@@ -1,0 +1,33 @@
+<%= javascript_tag do %>
+	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.team.join('') %>");
+<% end %>
+
+<%= react_component('OpenCollaborationBox') %>
+<div id="live_message"></div>
+
+<div id="quickview" class="quickview-wrapper" data-pages="quickview">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs">
+        <li class="">
+          <a href="#quickview-chat" data-toggle="tab"> <i class="fa fa-fw fa-users"></i> Collaboration</a>
+        </li>
+      </ul>
+        <div class="collaboration-team-members">
+          <ul id="presence">
+          </ul>
+        </div>
+      <a class="btn-link quickview-toggle" data-toggle="quickview"><i class="pg-close"></i></a>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!-- BEGIN Notes !-->
+        <div class="tab-pane fade no-padding active in" id="quickview-chat">
+       
+            <!-- BEGIN Conversation View  !-->
+            <div class="view chat-view bg-white clearfix">
+    			<%= react_component('CollaborationBox', {form: {user_id: current_user.id, action:idea_idea_messages_path(@idea), csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token}}.to_json) %>
+            </div>
+            <!-- END Conversation View  !-->
+
+        </div>
+      </div>
+    </div>

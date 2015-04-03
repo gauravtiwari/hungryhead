@@ -1,0 +1,15 @@
+<div class="container inner-profile-content">
+  <div class="row">
+    <div class="col-md-7 idea-user">
+      <%= react_component('Logo', {form: {action: idea_path(@idea), method: "PUT", idea_id: @idea.id, csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token}, logo: {url: @idea.logo.url(:avatar)}}) %>
+      <div class="idea-data">
+        <%= render partial: 'ideas/_partials/idea_data', locals: {idea: @idea} %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="block clearfix">
+        <blockquote><%= @idea.elevator_pitch %></blockquote>
+      </div>
+    </div>
+  </div>
+</div>

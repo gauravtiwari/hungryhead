@@ -1,0 +1,7 @@
+<div class="col-md-4 aside">
+
+  <%= render partial: 'meta/sidebar/widget', locals: {listings: @meta.find_founders.take(6), box_title: 'Team', css_class: 'ion-person-stalker red-link',count: @meta.founders.length} %>
+
+  <%= render partial: 'meta/sidebar/widget', locals: {listings: @meta.followers_by_type('User').take(6), css_class: 'ion-person-stalker red-link', path: followers_meta_path(@meta), box_title: 'Followers', count: @meta.followers_count} if @meta.followers_count > 0 %>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="modal fade" tabIndex="-1" role="dialog" id="sendMessagePopup" aria-labelledby="sendMessagePopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="profile-wrapper-title">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="ion-chatbubbles"></i> Send Message to <%= @user.name %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="new-message-form regular-padding">
+            <%= form_tag messages_path, method: :post do %>
+              <div class="form-group">
+                <%= text_field_tag 'recipient',@user.id, class: 'hidden' %>
+              </div>
+              <div class="form-group">
+                <%= label_tag 'message[subject]', 'Subject' %>
+                <%= text_field_tag 'message[subject]', nil, required: true, placeholder: "Type Subject..." %>
+              </div>
+
+              <div class="form-group">
+                <%= label_tag 'message[body]', 'Message' %>
+                <%= text_area_tag 'message[body]', nil, cols: 3, required: true, placeholder: "Type Message..." %>
+              </div>
+
+              <%= button_tag 'Send', class: 'btn btn-primary' %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#send-message-button').on('click', function(){
+    $('#sendMessagePopup').modal('show');
+  });
+</script>

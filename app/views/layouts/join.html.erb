@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HungryheadApp</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'jquery2', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!-- Container
+    	    ================================================== -->
+    <div id="container">
+      <!-- Header
+      ================================================== -->
+      <header class="clearfix">
+      	<%= render 'globals/menu'%>
+      </header>
+      <!-- End Header -->
+
+      <%= yield %>
+
+    </div>
+    <!-- End Container -->
+     <%= javascript_tag do %>
+      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+    <% end %>
+  </body>
+</html>

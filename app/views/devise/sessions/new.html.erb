@@ -1,0 +1,24 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+	<div class="container">
+	<div class="fill-form-login panel panel-default">
+      <div class="profile-wrapper-title">
+        <h4><i class="ion-log-in red-link"></i> Welcome back, please login</h4>
+      </div>
+		<% data = {csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token} %>
+		<%= react_component('Login', {form: data}.to_json )%>
+		<div class="col-md-6  social-login-buttons">
+		<ul class="social-buttons">
+			<li id="facebook"><%= link_to(omniauth_authorize_path(@user, :facebook), class: "main-button login button-facebook", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-facebook"></i> Login with Facebook <% end %>
+		</li>
+			<li id="twitter">
+				<%= link_to(omniauth_authorize_path(@user, :twitter), class: "main-button login button-twitter", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-twitter"></i> Login with Twitter <% end %>
+			</li>
+			<li id="linkedin"><%= link_to(omniauth_authorize_path(@user, :linkedin), class: "main-button login button-linkedin", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-linkedin"></i>  Login with Linkedin <% end %></li>
+		</ul>
+		</div>
+	</div>
+	</div>
+</div>
+<!-- End content -->

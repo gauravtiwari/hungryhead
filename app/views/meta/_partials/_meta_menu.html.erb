@@ -1,0 +1,30 @@
+<div class="project-menu">
+  <div class="container">
+    <div class="stasts">
+      <ul class="stats-list">
+        <%= link_to(user_path(@meta.user)) do %>
+          <%= image_tag(@meta.user.avatar.url(:avatar), width: "35px", height: "35px") %>
+        <% end %>
+        <li class="<%= current_class?(meta_path(@meta)) %>"><a href="<%= meta_path(@meta) %>"><span class="link-profile">
+              <%= @meta.name %></span></a></li>
+         <li class="<%= current_class?(comments_meta_path(@meta)) %>"><a href="<%= comments_meta_path(@meta) %>"><span class="link-feedbacks">
+              Q&A
+              </span></span></a></li>
+      </ul>
+    </div>
+
+      <ul class="project-buttons">
+          
+          <% if user_signed_in? %>
+            <%= react_component('Follow',{:followed => followed?(@meta)}) %>
+          <% else %>
+            <a class="main-button" href="<%= new_user_session_path %>">Follow</a>
+          <% end %>
+        <div>
+        <% if user_signed_in? && current_user.admin? %>
+            <a class="main-button edit-profile" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
+        <% end %>
+        </div>
+    </ul>
+  </div>
+</div>

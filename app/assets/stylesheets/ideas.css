@@ -1,0 +1,266 @@
+.post-your-idea {
+  background: #fff;
+  box-shadow: 0 1px 5px #e5e5e5;
+  -webkit-box-shadow: 0 1px 5px #e5e5e5;
+  -moz-box-shadow: 0 1px 5px #e5e5e5;
+  -o-box-shadow: 0 1px 5px #e5e5e5;
+}
+.post-idea-image {
+  background: linear-gradient(to bottom, transparent 0%, transparent 70%, #9d8371 100%), url('/assets/ideas_banner.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 60rem;
+  padding-top: 6rem;
+}
+.overlay {
+  zoom: 1;
+  height: 60rem;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#80000000', endColorstr='#80000000');
+  background: transparent;
+  background: rgba(51, 51, 51, 0.5);
+}
+.vmiddle {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.idea-section-explanation.editable input {
+  width: auto;
+  margin: 0;
+  border: 0;
+}
+.idea-section-explanation .redactor_editor {
+  margin: 0;
+  padding:10px 12px!important;
+  border: 0;
+}
+
+.idea-section-explanation .profile-wrapper-title .redactor_box input {
+  margin: 0!important;
+  padding: 0px!important;
+  font-size: 14px;
+  font-family: "Helvetica Neue Bold", Helvetica, Arial, sans-serif;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  line-height: 18px;
+  height: 18px;
+  background: #f2f2f2;
+}
+.idea-section-explanation  .profile-wrapper-title .redactor_box {
+  width: 400px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+}
+
+.idea-section-explanation .send-button p {
+  margin: 0;
+}
+.idea-section-explanation strong {
+  font-size: 14px;
+  font-family: "Helvetica Neue Bold", Helvetica, Arial, sans-serif;
+  letter-spacing:0;
+}
+
+.idea-section-explanation .send-button {
+  background: #f2f2f2;
+  padding: 10px;
+}
+.section-content img {
+  margin: 0!important;
+  padding:0!important;
+  margin-right: 10px!important;
+  max-width: 100%;
+}
+
+.idea-section-explanation .send-button button {
+  margin-right: 10px;
+}
+
+.idea-section-explanation .send-button .cancel-form {
+  margin-left: 10px;
+}
+.section-content p:last-child {
+  margin: 0;
+}
+
+.circle {
+    width: 100px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 1.2;
+    margin: 15px;
+    margin-top: 10px;
+}
+
+div[id^='feedbackProgress-']{
+  float: right;
+  margin-right: 35px;
+  color: #fff;
+}
+div[id^='feedbackProgress-'] span{
+  color: #fff;
+}
+div[id^='investmentProgress-'] span{
+  color: #fff;
+}
+
+.circle canvas {
+    vertical-align: top;
+}
+
+.listing-hero-banner {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: rgba(66, 133, 244, 1);
+  background-size: cover;
+  background-repeat: none;
+  background-position: 50%;
+  text-align: center;
+  color: #fff;
+}
+.listing-hero-banner a {
+  color: #fff;
+  border-bottom: 1px solid;
+}
+.circle strong {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 100%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 35px;
+  color:#fff;
+  font-family: 'dinengschrift-alternate', Helvetica, arial, sans-serif;
+}
+
+.circle strong i {
+    font-style: normal;
+    font-size: 0.6em;
+    font-weight: normal;
+}
+
+.circle span {
+  display: block;
+  color: #aaa;
+  margin-top: 12px;
+  font-family: 'dinengschrift-alternate', Helvetica, arial, sans-serif;
+  position: absolute;
+  top: 47%;
+  left: 30%;
+  text-transform: uppercase;
+  font-size: 18px;
+  text-align: center;
+}
+
+.point-list .point {
+  padding: 10px 12px;
+  border-top: 1px solid #f2f2f2;
+}
+.point .point-circle {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  border-radius: 7px;
+}
+.idea-information {
+  background: #33cc66;
+}
+
+.point.feedbacks-score .scores i {
+  color: #ff9933;
+}
+
+.point .point-circle.red {
+  background: #33cc66;
+}
+
+.point.investments .scores i {
+  color: #33cc66;
+}
+
+.point .point-circle.green {
+  background: #cc3333;
+}
+
+.point.followers .scores i {
+  color: #cc3333;
+}
+
+.point a {
+  display: inline-block;
+  color: #666666;
+  margin: 0;
+  padding: 0;
+  margin-top: 0px;
+  font-size: 12px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  position: absolute;
+}
+.point .scores {
+  float: right;
+  font-size: 25px;
+  padding: 0;
+  position: absolute;
+  right: 27px;
+  /* top: 0; */
+  margin-top: -8px;
+  color: #666666;
+}
+.point .scores i {
+  margin-left: 15px;
+}
+
+.idea-progress .circle {
+  margin: 0;
+  padding: 0;
+}
+
+.idea-progress .circle strong {
+  left: 0;
+  top: 18%;
+  color: #33cc66;
+
+}
+.idea-progress .circle span {
+  left: 8%;
+  top: 4%;
+}
+.big-idea {
+  padding: 10px 12px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f2f2f2;
+}
+.big-idea h1 i {
+  color: #f2d930;
+}
+.big-idea h1 {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 3.3rem;
+  color:rgba(0, 0, 0, 0.8);
+}
+
+.big-idea p {
+  word-wrap: break-word;
+  text-align: left;
+}
+.big-idea .action-buttons {
+  display: block;
+  overflow: hidden;
+}
+.big-idea .action-buttons div {
+  float: left;
+  margin-right: 13px;
+}

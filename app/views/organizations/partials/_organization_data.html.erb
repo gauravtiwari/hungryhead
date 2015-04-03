@@ -1,0 +1,5 @@
+<div class="university-data col-md-5">
+	<%= image_tag(@organization.logo.present? ? @organization.logo.url(:avatar) :  "http://placehold.it/110x110/f2f2f2/000&text=#{@organization.short_name}") %>
+	<h1><%= @organization.name %></h1>
+	<h2><i class="ion-location"></i> <%= @organization.location %></h2>
+</div>

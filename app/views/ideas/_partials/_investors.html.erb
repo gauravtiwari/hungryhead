@@ -1,0 +1,19 @@
+<div class="modal fade" tabIndex="-1" role="dialog" id="ideaInvestorsListPopup" aria-labelledby="ideaInvestorsListPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+   <div class="profile-wrapper-title">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h4 class="modal-title" id="ideaInvestorsListPopupLabel">People who invested in <%= @idea.name %></h4>
+    </div>
+  <div class="modal-body white-background">
+  <ul class="followers-list">
+    <% @investors.each do |f| %>
+      <% cache ["investor_list_follows_#{current_user.follows?(f)}", f] do %>
+       <%= render partial: 'shared/liker', locals: {f: f} %>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<!-- Content
+		================================================== -->
+<div id="content">
+  <!-- profile header -->
+  <div class="meta-box panel panel-default" style="background: url('<%= @meta.cover.url(:cover) %>');">
+    <div class="container">
+      <div class="meta-profile">
+        <img src="/assets/hungryhead_logo_150.png" alt="" width="100px">
+        <h1>HungryHead</h1>
+        <h2><%= @meta.high_concept_pitch %></h2>
+      </div>
+
+      <div class="meta-follow-box">
+      <ul class="meta-buttons">
+        <% if user_signed_in? %>
+          <%= react_component('Follow',{:followed => followed?(@meta)}) %>
+        <% else %>
+          <a class="main-button" href="<%= new_user_session_path %>">Follow</a>
+        <% end %>
+        <div>
+           <a class="main-button popup-link" href="#message-popup">Comment</a>
+        </div>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+  <!-- end profile header -->
+
+  <div class="idea-section wrapper-small light-bg">
+    <div class="col-md-6 auto-margin">
+      <h2>The idea</h2>
+      <p><%= @meta.description %></p>
+    </div>
+  </div>
+</div>
+<!-- End content -->
+</div>
+
+<!-- End Container -->

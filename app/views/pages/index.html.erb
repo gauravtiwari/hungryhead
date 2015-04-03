@@ -1,0 +1,37 @@
+<header class="clearfix">
+	<% cache ['global_menu', @user] do %>
+		<%= render 'globals/menu'%>
+	<% end %>
+</header>
+<!-- Content 
+================================================== -->
+<div id="content">
+	<div class="home-content-box container">
+	<div class="row">
+		<div class="col-md-4 aside">
+			<div class="sticky-sidebar">
+				<% cache ['home_sidebar_board', @user] do %>
+					<%= render partial: "shared/current_user_header" %>
+					<%= render partial: "shared/user_leaderboard" %>
+				<% end %>
+				<% cache ['home_user_idea', @user] do %>
+					<%=  render partial: "shared/user_idea" %>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-8 main-content">
+			<div class="activity-feed animated fadeIn">
+				<div class="activity-feed-box live">
+					<%= render partial: 'activities' %>
+				</div>
+				<% if @activities.next_page %>
+					<div class="pagination-box text-center">
+					<%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<!-- End content -->

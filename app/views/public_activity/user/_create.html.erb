@@ -1,0 +1,27 @@
+<% if activity.trackable %>
+<div class="activity-box panel panel-default">
+	<div class="activity-item">
+	<%= content_tag(:div, class: 'activity-header') do %>
+	<div class="user-avatar margin-right">
+		<%= image_tag(activity.owner.avatar.url(:avatar),  width: "40px;") %>
+	</div>
+	<%= content_tag(:span) do %>
+			<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card') %> <i class="fa fa-fw ion-person-stalker"></i> joined Hungryhead</span> 
+		<% end %>
+		<%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>
+			<%= content_tag(:li) do %>
+				<%= link_to(profile_people_path(activity.owner.location_list.first.parameterize)) do %>
+					<i class="ion-location green-link"></i> <%= activity.owner.location_list.first %>
+				<% end %>
+			<% end %>
+			<%= content_tag(:li) do %>
+				<%= link_to(user_status_path(activity.owner.slug, activity.trackable_id)) do %>
+					<%= local_time_ago(activity.created_at) %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+	</div>
+</div>
+<% end %>

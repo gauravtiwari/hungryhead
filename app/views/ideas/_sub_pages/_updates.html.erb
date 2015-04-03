@@ -1,0 +1,13 @@
+<% if @versions.length > 0 %>
+  <% @versions.each do |version| %>
+	   <% if version.changeset['sections'] || version.changeset['description'] %>
+	    <div class="activity-item margin-bottom">
+	      <%= render partial: 'ideas/_sub_pages/update', locals: {version: version} %>
+	    </div>
+	  <% end %>
+  <% end %>
+  <% else %>
+    <div class="no-content"> No updates yet </div>
+  <% end %>
+
+<%= will_paginate(@versions) %>

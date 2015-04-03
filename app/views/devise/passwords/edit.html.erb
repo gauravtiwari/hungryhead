@@ -1,0 +1,41 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+  <div class="container">
+    <div class="fill-form panel panel-default">
+      <div class="profile-wrapper-title">
+        <h4>Change your password</h4>
+      </div>
+      <div class="col-md-12 form-login panel-body">
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, :class => "confirmation-form form-horizontal" }) do |f| %>
+            <%= f.error_notification %>
+            <%= f.input :reset_password_token, as: :hidden %>
+            <%= f.full_error :reset_password_token %>
+
+            <div class="form-control-wrapper">
+              <label>Password
+            </label>
+              <%= f.input_field :password, required: true, autofocus: true,label: false, id: "email", class: "form-control empty", placeholder:"******"  %>
+              <span class="material-input"></span>
+            </div>
+            <div class="form-control-wrapper">
+             <label>Password confirmation
+            </label>
+              <%= f.input_field :password_confirmation, required: true, autofocus: true,label: false, id: "email", class: "form-control empty", placeholder:"******"   %>
+              <span class="material-input"></span>
+            </div>
+            <div class="login-form-buttons">
+              <%= f.button :button, "Send password instructions", :class => "btn main-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."} %>
+            </div>
+          <% end %>
+                  
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- End content -->
+
+
+

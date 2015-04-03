@@ -1,0 +1,35 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+	<div class="container">
+		<div class="fill-form-login small-box panel panel-default">
+			<div class="profile-wrapper-title">
+				<h4>Resend confirmation instructions</h4>
+			</div>
+			<div class="col-md-12 form-login panel-body">
+			<%= simple_form_for(resource, as: resource_name, remote: true, url: confirmation_path(resource_name), html: { method: :post, :class => "confirmation-form form-horizontal" }) do |f| %>
+					  <%= f.error_notification %>
+					  <%= f.full_error :confirmation_token %>
+
+					  <div class="form-control-wrapper">
+					  	<label>Email
+						</label>
+					    <%= f.input_field :login, required: true, autofocus: true,label: false, id: "email", class: "form-control empty", placeholder:"johndoe@example.com"  %>
+					    <span class="material-input"></span>
+					  </div>
+
+					  <div class="login-form-buttons">
+					    <%= f.button :button, "Resend", :class => "main-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."} %>
+					  </div>
+			<% end %>
+
+			<%= render "devise/shared/links" %>
+									
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<!-- End content -->
+

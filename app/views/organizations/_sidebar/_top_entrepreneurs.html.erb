@@ -1,0 +1,22 @@
+<% if @entrepreneurs.length >= 2 %>
+	<div class="profile-wrapper panel panel-default">
+		<div class="profile-wrapper-title">
+			<h4><i class="ion ion-lightbulb"></i> Featured entrepreneurs</h4>
+			<a class="see-all" href="#">See all</a>
+		</div>
+		<ul class="stories-list">
+			<% @entrepreneurs.limit(4).each do |user| %>
+				<li>
+					<%= link_to(user_path(user)) do %>
+						<%= image_tag(user.avatar.url(:avatar))%>
+					<% end %>
+					<div class="hover-box">
+					  <%= content_tag(:h3) do %>
+					  	<%= link_to(user.name, "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(user)}", class: 'load-card') %>
+					  <% end %>
+		          </div>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

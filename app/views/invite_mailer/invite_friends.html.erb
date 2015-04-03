@@ -1,0 +1,7 @@
+<p><%= t("devise.mailer.invitation_instructions.hello", email: @user.email) %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", name: @resource.name) %></p>
+
+<p><%= link_to t("devise.mailer.invitation_instructions.accept"), @invitation_link %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>

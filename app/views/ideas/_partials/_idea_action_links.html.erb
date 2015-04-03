@@ -1,0 +1,10 @@
+<% if user_signed_in? && !policy(@idea).collaborator? %>
+	<div class="idea-action-links panel panel-default">
+	  <ul class="action-links">
+	      <h2 class="red-link">If you liked <%= @idea.name %>, please: </h2>
+	      <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+	      <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.can_feedback?(current_user) }) %>
+	      <%= react_component('InvestButton',{ :invested => @idea.has_invested?(current_user) }) %>
+	  </ul>
+	</div>
+<% end %>

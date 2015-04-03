@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HungryheadApp</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'jquery2', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <!-- Container
+    ================================================== -->
+    <div id="container">
+      <!-- Header
+      ================================================== -->
+      <% cache ['global_menu', @user] do %>
+        <header class="clearfix">
+          <%= render 'globals/menu'%>
+        </header>
+      <% end %>
+      <!-- End Header -->
+      <%= yield %>
+
+      <% if !user_signed_in? %>
+        <%= render 'globals/footer' %>
+      <% end %>
+
+    </div>
+    <!-- End Container -->
+
+  </body>
+</html>

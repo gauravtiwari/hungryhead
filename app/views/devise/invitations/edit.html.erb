@@ -1,0 +1,60 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+<div class="signup-page">
+	<div class="container">
+		<div class="fill-form panel panel-default centering-box">
+		<div class="profile-wrapper-title">
+			<h4>Register</h4>
+		</div>
+		<div class="col-md-6 form-signup panel-body">
+			<%= simple_form_for(resource, as: resource_name, :url => invitation_path(resource_name), html: {:method => :put, :class => "sign-up-form form-horizontal"}) do |f| %>
+				<%= devise_error_messages! %>
+				 <%= f.hidden_field :invitation_token %>
+
+				<input type="hidden" name="idea_id" value="<%= @idea_id %>" />
+  				<div class="form-control-wrapper">
+					<label>Name</label>
+					<%= f.input_field :name, required: true, autofocus: true,  :validate => true, label: false, title: "Please enter your name", id: "name", class: "form-control empty", placeholder: "John Doe" %>
+				</div>
+
+				<div class="form-control-wrapper">
+					<label>Username</label>
+					<%= f.input_field :username, required: true, autofocus: true,  :validate => true, label: false, id: "username", class: "form-control empty", placeholder: "johndoe" %>
+					<span class="invalid" id="invalid-username"></span>
+				</div>
+
+				<div class="form-control-wrapper">
+					<label>Password</label>
+					<%= f.input_field :password, required: true, autofocus: true,  :validate => true, label: false, id: "password" , class: "form-control empty",placeholder: "*********" %>
+				</div>
+
+				<div class="signup-form-buttons">
+					<%= f.button :button, "Signup", :class => "btn main-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Signing up..."} %>
+				</div>
+
+				<p>Questions? <a href="#">Get help</a></p>
+				<p>Already registered, <a href="<%= new_session_path(resource_name) %>">Login</a></p>
+				<p><%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+				<%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+					<% end -%></p>
+			<% end %>
+			</div>
+			<div class="col-md-6 social-signup-buttons">
+				<ul>
+					<li id="facebook"><%= link_to(omniauth_authorize_path(@user, :facebook), class: "btn main-button login button-facebook", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-facebook"></i> Signup with Facebook <% end %>
+				</li>
+					<li id="twitter">
+						<%= link_to(omniauth_authorize_path(@user, :twitter), class: "btn main-button login button-twitter", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-twitter"></i> Signup with Twitter <% end %>
+					</li>
+					<li id="linkedin"><%= link_to(omniauth_authorize_path(@user, :linkedin), class: "btn main-button login button-linkedin", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-linkedin"></i>  Signup with Linkedin <% end %></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</div>
+<!-- End content -->
+

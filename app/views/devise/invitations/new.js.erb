@@ -1,0 +1,6 @@
+$("body").append("<%= escape_javascript(render partial: 'form') %>"); 
+
+$('#inviteFriendsPopup').modal('show');
+$('.tokenize-typehead').tokenfield({
+    limit: 10
+});

@@ -1,0 +1,30 @@
+<div class="modal fade" tabIndex="-1" role="dialog" id="inviteFriendsPopup" aria-labelledby="inviteFriendsPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+  <div class="profile-wrapper-title">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="inviteFriendsPopupLabel"><i class="ion-person-add"></i> Invite Friends</h4>
+  </div>
+    <div class="modal-body white-background">
+      <div class="new-invitations-box">
+        <div class="form-box">
+          <div class="new-conversation-form">
+          <label>Enter multiple emails <span>(maximum 10 emails)</span></label>
+            <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+            <%= devise_error_messages! %>
+              <div class="form-group">
+                  <% resource.class.invite_key_fields.each do |field| -%>
+            <%= f.input_field field, class: 'tokenize-typehead', placeholder: 'Type comma seperated emails', autofocus: true  %>
+          <% end -%>
+              </div>
+              <%= f.button :button, 'Send', class: 'main-button' %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+ </div>
+

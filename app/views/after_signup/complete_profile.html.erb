@@ -1,0 +1,97 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+<div class="after-signup-page">
+	<div class="container">
+		<div class="complete-profile panel panel-default centering-box">
+		<div class="profile-wrapper-title">
+			<h4><i class="ion-checkmark-circled"></i> Complete profile</h4>
+		</div>
+		<div class="col-md-12 panel-body">
+			
+			<div class="write-story-box">
+	<%= simple_form_for(@user, url: wizard_path, html: {class: "write-story active", id: "publish-your-idea", method: :put}) do |f| %>
+<div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="write-story-cont">
+				<ul class="next-steps">
+					<li>
+						<%= link_to(wizard_path(:getting_started), class: "#{current_class?(wizard_path(:getting_started))}") do %>
+							<span>1</span> Basics
+						<% end %>
+					</li>
+					<li>
+						<%= link_to(wizard_path(:complete_profile), class: "#{current_class?(wizard_path(:complete_profile))}") do %>
+							<span>2</span> Complete your profile
+						<% end %>
+					</li>
+				</ul>
+
+				<div class="profile-basics">
+				<div class="col-md-6">
+					<div class="form-control-wrapper">
+						<label>Username</label>
+						<%= f.input_field :username, label: false, placeholder: "Username",class: "form-control empty" %>
+                    </div>
+					<br/>
+					<div class="form-control-wrapper">
+						<label>Email</label>
+						<%= f.input_field :email, label: false, placeholder: "Email",class: "form-control empty" %>
+                    </div>
+					 <br/>
+					<div  class="form-control-wrapper">
+						<label>Mini Bio(<i>in 140 characters</i>) </label>
+						<%= f.input_field :mini_bio, label: false, class: "form-control empty", placeholder: "ex: Work as developer, founded example company" %>
+					</div>
+					<br/>
+					<div class="form-control-wrapper">
+						<label>Select your university</label>
+						<%= f.input :institution_id, as: :hidden, :id => "user_institution_id" %>
+						<%= autocomplete_field_tag 'institution_name', "#{@user.institution.name if @user.institution}", autocomplete_organization_name_organizations_path, :size => 75, :"data-autocomplete-label" => "Sorry, your university is not available.", placeholder: "Enter your university name", class: 'form-control empty', :id_element => '#user_institution_id' %>
+					</div>
+
+					<br/>
+					</div>
+					<div class="col-md-6">
+
+					<div  class="form-control-wrapper clearfix">
+						<label>Markets Interested</label>
+						<%= f.input_field :market_list, label: false, placeholder: "Choose markets interested", value: "#{@user.market_list}", class: "market_list form-control empty" %>
+					</div>
+
+					<div  class="form-control-wrapper clearfix">
+						<label>Where are you based?</label>
+						<%= f.input_field :location_list, label: false, placeholder: "Where are you based?", value: "#{@user.location_list}", class: "location_list form-control empty" %>
+					</div>
+				</div>
+				</div>
+				<br/>
+				<%= link_to('Back', wizard_path(:getting_started), class: "main-button") %>
+				<div class="form-buttons">
+				<%= f.button :button, 'Finish', class: "main-button continue float-right" %>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="side-box">
+				<h1>Let's Start With The Easy Stuff</h1>
+				<p>Fill in some basic information about your company. Please keep it short and sweet.</p>
+				<p><a href="#">Get more tips</a> on making an awesome company profile</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% end %>
+</div>
+
+			</div>
+		</div>
+		</div>
+
+	</div>
+</div>
+
+</div>
+<!-- End content -->

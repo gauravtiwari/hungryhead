@@ -1,0 +1,58 @@
+<% data = render(template: 'users/show.json.jbuilder') %>
+<!-- Content
+================================================== -->
+<div id="content">
+  <!-- profile header -->
+  <div class="profile-header">
+    <% if user_signed_in? %>
+      <%= react_component('Cover', {data: data}) %>
+    <% end %>
+    <div class="container inner-profile-content">
+      <div class="row">
+        <div class="col-md-5 profile-user">
+          <%= react_component('Avatar', {data: data}) %>
+          <%= react_component('UserProfileHeader', {data: data}) %>
+        </div>
+        <div class="col-md-7">
+          <%= render partial: 'users/_partials/stats' %>
+        </div>
+      </div>
+    </div>
+    <div class="container edit-profile-mode">
+      <%= react_component('UserProfileHeaderForm', {data: data}) %>
+    </div>
+  </div>
+  <!-- end profile header -->
+  <!-- profile menu -->
+  <div class="profile-menu">
+    <%= render partial: 'users/_partials/user_profile_menu' %>
+  </div>
+  <!-- end profile menu -->
+  <div class="profile-content-box	container">
+    <div id="profile" class="profile-tab active">
+      <div class="row">
+        <div class="col-md-4 aside">
+          <div id="about_me">
+            <div class="profile-wrapper">
+              <%= react_component('AboutMe', {data: data}) %>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-8">
+          <div class="activity-feed">
+            <div class="activity-feed-box">
+              <%= render partial: 'users/_sub_pages/activities' %>
+            </div>
+            <% if @activities.next_page %>
+              <div class="pagination-box text-center">
+              <%=  link_to 'Load More Activities', profile_activities_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End content -->

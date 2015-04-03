@@ -1,0 +1,12 @@
+/* Snackbar error */
+
+.snackbar.error {
+  background-color: red;
+}
+.snackbar.alert {
+  background-color: yellow;
+  color: black;
+}
+.snackbar.notice {
+  background-color: green;
+}

@@ -1,0 +1,73 @@
+<div id="content">
+  <div class="horz-section">
+      <div class="wrapper-small listing-hero-banner panel panel-default">
+            <h2>Find and follow people to get updates</h2>
+      </div>
+    </div>
+    <div class="container">
+        <div class="col-md-12">
+          <div class="row project-columns">
+          <% @users.each do |user| %>
+            <div class="col-md-4">
+            <div class="result-listing-box panel panel-default">
+              <% if user != current_user %>
+                <div class="search-follow-idea">
+                  <%= react_component('Follow',{:followed => followed?(user)}) %>
+                </div>
+              <% end %>
+              <div class="idea-listing-header">
+                <div class="user-avatar margin-right">
+                  <%= link_to(profile_path(user)) do %>
+                    <%= image_tag(user.avatar.url(:avatar), width: "40px")%>
+                  <% end %>
+                </div>
+                <div class="idea-meta">
+                  <h1><%= link_to(user.name, profile_path(user)) %> </h1>
+                  <span><i class="icon-clock3"></i> <%= local_date(user.created_at, '%B %e, %Y') %></span>
+                </div>
+              </div>
+              <div class="project-descript">
+                <%= content_tag(:p, class: "idea-description") do %>
+                  <%= truncate(user.about_me.present? ? user.about_me : user.mini_bio, length: 300) %>
+                <% end %>
+                <ul class="idea-tags-listing">
+                  <% user.market_list.each do |tag| %>
+                    <li><%= link_to('#'+tag, people_market_path(tag.parameterize)) %></li>
+                  <% end %>
+                  <% user.skill_list.each do |tag| %>
+                    <li><%= link_to('#'+tag, profile_path(tag.parameterize)) %></li>
+                  <% end %>
+                </ul>
+
+                <ul class="idea-tags-listing clearfix margin-top">
+                  <% user.location_list.each do |tag| %>
+                    <li><%= link_to("<i class='ion-location'></i> #{tag}".html_safe, profile_people_path(tag.parameterize)) %></li>
+                  <% end %>
+                  <li><%= link_to("<i class='fa fa-fw fa-institution'></i> ".html_safe+ user.institution.name, profile_path(user.institution)) if user.institution %></li>
+                </ul>
+
+                <div class="results-idea-progress">
+                  <ul class="stastics-list">
+                    <li>
+                      Followers
+                      <span><i class="ion-person-stalker"></i> <%= user.followers_count %></span>
+                    </li>
+                    <li>
+                      Investments
+                      <span><i class="fa fa-dollar"></i> <%= user.investments_count %></span>
+                    </li>
+                    <li>
+                      Feedbacks
+                      <span><i class="ion-chatbubbles"></i> <%= user.feedbacks_count %></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+    </div>
+</div>

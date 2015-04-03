@@ -1,0 +1,42 @@
+<div class="ideas-box feedbacks">
+  <div class="profile-wrapper-title">
+    <h4><i class="fa fa-fw ion-chatbubble red-link"></i> Feedbacks</h4>
+    <%= react_component('ShowAllLink', {path: profile_feedbacks_path(@user)}) %>
+  </div>
+  <div class="ideas project-columns">
+      <% feedbacks.each do |feedback| %>
+      <div class="idea feedback">
+        <div class="idea-logo">
+          <%= image_tag(feedback.idea.logo.url(:avatar), width: "50px") %>
+        </div>
+        <div class="idea-descript">
+           <%= content_tag(:h1) do %>
+              <%= link_to(idea_path(feedback.idea)) do %>
+                <%= feedback.idea.name %>
+              <% end %>
+            <% end %>
+            <% if feedback.body.length > 250 %>
+              <div class="idea-description">
+                <%= truncate(markdownify(feedback.body), escape: false, length: 250) %>
+                <%= link_to 'See more', '', class: "read-more-link read-more-#{feedback.id}" %>
+              </div>
+              <script>
+                $('.read-more-<%= feedback.id %>').on('click', function(e) {
+                  e.preventDefault()
+                  $(this).closest(".idea.feedback").find(".idea-description").html('<%= escape_javascript markdownify(feedback.body) %>')
+                })
+              </script>
+            <% else %>
+               <div class="idea-description">
+                <%= markdownify(feedback.body) %>
+               </div>
+            <% end %>
+          <ul class="item-tags clearfix grey-links">
+            <li><a><i class="icon-clock3"></i> Feedbacked <%= time_ago_in_words(feedback.created_at) %> ago</a>
+            </li>
+        </ul>
+      </div>
+      </div>
+    <% end %>
+</div>
+</div>

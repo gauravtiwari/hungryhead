@@ -1,0 +1,35 @@
+<div class="write-story-box">
+<div class="row">
+<div class="col-md-12">
+<div class="getting-started-guidelines">
+	<ul class="next-steps">
+		<li>
+		<%= link_to(new_idea_path(getting_started: true), class: "active") do %>
+			<span>1</span> Getting Started
+		<% end %>
+		</li>
+		<li>
+		<%= link_to(new_idea_path) do %>
+			<span>1</span> Submit us your idea</a>
+		<% end %>
+		</li>
+	</ul>
+		<section class="guidelines list-page">
+
+			<article class="list-page-content">
+				<h2>1. Be a company, not a project</h2>
+				<p>We help for-profit ideas find passionate investors to help them succeed. For non-profits, hobbies, or projects, we recommend Kickstarter or Indiegogo.</p>
+				<h2>2. Raise from investors, not customers pre-buying products</h2>
+				<p>Companies must sell shares or issue convertible debt. If you'd like to raise funding by pre-selling your product, Kickstarter is a great option</p>
+				<h2>3. Reasonably expect to deliver a return to investors</h2>
+				<p>We understand ideas are risky, but investors on Wefunder shouldn't have to depend on hell freezing over to earn a return. If you've got a cool lifestyle business that funds your exotic travels to study the breeding habits of monkeys, Indiegogo or Petridish might be a better fit.</p>
+				<h2>4. Offer ownership to your most passionate users</h2>
+				<p>The power of crowd investing lies in giving your most evangelical users a stake in the company. This feeling of ownership motivates them to help your company even more! Since most value-add investors aren’t wealthy, Wefunder is not intended for companies that only accept funding from accredited investors.</p>
+		</section>
+		<%= link_to("Continue", new_idea_path, class: "main-button float-right") %>
+</div>
+</div>
+
+</div>
+</div>
+

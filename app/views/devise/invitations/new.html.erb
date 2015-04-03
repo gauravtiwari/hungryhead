@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="new-invitations-box panel panel-default">
+      <div class="form-box">
+        <div class="new-conversation-form-header">
+          <h1>Send Invitations</h1>
+        </div>
+        <div class="new-conversation-form">
+        <label>Enter multiple emails <span>(maximum 10 emails)</span></label>
+          <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+          <%= devise_error_messages! %>
+            <div class="form-group">
+              	<% resource.class.invite_key_fields.each do |field| -%>
+				  <%= f.input_field field, class: 'tokenize-typehead', placeholder: 'Type comma seperated emails',  autofocus: true  %>
+				<% end -%>
+            </div>
+            <%= f.button :button, 'Send', class: 'main-button' %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>

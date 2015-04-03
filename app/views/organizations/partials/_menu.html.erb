@@ -1,0 +1,32 @@
+<div class="profile-menu">
+	<div class="container">
+		<%= link_to(organization_path(@organization)) do %>
+		<%= image_tag(@organization.logo.present? ? @organization.logo.url(:avatar) :  "http://placehold.it/35x35/f2f2f2/000&text=#{@organization.short_name}", width: "35px") %>
+		<% end %>
+		<div class="stasts">
+			<ul class="stats-list">
+	        <li class="<%= current_class?(organization_path(@organization)) %>">
+		        <%= link_to(organization_path(@organization)) do %>
+		        	<%= content_tag(:span, class: "link-profile") do %>
+		              Profile
+		             <% end %>
+		        <% end %>
+	        <li class="<%= current_class?(students_organization_path(@organization)) %>"><a href="<%= students_organization_path(@organization) %>"><span class="link-students">
+	              Students <span class="badge"><%= @organization.users_count %></span></span></span></a></li>
+	         <li class="<%= current_class?(trending_organization_path(@organization)) %>"><a href="<%= trending_organization_path(@organization) %>"><span class="link-activity">
+	              Trending Ideas <span class="badge"></span></span></a></li>
+	        <li class="<%= current_class?(ideas_organization_path(@organization)) %>"><a href="<%= ideas_organization_path(@organization) %>"><span class="link-feedbacks">
+	              Ideas
+	              <span class="badge"><%= @organization.ideas_count %></span></span></a></li>
+			</ul>
+		</div>
+		<ul class="project-buttons">
+			<% if user_signed_in? && current_user %>
+				<%= react_component('Follow',{:followed => followed?(@organization)}, {:id => "follow-component"}) %>
+			<% end %>
+			<% if user_signed_in? && current_user.admin? %>
+				<div><a class="main-button animated zoomIn" href="#">Edit School</a></div>
+			<% end %>
+		</ul>
+	</div>
+</div>

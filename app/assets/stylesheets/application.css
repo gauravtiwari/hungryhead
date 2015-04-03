@@ -1,0 +1,46 @@
+/*
+	All application CSS assets - checkout vendor assets/css directory
+ *
+ *= require_self
+ *= require jquery-ui
+ *= require animate
+ *= require icons
+ *= require nprogress
+ *= require nprogress-bootstrap
+ *= require font-awesome
+ *= require ionicons.min
+ *= require tooltip
+ *= require jquery.atwho
+ *= require sweetalert
+ *= require chosen
+ *= require bootstrap-material-design
+ *= require bootstrap
+ *= require bootstrap-tokenfield
+ *= require normalize-rails
+ *= require 'masonry/basic'
+ *= require 'masonry/centered'
+ *= require 'masonry/fluid'
+ *= require 'masonry/gutters'
+ *= require 'masonry/infinitescroll'
+ *= require 'masonry/right-to-left'
+ *= require 'masonry/transitions'
+ *= require style
+ *= require after_signup
+ *= require profiles
+ *= require canvas
+ *= require ideas
+ *= require errors
+ *= require pages-icons
+ *= require activities
+ *= require notifications
+ *= require badges
+ *= require collaborations
+ *= require search
+ *= require meta
+ *= require conversations
+ *= require messages
+ *= require tags
+ *= require notes
+ *= require pages
+ *= require feedbacks
+*/

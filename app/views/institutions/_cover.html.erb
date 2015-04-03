@@ -1,0 +1,3 @@
+<% if @institution.cover !=  nil %>
+	<%= react_component('OrganizationCover', render(template: 'institutions/show.json.jbuilder')) %>
+<% end %>

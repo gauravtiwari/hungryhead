@@ -1,0 +1,62 @@
+<!-- Content 
+================================================== -->
+<div id="content">
+	<div class="after-signup-page">
+		<div class="container">
+			<div class="complete-profile panel panel-default centering-box">
+			<div class="profile-wrapper-title">
+			<h4>Guidelines</h4>
+			</div>
+			<div class="col-md-12 panel-body">
+			<div class="tab-pages">
+				<ul class="next-steps">
+					<li>
+						<%= link_to(wizard_path(:getting_started), class: "#{current_class?(wizard_path(:getting_started))}") do %>
+						<span>1</span> Basics
+					<% end %>
+					</li>
+					<li>
+						<%= link_to(wizard_path(:complete_profile), class: "#{current_class?(wizard_path(:complete_profile))}") do %>
+						<span>2</span> Complete your profile
+					<% end %>
+					</li>
+				</ul>
+				<section class="guidelines list-page">
+
+					<p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio.</p>
+
+					<article class="list-page-content">
+					<h2>1. Be a company, not a project</h2>
+					<p>We help for-profit ideas find passionate investors to help them succeed. For non-profits, hobbies, or projects, we recommend Kickstarter or Indiegogo.</p>
+					<h2>2. Raise from investors, not customers pre-buying products</h2>
+					<p>Companies must sell shares or issue convertible debt. If you'd like to raise funding by pre-selling your product, Kickstarter is a great option</p>
+					<h2>3. Reasonably expect to deliver a return to investors</h2>
+					<p>We understand ideas are risky, but investors on Wefunder shouldn't have to depend on hell freezing over to earn a return. If you've got a cool lifestyle business that funds your exotic travels to study the breeding habits of monkeys, Indiegogo or Petridish might be a better fit.</p>
+					<h2>4. Offer ownership to your most passionate users</h2>
+					<p>The power of crowd investing lies in giving your most evangelical users a stake in the company. This feeling of ownership motivates them to help your company even more! Since most value-add investors aren’t wealthy, Wefunder is not intended for companies that only accept funding from accredited investors.</p>
+					<h2>5. Have traction and/or a prototype</h2>
+					<p>Lots of people have ideas; idea founders that "have what it takes" begin making them a reality on the first day. Investors are excited by companies that have made progress developing their product or gaining market traction.</p>
+					<h2>6. Have a well thought out plan to deliver on a reasonable goal</h2>
+					<p>We love grand and audacious visions! But when raising money, investors look for a reasonable milestone that can be reached with the funds you've been entrusted with. Raising $50k to build a Mars Landing Capsule wouldn't make sense.</p>
+					<h2>7. Tell a story. Get people excited.</h2>
+					<p>Last but not least, capture our imaginations. We're looking for ideas with an awesome story. How is your business going to make the world better? Why are you the best ones to do it? Inspire us.</p>
+
+					<%= form_for(@user,  url: wizard_path, method: :put) do |f| %>
+						<div class="checkbox">
+					        <label>
+					        	<%= f.check_box :terms_accepted %>
+					            <span class="check"></span> Accept our terms conditions
+					        </label>
+					    </div>
+					    <%= f.button "Continue", :class => "main-button float-right", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Confirming..."} %>
+					<% end %>
+				</section>
+				</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<!-- End content -->

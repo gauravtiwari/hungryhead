@@ -1,0 +1,49 @@
+<div id="content">
+<!-- profile header -->
+<div class="university-box">
+	<% cache ['cover', @organization] do %>
+		<%= render partial: 'cover' %>
+	<% end %>
+<div class="container">
+	<% cache ['organization_header', @organization] do %>
+		<%= render partial: 'organizations/partials/organization_data' %>
+		<%= render partial: 'organizations/partials/follow_list' %>
+	<% end %>
+</div>
+</div>
+<!-- end profile header -->
+<!-- profile menu -->
+<% cache ['organization_menu', @organization] do %>
+	<%= render partial: 'organizations/partials/menu' %>
+<% end %>
+<!-- end profile menu -->
+
+<!-- Content ================================================== -->
+
+<div id="content" class="container">
+<div class="row">
+	<div class="col-md-4">
+		<% cache ['sidebar', @organization] do %>
+			<%= render partial: 'organizations/_sidebar/about_organization' %>
+			<%= render partial: 'organizations/_sidebar/top_ideas' %>
+			<%= render partial: 'organizations/_sidebar/top_entrepreneurs' %>
+			<%= render partial: 'organizations/_sidebar/top_mentors' %>
+		<% end %>
+	</div>
+
+	<div class="col-md-8">
+		<div class="activity-feed animated fadeIn">
+			<div class="activity-feed-box live">
+				<%= render partial: 'organizations/content/activities' %>
+			</div>
+			<% if @activities.next_page %>
+				<div class="pagination-box text-center">
+				<%=  link_to 'Load More Activities', profile_activities_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<!-- End content -->
+</div>

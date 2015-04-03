@@ -1,0 +1,23 @@
+<div class="investments-box big-box panel panel-default margin-bottom">
+  <div class="profile-wrapper-title">
+    <h4><i class="fa fa-fw fa-dollar red-link"></i> Latest investments</h4>
+    <% if investments.length > 4 %>
+      <%= react_component('ShowAllLink', {path: profile_investments_path(@user)}) %>
+    <% end %>
+  </div>
+  <div class="idea-badges">
+      <% investments.take(4).each do |investment| %>
+          <div class="user-badge">
+          	<div class="badge-descript">
+          		<div class="badge-image">
+                <%= link_to(investment.idea.name) do %>
+            			<img alt="<%= investment.idea.name %>" src="<%= investment.idea.logo.url(:avatar) %>" width="50px" />
+                <% end %>
+          		</div>
+          		<h2><%= link_to(investment.idea.name, idea_path(investment.idea))  %></h2>
+              <p class="textcenter"><i class="fa fa-fw fa-dollar red-link"></i><%= investment.amount %></p>
+          	</div>
+          </div>
+      <% end %>
+  </div>
+</div>

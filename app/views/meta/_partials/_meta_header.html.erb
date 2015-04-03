@@ -1,0 +1,15 @@
+<div class="container inner-profile-content">
+  <div class="row">
+    <div class="col-md-7 idea-user">
+      <%= react_component('MetaLogo', {form: {action: update_meta_path(@meta), method: "PUT", idea_id: @meta.id, csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token}, logo: {url: @meta.logo.url(:avatar)}}) %>
+      <div class="idea-data">
+        <%= render partial: 'meta/_partials/meta_data', locals: {idea: @meta} %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="block clearfix">
+        <blockquote><%= @meta.elevator_pitch %></blockquote>
+      </div>
+    </div>
+  </div>
+</div>

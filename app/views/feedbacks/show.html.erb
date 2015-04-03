@@ -1,0 +1,41 @@
+<!-- Content
+		================================================== -->
+
+<div id="content">
+  <!-- profile header -->
+  <div class="idea-header">
+    <%= render partial: "ideas/_partials/idea_header", locals: {idea: @idea} %>
+    <%= render partial: "ideas/_partials/edit_idea_form", locals: {idea: @idea} %>
+  </div>
+  <!-- end profile header -->
+  <!-- idea menu -->
+  <%= render partial: "ideas/_partials/idea_menu", locals: {idea: @idea} %>
+  <!-- end idea menu -->
+  <div class="container project-page">
+    <div class="row">
+      <div class="col-md-4 aside">
+        <%= render partial: 'shared/leaderboard', resource: @idea %>
+      </div>
+      
+      <div class="col-md-8 project-content">
+        <%= render partial: "feedbacks/_sub_pages/feedback", locals: {feedback: @feedback} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if user_signed_in? && policy(@idea).collaborator? %>
+  <%= render 'ideas/collaboration' %>
+<% end %>
+<!-- End content -->
+<% if @idea.user != current_user %>
+
+  <% if @idea.has_invested?(current_user) %>
+    <%= react_component('Invest', render(template: 'ideas/invest.json.jbuilder', locals: {prerender: true, :id => "investment-component"})) %>
+  <% end %>
+  
+  <% if @idea.can_feedback?(current_user) %>
+   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
+  <% end %>
+<% end%>
+<!-- End Container -->

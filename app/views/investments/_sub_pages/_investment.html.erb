@@ -1,0 +1,59 @@
+<div class="activity-box panel panel-default post_<%= investment.id %>">
+<div class="activity-item">
+  <%= content_tag(:div, class: 'activity-header') do %>
+    <div class="user-avatar margin-right">
+      <%= image_tag(investment.user.avatar.url(:avatar),  width: "40px;") %>
+    </div>
+    <%= content_tag(:span) do %>
+      <i class="fa fa-fw fa-dollar"></i> <%= investment.amount %> Investment from <%= link_to(investment.user.name, user_path(investment.user)) %>
+    <% end %>
+
+    <%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>
+      <%= content_tag(:li) do %>
+        <%= link_to(profile_people_path(investment.user.location_list.first.downcase.strip.gsub(' : ', '-').gsub(' ', '-').gsub(/[^\w-]/, ''))) do %>
+          <i class="ion-location green-link"></i> <%= investment.user.location_list.first %>
+        <% end %>
+      <% end %>
+      <%= content_tag(:li) do %>
+        <%= link_to(idea_investment_path(@idea.slug, investment.id)) do %>
+          <%= local_time_ago(investment.created_at) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="activity-post">
+    <div class="item-content">
+      <div class="main-post-content">
+        <div class="recipients clearfix">
+          <%= content_tag(:article, class: "activity-excerpt #{params[:action] == 'show' ? '' : 'readmore'} float-left") do %>
+            <div class="activity-excerpt-content">
+             <% if investment.note.length > 250 && params[:action] == "index" %>
+              <%= truncate(markdownify(investment.note), escape: false, length: 250) %>
+              <%= link_to 'See more', '', class: "read-more-link read-more-#{investment.id}" %>
+              <script>
+                $('.read-more-<%= investment.id %>').on('click', function(e) {
+                  e.preventDefault()
+                  $(this).closest(".activity-excerpt").find(".activity-excerpt-content").html('<%= escape_javascript markdownify(investment.note) %>')
+                })
+              </script>
+            <% else %>
+              <%= markdownify(investment.note) %>
+            <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <ul class="item-tags">
+        <% liked = current_user.voted_for? investment %>
+        <%= react_component('Upvote', {record: investment.id, voted: liked, vote_url: like_path(votable_type: investment.class.to_s, votable_id: investment.id), votes_count: investment.cached_votes_total, likers_path: likers_path(votable_type: investment.class.to_s, votable_id: investment.id), css_class: 'vote-button add_vote'}.to_json) %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: investment}) %>
+
+<%= react_component('CommentBox', {data: data, count: investment.comments_count, comments_path: comments_path(commentable_type: investment.class.to_s, id: investment.id)}) %>
+</div>
+
+

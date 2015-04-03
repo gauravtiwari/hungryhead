@@ -1,0 +1,15 @@
+.earned-user-badge {
+	padding: 20px;
+	text-align: center;
+	vertical-align: middle;
+}
+.earned-user-badge img {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.earned-user-badge span {
+	display: block;
+	padding-top: 10px;
+}

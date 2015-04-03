@@ -1,0 +1,13 @@
+<% if @activities.length > 0 %>
+<% @activities.each do |activity| %>
+	<% cache (cached_key_for_activity(activity)), skip_digest: true do %>
+		<%= render_activity(activity) %>
+	<% end %>
+<% end %>
+<% else %>
+	<div class="widget-box">
+		<div class="no-content">
+			No Activities
+		</div>
+	</div>
+<% end %>

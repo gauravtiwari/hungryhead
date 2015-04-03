@@ -1,0 +1,40 @@
+<div class="follow-box big-box">
+	<div class="profile-wrapper-title">
+		<h4> <i class="ion-person-stalker"></i>
+		<%= link_to(profile_followers_path(@user)) do %>
+				<span class="link-followers">Followers <span class="badge"><%= @user.followers_count %> </span></span>
+			<% end %> /
+		<%= link_to(profile_followings_path(@user)) do %>
+				<span class="link-followings">Followings <span class="badge"><%= @user.followings_count %> </span></span>
+		<% end %>
+		</h4>
+	</div>	
+	<ul class="following-list">
+	<% if @following.size > 0 %>
+		<% @following.each do |f| %>
+			<li>
+				<div class="user-avatar margin-right">
+					<%= image_tag(f.avatar.url(:avatar), width: "50px") %>
+				</div>
+				<div class="following-list-content">
+					<h2> <%= link_to(f.name, profile_path(f) )%></h2>
+					<p class="about-me"><%= strip_tags(markdownify(truncate(f.about_me.length > 5 ? f.about_me : f.mini_bio, length: 100, escape: false))) %> </p>
+					<%= content_tag(:span)  do %>
+						<%= link_to(f.location_list.first, profile_people_path(f.location_list.first.parameterize)) if f.location_list.first %>
+					<% end %>
+				<% if f != current_user %>
+					<%= react_component('Follow',{:followed => followed?(f), :pollInterval => "60000", :isfollowed => "followed"}) %>
+				<% end %>
+				</div>
+			</li>
+		<% end %>
+	<% else %>
+		<li>
+			<h3 class="no-content">
+				<%= your_name(@user, false) %> are not following anyone yet.
+			</h3>
+		</li>
+	<% end %>
+</ul>
+
+</div>

@@ -1,0 +1,19 @@
+<a id="open-menu" class="mm-fixed-top" href="#aside-menu"><span></span></a>
+<nav id="aside-menu">
+	<ul>
+	<li><a href="/" data-push="true"> <i class="fa fa-home"> </i> Home</a></li>
+	<li>
+		<a href="#"><i class="fa fa-search"> </i> Explore</a>		    	
+	</li>
+	<li class="drop"><a href="start-business.html"><i class="fa fa-edit"> </i> Submit</a></li>
+	<li><a href="activity.html"><i class="fa fa-flash"> </i> Activity</a></li>
+	<li><a href="#"><i class="fa fa-users"> </i> People</a></li>
+	<% if user_signed_in? %>
+		<li> <%= link_to(destroy_user_session_path, :method => :get) do %>
+		<i class="fa fa-external-link"> </i> Logout
+		<% end %>
+		</li>
+	<% end %>
+	<li><a href="/about" data-push="true">About</a></li>
+	</ul>
+</nav>

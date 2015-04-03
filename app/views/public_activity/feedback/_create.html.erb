@@ -1,0 +1,89 @@
+<div class="activity-box panel panel-default post_<%= activity.id %>">
+	<div class="activity-item">
+	<%= content_tag(:div, class: 'activity-header') do %>
+	<div class="user-avatar margin-right">
+		<%= image_tag(activity.owner.avatar.url(:avatar),  width: "40px;") %>
+	</div>
+	<%= content_tag(:span) do %>
+			<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card') %> left a feedback <i class="fa ion-chatbubble"></i> for 
+
+			<% if activity.recipient.team.include?(current_user.id.to_s) %>
+				your idea
+			<% end %>
+
+			<%= link_to(activity.recipient.name, "javascript:void(0);", :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card') %> - <span class="high_concept_pitch"><%= activity.recipient.high_concept_pitch %></span>
+		<% end %>
+		<%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>
+			<%= content_tag(:li) do %>
+				<%= link_to(profile_path(activity.recipient.location_list.first.parameterize)) do %>
+					<i class="ion-location green-link"></i> <%= activity.recipient.location_list.first %>
+				<% end %>
+			<% end %>
+			<%= content_tag(:li) do %>
+				<%= link_to(profile_path(activity.recipient.market_list.first.parameterize)) do %>
+					<i class="fa fa-shopping-cart red-link"></i> <%= activity.recipient.market_list.first %>
+				<% end %>
+			<% end %>
+			<%= content_tag(:li) do %>
+				<%= link_to(idea_feedback_path(activity.recipient.slug, activity.trackable_id)) do %>
+					<%= local_time_ago(activity.created_at) %>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+	<div class="activity-post">
+		<div class="item-content">
+			<div class="main-post-content">
+				<div class="recipients clearfix">
+					<div class="activity-excerpt">
+						<div class="activity-excerpt-content">
+						 <% if activity.trackable.body.length > 450 %>
+						    <%= truncate(markdownify(activity.trackable.body), escape: false, length: 450) %>
+						    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id}" %>
+						    <script>
+						      $('.read-more-<%= activity.trackable.id %>').on('click', function(e) {
+						        e.preventDefault()
+						        $(this).closest(".activity-excerpt").find(".activity-excerpt-content").html('<%= escape_javascript markdownify(activity.trackable.body) %>')
+						      })
+						    </script>
+						  <% else %>
+						    <%= markdownify(activity.trackable.body) %>
+						  <% end %>
+						</div>
+					</div>
+				</div>
+		<% if activity.recipient.user_id == current_user.id %>
+		<div class="rate-box">
+			<% if activity.trackable.badged? && activity.trackable.badges.length > 0 %>
+				<div class="review-badge float-left margin-right">
+					<img data-toggle="tooltip" data-placement="left" title="<%= activity.owner.name.capitalize %> has earned a <%= activity.trackable.badges.first.custom_fields[:name].downcase %> badge" width="30px" src="<%= activity.trackable.badges.first.custom_fields[:image] %>" />   
+				</div>  	
+			<% end %>
+			<%= react_component('Rate', {record: activity.trackable_id, voted: activity.trackable.badged?, vote_url: rate_idea_feedback_path(idea_id: activity.recipient.id, id: activity.trackable_id), points:activity.owner.points(category: "Feedback_#{activity.trackable_id}"), votes_count: activity.trackable.cached_votes_total, css_class: 'main-button float-left margin-right'}.to_json) %>
+		</div>
+		<% end %>
+
+		<ul class="item-tags float-left">
+			<% if activity.recipient.user_id != current_user.id %>
+				<% liked = current_user.voted_for? activity.trackable %>
+				<%= react_component('Upvote', {record: activity.trackable_id, voted: liked,vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote'}.to_json) %>
+			<% end %>
+		</ul>
+		</div>
+
+		<% if activity.owner_id == current_user.id && activity.trackable.posted? %>
+			<div class="post-actions float-right">
+				<%= react_component('Trash', {record: activity.id, delete_url: idea_feedback_path(activity.recipient_id, activity.trackable_id)}.to_json) %>
+			</div>
+		<% end %>
+		</div>
+	</div>
+	</div>
+	<% if activity.recipient.team.include?(current_user.id.to_s) || activity.trackable.user == current_user %>
+	<% commentable = activity.trackable %>
+
+	<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
+
+	<%= react_component('CommentBox', {data: data, count: activity.trackable.comments_count, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
+	<% end %>
+</div>
