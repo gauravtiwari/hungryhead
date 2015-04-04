@@ -1,0 +1,81 @@
+<div class="register-container full-height sm-p-t-30">
+	<div class="container-sm-height full-height">
+	<div class="row row-sm-height">
+	  <div class="col-sm-12 col-sm-height col-middle">
+	   	<h1 class="bold">hungryhead</h1>
+	    <h3>Hungryhead helps students virtually explore the path of entrepreneurship.</h3>
+	    <p>
+	      <small>Create a hungryhead account. Make sure you use your school email address.</small>
+	    </p>
+	    <%= simple_form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :post, remote: true, id: "form-register", class: "p-t-15", role: "form", novalidate: "novalidate" }) do |f| %>
+	      <div class="row">
+	        <div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>First Name</label>
+	            <%= f.input_field :first_name, placeholder: "John", class: "form-control", required: "true", :"aria-required" => "true"%>
+	          </div>
+	        </div>
+	        <div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>Last Name</label>
+	            <%= f.input_field :last_name, placeholder: "John", class: "form-control", required: "true", :"aria-required" => "true"%>
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="row">
+	     	<div class="col-sm-12">
+	          <div class="form-group form-group-default">
+	            <label>School</label>
+	            <%= form.input_field :school_name, :url => autocomplete_school_name_schools_path, :as => :autocomplete %>
+	            <input type="text" name="uname" placeholder="Garforth academy (type and choose your school from the list)" class="form-control" required="" aria-required="true">
+	          </div>
+	        </div>
+	      </div>
+
+	      <div class="row">
+	      	<div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>Username</label>
+	            <input type="text" name="uname" placeholder="johndoe (your username)" class="form-control" required="" aria-required="true">
+	          </div>
+	        </div>
+
+	        <div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>Email</label>
+	            <input type="text" name="uname" placeholder="johndoe@example.com" class="form-control" required="" aria-required="true">
+	          </div>
+	        </div>
+	     </div>
+	      <div class="row">
+	        <div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>Password</label>
+	            <input type="password" name="pass" placeholder="Minimum of 8 Charactors" class="form-control" required="" aria-required="true">
+	          </div>
+	        </div>
+
+	        <div class="col-sm-6">
+	          <div class="form-group form-group-default">
+	            <label>Confirm Password</label>
+	            <input type="password" name="pass" placeholder="Minimum of 8 Charactors" class="form-control" required="" aria-required="true">
+	          </div>
+	        </div>
+
+	      </div>
+	      <div class="row m-t-10">
+	        <div class="col-md-6">
+	          <p>I agree to the <a href="#" class="text-info small">Pages Terms</a> and <a href="#" class="text-info small">Privacy</a>.</p>
+	        </div>
+	        <div class="col-md-6 text-right">
+	          <a href="#" class="text-info small">Help? Contact Support</a>
+	        </div>
+	      </div>
+	      <button class="btn btn-complete btn-cons m-t-10" type="submit">Create a new account</button>
+	      <button class="btn btn-primary btn-cons m-t-10" type="submit">Back</button>
+	    <% end %>
+	  </div>
+	</div>
+	</div>
+</div>
