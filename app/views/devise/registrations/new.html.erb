@@ -19,7 +19,6 @@
 	          <div class="form-group form-group-default">
 	            <label>Last Name</label>
 	            <%= f.input_field :last_name, placeholder: "John", class: "form-control", required: "true", :"aria-required" => "true"%>
-	            <input type="text" name="lname" placeholder="Smith" class="form-control" required="" aria-required="true">
 	          </div>
 	        </div>
 	      </div>
@@ -28,6 +27,7 @@
 	     	<div class="col-sm-12">
 	          <div class="form-group form-group-default">
 	            <label>School</label>
+	            <%= form.input_field :school_name, :url => autocomplete_school_name_schools_path, :as => :autocomplete %>
 	            <input type="text" name="uname" placeholder="Garforth academy (type and choose your school from the list)" class="form-control" required="" aria-required="true">
 	          </div>
 	        </div>
