@@ -1,0 +1,5 @@
+/* Overrides files */
+
+body.menu-behind .header .brand {
+  width: 100px;
+}
