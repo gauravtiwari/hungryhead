@@ -1,5 +1,0 @@
-<% commentable = @meta %>
-
-<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: @comments, record: commentable, paginate: false} )%>
-
-<%= react_component('CommentBox', {data: data, standalone: true, count: @meta.comments_count, comments_path: comments_path(commentable_type: @meta.class.to_s, id: @meta.id)}) %>

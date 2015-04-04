@@ -21,14 +21,14 @@ $(document).ready(function () {
   });
 });
 
-$('.load-card').on('hidden.bs.popover', function () {
-  $('.load-card').popover('destroy')
-});
+  $('.load-card').on('hidden.bs.popover', function () {
+    $('.load-card').popover('destroy')
+  });
 
-$('html').on('mouseup', function(e) {
-    if(!$(e.target).closest('.popover').length) {
-        $('.popover').each(function(){
-            $(this).popover('hide');
-        });
-    }
-});
+  $('html').on('mouseup', function(e) {
+      if(!$(e.target).closest('.popover').length) {
+          $('.popover').each(function(){
+              $(this).popover('hide');
+          });
+      }
+  });

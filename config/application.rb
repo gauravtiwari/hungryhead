@@ -31,11 +31,13 @@ module HungryheadApp
     config.autoload_paths += Dir["#{config.root}/app/presenters/*"]
     config.autoload_paths += Dir["#{config.root}/app/services/*"]
     config.autoload_paths += Dir["#{config.root}/app/lib/*"]
+    config.assets.paths << File.join(Rails.root, "/vendor/hh")
     config.app_generators.scaffold_controller = :scaffold_controller
-    config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
+    #Background job processing
     config.active_job.queue_adapter = :sidekiq
 
+    #React coding style
     config.react.jsx_transform_options = {
       harmony: true,
       strip_types: true,
@@ -45,11 +47,13 @@ module HungryheadApp
     config.react.timeout = 20 #seconds
     config.react.react_js = lambda {File.read(::Rails.application.assets.resolve('react.js'))}
     config.react.component_filenames = ['components.js']
+    
+
     config.active_record.schema_format = :sql
 
-    config.skylight.environments += ['production']
-    config.skylight.logger = Logger.new(STDOUT)
-    config.skylight.probes = %w(net_http redis)
+    #config.skylight.environments += ['production']
+    #config.skylight.logger = Logger.new(STDOUT)
+    #config.skylight.probes = %w(net_http redis)
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de

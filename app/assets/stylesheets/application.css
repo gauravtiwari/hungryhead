@@ -1,46 +1,28 @@
 /*
 	All application CSS assets - checkout vendor assets/css directory
  *
- *= require_self
- *= require jquery-ui
+
+
+ * BEGIN VENDOR CSS FOR PAGES
+ *= require pages-plugins/pace/pace-theme-flash
  *= require animate
- *= require icons
- *= require nprogress
- *= require nprogress-bootstrap
- *= require font-awesome
- *= require ionicons.min
- *= require tooltip
  *= require jquery.atwho
- *= require sweetalert
- *= require chosen
- *= require bootstrap-material-design
- *= require bootstrap
- *= require bootstrap-tokenfield
- *= require normalize-rails
- *= require 'masonry/basic'
- *= require 'masonry/centered'
- *= require 'masonry/fluid'
- *= require 'masonry/gutters'
- *= require 'masonry/infinitescroll'
- *= require 'masonry/right-to-left'
- *= require 'masonry/transitions'
- *= require style
- *= require after_signup
- *= require profiles
- *= require canvas
- *= require ideas
- *= require errors
- *= require pages-icons
- *= require activities
- *= require notifications
- *= require badges
- *= require collaborations
- *= require search
- *= require meta
- *= require conversations
- *= require messages
- *= require tags
- *= require notes
- *= require pages
- *= require feedbacks
-*/
+ *= require pages-plugins/boostrapv3/css/bootstrap.min
+ *= require pages-plugins/font-awesome/css/font-awesome
+ *= require pages-plugins/jquery-scrollbar/jquery.scrollbar
+ *= require pages-plugins/bootstrap-select2/select2
+ *= require pages-plugins/switchery/css/switchery.min
+ 
+
+ * BEGIN CORE TEMPLATE CSS FOR PAGES
+ *= require pages-core/css/pages-icons
+ *= require pages-core/css/pages
+
+
+ * BEGIN PAGES ASSET PIPELINE OVERRIDE
+ *= require ./pages-asset-pipeline
+ * BEGIN SITE STYLES
+ *= require splash
+ *= require home
+ *= require profile
+ *= require idea_profile

@@ -1,52 +1,44 @@
 //All application JS assets - checkout vendor assets directory
 
+// BEGIN VENDOR JS FOR PAGES
+
+//= require plugins/pace/pace.min
+//= require plugins/jquery/jquery-1.11.1.min
+//= require plugins/modernizr.custom
 //  require jquery.turbolinks
-//= require jquery-ui/core
-//= require jquery-ui/autocomplete
-//= require jquery-ui/draggable
-//= require jquery-ui/effect.all
 //= require jquery_ujs
-//= require sizzle.min
 //= require jquery.cookie
-//= require autocomplete-rails
-//= require polyfiller
-//= require webshims
-//= require bootstrap
-//= require bootstrap-material-design
-//= require jquery.autosize
-//= require jquery.form
-//= require bootstrap-tokenfield
+//= require jquery.pubsub
+//= require jquery.truncate
+//= require jquery.soulmate
 //= require underscore
 //= require js-routes
-//= require chosen-jquery
-//= require ImageSelect.jquery
-//= require jquery.truncate
-//= require modernizr.custom
-//= require local_time
-//= require infinity.min
-//= require masonry/jquery.masonry
-//= require masonry/jquery.event-drag
-//= require masonry/jquery.imagesloaded.min
-//= require masonry/jquery.infinitescroll.min
-//= require masonry/modernizr-transitions
-//= require isotope/jquery.isotope
-//= require jquery.simplyCountable
-//= require placeholders.jquery.min
-//= require jquery.soulmate
-//= require typer
-//= require jquery.pubsub
-//= require moment
 //= require jquery.atwho
-//= require jquery-circle-progress
-//= require jquery.slimscroll.min
+//= require typer
+//= require jquery.autosize
 //= require showdown
-//= require sweetalert
+//= require plugins/jquery-ui/jquery-ui.min
+//= require plugins/boostrapv3/js/bootstrap.min
+//= require plugins/jquery/jquery-easy
+//= require plugins/jquery-unveil/jquery.unveil.min
+//= require plugins/jquery-bez/jquery.bez.min
+//= require plugins/jquery-ios-list/jquery.ioslist.min
+//= require plugins/imagesloaded/imagesloaded.pkgd.min
+//= require plugins/jquery-actual/jquery.actual.min
+//= require plugins/jquery-scrollbar/jquery.scrollbar.min
 //= require react
 //= require react-infinite
 //= require react_ujs
+ 
+// Core Javascripts
+//= require core/js/pages
+
+// Turbolinks and plugins
 //= require_tree .
+// require turbolinks
 // require nprogress
 // require nprogress-turbolinks
 // require turbolinks
 
 //Turbolinks.enableTransitionCache();
+

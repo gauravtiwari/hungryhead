@@ -1,8 +1,0 @@
-<%= react_component("TextWidget", {data: data}) %>
-<% if @ideas.length > 0 %>
-	<%= render partial: 'users/_sub_pages/ideas', locals: {ideas: @ideas} %>
-<% end %>
-
-<% if @user.feedbacks_count > 0 %>
-	<%=  render partial: "users/_sub_pages/feedbacks", locals: { feedbacks: @user.feedbacks.take(2)} %>
-<% end %>
