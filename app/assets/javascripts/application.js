@@ -4,8 +4,8 @@
 
 //= require plugins/pace/pace.min
 //= require plugins/jquery/jquery-1.11.1.min
-//= require plugins/modernizr.custom
 //  require jquery.turbolinks
+//= require plugins/modernizr.custom
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -35,7 +35,6 @@
 
 // Turbolinks and plugins
 //= require_tree .
-// require turbolinks
 // require nprogress
 // require nprogress-turbolinks
 // require turbolinks

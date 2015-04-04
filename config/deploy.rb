@@ -16,7 +16,7 @@ set :domain, '178.62.37.180'
 set :forward_agent, true
 set :user, 'deployer'
 set :deploy_to, '/home/deployer/apps'
-set :repository, 'git@bitbucket.org:hungryheadorg/app.git'
+set :repository, 'git@bitbucket.org:hungryheadorg/school_app.git'
 set :branch, 'v0.0.1'
 set :application, 'Hungryhead'
 set :server_name, '178.62.37.180'

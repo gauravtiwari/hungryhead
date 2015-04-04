@@ -21,13 +21,11 @@ gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
-
-gem 'snackbarjs-rails'
 
 gem 'metainspector'
 
@@ -58,9 +56,6 @@ gem 'sanitize'
 gem 'gemoji'
 gem 'auto_html'
 
-#Timezone 
-gem 'local_time'
-
 #Deployment
 gem 'foreman'
 
@@ -76,8 +71,6 @@ gem 'omniauth-twitter'
 gem 'omniauth-linkedin-oauth2'
 gem 'pundit'
 gem 'devise-async'
-#gem 'omnicontacts', github: 'Diego81/omnicontacts'
-#gem 'the_role'
 
 gem 'responders'
 
@@ -91,8 +84,6 @@ gem 'underscore-rails'
 gem 'acts-as-taggable-on'
 
 gem 'paper_trail', '4.0.0.beta2'
-
-gem  'diffy'
 
 #Ruby Races
 gem 'less-rails'
@@ -109,8 +100,6 @@ gem 'puma'
 #State machines
 gem 'aasm'
 
-gem 'activerecord-reputation-system'
-
 #ShowDown
 
 gem 'showdown-rails'
@@ -121,19 +110,10 @@ gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 
-
-#Masonry gem
-gem 'masonry-rails'
-
 #Mailer gems
 
 gem 'premailer-rails'
 gem 'mandrill-rails'
-
-#Admin Gem
-
-gem 'jquery-oembed-rails'
-gem 'bootstrap-material-design'
 
 #Eager load associations
 gem 'goldiloader'
@@ -163,8 +143,6 @@ gem 'partisan'
 
 #need removing
 gem 'nested_form'
-
-gem 'jquery-ui-rails'
 
 #Active Record Session
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
@@ -232,8 +210,6 @@ gem 'acts_as_commentable_with_threading'
 
 gem 'jquery-atwho-rails'
 
-gem 'normalize-rails'
-
 #Security and best practices
 
 gem 'rails_best_practices'
@@ -269,6 +245,11 @@ gem 'uuidtools'
 gem 'mina'
 gem 'mina-sidekiq', :require => false
 gem 'mina-nginx', :require => false
+
+
+gem 'rename'
+
+
 #Mobile APP
 
 gem "skylight"
