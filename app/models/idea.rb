@@ -34,12 +34,10 @@ class Idea < ActiveRecord::Base
   #Associations
 
   belongs_to :user, counter_cache: true, touch: true
-  belongs_to :institution, counter_cache: true
+  belongs_to :school, counter_cache: true
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
-  has_many :idea_messages, dependent: :destroy, autosave: true
-  has_many :notes, as: :notable,  dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
   
   acts_as_followable

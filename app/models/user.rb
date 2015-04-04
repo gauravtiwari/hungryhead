@@ -38,7 +38,8 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   #Model Relationships
-  belongs_to :institution, counter_cache: true
+  belongs_to :school, counter_cache: true
+  has_one :school, { where teacher: true }
   has_many :authentications, :dependent => :destroy, autosave: true
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :shares, dependent: :destroy, autosave: true

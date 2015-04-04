@@ -26,4 +26,14 @@ class Organization < ActiveRecord::Base
     words.map{|w| w.first.upcase }.join(" ")
   end
 
+  private
+
+  def create_slug
+    return if !slug_changed? || slug == slugs.last.try(:slug)
+    #re-use old slugs
+    previous = slugs.where('lower(slug) = ?', slug.downcase)
+    previous.delete_all
+    slugs.create!(slug: slug)
+  end
+
 end
