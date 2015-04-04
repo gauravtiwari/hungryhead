@@ -1,0 +1,39 @@
+<div class="profile-wrapper panel panel-default">
+	<div class="profile-wrapper-title">
+		<h4><i class="fa fa-fw fa-company"></i> About </h4>
+	</div>
+	<div class="display-mode-profile">
+		<ul class="wrapper-list">
+			<li>
+				<div class="display-mode">
+				<span class="float-left"><i class="ion-building"></i> Description</span>
+				<div class="display-mode-content">
+					<p><%= truncate(@institution.description, length: 150, escape: false) %></p>
+				</div>
+				</div>
+			</li>
+
+			<li>
+				<div class="display-mode">
+				<span class="float-left"><i class="fa fa-fw fa-users"></i> Contacts</span>
+				<div class="display-mode-content">
+					<p><a href="mailto:" title="">Jon powell</a></p>
+					<p><a href="mailto:" title="">Dean Josh</a>
+					</p>
+				</div>
+				</div>
+			</li>
+
+			<li>
+				<div class="display-mode">
+				<span class="float-left"><i class="ion-at"></i> Website</span>
+				<div class="display-mode-content">
+					<p>
+					<%= link_to(@institution.website, url_with_protocol(@institution.website)) %>
+					</p>
+				</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
