@@ -121,7 +121,7 @@ body.dashboard .page-container {
   -webkit-animation: none;
   animation: none;
   top: 73px;
-  background: url('../../img/progress/progress-circle-success.svg') no-repeat top left;
+  background: url('/assets/core/img/progress/progress-circle-success.svg') no-repeat top left;
   background-size: 100% auto;
   margin: 0 auto;
   border-width: 0;
@@ -723,7 +723,7 @@ body.dashboard .page-container {
 }
 .quickview-wrapper .nav-tabs ~ .tab-content .quickview-notes .note {
   /* Quickview Note */
-  background-image: url('../../img/notes_lines.png');
+  background-image: url('/assets/core/img/notes_lines.png');
   background-repeat: repeat-y;
   background-position: 27px top;
 }
@@ -1000,7 +1000,7 @@ body.dashboard .page-container {
 ------------------------------------
 */
 .icon-set {
-  background: url('../../img/icons/top_tray.png') no-repeat;
+  background: url('/assets/core/img/icons/top_tray.png') no-repeat;
   position: relative;
   display: block;
 }
@@ -1649,10 +1649,10 @@ body.dashboard .page-container {
   opacity: 0.1;
 }
 .portlet-icon-refresh-lg-master {
-  background-image: url('../../img/progress/progress-circle-lg-master-static.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-lg-master-static.svg');
 }
 .portlet-icon-refresh-lg-white {
-  background-image: url('../../img/progress/progress-circle-lg-white-static.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-lg-white-static.svg');
 }
 .portlet-icon-refresh-lg-master-animated,
 .portlet-icon-refresh-lg-white-animated {
@@ -1669,10 +1669,10 @@ body.dashboard .page-container {
   opacity: 1;
 }
 .portlet-icon-refresh-lg-master-animated {
-  background-image: url('../../img/progress/progress-circle-lg-master.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-lg-master.svg');
 }
 .portlet-icon-refresh-lg-white-animated {
-  background-image: url('../../img/progress/progress-circle-lg-white.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-lg-white.svg');
 }
 /* For demo purpose only */
 .panel-scroll {
@@ -1729,13 +1729,13 @@ body.dashboard .page-container {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  src: local('Montserrat-Regular'), url(http://fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYAzyDMXhdD8sAj6OAJTFsBI.woff2) format('woff2'), url(http://fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff'), url('../fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+  src: local('Montserrat-Regular'), url(http://fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYAzyDMXhdD8sAj6OAJTFsBI.woff2) format('woff2'), url(http://fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff'), url('/assets/core/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  src: local('Montserrat-Bold'), url(http://fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcmaVI6zN22yiurzcBKxPjFE.woff2) format('woff2'), url(http://fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcnbFhgvWbfSbdVg11QabG8w.woff) format('woff'), url('../fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+  src: local('Montserrat-Bold'), url(http://fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcmaVI6zN22yiurzcBKxPjFE.woff2) format('woff2'), url(http://fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcnbFhgvWbfSbdVg11QabG8w.woff) format('woff'), url('/assets/core/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
 }
 html {
   font-size: 100%;
@@ -3258,7 +3258,7 @@ Misc buttons
   top: 8px;
 }
 .alert .close {
-  background: url("../img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
+  background: url("/assets/core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
   background-position: -9px -10px;
   width: 10px;
   height: 9px;
@@ -3972,37 +3972,37 @@ body > .pgn-wrapper {
 ------------------------------------
 */
 .progress-bar-indeterminate {
-  background: url('../../img/progress/progress-bar-master.svg') no-repeat top left;
+  background: url('/assets/core/img/progress/progress-bar-master.svg') no-repeat top left;
   width: 100%;
   height: 100%;
   background-size: cover;
 }
 .progress-bar-indeterminate.progress-bar-primary {
-  background-image: url('../../img/progress/progress-bar-primary.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-primary.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-complete {
-  background-image: url('../../img/progress/progress-bar-complete.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-complete.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-success {
-  background-image: url('../../img/progress/progress-bar-success.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-success.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-info {
-  background-image: url('../../img/progress/progress-bar-info.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-info.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-warning {
-  background-image: url('../../img/progress/progress-bar-warning.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-warning.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-danger {
-  background-image: url('../../img/progress/progress-bar-danger.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-danger.svg');
   background-color: transparent;
 }
 .progress-bar-indeterminate.progress-bar-master {
-  background-image: url('../../img/progress/progress-bar-master.svg');
+  background-image: url('/assets/core/img/progress/progress-bar-master.svg');
   background-color: transparent;
 }
 /* Progress Bar
@@ -4088,29 +4088,29 @@ body > .pgn-wrapper {
 ------------------------------------
 */
 .progress-circle-indeterminate {
-  background: url('../../img/progress/progress-circle-master.svg') no-repeat top left;
+  background: url('/assets/core/img/progress/progress-circle-master.svg') no-repeat top left;
   width: 50px;
   height: 50px;
   background-size: 100% auto;
   margin: 0 auto;
 }
 .progress-circle-indeterminate.progress-circle-warning {
-  background-image: url('../../img/progress/progress-circle-warning.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-warning.svg');
 }
 .progress-circle-indeterminate.progress-circle-danger {
-  background-image: url('../../img/progress/progress-circle-danger.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-danger.svg');
 }
 .progress-circle-indeterminate.progress-circle-info {
-  background-image: url('../../img/progress/progress-circle-info.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-info.svg');
 }
 .progress-circle-indeterminate.progress-circle-primary {
-  background-image: url('../../img/progress/progress-circle-primary.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-primary.svg');
 }
 .progress-circle-indeterminate.progress-circle-success {
-  background-image: url('../../img/progress/progress-circle-success.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-success.svg');
 }
 .progress-circle-indeterminate.progress-circle-complete {
-  background-image: url('../../img/progress/progress-circle-complete.svg');
+  background-image: url('/assets/core/img/progress/progress-circle-complete.svg');
 }
 /* Circular Progress 
 ------------------------------------
@@ -6583,7 +6583,7 @@ https://github.com/Waxolunist/bootstrap3-wysihtml5-bower
   font-weight: 600;
 }
 .editor-icon {
-  background-image: url("../img/editor_tray.png");
+  background-image: url("/assets/core/img/editor_tray.png");
   display: inline-block;
   height: 40px;
   margin-top: 5px;
@@ -7772,7 +7772,7 @@ input.list-view-search {
   overflow-x: hidden;
 }
 .social-wrapper .social .cover-photo:before {
-  background-image: url("../../img/linear_gradient.png");
+  background-image: url("/assets/core/img/linear_gradient.png");
   background-repeat: repeat-x;
   bottom: 0;
   content: " ";
@@ -10090,7 +10090,7 @@ Main components
   opacity: .69;
 }
 .widget-1:before {
-  background-image: url('../../img/linear_gradient.png');
+  background-image: url('/assets/core/img/linear_gradient.png');
   background-repeat: repeat-x;
   content: " ";
   left: 0;
@@ -12673,16 +12673,16 @@ Main components
 /*** Retina Display Images **/
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 200/100), only screen and (min-device-pixel-ratio: 2) {
   .icon-set {
-    background: url('../../img/icons/top_tray_2x.png');
+    background: url('/assets/core/img/icons/top_tray_2x.png');
     position: relative;
     background-size: 95px 19px;
   }
   .editor-icon {
-    background-image: url("../../img/editor_tray_2x.png");
+    background-image: url("/assets/core/img/editor_tray_2x.png");
     background-size: 480px 40px;
   }
   .alert .close {
-    background: url("../../img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
+    background: url("/assets/core/img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
     background-position: -9px -10px;
     width: 10px;
     height: 9px;

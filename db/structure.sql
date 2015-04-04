@@ -1126,6 +1126,8 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 CREATE TABLE users (
     id integer NOT NULL,
     email character varying NOT NULL,
+    first_name character varying DEFAULT ''::character varying NOT NULL,
+    last_name character varying DEFAULT ''::character varying NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
     username character varying NOT NULL,
     slug character varying,

@@ -24,14 +24,14 @@ module HungryheadSchoolApp
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'hh')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins', 'font-awesome', 'fonts')
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/controllers/*"]
     config.autoload_paths += Dir["#{config.root}/app/presenters/*"]
     config.autoload_paths += Dir["#{config.root}/app/services/*"]
     config.autoload_paths += Dir["#{config.root}/app/lib/*"]
-    config.assets.paths << File.join(Rails.root, "/vendor/hh")
     config.app_generators.scaffold_controller = :scaffold_controller
 
     #Background job processing

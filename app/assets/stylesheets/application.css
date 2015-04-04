@@ -1,28 +1,33 @@
 /*
 	All application CSS assets - checkout vendor assets/css directory
- *
+
 
 
  * BEGIN VENDOR CSS FOR PAGES
- *= require pages-plugins/pace/pace-theme-flash
+ *= require plugins/pace/pace-theme-flash
  *= require animate
  *= require jquery.atwho
- *= require pages-plugins/boostrapv3/css/bootstrap.min
- *= require pages-plugins/font-awesome/css/font-awesome
- *= require pages-plugins/jquery-scrollbar/jquery.scrollbar
- *= require pages-plugins/bootstrap-select2/select2
- *= require pages-plugins/switchery/css/switchery.min
+ *= require plugins/boostrapv3/css/bootstrap.min
+ *= require font-awesome
+ *= require plugins/jquery-scrollbar/jquery.scrollbar
+ *= require plugins/bootstrap-select2/select2
+ *= require plugins/switchery/css/switchery.min
  
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
- *= require pages-core/css/pages-icons
- *= require pages-core/css/pages
+ *= require core/css/pages-icons
+ *= require core/css/pages
+ *= require core/css/themes/corporate
 
 
  * BEGIN PAGES ASSET PIPELINE OVERRIDE
- *= require ./pages-asset-pipeline
+ *= require ./asset-pipeline
  * BEGIN SITE STYLES
  *= require splash
  *= require home
  *= require profile
+ *= require footer
+ *= require overrides
  *= require idea_profile
+ 
+ */

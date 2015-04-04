@@ -2,10 +2,12 @@
 
 // BEGIN VENDOR JS FOR PAGES
 
+
 //= require plugins/pace/pace.min
-//= require plugins/jquery/jquery-1.11.1.min
+//= require jquery2
 //  require jquery.turbolinks
 //= require plugins/modernizr.custom
+//= require plugins/jquery-ui/jquery-ui.min
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -17,7 +19,7 @@
 //= require typer
 //= require jquery.autosize
 //= require showdown
-//= require plugins/jquery-ui/jquery-ui.min
+//= require autocomplete-rails
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
 //= require plugins/jquery-unveil/jquery.unveil.min

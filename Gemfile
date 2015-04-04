@@ -24,9 +24,22 @@ gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'nprogress-rails'
+
+#Cache for jbuilder
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
 
+#Caching 
+gem 'identity_cache'
+gem 'cityhash'
+
+
+#Font awesome
+gem "font-awesome-rails"
+
+
+#Manage meta
 gem 'metainspector'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -83,8 +96,6 @@ gem 'underscore-rails'
 
 gem 'acts-as-taggable-on'
 
-gem 'paper_trail', '4.0.0.beta2'
-
 #Ruby Races
 gem 'less-rails'
 gem 'autoprefixer-rails'
@@ -110,9 +121,14 @@ gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 
-#Mailer gems
+#Redis objects
+gem 'redis-objects'
 
-gem 'premailer-rails'
+#Realtime connections using redis
+
+gem 'entangled'
+
+#Mailer gems
 gem 'mandrill-rails'
 
 #Eager load associations
@@ -150,16 +166,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'
 
-# font awesome
-
-gem 'font-awesome-rails'
-
-gem 'chartkick'
-
-gem 'chosen-rails'
-
 # SEO
-
 gem 'friendly_id'
 
 #Admin
@@ -175,7 +182,6 @@ gem 'autosize-rails'
 gem 'merit'
 
 # Animate.css
-
 gem 'animate-rails'
 
 #Image upload and manipulations
@@ -207,50 +213,37 @@ gem 'acts_as_commentable_with_threading'
 
 #Intercom
 #gem "intercom-rails"
-
 gem 'jquery-atwho-rails'
 
 #Security and best practices
 
 gem 'rails_best_practices'
-
 gem 'brakeman'
 
+#Application configuration
 gem 'figaro'
-
-gem 'nprogress-rails'
 
 #caching system
 gem  'dalli'
 
-#Realtime
-
+#Active link
 gem 'active_link_to'
 
+#Realtime
 gem 'pusher'
 gem 'em-http-request' # Required by trigger_async
 
-#Payment System
-
-gem 'bcrypt'
-gem 'faker'
+#Pagination
 gem 'will_paginate'
 
-gem 'wicked_pdf'
-
-gem 'kaminari'
 
 gem 'uuidtools'
 
+#Deployment
 gem 'mina'
 gem 'mina-sidekiq', :require => false
 gem 'mina-nginx', :require => false
 
-
-gem 'rename'
-
-
-#Mobile APP
 
 gem "skylight"
 

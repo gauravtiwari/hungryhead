@@ -5,12 +5,6 @@ class Idea < ActiveRecord::Base
   include PublicActivity::Model
   friendly_id :slug_candidates
 
-  has_paper_trail skip: [:idea_messages_count, :cached_votes_total, :comments_count,
-    :logo_processing, :logo, :fund, :balance, :cached_location_list,
-    :cached_market_list, :video_link, :sash_id, :level, :website, :updated_at, :status, :privacy,
-    :investments_count, :feedbackers, :investors, :team, :team_invites, :feedbacks_count,
-    :cover_processing, :slug, :looking_for_team, :cached_technology_list], on: [:update, :create]
-
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Enumerators for handling states
@@ -19,8 +13,6 @@ class Idea < ActiveRecord::Base
 
   #Scopes
   scope :published_ideas, -> { where(status: 1) }
-  scope :private_ideas, -> { where(privacy: 0) }
-  scope :public_ideas, -> { where(privacy: 2) }
   scope :for_user, lambda {|user| where("team @> ?", "{#{user.id}}") }
 
   #Upload logos and covers
@@ -58,7 +50,6 @@ class Idea < ActiveRecord::Base
   store_accessor :sections, :video, :video_html, :market, :problems, :solutions, :vision, :value_proposition
 
   #Auto HTML for youtube video
-
   auto_html_for :video do
     html_escape
     vimeo(:width => 640, :height => 250, :autoplay => false)

@@ -29,8 +29,7 @@ Rails.application.routes.draw do
     get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
 
     # joining
-    get   '/join' => 'users/registrations#social_signup',    as: 'social_registration'
-    get   '/join_without_social' => 'users/registrations#new',    as: 'new_user_registration'
+    get   '/join' => 'users/registrations#new',    as: 'new_user_registration'
     post  '/join' => 'users/registrations#create', as: 'user_registration'
     put  '/join' => 'users/registrations#update', as: 'user_update'
     delete  '/join' => 'devise/registrations#destroy', as: 'user_delete'
