@@ -357,7 +357,6 @@ CREATE TABLE ideas (
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
     level integer DEFAULT 0,
-    notes_count integer DEFAULT 0,
     shares_count integer DEFAULT 0
 );
 
@@ -379,36 +378,6 @@ CREATE SEQUENCE ideas_id_seq
 --
 
 ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
-
-
---
--- Name: institutions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE institutions (
-    id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: institutions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE institutions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: institutions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE institutions_id_seq OWNED BY institutions.id;
 
 
 --
@@ -791,89 +760,6 @@ ALTER SEQUENCE merit_scores_id_seq OWNED BY merit_scores.id;
 
 
 --
--- Name: meta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE meta (
-    id integer NOT NULL,
-    name character varying,
-    slug character varying,
-    high_concept_pitch character varying DEFAULT ''::character varying,
-    elevator_pitch text DEFAULT ''::text,
-    description text DEFAULT ''::text,
-    logo character varying,
-    cover character varying,
-    founders character varying[] DEFAULT '{}'::character varying[],
-    looking_for_team boolean DEFAULT false,
-    profile jsonb DEFAULT '{}'::jsonb,
-    sections jsonb DEFAULT '{}'::jsonb,
-    cached_location_list character varying,
-    cached_market_list character varying,
-    cached_technology_list character varying,
-    followers_count integer DEFAULT 0,
-    comments_count integer DEFAULT 0,
-    cached_votes_total integer DEFAULT 0,
-    user_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: meta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE meta_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: meta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE meta_id_seq OWNED BY meta.id;
-
-
---
--- Name: notes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE notes (
-    id integer NOT NULL,
-    notable_id integer,
-    notable_type character varying,
-    parameters jsonb,
-    status integer,
-    user_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: notes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE notes_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: notes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE notes_id_seq OWNED BY notes.id;
-
-
---
 -- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1021,24 +907,34 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: services; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schools; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE services (
+CREATE TABLE schools (
     id integer NOT NULL,
-    name character varying,
-    slug character varying,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    name character varying NOT NULL,
+    slug character varying NOT NULL,
     description text,
+    logo character varying,
+    type character varying,
+    cover character varying,
+    media jsonb DEFAULT '{}'::jsonb,
+    data jsonb DEFAULT '{}'::jsonb,
+    customizations jsonb DEFAULT '{}'::jsonb,
+    users_count integer DEFAULT 0,
+    ideas_count integer DEFAULT 0,
+    followers_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
 
 
 --
--- Name: services_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: schools_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE services_id_seq
+CREATE SEQUENCE schools_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1047,10 +943,10 @@ CREATE SEQUENCE services_id_seq
 
 
 --
--- Name: services_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: schools_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE services_id_seq OWNED BY services.id;
+ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 
 --
@@ -1124,39 +1020,6 @@ ALTER SEQUENCE shares_id_seq OWNED BY shares.id;
 
 
 --
--- Name: skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE skills (
-    id integer NOT NULL,
-    name character varying,
-    slug character varying,
-    description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: skills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE skills_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE skills_id_seq OWNED BY skills.id;
-
-
---
 -- Name: slugs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1188,39 +1051,6 @@ CREATE SEQUENCE slugs_id_seq
 --
 
 ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
-
-
---
--- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE subjects (
-    id integer NOT NULL,
-    name character varying,
-    description text,
-    slug character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE subjects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE subjects_id_seq OWNED BY subjects.id;
 
 
 --
@@ -1287,39 +1117,6 @@ CREATE SEQUENCE tags_id_seq
 --
 
 ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
-
-
---
--- Name: technologies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE technologies (
-    id integer NOT NULL,
-    name character varying,
-    slug character varying,
-    description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: technologies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE technologies_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: technologies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE technologies_id_seq OWNED BY technologies.id;
 
 
 --
@@ -1406,76 +1203,6 @@ CREATE SEQUENCE users_id_seq
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- Name: version_associations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE version_associations (
-    id integer NOT NULL,
-    version_id integer,
-    foreign_key_name character varying NOT NULL,
-    foreign_key_id integer
-);
-
-
---
--- Name: version_associations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE version_associations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: version_associations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE version_associations_id_seq OWNED BY version_associations.id;
-
-
---
--- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE versions (
-    id integer NOT NULL,
-    item_type character varying NOT NULL,
-    item_id integer NOT NULL,
-    event character varying NOT NULL,
-    whodunnit character varying,
-    object json,
-    created_at timestamp without time zone,
-    object_changes json,
-    user_name character varying,
-    user_avatar character varying,
-    owner_url character varying,
-    transaction_id integer
-);
-
-
---
--- Name: versions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE versions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: versions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
 
 --
@@ -1575,13 +1302,6 @@ ALTER TABLE ONLY ideas ALTER COLUMN id SET DEFAULT nextval('ideas_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY institutions ALTER COLUMN id SET DEFAULT nextval('institutions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY investments ALTER COLUMN id SET DEFAULT nextval('investments_id_seq'::regclass);
 
 
@@ -1659,20 +1379,6 @@ ALTER TABLE ONLY merit_scores ALTER COLUMN id SET DEFAULT nextval('merit_scores_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY meta ALTER COLUMN id SET DEFAULT nextval('meta_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY notes ALTER COLUMN id SET DEFAULT nextval('notes_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
@@ -1701,7 +1407,7 @@ ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY services ALTER COLUMN id SET DEFAULT nextval('services_id_seq'::regclass);
+ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::regclass);
 
 
 --
@@ -1722,21 +1428,7 @@ ALTER TABLE ONLY shares ALTER COLUMN id SET DEFAULT nextval('shares_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY skills ALTER COLUMN id SET DEFAULT nextval('skills_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
 
 
 --
@@ -1757,28 +1449,7 @@ ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY technologies ALTER COLUMN id SET DEFAULT nextval('technologies_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY version_associations ALTER COLUMN id SET DEFAULT nextval('version_associations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
 
 
 --
@@ -1850,14 +1521,6 @@ ALTER TABLE ONLY idea_messages
 
 ALTER TABLE ONLY ideas
     ADD CONSTRAINT ideas_pkey PRIMARY KEY (id);
-
-
---
--- Name: institutions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY institutions
-    ADD CONSTRAINT institutions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1949,22 +1612,6 @@ ALTER TABLE ONLY merit_scores
 
 
 --
--- Name: meta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY meta
-    ADD CONSTRAINT meta_pkey PRIMARY KEY (id);
-
-
---
--- Name: notes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY notes
-    ADD CONSTRAINT notes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1997,11 +1644,11 @@ ALTER TABLE ONLY sashes
 
 
 --
--- Name: services_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: schools_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY services
-    ADD CONSTRAINT services_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY schools
+    ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
 
 
 --
@@ -2021,27 +1668,11 @@ ALTER TABLE ONLY shares
 
 
 --
--- Name: skills_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY skills
-    ADD CONSTRAINT skills_pkey PRIMARY KEY (id);
-
-
---
 -- Name: slugs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY slugs
     ADD CONSTRAINT slugs_pkey PRIMARY KEY (id);
-
-
---
--- Name: subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY subjects
-    ADD CONSTRAINT subjects_pkey PRIMARY KEY (id);
 
 
 --
@@ -2061,35 +1692,11 @@ ALTER TABLE ONLY tags
 
 
 --
--- Name: technologies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY technologies
-    ADD CONSTRAINT technologies_pkey PRIMARY KEY (id);
-
-
---
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: version_associations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY version_associations
-    ADD CONSTRAINT version_associations_pkey PRIMARY KEY (id);
-
-
---
--- Name: versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY versions
-    ADD CONSTRAINT versions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2311,13 +1918,6 @@ CREATE INDEX index_ideas_on_looking_for_team ON ideas USING btree (looking_for_t
 
 
 --
--- Name: index_ideas_on_notes_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_notes_count ON ideas USING btree (notes_count);
-
-
---
 -- Name: index_ideas_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2479,76 +2079,6 @@ CREATE UNIQUE INDEX index_markets_on_slug ON markets USING btree (slug);
 
 
 --
--- Name: index_meta_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_cached_votes_total ON meta USING btree (cached_votes_total);
-
-
---
--- Name: index_meta_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_comments_count ON meta USING btree (comments_count);
-
-
---
--- Name: index_meta_on_followers_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_followers_count ON meta USING btree (followers_count);
-
-
---
--- Name: index_meta_on_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_looking_for_team ON meta USING btree (looking_for_team);
-
-
---
--- Name: index_meta_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_slug ON meta USING btree (slug);
-
-
---
--- Name: index_meta_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_meta_on_user_id ON meta USING btree (user_id);
-
-
---
--- Name: index_notes_on_notable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notes_on_notable_id ON notes USING btree (notable_id);
-
-
---
--- Name: index_notes_on_notable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notes_on_notable_type ON notes USING btree (notable_type);
-
-
---
--- Name: index_notes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notes_on_status ON notes USING btree (status);
-
-
---
--- Name: index_notes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notes_on_user_id ON notes USING btree (user_id);
-
-
---
 -- Name: index_notifications_on_reciever_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2619,10 +2149,59 @@ CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON re
 
 
 --
--- Name: index_services_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_schools_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_services_on_slug ON services USING btree (slug);
+CREATE INDEX index_schools_on_data ON schools USING gin (data);
+
+
+--
+-- Name: index_schools_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_email ON schools USING btree (email);
+
+
+--
+-- Name: index_schools_on_followers_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_followers_count ON schools USING btree (followers_count);
+
+
+--
+-- Name: index_schools_on_ideas_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_ideas_count ON schools USING btree (ideas_count);
+
+
+--
+-- Name: index_schools_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
+
+
+--
+-- Name: index_schools_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
+
+
+--
+-- Name: index_schools_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_type ON schools USING btree (type);
+
+
+--
+-- Name: index_schools_on_users_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_users_count ON schools USING btree (users_count);
 
 
 --
@@ -2661,13 +2240,6 @@ CREATE INDEX index_shares_on_user_id ON shares USING btree (user_id);
 
 
 --
--- Name: index_skills_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_skills_on_slug ON skills USING btree (slug);
-
-
---
 -- Name: index_slugs_on_slug_and_sluggable_type_and_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2689,13 +2261,6 @@ CREATE INDEX index_slugs_on_sluggable_type_and_sluggable_id ON slugs USING btree
 
 
 --
--- Name: index_subjects_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_subjects_on_slug ON subjects USING btree (slug);
-
-
---
 -- Name: index_taggings_on_taggable_id_and_taggable_type_and_context; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2714,13 +2279,6 @@ CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 --
 
 CREATE INDEX index_tags_on_slug ON tags USING btree (slug);
-
-
---
--- Name: index_technologies_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_technologies_on_slug ON technologies USING btree (slug);
 
 
 --
@@ -2843,34 +2401,6 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 
 
 --
--- Name: index_version_associations_on_foreign_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_version_associations_on_foreign_key ON version_associations USING btree (foreign_key_name, foreign_key_id);
-
-
---
--- Name: index_version_associations_on_version_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_version_associations_on_version_id ON version_associations USING btree (version_id);
-
-
---
--- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (item_type, item_id);
-
-
---
--- Name: index_versions_on_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_versions_on_transaction_id ON versions USING btree (transaction_id);
-
-
---
 -- Name: index_votes_on_votable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2927,14 +2457,6 @@ ALTER TABLE ONLY idea_messages
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs
     ADD CONSTRAINT mb_opt_outs_on_conversations_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
-
-
---
--- Name: notes_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY notes
-    ADD CONSTRAINT notes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -3027,16 +2549,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150119202844');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122230500');
 
-INSERT INTO schema_migrations (version) VALUES ('20150128134019');
-
-INSERT INTO schema_migrations (version) VALUES ('20150128193039');
-
-INSERT INTO schema_migrations (version) VALUES ('20150128200743');
-
-INSERT INTO schema_migrations (version) VALUES ('20150128220559');
-
-INSERT INTO schema_migrations (version) VALUES ('20150128220624');
-
 INSERT INTO schema_migrations (version) VALUES ('20150131181527');
 
 INSERT INTO schema_migrations (version) VALUES ('20150216233226');
@@ -3053,25 +2565,9 @@ INSERT INTO schema_migrations (version) VALUES ('20150221142357');
 
 INSERT INTO schema_migrations (version) VALUES ('20150308175637');
 
-INSERT INTO schema_migrations (version) VALUES ('20150310214033');
-
-INSERT INTO schema_migrations (version) VALUES ('20150310214034');
-
-INSERT INTO schema_migrations (version) VALUES ('20150311095548');
-
-INSERT INTO schema_migrations (version) VALUES ('20150311234014');
-
 INSERT INTO schema_migrations (version) VALUES ('20150312183515');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183534');
-
-INSERT INTO schema_migrations (version) VALUES ('20150312183551');
-
-INSERT INTO schema_migrations (version) VALUES ('20150312183609');
-
-INSERT INTO schema_migrations (version) VALUES ('20150312183627');
-
-INSERT INTO schema_migrations (version) VALUES ('20150312193647');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
@@ -3084,8 +2580,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 INSERT INTO schema_migrations (version) VALUES ('20150321223054');
 
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
-
-INSERT INTO schema_migrations (version) VALUES ('20150323233213');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 

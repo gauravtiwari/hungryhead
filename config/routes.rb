@@ -180,14 +180,6 @@ Rails.application.routes.draw do
     end
   end
 
-  #Meta Page
-
-  get '/meta', to: 'meta#show', as: :meta
-  put '/meta/:id', to: 'meta#update', as: :update_meta
-  get '/meta/comments', to: 'meta#comments', as: :comments_meta
-  get '/meta/followers', to: 'meta#followers', as: :followers_meta
-
-
   get '/:slug', to: SlugRouter.to(:show), as: :profile
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
