@@ -61,17 +61,17 @@ Rails.application.routes.draw do
 
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations] as :mentor do
     # mentor joining
-    get   '/mentors/join' => 'users/registrations#new',    as: 'new_mentor_registration'
-    post  '/mentors/join' => 'users/registrations#create', as: 'mentor_registration'
-    put  '/mentors/join' => 'users/registrations#update', as: 'mentor_update'
+    get   '/mentors/join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
+    post  '/mentors/join' => 'mentors/registrations#create', as: 'mentor_registration'
+    put  '/mentors/join' => 'mentors/registrations#update', as: 'mentor_update'
     delete  '/mentors/join' => 'devise/registrations#destroy', as: 'mentor_delete'
   end
 
   devise_for :teachers, skip: [:sessions, :passwords, :confirmations] as :teacher do
     # teacher joining
-    get   '/teachers/join' => 'users/registrations#new',    as: 'new_teacher_registration'
-    post  '/teachers/join' => 'users/registrations#create', as: 'teacher_registration'
-    put  '/teachers/join' => 'users/registrations#update', as: 'teacher_update'
+    get   '/teachers/join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
+    post  '/teachers/join' => 'teachers/registrations#create', as: 'teacher_registration'
+    put  '/teachers/join' => 'teachers/registrations#update', as: 'teacher_update'
     delete  '/teachers/join' => 'devise/registrations#destroy', as: 'teacher_delete'
   end
 
