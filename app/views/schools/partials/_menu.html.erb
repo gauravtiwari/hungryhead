@@ -1,0 +1,26 @@
+<div class="profile-menu">
+	<div class="container">
+		<%= link_to(school_path(@school)) do %>
+			<%= image_tag(@school.logo.url(:avatar), width: "30px") %>
+		<% end %>
+		<div class="stasts">
+			<ul class="stats-list">
+	        <li class="<%= current_class?(school_path(@school)) %>">
+		        <%= link_to(school_path(@school)) do %>
+		        	<%= content_tag(:span, class: "link-profile") do %>
+		              Profile
+		             <% end %>
+		        <% end %>
+
+			</ul>
+		</div>
+		<ul class="project-buttons">
+			<% if user_signed_in? && current_user %>
+				<%= react_component('Follow',{:followed => followed?(@school).to_json}, {:id => "follow-component"}) %>
+			<% end %>
+			<% if user_signed_in? && current_user.admin? %>
+				<div><a class="main-button animated zoomIn" href="#">Edit School</a></div>
+			<% end %>
+		</ul>
+	</div>
+</div>

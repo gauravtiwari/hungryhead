@@ -1,0 +1,11 @@
+<% if @students.length > 0 %>
+  <% @students.each do |student| %>
+    <div class="student panel panel-default">
+    <%= render partial: 'schools/content/student', locals: {student: student} %>
+    </div>
+<% end %>
+<% else %>
+  <div class="no-content"> No one has published ideas in <%= @school.name %> </div>
+<% end %>
+
+<%= will_paginate @students %>

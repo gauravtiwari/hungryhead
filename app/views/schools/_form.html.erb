@@ -1,0 +1,18 @@
+<%= simple_form_for(@school) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email %>
+    <%= f.input :name %>
+    <%= f.input :description, input_html: {class: 'redactor'} %>
+    <%= f.input :established %>
+    <%= f.input :location %>
+    <%= f.input :website %>
+    <%= f.file_field :logo %>
+    <%= f.file_field :cover %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

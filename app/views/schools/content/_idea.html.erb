@@ -1,0 +1,24 @@
+<div class="idea-logo">
+  <%= image_tag(idea.idea_logo.url(:logo), width: "50px") %>
+</div>
+<div class="idea-descript">
+   <%= content_tag(:h1) do %>
+      <%= link_to(idea_path(idea), class: "border-bottom-dotted") do %>
+        <%= idea.name %>
+      <% end %>
+    <% end %>
+  <em><%= local_time_ago(idea.created_at) %></em>
+  <p class="idea-description"><%= idea.elevator_pitch %> </p>
+  <ul class="idea-achievement-list">
+    <li><%= link_to(user_path(idea.user)) do %>
+    <div class="user-avatar">
+    	 <%= image_tag(idea.user.avatar.url(:avatar), width: "20px") %> <i class="icon-user"></i> <%= idea.user.name %>
+    </div>
+    	<% end %>
+    </li>
+  <li><i class="fa fa-dollar"></i> <%= investment_remaing(idea.fund['balance']) * 100 %>% funded</li>
+
+  <li><i class="fa fa-users"></i> <%= idea.followers(User).length %> Followers</li>
+</ul>
+ 
+</div>

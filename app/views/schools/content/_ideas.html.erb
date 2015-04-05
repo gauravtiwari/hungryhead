@@ -1,0 +1,11 @@
+<% if @ideas.length > 0 %>
+ <% @ideas.each do |idea| %>
+ <div class="idea panel panel-default">
+   <%= render partial: 'schools/content/idea', locals: {idea: idea} %>
+ </div>
+ <% end %>
+<% else %>
+  <div class="no-content"> No one has published ideas in <%= @school.name %> </div>
+<% end %>
+
+<%= will_paginate @ideas %>
