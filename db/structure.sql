@@ -632,6 +632,7 @@ ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
 
 CREATE TABLE mentors (
     id integer NOT NULL,
+    verified boolean DEFAULT false,
     cached_roles_list character varying,
     ideas_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
@@ -1190,6 +1191,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 CREATE TABLE teachers (
     id integer NOT NULL,
+    verified boolean,
     cached_roles_list character varying,
     ideas_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,

@@ -5,9 +5,14 @@
 
 //= require plugins/pace/pace.min
 //= require jquery2
+//= require plugins/boostrapv3/js/bootstrap.min
+//= require plugins/jquery/jquery-easy
 //  require jquery.turbolinks
 //= require plugins/modernizr.custom
-//= require plugins/jquery-ui/jquery-ui.min
+//= require jquery-ui/core
+//= require jquery-ui/autocomplete
+//= require jquery-ui/position
+//= require jquery-ui/draggable
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -15,13 +20,14 @@
 //= require jquery.soulmate
 //= require underscore
 //= require js-routes
+//= require select2
 //= require jquery.atwho
 //= require typer
+//= require jquery.validate
+//= require jquery.validate.additional-methods
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
-//= require plugins/boostrapv3/js/bootstrap.min
-//= require plugins/jquery/jquery-easy
 //= require plugins/jquery-unveil/jquery.unveil.min
 //= require plugins/jquery-bez/jquery.bez.min
 //= require plugins/jquery-ios-list/jquery.ioslist.min

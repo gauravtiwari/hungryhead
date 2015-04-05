@@ -147,6 +147,7 @@ gem 'js-routes'
 
 gem 'bower-rails'
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
+gem 'jquery-validation-rails'
 
 #MarkDown Editor
 gem 'redcarpet'
@@ -178,6 +179,7 @@ gem 'friendly_id'
 #JQuery AutoSize
 
 gem 'autosize-rails'
+gem "select2-rails"
 
 gem 'merit'
 
@@ -215,6 +217,7 @@ gem 'acts_as_commentable_with_threading'
 #gem "intercom-rails"
 gem 'jquery-atwho-rails'
 
+gem 'jquery-ui-rails'
 #Security and best practices
 
 gem 'rails_best_practices'

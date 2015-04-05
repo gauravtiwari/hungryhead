@@ -3258,7 +3258,7 @@ Misc buttons
   top: 8px;
 }
 .alert .close {
-  background: url("../assets/core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
+  background: url("/assets/core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
   background-position: -9px -10px;
   width: 10px;
   height: 9px;
@@ -10119,7 +10119,7 @@ Main components
   background: rgba(255, 255, 255, 0.3);
 }
 .widget-2:after {
-  background-image: url("../../assets/img/social/person-cropped.jpg");
+  background-image: url("/assets/img/social/person-cropped.jpg");
 }
 .widget-3 a {
   text-decoration: none;
@@ -12682,7 +12682,7 @@ Main components
     background-size: 480px 40px;
   }
   .alert .close {
-    background: url("../assets/core/img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
+    background: url("/assets/core/img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
     background-position: -9px -10px;
     width: 10px;
     height: 9px;

@@ -62,19 +62,19 @@ Rails.application.routes.draw do
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'} 
   as :mentor do
     # mentor joining
-    get   '/mentors/join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
-    post  '/mentors/join' => 'mentors/registrations#create', as: 'mentor_registration'
-    put  '/mentors/join' => 'mentors/registrations#update', as: 'mentor_update'
-    delete  '/mentors/join' => 'devise/registrations#destroy', as: 'mentor_delete'
+    get   '/mentors_join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
+    post  '/mentors_join' => 'mentors/registrations#create', as: 'mentor_registration'
+    put  '/mentors_join' => 'mentors/registrations#update', as: 'mentor_update'
+    delete  '/mentors_join' => 'devise/registrations#destroy', as: 'mentor_delete'
   end
 
   devise_for :teachers, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'teachers/registrations'}
   as :teacher do
     # teacher joining
-    get   '/teachers/join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
-    post  '/teachers/join' => 'teachers/registrations#create', as: 'teacher_registration'
-    put  '/teachers/join' => 'teachers/registrations#update', as: 'teacher_update'
-    delete  '/teachers/join' => 'devise/registrations#destroy', as: 'teacher_delete'
+    get   '/teachers_join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
+    post  '/teachers_join' => 'teachers/registrations#create', as: 'teacher_registration'
+    put  '/teachers_join' => 'teachers/registrations#update', as: 'teacher_update'
+    delete  '/teachers_join' => 'devise/registrations#destroy', as: 'teacher_delete'
   end
 
   match '/like',  to: 'likes#like', via: :put, as: 'like'

@@ -6,7 +6,6 @@ $(document).ready(function () {
 	/*-------------------------------------------------*/
 	/* =  Soulmate
 	/*-------------------------------------------------*/
-
 	 var render, select;
 
 	  render = function(term, data, type) {

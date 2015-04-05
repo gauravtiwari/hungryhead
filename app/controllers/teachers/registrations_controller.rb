@@ -1,4 +1,4 @@
-class Users::RegistrationsController < Devise::RegistrationsController
+class Teachers::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
   respond_to :json
   

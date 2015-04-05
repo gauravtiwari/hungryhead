@@ -54,7 +54,8 @@ class User < ActiveRecord::Base
 
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
- 
+  
+  before_save :add_fullname
   before_create :seed_fund
   after_save :create_slug
 
@@ -64,7 +65,8 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
-  validates :username, :presence => true, :uniqueness => true
+  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" } 
+
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
   acts_as_messageable
@@ -105,6 +107,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def add_fullname
+    self.name = self.first_name + " " + self.last_name
+  end
 
   def find_shares extra_conditions = {}
     shares.where(extra_conditions)

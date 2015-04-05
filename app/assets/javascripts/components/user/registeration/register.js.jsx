@@ -12,6 +12,9 @@ var Register = React.createClass({
   componentDidMount: function() {
     this.setState({disabled: false});
     var self = this;
+    $.pubsub('subscribe', 'join_name_changed', function(msg, data){
+      self.setState({name: data});
+    });
   },
 
   handleRegisteration: function ( formData ) {
@@ -24,42 +27,21 @@ var Register = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
-      if(data.invalid) {
-        var options =  {
-          content: ""+data.msg+"",
-          style: "error",
-          timeout: 10000
-        }
-        $.snackbar(options);
-      }
-      if(data.name) {
-        $.snackbar ({
-          content: "Registeration successfull. We have emailed you a link to confirm your email.", 
-          style: "notice", 
-          timeout: 5000
-        });
-        setTimeout(function(){
-          window.location = Routes.root_path();
-          self.setState({disabled: false});
-        }, 2000);
-      }
+
       }.bind(this),
       error: function(xhr, status, err) {
-        $.snackbar({content: err, style: "error", timeout: 5000});
+        var errors = JSON.parse(xhr.responseText);
+        $.each(errors, function(keys, values) {
+           _.map(values, function(key, value) {
+            $('body').pgNotification({style: "simple", message: (value + " " + key[0]).toString(), position: "top-right", type: "danger",timeout: 5000}).show();
+           });
+        });
       }.bind(this)
     });
   },
 
   render: function() {
-    return (<div className="signup-page">
-            <div className="container">
-              <div className="form-signup auto-margin panel panel-default">
-               <RegisterationHeader />
-               <RegisterationForm form={this.state.form} handleRegisterationSubmit={this.handleRegisteration} />
-              </div>
-            </div>
-          </div>
-    );
+    return (<RegisterationForm form={this.state.form} handleRegisterationSubmit={this.handleRegisteration} />);
   }
 
 });
