@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
-  store_accessor :education, :subjects
-  store_accessor :interests, :locations, :technologies, :skills, :markets, :services
   store_accessor :media, :avatar_position, :cover_position,
   :cover_processing, :avatar_processing
   store_accessor :settings, :weekly_email
@@ -31,7 +29,7 @@ class User < ActiveRecord::Base
 
   has_merit
 
-  devise :invitable, :omniauthable, :async, :database_authenticatable, :registerable,
+  devise :invitable, :async, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :registerable, :authentication_keys => [:login]
 

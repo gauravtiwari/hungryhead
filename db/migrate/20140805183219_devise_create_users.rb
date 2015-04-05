@@ -18,7 +18,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.jsonb  :media, :default => "{}"
       t.jsonb  :settings, :default => "{}"
       t.jsonb  :fund, :default => "{}"
-      t.jsonb  :education, :default => "{}"
       t.integer :school_id, null: false
       t.string :cached_school_list
       t.string :cached_location_list
@@ -63,9 +62,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
     end
 
     add_index :users, :settings, using: :gin
-    add_index :users, :admin
     add_index :users, :fund, using: :gin
-    add_index :users, :education, using: :gin
     add_index :users, :school_id
 
     add_index :users, :email,                :unique => true

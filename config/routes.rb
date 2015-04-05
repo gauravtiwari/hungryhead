@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :after_signup
 
   # Authentication
-  devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations",  :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'users/registrations', :confirmations => "users/confirmations"}
+  devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}
   as :user do
     # session handling
     get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
@@ -59,7 +59,8 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :mentors, skip: [:sessions, :passwords, :confirmations] as :mentor do
+  devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'} 
+  as :mentor do
     # mentor joining
     get   '/mentors/join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
     post  '/mentors/join' => 'mentors/registrations#create', as: 'mentor_registration'
@@ -67,7 +68,8 @@ Rails.application.routes.draw do
     delete  '/mentors/join' => 'devise/registrations#destroy', as: 'mentor_delete'
   end
 
-  devise_for :teachers, skip: [:sessions, :passwords, :confirmations] as :teacher do
+  devise_for :teachers, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'teachers/registrations'}
+  as :teacher do
     # teacher joining
     get   '/teachers/join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
     post  '/teachers/join' => 'teachers/registrations#create', as: 'teacher_registration'
