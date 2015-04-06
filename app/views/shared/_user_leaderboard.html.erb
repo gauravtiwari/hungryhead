@@ -1,0 +1,27 @@
+<div class="user-leaderboard panel panel-default">
+  <div class="profile-wrapper-title">
+    <h4><i class="ion-trophy"></i> Leaderboard</h4>
+  </div>
+	<div class="stastics">
+		<div class="col-md-6 score border-bottom">
+			<h3>Feedbacks Given</h3>
+			<span><i class="ion-chatbubbles"></i> <%= @user.feedbacks_count %></span>
+		</div>
+
+		<div class="col-md-6 score border-bottom border-left">
+			<h3>Ideas Funded</h3>
+			<span><i class="fa fa-dollar"></i> <%= @user.investments_count %></span>
+		</div>
+
+
+		<div class="col-md-6 score">
+			<h3>Followers</h3>
+			<span><i class="ion-person-stalker"></i>  <%= @user.followings.size %></span>
+		</div>
+
+		<div class="col-md-6 score border-left">
+			<h3>Balance coins</h3>
+			<span><i class="ion-thumbsup"></i> <%= @user.balance %></span>
+		</div>
+	</div>
+</div>

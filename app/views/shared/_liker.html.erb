@@ -1,0 +1,12 @@
+<li>
+	<div class="user-avatar margin-right">
+		<%= image_tag(f.avatar.url(:avatar), width: "50px") %>
+	</div>
+	<div class="followers-list-content">
+	<p> <%= link_to(your_name(f, false), user_path(f) )%></p>
+	<p class="about-me"><%= strip_tags(markdownify(truncate(f.about_me, length: 100, escape: false))) %> </p>
+	<% if f != current_user %>
+	  <%= react_component('Follow',{followed: followed?(f)}) %>
+	<% end %>
+	</div>
+</li>

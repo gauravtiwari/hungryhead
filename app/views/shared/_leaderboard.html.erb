@@ -1,0 +1,67 @@
+<div class="user-leaderboard panel panel-default">
+  <div class="profile-wrapper-title">
+    <h4><i class="ion-trophy"></i> Leaderboard</h4>
+  </div>
+	<div class="right-information">
+		<div id="investmentProgress-<%= @idea.slug %>" class="circle" data-investment="<%= investment_remaing(@idea.balance) %>">
+			<strong><%= investment_remaing(@idea.balance) %></strong>
+			<span>funded</span>
+		</div>
+
+		<div id="feedbackProgress-<%= @idea.slug %>" class="circle" data-investment="<%= feedbacks_remaing(@idea.feedbacks_count)%>">
+			<strong></strong>
+			<span>feedbacks</span>
+		</div>
+
+	</div>
+	<%= javascript_tag do %>
+		$(document).ready(function () {
+		  	var progress = <%= investment_remaing(@idea.balance) %>
+		  	$("#investmentProgress-<%= @idea.slug %>").circleProgress({
+		        value: progress,
+		        size: 120,
+		        fill: {
+		            gradient: ["#fff", "#fff"]
+		                   }
+		    }).on('circle-animation-progress', function(event, progress) {
+			    $(this).find('strong').html(parseInt(100 * <%= investment_remaing(@idea.fund['balance']) %>) + '<i>%</i>');
+			});
+		});
+
+		$(document).ready(function () {
+		  	var feedback = <%= investment_remaing(@idea.balance) %>
+		  	$("#feedbackProgress-<%= @idea.slug %>").circleProgress({
+		        value: feedback,
+		        size: 120,
+		        fill: {
+		            gradient: ["#fff", "#fff"]
+		                   }
+		    }).on('circle-animation-progress', function(event, feedback) {
+			    $(this).find('strong').html(parseInt(100 * <%= investment_remaing(@idea.fund['balance']) %>) + '<i>%</i>');
+			});
+		});
+	<% end %>
+	<div class="stastics">
+		<div class="col-md-6 score border-bottom">
+			<h3>Feedbacks</h3>
+			<span><i class="ion-chatbubbles"></i> <%= @idea.feedbacks_count %></span>
+		</div>
+
+		<div class="col-md-6 score border-bottom border-left">
+			<h3>Funded</h3>
+			<span><i class="fa fa-dollar"></i> <%= @idea.balance %></span>
+		</div>
+
+
+		<div class="col-md-6 score">
+			<h3>Followers</h3>
+			<span><i class="ion-person-stalker"></i>  <%= @idea.followings.size %></span>
+		</div>
+
+		<div class="col-md-6 score border-left">
+			<h3>Points</h3>
+			<span><i class="ion-thumbsup"></i> <%= @idea.balance %></span>
+		</div>
+	</div>
+
+</div>

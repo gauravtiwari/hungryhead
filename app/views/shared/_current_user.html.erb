@@ -1,0 +1,20 @@
+<script type="text/javascript">
+	var u = {
+		id: "<%= current_user.id %>",
+		name: "<%= current_user.name %>",
+		username: "<%= current_user.username %>",
+		balance: "<%= current_user.fund['balance'] %>",
+		id: "<%= current_user.id %>",
+		email: "<%= current_user.email %>",
+		badges: "<%= current_user.badges.length %>",
+		ideas: "<%= current_user.ideas_count if current_user.type == "User" %>",
+		feedbacks: "<%= current_user.feedbacks_count %>",
+		investments: "<%= current_user.investments_count %>",
+		avatar: "<%= current_user.avatar.url(:avatar) %>",
+		role: "<%= current_user.role %>",
+		user_url:  "<%= user_path(current_user) %>",
+		csrf_param: "<%= request_forgery_protection_token %>",
+		csrf_token: "<%= form_authenticity_token %>"
+	}
+	window.currentUser = u;
+</script>

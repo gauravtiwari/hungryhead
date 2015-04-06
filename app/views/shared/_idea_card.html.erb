@@ -1,0 +1,33 @@
+<%= content_tag(:div, class: 'popover-card') do %>
+	<%= content_tag(:div, class: 'popover-header  text-center') do %>
+		<%= content_tag(:div, class: 'popover-card-logo') do %>
+			<%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
+			<h2><%= @idea.name %></h2>
+			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
+      <% if @idea.user != current_user %>
+        <div class="card-follow-button">
+          <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+        </div>
+        <script type="text/javascript">
+           ReactRailsUJS.mountComponents();
+        </script>
+      <% end %>
+		<% end %>
+	<% end %>
+      <div class="popover-card-stats">
+      <ul class="stastics-list">
+        <li>
+          Followers
+          <span><i class="fa ion-person-stalker"></i> <%= @idea.followers_count %></span>
+        </li>
+        <li>
+          Raised
+          <span><i class="fa fa-dollar"></i> <%= @idea.balance %></span>
+        </li>
+        <li>
+          Feedbacks
+          <span><i class="fa ion-chatbubbles"></i> <%= @idea.feedbacks_count %></span>
+        </li>
+      </ul>
+    </div>
+<% end %>
