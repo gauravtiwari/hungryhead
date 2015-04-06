@@ -1,7 +1,7 @@
 /* Overrides files */
 
 body.menu-behind .header .brand {
-  width: 100px;
+  width: 50px;
 }
 .select2-chosen, .select2-choice > span:first-child, 
 .select2-container .select2-choices .select2-search-field input {
@@ -31,6 +31,13 @@ input.error:-webkit-autofill {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
+.fs-22 {
+	font-size: 22px;
+}
+.text-green {
+	color: #66ffcc!important;
+}
 .card{
   width: 100%;
   border: 0;
@@ -41,7 +48,9 @@ input.error:-webkit-autofill {
 }
 .box-shadow {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  border: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
 }
 .card.share .card-header,
 .card.status .card-header {
@@ -55,8 +64,33 @@ input.error:-webkit-autofill {
   background-color: #5b98e0;
   overflow: hidden;
 }
+.text-brand {
+  color: #5b98e0!important;
+}
+.header .bubble {
+  border-radius: 100%;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 81, 70, 0.8);
+  color: #ffffff;
+  position: relative;
+  top: -6px;
+  float: right;
+  right: 5px;
+  font-size: 11px;
+  text-align: center;
+  padding: 0;
+}
+.white-bg {
+	background: #fff;
+	overflow: hidden;
+}
 .card.share .card-footer:hover {
 	background: transparent;
+}
+.right-zero {
+	right: 0;
+	left: auto;
 }
 .circle {
   position: absolute;
@@ -71,12 +105,9 @@ input.error:-webkit-autofill {
   z-index: 1;
 }
 .placeholder {
-  background: silver;
+  background: #f8d053;
   display: block;
 }
 .user-pic .placeholder {
 	padding:5px;
-}
-.container {
-	max-width: 980px;
 }

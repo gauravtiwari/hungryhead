@@ -1,217 +1,411 @@
-<div class="col-md-4 solid-bg m-t-20 box-shadow">
-  <div class="sidebar full-height p-t-20">
-    <div class="user-sidebar sticky">
-      <div class="container-xs-height">
-        <div class="row-xs-height">
-          <div class="social-user-profile col-xs-height text-center col-top">
-            <div class="thumbnail-wrapper d48 circular bordered b-white">
-             <% if @user.avatar.present? %>
-              <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "55", height: "55") %>
-              <% else %>
-                <span class="placeholder bold text-white" width="32px" height="32px"><%= @user.first_name.first + @user.last_name.first %></span>
-              <% end %>
+<div class="col-md-3 col-sm-4 no-padding col-lg-3 col-xlg-3">
+<div class="sidebar auto-height sticky solid-bg">
+  <div class="user-sidebar padding-20">
+    <div class="container-xs-height">
+        <div class="row text-center">
+            <div class="social-user-profile auto-margin">
+                <div class="thumbnail-wrapper d48 circular bordered b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "55", height: "55") %><% else %>
+                    <span class="placeholder bold text-white" width="32px" height="32px"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+                    
+                </div>
+                <div class="p-l-10 p-r-10">
+                    <h3 class="no-margin text-white"><%= @user.name %> <i class="fa fa-check-circle text-green fs-16 m-l-10"></i></h3>
+                    <p class="no-margin text-white fs-16">is excited about the new pages design framework</p>
+                    <p class="text-white m-t-5 small">San Fransisco Bay | CEO at Pages.inc</p>
+                </div>
             </div>
-            <br>
-            <i class="fa fa-check-circle text-white fs-16 m-t-10"></i>
-          </div>
-          <div class="col-xs-height p-l-20">
-            <h3 class="no-margin text-white">David Nester</h3>
-            <p class="no-margin text-white fs-16">is excited about the new pages design framework</p>
-            <p class="hint-text text-white m-t-5 small">San Fransisco Bay | CEO at Pages.inc</p>
-          </div>
+        </div>
+    </div>
+    <div class="">
+        <div class="widget-16 text-white panel panel-transparent no-margin widget-loader-circle">
+            <div class="panel-heading">
+                <div class="panel-title">Idea Leaderboard</div>
+                <div class="panel-controls">
+                    <ul>
+                        <li class="hidden-xlg">
+                        <div class="dropdown">
+                          <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                          <i class="portlet-icon portlet-icon-settings text-white"></i>
+                          </a>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                          <li><a href="#">AAPL</a>
+                          </li>
+                          <li><a href="#">YHOO</a>
+                          </li>
+                          <li><a href="#">GOOG</a>
+                          </li>
+                          </ul>
+                        </div>
+                      </li>
+                        <li>
+                            <a href="#" class="portlet-refresh text-black" data-toggle="refresh">
+                                <i class="portlet-icon portlet-icon-refresh text-white"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="widget-16-header text-white padding-20">
+                <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                <div class="pull-left">
+                    <p class="all-caps bold small no-margin overflow-ellipsis ">Clowdy</p>
+                    <h5 class="small no-margin overflow-ellipsis text-white">Webarch Sales Analysis</h5>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="padding-20">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Views</p>
+                        <p class="all-caps bold  no-margin text-warning ">14,256</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Today</p>
+                        <p class="all-caps bold  no-margin text-warning ">24</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Week</p>
+                        <p class="all-caps bold  no-margin text-warning ">56</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+      <div class="m-b-10 m-t-10 text-white b-t b-white">
+        <div class="widget-14 panel panel-transparent no-margin widget-loader-circle">
+            <div class="panel-heading">
+                <div class="panel-title">Personal Leaderboard</div>
+                <div class="panel-controls">
+                  <ul>
+                        <li>
+                            <a href="#" class="portlet-refresh text-black" data-toggle="refresh">
+                                <i class="portlet-icon portlet-icon-refresh text-white"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+             <div class="padding-20">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <p class="all-caps bold small no-margin ">Views</p>
+                        <p class="all-caps bold  no-margin text-warning ">14,256</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Today</p>
+                        <p class="all-caps bold  no-margin text-warning ">24</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Week</p>
+                        <p class="all-caps bold  no-margin text-warning ">56</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="padding-20">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <p class="all-caps bold small no-margin ">Views</p>
+                        <p class="all-caps bold  no-margin text-warning ">14,256</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Today</p>
+                        <p class="all-caps bold  no-margin text-warning ">24</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin ">Week</p>
+                        <p class="all-caps bold  no-margin text-warning ">56</p>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
+    -->
+  </div>
+</div>
+<div class="col-md-6">
+<div class="activity-feed auto-height m-t-20">
+    <!--<div class="feed-filters p-b-10">
+      <ul class="list-inline text-right">
+        <li class="hint-text">Sort by: </li>
+        <li><a href="#" class="active text-master p-r-5 p-l-5">Investments</a>
+        </li>
+        <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Feedbacks</a>
+        </li>
+        <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Ideas</a>
+        </li>
 
-    <p class="m-b-5 small m-t-20 text-white">1,435 Mutual Friends</p>
-      <ul class="list-unstyled">
-        <li class="m-r-10">
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-            <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-          <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-           <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-              <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-            <% end %>
-          </div>
-        </li>
-        <li>
-      <div class="thumbnail-wrapper d32 circular b-white">
-        <div class="bg-master text-center text-white"><span>+34</span>
+      </ul>
+    </div>
+    -->
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Jeff Curtis</h5>
+            <h6>Shared a Tweet
+      
+                <span class="location semi-bold">
+                    <i class="fa fa-map-marker"></i> SF, California
+                </span>
+            </h6>
         </div>
-      </div>
-    </li>
-  </ul>
-  <br>
-  <p class="m-t-5 small text-white">More friends</p>
-      </div>
-  </div>
+        <div class="card-description">
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+                <a href="#">#quote</a>
+            </p>
+        </div>
+        <div class="card-footer clearfix">
+            <div class="pull-left">via 
+                <span class="text-complete">CNN</span>
+            </div>
+            <div class="pull-right hint-text">
+Apr 23
 </div>
-
-<div class="col-md-8">
-<div class="activity-feed full-height m-t-20">
-  <div class="card share" data-social="item">
-    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label">
+            <div class="clearfix"></div>
+        </div>
     </div>
-    <div class="card-header clearfix">
-      <div class="user-pic">
-         <% if @user.avatar.present? %>
-          <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %>
-          <% else %>
-            <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-          <% end %>
-      </div>
-      <h5>Jeff Curtis</h5>
-      <h6>Shared a Tweet
-              <span class="location semi-bold"><i class="fa fa-map-marker"></i> SF, California</span>
-          </h6>
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Jeff Curtis</h5>
+            <h6>Shared a Tweet
+      
+                <span class="location semi-bold">
+                    <i class="fa fa-map-marker"></i> SF, California
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+                <a href="#">#quote</a>
+            </p>
+        </div>
+        <div class="card-footer clearfix">
+            <div class="pull-left">via 
+                <span class="text-complete">CNN</span>
+            </div>
+            <div class="pull-right hint-text">
+Apr 23
+</div>
+            <div class="clearfix"></div>
+        </div>
     </div>
-    <div class="card-description">
-      <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. <a href="#">#quote</a> </p>
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Jeff Curtis</h5>
+            <h6>Shared a Tweet
+      
+                <span class="location semi-bold">
+                    <i class="fa fa-map-marker"></i> SF, California
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+                <a href="#">#quote</a>
+            </p>
+        </div>
+        <div class="card-footer clearfix">
+            <div class="pull-left">via 
+                <span class="text-complete">CNN</span>
+            </div>
+            <div class="pull-right hint-text">
+Apr 23
+</div>
+            <div class="clearfix"></div>
+        </div>
     </div>
-
-    <div class="card-footer clearfix">
-      <div class="pull-left">via <span class="text-complete">CNN</span>
-      </div>
-      <div class="pull-right hint-text">
-        Apr 23
-      </div>
-      <div class="clearfix"></div>
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Andy Young</h5>
+            <h6>Updated his status
+      
+                <span class="location semi-bold">
+                    <i class="icon-map"></i> NYC, New York
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What a lovely day! I think I should go and play outside.</p>
+        </div>
     </div>
-  </div>
-
-  <div class="card share" data-social="item">
-    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label">
-    </div>
-    <div class="card-header clearfix">
-      <div class="user-pic">
-         <% if @user.avatar.present? %>
-          <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %>
-          <% else %>
-            <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-          <% end %>
-      </div>
-      <h5>Jeff Curtis</h5>
-      <h6>Shared a Tweet
-              <span class="location semi-bold"><i class="fa fa-map-marker"></i> SF, California</span>
-          </h6>
-    </div>
-    <div class="card-description">
-      <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. <a href="#">#quote</a> </p>
-    </div>
-
-    <div class="card-footer clearfix">
-      <div class="pull-left">via <span class="text-complete">CNN</span>
-      </div>
-      <div class="pull-right hint-text">
-        Apr 23
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-  <div class="card share" data-social="item">
-    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label">
-    </div>
-    <div class="card-header clearfix">
-      <div class="user-pic">
-         <% if @user.avatar.present? %>
-          <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %>
-          <% else %>
-            <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-          <% end %>
-      </div>
-      <h5>Jeff Curtis</h5>
-      <h6>Shared a Tweet
-              <span class="location semi-bold"><i class="fa fa-map-marker"></i> SF, California</span>
-          </h6>
-    </div>
-    <div class="card-description">
-      <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. <a href="#">#quote</a> </p>
-    </div>
-
-    <div class="card-footer clearfix">
-      <div class="pull-left">via <span class="text-complete">CNN</span>
-      </div>
-      <div class="pull-right hint-text">
-        Apr 23
-      </div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
-
-
-  <div class="card share" data-social="item">
-    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label">
-    </div>
-    <div class="card-header clearfix">
-      <div class="user-pic">
-         <% if @user.avatar.present? %>
-          <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %>
-          <% else %>
-            <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %></span>
-          <% end %>
-      </div>
-      <h5>Andy Young</h5>
-      <h6>Updated his status
-              <span class="location semi-bold"><i class="icon-map"></i> NYC, New York</span>
-          </h6>
-    </div>
-    <div class="card-description">
-      <p>What a lovely day! I think I should go and play outside.</p>
-    </div>
-  </div>
 </div>
 </div>
+<div class="col-md-3 col-sm-4 no-padding">
+<div class="sidebar auto-height sticky white-bg box-shadow">
+    <div class="m-b-10">
+        <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
+            <div class="panel-heading">
+             <div class="panel-title">
+              Trending Ideas
+              </div>
+              <div class="panel-controls">
+                  <ul>
+                      <li class="hidden-xlg">
+                        <div class="dropdown">
+                          <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                          <i class="portlet-icon portlet-icon-settings"></i>
+                          </a>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                          <li><a href="#">AAPL</a>
+                          </li>
+                          <li><a href="#">YHOO</a>
+                          </li>
+                          <li><a href="#">GOOG</a>
+                          </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                          <a data-toggle="refresh" class="portlet-refresh text-black" href="#">
+                              <i class="portlet-icon portlet-icon-refresh"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="auto-overflow">
+              <ul class="trending-list p-t-20 no-style">
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                  <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                  <div class="pull-left">
+                      <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                      <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                 <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="p-t-10 p-l-25 p-b-20 p-r-20">
+                <p class="small no-margin text-brand pull-right">
+                    <a href="#">
+                      <span class="bold">See all</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="widget-16 panel no-margin widget-loader-circle">
+        <div class="panel-heading">
+            <div class="panel-title">
+              People you may know
+            </div>
+        </div>
+        <div class="panel-body">
+            <p class="m-b-5 small m-t-20">1,435 Mutual Friends</p>
+            <ul class="list-unstyled">
+                <li class="m-r-10">
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white">
+                        <div class="bg-master text-center text-white">
+                            <span>+34</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <br/>
+             <a href="#">
+                <span class="small bold pull-right">See all</span>
+              </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
