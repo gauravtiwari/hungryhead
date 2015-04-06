@@ -443,6 +443,7 @@ GEM
     mini_magick (4.2.0)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    modernizr-rails (2.7.1)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
     multi_json (1.11.0)
@@ -768,6 +769,7 @@ DEPENDENCIES
   mina-nginx
   mina-sidekiq
   mini_magick
+  modernizr-rails
   momentjs-rails
   nested_form
   nokogiri

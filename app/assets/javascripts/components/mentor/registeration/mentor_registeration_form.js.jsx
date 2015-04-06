@@ -103,8 +103,17 @@ var MentorRegisterationForm = React.createClass({
 
   render: function() {
     var cx = React.addons.classSet;
+
+    var button_class = cx ({
+      'main-button': true,
+      'disabled': this.props.disabled
+    });
+
+    var loading_class = cx ({
+      'fa fa-spinner fa-spin': this.props.loading
+    });
     return (  
-      <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" action="index.html" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
+      <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
         <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
           <div className="col-sm-6">
@@ -150,16 +159,16 @@ var MentorRegisterationForm = React.createClass({
 
         <div className="row m-t-10">
           <div className="col-md-6">
-            <div className="checkbox ">
-              <input type="checkbox" name="mentor[terms_accepted]" value="1" id="checkbox1" />
+            <div className="checkbox check-success">
+              <input type="checkbox" name="mentor[terms_accepted]" value="1" id="checkbox1" checked/>
               <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
             </div>
           </div>
           <div className="col-md-6 text-right">
-            <a href="#" className="text-info small">Help? Contact Support</a>
+            <span>Already registered?<a href="/login" className="text-info small"> Login</a></span>
           </div>
         </div>
-        <button className="btn btn-complete btn-cons m-t-10" type="submit">Create a new account</button>
+        <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
         <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
       </form>   
     )

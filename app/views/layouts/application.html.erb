@@ -43,7 +43,9 @@
     </div>
 
     <!-- JS at bottom of page to improve load time, and only loaded once with 'data-turbolinks-eval' == false  -->
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
+    <%= javascript_tag do %>
+      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+    <% end %>
   </body>
 </html>

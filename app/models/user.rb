@@ -109,7 +109,9 @@ class User < ActiveRecord::Base
   private
 
   def add_fullname
-    self.name = self.first_name + " " + self.last_name
+    words = self.name.split(" ")
+    self.first_name = words.first
+    self.last_name =  words.last
   end
 
   def find_shares extra_conditions = {}

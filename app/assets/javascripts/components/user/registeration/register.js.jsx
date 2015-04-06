@@ -5,21 +5,14 @@ var Register = React.createClass({
     return {
       form: this.props.form,
       name: "",
-      errors: []
+      errors: [],
+      loading: false
     };
-  },
-
-  componentDidMount: function() {
-    this.setState({disabled: false});
-    var self = this;
-    $.pubsub('subscribe', 'join_name_changed', function(msg, data){
-      self.setState({name: data});
-    });
   },
 
   handleRegisteration: function ( formData ) {
     var self = this;
-    this.setState({disabled: true})
+    this.setState({loading: true});
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
@@ -27,9 +20,16 @@ var Register = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
-
+        if(data.name) {
+          $('body').pgNotification({style: "simple", message: "Registeration Successful. Please confirm your email.", position: "top-right", type: "success",timeout: 5000}).show();
+          setTimeout(function(){
+            window.location.href = Routes.root_path;
+          }, 3000);
+        }
+      this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
+        this.setState({loading: false});
         var errors = JSON.parse(xhr.responseText);
         $.each(errors, function(keys, values) {
            _.map(values, function(key, value) {
@@ -41,7 +41,7 @@ var Register = React.createClass({
   },
 
   render: function() {
-    return (<RegisterationForm form={this.state.form} handleRegisterationSubmit={this.handleRegisteration} />);
+    return (<RegisterationForm loading={this.state.loading} form={this.state.form} handleRegisterationSubmit={this.handleRegisteration} />);
   }
 
 });

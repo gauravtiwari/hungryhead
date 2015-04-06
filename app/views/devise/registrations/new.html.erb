@@ -3,7 +3,7 @@
 	<div class="row row-sm-height">
 	  <div class="col-sm-12 col-sm-height col-middle">
 	   	<h1 class="bold">Join hungryhead</h1>
-	    <h3>Hungryhead helps you practically explore the path of <span>entrepreneurship <div class="fa fa-question-circle"data-toggle="tooltip" title="Entrepreneurship is the process of starting a business or other organization." data-init-plugin="tooltip" data-container="body">
+	    <h3>Hungryhead helps you practically explore the path of <span>entrepreneurship <div class="fa fa-question-circle" data-toggle="modal" data-target="#entrepreneurShipModal">
                       </div></span></h3>
 	    <p>
 	      <small>Hey there, fill this form to create an account. <strong>Make sure you use your school email address.</strong></small>
@@ -12,5 +12,70 @@
 		<%= react_component('Register', {form: data}.to_json) %>
 	  </div>
 	</div>
+	</div>
+</div>
+
+<div class="modal fade fill-in" id="entrepreneurShipModal" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	    <i class="pg-close"></i>
+	</button>
+	<div class="modal-dialog">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h1 class="text-left p-b-5"><span class="bold">Entrepreneurship</h1>
+	        </div>
+	        <div class="modal-body">
+	            <div class="row">
+	                <div class="col-md-12">
+	                    <p class="fs-14">Entrepreneurship is the process of starting a business or other organization. The entrepreneur develops a business model, acquires the human and other required resources, and is fully responsible for its success or failure.</p>
+	                </div>
+	            </div>
+	            <a class="text-right btn btn-primary pull-right">Read More</a>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<div class="modal fade fill-in" id="addSchoolPopup" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+	    <i class="pg-close"></i>
+	</button>
+	<div class="modal-dialog ">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            <h5 class="text-left p-b-5"><span class="semi-bold">Submit your</span> request</h5>
+	        </div>
+	        <div class="modal-body">
+	            <div class="row">
+	                <div class="col-md-6">
+		                <div class="form-group">
+		                    <input type="text" placeholder="Your email address" class="form-control input-lg" id="icon-filter" name="user_request[email]" autofocus />
+		                </div>
+	                </div>
+	                <div class="col-md-6">
+	                	<div class="form-group">
+	                    	<input type="text" placeholder="Your name" class="form-control input-lg" id="icon-filter" name="user_request[name]" />
+	                   	</div>
+	                </div>
+	                <div class="col-md-6">
+	                	<div class="form-group">
+	                		<input type="text" placeholder="Your school name" class="form-control input-lg" id="icon-filter" name="user_request[school_name]" />
+	                	</div>
+	                </div>
+	                <div class="col-md-6">
+		                <div class="form-group">
+		                	<select class="cs-select cs-skin-slide" placeholder="Who are you?" data-init-plugin="cs-select">
+							    <option value="student" disabled selected>I'm a Student</option>
+							    <option value="teacher">I'm a Teacher</option>
+							</select>
+						</div>
+	                </div>
+	                <div class="col-md-3 m-t-20 text-center pull-right">
+	                    <button type="button" class="btn btn-primary btn-lg btn-large fs-15">Submit</button>
+	                </div>
+	            </div>
+	            <small class="pull-right hinted-text p-t-20">We will get back to you in 24 hours.</small>
+	        </div>
+	    </div>
 	</div>
 </div>

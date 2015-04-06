@@ -1,71 +1,31 @@
 <div class="login-wrapper ">
-      <!-- START Login Background Pic Wrapper-->
-      <div class="bg-pic">
-        <!-- START Background Pic-->
-        <img src="assets/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
-        <!-- END Background Pic-->
-        <!-- START Background Caption-->
-        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
-          <h2 class="semi-bold text-white">
-					Pages make it easy to enjoy what matters the most in the life</h2>
-          <p class="small">
-            images Displayed are solely for representation purposes only, All work copyright of respective owner, otherwise © 2013-2014 REVOX.
-          </p>
-        </div>
-        <!-- END Background Caption-->
-      </div>
-      <!-- END Login Background Pic Wrapper-->
-      <!-- START Login Right Container-->
-      <div class="login-container bg-white">
-        <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-          <h1>hungryhead</h1>
-          <p class="p-t-35">Sign into your hungryhead account</p>
-          <!-- START Login Form -->
-          <form id="form-login" class="p-t-15" role="form" action="index.html" novalidate="novalidate">
-            <!-- START Form Control-->
-            <div class="form-group form-group-default">
-              <label>Login</label>
-              <div class="controls">
-                <input type="text" name="username" placeholder="User Name" class="form-control" required="" aria-required="true">
-              </div>
-            </div>
-            <!-- END Form Control-->
-            <!-- START Form Control-->
-            <div class="form-group form-group-default">
-              <label>Password</label>
-              <div class="controls">
-                <input type="password" class="form-control" name="password" placeholder="Credentials" required="" aria-required="true">
-              </div>
-            </div>
-            <!-- START Form Control-->
-            <div class="row">
-              <div class="col-md-6 no-padding">
-                <div class="checkbox ">
-                  <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Keep Me Signed in</label>
-                </div>
-              </div>
-              <div class="col-md-6 text-right">
-                <a href="#" class="text-info small">Help? Contact Support</a>
-              </div>
-            </div>
-            <!-- END Form Control-->
-            <button class="btn btn-primary btn-cons m-t-10" type="submit">Sign in</button>
-          </form>
-          <!--END Login Form-->
-          <div class="pull-bottom sm-pull-bottom">
-            <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-10 sm-p-b-20 clearfix">
-              <div class="col-sm-2 col-md-2 no-padding">
-                <img alt="" class="m-t-5" data-src="assets/hungryhead.png" data-src-retina="assets/hungryhead.png" height="30" src="assets/hungryhead.png" width="30">
-              </div>
-              <div class="col-sm-10 no-padding">
-                <p><small>
-		        		Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END Login Right Container-->
+  <div class="bg-pic">
+    <img src="assets/Hungryhead_header.jpg" data-src="assets/Hungryhead_header.jpg" data-src-retina="assets/Hungryhead_header.jpg" alt="" class="lazy">
+    <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
+      
+      <img src="assets/hungryhead_logo_150.png" alt="hungryhead" data-src="assets/hungryhead_logo_150.png" data-src-retina="assets/hungryhead_logo_150.png" alt="" width="80" height="80" class="lazy">
+      <h2 class="semi-bold text-white">
+			 Enabling students to practically explore entrepreneurship.
+      </h2>
+      <p class="small">
+        images Displayed are solely for representation purposes only, All work copyright of respective owner, otherwise © 2013-2014 REVOX.
+      </p>
     </div>
+  </div>
+  <div class="login-container bg-white">
+    <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+      <h1 class="bold">Login to hungryhead</h1>
+      <%= react_component('Login') %>
+      <div class="pull-bottom sm-pull-bottom">
+        <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-10 sm-p-b-20 clearfix">
+            <ul class="login-footer-links fs-12 no-margin no-padding no-style">
+              <li class="inline p-r-10"><a href="" title=""><span class="text-master">@ Copyright hungryhead 2015 </span></a></li>
+              <li class="p-l-5 p-r-5 inline no-padding"><a href="" title="">About</a></li>
+              <li class="p-l-5 p-r-5 inline"><a href="" title="">Learn</a></li>
+              <li class="p-l-5 inline"><a href="" title="">Help</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

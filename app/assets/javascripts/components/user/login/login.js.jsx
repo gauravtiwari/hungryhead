@@ -9,11 +9,7 @@ var Login = React.createClass({
       disabled: false
     };
   },
-
-  componentDidMount: function() {
-    this.setState({disabled: false});
-  },
-
+  
   handleLoginSubmit: function ( data ) {
     var self = this;
     this.setState({disabled: true})
@@ -31,17 +27,16 @@ var Login = React.createClass({
       }
       }.bind(this),
       error: function(xhr, status, err) {
-        $.snackbar({content: JSON.parse(xhr.responseText).error, style: "error", timeout: 5000});
+        var errors = JSON.parse(xhr.responseText);
+        $('body').pgNotification({style: "simple", message: errors.error.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
+
         this.setState({disabled: false, loading: false});
       }.bind(this)
     });
   },
   render: function() {
 
-    return (<div className="col-md-6 form-login">
-              <LoginForm disabled={this.state.disabled} loading={this.state.loading} form={this.state.form} handleLoginSubmit={this.handleLoginSubmit} checkUser = {this.checkUser} />
-            </div>
-    );
+    return (<LoginForm disabled={this.state.disabled} loading={this.state.loading} form={this.state.form} handleLoginSubmit={this.handleLoginSubmit} checkUser = {this.checkUser} />);
   }
 
 });

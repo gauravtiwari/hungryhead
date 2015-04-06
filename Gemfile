@@ -148,6 +148,7 @@ gem 'js-routes'
 gem 'bower-rails'
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
 gem 'jquery-validation-rails'
+gem 'modernizr-rails'
 
 #MarkDown Editor
 gem 'redcarpet'

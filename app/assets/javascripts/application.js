@@ -8,7 +8,7 @@
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
 //  require jquery.turbolinks
-//= require plugins/modernizr.custom
+//= require modernizr
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
 //= require jquery-ui/position
@@ -23,6 +23,7 @@
 //= require select2
 //= require jquery.atwho
 //= require typer
+//= require classie
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require jquery.autosize

@@ -12,36 +12,52 @@ render: function() {
   var loading_class = cx ({
     'fa fa-spinner fa-spin': this.props.loading
   });
-  return ( <form ref="form" className="sign-in-form form-horizontal ws-validate" id="new_user" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-            <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
-              <div className="form-control-wrapper">
-                <label>Email</label>
-                <input ref="email" autoComplete="off" required="required" onBlur={this.props.checkUser} autofocus="autofocus" label="false" id="email" className="string required form-control empty" placeholder="johndoe@example.com" type="email" name="user[login]" />
-                <span className="material-input"></span>
-              </div>
-              <div className="form-control-wrapper">
-                <label>Password</label>
-                 <input ref="password" autoComplete="off" required="required" label="false" id="password" className="password required form-control empty" placeholder="*********" type="password" name="user[password]" />
-                 <span className="material-input"></span>
-              </div>
-              <div className="checkbox">
-                  <label>
-                      <input type="checkbox" name="user[remember_me]" id="user_remember_me" />
-                      <span className="check"></span> Remember me
-                  </label>
-              </div>
-              <div className="login-form-buttons">
-              <a className="forgotpassword" href="/account/reset-password">Forgot your password? </a>
-                <button name="button" type="submit" className={button_class}><i className={loading_class}></i> Login</button>
-              </div>
-          </form> 
+
+  var confirmation_text = "Didn't recieve email confirmation? Click here";
+  var account_text = "Don't have an account? Click here"; 
+
+  return (
+
+    <form id="form-login" ref="form" className="p-t-15" role="form" action="index.html" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
+      <div className="form-group form-group-default">
+        <label>Login</label>
+        <div className="controls">
+          <input type="text" name="user[login]" autoComplete="off" placeholder="User Name" className="form-control" required="true" aria-required="true" />
+        </div>
+      </div>
+      <div className="form-group form-group-default">
+        <label>Password</label>
+        <div className="controls">
+          <input type="password" autoComplete="off" className="form-control" name="user[password]" placeholder="Credentials" required="true" aria-required="true" />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 no-padding">
+          <div className="checkbox check-success">
+            <input type="checkbox" name="user[remember_me]" value="1" id="checkbox1" checked/>
+            <label for="checkbox1">Keep Me Signed in</label>
+          </div>
+        </div>
+        <div className="col-md-6 text-right">
+          <a href="#" className="text-info small">Need Help? Click here</a>
+        </div>
+      </div>
+      <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Sign in</button>
+      <a className="btn btn-primary btn-cons m-t-10" href="/account/reset-password">Forgot password? </a>
+      <div className="col-md-12 no-padding m-t-20">
+        <a className="clearfix" href="/account/confirm/resend">{confirmation_text}</a>
+        <a className="clearfix" href="/join">{account_text}</a>
+      </div>
+    </form>
   );
 },
 
 _onKeyDown: function(event) {
     event.preventDefault();
-    var formData = $( this.refs.form.getDOMNode() ).serialize();
-    this.props.handleLoginSubmit(formData);
+    if($(this.refs.form.getDOMNode()).valid()) {
+      var formData = $( this.refs.form.getDOMNode() ).serialize();
+      this.props.handleLoginSubmit(formData);
+    }
 
 }
 

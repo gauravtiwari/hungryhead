@@ -23,6 +23,41 @@ input.error:-webkit-autofill {
 	-webkit-box-shadow: none;
 }
 
+.container .page-content-wrapper .content {
+  z-index: 10;
+  padding-top: 60px;
+  padding-bottom: 72px;
+  min-height: 100%;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.card{
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #f2f2f2;
+  border-radius: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
+}
+.box-shadow {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
+}
+.card.share .card-header,
+.card.status .card-header {
+  padding: 15px 15px 12px;
+  border-bottom: 1px solid #e1f0fd;
+  border: 0;
+  background: #e1f0fd;
+}
+.solid-bg {
+  background: none;
+  background-color: #5b98e0;
+  overflow: hidden;
+}
+.card.share .card-footer:hover {
+	background: transparent;
+}
 .circle {
   position: absolute;
   right: 20px;
@@ -34,4 +69,14 @@ input.error:-webkit-autofill {
   height: 9px;
   background: #626c75;
   z-index: 1;
+}
+.placeholder {
+  background: silver;
+  display: block;
+}
+.user-pic .placeholder {
+	padding:5px;
+}
+.container {
+	max-width: 980px;
 }

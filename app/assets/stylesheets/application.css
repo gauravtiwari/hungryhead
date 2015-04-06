@@ -28,6 +28,7 @@
  *= require splash
  *= require home
  *= require profile
+ *= require login
  *= require footer
  *= require overrides
  *= require idea_profile
