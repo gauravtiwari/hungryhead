@@ -314,7 +314,7 @@ GEM
     fog-serverlove (0.1.2)
       fog-core
       fog-json
-    fog-softlayer (0.4.1)
+    fog-softlayer (0.4.2)
       fog-core
       fog-json
     fog-storm_on_demand (0.1.1)
@@ -587,7 +587,7 @@ GEM
       ffi (>= 0.5.0)
     rbeautify (0.0.7)
     react-source (0.13.1)
-    redcarpet (3.2.2)
+    redcarpet (3.2.3)
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -675,7 +675,7 @@ GEM
       celluloid (~> 0.16.0)
     temple (0.7.5)
     terminal-table (1.4.5)
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
