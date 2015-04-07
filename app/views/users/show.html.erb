@@ -1,0 +1,208 @@
+<%= render partial: 'sidebar' %>
+
+<div class="col-md-8 col-sm-8">
+    <div class="jumbotron" data-pages="parallax" data-social="cover">
+        <div class="cover-photo" style="background-image: url(/assets/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg);"></div>
+        <div class="cover-edit-menu fs-22">
+		       <div class="dropdown pull-right">
+		       <button href="" class="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		        <ul class="dropdown-menu profile-dropdown" role="menu">
+		          <li><a href="#"><i class="pg-settings_small"></i>Settings</a>
+		          </li>
+		          <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+		          </li>
+		          <li><a href="#"><i class="pg-signals"></i> Help</a>
+		          </li>
+		          <li class="bg-master-lighter">
+		            <%= link_to(destroy_user_session_path, class: "clearfix") do %>
+		              <span class="pull-left">Logout</span>
+		              <span class="pull-right"><i class="pg-power"></i></span>
+		            <% end %>
+		          </li>
+		        </ul>
+		      </div>
+      </div>
+    </div>
+  <div class="profile-nav box-shadow bg-white">
+	<ul class="profile-name inline no-style no-margin">
+		<li class="inline b-r b-grey p-t-15 p-b-10 p-l-10 p-r-15 active">
+			<a class="bold text-success b-b b-grey p-b-5" href="" title="">Leaderboard</a>
+		</li>
+		<li class="inline b-r b-grey p-t-15 p-b-10 p-l-15 p-r-15">
+			<a class="text-brand bold" href="" title="">Activities</a>
+		</li>
+	</ul>
+
+	<div class="pull-right profile-action-buttons m-t-10">
+		<button href="" class="btn btn-rounded btn-success btn-animated from-left fa fa-check btn-cons no-padding padding-5 p-l-10 p-r-10 m-r-10" title=""><span>Follow</span></button>
+		<a href="" class="btn btn-rounded btn-primary btn-cons btn-animated from-left fa fa-edit no-padding padding-5 p-l-10 p-r-10 m-r-10" title=""><span>Edit Profile</span></a>
+	</div>
+</div>
+
+    <div class="summary white-bg box-shadow m-t-20">
+        <div class="widget-16 text-master panel panel-transparent no-margin widget-loader-circle">
+            <div class="panel-heading">
+                <div class="panel-title b-b b-grey p-b-5 b-transparent">Leaderboard</div>
+            </div>
+           <div class="p-l-20 p-r-20 p-t-10">
+            <div class="row">
+                <div class="col-md-4 no-padding text-center b-r b-grey b-dashed">
+                    <p class="all-caps bold small no-margin">Feedbacks</p>
+                    <p class="all-caps bold  no-margin text-danger ">5600</p>
+                </div>
+                <div class="col-md-4 text-center b-r b-grey b-dashed">
+                    <p class="all-caps bold small no-margin">Invested</p>
+                    <p class="all-caps bold  no-margin text-danger ">24000</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <p class="all-caps bold small no-margin">Votes</p>
+                    <p class="all-caps bold  no-margin text-danger ">14,256</p>
+                </div>
+            </div>
+            </div>
+
+            <div class="p-l-20 p-r-20 p-b-20 p-t-20">
+                <div class="row">
+                    <div class="col-md-4 text-center b-r b-grey b-dashed">
+                        <p class="all-caps bold small no-margin">Followers</p>
+                        <p class="all-caps bold  no-margin text-danger">14,256</p>
+                    </div>
+                    <div class="col-md-4 text-center b-r b-grey b-dashed">
+                        <p class="all-caps bold small no-margin">Ideas</p>
+                        <p class="all-caps bold  no-margin text-danger">5600</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <p class="all-caps bold small no-margin">Comments</p>
+                        <p class="all-caps bold  no-margin text-danger">5600</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ <div class="widget-16 panel no-margin widget-loader-circle">
+    <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">
+          Followers
+        </div>
+    </div>
+    <div class="panel-body">
+        <p class="m-b-5 small m-t-5">1,435 Followers</p>
+        <ul class="list-unstyled">
+            <li class="m-r-10">
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white">
+                    <div class="bg-master text-center text-white">
+                        <span>+34</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+
+
+   <div class="widget-16 panel no-margin widget-loader-circle">
+    <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">
+          Followings
+        </div>
+    </div>
+    <div class="panel-body">
+        <p class="m-b-5 small m-t-5">1,435 Followings</p>
+        <ul class="list-unstyled">
+            <li class="m-r-10">
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                    <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                    </span><% end %>
+                </div>
+            </li>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white">
+                    <div class="bg-master text-center text-white">
+                        <span>+34</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>

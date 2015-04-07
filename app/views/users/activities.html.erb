@@ -1,0 +1,124 @@
+<%= render partial: 'sidebar' %>
+
+<div class="col-md-8 col-sm-8">
+    <div class="jumbotron" data-pages="parallax" data-social="cover">
+        <div class="cover-photo" style="background-image: url(/assets/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg);"></div>
+        <div class="cover-edit-menu fs-22">
+		       <div class="dropdown pull-right">
+		       <button href="" class="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+		        <ul class="dropdown-menu profile-dropdown" role="menu">
+		          <li><a href="#"><i class="pg-settings_small"></i>Settings</a>
+		          </li>
+		          <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+		          </li>
+		          <li><a href="#"><i class="pg-signals"></i> Help</a>
+		          </li>
+		          <li class="bg-master-lighter">
+		            <%= link_to(destroy_user_session_path, class: "clearfix") do %>
+		              <span class="pull-left">Logout</span>
+		              <span class="pull-right"><i class="pg-power"></i></span>
+		            <% end %>
+		          </li>
+		        </ul>
+		      </div>
+      </div>
+    </div>
+  <div class="profile-nav box-shadow bg-white">
+	<ul class="profile-name inline no-style no-margin">
+		<li class="inline b-r b-grey p-t-15 p-b-10 p-l-10 p-r-15 active">
+			<a class="bold text-brand" href="" title="">Leaderboard</a>
+		</li>
+		<li class="inline b-r b-grey p-t-15 p-b-10 p-l-15 p-r-15">
+			<a class="text-success b-b b-grey p-b-5 bold" href="" title="">Activities</a>
+		</li>
+	</ul>
+
+	<div class="pull-right profile-action-buttons m-t-10">
+		<button href="" class="btn btn-rounded btn-success btn-animated from-left fa fa-check btn-cons no-padding padding-5 p-l-10 p-r-10 m-r-10" title=""><span>Follow</span></button>
+		<a href="" class="btn btn-rounded btn-primary btn-cons btn-animated from-left fa fa-edit no-padding padding-5 p-l-10 p-r-10 m-r-10" title=""><span>Edit Profile</span></a>
+	</div>
+</div>
+
+<div class="activity-feed auto-height m-t-20">
+
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Jeff Curtis</h5>
+            <h6>Shared a Tweet
+      
+                <span class="location semi-bold">
+                    <i class="fa fa-map-marker"></i> SF, California
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+                <a href="#">#quote</a>
+            </p>
+        </div>
+        <div class="card-footer clearfix">
+            <div class="pull-left">via 
+                <span class="text-complete">CNN</span>
+            </div>
+            <div class="pull-right hint-text">
+Apr 23
+</div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Jeff Curtis</h5>
+            <h6>Shared a Tweet
+      
+                <span class="location semi-bold">
+                    <i class="fa fa-map-marker"></i> SF, California
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+                <a href="#">#quote</a>
+            </p>
+        </div>
+        <div class="card-footer clearfix">
+            <div class="pull-left">via 
+                <span class="text-complete">CNN</span>
+            </div>
+            <div class="pull-right hint-text">
+Apr 23
+</div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="card share" data-social="item">
+        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+        <div class="card-header clearfix">
+            <div class="user-pic"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
+                <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                </span><% end %>
+            </div>
+            <h5>Andy Young</h5>
+            <h6>Updated his status
+      
+                <span class="location semi-bold">
+                    <i class="icon-map"></i> NYC, New York
+                </span>
+            </h6>
+        </div>
+        <div class="card-description">
+            <p>What a lovely day! I think I should go and play outside.</p>
+        </div>
+    </div>
+</div>
+</div>

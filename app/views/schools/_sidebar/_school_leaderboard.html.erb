@@ -1,0 +1,19 @@
+<div class="user-leaderboard">
+	<div class="stastics">
+		<div class="col-md-6 score border-bottom">
+			<h3>Students</h3>
+			<span><i class="ion-university"></i> <%= @school.users_count %></span>
+		</div>
+
+		<div class="col-md-6 score border-bottom border-left">
+			<h3>Startup ideas</h3>
+			<span> <i class="ion-lightbulb"></i> <%= @school.ideas_count %></span>
+		</div>
+
+
+		<div class="col-md-6 score">
+			<h3>Followers</h3>
+			<span><i class="ion-person-stalker"></i>  <%= count_followers(@school) %></span>
+		</div>
+	</div>
+</div>
