@@ -26,9 +26,9 @@ GIT
 
 GIT
   remote: git://github.com/reactjs/react-rails.git
-  revision: a8f8d83a7106fcbe27ba4a7acfc982c3712920a3
+  revision: ff564e82f6df668d3979b6ba7747a199f6f01a45
   specs:
-    react-rails (1.0.0.pre)
+    react-rails (1.0.0)
       coffee-script-source (~> 1.8)
       connection_pool
       execjs
@@ -220,7 +220,7 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    entangled (1.0.0)
+    entangled (1.1.0)
       rails (~> 4.2)
       redis (~> 3.2)
       tubesock (~> 0.2)
@@ -269,7 +269,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.1.1)
+    fog-aws (0.1.2)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -288,7 +288,8 @@ GEM
     fog-ecloud (0.1.1)
       fog-core
       fog-xml
-    fog-json (1.0.0)
+    fog-json (1.0.1)
+      fog-core (~> 1.0)
       multi_json (~> 1.0)
     fog-local (0.1.0)
       fog-core (~> 1.27)
