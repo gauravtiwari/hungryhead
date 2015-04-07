@@ -22,7 +22,14 @@ input.error:-webkit-autofill {
 	background:transparent;
 	-webkit-box-shadow: none;
 }
-
+.currency_icon {
+  width: 20px;
+   display: block;
+  margin: 0 auto;
+  height: 20px;
+  color: #fff;
+  fill: #ffffff;
+}
 .container .page-content-wrapper .content {
   z-index: 10;
   padding-top: 60px;
@@ -55,7 +62,22 @@ input.error:-webkit-autofill {
   border: 0;
   background: #e1f0fd;
 }
-.solid-bg {
+.panel .panel-heading {
+  min-height: 0;
+}
+.container .jumbotron {
+  padding-right: 60px;
+  padding-left: 60px;
+  height: 300px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  margin: 0;
+}
+.jumbotron .cover-photo {
+  background-color: transparent;
+}
+.bg-solid {
   background: none;
   background-color: #5b98e0;
   overflow: hidden;

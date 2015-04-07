@@ -4,6 +4,8 @@ class SchoolsController < ApplicationController
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:logo, :email]
 
+  layout 'home'
+
   # GET /schools
   # GET /schools.json
   def index
@@ -85,7 +87,7 @@ class SchoolsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_schools
       @user = current_user
-      @school = Organization.friendly.find(params[:id])
+      @school = School.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

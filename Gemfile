@@ -34,6 +34,7 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
+gem 'inline_svg'
 
 #Font awesome
 gem "font-awesome-rails"

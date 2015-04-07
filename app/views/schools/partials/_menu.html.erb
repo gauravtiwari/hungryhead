@@ -18,7 +18,7 @@
 			<% if user_signed_in? && current_user %>
 				<%= react_component('Follow',{:followed => followed?(@school).to_json}, {:id => "follow-component"}) %>
 			<% end %>
-			<% if user_signed_in? && current_user.admin? %>
+			<% if user_signed_in? && current_user.type == "User" && current_user.admin? %>
 				<div><a class="main-button animated zoomIn" href="#">Edit School</a></div>
 			<% end %>
 		</ul>

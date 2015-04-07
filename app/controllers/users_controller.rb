@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   after_action :verify_authorized, :only => [:update, :edit]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  layout "profile"
+  layout "home"
   autocomplete :user, :name, :full => true
 
   def index

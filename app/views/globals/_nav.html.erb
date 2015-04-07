@@ -1,9 +1,9 @@
 <div class="header">
 <div class="container">
   <div class=" pull-left sm-table">
-    <div class="header-inner">
+    <div class="header-inner  p-t-10">
       <div class="brand inline">
-        <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
+        <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
       </div>
       <a href="#" class="search-link b-l b-grey b-dashed p-l-15" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
       <ul class="inline no-style m-l-20 b-l b-grey b-dashed">
@@ -17,6 +17,10 @@
   <div class="pull-right">
     <div class="visible-lg visible-md m-t-10">
       <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
+         <li class="p-r-10 inline">
+          <a href="javascript:;" id="notification-center" class="fa fa-pencil b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
+            </a>
+         </li>
         <li class="p-r-10 inline">
           <div class="dropdown">
             <a href="javascript:;" id="notification-center" class="fa fa-globe b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
@@ -77,7 +81,6 @@
               <span class="pull-left">Logout</span>
               <span class="pull-right"><i class="pg-power"></i></span>
             <% end %>
-            </a>
           </li>
         </ul>
       </div>

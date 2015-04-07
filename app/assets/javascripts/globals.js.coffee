@@ -17,11 +17,13 @@ jQuery(document).ready ->
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
 			$('.sticky').css(position: "fixed", width: "17.85rem", height: "auto")
+			$('.profile-sidebar.sticky').css(position: "fixed", width: "23.75rem", height: "auto")
 		else
 			$('.sticky').css(position: "relative", width: "100%")
+			$('.profile-sidebar.sticky').css(position: "relative", width: "100%")
 
 	if Modernizr.mq 'only screen and (max-width: 991px)'
-		$('.col-md-3').each ->
+		$('.col-md-4').each ->
 			$(@).removeClass 'no-padding'
 
 	$('.list-view-wrapper').scrollbar()
