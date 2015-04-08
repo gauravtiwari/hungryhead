@@ -139,7 +139,7 @@ gem 'nokogiri'
 
 #React JS
 gem 'therubyracer', platforms: :ruby
-gem 'react-rails', github: 'reactjs/react-rails'
+gem 'react-rails', '~> 1.0'
 
 gem 'json'
 
