@@ -1,0 +1,30 @@
+<!-- Content
+		================================================== -->
+<div id="content">
+  <!-- profile header -->
+  <div class="idea-header">
+    <%= render partial: "ideas/_partials/idea_header", locals: {idea: @idea} %>
+    <%= render partial: "ideas/_partials/edit_idea_form", locals: {idea: @idea} %>
+  </div>
+  <!-- end profile header -->
+  <!-- idea menu -->
+  <%= render partial: "ideas/_partials/idea_menu", locals: {idea: @idea} %>
+  <!-- end idea menu -->
+  <div class="container project-page">
+    <div class="row">
+      <%= render partial: "ideas/sidebar/sidebar", locals: {idea: @idea} %>
+      <div class="col-md-8 project-content">
+        <div class="comments-feed animated fadeIn">
+      	   <%= render partial: "ideas/_sub_pages/comments" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End content -->
+</div>
+
+
+<% if user_signed_in? && policy(@idea).collaborator? %>
+  <%= render 'collaboration' %>
+<% end %>

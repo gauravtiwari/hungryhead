@@ -1,0 +1,24 @@
+<div class="top-idea-line">
+  <h1><%= @idea.name %>
+  </h1>
+  <p><%= @idea.high_concept_pitch %></p>
+  <ul class="idea-tag-list">
+    <% @idea.market_list.each do |market| %>
+      <li><%= link_to(market, profile_path(market.parameterize), class: "border-bottom-dotted")%></li>
+    <% end %>
+  </ul>
+  <div class="meta-data">
+    <%= content_tag(:span) do %>
+  		<%= link_to(url_with_protocol(@idea.website), class: "border-bottom-dotted", :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => "Website", target: "_blank") do %>
+  			<i class="icon-rss"></i>
+  		<% end %>
+  	<% end %>
+  	<%= content_tag(:span, class: "margin-left") do %>
+	  	<% @idea.location_list.each do |location| %>
+	  		<%= link_to(profile_path(location.parameterize), :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => location, class: "border-bottom-dotted") do %>
+	  			<i class="ion-location"></i>
+	  		<% end %>
+	  	<% end %>
+  	<% end %>
+  </div>
+</div>
