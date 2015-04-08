@@ -1,6 +1,7 @@
 class CreateIdeas < ActiveRecord::Migration
   def change
     create_table :ideas do |t|
+      t.integer :student_id, :null => false, index: true
       t.string :name
       t.string :slug, index: true, :unique => true
       t.string :high_concept_pitch, default: ""
@@ -35,7 +36,6 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :comments_count,default: 0, index: true
       t.integer :cached_votes_total, default: 0, index: true
       t.integer :idea_messages_count,  default: 0, index: true
-      t.integer :user_id, :null => false, index: true
       t.timestamps null: false
     end
     add_index :ideas, :profile, using: :gin

@@ -22,6 +22,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cached_school_list
       t.string :cached_location_list
       t.string :cached_market_list
+      t.boolean :verified, default: false
+      t.string :cached_roles_list
+      t.integer :ideas_count, default: 0
       t.integer :followers_count, default: 0, index: true
       t.integer :followings_count, default: 0, index: true
       t.integer :investments_count, default: 0

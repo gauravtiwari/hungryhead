@@ -318,6 +318,7 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 
 CREATE TABLE ideas (
     id integer NOT NULL,
+    student_id integer NOT NULL,
     name character varying,
     slug character varying,
     high_concept_pitch character varying DEFAULT ''::character varying,
@@ -352,7 +353,6 @@ CREATE TABLE ideas (
     comments_count integer DEFAULT 0,
     cached_votes_total integer DEFAULT 0,
     idea_messages_count integer DEFAULT 0,
-    user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
@@ -624,39 +624,6 @@ CREATE SEQUENCE markets_id_seq
 --
 
 ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
-
-
---
--- Name: mentors; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE mentors (
-    id integer NOT NULL,
-    verified boolean DEFAULT false,
-    cached_roles_list character varying,
-    ideas_count integer DEFAULT 0,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: mentors_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE mentors_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: mentors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE mentors_id_seq OWNED BY mentors.id;
 
 
 --
@@ -1087,39 +1054,6 @@ ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
 
 
 --
--- Name: students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE students (
-    id integer NOT NULL,
-    education jsonb DEFAULT '{}'::jsonb,
-    cached_hobbies_list character varying,
-    ideas_count integer DEFAULT 0,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE students_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE students_id_seq OWNED BY students.id;
-
-
---
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1186,39 +1120,6 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- Name: teachers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE teachers (
-    id integer NOT NULL,
-    verified boolean,
-    cached_roles_list character varying,
-    ideas_count integer DEFAULT 0,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: teachers_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE teachers_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: teachers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE teachers_id_seq OWNED BY teachers.id;
-
-
---
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1244,6 +1145,9 @@ CREATE TABLE users (
     cached_school_list character varying,
     cached_location_list character varying,
     cached_market_list character varying,
+    verified boolean DEFAULT false,
+    cached_roles_list character varying,
+    ideas_count integer DEFAULT 0,
     followers_count integer DEFAULT 0,
     followings_count integer DEFAULT 0,
     investments_count integer DEFAULT 0,
@@ -1445,13 +1349,6 @@ ALTER TABLE ONLY markets ALTER COLUMN id SET DEFAULT nextval('markets_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY mentors ALTER COLUMN id SET DEFAULT nextval('mentors_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY merit_actions ALTER COLUMN id SET DEFAULT nextval('merit_actions_id_seq'::regclass);
 
 
@@ -1536,13 +1433,6 @@ ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY students ALTER COLUMN id SET DEFAULT nextval('students_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -1551,13 +1441,6 @@ ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq':
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY teachers ALTER COLUMN id SET DEFAULT nextval('teachers_id_seq'::regclass);
 
 
 --
@@ -1695,14 +1578,6 @@ ALTER TABLE ONLY markets
 
 
 --
--- Name: mentors_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY mentors
-    ADD CONSTRAINT mentors_pkey PRIMARY KEY (id);
-
-
---
 -- Name: merit_actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1799,14 +1674,6 @@ ALTER TABLE ONLY slugs
 
 
 --
--- Name: students_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY students
-    ADD CONSTRAINT students_pkey PRIMARY KEY (id);
-
-
---
 -- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1820,14 +1687,6 @@ ALTER TABLE ONLY taggings
 
 ALTER TABLE ONLY tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
-
-
---
--- Name: teachers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY teachers
-    ADD CONSTRAINT teachers_pkey PRIMARY KEY (id);
 
 
 --
@@ -2106,10 +1965,10 @@ CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
 
 
 --
--- Name: index_ideas_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_ideas_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_ideas_on_user_id ON ideas USING btree (user_id);
+CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
 
 
 --
@@ -2397,13 +2256,6 @@ CREATE INDEX index_slugs_on_sluggable_id ON slugs USING btree (sluggable_id);
 --
 
 CREATE INDEX index_slugs_on_sluggable_type_and_sluggable_id ON slugs USING btree (sluggable_type, sluggable_id);
-
-
---
--- Name: index_students_on_education; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_students_on_education ON students USING gin (education);
 
 
 --
@@ -2721,10 +2573,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150321223054');
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
-
-INSERT INTO schema_migrations (version) VALUES ('20150404231440');
-
-INSERT INTO schema_migrations (version) VALUES ('20150404231517');
-
-INSERT INTO schema_migrations (version) VALUES ('20150404231540');
 

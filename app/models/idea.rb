@@ -25,7 +25,7 @@ class Idea < ActiveRecord::Base
   after_save :create_slug
   #Associations
 
-  belongs_to :user, counter_cache: true, touch: true
+  belongs_to :student, counter_cache: true, touch: true
   belongs_to :school, counter_cache: true
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true

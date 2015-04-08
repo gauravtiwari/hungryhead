@@ -31,12 +31,6 @@ Rails.application.routes.draw do
     post    '/login'  => 'users/sessions#create',  as: 'user_session'
     get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
 
-    # joining
-    get   '/join' => 'users/registrations#new',    as: 'new_user_registration'
-    post  '/join' => 'users/registrations#create', as: 'user_registration'
-    put  '/join' => 'users/registrations#update', as: 'user_update'
-    delete  '/join' => 'devise/registrations#destroy', as: 'user_delete'
-
     scope '/account' do
       # password reset
       get   '/reset-password'        => 'users/passwords#new',    as: 'new_user_password'
@@ -57,6 +51,15 @@ Rails.application.routes.draw do
       # account deletion
       delete '' => 'devise/registrations#destroy'
     end
+  end
+
+  devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'} 
+  as :student do
+    # joining
+    get   '/join' => 'students/registrations#new',    as: 'new_student_registration'
+    post  '/join' => 'students/registrations#create', as: 'student_registration'
+    put  '/join' => 'students/registrations#update', as: 'student_update'
+    delete  '/join' => 'devise/registrations#destroy', as: 'student_delete'
   end
 
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'} 

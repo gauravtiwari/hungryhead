@@ -120,14 +120,14 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Your full name</label>
-              <input type="text" ref="name" autoComplete="off" name="user[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
+              <input type="text" ref="name" autoComplete="off" name="student[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
             </div>
           </div>
           
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Email</label>
-              <input type="email" name="user[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span id="invalid-email"></span>
             </div>
           </div>
@@ -137,7 +137,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12">
             <div className="form-group">
               <label>Select your school <small className="fs-8 text-danger">Your school is not in the list. <a href="javascript:void();" data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
-              <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
+              <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="user[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
@@ -153,7 +153,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="user[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required="true" aria-required="true" />
+              <input type="password" name="student[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required="true" aria-required="true" />
             </div>
           </div>
         </div>
@@ -161,7 +161,7 @@ var RegisterationForm = React.createClass({
         <div className="row m-t-10">
           <div className="col-md-6">
             <div className="checkbox check-success">
-              <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" checked />
+              <input type="checkbox" name="student[terms_accepted]" value="1" id="checkbox1" checked />
               <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
             </div>
           </div>

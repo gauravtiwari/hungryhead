@@ -39,10 +39,8 @@ class User < ActiveRecord::Base
   belongs_to :school, counter_cache: true
   has_one :school, -> { where teacher: true } 
   has_many :authentications, :dependent => :destroy, autosave: true
-  has_many :ideas, dependent: :destroy, autosave: true
   has_many :shares, dependent: :destroy, autosave: true
   has_many :feedbacks, dependent: :destroy, autosave: true
-  has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
   has_many :notifications, :foreign_key => :reciever_id, dependent: :destroy, autosave: true

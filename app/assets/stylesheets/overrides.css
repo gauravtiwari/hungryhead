@@ -7,7 +7,9 @@ body.menu-behind .header .brand {
 .select2-container .select2-choices .select2-search-field input {
  padding: 0 0 0 8px;
 }
-
+.container .page-content-wrapper .content {
+  overflow: hidden;
+}
 span#invalid-email,
 span#invalid-username {
   margin-top: 10px;
@@ -43,7 +45,10 @@ input.error:-webkit-autofill {
 	font-size: 22px;
 }
 .text-green {
-	color: #66ffcc!important;
+	color: #33cc66!important;
+}
+.bg-green {
+  background-color: #33cc66!important;
 }
 .card{
   width: 100%;
@@ -75,7 +80,7 @@ input.error:-webkit-autofill {
   margin: 0;
 }
 .jumbotron .cover-photo {
-  background-color: transparent;
+  background-color: #5b98e0;
 }
 .bg-solid {
   background: none;
