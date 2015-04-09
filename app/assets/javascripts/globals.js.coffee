@@ -1,6 +1,6 @@
 
 jQuery(document).ready ->
-	
+
 	#Initialize AutoGrow plugin
 
 	jQuery -> 
@@ -23,7 +23,7 @@ jQuery(document).ready ->
 			$('.profile-sidebar.sticky').css(position: "relative", width: "100%")
 
 	if Modernizr.mq 'only screen and (max-width: 991px)'
-		$('.col-md-4').each ->
+		$('.col-md-3').each ->
 			$(@).removeClass 'no-padding'
 
 	$('.list-view-wrapper').scrollbar()

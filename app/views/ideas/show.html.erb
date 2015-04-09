@@ -1,50 +1,278 @@
+<div class="row">
+<div class="auto-height box-shadow bg-solid">
+  <div class="idea-header padding-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
 
-<% sections = render(template: 'ideas/show.json.jbuilder') %>
 
-<!-- Content
-		================================================== -->
-<div id="content">
-  <!-- profile header -->
-  <div class="idea-header">
-    <%= render partial: "ideas/_partials/idea_header", locals: {idea: @idea} %>
-    <%= render partial: "ideas/_partials/edit_idea_form", locals: {idea: @idea} %>
-  </div>
-  <!-- end profile header -->
-  <!-- idea menu -->
-  <%= render partial: "ideas/_partials/idea_menu", locals: {idea: @idea} %>
-  <!-- end idea menu -->
-  <div class="container project-page">
-    <div class="row">
-      <%= render partial: "ideas/sidebar/sidebar", locals: {idea: @idea} %>
-      <div class="col-md-8 project-content">
-        <%= react_component('MainContent', {data: sections}) %>
-        <%= render partial: 'ideas/_partials/idea_action_links' %>
-      </div>
+            <div class="idea-meta m-l-15 inline">
+                  <h3 class="no-margin text-white"><%= @idea.name.capitalize %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i></h3>
+                <p class="no-margin text-white fs-16"><%= @idea.high_concept_pitch %></p>
+                <p class="text-white m-t-5 small">San Fransisco Bay | CEO at Pages.inc</p>
+            </div>
+              
+          </div>
+          <div class="col-md-5 m-t-10 p-r-20">
+                   <div class="featured-feedback">
+            <h5 class="p-l-20 text-white bold"><%= @idea.elevator_pitch %></h5>
+          </div>
+
+          </div>
+            </div>
+        </div>
     </div>
   </div>
 </div>
-<!-- End content -->
+
+<div class="row box-shadow bg-white">
+  <div class="container">
+      <div class="profile-nav p-l-10">
+          <div class="col-md-7 no-padding">
+            <ul class="profile-name inline no-style no-margin">
+              <li class="inline b-r b-grey p-l-10 p-t-15 p-b-15 p-r-15 active">
+              <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
+                <% if @user.avatar.present? %>
+                <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "55", height: "55") %><% else %>
+                    <span class="placeholder bold text-white" width="32px" height="32px"><%= @user.first_name.first + @user.last_name.first %>
+                    </span>
+                <% end %>
+                </div>
+                <a class="bold text-success b-b b-grey p-b-5 m-l-45" href="" title="">Idea</a>
+              </li>
+              <li class="inline b-r b-grey p-l-15 p-t-15 p-b-15 p-r-15">
+                <a class="text-brand bold" href="" title="">Feedbacks</a>
+              </li>
+            </ul>
+                    
+        </div>
+
+           <div class="profile-action-buttons pull-right p-t-10 p-r-20">
+            <button class="btn btn-success btn-cons m-r-10"><i class="fa fa-thumbs-o-up"></i> Vote</button>
+             <button class="btn btn-complete btn-cons m-r-10"><i class="fa fa-comments-o"></i> Feedback</button>
+             <button class="btn btn-danger btn-cons"><i class="fa fa-dollar"></i> Invest</button>
+           </div>
+
+      </div>
+  </div>
 </div>
 
-<% if user_signed_in? && policy(@idea).collaborator? %>
-  <div class="idea-collaboration-floating-panel">
-    <%= render 'notes' %>
-    <%= render 'collaboration' %>
+<div class="row m-t-20">
+<div class="col-md-8">
+  <div class="idea-content">
+        <div class="widget-16 text-master panel m-b-10 bg-white no-margin widget-loader-circle">
+        <div class="panel-heading">
+            <div class="panel-title b-b b-grey p-b-5 b-transparent"><i class="fa fa-trophy text-danger"></i> Leaderboard</div>
+        </div>
+       <div class="p-l-20 p-r-20 p-t-10">
+        <div class="row">
+            <div class="col-md-4 no-padding text-center b-r b-grey b-dashed">
+                <h1 class="all-caps fs-13 text-master bold small">Feedbacks</h1>
+                <p class="all-caps bold  fs-13 no-margin text-danger ">5600</p>
+            </div>
+            <div class="col-md-4 text-center b-r b-grey b-dashed">
+                <h1 class="all-caps fs-13 text-master bold small">Invested</h1>
+                <p class="all-caps bold  fs-13 no-margin text-danger ">24000</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h1 class="all-caps fs-13 text-master bold small">Votes</h1>
+                <p class="all-caps bold  fs-13 no-margin text-danger">14,256</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="panel no-margin">
+      <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">What is your idea?</div>
+      </div>
+      <div class="panel-body">
+        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+
+         <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel no-margin">
+      <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">Why is it important?</div>
+      </div>
+      <div class="panel-body">
+        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel no-margin">
+      <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">What are you making this?</div>
+      </div>
+      <div class="panel-body">
+        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel no-margin">
+      <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">How will your solve?</div>
+      </div>
+      <div class="panel-body">
+        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
   </div>
-<% end %>
+</div>
+<div class="col-md-4 col-sm-4 no-padding">
+<div class="sidebar auto-height white-bg box-shadow">
+    <div class="m-b-10">
+        <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
+            <div class="panel-heading">
+             <div class="panel-title">
+              Trending Ideas
+              </div>
+              <div class="panel-controls">
+                  <ul>
+                      <li class="hidden-xlg">
+                        <div class="dropdown">
+                          <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                          <i class="portlet-icon portlet-icon-settings"></i>
+                          </a>
+                          <ul class="dropdown-menu pull-right" role="menu">
+                          <li><a href="#">AAPL</a>
+                          </li>
+                          <li><a href="#">YHOO</a>
+                          </li>
+                          <li><a href="#">GOOG</a>
+                          </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                          <a data-toggle="refresh" class="portlet-refresh text-black" href="#">
+                              <i class="portlet-icon portlet-icon-refresh"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+            </div>
+            <div class="auto-overflow">
+              <ul class="trending-list p-t-20 no-style">
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                  <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                  <div class="pull-left">
+                      <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                      <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                  </div>
+                  <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                 <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+                <li class="m-b-10">
+                  <div class="widget-16-header p-b-10 p-l-15">
+                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
+                      <div class="pull-left">
+                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
+                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
+                      </div>
+                      <div class="clearfix"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="p-t-10 p-l-25 p-b-20 p-r-20">
+                <p class="small no-margin text-brand pull-right">
+                    <a href="#">
+                      <span class="bold">See all</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="widget-16 panel no-margin widget-loader-circle">
+        <div class="panel-heading">
+            <div class="panel-title">
+              People you may know
+            </div>
+        </div>
+        <div class="panel-body">
+            <p class="m-b-5 small m-t-20">1,435 Mutual Friends</p>
+            <ul class="list-unstyled">
+                <li class="m-r-10">
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white">
+                        <div class="bg-master text-center text-white">
+                            <span>+34</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <br/>
+             <a href="#">
+                <span class="small bold pull-right">See all</span>
+              </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
-<%= render partial: 'ideas/_partials/invite_form' %>
-
-<% if @idea.user != current_user %>
-
-  <% if @idea.has_invested?(current_user) %>
-    <%= react_component('Invest', render(template: 'ideas/invest.json.jbuilder', locals: {:id => "investment-component"})) %>
-  <% end %>
-
-  <% if @idea.can_feedback?(current_user) %>
-   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
-  <% end %>
-<% end%>
-
-
-<!-- End Container -->

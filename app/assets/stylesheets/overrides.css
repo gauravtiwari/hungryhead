@@ -79,6 +79,10 @@ input.error:-webkit-autofill {
   border-radius: 0;
   margin: 0;
 }
+.absolute {
+  position: absolute;
+  top:10px;
+}
 .jumbotron .cover-photo {
   background-color: #5b98e0;
 }

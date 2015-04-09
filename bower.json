@@ -3,7 +3,8 @@
     "name": "bower-rails generated lib assets",
     "dependencies": {
         "bootstrap-tokenfield": "latest",
-        "classie": "latest"
+        "classie": "latest",
+        "jquery-form": "latest"
 
     }
   },

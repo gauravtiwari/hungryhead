@@ -2,7 +2,7 @@
     <div class="profile-wrapper-title">
       <h4><i class="<%= css_class %>"></i> <%= box_title %></h4>
       <span class="count"><%= count %></span>
-      <% if is_owner?(@idea.user) && box_title === "Team" %>
+      <% if is_owner?(@idea.student) && box_title === "Team" %>
         <%= react_component('InviteLink', {path: invite_team_idea_path(@idea)}) %>
       <% elsif count > 6 %>
         <%= react_component('ShowAllLink', {path: path}) %>

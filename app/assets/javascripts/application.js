@@ -5,6 +5,7 @@
 
 //= require plugins/pace/pace.min
 //= require jquery2
+//= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
 //  require jquery.turbolinks

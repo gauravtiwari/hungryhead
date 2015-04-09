@@ -2,8 +2,8 @@
   <div class="container">
     <div class="stasts">
       <ul class="stats-list">
-        <%= link_to(user_path(@idea.user)) do %>
-          <%= image_tag(@idea.user.avatar.url(:avatar), width: "35px", height: "35px") %>
+        <%= link_to(user_path(@idea.student)) do %>
+          <%= image_tag(@idea.student.avatar.url(:avatar), width: "35px", height: "35px") %>
         <% end %>
         <li class="<%= current_class?(idea_path(@idea)) %>"><a href="<%= idea_path(@idea) %>"><span class="link-profile">
               <%= @idea.name %></span></a></li>
