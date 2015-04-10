@@ -3,7 +3,7 @@
 	    <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
 	    	<div class="school-data text-center text-white col-md-5">
 				<%= image_tag(@school.logo.url(:avatar)) %>
-				<h1><%= @school.name %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i></h1>
+				<h1 class="bold"><%= @school.name %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i></h1>
                 <div class="row m-t-20">
                     <div class="col-md-4 text-center b-r b-white b-dashed">
                         <h1 class="all-caps bold small fs-16">Students</h1>
@@ -20,7 +20,7 @@
                 </div>
 			</div>
 
-	        <div class="cover-photo" style="background-image: url(/assets/photo1.jpg);">
+	        <div class="cover-photo" style="background-image: url(<%= @school.cover.url(:cover) %>);">
 	        </div>
 
 	       <div class="school-action-buttons">
