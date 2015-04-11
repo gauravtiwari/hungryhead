@@ -1,34 +1,39 @@
-<div class="row">
-<div class="auto-height box-shadow bg-solid">
-  <div class="idea-header padding-20">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-
-
-            <div class="idea-meta m-l-15 inline">
+<div class="col-md-8 no-padding">
+<div class="auto-height box-shadow ">
+  <div class="idea-header padding-20 bg-solid">
+          <div class="col-md-6">
+            <div class="idea-meta m-l-15 inline p-t-10 p-b-10">
                   <h3 class="no-margin text-white"><%= @idea.name.capitalize %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i></h3>
                 <p class="no-margin text-white fs-16"><%= @idea.high_concept_pitch %></p>
                 <p class="text-white m-t-5 small">San Fransisco Bay | CEO at Pages.inc</p>
             </div>
               
           </div>
-          <div class="col-md-5 m-t-10 p-r-20">
-                   <div class="featured-feedback">
-            <h5 class="p-l-20 text-white bold"><%= @idea.elevator_pitch %></h5>
-          </div>
+          <div class="col-md-6">
+
+        <div class="row m-t-20">
+            <div class="col-md-4 no-padding text-center b-r b-white b-dashed">
+                <h1 class="all-caps fs-13 text-white bold small">Feedbacks</h1>
+                <p class="all-caps bold  fs-13 no-margin text-white ">5600</p>
+            </div>
+            <div class="col-md-4 text-center b-r b-white b-dashed">
+                <h1 class="all-caps fs-13 text-white bold small">Raised</h1>
+                <p class="all-caps bold  fs-13 no-margin text-white ">24000</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h1 class="all-caps fs-13 text-white bold small">Votes</h1>
+                <p class="all-caps bold  fs-13 no-margin text-white">14,256</p>
+            </div>
+        </div>
 
           </div>
             </div>
         </div>
-    </div>
-  </div>
-</div>
 
-<div class="row box-shadow bg-white">
-  <div class="container">
+
+<div class="box-shadow bg-white">
       <div class="profile-nav p-l-10">
-          <div class="col-md-7 no-padding">
+          <div class="col-md-5 no-padding">
             <ul class="profile-name inline no-style no-margin">
               <li class="inline b-r b-grey p-l-10 p-t-15 p-b-15 p-r-15 active">
               <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
@@ -43,6 +48,9 @@
               <li class="inline b-r b-grey p-l-15 p-t-15 p-b-15 p-r-15">
                 <a class="text-brand bold" href="" title="">Feedbacks</a>
               </li>
+              <li class="inline b-r b-grey p-l-15 p-t-15 p-b-15 p-r-15">
+                <a class="text-brand bold" href="" title="">Chat</a>
+              </li>
             </ul>
                     
         </div>
@@ -54,80 +62,88 @@
            </div>
 
       </div>
+</div>
+
+<div class="m-t-20">
+    <div class="widget-16 text-master panel box-shadow bg-white widget-loader-circle">
+        <div class="panel-body p-l-60 p-r-60">
+          <div class="featured-feedback">
+            <h3 class="text-master no-margin"><%= @idea.elevator_pitch %></h3>
+          </div>
+        </div>
+
+    </div>
+
+  <div class="idea-content box-shadow">
+    <div class="panel bg-danger">
+      <div class="panel-heading p-l-60 p-b-10">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Summary</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+
+         <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel bg-complete">
+      <div class="panel-heading p-l-60">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Purpose and Vision</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel bg-success">
+      <div class="panel-heading p-l-60">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Problems</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel no-border bg-solid">
+      <div class="panel-heading p-l-60">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Solutions</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel bg-info">
+      <div class="panel-heading p-l-60">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Market</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
+    <div class="panel bg-primary">
+      <div class="panel-heading p-l-60">
+        <div class="panel-title b-b b-grey p-b-5 text-white">Values</div>
+      </div>
+      <div class="panel-body p-l-60 p-r-60 text-justify">
+        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<div class="row m-t-20">
-<div class="col-md-8">
-  <div class="idea-content">
-        <div class="widget-16 text-master panel m-b-10 bg-white no-margin widget-loader-circle">
-        <div class="panel-heading">
-            <div class="panel-title b-b b-grey p-b-5 b-transparent"><i class="fa fa-trophy text-danger"></i> Leaderboard</div>
-        </div>
-       <div class="p-l-20 p-r-20 p-t-10">
-        <div class="row">
-            <div class="col-md-4 no-padding text-center b-r b-grey b-dashed">
-                <h1 class="all-caps fs-13 text-master bold small">Feedbacks</h1>
-                <p class="all-caps bold  fs-13 no-margin text-danger ">5600</p>
-            </div>
-            <div class="col-md-4 text-center b-r b-grey b-dashed">
-                <h1 class="all-caps fs-13 text-master bold small">Invested</h1>
-                <p class="all-caps bold  fs-13 no-margin text-danger ">24000</p>
-            </div>
-            <div class="col-md-4 text-center">
-                <h1 class="all-caps fs-13 text-master bold small">Votes</h1>
-                <p class="all-caps bold  fs-13 no-margin text-danger">14,256</p>
-            </div>
-        </div>
-        </div>
-    </div>
-    <div class="panel no-margin">
-      <div class="panel-heading">
-        <div class="panel-title b-b b-grey p-b-5">What is your idea?</div>
-      </div>
-      <div class="panel-body">
-        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-
-         <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-      </div>
-    </div>
-
-    <div class="panel no-margin">
-      <div class="panel-heading">
-        <div class="panel-title b-b b-grey p-b-5">Why is it important?</div>
-      </div>
-      <div class="panel-body">
-        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-      </div>
-    </div>
-
-    <div class="panel no-margin">
-      <div class="panel-heading">
-        <div class="panel-title b-b b-grey p-b-5">What are you making this?</div>
-      </div>
-      <div class="panel-body">
-        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-      </div>
-    </div>
-
-    <div class="panel no-margin">
-      <div class="panel-heading">
-        <div class="panel-title b-b b-grey p-b-5">How will your solve?</div>
-      </div>
-      <div class="panel-body">
-        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-      </div>
-    </div>
-
-  </div>
 </div>
-<div class="col-md-4 col-sm-4 no-padding">
+
+
+<div class="col-md-4 col-sm-4">
 <div class="sidebar auto-height white-bg box-shadow">
     <div class="m-b-10">
         <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
             <div class="panel-heading">
              <div class="panel-title">
-              Trending Ideas
+              Live updates
               </div>
               <div class="panel-controls">
                   <ul>
@@ -154,10 +170,11 @@
                   </ul>
               </div>
             </div>
-            <div class="auto-overflow">
-              <ul class="trending-list p-t-20 no-style">
+            <div class="panel-body scrollable auto-overflow">
+             <div style="max-height:200px">
+              <ul class="trending-list no-style">
                 <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
+                  <div class="widget-16-header p-b-10">
                   <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
                   <div class="pull-left">
                       <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
@@ -167,7 +184,7 @@
                   </div>
                 </li>
                 <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
+                  <div class="widget-16-header p-b-10">
                       <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
                       <div class="pull-left">
                           <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
@@ -177,7 +194,7 @@
                   </div>
                 </li>
                 <li class="m-b-10">
-                 <div class="widget-16-header p-b-10 p-l-15">
+                 <div class="widget-16-header p-b-10">
                       <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
                       <div class="pull-left">
                           <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
@@ -187,7 +204,7 @@
                   </div>
                 </li>
                 <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
+                  <div class="widget-16-header p-b-10">
                       <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
                       <div class="pull-left">
                           <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
@@ -197,20 +214,14 @@
                   </div>
                 </li>
               </ul>
-            </div>
-            <div class="p-t-10 p-l-25 p-b-20 p-r-20">
-                <p class="small no-margin text-brand pull-right">
-                    <a href="#">
-                      <span class="bold">See all</span>
-                    </a>
-                </p>
+              </div>
             </div>
         </div>
     </div>
     <div class="widget-16 panel no-margin widget-loader-circle">
         <div class="panel-heading">
             <div class="panel-title">
-              People you may know
+              Followers
             </div>
         </div>
         <div class="panel-body">

@@ -5,12 +5,14 @@ var Cover = React.createClass({
     var data = JSON.parse(this.props.data);
 
     if(data.user.cover) {
-      var position = data.user.cover.position;
+      var top = data.user.cover.top;
+      var left = data.user.cover.left;
     }
     return {
       cover: data.user.cover,
       form: data.user.form,
-      position: position,
+      top: top,
+      left: left,
       draggable: false,
       is_owner: data.user.is_owner,
       visible: false,
@@ -44,11 +46,15 @@ var Cover = React.createClass({
 
   handleCoverDrag: function(){
    var self = this;
-   $("#usercover_preview").draggable({
-    stop:function(event,ui) {
+   $("#coverpic").draggable({
+    containment: "cover-wrap",
+    cursor: "crosshair",
+    handle: "h2",
+    drag:function(event, ui) {
       var wrapper = $("#cover-wrap").offset();
-      var pos = ui.helper.offset();
-      self.setState({position: (pos.top - wrapper.top)});
+      ui.position.left = Math.min( 100, ui.position.left );
+      ui.position.top = Math.min( 100, ui.position.top );
+      self.setState({top:  ui.position.top, left: ui.position.left});
     }
    });
   }, 
@@ -103,7 +109,7 @@ var Cover = React.createClass({
       });
 
       var drag_class = cx({
-        'cover-wrap': true,
+        'jumbotron': true,
         'normal': !this.state.draggable,
         'drag': this.state.draggable
       });
@@ -120,42 +126,44 @@ var Cover = React.createClass({
       }
 
       if(this.state.cover !== undefined){
-        var position = this.state.position;
-         var imageStyle = {
+        var top = this.state.top || "auto";
+        var left = this.state.left || "auto";
+        var imageStyle = {
           position: 'absolute',
-          left: '0%',
-          right: '0%',
-          width: '100%',
-          top: '' + position + '',
+          right: 'auto',
+          top: '' + top + '',
+          left: '' + left + '',
         };
         var image = <img className="cover-image" id="usercover_preview" src={this.state.cover.url} style={imageStyle}/>;
-        
       } else {
         var image = <img src="http://placehold.it/200&text=cover" className="cover-image" id="usercover_preview" />;
       }
-
+     
 
       if(this.state.is_owner) {
         return (
-          <div className={drag_class} id="cover-wrap">
-            <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
-              <input type="hidden" name="_method" value={this.state.form.method} />
-              <input type="file" ref="cover" style={{"display" : "none"}} name="user[cover]" id="user_cover" />
-               <input type="hidden" ref="position" name="user[cover_position]" value={position} />
-              <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
-            </form>
-            <div id="coverpic">
-              {image}
-            </div>
-            <CoverEditMenu loading={this.state.loading} onCancel={this._onCancel} onUpdate={this._onUpdate} draggable={this.state.draggable} visible={this.state.visible} cover = {this.state.cover} triggerOpen = {this.triggerOpen} handleDelete ={this.handleDelete} handleReposition = {this.handleReposition} />
+
+          <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap">
+              <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
+                <input type="hidden" name="_method" value={this.state.form.method} />
+                <input type="file" ref="cover" style={{"display" : "none"}} name="user[cover]" id="user_cover" />
+                <input type="hidden" ref="position" name="user[cover_position]" value={top} />
+                <input type="hidden" ref="position" name="user[cover_left]" value={left} />
+                <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
+              </form>
+              <div id="coverpic" className="cover-photo">
+                {image}
+                <h2 className="drag-handle text-white"><i className="fa fa-bars"></i> Drag</h2>
+              </div>
+              <CoverEditMenu loading={this.state.loading} onCancel={this._onCancel} onUpdate={this._onUpdate} draggable={this.state.draggable} visible={this.state.visible} cover = {this.state.cover} triggerOpen = {this.triggerOpen} handleDelete ={this.handleDelete} handleReposition = {this.handleReposition} />
           </div>
         )
      } else {
        return (
-      <div className={drag_class} id="cover-wrap">
-       <div id="coverpic">
-          {image}
-        </div>
+      <div className={drag_class} data-social="cover"  id="cover-wrap" id="cover-wrap">
+           <div id="coverpic" className="cover-photo">
+            {image}
+           </div>
       </div>
       )
     }
@@ -168,6 +176,8 @@ var Cover = React.createClass({
       var reader = new FileReader();
       var file = e.target.files[0];
       reader.onload = function(upload) {
+        $('#usercover_preview').attr('width', "100%");
+        $('#usercover_preview').attr('style', "");
         $('#usercover_preview').attr('src', upload.target.result);
       }.bind(this);
       reader.readAsDataURL(file);

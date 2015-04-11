@@ -1,18 +1,24 @@
+<% data = render(template: 'users/show.json.jbuilder') %>
 <div class="col-md-4 col-sm-4 no-padding box-shadow  col-lg-4 col-xlg-4">
 <div class="profile-sidebar auto-height bg-solid">
   <div class="user-sidebar padding-20">
     <div class="container-xs-height">
         <div class="row text-center">
-            <div class="social-user-profile auto-margin">
-                <div class="thumbnail-wrapper d48 circular bordered b-white">
-                <% if @user.avatar.present? %><%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "55", height: "55") %><% else %>
+            <div class="user-profile auto-margin">
+                <div class="thumbnail-wrapper d100 circular bordered b-white">
+                    <% if @user.avatar.present? %>
+                        <div class="profile-avatar">
+                          <%= react_component('Avatar', {data: data}) %>
+                        </div>
+                    <% else %>
                     <span class="placeholder bold text-white" width="32px" height="32px"><%= @user.first_name.first + @user.last_name.first %>
                     </span>
                 <% end %>
+
                 </div>
                     
                 </div>
-                <div class="p-l-10 p-r-10">
+                <div class="clearfix p-l-10 p-r-10">
                     <h3 class="no-margin text-white"><%= @user.name %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i></h3>
                     <p class="no-margin text-white fs-16">is excited about the new pages design framework</p>
                     <p class="text-white m-t-5 small">San Fransisco Bay | CEO at Pages.inc</p>

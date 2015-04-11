@@ -1,5 +1,4 @@
 /* Overrides files */
-
 body.menu-behind .header .brand {
   width: 50px;
 }
@@ -67,17 +66,28 @@ input.error:-webkit-autofill {
   border: 0;
   background: #e1f0fd;
 }
+.note-air-editor {
+  outline: 0;
+  background: #fafafa;
+  padding: 15px;
+}
 .panel .panel-heading {
   min-height: 0;
 }
-.container .jumbotron {
+.container .jumbotron,
+.cover {
   padding-right: 60px;
   padding-left: 60px;
   height: 300px;
   padding: 0;
-  background-color: transparent;
+  background-color: #ddd;
   border-radius: 0;
   margin: 0;
+}
+.profile-avatar {
+  height: 110px;
+  width: 110px;
+  background-color: #ddd;
 }
 .absolute {
   position: absolute;

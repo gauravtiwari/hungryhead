@@ -7,19 +7,19 @@ var CoverEditMenu =  React.createClass({
 	  var cx = React.addons.classSet;
 
       var save_buttons_class = cx({
-      	'container change-cover': true,
+      	'change-cover': true,
       	'show': this.props.visible,
         'hidden': !this.props.visible
       });
 
       var change_icon_class = cx({
-      	'container save-cover ': true,
+      	'save-cover ': true,
       	'hidden': this.props.visible || this.props.loading,
         'show': !this.props.visible
       });
 
       var spinner_class = cx({
-      	'container spinner ': true,
+      	'spinner ': true,
       	'show': this.props.loading,
         'hidden': !this.props.loading
       });
@@ -30,37 +30,40 @@ var CoverEditMenu =  React.createClass({
       });
 
 	if(this.props.cover.url !== null){
-        var menu = <ul className="dropdown-menu" role="menu">
-                   <li><a onClick={this.props.handleReposition}>Reposition</a></li>
-                    <li><a href="#" onClick={this.props.triggerOpen}>Upload New</a></li>
-                    <li><a className="delete" onClick={this.props.handleDelete}>
-                      Delete
+        var menu =  <div className="dropdown pull-right">
+        <button href="" className="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <ul className="dropdown-menu profile-dropdown" role="menu">
+                   <li><a onClick={this.props.handleReposition}><i className="fa fa-bars"></i> Reposition</a></li>
+                    <li><a href="#" onClick={this.props.triggerOpen}><i className="fa fa-upload"></i> Upload New</a></li>
+                    <li><a className="bg-master-lighter" onClick={this.props.handleDelete}>
+                      <i className="fa fa-trash-o"></i> Delete
                     </a></li>
-                  </ul>;
+                  </ul></div>;
       } else {
-        var menu = <ul className="dropdown-menu" role="menu">
+        var menu = 
+        <div className="dropdown pull-right">
+        <button href="" className="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <ul className="dropdown-menu profile-dropdown" role="menu">
                     <li><a href="#" onClick={this.props.triggerOpen}>Upload cover</a></li>
-                  </ul>;
+                  </ul></div>;
       }
 
 		return (
-			<div className="cover-edit-menu" id="cover-edit-menu">
 
-				<div className={spinner_class}>
-					<span>Please wait... <i className="ion-load-d"></i></span> 
-				</div>
+      <div className="cover-edit-menu fs-22" id="cover-edit-menu">
+          <div className={spinner_class}>
+            <span className="text-white fs-14">Please wait... <i className="ion-load-d"></i></span> 
+          </div>
 
-	            <div className={change_icon_class}>
-	             <i className="icon-camera3 change-cover dropdown-toggle" data-toggle="dropdown" href="#" id="change-cover-button"></i>
-	              {menu}
-	            </div>
+          <div className={change_icon_class}>
+            {menu}
+          </div>
 
-	          <div className={save_buttons_class}>
-	            <a className="main-button cancel-cover" onClick={this.props.onCancel}> <span className="icon-cross5"></span> Cancel</a>
-	            <a className="main-button save-cover" onClick={this.props.onUpdate}><span className="fa fa-floppy-o"></span> Save </a>
-	          </div>
-
-	        </div>
+            <div className={save_buttons_class}>
+              <a className="btn btn-danger cancel-cover m-r-10" onClick={this.props.onCancel}> <span className="icon-cross5"></span> Cancel</a>
+              <a className="btn btn-success save-cover" onClick={this.props.onUpdate}><span className="fa fa-floppy-o"></span> Save </a>
+            </div>
+      </div>
 			)
 	}
 

@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
-  store_accessor :media, :avatar_position, :cover_position,
+  store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
   store_accessor :settings, :weekly_email
   store_accessor :fund, :balance, :invested_amount, :earned_amount
@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
 
   #Model Relationships
   belongs_to :school, counter_cache: true
-  has_one :school, -> { where teacher: true } 
   has_many :authentications, :dependent => :destroy, autosave: true
   has_many :shares, dependent: :destroy, autosave: true
   has_many :feedbacks, dependent: :destroy, autosave: true

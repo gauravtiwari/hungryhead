@@ -37,6 +37,8 @@ gem 'cityhash'
 gem 'inline_svg'
 
 #Font awesome
+gem 'summernote-rails'
+gem 'bootstrap-sass'     # required
 gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

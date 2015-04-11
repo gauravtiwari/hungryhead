@@ -11,11 +11,13 @@
  *= require select2-bootstrap
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require font-awesome
+
  *= require plugins/jquery-scrollbar/jquery.scrollbar
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min
  
-
+ *= require summernote
+ 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
  *= require core/css/pages-icons
  *= require core/css/pages

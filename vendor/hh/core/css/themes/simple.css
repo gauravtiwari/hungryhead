@@ -1376,7 +1376,6 @@ body.dashboard .page-container {
   position: relative;
 }
 .panel .panel-heading {
-  background: transparent;
   border-radius: 0px;
   border-bottom: 0px;
   padding: 20px 20px 7px 20px;

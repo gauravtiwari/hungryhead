@@ -18,6 +18,10 @@ class CoverUploader < CarrierWave::Uploader::Base
   end
 
   version :cover do
+    process :resize_to_fit => [900, nil]
+  end
+
+  version :large do
     process :resize_to_fit => [1600, nil]
   end
 

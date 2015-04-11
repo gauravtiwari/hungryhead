@@ -1,28 +1,10 @@
+
 <%= render partial: 'sidebar' %>
 
 <div class="col-md-8 col-sm-8">
-    <div class="jumbotron" data-pages="parallax" data-social="cover">
-        <div class="cover-photo" style="background-image: url(/assets/cta.jpg);"></div>
-        <div class="cover-edit-menu fs-22">
-           <div class="dropdown pull-right">
-           <button href="" class="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-            <ul class="dropdown-menu profile-dropdown" role="menu">
-              <li><a href="#"><i class="pg-settings_small"></i>Settings</a>
-              </li>
-              <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
-              </li>
-              <li><a href="#"><i class="pg-signals"></i> Help</a>
-              </li>
-              <li class="bg-master-lighter">
-                <%= link_to(destroy_user_session_path, class: "clearfix") do %>
-                  <span class="pull-left">Logout</span>
-                  <span class="pull-right"><i class="pg-power"></i></span>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-      </div>
-    </div>
+  <div class="cover">
+    <%= render partial: 'cover' %>
+  </div>
   <div class="profile-nav box-shadow bg-white">
 	<ul class="profile-name inline no-style no-margin">
 		<li class="inline b-r b-grey p-t-15 p-b-10 p-l-10 p-r-15 active">

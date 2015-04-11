@@ -5,10 +5,10 @@
 
 //= require plugins/pace/pace.min
 //= require jquery2
+//  require jquery.turbolinks
 //= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
-//  require jquery.turbolinks
 //= require modernizr
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
@@ -30,6 +30,8 @@
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
+//= require summernote
+//= require summernote-video
 //= require plugins/jquery-unveil/jquery.unveil.min
 //= require plugins/jquery-bez/jquery.bez.min
 //= require plugins/jquery-ios-list/jquery.ioslist.min
@@ -50,4 +52,3 @@
 // require turbolinks
 
 //Turbolinks.enableTransitionCache();
-

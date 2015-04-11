@@ -26,8 +26,8 @@ var Avatar = React.createClass({
       });
 
       var classes = cx({
-        'fa fa-camera': !this.state.loading,
-        'fa fa-spinner fa-spin': this.state.loading
+        'fa fa-camera text-white': !this.state.loading,
+        'fa fa-spinner text-white fa-spin': this.state.loading
       });
 
       return (
@@ -47,7 +47,7 @@ var Avatar = React.createClass({
               </a>
             </div>
           </div>
-             <img className="user-image" id="userpic_preview" width="110px" height="110px" src={this.state.avatar.url} />
+             <img className="user-image" id="userpic_preview" width="110" height="110" src={this.state.avatar.url} />
           </div>
         </div>
       )

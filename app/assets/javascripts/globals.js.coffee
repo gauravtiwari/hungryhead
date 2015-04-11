@@ -3,16 +3,44 @@ jQuery(document).ready ->
 
 	#Initialize AutoGrow plugin
 
-	jQuery -> 
-		$('body textarea').autosize()
+	$('body textarea').autosize()
 
-	jQuery ->
-		$('#form-register').validate();
-		$('#form-login').validate();
+	$('#form-register').validate();
+	$('#form-login').validate();
 
 	$.each flashMessages, (key, value) ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'info', timeout: 5000}
 	  	.show();
+	$('[data-provider="summernote"]').each ->
+		$(this).summernote 
+			tabsize: 2
+			focus: true
+			toolbar: [
+			  [
+			    'style'
+			    [
+			      'bold'
+			      'italic'
+			      'underline'
+			    ]
+			  ]
+			  [
+			    'para'
+			    [
+			      'ul'
+			      'ol'
+			    ]
+			  ]
+			  [
+			  	'insert'
+			  	[
+			  		'video'
+			  		'picture'
+			  		'link'
+			  	]
+			  ]
+			]
+
 
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
@@ -28,30 +56,7 @@ jQuery(document).ready ->
 
 	$('.list-view-wrapper').scrollbar()
 	
-	$('[data-pages="search"]').search
-	  searchField: '#overlay-search'
-	  closeButton: '.overlay-close'
-	  suggestions: '#overlay-suggestions'
-	  brand: '.brand'
-	  onSearchSubmit: (searchString) ->
-	    console.log 'Search for: ' + searchString
-	    return
-	  onKeyEnter: (searchString) ->
-	    console.log 'Live search for: ' + searchString
-	    searchField = $('#overlay-search')
-	    searchResults = $('.search-results')
-	    clearTimeout $.data(this, 'timer')
-	    searchResults.fadeOut 'fast'
-	    wait = setTimeout((->
-	      searchResults.find('.result-name').each ->
-	        if searchField.val().length != 0
-	          $(this).html searchField.val()
-	          searchResults.fadeIn 'fast'
-	        return
-	      return
-	    ), 500)
-	    $(this).data 'timer', wait
-	    return
+
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()
 	  return
