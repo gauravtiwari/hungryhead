@@ -331,7 +331,7 @@ CREATE TABLE ideas (
     feedbackers character varying[] DEFAULT '{}'::character varying[],
     investors character varying[] DEFAULT '{}'::character varying[],
     looking_for_team boolean DEFAULT false,
-    institution_id integer,
+    school_id integer,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
     settings jsonb DEFAULT '{}'::jsonb,
@@ -1895,13 +1895,6 @@ CREATE INDEX index_ideas_on_idea_messages_count ON ideas USING btree (idea_messa
 
 
 --
--- Name: index_ideas_on_institution_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_institution_id ON ideas USING btree (institution_id);
-
-
---
 -- Name: index_ideas_on_investments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1934,6 +1927,13 @@ CREATE INDEX index_ideas_on_profile ON ideas USING gin (profile);
 --
 
 CREATE INDEX index_ideas_on_sash_id ON ideas USING btree (sash_id);
+
+
+--
+-- Name: index_ideas_on_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
 
 
 --
