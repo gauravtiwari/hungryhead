@@ -87,7 +87,8 @@ class SchoolsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_schools
       @user = current_user
-      @school = School.friendly.find(params[:id])
+      id = params[:id] || params[:slug]
+      @school = School.friendly.find(id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

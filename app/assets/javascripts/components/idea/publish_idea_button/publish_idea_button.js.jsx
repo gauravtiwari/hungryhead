@@ -34,12 +34,7 @@ var PublishIdeaButton = React.createClass({
          url: data.url 
        });
         this.setState({disabled: false});
-        var options =  {
-          content: ""+data.msg+"",
-          style: "notice",
-          timeout: 10000
-        }
-        $.snackbar(options);
+        $('body').pgNotification({style: "simple", message: data.msg, position: "bottom-left", type: "danger",timeout: 5000}).show();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -53,9 +48,9 @@ var PublishIdeaButton = React.createClass({
     
     var cx = React.addons.classSet;
     var classes = cx({
-      'main-button': true,
-      'privacy-team': !this.state.is_public,
-      'privacy-public': this.state.is_public
+      'btn btn-cons pull-right': true,
+      'privacy-team btn-info': !this.state.is_public,
+      'privacy-public btn-success': this.state.is_public
     });
 
     var icon_class = cx({

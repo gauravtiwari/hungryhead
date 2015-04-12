@@ -5,6 +5,7 @@ var Avatar = React.createClass({
     var data = JSON.parse(this.props.data);
     return {
       avatar: data.user.avatar,
+      badge: data.user.badge,
       form: data.user.form,
       loading: false
     }
@@ -30,6 +31,12 @@ var Avatar = React.createClass({
         'fa fa-spinner text-white fa-spin': this.state.loading
       });
 
+      if(this.state.avatar.url) {
+        var image = <img className="user-image" id="userpic_preview" width="110" height="110" src={this.state.avatar.url} />;
+      } else {
+        var image = <span className="placeholder bold text-white fs-22">{this.state.badge}</span>;
+      }
+
       return (
         <div id="profile_image">
           <form ref="avatarForm" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
@@ -47,7 +54,7 @@ var Avatar = React.createClass({
               </a>
             </div>
           </div>
-             <img className="user-image" id="userpic_preview" width="110" height="110" src={this.state.avatar.url} />
+            {image}
           </div>
         </div>
       )

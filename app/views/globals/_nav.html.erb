@@ -6,11 +6,27 @@
         <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
       </div>
       <a href="#" class="search-link b-l b-grey b-dashed p-l-15" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
-      <ul class="inline no-style m-l-20 b-l b-grey b-dashed">
-        <li class="inline p-r-15 p-l-15 fs-14 bold"><a class="text-brand" href="" title="">Home</a></li>
-        <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold"><a class="text-brand" href="" title="">People</a></li>
-        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold"><a class="text-brand" href="" title="">Ideas</a></li>
-        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold"><a class="text-brand" href="" title="">Schools</a></li>
+      <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
+        <li class="inline p-r-15 p-l-15 fs-14 bold">
+          <a class="text-brand fs-22" href="" title="Home">
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
+          <a class="text-brand fs-22" href="" title="People">
+            <i class="fa fa-users"></i>
+          </a>
+        </li>
+        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+          <a class="text-brand fs-22" href="" title="Ideas">
+            <i class="fa fa-lightbulb-o"></i>
+          </a>
+        </li>
+        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+          <a class="text-brand fs-22" href="" title="Schools">
+            <i class="fa fa-university"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -18,10 +34,11 @@
   <div class="pull-right">
     <div class="visible-lg visible-md m-t-10">
       <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
-         <li class="p-r-10 inline">
-          <a href="javascript:;" id="notification-center" class="fa fa-pencil b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
+        <li class="p-r-10 inline">
+          <a href="javascript:;" id="notification-center" class="fa fa-pencil b-r b-grey p-r-10 b-dashed fs-22 text-brand">
             </a>
-         </li>
+        </li>
+
         <li class="p-r-10 inline">
           <div class="dropdown">
             <a href="javascript:;" id="notification-center" class="fa fa-globe b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
@@ -58,7 +75,9 @@
         </li>
       </ul>
       <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-        <a href="" title=""><span class="fs-14 bold text-brand"><%= @user.first_name %></span></a>
+        <%= link_to(profile_path(@user)) do %>
+          <span class="fs-14 bold text-brand"><%= @user.first_name %></span>
+        <% end %>
       </div>
       <div class="dropdown pull-right">
         <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,11 +90,14 @@
           </span>
         </button>
         <ul class="dropdown-menu profile-dropdown" role="menu">
+          <%= content_tag(:li) do %>
+            <%= link_to(new_idea_path(getting_started: true)) do %>
+              <i class="fa fa-lightbulb-o"></i> Post Idea
+            <% end %>
+          <% end %>
           <li><a href="#"><i class="pg-settings_small"></i>Settings</a>
           </li>
           <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
-          </li>
-          <li><a href="#"><i class="pg-signals"></i> Help</a>
           </li>
           <li class="bg-master-lighter">
             <%= link_to(destroy_user_session_path, class: "clearfix") do %>

@@ -14,7 +14,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :feedbackers, array: true, default: "{}"
       t.string :investors, array: true, default: "{}"
       t.boolean :looking_for_team, index: true, default: false
-      t.integer :institution_id, index: true
+      t.integer :school_id, index: true
       t.integer :status, index: true, default: 0
       t.integer :privacy, index: true, default: 0
       t.jsonb :settings, default: "{}"

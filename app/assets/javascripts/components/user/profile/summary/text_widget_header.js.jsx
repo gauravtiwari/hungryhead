@@ -5,10 +5,18 @@ var TextWidgetHeader = React.createClass({
   render: function() {
 
     return(
-      <div className="widget-title">
-        <h4><i className="fa fa-book red-link"></i> Summary</h4>
-        <a className="see-all" onClick={this.props.openForm}>{this.props.text}</a>
-      </div>
+	        <div className="panel-heading">
+	            <div className="panel-title b-b b-grey p-b-5">
+	                <i className="fa fa-user text-danger"></i> About me
+	            </div>
+	            <div className="panel-controls">
+	                <ul>
+	                    <li>
+	                        <a onClick={this.props.openForm} className="portlet-collapse">{this.props.text}</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
     )
   }
 });

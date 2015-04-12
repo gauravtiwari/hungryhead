@@ -18,17 +18,26 @@
   z-index: 100;
   display: none;
   margin-top: 130px;
-  left: 50%;
+  left: 40%;
+  cursor: pointer;
   text-align: center;
 }
-
+.jumbotron .cover-photo {
+  width: auto;
+}
 .jumbotron.drag .drag-handle {
   display: block;
+}
+.jumbotron.drag #coverpic {
+  z-index: 15;
 }
 .user-profile {
   width: 110px;
 }
 .clearfix {
+  clear: both;
+}
+.profile-nav {
   clear: both;
 }
 #userpic {
@@ -37,7 +46,7 @@
 }
 .trigger-file-upload {
   position: absolute;
-  bottom: 10px;
+  bottom: -35px;
   z-index: 2;
   color: #fff;
   font-size: 18px;

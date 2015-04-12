@@ -53,7 +53,7 @@ class UsersController < ApplicationController
         else
           format.html
           format.js
-          format.json { render :show, status: :ok, location: @user }
+          format.json { render :show, status: :ok }
         end
       else
         format.html { render :edit }
@@ -104,7 +104,10 @@ class UsersController < ApplicationController
   def delete_cover
     @user.remove_cover!
     @user.save
-    render 'users/delete_cover.json.jbuilder'
+    respond_to do |format|
+      format.html
+      format.json { render :show, status: :ok }
+    end
   end
 
   def followings

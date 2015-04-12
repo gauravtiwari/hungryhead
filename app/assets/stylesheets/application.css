@@ -32,6 +32,7 @@
  *= require profile
  *= require login
  *= require school
+ *= require nav
  *= require footer
  *= require overrides
  *= require idea_profile

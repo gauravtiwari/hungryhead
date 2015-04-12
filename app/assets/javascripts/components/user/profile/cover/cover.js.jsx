@@ -49,7 +49,6 @@ var Cover = React.createClass({
    $("#coverpic").draggable({
     containment: "cover-wrap",
     cursor: "crosshair",
-    handle: "h2",
     drag:function(event, ui) {
       var wrapper = $("#cover-wrap").offset();
       ui.position.left = Math.min( 100, ui.position.left );
@@ -125,7 +124,7 @@ var Cover = React.createClass({
         $('.inner-profile-content').show();
       }
 
-      if(this.state.cover !== undefined){
+      if(this.state.cover.url !== null){
         var top = this.state.top || "auto";
         var left = this.state.left || "auto";
         var imageStyle = {
@@ -134,9 +133,10 @@ var Cover = React.createClass({
           top: '' + top + '',
           left: '' + left + '',
         };
-        var image = <img className="cover-image" id="usercover_preview" src={this.state.cover.url} style={imageStyle}/>;
+        var image = <img className="cover-photo" id="usercover_preview" src={this.state.cover.url} />;
       } else {
-        var image = <img src="http://placehold.it/200&text=cover" className="cover-image" id="usercover_preview" />;
+        var image = "";
+        var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
       }
      
 
@@ -151,17 +151,16 @@ var Cover = React.createClass({
                 <input type="hidden" ref="position" name="user[cover_left]" value={left} />
                 <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
               </form>
-              <div id="coverpic" className="cover-photo">
+              <div id="coverpic" style={imageStyle}>
                 {image}
-                <h2 className="drag-handle text-white"><i className="fa fa-bars"></i> Drag</h2>
               </div>
               <CoverEditMenu loading={this.state.loading} onCancel={this._onCancel} onUpdate={this._onUpdate} draggable={this.state.draggable} visible={this.state.visible} cover = {this.state.cover} triggerOpen = {this.triggerOpen} handleDelete ={this.handleDelete} handleReposition = {this.handleReposition} />
           </div>
         )
      } else {
        return (
-      <div className={drag_class} data-social="cover"  id="cover-wrap" id="cover-wrap">
-           <div id="coverpic" className="cover-photo">
+      <div className={drag_class} data-social="cover" id="cover-wrap" id="cover-wrap">
+           <div id="coverpic" style={imageStyle}>
             {image}
            </div>
       </div>

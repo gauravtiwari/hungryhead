@@ -1,6 +1,23 @@
 /* Overrides files */
 body.menu-behind .header .brand {
-  width: 50px;
+  width: 55px;
+  padding-left: 25px;
+}
+body, p {
+  line-height: 1.6;
+  font-size: 14px;
+}
+.textarea {
+  line-height: 1.4;
+}
+.light {
+  opacity: 0.8;
+}
+.thumbnail-wrapper.bordered.d100 {
+  line-height: 110px;
+}
+.textarea:focus {
+  background: #fff;
 }
 .select2-chosen, .select2-choice > span:first-child, 
 .select2-container .select2-choices .select2-search-field input {

@@ -3,7 +3,8 @@ jQuery(document).ready ->
 
 	#Initialize AutoGrow plugin
 
-	$('body textarea').autosize()
+	$('body textarea').focus ->
+		$(this).autosize()
 
 	$('#form-register').validate();
 	$('#form-login').validate();
@@ -12,7 +13,7 @@ jQuery(document).ready ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'info', timeout: 5000}
 	  	.show();
 	$('[data-provider="summernote"]').each ->
-		$(this).summernote 
+		$(this).summernote
 			tabsize: 2
 			focus: true
 			toolbar: [
@@ -29,6 +30,7 @@ jQuery(document).ready ->
 			    [
 			      'ul'
 			      'ol'
+			      'paragraph'
 			    ]
 			  ]
 			  [
@@ -44,7 +46,7 @@ jQuery(document).ready ->
 
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
-			$('.sticky').css(position: "fixed", width: "17.85rem", height: "auto")
+			$('.sticky').css(position: "fixed", width: "16.90rem", height: "auto")
 			$('.profile-sidebar.sticky').css(position: "fixed", width: "23.75rem", height: "auto")
 		else
 			$('.sticky').css(position: "relative", width: "100%")

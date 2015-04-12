@@ -5,7 +5,7 @@ var TextWidgetContent = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'widget-content': true,
+      'panel-body': true,
       'hidden': this.props.mode,
       'show': !this.props.mode,
     });
@@ -16,7 +16,7 @@ var TextWidgetContent = React.createClass({
       )
     } else {
       return(
-      <div className="no-content">  Please publish your summary </div>
+      <div className="no-content">Please publish your summary </div>
       )
     }
   }

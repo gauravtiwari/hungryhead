@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :teachers
-  resources :students
-  resources :mentors
   root 'pages#index'
 
   mount Soulmate::Server, :at => "/search"
