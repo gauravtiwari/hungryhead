@@ -1,0 +1,39 @@
+<% if @user.followers_count > 0 %>
+<div class="widget-16 panel no-margin widget-loader-circle">
+    <div class="panel-heading">
+        <div class="panel-title b-b b-grey p-b-5">
+          <i class="fa fa-users text-danger"></i> Followers
+        </div>
+    </div>
+    <div class="panel-body">
+        <p class="m-b-5 small m-b-10 m-t-5"><%= pluralize(@user.followers_count, 'Follower') %></p>
+        <ul class="list-unstyled">
+            <% @user.followers_by_type('User').limit(8).each do |follower| %>
+                <li class="m-r-10">
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
+                        <%= link_to(profile_path(follower)) do %>
+                            <% if follower.avatar.present? %>
+                                <%= image_tag(follower.avatar.url(:avatar), :"data-src" => "#{follower.avatar.url(:avatar)}", :"data-src-retina" => "#{follower.avatar.url(:square)}", width: "35", height: "35") %>
+                            <% else %>
+                                <span class="placeholder bold text-white">
+                                    <%= follower.first_name.first + follower.last_name.first %>
+                                </span>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </li>
+            <% end %>
+
+            <% if @user.followers_count > 8 %>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white">
+                        <div class="bg-master text-center text-white">
+                            <span>+34</span>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+</div>
+<% end %>
