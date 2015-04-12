@@ -3,7 +3,20 @@ class Idea < ActiveRecord::Base
   #Includes Modules
   extend FriendlyId
   include PublicActivity::Model
+  include Redis::Objects
   friendly_id :slug_candidates
+
+  counter :investments_count
+  counter :feedbacks_count
+  counter :followers_count
+  counter :comments_count
+  counter :votes_count
+  counter :views_count
+  counter :shares_count
+  counter :idea_messages_count
+
+  set :recent_activities
+  set :recent_followers
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -25,8 +38,8 @@ class Idea < ActiveRecord::Base
   after_save :create_slug
   #Associations
 
-  belongs_to :student, counter_cache: true, touch: true
-  belongs_to :school, counter_cache: true
+  belongs_to :student, touch: true
+  belongs_to :school
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true

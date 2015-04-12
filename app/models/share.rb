@@ -10,6 +10,13 @@ class Share < ActiveRecord::Base
 	acts_as_votable
 
 	include PublicActivity::Model
+	include Redis::Objects
+
+	counter :comments_count
+	counter :votes_count
+
+	set :sharers
+
 	before_destroy :remove_activity
 
 	private

@@ -11,9 +11,6 @@ class CreateSchools < ActiveRecord::Migration
       t.jsonb :media, default: "{}"
       t.jsonb :data, default: "{}"
       t.jsonb :customizations, default: "{}"
-      t.integer :users_count, default: 0, index: true
-      t.integer :ideas_count, default: 0, index: true
-      t.integer :followers_count, default: 0, index: true
       t.timestamps null: false
     end
     add_index :schools, :name, unique: true

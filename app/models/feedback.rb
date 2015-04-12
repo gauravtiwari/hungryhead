@@ -3,8 +3,8 @@ class Feedback < ActiveRecord::Base
   has_merit
   
   #Associations
-  belongs_to :idea, counter_cache: true, touch: true
-  belongs_to :user, counter_cache: true, touch: true
+  belongs_to :idea, touch: true
+  belongs_to :user, touch: true
 
   #Enums and states
   enum status: { posted:0, badged:1, flagged:2 }
@@ -16,6 +16,10 @@ class Feedback < ActiveRecord::Base
   acts_as_commentable
 
   include PublicActivity::Model
+  include Redis::Objects
+
+  counter :comments_count
+  counter :votes_count
 
   #Hooks
   before_destroy :remove_activity

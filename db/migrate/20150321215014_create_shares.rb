@@ -7,7 +7,6 @@ class CreateShares < ActiveRecord::Migration
       t.references :shareable, polymorphic: true
       t.references :user, index: true, foreign_key: true
       t.jsonb :parameters
-
       t.timestamps null: false
     end
     add_index :shares, [:shareable_id, :shareable_type]

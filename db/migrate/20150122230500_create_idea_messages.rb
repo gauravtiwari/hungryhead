@@ -5,7 +5,6 @@ class CreateIdeaMessages < ActiveRecord::Migration
       t.belongs_to :idea, index: true, :null => false
       t.text :body, :null => false
       t.integer :status
-
       t.timestamps null: false
     end
     add_foreign_key :idea_messages, :users

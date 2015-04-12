@@ -25,17 +25,6 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :cached_location_list
       t.string :cached_market_list
       t.string :cached_technology_list
-      t.integer :investments_count, default: 0, index: true
-      t.integer :idea_problems_count, default: 0
-      t.integer :idea_solutions_count, default: 0
-      t.integer :idea_customers_count, default: 0
-      t.integer :idea_competitors_count, default: 0
-      t.integer :idea_value_propositions_count, default: 0
-      t.integer :feedbacks_count, default: 0, index: true
-      t.integer :followers_count, default: 0, index: true
-      t.integer :comments_count,default: 0, index: true
-      t.integer :cached_votes_total, default: 0, index: true
-      t.integer :idea_messages_count,  default: 0, index: true
       t.timestamps null: false
     end
     add_index :ideas, :profile, using: :gin

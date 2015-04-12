@@ -2,7 +2,22 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   extend FriendlyId
+  include Redis::Objects
+
+  counter :followers_count
+  counter :followings_count
+  counter :ideas_count
+  counter :comments_count
+  counter :votes_count
+  counter :feedbacks_count
+  counter :investments_count
+
+  set :recent_followers
+  set :recent_followings
+  set :recent_activities
+
   friendly_id :slug_candidates
+  
   def slug_candidates
     [:username]
   end
