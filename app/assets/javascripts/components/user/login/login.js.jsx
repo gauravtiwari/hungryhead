@@ -21,10 +21,8 @@ var Login = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
-      if(data.name) {
-        window.location = Routes.root_path();
+        window.location = data.location;
         self.setState({disabled: false, loading: false});
-      }
       }.bind(this),
       error: function(xhr, status, err) {
         var errors = JSON.parse(xhr.responseText);

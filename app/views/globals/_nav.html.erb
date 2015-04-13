@@ -3,7 +3,9 @@
   <div class=" pull-left sm-table">
     <div class="header-inner  p-t-10">
       <div class="brand inline">
+        <%= link_to(root_path) do %>
         <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
+        <% end %>
       </div>
       <a href="#" class="search-link b-l b-grey b-dashed p-l-15" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
       <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
@@ -75,17 +77,17 @@
         </li>
       </ul>
       <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-        <%= link_to(profile_path(@user)) do %>
-          <span class="fs-14 bold text-brand"><%= @user.first_name %></span>
+        <%= link_to(profile_path(current_user)) do %>
+          <span class="fs-14 bold text-brand"><%= current_user.first_name %></span>
         <% end %>
       </div>
       <div class="dropdown pull-right">
         <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="thumbnail-wrapper d32 circular inline m-t-5">
-          <% if @user.avatar.present? %>
-            <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "32", height: "32") %>
+          <% if current_user.avatar.present? %>
+            <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "32", height: "32") %>
           <% else %>
-            <span class="placeholder bold text-white" width="32px" height="32px"><%= @user.first_name.first + @user.last_name.first %></span>
+            <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.first_name.first + current_user.last_name.first %></span>
           <% end %>
           </span>
         </button>

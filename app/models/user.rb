@@ -4,17 +4,21 @@ class User < ActiveRecord::Base
   extend FriendlyId
   include Redis::Objects
 
-  counter :followers_count
-  counter :followings_count
+  counter :follower_count
+  counter :following_count
   counter :ideas_count
   counter :comments_count
   counter :votes_count
   counter :feedbacks_count
   counter :investments_count
 
-  set :recent_followers
-  set :recent_followings
-  set :recent_activities
+  set :recent_followers, maxlength: 8, :marshal => true
+  set :recent_followings, maxlength: 8,  :marshal => true
+  set :recent_activities, maxlength: 8,  :marshal => true
+
+  set :followers_ids
+  set :followings_ids
+  set :activities_ids
 
   friendly_id :slug_candidates
   
@@ -51,7 +55,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   #Model Relationships
-  belongs_to :school, counter_cache: true
+  belongs_to :school
   has_many :authentications, :dependent => :destroy, autosave: true
   has_many :shares, dependent: :destroy, autosave: true
   has_many :feedbacks, dependent: :destroy, autosave: true
@@ -116,6 +120,10 @@ class User < ActiveRecord::Base
   def shared? shareable, args={}
     shares = find_shares(:shareable_id => shareable.id, :shareable_type => shareable.class.name)
     shares.size > 0
+  end
+
+  def following?(followable)
+    followings_ids.members.include? followable.id.to_s
   end
 
   private

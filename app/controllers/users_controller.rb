@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         if @user.username_changed?
-          redirect_to user_profile_path(current_user)
+          redirect_to user_profile_path(@user)
         else
           format.html
           format.js

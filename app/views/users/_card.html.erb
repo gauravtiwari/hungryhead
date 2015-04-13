@@ -15,30 +15,28 @@
             </h3>
             <p class="text-white m-t-5 small"><%= link_to(@user.school.name, profile_path(@user.school), class: 'text-white b-r b-white b-dashed p-r-10') %> <span class="p-l-5">CEO at Pages.inc</span></p>
         </div>
-
-        <div class="p-l-20 p-r-20 p-t-10">
-            <div class="row text-white">
-                <div class="col-md-4 no-padding text-center b-r b-white b-dashed">
-                    <h1 class="all-caps fs-13 text-white bold small">Feedbacks</h1>
-                    <p class="all-caps bold fs-13 no-margin">
-                        <%= @user.feedbacks_count %>
-                    </p>
-                </div>
-                <div class="col-md-4 text-center b-r b-white b-dashed">
-                    <h1 class="all-caps fs-13 text-white bold small">Invested</h1>
-                    <p class="all-caps bold  fs-13 no-margin">
-                        <%= @user.investments_count %>
-                    </p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h1 class="all-caps fs-13 text-white bold small">Followers</h1>
-                    <p class="all-caps bold  fs-13 no-margin text-white">
-                        <%= @user.followers_count %>
-                    </p>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
+</div>
+<div class="widget-16 padding-20 bg-info">
+    <div class="row text-white">
+        <div class="col-md-4 no-padding text-center b-r b-white b-dashed">
+            <h1 class="all-caps fs-13 text-white bold small">Feedbacks</h1>
+            <p class="all-caps bold fs-13 no-margin">
+                <%= @user.feedbacks_count %>
+            </p>
+        </div>
+        <div class="col-md-4 text-center b-r b-white b-dashed">
+            <h1 class="all-caps fs-13 text-white bold small">Invested</h1>
+            <p class="all-caps bold  fs-13 no-margin">
+                <%= @user.investments_count %>
+            </p>
+        </div>
+        <div class="col-md-4 text-center">
+            <h1 class="all-caps fs-13 text-white bold small">Followers</h1>
+            <p class="all-caps bold  fs-13 no-margin text-white">
+                <%= @user.follower_count %>
+            </p>
+        </div>
+    </div>
 </div>

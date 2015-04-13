@@ -23,7 +23,8 @@ class NewFollowNotificationJob < ActiveJob::Base
             read: false
           }
         )
-        Pusher.trigger("private-user-#{recipient.id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
+      
+      Pusher.trigger("private-user-#{recipient.id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
       elsif  recipient.class.name == "Idea"
    
         notification = Notification.create!(

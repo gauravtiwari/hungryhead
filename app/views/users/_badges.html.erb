@@ -12,10 +12,10 @@
             <% @user.badges.take(8).each do |badge| %>
                 <li class="m-r-10">
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-                        <% if @user.avatar.present? %>
-                            <%= image_tag(badge.first.custom_fields[:image], :"data-src" => "#{badge.first.custom_fields[:image]}", :"data-src-retina" => "#{badge.first.custom_fields[:image]}", width: "35", height: "35") %>
+                        <% if badge.custom_fields[:image].present? %>
+                            <img src="<%= badge.custom_fields[:image] %>" data-src = "<%= badge.custom_fields[:image] %>" data-src-retina = "<%= badge.custom_fields[:image] %>" width= "35", height= "35") data-toggle="tooltip" data-container="body" title="<%= badge.custom_fields[:name] %>" />
                         <% else %>
-                            <span class="placeholder bold text-white"><%= badge.first.custom_fields[:name].first + badge.first.custom_fields[:name].second %>
+                            <span class="placeholder bold text-white" data-toggle="tooltip" data-container="body" title="<%= badge.custom_fields[:name] %>"><%= (badge.custom_fields[:name].split('').first + badge.custom_fields[:name].split('').second).upcase %>
                             </span>
                         <% end %>
                     </div>

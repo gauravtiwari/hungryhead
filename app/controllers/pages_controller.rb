@@ -6,15 +6,7 @@ class PagesController < ApplicationController
 
   def index
     if user_signed_in?
-      if current_user
-        @user = current_user
-      elsif current_mentor 
-        @user = current_mentor
-      elsif current_teacher
-        @user = current_teacher
-      end
-          
-      ids = @user.following_by_type('User').map(&:id)
+      ids = current_user.following_by_type('User').map(&:id)
       ids.push(current_user.id)
       @activities = PublicActivity::Activity
       .where(owner_id: ids, published: true)

@@ -13,7 +13,7 @@
 		investments: "<%= current_user.investments_count %>",
 		avatar: "<%= current_user.avatar.url(:avatar) %>",
 		role: "<%= current_user.role %>",
-		user_url:  "<%= user_path(current_user) %>",
+		user_url:  "<%= user_url(current_user) %>",
 		csrf_param: "<%= request_forgery_protection_token %>",
 		csrf_token: "<%= form_authenticity_token %>"
 	}
