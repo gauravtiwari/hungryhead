@@ -91,19 +91,13 @@
 
     </div>
 
-  <div class="idea-content box-shadow">
-    <div class="panel bg-info">
-      <div class="panel-heading p-l-60 p-b-10">
-        <div class="panel-title b-b b-grey p-b-5 text-white">Idea</div>
-      </div>
-      <div class="panel-body p-l-60 p-r-60 text-justify text-white">
-        <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
+  <div class="idea-content">
 
-         <p class="fs-14">When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. </p>
-      </div>
-    </div>
+    <% sections = render(template: 'ideas/show.json.jbuilder') %>
+    <%= react_component('MainContent', {data: sections}) %>
+  
 
-    <div class="panel bg-danger">
+    <div class="panel bg-danger box-shadow">
       <div class="panel-heading p-l-60">
         <div class="panel-title b-b b-grey p-b-5 text-white">Problem</div>
       </div>
@@ -112,7 +106,7 @@
       </div>
     </div>
 
-    <div class="panel no-border bg-success">
+    <div class="panel no-border bg-success box-shadow">
       <div class="panel-heading p-l-60">
         <div class="panel-title b-b b-grey p-b-5 text-white">Solution</div>
       </div>
@@ -121,7 +115,7 @@
       </div>
     </div>
 
-    <div class="panel bg-solid">
+    <div class="panel bg-solid box-shadow">
       <div class="panel-heading p-l-60">
         <div class="panel-title b-b b-grey p-b-5 text-white">Market</div>
       </div>
@@ -130,7 +124,7 @@
       </div>
     </div>
 
-    <div class="panel bg-primary">
+    <div class="panel bg-primary box-shadow">
       <div class="panel-heading p-l-60">
         <div class="panel-title b-b b-grey p-b-5 text-white">Values</div>
       </div>
@@ -294,4 +288,10 @@
     </div>
 </div>
 </div>
+
+<% if user_signed_in? && policy(@idea).collaborator? %>
+  <div class="idea-collaboration-floating-panel">
+    <%= render 'collaboration' %>
+  </div>
+<% end %>
 

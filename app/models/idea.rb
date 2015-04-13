@@ -8,12 +8,12 @@ class Idea < ActiveRecord::Base
 
   counter :investments_count
   counter :feedbacks_count
-  counter :followers_count
+  counter :follower_count
   counter :comments_count
   counter :votes_count
   counter :views_count
   counter :shares_count
-  counter :idea_messages_count
+  counter :ideamessages_count
 
   set :recent_activities
   set :recent_followers

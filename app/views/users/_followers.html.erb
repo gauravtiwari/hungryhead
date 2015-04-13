@@ -8,16 +8,16 @@
     <div class="panel-body">
         <p class="m-b-5 small m-b-10 m-t-5"><%= pluralize(@user.follower_count, 'Follower') %></p>
         <ul class="list-unstyled">
-            <% @user.recent_followers.members.take(8).each do |follower| %>
+            <% User.find(@user.followers_ids.members).take(8).each do |follower| %>
                 <li class="m-r-10">
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
-                        <%= link_to(follower[:url]) do %>
-                            <% if follower[:avatar].present? %>
-                                <%= image_tag(follower[:avatar], :"data-src" => "#{follower[:avatar]}", :"data-src-retina" => "#{follower[:avatar]}", width: "35", height: "35",  data: { toggle: "tooltip", container: "body", title:"#{follower[:first_name] + " " + follower[:last_name] }"}) %>
+                        <%= link_to(profile_path(follower)) do %>
+                            <% if follower.avatar.present? %>
+                                <%= image_tag(follower.avatar.url(:avatar), :"data-src" => "#{follower.avatar.url(:avatar)}", :"data-src-retina" => "#{follower.avatar.url(:avatar)}", width: "35", height: "35",  data: { toggle: "tooltip", container: "body", title:"#{follower.first_name + " " + follower.last_name }"}) %>
                             <% else %>
-                                <span class="placeholder bold text-white">
-                                    <%= follower[:first_name].first + follower[:last_name].first %>
-                                </span>
+                                <%= content_tag(:span, class: "placeholder bold text-white", data: { toggle: "tooltip", container: "body", title:"#{follower.first_name + " " + follower.last_name }"}) do %>
+                                    <%= follower.first_name.first + follower.last_name.first %>
+                                <% end %>
                             <% end %>
                         <% end %>
                     </div>

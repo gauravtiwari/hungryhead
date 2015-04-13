@@ -11,8 +11,5 @@ if @idea_messages
 	    json.current_page @idea_messages.current_page
 	    json.next_page @idea_messages.next_page
 	    json.prev_page @idea_messages.previous_page
-	    json.per_page @idea_messages.per_page
-	    json.total_pages @idea_messages.total_pages
-	    json.idea_messages_count @idea.idea_messages_count
     end
 end

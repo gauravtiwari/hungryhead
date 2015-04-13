@@ -61,10 +61,14 @@ input.error:-webkit-autofill {
 	font-size: 22px;
 }
 .text-green {
-	color: #33cc66!important;
+	color: #56d6aa!important;
 }
 .bg-green {
-  background-color: #33cc66!important;
+  background-color: #56d6aa!important;
+}
+
+.bg-solid-dark {
+  background: #4d86c9!important;
 }
 .card{
   width: 100%;
