@@ -17,6 +17,7 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
+//= require pusher
 //= require jquery.truncate
 //= require jquery.soulmate
 //= require underscore
@@ -31,7 +32,6 @@
 //= require showdown
 //= require autocomplete-rails
 //= require summernote
-//= require entangled-js
 //= require summernote-video
 //= require plugins/jquery-unveil/jquery.unveil.min
 //= require plugins/jquery-bez/jquery.bez.min

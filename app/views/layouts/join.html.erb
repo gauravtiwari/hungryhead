@@ -13,6 +13,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_tag do %>
+      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+    <% end %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
@@ -30,11 +36,5 @@
 
   <body class="fixed-header <%= user_signed_in? ? '' : 'menu-behind' %>">
     <%= yield %>
-
-    <!-- JS at bottom of page to improve load time, and only loaded once with 'data-turbolinks-eval' == false  -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
-    <% end %>
   </body>
 </html>

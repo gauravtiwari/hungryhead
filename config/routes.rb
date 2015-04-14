@@ -174,7 +174,7 @@ Rails.application.routes.draw do
   resources :shares, only: [:create, :destroy]
 
   resources :ideas do
-    resources :idea_messages, except: [:show, :new, :edit]
+    resources :idea_messages, only: [:create, :destroy, :show]
     member do
       put :publish
       put :unpublish

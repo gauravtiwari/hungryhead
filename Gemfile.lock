@@ -210,10 +210,6 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    entangled (1.1.1)
-      rails (~> 4.0)
-      redis (~> 3.2)
-      tubesock (~> 0.2)
     erubis (2.7.0)
     eventmachine (1.0.7)
     excon (0.45.1)
@@ -670,9 +666,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    tubesock (0.2.5)
-      rack (>= 1.5.0)
-      websocket (>= 1.1.0)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -691,7 +684,6 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.3)
       rack (>= 1.0)
-    websocket (1.2.1)
     wicked (1.1.1)
       rails (>= 3.0.7)
     will_paginate (3.0.7)
@@ -732,7 +724,6 @@ DEPENDENCIES
   devise-async
   devise_invitable
   em-http-request
-  entangled
   ezcrypto
   figaro
   font-awesome-rails

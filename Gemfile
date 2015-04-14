@@ -117,10 +117,6 @@ gem 'redis'
 #Redis objects
 gem 'redis-objects'
 
-#Realtime connections using redis
-
-gem 'entangled'
-
 #Mailer gems
 gem 'mandrill-rails'
 

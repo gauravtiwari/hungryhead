@@ -5,7 +5,7 @@
         "bootstrap-tokenfield": "latest",
         "classie": "latest",
         "jquery-form": "latest",
-        "entangled-js": "latest"
+        "pusher": "latest"
 
     }
   },

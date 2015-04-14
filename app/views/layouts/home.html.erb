@@ -13,6 +13,27 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <% if user_signed_in? %>
+      <%= javascript_tag do %>
+          var pusher = new Pusher("<%= ENV['PUSHER_APP_KEY'] %>");
+          var channel = pusher.subscribe("private-user-<%= current_user.id %>");
+          var public_channel = pusher.subscribe("public-notifications");
+          if(channel) {
+            channel.bind('new_badge', function(data) {
+              setTimeout(function(){
+                 $('body').pgNotification({style: "simple", message: "You have earned a "+data.data.custom_fields.name+" badge " + "<img src=" + data.data.custom_fields.image + " width='30px' />", position: "top-right", type: "success",timeout: 5000}).show();
+              }, 5000);
+            });
+          }
+      <% end %>
+    <% end %>
+
+    <%= javascript_tag do %>
+      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+    <% end %>
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
@@ -46,26 +67,6 @@
       </div>
     </div>
 
-    <!-- JS at bottom of page to improve load time, and only loaded once with 'data-turbolinks-eval' == false  -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
-    <% if user_signed_in? %>
-      <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-      <%= javascript_tag do %>
-          var pusher = new Pusher("<%= ENV['PUSHER_APP_KEY'] %>");
-          var channel = pusher.subscribe("private-user-<%= current_user.id %>");
-          var public_channel = pusher.subscribe("public-notifications");
-          if(channel) {
-            channel.bind('new_badge', function(data) {
-              setTimeout(function(){
-                 $('body').pgNotification({style: "simple", message: "You have earned a "+data.data.custom_fields.name+" badge " + "<img src=" + data.data.custom_fields.image + " width='30px' />", position: "top-right", type: "success",timeout: 5000}).show();
-              }, 5000);
-            });
-          }
-      <% end %>
-    <% end %>
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
-    <% end %>
     <%= render partial: 'globals/search' %>
   </body>
 </html>
