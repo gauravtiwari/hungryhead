@@ -82,23 +82,11 @@
 </div>
 
 <div class="m-t-20">
-    <div class="widget-16 text-master panel box-shadow bg-white widget-loader-circle">
-        <div class="panel-body p-l-60 p-r-60">
-          <div class="featured-feedback">
-            <h3 class="text-master no-margin"><%= @idea.elevator_pitch %></h3>
-          </div>
-        </div>
-
-    </div>
-
   <div class="idea-content">
-
     <% sections = render(template: 'ideas/show.json.jbuilder') %>
     <%= react_component('MainContent', {data: sections}) %>
-
   </div>
-</div>
-
+  </div>
 </div>
 
 

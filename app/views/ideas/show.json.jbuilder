@@ -1,5 +1,5 @@
 json.idea do
-  json.(@idea, :id, :name, :description, :profile, :sections, :video_html, :video)
+  json.(@idea, :id, :name, :description, :profile, :elevator_pitch, :sections, :video_html, :video)
   json.logo do
     json.url @idea.logo.url(:avatar) if @idea.logo
   end

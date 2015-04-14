@@ -80,7 +80,7 @@ var Problems = React.createClass({
         <div className="panel bg-danger-dark box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-white">Problem</div>
+            <div className="panel-title b-b b-grey p-b-5 text-white">List problems</div>
             <div className="panel-controls">
             <ul>
               <li>

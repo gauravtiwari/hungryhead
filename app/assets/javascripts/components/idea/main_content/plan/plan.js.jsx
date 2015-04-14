@@ -74,7 +74,7 @@ var Plan = React.createClass({
         <div className="panel bg-info box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-white">Summarize Idea</div>
+            <div className="panel-title b-b b-grey p-b-5 text-white">Summarize your idea</div>
             <div className="panel-controls">
             <ul>
               <li>
