@@ -10,7 +10,7 @@ jQuery(document).ready ->
 	$('#form-login').validate();
 
 	$.each flashMessages, (key, value) ->
-	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'info', timeout: 5000}
+	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
 	  	.show();
 	$('[data-provider="summernote"]').each ->
 		$(this).summernote
@@ -58,7 +58,6 @@ jQuery(document).ready ->
 
 	$('.list-view-wrapper').scrollbar()
 	
-
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()
 	  return

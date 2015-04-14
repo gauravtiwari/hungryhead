@@ -26,7 +26,7 @@ var ProblemsForm = React.createClass({
              <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
              <label>Describe the problems identified. <span>How others are solving, if any? etc.</span></label>
              <textarea ref="description" className="form-control empty" defaultValue= {problems} name="idea[problems]" placeholder='List the problems you have identified?' autofocus/>
-             <div className="form-buttons send-button">
+             <div className="form-buttons send-button m-t-10 pull-right">
               <div>
                 <button type="submit" id="post_feedback_message" className="main-button"><i className={loading_class}></i> Save </button>
               </div>

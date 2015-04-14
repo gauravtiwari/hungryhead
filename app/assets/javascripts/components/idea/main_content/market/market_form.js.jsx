@@ -3,6 +3,7 @@
 var MarketForm = React.createClass({
 
   render: function() {
+    
     var cx = React.addons.classSet;
     var classes = cx({
       'market-edit-form': true,
@@ -23,10 +24,10 @@ var MarketForm = React.createClass({
     return (
       <div className={classes}>
          <form id="market-edit-form" ref="market_form" className="market-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden"  name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-             <label className="margin-bottom">Describe the market for your idea. <span>Estimated numbers? Any metrices? etc.</span> You can link images. </label>
+             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
+             <label className="m-b-10">Describe the market for your idea. <span>People you are targeting? Estimated numbers? </span> <small>You can link images.</small> </label>
              <textarea ref="description" className="form-control empty" defaultValue={market} name="idea[market]" placeholder='Describe your market' autofocus/>
-             <div className="form-buttons send-button">
+             <div className="form-buttons send-button m-t-10 pull-right">
               <div>
                 <button type="submit" id="post_feedback_message" className="main-button"><i className={loading_class}></i> Save </button>
               </div>

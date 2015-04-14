@@ -40,6 +40,7 @@ var Plan = React.createClass({
   },
 
   showMarkDownModal: function(){
+    $('body').append($('<div>', {class: 'markdown-modal', id: 'markdown-modal'}));
     React.render(
           <MarkDownHelpModal />,
           document.getElementById('markdown-modal')
@@ -59,12 +60,12 @@ var Plan = React.createClass({
       var error = <span className="alert alert-danger">{this.state.error}</span>;
     }
 
-    var text = this.state.editable ? <span><i className="fa fa-times-circle-o"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit summary</span>;
+     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit summary</span>;
     
     if(this.props.idea.description) {
       var html = converter.makeHtml(this.props.idea.description);
     } else {
-      var html = "<div class='no-content'>Describe your idea. <span>What is it? Story? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Summarize your idea. <span>What is it? story?</span> </div>";
     }
 
 
@@ -73,7 +74,7 @@ var Plan = React.createClass({
         <div className="panel bg-info box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-white">Idea</div>
+            <div className="panel-title b-b b-grey p-b-5 text-white">Summarize Idea</div>
             <div className="panel-controls">
             <ul>
               <li>
@@ -85,8 +86,8 @@ var Plan = React.createClass({
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-justify text-white">
-            <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
+          <div className="panel-body p-l-60 p-r-60 text-white">
+            <div onClick={this.openPlanForm} className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <PlanForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handlePlanSubmit= {this.handlePlanSubmit} form={this.props.idea} />
           </div>
         </div>
@@ -97,7 +98,7 @@ var Plan = React.createClass({
           <div className="panel-heading p-l-60 p-b-10">
             <div className="panel-title b-b b-grey p-b-5 text-white">Idea</div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-justify text-white">
+          <div className="panel-body p-l-60 p-r-60 text-white">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
           </div>
         </div>

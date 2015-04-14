@@ -52,7 +52,6 @@ var TextWidgetForm = React.createClass({
 
   updateWordCount: function(event) {
     var sHTML = $(event.target).val();
-    console.log(sHTML);
     this.setState({text: sHTML});
   },
 

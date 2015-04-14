@@ -26,8 +26,8 @@ var ValuePropositionForm = React.createClass({
          <form id="plan-edit-form" ref="value_form" className="plan-edit-form" onSubmit={this._onKeyDown}>
              <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
              <label>Describe your value proposition. <span>What is it that is most attractive? etc.</span></label>
-             <textarea ref="description" className="form-control empty" defaultValue= {value_proposition} name="idea[value_proposition]" placeholder='Write are your value propositions?' autofocus/>
-             <div className="form-buttons send-button">
+             <textarea ref="description" className="form-control empty" defaultValue= {value_proposition} name="idea[value_proposition]" placeholder='Write are your values? Why your solution is better?' autofocus/>
+             <div className="form-buttons send-button m-t-10 pull-right">
               <div>
                 <button type="submit" id="post_feedback_message" className="main-button"><i className={loading_class}></i> Save </button>
               </div>

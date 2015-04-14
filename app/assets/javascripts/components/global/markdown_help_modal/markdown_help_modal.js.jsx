@@ -5,13 +5,17 @@
 var MarkDownHelpModal = React.createClass({
     render: function() {
         return (
-            <article className="modal" tabIndex="-1" role="dialog" id="markdownPopup" aria-labelledby="markdownPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                <div className="modal-dialog modal-lg">
-                <header className="profile-wrapper-title">
-                    <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-                    <h4>Markdown cheatsheet</h4>
-                </header>
-                <section className="modal-content regular-padding margin-top">
+            <div className="modal fade stick-up" id="markdownPopup" tabindex="-1" role="dialog" aria-labelledby="markdownPopupLabel" aria-hidden="true">
+            <div className="modal-dialog ">
+                <div className="modal-content">
+                    <div className="modal-header">
+                                        <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
+                        <i className="pg-close"></i>
+                    </button>
+                        <h5 className="text-left p-b-5"><span className="semi-bold">Markdown</span> Help</h5>
+                    </div>
+                    <div className="modal-body">
+                    <div className="row">
                     <div className="table-content">
                         <p>We use markdown for text formatting. Please use the code on the right to format your text.</p>
                     </div>
@@ -53,9 +57,11 @@ var MarkDownHelpModal = React.createClass({
                             </tr>
                         </tbody>
                     </table>
-                    </section>
-                 </div>
-             </article>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
             );
     }

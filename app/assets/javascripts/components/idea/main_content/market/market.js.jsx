@@ -45,6 +45,7 @@ var Market = React.createClass({
   },
 
   showMarkDownModal: function(){
+    $('body').append($('<div>', {class: 'markdown-modal', id: 'markdown-modal'}));
     React.render(
           <MarkDownHelpModal />,
           document.getElementById('markdown-modal')
@@ -64,40 +65,46 @@ var Market = React.createClass({
       var error = <span className="alert alert-danger">{this.state.error}</span>;
     }
 
-    var text = this.state.editable ? <span><i className="ion-close"></i> Cancel </span> : <span><i className="ion-edit"></i> Edit market</span>;
+    var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit market</span>;
 
     if(this.props.idea.sections && this.props.idea.sections.market) {
       var html = converter.makeHtml(this.props.idea.sections.market);
       var market_classes = "section-content market";
     } else {
-      var html = "<div class='no-content'>Describe the market for your idea. <span>Estimated numbers? Any metrices? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? Any metrices? etc.</span> </div>";
       var market_classes = "section-content canvas-placeholder sales-marketing market";
     }
     
     if(this.props.meta.is_owner) {
       return (
-        <div className="widget-box the-market">
+        <div className="panel bg-solid-dark box-shadow">
           {error}
-          <div className="profile-wrapper-title">
-              <h4><i className="ion-stats-bars red-link"></i> Market</h4>
-              <a className="show-all margin-right" onClick={this.showMarkDownModal}><i className="ion-help-circled"></i> Markdown Help</a>
-              <a className="show-all" onClick={this.openMarketForm}>{text}</a>
+          <div className="panel-heading p-l-60 p-b-10">
+            <div className="panel-title b-b b-grey p-b-5 text-white">Market</div>
+            <div className="panel-controls">
+            <ul>
+              <li>
+                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+              </li>
+              <li>
+                <a className="portlet-close text-white fs-12" onClick={this.openMarketForm}>{text}</a>
+              </li>
+            </ul>
+            </div>
           </div>
-
-          <div className="section-content market">
-            <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
-            <MarketForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleMarketSubmit= {this.handleMarketSubmit} form={this.props.form} />
+          <div className="panel-body p-l-60 p-r-60 text-white">
+            <div onClick={this.openMarketForm} className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
+            <MarketForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleMarketSubmit= {this.handleMarketSubmit} form={this.props.idea} />
           </div>
         </div>
       )
     } else {
        return (
-      <div className="widget-box the-market">
-        <div className="profile-wrapper-title">
-            <h4><i className="ion-stats-bars red-link"></i> Market</h4>
+      <div className="panel bg-solid-dark box-shadow">
+        <div className="panel-heading p-l-60 p-b-10">
+          <div className="panel-title b-b b-grey p-b-5 text-white">Market</div>
         </div>
-
-        <div className={market_classes}>
+        <div className="panel-body p-l-60 p-r-60 text-white">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
         </div>
       </div>

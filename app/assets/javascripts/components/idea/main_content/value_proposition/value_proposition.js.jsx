@@ -36,6 +36,7 @@ var ValueProposition = React.createClass({
   },
 
   showMarkDownModal: function(){
+    $('body').append($('<div>', {class: 'markdown-modal', id: 'markdown-modal'}));
     React.render(
           <MarkDownHelpModal />,
           document.getElementById('markdown-modal')
@@ -66,25 +67,32 @@ var ValueProposition = React.createClass({
       var error = <span className="alert alert-danger">{this.state.error}</span>;
     }
 
-    var text = this.state.editable ? <span><i className="ion-close"></i> Cancel </span> : <span><i className="ion-edit"></i> Edit value proposition</span>;
+     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit values</span>;
     
     if(this.props.idea.sections && this.props.idea.sections.value_proposition) {
       var html = converter.makeHtml(this.props.idea.sections.value_proposition);
     } else {
-      var html = "<div class='no-content'>Describe your value proposition. <span>What is it that is most attractive? etc.</span> </div>";
+      var html = "<div class='no-content'>Describe your values. <span>What is it that you are offering that others are not? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="widget-box the-value_proposition">
+        <div className="panel bg-primary-dark box-shadow">
           {error}
-          <div className="profile-wrapper-title">
-              <h4><i className="ion-speedometer red-link"></i> Value Proposition</h4>
-              <a className="show-all margin-right" onClick={this.showMarkDownModal}><i className="ion-help-circled"></i> Markdown Help</a>
-              <a className="show-all" onClick={this.openValuePropositionForm}>{text}</a>
+          <div className="panel-heading p-l-60 p-b-10">
+            <div className="panel-title b-b b-grey p-b-5 text-white">Values</div>
+            <div className="panel-controls">
+            <ul>
+              <li>
+                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+              </li>
+              <li>
+                <a className="portlet-close text-white fs-12" onClick={this.openValuePropositionForm}>{text}</a>
+              </li>
+            </ul>
+            </div>
           </div>
-
-          <div className="section-content value_proposition">
+          <div className="panel-body p-l-60 p-r-60 text-white">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <ValuePropositionForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleValuePropositionSubmit= {this.handleValuePropositionSubmit} form={this.props.idea} />
           </div>
@@ -92,12 +100,11 @@ var ValueProposition = React.createClass({
       )
     } else {
        return (
-      <div className="widget-box the-value_proposition">
-        <div className="profile-wrapper-title">
-            <h4><i className="ion-speedometer red-link"></i> Value Proposition</h4>
+     <div className="panel bg-primary-dark box-shadow">
+        <div className="panel-heading p-l-60 p-b-10">
+          <div className="panel-title b-b b-grey p-b-5 text-white">Values</div>
         </div>
-
-        <div className="section-content value_proposition">
+        <div className="panel-body p-l-60 p-r-60 text-white">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
         </div>
       </div>

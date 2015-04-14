@@ -20,6 +20,7 @@ var Problems = React.createClass({
   },
 
   showMarkDownModal: function(){
+    $('body').append($('<div>', {class: 'markdown-modal', id: 'markdown-modal'}));
     React.render(
           <MarkDownHelpModal />,
           document.getElementById('markdown-modal')
@@ -66,7 +67,7 @@ var Problems = React.createClass({
     if(this.state.error) {
       var error = <span className="alert alert-danger">{this.state.error}</span>;
     }
-    var text = this.state.editable ? <span><i className="ion-close"></i> Cancel </span> : <span><i className="ion-edit"></i> Edit problems</span>;
+     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit problems</span>;
     
     if(this.props.idea.sections && this.props.idea.sections.problems) {
       var html = converter.makeHtml(this.props.idea.sections.problems);
@@ -76,15 +77,22 @@ var Problems = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="widget-box the-problems">
+        <div className="panel bg-danger-dark box-shadow">
           {error}
-          <div className="profile-wrapper-title">
-              <h4><i className="ion-heart-broken red-link"></i> Problem</h4>
-              <a className="show-all margin-right" onClick={this.showMarkDownModal}><i className="ion-help-circled"></i> Markdown Help</a>
-              <a className="show-all" onClick={this.openProblemsForm}>{text}</a>
+          <div className="panel-heading p-l-60 p-b-10">
+            <div className="panel-title b-b b-grey p-b-5 text-white">Problem</div>
+            <div className="panel-controls">
+            <ul>
+              <li>
+                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+              </li>
+              <li>
+                <a className="portlet-close text-white fs-12" onClick={this.openProblemsForm}>{text}</a>
+              </li>
+            </ul>
+            </div>
           </div>
-
-          <div className="section-content problems">
+          <div className="panel-body p-l-60 p-r-60 text-white">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <ProblemsForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleProblemsSubmit= {this.handleProblemsSubmit} form={this.props.idea} />
           </div>
@@ -92,15 +100,14 @@ var Problems = React.createClass({
       )
     } else {
        return (
-      <div className="widget-box the-problems">
-        <div className="profile-wrapper-title">
-            <h4><i className="ion-heart-broken red-link"></i> Problem</h4>
+        <div className="panel bg-danger-dark box-shadow">
+          <div className="panel-heading p-l-60 p-b-10">
+            <div className="panel-title b-b b-grey p-b-5 text-white">Problem</div>
+          </div>
+          <div className="panel-body p-l-60 p-r-60 text-white">
+            <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
+          </div>
         </div>
-
-        <div className="section-content problems">
-          <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
-        </div>
-      </div>
     )
     }
   }

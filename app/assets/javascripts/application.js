@@ -31,6 +31,7 @@
 //= require showdown
 //= require autocomplete-rails
 //= require summernote
+//= require entangled-js
 //= require summernote-video
 //= require plugins/jquery-unveil/jquery.unveil.min
 //= require plugins/jquery-bez/jquery.bez.min

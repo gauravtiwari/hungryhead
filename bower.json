@@ -4,7 +4,8 @@
     "dependencies": {
         "bootstrap-tokenfield": "latest",
         "classie": "latest",
-        "jquery-form": "latest"
+        "jquery-form": "latest",
+        "entangled-js": "latest"
 
     }
   },
