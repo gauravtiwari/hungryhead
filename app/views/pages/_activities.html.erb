@@ -1,0 +1,11 @@
+<% if @activities.length > 0 %>
+<% @activities.each do |activity| %>
+	<%= render_activity(activity) %>
+<% end %>
+<% else %>
+	<div class="widget-box">
+		<div class="no-content">
+			No Activities
+		</div>
+	</div>
+<% end %>
