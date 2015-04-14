@@ -10,7 +10,7 @@ json.comments comments.each do |comment|
     json.uuid SecureRandom.hex(4)
     json.is_owner current_user == comment.user
     json.voted current_user.voted_for? comment
-    json.votes_count comment.comment_vote_count
+    json.votes_count comment.cached_votes_total
     json.user_url  profile_card_path(comment.user)
     json.name comment.user.name
     json.avatar comment.user.avatar.url(:avatar)
@@ -22,7 +22,7 @@ json.comments comments.each do |comment|
         json.uuid SecureRandom.hex(4)
         json.is_owner current_user == comment.user
         json.voted current_user.voted_for? comment
-        json.votes_count comment.comment_vote_count
+        json.votes_count comment.cached_votes_total
         json.user_url  profile_card_path(comment.user)
         json.name comment.user.name
         json.avatar comment.user.avatar.url(:avatar)

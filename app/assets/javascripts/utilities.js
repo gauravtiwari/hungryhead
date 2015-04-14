@@ -10,7 +10,7 @@ $(document).ready(function () {
       return el.unbind('click').popover({
         content: response,
         html: true,
-        container: '#container',
+        container: 'body',
         delay: {
           show: 2000, 
           hide: 100

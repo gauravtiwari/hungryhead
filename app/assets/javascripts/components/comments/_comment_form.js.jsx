@@ -45,18 +45,26 @@ var CommentForm = React.createClass({
       'add-comment-form margin-left': true
     });
 
+    if(this.props.imgSrc) {
+      var imgSrc = <img src={ this.props.imgSrc } width="40px" />;
+    } else {
+      var imgSrc = <span className="placeholder bold text-white">
+                {currentUser.user_name_badge}
+              </span>;
+    }
+
     return (
     <article className={classes}>
-      <div className="user-avatar margin-right">
-        <img src={ this.props.imgSrc } width="40px" />
-      </div>
      <div className="add-comment">
+      <div className="user-pic  m-r-10 pull-left">
+        {imgSrc}
+      </div>
       <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit }>
         <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-        <p><textarea onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus /></p>
+        <textarea className="form-control empty"onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
         <input ref="commentable_id" type="hidden" value= { this.props.form.commentable_id } name= "comment[commentable_id]"/>
         <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" /> 
-        <button type="submit" id="post_comment" className="main-button"><i className={this.props.loading}></i> Post</button>
+        <button type="submit" id="post_comment" className="main-button m-t-10 pull-right"><i className={this.props.loading}></i> Post</button>
       </form>
       </div>
     </article>

@@ -29,6 +29,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :followers_count, default: 0
       t.integer :comments_count,default: 0
       t.integer :cached_votes_total, default: 0
+      t.integer :shares_count, default: 0
       t.integer :idea_messages_count,  default: 0
       t.timestamps null: false
     end

@@ -169,3 +169,13 @@ input.error:-webkit-autofill {
 .user-pic .placeholder {
 	padding:5px;
 }
+.card.share .card-header .user-pic,
+.card .comment-box .user-pic {
+  float: left;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.card.share .card-description p {
+  margin-bottom: 10px;
+}

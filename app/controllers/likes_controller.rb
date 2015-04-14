@@ -12,9 +12,16 @@ class LikesController < ApplicationController
       UnlikeNotificationJob.perform_later(@votable)
       render json: { voted: false, url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), votes_count: @votable.cached_votes_total }
     else
-      authorize @votable.user
+      if @votable.class.to_s == "Idea"
+        voter = @votable.student
+      else 
+        voter = @votable.user
+      end
+      
+      authorize voter
+      
       @votable.liked_by current_user
-      if current_user != @votable.user
+      if current_user != voter
         NewNotificationJob.perform_later(current_user, @votable, "#{@votable.class.to_s.downcase}")
       end
       render json: { voted: true, url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), votes_count: @votable.cached_votes_total }
@@ -30,7 +37,7 @@ class LikesController < ApplicationController
   def mentionables
     @mentionable = params[:mentionable_type].constantize.find(params[:id])
     @mentionables = Array.new
-    @comment_users = @mentionables.push(name: @mentionable.user.name, path: user_path(@mentionable.user), username: @mentionable.user.username) unless @mentionables.include?(@mentionable.user.name)
+    @comment_users = @mentionables.push(name: @mentionable.student.name, path: user_path(@mentionable.student), username: @mentionable.student.username) unless @mentionables.include?(@mentionable.student.name)
     @mentionable.comment_threads.includes(:user).each do |comment|
       @user = @mentionables.push(name: comment.user.name, path: user_path(comment.user), username: comment.user.username) unless @mentionables.include?(comment.user.name)
     end

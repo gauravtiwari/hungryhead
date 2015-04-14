@@ -69,11 +69,7 @@ var Share = React.createClass({
     var voter_text = this.state.shares_count > 1 ? 'people' : 'person';
 
     if(this.state.shares_count > 0) {
-      var voters = <div className="sharers-list readmore_small">
-                <div className="sharers">
-                  <span>(<a onClick={this.loadSharers}><i className={classes}></i>{this.state.shares_count}</a>)</span>
-                </div>
-              </div>;
+      var voters = <a onClick={this.loadSharers} className="m-l-5"><i className={classes}></i>({this.state.shares_count})</a>;
     }
 
     var share_link = this.state.shared ?  <span className={button_classes}>
@@ -82,7 +78,7 @@ var Share = React.createClass({
                 {text}
               </a>;
 
-    return (<div>
+    return (<div className="inline p-l-10 pull-left">
               {share_link}{voters}
             </div>
            

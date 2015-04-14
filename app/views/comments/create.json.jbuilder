@@ -8,5 +8,5 @@ json.comment do
   json.avatar @comment.user.avatar.url(:avatar)
   json.vote_url like_path(votable_type: @comment.class.to_s, votable_id: @comment.id)
   json.voted current_user.voted_for? @comment
-  json.votes_count @comment.comment_vote_count
+  json.votes_count @comment.cached_votes_total
 end

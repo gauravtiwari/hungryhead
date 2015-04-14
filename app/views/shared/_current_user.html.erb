@@ -3,7 +3,7 @@
 	var u = {
 		id: "<%= current_user.id %>",
 		name: "<%= current_user.name %>",
-		username: "<%= current_user.username %>",
+		user_name_badge: "<%= current_user.first_name.first + current_user.last_name.first %>",
 		balance: "<%= current_user.fund['balance'] %>",
 		id: "<%= current_user.id %>",
 		email: "<%= current_user.email %>",

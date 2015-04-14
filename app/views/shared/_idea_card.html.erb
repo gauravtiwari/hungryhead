@@ -4,7 +4,7 @@
 			<%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
 			<h2><%= @idea.name %></h2>
 			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
-      <% if @idea.user != current_user %>
+      <% if @idea.student != current_user %>
         <div class="card-follow-button">
           <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         </div>

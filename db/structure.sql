@@ -1170,7 +1170,8 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    shares_count integer
 );
 
 
@@ -2498,4 +2499,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321223054');
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
+
+INSERT INTO schema_migrations (version) VALUES ('20150414223204');
 

@@ -29,6 +29,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer :feedbacks_count, default: 0
       t.integer :comments_count, default: 0
       t.integer :ideas_count, default: 0
+      t.integer :shares_count, default: 0
       t.boolean :verified, default: false
       t.boolean :terms_accepted, default: false
       t.integer :state, default: 0, index: true

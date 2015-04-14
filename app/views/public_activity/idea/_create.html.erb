@@ -1,5 +1,5 @@
 <div class="card share post_<%= activity.id %>" data-social="item">
-    <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
+    <div class="circle" data-toggle="tooltip" title="hello" data-container="body"></div>
     <div class="card-header clearfix">
 	    <div class="user-pic">
 		    <% if activity.owner.avatar.present? %>
@@ -10,32 +10,30 @@
 		    <% end %>
 	    </div>
 
-	    <h5>
-	    	<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card') %>
-	    </h5>
-	    <h6>pitched <i class="fa ion-lightbulb"></i> <%= link_to(activity.trackable.name, "javascript:void(0);", :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
-	    	<% if activity.owner_id != current_user.id %>
-				<% liked = current_user.voted_for? activity.trackable %>
-				<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote'}.to_json) %>
-				<span class="bar"></span>
-				<% shared = current_user.shared? activity.trackable %>
-				<% form = render(template: 'globals/form.json.jbuilder') %>
-				<%= react_component('Share', {record: activity.trackable_id, shareable_name: activity.trackable.name, form: form, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), shares_count: activity.trackable.shares_count, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), css_class: 'vote-button add_vote'}.to_json) %>
-			<% end %>
-	        <span class="location semi-bold">
-	            <i class="fa fa-map-marker"></i> SF, California
-	        </span>
-	        <span class="market semi-bold m-l-10">
-	            <i class="fa fa-map-marker"></i> Ecommerce
-	        </span>
-
-	        <span class="date semi-bold m-l-10">
-	            <i class="fa fa-clock"></i> 
-		        <%= link_to(idea_path(activity.trackable)) do %>
-					<%= time_ago_in_words(activity.created_at) %>
-				<% end %>
-	        </span>
-	    </h6>
+	    <div class="text-master-dark">
+	    	<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %>
+	    	pitched an idea <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, "javascript:void(0);", :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
+		   	<h6>
+		   		<% if activity.owner.location_list.length > 0 %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i> 
+			            <%= activity.owner.location_list.first %>
+			        </span>
+		        <% end %>
+		       <% if activity.owner.market_list.length > 0 %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i> 
+			            <%= activity.owner.market_list.first %>
+			        </span>
+		        <% end %>
+		        <span class="date semi-bold">
+		            <i class="fa fa-clock"></i> 
+			        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
+						<%= time_ago_in_words(activity.created_at) %>
+					<% end %>
+		        </span>
+		    </h6>
+	    </div>
     </div>
     <div class="card-description">
 	    <div class="activity-content">
@@ -54,14 +52,19 @@
 	    </div>
     </div>
     <div class="card-footer clearfix">
-        <div class="pull-left">via 
-            <span class="text-complete">CNN</span>
+    	<% if activity.owner_id == current_user.id %>
+		<% liked = current_user.voted_for? activity.trackable %>
+		<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left m-r-10'}.to_json) %>
+		<span class="bar"></span>
+		<% shared = current_user.shared? activity.trackable %>
+		<% form = render(template: 'globals/form.json.jbuilder') %>
+		<%= react_component('Share', {record: activity.trackable_id, shareable_name: activity.trackable.name, form: form, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), shares_count: activity.trackable.shares_count, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left m-r-10'}.to_json) %>
+	<% end %>
+        <div class="pull-right">view
+	        <%= link_to(idea_path(activity.trackable)) do %> 
+	        	<span class="text-complete"><%= activity.trackable.name %></span>
+	        <% end %>
         </div>
-        <div class="pull-right hint-text">
-			<%= link_to(idea_path(activity.trackable)) do %>
-				<%= time_ago_in_words(activity.created_at) %>
-			<% end %>
-		</div>
         <div class="clearfix"></div>
     </div>
 
@@ -69,5 +72,5 @@
 
 <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
 
-<%= react_component('CommentBox', {data: data, count: activity.trackable.idea_comment_count, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
+<%= react_component('CommentBox', {data: data, count: activity.trackable.comments_count, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
 </div>

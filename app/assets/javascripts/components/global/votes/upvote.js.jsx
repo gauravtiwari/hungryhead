@@ -56,9 +56,9 @@ var Upvote = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
     if(this.state.voted) {
-      var button_classes = css_classes + ' delete-vote'
+      var button_classes = css_classes + 'delete-vote';
     } else {
-      var button_classes = css_classes
+      var button_classes = css_classes;
     }
 
     var text = this.state.voted ? 'You liked this' : 'Like';
@@ -66,18 +66,13 @@ var Upvote = React.createClass({
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
 
     if(this.state.votes_count > 0) {
-      var voters = <div className="voters-list readmore_small">
-                <div className="likers">
-                  <span>(<a onClick={this.loadLikers}><i className={classes}></i>{this.state.votes_count}</a>)</span>
-                </div>
-              </div>;
+      var voters =<a onClick={this.loadLikers} className="m-l-5"><i className={classes}></i>({this.state.votes_count})</a>;
     }
 
-    return (<div>
+    return (<div className="pull-left b-r b-grey b-dashed p-r-10">
               <a className={button_classes} onClick={this.handleClick}>
-                {text}
+                {text}{voters}
               </a>
-              {voters}
             </div>
            
     );
