@@ -1,7 +1,7 @@
 class Share < ActiveRecord::Base
   	#Associations
   	belongs_to :shareable, polymorphic: true, counter_cache: true
-	belongs_to :user, touch: true
+	belongs_to :user, touch: true, counter_cache: true
  	store_accessor :parameters, :shareable_name
 
  	#Enumerators to handle status
@@ -10,13 +10,6 @@ class Share < ActiveRecord::Base
 	acts_as_votable
 
 	include PublicActivity::Model
-	include Redis::Objects
-
-	counter :comments_count
-	counter :votes_count
-
-	set :sharers
-
 	before_destroy :remove_activity
 
 	private

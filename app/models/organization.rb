@@ -8,14 +8,6 @@ class Organization < ActiveRecord::Base
 
 	extend FriendlyId
  	friendly_id :slug_candidates
-  include Redis::Objects
-
-  counter :followers_count
-  counter :ideas_count
-  counter :users_count
-
-  set :recent_followers
-  set :recent_activities
 
   validates :name, :presence => true,
     :on => :create

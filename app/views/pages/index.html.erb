@@ -129,128 +129,14 @@
 </div>
 <div class="col-md-6">
 <div class="activity-feed auto-height m-t-20">
-    <!--<div class="feed-filters p-b-10">
-      <ul class="list-inline text-right">
-        <li class="hint-text">Sort by: </li>
-        <li><a href="#" class="active text-master p-r-5 p-l-5">Investments</a>
-        </li>
-        <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Feedbacks</a>
-        </li>
-        <li><a href="#" class="text-master hint-text p-r-5 p-l-5">Ideas</a>
-        </li>
-
-      </ul>
+    <div class="activity-feed-box live">
+      <%= render partial: 'activities' %>
     </div>
-    -->
-    <div class="card share" data-social="item">
-        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
-        <div class="card-header clearfix">
-            <div class="user-pic"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
-                <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                </span><% end %>
-            </div>
-            <h5>Jeff Curtis</h5>
-            <h6>Shared a Tweet
-      
-                <span class="location semi-bold">
-                    <i class="fa fa-map-marker"></i> SF, California
-                </span>
-            </h6>
-        </div>
-        <div class="card-description">
-            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
-                <a href="#">#quote</a>
-            </p>
-        </div>
-        <div class="card-footer clearfix">
-            <div class="pull-left">via 
-                <span class="text-complete">CNN</span>
-            </div>
-            <div class="pull-right hint-text">
-Apr 23
-</div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="card share" data-social="item">
-        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
-        <div class="card-header clearfix">
-            <div class="user-pic"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
-                <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                </span><% end %>
-            </div>
-            <h5>Jeff Curtis</h5>
-            <h6>Shared a Tweet
-      
-                <span class="location semi-bold">
-                    <i class="fa fa-map-marker"></i> SF, California
-                </span>
-            </h6>
-        </div>
-        <div class="card-description">
-            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
-                <a href="#">#quote</a>
-            </p>
-        </div>
-        <div class="card-footer clearfix">
-            <div class="pull-left">via 
-                <span class="text-complete">CNN</span>
-            </div>
-            <div class="pull-right hint-text">
-Apr 23
-</div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="card share" data-social="item">
-        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
-        <div class="card-header clearfix">
-            <div class="user-pic"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
-                <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                </span><% end %>
-            </div>
-            <h5>Jeff Curtis</h5>
-            <h6>Shared a Tweet
-      
-                <span class="location semi-bold">
-                    <i class="fa fa-map-marker"></i> SF, California
-                </span>
-            </h6>
-        </div>
-        <div class="card-description">
-            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
-                <a href="#">#quote</a>
-            </p>
-        </div>
-        <div class="card-footer clearfix">
-            <div class="pull-left">via 
-                <span class="text-complete">CNN</span>
-            </div>
-            <div class="pull-right hint-text">
-Apr 23
-</div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="card share" data-social="item">
-        <div class="circle" data-toggle="tooltip" title="" data-container="body" data-original-title="Label"></div>
-        <div class="card-header clearfix">
-            <div class="user-pic"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "33", height: "33") %><% else %>
-                <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                </span><% end %>
-            </div>
-            <h5>Andy Young</h5>
-            <h6>Updated his status
-      
-                <span class="location semi-bold">
-                    <i class="icon-map"></i> NYC, New York
-                </span>
-            </h6>
-        </div>
-        <div class="card-description">
-            <p>What a lovely day! I think I should go and play outside.</p>
-        </div>
-    </div>
+    <% if @activities.next_page %>
+      <div class="pagination-box text-center">
+      <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+      </div>
+    <% end %>
 </div>
 </div>
 <div class="col-md-3 col-sm-3 no-padding p-r-15">

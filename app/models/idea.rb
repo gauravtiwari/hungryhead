@@ -3,20 +3,7 @@ class Idea < ActiveRecord::Base
   #Includes Modules
   extend FriendlyId
   include PublicActivity::Model
-  include Redis::Objects
   friendly_id :slug_candidates
-
-  counter :investments_count
-  counter :feedbacks_count
-  counter :follower_count
-  counter :comments_count
-  counter :votes_count
-  counter :views_count
-  counter :shares_count
-  counter :ideamessages_count
-
-  set :recent_activities
-  set :recent_followers
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -38,8 +25,8 @@ class Idea < ActiveRecord::Base
   after_save :create_slug
   #Associations
 
-  belongs_to :student, touch: true
-  belongs_to :school
+  belongs_to :student, touch: true, counter_cache: true
+  belongs_to :school, counter_cache: true
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
@@ -119,9 +106,9 @@ class Idea < ActiveRecord::Base
   end
 
   def profile_complete?
-    if [self.logo, self.name, self.high_concept_pitch, self.elevator_pitch,
+    if [self.name, self.high_concept_pitch, self.elevator_pitch,
       self.description, self.market, self.solutions, self.problems,
-      self.vision, self.value_proposition].any?{|f| f.blank? }
+      self.value_proposition].any?{|f| f.blank? }
       return false
     else
       return true

@@ -77,22 +77,22 @@ var ValueProposition = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel bg-solid box-shadow">
+        <div className="panel bg-white box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-white">List your value offerings</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master">List your values</div>
             <div className="panel-controls">
             <ul>
               <li>
-                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-white fs-12" onClick={this.openValuePropositionForm}>{text}</a>
+                <a className="portlet-close text-master fs-12" onClick={this.openValuePropositionForm}>{text}</a>
               </li>
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-white">
+          <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <ValuePropositionForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleValuePropositionSubmit= {this.handleValuePropositionSubmit} form={this.props.idea} />
           </div>
@@ -100,7 +100,7 @@ var ValueProposition = React.createClass({
       )
     } else {
        return (
-     <div className="panel bg-solid box-shadow">
+     <div className="panel bg-white box-shadow">
         <div className="panel-heading p-l-60 p-b-10">
           <div className="panel-title b-b b-grey p-b-5 text-white">Values</div>
         </div>

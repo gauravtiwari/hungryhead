@@ -215,6 +215,8 @@ CREATE TABLE feedbacks (
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
     status integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0,
+    cached_votes_total integer DEFAULT 0,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -340,10 +342,16 @@ CREATE TABLE ideas (
     cached_location_list character varying,
     cached_market_list character varying,
     cached_technology_list character varying,
+    feedbacks_count integer DEFAULT 0,
+    followers_count integer DEFAULT 0,
+    comments_count integer DEFAULT 0,
+    cached_votes_total integer DEFAULT 0,
+    idea_messages_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    shares_count integer DEFAULT 0
 );
 
 
@@ -376,6 +384,8 @@ CREATE TABLE investments (
     note character varying NOT NULL,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
+    comments_count integer DEFAULT 0,
+    cached_votes_total integer DEFAULT 0,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -903,7 +913,10 @@ CREATE TABLE schools (
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    users_count integer DEFAULT 0,
+    ideas_count integer DEFAULT 0,
+    followers_count integer DEFAULT 0
 );
 
 
@@ -972,7 +985,8 @@ CREATE TABLE shares (
     user_id integer,
     parameters jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    cached_votes_total integer DEFAULT 0
 );
 
 
@@ -1122,6 +1136,12 @@ CREATE TABLE users (
     cached_location_list character varying,
     cached_market_list character varying,
     cached_roles_list character varying,
+    followers_count integer DEFAULT 0,
+    followings_count integer DEFAULT 0,
+    investments_count integer DEFAULT 0,
+    feedbacks_count integer DEFAULT 0,
+    comments_count integer DEFAULT 0,
+    ideas_count integer DEFAULT 0,
     verified boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
     state integer DEFAULT 0,
@@ -1767,6 +1787,20 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
+-- Name: index_feedbacks_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_cached_votes_total ON feedbacks USING btree (cached_votes_total);
+
+
+--
+-- Name: index_feedbacks_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_comments_count ON feedbacks USING btree (comments_count);
+
+
+--
 -- Name: index_feedbacks_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1858,6 +1892,13 @@ CREATE INDEX index_ideas_on_settings ON ideas USING gin (settings);
 
 
 --
+-- Name: index_ideas_on_shares_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_shares_count ON ideas USING btree (shares_count);
+
+
+--
 -- Name: index_ideas_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1876,6 +1917,20 @@ CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
 --
 
 CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
+
+
+--
+-- Name: index_investments_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investments_on_cached_votes_total ON investments USING btree (cached_votes_total);
+
+
+--
+-- Name: index_investments_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investments_on_comments_count ON investments USING btree (comments_count);
 
 
 --
@@ -2166,6 +2221,20 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_followers_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_followers_count ON users USING btree (followers_count);
+
+
+--
+-- Name: index_users_on_followings_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_followings_count ON users USING btree (followings_count);
+
+
+--
 -- Name: index_users_on_fund; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2420,7 +2489,13 @@ INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317220155');
 
+INSERT INTO schema_migrations (version) VALUES ('20150317231458');
+
 INSERT INTO schema_migrations (version) VALUES ('20150321215014');
+
+INSERT INTO schema_migrations (version) VALUES ('20150321223054');
+
+INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 

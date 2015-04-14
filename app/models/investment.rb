@@ -1,8 +1,8 @@
 class Investment < ActiveRecord::Base
   	
   	#Associations
-  	belongs_to :user, touch: true
-  	belongs_to :idea, touch: true
+  	belongs_to :user, touch: true, counter_cache: true
+  	belongs_to :idea, touch: true, counter_cache: true
 
   	store_accessor :parameters, :point_earned, :views_count
 
@@ -12,10 +12,6 @@ class Investment < ActiveRecord::Base
   	has_merit
 
 	include PublicActivity::Model
-	include Redis::Objects
-
-  	counter :comments_count
-  	counter :votes_count
   	
 	before_destroy :remove_activity
 	

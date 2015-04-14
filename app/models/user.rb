@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   extend FriendlyId
+  
   include Redis::Objects
 
   counter :follower_count
@@ -55,14 +56,13 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   #Model Relationships
-  belongs_to :school
+  belongs_to :school, counter_cache: true
   has_many :authentications, :dependent => :destroy, autosave: true
   has_many :shares, dependent: :destroy, autosave: true
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
   has_many :notifications, :foreign_key => :reciever_id, dependent: :destroy, autosave: true
-
   has_many :slugs, as: :sluggable, dependent: :destroy
 
   mount_uploader :avatar, LogoUploader
