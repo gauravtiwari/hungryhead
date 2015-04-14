@@ -1,0 +1,27 @@
+.comment-box {
+  clear: both;
+  background-color: #f5f9fc;
+  border-top: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+.comment-box .comments {
+  padding: 10px;
+}
+
+.add-comment-form {
+  padding: 10px 12px;
+}
+
+.timeline-bottom {
+  display: block;
+  overflow: hidden;
+}
+.innerAll.reply-form {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  clear: both;
+}
+.add-comment {
+  overflow: hidden;
+}
