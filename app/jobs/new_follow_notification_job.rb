@@ -1,15 +1,9 @@
 class NewFollowNotificationJob < ActiveJob::Base
 
-  def perform(user, recipient)
-    if recipient.class.name == "User"
-      object_path = Rails.application.routes.url_helpers.profile_url(recipient,  host: 'localhost', port: 3000)
-      object_name = 'You'
-    elsif recipient.class.name == "Idea"
-      object_path = Rails.application.routes.url_helpers.idea_url(recipient,  host: 'localhost', port: 3000)
-      object_name = recipient.name
-    end
+  def perform(user, recipient, followable_path, user_path)
+
+    msg = "<a href='#{user_path}'>#{user.name}</a> followed "+ "<a href='#{followable_path}'>#{recipient.name}</a>".html_safe
     
-    msg = "<a href='#{Rails.application.routes.url_helpers.profile_url(user, host: 'localhost', port: 3000)}'>#{user.name}</a> followed "+ "<a href='#{object_path}'>#{object_name}</a>".html_safe
     ActiveRecord::Base.connection_pool.with_connection do
       if recipient.class.name == "User"  
 
@@ -28,11 +22,11 @@ class NewFollowNotificationJob < ActiveJob::Base
       elsif  recipient.class.name == "Idea"
    
         notification = Notification.create!(
-          reciever_id: recipient.user.id,
+          reciever_id: recipient.student.id,
           sender_id: user.id,
           parameters: {
             verb: "followed",
-            trackable: recipient.user.id,
+            trackable: recipient.student.id,
             msg: msg,
             read: false
           }

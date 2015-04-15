@@ -11,7 +11,7 @@ class PostInvestmentJob < ActiveJob::Base
 	msg = "<a href='#{user_url}'>#{user.name}</a> made a <i class='fa fa-fw fa-dollar'></i> #{investment.amount} "+ "<a href='#{object_path}'>investment</a> in <a href='#{idea_path}'>#{investment.idea.name}</a>".html_safe
 
 	followers = user.followers_by_type('User')
-	all = followers.push(investment.idea.user)
+	all = followers.push(investment.idea.student)
 
    	all.each do |f|
 		notification = Notification.create!(

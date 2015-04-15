@@ -16,7 +16,7 @@ class PostFeedbackJob < ActiveJob::Base
 	msg = "<a href='#{user_url}'>#{user.name}</a> left a "+ "<a href='#{object_path}'>feedback <i class='fa fa-fw ion-chatbubbles'></i> </a> for <a href='#{idea_path}'>#{feedback.idea.name}</a> ".html_safe
 
 	followers = user.followers_by_type('User')
-	all = followers.push(feedback.idea.user)
+	all = followers.push(feedback.idea.student)
 
    	all.each do |f|
 		notification = Notification.create!(

@@ -203,7 +203,13 @@ input.error:-webkit-autofill {
 .card.share .card-description p {
   margin-bottom: 10px;
 }
-
+.card.share .card-header h6 {
+  font-size: 12px;
+  margin: 0;
+  font-family: arial;
+  opacity: .45;
+  margin-top: 5px;
+}
 /* Popover */
 
 .popover {

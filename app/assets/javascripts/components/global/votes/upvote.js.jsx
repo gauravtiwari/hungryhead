@@ -71,8 +71,9 @@ var Upvote = React.createClass({
 
     return (<div className="pull-left b-r b-grey b-dashed p-r-10">
               <a className={button_classes} onClick={this.handleClick}>
-                {text}{voters}
+                {text}
               </a>
+              {voters}
             </div>
            
     );

@@ -11,7 +11,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-fw ion-person-stalker"></i> joined Hungryhead</span> 
+	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span> 
 
 		   	<h6>
 		   		<% if activity.owner.location_list.length > 0 %>

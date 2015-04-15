@@ -15,7 +15,7 @@
 			<% if activity.recipient.team.include?(current_user.id.to_s) %>
 				your idea
 			<% end %>
-			
+
 			<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
 		   	<h6>
 		   		<% if activity.owner.location_list.length > 0 %>
@@ -56,7 +56,7 @@
 	    </div>
     </div>
     <div class="card-footer clearfix">
-    	<% if activity.owner_id == current_user.id %>
+    	<% if activity.owner_id != current_user.id %>
 		<% liked = current_user.voted_for? activity.trackable %>
 		<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 	<% end %>

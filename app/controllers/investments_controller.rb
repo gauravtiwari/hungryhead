@@ -34,14 +34,14 @@ class InvestmentsController < ApplicationController
     if @user.balance_available?(params[:investment][:amount])
       @investment = MakeInvestmentService.new(investment_params, @user, @idea).create
       authorize @investment
-      object_url = idea_feedback_url(@investment.idea, @investment.id)
+      object_url = idea_investment_url(@investment.idea, @investment.id)
       idea_url = idea_url(@investment.idea)
       user_url = profile_url(@user)
 
       respond_to do |format|
         if @investment.save
           @investment = UpdateBalanceService.new(@investment, @user, @idea).invest
-          PostInvestmentJob.perform_later(@investment, @user, feedback_url, idea_url, user_url)
+          PostInvestmentJob.perform_later(@investment, @user, object_url, idea_url, user_url)
           format.json { render :show, status: :created}
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }

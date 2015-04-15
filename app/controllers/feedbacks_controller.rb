@@ -39,6 +39,7 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new feedback_params
     @feedback.update_attributes(idea: @idea, user: @user)
     authorize @feedback
+    
     object_url = idea_feedback_url(@feedback.idea, @feedback.id)
     idea_url = idea_url(@feedback.idea)
     user_url = profile_url(@user)
@@ -46,7 +47,7 @@ class FeedbacksController < ApplicationController
     if @idea.can_feedback?(@user)
       respond_to do |format|
         if @feedback.save
-          PostFeedbackJob.perform_later(@feedback, @user, feedback_url, idea_url, user_url)
+          PostFeedbackJob.perform_later(@feedback, @user, object_url, idea_url, user_url)
           format.json { render :show, status: :created}
         else
           format.json { render json: @feedback.errors, status: :unprocessable_entity }
