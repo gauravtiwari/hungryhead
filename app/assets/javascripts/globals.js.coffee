@@ -8,6 +8,7 @@ jQuery(document).ready ->
 
 	$('#form-register').validate();
 	$('#form-login').validate();
+	$("[data-toggle='tooltip']").tooltip()
 
 	$.each flashMessages, (key, value) ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}

@@ -35,7 +35,7 @@ var InvestButton = React.createClass({
     });
 
     var invested_classes = cx({
-      'main-button': true,
+      'main-button pull-right m-r-10': true,
       'invested': !this.state.invested 
     });
 

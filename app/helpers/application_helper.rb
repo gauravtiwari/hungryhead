@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def followed?(object)
-    if current_user && current_user.following?(object)
+    if current_user && current_user.follows?(object)
       followed =  {
         follow: true, 
         followable_type: object.class.name, 

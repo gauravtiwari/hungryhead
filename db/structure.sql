@@ -351,7 +351,8 @@ CREATE TABLE ideas (
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
     level integer DEFAULT 0,
-    shares_count integer DEFAULT 0
+    shares_count integer DEFAULT 0,
+    investments_count integer
 );
 
 
@@ -2501,4 +2502,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150414223204');
+
+INSERT INTO schema_migrations (version) VALUES ('20150415011619');
 

@@ -1,7 +1,14 @@
 <%= content_tag(:div, class: 'popover-card') do %>
 	<%= content_tag(:div, class: 'popover-header  text-center') do %>
 		<%= content_tag(:div, class: 'popover-card-logo') do %>
-			<%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
+		  <div class="thumbnail-wrapper d32 auto-margin circular b-white m-r-5 m-b-5">
+      <% if @idea.logo.present? %>
+       <%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
+      <% else %>
+          <span class="placeholder bold text-white"><%= @idea.name.split('').first + @idea.name.split('').second %>
+          </span>
+      <% end %>
+      </div>
 			<h2><%= @idea.name %></h2>
 			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
       <% if @idea.student != current_user %>
@@ -18,7 +25,7 @@
       <ul class="stastics-list">
         <li>
           Followers
-          <span><i class="fa ion-person-stalker"></i> <%= @idea.followers_count %></span>
+          <span><i class="fa fa-users"></i> <%= @idea.followers_count %></span>
         </li>
         <li>
           Raised
@@ -26,7 +33,7 @@
         </li>
         <li>
           Feedbacks
-          <span><i class="fa ion-chatbubbles"></i> <%= @idea.feedbacks_count %></span>
+          <span><i class="fa fa-comment"></i> <%= @idea.feedbacks_count %></span>
         </li>
       </ul>
     </div>

@@ -63,6 +63,27 @@ input.error:-webkit-autofill {
 .text-green {
 	color: #56d6aa!important;
 }
+.main-button.invested {
+  background: #ff9933;
+  border: 1px solid #ff9933;
+  background: -webkit-linear-gradient(#ff9933, #ff9933);
+  background: linear-gradient(#ff9933, #ff9933);
+  color: #fff;
+}
+.main-button.feedbacked {
+  background: #4285f4;
+  color: #fff;
+  border-color: #4285f4;
+}
+.main-button.followed,
+.main-button.published,
+.main-button.privacy-public {
+  background: #33cc66;
+  border: 1px solid #33cc66;
+  color: #fff;
+  padding: 4px 8px;
+  text-align: center;
+}
 .bg-green {
   background-color: #56d6aa!important;
 }
@@ -76,6 +97,9 @@ input.error:-webkit-autofill {
   border-radius: 0;
   margin-bottom: 10px;
   box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.card a {
+  cursor: pointer;
 }
 .box-shadow {
 	box-shadow: 0 1px 2px rgba(0,0,0,.1);
@@ -178,4 +202,94 @@ input.error:-webkit-autofill {
 }
 .card.share .card-description p {
   margin-bottom: 10px;
+}
+
+/* Popover */
+
+.popover {
+  padding: 0;
+  z-index: 1040;
+}
+.popover-content {
+  padding: 0;
+  border: 0;
+}
+.popover-card {
+  overflow: hidden;
+  width: auto;
+  margin-bottom: 25px;
+}
+.popover-header {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin-bottom: 60px;
+  margin-top: 20px;
+  min-width: 275px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.popover-card-logo img {
+  border-radius: 50%;
+}
+.popover-card-logo h2,
+.popover-card-logo h2 a {
+  margin: 0;
+  color: #525252;
+  font-size: 24px;
+  font-weight: normal;
+}
+.popover-card-logo span {
+  color: #999;
+  font-size: 12px;
+}
+.popover-card-stats {
+  position: absolute;
+  overflow: hidden;
+  margin-top: 20px;
+  display: block;
+  background: #f2f2f2;
+  width: 100%;
+  bottom: 0;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top: 1px solid #e7e7e7;
+}
+.card-follow-button {
+  margin-top: 10px;
+}
+.card-follow-button .main-button {
+  float: none!important;
+}
+.card-follow-button .main-button.followed span {
+  color: #fff;
+}
+.card-follow-button .main-button span {
+  color: #4285f4;
+}
+.stastics-list {
+  display: flex;
+  padding: 10px;
+  margin: 0;
+}
+.stastics-list li {
+  float: left;
+  list-style: none;
+  text-align: center;
+  -webkit-flex: 1;
+  flex: 1;
+  font-size: 14px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #999;
+}
+.search-follow-idea {
+  float: right;
+  display: block;
+  overflow: hidden;
+  padding: 10px 12px;
+}
+.stastics-list li span {
+  color: #4e5052;
+  font-size: 12px;
+  display: block;
+  font-weight: bold;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }

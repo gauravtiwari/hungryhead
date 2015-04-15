@@ -26,12 +26,7 @@ var Invest = React.createClass({
         this.setState({loading: false});
         $("#investPopup").modal('hide');
         $.pubsub('publish', 'idea_invested', true);
-        var options =  {
-          content: "<img width='40px' src="+data.idea.user_avatar+"> <span>You have successfully invested "+data.idea.amount+ " coins into " + data.idea.name +"</span>",
-          style: "snackbar",
-          timeout: 3000
-        }
-        $.snackbar(options);
+        $('body').pgNotification({style: "simple", message: "<img width='40px' src="+data.idea.user_avatar+"> <span>You have successfully invested "+data.idea.amount+ " coins into " + data.idea.name +"</span>", position: "top-right", type: "success",timeout: 5000}).show();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());

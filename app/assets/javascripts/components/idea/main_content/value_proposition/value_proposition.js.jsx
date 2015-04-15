@@ -102,9 +102,9 @@ var ValueProposition = React.createClass({
        return (
      <div className="panel bg-white box-shadow">
         <div className="panel-heading p-l-60 p-b-10">
-          <div className="panel-title b-b b-grey p-b-5 text-white">Values</div>
+          <div className="panel-title b-b b-grey p-b-5 text-master">Values</div>
         </div>
-        <div className="panel-body p-l-60 p-r-60 text-white">
+        <div className="panel-body p-l-60 p-r-60 text-master">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
         </div>
       </div>

@@ -23,7 +23,7 @@ var CommentList = React.createClass({
 
     return (
 
-      <ul id={css_id} className="comment-list timeline-activity list-unstyled" ref="commentList">
+      <ul id={css_id} className="comment-list timeline-activity list-unstyled m-t-20" ref="commentList">
        { commentNodes }
       </ul>
 

@@ -1,6 +1,6 @@
 class PostInvestmentJob < ActiveJob::Base
 	
-  def perform(investment, user)
+  def perform(investment, user, object_path, idea_path, user_url)
    ActiveRecord::Base.connection_pool.with_connection do
    	#Post feedback activity
    	investment.create_activity(key: 'investment.create', 
@@ -8,10 +8,7 @@ class PostInvestmentJob < ActiveJob::Base
    		recipient: investment.idea
    	)
 
-   	object_path = Rails.application.routes.url_helpers.idea_investment_url(investment.idea, investment.id,  host: 'localhost', port: 3000)
-   	idea_path = Rails.application.routes.url_helpers.idea_url(investment.idea,  host: 'localhost', port: 3000)
-	
-	msg = "<a href='#{Rails.application.routes.url_helpers.profile_url(user)}'>#{user.name}</a> made a <i class='fa fa-fw fa-dollar'></i> #{investment.amount} "+ "<a href='#{object_path}'>investment</a> in <a href='#{idea_path}'>#{investment.idea.name}</a>".html_safe
+	msg = "<a href='#{user_url}'>#{user.name}</a> made a <i class='fa fa-fw fa-dollar'></i> #{investment.amount} "+ "<a href='#{object_path}'>investment</a> in <a href='#{idea_path}'>#{investment.idea.name}</a>".html_safe
 
 	followers = user.followers_by_type('User')
 	all = followers.push(investment.idea.user)

@@ -7,6 +7,7 @@ var Avatar = React.createClass({
       avatar: data.user.avatar,
       badge: data.user.badge,
       form: data.user.form,
+      is_owner: data.user.is_owner,
       loading: false
     }
   },
@@ -37,6 +38,7 @@ var Avatar = React.createClass({
         var image = <span className="placeholder bold text-white fs-22">{this.state.badge}</span>;
       }
 
+      if(this.state.is_owner) {
       return (
         <div id="profile_image">
           <form ref="avatarForm" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
@@ -58,6 +60,16 @@ var Avatar = React.createClass({
           </div>
         </div>
       )
+    } else {
+
+      return (
+        <div id="profile_image">
+          <div id="userpic">
+            {image}
+          </div>
+        </div>
+      )
+    }
   },
 
   _onChange: function(e) {

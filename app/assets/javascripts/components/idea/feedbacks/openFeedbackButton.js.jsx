@@ -34,14 +34,14 @@ var OpenFeedbackButton = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'ion-edit': this.state.feedbacked,
+      'fa fa-comment': this.state.feedbacked,
       'fa fa-fw fa-check': !this.state.feedbacked
     });
 
     if(!this.state.feedbacked) {
-      var feedbackButtonText = <a className="main-button new-feedback-button feedbacked" onClick={this.openFeedbackedBox}><i className={classes}></i> Feedbacked</a>;
+      var feedbackButtonText = <a className="main-button new-feedback-button feedbacked pull-right m-r-10" onClick={this.openFeedbackedBox}><i className={classes}></i> Feedbacked</a>;
     } else {
-      var feedbackButtonText = <a className="main-button new-feedback-button" onClick={this.openFeedbackBox}><i className={classes}></i> Feedback</a>;
+      var feedbackButtonText = <a className="main-button new-feedback-button pull-right m-r-10" onClick={this.openFeedbackBox}><i className={classes}></i> Feedback</a>;
     }
 
     return(

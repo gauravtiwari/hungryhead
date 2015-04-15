@@ -86,11 +86,11 @@ class Idea < ActiveRecord::Base
   end
 
   def is_owner?(current_user)
-    user == current_user
+    student == current_user
   end
 
   def can_invest?(user)
-    user.balance > 10 && has_invested?(user)
+    student.balance > 10 && has_invested?(user)
   end
 
   def in_team?(user)

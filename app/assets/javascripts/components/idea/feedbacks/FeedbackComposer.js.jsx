@@ -35,12 +35,7 @@ var FeedbackComposer = React.createClass({
       success: function ( data ) {
         $("#feedbackFormPopup").modal('hide');
         $.pubsub('publish', 'idea_feedbacked', false);
-         var options =  {
-          content: "<img width='40px' src="+data.user_avatar+"> <span> You gave feedback to " + data.meta.idea_name +"</span>",
-          style: "snackbar", // add a custom class to your snackbar
-          timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-        }
-        $.snackbar(options);
+         $('body').pgNotification({style: "simple", message: "<img width='40px' src="+data.user_avatar+"> <span> You gave feedback to " + data.meta.idea_name +"</span>", position: "top-right", type: "success",timeout: 5000}).show();
         this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {

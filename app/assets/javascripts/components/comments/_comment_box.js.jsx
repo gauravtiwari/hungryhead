@@ -122,7 +122,7 @@ var CommentBox = React.createClass({
 
     if(this.state.comments.length <= 0 && this.state.count > 0 && this.state.show_comment_bar) {
       var show_comment_bar =  <div className="comments">
-            <span><a className="border-bottom-dotted" onClick={this.loadComments}><i className={comment_loading_classes}></i> Show {this.state.count} {text}</a></span>
+            <span><a className="b-b b-grey p-b-5" onClick={this.loadComments}><i className={comment_loading_classes}></i> Show {this.state.count} {text}</a></span>
           </div>;
     }
 

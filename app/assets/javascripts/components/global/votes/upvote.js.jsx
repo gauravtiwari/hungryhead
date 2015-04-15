@@ -56,7 +56,7 @@ var Upvote = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
     if(this.state.voted) {
-      var button_classes = css_classes + 'delete-vote';
+      var button_classes = css_classes + ' delete-vote';
     } else {
       var button_classes = css_classes;
     }

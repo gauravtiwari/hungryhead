@@ -63,7 +63,7 @@
               
   </div>
 
-  <div class="profile-action-buttons pull-right p-t-10 p-r-20 col-md-5">
+  <div class="profile-action-buttons pull-right m-t-10 p-r-20 col-md-7">
     <% if !policy(@idea).collaborator? %>
       <%= react_component('Follow',{:followed => followed?(@idea)}) %>
       <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.can_feedback?(current_user) }) %>
@@ -95,7 +95,7 @@
     <div class="m-b-10">
         <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
             <div class="panel-heading">
-             <div class="panel-title">
+             <div class="panel-title b-b b-grey p-b-5">
               Live updates
               </div>
               <div class="panel-controls">
@@ -125,7 +125,7 @@
             </div>
             <div class="panel-body scrollable auto-overflow">
              <div style="max-height:200px">
-              <ul class="trending-list no-style">
+              <ul class="trending-list no-style p-t-20">
                 <li class="m-b-10">
                   <div class="widget-16-header p-b-10">
                   <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
@@ -173,7 +173,7 @@
     </div>
     <div class="widget-16 panel no-margin widget-loader-circle">
         <div class="panel-heading">
-            <div class="panel-title">
+            <div class="panel-title b-b b-grey p-b-5">
               Followers
             </div>
         </div>
@@ -245,4 +245,16 @@
     <%= render 'collaboration' %>
   </div>
 <% end %>
+
+<% if @idea.student != current_user %>
+
+  <% if @idea.has_invested?(current_user) %>
+    <%= react_component('Invest', render(template: 'ideas/invest.json.jbuilder', locals: {:id => "investment-component"})) %>
+  <% end %>
+
+  <% if @idea.can_feedback?(current_user) %>
+   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
+  <% end %>
+<% end%>
+
 

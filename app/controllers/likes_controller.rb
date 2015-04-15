@@ -17,7 +17,7 @@ class LikesController < ApplicationController
       else 
         voter = @votable.user
       end
-      
+
       authorize voter
       
       @votable.liked_by current_user
@@ -36,8 +36,13 @@ class LikesController < ApplicationController
 
   def mentionables
     @mentionable = params[:mentionable_type].constantize.find(params[:id])
+    if @mentionable.class.to_s == "Idea"
+      mentionable = @mentionable.student
+    else 
+      mentionable = @mentionable.user
+    end
     @mentionables = Array.new
-    @comment_users = @mentionables.push(name: @mentionable.student.name, path: user_path(@mentionable.student), username: @mentionable.student.username) unless @mentionables.include?(@mentionable.student.name)
+    @comment_users = @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) unless @mentionables.include?(mentionable.name)
     @mentionable.comment_threads.includes(:user).each do |comment|
       @user = @mentionables.push(name: comment.user.name, path: user_path(comment.user), username: comment.user.username) unless @mentionables.include?(comment.user.name)
     end

@@ -11,8 +11,8 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %>
-	    	pitched an idea <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, "javascript:void(0);", :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
+	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %>
+	    	pitched an idea <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
 		   	<h6>
 		   		<% if activity.owner.location_list.length > 0 %>
 			        <span class="location semi-bold m-r-10">
@@ -39,7 +39,7 @@
 	    <div class="activity-content">
 	     <% if activity.trackable.description.length > 450 %>
 		    <%= truncate(markdownify(activity.trackable.description), escape: false, length: 450) %>
-		    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id}" %>
+		    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
 		    <script type="text/javascript">
 		      $('.read-more-<%= activity.trackable.id %>').on('click', function(e) {
 		        e.preventDefault()
@@ -54,11 +54,10 @@
     <div class="card-footer clearfix">
     	<% if activity.owner_id == current_user.id %>
 		<% liked = current_user.voted_for? activity.trackable %>
-		<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left m-r-10'}.to_json) %>
-		<span class="bar"></span>
+		<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 		<% shared = current_user.shared? activity.trackable %>
 		<% form = render(template: 'globals/form.json.jbuilder') %>
-		<%= react_component('Share', {record: activity.trackable_id, shareable_name: activity.trackable.name, form: form, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), shares_count: activity.trackable.shares_count, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left m-r-10'}.to_json) %>
+		<%= react_component('Share', {record: activity.trackable_id, shareable_name: activity.trackable.name, form: form, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), shares_count: activity.trackable.shares_count, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 	<% end %>
         <div class="pull-right">view
 	        <%= link_to(idea_path(activity.trackable)) do %> 

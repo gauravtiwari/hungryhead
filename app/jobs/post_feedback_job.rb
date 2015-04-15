@@ -1,6 +1,6 @@
 class PostFeedbackJob < ActiveJob::Base
 	
-  def perform(feedback, user)
+  def perform(feedback, user, object_path, idea_path, user_url)
    ActiveRecord::Base.connection_pool.with_connection do
     
     feedback.idea.feedbackers.push(user.id)
@@ -13,10 +13,7 @@ class PostFeedbackJob < ActiveJob::Base
    		recipient: feedback.idea
    	)
 
-   	object_path = Rails.application.routes.url_helpers.idea_feedback_url(feedback.idea, feedback.id,  host: 'localhost', port: 3000)
-	idea_path = Rails.application.routes.url_helpers.idea_url(feedback.idea,  host: 'localhost', port: 3000)
-	
-	msg = "<a href='#{Rails.application.routes.url_helpers.user_url(user)}'>#{user.name}</a> left a "+ "<a href='#{object_path}'>feedback <i class='fa fa-fw ion-chatbubbles'></i> </a> for <a href='#{idea_path}'>#{feedback.idea.name}</a> ".html_safe
+	msg = "<a href='#{user_url}'>#{user.name}</a> left a "+ "<a href='#{object_path}'>feedback <i class='fa fa-fw ion-chatbubbles'></i> </a> for <a href='#{idea_path}'>#{feedback.idea.name}</a> ".html_safe
 
 	followers = user.followers_by_type('User')
 	all = followers.push(feedback.idea.user)

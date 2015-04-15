@@ -161,7 +161,7 @@ var RegisterationForm = React.createClass({
         <div className="row m-t-10">
           <div className="col-md-6">
             <div className="checkbox check-success">
-              <input type="checkbox" name="student[terms_accepted]" value="1" id="checkbox1" checked />
+              <input type="checkbox" name="student[terms_accepted]" value="1" id="checkbox1" defaultChecked />
               <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
             </div>
           </div>

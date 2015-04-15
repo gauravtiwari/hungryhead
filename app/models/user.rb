@@ -2,24 +2,6 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   extend FriendlyId
-  
-  include Redis::Objects
-
-  counter :follower_count
-  counter :following_count
-  counter :ideas_count
-  counter :comments_count
-  counter :votes_count
-  counter :feedbacks_count
-  counter :investments_count
-
-  set :recent_followers, maxlength: 8, :marshal => true
-  set :recent_followings, maxlength: 8,  :marshal => true
-  set :recent_activities, maxlength: 8,  :marshal => true
-
-  set :followers_ids
-  set :followings_ids
-  set :activities_ids
 
   friendly_id :slug_candidates
   
@@ -121,11 +103,7 @@ class User < ActiveRecord::Base
     shares = find_shares(:shareable_id => shareable.id, :shareable_type => shareable.class.name)
     shares.size > 0
   end
-
-  def following?(followable)
-    followings_ids.members.include? followable.id.to_s
-  end
-
+  
   private
 
   def add_fullname

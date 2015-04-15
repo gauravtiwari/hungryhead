@@ -15,7 +15,12 @@ class CommentsController < ApplicationController
     @comment.commentable = @commentable
     @comment.user = current_user
     if @comment.save
-      if current_user != @commentable.user
+      if @commentable.class.to_s == "Idea"
+        commenter = @commentable.student
+      else 
+        commenter = @commentable.user
+      end
+      if current_user != commenter
         NewCommentNotificationJob.perform_later(current_user, @comment, @commentable.class.to_s)
       end
       @comment.body.scan(/@\w+/).each do |username|

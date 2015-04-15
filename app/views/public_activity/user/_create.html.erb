@@ -1,27 +1,39 @@
-<% if activity.trackable %>
-<div class="activity-box panel panel-default">
-	<div class="activity-item">
-	<%= content_tag(:div, class: 'activity-header') do %>
-	<div class="user-avatar margin-right">
-		<%= image_tag(activity.owner.avatar.url(:avatar),  width: "40px;") %>
-	</div>
-	<%= content_tag(:span) do %>
-			<%= link_to(your_name(activity.owner, false), "javascript:void(0);", :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card') %> <i class="fa fa-fw ion-person-stalker"></i> joined Hungryhead</span> 
-		<% end %>
-		<%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>
-			<%= content_tag(:li) do %>
-				<%= link_to(profile_people_path(activity.owner.location_list.first.parameterize)) do %>
-					<i class="ion-location green-link"></i> <%= activity.owner.location_list.first %>
-				<% end %>
-			<% end %>
-			<%= content_tag(:li) do %>
-				<%= link_to(user_status_path(activity.owner.slug, activity.trackable_id)) do %>
-					<%= local_time_ago(activity.created_at) %>
-				<% end %>
-			<% end %>
-		<% end %>
-	<% end %>
+<div class="card share post_<%= activity.id %>" data-social="item">
+    <div class="circle" data-toggle="tooltip" title="hello" data-container="body"></div>
+    <div class="card-header clearfix bg-danger-lighter">
+	    <div class="user-pic">
+		    <% if activity.owner.avatar.present? %>
+			    <%= image_tag(activity.owner.avatar.url(:avatar), :"data-src" => "#{activity.owner.avatar.url(:avatar)}", :"data-src-retina" => "#{activity.owner.avatar.url(:square)}", width: "33", height: "33") %>
+			    <% else %>
+			        <span class="placeholder bold text-white"><%= activity.owner.first_name.first + activity.owner.last_name.first %>
+			        </span>
+		    <% end %>
+	    </div>
 
-	</div>
+	    <div class="text-master-dark">
+	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-fw ion-person-stalker"></i> joined Hungryhead</span> 
+
+		   	<h6>
+		   		<% if activity.owner.location_list.length > 0 %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i> 
+			            <%= activity.owner.location_list.first %>
+			        </span>
+		        <% end %>
+		       <% if activity.owner.market_list.length > 0 %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i> 
+			            <%= activity.owner.market_list.first %>
+			        </span>
+		        <% end %>
+		        <span class="date semi-bold">
+		            <i class="fa fa-clock"></i> 
+			        <%= link_to(profile_path(activity.owner), class: "text-master") do %>
+						<%= time_ago_in_words(activity.created_at) %>
+					<% end %>
+		        </span>
+		    </h6>
+	    </div>
+    </div>
 </div>
-<% end %>
+

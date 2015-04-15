@@ -22,21 +22,10 @@ var Trash = React.createClass({
         success: function ( data ) {
           this.setState({loading: false});
           if(data.deleted){
-            var options =  {
-              content: data.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
-
+            $('body').pgNotification({style: "simple", message: data.message, position: "top-right", type: "success",timeout: 5000}).show();
             $('.post_'+this.props.record).addClass('animated fadeOutUp').remove();
           } else if(data.error) {
-             var options =  {
-              content: data.error.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
+            $('body').pgNotification({style: "simple", message: data.error.message, position: "top-right", type: "danger",timeout: 5000}).show();
           }
         }.bind(this),
         error: function(xhr, status, err) {
@@ -62,13 +51,13 @@ var Trash = React.createClass({
     var text = this.state.sure ? 'Are you sure?' : '';
 
     if(this.state.sure) {
-      var confirm_delete = <span>{text} <a onClick={this.handleClick}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
+      var confirm_delete = <span className="text-master">{text} <a className="text-danger" onClick={this.handleClick}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
     } else {
-      var confirm_delete = <a onClick={this.checkDelete}><i className="ion-trash-b"></i> {text}</a>;
+      var confirm_delete = <a className="text-danger" onClick={this.checkDelete}><i className="fa fa-trash-o"></i> {text}</a>;
     }
  
     return (
-      <div>
+      <div className="text-master">
         {confirm_delete}
       </div>
     );

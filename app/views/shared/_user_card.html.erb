@@ -1,7 +1,14 @@
 <%= content_tag(:div, class: 'popover-card') do %>
 	<%= content_tag(:div, class: 'popover-header  text-center') do %>
 		<%= content_tag(:div, class: 'popover-card-logo') do %>
-			<%= image_tag(@user.avatar.url(:avatar), width: "50px") %>
+     <div class="thumbnail-wrapper d32 auto-margin circular b-white m-r-5 m-b-5">
+      <% if @user.avatar.present? %>
+			 <%= image_tag(@user.avatar.url(:avatar), width: "50px") %>
+      <% else %>
+          <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+          </span>
+      <% end %>
+      </div>
 			<h2><%= @user.name %></h2>
 			<span><%= truncate(@user.mini_bio, length: 100) %></span>
 			<% if @user != current_user %>
@@ -18,7 +25,7 @@
       <ul class="stastics-list">
         <li>
           Followers
-          <span><i class="fa ion-person-stalker"></i> <%= @user.followers_count %></span>
+          <span><i class="fa fa-users"></i> <%= @user.followers_count %></span>
         </li>
         <li>
           Investments
@@ -26,7 +33,7 @@
         </li>
         <li>
           Feedbacks
-          <span><i class="fa ion-chatbubbles"></i> <%= @user.feedbacks_count %></span>
+          <span><i class="fa fa-comment"></i> <%= @user.feedbacks_count %></span>
         </li>
       </ul>
     </div>

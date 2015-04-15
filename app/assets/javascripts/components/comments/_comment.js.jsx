@@ -45,20 +45,10 @@ var Comment = React.createClass({
         this.setState({deleting: false});
         this.setState({sure: false});
         if(data.deleted){
-            var options =  {
-              content: data.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
+            $('body').pgNotification({style: "simple", message: data.message, position: "top-right", type: "success",timeout: 5000}).show();
             this.props.removeComment(index, id);
           } else if(data.error) {
-             var options =  {
-              content: data.error.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
+            $('body').pgNotification({style: "simple", message: data.error.message, position: "top-right", type: "danger",timeout: 5000}).show();
           }
       }.bind(this),
       error: function(xhr, status, err) {
@@ -89,23 +79,6 @@ var Comment = React.createClass({
 
     var cx = React.addons.classSet;
 
-    var replies_count = [];
-    var commentChildNodes = _.map(comment.childrens, function ( children, index ) {
-      if(children.created_at !== 'undefined') {
-        var date = moment(children.created_at).fromNow();
-      } else {
-        var now = moment()._d;
-        var date = moment(now).fromNow();
-      }
-
-      if(comment.id == children.parent_id) {
-        replies_count.push(children);
-        return  <CommentChildren index = {index} comment = {children} removeChildrenComment = {this.removeChildrenComment} key={ children.id } />
-      }
-
-    });
-
-
     var deleteClass = cx({
       'fa fa-spinner fa-spin': this.state.deleting
     });
@@ -125,44 +98,46 @@ var Comment = React.createClass({
 
     if(comment.is_owner) {
       if(this.state.sure) {
-        var confirm_delete = <span>{delete_text} <a onClick={this.handleDelete.bind(this, index, comment.id)}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
+        var confirm_delete = <span>{delete_text} <a className="text-danger" onClick={this.handleDelete.bind(this, index, comment.id)}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
       } else {
-        var confirm_delete = <a onClick={this.checkDelete}><i className="ion-trash-b"></i> {delete_text}</a>;
+        var confirm_delete = <a className="text-danger" onClick={this.checkDelete}><i className="fa fa-trash-o"></i> {delete_text}</a>;
       }       
+    }
+
+    if(this.state.comment.avatar) {
+      var imgSrc = <img width="40px" src={ this.state.comment.avatar } />;
+    } else {
+      var imgSrc = <span className="placeholder bold text-white">
+                {this.state.comment.user_name_badge}
+              </span>;
     }
 
     var html = converter.makeHtml(this.state.comment.comment);
 
     return (
-       <li key={this.props.key} className="comment" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>
+       <li key={this.props.key} className="comment padding-10 fs-12 p-b-10" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>
          <div className="box-generic">
+            <div className="user-pic m-r-10 pull-left inline">
+              <a href="javascript:void(0)" data-popover-href={this.state.comment.user_url} className='load-card'>
+                {imgSrc}
+              </a>
+            </div> 
           <div className="timeline-top-info" id={html_id}>
-          <div className="user-avatar margin-right">
-            <a href="javascript:void(0)" data-popover-href={this.state.comment.user_url} className='load-card'><img width="40px" src={ this.state.comment.avatar } /></a>
-             </div> 
-              <div className="comment-body">
-                  <span>
-                  <span dangerouslySetInnerHTML={{__html: html}}></span></span>
-                  <div className="timeline-bottom">
-                    <ul className="social-actions">
-                      <li><Like vote_button={false} css_class="like-link" voted= {this.state.comment.voted}  vote_url = {this.state.comment.vote_url} votes_count= {this.state.comment.votes_count} /></li>
-                      <li> <a className='like-link' onClick={this.openReplyForm}>
-                        Reply
-                        <span className="count">{replies_count.length}</span>
-                      </a></li>
-                      <li><span className="count"><em>{LocalTime.relativeTimeAgo(new Date(this.state.comment.created_at))}</em> </span></li>
-                    </ul>
-                     <div className="post-actions float-right">
-                      {confirm_delete}
-                    </div>
+            <div className="comment-body">
+                <span>
+                <span dangerouslySetInnerHTML={{__html: html}}></span></span>
+                <div className="timeline-bottom">
+                  <ul className="social-actions no-style no-padding m-t-5">
+                    <li><Like vote_button={false} css_class="like-link pull-left p-r-10 b-r b-grey b-dashed" voted= {this.state.comment.voted}  vote_url = {this.state.comment.vote_url} votes_count= {this.state.comment.votes_count} /></li>
+                    <li className='like-link pull-left p-l-10'><span className="count"><em>{moment(this.state.comment.created_at).fromNow()}</em> </span></li>
+                  </ul>
+                   <div className="post-actions pull-right">
+                    {confirm_delete}
                   </div>
-              </div>
+                </div>
+            </div>
             </div>
           </div>
-          <ul className="comment-replies" id={html_id}>
-            {commentChildNodes}
-            <ChildCommentForm onReplyCommentSubmit={this.props.onReplyCommentSubmit} comment={this.state.comment} />
-          </ul>
         </li>
 
     )

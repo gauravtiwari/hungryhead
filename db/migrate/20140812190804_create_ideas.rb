@@ -26,6 +26,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :cached_market_list
       t.string :cached_technology_list
       t.integer :feedbacks_count, default: 0
+      t.integer :investments_count, default: 0
       t.integer :followers_count, default: 0
       t.integer :comments_count,default: 0
       t.integer :cached_votes_total, default: 0

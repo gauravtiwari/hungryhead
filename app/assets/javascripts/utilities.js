@@ -2,12 +2,13 @@ var $ = jQuery.noConflict();
 
 $(document).ready(function () {
   //Load user data remote
-  $(document).on('click', '.load-card', function() {
+  $(document).on('mouseover', '.load-card', function() {
     var callback, el, url;
     el = $(this);
     url = $(this).data('popover-href');
     callback = function(response) {
-      return el.unbind('click').popover({
+      $('.load-card').popover('destroy');
+      return el.unbind('mousehover').popover({
         content: response,
         html: true,
         container: 'body',

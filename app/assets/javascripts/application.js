@@ -14,6 +14,7 @@
 //= require jquery-ui/autocomplete
 //= require jquery-ui/position
 //= require jquery-ui/draggable
+//= require jquery-ui/effect.all
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -25,6 +26,7 @@
 //= require select2
 //= require jquery.atwho
 //= require typer
+//= require moment
 //= require classie
 //= require jquery.validate
 //= require jquery.validate.additional-methods

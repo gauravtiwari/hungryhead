@@ -25,3 +25,33 @@
 .add-comment {
   overflow: hidden;
 }
+.comment {
+  border-top: 1px solid #f2f2f2;
+}
+.comment-body {
+  overflow: hidden;
+}
+.card .placeholder {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+}
+.comment p {
+  margin-bottom: 0;
+}
+.card .comment-box img {
+  width: 40px;
+}
+.card .comment-box .placeholder { 
+  padding-top: 8px;
+}
+.comment:last-child {
+  border-bottom: none;
+}
+ul > li, ol > li {
+  padding-left: 0px;
+  line-height: 18px;
+}
+.post-actions {
+  display: none;
+}

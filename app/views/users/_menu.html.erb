@@ -8,7 +8,7 @@
 		</li>
 	</ul>
 
-	<div class="pull-right profile-action-buttons m-t-5 col-md-5">
+	<div class="pull-right profile-action-buttons m-t-5 m-b-5 col-md-5">
 		<% if @user != current_user %>
 		<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
 		<%= content_tag(:div) do %>

@@ -11,7 +11,7 @@ class SharesController < ApplicationController
     @activity = @share.create_activity(
     key: 'share.create',
     owner: current_user,
-    recipient: @shareable.user
+    recipient: @shareable.student
     )
     render :show
   end
