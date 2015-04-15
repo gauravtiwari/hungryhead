@@ -6,14 +6,8 @@ class SharesController < ApplicationController
 
   def create
     @shareable = params[:shareable_type].constantize.find(params[:shareable_id])
-    @share = Share.new share_params
-    @share.update_attributes!(user: current_user, parameters: {shareable_name: @shareable.name}, shareable: @shareable, status: 1)
-    @activity = @share.create_activity(
-    key: 'share.create',
-    owner: current_user,
-    recipient: @shareable.student
-    )
-    render :show
+    @share = ShareService.new(params, current_user, @shareable).create
+    render :show, status: :created
   end
 
   # DELETE /share/1

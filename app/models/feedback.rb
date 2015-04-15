@@ -16,7 +16,14 @@ class Feedback < ActiveRecord::Base
   acts_as_commentable
 
   include PublicActivity::Model
+  include Redis::Objects
+  tracked only: [:create],
+  owner: ->(controller, model) { controller && controller.current_user },
+  recipient: ->(controller, model) { model && model.idea.user }
 
+  counter :votes_counter
+  counter :comments_counter
+  
   #Hooks
   before_destroy :remove_activity
 

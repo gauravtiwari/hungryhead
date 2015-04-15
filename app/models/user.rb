@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
   include ActiveModel::Validations
+  include Redis::Objects
+  include PublicActivity::Model
   extend FriendlyId
 
   friendly_id :slug_candidates
@@ -9,7 +11,14 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  include PublicActivity::Model
+  list :followers_ids
+  list :followings_ids 
+  counter :followers_counter
+  counter :followings_counter
+  counter :feedbacks_counter
+  counter :investments_counter
+  sorted_set :activities_ids
+
 
   enum state: { inactive: 0, published: 1}
   enum role: { user: 0, entrepreneur: 1, mentor: 2 }

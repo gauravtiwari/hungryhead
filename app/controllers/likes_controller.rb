@@ -6,26 +6,19 @@ class LikesController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def like
+    authorize @votable
     if current_user.voted_for? @votable
-      authorize @votable.user
-      @votable.unliked_by current_user
-      UnlikeNotificationJob.perform_later(@votable)
-      render json: { voted: false, url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), votes_count: @votable.cached_votes_total }
+      @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
+      @like = LikeService.new(current_user, @votable, @owner, profile_url(current_user)).unlike
     else
-      if @votable.class.to_s == "Idea"
-        voter = @votable.student
-      else 
-        voter = @votable.user
-      end
-
-      authorize voter
-      
-      @votable.liked_by current_user
-      if current_user != voter
-        NewNotificationJob.perform_later(current_user, @votable, "#{@votable.class.to_s.downcase}")
-      end
-      render json: { voted: true, url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), votes_count: @votable.cached_votes_total }
+      @like = LikeService.new(current_user, @votable, @owner, profile_url(current_user)).like
     end
+    voted = current_user.voted_for? @votable
+    render json: { 
+      voted: voted, 
+      url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), 
+      votes_count: @votable.cached_votes_total 
+    }
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end
 
@@ -58,8 +51,8 @@ class LikesController < ApplicationController
   def load_socializable
     @socializable =
     case
-    when organization_id = params[:organization_id]
-      Institution.find(organization_id)
+    when school_id = params[:school_id]
+      School.find(school_id)
     when idea_id = params[:idea_id]
       Idea.find_by_id(idea_id)
     when user_id = params[:user_id]

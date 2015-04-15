@@ -154,6 +154,7 @@ gem 'nested_form'
 #Active Record Session
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
+
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'
 

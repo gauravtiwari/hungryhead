@@ -4,6 +4,10 @@ class InvestmentPolicy < ApplicationPolicy
   	current_user == record.user
   end
 
+ def like?
+  	current_user != record.user
+  end
+
   def show?   ; false; end
   def create? ; current_user != record.idea.student && record.idea.published? ; end
   def destroy?; current_user == record.user; end

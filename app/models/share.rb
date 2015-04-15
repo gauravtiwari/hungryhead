@@ -10,6 +10,10 @@ class Share < ActiveRecord::Base
 	acts_as_votable
 
 	include PublicActivity::Model
+	tracked only: [:create],
+	owner: ->(controller, model) { controller && controller.current_user },
+	recipient: ->(controller, model) { model && model.shareable.user }
+	
 	before_destroy :remove_activity
 
 	private

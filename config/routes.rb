@@ -171,7 +171,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create, :update, :index, :destroy]
 
-  resources :shares, only: [:create, :destroy]
+  resources :shares, only: [:create, :destroy, :show]
 
   resources :ideas do
     resources :idea_messages, only: [:create, :destroy, :show, :index]

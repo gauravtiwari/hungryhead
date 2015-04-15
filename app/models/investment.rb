@@ -12,7 +12,14 @@ class Investment < ActiveRecord::Base
   	has_merit
 
 	include PublicActivity::Model
-  	
+	include Redis::Objects
+	tracked only: [:create],
+	owner: ->(controller, model) { controller && controller.current_user },
+	recipient: ->(controller, model) { model && model.idea.user }
+
+	counter :votes_counter
+	counter :comments_counter
+
 	before_destroy :remove_activity
 	
 	private

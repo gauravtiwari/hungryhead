@@ -3,9 +3,20 @@ class Idea < ActiveRecord::Base
   #Includes Modules
   extend FriendlyId
   include PublicActivity::Model
+  include Redis::Objects
   friendly_id :slug_candidates
 
   acts_as_taggable_on :markets, :locations, :technologies
+
+  list :followers_ids
+  counter :followers_counter
+  counter :investments_counter
+  counter :feedbacks_counter
+  counter :views_counter
+  counter :votes_counter
+  counter :comments_counter
+  
+  sorted_set :activities_ids
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }

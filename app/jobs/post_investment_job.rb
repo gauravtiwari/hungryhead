@@ -2,12 +2,7 @@ class PostInvestmentJob < ActiveJob::Base
 	
   def perform(investment, user, object_path, idea_path, user_url)
    ActiveRecord::Base.connection_pool.with_connection do
-   	#Post feedback activity
-   	investment.create_activity(key: 'investment.create', 
-   		owner: user, 
-   		recipient: investment.idea
-   	)
-
+   	
 	msg = "<a href='#{user_url}'>#{user.name}</a> made a <i class='fa fa-fw fa-dollar'></i> #{investment.amount} "+ "<a href='#{object_path}'>investment</a> in <a href='#{idea_path}'>#{investment.idea.name}</a>".html_safe
 
 	followers = user.followers_by_type('User')

@@ -22,9 +22,10 @@
           var public_channel = pusher.subscribe("public-notifications");
           if(channel) {
             channel.bind('new_badge', function(data) {
-              setTimeout(function(){
-                 $('body').pgNotification({style: "simple", message: "You have earned a "+data.data.custom_fields.name+" badge " + "<img src=" + data.data.custom_fields.image + " width='30px' />", position: "top-right", type: "success",timeout: 5000}).show();
-              }, 5000);
+              $('body').pgNotification({style: "simple", message: "You have earned a "+data.data.custom_fields.name+" badge " + "<img src=" + data.data.custom_fields.image + " width='30px' />", position: "top-right", type: "success",timeout: 5000}).show();
+            });
+            channel.bind('new_notification', function(data){
+              $('body').pgNotification({style: "simple", message: data.data, position: "top-right", type: "success",timeout: 5000}).show();
             });
           }
       <% end %>

@@ -27,6 +27,10 @@ class IdeaPolicy < ApplicationPolicy
   	show?
   end
 
+  def like?
+    follow?
+  end
+
   def invite_team?
   	record.user == current_user
   end
