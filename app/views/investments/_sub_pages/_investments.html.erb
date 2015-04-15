@@ -1,0 +1,13 @@
+<% if @investments.length > 0 %>
+  <% @investments.each do |investment| %>
+    <%= render partial: 'investments/_sub_pages/investment', locals: {investment: investment} %>
+  <% end %>
+  <% else %>
+    <div class="widget-box">
+	    <div class="no-content">
+	      No feedbacks received.
+	    </div>
+  	</div>
+<% end %>
+
+<%= will_paginate(@investments) %>
