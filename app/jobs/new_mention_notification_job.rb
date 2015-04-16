@@ -1,13 +1,13 @@
 class NewMentionNotificationJob < ActiveJob::Base
 
-  def perform(user, recipient)
+  def perform(user, recipient, msg)
 
     notification = Notification.create!(
         reciever_id: recipient.id,
         sender_id: user.id,
         parameters: {
           verb: "mentioned",
-          notifiable_type: "Mention", 
+          notifiable_type: "Mention",
           trackable: recipient.id,
           msg: msg,
           read: false

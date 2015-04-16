@@ -62,7 +62,7 @@ var Upvote = React.createClass({
     }
 
     var text = this.state.voted ? 'You liked this' : 'Like';
-    
+
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
 
     if(this.state.votes_count > 0) {
@@ -75,7 +75,7 @@ var Upvote = React.createClass({
               </span>
               {voters}
             </div>
-           
+
     );
   }
 

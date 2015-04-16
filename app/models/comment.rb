@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true, counter_cache: true, touch: true
 	
   #Model Scopes
-  default_scope -> { order('created_at ASC') }
+  default_scope -> { order('created_at DESC') }
 
   # Helper class method that allows you to build a comment
   # by passing a commentable object, a user_id, and comment text

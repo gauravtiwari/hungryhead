@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
     if @comment.save
      CommentNotificationService.new(@comment, @commentable, current_user, profile_url(current_user)).notify
-     CreateMentionService.new(@comment, @comment.body).mention
+     CreateMentionService.new(@comment, @comment.body, profile_url(current_user)).mention
      expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
     end
   end

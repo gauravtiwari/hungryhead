@@ -129,7 +129,7 @@ var Comment = React.createClass({
                 <div className="timeline-bottom">
                   <ul className="social-actions no-style no-padding m-t-5">
                     <li><Like vote_button={false} css_class="like-link pull-left p-r-10 b-r b-grey b-dashed" voted= {this.state.comment.voted}  vote_url = {this.state.comment.vote_url} votes_count= {this.state.comment.votes_count} /></li>
-                    <li className='like-link pull-left p-l-10'><span className="count"><em>{moment(this.state.comment.created_at).fromNow()}</em> </span></li>
+                    <li className='like-link pull-left p-l-10'><span className="count">{moment(this.state.comment.created_at).fromNow()}</span></li>
                   </ul>
                    <div className="post-actions pull-right">
                     {confirm_delete}

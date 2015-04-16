@@ -42,7 +42,7 @@
 .card .comment-box img {
   width: 40px;
 }
-.card .comment-box .placeholder { 
+.card .comment-box .comment .placeholder { 
   padding-top: 8px;
 }
 .comment:last-child {

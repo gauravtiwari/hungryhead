@@ -65,7 +65,7 @@ var CommentBox = React.createClass({
   },
 
   loadMoreComments: function() {
-    var loadingText = <i className="ion-loading-d"></i>;
+    var loadingText = <i className="fa fa-spinner fa-spin"></i>;
     this.setState({text: loadingText});
      $.get(this.state.comments_path, function(data){
       var new_comments = this.state.comments.concat(data.comments);
@@ -110,7 +110,7 @@ var CommentBox = React.createClass({
       'fa fa-spinner fa-spin': this.state.comment_loading
     });
     if(this.state.comments_path && !this.state.show_comment_bar) {
-    var pagination =  <div className="pagination-box text-center show">
+    var pagination =  <div className="pagination-box text-center show padding-5">
               <a onClick={this.loadMoreComments}><i className="ion-refresh"></i> {this.state.text}</a>
             </div>;
     } else {
@@ -120,7 +120,7 @@ var CommentBox = React.createClass({
 
     var text = this.state.count > 1 || this.state.count === 0 ? 'comments' : 'comment';
 
-    if(this.state.comments.length <= 0 && this.state.count > 0 && this.state.show_comment_bar) {
+    if(this.state.count > 0 && this.state.show_comment_bar) {
       var show_comment_bar =  <div className="comments">
             <span><a className="b-b b-grey p-b-5" onClick={this.loadComments}><i className={comment_loading_classes}></i> Show {this.state.count} {text}</a></span>
           </div>;

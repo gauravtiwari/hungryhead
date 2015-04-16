@@ -19,7 +19,7 @@ class CommentNotificationService
 	end
 
 	def msg
-		 msg = "<a href='#{@profile_url}'>#{@user.name}</a> commented your " + "#{@commentable.class.to_s.downcase}".html_safe
+		 msg = "<a href='#{@profile_url}'>#{@user.name}</a> commented on your " + "#{@commentable.class.to_s.downcase}".html_safe
 	end
 
 end

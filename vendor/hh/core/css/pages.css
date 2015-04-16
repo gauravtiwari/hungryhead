@@ -7911,7 +7911,7 @@ input.list-view-search {
   padding: 15px 15px 12px;
   border-bottom: 1px solid #daeffd;
 }
-.card.share .card-header:hover {
+.card.share:hover .card-header {
   background: #daeffd;
   cursor: pointer;
   border-top-right-radius: 2px;
@@ -8009,7 +8009,6 @@ input.list-view-search {
 }
 .card.share .card-footer:hover {
   background: #daeffd;
-  cursor: pointer;
 }
 .card.share .card-footer:hover .reactions,
 .card.share .card-footer:hover .time {
