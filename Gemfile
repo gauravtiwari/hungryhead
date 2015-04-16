@@ -139,8 +139,8 @@ gem 'mailboxer', :github => 'mailboxer/mailboxer'
 gem 'jquery-validation-rails'
 gem 'modernizr-rails'
 
-#MarkDown Editor
-gem 'redcarpet'
+#Active Record Session
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 #Activity feed
 gem 'public_activity'

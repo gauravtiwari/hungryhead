@@ -21,7 +21,7 @@ json.user do
 		json.linkedin_url @user.linkedin_url
 		json.twitter_url @user.twitter_url
 		json.location @user.location_list.first
-		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first 
+		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first
 	end
 
 	json.is_owner @user == current_user
@@ -43,11 +43,6 @@ json.user do
 			json.markets @user.market_list.each do |tag|
 				json.tag tag
 				json.url profile_people_path(tag.parameterize)
-			end
-
-			json.technologies @user.technology_list.each do |tag|
-				json.tag tag
-				json.url profile_path(tag.parameterize)
 			end
 		end
 

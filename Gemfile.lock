@@ -16,6 +16,15 @@ GIT
       activemodel (~> 4.0)
 
 GIT
+  remote: git://github.com/rails/activerecord-session_store.git
+  revision: 2d9517d0f26281e76e80e63ca202fb7dafbe27cb
+  specs:
+    activerecord-session_store (0.1.1)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
+
+GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: 15ebc37b3f1b424ce7f5a160d2a8f890023208e6
   specs:
@@ -685,6 +694,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_link_to
+  activerecord-session_store!
   acts-as-taggable-on
   acts_as_commentable_with_threading
   acts_as_votable
@@ -773,7 +783,6 @@ DEPENDENCIES
   rails_best_practices
   rbeautify
   react-rails (~> 1.0)
-  redcarpet
   redis
   redis-objects
   responders
