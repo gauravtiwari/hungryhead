@@ -88,7 +88,7 @@ var ElevatorPitch = React.createClass({
           <div className="panel-title b-b b-grey p-b-5 text-master">Elevator Pitch</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">
-          <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
+          <div className={classes}><h3 className="no-margin" dangerouslySetInnerHTML={{__html: html}}></h3></div>
         </div>
       </div>
     );

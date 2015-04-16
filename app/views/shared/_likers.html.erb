@@ -1,19 +1,47 @@
 <div class="modal fade" tabIndex="-1" role="dialog" id="likersListPopup" aria-labelledby="modalPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
-   <div class="profile-wrapper-title">
-      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <h4 class="modal-title" id="likersListPopupLabel">People who liked this</h4>
-    </div>
-  <div class="modal-body white-background">
-  <ul class="followers-list">
+<div class="widget-11-2 panel no-border no-margin widget-loader-circle">
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<div class="panel-heading">
+ <div class="panel-title">
+  People who liked this
+  </div>
+  <div class="panel-controls">
+      <ul>
+          <li class="hidden-xlg">
+            <div class="dropdown">
+              <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+              <i class="portlet-icon portlet-icon-settings"></i>
+              </a>
+              <ul class="dropdown-menu pull-right" role="menu">
+              <li><a href="#">AAPL</a>
+              </li>
+              <li><a href="#">YHOO</a>
+              </li>
+              <li><a href="#">GOOG</a>
+              </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+              <a data-toggle="refresh" class="portlet-refresh text-black" href="#">
+                  <i class="portlet-icon portlet-icon-refresh"></i>
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>
+<div class="auto-overflow">
+  <ul class="trending-list p-t-20 no-style">
     <% @likers.each do |f| %>
       <% cache ["liker_list_follows_#{current_user.follows?(f)}", f] do %>
        <%= render partial: 'shared/liker', locals: {f: f} %>
       <% end %>
     <% end %>
-    </ul>
-  </div>
+  </ul>
+</div>
+</div>
 </div>
 </div>
 </div>

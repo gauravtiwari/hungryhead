@@ -42,8 +42,8 @@
 <div class="box-shadow bg-white">
 <div class="profile-nav p-l-10 row">
     <div class="col-md-5 no-padding">
-      <ul class="profile-name inline no-style no-margin">
-        <li class="inline b-r b-grey p-l-10 p-t-15 p-b-15 p-r-15 active">
+      <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
+        <li class="inline b-r b-grey b-dashed p-l-10 p-r-15 active">
         <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
           <% if @user.avatar.present? %>
           <%= image_tag(@user.avatar.url(:avatar), :"data-src" => "#{@user.avatar.url(:avatar)}", :"data-src-retina" => "#{@user.avatar.url(:square)}", width: "55", height: "55") %><% else %>
@@ -53,17 +53,17 @@
           </div>
           <a class="bold text-success b-b b-grey p-b-5 m-l-45 fs-13" href="" title="">Idea</a>
         </li>
-        <li class="inline b-r b-grey p-l-15 p-t-15 p-b-15 p-r-15">
+        <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
           <a class="text-brand bold fs-13" href="" title="">Feedbacks</a>
         </li>
-        <li class="inline b-r b-grey p-l-15 p-t-15 p-b-15 p-r-15">
+        <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
           <a class="text-brand bold fs-13" href="" title="">Q&A</a>
         </li>
       </ul>
               
   </div>
 
-  <div class="profile-action-buttons pull-right m-t-10 p-r-20 col-md-7">
+  <div class="profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
     <% if !policy(@idea).collaborator? %>
       <%= react_component('Follow',{:followed => followed?(@idea)}) %>
       <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.can_feedback?(current_user) }) %>

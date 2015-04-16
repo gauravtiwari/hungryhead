@@ -42,8 +42,8 @@
             });
           });
           channel.bind('new_notification', function(data){
-          console.log(data);
-            $('body').pgNotification({style: "simple", message: ""+data.msg+"", position: "top-right", type: "success",timeout: 5000}).show();
+
+            $('body').pgNotification({style: "simple", message: data.data.msg, position: "top-right", type: "success",timeout: 5000}).show();
           });
         }
       <% end %>
@@ -69,7 +69,5 @@
         </div>
       </div>
     </div>
-
-    <%= render partial: 'globals/search' %>
   </body>
 </html>

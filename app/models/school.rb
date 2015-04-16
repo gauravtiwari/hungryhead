@@ -39,6 +39,8 @@ class School < ActiveRecord::Base
 	end
 
 	after_save :create_slug
+	after_save :load_into_soulmate
+  	before_destroy :remove_from_soulmate
 
 	private
 
@@ -46,6 +48,24 @@ class School < ActiveRecord::Base
 		words = name.split(' ')
 		name = ""
 		words.map{|w| w.first.upcase }.join(" ")
+	end
+
+	def load_into_soulmate
+		loader = Soulmate::Loader.new("schools")
+		if logo
+		  image =  logo.url(:avatar)
+		  resume = location
+		else 
+		  image= "http://placehold.it/30"
+		end
+		loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
+		  "link" => Rails.application.routes.url_helpers.profile_path(self)
+		  })
+	end
+	 
+	def remove_from_soulmate
+		loader = Soulmate::Loader.new("universities")
+	  	loader.remove("id" => id)
 	end
 
 	def create_slug

@@ -1,8 +1,8 @@
 class NewFollowNotificationJob < ActiveJob::Base
 
-  def perform(user, recipient, followable_path, user_path)
+  def perform(user, recipient, user_path)
 
-    msg = "<a href='#{user_path}'>#{user.name}</a> followed "+ "<a href='#{followable_path}'>#{recipient.name}</a>".html_safe
+    msg = "<a href='#{user_path}'>#{user.name}</a> followed "+ "You".html_safe
     
     ActiveRecord::Base.connection_pool.with_connection do
       if recipient.class.name == "User"  

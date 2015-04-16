@@ -76,11 +76,11 @@
 
     Suggestion.prototype.render = function(callback) {
       if(this.data.image && this.data.description) {
-        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\">\n  " + "<img src=\"" + this.data.image + "\" class=\"autocomplete search-image\" />" + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "\n" + "<p class=\"autocomplete search-description \">" + this.data.description + "</p></li>";
+        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\">\n  " + "<img src=\"" + this.data.image + "\" width=\"30px\" class=\"autocomplete search-image\" />" + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "\n" + "<p class=\"autocomplete search-description \">" + this.data.description + "</p></li>";
       } else if(this.data.image && !this.data.description) {
-        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\">\n  " + "<img src=\"" + this.data.image + "\" class=\"autocomplete search-image\" />" + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "</li>";
+        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\">\n  " + "<img src=\"" + this.data.image + "\" width=\"30px\"  class=\"autocomplete search-image\" />" + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "</li>";
       } else if(this.data.description && !this.data.image) {
-        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\">\n  " + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "\n" + "<p class=\"autocomplete search-description \">" + this.data.description + "</p></li>";
+        return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion\"><div class=\"thumbnail-wrapper d32 circular b-white m-r-10\"><span class=\"placeholder bold text-white\">" + this.term.split(' ')[0].split('')[0].toUpperCase() + this.term.split(' ')[1].split('')[0].toUpperCase() + "</span></div>" + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "\n" + "<p class=\"autocomplete search-description \">" + this.data.description + "</p></li>";
       } else {
         return "<li id=\"" + this.id + "\" class=\"soulmate-suggestion no-image\">\n  " + "<span class=\"autocomplete search-term \">" + (callback(this.term, this.data, this.type, this.index, this.id)) + "</span>" + "</li>";
       }
@@ -198,7 +198,7 @@
     };
 
     SuggestionCollection.prototype._renderTypeStart = function(type) {
-      return "\n  <div class=\"soulmate-type\">" + type + "</div>\n<li class=\"soulmate-type-container\">\n  <ul class=\"soulmate-type-suggestions\">";
+      return "\n  <div class=\"soulmate-type panel\"><span class=\"panel-title\">" + type + "</span>\n</div>\n<li class=\"soulmate-type-container\">\n  <ul class=\"soulmate-type-suggestions\">";
     };
 
     SuggestionCollection.prototype._renderTypeEnd = function() {

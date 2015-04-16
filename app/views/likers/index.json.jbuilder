@@ -11,6 +11,7 @@ json.payload do
     end
     json.about_me i.voter.mini_bio
     json.is_following current_user.follows?(i.voter)
+    json.user_name_badge i.voter.first_name.first + i.voter.last_name.first
     json.followed followed?(i.voter)
     json.not_current_user i.voter != current_user
   end

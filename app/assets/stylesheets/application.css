@@ -34,6 +34,7 @@
  *= require profile
  *= require login
  *= require school
+ *= require search
  *= require nav
  *= require comments
  *= require footer

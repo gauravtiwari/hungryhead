@@ -47,20 +47,4 @@ class LikesController < ApplicationController
   def load_votable
     @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
   end
-
-  def load_socializable
-    @socializable =
-    case
-    when school_id = params[:school_id]
-      School.find(school_id)
-    when idea_id = params[:idea_id]
-      Idea.find_by_id(idea_id)
-    when user_id = params[:user_id]
-      User.find(user_id)
-    else
-      raise ArgumentError, "Unsupported socializable model, params: " +
-        params.keys.inspect
-    end
-    raise ActiveRecord::RecordNotFound unless @socializable
-  end
 end

@@ -15,7 +15,7 @@ class Idea < ActiveRecord::Base
   counter :views_counter
   counter :votes_counter
   counter :comments_counter
-  
+
   sorted_set :activities_ids
 
   #Enumerators for handling states
@@ -34,6 +34,8 @@ class Idea < ActiveRecord::Base
   before_destroy :remove_activity
   before_create :add_fund
   after_save :create_slug
+  after_save :load_into_soulmate
+  before_destroy :remove_from_soulmate
   #Associations
 
   belongs_to :student, touch: true, counter_cache: true
@@ -135,6 +137,24 @@ class Idea < ActiveRecord::Base
     previous.delete_all
     slugs.create!(slug: slug)
   end
+
+  def load_into_soulmate
+    if self.published? && self.everyone?
+      loader = Soulmate::Loader.new("ideas")
+      image =  logo.url(:mini)
+      loader.add("term" => name, "image" => image, "description" => high_concept_pitch, "id" => id, "data" => {
+        "link" => Rails.application.routes.url_helpers.idea_path(self)
+        })
+    else
+      remove_from_soulmate
+    end
+  end
+ 
+  def remove_from_soulmate
+    loader = Soulmate::Loader.new("startups")
+      loader.remove("id" => id)
+  end
+
 
   def slug_candidates
     [:name, [:name, :id]]

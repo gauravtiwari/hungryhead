@@ -61,7 +61,7 @@ input.error:-webkit-autofill {
 	font-size: 22px;
 }
 .text-green {
-	color: #56d6aa!important;
+	color: #00b27f!important;
 }
 .main-button.invested {
   background: #ff9933;
@@ -85,9 +85,12 @@ input.error:-webkit-autofill {
   text-align: center;
 }
 .bg-green {
-  background-color: #56d6aa!important;
+  background-color: #00b27f!important;
 }
-
+.btn-green {
+  background-color: #00b27f!important;
+  border: 1px solid #00b27f;
+}
 .bg-solid-dark {
   background: #4d86c9!important;
 }
@@ -138,6 +141,14 @@ input.error:-webkit-autofill {
   position: absolute;
   top:10px;
 }
+.idea-badge {
+  display: block;
+}
+.absolute.idea-badge {
+  position: absolute;
+  top: -6px;
+  right: -30px;
+}
 .jumbotron .cover-photo {
   background-color: #5b98e0;
 }
@@ -162,6 +173,7 @@ input.error:-webkit-autofill {
   font-size: 11px;
   text-align: center;
   padding: 0;
+  padding-top: 2px;
 }
 .white-bg {
 	background: #fff;
@@ -189,6 +201,17 @@ input.error:-webkit-autofill {
 .placeholder {
   background: #f8d053;
   display: block;
+}
+.idea-badge {
+  padding-top: 2px;
+}
+.thumbnail-wrapper.d24 {
+  width: 24px;
+  height: 24px;
+}
+.thumbnail-wrapper.d24.idea-badge:hover {
+  width: 140px;
+  border-radius: 5px;
 }
 .user-pic .placeholder {
 	padding:5px;
@@ -262,14 +285,11 @@ input.error:-webkit-autofill {
 .card-follow-button {
   margin-top: 10px;
 }
-.card-follow-button .main-button {
+.card-follow-button .btn {
   float: none!important;
 }
-.card-follow-button .main-button.followed span {
+.card-follow-button .btn span {
   color: #fff;
-}
-.card-follow-button .main-button span {
-  color: #4285f4;
 }
 .stastics-list {
   display: flex;

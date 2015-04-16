@@ -7,7 +7,9 @@
         <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
         <% end %>
       </div>
-      <a href="#" class="search-link b-l b-grey b-dashed p-l-15" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
+      <%= form_tag('/search/search', class: 'inline')  do %>
+        <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link b-l b-grey b-dashed p-l-15 no-border overlay-search bg-transparent", autofocus: true %>
+      <% end %>
       <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
         <li class="inline p-r-15 p-l-15 fs-14 bold">
           <a class="text-brand fs-22" href="" title="Home">

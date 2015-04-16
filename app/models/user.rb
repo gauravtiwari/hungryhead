@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
 
   list :followers_ids
-  list :followings_ids 
+  list :followings_ids
   counter :followers_counter
   counter :followings_counter
   counter :feedbacks_counter
@@ -65,6 +65,8 @@ class User < ActiveRecord::Base
   before_save :add_fullname
   before_create :seed_fund
   after_save :create_slug
+  after_save :load_into_soulmate
+  before_destroy :remove_from_soulmate
 
   acts_as_follower
   acts_as_followable
@@ -139,10 +141,37 @@ class User < ActiveRecord::Base
 
   def create_slug
   	return if !slug_changed? || slug == slugs.last.try(:slug)
-  	#re-use old slugs
   	previous = slugs.where('lower(slug) = ?', slug.downcase)
   	previous.delete_all
   	slugs.create!(slug: slug)
+  end
+
+  def load_into_soulmate
+    if type == "Student"
+      soulmate_loader("students")
+    elsif type == "Mentor"
+      soulmate_loader("mentors")
+    elsif type == "Teacher"
+      soulmate_loader("teachers")
+    end
+  end
+
+  def soulmate_loader(type)
+    loader = Soulmate::Loader.new(type)
+    if avatar
+      image =  avatar.url(:avatar)
+      resume = school.name
+    else 
+      image= "http://placehold.it/30"
+    end
+    loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
+      "link" => Rails.application.routes.url_helpers.profile_path(self)
+      })
+  end
+ 
+  def remove_from_soulmate
+    loader = Soulmate::Loader.new("students")
+      loader.remove("id" => id)
   end
 
   protected

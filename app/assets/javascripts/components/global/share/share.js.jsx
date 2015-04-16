@@ -18,6 +18,20 @@ var Share = React.createClass({
     };
   },
 
+  loadSharers: function() {
+    this.setState({loading: true});
+    var path = this.props.sharers_path;
+    $('body').append($('<div>', {class: 'sharers_list', id: 'listing_modal'}));
+    React.render(
+      <ModalListing path={path} key={Math.random()}  />,
+      document.getElementById('listing_modal')
+    );
+    this.setState({loading: false});
+    $('#modalListingPopup').modal('show');
+    ReactRailsUJS.mountComponents();
+  },
+
+
   handleShareSubmit: function ( formData ) {
     this.setState({loading: true});
     $.ajaxSetup({ cache: false });

@@ -116,7 +116,7 @@ class IdeasController < ApplicationController
     @user = @user
     @idea = Idea.new(idea_params)
     respond_to do |format|
-      @idea.update_attributes(team: [@user.id],  student_id: @user.id, school_id: @user.school_id)
+      @idea.update_attributes(student_id: @user.id, school_id: @user.school_id)
       authorize @idea
       if @idea.save
           format.html { redirect_to @idea, notice: 'Idea was successfully created.' }

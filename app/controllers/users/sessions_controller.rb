@@ -33,6 +33,7 @@ class Users::SessionsController < Devise::SessionsController
 				}
 		   	)
 	    	AwardBadgeJob.set(wait: 5.seconds).perform_later(resource, resource, 1, 'user_joined')
+	    	UpdateSearchIndexJob.perform_later(true, )
 	    	profile_path(resource)
 	    else
 	      signed_in_root_path(resource)

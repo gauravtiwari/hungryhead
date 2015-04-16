@@ -1,6 +1,6 @@
 <% ideas = Idea.for_user(@user) %>
     <% if ideas.size > 0 %>
-        <div class="widget-16 text-white panel bg-success m-t-15 m-b-15">
+        <div class="widget-16 text-white panel bg-green m-t-15 m-b-15">
         <div class="panel-heading">
             <div class="panel-title b-b b-white p-b-5">
                 <i class="fa fa-lightbulb-o text-white"></i> Ideas
@@ -12,15 +12,15 @@
                     <%= idea.name.split('').first + idea.name.split('').second %>
                 </span>
                 <div class="pull-left">
-                    <h5 class="all-caps bold small no-margin overflow-ellipsis text-white p-b-5">
+                    <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
                         <%= link_to(idea.name, idea_path(idea), class: "text-white") %>
                     </h5>
-                    <p class="small no-margin overflow-ellipsis text-white">
+                    <p class="small no-margin overflow-ellipsis clearfix text-white">
                         <%= idea.elevator_pitch %>
                     </p>
                 </div>
                 <div class="clearfix"></div>
             </div>
-    <% end %>
+        <% end %>
     </div>
 <% end %>

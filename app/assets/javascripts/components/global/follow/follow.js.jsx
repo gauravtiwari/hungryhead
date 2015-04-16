@@ -43,10 +43,10 @@ var Follow = React.createClass({
       });
     } else {
       var classes = cx({
-        'main-button follow-button pull-right m-r-10': true,
+        'btn btn-cons padding-5 pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
-        'bg-transparent': !this.state.follow,
-        'followed': this.state.follow
+        'btn-danger': !this.state.follow,
+        'btn-green': this.state.follow
       });
     }
 

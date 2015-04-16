@@ -93,7 +93,7 @@ GEM
     auto_html (1.6.4)
       redcarpet (~> 3.1)
       rinku (~> 1.5.0)
-    autoprefixer-rails (5.1.8.1)
+    autoprefixer-rails (5.1.9)
       execjs
       json
     autosize-rails (1.18.17)
@@ -164,7 +164,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1)
+    coffee-script-source (1.9.1.1)
     colored (1.2)
     commonjs (0.2.7)
     connection_pool (2.2.0)
@@ -294,7 +294,7 @@ GEM
     fog-serverlove (0.1.2)
       fog-core
       fog-json
-    fog-softlayer (0.4.3)
+    fog-softlayer (0.4.5)
       fog-core
       fog-json
     fog-storm_on_demand (0.1.1)
@@ -325,7 +325,7 @@ GEM
     github-markdown (0.6.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    goldiloader (0.0.8)
+    goldiloader (0.0.9)
       activerecord (>= 3.2, < 4.3)
       activesupport (>= 3.2, < 4.3)
     guard (2.12.5)
@@ -425,7 +425,7 @@ GEM
       mina
     mini_magick (4.2.1)
     mini_portile (0.6.2)
-    minitest (5.5.1)
+    minitest (5.6.0)
     modernizr-rails (2.7.1)
     momentjs-rails (2.9.0)
       railties (>= 3.1)
@@ -452,7 +452,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.12.1)
+    oj (2.12.2)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -474,7 +474,7 @@ GEM
       omniauth-oauth (~> 1.0)
     open4 (1.3.4)
     orm_adapter (0.5.0)
-    parser (2.2.0.3)
+    parser (2.2.2.0)
       ast (>= 1.1, < 3.0)
     partisan (0.4.1)
       activerecord (>= 3.0.0)
@@ -483,7 +483,7 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
-    postgres-copy (0.9.1)
+    postgres-copy (0.9.2)
       activerecord (>= 4.0)
       pg (>= 0.17)
       rails (>= 4.0)
@@ -498,7 +498,7 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    puma (2.11.1)
+    puma (2.11.2)
       rack (>= 1.1, < 2.0)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
@@ -572,7 +572,7 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redis-objects (1.0.1)
+    redis-objects (1.1.0)
       redis (>= 3.0.2)
     ref (1.0.5)
     require_all (1.3.2)
@@ -585,13 +585,13 @@ GEM
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
-    ruby-beautify (0.97.2)
+    ruby-beautify (0.97.3)
     ruby-filemagic (0.6.3)
     ruby-progressbar (1.7.5)
-    ruby2ruby (2.1.3)
+    ruby2ruby (2.1.4)
       ruby_parser (~> 3.1)
       sexp_processor (~> 4.0)
-    ruby_parser (3.6.5)
+    ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
     sanitize (3.1.2)
       crass (~> 1.0.1)
@@ -804,6 +804,7 @@ DEPENDENCIES
   slim (>= 1.1.0)
   soulmate
   spring
+  sprockets (~> 2.12.3)
   sucker_punch
   summernote-rails
   therubyracer

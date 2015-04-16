@@ -1,18 +1,20 @@
-<div class="profile-nav row p-l-15 p-r-15">	
-	<ul class="profile-name inline no-style no-margin col-md-7">
-		<li class="inline b-r b-grey p-t-10 p-b-10 p-l-10 p-r-15 active">
+<div class="profile-nav row p-l-15">	
+	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
+		<li class="inline b-r b-grey b-dashed p-l-10 p-r-15 active">
 			<a class="bold text-success b-b b-grey p-b-5 fs-13" href="" title="">Leaderboard</a>
 		</li>
-		<li class="inline b-r b-grey p-t-10 p-b-10 p-l-15 p-r-15">
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<a class="text-brand bold fs-13" href="" title="">Activities</a>
 		</li>
 	</ul>
 
-	<div class="pull-right profile-action-buttons m-t-5 m-b-5 col-md-5">
+	<div class="pull-right profile-action-buttons p-t-10 p-b-10 col-md-5">
 		<% if @user != current_user %>
 		<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
 		<%= content_tag(:div) do %>
-		<%= link_to('Send Message', '#', onClick: "return false;", class: 'btn btn-info padding-5 p-l-10 p-r-10 m-r-10 pull-right', id: 'send-message-button') %>
+		<%= link_to('#', onClick: "return false;", class: 'btn btn-info padding-5 p-l-10 p-r-10 m-r-10 pull-right', id: 'send-message-button') do %>
+			<i class="fa fa-envelope"></i> Send Message
+		<% end %>
 		<% end %>
 		<% else %>
 			<a href="" class="btn btn-danger btn-cons pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10" title=""><span>Edit Profile</span></a>

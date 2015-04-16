@@ -13,14 +13,14 @@ $(document).ready(function () {
 	  }
 
 	  select = function(term, data, type){
-	    $('#search').val(term);
+	    $('#overlay-search').val(term);
 	    $('ul#soulmate').hide();
 	    return window.location.href = data.link
 	  }
 
 	  $('#search').soulmate({
 	    url: '/search/search',
-	    types: ['ideas','students', 'universities', 'categories'],
+	    types: ['ideas','students', 'schools'],
 	    renderCallback : render,
 	    selectCallback : select,
 	    minQueryLength : 2,

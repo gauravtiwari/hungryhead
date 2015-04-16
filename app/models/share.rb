@@ -12,7 +12,7 @@ class Share < ActiveRecord::Base
 	include PublicActivity::Model
 	tracked only: [:create],
 	owner: ->(controller, model) { controller && controller.current_user },
-	recipient: ->(controller, model) { model && model.shareable.user }
+	recipient: ->(controller, model) { model && model.shareable.student }
 	
 	before_destroy :remove_activity
 

@@ -8,13 +8,9 @@ module ApplicationHelper
     return 'active' if request.path == test_path
     ''
   end
-  
-  def edit_allowed(user)
-    current_user == user
-  end
 
   def followed?(object)
-    if current_user && current_user.follows?(object)
+    if current_user && current_user.followings_ids.values.include?(object.id.to_s)
       followed =  {
         follow: true, 
         followable_type: object.class.name, 

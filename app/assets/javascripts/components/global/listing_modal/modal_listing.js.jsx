@@ -70,27 +70,31 @@ var ModalListing = React.createClass({
 
 	render: function() {
 		return(
-			<div className="modal fade" tabIndex="-1" role="dialog" id="modalListingPopup" aria-labelledby="modalListingPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-			<div className="modal-dialog modal-lg">
+			<div className="modal fade stick-up" tabIndex="-1" role="dialog" id="modalListingPopup" aria-labelledby="modalListingPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div className="modal-dialog modal-md">
 			<div className="modal-content">
-			   	<div className="profile-wrapper-title">
-			      <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-			      <h4 className="modal-title" id="modalListingPopupLabel">{this.state.meta.label}</h4>
-			    </div>
+			<div className="widget-11-2 panel no-border no-margin widget-loader-circle">
 
-			  <div className="modal-body white-background">
-				  <ul className="followers-list">
-				  	<Infinite elementHeight={96}
-	                 containerHeight={500}
-	                 infiniteLoadBeginBottomOffset={250}
-	                 onInfiniteLoad={this.handleInfiniteLoad}
-	                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
-	                 isInfiniteLoading={this.state.isInfiniteLoading}
-	                 >
-	                  {this.state.listings}
-	                 </Infinite>
-				  </ul>
-			  </div>
+			<div className="panel-heading">
+				<button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
+				<div className="panel-title b-b b-grey p-b-5">
+				  {this.state.meta.label}
+				</div>
+			</div>
+			<div className="auto-overflow">
+			 <ul className="trending-list p-t-20 no-style no-padding">
+			  	<Infinite elementHeight={96}
+                 containerHeight={500}
+                 infiniteLoadBeginBottomOffset={250}
+                 onInfiniteLoad={this.handleInfiniteLoad}
+                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                 isInfiniteLoading={this.state.isInfiniteLoading}
+                 >
+                  {this.state.listings}
+                 </Infinite>
+			  </ul>
+			</div>
+			</div>
 			</div>
 			</div>
 			</div>
