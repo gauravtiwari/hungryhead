@@ -8,7 +8,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def follow?
-    current_user != record.user
+    current_user != record.student
   end
 
   def show?
@@ -80,7 +80,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def destroy? 
-  	record.user == current_user
+  	current_user == record.student
   end
 
 end

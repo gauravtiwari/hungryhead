@@ -10,39 +10,12 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new comment_params
     @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
-    @comment.commentable = @commentable
-    @comment.user = current_user
+    @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
     if @comment.save
-      if @commentable.class.to_s == "Idea"
-        commenter = @commentable.student
-      else 
-        commenter = @commentable.user
-      end
-      if current_user != commenter
-        NewCommentNotificationJob.perform_later(current_user, @comment, @commentable.class.to_s)
-      end
-      @comment.body.scan(/@\w+/).each do |username|
-        user = User.friendly.find_by_username(username.gsub('@', ''))
-        if user
-          @comment.mention!(user)
-        end
-      end
-      expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
-    end
-  end
-
-  def update
-    authorize @feedback
-    respond_to do |format|
-      if @feedback.update(feedback_params)
-        format.html { redirect_to @feedback, notice: 'Feedback was successfully updated.' }
-        format.json { render :show, status: :ok, location: @feedback }
-      else
-        format.html { render :edit }
-        format.json { render json: @feedback.errors, status: :unprocessable_entity }
-      end
+     CommentNotificationService.new(@comment, @commentable, current_user, profile_url(current_user)).notify
+     CreateMentionService.new(@comment, @comment.body).mention
+     expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
     end
   end
 
@@ -56,7 +29,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:id, :user_id, :commentable_id, :parent_id, :commentable_type, :body)
+    params.require(:comment).permit(:id, :user_id, :parent_id, :body)
   end
 
   def find_comment

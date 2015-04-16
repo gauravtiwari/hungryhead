@@ -91,6 +91,9 @@ input.error:-webkit-autofill {
   background-color: #00b27f!important;
   border: 1px solid #00b27f;
 }
+.bg-light-blue {
+  background: #f5f9fc;
+}
 .bg-solid-dark {
   background: #4d86c9!important;
 }
@@ -110,9 +113,9 @@ input.error:-webkit-autofill {
 .card.share .card-header,
 .card.status .card-header {
   padding: 15px 15px 12px;
-  border-bottom: 1px solid #e1f0fd;
   border: 0;
-  background: #e1f0fd;
+  border-bottom: 1px solid #e1f0fd;
+  background: #f5f9fc;
 }
 .note-air-editor {
   outline: 0;

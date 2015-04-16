@@ -77,22 +77,22 @@ var Market = React.createClass({
     
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel bg-solid-dark box-shadow">
+        <div className="panel bg-light-blue box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-white">Describe your market</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master">Describe your market</div>
             <div className="panel-controls">
             <ul>
               <li>
-                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-white fs-12" onClick={this.openMarketForm}>{text}</a>
+                <a className="portlet-close text-master fs-12" onClick={this.openMarketForm}>{text}</a>
               </li>
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-white">
+          <div className="panel-body p-l-60 p-r-60 text-master">
             <div onClick={this.openMarketForm} className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <MarketForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleMarketSubmit= {this.handleMarketSubmit} form={this.props.idea} />
           </div>
@@ -100,11 +100,11 @@ var Market = React.createClass({
       )
     } else {
        return (
-      <div className="panel bg-solid-dark box-shadow">
+      <div className="panel bg-light-blue box-shadow">
         <div className="panel-heading p-l-60 p-b-10">
-          <div className="panel-title b-b b-grey p-b-5 text-white">Market</div>
+          <div className="panel-title b-b b-grey p-b-5 text-master">Market</div>
         </div>
-        <div className="panel-body p-l-60 p-r-60 text-white">
+        <div className="panel-body p-l-60 p-r-60 text-master">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
         </div>
       </div>
