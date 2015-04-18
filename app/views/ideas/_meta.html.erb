@@ -1,0 +1,21 @@
+<div class="idea-meta m-l-15 inline p-t-20 p-b-10">
+  <h3 class="no-margin text-white">
+    <%= @idea.name.capitalize %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
+  </h3>
+  <p class="no-margin text-white fs-16">
+    <%= @idea.high_concept_pitch %>
+  </p>
+  <%= content_tag(:span) do %>
+    <%= link_to(url_with_protocol(@idea.website), class: "text-white", :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => "Website", target: "_blank") do %>
+    <i class="fa fa-rss"></i>
+    <% end %>
+  <% end %>
+  <%= content_tag(:span, class: "m-l-10 text-white") do %>
+    <% @idea.location_list.each do |location| %>
+      <%= link_to(profile_path(location.parameterize), :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => location, class: "text-white") do %>
+      <i class="fa fa-map-marker"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+  <p class="text-white m-t-5 small"><%= @idea.school.name %></p>
+</div>

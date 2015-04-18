@@ -1,0 +1,12 @@
+<div class="widget-11-2 panel bg-light-blue b-b b-light-grey no-margin p-b-20">
+    <div class="panel-heading m-l-15">
+     <div class="panel-title b-b b-grey p-b-5">
+      Latest activities
+      </div>
+    </div>
+    <div class="panel-body no-margin scrollable auto-overflow no-padding p-l-20 p-r-20">
+     <div style="max-height:300px">
+      <%= react_component('LatestFeed', {feed: @idea.latest_activities.values.reverse, idea_id: @idea.id}) %>
+      </div>
+    </div>
+</div>

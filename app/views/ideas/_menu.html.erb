@@ -1,0 +1,38 @@
+<div class="box-shadow bg-white">
+  <div class="profile-nav p-l-10 row">
+    <div class="col-md-5 no-padding">
+        <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
+          <li class="inline b-r b-grey b-dashed p-l-10 p-r-15 <%= current_class?(idea_path(@idea)) %>">
+            <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
+            <% if @idea.student.avatar.present? %>
+              <%= image_tag(@idea.student.avatar.url(:avatar), :"data-src" => "#{@idea.student.avatar.url(:avatar)}", :"data-src-retina" => "#{@idea.student.avatar.url(:square)}", width: "55", height: "55") %><% else %>
+              <span class="placeholder bold text-white" width="32px" height="32px"><%= @idea.student.first_name.first + @idea.student.last_name.first %>
+              </span>
+            <% end %>
+            </div>
+            <%= link_to(@idea.student.first_name, profile_path(@idea.student), class: "bold text-success b-b b-grey p-b-5 m-l-45 fs-13") %>
+          </li>
+          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15 <%= current_class?(idea_feedbacks_path(@idea)) %>">
+            <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13") %>
+          </li>
+          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15 <%= current_class?(comments_idea_path(@idea)) %>">
+            <%= link_to("Q&A", comments_idea_path(@idea), class: "text-brand bold fs-13") %>
+          </li>
+        </ul>
+    </div>
+    <div class="profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
+      <% if !policy(@idea).collaborator? %>
+        <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+        <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.can_feedback?(current_user) }) %>
+        <%= react_component('InvestButton',{ :invested => @idea.has_invested?(current_user) }) %>
+      <% else %>
+       <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
+        <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.me?, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>
+
+        <div>
+          <a class="btn btn-danger btn-cons edit-profile pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
