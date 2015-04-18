@@ -5,7 +5,9 @@
         "bootstrap-tokenfield": "latest",
         "classie": "latest",
         "jquery-form": "latest",
-        "pusher": "latest"
+        "pusher": "latest",
+        "sweetalert": "latest",
+        "slimScroll": "latest"
 
     }
   },

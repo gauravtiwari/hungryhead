@@ -2,22 +2,18 @@ class LikesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_votable, only: [:like, :likers]
 
-  after_action :verify_authorized, :only => [:create, :destroy, :update]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   def like
     authorize @votable
     if current_user.voted_for? @votable
-      @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
-      @like = LikeService.new(current_user, @votable, @owner, profile_url(current_user)).unlike
+      @like = LikeService.new(current_user, @votable, profile_url(current_user)).unlike
     else
-      @like = LikeService.new(current_user, @votable, @owner, profile_url(current_user)).like
+      @like = LikeService.new(current_user, @votable, profile_url(current_user)).like
     end
     voted = current_user.voted_for? @votable
-    render json: { 
-      voted: voted, 
-      url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id), 
-      votes_count: @votable.cached_votes_total 
+    render json: {
+      voted: voted,
+      url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id),
+      votes_count: @votable.cached_votes_total
     }
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end
@@ -31,7 +27,7 @@ class LikesController < ApplicationController
     @mentionable = params[:mentionable_type].constantize.find(params[:id])
     if @mentionable.class.to_s == "Idea"
       mentionable = @mentionable.student
-    else 
+    else
       mentionable = @mentionable.user
     end
     @mentionables = Array.new

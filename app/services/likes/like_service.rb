@@ -1,8 +1,7 @@
 class LikeService
-  
-  def initialize(user, votable, owner, profile_url)
+
+  def initialize(user, votable, profile_url)
     @user = user
-    @owner = owner
     @profile_url = profile_url
     @votable = votable
   end
@@ -22,7 +21,8 @@ class LikeService
   end
 
   def send_like_notification
-    if @user != @owner
+    @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
+    if @user != @voter
       NewNotificationJob.perform_later(@user, @votable, msg)
     end
   end

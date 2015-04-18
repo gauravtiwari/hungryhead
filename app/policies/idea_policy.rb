@@ -15,7 +15,7 @@ class IdeaPolicy < ApplicationPolicy
   	if record.in_team?(current_user) || record.published? && record.everyone?
   		true
   	else
-  		false 
+  		false
   	end
   end
 
@@ -28,7 +28,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def like?
-    follow?
+    true
   end
 
   def invite_team?
@@ -62,12 +62,12 @@ class IdeaPolicy < ApplicationPolicy
   def join_team?
     record.invited?(current_user)
   end
-  
+
   def followers?
   	show?
   end
 
-  def collaborator? 
+  def collaborator?
   	record.team.include? current_user.id.to_s
   end
 
@@ -79,7 +79,7 @@ class IdeaPolicy < ApplicationPolicy
     true
   end
 
-  def destroy? 
+  def destroy?
   	current_user == record.student
   end
 

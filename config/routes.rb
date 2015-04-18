@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'} 
+  devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'}
   as :student do
     # joining
     get   '/join' => 'students/registrations#new',    as: 'new_student_registration'
@@ -59,7 +59,7 @@ Rails.application.routes.draw do
     delete  '/join' => 'devise/registrations#destroy', as: 'student_delete'
   end
 
-  devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'} 
+  devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'}
   as :mentor do
     # mentor joining
     get   '/mentors_join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
@@ -185,6 +185,7 @@ Rails.application.routes.draw do
       get :likers
       get :card
       get :join_team
+      get :comments
       get :feedbackers
       get :investors
       get :team

@@ -4,7 +4,7 @@ class SharePolicy < ApplicationPolicy
   end
 
   def like?
-  	current_user != record.user
+  	true
   end
 
   def destroy?; current_user == record.user; end

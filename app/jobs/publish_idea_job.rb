@@ -1,5 +1,5 @@
 class PublishIdeaJob < ActiveJob::Base
-	
+
   def perform(idea, user)
    ActiveRecord::Base.connection_pool.with_connection do
    	#Publish idea activity
@@ -13,7 +13,8 @@ class PublishIdeaJob < ActiveJob::Base
 	    end
 	else
 
-   	idea.create_activity(key: 'idea.create', owner: user, recipient: user)
+  idea.create_activity(key: 'idea.create', owner: user, recipient: user,
+   		params: {verb: "pitched", action:  "an idea"})
 
    	object_path = Rails.application.routes.url_helpers.idea_url(idea, host: 'localhost', port: 3000)
 	msg = "<a href='#{Rails.application.routes.url_helpers.profile_url(user)}'>#{user.name}</a> published <i class='fa fa-fw ion-briefcase'></i> "+ "<a href='#{object_path}'>#{idea.name}</a>".html_safe

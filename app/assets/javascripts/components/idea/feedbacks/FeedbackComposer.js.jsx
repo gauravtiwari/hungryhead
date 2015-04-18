@@ -35,7 +35,7 @@ var FeedbackComposer = React.createClass({
       success: function ( data ) {
         $("#feedbackFormPopup").modal('hide');
         $.pubsub('publish', 'idea_feedbacked', false);
-         $('body').pgNotification({style: "simple", message: "<img width='40px' src="+data.user_avatar+"> <span> You gave feedback to " + data.meta.idea_name +"</span>", position: "top-right", type: "success",timeout: 5000}).show();
+         $('body').pgNotification({style: "simple", message: "<span> You gave feedback to " + data.meta.idea_name +"</span>", position: "bottom-left", type: "success",timeout: 5000}).show();
         this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -72,39 +72,39 @@ var FeedbackComposer = React.createClass({
     });
 
     return (
-  <div className="feedbackFormPopup">
-    <div className="modal fade" tabIndex="-1" role="dialog" id="feedbackFormPopup" aria-labelledby="feedbackFormPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-    <div className="modal-dialog modal-lg">
-      <div className="modal-content">
-        <div className="profile-wrapper-title">
-         <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-          <h4 className="modal-title">
-            <span>
-              <i className="ion-edit"></i> Write your feedback/idea
-            </span> 
-          </h4>
-        </div>
-      <div className="feedback_message-form">
-        <div className="feedback_message-form-textarea">
-         <form ref="form" className={form_classes} acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-            <input ref="token" type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
-            <label htmlFor="body">Intrinsically, what you think works, not works and recommendations? </label>
-            <textarea ref="body" name="feedback[body]" placeholder="Type your feedback here ..." className="feedback_message-composer form-control empty" autoFocus={true} onChange={this._onChange}/>
-          <div className="form-buttons send-button">
-            <div>
-              <button type="submit" id="post_feedback_message" className="main-button"><i className={loading_classes}></i> Submit </button>
+
+    <div className="modal fade fill-in" id="feedbackFormPopup" tabindex="-1" role="dialog" aria-labelledby="feedbackFormPopupLabel" aria-hidden="true">
+    <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
+        <i className="pg-close"></i>
+    </button>
+    <div className="modal-dialog ">
+        <div className="modal-content">
+            <div className="modal-header">
+                <h5 className="text-left p-b-5"><span className="semi-bold">Write feedback for</span> {this.state.form.idea_name}</h5>
             </div>
-            <div>
-              <a id="cancel" className="main-button cancel" onClick={this.closeFeedbackForm} > Cancel </a>
+            <div className="modal-body">
+            <form ref="form" className={form_classes} acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
+                <div className="row">
+                    <div className="col-md-12">
+
+                          <input ref="token" type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
+                          <label htmlFor="body">Intrinsically, what you think works, not works and recommendations? </label>
+                          <textarea ref="body" name="feedback[body]" placeholder="Type your feedback here ..." className="feedback_message-composer form-control input-lg" autoFocus={true} onChange={this._onChange}/>
+                    </div>
+                    <div className="col-md-5 pull-right m-t-15">
+                    <button type="submit" id="post_feedback_message" className="btn btn-primary pull-right"><i className={loading_classes}></i> Submit </button>
+                        <a id="cancel" className="btn btn-danger cancel m-r-10 pull-right" onClick={this.closeFeedbackForm} > Cancel </a>
+
+                    </div>
+                </div>
+              </form>
             </div>
-          </div>
-        </form>
+            <div className="modal-footer">
+
+            </div>
         </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
+    </div>
+    </div>
 
     );
   }

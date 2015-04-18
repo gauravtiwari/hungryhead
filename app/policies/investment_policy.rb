@@ -5,7 +5,7 @@ class InvestmentPolicy < ApplicationPolicy
   end
 
  def like?
-  	current_user != record.user
+  	true
   end
 
   def show?   ; false; end

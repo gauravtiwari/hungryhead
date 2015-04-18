@@ -39,7 +39,7 @@ Rails.application.configure do
   config.react.addons = true
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000}
-  
+
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
     :port      => 587,
@@ -71,6 +71,7 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
+  config.identity_cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"

@@ -16,14 +16,14 @@ var CommentList = React.createClass({
     var commentNodes = comments.map(function ( comment, index ) {
       if(comment.created_at !== 'undefined') {
         var date = comment.created_at
-      } 
+      }
       return  <Comment form={form} onReplyCommentSubmit={onReplyCommentSubmit} status={status} current_user = {current_user} index = {index} removeComment = {removeComment} comment = {comment} key={comment.uuid} />
 
     });
 
     return (
 
-      <ul id={css_id} className="comment-list timeline-activity list-unstyled m-t-20" ref="commentList">
+      <ul id={css_id} className="comment-list timeline-activity list-unstyled" ref="commentList">
        { commentNodes }
       </ul>
 

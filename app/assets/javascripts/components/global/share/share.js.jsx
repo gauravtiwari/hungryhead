@@ -4,7 +4,7 @@
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var Share = React.createClass({
-  
+
   mixins: [PureRenderMixin],
   getInitialState: function () {
      return {
@@ -72,30 +72,23 @@ var Share = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
-    if(this.state.shared) {
-      var button_classes = css_classes + ' delete-vote'
-    } else {
-      var button_classes = css_classes
-    }
 
     var text = this.state.shared ? 'You shared this' : 'Share';
-    
+
     var voter_text = this.state.shares_count > 1 ? 'people' : 'person';
 
     if(this.state.shares_count > 0) {
-      var voters = <a onClick={this.loadSharers} className="m-l-5"><i className={classes}></i>({this.state.shares_count})</a>;
+      var voters = <a onClick={this.loadSharers} className="m-l-5"><i className={classes}></i>{this.state.shares_count}</a>;
     }
 
-    var share_link = this.state.shared ?  <span className={button_classes}>
-                {text}
-              </span> :  <a className={button_classes} onClick={this.openShareBox}>
-                {text}
+    var share_link = this.state.shared ?  <span data-toggle="tooltip" data-container="body" title={text} className="fa fa-share-square text-danger">
+              </span> :  <a data-toggle="tooltip" data-container="body" title={text} className="fa fa-share-square-o" onClick={this.openShareBox}>
               </a>;
 
-    return (<div className="inline p-l-10 pull-left">
+    return (<li className="inline p-l-10 fs-14">
               {share_link}{voters}
-            </div>
-           
+            </li>
+
     );
   }
 });

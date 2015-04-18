@@ -9,7 +9,7 @@ var ComponentIsMountedMixin = {
     },
     componentWillUnmount: function() {
         this.componentIsMounted = false;
-    }, 
+    },
     safeSetState: function(newState) {
         if (this.componentIsMounted) {
             this.setState(newState);
@@ -40,7 +40,7 @@ var CommentBox = React.createClass({
     if(this.isMounted()){
       this.setState({loading: false});
     }
-    
+
   },
 
   handleCommentSubmit: function ( formData ) {
@@ -70,7 +70,7 @@ var CommentBox = React.createClass({
      $.get(this.state.comments_path, function(data){
       var new_comments = this.state.comments.concat(data.comments);
       this.setState({
-        comments: new_comments, 
+        comments: new_comments,
         comments_path: data.comments_path,
         text: "Load More comments"
       });
@@ -81,9 +81,9 @@ var CommentBox = React.createClass({
     this.setState({comment_loading: true});
     $.get(this.state.comments_path, function(data){
       this.setState({
-        comments: data.comments, 
+        comments: data.comments,
         comment_loading: false,
-        comments_path: data.comments_path, 
+        comments_path: data.comments_path,
         show_comment_bar: false
     });
     }.bind(this));
@@ -136,6 +136,6 @@ var CommentBox = React.createClass({
       </div>
     )
 
-    
+
   }
 });

@@ -45,8 +45,8 @@ var Follow = React.createClass({
       var classes = cx({
         'btn btn-cons padding-5 pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
-        'btn-danger': !this.state.follow,
-        'btn-green': this.state.follow
+        'btn-info': !this.state.follow,
+        'btn-green semi-bold': this.state.follow
       });
     }
 

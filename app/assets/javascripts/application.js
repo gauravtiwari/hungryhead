@@ -24,8 +24,10 @@
 //= require underscore
 //= require js-routes
 //= require select2
+//= require slimScroll
 //= require jquery.atwho
 //= require typer
+//= require sweetalert
 //= require moment
 //= require classie
 //= require jquery.validate
@@ -44,7 +46,7 @@
 //= require react
 //= require react-infinite
 //= require react_ujs
- 
+
 // Core Javascripts
 //= require core/js/pages
 

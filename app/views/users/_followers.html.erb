@@ -8,7 +8,7 @@
     <div class="panel-body">
         <p class="m-b-5 small m-b-10 m-t-5"><%= pluralize(@user.followers_count, 'Follower') %></p>
         <ul class="list-unstyled">
-            <% User.find(@user.followers_ids.values.take(8)).each do |follower| %>
+            <% @user.followers_by_type('User').limit(8).each do |follower| %>
                 <li class="m-r-10">
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
                         <%= link_to(profile_path(follower)) do %>

@@ -10,12 +10,13 @@ class PagesController < ApplicationController
       ids.push(current_user.id)
       @activities = PublicActivity::Activity
       .where(owner_id: ids, published: true)
+      .where.not(key: 'follow.create')
       .order(id: :desc)
       .paginate(:page => params[:page], :per_page => 20)
-      
+
       respond_to do |format|
         format.html
-        format.js      
+        format.js
       end
     else
       render 'pages/splash'
@@ -23,7 +24,7 @@ class PagesController < ApplicationController
  end
 
  def learn_more
-  
+
  end
 
   def about

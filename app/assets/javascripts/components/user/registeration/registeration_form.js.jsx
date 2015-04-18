@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var RegisterationForm = React.createClass({
-  
+
   getInitialState: function(){
     return {
       form: this.props.form,
@@ -113,8 +113,8 @@ var RegisterationForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    return (  
-      <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" action="index.html" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
+    return (
+      <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
         <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
           <div className="col-sm-6">
@@ -123,11 +123,11 @@ var RegisterationForm = React.createClass({
               <input type="text" ref="name" autoComplete="off" name="student[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
             </div>
           </div>
-          
+
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Email</label>
-              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required aria-required="true" />
               <span id="invalid-email"></span>
             </div>
           </div>
@@ -171,7 +171,7 @@ var RegisterationForm = React.createClass({
         </div>
         <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
         <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
-      </form>   
+      </form>
     )
   },
 

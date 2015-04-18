@@ -2,8 +2,6 @@ class InvestmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_investment, only: [:show, :destroy]
   before_action :set_props, only: [:index, :show, :create]
-  after_action :verify_authorized, :only => [:index, :create, :show]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json, :html
 
   layout "idea"
@@ -37,18 +35,19 @@ class InvestmentsController < ApplicationController
       object_url = idea_investment_url(@investment.idea, @investment.id)
       idea_url = idea_url(@investment.idea)
       user_url = profile_url(@user)
-
       respond_to do |format|
         if @investment.save
           @investment = UpdateBalanceService.new(@investment, @user, @idea).invest
-          PostInvestmentJob.perform_later(@investment, @user, object_url, idea_url, user_url)
           format.json { render :show, status: :created}
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
         end
       end
-    else 
-      render json: {error: "Insufficient Balance #{@user.fund['balance']}"}
+      PostInvestmentJob.perform_later(@investment, @user, object_url, idea_url, user_url)
+    else
+      respond_to do |format|
+        format.json { render json: {error: "Insufficient Balance #{@user.fund['balance']}"}, status: :unprocessable_entity }
+      end
     end
   end
 

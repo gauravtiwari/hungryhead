@@ -4,7 +4,7 @@ class FeedbacksController < ApplicationController
   before_action :set_props, only: [:index, :show, :create]
   after_action :verify_authorized, :only => [:create, :destroy, :update]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  
+
   layout "idea"
 
   respond_to :json, :html
@@ -39,7 +39,7 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new feedback_params
     @feedback.update_attributes(idea: @idea, user: @user)
     authorize @feedback
-    
+
     object_url = idea_feedback_url(@feedback.idea, @feedback.id)
     idea_url = idea_url(@feedback.idea)
     user_url = profile_url(@user)
@@ -47,18 +47,18 @@ class FeedbacksController < ApplicationController
     if @idea.can_feedback?(@user)
       respond_to do |format|
         if @feedback.save
-          PostFeedbackJob.perform_later(@feedback, @user, object_url, idea_url, user_url)
           format.json { render :show, status: :created}
         else
           format.json { render json: @feedback.errors, status: :unprocessable_entity }
         end
       end
-    else 
+      PostFeedbackJob.perform_later(@feedback, @user, object_url, idea_url, user_url)
+    else
       render json: {error: "Already feedbacked"}
     end
   end
 
-  def rate 
+  def rate
     @feedback.badged! if !@feedback.badged?
     @feedback.add_badge(params[:badge].to_i)
     AwardBadgeJob.perform_later(@user, @feedback.user, params[:badge].to_i, "Feedback_#{@feedback.id}")

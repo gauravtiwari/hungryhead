@@ -9,14 +9,17 @@ class Idea < ActiveRecord::Base
   acts_as_taggable_on :markets, :locations, :technologies
 
   list :followers_ids
+  list :followings_ids
+  list :voters_ids
+
   counter :followers_counter
-  counter :investments_counter
-  counter :feedbacks_counter
+  counter :investors_counter
+  counter :feedbackers_counter
   counter :views_counter
   counter :votes_counter
   counter :comments_counter
 
-  sorted_set :activities_ids
+  list :latest_activities, maxlength: 20, marshal: true
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -36,6 +39,8 @@ class Idea < ActiveRecord::Base
   after_save :create_slug
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
+  after_create :increment_counters
+  before_destroy :decrement_counters
   #Associations
 
   belongs_to :student, touch: true, counter_cache: true
@@ -44,7 +49,7 @@ class Idea < ActiveRecord::Base
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
-  
+
   acts_as_followable
   acts_as_votable
   acts_as_commentable
@@ -94,6 +99,10 @@ class Idea < ActiveRecord::Base
     User.find(investors)
   end
 
+  def find_followers
+    User.find(followers_ids.values.take(16))
+  end
+
   def find_team
     User.find(team)
   end
@@ -132,27 +141,25 @@ class Idea < ActiveRecord::Base
 
   def create_slug
     return if !slug_changed? || slug == slugs.last.try(:slug)
-    #re-use old slugs
     previous = slugs.where('lower(slug) = ?', slug.downcase)
     previous.delete_all
     slugs.create!(slug: slug)
   end
 
   def load_into_soulmate
-    if self.published? && self.everyone?
+    if published? && everyone?
       loader = Soulmate::Loader.new("ideas")
-      image =  logo.url(:mini)
-      loader.add("term" => name, "image" => image, "description" => high_concept_pitch, "id" => id, "data" => {
+      loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
         "link" => Rails.application.routes.url_helpers.idea_path(self)
         })
     else
       remove_from_soulmate
     end
   end
- 
+
   def remove_from_soulmate
-    loader = Soulmate::Loader.new("startups")
-      loader.remove("id" => id)
+    loader = Soulmate::Loader.new("ideas")
+    loader.remove("id" => id)
   end
 
 
@@ -165,6 +172,16 @@ class Idea < ActiveRecord::Base
     activity.destroy if activity.present?
     true
    end
+  end
+
+  def increment_counters
+    school.ideas_counter.increment
+    student.ideas_counter.increment
+  end
+
+  def decrement_counters
+    school.ideas_counter.decrement
+    student.ideas_counter.decrement
   end
 
 end

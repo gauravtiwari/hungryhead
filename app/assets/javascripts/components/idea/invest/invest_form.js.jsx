@@ -9,39 +9,33 @@ render: function() {
   });
 
   return (
-    <div className="pledge-information-popup">
-    <article className="right">
-        <div className="top">
-        <h1>Accountability is important</h1>
-        <p>Under state law, companies can raise funding from 35 un-accredited investors in MA, CA, and NY. </p>
-        <a href="#">Learn more about accountability</a>
-        </div>
-      </article>
-        <article className="left">
-          <h1>Enter Amount</h1>
-          <span className="label label-info">Your Virtual Balance is {this.props.idea.user_fund}</span>
-          <form id="information-form" ref="invest_form"className="invest-form" onSubmit={this._onKeyDown}>
-            <label htmlFor="amount">Investment amount</label>
-            <input type="number" ref="amount" name="investment[amount]" className="form-control empty" id="amount" placeholder="Type amount" />
-            <label htmlFor="note">Why are you investing?</label>
-            <textarea ref="note" name="investment[note]" className="form-control empty" id="note" placeholder="Type here..." />
-            <div className="invest-buttons">
-              <button type="submit" id="update_section" className="main-button">
-              <i className={classes}></i> Invest
-              </button>
-               <button type="button" className="main-button margin-left" data-dismiss="modal">Cancel</button>
-            </div>
-          </form>
-        </article>
-    </div>
+    <form id="information-form" role="form" noValidate="novalidate" acceptCharset="UTF-8" ref="invest_form" onSubmit={this._onKeyDown}>
+       <div className="form-group">
+           <div className="row">
+               <div className="col-md-12">
+                   <div className="form-group form-group-default">
+                       <label>Investment amount</label>
+                       <input ref="amount" name="investment[amount]" className="form-control required" id="amount" placeholder="Type amount" type="text" required aria-required="true"/>
+                   </div>
+               </div>
+               <div className="col-md-6 pull-right">
+                  <button type="submit" id="update_section" className="btn btn-success m-r-10 pull-right">
+                  <i className={classes}></i> Invest
+                  </button>
+                  <button type="button" className="btn btn-danger m-r-10 pull-right" data-dismiss="modal">Cancel</button>
+               </div>
+           </div>
+       </div>
+   </form>
   )
 },
 _onKeyDown: function(event) {
   event.preventDefault();
   var amount = this.refs.amount.getDOMNode().value.trim();
   var formData = $( this.refs.invest_form.getDOMNode() ).serialize();
-  this.props.sendInvestment(formData, this.props.form.action, {amount: amount});
-  this.refs.amount.getDOMNode().value = '';
-  this.refs.note.getDOMNode().value = '';
+  if($(this.refs.invest_form.getDOMNode()).valid()) {
+    this.props.sendInvestment(formData, this.props.form.action, {amount: amount});
+    this.refs.amount.getDOMNode().value = '';
+  }
 }
 });

@@ -21,14 +21,18 @@ var Invest = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
-        this.setState({idea: data.idea});
-        this.setState({mode: false});
-        this.setState({loading: false});
-        $("#investPopup").modal('hide');
-        $.pubsub('publish', 'idea_invested', true);
-        $('body').pgNotification({style: "simple", message: "<img width='40px' src="+data.idea.user_avatar+"> <span>You have successfully invested "+data.idea.amount+ " coins into " + data.idea.name +"</span>", position: "top-right", type: "success",timeout: 5000}).show();
+        if(!data.error) {
+          this.setState({idea: data.idea});
+          this.setState({mode: false});
+          this.setState({loading: false});
+          $("#investPopup").modal('hide');
+          $.pubsub('publish', 'idea_invested', true);
+          $('body').pgNotification({style: "simple", message: "<span>You have successfully invested "+data.idea.amount+ " coins into " + data.idea.name +"</span>", position: "bottom-left", type: "success",timeout: 5000}).show();
+        }
       }.bind(this),
       error: function(xhr, status, err) {
+        $("#investPopup").modal('hide');
+        $('body').pgNotification({style: "simple", message: JSON.parse(xhr.responseText).error.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
@@ -45,14 +49,18 @@ var Invest = React.createClass({
 
     return (
       <div className="investapp invest-box">
-        <div className="modal fade" tabIndex="-1" role="dialog" id="investPopup" aria-labelledby="investlPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-          <div className="modal-dialog modal-lg">
+        <div className="modal fade slide-up disable-scroll" tabIndex="-1" role="dialog" id="investPopup" aria-labelledby="investlPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div className="modal-dialog modal-md">
+          <div className="modal-content-wrapper">
             <div className="modal-content">
-              <div className="profile-wrapper-title">
-               <button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-                <h4><i className="fa fa-dollar"></i> Invest in {this.state.idea.name }</h4>
+               <div className="modal-header clearfix text-left">
+                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
+                    <i className="pg-close fs-14"></i>
+                  </button>
+                  <h5>Invest in <span className="semi-bold">{this.state.idea.name}</span></h5>
               </div>
               {content}
+          </div>
           </div>
           </div>
         </div>

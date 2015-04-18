@@ -2,7 +2,7 @@ var $ = jQuery.noConflict();
 
 
 $(document).ready(function () {
-	
+
 	 var render, select;
 
 	  render = function(term, data, type) {
@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 	  $('#search').soulmate({
 	    url: '/search/search',
-	    types: ['ideas','students', 'schools'],
+	    types: ['ideas','students', 'schools', 'mentors', 'teachers'],
 	    renderCallback : render,
 	    selectCallback : select,
 	    minQueryLength : 2,

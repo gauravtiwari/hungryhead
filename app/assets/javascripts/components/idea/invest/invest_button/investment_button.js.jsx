@@ -20,11 +20,11 @@ var InvestButton = React.createClass({
   },
   openInvestedBox: function() {
     swal({
-      title: "Error!",   
-      text: "Hey! You have already invested",   
-      type: "error",   
-      confirmButtonText: "", 
-      timer: 2000 
+      title: "Error!",
+      text: "Hey! You have already invested",
+      type: "error",
+      confirmButtonText: "",
+      timer: 2000
     });
   },
 
@@ -35,8 +35,9 @@ var InvestButton = React.createClass({
     });
 
     var invested_classes = cx({
-      'btn btn-cons btn-warning-dark padding-5 pull-right m-r-10': true,
-      'btn-info': !this.state.invested 
+      'btn btn-cons padding-5 pull-right m-r-10': true,
+      'btn-info': this.state.invested,
+      'btn-green text-white semi-bold': !this.state.invested
     });
 
     if(!this.state.invested) {

@@ -8,6 +8,7 @@ jQuery(document).ready ->
 
 	$('#form-register').validate();
 	$('#form-login').validate();
+	$('#information-form').validate();
 	$("[data-toggle='tooltip']").tooltip()
 
 	$.each flashMessages, (key, value) ->
@@ -44,6 +45,7 @@ jQuery(document).ready ->
 			  ]
 			]
 
+	$('.scrollable').slimScroll height: '300px'
 
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
@@ -58,7 +60,7 @@ jQuery(document).ready ->
 			$(@).removeClass 'no-padding'
 
 	$('.list-view-wrapper').scrollbar()
-	
+
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()
 	  return

@@ -1,6 +1,7 @@
 class Share < ActiveRecord::Base
-  	#Associations
-  	belongs_to :shareable, polymorphic: true, counter_cache: true
+
+  #Associations
+  belongs_to :shareable, polymorphic: true, counter_cache: true
 	belongs_to :user, touch: true, counter_cache: true
  	store_accessor :parameters, :shareable_name
 
@@ -10,10 +11,14 @@ class Share < ActiveRecord::Base
 	acts_as_votable
 
 	include PublicActivity::Model
+	include Redis::Objects
 	tracked only: [:create],
 	owner: ->(controller, model) { controller && controller.current_user },
 	recipient: ->(controller, model) { model && model.shareable.student }
-	
+
+	counter :votes_counter
+	list :voters_ids
+
 	before_destroy :remove_activity
 
 	private

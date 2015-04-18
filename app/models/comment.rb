@@ -8,13 +8,16 @@ class Comment < ActiveRecord::Base
   #Included modules
   acts_as_votable
   include Redis::Objects
-
   counter :votes_counter
+  list :voters_ids
+
+  after_create :increment_counters
+  before_destroy :decrement_counters
 
   #Model Associations
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, counter_cache: true, touch: true
-	
+
   #Model Scopes
   default_scope -> { order('created_at DESC') }
 
@@ -50,4 +53,15 @@ class Comment < ActiveRecord::Base
   def self.find_commentable(commentable_str, commentable_id)
     commentable_str.constantize.find(commentable_id)
   end
+
+  private
+
+  def increment_counters
+    commentable.comments_counter.increment
+  end
+
+  def decrement_counters
+    commentable.comments_counter.decrement
+  end
+
 end

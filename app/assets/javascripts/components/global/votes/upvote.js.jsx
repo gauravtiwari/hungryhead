@@ -55,26 +55,21 @@ var Upvote = React.createClass({
     var classes = cx({
       'fa fa-spinner fa-spin': this.state.loading
     });
-    if(this.state.voted) {
-      var button_classes = css_classes + ' delete-vote';
-    } else {
-      var button_classes = css_classes;
-    }
-
-    var text = this.state.voted ? 'You liked this' : 'Like';
+    var text = this.state.voted ? 'You liked this' : 'Click to like';
+    var heart = this.state.voted ? <i className="fa fa-thumbs-up text-danger"></i> : <i className="fa fa-thumbs-o-up"></i>;
 
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
 
     if(this.state.votes_count > 0) {
-      var voters =<a onClick={this.loadLikers} className="m-l-5"><i className={classes}></i>({this.state.votes_count})</a>;
+      var voters =<a onClick={this.loadLikers} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
     }
 
-    return (<div className="pull-left b-r b-grey b-dashed p-r-10">
-              <span className={button_classes} onClick={this.handleClick}>
-                {text}
-              </span>
+    return (<li className="inline m-r-10 fs-14 bold">
+              <a data-toggle="tooltip" data-container="body" title={text} onClick={this.handleClick}>
+                {heart}
+              </a>
               {voters}
-            </div>
+            </li>
 
     );
   }

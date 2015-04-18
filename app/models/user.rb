@@ -3,22 +3,25 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
   include Redis::Objects
   include PublicActivity::Model
+  activist
   extend FriendlyId
 
   friendly_id :slug_candidates
-  
+
   def slug_candidates
     [:username]
   end
 
   list :followers_ids
   list :followings_ids
+
+  list :latest_activities, maxlength: 20, marshal: true
+
   counter :followers_counter
   counter :followings_counter
   counter :feedbacks_counter
   counter :investments_counter
-  sorted_set :activities_ids
-
+  counter :ideas_counter
 
   enum state: { inactive: 0, published: 1}
   enum role: { user: 0, entrepreneur: 1, mentor: 2 }
@@ -61,12 +64,14 @@ class User < ActiveRecord::Base
 
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
-  
+
   before_save :add_fullname
   before_create :seed_fund
   after_save :create_slug
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
+  after_create :increment_counters
+  before_destroy :decrement_counters
 
   acts_as_follower
   acts_as_followable
@@ -74,7 +79,7 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
-  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" } 
+  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
 
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
@@ -114,7 +119,7 @@ class User < ActiveRecord::Base
     shares = find_shares(:shareable_id => shareable.id, :shareable_type => shareable.class.name)
     shares.size > 0
   end
-  
+
   private
 
   def add_fullname
@@ -161,17 +166,25 @@ class User < ActiveRecord::Base
     if avatar
       image =  avatar.url(:avatar)
       resume = school.name
-    else 
+    else
       image= "http://placehold.it/30"
     end
     loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
       "link" => Rails.application.routes.url_helpers.profile_path(self)
       })
   end
- 
+
   def remove_from_soulmate
     loader = Soulmate::Loader.new("students")
       loader.remove("id" => id)
+  end
+
+  def increment_counters
+    school.students_counter.increment
+  end
+
+  def decrement_counters
+    school.students_counter.decrement
   end
 
   protected

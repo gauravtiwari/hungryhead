@@ -21,7 +21,7 @@ body, p {
 .textarea:focus {
   background: #fff;
 }
-.select2-chosen, .select2-choice > span:first-child, 
+.select2-chosen, .select2-choice > span:first-child,
 .select2-container .select2-choices .select2-search-field input {
  padding: 0 0 0 8px;
 }
@@ -209,6 +209,9 @@ input.error:-webkit-autofill {
 .placeholder {
   background: #f8d053;
   display: block;
+}
+ul.reactions div {
+  float: left;
 }
 .idea-badge {
   padding-top: 2px;

@@ -1,7 +1,7 @@
 class Feedback < ActiveRecord::Base
 
   has_merit
-  
+
   #Associations
   belongs_to :idea, touch: true, counter_cache: true
   belongs_to :user, touch: true, counter_cache: true
@@ -19,13 +19,17 @@ class Feedback < ActiveRecord::Base
   include Redis::Objects
   tracked only: [:create],
   owner: ->(controller, model) { controller && controller.current_user },
-  recipient: ->(controller, model) { model && model.idea.user }
+  recipient: ->(controller, model) { model && model.idea },
+  params: {verb: "left a feedback", action:  ""}
 
   counter :votes_counter
+  list :voters_ids
   counter :comments_counter
-  
+
   #Hooks
   before_destroy :remove_activity
+  after_create :increment_counters
+  before_destroy :decrement_counters
 
   private
 
@@ -34,6 +38,18 @@ class Feedback < ActiveRecord::Base
     activity.destroy if activity.present?
     true
    end
+  end
+
+  def increment_counters
+    user.feedbacks_counter.increment
+    idea.feedbackers_counter.increment
+  end
+
+  def decrement_counters
+    user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
+    idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
+    idea.feedbackers.delete(user.id.to_s)
+    idea.save
   end
 
 end

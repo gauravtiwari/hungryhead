@@ -1,5 +1,5 @@
 class School < ActiveRecord::Base
-	
+
 	has_many :users, as: :students
 	has_many :ideas
 	has_many :slugs, as: :sluggable, dependent: :destroy
@@ -7,13 +7,14 @@ class School < ActiveRecord::Base
 	store_accessor :data, :established, :location, :website
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
-	
+
 	acts_as_followable
 	include Redis::Objects
 
 	list :followers_ids
 	list :students_ids
 	list :ideas_ids
+
 	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
@@ -24,7 +25,7 @@ class School < ActiveRecord::Base
 
 	extend FriendlyId
 
-	
+
 	friendly_id :slug_candidates
 
 	validates :name, :presence => true,
@@ -40,7 +41,7 @@ class School < ActiveRecord::Base
 
 	after_save :create_slug
 	after_save :load_into_soulmate
-  	before_destroy :remove_from_soulmate
+  before_destroy :remove_from_soulmate
 
 	private
 
@@ -55,14 +56,14 @@ class School < ActiveRecord::Base
 		if logo
 		  image =  logo.url(:avatar)
 		  resume = location
-		else 
+		else
 		  image= "http://placehold.it/30"
 		end
 		loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
 		  "link" => Rails.application.routes.url_helpers.profile_path(self)
 		  })
 	end
-	 
+
 	def remove_from_soulmate
 		loader = Soulmate::Loader.new("universities")
 	  	loader.remove("id" => id)
