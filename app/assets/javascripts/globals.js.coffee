@@ -9,6 +9,7 @@ jQuery(document).ready ->
 	$('#form-register').validate();
 	$('#form-login').validate();
 	$('#information-form').validate();
+	$('#feedback_form').validate();
 	$("[data-toggle='tooltip']").tooltip()
 
 	$.each flashMessages, (key, value) ->

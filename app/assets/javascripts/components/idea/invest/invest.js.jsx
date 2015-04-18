@@ -49,7 +49,7 @@ var Invest = React.createClass({
 
     return (
       <div className="investapp invest-box">
-        <div className="modal fade slide-up disable-scroll" tabIndex="-1" role="dialog" id="investPopup" aria-labelledby="investlPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div className="modal fade stick-up" tabIndex="-1" role="dialog" id="investPopup" aria-labelledby="investlPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
           <div className="modal-dialog modal-md">
           <div className="modal-content-wrapper">
             <div className="modal-content">
@@ -57,7 +57,7 @@ var Invest = React.createClass({
                   <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                     <i className="pg-close fs-14"></i>
                   </button>
-                  <h5>Invest in <span className="semi-bold">{this.state.idea.name}</span></h5>
+                  <h5 className="b-b b-grey p-b-5 pull-left">Invest into <span className="semi-bold">{this.state.idea.name}</span></h5>
               </div>
               {content}
           </div>
