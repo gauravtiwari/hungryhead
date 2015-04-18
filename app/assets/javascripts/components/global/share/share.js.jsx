@@ -45,6 +45,7 @@ var Share = React.createClass({
           $('body textarea').trigger('autosize.destroy');
           $('#sharePopup').modal('hide');
           this.setState({loading: false});
+          $('body').pgNotification({style: "simple", message: "<span> You shared " + this.props.shareable_name +"</span>", position: "bottom-left", type: "success",timeout: 5000}).show();
           this.setState({shares_count: data.share.count, shared: data.share.shared});
         }
       }.bind(this),
@@ -58,7 +59,7 @@ var Share = React.createClass({
     if(this.isMounted()) {
       $('body').append($('<div>', {class: 'idea_share_form', id: 'idea_share_form'}));
       React.render(
-        <ShareForm key={this.props.record} shareable_name={this.props.shareable_name} form={this.state.form.form} handleShareSubmit={this.handleShareSubmit} />,
+        <ShareForm key={this.props.record} loading={this.state.loading} shareable_name={this.props.shareable_name} form={this.state.form.form} handleShareSubmit={this.handleShareSubmit} />,
         document.getElementById('idea_share_form')
       );
       $('#sharePopup').modal('show');

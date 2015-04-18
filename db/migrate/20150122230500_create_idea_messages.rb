@@ -1,7 +1,7 @@
 class CreateIdeaMessages < ActiveRecord::Migration
   def change
     create_table :idea_messages do |t|
-      t.belongs_to :user, index: true, :null => false
+      t.belongs_to :student, index: true, :null => false
       t.belongs_to :idea, index: true, :null => false
       t.text :body, :null => false
       t.integer :status

@@ -210,6 +210,9 @@ input.error:-webkit-autofill {
   background: #f8d053;
   display: block;
 }
+.card.share .card-footer .reactions {
+  opacity: 1;
+}
 ul.reactions div {
   float: left;
 }
