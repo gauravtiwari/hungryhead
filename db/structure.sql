@@ -343,16 +343,16 @@ CREATE TABLE ideas (
     cached_market_list character varying,
     cached_technology_list character varying,
     feedbacks_count integer DEFAULT 0,
+    investments_count integer DEFAULT 0,
     followers_count integer DEFAULT 0,
     comments_count integer DEFAULT 0,
     cached_votes_total integer DEFAULT 0,
+    shares_count integer DEFAULT 0,
     idea_messages_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    shares_count integer DEFAULT 0,
-    investments_count integer
+    level integer DEFAULT 0
 );
 
 
@@ -1143,6 +1143,7 @@ CREATE TABLE users (
     feedbacks_count integer DEFAULT 0,
     comments_count integer DEFAULT 0,
     ideas_count integer DEFAULT 0,
+    shares_count integer DEFAULT 0,
     verified boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
     state integer DEFAULT 0,
@@ -1171,8 +1172,7 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0,
-    shares_count integer
+    level integer DEFAULT 0
 );
 
 
@@ -1894,13 +1894,6 @@ CREATE INDEX index_ideas_on_settings ON ideas USING gin (settings);
 
 
 --
--- Name: index_ideas_on_shares_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_shares_count ON ideas USING btree (shares_count);
-
-
---
 -- Name: index_ideas_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2495,13 +2488,7 @@ INSERT INTO schema_migrations (version) VALUES ('20150317231458');
 
 INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 
-INSERT INTO schema_migrations (version) VALUES ('20150321223054');
-
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
-
-INSERT INTO schema_migrations (version) VALUES ('20150414223204');
-
-INSERT INTO schema_migrations (version) VALUES ('20150415011619');
 
