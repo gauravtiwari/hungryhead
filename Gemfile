@@ -34,6 +34,7 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
+#Inline SVG
 gem 'inline_svg'
 
 #Font awesome
@@ -51,7 +52,6 @@ gem  'hashie'
 
 #Generating auto content for social media channels
 gem 'searchkick'
-
 
 #For formatting texts
 gem 'html-pipeline'

@@ -827,44 +827,6 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: pages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE pages (
-    id integer NOT NULL,
-    title character varying,
-    meta_title character varying,
-    meta_description character varying,
-    excerpt text,
-    cover character varying,
-    cover_bg character varying,
-    body text,
-    slug character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: pages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE pages_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: pages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE pages_id_seq OWNED BY pages.id;
-
-
---
 -- Name: read_marks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1179,9 +1141,9 @@ CREATE TABLE users (
     ideas_count integer DEFAULT 0,
     shares_count integer DEFAULT 0,
     verified boolean DEFAULT false,
+    admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
     state integer DEFAULT 0,
-    role integer DEFAULT 0,
     encrypted_password character varying DEFAULT ''::character varying,
     reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
@@ -1411,13 +1373,6 @@ ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notification
 --
 
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY pages ALTER COLUMN id SET DEFAULT nextval('pages_id_seq'::regclass);
 
 
 --
@@ -1656,14 +1611,6 @@ ALTER TABLE ONLY notifications
 
 ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
-
-
---
--- Name: pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY pages
-    ADD CONSTRAINT pages_pkey PRIMARY KEY (id);
 
 
 --
@@ -2321,13 +2268,6 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
--- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_role ON users USING btree (role);
-
-
---
 -- Name: index_users_on_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2540,6 +2480,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
-
-INSERT INTO schema_migrations (version) VALUES ('20150419213741');
 
