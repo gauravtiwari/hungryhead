@@ -1,0 +1,50 @@
+<!-- START HEADER -->
+<div class="header bg-white">
+<div class="container">
+  <div class=" pull-left sm-table">
+    <div class="header-inner">
+      <div class="brand inline">
+      <%= link_to(root_path) do %>
+        <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
+      <% end %>
+      </div>
+      <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+        <li class="p-r-15 b-grey b-l p-l-15 fs-14 inline b-dashed"><a href="" title=""><span class="">Learn More</span></a></li>
+        <li class="p-r-15 b-grey b-l p-l-15 fs-14 inline b-dashed"><a href="" title=""><span class="">How it works?</span></a></li>
+        <li class="p-r-15 b-grey b-l p-l-15 fs-14 inline b-dashed"><a href="" title=""><span class="">Help</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <div class="visible-lg visible-md m-t-10">
+      <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
+        <div class="dropdown pull-right">
+          <%= link_to(new_user_registration_path, title: "Click to Register", class: "profile-dropdown-toggle inline", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}) do %>
+            <span class="text-master fs-16">Join</span>
+          <% end %>
+
+          <ul class="dropdown-menu profile-dropdown" role="menu">
+            <li>
+              <%= link_to(new_student_registration_path) do %>
+                <i class="fa fa-graduation-cap"></i> As Student
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(new_mentor_registration_path) do %>
+                <i class="fa fa-briefcase"></i> As Mentor
+              <% end %>
+            </li>
+            <li class="no-margin">
+              <%= link_to(new_teacher_registration_path) do %>
+                <i class="fa fa-university"></i> As Teacher
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a href="" title="" class="pull-left p-t-10 fs-16 font-heading"><span class="text-master">Login</span></a>
+    </div>
+  </div>
+  </div>
+</div>
