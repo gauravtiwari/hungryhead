@@ -344,6 +344,7 @@ GEM
     haml (4.0.6)
       tilt
     hashie (3.4.1)
+    high_voltage (2.3.0)
     highline (1.6.21)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -734,6 +735,7 @@ DEPENDENCIES
   goldiloader
   guard-livereload
   hashie
+  high_voltage
   html-pipeline
   htmlbeautifier
   identity_cache

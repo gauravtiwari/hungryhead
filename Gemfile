@@ -52,6 +52,7 @@ gem  'hashie'
 #Generating auto content for social media channels
 gem 'searchkick'
 
+
 #For formatting texts
 gem 'html-pipeline'
 gem 'github-markdown'
@@ -153,6 +154,12 @@ gem 'country_select'
 
 # SEO
 gem 'friendly_id'
+
+#Admin
+#gem 'activeadmin', github: 'activeadmin'
+#gem 'inherited_resources'
+#gem 'active_skin'
+#gem 'activeadmin_hstore_editor'
 
 #JQuery AutoSize
 

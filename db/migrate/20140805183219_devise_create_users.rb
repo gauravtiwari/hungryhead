@@ -18,7 +18,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.jsonb  :media, :default => "{}"
       t.jsonb  :settings, :default => "{}"
       t.jsonb  :fund, :default => "{}"
-      t.integer :school_id, null: false
+      t.integer :school_id
       t.integer :followers_count, default: 0, index: true
       t.integer :followings_count, default: 0, index: true
       t.integer :investments_count, default: 0
