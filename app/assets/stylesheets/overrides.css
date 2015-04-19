@@ -157,6 +157,11 @@ input.error:-webkit-autofill {
   top: -6px;
   right: -30px;
 }
+.select2-results .select2-no-results,
+.select2-results .select2-searching,
+.select2-results .select2-selection-limit {
+  padding-top: 8px;
+}
 .jumbotron .cover-photo {
   background-color: #5b98e0;
 }
@@ -216,8 +221,24 @@ input.error:-webkit-autofill {
 ul.reactions div {
   float: left;
 }
+.light-bg {
+  background: #fafafa;
+}
+.wrapper-small {
+  padding: 60px 0;
+}
+.wrapper-lg {
+  padding: 120px 0;
+}
+.btn-ghost:hover,
+.btn-ghost:focus {
+  color: #51646b!important;
+}
 .idea-badge {
   padding-top: 2px;
+}
+.bg-white {
+  background: #fff!important;
 }
 .thumbnail-wrapper.d24 {
   width: 24px;

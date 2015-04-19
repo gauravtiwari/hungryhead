@@ -38,7 +38,7 @@
  *= require nav
  *= require comments
  *= require footer
- *= require overrides
  *= require idea_profile
-
+ *= require join
+ *= require overrides
  */

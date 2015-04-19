@@ -34,7 +34,7 @@
     <%= javascript_tag do %>
       window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
     <% end %>
-    
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
@@ -57,8 +57,10 @@
     <div class="<%= user_signed_in? ? 'container' : 'page-container' %>">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav' %>
-      <% else %>
+      <% elsif params[:action] == "index" %>
        <%= render partial: 'globals/guest_nav' %>
+      <% else %>
+        <%= render partial: 'globals/page_nav' %>
       <% end %>
 
       <div class="page-content-wrapper">

@@ -23,7 +23,10 @@ class PagesController < ApplicationController
     end
  end
 
- def learn_more
+ def story
+
+ end
+ def learn
 
  end
 

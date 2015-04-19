@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, except: [:check_username, :check_email]
-  before_filter :check_terms, except: [:update, :edit, :check_username, :check_email]
-  before_action :set_user, except: [:tags, :autocomplete_user_name, :index, :check_username, :check_email]
+  before_filter :authenticate_user!, except: [:check_username, :check_email, :join]
+  before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
+  before_action :set_user, except: [:tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
   after_action :verify_authorized, :only => [:update, :edit]
@@ -22,11 +22,16 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def join
+  end
+
   def show
     @badges = @user.badges.group_by(&:id)
     @ideas = Idea.for_user(@user)
     respond_to do |format|
-      format.html
+      format.html {render :show} if @user.type == "Student"
+      format.html {render :mentor} if @user.type == "Mentor"
+      format.html {render :teacher} if @user.type == "Teacher"
     end
   end
 
@@ -121,7 +126,7 @@ class UsersController < ApplicationController
     @activities = PublicActivity::Activity
     .where(owner_id: @user.id, owner_type: "User")
     .order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 10)  
+    .paginate(:page => params[:page], :per_page => 10)
      respond_to do |format|
       format.html
       format.js

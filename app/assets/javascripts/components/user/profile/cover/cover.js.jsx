@@ -56,7 +56,7 @@ var Cover = React.createClass({
       self.setState({top:  ui.position.top, left: ui.position.left});
     }
    });
-  }, 
+  },
 
   updateCover: function(formData) {
     this.setState({loading: true});
@@ -138,7 +138,7 @@ var Cover = React.createClass({
         var image = "";
         var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
       }
-     
+
 
       if(this.state.is_owner) {
         return (

@@ -34,6 +34,9 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
+#CMS
+gem "storytime"
+
 gem 'inline_svg'
 
 #Font awesome
@@ -51,9 +54,6 @@ gem  'hashie'
 
 #Generating auto content for social media channels
 gem 'searchkick'
-
-#Static pages
-#gem 'high_voltage'
 
 #For formatting texts
 gem 'html-pipeline'
@@ -156,12 +156,6 @@ gem 'country_select'
 
 # SEO
 gem 'friendly_id'
-
-#Admin
-#gem 'activeadmin', github: 'activeadmin'
-#gem 'inherited_resources'
-#gem 'active_skin'
-#gem 'activeadmin_hstore_editor'
 
 #JQuery AutoSize
 

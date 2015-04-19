@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   post "pusher/auth"
 
-  get '/learn-more', to: 'pages#learn_more', as: :learn_more
+  get '/learn', to: 'pages#learn', as: :learn
+  get '/our-story', to: 'pages#story', as: :story
 
   #Pages routes
   resources :pages do
@@ -23,6 +24,10 @@ Rails.application.routes.draw do
   # Authentication
   devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}
   as :user do
+
+    # joining
+    get   '/join' => 'users#join',    as: 'new_user_registration'
+
     # session handling
     get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
     post    '/login'  => 'users/sessions#create',  as: 'user_session'
@@ -53,10 +58,10 @@ Rails.application.routes.draw do
   devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'}
   as :student do
     # joining
-    get   '/join' => 'students/registrations#new',    as: 'new_student_registration'
-    post  '/join' => 'students/registrations#create', as: 'student_registration'
-    put  '/join' => 'students/registrations#update', as: 'student_update'
-    delete  '/join' => 'devise/registrations#destroy', as: 'student_delete'
+    get   '/students_join' => 'students/registrations#new',    as: 'new_student_registration'
+    post  '/students_join' => 'students/registrations#create', as: 'student_registration'
+    put  '/students_join' => 'students/registrations#update', as: 'student_update'
+    delete  '/students_join' => 'devise/registrations#destroy', as: 'student_delete'
   end
 
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'}

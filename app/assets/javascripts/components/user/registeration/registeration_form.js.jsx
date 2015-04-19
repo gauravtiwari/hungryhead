@@ -127,7 +127,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Email</label>
-              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required aria-required="true" />
+              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span id="invalid-email"></span>
             </div>
           </div>
@@ -136,7 +136,7 @@ var RegisterationForm = React.createClass({
         <div className="row">
           <div className="col-sm-12">
             <div className="form-group">
-              <label>Select your school <small className="fs-8 text-danger">Your school is not in the list. <a href="javascript:void();" data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
+              <label>Select your school <small className="fs-8 text-danger">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
               <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
             </div>
           </div>

@@ -325,12 +325,12 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
 ;( function( window ) {
-    
+
     'use strict';
 
     /**
@@ -344,12 +344,12 @@
         }
         return (el!==false);
     };
-    
+
     /**
      * extend obj function
      */
     function extend( a, b ) {
-        for( var key in b ) { 
+        for( var key in b ) {
             if( b.hasOwnProperty( key ) ) {
                 a[key] = b[key];
             }
@@ -360,7 +360,7 @@
     /**
      * SelectFx function
      */
-    function SelectFx( el, options ) {  
+    function SelectFx( el, options ) {
         this.el = el;
         this.options = extend( {}, this.options );
         extend( this.options, options );
@@ -390,7 +390,7 @@
             left : el.getBoundingClientRect().left + window.pageXOffset - el.ownerDocument.documentElement.clientLeft,
             top : el.getBoundingClientRect().top + window.pageYOffset - el.ownerDocument.documentElement.clientTop
         }
-        
+
     }
 
     /**
@@ -411,7 +411,7 @@
         // default container is body
         container : 'body',
         // callback when changing the value
-        onChange : function( el ) { 
+        onChange : function( el ) {
             var event = document.createEvent('HTMLEvents');
             event.initEvent('change', true, false);
             el.dispatchEvent(event);
@@ -436,13 +436,13 @@
 
         // all options
         this.selOpts = [].slice.call( this.selEl.querySelectorAll( 'li[data-option]' ) );
-        
+
         // total options
         this.selOptsCount = this.selOpts.length;
-        
+
         // current index
         this.current = this.selOpts.indexOf( this.selEl.querySelector( 'li.cs-selected' ) ) || -1;
-        
+
         // placeholder elem
         this.selPlaceholder = this.selEl.querySelector( 'span.cs-placeholder' );
 
@@ -588,7 +588,7 @@
         }
 
         var tmpcurrent = typeof this.preSelCurrent != 'undefined' && this.preSelCurrent !== -1 ? this.preSelCurrent : this.current;
-        
+
         if( dir === 'prev' && tmpcurrent > 0 || dir === 'next' && tmpcurrent < this.selOptsCount - 1 ) {
             // save pre selected current - if we click on option, or press enter, or press space this is going to be the index of the current option
             this.preSelCurrent = dir === 'next' ? tmpcurrent + 1 : tmpcurrent - 1;
@@ -640,7 +640,7 @@
             mask.style.display = 'none';
             csOptions.style.overflowY = 'hidden';
             csOptions.style.width = 'auto';
-            
+
             var parentFormGroup = closest(this.selEl,'.form-group');
             parentFormGroup && classie.removeClass(parentFormGroup, 'focused');
 
@@ -696,7 +696,7 @@
             }
 
             mask.style.display = 'block';
-            
+
             classie.add(this.selEl, 'cs-active');
 
             var resizedWidth = (csPlaceholderWidth < csOptionsWidth) ? csOptionsWidth : csPlaceholderWidth;
@@ -727,7 +727,7 @@
 
         // update current selected value
         this.selPlaceholder.textContent = opt.textContent;
-        
+
         // change native select element´s value
         this.el.value = opt.getAttribute( 'data-value' );
 
@@ -1030,7 +1030,7 @@
 
         self.notification.append(self.alert);
 
-        // bind to Bootstrap closed event for alerts 
+        // bind to Bootstrap closed event for alerts
         self.alert.on('closed.bs.alert', function() {
             self.notification.remove();
             self.options.onClosed();
@@ -1041,7 +1041,7 @@
     };
 
     Notification.VERSION = "1.0.0";
-    
+
     Notification.prototype.show = function() {
 
         // TODO: add fadeOut animation on show as option
@@ -1140,7 +1140,7 @@
             this.$loader = $('<div class="portlet-progress"></div>');
             this.$loader.css({
                 'background-color': 'rgba('+this.options.overlayColor+','+this.options.overlayOpacity+')'
-           
+
             });
 
             var elem = '';
@@ -1456,7 +1456,7 @@
     var Parallax = function(element, options) {
         this.$element = $(element);
         this.options = $.extend(true, {}, $.fn.parallax.defaults, options);
-        this.$coverPhoto = this.$element.find('.cover-photo');
+        this.$coverPhoto = this.$element.find('.cover-photo, .join-photo');
         // TODO: rename .inner to .page-cover-content
         this.$content = this.$element.find('.inner');
 
@@ -1530,7 +1530,7 @@
 
     // PARALLAX NO CONFLICT
     // ====================
-    
+
     $.fn.parallax.noConflict = function() {
         $.fn.parallax = old;
         return this;
@@ -1713,7 +1713,7 @@
      }
 
 
-     // Toggle sidebar for mobile view   
+     // Toggle sidebar for mobile view
      Sidebar.prototype.toggleSidebar = function(toggle) {
          var timer;
          if (this.$body.hasClass('sidebar-open')) {
@@ -1892,7 +1892,7 @@
         if (action == 'show') {
             this.$element.removeClass("hide");
             this.$element.fadeIn("fast");
-            if(!this.$searchField.is(':focus')) { 
+            if(!this.$searchField.is(':focus')) {
                 this.$searchField.val(key);
                 setTimeout(function(){
                     this.$searchField.focus();

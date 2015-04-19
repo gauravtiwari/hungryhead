@@ -4,7 +4,9 @@
   <div class=" pull-left sm-table">
     <div class="header-inner">
       <div class="brand inline">
+      <%= link_to(root_path) do %>
         <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+      <% end %>
       </div>
       <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
         <li class="p-r-15 b-grey b-l p-l-15 fs-14 inline b-dashed"><a href="" title=""><span class="text-white">Learn More</span></a></li>
@@ -13,33 +15,36 @@
       </ul>
     </div>
   </div>
-  
+
   <div class=" pull-right">
-    <!-- START User Info-->
     <div class="visible-lg visible-md m-t-10">
       <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
         <div class="dropdown pull-right">
-          <button type="button" title="" class="profile-dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="text-white fs-16">Join</span></button>
+          <%= link_to(new_user_registration_path, title: "Click to Register", class: "profile-dropdown-toggle inline", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}) do %>
+            <span class="text-white fs-16">Join</span>
+          <% end %>
+
           <ul class="dropdown-menu profile-dropdown" role="menu">
-            <li><a href="#"><i class="pg-settings_small"></i> Settings</a>
+            <li>
+              <%= link_to(new_student_registration_path) do %>
+                <i class="fa fa-graduation-cap"></i> As Student
+              <% end %>
             </li>
-            <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+            <li>
+              <%= link_to(new_mentor_registration_path) do %>
+                <i class="fa fa-briefcase"></i> As Mentor
+              <% end %>
             </li>
-            <li><a href="#"><i class="pg-signals"></i> Help</a>
-            </li>
-            <li class="bg-master-lighter">
-              <a href="#" class="clearfix">
-                <span class="pull-left">Logout</span>
-                <span class="pull-right"><i class="pg-power"></i></span>
-              </a>
+            <li class="no-margin">
+              <%= link_to(new_teacher_registration_path) do %>
+                <i class="fa fa-university"></i> As Teacher
+              <% end %>
             </li>
           </ul>
         </div>
       </div>
       <a href="" title="" class="pull-left p-t-10 fs-16 font-heading"><span class="text-white">Login</span></a>
     </div>
-    <!-- END User Info-->
   </div>
   </div>
 </div>
-<!-- END HEADER -->

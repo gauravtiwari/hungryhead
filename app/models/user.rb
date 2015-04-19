@@ -26,11 +26,6 @@ class User < ActiveRecord::Base
   enum state: { inactive: 0, published: 1}
   enum role: { user: 0, entrepreneur: 1, mentor: 2 }
 
-  acts_as_taggable_on :skills, :locations, :subjects, :markets,
-  :services, :technologies
-
-  acts_as_tagger
-
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing

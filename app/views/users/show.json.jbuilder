@@ -20,8 +20,8 @@ json.user do
 		json.facebook_url @user.facebook_url
 		json.linkedin_url @user.linkedin_url
 		json.twitter_url @user.twitter_url
-		json.location @user.location_list.first
-		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first
+		json.location @user.locations.first if @user.locations
+		json.location_url profile_people_path(@user.locations.first.parameterize) if @user.locations
 	end
 
 	json.is_owner @user == current_user
@@ -32,17 +32,11 @@ json.user do
 
 	json.about_me do
 		json.sidebar do
-			json.skills @user.skill_list.each do |tag|
-				json.tag tag
-				json.url profile_path(tag.parameterize)
-			end
-			json.services @user.service_list.each do |tag|
-				json.tag tag
-				json.url profile_path(tag.parameterize)
-			end
-			json.markets @user.market_list.each do |tag|
-				json.tag tag
-				json.url profile_people_path(tag.parameterize)
+			if @user.markets
+				json.markets @user.markets.each do |tag|
+					json.tag tag
+					json.url profile_people_path(tag.parameterize)
+				end
 			end
 		end
 
