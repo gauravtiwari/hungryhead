@@ -34,9 +34,6 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
-#CMS
-gem "storytime"
-
 gem 'inline_svg'
 
 #Font awesome
