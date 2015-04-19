@@ -2,24 +2,24 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
+  #Pages routes
+  get '/learn', to: 'pages#learn', as: :learn
+  get '/hello', to: 'pages#hello', as: :hello
+  get '/rules', to: 'pages#rules', as: :rules
+  get '/privacy', to: 'pages#privacy', as: :privacy
+  get '/terms-of-use', to: 'pages#terms', as: :terms
+  get '/our-story', to: 'pages#story', as: :story
+
+  #Soulmate search engine
   mount Soulmate::Server, :at => "/search"
 
+  #Sidekiq
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
+  #Pusher authentication route
   post "pusher/auth"
 
-  get '/learn', to: 'pages#learn', as: :learn
-  get '/our-story', to: 'pages#story', as: :story
-
-  #Pages routes
-  resources :pages do
-    member do
-      get 'about'
-    end
-  end
-
-  resources :after_signup
 
   # Authentication
   devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}
@@ -87,6 +87,8 @@ Rails.application.routes.draw do
   match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
   match '/mentionables/:mentionable_type/:id', to: 'likes#mentionables', via: :get, as: 'mentionables'
 
+  resources :after_signup
+
   resources :follows, only: [:create, :destroy] do
     member do
       get :followers
@@ -94,6 +96,7 @@ Rails.application.routes.draw do
     end
   end
 
+  #Tagging system
   resources :locations, only: [:show] do
     get :autocomplete_location_name, :on => :collection
     member do
@@ -112,10 +115,6 @@ Rails.application.routes.draw do
     get :autocomplete_skill_name, :on => :collection
   end
 
-  resources :services, only: [:show]  do
-    get :autocomplete_service_name, :on => :collection
-  end
-
   resources :subjects, only: [:show]  do
     get :autocomplete_subject_name, :on => :collection
   end
@@ -124,6 +123,7 @@ Rails.application.routes.draw do
     get :autocomplete_technology_name, :on => :collection
   end
 
+  #Schools resources
   resources :schools do
     get :autocomplete_school_name, :on => :collection
     member do
@@ -135,9 +135,12 @@ Rails.application.routes.draw do
     end
   end
 
+  #Check if email and username exists
   get 'check_username', to: 'users#check_username', as: 'check_username'
   get 'check_email', to: 'users#check_email', as: 'check_email'
 
+
+  #Messaging system
   resources :conversations, only: [:index, :show, :destroy] do
     member do
       post :reply
@@ -157,6 +160,7 @@ Rails.application.routes.draw do
     end
   end
 
+  #Users routes
   resources :users, path: 'people' do
     get :autocomplete_user_name, :on => :collection
     member do
@@ -174,15 +178,19 @@ Rails.application.routes.draw do
     end
   end
 
+  #Comments resources
   resources :comments, only: [:create, :update, :index, :destroy]
 
+  #Shares resources
   resources :shares, only: [:create, :destroy, :show] do
     member do
       get :sharers
     end
   end
 
+  #Ideas routes
   resources :ideas do
+    #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     member do
       put :publish
@@ -199,15 +207,23 @@ Rails.application.routes.draw do
       post :invite_team
       get :followers
     end
+
+    #Investments resource
     resources :investments, only: [:create, :index, :show]
-    resources :notes
+
+    #Notes /TODO
+    #resources :notes
+
+    #Feedback resources
     resources :feedbacks do
       member do
         put :rate
       end
     end
+
   end
 
+  #Vanity urls for users
   get '/:slug', to: SlugRouter.to(:show), as: :profile
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy

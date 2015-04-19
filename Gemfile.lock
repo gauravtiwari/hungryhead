@@ -344,7 +344,6 @@ GEM
     haml (4.0.6)
       tilt
     hashie (3.4.1)
-    high_voltage (2.3.0)
     highline (1.6.21)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -414,6 +413,8 @@ GEM
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
+    metamagic (3.1.7)
+      rails (>= 3.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
     mimetype-fu (0.1.2)
@@ -735,7 +736,6 @@ DEPENDENCIES
   goldiloader
   guard-livereload
   hashie
-  high_voltage
   html-pipeline
   htmlbeautifier
   identity_cache
@@ -754,6 +754,7 @@ DEPENDENCIES
   mandrill-rails
   merit
   meta_request
+  metamagic
   mina
   mina-nginx
   mina-sidekiq

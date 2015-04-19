@@ -224,7 +224,10 @@ gem 'em-http-request' # Required by trigger_async
 #Pagination
 gem 'will_paginate'
 
+#Meta tags
+gem 'metamagic'
 
+#UUID generation
 gem 'uuidtools'
 
 #Deployment

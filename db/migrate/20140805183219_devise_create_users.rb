@@ -27,9 +27,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer :ideas_count, default: 0
       t.integer :shares_count, default: 0
       t.boolean :verified, default: false
+      t.boolean :admin, default: false
       t.boolean :terms_accepted, default: false
       t.integer :state, default: 0, index: true
-      t.integer :role, default: 0, index: true
       t.string :encrypted_password, :null => false, :default => ""
 
       ## Recoverable
