@@ -284,7 +284,7 @@ ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
 
 CREATE TABLE idea_messages (
     id integer NOT NULL,
-    user_id integer NOT NULL,
+    student_id integer NOT NULL,
     idea_id integer NOT NULL,
     body text NOT NULL,
     status integer,
@@ -1834,10 +1834,10 @@ CREATE INDEX index_idea_messages_on_idea_id ON idea_messages USING btree (idea_i
 
 
 --
--- Name: index_idea_messages_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_idea_messages_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_id);
+CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (student_id);
 
 
 --
@@ -2343,14 +2343,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 ALTER TABLE ONLY idea_messages
     ADD CONSTRAINT idea_messages_idea_id_fk FOREIGN KEY (idea_id) REFERENCES ideas(id);
-
-
---
--- Name: idea_messages_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY idea_messages
-    ADD CONSTRAINT idea_messages_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --

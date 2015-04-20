@@ -2,12 +2,8 @@ class FeedbacksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_feedback, only: [:rate, :show, :edit, :update, :destroy]
   before_action :set_props, only: [:index, :show, :create]
-  after_action :verify_authorized, :only => [:create, :destroy, :update]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   layout "idea"
-
-  respond_to :json, :html
 
   # GET /feedbacks
   # GET /feedbacks.json
@@ -36,14 +32,8 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    @feedback = Feedback.new feedback_params
-    @feedback.update_attributes(idea: @idea, user: @user)
+    @feedback = FeedbackService.new(feedback_params, @idea, current_user).create
     authorize @feedback
-
-    object_url = idea_feedback_url(@feedback.idea, @feedback.id)
-    idea_url = idea_url(@feedback.idea)
-    user_url = profile_url(@user)
-
     if @idea.can_feedback?(@user)
       respond_to do |format|
         if @feedback.save
@@ -52,7 +42,7 @@ class FeedbacksController < ApplicationController
           format.json { render json: @feedback.errors, status: :unprocessable_entity }
         end
       end
-      PostFeedbackJob.perform_later(@feedback, @user, object_url, idea_url, user_url)
+      FeedbackNotificationService.new(profile_url(@user), @user, idea_feedback_url(@feedback.idea, @feedback.id), @idea, idea_url(@feedback.idea)).notify
     else
       render json: {error: "Already feedbacked"}
     end

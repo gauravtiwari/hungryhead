@@ -1,4 +1,5 @@
 class IdeaPolicy < ApplicationPolicy
+
   def update?
   	collaborator?
   end
@@ -12,11 +13,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def show?
-  	if record.in_team?(current_user) || record.published? && record.everyone?
-  		true
-  	else
-  		false
-  	end
+    record.founder?(current_user) || record.in_team?(current_user) || record.published? && record.everyone?
   end
 
   def card?
@@ -68,7 +65,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def collaborator?
-  	record.team.include? current_user.id.to_s
+  	record.founder?(current_user) || record.team.include?(current_user.id.to_s)
   end
 
   def create?
@@ -80,7 +77,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def destroy?
-  	current_user == record.student
+  	record.founder?(current_user)
   end
 
 end

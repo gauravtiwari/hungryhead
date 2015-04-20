@@ -43,6 +43,8 @@ class Feedback < ActiveRecord::Base
   def increment_counters
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
+    idea.feedbackers.push(user.id)
+    idea.save
   end
 
   def decrement_counters

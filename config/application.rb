@@ -27,11 +27,6 @@ module HungryheadSchoolApp
     config.assets.paths << Rails.root.join('vendor', 'hh')
     config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins', 'font-awesome', 'fonts')
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
-    config.autoload_paths += Dir["#{config.root}/app/models/*"]
-    config.autoload_paths += Dir["#{config.root}/app/controllers/*"]
-    config.autoload_paths += Dir["#{config.root}/app/presenters/*"]
-    config.autoload_paths += Dir["#{config.root}/app/services/*"]
-    config.autoload_paths += Dir["#{config.root}/app/lib/*"]
     config.app_generators.scaffold_controller = :scaffold_controller
 
     #Background job processing
@@ -47,7 +42,7 @@ module HungryheadSchoolApp
     config.react.timeout = 20 #seconds
     config.react.react_js = lambda {File.read(::Rails.application.assets.resolve('react.js'))}
     config.react.component_filenames = ['components.js']
-    
+
 
     config.active_record.schema_format = :sql
 

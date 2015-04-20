@@ -83,6 +83,10 @@ class Idea < ActiveRecord::Base
 
   public
 
+  def founder?(user)
+    student == user
+  end
+
   def has_invested?(user)
     !investors.include? user.id.to_s
   end
