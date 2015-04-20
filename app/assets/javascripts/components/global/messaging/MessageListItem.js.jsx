@@ -21,17 +21,30 @@ var MessageListItem = React.createClass({
   },
   render: function() {
     var message = this.props.message;
-    var message_class = this.props.message_class;
-    var classes = "message-list-item ";
+
+    var cx = React.addons.classSet;
+    var message_owner_classes = cx({
+      "chat-bubble": true,
+      "from-me": this.props.message.user_id == window.currentUser.id,
+      "from-them": this.props.message.user_id != window.currentUser.id
+    });
+
     var message_id = "message-"+message.uuid;
-    return (
-       <li className={classes} id={message_id}>
-        <div className="user-avatar"><img src={message.user_avatar} width="30px" /></div>
-        <div className="tree-content">
-          <div className="message" dangerouslySetInnerHTML={{__html: message.body}}></div>
-          <span>{moment(this.props.message.created_at).fromNow()}</span>
+    if(this.props.message.user_id == window.currentUser.id) {
+      var message =<div className={message_owner_classes} dangerouslySetInnerHTML={{__html: message.body}}>
+        </div>;
+    } else {
+      var message = <div>
+        <div className="profile-img-wrapper m-t-5 inline">
+            <img className="col-top" src={message.user_avatar}  data-src={message.user_avatar} data-src-retina={message.user_avatar} width="30" height="30" />
         </div>
-      </li>
+        <div className={message_owner_classes} dangerouslySetInnerHTML={{__html: message.body}}>
+        </div></div>;
+    }
+    return (
+      <div className="message clearfix">
+      {message}
+      </div>
     );
   }
 

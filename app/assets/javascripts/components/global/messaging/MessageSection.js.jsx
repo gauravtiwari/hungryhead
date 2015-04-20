@@ -11,10 +11,8 @@ var MessageSection = React.createClass({
       });
     }
     return (
-      <div className="comment-tree">
-        <ul className="comment-tree-list" ref="messageList">
-            {messageListItems}
-        </ul>
+      <div className="chat-inner" id="my-conversation" ref="messageList">
+        {messageListItems}
       </div>
     );
   },

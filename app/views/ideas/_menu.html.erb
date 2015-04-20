@@ -26,12 +26,11 @@
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.can_feedback?(current_user) }) %>
         <%= react_component('InvestButton',{ :invested => @idea.has_invested?(current_user) }) %>
       <% else %>
+      <div>
+        <a class="btn btn-danger btn-cons edit-profile pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
+      </div>
        <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
         <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.me?, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>
-
-        <div>
-          <a class="btn btn-danger btn-cons edit-profile pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
-        </div>
       <% end %>
     </div>
   </div>

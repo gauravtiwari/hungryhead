@@ -46,6 +46,7 @@ class Idea < ActiveRecord::Base
   belongs_to :student, touch: true, counter_cache: true
   belongs_to :school, counter_cache: true
   has_many :feedbacks, dependent: :destroy, autosave: true
+  has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy

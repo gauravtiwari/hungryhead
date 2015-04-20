@@ -192,9 +192,7 @@ var CollaborationBox = React.createClass({
       }
 
       return (<div>
-        <aside className="chat-inner" id="my-conversation">
           {messages_section}
-        </aside>
        <IdeaMessageComposer loading = {this.state.loading} form = {this.state.form} onMessageSubmit={this.handleMessageSubmit}/>
       </div>
 
