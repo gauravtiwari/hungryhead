@@ -3,7 +3,7 @@ class FeedbackNotificationService
   def initialize(user_url, user, feedback_url, idea, idea_url)
     @user_url = user_url
     @user = user
-    @feedback_path = feedback_path
+    @feedback_url = feedback_url
     @idea = idea
     @idea_url = idea_url
   end

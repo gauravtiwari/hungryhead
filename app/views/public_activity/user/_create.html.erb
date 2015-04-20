@@ -11,23 +11,23 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span> 
+	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span>
 
 		   	<h6>
-		   		<% if activity.owner.location_list.length > 0 %>
+		   		<% if activity.owner.locations %>
 			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-map-marker"></i> 
-			            <%= activity.owner.location_list.first %>
+			            <i class="fa fa-map-marker"></i>
+			            <%= activity.owner.locations.first %>
 			        </span>
 		        <% end %>
-		       <% if activity.owner.market_list.length > 0 %>
+		       <% if activity.owner.markets %>
 			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-map-marker"></i> 
-			            <%= activity.owner.market_list.first %>
+			            <i class="fa fa-map-marker"></i>
+			            <%= activity.owner.markets.first %>
 			        </span>
 		        <% end %>
 		        <span class="date semi-bold">
-		            <i class="fa fa-clock"></i> 
+		            <i class="fa fa-clock"></i>
 			        <%= link_to(profile_path(activity.owner), class: "text-master") do %>
 						<%= time_ago_in_words(activity.created_at) %>
 					<% end %>

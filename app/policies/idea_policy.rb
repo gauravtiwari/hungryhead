@@ -13,7 +13,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def show?
-    record.founder?(current_user) || record.in_team?(current_user) || record.published? && record.everyone?
+    record.in_team?(current_user) || record.published? && record.everyone?
   end
 
   def card?
@@ -65,7 +65,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def collaborator?
-  	record.founder?(current_user) || record.team.include?(current_user.id.to_s)
+  	record.in_team?(current_user)
   end
 
   def create?

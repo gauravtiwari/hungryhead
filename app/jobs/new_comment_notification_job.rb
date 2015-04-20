@@ -13,6 +13,6 @@ class NewCommentNotificationJob < ActiveJob::Base
         read: false
       }
     )
-    Pusher.trigger("private-user-#{object.user.id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
+    Pusher.trigger("private-user-#{recipient.id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
   end
 end

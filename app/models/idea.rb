@@ -11,12 +11,14 @@ class Idea < ActiveRecord::Base
   list :followers_ids
   list :followings_ids
   list :voters_ids
+  list :sharers_ids
 
   counter :followers_counter
   counter :investors_counter
   counter :feedbackers_counter
   counter :views_counter
   counter :votes_counter
+  counter :shares_counter
   counter :comments_counter
 
   list :latest_activities, maxlength: 20, marshal: true
@@ -121,7 +123,7 @@ class Idea < ActiveRecord::Base
   end
 
   def in_team?(user)
-    team.include? user.id.to_s
+    founder?(user) || team.include?(user.id.to_s)
   end
 
   def invited?(user)

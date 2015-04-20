@@ -19,16 +19,16 @@
 
 			<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
 		   	<h6>
-		   		<% if activity.owner.location_list.length > 0 %>
+		   		<% if activity.owner.locations %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>
-			            <%= activity.owner.location_list.first %>
+			            <%= activity.owner.locations.first %>
 			        </span>
 		        <% end %>
-		       <% if activity.owner.market_list.length > 0 %>
+		       <% if activity.owner.markets %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>
-			            <%= activity.owner.market_list.first %>
+			            <%= activity.owner.markets.first %>
 			        </span>
 		        <% end %>
 		        <span class="time semi-bold">
@@ -59,8 +59,8 @@
     <div class="card-footer clearfix bold">
     	<ul class="reactions pull-left">
 
-				<% liked = current_user.voted_for? activity.trackable %>
-				<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.cached_votes_total, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+				<% liked = current_user.voted?(activity.trackable) %>
+				<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.votes_counter.value, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 			</ul>
       <div class="clearfix"></div>
     </div>

@@ -50,11 +50,11 @@ var ElevatorPitch = React.createClass({
     }
 
     var text = this.state.editable ? <span><i className="ion-close"></i> Cancel </span> : <span><i className="ion-edit"></i> Edit pitch</span>;
-    
+
     if(this.props.idea.elevator_pitch) {
       var html = this.props.idea.elevator_pitch;
     } else {
-      var html = "<div class='no-content'>Introduce your idea using a video. <span>Please add a youtube or vimeo video link. It's optional</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Introduce your idea using a video. <span>Please add a youtube or vimeo video link. It's optional</span> </div>";
     }
 
 

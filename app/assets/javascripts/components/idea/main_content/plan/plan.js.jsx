@@ -61,7 +61,7 @@ var Plan = React.createClass({
     }
 
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit summary</span>;
-    
+
     if(this.props.idea.description) {
       var html = converter.makeHtml(this.props.idea.description);
     } else {
@@ -74,19 +74,19 @@ var Plan = React.createClass({
         <div className="panel bg-light-blue box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-master-darker">Summarize your idea</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master">Summarize your idea</div>
             <div className="panel-controls">
             <ul>
               <li>
-                <a className="portlet-maximize text-master-darker m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-master-darker fs-12" onClick={this.openPlanForm}>{text}</a>
+                <a className="portlet-close text-master fs-12" onClick={this.openPlanForm}>{text}</a>
               </li>
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-master-darker">
+          <div className="panel-body p-l-60 p-r-60 text-master">
             <div onClick={this.openPlanForm} className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <PlanForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handlePlanSubmit= {this.handlePlanSubmit} form={this.props.idea} />
           </div>
@@ -96,9 +96,9 @@ var Plan = React.createClass({
        return (
       <div className="panel bg-light-blue box-shadow">
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-master-darker">Idea</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master">Idea</div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-master-darker">
+          <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
           </div>
         </div>

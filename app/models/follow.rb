@@ -17,14 +17,16 @@ class Follow < ActiveRecord::Base
   def increment_counters
   	follower.followings_counter.increment
     followable.followers_counter.increment
-    follower.followings_ids << followable_id
+    follower.followings_ids << followable_id if followable.class.to_s == "User"
+    follower.idea_followings_ids << followable_id if followable.class.to_s == "Idea"
     followable.followers_ids << follower_id
   end
 
   def decrement_counters
   	follower.followings_counter.decrement
     followable.followers_counter.decrement
-    follower.followings_ids.delete(followable_id)
+    follower.followings_ids.delete(followable_id) if followable.class.to_s == "User"
+    follower.idea_followings_ids.delete(followable_id) if followable.class.to_s == "Idea"
     followable.followers_ids.delete(follower_id)
   end
 

@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   list :followers_ids
   list :followings_ids
+  list :idea_followings_ids
 
   list :latest_activities, maxlength: 20, marshal: true
 
@@ -110,9 +111,12 @@ class User < ActiveRecord::Base
     super && authentications.blank?
   end
 
-  def shared? shareable, args={}
-    shares = find_shares(:shareable_id => shareable.id, :shareable_type => shareable.class.name)
-    shares.size > 0
+  def shared?(shareable)
+    shareable.sharers_ids.include?(id.to_s)
+  end
+
+  def voted?(votable)
+    votable.voters_ids.include?(id.to_s)
   end
 
   private
@@ -121,10 +125,6 @@ class User < ActiveRecord::Base
     words = self.name.split(" ")
     self.first_name = words.first
     self.last_name =  words.last
-  end
-
-  def find_shares extra_conditions = {}
-    shares.where(extra_conditions)
   end
 
   def seed_fund

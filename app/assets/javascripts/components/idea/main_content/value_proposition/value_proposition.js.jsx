@@ -17,7 +17,7 @@ var ValueProposition = React.createClass({
       self.setState({loading: data, editable: false});
     });
   },
-  
+
   handleValuePropositionSubmit: function(formData, description) {
     this.setState({description: description.description});
     this.setState({loading: true});
@@ -68,11 +68,11 @@ var ValueProposition = React.createClass({
     }
 
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit values</span>;
-    
+
     if(this.props.idea.sections && this.props.idea.sections.value_proposition) {
       var html = converter.makeHtml(this.props.idea.sections.value_proposition);
     } else {
-      var html = "<div class='no-content'>Describe your values. <span>What is it that you are offering that others are not? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe your values. <span>What is it that you are offering that others are not? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {

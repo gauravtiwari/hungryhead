@@ -20,6 +20,8 @@ class Share < ActiveRecord::Base
 	list :voters_ids
 
 	before_destroy :remove_activity
+	after_create :increment_counters
+	before_destroy :decrement_counters
 
 	private
 
@@ -29,4 +31,15 @@ class Share < ActiveRecord::Base
 	  true
 	 end
 	end
+
+	def increment_counters
+		shareable.shares_counter.increment
+	  shareable.sharers_ids << user_id
+	end
+
+	def decrement_counters
+		shareable.shares_counter.decrement
+	  shareable.sharers_ids.delete(user_id)
+	end
+
 end

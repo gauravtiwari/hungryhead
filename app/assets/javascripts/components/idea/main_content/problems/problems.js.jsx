@@ -68,11 +68,11 @@ var Problems = React.createClass({
       var error = <span className="alert alert-danger">{this.state.error}</span>;
     }
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit problems</span>;
-    
+
     if(this.props.idea.sections && this.props.idea.sections.problems) {
       var html = converter.makeHtml(this.props.idea.sections.problems);
     } else {
-      var html = "<div class='no-content'>Describe the problems identified. <span>How others are solving, if any? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe the problems identified. <span>How others are solving, if any? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {

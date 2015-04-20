@@ -19,7 +19,7 @@ var Market = React.createClass({
       self.setState({loading: data, editable: false});
     });
   },
-  
+
   handleMarketSubmit: function(formData, body) {
     this.setState({loading: true});
     $.ajaxSetup({ cache: false });
@@ -74,7 +74,7 @@ var Market = React.createClass({
       var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? Any metrices? etc.</span> </div>";
       var market_classes = "section-content canvas-placeholder sales-marketing market";
     }
-    
+
     if(this.props.meta.is_owner) {
       return (
         <div className="panel bg-light-blue box-shadow">

@@ -68,11 +68,11 @@ var Solutions = React.createClass({
     }
 
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit solutions</span>;
-    
+
     if(this.props.idea.sections && this.props.idea.sections.solutions) {
       var html = converter.makeHtml(this.props.idea.sections.solutions);
     } else {
-      var html = "<div class='no-content'>Describe the solutions identified. <span>What's different or unique? </span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe the solutions identified. <span>What's different or unique? </span> </div>";
     }
 
     if(this.props.meta.is_owner) {

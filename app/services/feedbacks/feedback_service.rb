@@ -7,7 +7,7 @@ class FeedbackService
   end
 
   def create
-    @feedback = Feedback.new feedback_params
+    @feedback = Feedback.new @params
     @feedback.update_attributes(idea: @idea, user: @user)
     @feedback
   end

@@ -9,7 +9,7 @@ class IdeaMessagePolicy < ApplicationPolicy
   end
 
   def create?
-   record.idea.founder?(current_user) || record.idea.team.include?(current_user.id.to_s)
+   record.idea.in_team?(current_user)
   end
 
   def destroy?

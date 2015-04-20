@@ -8,11 +8,15 @@ class LikeService
 
   def like
     @votable.liked_by @user
+    @votable.votes_counter.increment
+    @votable.voters_ids << @user.id
     send_like_notification
   end
 
   def unlike
     @votable.unliked_by @user
+    @votable.votes_counter.decrement if @votable.votes_counter.value > 0
+    @votable.voters_ids.delete(@user.id)
     UnlikeNotificationJob.perform_later(@votable)
   end
 

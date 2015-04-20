@@ -1168,7 +1168,8 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    role integer DEFAULT 0
 );
 
 
@@ -1778,6 +1779,13 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 
 
 --
+-- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
+
+
+--
 -- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1824,6 +1832,20 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_follows_on_followable_id_and_followable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_follows_on_followable_id_and_followable_type ON follows USING btree (followable_id, followable_type);
+
+
+--
+-- Name: index_follows_on_follower_id_and_follower_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_follows_on_follower_id_and_follower_type ON follows USING btree (follower_id, follower_type);
 
 
 --
@@ -2016,6 +2038,13 @@ CREATE UNIQUE INDEX index_markets_on_slug ON markets USING btree (slug);
 
 
 --
+-- Name: index_merit_activity_logs_on_action_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING btree (action_id);
+
+
+--
 -- Name: index_notifications_on_reciever_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2170,10 +2199,24 @@ CREATE INDEX index_slugs_on_sluggable_id ON slugs USING btree (sluggable_id);
 
 
 --
+-- Name: index_slugs_on_sluggable_id_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_slugs_on_sluggable_id_and_sluggable_type ON slugs USING btree (sluggable_id, sluggable_type);
+
+
+--
 -- Name: index_slugs_on_sluggable_type_and_sluggable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_slugs_on_sluggable_type_and_sluggable_id ON slugs USING btree (sluggable_type, sluggable_id);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
 
 
 --
@@ -2310,10 +2353,24 @@ CREATE INDEX index_votes_on_votable_id ON votes USING btree (votable_id);
 
 
 --
+-- Name: index_votes_on_votable_id_and_votable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_votes_on_votable_id_and_votable_type ON votes USING btree (votable_id, votable_type);
+
+
+--
 -- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON votes USING btree (votable_id, votable_type, vote_scope);
+
+
+--
+-- Name: index_votes_on_voter_id_and_voter_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_id, voter_type);
 
 
 --
@@ -2472,4 +2529,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
+
+INSERT INTO schema_migrations (version) VALUES ('20150420113616');
 

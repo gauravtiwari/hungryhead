@@ -1,8 +1,8 @@
 class PostFeedbackJob < ActiveJob::Base
   def perform(idea, user, msg)
     ActiveRecord::Base.connection_pool.with_connection do
-      followers = idea.followers_by_type('User')
-      all = followers.push(feedback.idea.student)
+      followers = idea.followers_ids.values
+      all = followers.push(user)
 
       all.each do |f|
         notification = Notification.create!(
@@ -10,7 +10,7 @@ class PostFeedbackJob < ActiveJob::Base
               sender_id: user.id,
               parameters: {
                 verb: "feedbacked",
-                trackable: feedback.id,
+                trackable: idea.id,
                 msg: msg,
                 read: false
               }
