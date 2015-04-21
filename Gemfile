@@ -240,6 +240,8 @@ gem "skylight"
 
 group :development, :test do
   gem 'better_errors'
+  gem 'hirb'
+  gem 'pry'
   gem 'rubocop', require: false
   gem "lol_dba"
   gem 'binding_of_caller'

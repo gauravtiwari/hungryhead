@@ -112,6 +112,15 @@ var CollaborationBox = React.createClass({
         valign: "middle",
         width: "20px"
       }))
+    } else {
+
+      placeholder = $('<div>', {
+        "class": "thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white"
+      })
+      content = placeholder.append($("<span>", {
+        text: member.info.name.split(' ')[0].split('')[0] + member.info.name.split(' ')[1].split('')[0],
+        "class": "placeholder bold text-white"
+      }))
     }
 
     if (member.id == idea_collaboration_channel.members.me.id) {

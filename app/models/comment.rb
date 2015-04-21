@@ -9,7 +9,7 @@ class Comment < ActiveRecord::Base
   acts_as_votable
   include Redis::Objects
   counter :votes_counter
-  list :voters_ids
+  sorted_set :voters_ids
 
   after_create :increment_counters
   before_destroy :decrement_counters

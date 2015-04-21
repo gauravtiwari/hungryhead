@@ -245,6 +245,40 @@ ALTER SEQUENCE feedbacks_id_seq OWNED BY feedbacks.id;
 
 
 --
+-- Name: feeds; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE feeds (
+    id integer NOT NULL,
+    owner_id integer,
+    owner_type character varying,
+    settings character varying,
+    type character varying DEFAULT 'News'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: feeds_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE feeds_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: feeds_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE feeds_id_seq OWNED BY feeds.id;
+
+
+--
 -- Name: follows; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1143,6 +1177,7 @@ CREATE TABLE users (
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
+    role integer DEFAULT 0,
     state integer DEFAULT 0,
     encrypted_password character varying DEFAULT ''::character varying,
     reset_password_token character varying,
@@ -1168,8 +1203,7 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0,
-    role integer DEFAULT 0
+    level integer DEFAULT 0
 );
 
 
@@ -1262,6 +1296,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 --
 
 ALTER TABLE ONLY feedbacks ALTER COLUMN id SET DEFAULT nextval('feedbacks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY feeds ALTER COLUMN id SET DEFAULT nextval('feeds_id_seq'::regclass);
 
 
 --
@@ -1484,6 +1525,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY feedbacks
     ADD CONSTRAINT feedbacks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: feeds_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY feeds
+    ADD CONSTRAINT feeds_pkey PRIMARY KEY (id);
 
 
 --
@@ -1832,6 +1881,27 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_feeds_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feeds_on_owner_id ON feeds USING btree (owner_id);
+
+
+--
+-- Name: index_feeds_on_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feeds_on_owner_type ON feeds USING btree (owner_type);
+
+
+--
+-- Name: index_feeds_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feeds_on_type ON feeds USING btree (type);
 
 
 --
@@ -2311,6 +2381,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_role ON users USING btree (role);
+
+
+--
 -- Name: index_users_on_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2531,4 +2608,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
+
+INSERT INTO schema_migrations (version) VALUES ('20150420123428');
 

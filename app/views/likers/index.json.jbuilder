@@ -5,9 +5,11 @@ json.payload do
     json.avatar i.voter.avatar.url(:avatar)
     json.uuid SecureRandom.hex(6)
     json.path profile_path(i.voter)
-    json.locations i.voter.location_list.each do |tag|
-        json.tag tag
-        json.url profile_people_path(tag.parameterize)
+    if i.voter.locations
+        json.locations i.voter.locations.each do |tag|
+            json.tag tag
+            json.url profile_people_path(tag.parameterize)
+        end
     end
     json.about_me i.voter.mini_bio
     json.is_following current_user.follows?(i.voter)

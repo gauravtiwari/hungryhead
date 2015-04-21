@@ -9,11 +9,12 @@ var LatestFeed = React.createClass({
 
   componentDidMount: function() {
     var self = this;
-    var idea_feed_channel = pusher.subscribe("feed-"+this.props.idea_id);
+    var feed = this.state.feed;
+    var idea_feed_channel = pusher.subscribe("idea-feed-"+this.props.idea_id);
     if(idea_feed_channel) {
       idea_feed_channel.bind('new_feed_item', function(data){
-        var items = data.data.item.reverse();
-        self.setState({feed: items});
+        var items = feed.concat(data.data.item);
+        self.setState({feed: items.reverse()});
       });
     }
   },

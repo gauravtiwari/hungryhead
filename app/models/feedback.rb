@@ -23,7 +23,7 @@ class Feedback < ActiveRecord::Base
   params: {verb: "left a feedback", action:  ""}
 
   counter :votes_counter
-  list :voters_ids
+  sorted_set :voters_ids
   counter :comments_counter
 
   #Hooks

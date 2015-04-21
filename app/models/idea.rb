@@ -8,10 +8,12 @@ class Idea < ActiveRecord::Base
 
   acts_as_taggable_on :markets, :locations, :technologies
 
-  list :followers_ids
-  list :followings_ids
-  list :voters_ids
-  list :sharers_ids
+  sorted_set :followers_ids
+  sorted_set :voters_ids
+  sorted_set :sharers_ids
+  sorted_set :feedbackers_ids
+  sorted_set :investors_ids
+  sorted_set :activities_ids
 
   counter :followers_counter
   counter :investors_counter
@@ -21,7 +23,7 @@ class Idea < ActiveRecord::Base
   counter :shares_counter
   counter :comments_counter
 
-  list :latest_activities, maxlength: 20, marshal: true
+  sorted_set :latest_activities, maxlength: 100, marshal: true
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -29,7 +31,7 @@ class Idea < ActiveRecord::Base
 
   #Scopes
   scope :published_ideas, -> { where(status: 1) }
-  scope :for_user, lambda {|user| where("team @> ?", "{#{user.id}}") }
+  scope :for_user, lambda {|user| where("student_id=? OR team @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Upload logos and covers
   mount_uploader :logo, LogoUploader
@@ -107,7 +109,7 @@ class Idea < ActiveRecord::Base
   end
 
   def find_followers
-    User.find(followers_ids.values.take(16))
+    User.find(followers_ids.revrange(0,16))
   end
 
   def find_team

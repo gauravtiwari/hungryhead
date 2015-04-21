@@ -29,17 +29,20 @@ class IdeasController < ApplicationController
   def publish
     authorize @idea
     if @idea.profile_complete?
-      @idea.published!
-      @idea.everyone!
-      PublishIdeaJob.perform_later(@idea, @user)
-      if !@user.entrepreneur?
-        @user.entrepreneur!
-        AwardBadgeJob.perform_later(@user, @user, 2, "Idea_#{@idea.id}")
-      end
+      PublishIdeaService.new(@idea, @user, idea_url(@idea), profile_url(@user)).publish
       render json: {is_public: true, msg: "Your idea profile was published successfully", profile_complete: @idea.profile_complete?, published: @idea.published?, url: unpublish_idea_path(@idea)}
     else
       render json: {msg: "We couldn't publish your idea profile as it's incomplete", profile_complete: @idea.profile_complete?, published: @idea.published?, url: publish_idea_path(@idea)}
     end
+  end
+
+  # PUT /ideas/1/unpublish
+  def unpublish
+    authorize @idea
+    @idea.draft!
+    @idea.me!
+    UnpublishIdeaJob.perform_later(@idea)
+    render json: {is_public: false, msg: "Your profile was unpublished successfully", profile_complete: @idea.profile_complete?, published: @idea.published?, url: publish_idea_path(@idea)}
   end
 
   # GET /ideas/1/updates
@@ -77,15 +80,6 @@ class IdeasController < ApplicationController
   def team
     @team = @idea.find_team
     render partial: 'ideas/_partials/team'
-  end
-
-  # PUT /ideas/1/unpublish
-  def unpublish
-    authorize @idea
-    @idea.draft!
-    @idea.me!
-    UnpublishIdeaJob.perform_later(@idea)
-    render json: {is_public: false, msg: "Your profile was unpublished successfully", profile_complete: @idea.profile_complete?, published: @idea.published?, url: publish_idea_path(@idea)}
   end
 
   # POST /ideas/1/invite_team

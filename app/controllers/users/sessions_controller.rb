@@ -27,12 +27,12 @@ class Users::SessionsController < Devise::SessionsController
 	def after_sign_in_path_for(resource)
 	    if resource.sign_in_count == 1
 		    resource.create_activity(key: 'user.create', owner: resource, recipient: resource, params: {
-				user_name: resource.name,
-				verb: "joined",
-				action: "hungryhead",
-				user_path: profile_path(resource),
-			    avatar: resource.avatar.url(:avatar)
-				}
+					user_name: resource.name,
+					verb: "joined",
+					action: "hungryhead",
+					user_path: profile_path(resource),
+				    avatar: resource.avatar.url(:avatar)
+					}
 		   	)
 	    	AwardBadgeJob.set(wait: 5.seconds).perform_later(resource, resource, 1, 'user_joined')
 	    	profile_path(resource)

@@ -12,11 +12,12 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  list :followers_ids
-  list :followings_ids
-  list :idea_followings_ids
+  sorted_set :followers_ids
+  sorted_set :followings_ids
+  sorted_set :idea_followings_ids
+  sorted_set :activities_ids
 
-  list :latest_activities, maxlength: 20, marshal: true
+  sorted_set :latest_activities, maxlength: 100, marshal: true
 
   counter :followers_counter
   counter :followings_counter
@@ -30,7 +31,8 @@ class User < ActiveRecord::Base
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
-  store_accessor :settings, :weekly_email
+  store_accessor :settings, :idea_notification_email, :feedback_notification_email,
+  :investment_notification_email, :follow_notification_email
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   serialize [:fund, :education, :interests, :profile, :settings], HashSerializer
@@ -95,6 +97,10 @@ class User < ActiveRecord::Base
     self.update_without_password(params)
   end
 
+  def follower?(user)
+    followers_ids.members.include?(user.id.to_s)
+  end
+
   def login=(login)
     @login = login
   end
@@ -112,11 +118,11 @@ class User < ActiveRecord::Base
   end
 
   def shared?(shareable)
-    shareable.sharers_ids.include?(id.to_s)
+    shareable.sharers_ids.members.include?(id.to_s)
   end
 
   def voted?(votable)
-    votable.voters_ids.include?(id.to_s)
+    votable.voters_ids.members.include?(id.to_s)
   end
 
   private

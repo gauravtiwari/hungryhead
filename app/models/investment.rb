@@ -19,10 +19,11 @@ class Investment < ActiveRecord::Base
 		params: {verb: "invested", action:  ->(controller, model) { model && model.amount }}
 
 	counter :votes_counter
-  list :voters_ids
+  sorted_set :voters_ids
 	counter :comments_counter
 
 	before_destroy :remove_activity
+  before_destroy :cancel_investment
   after_create :increment_counters
   before_destroy :decrement_counters
 
@@ -35,6 +36,9 @@ class Investment < ActiveRecord::Base
 	 end
 	end
 
+  def cancel_investment
+    idea.update_attributes(fund: {"balance" => idea.balance - amount })
+  end
 
   def increment_counters
     user.investments_counter.increment

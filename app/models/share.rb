@@ -17,7 +17,7 @@ class Share < ActiveRecord::Base
 	recipient: ->(controller, model) { model && model.shareable.student }
 
 	counter :votes_counter
-	list :voters_ids
+	sorted_set :voters_ids
 
 	before_destroy :remove_activity
 	after_create :increment_counters
@@ -34,7 +34,7 @@ class Share < ActiveRecord::Base
 
 	def increment_counters
 		shareable.shares_counter.increment
-	  shareable.sharers_ids << user_id
+	  shareable.sharers_ids.add(user_id, created_at.to_i)
 	end
 
 	def decrement_counters

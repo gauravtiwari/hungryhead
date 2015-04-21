@@ -13,7 +13,7 @@ class FeedbackNotificationService
   end
 
   def msg
-    msg = "<a href='#{@user_url}'>#{@user.name}</a> left a "+ "<a href='#{@feedback_url}'>feedback <i class='fa fa-fw ion-chatbubbles'></i> </a> for <a href='#{@idea_url}'>#{@idea.name}</a> ".html_safe
+    msg = "<a href='#{@user_url}'>#{@user.name}</a> left a "+ "<a href='#{@feedback_url}'>feedback <i class='fa fa-fw fa-comment'></i> </a> for <a href='#{@idea_url}'>#{@idea.name}</a> ".html_safe
   end
 
 end

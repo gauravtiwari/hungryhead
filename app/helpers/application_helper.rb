@@ -10,16 +10,32 @@ module ApplicationHelper
   end
 
   def followed?(object)
-    if current_user && current_user.followings_ids.values.include?(object.id.to_s)
+    if current_user && current_user.followings_ids.members.include?(object.id.to_s)
       followed =  {
-        follow: true, 
-        followable_type: object.class.name, 
+        follow: true,
+        followable_type: object.class.name,
         followable_id: object.id
       }
     else
-      followed = { 
-        follow: false, 
-        followable_type: object.class.name, 
+      followed = {
+        follow: false,
+        followable_type: object.class.name,
+        followable_id: object.id
+      }
+    end
+  end
+
+  def idea_followed?(object)
+    if current_user && current_user.idea_followings_ids.members.include?(object.id.to_s)
+      followed =  {
+        follow: true,
+        followable_type: object.class.name,
+        followable_id: object.id
+      }
+    else
+      followed = {
+        follow: false,
+        followable_type: object.class.name,
         followable_id: object.id
       }
     end

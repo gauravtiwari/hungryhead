@@ -9,7 +9,7 @@ class LikeService
   def like
     @votable.liked_by @user
     @votable.votes_counter.increment
-    @votable.voters_ids << @user.id
+    @votable.voters_ids.add(@user.id, Time.now.to_i)
     send_like_notification
   end
 

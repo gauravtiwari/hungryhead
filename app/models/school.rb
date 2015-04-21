@@ -9,16 +9,16 @@ class School < ActiveRecord::Base
 	:cover_position, :cover_prcessing, :logo_processing
 
 	acts_as_followable
-	include Redis::Objects
 
-	list :followers_ids
-	list :students_ids
-	list :ideas_ids
+	include Redis::Objects
+	sorted_set :followers_ids
+	sorted_set :students_ids
+	sorted_set :ideas_ids
+	sorted_set :activities_ids
 
 	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
-	sorted_set :activities_ids
 
 	mount_uploader :logo, LogoUploader
 	mount_uploader :cover, CoverUploader

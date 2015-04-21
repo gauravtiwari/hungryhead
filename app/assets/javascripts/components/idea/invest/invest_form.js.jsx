@@ -2,6 +2,14 @@
 
 var InvestForm = React.createClass({
 
+componentDidMount: function(){
+  var self = this;
+  $.pubsub('subscribe', 'idea_invested', function(msg, data){
+    self.refs.amount.getDOMNode().value = '';
+    self.refs.note.getDOMNode().value = '';
+  });
+},
+
 render: function() {
   var cx = React.addons.classSet;
   var classes = cx({
@@ -55,7 +63,6 @@ _onKeyDown: function(event) {
   var formData = $( this.refs.invest_form.getDOMNode() ).serialize();
   if($(this.refs.invest_form.getDOMNode()).valid()) {
     this.props.sendInvestment(formData, this.props.form.action, {amount: amount});
-    this.refs.amount.getDOMNode().value = '';
   }
 }
 });
