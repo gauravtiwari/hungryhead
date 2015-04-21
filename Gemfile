@@ -235,6 +235,8 @@ gem 'mina'
 gem 'mina-sidekiq', :require => false
 gem 'mina-nginx', :require => false
 
+#Trending/Popular
+gem "punching_bag"
 
 gem "skylight"
 

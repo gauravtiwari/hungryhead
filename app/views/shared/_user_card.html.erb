@@ -21,20 +21,20 @@
 			<% end %>
 		<% end %>
 	<% end %>
-      <div class="popover-card-stats">
-      <ul class="stastics-list">
-        <li>
-          Followers
-          <span><i class="fa fa-users"></i> <%= @user.followers_count %></span>
-        </li>
-        <li>
-          Investments
-          <span><i class="fa fa-dollar"></i> <%= @user.investments_count %></span>
-        </li>
-        <li>
-          Feedbacks
-          <span><i class="fa fa-comment"></i> <%= @user.feedbacks_count %></span>
-        </li>
-      </ul>
-    </div>
+  <div class="popover-card-stats">
+    <ul class="stastics-list">
+      <li>
+        Followers
+        <span><i class="fa fa-users"></i> <%= @user.followers_counter %></span>
+      </li>
+      <li>
+        Investments
+        <span><i class="fa fa-dollar"></i> <%= @user.investments_counter %></span>
+      </li>
+      <li>
+        Feedbacks
+        <span><i class="fa fa-comment"></i> <%= @user.feedbacks_counter %></span>
+      </li>
+    </ul>
+  </div>
 <% end %>

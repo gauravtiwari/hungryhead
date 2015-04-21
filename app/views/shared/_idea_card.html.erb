@@ -3,17 +3,18 @@
 		<%= content_tag(:div, class: 'popover-card-logo') do %>
 		  <div class="thumbnail-wrapper d32 auto-margin circular b-white m-r-5 m-b-5">
       <% if @idea.logo.present? %>
-       <%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
+        <%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
       <% else %>
-          <span class="placeholder bold text-white"><%= @idea.name.split('').first + @idea.name.split('').second %>
-          </span>
+        <span class="placeholder bold text-white">
+          <%= @idea.name.split('').first + @idea.name.split('').second %>
+        </span>
       <% end %>
       </div>
 			<h2><%= @idea.name %></h2>
 			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
       <% if @idea.student != current_user %>
         <div class="card-follow-button">
-          <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+          <%= react_component('Follow',{:followed => idea_followed?(@idea)}) %>
         </div>
         <script type="text/javascript">
            ReactRailsUJS.mountComponents();

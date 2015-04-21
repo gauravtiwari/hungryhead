@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
     [:username]
   end
 
+  acts_as_taggable_on :skills, :locations, :subjects, :markets,
+  :services, :technologies
+  acts_as_tagger
+  acts_as_punchable
+
   sorted_set :followers_ids
   sorted_set :followings_ids
   sorted_set :idea_followings_ids

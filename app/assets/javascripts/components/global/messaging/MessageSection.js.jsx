@@ -10,16 +10,26 @@ var MessageSection = React.createClass({
       return <MessageListItem message= {message} key={message.uuid} />
       });
     }
+
+    var styles = {
+      height: $(window).height() - 103 + 'px'
+    }
     return (
-      <div className="chat-inner" id="my-conversation" ref="messageList">
+      <div className="chat-inner" style={styles} id="idea-conversation" ref="messageList">
         {messageListItems}
       </div>
     );
   },
 
+  sizeContent: function() {
+      var newHeight = $("html").height() - 103 + "px";
+      $(".chat-inner").css("height", newHeight,toString());
+  },
+
   componentDidMount: function() {
+    $(window).resize(this.sizeContent);
     this._scrollToBottom();
-    $('a[data-toggle="quickview"], #content').on('click', function(){
+    $('a[data-toggle="quickview"], .content').on('click', function(){
       $('body').removeClass('show-collaboration');
       $('.quickview-wrapper').removeClass('open');
     });

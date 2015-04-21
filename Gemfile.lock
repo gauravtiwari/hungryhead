@@ -505,6 +505,9 @@ GEM
       railties (>= 3.0.0)
     puma (2.11.2)
       rack (>= 1.1, < 2.0)
+    punching_bag (0.4.0)
+      railties (>= 3.2, < 5)
+      voight_kampff (~> 0.2)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     pusher (0.14.4)
@@ -687,6 +690,9 @@ GEM
     uuidtools (2.1.5)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    voight_kampff (0.2.2)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.6)
     warden (1.2.3)
       rack (>= 1.0)
     wicked (1.1.1)
@@ -780,6 +786,7 @@ DEPENDENCIES
   pry
   public_activity
   puma
+  punching_bag
   pundit
   pusher
   rack-contrib

@@ -48,6 +48,9 @@ jQuery(document).ready ->
 
 	$('.scrollable').slimScroll height: '300px'
 
+
+	#$('.chat-inner').slimScroll height: $(window).height() - 103
+
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
 			$('.sticky').css(position: "fixed", width: "16.90rem", height: "auto")

@@ -15,6 +15,7 @@ var CollaborationBox = React.createClass({
 
   componentDidMount: function() {
     var self = this;
+
     if(this.isMounted()){
       $.getJSON(this.props.form.action, function(data) {
         this.setState({
@@ -54,7 +55,7 @@ var CollaborationBox = React.createClass({
       }
     });
 
-    $(".message-form #message").monitor(typer);
+    $(".add-comment #message").monitor(typer);
 
     idea_collaboration_channel.bind('client-typing', function(data) {
       var member = idea_collaboration_channel.members.get(data.user_id)
@@ -167,13 +168,6 @@ var CollaborationBox = React.createClass({
       "class": "bubble-content",
       text: message.body
     }));
-
-    var options =  {
-      content: "<li><img width='40px' src="+message.user_avatar+"><span> "+message.body+"</span></li>", // text of the snackbar
-      style: "snackbar", // add a custom class to your snackbar
-      timeout: 10000 // time in milliseconds after the snackbar autohides, 0 is disabled
-    }
-    $.snackbar(options);
   },
 
   handleMessageSubmit: function ( formData, action, body ) {
@@ -194,15 +188,11 @@ var CollaborationBox = React.createClass({
   },
 
   render: function() {
-      if(this.state.messages) {
-        var messages_section =  <MessageSection messages ={this.state.messages}  />;
-      } else {
-        var messages_section = <div className="loading-component"><i className="ion-loading-d"></i></div>;
-      }
 
-      return (<div>
-          {messages_section}
-       <IdeaMessageComposer loading = {this.state.loading} form = {this.state.form} onMessageSubmit={this.handleMessageSubmit}/>
+      return (  <div className="view chat-view bg-white clearfix">
+          <MessageSection messages ={this.state.messages}  />
+          <span id="typing_status"></span>
+        <IdeaMessageComposer loading = {this.state.loading} form = {this.state.form} onMessageSubmit={this.handleMessageSubmit}/>
       </div>
 
 

@@ -30,14 +30,25 @@ var MessageListItem = React.createClass({
     });
 
     var message_id = "message-"+message.uuid;
+
+    if(message.user_avatar != null) {
+      var avatar =  <div className="profile-img-wrapper m-t-5 inline">
+            <img className="col-top" src={message.user_avatar}  data-src={message.user_avatar} data-src-retina={message.user_avatar} width="30" height="30" />
+        </div>;
+    } else {
+      var avatar = <div className="thumbnail-wrapper d32 circular bordered b-white">
+              <span className="placeholder bold text-white">
+                {message.user_name.split(' ')[0].split('')[0]}{message.user_name.split(' ')[1].split('')[0]}
+              </span>
+            </div>;
+    }
+
     if(this.props.message.user_id == window.currentUser.id) {
       var message =<div className={message_owner_classes} dangerouslySetInnerHTML={{__html: message.body}}>
         </div>;
     } else {
       var message = <div>
-        <div className="profile-img-wrapper m-t-5 inline">
-            <img className="col-top" src={message.user_avatar}  data-src={message.user_avatar} data-src-retina={message.user_avatar} width="30" height="30" />
-        </div>
+        {avatar}
         <div className={message_owner_classes} dangerouslySetInnerHTML={{__html: message.body}}>
         </div></div>;
     }

@@ -20,12 +20,6 @@
   </div>
 </div>
 
-<% if user_signed_in? && policy(@idea).collaborator? %>
-  <div class="idea-collaboration-floating-panel">
-    <%= render 'collaboration' %>
-  </div>
-<% end %>
-
 <% if @idea.student != current_user %>
 
 <% if @idea.has_invested?(current_user) %>

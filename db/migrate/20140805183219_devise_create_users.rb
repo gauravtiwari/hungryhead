@@ -19,6 +19,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.jsonb  :settings, :default => "{}"
       t.jsonb  :fund, :default => "{}"
       t.integer :school_id
+      t.string :cached_location_list
+      t.string :cached_market_list
+      t.string :cached_skill_list
+      t.string :cached_subject_list
+      t.string :cached_technology_list
+      t.string :cached_service_list
       t.integer :followers_count, default: 0, index: true
       t.integer :followings_count, default: 0, index: true
       t.integer :investments_count, default: 0

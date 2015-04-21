@@ -21,21 +21,22 @@ var IdeaMessageComposer = React.createClass({
     });
 
     return (
-      <div className="message-form">
-        <span id="typing_status"></span>
-        <div className="message-form-textarea">
-         <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this._onKeyDown }>
-            <p><input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } /></p>
-            <p><textarea ref="body" id="message" name="idea_message[body]" placeholder="Type your message here..." className="message-composer" value={this.state.text} onChange={this._onChange}/></p>
-          
-          <div className="send-button float-right">
-            <button type="submit" id="post_message" className="main-button"><i className={loading_classes}></i> Send </button>
-          </div>
-        </form>
+      <div className="b-t b-b b-grey bg-white clearfix p-l-10 p-r-10">
+        <div className="row">
+          <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this._onKeyDown }>
+            <div className="col-xs-9 no-padding">
+                <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
+                <textarea type="text" value={this.state.text} onChange={this._onChange} data-chat-input data-chat-conversation="#idea-conversation" ref="body" id="message" name="idea_message[body]" className="form-control chat-input" placeholder="Type and enter to send" />
+            </div>
+            <div className="col-xs-2 link text-master m-l-10 m-t-15 p-l-10 b-l b-grey col-top">
+                <a href="#" className="link text-master">
+                    <button type="submit" id="post_message" className="main-button no-border no-padding bg-transparent"><i className={loading_classes}></i> <i className="fa fa-paper-plane"></i> </button>
+                </a>
+            </div>
+          </form>
         </div>
       </div>
 
-      
     );
   },
 

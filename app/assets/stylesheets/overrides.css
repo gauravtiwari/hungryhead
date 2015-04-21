@@ -15,6 +15,16 @@ body, p {
 .light {
   opacity: 0.8;
 }
+.chat-view .chat-inner {
+  padding: 15px;
+  overflow-x: hidden;
+  height: -moz-calc(100% - 103px);
+  height: -webkit-calc(100% - 103px);
+  height: calc(100% - 103px);
+}
+.quickview-wrapper .nav-tabs {
+  background-color: #2b303b;
+}
 .thumbnail-wrapper.bordered.d100 {
   line-height: 110px;
 }

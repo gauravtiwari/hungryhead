@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
   friendly_id :slug_candidates
 
   acts_as_taggable_on :markets, :locations, :technologies
+  acts_as_punchable
 
   sorted_set :followers_ids
   sorted_set :voters_ids
