@@ -28,6 +28,7 @@
 //= require jquery.atwho
 //= require typer
 //= require sweetalert
+//= require bootstrap-tagsinput
 //= require moment
 //= require classie
 //= require jquery.validate

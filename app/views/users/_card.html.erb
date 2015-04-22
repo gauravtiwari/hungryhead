@@ -1,22 +1,60 @@
-<div class="profile padding-20 bg-solid box-shadow ">
-<div class="container-xs-height">
-    <div class="row text-center">
-        <div class="user-profile auto-margin">
-            <div class="thumbnail-wrapper d100 circular bordered b-white">
-                <div class="profile-avatar">
-                  <%= react_component('Avatar', {data: data}) %>
+<div class="profile-card padding-20 bg-solid box-shadow ">
+    <a href="javascript;" id="edit-profile" class="pull-right text-white"><i class="fa fa-pencil"></i></a>
+    <div class="container-xs-height">
+        <div class="row text-center">
+            <div class="user-profile auto-margin">
+                <div class="thumbnail-wrapper d100 circular bordered b-white">
+                    <div class="profile-avatar">
+                      <%= react_component('Avatar', {data: data}) %>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="clearfix p-l-10 p-r-10 p-t-10">
-            <h3 class="no-margin text-white">
-                <%= @user.name %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
-            </h3>
-            <p class="text-white m-t-5 small"><%= link_to(@user.school.name, profile_path(@user.school), class: 'text-white b-r b-white b-dashed p-r-10') %> <span class="p-l-5">CEO at Pages.inc</span></p>
+            <div class="clearfix p-l-10 p-r-10 p-t-10">
+                <h3 class="no-margin text-white">
+                    <%= @user.name %> <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
+                </h3>
+                <p class="text-white m-t-5 small"><i class="fa fa-university"></i> <%= link_to(@user.school.name, profile_path(@user.school), class: 'text-white b-r b-white b-dashed p-r-10') %> <span class="p-l-5"><i class="fa fa-map-marker"></i> <%= @user.location_list.first %></span></p>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="edit-profile">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+            Update Profile
+            </div>
+        </div>
+        <div class="panel-body p-t-20">
+        <%= simple_form_for(@user, url: user_path(@user), as: :user, role: 'form', remote: true, method: :put) do |f| %>
+            <div class="form-group">
+                <label>Your name</label>
+                <span class="help">e.g. "Mona Lisa Portrait"</span>
+                <%= f.input_field :name, class: "form-control", required: true,  aria: {required: "true"} %>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <span class="help">e.g. "Mona Lisa Portrait"</span>
+               <%= f.input_field :email, class: "form-control", required: true, aria: {required: "true"} %>
+            </div>
+            <div class="form-group">
+                <label>Your location</label>
+                <span class="help">e.g. "Mona Lisa Portrait"</span>
+               <%= f.input_field :location_list, placeholder: 'Comma seperated list of locations',class: "form-control single-tag", value: "#{@user.location_list}", id: "#tagsinput", required: true, aria: {required: "true"} %>
+            </div>
+            <div class="form-group">
+                <label>Markets interested</label>
+                <span class="help">e.g. "Mona Lisa Portrait"</span>
+               <%= f.input_field :market_list, placeholder: 'Comma seperated list of markets', class: "form-control three-tags", required: true,  value: "#{@user.market_list}", id: "#tagsinput",aria: {required: "true"} %>
+            </div>
+            <%= f.button :submit, value: 'Update profile', class: 'btn btn-success btn-cons pull-right'%>
+            <a href="javascript;" id="cancel-edit-profile" class= "btn btn-danger btn-cons pull-right">Cancel</a>
+        <% end %>
+        </div>
+    </div>
 </div>
+
 <div class="widget-16 padding-20 bg-info-dark">
     <div class="row text-white">
         <div class="col-md-4 no-padding text-center b-r b-white b-dashed">

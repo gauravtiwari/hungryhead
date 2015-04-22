@@ -48,6 +48,18 @@ jQuery(document).ready ->
 
 	$('.scrollable').slimScroll height: '300px'
 
+	$('.single-tag').tagsinput maxTags: 1
+	$('.three-tags').tagsinput maxTags: 3
+
+	$('#edit-profile').on 'click', (e) ->
+		e.preventDefault()
+		$(@).closest('.profile-card').hide()
+		$('.edit-profile').show()
+
+	$('#cancel-edit-profile').on 'click', (e) ->
+		e.preventDefault()
+		$('.profile-card').show()
+		$(@).closest('.edit-profile').hide()
 
 	#$('.chat-inner').slimScroll height: $(window).height() - 103
 

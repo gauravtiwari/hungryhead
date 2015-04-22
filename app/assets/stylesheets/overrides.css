@@ -140,6 +140,9 @@ input.error:-webkit-autofill {
 .panel .panel-heading {
   min-height: 0;
 }
+.panel.panel-default {
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
 .container .jumbotron,
 .cover {
   padding-right: 60px;

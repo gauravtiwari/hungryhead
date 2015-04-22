@@ -20,8 +20,8 @@ json.user do
 		json.facebook_url @user.facebook_url
 		json.linkedin_url @user.linkedin_url
 		json.twitter_url @user.twitter_url
-		json.location @user.locations.first if @user.locations
-		json.location_url profile_people_path(@user.locations.first.parameterize) if @user.locations
+		json.location @user.location_list.first if @user.location_list
+		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first
 	end
 
 	json.is_owner @user == current_user

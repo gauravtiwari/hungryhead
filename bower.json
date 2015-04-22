@@ -7,7 +7,8 @@
         "jquery-form": "latest",
         "pusher": "latest",
         "sweetalert": "latest",
-        "slimScroll": "latest"
+        "slimScroll": "latest",
+        "bootstrap-tagsinput": "latest"
 
     }
   },
