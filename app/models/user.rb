@@ -17,22 +17,25 @@ class User < ActiveRecord::Base
   acts_as_tagger
   acts_as_punchable
 
+  #Sorted set to store followers, followings ids and latest activities
   sorted_set :followers_ids
   sorted_set :followings_ids
   sorted_set :idea_followings_ids
-  sorted_set :activities_ids
-
   sorted_set :latest_activities, maxlength: 100, marshal: true
 
+  #Redis counters to cache total followers, followings,
+  #feedbacks, investments and ideas
   counter :followers_counter
   counter :followings_counter
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
 
+  #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
   enum role: { user: 0, entrepreneur: 1, mentor: 2 }
 
+  #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
@@ -44,8 +47,10 @@ class User < ActiveRecord::Base
 
   attr_accessor :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
 
+  #Merit GEM for badges and points
   has_merit
 
+  #Devise for authentication
   devise :invitable, :async, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :registerable, :authentication_keys => [:login]
@@ -62,31 +67,38 @@ class User < ActiveRecord::Base
   has_many :notifications, :foreign_key => :reciever_id, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
 
+  #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
   mount_uploader :cover, CoverUploader
 
+  #Scopes for searching
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
 
+  #Callbacks
   before_save :add_fullname
-  before_create :seed_fund
+  before_save :seed_fund
   after_save :create_slug
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
   after_create :increment_counters
   before_destroy :decrement_counters
 
+  #Follower/Follow System
   acts_as_follower
   acts_as_followable
   acts_as_voter
 
+  #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
   validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
 
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
+  #Messaging system
   acts_as_messageable
+
 
   def mailboxer_email(object)
     email
@@ -102,9 +114,20 @@ class User < ActiveRecord::Base
     self.update_without_password(params)
   end
 
+  #Methods to check if action is performed  - follow/share/vote
   def follower?(user)
     followers_ids.members.include?(user.id.to_s)
   end
+
+  def shared?(shareable)
+    shareable.sharers_ids.members.include?(id.to_s)
+  end
+
+  def voted?(votable)
+    votable.voters_ids.members.include?(id.to_s)
+  end
+
+  #Login using both email and username
 
   def login=(login)
     @login = login
@@ -120,14 +143,6 @@ class User < ActiveRecord::Base
 
   def password_required?
     super && authentications.blank?
-  end
-
-  def shared?(shareable)
-    shareable.sharers_ids.members.include?(id.to_s)
-  end
-
-  def voted?(votable)
-    votable.voters_ids.members.include?(id.to_s)
   end
 
   private

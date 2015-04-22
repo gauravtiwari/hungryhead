@@ -51,7 +51,8 @@ class FeedbacksController < ApplicationController
   def rate
     @feedback.badged! if !@feedback.badged?
     @feedback.add_badge(params[:badge].to_i)
-    AwardBadgeJob.perform_later(@user, @feedback.user, params[:badge].to_i, "Feedback_#{@feedback.id}")
+    msg = "<a href='#{user_url(@user)}'>You</a> have earned a badge for your <a href='#{idea_feedback_url(@idea, @feedback)}'>feedback</a>".html_safe
+    AwardBadgeJob.set(wait: 15.seconds).perform_later(@user, @feedback.user, params[:badge].to_i, msg, "Feedback_#{@feedback.id}")
     render json: { voted: @feedback.badged!}
   end
 

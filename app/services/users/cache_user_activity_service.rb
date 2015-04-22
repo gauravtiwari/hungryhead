@@ -16,7 +16,16 @@ class CacheUserActivityService
      recipient: @activity.recipient.name
    }, @activity.created_at.to_i)
 
-   Pusher.trigger("user-feed-#{@activity.recipient_id}", "new_feed_item", {data: {id: @activity.id, item: @user_feed } }.to_json)
+   #Trigger pusher call to refresh user feed
+   Pusher.trigger("user-feed-#{@activity.recipient_id}",
+    "new_feed_item",
+      {data:
+        {
+          id: @activity.id,
+          item: @user_feed
+        }
+      }.to_json
+    )
   end
 
   def delete_redis_cache

@@ -9,13 +9,19 @@ class Idea < ActiveRecord::Base
   acts_as_taggable_on :markets, :locations, :technologies
   acts_as_punchable
 
+  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
   sorted_set :followers_ids
   sorted_set :voters_ids
   sorted_set :sharers_ids
   sorted_set :feedbackers_ids
   sorted_set :investors_ids
-  sorted_set :activities_ids
+  sorted_set :latest_activities, maxlength: 100, marshal: true
 
+  #Calculate idea popularity and trending score
+  sorted_set :trending_list, maxlength: 20, marshal: true
+  sorted_set :popular_list, maxlength: 20, marshal: true
+
+  #Redis Cache counters
   counter :followers_counter
   counter :investors_counter
   counter :feedbackers_counter
@@ -24,7 +30,6 @@ class Idea < ActiveRecord::Base
   counter :shares_counter
   counter :comments_counter
 
-  sorted_set :latest_activities, maxlength: 100, marshal: true
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -91,6 +96,14 @@ class Idea < ActiveRecord::Base
 
   def founder?(user)
     student == user
+  end
+
+  def name_badge
+    name_split.first + name_split.second
+  end
+
+  def name_split
+    name.split('')
   end
 
   def has_invested?(user)
