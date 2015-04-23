@@ -8,12 +8,9 @@ var Card = React.createClass({
       form: data.user.about_me.form,
       is_owner: data.user.is_owner,
       loading: false,
-      mode: false
+      mode: false,
+      disabled: false
     }
-  },
-
-  componentDidMount: function() {
-    this.setState({disabled: false})
   },
 
   saveSidebarWidget:function(formData, action) {
@@ -27,6 +24,8 @@ var Card = React.createClass({
       success: function ( data ) {
         this.setState({profile: data.user.profile});
         this.setState({mode: false, loading: false});
+        $('#editProfileFormPopup').modal('hide');
+        $('body').pgNotification({style: "simple", message: "Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -36,6 +35,17 @@ var Card = React.createClass({
 
   openForm: function() {
     this.setState({mode: !this.state.mode});
+    $('body').append($('<div>', {class: 'edit_profile_form_modal', id: 'edit_profile_form_modal'}));
+    React.render(<CardForm key={Math.random()} closeForm={this.closeForm} openForm={this.openForm} profile={this.state.profile} loading={this.state.loading} form={this.state.form} saveSidebarWidget={this.saveSidebarWidget} />,
+      document.getElementById('edit_profile_form_modal')
+    );
+    ReactRailsUJS.mountComponents();
+    $('#editProfileFormPopup').modal('show');
+  },
+
+  closeForm: function() {
+    $('#editProfileFormPopup').modal('hide');
+    this.setState({mode: false, loaing: false});
   },
 
   render: function() {
@@ -51,9 +61,8 @@ var Card = React.createClass({
   }
     return (
       <div>
-        <CardContent key={Math.random()} openForm={this.openForm} text={text} data={this.props.data} is_owner={this.state.is_owner} mode={this.state.mode} profile={this.state.profile} />
-        <CardStats key={Math.random()} openForm={this.openForm} mode={this.state.mode} profile={this.state.profile} />
-        <CardForm key={Math.random()} openForm={this.openForm} profile={this.state.profile} mode={this.state.mode} loading={this.state.loading} form={this.state.form} saveSidebarWidget ={this.saveSidebarWidget} />
+        <CardContent key={Math.random()} openForm={this.openForm} text={text} data={this.props.data} is_owner={this.state.is_owner} profile={this.state.profile} />
+        <CardStats key={Math.random()} profile={this.state.profile} />
       </div>
     );
   }

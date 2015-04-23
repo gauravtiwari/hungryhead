@@ -1,3 +1,3 @@
 class Teacher < User
-	store_accessor :interests, :locations, :skills, :markets
+	store_accessor :interests, :locations, :hobbies, :markets
 end

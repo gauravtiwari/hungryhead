@@ -11,18 +11,12 @@ var CardForm = React.createClass({
   },
   render: function() {
     var cx = React.addons.classSet;
-    var classes = cx({
-      'edit-mode-section edit-profile': true,
-      'show': this.props.mode,
-      'hide': !this.props.mode,
-    });
-
     var markets = this.props.profile.markets.map(function(market){
       return market.tag
     });
 
-    var skills = this.props.profile.skills.map(function(skill){
-      return skill.tag
+    var hobbies = this.props.profile.hobbies.map(function(hobby){
+      return hobby.tag
     });
 
     var loadingClass = cx({
@@ -30,57 +24,87 @@ var CardForm = React.createClass({
     });
 
     return(
+      <div className="modal fade stick-up" id="editProfileFormPopup" tabIndex="-1" role="dialog" aria-labelledby="editProfileFormPopupLabel" aria-hidden="true">
+        <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+                <div className="modal-header clearfix text-left">
+                    <button type="button" className="close" onClick={this.props.closeForm}>
+                      <i className="pg-close fs-14"></i>
+                    </button>
+                    <h5 className="b-b b-grey p-b-5 pull-left">Edit your <span className="semi-bold">Profile</span></h5>
+                </div>
+                <div className="modal-body p-t-20">
+                    <div className="editProfile">
+                      <div className="panel panel-default no-border">
+                        <div className="panel-body no-padding no-border">
+                          <form ref="profile_form" noValidate="novalidate" className="edit_user" id="edit_user" method="put" onSubmit={this._onKeyDown} acceptCharset="UTF-8">
+                            <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
+                            <div className="col-md-6">
+                              <div className="form-group">
+                                  <label>Your name</label>
+                                  <span className="help"> e.g. "John Doe" <span className="text-danger">required</span></span>
+                                  <input className="string required form-control" required="required" aria-required="true" type="text" defaultValue={this.props.profile.name} name="user[name]" id="user_name" />
+                              </div>
+                              <div className="form-group">
+                                  <label>Email</label>
+                                  <span className="help"> e.g. "johndoe@example.com" <span className="text-danger">required</span></span>
+                                 <input className="string email required form-control" required="required" aria-required="true" type="email" defaultValue={this.props.profile.email}  name="user[email]" id="user_email" />
+                              </div>
+                              <div className="form-group">
+                                  <label>Mini Bio</label>
+                                  <span className="help"> e.g. "Student, interested in startups"</span>
+                                  <input className="string required form-control" required="required" aria-required="true" type="text" defaultValue={this.props.profile.mini_bio}  name="user[mini_bio]" id="user_mini_bio" />
+                              </div>
+                              <div className="form-group">
+                                <label>Location you are based</label>
+                                <span className="help"> e.g. "Lancaster"</span>
+                                <input defaultValue={this.props.profile.location_name} className="string optional location_list single-tag" placeholder="Location where you are based?" type="text" name="user[location_list]" id="user_location_list" />
+                              </div>
+                              <div className="form-group">
+                                <label>Markets interested</label>
+                                <span className="help"> e.g. "Ecommerce, SASS"</span>
+                                <input defaultValue={markets} className="string optional form-control market_list three-tags" placeholder="Which markets interests you?" type="text" name="user[market_list]" id="user_market_list" />
+                              </div>
+                            </div>
+                            <div className="col-md-6">
+                              <div className="form-group">
+                                  <label>Website url</label>
+                                  <span className="help"> e.g. "www.example.com"</span>
+                                  <input className="string form-control" type="text" placeholder="Enter Website url" defaultValue={this.props.profile.website_url}  name="user[website_url]" id="user_website_url" />
+                              </div>
+                              <div className="form-group">
+                                  <label>Linkedin url</label>
+                                  <span className="help"> e.g. "www.linkedin.com/john"</span>
+                                  <input className="string form-control" type="text" placeholder="Enter Linkedin url" defaultValue={this.props.profile.linkedin_url}  name="user[linkedin_url]" id="user_linkedin_url" />
+                              </div>
+                              <div className="form-group">
+                                  <label>Facebook url</label>
+                                  <span className="help"> e.g. "www.facebook.com/john"</span>
+                                  <input className="string form-control" type="text" placeholder="Enter Facebook url" defaultValue={this.props.profile.facebook_url}  name="user[facebook_url]" id="user_facebook_url" />
+                              </div>
+                              <div className="form-group">
+                                  <label>Twitter url</label>
+                                  <span className="help"> e.g. "www.twitter.com/john"</span>
+                                  <input className="string form-control" type="text" placeholder="Enter Twitter url" defaultValue={this.props.profile.twitter_url}  name="user[twitter_url]" id="user_twitter_url" />
+                              </div>
 
-    <div className={classes}>
-      <div className="panel panel-default">
-        <div className="panel-heading">
-            <div className="panel-title">
-            Update Profile
+                              <div className="form-group">
+                                <label>Interests/Hobbies</label>
+                                <span className="help"> e.g. "Programming, Marketing"</span>
+                                <input defaultValue={hobbies} className="string optional form-control hobbie_list three-tags" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" id="user_hobby_list" />
+                              </div>
+                            <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
+                            <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
             </div>
-        </div>
-        <div className="panel-body p-t-20">
-          <form ref="profile_form" noValidate="novalidate" className="edit_user" id="edit_user" method="put" onSubmit={this._onKeyDown} acceptCharset="UTF-8">
-            <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-            <div className="form-group">
-                <label>Your name</label>
-                <span className="help"> e.g. "John Doe" <span className="text-danger">required</span></span>
-                <input className="string required form-control" required="required" aria-required="true" type="text" defaultValue={this.props.profile.name} name="user[name]" id="user_name" />
-            </div>
-            <div className="form-group">
-                <label>Email</label>
-                <span className="help"> e.g. "johndoe@example.com" <span className="text-danger">required</span></span>
-               <input className="string email required form-control" required="required" aria-required="true" type="email" defaultValue={this.props.profile.email}  name="user[email]" id="user_email" />
-            </div>
-
-            <div className="form-group">
-                <label>Mini Bio</label>
-                <span className="help"> e.g. "Student, interested in startups"</span>
-                <input className="string required form-control" required="required" aria-required="true" type="text" defaultValue={this.props.profile.mini_bio}  name="user[mini_bio]" id="user_mini_bio" />
-            </div>
-            <div className="form-group">
-              <label>Location you are based</label>
-              <span className="help"> e.g. "Lancaster"</span>
-              <input defaultValue={this.props.profile.location_name} className="string optional location_list single-tag" placeholder="Location where you are based?" type="text" name="user[location_list]" id="user_location_list" />
-            </div>
-
-            <div className="form-group">
-              <label>Markets interested</label>
-              <span className="help"> e.g. "Ecommerce, SASS"</span>
-              <input defaultValue={markets} className="string optional form-control market_list three-tags" placeholder="Which markets interests you?" type="text" name="user[market_list]" id="user_market_list" />
-            </div>
-
-            <div className="form-group">
-              <label>Skills</label>
-              <span className="help"> e.g. "Programming, Marketing"</span>
-              <input defaultValue={skills} className="string optional form-control skill_list three-tags" placeholder="Which skills you have?" type="text" name="user[skill_list]" id="user_skill_list" />
-            </div>
-
-            <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
-            <a onClick={this.props.openForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>
-          </form>
         </div>
     </div>
-  </div>
+
     )
   },
 

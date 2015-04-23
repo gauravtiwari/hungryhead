@@ -33,6 +33,11 @@ Rails.application.routes.draw do
     post    '/login'  => 'users/sessions#create',  as: 'user_session'
     get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
 
+    # settings & cancellation
+    get '/cancel/:id'   => 'devise/registrations#cancel', as: 'cancel_user_registration'
+    get '/settings/:id' => 'users/registrations#edit',   as: 'edit_user_registration'
+    patch '/settings/:id' => 'users/registrations#update', as: 'update_user_registeration'
+
     scope '/account' do
       # password reset
       get   '/reset-password'        => 'users/passwords#new',    as: 'new_user_password'
@@ -45,11 +50,6 @@ Rails.application.routes.draw do
       post  '/confirm'        => 'devise/confirmations#create'
       get   '/confirm/resend' => 'users/confirmations#new',    as: 'new_user_confirmation'
 
-      # settings & cancellation
-      get '/cancel'   => 'users/registrations#cancel', as: 'cancel_user_registration'
-      get '/settings' => 'users/registrations#edit',   as: 'edit_user_registration'
-      put '/settings' => 'users/registrations#update', as: 'update_user_registeration'
-
       # account deletion
       delete '' => 'devise/registrations#destroy', as: :user_destroy
     end
@@ -61,7 +61,6 @@ Rails.application.routes.draw do
     get   '/students_join' => 'students/registrations#new',    as: 'new_student_registration'
     post  '/students_join' => 'students/registrations#create', as: 'student_registration'
     put  '/students_join' => 'students/registrations#update', as: 'student_update'
-    delete  '/students_join' => 'devise/registrations#destroy', as: 'student_delete'
   end
 
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'}
@@ -70,7 +69,6 @@ Rails.application.routes.draw do
     get   '/mentors_join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
     post  '/mentors_join' => 'mentors/registrations#create', as: 'mentor_registration'
     put  '/mentors_join' => 'mentors/registrations#update', as: 'mentor_update'
-    delete  '/mentors_join' => 'devise/registrations#destroy', as: 'mentor_delete'
   end
 
   devise_for :teachers, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'teachers/registrations'}
@@ -79,10 +77,11 @@ Rails.application.routes.draw do
     get   '/teachers_join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
     post  '/teachers_join' => 'teachers/registrations#create', as: 'teacher_registration'
     put  '/teachers_join' => 'teachers/registrations#update', as: 'teacher_update'
-    delete  '/teachers_join' => 'devise/registrations#destroy', as: 'teacher_delete'
   end
 
   match '/like',  to: 'likes#like', via: :put, as: 'like'
+  get '/:tag/people',  to: 'tags#people', as: 'tag_people'
+  get '/:tag/ideas',  to: 'tags#show', as: 'tag'
   match '/likers', to: 'likes#likers', via: :get, as: 'likers'
   match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
   match '/mentionables/:mentionable_type/:id', to: 'likes#mentionables', via: :get, as: 'mentionables'
@@ -97,30 +96,11 @@ Rails.application.routes.draw do
   end
 
   #Tagging system
-  resources :locations, only: [:show] do
+  resources :tags, only: [:show] do
     get :autocomplete_location_name, :on => :collection
     member do
       get :people
     end
-  end
-
-  resources :markets, only: [:show]  do
-    get :autocomplete_market_name, :on => :collection
-    member do
-      get :people
-    end
-  end
-
-  resources :skills, only: [:show]  do
-    get :autocomplete_skill_name, :on => :collection
-  end
-
-  resources :subjects, only: [:show]  do
-    get :autocomplete_subject_name, :on => :collection
-  end
-
-  resources :technologies , only: [:show] do
-    get :autocomplete_technology_name, :on => :collection
   end
 
   #Schools resources
@@ -228,7 +208,6 @@ Rails.application.routes.draw do
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
-  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks

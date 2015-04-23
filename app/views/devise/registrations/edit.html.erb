@@ -1,41 +1,92 @@
-<!-- Content
-================================================== -->
-<div id="content">
-  <div class="signup-page">
-    <div class="container">
-      <div id="categories-choose" style="display: block;">
-        <div class="profile-wrapper-title">
-          <h4>Edit your account</h4>
+<div class="col-lg-8 auto-margin">
+    <div class="panel panel-transparent">
+        <ul class="nav nav-tabs nav-tabs-simple nav-tabs-left bg-white"
+        id="tab-3">
+            <li class="active">
+                <a data-toggle="tab" href="#password">Password</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#notifications">Notification</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#deleteAccount">Delete Account</a>
+            </li>
+        </ul>
+        <div class="tab-content bg-white">
+            <div class="tab-pane active" id="password">
+                <div class="row column-seperation">
+                    <div class="col-md-12">
+                        <h3 class="semi-bold m-b-20  b-b b-grey inline">
+                            Change Password
+                        </h3>
+                       <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource),  method: :patch) do |f| %>
+                         <%= f.error_notification %>
+
+                         <div class="form-group">
+                           <label for="password">New Password</label>
+                           <%= f.input_field :password, autocomplete: "off", placeholder: "Your new password", required: true, class: 'form-control' %>
+                          </div>
+                          <div class="form-group">
+                            <label for="password_confirmation">Confirm new password</label>
+                           <%= f.input_field :password_confirmation, placeholder: "Confirm new password", required: true, class: 'form-control' %>
+                          </div>
+                          <div class="form-group">
+                           <label for="current_password">Current password</label>
+                           <%= f.input_field :current_password, placeholder: "Your current password to change your password", required: true, class: 'form-control' %>
+                         </div>
+
+                         <div class="form-actions p-t-20">
+                            <%= link_to "Back", :back, class: 'b-b b-danger text-master p-b-5' %>
+                           <%= f.button :button, "Update password", class: 'btn btn-cons btn-success pull-right' %>
+                         </div>
+                       <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="notifications">
+                <h3 class="semi-bold m-b-20  b-b b-grey inline">
+                  Notification Preferences
+                </h3>
+
+                <%= simple_form_for(resource, as: :user, url: user_path(resource),  method: :patch) do |f| %>
+
+                 <div class="checkbox check-success">
+                   <%= f.input_field :idea_notifications, as: :boolean, id: 'idea_notifications' %>
+                   <label for="idea_notifications">Idea notifications</label>
+                 </div>
+
+                 <div class="checkbox check-danger">
+                   <%= f.input_field :investment_notifications, as: :boolean, id: 'investment_notifications' %>
+                   <label for="investment_notifications">Investment notifications</label>
+                 </div>
+
+                 <div class="checkbox check-complete">
+                   <%= f.input_field :feedback_notifications, as: :boolean, id: 'feedback_notifications' %>
+                   <label for="feedback_notifications">Feedbacks notifications</label>
+                 </div>
+
+                 <div class="checkbox check-master">
+                   <%= f.input_field :follow_notifications, as: :boolean, id: 'follow_notifications' %>
+                   <label for="follow_notifications">Follow notifications</label>
+                 </div>
+
+                 <div class="checkbox check-primary">
+                   <%= f.input_field :weekly_mail, as: :boolean, id: 'weekly_mail' %>
+                   <label for="weekly_mail">Weekly newsletter</label>
+                 </div>
+
+                  <div class="form-actions p-t-20">
+                    <%= link_to "Back", :back, class: 'b-b b-danger text-master p-b-5' %>
+                    <%= f.button :button, "Update Preferences", class: 'btn btn-cons btn-success pull-right' %>
+                  </div>
+                <% end %>
+
+            </div>
+            <div class="tab-pane" id="deleteAccount">
+                <h3 class="m-b-20 b-b b-grey inline">Cancel my account</h3>
+                <p class="text-center m-t-20">Unhappy? <%= link_to "Cancel my account", user_destroy_path, data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-cons btn-danger' %></p>
+            </div>
         </div>
-
-        <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.error_notification %>
-
-          <div class="form-inputs">
-            <%= f.input :email, required: true, autofocus: true %>
-
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
-
-            <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-            <%= f.input :password_confirmation, required: false %>
-            <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
-          </div>
-
-          <div class="form-actions">
-            <%= f.button :button, "Update password" %>
-          </div>
-        <% end %>
-
-        <h3>Cancel my account</h3>
-
-        <p>Unhappy? <%= link_to "Cancel my account", user_destroy_path, data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-        <%= link_to "Back", :back %>
-
-      </div>
     </div>
-  </div>
 </div>
-<!-- End content -->
+

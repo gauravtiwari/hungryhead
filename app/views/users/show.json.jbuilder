@@ -28,13 +28,13 @@ json.user do
 		json.location_name @user.location_list.first if @user.location_list
 		json.markets @user.market_list.each do |tag|
 			json.tag tag
-			json.url profile_people_path(tag.parameterize)
+			json.url tag_people_path(tag: tag.parameterize)
 		end
-		json.skills @user.skill_list.each do |tag|
+		json.hobbies @user.hobby_list.each do |tag|
 			json.tag tag
-			json.url profile_people_path(tag.parameterize)
+			json.url tag_people_path(tag: tag.parameterize)
 		end
-		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first
+		json.location_url tag_people_path(tag: @user.location_list.first.parameterize) if @user.location_list.first
 	end
 
 	json.is_owner @user == current_user

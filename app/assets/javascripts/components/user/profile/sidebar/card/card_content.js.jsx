@@ -4,11 +4,6 @@ var CardContent = React.createClass({
 
   render: function() {
     var cx = React.addons.classSet;
-    var classes = cx({
-      'profile-card padding-20 bg-solid box-shadow': true,
-      'hide': this.props.mode,
-      'show': !this.props.mode,
-    });
 
     if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
@@ -17,21 +12,21 @@ var CardContent = React.createClass({
 
     } else {
       if(this.props.is_owner) {
-        var markets = <em className="sidebar_filler">Which markets are you interested in? ex: finance, ecommerce</em>;
+        var markets = <em className="sidebar_filler clearfix">Which markets are you interested in? ex: finance, ecommerce</em>;
       } else {
-        var markets = <li className="inline"  className="text-white p-r-10">None</li>;
+        var markets = "";
       }
     }
 
-    if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
-      var skills = this.props.profile.skills.map(function(skill){
-        return <li className="inline"  key={Math.random()}><a className="text-white p-r-10" href={skill.url} >#{skill.tag}</a></li>
+    if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
+      var hobbies = this.props.profile.hobbies.map(function(hobby){
+        return <li className="inline"  key={Math.random()}><a className="text-white p-r-10" href={hobby.url} >#{hobby.tag}</a></li>
       });
     } else {
       if(this.props.is_owner) {
-        var skills = <em className="sidebar_filler"> What are you good at? ex: Design, Photoshop, PHP etc.</em>
+        var hobbies = <em className="sidebar_filler clearfix"> What interests you? ex: Technology, Programming, Science etc.</em>
       } else {
-        var skills = <li className="inline"  className="text-white p-r-10">None</li>;
+        var hobbies = "";
       }
     }
 
@@ -40,7 +35,7 @@ var CardContent = React.createClass({
     }
 
     return(
-        <div className={classes}>
+        <div className="profile-card padding-20 bg-solid box-shadow">
             <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
             <div className="container-xs-height">
                 <div className="row text-center">
@@ -65,7 +60,21 @@ var CardContent = React.createClass({
                          </a>
                        </p>
                        <ul className="text-white m-t-5 small no-style">
-                         {markets}{skills}
+                         {markets}{hobbies}
+                       </ul>
+                       <ul className="social-list text-white m-t-5 small no-style">
+                          <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.website_url} ><i className="fa fa-rss"></i></a>
+                          </li>
+                          <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.linkedin_url} ><i className="fa fa-linkedin"></i></a>
+                          </li>
+                          <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.facebook_url} ><i className="fa fa-facebook"></i></a>
+                          </li>
+                          <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.twitter_url} ><i className="fa fa-twitter"></i></a>
+                          </li>
                        </ul>
                    </div>
                 </div>

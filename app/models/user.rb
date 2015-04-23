@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  acts_as_taggable_on :skills, :locations, :subjects, :markets,
-  :services, :technologies
+  acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
   acts_as_punchable
 
@@ -41,8 +40,8 @@ class User < ActiveRecord::Base
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
 
-  store_accessor :settings, :theme, :idea_notification_email, :feedback_notification_email,
-  :investment_notification_email, :follow_notification_email
+  store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
+  :investment_notifications, :follow_notifications, :weekly_mail
 
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
@@ -109,12 +108,6 @@ class User < ActiveRecord::Base
 
   def balance_available?(amount)
     balance > amount.to_i
-  end
-
-  #Override Devise's update with password to allow registration edits without password entry
-  def update_with_password(params={})
-    params.delete(:current_password)
-    self.update_without_password(params)
   end
 
   #Methods to check if action is performed  - follow/share/vote

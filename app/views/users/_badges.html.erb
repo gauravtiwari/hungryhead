@@ -10,15 +10,18 @@
         <ul class="list-unstyled">
             <%  @badges.take(8).each do |id, badge| %>
                 <li class="m-r-10">
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white inline">
+
                         <% if badge.first.custom_fields[:image].present? %>
+                        <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white inline">
                             <img src="<%= badge.first.custom_fields[:image] %>" data-src = "<%= badge.first.custom_fields[:image] %>" data-src-retina = "<%= badge.first.custom_fields[:image] %>" width= "35", height= "35") data-toggle="tooltip" data-container="body" title="<%= pluralize(badge.length, "#{badge.first.custom_fields[:name]} badge") %>" />
+                        </div>
                         <% else %>
-                            <span class="placeholder bold text-white" data-toggle="tooltip" data-container="body" title="<%= pluralize(badge.length, "#{badge.first.custom_fields[:name]} badge") %>">
+                        <div class="thumbnail-wrapper bg-<%= badge.first.custom_fields[:bg] %> text-center d32 circular b-white m-r-5 m-b-5 b-a b-white inline">
+                            <span class="bold text-white" data-toggle="tooltip" data-container="body" title="<%= pluralize(badge.length, "#{badge.first.custom_fields[:name]} badge") %>">
                                 <i class="fa fa-<%= badge.first.custom_fields[:class] %> fs-16"></i>
                             </span>
+                        </div>
                         <% end %>
-                    </div>
                 </li>
             <% end %>
             <% if @user.badges.length > 8 %>

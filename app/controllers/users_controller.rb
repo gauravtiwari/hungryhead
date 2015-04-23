@@ -57,7 +57,7 @@ class UsersController < ApplicationController
         if @user.username_changed?
           redirect_to profile_path(@user)
         else
-          format.html
+          format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
           format.json { render :show, status: :ok }
         end
       else
@@ -169,10 +169,11 @@ class UsersController < ApplicationController
 
   # White-listed attributes.
   def user_params
-    params.require(:user).permit(:name, :technology_list, :institution_id, :mini_bio, :service_list, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
+    params.require(:user).permit(:name, :mini_bio, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
       :email, :terms_accepted, :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
-      :name, :avatar, :subject_list, :cover, :about_me, :website_url, :google_plus_url, :facebook_url,
-      :twitter_url, :linkedin_url, :location_list, :skill_list, :market_list, :mini_resume, :country)
+      :name, :avatar, :subject_list, :cover, :about_me, :website_url, :facebook_url,
+      :twitter_url, :linkedin_url, :location_list, :hobby_list, :market_list, :idea_notifications,
+      :investment_notifications, :feedback_notifications, :follow_notifications, :weekly_mail)
   end
 
 end
