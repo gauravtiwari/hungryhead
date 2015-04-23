@@ -61,7 +61,7 @@ var ShareForm = React.createClass({
                           </div>
                           <div className="col-md-5 pull-right m-t-15">
                             <button type="submit" id="post_share_message" className="btn btn-primary pull-right"><i className={loading_classes}></i> Share </button>
-                            <a id="cancel" className="btn btn-danger cancel m-r-10 pull-right" onClick={this.closeFeedbackForm} > Cancel </a>
+                            <a id="cancel" className="btn btn-danger cancel m-r-10 pull-right" data-dismiss="modal" aria-hidden="true"> Cancel </a>
                           </div>
                       </div>
                     </form>

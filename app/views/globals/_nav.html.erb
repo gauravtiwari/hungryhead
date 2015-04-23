@@ -99,8 +99,13 @@
               <i class="fa fa-lightbulb-o"></i> Post Idea
             <% end %>
           <% end %>
-          <li><a href="#"><i class="pg-settings_small"></i>Settings</a>
-          </li>
+
+          <%= content_tag(:li) do %>
+            <%= link_to(edit_user_registration_path) do %>
+              <i class="pg-settings_small"></i>Settings
+            <% end %>
+          <% end %>
+
           <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
           </li>
           <li class="bg-master-lighter">

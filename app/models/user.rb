@@ -37,10 +37,13 @@ class User < ActiveRecord::Base
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
+
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
-  store_accessor :settings, :idea_notification_email, :feedback_notification_email,
+
+  store_accessor :settings, :theme, :idea_notification_email, :feedback_notification_email,
   :investment_notification_email, :follow_notification_email
+
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   serialize [:fund, :education, :interests, :profile, :settings], HashSerializer

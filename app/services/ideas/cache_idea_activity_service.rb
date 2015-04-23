@@ -5,7 +5,6 @@ class CacheIdeaActivityService
   end
 
   def create_redis_cache
-    @activity.owner.activities_ids.add(@activity.id, @activity.created_at.to_i)
     @idea_feed = @activity.recipient.latest_activities.add({
       actor: @activity.owner.name,
       id: @activity.id,
@@ -19,7 +18,6 @@ class CacheIdeaActivityService
   end
 
   def delete_redis_cache
-    @activity.owner.activities_ids.delete(@activity.id)
     @activity.recipient.latest_activities.delete({
       actor: @activity.owner.name,
       id: @activity.id,

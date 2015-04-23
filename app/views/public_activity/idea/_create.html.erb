@@ -12,7 +12,7 @@
 
 	    <div class="text-master-dark">
 	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %>
-	    	pitched an idea <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
+	    	pitched <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
 		   	<h6>
 		   		<% if activity.owner.locations %>
 			        <span class="location semi-bold m-r-10">

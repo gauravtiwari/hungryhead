@@ -6,7 +6,7 @@
         <%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
       <% else %>
         <span class="placeholder bold text-white">
-          <%= @idea.name.split('').first + @idea.name.split('').second %>
+          <%= @idea.name_badge.upcase %>
         </span>
       <% end %>
       </div>

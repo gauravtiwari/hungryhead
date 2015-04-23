@@ -71,7 +71,8 @@ class Idea < ActiveRecord::Base
 
   store_accessor :settings, :visible_everyone
 
-  store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url, :website
+  store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
+  :website
 
   store_accessor :media, :logo_position, :logo_processing,
   :cover_position, :cover_processing

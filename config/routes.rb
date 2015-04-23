@@ -51,7 +51,7 @@ Rails.application.routes.draw do
       put '/settings' => 'users/registrations#update', as: 'update_user_registeration'
 
       # account deletion
-      delete '' => 'devise/registrations#destroy'
+      delete '' => 'devise/registrations#destroy', as: :user_destroy
     end
   end
 

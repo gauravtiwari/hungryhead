@@ -1,7 +1,7 @@
 class Mentors::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
   respond_to :json
-  
+
   layout 'join'
 
   def new

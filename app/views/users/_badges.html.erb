@@ -7,15 +7,15 @@
     </div>
 
     <div class="panel-body">
-        <p class="m-b-5 small m-t-5"><%= pluralize(@user.badges.length, 'Badge') %></p>
         <ul class="list-unstyled">
-            <% @user.badges.take(8).each do |badge| %>
+            <%  @badges.take(8).each do |id, badge| %>
                 <li class="m-r-10">
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-                        <% if badge.custom_fields[:image].present? %>
-                            <img src="<%= badge.custom_fields[:image] %>" data-src = "<%= badge.custom_fields[:image] %>" data-src-retina = "<%= badge.custom_fields[:image] %>" width= "35", height= "35") data-toggle="tooltip" data-container="body" title="<%= badge.custom_fields[:name] %>" />
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white inline">
+                        <% if badge.first.custom_fields[:image].present? %>
+                            <img src="<%= badge.first.custom_fields[:image] %>" data-src = "<%= badge.first.custom_fields[:image] %>" data-src-retina = "<%= badge.first.custom_fields[:image] %>" width= "35", height= "35") data-toggle="tooltip" data-container="body" title="<%= pluralize(badge.length, "#{badge.first.custom_fields[:name]} badge") %>" />
                         <% else %>
-                            <span class="placeholder bold text-white" data-toggle="tooltip" data-container="body" title="<%= badge.custom_fields[:name] %>"><%= (badge.custom_fields[:name].split('').first + badge.custom_fields[:name].split('').second).upcase %>
+                            <span class="placeholder bold text-white" data-toggle="tooltip" data-container="body" title="<%= pluralize(badge.length, "#{badge.first.custom_fields[:name]} badge") %>">
+                                <i class="fa fa-<%= badge.first.custom_fields[:class] %> fs-16"></i>
                             </span>
                         <% end %>
                     </div>

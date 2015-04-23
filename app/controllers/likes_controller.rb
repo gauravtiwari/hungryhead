@@ -4,16 +4,16 @@ class LikesController < ApplicationController
 
   def like
     authorize @votable
-    if current_user.voted_for? @votable
+    if @votable.voters_ids.members.include? current_user.id.to_s
       @like = LikeService.new(current_user, @votable, profile_url(current_user)).unlike
     else
       @like = LikeService.new(current_user, @votable, profile_url(current_user)).like
     end
-    voted = current_user.voted_for? @votable
+    voted = @votable.voters_ids.members.include? current_user.id.to_s
     render json: {
       voted: voted,
       url: like_path(votable_type: @votable.class.to_s, votable_id: @votable.id),
-      votes_count: @votable.cached_votes_total
+      votes_count: @votable.votes_counter.value
     }
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end
@@ -31,9 +31,9 @@ class LikesController < ApplicationController
       mentionable = @mentionable.user
     end
     @mentionables = Array.new
-    @comment_users = @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) unless @mentionables.include?(mentionable.name)
+    @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) if mentionable != current_user
     @mentionable.comment_threads.includes(:user).each do |comment|
-      @user = @mentionables.push(name: comment.user.name, path: user_path(comment.user), username: comment.user.username) unless @mentionables.include?(comment.user.name)
+      @mentionables.push(name: comment.user.name, path: user_path(comment.user), username: comment.user.username) unless @mentionables.include?(comment.user.name) && comment.user == current_user
     end
     render json: @mentionables
   end

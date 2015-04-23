@@ -10,6 +10,7 @@ jQuery(document).ready ->
 	$('#form-login').validate();
 	$('#information-form').validate();
 	$('#feedback_form').validate();
+	$('#edit-profile').validate();
 	$("[data-toggle='tooltip']").tooltip()
 
 	$.each flashMessages, (key, value) ->

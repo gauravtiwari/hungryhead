@@ -57,11 +57,23 @@
 	    </div>
     </div>
     <div class="card-footer clearfix bold">
-    	<ul class="reactions pull-left">
-
-				<% liked = current_user.voted?(activity.trackable) %>
-				<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.votes_counter.value, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
-			</ul>
+    	<% if activity.recipient.student_id == current_user.id %>
+    		<%= react_component('Rate', {data: render(template: 'feedbacks/rate.json.jbuilder', locals: {activity: activity})}) %>
+    	<% else %>
+	    	<% if activity.trackable.badged? %>
+		    	<div class="review-badge pull-right">
+		    	  <div class="thumbnail-wrapper displayblock bg-solid d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= activity.owner.first_name.capitalize %> Earned <%= activity.trackable.badges.last.custom_fields[:name].downcase %> badge">
+		    	      <span class="bold displayblock text-white">
+		    	        <i class="fa fa-<%= activity.trackable.badges.last.custom_fields[:class] %> fs-16"></i>
+		    	      </span>
+		    	  </div>
+		    	</div>
+	    	<% end %>
+	    	<ul class="reactions pull-left">
+					<% liked = current_user.voted?(activity.trackable) %>
+					<%= react_component('Upvote', {record: activity.trackable_id, voted: liked, vote_url: like_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.votes_counter.value, likers_path: likers_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+				</ul>
+			<% end %>
       <div class="clearfix"></div>
     </div>
 

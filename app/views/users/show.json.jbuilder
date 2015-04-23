@@ -12,34 +12,37 @@ json.user do
 		json.name @user.name
 		json.username @user.username
 		json.email @user.email
+		json.theme @user.theme
+		json.followers_count @user.followers_counter.value
+		json.feedbacks_count @user.feedbacks_counter.value
+		json.investments_count @user.investments_counter.value
 		json.school_id @user.school.id if @user.school
-		json.school @user.school.name if @user.school
+		json.school_name @user.school.name if @user.school
 		json.school_url profile_path(@user.school) if @user.school
 		json.mini_bio @user.mini_bio
+		json.verified @user.verified?
 		json.website_url @user.website_url
 		json.facebook_url @user.facebook_url
 		json.linkedin_url @user.linkedin_url
 		json.twitter_url @user.twitter_url
-		json.location @user.location_list.first if @user.location_list
+		json.location_name @user.location_list.first if @user.location_list
+		json.markets @user.market_list.each do |tag|
+			json.tag tag
+			json.url profile_people_path(tag.parameterize)
+		end
+		json.skills @user.skill_list.each do |tag|
+			json.tag tag
+			json.url profile_people_path(tag.parameterize)
+		end
 		json.location_url profile_people_path(@user.location_list.first.parameterize) if @user.location_list.first
 	end
 
 	json.is_owner @user == current_user
 	json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 	json.name @user.name
-
 	json.badge @user.first_name.first + @user.last_name.first
 
 	json.about_me do
-		json.sidebar do
-			if @user.markets
-				json.markets @user.markets.each do |tag|
-					json.tag tag
-					json.url profile_people_path(tag.parameterize)
-				end
-			end
-		end
-
 		json.content @user.about_me
 		json.form action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 	end

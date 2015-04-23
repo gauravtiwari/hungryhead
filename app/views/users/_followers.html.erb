@@ -6,7 +6,6 @@
         </div>
     </div>
     <div class="panel-body">
-        <p class="m-b-5 small m-b-10 m-t-5"><%= pluralize(@user.followers_count, 'Follower') %></p>
         <ul class="list-unstyled">
             <% @user.followers_by_type('User').limit(8).each do |follower| %>
                 <li class="m-r-10">

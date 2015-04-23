@@ -15,6 +15,12 @@ body, p {
 .light {
   opacity: 0.8;
 }
+.w110 {
+  width: 20%;
+}
+.displayblock {
+  display: block;
+}
 .chat-view .chat-inner {
   padding: 15px;
   overflow-x: hidden;
@@ -231,8 +237,12 @@ input.error:-webkit-autofill {
 .card.share .card-footer .reactions {
   opacity: 1;
 }
-ul.reactions div {
+ul.reactions > div {
   float: left;
+}
+.w32 {
+  width: 32px;
+  height: 32px;
 }
 .light-bg {
   background: #fafafa;

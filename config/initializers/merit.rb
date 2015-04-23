@@ -72,46 +72,48 @@ Merit::Badge.create!(
   custom_fields: { name: "Focussed", points: 10,  image: '/assets/badges/focussed.png', created_at: Time.now  }
 )
 
+#Badges for feedbacks
 Merit::Badge.create!(
   id: 6,
-  name: "wise",
+  name: "helpful",
   type: "user",
-  description: "Wise guy",
-  custom_fields: { name: "Wise", points: 10,  image: '/assets/badges/wise.png', created_at: Time.now  }
+  description: "Helful",
+  custom_fields: { name: "helpful", bg: 'solid', class: 'thumbs-up', points: 10, created_at: Time.now  }
 )
 
 Merit::Badge.create!(
   id: 7,
-  name: "cool",
+  name: "not-helpful",
   type: "user",
-  description: "Cool guy",
-  custom_fields: { name: "Cool", points: 10,  image: '/assets/badges/cool-guy.png', created_at: Time.now  }
+  description: "Not Helpful",
+  custom_fields: { name: "Not Helpful", bg: 'master', class: 'thumbs-down', points: 10, created_at: Time.now  }
 )
 
 Merit::Badge.create!(
   id: 8,
-  name: "scholar",
+  name: "ok",
   type: "user",
-  description: "Scholar",
-  custom_fields: { name: "Scholar", points: 10,  image: '/assets/badges/wise.png', created_at: Time.now  }
+  description: "OK",
+  custom_fields: { name: "OK", bg: 'warning-dark', class: 'check-circle', points: 10, created_at: Time.now  }
 )
 
 Merit::Badge.create!(
   id: 9,
-  name: "fish",
+  name: "very-helpful",
   type: "user",
-  description: "Fish",
-  custom_fields: { name: "Fish", points: 10,  image: '/assets/badges/fish.png', created_at: Time.now  }
+  description: "Very Helpful",
+  custom_fields: { name: "Very Helpful",  bg: 'danger', class: 'heart', points: 10, created_at: Time.now  }
 )
 
 Merit::Badge.create!(
   id: 10,
-  name: "expert",
+  name: "game-changing",
   type: "user",
-  description: "Expert",
-  custom_fields: { name: "Expert", points: 10,  image: '/assets/badges/ninja.png', created_at: Time.now  }
+  description: "Game Changing",
+  custom_fields: { name: "Game Changing",  bg: 'green', class: 'magic', points: 10, created_at: Time.now  }
 )
 
+#User specific badge
 Merit::Badge.create!(
   id: 11,
   name: "mentor",
