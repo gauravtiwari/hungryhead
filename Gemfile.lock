@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mailboxer/mailboxer.git
-  revision: 30492cca63818be903d72262cf4a3c9f437b8d08
+  revision: 51fd6391592aace8a8eb3d1b1a761a9bea81fe1b
   specs:
     mailboxer (0.12.5)
       carrierwave (>= 0.5.8)
@@ -696,6 +696,7 @@ GEM
     wicked (1.1.1)
       rails (>= 3.0.7)
     will_paginate (3.0.7)
+    wisper (1.6.0)
 
 PLATFORMS
   ruby
@@ -827,3 +828,4 @@ DEPENDENCIES
   uuidtools
   wicked
   will_paginate
+  wisper

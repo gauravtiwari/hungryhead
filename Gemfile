@@ -75,8 +75,10 @@ gem 'omniauth-twitter'
 gem 'omniauth-linkedin-oauth2'
 gem 'pundit'
 gem 'devise-async'
-
 gem 'responders'
+
+#Pub Sub for models
+gem 'wisper'
 
 #Step by step wizard
 gem 'wicked'
