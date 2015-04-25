@@ -1,0 +1,11 @@
+<% if @activities.length > 0 %>
+  <% @activities.each do |activity| %>
+  	<%= render_activity(activity) %>
+  <% end %>
+<% else %>
+  <div class="card share" data-social="item">
+       <div class="card-description text-center">
+         <h2 class="text-master">No Activities to view</h2>
+       </div>
+   </div>
+<% end %>
