@@ -11,29 +11,24 @@ class Investment < ActiveRecord::Base
   acts_as_commentable
   has_merit
 
-	include PublicActivity::Model
 	include Redis::Objects
-	tracked only: [:create],
-	owner: ->(controller, model) { controller && controller.current_user },
-	recipient: ->(controller, model) { model && model.idea },
-		params: {verb: "invested", action:  ->(controller, model) { model && model.amount }}
 
 	counter :votes_counter
   sorted_set :voters_ids
 	counter :comments_counter
 
-	before_destroy :remove_activity
+	#before_destroy :remove_activity
   before_destroy :cancel_investment
   after_create :increment_counters
   before_destroy :decrement_counters
 
 	private
 
-	def remove_activity
-   PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    DeleteUserFeedJob.perform_later(activity)
-   end
-  end
+	#def remove_activity
+   #PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
+    #DeleteUserFeedJob.perform_later(activity)
+   #end
+  #end
 
   def cancel_investment
     idea.update_attributes(fund: {"balance" => idea.balance - amount })

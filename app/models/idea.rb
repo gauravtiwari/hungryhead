@@ -2,7 +2,6 @@ class Idea < ActiveRecord::Base
 
   #Includes Modules
   extend FriendlyId
-  include PublicActivity::Model
   include Redis::Objects
   friendly_id :slug_candidates
 
@@ -44,7 +43,7 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #CallBack hooks
-  before_destroy :remove_activity
+  #before_destroy :remove_activity
   before_create :add_fund
   after_save :create_slug
   after_save :load_into_soulmate
@@ -195,11 +194,11 @@ class Idea < ActiveRecord::Base
     [:name, [:name, :id]]
   end
 
-  def remove_activity
-   PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    DeleteUserFeedJob.perform_later(activity)
-   end
-  end
+  #def remove_activity
+   #PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
+    #DeleteUserFeedJob.perform_later(activity)
+   #end
+  #end
 
   def increment_counters
     school.ideas_counter.increment

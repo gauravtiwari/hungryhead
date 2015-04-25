@@ -353,10 +353,6 @@ GEM
       nokogiri (~> 1.4)
     htmlbeautifier (1.1.0)
     http_parser.rb (0.6.0)
-    http_signatures (0.2.2)
-    httparty (0.13.3)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     i18n (0.7.0)
     i18n_data (0.6.3)
@@ -442,7 +438,6 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
-    nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -500,11 +495,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    public_activity (1.4.2)
-      actionpack (>= 3.0.0)
-      activerecord (>= 3.0)
-      i18n (>= 0.5.0)
-      railties (>= 3.0.0)
     puma (2.11.2)
       rack (>= 1.1, < 2.0)
     punching_bag (0.4.0)
@@ -662,14 +652,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    stream-ruby (2.2.3)
-      http_signatures (~> 0)
-      httparty (~> 0)
-    stream_rails (2.2.1)
-      actionpack (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      railties (>= 3.0.0)
-      stream-ruby (~> 2.1)
     sucker_punch (1.4.0)
       celluloid (~> 0.16.0)
     summernote-rails (0.6.2.1)
@@ -781,7 +763,6 @@ DEPENDENCIES
   mini_magick
   modernizr-rails
   momentjs-rails
-  nested_form
   nokogiri
   nprogress-rails
   oj
@@ -794,7 +775,6 @@ DEPENDENCIES
   pg_search
   postgres-copy
   pry
-  public_activity
   puma
   punching_bag
   pundit
@@ -829,7 +809,6 @@ DEPENDENCIES
   soulmate
   spring
   sprockets (~> 2.12.3)
-  stream_rails
   sucker_punch
   summernote-rails
   therubyracer
