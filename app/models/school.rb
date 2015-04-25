@@ -1,6 +1,7 @@
 class School < ActiveRecord::Base
 
 	include Followable
+	include Sluggable
 
 	has_many :users, as: :students
 	has_many :ideas

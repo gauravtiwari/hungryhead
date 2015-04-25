@@ -4,14 +4,9 @@ class VotesController < ApplicationController
 
   def vote
     authorize @votable
-    if @votable.voters_ids.members.include? current_user.id.to_s
-      @vote = VoteService.new(current_user, @votable, profile_url(current_user)).unvote
-    else
-      @vote = VoteService.new(current_user, @votable, profile_url(current_user)).vote
-    end
-    voted = @votable.voters_ids.members.include? current_user.id.to_s
+    @vote = VoteService.new(current_user, @votable, profile_url(current_user)).create
     render json: {
-      voted: voted,
+      voted: @vote,
       url: vote_path(votable_type: @votable.class.to_s, votable_id: @votable.id),
       votes_count: @votable.votes_counter.value
     }
@@ -21,19 +16,6 @@ class VotesController < ApplicationController
   def voters
     @voters = @votable.votes_for.paginate(:page => params[:page], :per_page => 10)
     render 'voters/index'
-  end
-
-  def mentionables
-    @mentionable = params[:mentionable_type].constantize.find(params[:id])
-    if @mentionable.class.to_s == "Idea"
-      mentionable = @mentionable.student
-    else
-      mentionable = @mentionable.user
-    end
-    @mentionables = Array.new
-    @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) if mentionable != current_user
-    @mentionable.comment_threads.includes(:user).map { |c| @mentionables.push({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) unless @mentionables.include?({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) && c.user == current_user }
-    render json: @mentionables
   end
 
   private

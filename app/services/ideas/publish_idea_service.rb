@@ -1,10 +1,8 @@
 class PublishIdeaService
 
-  def initialize(idea, user, idea_url, user_url)
+  def initialize(idea, user)
     @idea = idea
     @user = user
-    @idea_url = idea_url
-    @user_url = user_url
   end
 
   def publish
@@ -29,12 +27,7 @@ class PublishIdeaService
 
   #Create Activity if idea is new
   def create_activity
-    @idea.create_activity(
-      key: 'idea.create',
-      owner: @user,
-      recipient: @idea,
-      params: {verb: "pitched #{@idea.name}", action:  "an idea"}
-    )
+    @activity = @user.activities.create!(trackable: @idea, recipient: @idea)
   end
 
   #Award Badge to user

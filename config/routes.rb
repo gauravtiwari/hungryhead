@@ -86,7 +86,7 @@ Rails.application.routes.draw do
   get '/:tag/ideas',  to: 'tags#show', as: 'tag'
   match '/voters', to: 'votes#voters', via: :get, as: 'voters'
   match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
-  match '/mentionables/:mentionable_type/:id', to: 'likes#mentionables', via: :get, as: 'mentionables'
+  match '/mentionables/:mentionable_type/:id', to: 'votes#mentionables', via: :get, as: 'mentionables'
 
   resources :after_signup
 

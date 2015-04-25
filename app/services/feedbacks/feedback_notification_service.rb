@@ -1,19 +1,29 @@
 class FeedbackNotificationService
 
-  def initialize(user_url, user, feedback_url, idea, idea_url)
-    @user_url = user_url
-    @user = user
-    @feedback_url = feedback_url
-    @idea = idea
-    @idea_url = idea_url
+  def initialize(feedback)
+    @feedback = feedback
+    @idea = feedback.idea
+    @user = feedback.user
   end
 
   def notify
-    PostFeedbackJob.perform_later(@idea, @user, msg)
+    @activity = @user.activities.create!(trackable: @feedback, recipient: @idea)
+    send_notification(@activity)
   end
 
-  def msg
-    msg = "<a href='#{@user_url}'>#{@user.name}</a> left a "+ "<a href='#{@feedback_url}'>feedback <i class='fa fa-fw fa-comment'></i> </a> for <a href='#{@idea_url}'>#{@idea.name}</a> ".html_safe
+
+  private
+
+  def send_notification(activity)
+    Pusher.trigger("private-user-#{@idea.student.id}",
+      "new_notification",
+      {data:
+        {
+          id: activity.id,
+          msg: ActivityPresenter.new(activity, self).render_activity
+        }
+      }.to_json
+    )
   end
 
 end

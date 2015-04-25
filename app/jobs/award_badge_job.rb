@@ -1,5 +1,5 @@
 class AwardBadgeJob < ActiveJob::Base
-  def perform(current_user, user, badge_id, msg, category)
+  def perform(user, badge_id, msg, category)
     ActiveRecord::Base.connection_pool.with_connection do
       user.add_badge(badge_id)
       @badge = Merit::Badge.find(badge_id)

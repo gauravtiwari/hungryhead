@@ -10,13 +10,12 @@ class InvestmentsController < ApplicationController
   # GET /investments.json
   def index
     @team  = User.find(@idea.team)
-    @user = current_user
+    current_user = current_user
     authorize @idea
     @investments = @idea
     .investments
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 10)
-    @team = User.find(@idea.team)
   end
 
   # GET /investments/1
@@ -29,24 +28,21 @@ class InvestmentsController < ApplicationController
   # POST /investments
   # POST /investments.json
   def create
-    if @user.balance_available?(params[:investment][:amount])
-      @investment = MakeInvestmentService.new(investment_params, @user, @idea).create
+    if current_user.balance_available?(params[:investment][:amount])
+      @investment = CreateInvestmentService.new(investment_params, current_user, @idea).create
       authorize @investment
-      object_url = idea_investment_url(@investment.idea, @investment.id)
-      idea_url = idea_url(@investment.idea)
-      user_url = profile_url(@user)
       respond_to do |format|
         if @investment.save
-          @investment = UpdateBalanceService.new(@investment, @user, @idea).invest
+          UpdateBalanceService.new(@investment).invest
           format.json { render :show, status: :created}
+          InvestmentNotificationService.new(@investment).notify
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
         end
       end
-      PostInvestmentJob.perform_later(@investment, @user, object_url, idea_url, user_url)
     else
       respond_to do |format|
-        format.json { render json: {error: "Insufficient Balance #{@user.fund['balance']}"}, status: :unprocessable_entity }
+        format.json { render json: {error: "Insufficient Balance #{current_user.fund['balance']}"}, status: :unprocessable_entity }
       end
     end
   end
@@ -55,14 +51,11 @@ class InvestmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_investment
       @idea = Idea.friendly.find(params[:idea_id])
-      @team = User.find(@idea.team)
-      @user = current_user
       @investment = Investment.find(params[:id])
     end
 
     def set_props
       @idea = Idea.friendly.find(params[:idea_id])
-      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

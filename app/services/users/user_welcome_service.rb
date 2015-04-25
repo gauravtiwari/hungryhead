@@ -6,7 +6,8 @@ class Users::UserWelcomeService
   end
 
   def welcome
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(@resource, @resource, 1, msg, "User_#{@resource.id}")
+    @activity = @resource.activities.create!(trackable: @resource, recipient: @resource)
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(@resource, 1, msg, "User_#{@resource.id}")
   end
 
   def msg

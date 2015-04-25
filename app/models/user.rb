@@ -133,10 +133,6 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
-
   def load_into_soulmate
     if type == "Student"
       soulmate_loader("students")

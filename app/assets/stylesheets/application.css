@@ -1,8 +1,6 @@
 /*
 	All application CSS assets - checkout vendor assets/css directory
 
-
-
  * BEGIN VENDOR CSS FOR PAGES
  *= require plugins/pace/pace-theme-flash
  *= require animate
@@ -34,7 +32,6 @@
  *= require login
  *= require school
  *= require search
- *= require nav
  *= require comments
  *= require footer
  *= require idea_profile

@@ -63,15 +63,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #Trackable methods to track activities and notifications for user
-  def track_activity(trackable, recipient, action = params[:action])
-    current_user.activities.create! key: action, trackable: trackable, recipient: recipient
-  end
-
-  def track_notification(trackable, action = params[:action], recipient)
-    current_user.notifications.create! key: action, trackable: trackable, recipient: recipient, type: "Notification"
-  end
-
   private
 
   def user_not_authorized

@@ -1,8 +1,8 @@
 class UpdateBalanceService
-	def initialize(investment, user, idea)
+	def initialize(investment)
 		@investment = investment
-		@user = user
-		@idea = idea
+		@user = investment.user
+		@idea = investment.idea
 	end
 
 	def invest
