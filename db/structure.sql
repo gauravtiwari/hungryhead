@@ -68,7 +68,7 @@ CREATE TABLE activities (
     user_id integer,
     key character varying,
     type character varying DEFAULT 'Activity'::character varying,
-    parameters jsonb,
+    parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
     recipient_id integer,
     recipient_type character varying,

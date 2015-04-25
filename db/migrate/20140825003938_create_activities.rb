@@ -7,7 +7,7 @@ class CreateActivities < ActiveRecord::Migration
       t.belongs_to :user
       t.string  :key
       t.string :type, default: 'Activity'
-      t.jsonb    :parameters
+      t.jsonb    :parameters, default: "{}"
       t.boolean :published, default: true
       t.belongs_to :recipient, :polymorphic => true
       t.timestamps null: false
