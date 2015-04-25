@@ -1,9 +1,9 @@
 class School < ActiveRecord::Base
 
+	include Followable
+
 	has_many :users, as: :students
 	has_many :ideas
-	has_many :followers, as: :follower, :dependent => :destroy
-	has_many :slugs, as: :sluggable, dependent: :destroy
 
 	store_accessor :data, :established, :location, :website
 	store_accessor :media, :logo_position,
@@ -25,11 +25,6 @@ class School < ActiveRecord::Base
 	mount_uploader :logo, LogoUploader
 	mount_uploader :cover, CoverUploader
 
-	extend FriendlyId
-
-
-	friendly_id :slug_candidates
-
 	validates :name, :presence => true,
 	:on => :create
 
@@ -37,17 +32,8 @@ class School < ActiveRecord::Base
 	 [:name]
 	end
 
-	def should_generate_new_friendly_id?
-	slug.blank? || name_changed?
-	end
-
-	after_save :create_slug
 	after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
-
-  def follower?(user)
-    followers_ids.members.include?(user.id.to_s)
-  end
 
 	private
 
@@ -75,11 +61,4 @@ class School < ActiveRecord::Base
 	  	loader.remove("id" => id)
 	end
 
-	def create_slug
-		return if !slug_changed? || slug == slugs.last.try(:slug)
-		#re-use old slugs
-		previous = slugs.where('lower(slug) = ?', slug.downcase)
-		previous.delete_all
-		slugs.create!(slug: slug)
-	end
 end

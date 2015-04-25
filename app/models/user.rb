@@ -2,13 +2,9 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   include Redis::Objects
-  extend FriendlyId
-
-  friendly_id :slug_candidates
-
-  def slug_candidates
-    [:username]
-  end
+  include Followable
+  include Follower
+  include Sluggable
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
@@ -61,21 +57,12 @@ class User < ActiveRecord::Base
   belongs_to :school
   has_many :authentications, :dependent => :destroy, autosave: true
 
-  #Follow System
-  has_many :followings, as: :followable, :dependent => :destroy
-  has_many :followers, as: :follower, :dependent => :destroy
-
-  #Votes and Share
-  has_many :votes, as: :voter, :dependent => :destroy
-  has_many :shares, dependent: :destroy, autosave: true
-
   #Activities
   has_many :activities, :dependent => :destroy
 
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
-  has_many :notifications, :foreign_key => :reciever_id, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Media Uploaders - carrierwave
@@ -88,7 +75,7 @@ class User < ActiveRecord::Base
 
   #Callbacks
   before_save :add_fullname, :seed_fund
-  after_save :create_slug, :load_into_soulmate
+  after_save :load_into_soulmate
   before_destroy :remove_from_soulmate, :decrement_counters
   after_create :increment_counters
 
@@ -104,26 +91,12 @@ class User < ActiveRecord::Base
   #Messaging system
   acts_as_messageable
 
-
   def mailboxer_email(object)
     email
   end
 
   def balance_available?(amount)
     balance > amount.to_i
-  end
-
-  #Methods to check if action is performed  - follow/share/vote
-  def follower?(user)
-    followers_ids.members.include?(user.id.to_s)
-  end
-
-  def shared?(shareable)
-    shareable.sharers_ids.members.include?(id.to_s)
-  end
-
-  def voted?(votable)
-    votable.voters_ids.members.include?(id.to_s)
   end
 
   #Login using both email and username
@@ -156,19 +129,12 @@ class User < ActiveRecord::Base
     self.fund = {balance: 1000}
   end
 
-  def should_generate_new_friendly_id?
-    slug.blank? || username_changed?
+  def slug_candidates
+    [:username]
   end
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
-  end
-
-  def create_slug
-  	return if !slug_changed? || slug == slugs.last.try(:slug)
-  	previous = slugs.where('lower(slug) = ?', slug.downcase)
-  	previous.delete_all
-  	slugs.create!(slug: slug)
   end
 
   def load_into_soulmate

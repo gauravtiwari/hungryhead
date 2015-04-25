@@ -1,13 +1,15 @@
 class Feedback < ActiveRecord::Base
 
+  #Includes concerns
+  include Commentable
+  include Shareable
+  include Votable
+
   has_merit
 
   #Associations
   belongs_to :idea, touch: true
   belongs_to :user, touch: true
-  has_many :comments, as: :commentable, :dependent => :destroy
-  has_many :votes, as: :votable, :dependent => :destroy
-  has_many :shares, as: :shareable, dependent: :destroy, autosave: true
 
   #Enums and states
   enum status: { posted:0, badged:1, flagged:2 }
@@ -21,16 +23,10 @@ class Feedback < ActiveRecord::Base
   counter :comments_counter
 
   #Hooks
-  before_destroy :remove_activity, :decrement_counters
+  before_destroy :decrement_counters
   after_create :increment_counters
 
   private
-
-  def remove_activity
-   Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    DeleteUserFeedJob.perform_later(activity)
-   end
-  end
 
   def increment_counters
     user.feedbacks_counter.increment

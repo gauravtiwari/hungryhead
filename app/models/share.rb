@@ -3,8 +3,9 @@ class Share < ActiveRecord::Base
   #Associations
   belongs_to :shareable, polymorphic: true
 	belongs_to :user, touch: true
-	has_many :comments, as: :commentable, :dependent => :destroy
-	has_many :votes, as: :votable, :dependent => :destroy
+	#Includes concerns
+	include Commentable
+	include Votable
 
 	#Store accessor methods
  	store_accessor :parameters, :shareable_name

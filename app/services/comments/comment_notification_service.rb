@@ -1,25 +1,28 @@
 class CommentNotificationService
-	
-	def initialize(comment, commentable, user, profile_url)
+
+	def initialize(comment, commentable)
 		@comment = comment
-		@user = user
+		@user = comment.user
 		@commentable = commentable
-		@profile_url = profile_url
 	end
 
 	def notify
-	  if @commentable.class.to_s == "Idea"
-        commenter = @commentable.student
-      else 
-        commenter = @commentable.user
-      end
-      if @user != commenter
-        NewCommentNotificationJob.perform_later(@user, @commentable, msg)
-      end
+    @activity = @user.notifications.create!(trackable: @comment, recipient: @commentable)
+    send_notification(@activity)
 	end
 
-	def msg
-		 msg = "<a href='#{@profile_url}'>#{@user.name}</a> commented on your " + "#{@commentable.class.to_s.downcase}".html_safe
-	end
+  def send_notification
+    @activity.recipient.find_comments_for_commentable_without_current(@activity.recipient_type, @activity.recipient_id).each do |comment|
+      Pusher.trigger("private-user-#{comment.user.id}",
+        "new_notification",
+        {data:
+          {
+            id: activity.id,
+            msg: ActivityPresenter.new(@activity, self).render_activity
+          }
+        }.to_json
+      )
+    end
+  end
 
 end

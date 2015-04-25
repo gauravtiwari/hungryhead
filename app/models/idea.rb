@@ -1,9 +1,14 @@
 class Idea < ActiveRecord::Base
 
   #Includes Modules
-  extend FriendlyId
   include Redis::Objects
-  friendly_id :slug_candidates
+
+  #Includes concerns
+  include Commentable
+  include Shareable
+  include Votable
+  include Followable
+  include Sluggable
 
   acts_as_taggable_on :markets, :locations, :technologies
   acts_as_punchable
@@ -43,28 +48,19 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #CallBack hooks
-  before_destroy :remove_activity
-  before_create :add_fund
-  after_save :create_slug
+  before_destroy :decrement_counters, :remove_from_soulmate
+  before_create :add_fund, :increment_counters
   after_save :load_into_soulmate
-  before_destroy :remove_from_soulmate
-  after_create :increment_counters
-  before_destroy :decrement_counters
 
   #Associations
   belongs_to :student, touch: true
   belongs_to :school
 
-  #Idea follower system
-  has_many :followers, as: :follower, :dependent => :destroy
-  #Comments and votes
-  has_many :comments, as: :commentable, :dependent => :destroy
-  has_many :votes, as: :votable, :dependent => :destroy
+
   #Rest of the assocuations
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
-  has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Includes modules
@@ -114,10 +110,6 @@ class Idea < ActiveRecord::Base
     name.split('')
   end
 
-  def follower?(user)
-    followers_ids.members.include?(user.id.to_s)
-  end
-
   def has_invested?(user)
     !investors.include? user.id.to_s
   end
@@ -132,10 +124,6 @@ class Idea < ActiveRecord::Base
 
   def find_investors
     User.find(investors)
-  end
-
-  def find_followers
-    User.find(followers_ids.revrange(0,16))
   end
 
   def find_team
@@ -174,13 +162,6 @@ class Idea < ActiveRecord::Base
 
   private
 
-  def create_slug
-    return if !slug_changed? || slug == slugs.last.try(:slug)
-    previous = slugs.where('lower(slug) = ?', slug.downcase)
-    previous.delete_all
-    slugs.create!(slug: slug)
-  end
-
   def load_into_soulmate
     if published? && everyone?
       loader = Soulmate::Loader.new("ideas")
@@ -200,12 +181,6 @@ class Idea < ActiveRecord::Base
 
   def slug_candidates
     [:name, [:name, :id]]
-  end
-
-  def remove_activity
-   Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    DeleteUserFeedJob.perform_later(activity)
-   end
   end
 
   def increment_counters

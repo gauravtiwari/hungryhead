@@ -4,8 +4,7 @@ class Comment < ActiveRecord::Base
   validates :body, :presence => true
   validates :user, :presence => true
 
-  # want user to vote on the quality of comments.
-  has_many :votes, as: :votable, :dependent => :destroy
+  include Votable
 
   #Redis counters and ids cache
   include Redis::Objects
@@ -47,6 +46,12 @@ class Comment < ActiveRecord::Base
   # commentable class name and commentable id.
   scope :find_comments_for_commentable, lambda { |commentable_str, commentable_id|
     where(:commentable_type => commentable_str.to_s, :commentable_id => commentable_id).order('created_at DESC')
+  }
+
+  # Helper class method to look up all comments for
+  # commentable class name and commentable id except current_user
+  scope :find_comments_for_commentable_without_current, lambda { |commentable_str, commentable_id|
+    where(:commentable_type => commentable_str.to_s, :commentable_id => commentable_id).order('created_at DESC').not(user_id: current_user.id)
   }
 
   # Helper class method to look up a commentable object

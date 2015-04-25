@@ -6,14 +6,8 @@ class CommentsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    if @commentables.include? params[:commentable_type]
-      @commentable = params[:commentable_type].safe_constantize.find(params[:id])
-      @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
-    else
-      respond_to do |format|
-       format.html { render json: {error: 'Sorry, unable to comment on this entity'}, status: :unprocessable_entity }
-      end
-    end
+    @commentable = params[:commentable_type].safe_constantize.find(params[:id])
+    @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
   end
 
   def create
@@ -21,14 +15,20 @@ class CommentsController < ApplicationController
       @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
       @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
       if @comment.save
-       track_notification(@comment, @commentable) #Create comment notification for (User)
-       CommentNotificationService.new(@comment, @commentable, current_user, profile_url(current_user)).notify
-       CreateMentionService.new(@comment, @comment.body, profile_url(current_user)).mention
-       expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
+        CommentNotificationService.new(@comment, @commentable).create
+        CreateMentionService.new(@comment).mention
+        expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
+        respond_to do |format|
+          format.json { render :show, status: :created }
+        end
+      else
+        respond_to do |format|
+          format.json { render json: @comment.errors,  status: :unprocessable_entity }
+        end
       end
     else
       respond_to do |format|
-       format.html { render json: {error: 'Sorry, unable to comment on this entity'}, status: :unprocessable_entity }
+       format.json { render json: {error: 'Sorry, unable to comment on this entity'}, status: :unprocessable_entity }
       end
     end
   end
