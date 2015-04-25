@@ -5,7 +5,6 @@ class DeleteUserFeedJob < ActiveJob::Base
       User.find(@activity.user.followers_ids.members).each do |follower|
         follower.latest_activities.delete(@activity.id)
       end
-
       if @activity.recipient_type == "Idea"
         @activity.recipient.latest_activities.delete(@activity.id)
       end

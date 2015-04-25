@@ -15,19 +15,40 @@ class Follow < ActiveRecord::Base
 
   #Redis Counters
   def increment_counters
-  	follower.followings_counter.increment
+    follower.followings_counter.increment
     followable.followers_counter.increment
     follower.followings_ids.add(followable_id, created_at.to_i) if followable_type == "User"
     follower.idea_followings_ids.add(followable_id, created_at.to_i) if followable_type == "Idea"
     followable.followers_ids.add(follower_id, created_at.to_i)
+    #Trigger pusher to update stats
+    Pusher.trigger_async("user-stats-#{followable.id}",
+     "user_stats_update",
+       {data:
+         {
+           id: followable.id,
+           followers_count: followable.followers_counter.value
+         }
+       }.to_json
+     )
   end
 
   def decrement_counters
-  	follower.followings_counter.decrement
+    follower.followings_counter.decrement
     followable.followers_counter.decrement
     follower.followings_ids.delete(followable_id) if followable_type == "User"
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
     followable.followers_ids.delete(follower_id)
+
+    #Trigger pusher to update stats
+    Pusher.trigger_async("user-stats-#{followable.id}",
+     "user_stats_update",
+       {data:
+         {
+           id: followable.id,
+           followers_count: followable.followers_counter.value
+         }
+       }.to_json
+    )
   end
 
 end

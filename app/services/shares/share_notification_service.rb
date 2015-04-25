@@ -21,7 +21,7 @@ class ShareNotificationService
       {data:
         {
           id: activity.id,
-          msg: ActivityPresenter.new(activity, self).render_activity
+          msg: render(json: ActivityPresenter.new(activity))
         }
       }.to_json
     )

@@ -29,7 +29,7 @@ class CreateVoteService
   private
 
   def create_activity
-    @activity = @user.activities.create!(trackable: @votable, recipient: @votable.user, verb: 'voted',  type: 'Notification', key: 'create')
+    @activity = @user.activities.create!(trackable: @votable, recipient: @votable, verb: 'voted', key: 'create')
     @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
     if @user != @voter
       VoteNotificationService.new(@activity).notify

@@ -9,8 +9,8 @@ class MentionNotificationService
       "new_notification",
       {data:
         {
-          id: activity.id,
-          msg: ActivityPresenter.new(@activity, self).render_activity
+          id: @activity.id,
+          msg: render(json: ActivityPresenter.new(@activity))
         }
       }.to_json
     )

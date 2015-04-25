@@ -1,7 +1,7 @@
 module Authentication
+  extend ActiveSupport::Concern
 
   #Login using both email and username
-
   def login=(login)
     @login = login
   end

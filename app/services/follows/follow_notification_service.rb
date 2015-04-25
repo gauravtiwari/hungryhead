@@ -5,14 +5,14 @@ class FollowNotificationService
 	end
 
 	def notify
-    @user = @activity.recipient_type == "Idea" ? @activity.recipient.student : @activity.recipient.user
+    @user = @activity.recipient_type == "Idea" ? @activity.recipient.student : @activity.recipient
 
     Pusher.trigger("private-user-#{@user.id}",
       "new_notification",
       {data:
         {
-          id: activity.id,
-          msg: ActivityPresenter.new(@activity, self).render_activity
+          id: @activity.id,
+          msg: render(json: ActivityPresenter.new(@activity))
         }
       }.to_json
     )

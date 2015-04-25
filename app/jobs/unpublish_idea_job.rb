@@ -1,5 +1,4 @@
 class UnpublishIdeaJob < ActiveJob::Base
-  queue_as :default
 
   def perform(idea)
    ActiveRecord::Base.connection_pool.with_connection do
