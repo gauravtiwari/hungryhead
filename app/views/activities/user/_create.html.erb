@@ -1,0 +1,39 @@
+<div class="card share post_<%= activity.id %>" data-social="item">
+    <div class="circle" data-toggle="tooltip" title="hello" data-container="body"></div>
+    <div class="card-header clearfix bg-danger-lighter">
+	    <div class="user-pic">
+		    <% if activity.user.avatar.present? %>
+			    <%= image_tag(activity.user.avatar.url(:avatar), :"data-src" => "#{activity.user.avatar.url(:avatar)}", :"data-src-retina" => "#{activity.user.avatar.url(:square)}", width: "33", height: "33") %>
+			    <% else %>
+			        <span class="placeholder bold text-white"><%= activity.user.first_name.first + activity.user.last_name.first %>
+			        </span>
+		    <% end %>
+	    </div>
+
+	    <div class="text-master-dark">
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span>
+
+		   	<h6>
+		   		<% if activity.user.locations %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i>
+			            <%= activity.user.locations.first %>
+			        </span>
+		        <% end %>
+		       <% if activity.user.markets %>
+			        <span class="location semi-bold m-r-10">
+			            <i class="fa fa-map-marker"></i>
+			            <%= activity.user.markets.first %>
+			        </span>
+		        <% end %>
+		        <span class="date semi-bold">
+		            <i class="fa fa-clock"></i>
+			        <%= link_to(profile_path(activity.user), class: "text-master") do %>
+						<%= time_ago_in_words(activity.created_at) %>
+					<% end %>
+		        </span>
+		    </h6>
+	    </div>
+    </div>
+</div>
+
