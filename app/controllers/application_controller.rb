@@ -63,8 +63,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def track_activity(trackable, action = params[:action], type)
-    current_user.activities.create! key: action, trackable: trackable, type: type
+  #Trackable methods to track activities and notifications for user
+  def track_activity(trackable, action = params[:action])
+    current_user.activities.create! key: action, trackable: trackable
+  end
+
+  def track_notification(trackable, action = params[:action])
+    current_user.notifications.create! key: action, trackable: trackable
   end
 
   private

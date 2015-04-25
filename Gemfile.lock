@@ -757,7 +757,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-linkedin-oauth2
   omniauth-twitter
-  paper_trail (~> 4.0.0.beta)
+  paper_trail (~> 4.0.0.beta2)
   pg
   pg_search
   postgres-copy

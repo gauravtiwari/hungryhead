@@ -141,7 +141,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'shareable'
 
 #Log versions
-gem 'paper_trail', '~> 4.0.0.beta'
+gem 'paper_trail', '~> 4.0.0.beta2'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'

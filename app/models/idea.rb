@@ -67,7 +67,11 @@ class Idea < ActiveRecord::Base
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
 
+  #Includes modules
   has_merit
+  has_paper_trail :only => [:name, :description, :elevator_pitch,
+    :high_concept_pitch, :market, :problems, :solutions, :vision,
+    :value_proposition]
 
   #Store accessor for JSON columns
   store_accessor :fund, :balance

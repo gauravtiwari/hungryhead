@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
   def index
     ids = current_user.followings_ids.members
     ids.push(current_user.id)
-    @activities = Activity.where(owner_id: ids, published: true)
+    @activities = Activity.where(user_id: ids, published: true)
     .where.not(key: 'follow.create')
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 20)
