@@ -1,7 +1,7 @@
 class ShareNotificationService
 
   def initialize(share)
-    @feedback = share
+    @share = share
     @shareable = share.shareable
     @user = share.user
   end

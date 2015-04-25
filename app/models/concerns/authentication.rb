@@ -18,10 +18,6 @@ module Authentication
     super && authentications.blank?
   end
 
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
-
   protected
 
   def self.find_first_by_auth_conditions(warden_conditions)
