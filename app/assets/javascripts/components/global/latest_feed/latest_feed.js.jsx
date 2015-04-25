@@ -9,11 +9,10 @@ var LatestFeed = React.createClass({
 
   componentDidMount: function() {
     var self = this;
-    var feed = this.state.feed;
     var feed_channel = pusher.subscribe(this.props.channel_name);
     if(feed_channel) {
       feed_channel.bind('new_feed_item', function(data){
-        var items = feed.concat(data.data.item);
+        var items =  self.state.feed.concat(data.data.item);
         self.setState({feed: items.reverse()});
       });
     }

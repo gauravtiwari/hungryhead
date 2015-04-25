@@ -140,13 +140,14 @@ gem 'modernizr-rails'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 #Activity feed
-gem 'public_activity'
+#gem 'public_activity'
+
+#Social Share
 gem 'shareable'
 
-gem 'partisan'
 
-#need removing
-gem 'nested_form'
+#Follow
+gem 'partisan'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'

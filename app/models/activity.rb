@@ -1,7 +1,7 @@
 class Activity < PublicActivity::Activity
 
   def cache_activities
-    UpdateUserFeedJob.set(wait: 10.seconds).perform_later(self)
+    UpdateUserFeedJob.perform_later(self)
     if recipient_type == "Idea"
       @activity = self
       @activity.recipient.latest_activities.add({

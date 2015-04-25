@@ -353,6 +353,10 @@ GEM
       nokogiri (~> 1.4)
     htmlbeautifier (1.1.0)
     http_parser.rb (0.6.0)
+    http_signatures (0.2.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpclient (2.6.0.1)
     i18n (0.7.0)
     i18n_data (0.6.3)
@@ -658,6 +662,14 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    stream-ruby (2.2.3)
+      http_signatures (~> 0)
+      httparty (~> 0)
+    stream_rails (2.2.1)
+      actionpack (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      railties (>= 3.0.0)
+      stream-ruby (~> 2.1)
     sucker_punch (1.4.0)
       celluloid (~> 0.16.0)
     summernote-rails (0.6.2.1)
@@ -817,6 +829,7 @@ DEPENDENCIES
   soulmate
   spring
   sprockets (~> 2.12.3)
+  stream_rails
   sucker_punch
   summernote-rails
   therubyracer
