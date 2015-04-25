@@ -68,12 +68,14 @@ CREATE TABLE activities (
     owner_id integer,
     owner_type character varying,
     key character varying,
-    parameters text,
+    type character varying,
+    parameters jsonb,
+    published boolean DEFAULT true,
+    "boolean" boolean DEFAULT true,
     recipient_id integer,
     recipient_type character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    published boolean DEFAULT true
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -179,7 +181,6 @@ CREATE TABLE comments (
     parent_id integer,
     lft integer,
     rgt integer,
-    cached_votes_total integer DEFAULT 0,
     role character varying DEFAULT 'comments'::character varying,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -215,8 +216,6 @@ CREATE TABLE feedbacks (
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
     status integer DEFAULT 0 NOT NULL,
-    comments_count integer DEFAULT 0,
-    cached_votes_total integer DEFAULT 0,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -342,13 +341,6 @@ CREATE TABLE ideas (
     cached_location_list character varying,
     cached_market_list character varying,
     cached_technology_list character varying,
-    feedbacks_count integer DEFAULT 0,
-    investments_count integer DEFAULT 0,
-    followers_count integer DEFAULT 0,
-    comments_count integer DEFAULT 0,
-    cached_votes_total integer DEFAULT 0,
-    shares_count integer DEFAULT 0,
-    idea_messages_count integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
@@ -385,8 +377,6 @@ CREATE TABLE investments (
     note character varying NOT NULL,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
-    comments_count integer DEFAULT 0,
-    cached_votes_total integer DEFAULT 0,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -754,39 +744,6 @@ ALTER SEQUENCE merit_scores_id_seq OWNED BY merit_scores.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE notifications (
-    id integer NOT NULL,
-    reciever_id integer,
-    sender_id integer,
-    parameters jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE notifications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
-
-
---
 -- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -948,10 +905,7 @@ CREATE TABLE schools (
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    users_count integer DEFAULT 0,
-    ideas_count integer DEFAULT 0,
-    followers_count integer DEFAULT 0
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1020,8 +974,7 @@ CREATE TABLE shares (
     user_id integer,
     parameters jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    cached_votes_total integer DEFAULT 0
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1173,13 +1126,6 @@ CREATE TABLE users (
     cached_subject_list character varying,
     cached_technology_list character varying,
     cached_service_list character varying,
-    followers_count integer DEFAULT 0,
-    followings_count integer DEFAULT 0,
-    investments_count integer DEFAULT 0,
-    feedbacks_count integer DEFAULT 0,
-    comments_count integer DEFAULT 0,
-    ideas_count integer DEFAULT 0,
-    shares_count integer DEFAULT 0,
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
@@ -1400,13 +1346,6 @@ ALTER TABLE ONLY merit_score_points ALTER COLUMN id SET DEFAULT nextval('merit_s
 --
 
 ALTER TABLE ONLY merit_scores ALTER COLUMN id SET DEFAULT nextval('merit_scores_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
 --
@@ -1646,14 +1585,6 @@ ALTER TABLE ONLY merit_scores
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY notifications
-    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
-
-
---
 -- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1820,13 +1751,6 @@ CREATE INDEX index_badges_sashes_on_sash_id ON badges_sashes USING btree (sash_i
 
 
 --
--- Name: index_comments_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_cached_votes_total ON comments USING btree (cached_votes_total);
-
-
---
 -- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1845,20 +1769,6 @@ CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
 --
 
 CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
-
-
---
--- Name: index_feedbacks_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_cached_votes_total ON feedbacks USING btree (cached_votes_total);
-
-
---
--- Name: index_feedbacks_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_comments_count ON feedbacks USING btree (comments_count);
 
 
 --
@@ -1887,6 +1797,20 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_followables ON follows USING btree (followable_id, followable_type);
+
+
+--
+-- Name: index_followers; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_followers ON follows USING btree (follower_id, follower_type);
 
 
 --
@@ -1988,20 +1912,6 @@ CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
 
 
 --
--- Name: index_investments_on_cached_votes_total; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_investments_on_cached_votes_total ON investments USING btree (cached_votes_total);
-
-
---
--- Name: index_investments_on_comments_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_investments_on_comments_count ON investments USING btree (comments_count);
-
-
---
 -- Name: index_investments_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2100,20 +2010,6 @@ CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING
 
 
 --
--- Name: index_notifications_on_reciever_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_reciever_id ON notifications USING btree (reciever_id);
-
-
---
--- Name: index_notifications_on_sender_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_sender_id ON notifications USING btree (sender_id);
-
-
---
 -- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2146,20 +2042,6 @@ CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (sl
 --
 
 CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
-
-
---
--- Name: index_partisan_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_partisan_followables ON follows USING btree (followable_id, followable_type);
-
-
---
--- Name: index_partisan_followers; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_partisan_followers ON follows USING btree (follower_id, follower_type);
 
 
 --
@@ -2314,20 +2196,6 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (conf
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
-
-
---
--- Name: index_users_on_followers_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_followers_count ON users USING btree (followers_count);
-
-
---
--- Name: index_users_on_followings_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_followings_count ON users USING btree (followings_count);
 
 
 --
@@ -2576,10 +2444,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150119202844');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122230500');
 
-INSERT INTO schema_migrations (version) VALUES ('20150131181527');
-
-INSERT INTO schema_migrations (version) VALUES ('20150216233226');
-
 INSERT INTO schema_migrations (version) VALUES ('20150219031949');
 
 INSERT INTO schema_migrations (version) VALUES ('20150219031950');
@@ -2587,8 +2451,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150219031950');
 INSERT INTO schema_migrations (version) VALUES ('20150219031951');
 
 INSERT INTO schema_migrations (version) VALUES ('20150221035657');
-
-INSERT INTO schema_migrations (version) VALUES ('20150308175637');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183515');
 
@@ -2598,11 +2460,7 @@ INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317220155');
 
-INSERT INTO schema_migrations (version) VALUES ('20150317231458');
-
 INSERT INTO schema_migrations (version) VALUES ('20150321215014');
-
-INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 

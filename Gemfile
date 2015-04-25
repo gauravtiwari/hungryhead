@@ -188,9 +188,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 
 
 #Voting
-gem 'acts_as_votable'
 gem 'awesome_nested_set'
-gem 'acts_as_commentable_with_threading'
 
 #Intercom
 #gem "intercom-rails"

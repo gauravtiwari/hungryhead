@@ -57,11 +57,10 @@ class Idea < ActiveRecord::Base
 
   #Idea follower system
   has_many :followers, as: :follower, :dependent => :destroy
-
   #Comments and votes
   has_many :comments, as: :commentable, :dependent => :destroy
   has_many :votes, as: :votable, :dependent => :destroy
-
+  #Rest of the assocuations
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
