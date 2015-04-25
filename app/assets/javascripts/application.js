@@ -36,8 +36,6 @@
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
-//= require summernote
-//= require summernote-video
 //= require plugins/jquery-unveil/jquery.unveil.min
 //= require plugins/jquery-bez/jquery.bez.min
 //= require plugins/jquery-ios-list/jquery.ioslist.min

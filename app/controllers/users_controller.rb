@@ -116,7 +116,7 @@ class UsersController < ApplicationController
   end
 
   def activities
-    @activities = PublicActivity::Activity
+    @activities = Activity
     .where(owner_id: @user.id, owner_type: "User")
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)

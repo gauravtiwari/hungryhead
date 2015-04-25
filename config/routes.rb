@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  authenticated do
+    root :to => 'activities#index', as: :authenticated
+  end
+
   root 'pages#index'
 
   #Pages routes
@@ -76,10 +80,10 @@ Rails.application.routes.draw do
     post  '/teachers_join' => 'teachers/registrations#create', as: 'teacher_registration'
   end
 
-  match '/like',  to: 'likes#like', via: :put, as: 'like'
+  match '/vote',  to: 'votes#vote', via: :put, as: 'vote'
   get '/:tag/people',  to: 'tags#people', as: 'tag_people'
   get '/:tag/ideas',  to: 'tags#show', as: 'tag'
-  match '/likers', to: 'likes#likers', via: :get, as: 'likers'
+  match '/voters', to: 'votes#voters', via: :get, as: 'voters'
   match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
   match '/mentionables/:mentionable_type/:id', to: 'likes#mentionables', via: :get, as: 'mentionables'
 
@@ -169,6 +173,7 @@ Rails.application.routes.draw do
   resources :ideas do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
+    #Member routes
     member do
       put :publish
       put :unpublish
@@ -187,9 +192,6 @@ Rails.application.routes.draw do
 
     #Investments resource
     resources :investments, only: [:create, :index, :show]
-
-    #Notes /TODO
-    #resources :notes
 
     #Feedback resources
     resources :feedbacks do

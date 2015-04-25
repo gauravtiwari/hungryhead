@@ -38,8 +38,6 @@ gem 'cityhash'
 gem 'inline_svg'
 
 #Font awesome
-gem 'summernote-rails'
-gem 'bootstrap-sass'     # required
 gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -139,15 +137,11 @@ gem 'modernizr-rails'
 #Active Record Session
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
-#Activity feed
-#gem 'public_activity'
-
 #Social Share
 gem 'shareable'
 
-
-#Follow
-gem 'partisan'
+#Log versions
+gem 'paper_trail', '~> 4.0.0.beta'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'
@@ -200,22 +194,18 @@ gem 'acts_as_commentable_with_threading'
 
 #Intercom
 #gem "intercom-rails"
+
+#At.js
 gem 'jquery-atwho-rails'
 
+#Jquery UI
 gem 'jquery-ui-rails'
-#Security and best practices
-
-gem 'rails_best_practices'
-gem 'brakeman'
 
 #Application configuration
 gem 'figaro'
 
 #caching system
 gem  'dalli'
-
-#Active link
-gem 'active_link_to'
 
 #Realtime
 gem 'pusher'
@@ -243,6 +233,8 @@ gem "skylight"
 group :development, :test do
   gem 'better_errors'
   gem 'hirb'
+  gem 'rails_best_practices'
+  gem 'brakeman'
   gem 'pry'
   gem 'rubocop', require: false
   gem "lol_dba"

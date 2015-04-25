@@ -50,7 +50,7 @@ class PublishIdeaService
 
   #Publish activity if activity exists?
   def publish_activity
-    PublicActivity::Activity.where(trackable_id: @idea.id, trackable_type: "Idea").find_each do |activity|
+    Activity.where(trackable_id: @idea.id, trackable_type: "Idea").find_each do |activity|
       if activity && !activity.published?
         activity.published = true
         activity.save!
@@ -61,7 +61,7 @@ class PublishIdeaService
 
   #Check if activity exists for idea?
   def activity_exists?
-    PublicActivity::Activity.where(trackable_id: @idea.id, key: "idea.create").exists?
+    Activity.where(trackable_id: @idea.id, key: "idea.create").exists?
   end
 
   #Construct msg to send in notification

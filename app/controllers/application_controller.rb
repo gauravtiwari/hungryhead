@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   include Pundit
-  include PublicActivity::StoreController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
@@ -67,13 +66,12 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-  if request.xhr?
-    render json: {error: {message: "You are not authorized to perform this action"}}
-  else
-    redirect_to root_path
-    flash[:notice] = "You are not authorized to perform this action"
+    if request.xhr?
+      render json: {error: {message: "You are not authorized to perform this action"}}
+    else
+      redirect_to root_path
+      flash[:notice] = "You are not authorized to perform this action"
+    end
   end
-  end
-
 
 end

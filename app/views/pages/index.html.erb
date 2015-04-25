@@ -1,187 +1,27 @@
-<div class="col-md-3 col-sm-3 no-padding p-l-15 col-lg-3 col-xlg-3">
-  <%= render partial: 'sidebar' %>
-</div>
+<div class="splash-wrapper ">
+    <section class="slider-caption">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 auto-margin hero-text text-center">
+            <h1>Are you building something that people actually want? <span class="bold">Let's find out</span></h1>
+          </div>
+        </div>
 
-<div class="col-md-6">
-  <div class="activity-feed auto-height m-t-20">
-      <div class="activity-feed-box live">
-        <%= render partial: 'activities' %>
+        <div class="row">
+              <div class="col-md-6 auto-margin">
+                <div class="slider-caption-text text-center">
+                 <p class="intro text-white fs-16 p-t-20 semi-bold">
+                        HungryHead is a practical idea simulation and learning platform for anyone, anywhere to validate startup ideas, together.
+                    </p>
+                    <div class="btn-box p-t-20">
+                        <a href="#about" class="btn btn-color btn-ghost">Learn More</a>
+                        <!-- Video Lightbox on Click -->
+                        <a href="/join" class="btn btn-white venobox vbox-item"><i class="icon arrow_triangle-right_alt"></i>Join Us</a>
+                    </div>
+                </div>
+              </div><!-- /End Col -->
+          </div>
       </div>
-      <% if @activities.next_page %>
-        <div class="pagination-box text-center">
-        <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
-        </div>
-      <% end %>
-  </div>
+    </section>
+  <%= render partial: 'globals/small_footer' %>
 </div>
-
-<div class="col-md-3 col-sm-3 no-padding p-r-15">
-<div class="sidebar auto-height sticky white-bg box-shadow">
-
-    <div class="widget-11-2 panel bg-light-blue b-b b-light-grey no-margin p-b-20">
-        <div class="panel-heading m-l-15">
-         <div class="panel-title b-b b-grey p-b-5">
-          Latest activities
-          </div>
-        </div>
-        <div class="panel-body no-margin scrollable auto-overflow no-padding p-l-20 p-r-20">
-         <div style="max-height:300px">
-          <%= react_component('LatestFeed', {feed: current_user.latest_activities.revrange(0,100).paginate(:page => 1, :per_page => 10), user_id: current_user.id, channel_name: "user-feed-#{current_user.id}"}.to_json) %>
-          </div>
-        </div>
-    </div>
-
-    <div class="m-b-10">
-        <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
-            <div class="panel-heading">
-             <div class="panel-title">
-              Trending Ideas
-              </div>
-              <div class="panel-controls">
-                  <ul>
-                      <li class="hidden-xlg">
-                        <div class="dropdown">
-                          <a data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                          <i class="portlet-icon portlet-icon-settings"></i>
-                          </a>
-                          <ul class="dropdown-menu pull-right" role="menu">
-                          <li><a href="#">AAPL</a>
-                          </li>
-                          <li><a href="#">YHOO</a>
-                          </li>
-                          <li><a href="#">GOOG</a>
-                          </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li>
-                          <a data-toggle="refresh" class="portlet-refresh text-black" href="#">
-                              <i class="portlet-icon portlet-icon-refresh"></i>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-            </div>
-            <div class="auto-overflow">
-              <ul class="trending-list p-t-20 no-style">
-                <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
-                  <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                  <div class="pull-left">
-                      <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                      <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                  </div>
-                  <div class="clearfix"></div>
-                  </div>
-                </li>
-                <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
-                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                      <div class="pull-left">
-                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                      </div>
-                      <div class="clearfix"></div>
-                  </div>
-                </li>
-                <li class="m-b-10">
-                 <div class="widget-16-header p-b-10 p-l-15">
-                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                      <div class="pull-left">
-                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                      </div>
-                      <div class="clearfix"></div>
-                  </div>
-                </li>
-                <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
-                      <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                      <div class="pull-left">
-                          <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                          <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                      </div>
-                      <div class="clearfix"></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="p-t-10 p-l-25 p-b-20 p-r-20">
-                <p class="small no-margin text-brand pull-right">
-                    <a href="#">
-                      <span class="bold">See all</span>
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="widget-16 panel no-margin widget-loader-circle">
-        <div class="panel-heading">
-            <div class="panel-title">
-              People you may know
-            </div>
-        </div>
-        <div class="panel-body">
-            <p class="m-b-5 small m-t-20">1,435 Mutual Friends</p>
-            <ul class="list-unstyled">
-                <li class="m-r-10">
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white">
-                        <div class="bg-master text-center text-white">
-                            <span>+34</span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <br/>
-             <a href="#">
-                <span class="small bold pull-right">See all</span>
-              </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-

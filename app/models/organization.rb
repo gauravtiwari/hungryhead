@@ -1,5 +1,8 @@
 class Organization < ActiveRecord::Base
-  acts_as_followable
+
+  has_many :followers, as: :follower, :dependent => :destroy
+  has_many :slugs, as: :sluggable, dependent: :destroy
+
   store_accessor :media, :logo_position,
   :cover_position, :cover_prcessing, :logo_processing
 

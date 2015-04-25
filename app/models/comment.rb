@@ -5,8 +5,9 @@ class Comment < ActiveRecord::Base
   validates :user, :presence => true
 
   # want user to vote on the quality of comments.
-  #Included modules
-  acts_as_votable
+  has_many :votes, as: :votable, :dependent => :destroy
+
+  #Redis counters and ids cache
   include Redis::Objects
   counter :votes_counter
   sorted_set :voters_ids
@@ -16,7 +17,7 @@ class Comment < ActiveRecord::Base
 
   #Model Associations
   belongs_to :user
-  belongs_to :commentable, :polymorphic => true, counter_cache: true, touch: true
+  belongs_to :commentable, :polymorphic => true, touch: true
 
   #Model Scopes
   default_scope -> { order('created_at DESC') }

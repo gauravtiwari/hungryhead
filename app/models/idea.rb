@@ -43,26 +43,31 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #CallBack hooks
-  #before_destroy :remove_activity
+  before_destroy :remove_activity
   before_create :add_fund
   after_save :create_slug
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
   after_create :increment_counters
   before_destroy :decrement_counters
-  #Associations
 
-  belongs_to :student, touch: true, counter_cache: true
-  belongs_to :school, counter_cache: true
+  #Associations
+  belongs_to :student, touch: true
+  belongs_to :school
+
+  #Idea follower system
+  has_many :followers, as: :follower, :dependent => :destroy
+
+  #Comments and votes
+  has_many :comments, as: :commentable, :dependent => :destroy
+  has_many :votes, as: :votable, :dependent => :destroy
+
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
 
-  acts_as_followable
-  acts_as_votable
-  acts_as_commentable
   has_merit
 
   #Store accessor for JSON columns
@@ -194,11 +199,11 @@ class Idea < ActiveRecord::Base
     [:name, [:name, :id]]
   end
 
-  #def remove_activity
-   #PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    #DeleteUserFeedJob.perform_later(activity)
-   #end
-  #end
+  def remove_activity
+   Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
+    DeleteUserFeedJob.perform_later(activity)
+   end
+  end
 
   def increment_counters
     school.ideas_counter.increment

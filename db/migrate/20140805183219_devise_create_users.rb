@@ -25,13 +25,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cached_subject_list
       t.string :cached_technology_list
       t.string :cached_service_list
-      t.integer :followers_count, default: 0, index: true
-      t.integer :followings_count, default: 0, index: true
-      t.integer :investments_count, default: 0
-      t.integer :feedbacks_count, default: 0
-      t.integer :comments_count, default: 0
-      t.integer :ideas_count, default: 0
-      t.integer :shares_count, default: 0
       t.boolean :verified, default: false
       t.boolean :admin, default: false
       t.boolean :terms_accepted, default: false

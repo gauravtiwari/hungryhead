@@ -5,21 +5,6 @@ class PagesController < ApplicationController
 
   #Index page to handle home and after login route
   def index
-    if user_signed_in?
-      ids = current_user.followings_ids.members
-      ids.push(current_user.id)
-      @activities = PublicActivity::Activity
-      .where(owner_id: ids, published: true)
-      .where.not(key: 'follow.create')
-      .order(id: :desc)
-      .paginate(:page => params[:page], :per_page => 20)
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    else
-      render 'pages/splash'
-    end
   end
 
   #Our Story and how we got started

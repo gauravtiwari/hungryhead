@@ -2,24 +2,26 @@ class School < ActiveRecord::Base
 
 	has_many :users, as: :students
 	has_many :ideas
+	has_many :followers, as: :follower, :dependent => :destroy
 	has_many :slugs, as: :sluggable, dependent: :destroy
 
 	store_accessor :data, :established, :location, :website
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
 
-	acts_as_followable
-
+	#Redis Cache counters and ids
 	include Redis::Objects
 	sorted_set :followers_ids
 	sorted_set :students_ids
 	sorted_set :ideas_ids
 	sorted_set :activities_ids
 
+	#Counters
 	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
 
+	#Mount carrierwave
 	mount_uploader :logo, LogoUploader
 	mount_uploader :cover, CoverUploader
 

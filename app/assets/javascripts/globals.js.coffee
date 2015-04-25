@@ -16,36 +16,6 @@ jQuery(document).ready ->
 	$.each flashMessages, (key, value) ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
 	  	.show();
-	$('[data-provider="summernote"]').each ->
-		$(this).summernote
-			tabsize: 2
-			focus: true
-			toolbar: [
-			  [
-			    'style'
-			    [
-			      'bold'
-			      'italic'
-			      'underline'
-			    ]
-			  ]
-			  [
-			    'para'
-			    [
-			      'ul'
-			      'ol'
-			      'paragraph'
-			    ]
-			  ]
-			  [
-			  	'insert'
-			  	[
-			  		'video'
-			  		'picture'
-			  		'link'
-			  	]
-			  ]
-			]
 
 	$('.scrollable').slimScroll height: '300px'
 

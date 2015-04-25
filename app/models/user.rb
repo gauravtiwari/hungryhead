@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   include Redis::Objects
-  include PublicActivity::Model
-  activist
   extend FriendlyId
 
   friendly_id :slug_candidates
@@ -60,9 +58,17 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   #Model Relationships
-  belongs_to :school, counter_cache: true
+  belongs_to :school
   has_many :authentications, :dependent => :destroy, autosave: true
+
+  #Follow System
+  has_many :followings, as: :followable, :dependent => :destroy
+  has_many :followers, as: :follower, :dependent => :destroy
+
+  #Votes and Share
+  has_many :votes, as: :voter, :dependent => :destroy
   has_many :shares, dependent: :destroy, autosave: true
+
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
@@ -84,8 +90,6 @@ class User < ActiveRecord::Base
   after_create :increment_counters
 
   #Follower/Follow System
-  acts_as_follower
-  acts_as_followable
   acts_as_voter
 
   #Model Validations

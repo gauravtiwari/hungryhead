@@ -23,7 +23,7 @@ class OrganizationsController < ApplicationController
       @user = current_user
     end
     student_ids =  @users.map(&:id)
-    @activities = PublicActivity::Activity
+    @activities = Activity
     .where(owner_id: student_ids, owner_type: "User", published: true)
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 20)
