@@ -40,7 +40,7 @@ class PublishIdeaService
   #Award Badge to user
   def award_badge
     @user.entrepreneur!
-    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user, @user, 2, "Idea_#{@idea.id}")
+    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user, @user, 2, msg, "Idea_#{@idea.id}")
   end
 
   #Send notification to followers of user

@@ -92,13 +92,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-    end
-  end
-
   def followers
     @followers = @user.followers_by_type('User')
     respond_to do |format|

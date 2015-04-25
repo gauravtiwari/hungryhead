@@ -12,7 +12,9 @@ var LatestFeedInvestmentItem = React.createClass({
             <span className="verb p-l-5">
               {this.props.item.verb}
             </span>
-
+            <span className="recipient p-l-5">
+              in {this.props.item.recipient}
+            </span>
           <span className="date p-l-10 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
           </span>
         </li>

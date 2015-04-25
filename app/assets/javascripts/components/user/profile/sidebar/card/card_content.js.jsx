@@ -34,6 +34,35 @@ var CardContent = React.createClass({
       var verified_badge = <i className="fa fa-check-circle text-white fs-16 m-l-10"></i>;
     }
 
+    if(this.props.profile.website_url) {
+      var website_url =  <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.website_url} ><i className="fa fa-rss"></i></a>                         </li>;
+    }
+
+    if(this.props.profile.facebook_url) {
+      var facebook_url =  <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.facebook_url} ><i className="fa fa-facebook"></i></a>
+                          </li>;
+    }
+
+    if(this.props.profile.linkedin_url) {
+      var linkedin_url =  <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.linkedin_url} ><i className="fa fa-linkedin"></i></a>
+                          </li>;
+    }
+
+    if(this.props.profile.twitter_url) {
+      var twitter_url =  <li className="inline">
+                            <a className="text-white p-r-10" href={this.props.profile.twitter_url} ><i className="fa fa-twitter"></i></a>
+                          </li>;
+    }
+
+    if(this.props.profile.location_name) {
+      var location =  <a className="b-l b-white b-dashed text-white p-l-10" href={this.props.profile.location_url}>
+                          <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
+                         </a>;
+    }
+
     return(
         <div className="profile-card padding-20 bg-solid box-shadow">
             <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
@@ -52,29 +81,19 @@ var CardContent = React.createClass({
                        </h3>
                        <p className="no-margin text-white fs-14">{this.props.profile.mini_bio}</p>
                        <p className="text-white m-t-5 small">
-                         <a className="text-white b-r b-white b-dashed p-r-10" href={this.props.profile.school_url}>
+                         <a className="text-white p-r-10" href={this.props.profile.school_url}>
                           <i className="fa fa-university"></i> {this.props.profile.school_name}
                           </a>
-                         <a className="text-white p-l-10" href={this.props.profile.location_url}>
-                          <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
-                         </a>
+                          {location}
                        </p>
                        <ul className="text-white m-t-5 small no-style">
                          {markets}{hobbies}
                        </ul>
                        <ul className="social-list text-white m-t-5 small no-style">
-                          <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.website_url} ><i className="fa fa-rss"></i></a>
-                          </li>
-                          <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.linkedin_url} ><i className="fa fa-linkedin"></i></a>
-                          </li>
-                          <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.facebook_url} ><i className="fa fa-facebook"></i></a>
-                          </li>
-                          <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.twitter_url} ><i className="fa fa-twitter"></i></a>
-                          </li>
+                        {website_url}
+                        {linkedin_url}
+                        {facebook_url}
+                        {twitter_url}
                        </ul>
                    </div>
                 </div>

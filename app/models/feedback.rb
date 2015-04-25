@@ -35,8 +35,7 @@ class Feedback < ActiveRecord::Base
 
   def remove_activity
    PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    activity.destroy if activity.present?
-    true
+    DeleteUserFeedJob.set(wait: 10.seconds).perform_later(activity)
    end
   end
 

@@ -30,14 +30,14 @@ class Investment < ActiveRecord::Base
 	private
 
 	def remove_activity
-	 PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-	  activity.destroy if activity.present?
-	  true
-	 end
-	end
+   PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
+    DeleteUserFeedJob.set(wait: 10.seconds).perform_later(activity)
+   end
+  end
 
   def cancel_investment
     idea.update_attributes(fund: {"balance" => idea.balance - amount })
+    user.update_attributes(fund: {"balance" => user.balance + amount })
   end
 
   def increment_counters

@@ -32,15 +32,20 @@ class LikesController < ApplicationController
     end
     @mentionables = Array.new
     @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) if mentionable != current_user
-    @mentionable.comment_threads.includes(:user).each do |comment|
-      @mentionables.push(name: comment.user.name, path: user_path(comment.user), username: comment.user.username) unless @mentionables.include?(comment.user.name) && comment.user == current_user
-    end
+    @mentionable.comment_threads.includes(:user).map { |c| @mentionables.push({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) unless @mentionables.include?({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) && c.user == current_user }
     render json: @mentionables
   end
 
   private
 
   def load_votable
-    @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
+    @votables = ["Idea", "Feedback", "Investment", "Comment", "Share"]
+    if @votables.include? params[:votable_type]
+      @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
+    else
+      respond_to do |format|
+       format.html { render json: {error: 'Sorry, unable to vote on this entity'}, status: :unprocessable_entity }
+      end
+    end
   end
 end

@@ -43,6 +43,10 @@ class School < ActiveRecord::Base
 	after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
 
+  def follower?(user)
+    followers_ids.members.include?(user.id.to_s)
+  end
+
 	private
 
 	def short_name

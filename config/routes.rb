@@ -60,7 +60,6 @@ Rails.application.routes.draw do
     # joining
     get   '/students_join' => 'students/registrations#new',    as: 'new_student_registration'
     post  '/students_join' => 'students/registrations#create', as: 'student_registration'
-    put  '/students_join' => 'students/registrations#update', as: 'student_update'
   end
 
   devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'}
@@ -68,7 +67,6 @@ Rails.application.routes.draw do
     # mentor joining
     get   '/mentors_join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
     post  '/mentors_join' => 'mentors/registrations#create', as: 'mentor_registration'
-    put  '/mentors_join' => 'mentors/registrations#update', as: 'mentor_update'
   end
 
   devise_for :teachers, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'teachers/registrations'}
@@ -76,7 +74,6 @@ Rails.application.routes.draw do
     # teacher joining
     get   '/teachers_join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
     post  '/teachers_join' => 'teachers/registrations#create', as: 'teacher_registration'
-    put  '/teachers_join' => 'teachers/registrations#update', as: 'teacher_update'
   end
 
   match '/like',  to: 'likes#like', via: :put, as: 'like'

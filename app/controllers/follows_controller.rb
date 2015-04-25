@@ -1,17 +1,17 @@
 class FollowsController < ApplicationController
 
-  before_filter :authenticate_user!
-  before_filter :load_followable
+  before_action :authenticate_user!
+  before_action :load_followable
 
   def create
-    if current_user.follows?(@followable)
+    if @followable.follower?(current_user)
       current_user.unfollow(@followable)
       NewUnfollowNotificationJob.perform_later(current_user, @followable)
     else
       current_user.follow(@followable)
       NewFollowNotificationJob.perform_later(current_user, @followable, profile_path(current_user))
     end
-    render json: { follow: current_user.follows?(@followable)  }
+    render json: { follow: @followable.follower?(current_user), followers_count: @followable.followers_counter.value  }
   end
 
   def followers
@@ -27,10 +27,19 @@ class FollowsController < ApplicationController
   private
 
   def load_followable
-    unless params[:followable_type].safe_constantize.find(params[:followable_id]).blank?
-      @followable = params[:followable_type].constantize.find(params[:followable_id])
+    @follwables = ["Idea", "Student", "School", "Mentor", "Teacher", "User"]
+    if @follwables.include? params[:followable_type]
+      followable_type = params[:followable_type]
+      unless followable_type.safe_constantize.find(params[:followable_id]).blank?
+        @followable = followable_type.safe_constantize.find(params[:followable_id])
+      else
+        raise ActiveRecord::RecordNotFound
+      end
     else
-      raise ActiveRecord::RecordNotFound
+      respond_to do |format|
+       format.html { render json: {error: 'Sorry, unable to follow this entity'}, status: :unprocessable_entity }
+      end
     end
   end
+
 end

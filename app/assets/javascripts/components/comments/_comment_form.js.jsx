@@ -10,35 +10,29 @@ var CommentForm = React.createClass({
   handleSubmit: function ( event ) {
     event.preventDefault();
     var body = this.refs.body.getDOMNode().value.trim();
-  
-    // validate
     if (!body) {
       return false;
     }
-
-    // submit
     var formData = $( this.refs.form.getDOMNode() ).serialize();
     this.props.onCommentSubmit(formData);
-
-    // reset form;
     this.refs.body.getDOMNode().value = "";
     event.stopPropagation();
   },
 
   loadMentionables: function(e) {
     $(e.target).autosize();
-    $.get(Routes.mentionables_path(this.props.form.commentable_type, this.props.form.commentable_id), function(data){  
-      $('textarea').atwho({
-        at:"@", 
-        'data':data, 
-        search_key: "username", 
-        insertTpl: '@${username}',
-        displayTpl: "<li data-value='@${name}'>${name} <small>${username}</small></li>",
-      });
-    }.bind(this));
+    $(e.target).atwho({
+      at:"@",
+      'data': Routes.mentionables_path(this.props.form.commentable_type, this.props.form.commentable_id),
+      search_key: "username",
+      insertTpl: '@${username}',
+      displayTpl: "<li data-value='@${name}'>${name} <small>${username}</small></li>",
+    });
+
+    e.stopPropagation();
   },
 
-  
+
   render: function () {
     var cx = React.addons.classSet;
     var classes = cx({
@@ -61,9 +55,9 @@ var CommentForm = React.createClass({
       </div>
       <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit }>
         <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-        <textarea className="form-control empty"onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
+        <textarea className="form-control empty" onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
         <input ref="commentable_id" type="hidden" value= { this.props.form.commentable_id } name= "comment[commentable_id]"/>
-        <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" /> 
+        <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" />
         <button type="submit" id="post_comment" className="main-button m-t-10 pull-right"><i className={this.props.loading}></i> Post</button>
       </form>
       </div>

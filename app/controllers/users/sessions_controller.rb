@@ -12,10 +12,10 @@ class Users::SessionsController < Devise::SessionsController
 
 	def create
 		self.resource = warden.authenticate!(auth_options)
+		if self.resource.sign_in_count == 1
+			Users::UserWelcomeService.new(self.resource, profile_path(self.resource)).welcome
+		end
 	  set_flash_message(:notice, :signed_in) if is_flashing_format?
-	  if resource.sign_in_count == 0
-	  	UserWelcomeService.new(resource, profile_path(resource)).welcome
-	  end
 	  sign_in(resource_name, resource)
 	  yield resource if block_given?
 	  render json: {location: after_sign_in_path_for(resource) }

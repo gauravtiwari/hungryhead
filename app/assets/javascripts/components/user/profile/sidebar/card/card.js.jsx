@@ -5,12 +5,23 @@ var Card = React.createClass({
     var data = JSON.parse(this.props.data);
     return {
       profile: data.user.profile,
+      id: data.user.id,
+      feedbacks_count: data.user.profile.feedbacks_count,
+      followers_count: data.user.profile.followers_count,
+      investments_count: data.user.profile.investments_count,
       form: data.user.about_me.form,
       is_owner: data.user.is_owner,
       loading: false,
       mode: false,
       disabled: false
     }
+  },
+
+  componentDidMount: function() {
+    var self = this;
+    $.pubsub('subscribe', 'update_followers_stats', function(msg, data){
+      self.setState({followers_count: data});
+    });
   },
 
   saveSidebarWidget:function(formData, action) {
@@ -62,7 +73,7 @@ var Card = React.createClass({
     return (
       <div>
         <CardContent key={Math.random()} openForm={this.openForm} text={text} data={this.props.data} is_owner={this.state.is_owner} profile={this.state.profile} />
-        <CardStats key={Math.random()} profile={this.state.profile} />
+        <CardStats key={Math.random()} followers_count={this.state.followers_count} feedbacks_count={this.state.feedbacks_count} investments_count={this.state.investments_count} />
       </div>
     );
   }

@@ -1,4 +1,4 @@
-class UserWelcomeService
+class Users::UserWelcomeService
 
   def initialize(resource, profile_url)
     @resource = resource
@@ -15,14 +15,14 @@ class UserWelcomeService
       user_name: @resource.name,
       verb: "joined",
       action: "hungryhead",
-      user_path: profile_url,
+      user_path: @profile_url,
         avatar: @resource.avatar.url(:avatar)
       }
     )
   end
 
   def msg
-    "<a href='#{profile_url}'>You</a> have earned a community badge for joining hungryhead</a>".html_safe
+    "<a href='#{@profile_url}'>You</a> have earned a community badge for joining hungryhead</a>".html_safe
   end
 
 end

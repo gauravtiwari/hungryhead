@@ -1167,6 +1167,12 @@ CREATE TABLE users (
     settings jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
     school_id integer,
+    cached_location_list character varying,
+    cached_market_list character varying,
+    cached_skill_list character varying,
+    cached_subject_list character varying,
+    cached_technology_list character varying,
+    cached_service_list character varying,
     followers_count integer DEFAULT 0,
     followings_count integer DEFAULT 0,
     investments_count integer DEFAULT 0,
@@ -1744,10 +1750,10 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_owner_id_and_owner_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_owner_id_and_owner_type ON activities USING btree (owner_id, owner_type);
+CREATE INDEX index_activities_on_owner_id_and_owner_type_and_key ON activities USING btree (owner_id, owner_type, key);
 
 
 --
@@ -2601,8 +2607,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321230318');
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150420123428');
 
 INSERT INTO schema_migrations (version) VALUES ('20150421231158');
 

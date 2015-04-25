@@ -27,6 +27,7 @@ var Follow = React.createClass({
         this.setState({ follow: data.follow });
         this.setState({ url: data.url });
         this.setState({disabled: false});
+        $.pubsub('publish', 'update_followers_stats', data.followers_count);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());

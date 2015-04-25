@@ -107,6 +107,10 @@ class Idea < ActiveRecord::Base
     name.split('')
   end
 
+  def follower?(user)
+    followers_ids.members.include?(user.id.to_s)
+  end
+
   def has_invested?(user)
     !investors.include? user.id.to_s
   end
@@ -193,8 +197,7 @@ class Idea < ActiveRecord::Base
 
   def remove_activity
    PublicActivity::Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-    activity.destroy if activity.present?
-    true
+    DeleteUserFeedJob.set(wait: 10.seconds).perform_later(activity)
    end
   end
 

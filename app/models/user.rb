@@ -78,13 +78,10 @@ class User < ActiveRecord::Base
   scope :users, -> { where(role: 0) }
 
   #Callbacks
-  before_save :add_fullname
-  before_save :seed_fund
-  after_save :create_slug
-  after_save :load_into_soulmate
-  before_destroy :remove_from_soulmate
+  before_save :add_fullname, :seed_fund
+  after_save :create_slug, :load_into_soulmate
+  before_destroy :remove_from_soulmate, :decrement_counters
   after_create :increment_counters
-  before_destroy :decrement_counters
 
   #Follower/Follow System
   acts_as_follower

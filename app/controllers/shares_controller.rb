@@ -5,7 +5,7 @@ class SharesController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def create
-    @shareable = params[:shareable_type].constantize.find(params[:shareable_id])
+    @shareable = Idea.find(params[:shareable_id])
     @share = ShareService.new(share_params, current_user, @shareable).create
     render :show, status: :created
   end
