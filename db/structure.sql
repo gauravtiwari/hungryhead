@@ -67,7 +67,7 @@ CREATE TABLE activities (
     trackable_type character varying,
     user_id integer,
     key character varying,
-    type character varying,
+    type character varying DEFAULT 'Activity'::character varying,
     parameters jsonb,
     published boolean DEFAULT true,
     recipient_id integer,
@@ -1778,10 +1778,10 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_key_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_key_and_published_and_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_key_and_published ON activities USING btree (key, published);
+CREATE INDEX index_activities_on_key_and_published_and_type ON activities USING btree (key, published, type);
 
 
 --

@@ -12,7 +12,7 @@ class Activity < ActiveRecord::Base
   #Serialize JSON
   store_accessor :parameters, :verb, :meta
 
-  #reading notifications
+  #reading notifications and activities
   acts_as_readable :on => :created_at
 
   #Model callbacks
