@@ -4,14 +4,10 @@ class FollowsController < ApplicationController
   before_action :load_followable
 
   def create
-    if @followable.follower?(current_user)
-      current_user.follows.destroy!(followable: @followable)
-    else
-      @follow = current_user.follows.create!(@followable)
-      track_notification(@follow, @followable) #Create follow notification for (User)
-      NewFollowNotificationJob.perform_later(current_user, @followable, profile_path(current_user))
+    @follow = CreateFollowService.new(current_user, @followable).create
+    if @follow
+      render json: { follow: @followable.follower?(current_user), followers_count: @followable.followers_counter.value  }
     end
-    render json: { follow: @followable.follower?(current_user), followers_count: @followable.followers_counter.value  }
   end
 
   def followers

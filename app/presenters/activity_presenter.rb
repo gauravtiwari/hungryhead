@@ -6,6 +6,18 @@ class ActivityPresenter < SimpleDelegator
     @activity = activity
   end
 
+  def as_json(*)
+    {
+      actor: @object.user.name,
+      recipient: @object.recipient.name,
+      recipient_type: @object.trackable.class.to_s.downcase,
+      id: @object.id,
+      created_at: "#{@object.created_at}",
+      url: profile_path(@object.user),
+      verb: @object.verb
+    }
+  end
+
   def render_activity
     render_partial
   end

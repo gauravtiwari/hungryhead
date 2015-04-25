@@ -6,12 +6,8 @@ class Users::UserWelcomeService
   end
 
   def welcome
-    @activity = @resource.activities.create!(trackable: @resource, recipient: @resource)
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(@resource, 1, msg, "User_#{@resource.id}")
-  end
-
-  def msg
-    "<a href='#{@profile_url}'>You</a> have earned a community badge for joining hungryhead</a>".html_safe
+    @activity = @resource.activities.create!(trackable: @resource, verb: 'joined', recipient: @resource, key: 'create')
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(@resource.id, 1, "User_#{@resource.id}")
   end
 
 end

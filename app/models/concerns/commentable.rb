@@ -5,14 +5,12 @@ module Commentable
     has_many :comments, as: :commentable, :dependent => :destroy
   end
 
-  module ClassMethods
-    def root_comments
-      self.comments.where(:parent_id => nil)
-    end
+  def root_comments
+    self.comments.where(:parent_id => nil)
+  end
 
-    def comment_threads
-      self.comments
-    end
+  def comment_threads
+    self.comments
   end
 
 end

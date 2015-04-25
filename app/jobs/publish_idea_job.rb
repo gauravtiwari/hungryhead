@@ -1,23 +1,26 @@
-  class PublishIdeaJob < ActiveJob::Base
+class PublishIdeaJob < ActiveJob::Base
 
-  def perform(idea, user, msg, plain_msg)
+  def perform(idea_id, user_id, activity_id)
     ActiveRecord::Base.connection_pool.with_connection do
+      #Fetch records
+      @user = User.find(user_id)
+      @idea = Idea.find(idea_id)
+      @activity = Activity.find(activity_id)
       # Send notifications to followers
-      User.find(user.followers_ids.members).each do |f|
-        notification = Notification.create!(
-          reciever_id: f.id,
-          sender_id: user.id,
-          parameters: {
-            verb: "published",
-            trackable: idea.id,
-            msg: msg,
-            read: false
-          }
+      User.find(@user.followers_ids.members).each do |f|
+        Pusher.trigger("private-user-#{f.id}",
+          "new_notification",
+          {data:
+            {
+              id: @activity.id,
+              msg: render(json: ActivityPresenter.new(@activity))
+            }
+          }.to_json
         )
-
-      Pusher.trigger_async("private-user-#{f.id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
-      IdeaMailer.new_idea(idea, user, f, plain_msg).deliver_later
+        #send mail to users if subscribed
+        IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications?
       end
     end
   end
+
 end

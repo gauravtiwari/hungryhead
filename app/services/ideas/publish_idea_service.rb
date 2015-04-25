@@ -19,7 +19,6 @@ class PublishIdeaService
       publish_activity
     else
       create_activity
-      send_notification
     end
   end
 
@@ -27,18 +26,14 @@ class PublishIdeaService
 
   #Create Activity if idea is new
   def create_activity
-    @activity = @user.activities.create!(trackable: @idea, recipient: @idea)
+    @activity = @user.activities.create!(trackable: @idea, recipient: @idea, key: 'create', verb: 'pitched')
+    PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea.id, @user.id, @activity.id)
   end
 
   #Award Badge to user
   def award_badge
     @user.entrepreneur!
-    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user, @user, 2, msg, "Idea_#{@idea.id}")
-  end
-
-  #Send notification to followers of user
-  def send_notification
-    PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea, @user, msg, plain_msg)
+    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user.id, 2, "Idea_#{@idea.id}")
   end
 
   #Publish activity if activity exists?
@@ -54,16 +49,7 @@ class PublishIdeaService
 
   #Check if activity exists for idea?
   def activity_exists?
-    Activity.where(trackable_id: @idea.id, key: "idea.create").exists?
-  end
-
-  #Construct msg to send in notification
-  def msg
-    "<a href='#{@user_url}'>#{@user.name}</a> pitched <i class='fa fa-fw ion-briefcase'></i> "+ "<a href='#{@idea_url}'>#{@idea.name}</a>".html_safe
-  end
-
-  def plain_msg
-    "Your friend #{@user.name} pitched #{@idea.name}"
+    Activity.where(trackable_id: @idea.id, key: "create").exists?
   end
 
 end

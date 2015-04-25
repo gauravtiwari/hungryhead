@@ -7,7 +7,7 @@ class InvestmentNotificationService
   end
 
   def notify
-    @activity = @user.activities.create!(trackable: @investment, recipient: @idea)
+    @activity = @user.activities.create!(trackable: @investment, verb: 'invested', recipient: @idea, key: 'create')
     send_notification(@activity)
   end
 

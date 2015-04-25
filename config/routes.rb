@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :mentions
+
   authenticated do
     root :to => 'activities#index', as: :authenticated
   end

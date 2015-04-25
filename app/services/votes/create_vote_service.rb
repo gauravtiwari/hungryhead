@@ -22,35 +22,17 @@ class CreateVoteService
 
   def unvote
     @votable.unvoted_by @user
-    delete_activity
     decrement_counters
     false
   end
 
   private
 
-  def increment_counters
-    @votable.votes_counter.increment
-    @votable.voters_ids.add(@user.id, Time.now.to_i)
-  end
-
-  def decrement_counters
-    @votable.votes_counter.decrement if @votable.votes_counter.value > 0
-    @votable.voters_ids.delete(@user.id)
-  end
-
   def create_activity
-    @activity = @user.activities.create!(trackable: @votable, recipient: @votable, type: 'Notification')
-
+    @activity = @user.activities.create!(trackable: @votable, recipient: @votable.user, verb: 'voted',  type: 'Notification', key: 'create')
     @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
     if @user != @voter
       VoteNotificationService.new(@activity).notify
-    end
-  end
-
-  def delete_activity
-    @user.activities.where(trackable: @votable).find_each do |vote|
-      vote.destroy if vote.present?
     end
   end
 

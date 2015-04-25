@@ -7,7 +7,7 @@ class ShareNotificationService
   end
 
   def notify
-    @activity = @user.activities.create!(trackable: @share, recipient: @shareable)
+    @activity = @user.activities.create!(trackable: @share, verb: 'shared', recipient: @shareable, key: 'create')
     send_notification(@activity)
   end
 

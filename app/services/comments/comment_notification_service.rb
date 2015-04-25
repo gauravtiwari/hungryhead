@@ -7,7 +7,7 @@ class CommentNotificationService
 	end
 
 	def notify
-    @activity = @user.activities.create!(trackable: @comment, recipient: @commentable, type: 'Notification')
+    @activity = @user.activities.create!(trackable: @comment, recipient: @commentable, verb: 'commented', type: 'Notification', key: 'create')
     send_notification(@activity)
 	end
 

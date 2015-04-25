@@ -5,14 +5,12 @@ module Shareable
     has_many :shares, as: :shareable, dependent: :destroy, autosave: true
   end
 
-  module ClassMethods
-    def shared?(user)
-      sharers_ids.members.include?(user.id.to_s)
-    end
+  def shared?(user)
+    sharers_ids.members.include?(user.id.to_s)
+  end
 
-    def sharers
-      User.find(sharers_ids.members)
-    end
+  def sharers
+    User.find(sharers_ids.members)
   end
 
 end

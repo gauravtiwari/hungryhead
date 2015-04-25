@@ -51,8 +51,7 @@ class FeedbacksController < ApplicationController
   def rate
     @feedback.badged! if !@feedback.badged?
     @feedback.add_badge(params[:badge].to_i)
-    msg = "<a href='#{user_url(@user)}'>You</a> have earned a badge for your <a href='#{idea_feedback_url(@feedback.idea, @feedback.id)}'>feedback</a>".html_safe
-    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user, @feedback.user, params[:badge].to_i, msg, "Feedback_#{@feedback.id}")
+    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user.id, params[:badge].to_i, "Feedback_#{@feedback.id}")
     @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
     render :rate, locals: {activity: @activity}
   end

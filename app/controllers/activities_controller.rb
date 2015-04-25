@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
     ids = current_user.followings_ids.members
     ids.push(current_user.id)
     @activities = Activity.where(user_id: ids, published: true)
-    .where.not(key: 'follow.create')
+    .where.not(type: 'Notification')
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|

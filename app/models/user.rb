@@ -2,9 +2,11 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   include Redis::Objects
+  #Concerns for User class
   include Followable
   include Follower
   include Sluggable
+  include Authentication
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
@@ -74,7 +76,7 @@ class User < ActiveRecord::Base
   scope :users, -> { where(role: 0) }
 
   #Callbacks
-  before_save :add_fullname, :seed_fund
+  before_save :add_fullname, :seed_fund, :seed_settings
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate, :decrement_counters
   after_create :increment_counters
@@ -99,24 +101,6 @@ class User < ActiveRecord::Base
     balance > amount.to_i
   end
 
-  #Login using both email and username
-
-  def login=(login)
-    @login = login
-  end
-
-  def login
-    @login || self.username || self.email
-  end
-
-  def email_required?
-    super && authentications.blank?
-  end
-
-  def password_required?
-    super && authentications.blank?
-  end
-
   private
 
   def add_fullname
@@ -127,6 +111,11 @@ class User < ActiveRecord::Base
 
   def seed_fund
     self.fund = {balance: 1000}
+  end
+
+  def seed_settings
+    self.settings = {theme: 'solid', idea_notifications: true, feedback_notifications: true,
+    investment_notifications: true, follow_notifications: true, weekly_mail: true}
   end
 
   def slug_candidates
@@ -168,17 +157,5 @@ class User < ActiveRecord::Base
   def decrement_counters
     school.students_counter.decrement
   end
-
-  protected
-
-  def self.find_first_by_auth_conditions(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
-    else
-      where(conditions).first
-    end
-  end
-
 
 end
