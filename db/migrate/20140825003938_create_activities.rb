@@ -4,7 +4,7 @@ class CreateActivities < ActiveRecord::Migration
   def self.up
     create_table :activities do |t|
       t.belongs_to :trackable, :polymorphic => true
-      t.belongs_to :owner, :polymorphic => true
+      t.belongs_to :user
       t.string  :key
       t.string :type
       t.jsonb    :parameters
@@ -14,9 +14,8 @@ class CreateActivities < ActiveRecord::Migration
     end
 
     add_index :activities, [:trackable_id, :trackable_type]
-    add_index :activities, [:owner_id, :owner_type, :key]
+    add_index :activities, [:key, :published]
     add_index :activities, [:recipient_id, :recipient_type]
-    add_index :activities, [:published]
   end
   # Drop table
   def self.down
