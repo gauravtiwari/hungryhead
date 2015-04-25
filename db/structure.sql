@@ -70,7 +70,6 @@ CREATE TABLE activities (
     type character varying,
     parameters jsonb,
     published boolean DEFAULT true,
-    "boolean" boolean DEFAULT true,
     recipient_id integer,
     recipient_type character varying,
     created_at timestamp without time zone NOT NULL,

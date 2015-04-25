@@ -69,6 +69,9 @@ class User < ActiveRecord::Base
   has_many :votes, as: :voter, :dependent => :destroy
   has_many :shares, dependent: :destroy, autosave: true
 
+  #Activities
+  has_many :activities, :dependent => :destroy
+
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true

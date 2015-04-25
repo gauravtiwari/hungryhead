@@ -63,6 +63,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def track_activity(trackable, action = params[:action], type)
+    current_user.activities.create! key: action, trackable: trackable, type: type
+  end
+
   private
 
   def user_not_authorized
