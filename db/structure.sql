@@ -65,8 +65,7 @@ CREATE TABLE activities (
     id integer NOT NULL,
     trackable_id integer,
     trackable_type character varying,
-    owner_id integer,
-    owner_type character varying,
+    user_id integer,
     key character varying,
     type character varying,
     parameters jsonb,
@@ -744,6 +743,40 @@ ALTER SEQUENCE merit_scores_id_seq OWNED BY merit_scores.id;
 
 
 --
+-- Name: notes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notes (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    status integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notes_id_seq OWNED BY notes.id;
+
+
+--
 -- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -824,8 +857,8 @@ ALTER SEQUENCE punches_id_seq OWNED BY punches.id;
 CREATE TABLE read_marks (
     id integer NOT NULL,
     readable_id integer,
+    readable_type character varying NOT NULL,
     user_id integer NOT NULL,
-    readable_type character varying(20) NOT NULL,
     "timestamp" timestamp without time zone
 );
 
@@ -1352,6 +1385,13 @@ ALTER TABLE ONLY merit_scores ALTER COLUMN id SET DEFAULT nextval('merit_scores_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY notes ALTER COLUMN id SET DEFAULT nextval('notes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
 
 
@@ -1585,6 +1625,14 @@ ALTER TABLE ONLY merit_scores
 
 
 --
+-- Name: notes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notes
+    ADD CONSTRAINT notes_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1681,17 +1729,10 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_owner_id_and_owner_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_key_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_owner_id_and_owner_type_and_key ON activities USING btree (owner_id, owner_type, key);
-
-
---
--- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_published ON activities USING btree (published);
+CREATE INDEX index_activities_on_key_and_published ON activities USING btree (key, published);
 
 
 --
@@ -2007,6 +2048,20 @@ CREATE UNIQUE INDEX index_markets_on_slug ON markets USING btree (slug);
 --
 
 CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING btree (action_id);
+
+
+--
+-- Name: index_notes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notes_on_status ON notes USING btree (status);
+
+
+--
+-- Name: index_notes_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notes_on_user_id ON notes USING btree (user_id);
 
 
 --
@@ -2355,6 +2410,14 @@ ALTER TABLE ONLY mailboxer_conversation_opt_outs
 
 
 --
+-- Name: notes_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY notes
+    ADD CONSTRAINT notes_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2440,8 +2503,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141207174436');
 
 INSERT INTO schema_migrations (version) VALUES ('20141209231249');
 
-INSERT INTO schema_migrations (version) VALUES ('20150119202844');
-
 INSERT INTO schema_migrations (version) VALUES ('20150122230500');
 
 INSERT INTO schema_migrations (version) VALUES ('20150219031949');
@@ -2467,4 +2528,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
 
 INSERT INTO schema_migrations (version) VALUES ('20150421231158');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425114736');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 
