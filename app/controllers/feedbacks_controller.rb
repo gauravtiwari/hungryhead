@@ -37,6 +37,7 @@ class FeedbacksController < ApplicationController
     if @idea.can_feedback?(@user)
       respond_to do |format|
         if @feedback.save
+          track_activity(@feedback, @commentable) #Create feedback Activity for (User)
           format.json { render :show, status: :created}
         else
           format.json { render json: @feedback.errors, status: :unprocessable_entity }

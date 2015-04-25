@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
       @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
       @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
       if @comment.save
+       track_notification(@comment, @commentable) #Create comment notification for (User)
        CommentNotificationService.new(@comment, @commentable, current_user, profile_url(current_user)).notify
        CreateMentionService.new(@comment, @comment.body, profile_url(current_user)).mention
        expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")

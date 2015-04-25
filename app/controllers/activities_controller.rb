@@ -1,5 +1,8 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
+  before_filter :check_terms
+
+  layout "home"
 
   def index
     ids = current_user.followings_ids.members

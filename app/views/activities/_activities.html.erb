@@ -1,6 +1,6 @@
 <% if @activities.length > 0 %>
   <% @activities.each do |activity| %>
-  	<%= render_activity(activity) %>
+    <%= ActivityPresenter.new(activity, self).render_activity %>
   <% end %>
 <% else %>
   <div class="card share" data-social="item">

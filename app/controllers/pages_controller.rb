@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
 
-  before_filter :check_terms
   layout "home"
 
   #Index page to handle home and after login route

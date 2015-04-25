@@ -5,10 +5,10 @@ class FollowsController < ApplicationController
 
   def create
     if @followable.follower?(current_user)
-      current_user.unfollow(@followable)
-      NewUnfollowNotificationJob.perform_later(current_user, @followable)
+      current_user.follows.destroy!(followable: @followable)
     else
-      current_user.follow(@followable)
+      @follow = current_user.follows.create!(@followable)
+      track_notification(@follow, @followable) #Create follow notification for (User)
       NewFollowNotificationJob.perform_later(current_user, @followable, profile_path(current_user))
     end
     render json: { follow: @followable.follower?(current_user), followers_count: @followable.followers_counter.value  }
