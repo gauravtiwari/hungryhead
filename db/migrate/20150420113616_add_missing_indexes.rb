@@ -6,7 +6,5 @@ class AddMissingIndexes < ActiveRecord::Migration
     add_index :follows, [:followable_id, :followable_type]
     add_index :follows, [:follower_id, :follower_type]
     add_index :comments, :parent_id
-    add_index :votes, [:votable_id, :votable_type]
-    add_index :votes, [:voter_id, :voter_type]
   end
 end

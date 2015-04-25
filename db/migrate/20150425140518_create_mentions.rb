@@ -9,6 +9,5 @@ class CreateMentions < ActiveRecord::Migration
 
     add_index :mentions, [:mentionable_type, :mentionable_id]
     add_index :mentions, [:mentioner_id, :mentioner_type]
-    add_index :mentions, [:user_id]
   end
 end

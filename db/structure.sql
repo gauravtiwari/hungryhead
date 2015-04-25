@@ -609,6 +609,41 @@ ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
 
 
 --
+-- Name: mentions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE mentions (
+    id integer NOT NULL,
+    mentionable_id integer,
+    mentionable_type character varying,
+    mentioner_id integer,
+    mentioner_type character varying,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: mentions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mentions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mentions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mentions_id_seq OWNED BY mentions.id;
+
+
+--
 -- Name: merit_actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1255,9 +1290,6 @@ CREATE TABLE votes (
     votable_type character varying,
     voter_id integer,
     voter_type character varying,
-    vote_flag boolean,
-    vote_scope character varying,
-    vote_weight integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1385,6 +1417,13 @@ ALTER TABLE ONLY mailboxer_receipts ALTER COLUMN id SET DEFAULT nextval('mailbox
 --
 
 ALTER TABLE ONLY markets ALTER COLUMN id SET DEFAULT nextval('markets_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mentions ALTER COLUMN id SET DEFAULT nextval('mentions_id_seq'::regclass);
 
 
 --
@@ -1631,6 +1670,14 @@ ALTER TABLE ONLY mailboxer_receipts
 
 ALTER TABLE ONLY markets
     ADD CONSTRAINT markets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mentions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY mentions
+    ADD CONSTRAINT mentions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2093,6 +2140,27 @@ CREATE UNIQUE INDEX index_markets_on_slug ON markets USING btree (slug);
 
 
 --
+-- Name: index_mentions_on_mentionable_type_and_mentionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_mentions_on_mentionable_type_and_mentionable_id ON mentions USING btree (mentionable_type, mentionable_id);
+
+
+--
+-- Name: index_mentions_on_mentioner_id_and_mentioner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_mentions_on_mentioner_id_and_mentioner_type ON mentions USING btree (mentioner_id, mentioner_type);
+
+
+--
+-- Name: index_mentions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_mentions_on_user_id ON mentions USING btree (user_id);
+
+
+--
 -- Name: index_merit_activity_logs_on_action_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2408,24 +2476,10 @@ CREATE INDEX index_votes_on_votable_id_and_votable_type ON votes USING btree (vo
 
 
 --
--- Name: index_votes_on_votable_id_and_votable_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_votes_on_votable_id_and_votable_type_and_vote_scope ON votes USING btree (votable_id, votable_type, vote_scope);
-
-
---
 -- Name: index_votes_on_voter_id_and_voter_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_id, voter_type);
-
-
---
--- Name: index_votes_on_voter_id_and_voter_type_and_vote_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_votes_on_voter_id_and_voter_type_and_vote_scope ON votes USING btree (voter_id, voter_type, vote_scope);
 
 
 --
@@ -2463,6 +2517,14 @@ ALTER TABLE ONLY idea_messages
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs
     ADD CONSTRAINT mb_opt_outs_on_conversations_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
+
+
+--
+-- Name: mentions_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mentions
+    ADD CONSTRAINT mentions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -2592,4 +2654,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425124546');
+
+INSERT INTO schema_migrations (version) VALUES ('20150425140518');
 
