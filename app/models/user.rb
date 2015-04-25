@@ -89,15 +89,14 @@ class User < ActiveRecord::Base
   before_destroy :remove_from_soulmate, :decrement_counters
   after_create :increment_counters
 
-  #Follower/Follow System
-  acts_as_voter
-
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
   validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
-
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
+
+  #Reading models
+  acts_as_reader
 
   #Messaging system
   acts_as_messageable

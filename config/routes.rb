@@ -169,6 +169,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notes
+
   #Ideas routes
   resources :ideas do
     #idea messages
