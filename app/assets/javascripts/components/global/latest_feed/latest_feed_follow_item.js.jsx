@@ -7,11 +7,16 @@ var LatestFeedFollowItem = React.createClass({
   },
   render: function() {
     var html_id = "feed_"+this.props.item.id;
+    if(window.currentUser.name === this.props.item.actor) {
+      var actor = "You";
+    } else {
+      var actor = this.props.item.actor;
+    }
     return (
         <li id={html_id} className="p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
             <a className="text-master hint-text" href={this.props.item.url}>
-              <strong>{this.props.item.actor}</strong>
+              <strong>{actor}</strong>
             </a>
             <span className="icon p-l-5"><i className="fa fa-user-plus"></i></span>
             <span className="verb p-l-5">
