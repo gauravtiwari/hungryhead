@@ -7,7 +7,7 @@ class FeedbackNotificationService
   end
 
   def notify
-    @activity = @user.activities.create!(trackable: @feedback, verb: 'feedbacked', recipient: @idea, key: 'create')
+    @activity = @user.activities.create!(trackable: @feedback, verb: 'feedbacked', recipient: @idea, key: 'feedback.create')
     send_notification(@activity)
   end
 

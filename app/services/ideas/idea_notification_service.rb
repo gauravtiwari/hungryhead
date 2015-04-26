@@ -22,7 +22,7 @@ class IdeaNotificationService
 
   #Create activity if new idea
   def create_activity
-    @activity = @user.activities.create!(trackable: @idea, recipient: @idea, key: 'create', verb: 'pitched')
+    @activity = @user.activities.create!(trackable: @idea, recipient: @idea, key: 'idea.create', verb: 'pitched')
     PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea.id, @user.id, @activity.id)
   end
 

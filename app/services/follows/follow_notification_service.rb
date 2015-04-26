@@ -7,7 +7,7 @@ class FollowNotificationService
 	end
 
   def notify
-    @activity = @user.activities.create!(trackable: @follow, verb: 'followed', type: 'Notification', recipient: @followable, key: 'create')
+    @activity = @user.activities.create!(trackable: @follow, verb: 'followed', type: 'Notification', recipient: @followable, key: 'follow.create')
     send_notification(@activity)
   end
 
