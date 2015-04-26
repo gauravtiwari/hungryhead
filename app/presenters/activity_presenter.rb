@@ -24,8 +24,8 @@ class ActivityPresenter < SimpleDelegator
 
   def partial_paths
     [
-      "#{activity.type.downcase.pluralize}/#{activity.key.split('.').first}/#{activity.key.split('.').second}",
-      "#{activity.type.downcase.pluralize}/#{activity.key.split('.').first}",
+      "#{activity.type.downcase.pluralize}/#{activity.trackable_type.underscore}/#{activity.key.split('.').last.to_s}",
+      "#{activity.type.downcase.pluralize}/#{activity.trackable_type.underscore}",
       "#{activity.type.downcase.pluralize}/activity"
     ]
   end

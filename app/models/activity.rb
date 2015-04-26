@@ -22,20 +22,9 @@ class Activity < ActiveRecord::Base
 
   def cache_activities
     user.latest_activities.add(activity_json, created_at.to_i)
-    ActivityNotificationJob.perform_later(id)
     if recipient_type == "Idea"
       recipient.latest_activities.add(activity_json, created_at.to_i)
       Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)
-    end
-  end
-
-  def update_redis_cache
-    Activity.find_each do |activity|
-      activity.user.latest_activities.clear
-      activity.user.latest_activities.add(activity_json, activity.created_at.to_i)
-      if activity.recipient_type == "Idea"
-        activity.recipient.latest_activities.add(activity_json, created_at.to_i)
-      end
     end
   end
 

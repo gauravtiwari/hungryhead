@@ -11,6 +11,7 @@ class ActivitiesController < ApplicationController
     .where(type: 'Notification')
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 20)
+
     @activities = Activity.where(user_id: ids, published: true)
     .where.not(type: 'Notification')
     .order(id: :desc)
