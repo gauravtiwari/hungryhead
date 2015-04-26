@@ -1,8 +1,8 @@
 class IdeaNotificationService
 
   def initialize(idea, user)
-    @idea = feedback.idea
-    @user = feedback.user
+    @idea = idea
+    @user = user
   end
 
   def notify

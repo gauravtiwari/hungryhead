@@ -13,6 +13,7 @@ class PublishIdeaService
       award_badge
     end
     IdeaNotificationService.new(@idea, @user).notify
+    @idea
   end
 
   private

@@ -12,17 +12,17 @@ var Upvote = React.createClass({
       voted: this.props.voted,
       vote_url: this.props.vote_url,
       votes_count: this.props.votes_count,
-      likers_path: this.props.likers_path
+      voters_path: this.props.voters_path
     };
   },
 
-  loadLikers: function() {
+  loadVoters: function() {
     this.setState({loading: true});
-    var path = this.props.likers_path;
-    $('body').append($('<div>', {class: 'likers_list', id: 'listing_modal'}));
+    var path = this.props.voters_path;
+    $('body').append($('<div>', {class: 'voters_list', id: 'voters_modal'}));
     React.render(
       <ModalListing path={path} key={Math.random()}  />,
-      document.getElementById('listing_modal')
+      document.getElementById('voters_modal')
     );
     this.setState({loading: false});
     $('#modalListingPopup').modal('show');
@@ -55,13 +55,13 @@ var Upvote = React.createClass({
     var classes = cx({
       'fa fa-spinner fa-spin': this.state.loading
     });
-    var text = this.state.voted ? 'You liked this' : 'Click to like';
+    var text = this.state.voted ? 'You voted this' : 'Click to vote';
     var heart = this.state.voted ? <i className="fa fa-thumbs-up text-danger"></i> : <i className="fa fa-thumbs-o-up"></i>;
 
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
 
     if(this.state.votes_count > 0) {
-      var voters =<a onClick={this.loadLikers} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
+      var voters =<a onClick={this.loadVoters} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
     }
 
     return (<li className="inline m-r-10 fs-14 bold">

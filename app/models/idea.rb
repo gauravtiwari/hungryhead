@@ -5,10 +5,10 @@ class Idea < ActiveRecord::Base
 
   #Includes concerns
   include Commentable
-  include Shareable
   include Votable
   include Followable
   include Sluggable
+  include Sharings
 
   acts_as_taggable_on :markets, :locations, :technologies
   acts_as_punchable
@@ -56,7 +56,6 @@ class Idea < ActiveRecord::Base
   belongs_to :student, touch: true
   belongs_to :school
 
-
   #Rest of the assocuations
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
@@ -66,8 +65,7 @@ class Idea < ActiveRecord::Base
   #Includes modules
   has_merit
   has_paper_trail :only => [:name, :description, :elevator_pitch,
-    :high_concept_pitch, :market, :problems, :solutions, :vision,
-    :value_proposition]
+    :high_concept_pitch, :sections]
 
   #Store accessor for JSON columns
   store_accessor :fund, :balance
