@@ -8,13 +8,13 @@ class ActivityPresenter < SimpleDelegator
 
   def as_json(*)
     {
-      actor: @object.user.name,
-      recipient: @object.recipient.name,
-      recipient_type: @object.trackable.class.to_s.downcase,
-      id: @object.id,
-      created_at: "#{@object.created_at}",
-      url: profile_path(@object.user),
-      verb: @object.verb
+      actor: @activity.user.name,
+      recipient: @activity.recipient.name,
+      recipient_type: @activity.trackable.class.to_s.downcase,
+      id: @activity.id,
+      created_at: "#{@activity.created_at}",
+      url: Rails.application.routes.url_helpers.profile_path(@activity.user),
+      verb: @activity.verb
     }
   end
 

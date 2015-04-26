@@ -16,11 +16,11 @@ class FeedbackNotificationService
 
   def send_notification(activity)
     Pusher.trigger("private-user-#{@idea.student.id}",
-      "new_notification",
+      "new_feed_item",
       {data:
         {
           id: activity.id,
-          msg: render(json: ActivityPresenter.new(activity))
+          item: ActivityPresenter.new(@activity, self)
         }
       }.to_json
     )

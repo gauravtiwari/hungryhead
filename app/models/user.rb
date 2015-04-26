@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   include Followable
   include Follower
   include Sluggable
-  include Authentication
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
@@ -119,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
   def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+    devise_mailer.send(notification, self, *args).deliver_later!(wait: 2.seconds)
   end
 
   private

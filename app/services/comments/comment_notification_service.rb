@@ -7,7 +7,7 @@ class CommentNotificationService
 	end
 
 	def notify
-    @activity = @user.activities.create!(trackable: @comment, recipient: @commentable, verb: 'commented', key: 'create')
+    @activity = @user.activities.create!(trackable: @comment, type: 'Notification', recipient: @commentable, verb: 'commented', key: 'create')
     send_notification(@activity)
 	end
 
@@ -16,11 +16,11 @@ class CommentNotificationService
   def send_notification(activity)
     activity.recipient.find_comments_for_commentable_without_current(activity.recipient_type, activity.recipient_id).each do |comment|
       Pusher.trigger("private-user-#{comment.user.id}",
-        "new_notification",
+        "new_feed_item",
         {data:
           {
             id: activity.id,
-            msg: render(json: ActivityPresenter.new(activity))
+            item: ActivityPresenter.new(@activity, self)
           }
         }.to_json
       )

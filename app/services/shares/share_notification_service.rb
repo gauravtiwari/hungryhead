@@ -17,11 +17,11 @@ class ShareNotificationService
   def send_notification(activity)
     @user = @shareable.class.to_s == "Idea" ? @shareable.student : @shareable.user
     Pusher.trigger("private-user-#{@user.id}",
-      "new_notification",
+      "new_feed_item",
       {data:
         {
           id: activity.id,
-          msg: render(json: ActivityPresenter.new(activity))
+          item: ActivityPresenter.new(activity, self)
         }
       }.to_json
     )
