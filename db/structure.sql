@@ -1255,12 +1255,12 @@ CREATE TABLE versions (
     item_id integer NOT NULL,
     event character varying NOT NULL,
     whodunnit character varying,
-    object text,
-    created_at timestamp without time zone,
-    object_changes text,
     user_name character varying,
     user_avatar character varying,
-    owner_url character varying
+    owner_url character varying,
+    object_changes json,
+    object json,
+    created_at timestamp without time zone
 );
 
 
@@ -2656,9 +2656,5 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
-INSERT INTO schema_migrations (version) VALUES ('20150425124546');
-
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
-
-INSERT INTO schema_migrations (version) VALUES ('20150426013327');
 
