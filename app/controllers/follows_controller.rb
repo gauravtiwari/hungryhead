@@ -5,8 +5,16 @@ class FollowsController < ApplicationController
 
   def create
     @follow = CreateFollowService.new(current_user, @followable).create
-    if @follow
-      render json: { follow: @followable.follower?(current_user), followers_count: @followable.followers_counter.value  }
+    if @follow.save
+      render json: {
+        follow: @followable.follower?(current_user),
+        followers_count: @followable.followers_counter.value
+      }
+      FollowNotificationService.new(@follow).notify unless @followable.class.to_s == "School"
+    else
+      respond_to do |format|
+        format.json {render json: @follow.errors, status: unprocessable_entity}
+      end
     end
   end
 

@@ -15,9 +15,7 @@ class CreateFollowService
   private
 
   def follow
-    @follow = @user.follows.create!(followable: @followable)
-    @activity = @user.activities.create!(trackable: @follow, verb: 'followed', type: 'Notification', recipient: @followable, key: 'create')
-    FollowNotificationService.new(@activity).notify unless @activity.recipient_type == "School"
+    @user.follows.new(followable: @followable)
   end
 
   def unfollow
