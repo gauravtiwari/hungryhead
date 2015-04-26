@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   #Concerns for User class
   include Followable
   include Follower
+  include Mentionable
   include Sluggable
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets

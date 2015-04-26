@@ -9,9 +9,9 @@ class CreateMentionService
 	  @mentioner_content.scan(/@\w+/).each do |username|
       mentionable = User.friendly.find_by_username(username.gsub('@', ''))
       if mentionable.present?
-        @mention = @user.mentions.create!(mentionable: mentionable, mentioner: @mentioner)
+        @mention = mentionable.mentions.create!(user: @user, mentioner: @mentioner)
         @activity = @user.activities.create!(trackable: @mention, verb: 'mentioned', type: 'Notification', recipient: mentionable, key: 'create')
-        MentionNotificationService.new(@activity).notify
+        MentionNotificationService.new(@activity).notify if @user != mentionable
       end
     end
 	end

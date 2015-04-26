@@ -2,7 +2,7 @@ json.comments @comments.each do |comment|
   json.cache! ['v1', comment], expires_in: 1.minutes do
     json.(comment, :id, :user_id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
-    json.vote_url like_path(votable_type: comment.class.to_s, votable_id: comment.id)
+    json.vote_url vote_path(votable_type: comment.class.to_s, votable_id: comment.id)
     json.uuid SecureRandom.hex(4)
     json.is_owner current_user == comment.user
     json.voted comment.voters_ids.members.include? current_user.id.to_s

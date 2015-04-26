@@ -5,7 +5,7 @@ class MentionNotificationService
 	end
 
 	def notify
-    Pusher.trigger("private-user-#{@activity.recipient.user.id}",
+    Pusher.trigger("private-user-#{@activity.recipient.id}",
       "new_feed_item",
       {data:
         {

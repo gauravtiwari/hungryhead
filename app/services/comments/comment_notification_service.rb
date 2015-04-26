@@ -14,16 +14,16 @@ class CommentNotificationService
   private
 
   def send_notification(activity)
-    activity.recipient.find_comments_for_commentable_without_current(activity.recipient_type, activity.recipient_id).each do |comment|
+    activity.recipient.comment_threads.each do |comment|
       Pusher.trigger("private-user-#{comment.user.id}",
         "new_feed_item",
         {data:
           {
             id: activity.id,
-            item: ActivityPresenter.new(@activity, self)
+            item: ActivityPresenter.new(activity, self)
           }
         }.to_json
-      )
+      ) unless @user == (@commentable.class.to_s == "Idea" ? @commentable.student : @commentable.user)
     end
   end
 

@@ -2,8 +2,9 @@
 var LatestFeed = React.createClass({
 
   getInitialState: function(){
+    var feed = JSON.parse(this.props.feed);
     return {
-      feed: this.props.feed
+      feed: feed.activities
     };
   },
 
@@ -20,13 +21,21 @@ var LatestFeed = React.createClass({
   render: function(){
     var latest_feed_items = _.map(this.state.feed, function(item){
       if(item.verb === "invested") {
-        return <LatestFeedInvestmentItem key={item.id} item={item} />
+        return <LatestFeedInvestmentItem key={Math.random()} item={item} />
       } else if(item.verb === "followed") {
-        return <LatestFeedFollowItem key={item.id} item={item} />
-      } else if(item.verb === "left a feedback") {
-        return <LatestFeedFeedbackItem key={item.id} item={item} />
-      }  else{
-        return <LatestFeedIdeaItem key={item.id} item={item} />
+        return <LatestFeedFollowItem key={Math.random()} item={item} />
+      } else if(item.verb === "feedbacked") {
+        return <LatestFeedFeedbackItem key={Math.random()} item={item} />
+      } else if(item.verb === "pitched"){
+        return <LatestFeedIdeaItem key={Math.random()} item={item} />
+      } else if(item.verb === "joined"){
+        return <LatestFeedJoinItem key={Math.random()} item={item} />
+      } else if(item.verb === "commented"){
+        return <LatestFeedCommentItem key={Math.random()} item={item} />
+      } else if(item.verb === "voted"){
+        return <LatestFeedVoteItem key={Math.random()} item={item} />
+      } else if(item.verb === "mentioned"){
+        return <LatestFeedMentionItem key={Math.random()} item={item} />
       }
     });
 

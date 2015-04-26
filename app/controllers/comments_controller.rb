@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
       @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
       if @comment.save
-        CommentNotificationService.new(@comment, @commentable).create
+        CommentNotificationService.new(@comment, @commentable).notify
         CreateMentionService.new(@comment).mention
         expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
         respond_to do |format|
