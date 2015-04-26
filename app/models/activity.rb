@@ -16,36 +16,31 @@ class Activity < ActiveRecord::Base
   acts_as_readable :on => :created_at
 
   #Model callbacks
-  after_create :cache_activities
+  after_commit :cache_activities
 
   private
 
   def cache_activities
-    UpdateUserFeedJob.set(wait: 5.seconds).perform_later(self.id)
-    mentioner = trackable.mentioner.class.to_s.downcase if trackable_type == "Mention"
-    recipient_name = recipient_type == "Comment" ? recipient.user.name : recipient.name
-    user.latest_activities.add({
-        actor: user.name,
-        recipient: recipient_name,
-        recipient_type: mentioner || nil,
-        id: id,
-        created_at: "#{created_at}",
-        url: Rails.application.routes.url_helpers.profile_path(user),
-        verb: verb
-      }, created_at.to_i)
-
+    user.latest_activities.add(activity_json, created_at.to_i)
+    ActivityNotificationJob.perform_later(id)
     if recipient_type == "Idea"
-      recipient.latest_activities.add({
-        actor: user.name,
-        recipient: recipient_name,
-        recipient_type: mentioner || nil,
-        id: id,
-        created_at: "#{created_at}",
-        url: Rails.application.routes.url_helpers.profile_path(user),
-        verb: verb
-      }, created_at.to_i)
+      recipient.latest_activities.add(activity_json, created_at.to_i)
       Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)
     end
+  end
+
+  def activity_json
+    mentioner = trackable.mentioner.class.to_s.downcase if trackable_type == "Mention"
+    recipient_name = recipient_type == "Comment" ? recipient.user.name : recipient.name
+    {
+      actor: user.name,
+      recipient: recipient_name,
+      recipient_type: mentioner || nil,
+      id: id,
+      created_at: "#{created_at}",
+      url: Rails.application.routes.url_helpers.profile_path(user),
+      verb: verb
+    }
   end
 
 end

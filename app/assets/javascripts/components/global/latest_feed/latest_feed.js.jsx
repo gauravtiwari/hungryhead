@@ -21,15 +21,13 @@ var LatestFeed = React.createClass({
     var feed_channel = pusher.subscribe(this.props.channel_name);
     if(feed_channel) {
       feed_channel.bind('new_feed_item', function(data){
-        var response = JSON.parse(data.data);
-        var activity = response.activity;
         var newState = React.addons.update(this.state, {
             feed : {
-              $unshift : [activity]
+              $unshift : [data.data]
             }
         });
         this.setState(newState);
-        $("#feed_"+activity.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+        $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
       }.bind(this));
     }
   },
