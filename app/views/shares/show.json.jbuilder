@@ -1,4 +1,4 @@
 json.share do
-  json.shared current_user.shared? @shareable
-  json.count @shareable.shares_count
+  json.shared @shareable.shared? current_user
+  json.count @shareable.shares_counter.value
 end

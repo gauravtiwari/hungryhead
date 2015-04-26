@@ -1,4 +1,4 @@
-class ShareService
+class CreateShareService
   def initialize(params, user, idea)
     @params = params
     @user = user

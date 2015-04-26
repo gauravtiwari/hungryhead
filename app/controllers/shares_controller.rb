@@ -6,9 +6,9 @@ class SharesController < ApplicationController
 
   def create
     @shareable = Idea.find(params[:shareable_id])
-    @share = ShareService.new(share_params, current_user, @shareable).create
+    @share = CreateShareService.new(share_params, current_user, @shareable).create
     render :show, status: :created
-    ShareNotificationService.new(@share).create
+    ShareNotificationService.new(@share).notify
   end
 
   def sharers

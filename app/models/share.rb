@@ -19,7 +19,7 @@ class Share < ActiveRecord::Base
 	sorted_set :commenters_ids
 	counter :comments_counter
 
-	before_destroy :remove_activity, :decrement_counters, :delete_activity
+	before_destroy :decrement_counters, :delete_activity
 	after_create :increment_counters
 
 	private

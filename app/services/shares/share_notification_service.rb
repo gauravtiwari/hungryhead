@@ -11,7 +11,6 @@ class ShareNotificationService
     send_notification(@activity)
   end
 
-
   private
 
   def send_notification(activity)
