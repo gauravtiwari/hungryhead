@@ -19,6 +19,7 @@ class Idea < ActiveRecord::Base
   sorted_set :sharers_ids
   sorted_set :feedbackers_ids
   sorted_set :investors_ids
+  sorted_set :commenters_ids
   sorted_set :latest_activities, maxlength: 100, marshal: true
 
   #Calculate idea popularity and trending score

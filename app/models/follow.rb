@@ -39,10 +39,6 @@ class Follow < ActiveRecord::Base
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
     followable.followers_ids.delete(follower_id)
 
-    followable.followers.each do |follower|
-      follower.latest_activities.delete(activity.id)
-    end
-
     #Trigger pusher to update stats
     Pusher.trigger_async("user-stats-#{followable.id}",
      "user_stats_update",

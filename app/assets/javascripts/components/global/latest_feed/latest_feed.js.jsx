@@ -1,6 +1,15 @@
-
+var SetIntervalMixin = {
+    componentWillMount: function() {
+        this.intervals = [];
+    },
+    setInterval: function(fn, ms) {
+        this.intervals.push(setInterval(fn, ms));
+    },
+    componentWillUnmount: function() {
+        this.intervals.forEach(clearInterval);
+    }
+};
 var LatestFeed = React.createClass({
-
   getInitialState: function(){
     var feed = JSON.parse(this.props.feed);
     return {
@@ -9,13 +18,19 @@ var LatestFeed = React.createClass({
   },
 
   componentDidMount: function() {
-    var self = this;
     var feed_channel = pusher.subscribe(this.props.channel_name);
     if(feed_channel) {
       feed_channel.bind('new_feed_item', function(data){
-        var items =  self.state.feed.concat(data.data.item);
-        self.setState({feed: items.reverse()});
-      });
+        var response = JSON.parse(data.data);
+        var activity = response.activity;
+        var newState = React.addons.update(this.state, {
+            feed : {
+              $unshift : [activity]
+            }
+        });
+        this.setState(newState);
+        $("#feed_"+activity.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+      }.bind(this));
     }
   },
   render: function(){
@@ -40,7 +55,7 @@ var LatestFeed = React.createClass({
     });
 
     return(
-        <ul className="idea-latest-activities no-style no-padding p-l-15 p-r-15">
+        <ul className="idea-latest-activities no-style no-padding">
           {latest_feed_items}
         </ul>
       );

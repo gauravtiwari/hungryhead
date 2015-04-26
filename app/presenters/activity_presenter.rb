@@ -6,20 +6,6 @@ class ActivityPresenter < SimpleDelegator
     @activity = activity
   end
 
-  def as_json(*)
-    mentioner = @activity.trackable.mentioner.class.to_s.downcase if @activity.trackable_type == "Mention"
-    recipient = @activity.recipient_type == "Comment" ? @activity.recipient.user.name : @activity.recipient.name
-    {
-      actor: @activity.user.name,
-      recipient: recipient,
-      recipient_type: mentioner || nil,
-      id: @activity.id,
-      created_at: "#{@activity.created_at}",
-      url: Rails.application.routes.url_helpers.profile_path(@activity.user),
-      verb: @activity.verb
-    }
-  end
-
   def render_activity
     render_partial
   end

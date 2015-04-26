@@ -13,4 +13,8 @@ module Commentable
     self.comments
   end
 
+  def commenters
+    commenters_ids.members
+  end
+
 end

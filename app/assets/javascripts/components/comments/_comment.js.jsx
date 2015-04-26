@@ -1,11 +1,28 @@
 /** @jsx React.DOM */
 var converter = new Showdown.converter();
+var SetIntervalMixin = {
+    componentWillMount: function() {
+        this.intervals = [];
+    },
+    setInterval: function(fn, ms) {
+        this.intervals.push(setInterval(fn, ms));
+    },
+    componentWillUnmount: function() {
+        this.intervals.forEach(clearInterval);
+    }
+};
+
 var Comment = React.createClass({
+  mixins: [SetIntervalMixin],
+  componentDidMount: function() {
+    var interval = this.state.comment.created_at || 60000;
+    this.setInterval(this.forceUpdate.bind(this), interval);
+  },
   getInitialState: function() {
     return  {
-      liked: this.props.comment.like, 
-      comment: this.props.comment, 
-      vote_url: this.props.comment.vote_url, 
+      liked: this.props.comment.like,
+      comment: this.props.comment,
+      vote_url: this.props.comment.vote_url,
       likes_count: this.props.comment.votes,
       sure: false,
       deleting: false
@@ -101,7 +118,7 @@ var Comment = React.createClass({
         var confirm_delete = <span>{delete_text} <a className="text-danger" onClick={this.handleDelete.bind(this, index, comment.id)}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
       } else {
         var confirm_delete = <a className="text-danger" onClick={this.checkDelete}><i className="fa fa-trash-o"></i> {delete_text}</a>;
-      }       
+      }
     }
 
     if(this.state.comment.avatar) {
@@ -121,7 +138,7 @@ var Comment = React.createClass({
               <a href="javascript:void(0)" data-popover-href={this.state.comment.user_url} className='load-card'>
                 {imgSrc}
               </a>
-            </div> 
+            </div>
           <div className="timeline-top-info" id={html_id}>
             <div className="comment-body">
                 <span>

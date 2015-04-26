@@ -37,10 +37,22 @@ var CommentBox = React.createClass({
   },
 
   componentDidMount: function() {
-    if(this.isMounted()){
-      this.setState({loading: false});
+    if(this.isMounted()) {
+      var comment_channel = pusher.subscribe(this.props.comment_channel);
+        if(comment_channel) {
+        comment_channel.bind('new_comment', function(data){
+          var response = JSON.parse(data.data);
+          var comment = response.comment;
+          var newState = React.addons.update(this.state, {
+              comments : {
+                $unshift : [comment]
+              }
+          });
+          this.setState(newState);
+          this.setState({count: this.state.count+1 });
+        }.bind(this));
+      }
     }
-
   },
 
   handleCommentSubmit: function ( formData ) {
@@ -53,8 +65,6 @@ var CommentBox = React.createClass({
       dataType: "json",
       success: function ( data ) {
         this.setState({visible: false});
-        var new_comments = this.state.comments.concat(data.comment);
-        this.setState({comments: new_comments.reverse(), count: this.state.count+1 });
         $("#comment_"+data.comment.id).effect('highlight', {color: '#f7f7f7'} , 3000);
         this.setState({button_loading: false});
       }.bind(this),
@@ -129,8 +139,8 @@ var CommentBox = React.createClass({
     return (
       <div className={comments_box}>
         <CommentForm loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
-        {show_comment_bar}
         <CommentList form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
+        {show_comment_bar}
         {pagination}
         {no_comments}
       </div>

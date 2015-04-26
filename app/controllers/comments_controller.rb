@@ -15,12 +15,13 @@ class CommentsController < ApplicationController
       @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
       @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
       if @comment.save
-        CommentNotificationService.new(@comment, @commentable).notify
-        CreateMentionService.new(@comment).mention
-        expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
-        respond_to do |format|
-          format.json { render :show, status: :created }
-        end
+        Pusher.trigger("#{@comment.commentable_type}-#{@comment.commentable_id}-comments",
+          "new_comment",
+          { data: render(:show)}
+        )
+       CommentNotificationService.new(@comment, @commentable).notify
+       CreateMentionService.new(@comment).mention
+       expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
       else
         respond_to do |format|
           format.json { render json: @comment.errors,  status: :unprocessable_entity }

@@ -22,8 +22,28 @@ class Activity < ActiveRecord::Base
 
   def cache_activities
     UpdateUserFeedJob.set(wait: 5.seconds).perform_later(self.id)
+    mentioner = trackable.mentioner.class.to_s.downcase if trackable_type == "Mention"
+    recipient_name = recipient_type == "Comment" ? recipient.user.name : recipient.name
+    user.latest_activities.add({
+        actor: user.name,
+        recipient: recipient_name,
+        recipient_type: mentioner || nil,
+        id: id,
+        created_at: "#{created_at}",
+        url: Rails.application.routes.url_helpers.profile_path(user),
+        verb: verb
+      }, created_at.to_i)
+
     if recipient_type == "Idea"
-      recipient.latest_activities.add(id, created_at.to_i)
+      recipient.latest_activities.add({
+        actor: user.name,
+        recipient: recipient_name,
+        recipient_type: mentioner || nil,
+        id: id,
+        created_at: "#{created_at}",
+        url: Rails.application.routes.url_helpers.profile_path(user),
+        verb: verb
+      }, created_at.to_i)
       Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)
     end
   end

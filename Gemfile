@@ -25,6 +25,7 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 gem 'nprogress-rails'
+gem 'render_anywhere', :require => false
 
 #Cache for jbuilder
 gem 'bulk_cache_fetcher'

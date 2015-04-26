@@ -16,6 +16,8 @@ class Share < ActiveRecord::Base
 
 	counter :votes_counter
 	sorted_set :voters_ids
+	sorted_set :commenters_ids
+	counter :comments_counter
 
 	before_destroy :remove_activity, :decrement_counters
 	after_create :increment_counters

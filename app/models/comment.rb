@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   validates :user, :presence => true
 
   include Votable
+  include Mentioner
 
   #Redis counters and ids cache
   include Redis::Objects
@@ -64,10 +65,13 @@ class Comment < ActiveRecord::Base
 
   def increment_counters
     commentable.comments_counter.increment
+    commentable.commenters_ids.add(user_id, created_at.to_i)
   end
 
   def decrement_counters
     commentable.comments_counter.decrement
+    commentable.commenters_ids.delete(user_id)
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

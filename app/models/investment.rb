@@ -17,6 +17,7 @@ class Investment < ActiveRecord::Base
 	include Redis::Objects
 	counter :votes_counter
   sorted_set :voters_ids
+  sorted_set :commenters_ids
 	counter :comments_counter
 
   #Model Callbacks

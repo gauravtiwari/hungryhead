@@ -1,10 +1,14 @@
 
 var LatestFeedFollowItem = React.createClass({
-
+  mixins: [SetIntervalMixin],
+  componentDidMount: function() {
+    var interval = this.props.item.created_at || 60000;
+    this.setInterval(this.forceUpdate.bind(this), interval);
+  },
   render: function() {
-
+    var html_id = "feed_"+this.props.item.id;
     return (
-        <li className="p-b-15 fs-12 clearfix">
+        <li id={html_id} className="p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
             <a className="text-master hint-text" href={this.props.item.url}>
               <strong>{this.props.item.actor}</strong>
