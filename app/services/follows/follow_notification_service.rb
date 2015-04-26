@@ -8,22 +8,6 @@ class FollowNotificationService
 
   def notify
     @activity = @user.activities.create!(trackable: @follow, verb: 'followed', type: 'Notification', recipient: @followable, key: 'follow.create')
-    send_notification(@activity)
   end
-
-  private
-
-	def send_notification(activity)
-    @user = activity.recipient_type == "Idea" ? activity.recipient.student : activity.recipient
-    Pusher.trigger("private-user-#{@user.id}",
-      "new_feed_item",
-      {data:
-        {
-          id: activity.id,
-          item: ActivityPresenter.new(activity, self)
-        }
-      }.to_json
-    )
-	end
 
 end

@@ -8,7 +8,7 @@ class Follow < ActiveRecord::Base
   validates :follower, presence: true
 
   after_create :increment_counters
-  before_destroy :decrement_counters
+  before_destroy :decrement_counters, :delete_activity
   #before_destroy :remove_activity
 
   private
@@ -20,16 +20,9 @@ class Follow < ActiveRecord::Base
     follower.followings_ids.add(followable_id, created_at.to_i) if followable_type == "User"
     follower.idea_followings_ids.add(followable_id, created_at.to_i) if followable_type == "Idea"
     followable.followers_ids.add(follower_id, created_at.to_i)
-    #Trigger pusher to update stats
-    Pusher.trigger_async("user-stats-#{followable.id}",
-     "user_stats_update",
-       {data:
-         {
-           id: followable.id,
-           followers_count: followable.followers_counter.value
-         }
-       }.to_json
-     )
+
+    #Send stats via pusher
+    publish_stats
   end
 
   def decrement_counters
@@ -39,6 +32,11 @@ class Follow < ActiveRecord::Base
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
     followable.followers_ids.delete(follower_id)
 
+    #Send stats via pusher
+    publish_stats
+  end
+
+  def publish_stats
     #Trigger pusher to update stats
     Pusher.trigger_async("user-stats-#{followable.id}",
      "user_stats_update",
@@ -49,6 +47,9 @@ class Follow < ActiveRecord::Base
          }
        }.to_json
     )
+  end
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

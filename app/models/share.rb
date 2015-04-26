@@ -19,17 +19,10 @@ class Share < ActiveRecord::Base
 	sorted_set :commenters_ids
 	counter :comments_counter
 
-	before_destroy :remove_activity, :decrement_counters
+	before_destroy :remove_activity, :decrement_counters, :delete_activity
 	after_create :increment_counters
 
 	private
-
-	def remove_activity
-	 Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).find_each do |activity|
-	  activity.destroy if activity.present?
-	  true
-	 end
-	end
 
 	def increment_counters
 		shareable.shares_counter.increment
@@ -39,6 +32,10 @@ class Share < ActiveRecord::Base
 	def decrement_counters
 		shareable.shares_counter.decrement
 	  shareable.sharers_ids.delete(user_id)
+	end
+
+	def delete_activity
+	  DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
 	end
 
 end

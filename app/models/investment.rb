@@ -21,7 +21,7 @@ class Investment < ActiveRecord::Base
 	counter :comments_counter
 
   #Model Callbacks
-	before_destroy :cancel_investment, :decrement_counters
+	before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_create :increment_counters
 
 	private
@@ -41,6 +41,10 @@ class Investment < ActiveRecord::Base
     idea.investors_counter.decrement if idea.investors_counter.value > 0
     idea.investors.delete(user.id.to_s)
     idea.save
+  end
+
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

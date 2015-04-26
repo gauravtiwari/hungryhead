@@ -23,7 +23,6 @@ class CreateVoteService
   def unvote
     @user.votes.where(votable: @votable).each do |vote|
       vote.destroy
-      DeleteUserFeedJob.perform_later(vote.id, vote.class.to_s)
     end
     false
   end

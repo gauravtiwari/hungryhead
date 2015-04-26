@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, :seed_fund, :seed_settings
   after_save :load_into_soulmate
-  before_destroy :remove_from_soulmate, :decrement_counters
+  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity
   after_create :increment_counters
 
   #Model Validations
@@ -177,6 +177,10 @@ class User < ActiveRecord::Base
 
   def decrement_counters
     school.students_counter.decrement
+  end
+
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
   protected

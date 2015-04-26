@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
   validates_presence_of :votable_id
   validates_presence_of :voter_id
 
-  before_destroy :decrement_counter
+  before_destroy :decrement_counter, :delete_activity
   after_create :increment_counter
 
   private
@@ -18,6 +18,10 @@ class Vote < ActiveRecord::Base
   def decrement_counter
     votable.votes_counter.decrement if votable.votes_counter.value > 0
     votable.voters_ids.delete(voter.id)
+  end
+
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

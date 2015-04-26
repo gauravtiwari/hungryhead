@@ -24,7 +24,7 @@ class Feedback < ActiveRecord::Base
   counter :comments_counter
 
   #Hooks
-  before_destroy :decrement_counters
+  before_destroy :decrement_counters, :delete_activity
   after_create :increment_counters
 
   private
@@ -41,6 +41,10 @@ class Feedback < ActiveRecord::Base
     idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
     idea.feedbackers.delete(user.id.to_s)
     idea.save
+  end
+
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

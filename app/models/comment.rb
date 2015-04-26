@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
   sorted_set :voters_ids
 
   after_create :increment_counters
-  before_destroy :decrement_counters
+  before_destroy :decrement_counters, :delete_activity
 
   #Model Associations
   belongs_to :user
@@ -71,6 +71,9 @@ class Comment < ActiveRecord::Base
   def decrement_counters
     commentable.comments_counter.decrement
     commentable.commenters_ids.delete(user_id)
+  end
+
+  def delete_activity
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
