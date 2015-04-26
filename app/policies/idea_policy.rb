@@ -24,7 +24,7 @@ class IdeaPolicy < ApplicationPolicy
   	show?
   end
 
-  def like?
+  def vote?
     true
   end
 

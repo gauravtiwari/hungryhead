@@ -4,7 +4,7 @@ class CommentPolicy < ApplicationPolicy
   end
   def destroy?; current_user == record.user; end
 
-  def like?
+  def vote?
     true
   end
 end

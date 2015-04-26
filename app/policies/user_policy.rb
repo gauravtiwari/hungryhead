@@ -10,7 +10,7 @@ class UserPolicy < ApplicationPolicy
   	current_user == record
   end
 
-  def like?
+  def vote?
     true
   end
 

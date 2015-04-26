@@ -6,7 +6,7 @@ class CreateVoteService
   end
 
   def create
-    if @votable.voted?(user)
+    if @votable.voted?(@user)
       unvote
     else
       vote
@@ -15,14 +15,15 @@ class CreateVoteService
 
   def vote
     @vote = @votable.votes.create!(voter: @user)
-    increment_counters
     create_activity
     true
   end
 
   def unvote
-    @votable.unvoted_by @user
-    decrement_counters
+    @user.votes.where(votable: @votable).each do |vote|
+      vote.destroy
+      DeleteUserFeedJob.perform_later(vote.id, vote.class.to_s)
+    end
     false
   end
 

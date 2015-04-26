@@ -21,7 +21,7 @@ class Activity < ActiveRecord::Base
   private
 
   def cache_activities
-    UpdateUserFeedJob.perform_later(self)
+    UpdateUserFeedJob.perform_later(self.id)
     if recipient_type == "Idea"
       recipient.latest_activities.add(id, created_at.to_i)
       Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)

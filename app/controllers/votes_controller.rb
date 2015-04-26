@@ -4,7 +4,7 @@ class VotesController < ApplicationController
 
   def vote
     authorize @votable
-    @vote = VoteService.new(current_user, @votable, profile_url(current_user)).create
+    @vote = CreateVoteService.new(current_user, @votable).create
     render json: {
       voted: @vote,
       url: vote_path(votable_type: @votable.class.to_s, votable_id: @votable.id),

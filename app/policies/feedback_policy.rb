@@ -4,7 +4,7 @@ class FeedbackPolicy < ApplicationPolicy
   	current_user == record.user
   end
 
-  def like?
+  def vote?
   	true
   end
 
