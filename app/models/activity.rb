@@ -29,6 +29,16 @@ class Activity < ActiveRecord::Base
     end
   end
 
+  def update_redis_cache
+    Activity.find_each do |activity|
+      activity.user.latest_activities.clear
+      activity.user.latest_activities.add(activity_json, activity.created_at.to_i)
+      if activity.recipient_type == "Idea"
+        activity.recipient.latest_activities.add(activity_json, created_at.to_i)
+      end
+    end
+  end
+
   def activity_json
     mentioner = trackable.mentioner.class.to_s.downcase if trackable_type == "Mention"
     recipient_name = recipient_type == "Comment" ? recipient.user.name : recipient.name
