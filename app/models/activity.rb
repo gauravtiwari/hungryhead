@@ -17,7 +17,6 @@ class Activity < ActiveRecord::Base
 
   #Model callbacks
   after_create :cache_activities
-  before_destroy :delete_cached_activities
 
   private
 
@@ -28,13 +27,5 @@ class Activity < ActiveRecord::Base
       Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)
     end
   end
-
-  def delete_cached_activities
-    DeleteUserFeedJob.perform_later(self)
-    if recipient_type == "Idea"
-      @activity.recipient.latest_activities.delete(id)
-    end
-  end
-
 
 end

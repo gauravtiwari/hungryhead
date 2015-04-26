@@ -4,16 +4,6 @@ class CreateFollowService
     @followable = followable
 	end
 
-	def create
-    if @followable.follower?(@user)
-      unfollow
-    else
-      follow
-    end
-	end
-
-  private
-
   def follow
     @user.follows.new(followable: @followable)
   end
@@ -21,6 +11,7 @@ class CreateFollowService
   def unfollow
     @user.follows.where(followable: @followable).each do |follow|
       follow.destroy
+      DeleteUserFeedJob.perform_later(follow.id, follow.class.to_s)
     end
   end
 

@@ -1257,7 +1257,10 @@ CREATE TABLE versions (
     whodunnit character varying,
     object text,
     created_at timestamp without time zone,
-    object_changes text
+    object_changes text,
+    user_name character varying,
+    user_avatar character varying,
+    owner_url character varying
 );
 
 
@@ -2656,4 +2659,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 INSERT INTO schema_migrations (version) VALUES ('20150425124546');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150426013327');
 

@@ -53,6 +53,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
   def info_for_paper_trail
     { user_name: current_user.name, user_avatar: current_user.avatar.url(:avatar), owner_url: user_path(current_user) } if current_user
   end

@@ -106,6 +106,10 @@ class Idea < ActiveRecord::Base
     name_split.first + name_split.second
   end
 
+  def user_name
+    user ? user.name : ''
+  end
+
   def name_split
     name.split('')
   end

@@ -10,7 +10,7 @@ class CreateMentionService
       mentionable = User.friendly.find_by_username(username.gsub('@', ''))
       if mentionable.present?
         @mention = @user.mentions.create!(mentionable: mentionable, mentioner: @mentioner)
-        @activity = @user.activities.create!(trackable: @mention, verb: 'mentioned', type: 'Notification', recipient: mentionable, type: 'Notification', key: 'create')
+        @activity = @user.activities.create!(trackable: @mention, verb: 'mentioned', type: 'Notification', recipient: mentionable, key: 'create')
         MentionNotificationService.new(@activity).notify
       end
     end

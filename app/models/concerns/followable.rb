@@ -9,6 +9,6 @@ module Followable
   end
 
   def followers
-    User.find(followers_ids.revrange(0,16))
+    User.find(followers_ids.members)
   end
 end

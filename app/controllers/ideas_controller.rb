@@ -99,7 +99,6 @@ class IdeasController < ApplicationController
 
   # GET /ideas/new
   def new
-    @user = @user
     @idea = Idea.new
     authorize @idea
   end
@@ -107,7 +106,6 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
-    @user = @user
     @idea = Idea.new(idea_params)
     respond_to do |format|
       @idea.update_attributes(student_id: @user.id, school_id: @user.school_id)
