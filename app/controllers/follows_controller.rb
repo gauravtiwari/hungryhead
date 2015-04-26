@@ -19,13 +19,8 @@ class FollowsController < ApplicationController
   end
 
   def followers
-    @followers = @followable.followers_by_type('User')
+    @followers = @followable.followers
     render 'follows/followers'
-  end
-
-  def followings
-    @followings = @followable.following_by_type('User')
-    render 'follows/followings'
   end
 
   private
