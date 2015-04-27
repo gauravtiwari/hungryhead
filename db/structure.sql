@@ -275,6 +275,39 @@ ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
 
 
 --
+-- Name: hobbies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE hobbies (
+    id integer NOT NULL,
+    name character varying,
+    slug character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: hobbies_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE hobbies_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: hobbies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
+
+
+--
 -- Name: idea_messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1135,6 +1168,39 @@ ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
 
 
 --
+-- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE subjects (
+    id integer NOT NULL,
+    name character varying,
+    slug character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE subjects_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE subjects_id_seq OWNED BY subjects.id;
+
+
+--
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1399,6 +1465,13 @@ ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY hobbies ALTER COLUMN id SET DEFAULT nextval('hobbies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY idea_messages ALTER COLUMN id SET DEFAULT nextval('idea_messages_id_seq'::regclass);
 
 
@@ -1567,6 +1640,13 @@ ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -1644,6 +1724,14 @@ ALTER TABLE ONLY feedbacks
 
 ALTER TABLE ONLY follows
     ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hobbies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY hobbies
+    ADD CONSTRAINT hobbies_pkey PRIMARY KEY (id);
 
 
 --
@@ -1839,6 +1927,14 @@ ALTER TABLE ONLY slugs
 
 
 --
+-- Name: subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY subjects
+    ADD CONSTRAINT subjects_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2030,6 +2126,13 @@ CREATE INDEX index_follows_on_followable_id_and_followable_type ON follows USING
 --
 
 CREATE INDEX index_follows_on_follower_id_and_follower_type ON follows USING btree (follower_id, follower_type);
+
+
+--
+-- Name: index_hobbies_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_hobbies_on_slug ON hobbies USING btree (slug);
 
 
 --
@@ -2376,6 +2479,13 @@ CREATE INDEX index_slugs_on_sluggable_type_and_sluggable_id ON slugs USING btree
 
 
 --
+-- Name: index_subjects_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_subjects_on_slug ON subjects USING btree (slug);
+
+
+--
 -- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2661,6 +2771,10 @@ INSERT INTO schema_migrations (version) VALUES ('20150221035657');
 INSERT INTO schema_migrations (version) VALUES ('20150312183515');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183534');
+
+INSERT INTO schema_migrations (version) VALUES ('20150312183535');
+
+INSERT INTO schema_migrations (version) VALUES ('20150312183545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
