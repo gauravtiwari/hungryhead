@@ -6,34 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-institutions = File.read("#{Rails.root}/dump-data/institutions.json")
+User.create!(
+	name: 'Admin User',
+	first_name: 'Admin',
+	last_name: 'User',
+	username: 'adminuser',
+	email: 'admin@hungryhead.org',
+	admin: true
+)
 
-data_hash = JSON.parse(institutions)
-Institution.destroy_all
+hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")
+
+data_hash = JSON.parse(hobbies)
+Hobby.destroy_all
 data_hash.each do |tag|
-	if Institution.find_by_email("#{tag['name'].parameterize}@hungryhead.org").blank?
-		Institution.new(name: tag["name"], website: tag["website"], description: tag["name"], email: "#{tag['name'].parameterize}@hungryhead.org").save
-	end
-end
-
-
-roles = File.read("#{Rails.root}/dump-data/roles.json")
-
-data_hash = JSON.parse(roles)
-Service.destroy_all
-data_hash.each do |tag|
-	if Service.find_by_slug("#{tag.parameterize}").blank?
-		Service.new(name: tag, description: tag, description: tag).save
-	end
-end
-
-skills = File.read("#{Rails.root}/dump-data/skills.json")
-
-data_hash = JSON.parse(skills)
-Skill.destroy_all
-data_hash.each do |tag|
-	if Skill.find_by_slug("#{tag.parameterize}").blank?
-		Skill.new(name: tag, description: tag, description: tag).save
+	if Hobby.find_by_slug("#{tag.parameterize}").blank?
+		Hobby.new(name: tag, description: tag, description: tag).save
 	end
 end
 
@@ -54,16 +42,6 @@ Location.destroy_all
 data_hash.each do |tag|
 	if Location.find_by_slug("#{tag.parameterize}").blank?
 		Location.new(name: tag, description: tag, description: tag).save
-	end
-end
-
-technologies = File.read("#{Rails.root}/dump-data/technologies.json")
-
-data_hash = JSON.parse(technologies)
-Technology.destroy_all
-data_hash.each do |tag|
-	if Technology.find_by_slug("#{tag.parameterize}").blank?
-		Technology.new(name: tag, description: tag, description: tag).save
 	end
 end
 

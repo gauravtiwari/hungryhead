@@ -61,6 +61,10 @@ Rails.application.routes.draw do
     end
   end
 
+  #Check if email and username exists
+  get 'check_username', to: 'users#check_username', as: 'check_username'
+  get 'check_email', to: 'users#check_email', as: 'check_email'
+
   devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'}
   as :student do
     # joining
@@ -102,27 +106,39 @@ Rails.application.routes.draw do
 
   #Tagging system
   resources :tags, only: [:show] do
-    get :autocomplete_location_name, :on => :collection
     member do
       get :people
     end
   end
 
-  #Schools resources
-  resources :schools do
-    get :autocomplete_school_name, :on => :collection
-    member do
-      get :students
-      get :ideas
-      get :activities
-      get :followers
-      get :trending
-    end
+  #Hobby autocomplete system
+  resources :hobbies, only: [:index] do
+    get :autocomplete_hobby_name, :on => :collection
   end
 
-  #Check if email and username exists
-  get 'check_username', to: 'users#check_username', as: 'check_username'
-  get 'check_email', to: 'users#check_email', as: 'check_email'
+  #markets autocomplete system
+  resources :markets, only: [:index] do
+    get :autocomplete_market_name, :on => :collection
+  end
+
+  #subjects autocomplete system
+  resources :subjects, only: [:index] do
+    get :autocomplete_subject_name, :on => :collection
+  end
+
+  #locations autocomplete system
+  resources :locations, only: [:index] do
+    get :autocomplete_location_name, :on => :collection
+  end
+
+  #Schools resources
+  resources :schools, only: [:index] do
+    get :autocomplete_school_name, :on => :collection
+  end
+
+  #School new and create action
+  get 'new_school_registeration', to: 'schools#new', as: :new_school_registeration
+  post 'new_school_registeration', to: 'schools#create', as: :school_registeration
 
 
   #Messaging system
@@ -214,6 +230,9 @@ Rails.application.routes.draw do
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
+  get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
+  get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
+  get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks
   get '/:slug/investments', to: SlugRouter.to(:investments), as: :profile_investments
