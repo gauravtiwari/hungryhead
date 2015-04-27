@@ -1,0 +1,3 @@
+class Punch < Punch
+
+end
