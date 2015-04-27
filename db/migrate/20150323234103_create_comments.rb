@@ -1,4 +1,5 @@
 class CreateComments < ActiveRecord::Migration
+  disable_ddl_transaction!
   def self.up
     create_table :comments, :force => true do |t|
       t.integer :commentable_id
@@ -12,8 +13,8 @@ class CreateComments < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :comments, :user_id
-    add_index :comments, [:commentable_id, :commentable_type]
+    add_index :comments, :user_id, algorithm: :concurrently
+    add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
   end
 
   def self.down

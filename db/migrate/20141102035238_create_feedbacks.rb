@@ -1,4 +1,5 @@
 class CreateFeedbacks < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
     create_table :feedbacks do |t|
       t.text :body, :null => false
@@ -8,8 +9,8 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.jsonb :parameters, default: "{}"
       t.timestamps null: false
     end
-    add_index :feedbacks, :user_id
+    add_index :feedbacks, :user_id, algorithm: :concurrently
     add_index :feedbacks, :parameters, using: :gin
-    add_index :feedbacks, :idea_id
+    add_index :feedbacks, :idea_id, algorithm: :concurrently
   end
 end

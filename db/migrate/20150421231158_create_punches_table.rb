@@ -1,4 +1,5 @@
 class CreatePunchesTable < ActiveRecord::Migration
+  disable_ddl_transaction!
   def self.up
     create_table :punches do |t|
       t.integer :punchable_id, :null => false
@@ -8,8 +9,8 @@ class CreatePunchesTable < ActiveRecord::Migration
       t.datetime :average_time, :null => false
       t.integer :hits, :null => false, :default=>1
     end
-    add_index :punches, [:punchable_type, :punchable_id], :name => :punchable_index, :unique => false
-    add_index :punches, :average_time, :unique => false
+    add_index :punches, [:punchable_type, :punchable_id], :name => :punchable_index, :unique => false, algorithm: :concurrently
+    add_index :punches, :average_time, :unique => false, algorithm: :concurrently
   end
 
   def self.down

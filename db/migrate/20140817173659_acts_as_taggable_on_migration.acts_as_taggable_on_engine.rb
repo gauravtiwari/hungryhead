@@ -1,5 +1,6 @@
 # This migration comes from acts_as_taggable_on_engine (originally 1)
 class ActsAsTaggableOnMigration < ActiveRecord::Migration
+  disable_ddl_transaction!
   def self.up
     create_table :tags do |t|
       t.string :name
@@ -20,8 +21,8 @@ class ActsAsTaggableOnMigration < ActiveRecord::Migration
       t.datetime :created_at
     end
 
-    add_index :taggings, :tag_id
-    add_index :taggings, [:taggable_id, :taggable_type, :context]
+    add_index :taggings, :tag_id, algorithm: :concurrently
+    add_index :taggings, [:taggable_id, :taggable_type, :context], algorithm: :concurrently
   end
 
   def self.down

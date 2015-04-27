@@ -7,7 +7,8 @@ class FollowNotificationService
 	end
 
   def notify
-    @activity = @user.activities.create!(trackable: @follow, verb: 'followed', type: 'Notification', recipient: @followable, key: 'follow.create')
+    @activity = @user.notifications.create!(trackable: @follow, verb: 'followed', recipient: @followable, key: 'follow.create')
+    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
   end
 
@@ -17,7 +18,9 @@ class FollowNotificationService
     @user = activity.recipient_type == "Idea" ? activity.recipient.student : activity.recipient
     Pusher.trigger("private-user-#{@user.id}",
       "new_feed_item",
-      {data: activity.user.latest_notifications.last}
+      {
+        data: activity.user.latest_notifications.last
+      }
     )
 	end
 

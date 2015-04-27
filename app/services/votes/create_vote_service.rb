@@ -13,10 +13,13 @@ class CreateVoteService
     end
   end
 
+  private
+
   def vote
     @vote = @votable.votes.create!(voter: @user)
     recipient = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
-    @activity = @user.activities.create!(trackable: @vote, recipient: recipient, type: 'Notification', verb: 'voted', key: 'vote.create')
+    @activity = @user.notifications.create!(trackable: @vote, recipient: recipient, verb: 'voted', key: 'vote.create')
+    NotificationCacheService.new(@activity).cache
     send_notification @activity
     true
   end
@@ -27,8 +30,6 @@ class CreateVoteService
     end
     false
   end
-
-  private
 
   def send_notification activity
     @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user

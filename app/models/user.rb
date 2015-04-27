@@ -61,7 +61,9 @@ class User < ActiveRecord::Base
 
   #Activities
   has_many :activities, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
 
+  #relationships
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true

@@ -1,4 +1,5 @@
 class CreateVotes < ActiveRecord::Migration
+  disable_ddl_transaction!
   def self.up
     create_table :votes do |t|
       t.references :votable, :polymorphic => true
@@ -6,8 +7,8 @@ class CreateVotes < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :votes, [:voter_id, :voter_type]
-    add_index :votes, [:votable_id, :votable_type]
+    add_index :votes, [:voter_id, :voter_type], algorithm: :concurrently
+    add_index :votes, [:votable_id, :votable_type], algorithm: :concurrently
   end
 
   def self.down

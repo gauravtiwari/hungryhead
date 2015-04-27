@@ -67,7 +67,6 @@ CREATE TABLE activities (
     trackable_type character varying,
     user_id integer,
     key character varying,
-    type character varying DEFAULT 'Activity'::character varying,
     parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
     recipient_id integer,
@@ -811,6 +810,44 @@ ALTER SEQUENCE notes_id_seq OWNED BY notes.id;
 
 
 --
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE notifications (
+    id integer NOT NULL,
+    trackable_id integer,
+    trackable_type character varying,
+    user_id integer,
+    key character varying,
+    parameters jsonb DEFAULT '{}'::jsonb,
+    published boolean DEFAULT true,
+    recipient_id integer,
+    recipient_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE notifications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
+
+
+--
 -- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1468,6 +1505,13 @@ ALTER TABLE ONLY notes ALTER COLUMN id SET DEFAULT nextval('notes_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
 
 
@@ -1724,6 +1768,14 @@ ALTER TABLE ONLY notes
 
 
 --
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY notifications
+    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1828,10 +1880,17 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_key_and_published_and_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_key_and_published_and_type ON activities USING btree (key, published, type);
+CREATE UNIQUE INDEX index_activities_on_key ON activities USING btree (key);
+
+
+--
+-- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_published ON activities USING btree (published);
 
 
 --
@@ -1845,7 +1904,7 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
+CREATE UNIQUE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
 
 
 --
@@ -1982,13 +2041,6 @@ CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (stu
 
 
 --
--- Name: index_ideas_on_fund; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_fund ON ideas USING gin (fund);
-
-
---
 -- Name: index_ideas_on_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2003,13 +2055,6 @@ CREATE INDEX index_ideas_on_privacy ON ideas USING btree (privacy);
 
 
 --
--- Name: index_ideas_on_profile; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_profile ON ideas USING gin (profile);
-
-
---
 -- Name: index_ideas_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2021,13 +2066,6 @@ CREATE INDEX index_ideas_on_sash_id ON ideas USING btree (sash_id);
 --
 
 CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
-
-
---
--- Name: index_ideas_on_settings; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_settings ON ideas USING gin (settings);
 
 
 --
@@ -2056,13 +2094,6 @@ CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
 --
 
 CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
-
-
---
--- Name: index_investments_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_investments_on_parameters ON investments USING gin (parameters);
 
 
 --
@@ -2171,10 +2202,10 @@ CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING
 
 
 --
--- Name: index_notes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notes_on_status_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_notes_on_status ON notes USING btree (status);
+CREATE INDEX index_notes_on_status_and_user_id ON notes USING btree (status, user_id);
 
 
 --
@@ -2182,6 +2213,34 @@ CREATE INDEX index_notes_on_status ON notes USING btree (status);
 --
 
 CREATE INDEX index_notes_on_user_id ON notes USING btree (user_id);
+
+
+--
+-- Name: index_notifications_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_notifications_on_key ON notifications USING btree (key);
+
+
+--
+-- Name: index_notifications_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_published ON notifications USING btree (published);
+
+
+--
+-- Name: index_notifications_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_recipient_id_and_recipient_type ON notifications USING btree (recipient_id, recipient_type);
+
+
+--
+-- Name: index_notifications_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
 
 
 --
@@ -2283,13 +2342,6 @@ CREATE INDEX index_sessions_on_updated_at ON sessions USING btree (updated_at);
 
 
 --
--- Name: index_shares_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_shares_on_parameters ON shares USING gin (parameters);
-
-
---
 -- Name: index_shares_on_shareable_id_and_shareable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2374,13 +2426,6 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_fund; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_fund ON users USING gin (fund);
-
-
---
 -- Name: index_users_on_invitation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2427,13 +2472,6 @@ CREATE INDEX index_users_on_role ON users USING btree (role);
 --
 
 CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
-
-
---
--- Name: index_users_on_settings; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_settings ON users USING gin (settings);
 
 
 --
@@ -2504,14 +2542,6 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- Name: idea_messages_idea_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY idea_messages
-    ADD CONSTRAINT idea_messages_idea_id_fk FOREIGN KEY (idea_id) REFERENCES ideas(id);
 
 
 --
@@ -2587,6 +2617,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140817173661');
 INSERT INTO schema_migrations (version) VALUES ('20140817173662');
 
 INSERT INTO schema_migrations (version) VALUES ('20140825003938');
+
+INSERT INTO schema_migrations (version) VALUES ('20140825003939');
 
 INSERT INTO schema_migrations (version) VALUES ('20140830232833');
 

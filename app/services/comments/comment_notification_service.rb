@@ -7,7 +7,8 @@ class CommentNotificationService
 	end
 
 	def notify
-    @activity = @user.activities.create!(trackable: @comment, type: 'Notification', recipient: @commentable, verb: 'commented', key: 'comment.create')
+    @activity = @user.notifications.create!(trackable: @comment, recipient: @commentable, verb: 'commented', key: 'comment.create')
+    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
 	end
 
@@ -19,7 +20,9 @@ class CommentNotificationService
     users.each do |user|
       Pusher.trigger("private-user-#{user}",
         "new_feed_item",
-        { data: activity.user.latest_notifications.last}
+        {
+          data: activity.user.latest_notifications.last
+        }
       )
     end
   end

@@ -8,16 +8,18 @@ class FeedbackNotificationService
 
   def notify
     @activity = @user.activities.create!(trackable: @feedback, verb: 'feedbacked', recipient: @idea, key: 'feedback.create')
+    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
   end
-
 
   private
 
   def send_notification(activity)
     Pusher.trigger("private-user-#{@idea.student.id}",
       "new_feed_item",
-      {data:  activity.user.latest_notifications.last }
+      {
+        data:  activity.user.latest_notifications.last
+      }
     )
   end
 

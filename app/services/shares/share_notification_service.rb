@@ -8,6 +8,7 @@ class ShareNotificationService
 
   def notify
     @activity = @user.activities.create!(trackable: @share, verb: 'shared', recipient: @shareable, key: 'share.create')
+    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
   end
 
@@ -17,7 +18,9 @@ class ShareNotificationService
     @user = @shareable.class.to_s == "Idea" ? @shareable.student : @shareable.user
     Pusher.trigger("private-user-#{@user.id}",
       "new_feed_item",
-      {data: activity.user.latest_notifications.last}
+      {
+        data: activity.user.latest_notifications.last
+      }
     )
   end
 

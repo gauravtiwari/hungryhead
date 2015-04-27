@@ -1,4 +1,5 @@
 class CreateNotes < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
     create_table :notes do |t|
       t.string :title
@@ -8,6 +9,6 @@ class CreateNotes < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :notes, :status
+    add_index :notes, [:status, :user_id], algorithm: :concurrently
   end
 end

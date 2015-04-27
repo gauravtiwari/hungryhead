@@ -4,7 +4,6 @@ class CreateLocations < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.text :description
-
       t.timestamps null: false
     end
     add_index :locations, :slug, unique: true

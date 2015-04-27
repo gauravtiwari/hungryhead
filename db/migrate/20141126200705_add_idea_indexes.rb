@@ -1,8 +1,9 @@
 class AddIdeaIndexes < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
-    add_index :investments, :user_id
-    add_index :investments, :idea_id
-    add_index :feedbacks, :sash_id
-    add_index :ideas, :sash_id
+    add_index :investments, :user_id, algorithm: :concurrently
+    add_index :investments, :idea_id, algorithm: :concurrently
+    add_index :feedbacks, :sash_id, algorithm: :concurrently
+    add_index :ideas, :sash_id, algorithm: :concurrently
   end
 end

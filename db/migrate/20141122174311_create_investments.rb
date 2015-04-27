@@ -8,6 +8,5 @@ class CreateInvestments < ActiveRecord::Migration
       t.jsonb :parameters, default: "{}"
       t.timestamps null: false
     end
-    add_index :investments, :parameters, using: :gin
   end
 end

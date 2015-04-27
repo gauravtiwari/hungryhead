@@ -1,4 +1,5 @@
 class CreateMentions < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
     create_table :mentions do |t|
       t.belongs_to :mentionable, polymorphic: true
@@ -7,7 +8,7 @@ class CreateMentions < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :mentions, [:mentionable_type, :mentionable_id]
-    add_index :mentions, [:mentioner_id, :mentioner_type]
+    add_index :mentions, [:mentionable_type, :mentionable_id], algorithm: :concurrently
+    add_index :mentions, [:mentioner_id, :mentioner_type], algorithm: :concurrently
   end
 end

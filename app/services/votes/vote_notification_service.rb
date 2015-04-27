@@ -7,7 +7,9 @@ class VoteNotificationService
   def notify
     Pusher.trigger("private-user-#{@activity.user.id}",
       "new_feed_item",
-      {data:  @activity.user.latest_notifications.last}
+      {
+        data:  @activity.user.latest_notifications.last
+      }
     )
   end
 

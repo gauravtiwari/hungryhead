@@ -1,5 +1,6 @@
 # Migration responsible for creating a table with activities
 class CreateActivities < ActiveRecord::Migration
+  disable_ddl_transaction!
   # Create table
   def self.up
     create_table :activities do |t|
@@ -12,9 +13,9 @@ class CreateActivities < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :activities, [:trackable_id, :trackable_type], unique: true
-    add_index :activities, [:key], unique: true
-    add_index :activities, [:recipient_id, :recipient_type]
+    add_index :activities, [:trackable_id, :trackable_type], unique: true, algorithm: :concurrently
+    add_index :activities, [:key], unique: true, algorithm: :concurrently
+    add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently
   end
   # Drop table
   def self.down

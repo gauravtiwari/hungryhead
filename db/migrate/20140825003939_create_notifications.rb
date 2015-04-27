@@ -1,5 +1,6 @@
-# Migration responsible for creating a table with activities
+# Migration responsible for creating a table with notifications
 class CreateNotifications < ActiveRecord::Migration
+  disable_ddl_transaction!
   # Create table
   def self.up
     create_table :notifications do |t|
@@ -12,9 +13,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :notifications, [:trackable_id, :trackable_type], unique: true
-    add_index :notifications, [:key], unique: true
-    add_index :notifications, [:recipient_id, :recipient_type]
+    add_index :notifications, [:trackable_id, :trackable_type], unique: true, algorithm: :concurrently
+    add_index :notifications, [:key], unique: true, algorithm: :concurrently
+    add_index :notifications, [:recipient_id, :recipient_type], algorithm: :concurrently
   end
   # Drop table
   def self.down
