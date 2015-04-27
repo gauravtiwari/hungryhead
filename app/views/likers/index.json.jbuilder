@@ -4,7 +4,7 @@ json.payload do
     json.name your_name(i.voter, false)
     json.avatar i.voter.avatar.url(:avatar)
     json.uuid SecureRandom.hex(6)
-    json.path profile_path(i.voter)
+    json.path user_path(i.voter)
     json.locations i.voter.location_list.each do |tag|
         json.tag tag
         json.url profile_people_path(tag.parameterize)

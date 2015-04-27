@@ -27,8 +27,7 @@ class UsersController < ApplicationController
 
   def show
     @badges = @user.badges.group_by(&:id)
-    @user.punch(request) if @user != current_user
-    @ideas = Idea.for_user(@user)
+    RecordHitsJob.set(wait: 2.seconds).perform_later(@user.id, @user.class.to_s) if @user != current_user
     respond_to do |format|
       format.html {render :show} if @user.type == "User"
       format.html {render :show} if @user.type == "Student"
@@ -56,9 +55,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         if @user.username_changed?
-          redirect_to profile_path(@user)
+          redirect_to user_path(@user)
         else
-          format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
+          format.html { redirect_to user_path(@user), notice: 'Preferences was succesfully updated.' }
           format.json { render :show, status: :ok }
         end
       else

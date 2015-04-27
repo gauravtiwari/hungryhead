@@ -18,7 +18,7 @@ json.user do
 		json.investments_count @user.investments_counter.value
 		json.school_id @user.school.id if @user.school
 		json.school_name @user.school.name if @user.school
-		json.school_url profile_path(@user.school) if @user.school
+		json.school_url user_path(@user.school) if @user.school
 		json.mini_bio @user.mini_bio
 		json.verified @user.verified?
 		json.website_url @user.website_url
@@ -39,7 +39,7 @@ json.user do
 
 	json.id @user.id
 	json.is_owner @user == current_user
-	json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
+	json.form delete_action: user_path(@user), action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 	json.name @user.name
 	json.badge @user.first_name.first + @user.last_name.first
 

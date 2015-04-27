@@ -3,10 +3,6 @@
     'use strict';
 
     var Pages = function() {
-        this.VERSION = "1.0.0";
-        this.AUTHOR = "Revox";
-        this.SUPPORT = "support@revox.io";
-
         this.pageScrollElement = 'html, body';
         this.$body = $('body');
 

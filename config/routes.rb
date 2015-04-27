@@ -132,7 +132,7 @@ Rails.application.routes.draw do
   end
 
   #Schools resources
-  resources :schools, only: [:index] do
+  resources :schools, path: 'school' do
     get :autocomplete_school_name, :on => :collection
   end
 
@@ -162,7 +162,8 @@ Rails.application.routes.draw do
   end
 
   #Users routes
-  resources :users, path: 'people' do
+  resources :users, path: '' do
+    resources :notes
     get :autocomplete_user_name, :on => :collection
     member do
       get :activities
@@ -189,10 +190,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notes
-
   #Ideas routes
-  resources :ideas do
+  resources :ideas, path: 'idea' do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     #Member routes
@@ -224,24 +223,5 @@ Rails.application.routes.draw do
 
   end
 
-  #Vanity urls for users
-  get '/:slug', to: SlugRouter.to(:show), as: :profile
-  put '/:slug', to: SlugRouter.to(:update), as: :profile_update
-  delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
-  get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
-  get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
-  get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
-  get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
-  get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
-  get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
-  get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks
-  get '/:slug/investments', to: SlugRouter.to(:investments), as: :profile_investments
-  get '/:slug/badges', to: SlugRouter.to(:badges), as: :profile_badges
-  put '/:slug/publish', to: SlugRouter.to(:publish), as: :profile_publish
-  put '/:slug/unpublish', to: SlugRouter.to(:publish), as: :profile_unpublish
-  post '/:slug/user_invite', to: SlugRouter.to(:user_invite), as: :profile_user_invite
-  get '/:slug/followings', to: SlugRouter.to(:followings), as: :profile_followings
-  get '/:slug/comments', to: SlugRouter.to(:comments), as: :profile_comments
-  delete '/:slug/delete_cover', to: SlugRouter.to(:delete_cover), as: :profile_delete_cover
 
 end

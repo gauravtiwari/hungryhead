@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   def render_forbidden
     flash[:notice] = "You are not authorized to access this page"
     if user_signed_in?
-      redirect_to profile_path(current_user)
+      redirect_to user_path(current_user)
     else
       flash[:notice] = "Please login to access this page"
       redirect_to root_path

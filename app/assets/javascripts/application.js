@@ -24,6 +24,7 @@
 //= require underscore
 //= require js-routes
 //= require select2
+//= require local_time
 //= require slimScroll
 //= require jquery.atwho
 //= require typer

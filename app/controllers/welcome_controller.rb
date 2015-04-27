@@ -30,7 +30,7 @@ class WelcomeController < ApplicationController
   end
 
   def finish_wizard_path
-    profile_path(@user)
+    user_path(@user)
   end
 
   def user

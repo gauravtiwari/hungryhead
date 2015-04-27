@@ -19,6 +19,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
+    RecordHitsJob.set(wait: 2.seconds).perform_later(@idea.id, @idea.class.to_s) if @idea.user != current_user
   end
 
   def card

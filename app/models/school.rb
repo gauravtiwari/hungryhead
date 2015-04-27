@@ -62,7 +62,7 @@ class School < ActiveRecord::Base
 		  image= "http://placehold.it/30"
 		end
 		loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-		  "link" => Rails.application.routes.url_helpers.profile_path(self)
+		  "link" => Rails.application.routes.url_helpers.user_path(self)
 		  })
 	end
 

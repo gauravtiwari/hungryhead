@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
 
 
   def index
-    @notifications = Activity.where(user_id: current_user.followings_ids.members, published: true, type: 'Notification').map{|activity| activity.user.latest_notifications.revrange(0,100)}
+    @notifications = Activity.where(user_id: current_user.followings_ids.members, published: true).map{|activity| activity.user.latest_notifications.revrange(0,100)}
     render json: Oj.dump(@notifications.uniq.flatten, mode: :compat)
   end
 

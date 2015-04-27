@@ -1,1 +1,0 @@
-json.notifications @notification

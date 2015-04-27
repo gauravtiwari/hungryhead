@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
+  counter :views_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -36,7 +37,7 @@ class User < ActiveRecord::Base
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing
 
-  store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
+  store_accessor :settings, :theme, :idea_notifications, :note_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
 
   store_accessor :fund, :balance, :invested_amount, :earned_amount
@@ -128,6 +129,10 @@ class User < ActiveRecord::Base
     school.name if school_id.present?
   end
 
+  def user_name_badge
+    first_name.first + last_name.first
+  end
+
   private
 
   def is_admin
@@ -174,7 +179,7 @@ class User < ActiveRecord::Base
       image= "http://placehold.it/30"
     end
     loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-      "link" => Rails.application.routes.url_helpers.profile_path(self)
+      "link" => Rails.application.routes.url_helpers.user_path(self)
       })
   end
 
