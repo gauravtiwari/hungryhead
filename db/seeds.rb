@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.find_by_slug('adminuser').destroy!
 User.create!(
 	name: 'Admin User',
 	first_name: 'Admin',
