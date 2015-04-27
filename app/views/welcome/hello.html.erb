@@ -1,0 +1,75 @@
+<div class="container-fluid col-md-8 auto-margin">
+    <div class="m-t-50" id="rootwizard">
+        <ul class=
+        "nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
+        <li class="active">
+                <a data-toggle="tab" href="#tab1"><i class=
+                "fa fa-list-ul tab-icon"></i>
+                <span>Rules</span>
+                </a>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab2"><i class=
+                "fa fa-users tab-icon"></i> <span>Follow Friends</span></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+        		<div class="tab-pane padding-20 active slide-left" id="tab1">
+        		      <div class="row row-same-height">
+     								<div class="col-md-10 auto-margin">
+     								    <h2 class="normal p-b-20">Things to know about Hungryhead:</h2>
+     								    <div class="divider b-b b-grey b-md b-small"></div>
+     								  <div>
+	     								  <h3 class="m-t-30">1. Hungryhead is a new way to discover entrepreneurship</h3>
+	     								  <p>
+	     								 		We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+	     								  </p>
+     								  </div>
+     								  <div>
+	     								  <h3 class="m-t-30">2. Each project is independently created.</h3>
+	     								  <p>
+	     								  	The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+	     								  </p>
+     								  </div>
+     								  <div>
+	     								  <p class="bold">3. Together, creators and backers make projects happen.</p>
+	     								  <p>
+	     								  	Project creators set a funding goal and deadline. If people like a project, they can pledge money to make it happen. Funding on Kickstarter is all-or-nothing — projects must reach their funding goals to receive any money. All-or-nothing funding might seem scary, but it’s amazingly effective in creating momentum and rallying people around an idea. To date, an impressive 44% of projects have reached their funding goals.
+	     								  </p>
+     								  </div>
+     								</div>
+
+     								<div class="rule-accept p-t-20">
+     									<%= simple_form_for(@user, url: wizard_path, class: 'clearfix', method: :patch) do |f| %>
+												<div class="checkbox check-success">
+												  <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted' %>
+												  <label for="rules_accepted">I understand</label>
+												</div>
+     									<% end %>
+     								</div>
+     								<div class="pager wizard m-t-20 clearfix">
+     									<%= link_to("<i class='fa fa-arrow-right'></i> Follow friends".html_safe, next_wizard_path, class: 'text-white btn btn-cons btn-green pull-right') %>
+     								</div>
+        		      </div>
+        		  </div>
+
+        		<div class="tab-pane slide-left padding-20" id="tab2">
+        		    <h1>
+        		        Tab2 you.
+        		    </h1>
+        		</div>
+
+        		<div class="tab-pane slide-left padding-20" id="tab3">
+        		    <h1>
+        		        Tab3 you.
+        		    </h1>
+        		</div>
+
+            <div class="tab-pane slide-left padding-20" id="tab4">
+                <h1>
+                    Thank you.
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
