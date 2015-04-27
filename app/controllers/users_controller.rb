@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     @user.punch(request) if @user != current_user
     @ideas = Idea.for_user(@user)
     respond_to do |format|
+      format.html {render :show} if @user.type == "User"
       format.html {render :show} if @user.type == "Student"
       format.html {render :mentor} if @user.type == "Mentor"
       format.html {render :teacher} if @user.type == "Teacher"

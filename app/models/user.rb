@@ -124,6 +124,10 @@ class User < ActiveRecord::Base
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
 
+  def school_name
+    school.name if school_id.present?
+  end
+
   private
 
   def is_admin

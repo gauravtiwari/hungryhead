@@ -10,6 +10,6 @@ module Followable
   end
 
   def followers
-    User.find(followers_ids.members)
+    followers_ids.members
   end
 end

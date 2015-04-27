@@ -19,6 +19,8 @@ jQuery(document).ready ->
 
 	$('.scrollable').slimScroll height: '300px'
 
+	$('.follow-scrollable').slimScroll height: '350px'
+
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
 

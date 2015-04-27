@@ -6,28 +6,31 @@ class WelcomeController < ApplicationController
 
   def show
     @user = current_user
+    case step
+    when :complete_profile
+      @user.update_attributes(user_params)
+    end
     render_wizard
   end
 
   def update
     @user = current_user
     case step
-    when :complete_profile
+    when :hello
       @user.update_attributes(user_params)
     end
     sign_in(@user, bypass: true)
     render_wizard @user
   end
 
-  def finish_wizard_path
-    profile_path(@user)
-  end
-
   private
 
   def user_params
-    params.require(:user).permit(:name, :password, :institution_id, :mini_bio, :market_list, :location_list,
-      :email, :terms_accepted, :username, :reset_password_token, :password_confirmation)
+    params.require(:user).permit(:rules_accepted)
+  end
+
+  def finish_wizard_path
+    profile_path(@user)
   end
 
   def user

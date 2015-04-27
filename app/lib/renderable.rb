@@ -29,7 +29,7 @@ module Renderable
     end
 
     def partial_path(path = nil, root = nil)
-      root ||= self.type.downcase.pluralize
+      root ||= 'activities'
       path ||= self.key.to_s.gsub('.', '/')
       select_path path, root
     end

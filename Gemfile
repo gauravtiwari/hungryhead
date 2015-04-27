@@ -76,6 +76,9 @@ gem 'pundit'
 gem 'devise-async'
 gem 'responders'
 
+#Local time
+gem 'local_time'
+
 #Step by step wizard
 gem 'wicked'
 
