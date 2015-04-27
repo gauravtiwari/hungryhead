@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   sorted_set :followers_ids
   sorted_set :followings_ids
   sorted_set :idea_followings_ids
-  sorted_set :latest_activities, maxlength: 100, marshal: true
+  sorted_set :latest_notifications, maxlength: 100, marshal: true
 
   #Redis counters to cache total followers, followings,
   #feedbacks, investments and ideas

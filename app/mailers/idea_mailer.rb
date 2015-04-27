@@ -1,6 +1,6 @@
 class IdeaMailer < ActionMailer::Base
 
-  def new_idea(idea, user, recipient, subject)
+  def new_idea(idea, user, recipient)
     @user = user
     @idea = idea
     @recipient = recipient

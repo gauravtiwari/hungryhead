@@ -1,6 +1,4 @@
-require 'render_anywhere'
 class CommentNotificationService
-  include RenderAnywhere
 
 	def initialize(comment, commentable)
 		@comment = comment
@@ -16,10 +14,12 @@ class CommentNotificationService
   private
 
   def send_notification(activity)
-    activity.recipient.commenters.each do |user|
+    commentable_user = @commentable.class.to_s == "Idea" ? @commentable.student : @commentable.user
+    users = activity.recipient.commenters.push(commentable_user)
+    users.each do |user|
       Pusher.trigger("private-user-#{user}",
         "new_feed_item",
-        { data: activity.user.latest_activities.last}
+        { data: activity.user.latest_notifications.last}
       )
     end
   end

@@ -5,10 +5,9 @@ class VoteNotificationService
   end
 
   def notify
-    @user = @activity.recipient_type == "Idea" ? @activity.recipient.student : @activity.recipient.user
-    Pusher.trigger("private-user-#{@user.id}",
+    Pusher.trigger("private-user-#{@activity.user.id}",
       "new_feed_item",
-      {data:  @activity.user.latest_activities.last}
+      {data:  @activity.user.latest_notifications.last}
     )
   end
 

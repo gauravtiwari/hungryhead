@@ -17,7 +17,7 @@ class InvestmentNotificationService
   def send_notification(activity)
     Pusher.trigger("private-user-#{@idea.student.id}",
       "new_feed_item",
-      {data: activity.user.latest_activities.last}
+      {data: activity.user.latest_notifications.last}
     )
   end
 

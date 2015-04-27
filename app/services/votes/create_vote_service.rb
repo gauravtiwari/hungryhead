@@ -22,7 +22,7 @@ class CreateVoteService
   end
 
   def unvote
-    @user.votes.where(votable: @votable).each do |vote|
+    @votable.votes.where(voter: @user).each do |vote|
       vote.destroy
     end
     false

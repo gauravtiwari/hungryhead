@@ -2,9 +2,9 @@ class DeleteUserFeedJob < ActiveJob::Base
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
       Activity.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |activity|
-        activity.user.latest_activities.delete(activity_json(activity))
+        activity.user.latest_notifications.delete(activity_json(activity))
         if activity.recipient_type == "Idea"
-          recipient.latest_activities.add(activity_json(activity))
+          recipient.latest_notifications.add(activity_json(activity))
         end
         activity.destroy if activity.present?
       end

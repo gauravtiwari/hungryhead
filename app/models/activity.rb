@@ -1,5 +1,6 @@
 class Activity < ActiveRecord::Base
 
+  include Renderable
   # Define polymorphic association to the parent
   belongs_to :trackable, :polymorphic => true
   # Define ownership to a resource responsible for this activity
@@ -21,10 +22,10 @@ class Activity < ActiveRecord::Base
   private
 
   def cache_activities
-    user.latest_activities.add(activity_json, created_at.to_i)
+    user.latest_notifications.add(activity_json, created_at.to_i)
     if recipient_type == "Idea"
-      recipient.latest_activities.add(activity_json, created_at.to_i)
-      Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_activities.last}}.to_json)
+      recipient.latest_notifications.add(activity_json, created_at.to_i)
+      Pusher.trigger_async("idea-feed-#{recipient_id}", "new_feed_item", {data: {id: id, item: recipient.latest_notifications.last}}.to_json)
     end
   end
 

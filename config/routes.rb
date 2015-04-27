@@ -91,6 +91,8 @@ Rails.application.routes.draw do
 
   resources :after_signup
 
+  resources :notifications, only: [:index, :update]
+
   resources :follows, only: [:create, :destroy] do
     member do
       get :followers

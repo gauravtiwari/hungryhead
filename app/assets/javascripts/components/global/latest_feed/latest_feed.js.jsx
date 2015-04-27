@@ -11,13 +11,15 @@ var SetIntervalMixin = {
 };
 var LatestFeed = React.createClass({
   getInitialState: function(){
-    var feed = JSON.parse(this.props.feed);
     return {
-      feed: feed.activities
+      feed: []
     };
   },
 
   componentDidMount: function() {
+    if(this.isMounted()){
+      this.fetchNotifications();
+    }
     var feed_channel = pusher.subscribe(this.props.channel_name);
     if(feed_channel) {
       feed_channel.bind('new_feed_item', function(data){
@@ -30,6 +32,12 @@ var LatestFeed = React.createClass({
         $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
       }.bind(this));
     }
+  },
+
+  fetchNotifications: function(){
+    $.getJSON(Routes.notifications_path(), function(json, textStatus) {
+      this.setState({feed: json});
+    }.bind(this));
   },
   render: function(){
     var latest_feed_items = _.map(this.state.feed, function(item){

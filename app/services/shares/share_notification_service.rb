@@ -17,7 +17,7 @@ class ShareNotificationService
     @user = @shareable.class.to_s == "Idea" ? @shareable.student : @shareable.user
     Pusher.trigger("private-user-#{@user.id}",
       "new_feed_item",
-      {data: activity.user.latest_activities.last}
+      {data: activity.user.latest_notifications.last}
     )
   end
 

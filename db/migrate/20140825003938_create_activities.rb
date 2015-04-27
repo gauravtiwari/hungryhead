@@ -6,7 +6,6 @@ class CreateActivities < ActiveRecord::Migration
       t.belongs_to :trackable, :polymorphic => true, unique: true
       t.belongs_to :user
       t.string  :key, unique: true
-      t.string :type, default: 'Activity'
       t.jsonb    :parameters, default: "{}"
       t.boolean :published, default: true
       t.belongs_to :recipient, :polymorphic => true
