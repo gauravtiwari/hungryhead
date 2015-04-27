@@ -1,5 +1,6 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
+  before_action :authenticate_admin_user!, only: [:new, :create, :destroy]
   before_action :set_schools, only: [:notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:logo, :email]
