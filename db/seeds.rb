@@ -11,8 +11,10 @@ User.create!(
 	first_name: 'Admin',
 	last_name: 'User',
 	username: 'adminuser',
+	password: 'hungryheaduser',
 	email: 'admin@hungryhead.org',
-	admin: true
+	admin: true,
+	confirmed_at: Time.now
 )
 
 hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")

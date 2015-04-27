@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   scope :users, -> { where(role: 0) }
 
   #Callbacks
-  before_save :add_fullname, :seed_fund, :seed_settings
+  before_save :add_fullname, :seed_fund, :seed_settings, unless: :is_admin
   after_save :load_into_soulmate
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity
   after_create :increment_counters
@@ -126,6 +126,10 @@ class User < ActiveRecord::Base
 
   private
 
+  def is_admin
+    admin?
+  end
+
   def add_fullname
     words = self.name.split(" ")
     self.first_name = words.first
@@ -146,12 +150,14 @@ class User < ActiveRecord::Base
   end
 
   def load_into_soulmate
-    if type == "Student"
-      soulmate_loader("students")
-    elsif type == "Mentor"
-      soulmate_loader("mentors")
-    elsif type == "Teacher"
-      soulmate_loader("teachers")
+    unless admin?
+      if type == "Student"
+        soulmate_loader("students")
+      elsif type == "Mentor"
+        soulmate_loader("mentors")
+      elsif type == "Teacher"
+        soulmate_loader("teachers")
+      end
     end
   end
 
@@ -174,11 +180,11 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment
+    school.students_counter.increment if school
   end
 
   def decrement_counters
-    school.students_counter.decrement
+    school.students_counter.decrement if school
   end
 
   def delete_activity
