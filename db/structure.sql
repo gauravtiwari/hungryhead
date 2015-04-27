@@ -1003,7 +1003,6 @@ CREATE TABLE schools (
     slug character varying NOT NULL,
     description text,
     logo character varying,
-    type character varying,
     cover character varying,
     media jsonb DEFAULT '{}'::jsonb,
     data jsonb DEFAULT '{}'::jsonb,
@@ -1908,17 +1907,24 @@ CREATE UNIQUE INDEX index_activities_on_trackable_id_and_trackable_type ON activ
 
 
 --
--- Name: index_authentications_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authentications_on_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_authentications_on_parameters ON authentications USING gin (parameters);
+CREATE INDEX index_authentications_on_access_token ON authentications USING btree (access_token);
 
 
 --
--- Name: index_authentications_on_uid_and_provider_and_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_authentications_on_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_authentications_on_uid_and_provider_and_access_token ON authentications USING btree (uid, provider, access_token);
+CREATE INDEX index_authentications_on_provider ON authentications USING btree (provider);
+
+
+--
+-- Name: index_authentications_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_authentications_on_uid ON authentications USING btree (uid);
 
 
 --
@@ -2293,13 +2299,6 @@ CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON re
 
 
 --
--- Name: index_schools_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_schools_on_data ON schools USING gin (data);
-
-
---
 -- Name: index_schools_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2318,13 +2317,6 @@ CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
 --
 
 CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
-
-
---
--- Name: index_schools_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_schools_on_type ON schools USING btree (type);
 
 
 --
@@ -2356,10 +2348,10 @@ CREATE INDEX index_shares_on_user_id ON shares USING btree (user_id);
 
 
 --
--- Name: index_slugs_on_slug_and_sluggable_type_and_scope; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slugs_on_slug_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_slugs_on_slug_and_sluggable_type_and_scope ON slugs USING btree (slug, sluggable_type, scope);
+CREATE UNIQUE INDEX index_slugs_on_slug_and_sluggable_type ON slugs USING btree (slug, sluggable_type);
 
 
 --
