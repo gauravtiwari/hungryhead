@@ -3,7 +3,7 @@
 </div>
 <div class="idea-descript">
    <%= content_tag(:h1) do %>
-      <%= link_to(user_path(student), class: "border-bottom-dotted") do %>
+      <%= link_to(profile_path(student), class: "border-bottom-dotted") do %>
         <%= student.name %>
       <% end %>
     <% end %>
@@ -15,5 +15,5 @@
 
   <li><i class="fa fa-users"></i> <%= pluralize(student.followers(User).length, 'Follower') %> </li>
 </ul>
- 
+
 </div>

@@ -11,7 +11,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.user, false), user_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
 
 			<% if activity.recipient.team.include?(current_user.id.to_s) %>
 				your idea

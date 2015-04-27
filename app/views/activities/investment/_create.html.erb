@@ -11,7 +11,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.user, false), user_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> invested <i class="fa fa-fw fa-dollar"></i><%= activity.trackable.amount %> in
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> invested <i class="fa fa-fw fa-dollar"></i><%= activity.trackable.amount %> in
 			<% if activity.recipient.team.include?(current_user.id.to_s) %>
 				your idea
 			<% end %>

@@ -20,7 +20,7 @@ class DeleteUserFeedJob < ActiveJob::Base
       recipient_type: mentioner || nil,
       id: activity.id,
       created_at: "#{activity.created_at}",
-      url: Rails.application.routes.url_helpers.user_path(activity.user),
+      url: Rails.application.routes.url_helpers.profile_path(activity.user),
       verb: activity.verb
     }
   end

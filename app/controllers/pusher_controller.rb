@@ -11,7 +11,7 @@ class PusherController < ApplicationController
           :name => current_user.name,
           :email => current_user.email,
           :avatar => current_user.avatar.url(:avatar),
-          :url => user_path(current_user)
+          :url => profile_path(current_user)
         }
       })
       render :json => response

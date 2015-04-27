@@ -6,7 +6,7 @@
     </div>
     <div class="panel-body no-margin scrollable auto-overflow no-padding p-l-20 p-r-20">
      <div style="max-height:300px">
-      <%= react_component('LatestFeed', {feed: @idea.latest_notifications.revrange(0,100).paginate(:page => 1, :per_page => 10), idea_id: @idea.id, channel_name: "idea-feed-#{@idea.id}"}.to_json) %>
+      <%= react_component('LatestFeed', {feed: @idea.latest_activities.revrange(0,100).paginate(:page => 1, :per_page => 10), idea_id: @idea.id, channel_name: "idea-feed-#{@idea.id}"}.to_json) %>
       </div>
     </div>
 </div>

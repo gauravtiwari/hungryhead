@@ -10,7 +10,7 @@
   <em><%= local_time_ago(idea.created_at) %></em>
   <p class="idea-description"><%= idea.elevator_pitch %> </p>
   <ul class="idea-achievement-list">
-    <li><%= link_to(user_path(idea.user)) do %>
+    <li><%= link_to(profile_path(idea.user)) do %>
     <div class="user-avatar">
     	 <%= image_tag(idea.user.avatar.url(:avatar), width: "20px") %> <i class="icon-user"></i> <%= idea.user.name %>
     </div>
@@ -20,5 +20,5 @@
 
   <li><i class="fa fa-users"></i> <%= idea.followers(User).length %> Followers</li>
 </ul>
- 
+
 </div>

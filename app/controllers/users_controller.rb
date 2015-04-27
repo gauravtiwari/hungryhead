@@ -55,9 +55,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         if @user.username_changed?
-          redirect_to user_path(@user)
+          redirect_to profile_path(@user)
         else
-          format.html { redirect_to user_path(@user), notice: 'Preferences was succesfully updated.' }
+          format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
           format.json { render :show, status: :ok }
         end
       else

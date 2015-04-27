@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
 	def create
 		self.resource = warden.authenticate!(auth_options)
 		if self.resource.sign_in_count == 1
-			Users::UserWelcomeService.new(self.resource, user_path(self.resource)).welcome
+			Users::UserWelcomeService.new(self.resource, profile_path(self.resource)).welcome
 		end
 	  set_flash_message(:notice, :signed_in) if is_flashing_format?
 	  sign_in(resource_name, resource)
@@ -29,7 +29,7 @@ class Users::SessionsController < Devise::SessionsController
 
 	def after_sign_in_path_for(resource)
     if resource.sign_in_count == 1
-    	user_path(resource)
+    	profile_path(resource)
     else
       signed_in_root_path(resource)
     end

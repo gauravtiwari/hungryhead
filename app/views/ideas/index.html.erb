@@ -24,7 +24,7 @@
                 </div>
                 <div class="idea-meta">
                   <h1><%= link_to(idea.name, idea_path(idea)) %></h1>
-                  <span>by <%= link_to(idea.user.name, user_path(idea.user)) %></span>
+                  <span>by <%= link_to(idea.user.name, profile_path(idea.user)) %></span>
                 </div>
               </div>
               <div class="project-descript">

@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   def render_forbidden
     flash[:notice] = "You are not authorized to access this page"
     if user_signed_in?
-      redirect_to user_path(current_user)
+      redirect_to profile_path(current_user)
     else
       flash[:notice] = "Please login to access this page"
       redirect_to root_path
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
 
   def info_for_paper_trail
-    { user_name: current_user.name, user_avatar: current_user.avatar.url(:avatar), owner_url: user_path(current_user) } if current_user
+    { user_name: current_user.name, user_avatar: current_user.avatar.url(:avatar), owner_url: profile_path(current_user) } if current_user
   end
 
   def check_terms

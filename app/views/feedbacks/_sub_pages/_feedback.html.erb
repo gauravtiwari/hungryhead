@@ -3,7 +3,7 @@
  <%= content_tag(:div, class: 'activity-header') do %>
  <span class="activity-badge float-right">
     <% if feedback.badged? && feedback.badges.length > 0 %>
-      <img data-toggle="tooltip" data-placement="left" title="<%= feedback.user.name.capitalize %> has earned a <%= feedback.badges.first.custom_fields[:name].downcase %> badge" width="30px" src="<%= feedback.badges.first.custom_fields[:image] %>" />       
+      <img data-toggle="tooltip" data-placement="left" title="<%= feedback.user.name.capitalize %> has earned a <%= feedback.badges.first.custom_fields[:name].downcase %> badge" width="30px" src="<%= feedback.badges.first.custom_fields[:image] %>" />
     <% end %>
    <i class="fa ion-chatbubble margin-left"></i>
  </span>
@@ -11,7 +11,7 @@
     <%= image_tag(feedback.user.avatar.url(:avatar),  width: "40px;") %>
   </div>
     <%= content_tag(:span) do %>
-     Feedback from <%= link_to(feedback.user.name, user_path(feedback.user)) %>
+     Feedback from <%= link_to(feedback.user.name, profile_path(feedback.user)) %>
     <% end %>
     <%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>
       <%= content_tag(:li) do %>

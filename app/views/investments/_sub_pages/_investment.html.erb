@@ -5,7 +5,7 @@
       <%= image_tag(investment.user.avatar.url(:avatar),  width: "40px;") %>
     </div>
     <%= content_tag(:span) do %>
-      <i class="fa fa-fw fa-dollar"></i> <%= investment.amount %> Investment from <%= link_to(investment.user.name, user_path(investment.user)) %>
+      <i class="fa fa-fw fa-dollar"></i> <%= investment.amount %> Investment from <%= link_to(investment.user.name, profile_path(investment.user)) %>
     <% end %>
 
     <%= content_tag(:ul, class: "item-tags clearfix grey-links") do %>

@@ -12,7 +12,7 @@
   <% end %>
   <%= content_tag(:span, class: "m-l-10 text-white") do %>
     <% @idea.location_list.each do |location| %>
-      <%= link_to(user_path(location.parameterize), :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => location, class: "text-white") do %>
+      <%= link_to(profile_path(location.parameterize), :"data-toggle" => "tooltip", :"data-placement" => "top", :"data-original-title" => location, class: "text-white") do %>
       <i class="fa fa-map-marker"></i>
       <% end %>
     <% end %>

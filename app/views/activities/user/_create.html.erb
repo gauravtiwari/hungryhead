@@ -11,7 +11,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.user, false), user_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span>
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span>
 
 		   	<h6>
 		   		<% if activity.user.location_list.first %>
@@ -27,7 +27,7 @@
 			        </span>
 		        <% end %>
 		        <span class="date semi-bold">
-			        <%= link_to(user_path(activity.user), class: "text-master") do %>
+			        <%= link_to(profile_path(activity.user), class: "text-master") do %>
 							<i class="fa fa-clock-o"></i>
 							<%= local_time_ago(activity.created_at) %>
 							<% end %>

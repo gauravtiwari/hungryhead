@@ -9,7 +9,7 @@ class MentionsController < ApplicationController
       mentionable = @mentionable.user
     end
     @mentionables = Array.new
-    @mentionables.push(name: mentionable.name, path: user_path(mentionable), username: mentionable.username) if mentionable != current_user
+    @mentionables.push(name: mentionable.name, path: profile_path(mentionable), username: mentionable.username) if mentionable != current_user
     @mentionable.comment_threads.includes(:user).map { |c| @mentionables.push({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) unless @mentionables.include?({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) && c.user == current_user }
     render json: @mentionables
   end

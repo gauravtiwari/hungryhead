@@ -7,7 +7,7 @@ class InviteTeamJob < ActiveJob::Base
         idea.team_invites.push(reciever.id.to_s)
         idea.save
 
-        msg = "<a href='#{Rails.application.routes.url_helpers.user_path(user)}'>#{user.name}</a> invited you to <a href='#{Rails.application.routes.url_helpers.join_team_idea_path(idea)}'> join </a> "+ "<a href='#{Rails.application.routes.url_helpers.idea_path(idea)}'>#{idea.name}</a>".html_safe
+        msg = "<a href='#{Rails.application.routes.url_helpers.profile_path(user)}'>#{user.name}</a> invited you to <a href='#{Rails.application.routes.url_helpers.join_team_idea_path(idea)}'> join </a> "+ "<a href='#{Rails.application.routes.url_helpers.idea_path(idea)}'>#{idea.name}</a>".html_safe
 
         notification = Notification.create!(
             reciever_id: reciever.id,

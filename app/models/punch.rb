@@ -1,3 +1,3 @@
-class Punch < Punch
+class Punch < ActiveRecord::Base
 
 end

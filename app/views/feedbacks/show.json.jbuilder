@@ -3,7 +3,7 @@ if @feedback
 	json.user_id @feedback.user.id
   json.body markdownify(@feedback.body)
 	json.user_name @feedback.user.name
-	json.user_path user_path(@feedback.user)
+	json.user_path profile_path(@feedback.user)
 	json.created_at @feedback.created_at
 	json.user_avatar @feedback.user.avatar.url(:mini)
 

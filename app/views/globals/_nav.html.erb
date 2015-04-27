@@ -77,7 +77,7 @@
         </li>
       </ul>
       <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-        <%= link_to(user_path(current_user)) do %>
+        <%= link_to(profile_path(current_user)) do %>
           <span class="fs-14 bold text-brand"><%= current_user.first_name %></span>
         <% end %>
       </div>

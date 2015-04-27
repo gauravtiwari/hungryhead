@@ -5,7 +5,7 @@ if @idea_messages
 		json.uuid SecureRandom.hex(5)
 		json.user_id idea_message.student.id
 		json.user_avatar idea_message.student.avatar.url(:avatar)
-		json.user_path user_path(idea_message.student)
+		json.user_path profile_path(idea_message.student)
 	end
 	json.meta do
 	    json.current_page @idea_messages.current_page
