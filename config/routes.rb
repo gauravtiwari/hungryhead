@@ -93,7 +93,7 @@ Rails.application.routes.draw do
   match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
-  resources :after_signup
+  resources :welcome
 
   resources :notifications, only: [:index, :update]
 

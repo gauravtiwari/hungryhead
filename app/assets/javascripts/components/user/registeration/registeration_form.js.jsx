@@ -9,13 +9,15 @@ var RegisterationForm = React.createClass({
       email: "",
       username: "",
       school_id: "",
-      name: ""
+      name: "",
+      school_domain: ".edu"
     };
   },
 
   componentDidMount: function(){
     var self = this;
-    $('#school_select').each((function(_this) {
+    var $schoolSelect = $('#school_select');
+    $schoolSelect.each((function(_this) {
       return function(i, e) {
         var select;
         select = $(e);
@@ -49,6 +51,10 @@ var RegisterationForm = React.createClass({
         });
       };
     })(this));
+
+    $schoolSelect.on("select2:select", function (e) {
+      log("select2:select", e);
+    });
   },
 
   onUsernameChange: function(e) {
@@ -126,11 +132,12 @@ var RegisterationForm = React.createClass({
 
           <div className="col-sm-6">
             <div className="form-group form-group-default">
-              <label>Email</label>
-              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
-              <span id="invalid-email"></span>
+              <label>Username</label>
+              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
+              <span id="invalid-username"></span>
             </div>
           </div>
+
         </div>
 
         <div className="row">
@@ -143,10 +150,13 @@ var RegisterationForm = React.createClass({
         </div>
         <div className="row">
           <div className="col-sm-6">
-            <div className="form-group form-group-default">
-              <label>Username</label>
-              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
-              <span id="invalid-username"></span>
+            <div className="form-group form-group-default input-group">
+              <label>Email</label>
+              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <span className="input-group-addon" id="school_domain">
+                {this.state.school_domain}
+              </span>
+              <span id="invalid-email"></span>
             </div>
           </div>
 

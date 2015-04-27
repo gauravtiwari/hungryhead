@@ -29,6 +29,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.boolean :verified, default: false
       t.boolean :admin, default: false
       t.boolean :terms_accepted, default: false
+      t.boolean :rules_accepted, default: false
       t.integer :role, default: 0, index: true
       t.integer :state, default: 0, index: true
       t.string :encrypted_password, :null => false, :default => ""

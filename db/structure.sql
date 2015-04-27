@@ -1298,6 +1298,7 @@ CREATE TABLE users (
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
+    rules_accepted boolean DEFAULT false,
     role integer DEFAULT 0,
     state integer DEFAULT 0,
     encrypted_password character varying DEFAULT ''::character varying,
