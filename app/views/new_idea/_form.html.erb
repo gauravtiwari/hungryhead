@@ -1,0 +1,3 @@
+<h2 class="normal">Create your idea profile</h2>
+<div class="divider b-b b-grey b-md b-small"></div>
+<%= react_component('NewIdeaForm', {form: render(template: 'globals/form.json.jbuilder'), meta: {name: current_user.name, location: current_user.location_list.first}})%>

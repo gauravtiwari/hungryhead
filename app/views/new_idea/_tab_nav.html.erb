@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs nav-tabs-linetriangle col-md-6 auto-margin nav-tabs-separator nav-stack-sm">
+  <li class="<%= current_class?(wizard_path(:rules)) %>">
+    <%= link_to(wizard_path(:rules)) do %>
+      <i class="fa fa-list-ul tab-icon"></i>
+      <span>Guidelines</span>
+    <% end %>
+  </li>
+  <li class="<%= current_class?(wizard_path(:pitch)) %>">
+    <%= link_to(wizard_path(:pitch)) do %>
+      <i class="fa fa-briefcase tab-icon"></i>
+      <span>Create idea profile</span>
+    <% end %>
+  </li>
+</ul>
