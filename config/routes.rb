@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome
+  resources :new_idea
 
   resources :notifications, only: [:index, :update]
 
@@ -190,7 +191,7 @@ Rails.application.routes.draw do
   end
 
   #Ideas routes
-  resources :ideas, path: 'ideas' do
+  resources :ideas, path: 'ideas', except: [:new, :create] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     #Member routes

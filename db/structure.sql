@@ -374,7 +374,8 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    rules_accepted boolean
 );
 
 
@@ -2158,6 +2159,13 @@ CREATE INDEX index_ideas_on_privacy ON ideas USING btree (privacy);
 
 
 --
+-- Name: index_ideas_on_rules_accepted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_rules_accepted ON ideas USING btree (rules_accepted);
+
+
+--
 -- Name: index_ideas_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2789,4 +2797,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150428101137');
 

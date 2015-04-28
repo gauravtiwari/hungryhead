@@ -8,7 +8,7 @@ class Mention < ActiveRecord::Base
   private
 
   def delete_user_feed
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

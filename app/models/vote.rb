@@ -21,7 +21,7 @@ class Vote < ActiveRecord::Base
   end
 
   def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

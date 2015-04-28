@@ -18,6 +18,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :school_id
       t.integer :status, default: 0
       t.integer :privacy, default: 0
+      t.boolean :rules_accepted, index: true, default: false
       t.jsonb :settings, default: "{}"
       t.jsonb  :media, :default => "{}"
       t.jsonb :profile, default: "{}"

@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    RecordHitsJob.set(wait: 2.seconds).perform_later(@idea.id, @idea.class.to_s) if @idea.user != current_user
+    @idea.punch(request) if @idea.user != current_user
   end
 
   def card
@@ -96,29 +96,6 @@ class IdeasController < ApplicationController
   def join_team
     JoinTeamJob.perform_later(@user, @idea.user.id, @idea)
     redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
-  end
-
-  # GET /ideas/new
-  def new
-    @idea = Idea.new
-    authorize @idea
-  end
-
-  # POST /ideas
-  # POST /ideas.json
-  def create
-    @idea = Idea.new(idea_params)
-    respond_to do |format|
-      @idea.update_attributes(student_id: @user.id, school_id: @user.school_id)
-      authorize @idea
-      if @idea.save
-          format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
-          format.json { render :show, status: :created, location: @idea }
-      else
-        format.html { render :new }
-        format.json { render json: @idea.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /ideas/1

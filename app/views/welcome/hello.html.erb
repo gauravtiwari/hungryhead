@@ -49,7 +49,7 @@
      								  </div>
 
        								<div class="rule-accept p-t-20">
-  	   									<%= simple_form_for(@user, url: wizard_path, class: 'clearfix', method: :patch) do |f| %>
+  	   									<%= simple_form_for(@user, url: wizard_path, as: :user, class: 'clearfix', method: :patch) do |f| %>
   												<div class="checkbox check-success">
   												  <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted' %>
   												  <label for="rules_accepted">I understand</label>

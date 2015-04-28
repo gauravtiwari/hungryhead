@@ -27,9 +27,9 @@ class NotificationCacheService
     {
       actor: @activity.user.name,
       recipient: recipient_name,
-      recipient_type: mentioner || nil,
+      recipient_type: mentioner || nil.to_s,
       id: @activity.id,
-      created_at: "#{@activity.created_at}",
+      created_at: "#{@activity.created_at.to_i}",
       url: Rails.application.routes.url_helpers.profile_path(@activity.user),
       verb: @activity.verb
     }
