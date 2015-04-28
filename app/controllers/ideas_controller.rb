@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @idea.punch(request) if @idea.user != current_user
+    @idea.punch(request) if @idea.student != current_user
   end
 
   def card
@@ -98,6 +98,19 @@ class IdeasController < ApplicationController
     redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
   end
 
+  # POST /ideas
+  # POST /ideas.json
+  def create
+    @idea = Idea.new(idea_params)
+    @idea.update_attributes(student_id: @user.id, school_id: @user.school_id)
+    authorize @idea
+    if @idea.save
+      render json: {status: :created, location_url: idea_path(@idea)}
+    else
+      render json: @idea.errors, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
@@ -134,7 +147,7 @@ class IdeasController < ApplicationController
 
   # WhiteListed Params
   def idea_params
-    params.require(:idea).permit(:looking_for_team, :video, :logo, :name, :high_concept_pitch,
+    params.require(:idea).permit(:looking_for_team, :rules_accepted, :video, :logo, :name, :high_concept_pitch,
       :elevator_pitch, :website, :location_list, :description, :cover, :market_list,
        :market, :problems, :technology_list, :solutions, :vision, :value_proposition)
   end

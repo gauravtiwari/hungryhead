@@ -35,7 +35,7 @@ var LatestFeed = React.createClass({
   },
 
   fetchNotifications: function(){
-    $.getJSON(Routes.notifications_path(), function(json, textStatus) {
+    $.getJSON(this.props.path, function(json, textStatus) {
       this.setState({feed: json});
     }.bind(this));
   },

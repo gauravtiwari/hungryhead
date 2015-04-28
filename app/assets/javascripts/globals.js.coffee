@@ -11,6 +11,7 @@ jQuery(document).ready ->
 	$('#information-form').validate();
 	$('#feedback_form').validate();
 	$('#edit-profile').validate();
+	$('#pitch_idea_form').validate();
 	$("[data-toggle='tooltip']").tooltip()
 
 	$.each flashMessages, (key, value) ->

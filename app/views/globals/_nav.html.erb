@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header <%= bg if bg %>">
 <div class="container">
   <div class=" pull-left sm-table">
     <div class="header-inner  p-t-10">
@@ -93,7 +93,7 @@
         </button>
         <ul class="dropdown-menu profile-dropdown" role="menu">
           <%= content_tag(:li) do %>
-            <%= link_to(new_idea_path(getting_started: true)) do %>
+            <%= link_to(new_idea_path(:rules)) do %>
               <i class="fa fa-lightbulb-o"></i> Post Idea
             <% end %>
           <% end %>

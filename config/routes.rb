@@ -96,7 +96,14 @@ Rails.application.routes.draw do
   resources :welcome
   resources :new_idea
 
-  resources :notifications, only: [:index, :update]
+  resources :notifications, only: [:index, :update] do
+    member do
+      get :ideas
+    end
+    collection do
+      post :mark_as_read
+    end
+  end
 
   resources :follows, only: [:create, :destroy] do
     member do
@@ -156,11 +163,6 @@ Rails.application.routes.draw do
   end
 
   resources :messages, only: [:new, :create, :destroy]
-  resources :notifications, only: [:index] do
-    collection do
-      post :mark_as_read
-    end
-  end
 
   #Users routes
   resources :users, path: 'people' do
@@ -191,7 +193,7 @@ Rails.application.routes.draw do
   end
 
   #Ideas routes
-  resources :ideas, path: 'ideas', except: [:new, :create] do
+  resources :ideas, path: 'ideas', except: [:new, :edit] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     #Member routes

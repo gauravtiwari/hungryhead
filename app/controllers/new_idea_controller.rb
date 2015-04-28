@@ -1,6 +1,8 @@
 class NewIdeaController < ApplicationController
+  layout "new_idea"
+
   include Wicked::Wizard
-  steps :rules, :create
+  steps :rules, :pitch
 
   def show
     case step
@@ -14,17 +16,7 @@ class NewIdeaController < ApplicationController
   end
 
   def update
-    case step
-    when :rules
-      @idea = Idea.new(idea_params)
-      session[:idea] = @idea.attributes
-      render_wizard
-    when :create
-      session[:idea] = session[:idea].merge(params[:idea])
-      @idea = Idea.new(session[:idea])
-      @idea.save
-      redirect_to idea_path(@idea)
-    end
+    render_wizard
   end
 
   private
