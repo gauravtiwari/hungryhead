@@ -1,71 +1,142 @@
-<div id="content">
-    <div class="horz-section">
-      <div class="wrapper-small listing-hero-banner panel panel-default">
-            <h2>Find ideas you would like to browse,</h2>
-            <span class="large">or <%= link_to('pitch your own idea', new_idea_path) %> to validate with others</span>
-      </div>
+<div class="horz-section col-md-12">
+  <div class="wrapper-small bg-solid text-center panel panel-default">
+    <h2 class="text-white">Find ideas you would like to browse,</h2>
+    <span class="large text-white">or <%= link_to('pitch your own idea', new_idea_path, class: 'text-white b-b b-white p-b-5') %> to validate with others</span>
+  </div>
+
+      <div class="container-fluid container-fixed-lg bg-white">
+       <div class="panel panel-transparent">
+           <div class="panel-heading">
+               <div class="panel-title">
+                   Pages Default Tables Style
+               </div>
+               <div class="pull-right">
+                   <div class="col-xs-12">
+                       <input class="form-control pull-right" id=
+                       "search-table" placeholder="Search" type="text">
+                   </div>
+               </div>
+               <div class="clearfix"></div>
+           </div>
+           <div class="panel-body">
+               <div class="dataTables_wrapper form-inline no-footer" id=
+               "tableWithSearch_wrapper">
+                   <div class="table-responsive">
+                       <table class=
+                       "table table-hover demo-table-search dataTable no-footer"
+                       id="tableWithSearch">
+                           <thead>
+                               <tr>
+                                   <th class="sorting_asc" colspan="1"
+                                   rowspan="1" style="width: 186px;"
+                                   tabindex="0">
+                                       Title
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 208px;"
+                                   tabindex="0">
+                                       Places
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 229px;"
+                                   tabindex="0">
+                                       Activities
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 130px;"
+                                   tabindex="0">
+                                       Status
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 174px;"
+                                   tabindex="0">
+                                       Last Update
+                                   </th>
+                               </tr>
+                           </thead>
+                           <tbody>
+
+                             <tr role="row" class="odd">
+                                 <td class=
+                                 "v-align-middle semi-bold sorting_1">
+                                     <p>
+                                         A day to remember
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <a class="btn btn-tag" href=
+                                     "#">United States</a><a class=
+                                     "btn btn-tag" href="#">India</a>
+                                     <a class="btn btn-tag" href=
+                                     "#">China</a><a class="btn btn-tag"
+                                     href="#">Africa</a>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         UK was on top of the art world
+                                         18-19 century had the best
+                                         food, best cloths and best
+                                         entertainment back then) it was
+                                         a hyper nation
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         Public
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         April 13,2014 10:13
+                                     </p>
+                                 </td>
+                             </tr>
+
+                             <tr role="row" class="even">
+                                 <td class=
+                                 "v-align-middle semi-bold sorting_1">
+                                     <p>
+                                         A day to remember
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <a class="btn btn-tag" href=
+                                     "#">United States</a><a class=
+                                     "btn btn-tag" href="#">India</a>
+                                     <a class="btn btn-tag" href=
+                                     "#">China</a><a class="btn btn-tag"
+                                     href="#">Africa</a>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         UK was on top of the art world
+                                         18-19 century had the best
+                                         food, best cloths and best
+                                         entertainment back then) it was
+                                         a hyper nation
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         Public
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         April 13,2014 10:13
+                                     </p>
+                                 </td>
+                             </tr>
+
+                           </tbody>
+                       </table>
+                   </div>
+
+               </div>
+           </div>
+       </div>
     </div>
-      <div class="container">
-        <div class="col-md-12">
-          <div class="row project-columns">
-          <% @ideas.each do |idea| %>
-            <div class="col-md-4">
-            <div class="result-listing-box panel panel-default">
-              <% if idea.user != current_user %>
-                <div class="search-follow-idea">
-                  <%= react_component('Follow',{:followed => followed?(idea)}) %>
-                </div>
-              <% end %>
-              <div class="idea-listing-header">
-                <div class="idea-logo">
-                  <%= link_to(idea_path(idea)) do %>
-                    <%= image_tag(idea.logo.url(:avatar), width: "40px")%>
-                  <% end %>
-                </div>
-                <div class="idea-meta">
-                  <h1><%= link_to(idea.name, idea_path(idea)) %></h1>
-                  <span>by <%= link_to(idea.user.name, profile_path(idea.user)) %></span>
-                </div>
-              </div>
-              <div class="project-descript">
-                <%= content_tag(:p, class: "idea-description") do %>
-                  <%= truncate(idea.description, length: 300) %>
-                <% end %>
-                <ul class="idea-tags-listing">
-                  <% idea.market_list.each do |tag| %>
-                    <li><%= link_to('#'+tag, market_path(tag.parameterize)) %></li>
-                  <% end %>
-                  <% idea.location_list.each do |tag| %>
-                    <li><%= link_to('#'+tag, location_path(tag.parameterize)) %></li>
-                  <% end %>
-                </ul>
 
-                <p class="idea-posted-date">
-                  <i class="icon-clock3"></i> <%= local_time_ago(idea.created_at) %>
-                </p>
+  </div>
 
-                <div class="results-idea-progress">
-                  <ul class="stastics-list">
-                    <li>
-                      Followers
-                      <span><i class="ion-person-stalker"></i> <%= idea.followers_count %></span>
-                    </li>
-                    <li>
-                      Raised
-                      <span><i class="fa fa-dollar"></i> <%= idea.balance %></span>
-                    </li>
-                    <li>
-                      Feedbacks
-                      <span><i class="ion-chatbubbles"></i> <%= idea.feedbacks_count %></span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
 
-              </div>
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-</div>

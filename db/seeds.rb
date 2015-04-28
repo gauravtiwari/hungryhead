@@ -18,6 +18,15 @@ User.create!(
 	confirmed_at: Time.now
 )
 
+School.create!(
+	name: "Lancaster University",
+	email: "info@lancas.ac.uk",
+	location_list: "Lancaster",
+	logo: "assets/lancaster-logo.png",
+	cover: "assets/cover_lancs-cover.jpg",
+	description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus nesciunt ex esse similique quam placeat, possimus ratione animi, non, voluptate consequatur aperiam. Rerum mollitia sequi et molestiae, eius soluta provident!"
+)
+
 hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")
 
 data_hash = JSON.parse(hobbies)

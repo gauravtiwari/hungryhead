@@ -13,8 +13,7 @@ class CreateActivities < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :activities, [:trackable_id, :trackable_type], unique: true, algorithm: :concurrently
-    add_index :activities, [:key], unique: true, algorithm: :concurrently
+    add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently
   end
   # Drop table

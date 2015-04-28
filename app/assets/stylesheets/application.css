@@ -11,6 +11,10 @@
  * require nprogress-bootstrap
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require font-awesome
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require dataTables/extras/dataTables.fixedColumns
+ *= require dataTables/extras/dataTables.responsive
  *= require sweetalert
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar

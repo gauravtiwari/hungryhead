@@ -25,6 +25,11 @@
 //= require js-routes
 //= require select2
 //= require local_time
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/extras/dataTables.tableTools
+//= require dataTables/extras/dataTables.responsive
+//= require lodash
 //= require slimScroll
 //= require jquery.atwho
 //= require typer

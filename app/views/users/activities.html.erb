@@ -1,5 +1,7 @@
+<% data = render(template: 'users/show.json.jbuilder') %>
+
 <div class="col-md-4 col-sm-4 no-padding box-shadow  col-lg-4 col-xlg-4">
-    <%= render partial: 'sidebar' %>
+    <%= render partial: 'sidebar', locals: {data: data} %>
 </div>
 
 <div class="col-md-8 col-sm-8">
@@ -22,14 +24,14 @@
             </div>
             <h5>Jeff Curtis</h5>
             <h6>Shared a Tweet
-      
+
                 <span class="location semi-bold">
                     <i class="fa fa-map-marker"></i> SF, California
                 </span>
             </h6>
         </div>
         <div class="card-description">
-            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha.
                 <a href="#">#quote</a>
             </p>
         </div>
@@ -54,14 +56,14 @@
             </div>
             <h5>Jeff Curtis</h5>
             <h6>Shared a Tweet
-      
+
                 <span class="location semi-bold">
                     <i class="fa fa-map-marker"></i> SF, California
                 </span>
             </h6>
         </div>
         <div class="card-description">
-            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha. 
+            <p>What you think, you become. What you feel, you attract. What you imagine, you create - Buddha.
                 <a href="#">#quote</a>
             </p>
         </div>
@@ -86,7 +88,7 @@
             </div>
             <h5>Andy Young</h5>
             <h6>Updated his status
-      
+
                 <span class="location semi-bold">
                     <i class="icon-map"></i> NYC, New York
                 </span>

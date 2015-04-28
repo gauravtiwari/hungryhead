@@ -63,6 +63,12 @@ var CardContent = React.createClass({
                          </a>;
     }
 
+    if(this.props.profile.school_url) {
+      var school = <a className="text-white p-r-10" href={this.props.profile.school_url}>
+                          <i className="fa fa-university"></i> {this.props.profile.school_name}
+                          </a>;
+    }
+
     return(
         <div className="profile-card padding-20 bg-solid box-shadow">
             <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
@@ -81,10 +87,7 @@ var CardContent = React.createClass({
                        </h3>
                        <p className="no-margin text-white fs-14">{this.props.profile.mini_bio}</p>
                        <p className="text-white m-t-5 small">
-                         <a className="text-white p-r-10" href={this.props.profile.school_url}>
-                          <i className="fa fa-university"></i> {this.props.profile.school_name}
-                          </a>
-                          {location}
+                         {school}{location}
                        </p>
                        <ul className="text-white m-t-5 small no-style">
                          {markets}{hobbies}

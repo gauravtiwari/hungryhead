@@ -24,4 +24,31 @@ $(document).ready(function () {
 	    maxResults     : 10
 	  });
 
+	  var responsiveHelper = undefined;
+	  var breakpointDefinition = {
+	      tablet: 1024,
+	      phone: 480
+	  };
+	  var initTableWithSearch = function() {
+	      var table = $('#tableWithSearch');
+	      var settings = {
+	          dom: "<'table-responsive't><'row'<p i>>",
+	          resposive: true,
+	          destroy: true,
+	          scrollCollapse: true,
+	          language: {
+	              engthMenu: "_MENU_ ",
+	              info: "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+	          },
+	          displayLength: 5
+	      };
+	      table.dataTable(settings);
+	      $('#search-table').keyup(function() {
+	          table.fnFilter($(this).val());
+	      });
+	  }
+	  initTableWithSearch();
+
+
 });
+

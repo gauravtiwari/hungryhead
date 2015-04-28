@@ -163,7 +163,6 @@ Rails.application.routes.draw do
 
   #Users routes
   resources :users, path: 'people' do
-    resources :notes
     get :autocomplete_user_name, :on => :collection
     member do
       get :activities
@@ -191,7 +190,7 @@ Rails.application.routes.draw do
   end
 
   #Ideas routes
-  resources :ideas, path: 'idea' do
+  resources :ideas, path: 'ideas' do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     #Member routes
@@ -229,6 +228,8 @@ Rails.application.routes.draw do
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
+  get '/:slug/notes', to: SlugRouter.to(:notes), as: :profile_notes
+  get '/:slug/notes/:id', to: SlugRouter.to(:note), as: :profile_notes_note
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending

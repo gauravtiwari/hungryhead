@@ -13,8 +13,8 @@ class CreateNotifications < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :notifications, [:trackable_id, :trackable_type], unique: true, algorithm: :concurrently
-    add_index :notifications, [:key], unique: true, algorithm: :concurrently
+    add_index :notifications, [:trackable_id, :trackable_type], algorithm: :concurrently
+    add_index :notifications, [:key], algorithm: :concurrently
     add_index :notifications, [:recipient_id, :recipient_type], algorithm: :concurrently
   end
   # Drop table

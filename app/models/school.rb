@@ -6,7 +6,9 @@ class School < ActiveRecord::Base
 	has_many :users
 	has_many :ideas
 
-	store_accessor :data, :established, :location, :website
+	acts_as_taggable_on :locations
+
+	store_accessor :data, :established, :locations, :website
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
 
@@ -57,7 +59,7 @@ class School < ActiveRecord::Base
 		loader = Soulmate::Loader.new("schools")
 		if logo
 		  image =  logo.url(:avatar)
-		  resume = location
+		  resume = location_list.first
 		else
 		  image= "http://placehold.it/30"
 		end

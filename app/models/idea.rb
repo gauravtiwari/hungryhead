@@ -189,11 +189,13 @@ class Idea < ActiveRecord::Base
   def increment_counters
     school.ideas_counter.increment
     student.ideas_counter.increment
+    student.ideas_ids.add(id, created_at.to_i)
   end
 
   def decrement_counters
     school.ideas_counter.decrement
     student.ideas_counter.decrement
+    student.ideas_ids.delete(id)
   end
 
 end

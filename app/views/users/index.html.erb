@@ -1,25 +1,171 @@
-<p id="notice"><%= notice %></p>
+<div class="horz-section col-md-12">
+  <div class="wrapper-small bg-solid text-center panel panel-default">
+    <h2 class="text-white">Find people you would like to connect</h2>
+  </div>
 
-<h1>Listing Students</h1>
+      <div class="container-fluid container-fixed-lg bg-white">
+       <div class="panel panel-transparent">
+           <div class="panel-heading">
+               <div class="panel-title">
+                   Pages Default Tables Style
+               </div>
+               <div class="pull-right">
+                   <div class="col-xs-12">
+                       <input class="form-control pull-right" id=
+                       "search-table" placeholder="Search" type="text">
+                   </div>
+               </div>
+               <div class="clearfix"></div>
+           </div>
+           <div class="panel-body">
+               <div class="dataTables_wrapper form-inline no-footer" id=
+               "tableWithSearch_wrapper">
+                   <div class="table-responsive">
+                       <table class=
+                       "table table-hover demo-table-search dataTable no-footer"
+                       id="tableWithSearch">
+                           <thead>
+                               <tr>
+                                   <th class="sorting_asc" colspan="1"
+                                   rowspan="1" style="width: 186px;"
+                                   tabindex="0">
+                                       Title
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 208px;"
+                                   tabindex="0">
+                                       Places
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 229px;"
+                                   tabindex="0">
+                                       Activities
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 130px;"
+                                   tabindex="0">
+                                       Status
+                                   </th>
+                                   <th class="sorting" colspan="1"
+                                   rowspan="1" style="width: 174px;"
+                                   tabindex="0">
+                                       Last Update
+                                   </th>
+                               </tr>
+                           </thead>
+                           <tbody>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                             <tr role="row" class="odd">
+                                 <td class=
+                                 "v-align-middle semi-bold sorting_1">
+                                     <p>
+                                         A day to remember
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <a class="btn btn-tag" href=
+                                     "#">United States</a><a class=
+                                     "btn btn-tag" href="#">India</a>
+                                     <a class="btn btn-tag" href=
+                                     "#">China</a><a class="btn btn-tag"
+                                     href="#">Africa</a>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         UK was on top of the art world
+                                         18-19 century had the best
+                                         food, best cloths and best
+                                         entertainment back then) it was
+                                         a hyper nation
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         Public
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         April 13,2014 10:13
+                                     </p>
+                                 </td>
+                             </tr>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                             <tr role="row" class="even">
+                                 <td class=
+                                 "v-align-middle semi-bold sorting_1">
+                                     <p>
+                                         A day to remember
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <a class="btn btn-tag" href=
+                                     "#">United States</a><a class=
+                                     "btn btn-tag" href="#">India</a>
+                                     <a class="btn btn-tag" href=
+                                     "#">China</a><a class="btn btn-tag"
+                                     href="#">Africa</a>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         UK was on top of the art world
+                                         18-19 century had the best
+                                         food, best cloths and best
+                                         entertainment back then) it was
+                                         a hyper nation
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         Public
+                                     </p>
+                                 </td>
+                                 <td class="v-align-middle">
+                                     <p>
+                                         April 13,2014 10:13
+                                     </p>
+                                 </td>
+                             </tr>
 
-<br>
+                           </tbody>
+                       </table>
+                   </div>
+                   <div class="row">
+                       <div>
+                           <div class=
+                           "dataTables_paginate paging_bootstrap pagination"
+                           id="tableWithSearch_paginate">
+                               <ul>
+                                   <li class="prev disabled">
+                                       <a class="pg-arrow_left" href="#"
+                                       style="font-style: italic"></a>
+                                   </li>
+                                   <li class="active">
+                                       <a href="#">1</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">2</a>
+                                   </li>
+                                   <li>
+                                       <a href="#">3</a>
+                                   </li>
+                                   <li class="next">
+                                       <a class="pg-arrow_right" href="#"
+                                       style="font-style: italic"></a>
+                                   </li>
+                               </ul>
+                           </div>
+                           <div class="dataTables_info" id=
+                           "tableWithSearch_info">
+                               Showing <b>1 to 5</b> of 12 entries
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
 
-<%= link_to 'New Student', new_student_path %>
+  </div>
+
+

@@ -116,6 +116,7 @@ class UsersController < ApplicationController
   end
 
   def activities
+    @badges = @user.badges.group_by(&:id)
     @activities = Activity
     .where(owner_id: @user.id, owner_type: "User")
     .order(created_at: :desc)

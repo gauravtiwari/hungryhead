@@ -1976,13 +1976,6 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_activities_on_key ON activities USING btree (key);
-
-
---
 -- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2000,7 +1993,7 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
+CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
 
 
 --
@@ -2329,7 +2322,7 @@ CREATE INDEX index_notes_on_user_id ON notes USING btree (user_id);
 -- Name: index_notifications_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_notifications_on_key ON notifications USING btree (key);
+CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
 
 
 --
@@ -2350,7 +2343,7 @@ CREATE INDEX index_notifications_on_recipient_id_and_recipient_type ON notificat
 -- Name: index_notifications_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
+CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
 
 
 --
