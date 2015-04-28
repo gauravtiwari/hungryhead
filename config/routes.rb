@@ -225,6 +225,8 @@ Rails.application.routes.draw do
 
   end
 
+  resources :notes, only: [:create, :destroy, :update]
+
 
   #Vanity urls for users
   get '/:slug', to: SlugRouter.to(:show), as: :profile

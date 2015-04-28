@@ -15,7 +15,7 @@ var LatestFeedCommentItem = React.createClass({
       var recipient = "on " + this.props.item.recipient;
     }
     return (
-        <li id={html_id} className="p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
+        <li id={html_id} className="p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
             <a className="text-master hint-text" href={this.props.item.url}>
               <strong>{actor}</strong>

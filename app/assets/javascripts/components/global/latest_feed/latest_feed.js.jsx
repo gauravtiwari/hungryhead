@@ -57,6 +57,8 @@ var LatestFeed = React.createClass({
         return <LatestFeedVoteItem key={Math.random()} item={item} />
       } else if(item.verb === "mentioned"){
         return <LatestFeedMentionItem key={Math.random()} item={item} />
+      } else if(item.verb === "noted"){
+        return <LatestFeedNoteItem key={Math.random()} item={item} />
       }
     });
 

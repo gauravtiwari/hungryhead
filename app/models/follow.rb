@@ -8,7 +8,7 @@ class Follow < ActiveRecord::Base
   validates :follower, presence: true
 
   after_create :increment_counters
-  before_destroy :decrement_counters, :delete_activity
+  before_destroy :decrement_counters, :delete_notification
   #before_destroy :remove_activity
 
   private
@@ -48,8 +48,9 @@ class Follow < ActiveRecord::Base
        }.to_json
     )
   end
-  def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+
+  def delete_notification
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

@@ -24,7 +24,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = CreateNoteService.new(note_params, @idea, current_user).create
+    @note = CreateNoteService.new(note_params, current_user).create
     authorize @note
     respond_to do |format|
       if @note.save

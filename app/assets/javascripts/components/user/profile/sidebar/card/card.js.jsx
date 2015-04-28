@@ -11,8 +11,6 @@ var Card = React.createClass({
       investments_count: data.user.profile.investments_count,
       form: data.user.about_me.form,
       is_owner: data.user.is_owner,
-      loading: false,
-      mode: false,
       disabled: false
     }
   },
@@ -25,7 +23,6 @@ var Card = React.createClass({
   },
 
   saveSidebarWidget:function(formData, action) {
-    this.setState({loading: true});
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
@@ -34,7 +31,6 @@ var Card = React.createClass({
       dataType: "json",
       success: function ( data ) {
         this.setState({profile: data.user.profile});
-        this.setState({mode: false, loading: false});
         $('#editProfileFormPopup').modal('hide');
         $('body').pgNotification({style: "simple", message: "Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
       }.bind(this),
@@ -45,18 +41,15 @@ var Card = React.createClass({
   },
 
   openForm: function() {
-    this.setState({mode: !this.state.mode});
     $('body').append($('<div>', {class: 'edit_profile_form_modal', id: 'edit_profile_form_modal'}));
     React.render(<CardForm key={Math.random()} closeForm={this.closeForm} openForm={this.openForm} profile={this.state.profile} loading={this.state.loading} form={this.state.form} saveSidebarWidget={this.saveSidebarWidget} />,
       document.getElementById('edit_profile_form_modal')
     );
-    ReactRailsUJS.mountComponents();
     $('#editProfileFormPopup').modal('show');
   },
 
   closeForm: function() {
     $('#editProfileFormPopup').modal('hide');
-    this.setState({mode: false, loaing: false});
   },
 
   render: function() {
