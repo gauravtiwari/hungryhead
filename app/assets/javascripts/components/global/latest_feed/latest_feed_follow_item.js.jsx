@@ -2,7 +2,7 @@
 var LatestFeedFollowItem = React.createClass({
   mixins: [SetIntervalMixin],
   componentDidMount: function() {
-    var interval = this.props.refreshMillis || 60000;
+    var interval = this.props.item.created_at || 60000;
     this.setInterval(this.forceUpdate.bind(this), interval);
   },
   render: function() {
@@ -18,6 +18,7 @@ var LatestFeedFollowItem = React.createClass({
     } else {
       var actor = this.props.item.recipient;
     }
+
     return (
         <li id={html_id} className="p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">

@@ -363,6 +363,7 @@ CREATE TABLE ideas (
     school_id integer,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
+    rules_accepted boolean DEFAULT false,
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
     profile jsonb DEFAULT '{}'::jsonb,
@@ -374,8 +375,7 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    rules_accepted boolean
+    level integer DEFAULT 0
 );
 
 
@@ -2797,6 +2797,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
-
-INSERT INTO schema_migrations (version) VALUES ('20150428101137');
 

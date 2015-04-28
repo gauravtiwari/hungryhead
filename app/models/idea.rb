@@ -50,7 +50,8 @@ class Idea < ActiveRecord::Base
 
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate
-  before_create :add_fund, :increment_counters
+  before_create :add_fund
+  after_commit :increment_counters
   after_save :load_into_soulmate
 
   #Associations
@@ -161,6 +162,15 @@ class Idea < ActiveRecord::Base
     else
       return true
     end
+  end
+
+  def refresh_redis_cache
+    school.ideas_counter.reset
+    student.ideas_counter.reset
+    student.ideas_ids.clear
+    school.ideas_counter.increment
+    student.ideas_counter.increment
+    student.ideas_ids.add(id, created_at.to_i)
   end
 
   private

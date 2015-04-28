@@ -49,7 +49,7 @@ class Follow < ActiveRecord::Base
     )
   end
   def delete_activity
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end
