@@ -1,4 +1,4 @@
-<% if @user.followers_count > 0 %>
+<% if @user.followers_counter.value > 0 %>
 <div class="widget-16 panel no-margin widget-loader-circle">
     <div class="panel-heading">
         <div class="panel-title b-b b-grey p-b-5">
@@ -23,7 +23,7 @@
                 </li>
             <% end %>
 
-            <% if @user.followers_count > 8 %>
+            <% if @user.followers_counter.value > 8 %>
                 <li>
                     <div class="thumbnail-wrapper d32 circular b-white">
                         <div class="bg-master text-center text-white">

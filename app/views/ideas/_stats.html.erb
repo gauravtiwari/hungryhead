@@ -2,7 +2,7 @@
   <div class="col-md-4 no-padding text-center b-r b-white b-dashed">
       <h1 class="all-caps fs-13 text-white bold small">Feedbacks</h1>
       <p class="all-caps bold  fs-13 no-margin text-white ">
-        <%= @idea.feedbacks_count %>
+        <%= @idea.feedbacks_counter.value %>
       </p>
   </div>
   <div class="col-md-4 text-center b-r b-white b-dashed">
@@ -12,7 +12,7 @@
   <div class="col-md-4 text-center">
       <h1 class="all-caps fs-13 text-white bold small">Votes</h1>
       <p class="all-caps bold  fs-13 no-margin text-white">
-        <%= @idea.votes_count %>
+        <%= @idea.votes_counter.value %>
       </p>
   </div>
 </div>

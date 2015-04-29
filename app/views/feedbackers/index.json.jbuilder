@@ -22,7 +22,7 @@ json.payload do
     json.prev_page @feedbackers.previous_page
     json.per_page @feedbackers.per_page
     json.total_pages @feedbackers.total_pages
-    json.count @idea.feedbackers.length
+    json.count @idea.feedbackers_counter.length
     json.label "People who gave feedback to #{@idea.name}"
   end
 

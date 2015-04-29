@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
   validates_presence_of :voter_id
 
   before_destroy :decrement_counter, :delete_notification
-  after_create :increment_counter, :update_activity_score
+  after_create :increment_counter
 
   private
 
@@ -21,13 +21,6 @@ class Vote < ActiveRecord::Base
   def decrement_counter
     votable.votes_counter.decrement if votable.votes_counter.value > 0
     votable.voters_ids.delete(voter.id)
-  end
-
-  def update_activity_score
-    Activity.where(recipient_id: self.votable.id, recipient_type: self.votable.class.to_s).find_each do |activity|
-      activity.score = activity.score + 1
-      activity.save
-    end
   end
 
   def delete_notification

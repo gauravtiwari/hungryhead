@@ -25,15 +25,15 @@
     <ul class="stastics-list">
       <li>
         Followers
-        <span><i class="fa fa-users"></i> <%= @user.followers_count %></span>
+        <span><i class="fa fa-users"></i> <%= @user.followers_counter.value %></span>
       </li>
       <li>
         Investments
-        <span><i class="fa fa-dollar"></i> <%= @user.investments_count %></span>
+        <span><i class="fa fa-dollar"></i> <%= @user.investments_counter.value %></span>
       </li>
       <li>
         Feedbacks
-        <span><i class="fa fa-comment"></i> <%= @user.feedbacks_count %></span>
+        <span><i class="fa fa-comment"></i> <%= @user.feedbacks_counter.value %></span>
       </li>
     </ul>
   </div>

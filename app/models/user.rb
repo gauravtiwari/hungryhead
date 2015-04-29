@@ -75,7 +75,6 @@ class User < ActiveRecord::Base
 
   cache_index :school_id
   cache_index :type
-  cache_index :score
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader

@@ -11,6 +11,5 @@ class CreateNotes < ActiveRecord::Migration
     end
     add_index :notes, :status, algorithm: :concurrently
     add_index :notes, :user_id, algorithm: :concurrently
-    add_index :notes, :score, algorithm: :concurrently
   end
 end
