@@ -14,7 +14,7 @@ class CreateActivities < ActiveRecord::Migration
       #Score to calculate popularity
       t.bigint :score, default: DateTime.now.to_i
 
-      t.boolean :published, default: true, index: true
+      t.boolean :published, default: true
 
       t.belongs_to :recipient, :polymorphic => true
 

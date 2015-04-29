@@ -8,7 +8,6 @@ class FeedbackNotificationService
 
   def notify
     @activity = @user.activities.create!(trackable: @feedback, verb: 'left a feedback for', recipient: @idea, key: 'feedback.create')
-    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
   end
 
@@ -19,8 +18,17 @@ class FeedbackNotificationService
       "new_feed_item",
       {
         data:  activity.user.latest_notifications.last
-      }
+      }.to_json
     )
+
+    if activity.recipient_type == "Idea"
+      Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
+        "new_feed_item",
+        {
+          data: activity
+        }.to_json
+      )
+    end
   end
 
 end

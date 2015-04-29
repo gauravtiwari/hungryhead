@@ -8,7 +8,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.belongs_to :user
       t.string  :key
       t.jsonb    :parameters, default: "{}"
-      t.boolean :published, default: true, index: true
+      t.boolean :published, default: true
       t.belongs_to :recipient, :polymorphic => true
       t.timestamps null: false
     end

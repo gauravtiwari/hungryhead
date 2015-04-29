@@ -68,6 +68,7 @@ CREATE TABLE activities (
     user_id integer,
     key character varying,
     parameters jsonb DEFAULT '{}'::jsonb,
+    score bigint DEFAULT 1430321701,
     published boolean DEFAULT true,
     recipient_id integer,
     recipient_type character varying,
@@ -178,7 +179,10 @@ CREATE TABLE comments (
     parent_id integer,
     lft integer,
     rgt integer,
+    score bigint DEFAULT 1430321704,
     role character varying DEFAULT 'comments'::character varying,
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    votes_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -214,6 +218,13 @@ CREATE TABLE feedbacks (
     user_id integer NOT NULL,
     status integer DEFAULT 0 NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
+    score bigint DEFAULT 1430321701,
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    commenters_ids character varying[] DEFAULT '{}'::character varying[],
+    sharer_ids character varying[] DEFAULT '{}'::character varying[],
+    votes_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    shares_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
@@ -355,10 +366,15 @@ CREATE TABLE ideas (
     description text DEFAULT ''::text,
     logo character varying,
     cover character varying,
-    team character varying[] DEFAULT '{}'::character varying[],
-    team_invites character varying[] DEFAULT '{}'::character varying[],
-    feedbackers character varying[] DEFAULT '{}'::character varying[],
-    investors character varying[] DEFAULT '{}'::character varying[],
+    team_ids character varying[] DEFAULT '{}'::character varying[],
+    team_invites_ids character varying[] DEFAULT '{}'::character varying[],
+    feedbackers_ids character varying[] DEFAULT '{}'::character varying[],
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    commenters_ids character varying[] DEFAULT '{}'::character varying[],
+    investors_ids character varying[] DEFAULT '{}'::character varying[],
+    followers_ids character varying[] DEFAULT '{}'::character varying[],
+    sharers_ids character varying[] DEFAULT '{}'::character varying[],
+    score bigint DEFAULT 1430321700,
     looking_for_team boolean DEFAULT false,
     school_id integer,
     status integer DEFAULT 0,
@@ -369,6 +385,13 @@ CREATE TABLE ideas (
     profile jsonb DEFAULT '{}'::jsonb,
     sections jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
+    votes_count integer DEFAULT 0 NOT NULL,
+    followers_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    shares_count integer DEFAULT 0 NOT NULL,
+    investments_count integer DEFAULT 0 NOT NULL,
+    idea_messages_count integer DEFAULT 0 NOT NULL,
+    feedbacks_count integer DEFAULT 0 NOT NULL,
     cached_location_list character varying,
     cached_market_list character varying,
     cached_technology_list character varying,
@@ -409,6 +432,10 @@ CREATE TABLE investments (
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    commenters_ids character varying[] DEFAULT '{}'::character varying[],
+    votes_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -819,6 +846,13 @@ CREATE TABLE notes (
     body text,
     status integer,
     user_id integer,
+    score bigint DEFAULT 1430321704,
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    commenters_ids character varying[] DEFAULT '{}'::character varying[],
+    sharers_ids character varying[] DEFAULT '{}'::character varying[],
+    votes_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    shares_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1041,6 +1075,11 @@ CREATE TABLE schools (
     media jsonb DEFAULT '{}'::jsonb,
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
+    followers_ids character varying[] DEFAULT '{}'::character varying[],
+    students_count integer DEFAULT 0 NOT NULL,
+    teachers_count integer DEFAULT 0 NOT NULL,
+    ideas_count integer DEFAULT 0 NOT NULL,
+    followers_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1110,6 +1149,10 @@ CREATE TABLE shares (
     shareable_type character varying,
     user_id integer,
     parameters jsonb,
+    voters_ids character varying[] DEFAULT '{}'::character varying[],
+    commenters_ids character varying[] DEFAULT '{}'::character varying[],
+    votes_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1290,12 +1333,22 @@ CREATE TABLE users (
     settings jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
     school_id integer,
+    followers_ids character varying[] DEFAULT '{}'::character varying[],
+    followings_ids character varying[] DEFAULT '{}'::character varying[],
+    idea_followings_ids character varying[] DEFAULT '{}'::character varying[],
+    score bigint DEFAULT 1430321699,
     cached_location_list character varying,
     cached_market_list character varying,
     cached_skill_list character varying,
     cached_subject_list character varying,
     cached_technology_list character varying,
     cached_service_list character varying,
+    ideas_count integer DEFAULT 0 NOT NULL,
+    followers_count integer DEFAULT 0 NOT NULL,
+    followings_count integer DEFAULT 0 NOT NULL,
+    comments_count integer DEFAULT 0 NOT NULL,
+    investments_count integer DEFAULT 0 NOT NULL,
+    feedbacks_count integer DEFAULT 0 NOT NULL,
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
@@ -1991,6 +2044,13 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 
 
 --
+-- Name: index_activities_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_score ON activities USING btree (score);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2061,6 +2121,13 @@ CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
 
 
 --
+-- Name: index_comments_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_score ON comments USING btree (score);
+
+
+--
 -- Name: index_comments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2086,6 +2153,13 @@ CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
 --
 
 CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
+
+
+--
+-- Name: index_feedbacks_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_score ON feedbacks USING btree (score);
 
 
 --
@@ -2177,6 +2251,13 @@ CREATE INDEX index_ideas_on_sash_id ON ideas USING btree (sash_id);
 --
 
 CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
+
+
+--
+-- Name: index_ideas_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_score ON ideas USING btree (score);
 
 
 --
@@ -2313,10 +2394,17 @@ CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING
 
 
 --
--- Name: index_notes_on_status_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notes_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_notes_on_status_and_user_id ON notes USING btree (status, user_id);
+CREATE INDEX index_notes_on_score ON notes USING btree (score);
+
+
+--
+-- Name: index_notes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notes_on_status ON notes USING btree (status);
 
 
 --
@@ -2331,13 +2419,6 @@ CREATE INDEX index_notes_on_user_id ON notes USING btree (user_id);
 --
 
 CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
-
-
---
--- Name: index_notifications_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_published ON notifications USING btree (published);
 
 
 --
@@ -2576,6 +2657,13 @@ CREATE INDEX index_users_on_role ON users USING btree (role);
 --
 
 CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
+
+
+--
+-- Name: index_users_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_score ON users USING btree (score);
 
 
 --

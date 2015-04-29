@@ -5,14 +5,12 @@ class NotificationsController < ApplicationController
 
 
   def index
-    @notifications = Activity.where(user_id: current_user.followings_ids, published: true).map{|activity| activity.user.latest_notifications.revrange(0,100)}
-    render json: Oj.dump(@notifications.uniq.flatten, mode: :compat)
+    @notifications = Activity.where(user_id: current_user.followings_ids, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   def ideas
     @idea = Idea.find(params[:id])
-    @notifications = Activity.where(recipient_id: @idea.id, published: true).map{|activity| @idea.latest_notifications.revrange(0,100)}
-    render json: Oj.dump(@notifications.uniq.flatten, mode: :compat)
+    @notifications = Activity.where(recipient_id: @idea.id, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   def mark_as_read

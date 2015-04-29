@@ -8,7 +8,6 @@ class FollowNotificationService
 
   def notify
     @activity = @user.notifications.create!(trackable: @follow, verb: 'followed', recipient: @followable, key: 'follow.create')
-    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
   end
 
@@ -20,8 +19,16 @@ class FollowNotificationService
       "new_feed_item",
       {
         data: activity.user.latest_notifications.last
-      }
+      }.to_json
     )
+    if activity.recipient_type == "Idea"
+      Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
+        "new_feed_item",
+        {
+          data: activity
+        }.to_json
+      )
+    end
 	end
 
 end

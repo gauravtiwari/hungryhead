@@ -8,7 +8,6 @@ class CommentNotificationService
 
 	def notify
     @activity = @user.notifications.create!(trackable: @comment, recipient: @commentable, verb: 'commented on', key: 'comment.create')
-    NotificationCacheService.new(@activity).cache
     send_notification(@activity)
 	end
 
@@ -22,8 +21,16 @@ class CommentNotificationService
         "new_feed_item",
         {
           data: activity.user.latest_notifications.last
-        }
+        }.to_json
       )
+      if activity.recipient_type == "Idea"
+        Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
+          "new_feed_item",
+          {
+            data: activity
+          }.to_json
+        )
+      end
     end
   end
 
