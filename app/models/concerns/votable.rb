@@ -6,11 +6,11 @@ module Votable
   end
 
   def voted?(user)
-    voters_ids.members.include?(user.id.to_s)
+    voters_ids.include?(user.id.to_s)
   end
 
   def voters
-    User.find(voters_ids.members)
+    User.find(voters_ids)
   end
 
 end

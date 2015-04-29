@@ -43,18 +43,18 @@
     <div class="row text-white m-t-15 bg-info-dark p-l-20 p-r-20">
         <div class="col-md-4 text-center p-t-10 p-b-10">
             <p class="all-caps no-margin bold small">Views</p>
-            <p class="all-caps no-margin bold text-warning "><%= current_user.views_counter.value %></p>
+            <p class="all-caps no-margin bold text-warning "><%= current_user.views_count %></p>
         </div>
         <div class="col-md-4 text-center p-t-10 p-b-10">
             <p class="all-caps no-margin bold small">Followers</p>
-            <p class="all-caps no-margin bold text-warning "><%= current_user.followers_counter.value %></p>
+            <p class="all-caps no-margin bold text-warning "><%= current_user.followers_count %></p>
         </div>
         <div class="col-md-4 text-center p-t-10 p-b-10">
             <p class="all-caps no-margin bold small">Ideas</p>
             <p class="all-caps no-margin bold text-warning "><%= current_user.ideas_counter %></p>
         </div>
     </div>
-    <% if current_user.ideas_counter.value > 0 %>
+    <% if current_user.ideas_count > 0 %>
         <div class="widget-16 text-white panel panel-transparent no-margin widget-loader-circle">
             <div class="panel-heading">
                 <div class="panel-title b-b b-white p-b-5">Idea Leaderboard</div>

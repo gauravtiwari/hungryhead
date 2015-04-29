@@ -14,12 +14,6 @@ class School < ActiveRecord::Base
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
 
-	#Redis Cache counters and ids
-	include Redis::Objects
-	sorted_set :followers_ids
-	sorted_set :students_ids
-	sorted_set :ideas_ids
-
 	#Counters
 	counter :followers_counter
 	counter :students_counter
@@ -38,29 +32,20 @@ class School < ActiveRecord::Base
 	validates :name, :presence => true,
 	:on => :create
 
+	#Slug candidates for school
 	def slug_candidates
 	 [:name]
 	end
 
+	#Callbacks hooks
 	after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
 
-  def update_counters
-  	students_counter.reset
-  	ideas_counter.reset
-  	followers_counter.reset
-  	students_counter.incr(users.size)
-  	ideas_counter.incr(ideas.size)
-  	followers_counter.incr(followers.size)
+  def can_score?
+  	true
   end
 
 	private
-
-	def short_name
-		words = name.split(' ')
-		name = ""
-		words.map{|w| w.first.upcase }.join(" ")
-	end
 
 	def load_into_soulmate
 		loader = Soulmate::Loader.new("schools")

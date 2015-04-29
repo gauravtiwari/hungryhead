@@ -1,8 +1,11 @@
 class Mention < ActiveRecord::Base
+
+  #Model relationships
   belongs_to :mentionable, polymorphic: true
   belongs_to :mentioner, polymorphic: true
   belongs_to :user
 
+  #Model callbacks
   before_destroy :delete_notification
 
   private

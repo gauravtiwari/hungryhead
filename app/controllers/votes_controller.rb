@@ -8,7 +8,7 @@ class VotesController < ApplicationController
     render json: {
       voted: @vote,
       url: vote_path(votable_type: @votable.class.to_s, votable_id: @votable.id),
-      votes_count: @votable.votes_counter.value
+      votes_count: @votable.votes_count
     }
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end

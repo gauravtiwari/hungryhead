@@ -10,13 +10,8 @@ class Comment < ActiveRecord::Base
   include Votable
   include Mentioner
 
-  #Redis counters and ids cache
-  include Redis::Objects
-  counter :votes_counter
-  sorted_set :voters_ids
-
-  after_create :increment_counters
-  before_destroy :decrement_counters, :delete_activity
+  after_commit :cache_ids, :update_activity_score, on: :create
+  before_destroy :remove_cache_ids, :delete_activity
 
   #Model Associations
   belongs_to :user
@@ -69,16 +64,35 @@ class Comment < ActiveRecord::Base
     commentable_str.constantize.find(commentable_id)
   end
 
-  private
-
-  def increment_counters
-    commentable.comments_counter.increment
-    commentable.commenters_ids.add(user_id, created_at.to_i)
+  def can_score?
+    true
   end
 
-  def decrement_counters
-    commentable.comments_counter.decrement
-    commentable.commenters_ids.delete(user_id)
+  private
+
+  def cache_ids
+    commentable.commenters_ids.push(user_id)
+    commentable.score + 1 if commentable.can_score?
+    user.score + 1
+    save_cache
+  end
+
+  def remove_cache_ids
+    commentable.commenters_ids.delete(user_id.to_s)
+    commentable.score - 1 if commentable.can_score?
+    user.score - 1
+    save_cache
+  end
+
+  def update_activity_score
+    @activity = Activity.find_by_recipient_id_and_recipient_type(commentable)
+    @activity.score = score + 1
+    @activity.save
+  end
+
+  def save_cache
+    commentable.save
+    user.save
   end
 
   def delete_activity

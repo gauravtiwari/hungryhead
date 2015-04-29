@@ -16,10 +16,4 @@ class Organization < ActiveRecord::Base
 	 [:name]
 	end
 
-  def short_name
-    words = name.split(' ')
-    name = ""
-    words.map{|w| w.first.upcase }.join(" ")
-  end
-
 end

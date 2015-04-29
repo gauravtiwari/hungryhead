@@ -1,7 +1,6 @@
 class Feedback < ActiveRecord::Base
 
   include IdentityCache
-
   #Includes concerns
   include Commentable
   include Shareable
@@ -20,34 +19,38 @@ class Feedback < ActiveRecord::Base
 
   store_accessor :parameters, :point_earned, :views_count
 
-  include Redis::Objects
-
-  counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
-  counter :comments_counter
-
   #Caching Model
   cache_has_many :votes, :inverse_name => :votable, :embed => true
   cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   #Hooks
-  before_destroy :decrement_counters, :delete_activity
-  after_create :increment_counters
+  before_destroy :remove_cache_ids, :delete_activity
+  after_commit :cache_ids, on: :create
+
+  public
+
+  def can_score?
+    true
+  end
 
   private
 
-  def increment_counters
-    user.feedbacks_counter.increment
-    idea.feedbackers_counter.increment
-    idea.feedbackers.push(user.id)
-    idea.save
+  def cache_ids
+    idea.feedbackers_ids.push(user.id)
+    idea.score + 1
+    user.score + 1
+    save_cache
   end
 
-  def decrement_counters
-    user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
-    idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
+  def remove_cache_ids
     idea.feedbackers.delete(user.id.to_s)
+    idea.score - 1
+    user.score - 1
+    save_cache
+  end
+
+  def save_cache
+    user.save
     idea.save
   end
 

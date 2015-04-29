@@ -7,7 +7,7 @@ class PublishIdeaJob < ActiveJob::Base
       @idea = Idea.find(idea_id)
       @activity = Activity.find(activity_id)
       # Send notifications to followers
-      User.find(@user.followers_ids.members).each do |f|
+      User.find(@user.followers_ids).each do |f|
         Pusher.trigger("private-user-#{f.id}",
           "new_feed_item",
           {data: @activity.user.latest_notifications.last}

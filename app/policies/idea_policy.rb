@@ -69,7 +69,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def create?
-    current_user.ideas_counter.value <= 5
+    current_user.ideas_count <= 5
   end
 
   def new?

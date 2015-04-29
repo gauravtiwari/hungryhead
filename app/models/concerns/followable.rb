@@ -6,10 +6,10 @@ module Followable
   end
 
   def follower?(followable)
-    followers_ids.members.include?(followable.id.to_s)
+    followers_ids.include?(followable.id.to_s)
   end
 
   def followers
-    followers_ids.members
+    followers_ids
   end
 end

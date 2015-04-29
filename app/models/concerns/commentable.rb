@@ -14,7 +14,7 @@ module Commentable
   end
 
   def commenters
-    commenters_ids.members
+    commenters_ids
   end
 
 end

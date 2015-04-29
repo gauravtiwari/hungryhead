@@ -1,9 +1,8 @@
 class Idea < ActiveRecord::Base
 
+  #included modules
   include IdentityCache
-
-  #Includes Modules
-  include Redis::Objects
+  acts_as_punchable
 
   #Includes concerns
   include Commentable
@@ -13,28 +12,6 @@ class Idea < ActiveRecord::Base
   include Sharings
 
   acts_as_taggable_on :markets, :locations, :technologies
-  acts_as_punchable
-
-  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  sorted_set :followers_ids
-  sorted_set :voters_ids
-  sorted_set :sharers_ids
-  sorted_set :commenters_ids
-  sorted_set :latest_notifications, maxlength: 100, marshal: true
-
-  #Calculate idea popularity and trending score
-  sorted_set :trending_list, maxlength: 20, marshal: true
-  sorted_set :popular_list, maxlength: 20, marshal: true
-
-  #Redis Cache counters
-  counter :followers_counter
-  counter :investors_counter
-  counter :feedbackers_counter
-  counter :views_counter
-  counter :votes_counter
-  counter :shares_counter
-  counter :comments_counter
-
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -49,9 +26,9 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate
+  before_destroy :remove_cache_ids, :remove_from_soulmate
   before_create :add_fund
-  after_create :increment_counters
+  after_commit :cache_ids, on: :create
   after_save :load_into_soulmate
 
   #Associations
@@ -109,6 +86,10 @@ class Idea < ActiveRecord::Base
 
   public
 
+  def can_score?
+    true
+  end
+
   def founder?(user)
     student == user
   end
@@ -126,23 +107,23 @@ class Idea < ActiveRecord::Base
   end
 
   def has_invested?(user)
-    !investors.include? user.id.to_s
+    !investors_ids.include? user.id.to_s
   end
 
   def can_feedback?(user)
-    !feedbackers.include? user.id.to_s
+    !feedbackers_ids.include? user.id.to_s
   end
 
   def find_feedbackers
-    User.find(feedbackers)
+    User.find(feedbackers_ids)
   end
 
   def find_investors
-    User.find(investors)
+    User.find(investors_ids)
   end
 
   def find_team
-    User.find(team)
+    User.find(team_ids)
   end
 
   def is_owner?(current_user)
@@ -154,11 +135,11 @@ class Idea < ActiveRecord::Base
   end
 
   def in_team?(user)
-    founder?(user) || team.include?(user.id.to_s)
+    founder?(user) || team_ids.include?(user.id.to_s)
   end
 
   def invited?(user)
-    team_invites.include? user.id.to_s
+    team_invites_ids.include? user.id.to_s
   end
 
   def add_fund
@@ -173,56 +154,6 @@ class Idea < ActiveRecord::Base
     else
       return true
     end
-  end
-
-  def refresh_redis_cache
-    #Clear all redis cache
-    school.ideas_counter.reset
-    student.ideas_counter.reset
-    student.ideas_ids.clear
-
-    #Reload data into redis
-    school.ideas_counter.increment
-    student.ideas_counter.increment
-    student.ideas_ids.add(id, created_at.to_i)
-  end
-
-  def refresh
-    latest_notifications.clear
-    Activity.where(trackable: self).order(id: :desc).limit(50).each do |activity|
-      refresh_activity_cache(activity)
-    end
-    Notification.where(trackable: self).order(id: :desc).limit(50).each do |notification|
-      refresh_notification_cache(notification)
-    end
-  end
-
-  def refresh_activity_cache(activity)
-    latest_notifications.add(activity_json(activity), activity.created_at.to_i)
-    if activity.recipient_type == "Idea"
-      activity.recipient.latest_notifications.add(activity_json(activity), activity.created_at.to_i)
-    end
-  end
-
-  def refresh_notification_cache(notification)
-    latest_notifications.add(activity_json(notification), notification.created_at.to_i)
-    if notification.recipient_type == "Idea"
-      notification.recipient.latest_notifications.add(activity_json(notification), notification.created_at.to_i)
-    end
-  end
-
-  def activity_json(activity)
-    mentioner = activity.trackable.mentioner.class.to_s.downcase if activity.trackable_type == "Mention"
-    recipient_name = activity.recipient_type == "Comment" ? activity.recipient.user.name : activity.recipient.name
-    {
-      actor: activity.user.name,
-      recipient: recipient_name,
-      recipient_type: mentioner || nil,
-      id: activity.id,
-      created_at: "#{activity.created_at.to_formatted_s(:iso8601)}",
-      url: Rails.application.routes.url_helpers.profile_path(activity.user),
-      verb: activity.verb
-    }
   end
 
   private
@@ -248,16 +179,25 @@ class Idea < ActiveRecord::Base
     [:name, [:name, :id]]
   end
 
-  def increment_counters
-    school.ideas_counter.increment
-    student.ideas_counter.increment
-    student.ideas_ids.add(id, created_at.to_i)
+  def cache_ids
+    student.ideas_ids.push(id)
+    student.score + 1
+    school.score + 1
+
+    save_cache
   end
 
-  def decrement_counters
-    school.ideas_counter.decrement
-    student.ideas_counter.decrement
-    student.ideas_ids.delete(id)
+  def remove_cache_ids
+    student.ideas_ids.delete(id.to_s)
+    student.score - 1
+    school.score - 1
+
+    save_cache
+  end
+
+  def save_cache
+    student.save
+    school.save
   end
 
 end

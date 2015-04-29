@@ -18,19 +18,19 @@ class Investment < ActiveRecord::Base
   #Includes modules
   has_merit
 
-	include Redis::Objects
-	counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
-	counter :comments_counter
-
   #Caching Model
   cache_has_many :votes, :inverse_name => :votable, :embed => true
   cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   #Model Callbacks
-	before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_create :increment_counters
+	before_destroy :cancel_investment, :remove_cache_ids, :delete_activity
+  after_commit :cache_ids, on: :create
+
+  public
+
+  def can_score?
+    false
+  end
 
 	private
 
@@ -39,16 +39,23 @@ class Investment < ActiveRecord::Base
     user.update_attributes(fund: {"balance" => user.balance + amount })
   end
 
-  def increment_counters
-    user.investments_counter.increment
-    idea.investors_counter.increment
+  def cache_ids
+    idea.investors.push(user.id)
+    idea.score + 1
+    user.score + 1
+    save_cache
   end
 
-  def decrement_counters
-    user.investments_counter.decrement if user.investments_counter.value > 0
-    idea.investors_counter.decrement if idea.investors_counter.value > 0
+  def remove_cache_ids
     idea.investors.delete(user.id.to_s)
+    idea.score - 1
+    user.score - 1
+    save_cache
+  end
+
+  def save_cache
     idea.save
+    user.save
   end
 
   def delete_activity

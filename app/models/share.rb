@@ -17,30 +17,45 @@ class Share < ActiveRecord::Base
 
  	#Enumerators to handle status
 	enum status: {pending: 0, shared: 1}
-	include Redis::Objects
-
-	counter :votes_counter
-	sorted_set :voters_ids
-	sorted_set :commenters_ids
-	counter :comments_counter
 
 	#Caching Model
 	cache_has_many :votes, :inverse_name => :votable, :embed => true
 	cache_has_many :comments, :inverse_name => :commentable, embed: true
 
-	before_destroy :decrement_counters, :delete_activity
-	after_create :increment_counters
+	before_destroy :remove_cache_ids, :delete_activity
+	after_commit :cache_ids, :update_activity_score, on: :create
+
+	public
+
+	def can_score?
+		false
+	end
 
 	private
 
-	def increment_counters
-		shareable.shares_counter.increment
-	  shareable.sharers_ids.add(user_id, created_at.to_i)
+	def cache_ids
+	  shareable.sharers_ids.push(user_id)
+	  shareable.score + 1 if shareable.can_score?
+	  user.score + 1
+	  save_cache
 	end
 
-	def decrement_counters
-		shareable.shares_counter.decrement
-	  shareable.sharers_ids.delete(user_id)
+	def remove_cache_ids
+	  shareable.sharers_ids.delete(user_id.to_s)
+	  shareable.score - 1 if shareable.can_score?
+	  user.score - 1
+	  save_cache
+	end
+
+	def update_activity_score
+	  @activity = Activity.find_by_recipient_id_and_recipient_type(shareable)
+	  @activity.score = score + 1
+	  @activity.save
+	end
+
+	def save_cache
+		shareable.save
+		user.save
 	end
 
 	def delete_activity

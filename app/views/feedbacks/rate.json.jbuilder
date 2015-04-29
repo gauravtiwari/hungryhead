@@ -8,5 +8,5 @@ json.rate do
   json.id  activity.trackable_id
   json.badge_bg activity.trackable.badges.last.custom_fields[:bg] if activity.trackable.badges.length > 0
   json.points activity.user.points(category: "Feedback_#{activity.trackable_id}")
-  json.votes_count  activity.trackable.votes_counter.value
+  json.votes_count  activity.trackable.votes_count
 end

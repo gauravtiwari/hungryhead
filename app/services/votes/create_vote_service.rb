@@ -17,8 +17,7 @@ class CreateVoteService
 
   def vote
     @vote = @votable.votes.create!(voter: @user)
-    recipient = @votable.class.to_s == "Idea" ? @votable : @votable.user
-    @activity = @user.notifications.create!(trackable: @vote, recipient: recipient, verb: 'voted', key: 'vote.create')
+    @activity = @user.notifications.create!(trackable: @vote, recipient: @votable, verb: 'voted', key: 'vote.create')
     NotificationCacheService.new(@activity).cache
     send_notification @activity
     true
