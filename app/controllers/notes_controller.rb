@@ -26,13 +26,11 @@ class NotesController < ApplicationController
   def create
     @note = CreateNoteService.new(note_params, current_user).create
     authorize @note
-    respond_to do |format|
-      if @note.save
-        NoteNotificationService.new(@note, current_user).notify
-        format.json { render :show, status: :created}
-      else
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
+    if @note.save
+      NoteNotificationService.new(@note, current_user).notify
+      render json: { created: true, status: :created}
+    else
+      render json: @note.errors, status: :unprocessable_entity
     end
   end
 

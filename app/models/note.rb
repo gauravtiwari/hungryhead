@@ -6,6 +6,7 @@ class Note < ActiveRecord::Base
   include Commentable
   include Shareable
   include Votable
+
   #Redis counters and cache
   counter :votes_counter
   sorted_set :voters_ids
@@ -14,4 +15,11 @@ class Note < ActiveRecord::Base
   counter :shares_counter
   counter :comments_counter
 
+  before_destroy :delete_activity
+
+  private
+
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+  end
 end

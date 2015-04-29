@@ -51,7 +51,7 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate
   before_create :add_fund
-  after_commit :increment_counters
+  after_create :increment_counters
   after_save :load_into_soulmate
 
   #Associations
@@ -165,12 +165,53 @@ class Idea < ActiveRecord::Base
   end
 
   def refresh_redis_cache
+    #Clear all redis cache
     school.ideas_counter.reset
     student.ideas_counter.reset
     student.ideas_ids.clear
+
+    #Reload data into redis
     school.ideas_counter.increment
     student.ideas_counter.increment
     student.ideas_ids.add(id, created_at.to_i)
+  end
+
+  def refresh
+    latest_notifications.clear
+    Activity.where(recipient: self).order(id: :desc).limit(50).each do |activity|
+      refresh_activity_cache(activity)
+    end
+    Notification.where(recipient: self).order(id: :desc).limit(50).each do |notification|
+      refresh_notification_cache(notification)
+    end
+  end
+
+  def refresh_activity_cache(activity)
+    latest_notifications.add(activity_json(activity), activity.created_at.to_i)
+    if activity.recipient_type == "Idea"
+      activity.recipient.latest_notifications.add(activity_json(activity), activity.created_at.to_i)
+    end
+  end
+
+  def refresh_notification_cache(notification)
+    latest_notifications.add(activity_json(notification), notification.created_at.to_i)
+    if notification.recipient_type == "Idea"
+      notification.recipient.latest_notifications.add(activity_json(notification), notification.created_at.to_i)
+    end
+  end
+
+  def activity_json(activity)
+    mentioner = activity.trackable.mentioner.class.to_s.downcase if activity.trackable_type == "Mention"
+    recipient_name = activity.recipient_type == "Comment" ? activity.recipient.user.name : activity.recipient.name
+    {
+      actor: activity.user.name,
+      recipient: recipient_name,
+      recipient_type: mentioner || nil,
+      id: activity.id,
+      created_at: "#{activity.created_at.to_formatted_s(:iso8601)}",
+      url: Rails.application.routes.url_helpers.profile_path(activity.user),
+      verb: activity.verb
+    }
   end
 
   private

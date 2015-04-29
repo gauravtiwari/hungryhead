@@ -15,7 +15,7 @@ class CommentNotificationService
   private
 
   def send_notification(activity)
-    commentable_user = @commentable.class.to_s == "Idea" ? @commentable.student : @commentable.user
+    commentable_user = @commentable.class.to_s == "Idea" ? @commentable.student.id : @commentable.user.id
     users = activity.recipient.commenters.push(commentable_user)
     users.each do |user|
       Pusher.trigger("private-user-#{user}",

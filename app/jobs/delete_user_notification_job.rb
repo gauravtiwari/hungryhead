@@ -4,7 +4,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
       Notification.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |notification|
         notification.user.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
         if notification.recipient_type == "Idea"
-          recipient.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
+          notification.recipient.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
         end
         notification.destroy if notification.present?
       end

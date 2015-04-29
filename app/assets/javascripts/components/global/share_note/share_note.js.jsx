@@ -20,7 +20,7 @@ var ShareNote = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
-        if(data.note.create) {
+        if(data.created) {
           $('body textarea').trigger('autosize.destroy');
           $('#shareNotePopup').modal('hide');
           this.setState({loading: false});

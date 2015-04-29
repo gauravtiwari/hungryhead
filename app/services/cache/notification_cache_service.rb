@@ -23,13 +23,13 @@ class NotificationCacheService
 
   def activity_json
     mentioner = @activity.trackable.mentioner.class.to_s.downcase if @activity.trackable_type == "Mention"
-    recipient_name = @activity.recipient_type == "Comment" ? @activity.recipient.user.name : @activity.recipient.name
+    recipient_name = @activity.recipient_type == "Comment" || @activity.recipient_type == "Investment" || @activity.recipient_type == "Feedback" || @activity.recipient_type == "Note"? @activity.recipient.user.name : @activity.recipient.name
     {
       actor: @activity.user.name,
       recipient: recipient_name,
       recipient_type: mentioner || nil,
       id: @activity.id,
-      created_at: "#{@activity.created_at}",
+      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
       url: Rails.application.routes.url_helpers.profile_path(@activity.user),
       verb: @activity.verb
     }

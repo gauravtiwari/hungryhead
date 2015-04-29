@@ -64,6 +64,6 @@
 
 <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
 
-<%= react_component('CommentBox', {data: data, count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
+<%= react_component('CommentBox', {data: data, comment_channel: "#{activity.trackable_type}-#{activity.trackable_id}-comments", count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
 </div>
 

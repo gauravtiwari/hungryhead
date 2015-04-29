@@ -245,6 +245,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'brakeman'
   gem 'pry'
+  gem 'awesome_print'
   gem 'rubocop', require: false
   gem "lol_dba"
   gem 'binding_of_caller'

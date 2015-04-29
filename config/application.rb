@@ -28,8 +28,8 @@ module HungryheadSchoolApp
     config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins', 'font-awesome', 'fonts')
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/controllers/*"]
-    config.eager_load_paths += Dir["#{config.root}/app/services/*"]
-    config.eager_load_paths += Dir["#{config.root}/app/lib/*"]
+    config.autoload_paths += Dir["#{config.root}/app/services/*"]
+    config.autoload_paths += Dir["#{config.root}/app/lib/*"]
     config.app_generators.scaffold_controller = :scaffold_controller
 
     #Background job processing

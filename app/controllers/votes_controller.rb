@@ -21,7 +21,7 @@ class VotesController < ApplicationController
   private
 
   def load_votable
-    @votables = ["Idea", "Feedback", "Investment", "Comment", "Share"]
+    @votables = ["Idea", "Feedback", "Investment", "Comment", "Share", "Note"]
     if @votables.include? params[:votable_type]
       @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
     else

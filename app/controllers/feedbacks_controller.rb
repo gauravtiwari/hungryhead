@@ -51,7 +51,7 @@ class FeedbacksController < ApplicationController
   def rate
     @feedback.badged! if !@feedback.badged?
     @feedback.add_badge(params[:badge].to_i)
-    AwardBadgeJob.set(wait: 10.seconds).perform_later(@user.id, params[:badge].to_i, "Feedback_#{@feedback.id}")
+    AwardBadgeJob.set(wait: 10.seconds).perform_later(@feedback.user.id, params[:badge].to_i, "Feedback_#{@feedback.id}")
     @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
     render :rate, locals: {activity: @activity}
   end

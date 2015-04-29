@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
 
   #relationships
   has_many :feedbacks, dependent: :destroy, autosave: true
+  has_many :notes, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
@@ -132,6 +133,44 @@ class User < ActiveRecord::Base
 
   def user_name_badge
     first_name.first + last_name.first
+  end
+
+  def refresh
+    latest_notifications.clear
+    activities.order(id: :desc).limit(50).each do |activity|
+      refresh_activity_cache(activity)
+    end
+    notifications.order(id: :desc).limit(50).each do |notification|
+      refresh_notification_cache(notification)
+    end
+  end
+
+  def refresh_activity_cache(activity)
+    latest_notifications.add(activity_json(activity), activity.created_at.to_i)
+    if activity.recipient_type == "Idea"
+      activity.recipient.latest_notifications.add(activity_json(activity), activity.created_at.to_i)
+    end
+  end
+
+  def refresh_notification_cache(notification)
+    latest_notifications.add(activity_json(notification), notification.created_at.to_i)
+    if notification.recipient_type == "Idea"
+      notification.recipient.latest_notifications.add(activity_json(notification), notification.created_at.to_i)
+    end
+  end
+
+  def activity_json(activity)
+    mentioner = activity.trackable.mentioner.class.to_s.downcase if activity.trackable_type == "Mention"
+    recipient_name = activity.recipient_type == "Comment" ? activity.recipient.user.name : activity.recipient.name
+    {
+      actor: activity.user.name,
+      recipient: recipient_name,
+      recipient_type: mentioner || nil,
+      id: activity.id,
+      created_at: "#{activity.created_at.to_formatted_s(:iso8601)}",
+      url: Rails.application.routes.url_helpers.profile_path(activity.user),
+      verb: activity.verb
+    }
   end
 
   private

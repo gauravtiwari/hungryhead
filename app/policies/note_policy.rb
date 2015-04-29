@@ -4,6 +4,10 @@ class NotePolicy < ApplicationPolicy
   true
  end
 
+ def vote?
+  true
+ end
+
  def update?
   record.user == current_user
  end

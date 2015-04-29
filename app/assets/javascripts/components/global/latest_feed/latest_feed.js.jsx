@@ -19,19 +19,20 @@ var LatestFeed = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.fetchNotifications();
+      var feed_channel = pusher.subscribe(this.props.channel_name);
+      if(feed_channel) {
+        feed_channel.bind('new_feed_item', function(data){
+          var newState = React.addons.update(this.state, {
+              feed : {
+                $unshift : [data.data]
+              }
+          });
+          this.setState(newState);
+          $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+        }.bind(this));
+      }
     }
-    var feed_channel = pusher.subscribe(this.props.channel_name);
-    if(feed_channel) {
-      feed_channel.bind('new_feed_item', function(data){
-        var newState = React.addons.update(this.state, {
-            feed : {
-              $unshift : [data.data]
-            }
-        });
-        this.setState(newState);
-        $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
-      }.bind(this));
-    }
+
   },
 
   fetchNotifications: function(){
