@@ -15,7 +15,6 @@ class Follow < ActiveRecord::Base
 
   private
 
-  #Redis Counters
   def cache_ids
     follower.followings_ids.push(followable_id) if followable_type == "User"
     follower.idea_followings_ids.push(followable_id) if followable_type == "Idea"
