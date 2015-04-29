@@ -47,7 +47,7 @@ class Idea < ActiveRecord::Base
   #Caching Model
   cache_has_many :feedbacks, :embed => true
   cache_has_many :investments, :embed => true
-  cache_has_many :follows, :inverse_name => :followable, :embed => true
+  cache_has_many :followers, :inverse_name => :followable, :embed => true
   cache_has_many :votes, :inverse_name => :votable, :embed => true
   cache_has_many :comments, :inverse_name => :commentable, embed: true
   cache_has_many :shares, :inverse_name => :shareable, embed: true

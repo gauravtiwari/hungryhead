@@ -4,26 +4,14 @@ class School < ActiveRecord::Base
 	include Followable
 	include Sluggable
 
-	has_many :students, as: :student, class_name: 'Student'
-	has_many :teachers, as: :teacher, class_name: 'Teacher'
-	has_many :ideas
-
 	acts_as_taggable_on :locations
 
 	store_accessor :data, :established, :locations, :website
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
 
-	#Counters
-	counter :followers_counter
-	counter :students_counter
-	counter :ideas_counter
-
 	#Caching Model
-	cache_has_many :follows, :inverse_name => :followable, :embed => true
-	cache_has_many :students, :embed => true
-	cache_has_many :teachers, :embed => true
-	cache_has_many :ideas, :embed => true
+	cache_has_many :followers, :inverse_name => :followable, :embed => true
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader
