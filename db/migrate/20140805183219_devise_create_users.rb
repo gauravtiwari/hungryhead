@@ -24,27 +24,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.jsonb  :fund, :default => "{}"
       t.integer :school_id
 
-      #Caching ids
-      t.string :followers_ids, array: true, default: "{}"
-      t.string :followings_ids, array: true, default: "{}"
-      t.string :idea_followings_ids, array: true, default: "{}"
-
-      #Score to calculate popularity
-      t.bigint :score, default: DateTime.now.to_i
-
       t.string :cached_location_list
       t.string :cached_market_list
       t.string :cached_skill_list
       t.string :cached_subject_list
       t.string :cached_technology_list
       t.string :cached_service_list
-
-      t.integer :ideas_count, null: false, default: 0
-      t.integer :followers_count, null: false, default: 0
-      t.integer :followings_count, null: false, default: 0
-      t.integer :comments_count, null: false, default: 0
-      t.integer :investments_count, null: false, default: 0
-      t.integer :feedbacks_count, null: false, default: 0
 
       t.boolean :verified, default: false
       t.boolean :admin, default: false
@@ -85,7 +70,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
     end
     add_index :users, :school_id, algorithm: :concurrently
     add_index :users, :email,                :unique => true, algorithm: :concurrently
-    add_index :users, :score, algorithm: :concurrently
     add_index :users, :slug,                :unique => true, algorithm: :concurrently
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently
     add_index :users, :confirmation_token,   :unique => true, algorithm: :concurrently

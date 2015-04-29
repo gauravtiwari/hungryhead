@@ -2,6 +2,7 @@ class Idea < ActiveRecord::Base
 
   #included modules
   include IdentityCache
+  include Redis::Objects
   acts_as_punchable
 
   #Includes concerns
@@ -13,6 +14,23 @@ class Idea < ActiveRecord::Base
   include Activist
 
   acts_as_taggable_on :markets, :locations, :technologies
+
+  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
+  sorted_set :followers_ids
+  sorted_set :voters_ids
+  sorted_set :sharers_ids
+  sorted_set :feedbackers_ids
+  sorted_set :investors_ids
+  sorted_set :commenters_ids
+
+  #Redis Cache counters
+  counter :followers_counter
+  counter :investors_counter
+  counter :feedbackers_counter
+  counter :views_counter
+  counter :votes_counter
+  counter :shares_counter
+  counter :comments_counter
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -27,21 +45,19 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #CallBack hooks
-  before_destroy :remove_cache_ids, :remove_from_soulmate
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_commit :cache_ids, on: :create
+  after_commit :increment_counters
   after_save :load_into_soulmate
 
   #Associations
   belongs_to :student, touch: true
-  counter_culture :student
   belongs_to :school
-  counter_culture :school
 
   #Rest of the assocuations
-  has_many :feedbacks, dependent: :destroy, autosave: true
-  has_many :idea_messages, dependent: :destroy, autosave: true
-  has_many :investments, dependent: :destroy, autosave: true
+  has_many :feedbacks, dependent: :destroy
+  has_many :idea_messages, dependent: :destroy
+  has_many :investments, dependent: :destroy
   has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Caching Model
@@ -54,7 +70,6 @@ class Idea < ActiveRecord::Base
   cache_has_many :idea_messages, :embed => true
 
   cache_index :school_id
-  cache_index :score
 
   #Includes modules
   has_merit
@@ -111,23 +126,11 @@ class Idea < ActiveRecord::Base
   end
 
   def has_invested?(user)
-    !investors_ids.include? user.id.to_s
+    !investors_ids.members.include? user.id.to_s
   end
 
   def can_feedback?(user)
-    !feedbackers_ids.include? user.id.to_s
-  end
-
-  def find_feedbackers
-    User.find(feedbackers_ids)
-  end
-
-  def find_investors
-    User.find(investors_ids)
-  end
-
-  def find_team
-    User.find(team_ids)
+    !feedbackers_ids.members.include? user.id.to_s
   end
 
   def is_owner?(current_user)
@@ -139,7 +142,7 @@ class Idea < ActiveRecord::Base
   end
 
   def in_team?(user)
-    founder?(user) || team_ids.include?(user.id.to_s)
+    founder?(user) || team_ids.members.include?(user.id.to_s)
   end
 
   def invited?(user)
@@ -158,6 +161,15 @@ class Idea < ActiveRecord::Base
     else
       return true
     end
+  end
+
+  def refresh_redis_cache
+    school.ideas_counter.reset
+    student.ideas_counter.reset
+    student.ideas_ids.clear
+    school.ideas_counter.increment
+    student.ideas_counter.increment
+    student.ideas_ids.add(id, created_at.to_i)
   end
 
   private
@@ -183,25 +195,20 @@ class Idea < ActiveRecord::Base
     [:name, [:name, :id]]
   end
 
-  def cache_ids
-    student.ideas_ids.push(id)
-    student.score + 1
-    school.score + 1
-
-    save_cache
+  def increment_counters
+    school.ideas_counter.increment
+    student.ideas_counter.increment
+    student.ideas_ids.add(id, created_at.to_i)
   end
 
-  def remove_cache_ids
-    student.ideas_ids.delete(id.to_s)
-    student.score - 1
-    school.score - 1
-
-    save_cache
+  def decrement_counters
+    school.ideas_counter.decrement
+    student.ideas_counter.decrement
+    student.ideas_ids.delete(id)
   end
 
-  def save_cache
-    student.save
-    school.save
+  def delete_activity
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

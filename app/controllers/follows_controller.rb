@@ -4,17 +4,17 @@ class FollowsController < ApplicationController
   before_action :load_followable
 
   def create
-    if @followable.follower?(current_user)
+    if current_user.follows?(@followable)
       @follow = CreateFollowService.new(current_user, @followable).unfollow
       render json: {
-        follow: @followable.follower?(current_user),
-        followers_count: @followable.followers_count
+        follow: false,
+        followers_count: @followable.followers_count - 1
       }
     else
       @follow = CreateFollowService.new(current_user, @followable).follow
       if @follow.save
         render json: {
-          follow: @followable.follower?(current_user),
+          follow: true,
           followers_count: @followable.followers_count
         }
         FollowNotificationService.new(@follow).notify unless @followable.class.to_s == "School"

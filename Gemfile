@@ -159,6 +159,7 @@ gem 'country_select'
 # SEO
 gem 'friendly_id'
 
+
 #Admin
 #gem 'activeadmin', github: 'activeadmin'
 #gem 'inherited_resources'

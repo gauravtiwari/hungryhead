@@ -4,12 +4,14 @@ class VotesController < ApplicationController
 
   def vote
     authorize @votable
-    @vote = CreateVoteService.new(current_user, @votable).create
-    render json: {
-      voted: @vote,
-      url: vote_path(votable_type: @votable.class.to_s, votable_id: @votable.id),
-      votes_count: @votable.votes_count
-    }
+    if @votable.voted?(current_user)
+      CreateVoteService.new(current_user, @votable).unvote
+    else
+      @vote = CreateVoteService.new(current_user, @votable).vote
+      if @vote.save
+        VoteNotificationService.new(current_user, @vote, @votable).notify
+      end
+    end
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end
 

@@ -11,21 +11,10 @@ class CreateSchools < ActiveRecord::Migration
       t.jsonb :media, default: "{}"
       t.jsonb :data, default: "{}"
       t.jsonb :customizations, default: "{}"
-
-      #Score to calculate popularity
-      t.bigint :score, default: DateTime.now.to_i
-
-      #Caching ids
-      t.string :followers_ids, array: true, default: "{}"
-
-      t.integer :users_count, null: false, default: 0
-      t.integer :ideas_count, null: false, default: 0
-      t.integer :followers_count, null: false, default: 0
       t.timestamps null: false
     end
     add_index :schools, :name, unique: true, algorithm: :concurrently
     add_index :schools, :slug, unique: true, algorithm: :concurrently
-    add_index :schools, :score, algorithm: :concurrently
     add_index :schools, :email, unique: true, algorithm: :concurrently
   end
 end

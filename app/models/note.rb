@@ -2,14 +2,22 @@ class Note < ActiveRecord::Base
 
   #Includes Modules
   include IdentityCache
+  include Redis::Objects
 
   belongs_to :user
-  counter_culture :note #counter cache
 
   #Includes concerns
   include Commentable
   include Sharings
   include Votable
+
+  #Redis counters and cache
+  counter :votes_counter
+  sorted_set :voters_ids
+  sorted_set :commenters_ids
+  sorted_set :sharers_ids
+  counter :shares_counter
+  counter :comments_counter
 
   #Caching Model
   cache_has_many :votes, :inverse_name => :votable, :embed => true
@@ -17,8 +25,7 @@ class Note < ActiveRecord::Base
   cache_has_many :shares, :inverse_name => :shareable, embed: true
 
   #Model callbacks
-  before_destroy :delete_activity, :substract_score
-  after_commit :add_score, on: :create
+  before_destroy :delete_activity
 
   public
 
@@ -30,16 +37,6 @@ class Note < ActiveRecord::Base
 
   def delete_activity
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
-  end
-
-  def add_score
-    user.score + 1
-    user.save
-  end
-
-  def substract_score
-    user.score - 1
-    user.save
   end
 
 end

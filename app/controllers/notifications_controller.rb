@@ -5,12 +5,13 @@ class NotificationsController < ApplicationController
 
 
   def index
-    @notifications = Activity.where(user_id: current_user.followings_ids, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    @notifications = Notification.where(user_id: current_user.followings_ids, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   def ideas
     @idea = Idea.find(params[:id])
-    @notifications = Activity.where(recipient_id: @idea.id, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
+    @notifications = Notification.where(recipient_id: @idea.id, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
+    render :index
   end
 
   def mark_as_read

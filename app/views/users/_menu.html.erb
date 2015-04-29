@@ -11,7 +11,7 @@
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10 col-md-5">
 		<% if @user != current_user %>
 		<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
-		<% if current_user.follower?(@user) %>
+		<% if current_user.follows?(@user) %>
 			<%= content_tag(:div) do %>
 			<%= link_to('#', onClick: "return false;", class: 'btn btn-info padding-5 p-l-10 p-r-10 m-r-10 pull-right', id: 'send-message-button') do %>
 					<i class="fa fa-envelope"></i> Send Message

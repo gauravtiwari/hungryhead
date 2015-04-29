@@ -1,6 +1,7 @@
 class School < ActiveRecord::Base
 
 	include IdentityCache
+	include Redis::Objects
 	include Followable
 	include Sluggable
 
@@ -12,6 +13,16 @@ class School < ActiveRecord::Base
 	store_accessor :data, :established, :locations, :website
 	store_accessor :media, :logo_position,
 	:cover_position, :cover_prcessing, :logo_processing
+
+	#Redis Cache counters and ids
+	sorted_set :followers_ids
+	sorted_set :students_ids
+	sorted_set :ideas_ids
+
+	#Counters
+	counter :followers_counter
+	counter :students_counter
+	counter :ideas_counter
 
 	#Caching Model
 	cache_has_many :followers, :inverse_name => :followable, :embed => true
@@ -34,6 +45,15 @@ class School < ActiveRecord::Base
 
   def can_score?
   	true
+  end
+
+  def update_counters
+  	students_counter.reset
+  	ideas_counter.reset
+  	followers_counter.reset
+  	students_counter.incr(users.size)
+  	ideas_counter.incr(ideas.size)
+  	followers_counter.incr(followers.size)
   end
 
 	private

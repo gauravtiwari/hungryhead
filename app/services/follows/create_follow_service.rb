@@ -5,12 +5,12 @@ class CreateFollowService
 	end
 
   def follow
-    @user.follows.new(followable: @followable)
+    @user.followings.new(followable: @followable)
   end
 
   def unfollow
-    @user.follows.where(followable: @followable).each do |follow|
-      follow.destroy
+    @user.followings.where(followable: @followable).each do |follow|
+      follow.destroy!
     end
   end
 

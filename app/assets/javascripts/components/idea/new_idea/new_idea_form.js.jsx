@@ -11,7 +11,6 @@ var NewIdeaForm = React.createClass({
 
   _handleSubmit: function(formData){
     $.post(Routes.ideas_path(), formData, function(data, textStatus, xhr) {
-    }).done(function(){
       window.location.href = data.location;
     }).fail(function(error){
       $('body').pgNotification({style: "simple", message: error.responseText.toString(), position: "top-right", type: "danger",timeout: 5000}).show();

@@ -11,9 +11,6 @@ class CreateActivities < ActiveRecord::Migration
       t.string  :key
       t.jsonb    :parameters, default: "{}"
 
-      #Score to calculate popularity
-      t.bigint :score, default: DateTime.now.to_i
-
       t.boolean :published, default: true
 
       t.belongs_to :recipient, :polymorphic => true
@@ -22,7 +19,6 @@ class CreateActivities < ActiveRecord::Migration
     end
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
-    add_index :activities, [:score], algorithm: :concurrently
     add_index :activities, [:published], algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently
   end

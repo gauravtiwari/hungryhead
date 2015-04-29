@@ -59,7 +59,7 @@
             <div class="panel-heading">
                 <div class="panel-title b-b b-white p-b-5">Idea Leaderboard</div>
             </div>
-            <% Idea.find(current_user.ideas_ids.revrange(0,2)).each do |idea| %>
+            <% current_user.ideas.each do |idea| %>
                 <div class="widget-16-header text-white padding-20">
                     <span class="icon-thumbnail placeholder bg-master-light pull-left text-white"><%= idea.name_badge %></span>
                     <div class="pull-left">

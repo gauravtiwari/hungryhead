@@ -1,6 +1,7 @@
 class Feedback < ActiveRecord::Base
 
   include IdentityCache
+  include Redis::Objects
   #Includes concerns
   include Commentable
   include Shareable
@@ -8,11 +9,15 @@ class Feedback < ActiveRecord::Base
 
   has_merit
 
+  #redis counters
+  counter :votes_counter
+  sorted_set :voters_ids
+  sorted_set :commenters_ids
+  counter :comments_counter
+
   #Associations
   belongs_to :idea, touch: true
-  counter_culture :idea
   belongs_to :user, touch: true
-  counter_culture :user
 
   #Enums and states
   enum status: { posted:0, badged:1, flagged:2 }
@@ -24,8 +29,8 @@ class Feedback < ActiveRecord::Base
   cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   #Hooks
-  before_destroy :remove_cache_ids, :delete_activity
-  after_commit :cache_ids, on: :create
+  before_destroy :decrement_counters, :delete_activity
+  after_create :increment_counters
 
   public
 
@@ -35,23 +40,16 @@ class Feedback < ActiveRecord::Base
 
   private
 
-  def cache_ids
+  def increment_counters
+    user.feedbacks_counter.increment
+    idea.feedbackers_counter.increment
     idea.feedbackers_ids.push(user.id)
-    idea.score + 1
-    user.score + 1
-    save_cache
   end
 
-  def remove_cache_ids
-    idea.feedbackers.delete(user.id.to_s)
-    idea.score - 1
-    user.score - 1
-    save_cache
-  end
-
-  def save_cache
-    user.save
-    idea.save
+  def decrement_counters
+    user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
+    idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
+    idea.feedbackers_ids.delete(user.id)
   end
 
   def delete_activity

@@ -16,23 +16,19 @@ var LatestFeedFollowItem = React.createClass({
     if(window.currentUser.name === this.props.item.recipient) {
       var recipient = "You"
     } else {
-      var actor = this.props.item.recipient;
+      var recipient = this.props.item.recipient;
     }
 
     return (
         <li id={html_id} className="pointer p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
-            <a className="text-master hint-text" href={this.props.item.url}>
+            <a className="text-master" href={this.props.item.url}>
               <strong>{actor}</strong>
             </a>
-            <span className="icon p-l-5"><i className="fa fa-user-plus"></i></span>
-            <span className="verb p-l-5">
-              {this.props.item.verb}
+            <span className="text p-l-5">
+             {this.props.item.text}
             </span>
-            <span className="recipient p-l-5">
-              {recipient}
-            </span>
-          <span className="date p-l-10 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
+          <span className="date p-l-5 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
           </span>
         </li>
       );

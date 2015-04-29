@@ -1,16 +1,24 @@
 class Share < ActiveRecord::Base
 
 	include IdentityCache
+	include Redis::Objects
 
   #Associations
   belongs_to :shareable, polymorphic: true
-  counter_culture :shareable
 	belongs_to :user, touch: true
-	counter_culture :user
 
 	#Includes concerns
 	include Commentable
 	include Votable
+
+	#redis caching
+	counter :votes_counter
+	counter :comments_counter
+	sorted_set :voters_ids
+	sorted_set :commenters_ids
+
+	before_destroy :decrement_counters, :delete_activity
+	after_create :increment_counters
 
 	#Store accessor methods
  	store_accessor :parameters, :shareable_name
@@ -22,9 +30,6 @@ class Share < ActiveRecord::Base
 	cache_has_many :votes, :inverse_name => :votable, :embed => true
 	cache_has_many :comments, :inverse_name => :commentable, embed: true
 
-	before_destroy :remove_cache_ids, :delete_activity
-	after_commit :cache_ids, :update_activity_score, on: :create
-
 	public
 
 	def can_score?
@@ -33,30 +38,16 @@ class Share < ActiveRecord::Base
 
 	private
 
-	def cache_ids
-	  shareable.sharers_ids.push(user_id)
-	  shareable.score + 1 if shareable.can_score?
-	  user.score + 1
-	  save_cache
+	def increment_counters
+		shareable.shares_counter.increment
+	  shareable.sharers_ids.add(user_id, created_at.to_i)
 	end
 
-	def remove_cache_ids
-	  shareable.sharers_ids.delete(user_id.to_s)
-	  shareable.score - 1 if shareable.can_score?
-	  user.score - 1
-	  save_cache
+	def decrement_counters
+		shareable.shares_counter.decrement
+	  shareable.sharers_ids.delete(user_id)
 	end
 
-	def update_activity_score
-	  @activity = Activity.find_by_recipient_id_and_recipient_type(shareable)
-	  @activity.score = score + 1
-	  @activity.save
-	end
-
-	def save_cache
-		shareable.save
-		user.save
-	end
 
 	def delete_activity
 	  DeleteUserFeedJob.perform_later(self.id, self.class.to_s)

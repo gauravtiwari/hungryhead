@@ -1,6 +1,6 @@
 <div class="idea-collaboration-floating-panel">
 <%= javascript_tag do %>
-	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.team.join('') %>");
+	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.team_ids.join('') %>");
 <% end %>
 
 <%= react_component('OpenCollaborationBox') %>

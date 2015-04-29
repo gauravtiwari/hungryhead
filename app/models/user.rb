@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   include IdentityCache
+  include Redis::Objects
 
   #Concerns for User class
   include Followable
@@ -12,6 +13,21 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
   acts_as_punchable
+
+  #Sorted set to store followers, followings ids and latest activities
+  sorted_set :followers_ids
+  sorted_set :followings_ids
+  sorted_set :idea_followings_ids
+  sorted_set :ideas_ids
+
+  #Redis counters to cache total followers, followings,
+  #feedbacks, investments and ideas
+  counter :followers_counter
+  counter :followings_counter
+  counter :feedbacks_counter
+  counter :investments_counter
+  counter :ideas_counter
+  counter :views_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -38,9 +54,6 @@ class User < ActiveRecord::Base
 
   #Model Relationships
   belongs_to :school
-
-  #counter cache for students and teachers
-  counter_culture :school
 
   has_many :authentications, :dependent => :destroy
   has_many :activities, :dependent => :destroy
@@ -75,8 +88,8 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, unless: :is_admin
   after_save :load_into_soulmate , unless: :is_admin
-  before_destroy :remove_from_soulmate, :remove_cache_ids, :delete_activity , unless: :is_admin
-  after_create :cache_ids, :seed_fund, :seed_settings, on: :create , unless: :is_admin
+  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity , unless: :is_admin
+  after_create :increment_counters, :seed_fund, :seed_settings, on: :create , unless: :is_admin
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -96,6 +109,10 @@ class User < ActiveRecord::Base
 
   def can_score?
     true
+  end
+
+  def follows? followable
+    followings_ids.members.include? followable.id.to_s
   end
 
   def mailboxer_email(object)
@@ -203,18 +220,14 @@ class User < ActiveRecord::Base
       loader.remove("id" => id)
   end
 
-
-  #Increment redis counters for caching
-  def cache_ids
-    school.followers_ids.push(id)
-    school.score + 1
-    school.save
+  def increment_counters
+    school.followers_ids.add(id, created_at.to_i)
+    school.students_counter.increment if school
   end
 
-  def remove_cache_ids
-    school.followers_ids.delete(id.to_s)
-    school.score - 1
-    school.save
+  def decrement_counters
+    school.students_counter.decrement if school && school.students_counter.value > 0
+    school.followers_ids.delete(id)
   end
 
   #Deletes all dependent activities for this user
