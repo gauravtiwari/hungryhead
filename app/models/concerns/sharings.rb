@@ -8,11 +8,7 @@ module Sharings
   public
 
   def shared?(user)
-    sharers_ids.include?(user.id.to_s)
-  end
-
-  def sharers
-    User.find(sharers_ids)
+    sharers_ids.members.include?(user.id.to_s)
   end
 
 end

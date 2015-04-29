@@ -111,10 +111,6 @@ class User < ActiveRecord::Base
     true
   end
 
-  def follows? followable
-    followings_ids.members.include? followable.id.to_s
-  end
-
   def mailboxer_email(object)
     email
   end
