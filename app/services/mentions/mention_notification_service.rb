@@ -8,8 +8,8 @@ class MentionNotificationService
     Pusher.trigger("private-user-#{@activity.recipient.id}",
       "new_feed_item",
       {
-        data: @activity.user.latest_notifications.last
-      }
+        data: @activity
+      }.to_json
     )
 	end
 

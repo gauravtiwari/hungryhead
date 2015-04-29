@@ -18,7 +18,7 @@ class FollowNotificationService
     Pusher.trigger("private-user-#{@user.id}",
       "new_feed_item",
       {
-        data: activity.user.latest_notifications.last
+        data: activity
       }.to_json
     )
     if activity.recipient_type == "Idea"

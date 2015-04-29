@@ -17,7 +17,7 @@ class FeedbackNotificationService
     Pusher.trigger("private-user-#{@idea.student.id}",
       "new_feed_item",
       {
-        data:  activity.user.latest_notifications.last
+        data:  activity
       }.to_json
     )
 

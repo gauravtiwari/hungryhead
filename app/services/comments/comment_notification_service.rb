@@ -20,7 +20,7 @@ class CommentNotificationService
       Pusher.trigger("private-user-#{user}",
         "new_feed_item",
         {
-          data: activity.user.latest_notifications.last
+          data: activity
         }.to_json
       )
       if activity.recipient_type == "Idea"
