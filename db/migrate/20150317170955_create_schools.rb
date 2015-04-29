@@ -18,8 +18,7 @@ class CreateSchools < ActiveRecord::Migration
       #Caching ids
       t.string :followers_ids, array: true, default: "{}"
 
-      t.integer :students_count, null: false, default: 0
-      t.integer :teachers_count, null: false, default: 0
+      t.integer :users_count, null: false, default: 0
       t.integer :ideas_count, null: false, default: 0
       t.integer :followers_count, null: false, default: 0
       t.timestamps null: false
