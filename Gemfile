@@ -121,6 +121,7 @@ gem 'redis'
 
 #Redis objects
 gem 'redis-objects'
+gem 'ohm'
 
 #Mailer gems
 gem 'mandrill-rails'
