@@ -14,9 +14,9 @@
 <div class="col-md-4 col-sm-4">
   <div class="sidebar auto-height bg-white box-shadow">
     <%= render partial: 'latest_activities' %>
-    <%= render partial: 'followers' if @idea.followers_count > 0 %>
-    <%= render partial: 'feedbackers' if @idea.feedbacks_count > 0 %>
-    <%= render partial: 'investors' if @idea.investments_count > 0 %>
+    <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
+    <%= render partial: 'feedbackers' if @idea.feedbacks_counter.value > 0 %>
+    <%= render partial: 'investors' if @idea.investments_counter.value > 0 %>
   </div>
 </div>
 
