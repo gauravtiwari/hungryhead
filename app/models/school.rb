@@ -1,9 +1,11 @@
 class School < ActiveRecord::Base
 
+	include IdentityCache
 	include Followable
 	include Sluggable
 
-	has_many :users
+	has_many :students, as: :student, class_name: 'Student'
+	has_many :teachers, as: :teacher, class_name: 'Teacher'
 	has_many :ideas
 
 	acts_as_taggable_on :locations
@@ -17,12 +19,17 @@ class School < ActiveRecord::Base
 	sorted_set :followers_ids
 	sorted_set :students_ids
 	sorted_set :ideas_ids
-	sorted_set :activities_ids
 
 	#Counters
 	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
+
+	#Caching Model
+	cache_has_many :follows, :inverse_name => :followable, :embed => true
+	cache_has_many :students, :embed => true
+	cache_has_many :teachers, :embed => true
+	cache_has_many :ideas, :embed => true
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader

@@ -10,6 +10,7 @@ class CreateComments < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.integer :parent_id, :lft, :rgt
       t.string :role, :default => "comments"
+      t.integer :votes_count, null: false, default: 0
       t.timestamps
     end
 

@@ -8,6 +8,8 @@ class CreateShares < ActiveRecord::Migration
       t.references :shareable, polymorphic: true
       t.references :user, foreign_key: true
       t.jsonb :parameters
+      t.integer :votes_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
       t.timestamps null: false
     end
     add_index :shares, [:shareable_id, :shareable_type], algorithm: :concurrently

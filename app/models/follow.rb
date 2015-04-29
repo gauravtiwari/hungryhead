@@ -3,13 +3,15 @@ class Follow < ActiveRecord::Base
   belongs_to :follower, polymorphic: true
   belongs_to :followable, polymorphic: true
 
+  counter_culture :follower
+  counter_culture :followable
+
   # Validations
   validates :followable, presence: true
   validates :follower, presence: true
 
   after_create :increment_counters
   before_destroy :decrement_counters, :delete_notification
-  #before_destroy :remove_activity
 
   private
 

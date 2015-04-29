@@ -11,7 +11,7 @@
 environment 'development'
 daemonize false
 port 3000
-threads 16,32
+threads 8,32
 preload_app!
 
 
@@ -33,7 +33,7 @@ preload_app!
 
 # === Cluster mode ===
 
-workers 3
+workers 1
 
 # on_worker_boot do
 #   puts 'On worker boot...'

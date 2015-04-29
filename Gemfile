@@ -38,6 +38,9 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
+#Bette counter caching
+gem 'counter_culture'
+
 #Inline SVG
 gem 'inline_svg'
 

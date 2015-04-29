@@ -74,6 +74,9 @@ GEM
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     addressable (2.3.8)
+    after_commit_action (1.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     ambry (0.3.1)
     animate-rails (1.0.7)
       rails
@@ -160,6 +163,10 @@ GEM
     commonjs (0.2.7)
     connection_pool (2.2.0)
     cookiejar (0.3.2)
+    counter_culture (0.1.33)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      after_commit_action (~> 1.0.0)
     countries (0.11.3)
       currencies (~> 0.4.2)
       i18n_data (~> 0.6.0)
@@ -719,6 +726,7 @@ DEPENDENCIES
   carrierwave_direct (~> 0.0.14)
   cityhash
   coffee-rails
+  counter_culture
   country_select
   dalli
   devise

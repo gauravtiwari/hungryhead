@@ -1,8 +1,12 @@
 class Investment < ActiveRecord::Base
 
+  include IdentityCache
+
   #Associations
   belongs_to :user, touch: true
+  counter_culture :user
   belongs_to :idea, touch: true
+  counter_culture :idea
 
   #Includes concerns
   include Commentable
@@ -19,6 +23,10 @@ class Investment < ActiveRecord::Base
   sorted_set :voters_ids
   sorted_set :commenters_ids
 	counter :comments_counter
+
+  #Caching Model
+  cache_has_many :votes, :inverse_name => :votable, :embed => true
+  cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   #Model Callbacks
 	before_destroy :cancel_investment, :decrement_counters, :delete_activity

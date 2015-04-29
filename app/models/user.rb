@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   include ActiveModel::Validations
   include Redis::Objects
+  include IdentityCache
   #Concerns for User class
   include Followable
   include Follower
@@ -16,7 +17,6 @@ class User < ActiveRecord::Base
   sorted_set :followers_ids
   sorted_set :followings_ids
   sorted_set :idea_followings_ids
-  sorted_set :ideas_ids
   sorted_set :latest_notifications, maxlength: 100, marshal: true
 
   #Redis counters to cache total followers, followings,
@@ -59,6 +59,7 @@ class User < ActiveRecord::Base
 
   #Model Relationships
   belongs_to :school
+  counter_culture :school
   has_many :authentications, :dependent => :destroy, autosave: true
 
   #Activities
@@ -71,6 +72,15 @@ class User < ActiveRecord::Base
   has_many :investments, dependent: :destroy, autosave: true
   has_many :comments, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
+
+  #Caching Model
+  cache_has_many :activities, :embed => true
+  cache_has_many :follows, :inverse_name => :follower, :embed => true
+  cache_has_many :follows, :inverse_name => :followable, :embed => true
+  cache_has_many :investments, :embed => true
+  cache_has_many :feedbacks, :embed => true
+  cache_has_many :activities, :embed => true
+
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader

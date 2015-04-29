@@ -7,6 +7,8 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.integer :status, default: 0, null: false
       t.jsonb :parameters, default: "{}"
+      t.integer :votes_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
       t.timestamps null: false
     end
     add_index :feedbacks, :user_id, algorithm: :concurrently

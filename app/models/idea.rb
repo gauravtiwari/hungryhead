@@ -1,5 +1,7 @@
 class Idea < ActiveRecord::Base
 
+  include IdentityCache
+
   #Includes Modules
   include Redis::Objects
 
@@ -17,8 +19,6 @@ class Idea < ActiveRecord::Base
   sorted_set :followers_ids
   sorted_set :voters_ids
   sorted_set :sharers_ids
-  sorted_set :feedbackers_ids
-  sorted_set :investors_ids
   sorted_set :commenters_ids
   sorted_set :latest_notifications, maxlength: 100, marshal: true
 
@@ -56,13 +56,24 @@ class Idea < ActiveRecord::Base
 
   #Associations
   belongs_to :student, touch: true
+  counter_culture :student
   belongs_to :school
+  counter_culture :school
 
   #Rest of the assocuations
   has_many :feedbacks, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
   has_many :investments, dependent: :destroy, autosave: true
   has_many :slugs, as: :sluggable, dependent: :destroy
+
+  #Caching Model
+  cache_has_many :feedbacks, :embed => true
+  cache_has_many :investments, :embed => true
+  cache_has_many :follows, :inverse_name => :followable, :embed => true
+  cache_has_many :votes, :inverse_name => :votable, :embed => true
+  cache_has_many :comments, :inverse_name => :commentable, embed: true
+  cache_has_many :shares, :inverse_name => :shareable, embed: true
+  cache_has_many :idea_messages, :embed => true
 
   #Includes modules
   has_merit

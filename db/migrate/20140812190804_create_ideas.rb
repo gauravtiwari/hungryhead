@@ -24,6 +24,13 @@ class CreateIdeas < ActiveRecord::Migration
       t.jsonb :profile, default: "{}"
       t.jsonb :sections, default: "{}"
       t.jsonb :fund, default: "{}"
+      t.integer :votes_count, null: false, default: 0
+      t.integer :followers_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
+      t.integer :shares_count, null: false, default: 0
+      t.integer :investments_count, null: false, default: 0
+      t.integer :idea_messages_count, null: false, default: 0
+      t.integer :feedbacks_count, null: false, default: 0
       t.string :cached_location_list
       t.string :cached_market_list
       t.string :cached_technology_list
