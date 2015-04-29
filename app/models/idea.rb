@@ -178,10 +178,10 @@ class Idea < ActiveRecord::Base
 
   def refresh
     latest_notifications.clear
-    Activity.where(recipient: self).order(id: :desc).limit(50).each do |activity|
+    Activity.where(trackable: self).order(id: :desc).limit(50).each do |activity|
       refresh_activity_cache(activity)
     end
-    Notification.where(recipient: self).order(id: :desc).limit(50).each do |notification|
+    Notification.where(trackable: self).order(id: :desc).limit(50).each do |notification|
       refresh_notification_cache(notification)
     end
   end
