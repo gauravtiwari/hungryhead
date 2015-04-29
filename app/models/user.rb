@@ -58,7 +58,11 @@ class User < ActiveRecord::Base
   cache_has_many :investments, :embed => true
   cache_has_many :feedbacks, :embed => true
   cache_has_many :activities, :embed => true
+  cache_has_many :notifications, :embed => true
 
+  cache_index :school_id
+  cache_index :type
+  cache_index :score
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader

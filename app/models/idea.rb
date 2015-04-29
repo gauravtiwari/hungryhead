@@ -10,6 +10,7 @@ class Idea < ActiveRecord::Base
   include Followable
   include Sluggable
   include Sharings
+  include Activist
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -51,6 +52,9 @@ class Idea < ActiveRecord::Base
   cache_has_many :comments, :inverse_name => :commentable, embed: true
   cache_has_many :shares, :inverse_name => :shareable, embed: true
   cache_has_many :idea_messages, :embed => true
+
+  cache_index :school_id
+  cache_index :score
 
   #Includes modules
   has_merit
