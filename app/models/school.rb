@@ -4,6 +4,9 @@ class School < ActiveRecord::Base
 	include Followable
 	include Sluggable
 
+	has_many :users
+	has_many :ideas
+
 	acts_as_taggable_on :locations
 
 	store_accessor :data, :established, :locations, :website

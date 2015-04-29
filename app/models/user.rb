@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   #Model Relationships
-  belongs_to :school, polymorphic: true
+  belongs_to :school
 
   #counter cache for students and teachers
   counter_culture :school

@@ -8,7 +8,7 @@ class Note < ActiveRecord::Base
 
   #Includes concerns
   include Commentable
-  include Shareable
+  include Sharings
   include Votable
 
   #Caching Model

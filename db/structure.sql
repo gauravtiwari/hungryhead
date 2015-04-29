@@ -68,7 +68,7 @@ CREATE TABLE activities (
     user_id integer,
     key character varying,
     parameters jsonb DEFAULT '{}'::jsonb,
-    score bigint DEFAULT 1430321701,
+    score bigint DEFAULT 1430323192,
     published boolean DEFAULT true,
     recipient_id integer,
     recipient_type character varying,
@@ -179,7 +179,7 @@ CREATE TABLE comments (
     parent_id integer,
     lft integer,
     rgt integer,
-    score bigint DEFAULT 1430321704,
+    score bigint DEFAULT 1430323194,
     role character varying DEFAULT 'comments'::character varying,
     voters_ids character varying[] DEFAULT '{}'::character varying[],
     votes_count integer DEFAULT 0 NOT NULL,
@@ -218,7 +218,7 @@ CREATE TABLE feedbacks (
     user_id integer NOT NULL,
     status integer DEFAULT 0 NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
-    score bigint DEFAULT 1430321701,
+    score bigint DEFAULT 1430323192,
     voters_ids character varying[] DEFAULT '{}'::character varying[],
     commenters_ids character varying[] DEFAULT '{}'::character varying[],
     sharer_ids character varying[] DEFAULT '{}'::character varying[],
@@ -374,7 +374,7 @@ CREATE TABLE ideas (
     investors_ids character varying[] DEFAULT '{}'::character varying[],
     followers_ids character varying[] DEFAULT '{}'::character varying[],
     sharers_ids character varying[] DEFAULT '{}'::character varying[],
-    score bigint DEFAULT 1430321700,
+    score bigint DEFAULT 1430323192,
     looking_for_team boolean DEFAULT false,
     school_id integer,
     status integer DEFAULT 0,
@@ -846,7 +846,7 @@ CREATE TABLE notes (
     body text,
     status integer,
     user_id integer,
-    score bigint DEFAULT 1430321704,
+    score bigint DEFAULT 1430323194,
     voters_ids character varying[] DEFAULT '{}'::character varying[],
     commenters_ids character varying[] DEFAULT '{}'::character varying[],
     sharers_ids character varying[] DEFAULT '{}'::character varying[],
@@ -1075,6 +1075,7 @@ CREATE TABLE schools (
     media jsonb DEFAULT '{}'::jsonb,
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
+    score bigint DEFAULT 1430323193,
     followers_ids character varying[] DEFAULT '{}'::character varying[],
     students_count integer DEFAULT 0 NOT NULL,
     teachers_count integer DEFAULT 0 NOT NULL,
@@ -1336,7 +1337,7 @@ CREATE TABLE users (
     followers_ids character varying[] DEFAULT '{}'::character varying[],
     followings_ids character varying[] DEFAULT '{}'::character varying[],
     idea_followings_ids character varying[] DEFAULT '{}'::character varying[],
-    score bigint DEFAULT 1430321699,
+    score bigint DEFAULT 1430323191,
     cached_location_list character varying,
     cached_market_list character varying,
     cached_skill_list character varying,
@@ -2496,6 +2497,13 @@ CREATE UNIQUE INDEX index_schools_on_email ON schools USING btree (email);
 --
 
 CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
+
+
+--
+-- Name: index_schools_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_score ON schools USING btree (score);
 
 
 --

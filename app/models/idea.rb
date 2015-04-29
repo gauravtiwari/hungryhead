@@ -20,7 +20,7 @@ class Idea < ActiveRecord::Base
 
   #Scopes
   scope :published_ideas, -> { where(status: 1) }
-  scope :for_user, lambda {|user| where("student_id=? OR team @> ?", "#{user.id}", "{#{user.id}}") }
+  scope :for_user, lambda {|user| where("student_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Upload logos and covers
   mount_uploader :logo, LogoUploader
