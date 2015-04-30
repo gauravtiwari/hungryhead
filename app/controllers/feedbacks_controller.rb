@@ -39,8 +39,8 @@ class FeedbacksController < ApplicationController
     else
       respond_to do |format|
         if @feedback.save
-          FeedbackNotificationService.new(@feedback).notify
           format.json { render :show, status: :created}
+          FeedbackNotificationService.new(@feedback).notify
         else
           format.json { render json: @feedback.errors, status: :unprocessable_entity }
         end

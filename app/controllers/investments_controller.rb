@@ -33,8 +33,8 @@ class InvestmentsController < ApplicationController
       authorize @investment
       respond_to do |format|
         if @investment.save
-          UpdateBalanceService.new(@investment).invest
           format.json { render :show, status: :created}
+          UpdateBalanceService.new(@investment).invest
           InvestmentNotificationService.new(@investment).notify
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }

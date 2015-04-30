@@ -6,9 +6,17 @@ class SharesController < ApplicationController
 
   def create
     @shareable = Idea.find(params[:shareable_id])
-    @share = CreateShareService.new(share_params, current_user, @shareable).create
-    render :show, status: :created
-    ShareNotificationService.new(@share).notify
+    if @shareable.shared?(current_user)
+      render json: {error: 'Already shared'}
+    else
+      @share = CreateShareService.new(share_params, current_user, @shareable).create
+      if @share.save
+        render :show, status: :created
+        ShareNotificationService.new(@share).notify
+      else
+        render json: @share.errors, status: :unprocessible_entity
+      end
+    end
   end
 
   def sharers

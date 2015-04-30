@@ -9,7 +9,10 @@ class VotesController < ApplicationController
     else
       @vote = CreateVoteService.new(current_user, @votable).vote
       if @vote.save
+        render json: {voted: @votable.voted?(current_user), votes_count: @votable.votes_count}
         VoteNotificationService.new(current_user, @vote, @votable).notify
+      else
+        render json: @vote.errors, status: :unprocessable_entity
       end
     end
     expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
