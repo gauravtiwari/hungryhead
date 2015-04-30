@@ -7,7 +7,7 @@ class UpdateVoteCacheJob < ActiveJob::Base
     @votable.voters_ids.clear
     @votable.votes_counter.incr(@votable.votes.size)
     @votable.votes.find_each do |vote|
-      vote.votable.voters_ids.add(vote.voter.id, vote.created_at.to_i)
+      vote.votable.voters_ids.add(vote.voter.id)
     end
   end
 end

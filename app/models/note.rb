@@ -13,9 +13,9 @@ class Note < ActiveRecord::Base
 
   #Redis counters and cache
   counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
-  sorted_set :sharers_ids
+  set :voters_ids
+  set :commenters_ids
+  set :sharers_ids
   counter :shares_counter
   counter :comments_counter
 

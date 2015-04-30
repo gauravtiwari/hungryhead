@@ -5,9 +5,9 @@ class FeedbackNotificationCacheService
   end
 
   def cache
-    @activity.user.latest_notifications.add(activity_json, @activity.created_at.to_i)
+    @activity.user.latest_notifications.add(activity_json)
     if @activity.recipient_type == "Idea"
-      @activity.recipient.latest_notifications.add(activity_json, @activity.created_at.to_i)
+      @activity.recipient.latest_notifications.add(activity_json)
     end
   end
 

@@ -13,8 +13,8 @@ class Investment < ActiveRecord::Base
 
   #Counters for redis
   counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
+  set :voters_ids
+  set :commenters_ids
   counter :comments_counter
 
   #Model Callbacks
@@ -47,7 +47,7 @@ class Investment < ActiveRecord::Base
   def increment_counters
     user.investments_counter.increment
     idea.investors_counter.increment
-    idea.investors_ids.add(user.id, created_at.to_i)
+    idea.investors_ids.add(user.id)
   end
 
   def decrement_counters

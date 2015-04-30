@@ -5,9 +5,9 @@ class VoteNotificationCacheService
   end
 
   def cache
-    @activity.user.latest_notifications.add(activity_json, @activity.created_at.to_i)
+    @activity.user.latest_notifications.add(activity_json)
     if @activity.recipient_type == "Idea"
-      @activity.recipient.latest_notifications.add(activity_json, @activity.created_at.to_i)
+      @activity.recipient.latest_notifications.add(activity_json)
     end
   end
 
@@ -16,6 +16,7 @@ class VoteNotificationCacheService
     recipient_user_id = @activity.recipient_type == "Idea" ? @activity.recipient.student.id : @activity.recipient.user.id
     avatar = @activity.user.avatar.url(:avatar) if @activity.user.avatar.present?
     {
+      actor: @activity.user.name,
       actor_id: @activity.user.id,
       recipient_user_id: recipient_user_id,
       recipient: recipient_name,

@@ -11,8 +11,8 @@ class Feedback < ActiveRecord::Base
 
   #redis counters
   counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
+  set :voters_ids
+  set :commenters_ids
   counter :comments_counter
 
   #Associations
@@ -43,7 +43,7 @@ class Feedback < ActiveRecord::Base
   def increment_counters
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
-    idea.feedbackers_ids.add(user.id, created_at.to_i)
+    idea.feedbackers_ids.add(user.id)
   end
 
   def decrement_counters

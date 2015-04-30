@@ -15,9 +15,9 @@ class School < ActiveRecord::Base
 	:cover_position, :cover_prcessing, :logo_processing
 
 	#Redis Cache counters and ids
-	sorted_set :followers_ids
-	sorted_set :students_ids
-	sorted_set :ideas_ids
+	set :followers_ids
+	set :students_ids
+	set :ideas_ids
 
 	#Counters
 	counter :followers_counter

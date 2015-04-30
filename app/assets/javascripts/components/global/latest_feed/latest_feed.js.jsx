@@ -60,6 +60,8 @@ var LatestFeed = React.createClass({
         return <LatestFeedMentionItem key={Math.random()} item={item} />
       } else if(item.verb === "noted"){
         return <LatestFeedNoteItem key={Math.random()} item={item} />
+      } else if(item.verb === "shared"){
+        return <LatestFeedShareItem key={Math.random()} item={item} />
       }
     });
 

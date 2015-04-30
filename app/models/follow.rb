@@ -16,9 +16,9 @@ class Follow < ActiveRecord::Base
   def increment_counters
     follower.followings_counter.increment
     followable.followers_counter.increment
-    follower.followings_ids.add(followable_id, created_at.to_i) if followable_type == "User"
-    follower.idea_followings_ids.add(followable_id, created_at.to_i) if followable_type == "Idea"
-    followable.followers_ids.add(follower_id, created_at.to_i)
+    follower.followings_ids.add(followable_id) if followable_type == "User"
+    follower.idea_followings_ids.add(followable_id) if followable_type == "Idea"
+    followable.followers_ids.add(follower_id)
 
     #Send stats via pusher
     publish_stats

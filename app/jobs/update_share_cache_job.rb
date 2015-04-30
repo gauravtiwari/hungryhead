@@ -7,7 +7,7 @@ class UpdateShareCacheJob < ActiveJob::Base
     @shareable.sharers_ids.clear
     @shareable.shares_counter.incr(@shareable.shares.size)
     @shareable.shares.find_each do |share|
-      share.shareable.sharers_ids.add(share.user.id, share.created_at.to_i)
+      share.shareable.sharers_ids.add(share.user.id)
     end
   end
 

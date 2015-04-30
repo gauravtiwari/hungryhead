@@ -10,7 +10,7 @@ class VoteNotificationService
     @activity = @user.notifications.create!(trackable: @vote, recipient: @votable, verb: 'voted', key: 'vote.create')
     @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
     VoteNotificationCacheService.new(@activity).cache
-    send_notification(@activity) if @user != @voter
+    send_notification(@activity)
   end
 
   def send_notification(activity)

@@ -17,13 +17,14 @@ class User < ActiveRecord::Base
   acts_as_punchable
 
   #Sorted set to store followers, followings ids and latest activities
-  sorted_set :followers_ids
-  sorted_set :followings_ids
-  sorted_set :idea_followings_ids
-  sorted_set :ideas_ids
+  set :followers_ids
+  set :followings_ids
+  set :idea_followings_ids
+  set :ideas_ids
 
   #Store latest user notifications
-  sorted_set :latest_notifications, maxlength: 100, marshal: true
+  set :latest_notifications, maxlength: 100, marshal: true
+  sorted_set :notification_feed
 
   #Redis counters to cache total followers, followings,
   #feedbacks, investments and ideas
