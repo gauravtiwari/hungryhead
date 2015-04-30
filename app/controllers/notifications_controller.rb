@@ -5,7 +5,7 @@ class NotificationsController < ApplicationController
 
 
   def index
-    @notifications = Notification.where(user_id: current_user.followings_ids, published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+    @notifications = Notification.where(user_id: current_user.followings_ids.members.push(current_user.id), published: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   def ideas

@@ -5,5 +5,5 @@ json.idea do
   json.idea_fund @idea.balance
   json.user_avatar current_user.avatar.url(:avatar)
   json.amount @investment.amount
-  json.has_invested @idea.has_invested?(current_user)
+  json.has_invested !@idea.invested?(current_user)
 end

@@ -18,9 +18,12 @@ var LatestFeedJoinItem = React.createClass({
             <a className="text-master" href={this.props.item.url}>
               <strong>{actor}</strong>
             </a>
-            <span className="text p-l-5">
-               {this.props.item.text}
-             </span>
+            <span className="verb p-l-5">
+              {this.props.item.verb}
+            </span>
+            <span className="recipient p-l-5">
+              hungryhead
+            </span>
           <span className="date p-l-10 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
           </span>
         </li>

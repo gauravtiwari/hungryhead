@@ -1,1 +1,0 @@
-Ohm.redis = $redis

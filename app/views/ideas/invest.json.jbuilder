@@ -4,5 +4,5 @@ json.idea do
   json.can_invest @idea.can_invest?(current_user)
   json.idea_fund @idea.balance
   json.user_fund current_user.balance
-  json.has_invested @idea.has_invested?(current_user)
+  json.has_invested !@idea.invested?(current_user)
 end

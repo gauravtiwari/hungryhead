@@ -26,6 +26,8 @@ class School < ActiveRecord::Base
 
 	#Caching Model
 	cache_has_many :followers, :inverse_name => :followable, :embed => true
+	cache_index :slug
+	cache_index :name
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader

@@ -20,9 +20,7 @@ class Comment < ActiveRecord::Base
 
   #Model Associations
   belongs_to :user
-  counter_culture :user
   belongs_to :commentable, :polymorphic => true, touch: true
-  counter_culture :commentable
 
   #Caching Model
   cache_has_many :votes, :inverse_name => :votable, :embed => true

@@ -30,7 +30,7 @@ class Feedback < ActiveRecord::Base
 
   #Hooks
   before_destroy :decrement_counters, :delete_activity
-  after_create :increment_counters
+  after_commit :increment_counters, on: :create
 
   public
 
@@ -43,7 +43,7 @@ class Feedback < ActiveRecord::Base
   def increment_counters
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
-    idea.feedbackers_ids.push(user.id)
+    idea.feedbackers_ids.add(user.id, created_at.to_i)
   end
 
   def decrement_counters

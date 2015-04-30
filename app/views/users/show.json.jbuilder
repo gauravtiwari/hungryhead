@@ -13,9 +13,9 @@ json.user do
 		json.username @user.username
 		json.email @user.email
 		json.theme @user.theme
-		json.followers_count @user.followers_count
-		json.feedbacks_count @user.feedbacks_count
-		json.investments_count @user.investments_count
+		json.followers_count @user.followers_counter.value
+		json.feedbacks_count @user.feedbacks_counter.value
+		json.investments_count @user.investments_counter.value
 		json.school_id @user.school.id if @user.school
 		json.school_name @user.school.name if @user.school
 		json.school_url profile_path(@user.school) if @user.school

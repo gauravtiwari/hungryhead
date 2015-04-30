@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+
   before_action :authenticate_user!
   before_filter :find_comment, only: [:vote, :update]
   before_filter :check_commentables, only: [:index, :create]
@@ -15,7 +16,7 @@ class CommentsController < ApplicationController
       @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
       @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
       if @comment.save
-        Pusher.trigger("#{@comment.commentable_type}-#{@comment.commentable_id}-comments",
+        Pusher.trigger_async("#{@comment.commentable_type}-#{@comment.commentable_id}-comments",
           "new_comment",
           { data: render(:show)}
         )

@@ -11,7 +11,7 @@ if @feedback
     json.user_name your_name(current_user, false)
     json.idea_name @feedback.idea.name
     json.idea_path idea_path(@feedback.idea)
-    json.can_feedback @feedback.idea.can_feedback?(current_user)
+    json.can_feedback !@feedback.idea.feedbacked?(current_user)
     json.is_owner @feedback.idea.is_owner?(current_user)
     json.user_avatar current_user.avatar.url(:mini)
   end

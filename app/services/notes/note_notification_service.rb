@@ -7,7 +7,7 @@ class NoteNotificationService
 
   def notify
     @activity = @user.activities.create!(trackable: @note, verb: 'noted', recipient: @user, key: 'note.create')
-    @user.notifications.create!(trackable: @note, verb: 'noted', recipient: @user, key: 'note.create')
+    NoteNotificationCacheService.new(@activity).cache
     NoteNotificationJob.set(wait: 10.seconds).perform_later(@note.id, @user.id, @activity.id)
   end
 

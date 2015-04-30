@@ -10,16 +10,16 @@ json.idea do
 end
 
 json.form do
-	json.csrf_param request_forgery_protection_token 
+	json.csrf_param request_forgery_protection_token
 	json.csrf_token form_authenticity_token
-	json.idea_slug @idea.slug 
+	json.idea_slug @idea.slug
 	json.idea_id @idea.id
 end
-json.meta do 
+json.meta do
 	  json.user_name current_user.name
 	  json.idea_name @idea.name
 	  json.idea_path idea_path(@idea)
-	  json.can_feedback policy(@idea).collaborator?
+	  json.can_feedback @idea.feedbacked?(current_user)
 	  json.is_owner @idea.in_team?(current_user)
 	  json.user_avatar current_user.avatar.url(:mini)
 end

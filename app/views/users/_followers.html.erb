@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
         <ul class="list-unstyled">
-            <% User.find(@user.followers_ids).each do |follower| %>
+            <% User.find(@user.followers_ids.members).each do |follower| %>
                 <li class="m-r-10">
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
                         <%= link_to(profile_path(follower)) do %>

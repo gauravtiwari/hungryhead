@@ -11,7 +11,7 @@ class CreateMentionService
       if mentionable.present?
         @mention = mentionable.mentions.create!(user: @user, mentioner: @mentioner)
         @activity = @user.notifications.create!(trackable: @mention, verb: 'mentioned', recipient: mentionable, key: 'mention.create')
-        NotificationCacheService.new(@activity).cache
+        MentionNotificationCacheService.new(@activity).cache
         MentionNotificationService.new(@activity).notify if @user != mentionable
       end
     end

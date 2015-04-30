@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
 
   cache_index :school_id
   cache_index :type
+  cache_index :slug
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
@@ -88,7 +89,7 @@ class User < ActiveRecord::Base
   before_save :add_fullname, unless: :is_admin
   after_save :load_into_soulmate , unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity , unless: :is_admin
-  after_create :increment_counters, :seed_fund, :seed_settings, on: :create , unless: :is_admin
+  after_create :increment_counters, :seed_fund, :seed_settings, unless: :is_admin
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -216,13 +217,13 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.followers_ids.add(id, created_at.to_i)
+    school.followers_ids.add(id, created_at.to_i) if school
     school.students_counter.increment if school
   end
 
   def decrement_counters
     school.students_counter.decrement if school && school.students_counter.value > 0
-    school.followers_ids.delete(id)
+    school.followers_ids.delete(id) if school
   end
 
   #Deletes all dependent activities for this user

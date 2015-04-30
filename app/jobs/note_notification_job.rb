@@ -7,10 +7,10 @@ class NoteNotificationJob < ActiveJob::Base
       @note = Note.find(note_id)
       @activity = Activity.find(activity_id)
       # Send notifications to followers
-      User.find(@user.followers_ids).each do |f|
-        Pusher.trigger("private-user-#{f.id}",
+      User.find(@user.followers_ids.members).each do |f|
+        Pusher.trigger_async("private-user-#{f.id}",
           "new_feed_item",
-          {data: @activity}.to_json
+          {data: @activity.user.latest_notifications.last}.to_json
         )
         #send mail to users if subscribed
         NoteMailer.new_note(@note, @user, f).deliver_later if f.note_notifications && f.note_notifications == true

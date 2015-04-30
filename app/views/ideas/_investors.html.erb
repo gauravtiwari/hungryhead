@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-      <% @idea.find_investors.each do |investor| %>
+      <% User.find(@idea.investors_ids.members).each do |investor| %>
         <li class="m-r-10">
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
             <% if investor.avatar.present? %>
@@ -18,7 +18,7 @@
             </div>
         </li>
       <% end %>
-      <% if @idea.investments_counter.value > 16 %>
+      <% if @idea.investors_counter.value > 16 %>
         <li>
             <div class="thumbnail-wrapper d32 circular b-white">
                 <div class="bg-master text-center text-white">

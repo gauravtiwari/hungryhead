@@ -47,7 +47,7 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_commit :increment_counters
+  after_commit :increment_counters, on: :create
   after_save :load_into_soulmate
 
   #Associations
@@ -70,6 +70,7 @@ class Idea < ActiveRecord::Base
   cache_has_many :idea_messages, :embed => true
 
   cache_index :school_id
+  cache_index :slug
 
   #Includes modules
   has_merit
@@ -125,12 +126,12 @@ class Idea < ActiveRecord::Base
     name.split('')
   end
 
-  def has_invested?(user)
-    !investors_ids.members.include? user.id.to_s
+  def invested?(user)
+    investors_ids.members.include?(user.id.to_s)
   end
 
-  def can_feedback?(user)
-    !feedbackers_ids.members.include? user.id.to_s
+  def feedbacked?(user)
+    feedbackers_ids.members.include?(user.id.to_s)
   end
 
   def is_owner?(current_user)
@@ -138,11 +139,11 @@ class Idea < ActiveRecord::Base
   end
 
   def can_invest?(user)
-    student.balance > 10 && has_invested?(user)
+    student.balance > 10 && invested?(user)
   end
 
   def in_team?(user)
-    founder?(user) || team_ids.members.include?(user.id.to_s)
+    founder?(user) || team_ids.include?(user.id.to_s)
   end
 
   def invited?(user)

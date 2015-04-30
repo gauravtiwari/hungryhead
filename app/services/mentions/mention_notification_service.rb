@@ -5,10 +5,10 @@ class MentionNotificationService
 	end
 
 	def notify
-    Pusher.trigger("private-user-#{@activity.recipient.id}",
+    Pusher.trigger_async("private-user-#{@activity.recipient.id}",
       "new_feed_item",
       {
-        data: @activity
+        data: @activity.user.latest_notifications.last
       }.to_json
     )
 	end

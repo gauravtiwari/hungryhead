@@ -9,21 +9,27 @@ class VoteNotificationService
   def notify
     @activity = @user.notifications.create!(trackable: @vote, recipient: @votable, verb: 'voted', key: 'vote.create')
     @voter = @votable.class.to_s == "Idea" ? @votable.student : @votable.user
+    VoteNotificationCacheService.new(@activity).cache
     send_notification(@activity) if @user != @voter
   end
 
   def send_notification(activity)
-    Pusher.trigger("private-user-#{activity.user.id}",
+    Pusher.trigger_async("private-user-#{activity.user.id}",
       "new_feed_item",
       {
-        data:  activity
+        data:   activity.user.latest_notifications.last
       }.to_json
     )
+
+    idea_notification(activity)
+  end
+
+  def idea_notification(activity)
     if activity.recipient_type == "Idea"
       Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
         "new_feed_item",
         {
-          data: activity
+          data:  activity.recipient.latest_notifications.last
         }.to_json
       )
     end

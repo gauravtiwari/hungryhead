@@ -38,9 +38,6 @@ gem 'jbuilder'
 gem 'identity_cache'
 gem 'cityhash'
 
-#Bette counter caching
-gem 'counter_culture'
-
 #Inline SVG
 gem 'inline_svg'
 
@@ -121,7 +118,6 @@ gem 'redis'
 
 #Redis objects
 gem 'redis-objects'
-gem 'ohm'
 
 #Mailer gems
 gem 'mandrill-rails'
