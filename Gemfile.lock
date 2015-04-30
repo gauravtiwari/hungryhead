@@ -691,6 +691,10 @@ GEM
     wicked (1.1.1)
       rails (>= 3.0.7)
     will_paginate (3.0.7)
+    wisper (1.6.0)
+    wisper-activerecord (0.3.0)
+      activerecord (>= 3.0.0)
+      wisper (~> 1.3)
 
 PLATFORMS
   ruby
@@ -820,3 +824,5 @@ DEPENDENCIES
   uuidtools
   wicked
   will_paginate
+  wisper
+  wisper-activerecord

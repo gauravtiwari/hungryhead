@@ -159,6 +159,7 @@ class UsersController < ApplicationController
   def set_user
     id = params[:slug] || params[:id]
     @user = User.find(id)
+    @user.subscribe(UserUpdateListener.new)
   end
 
   # White-listed attributes.

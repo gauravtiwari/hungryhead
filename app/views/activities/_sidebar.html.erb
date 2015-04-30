@@ -21,17 +21,19 @@
                             <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
                         <% end %>
                     </h3>
-                    <p class="no-margin text-white fs-16">
+                    <p class="no-margin text-white fs-13">
                         <%= current_user.mini_bio %>
                     </p>
                     <p class="text-white m-t-5 small">
                         <%  if current_user.location_list.first %>
                             <span class="b-r b-white b-dashed p-r-5">
+                                <i class="fa fa-map-marker"></i>
                                 <%= current_user.location_list.first %>
                             </span>
                         <% end %>
                         <% if current_user.school  %>
                             <span class="p-l-5">
+                                <i class="fa fa-university"></i>
                                 <%= current_user.school_name %>
                             </span>
                         <% end %>
