@@ -11,7 +11,12 @@ class Vote < ActiveRecord::Base
   before_destroy :decrement_counter, :delete_notification
   after_create :increment_counter
 
+
   private
+
+  def rebuild_cache
+    UpdateVoteCacheJob.perform_later(votable_id, votable_type)
+  end
 
   def increment_counter
     votable.votes_counter.increment

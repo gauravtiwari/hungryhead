@@ -220,13 +220,11 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.followers_ids.add(id, created_at.to_i) if school
     school.students_counter.increment if school
   end
 
   def decrement_counters
     school.students_counter.decrement if school && school.students_counter.value > 0
-    school.followers_ids.delete(id) if school
   end
 
   #Deletes all dependent activities for this user

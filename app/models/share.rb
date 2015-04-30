@@ -38,6 +38,10 @@ class Share < ActiveRecord::Base
 
 	private
 
+	def rebuild_cache
+	  UpdateShareCacheJob.perform_later(shareable_id, shareable_type)
+	end
+
 	def increment_counters
 		shareable.shares_counter.increment
 	  shareable.sharers_ids.add(user_id, created_at.to_i)

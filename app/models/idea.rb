@@ -167,15 +167,6 @@ class Idea < ActiveRecord::Base
     end
   end
 
-  def refresh_redis_cache
-    school.ideas_counter.reset
-    student.ideas_counter.reset
-    student.ideas_ids.clear
-    school.ideas_counter.increment
-    student.ideas_counter.increment
-    student.ideas_ids.add(id, created_at.to_i)
-  end
-
   private
 
   def load_into_soulmate
@@ -193,7 +184,6 @@ class Idea < ActiveRecord::Base
     loader = Soulmate::Loader.new("ideas")
     loader.remove("id" => id)
   end
-
 
   def slug_candidates
     [:name, [:name, :id]]
