@@ -5,13 +5,8 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = User.find(current_user.followings_ids.members.push(current_user.id))
-    .map { |u| u.latest_notifications }
-
-    @sorted_set = Redis::SortedSet.new('latest_feed')
-
-    @set = @notifications.map{|n| @sorted_set.inter(n) }
-
-    render json: Oj.dump(@notifications.flatten.revrange(0, 100), {:mode => :compat})
+    .map { |u| u.latest_notifications.members.paginate(:page => params[:page], :per_page => 10) }
+    render json: Oj.dump(@notifications.uniq.flatten, {:mode => :compat})
   end
 
   def ideas

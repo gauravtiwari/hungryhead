@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
   include IdentityCache
   include Redis::Objects
-  include Wisper::Publisher
   include Wisper.model
 
   #Concerns for User class
@@ -91,12 +90,6 @@ class User < ActiveRecord::Base
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
 
-  #Callbacks
-  before_save :add_fullname, unless: :is_admin
-  after_save :load_into_soulmate, unless: :is_admin
-  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  after_create :increment_counters, :seed_fund, :seed_settings, unless: :is_admin
-
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
@@ -146,93 +139,26 @@ class User < ActiveRecord::Base
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
 
-  def school_name
-    school_id.present? ? school.name : ""
-  end
-
-  def user_name_badge
-    first_name.present? ? first_name.first + last_name.first : add_fullname
-  end
-
-  private
-
   #returns if a user is admin
   def is_admin
     admin?
   end
 
-  # returns and adds first_name and last_name to database
-  def add_fullname
-    words = self.name.split(" ")
-    self.first_name = words.first
-    self.last_name =  words.last
+  #return user school name
+  def school_name
+    school_id.present? ? school.name : ""
   end
 
-  #Seeds amount into database on: :create
-  def seed_fund
-    self.fund = {balance: 1000}
+  #returns user short name badghe
+  def user_name_badge
+    first_name.present? ? first_name.first + last_name.first : name
   end
 
-  #Seeds settings into database on: :create
-  def seed_settings
-    self.settings = {
-      theme: 'solid',
-      idea_notifications: true,
-      feedback_notifications: true,
-      investment_notifications: true,
-      follow_notifications: true,
-      note_notifications: true,
-      weekly_mail: true
-    }
-  end
+  private
 
   #Slug attributes for friendly id
   def slug_candidates
     [:username]
-  end
-
-  #Load data to redis using soulmate after_save
-  def load_into_soulmate
-    unless admin?
-      if type == "Student"
-        soulmate_loader("students")
-      elsif type == "Mentor"
-        soulmate_loader("mentors")
-      elsif type == "Teacher"
-        soulmate_loader("teachers")
-      end
-    end
-  end
-
-  def soulmate_loader(type)
-    loader = Soulmate::Loader.new(type)
-    if avatar
-      image =  avatar.url(:avatar)
-      resume = school.name
-    else
-      image= "http://placehold.it/30"
-    end
-    loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-      "link" => Rails.application.routes.url_helpers.profile_path(self)
-      })
-  end
-
-  def remove_from_soulmate
-    loader = Soulmate::Loader.new("students")
-      loader.remove("id" => id)
-  end
-
-  def increment_counters
-    school.students_counter.increment if school
-  end
-
-  def decrement_counters
-    school.students_counter.decrement if school && school.students_counter.value > 0
-  end
-
-  #Deletes all dependent activities for this user
-  def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
   protected

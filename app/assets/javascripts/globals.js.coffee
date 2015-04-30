@@ -18,7 +18,7 @@ jQuery(document).ready ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
 	  	.show();
 
-	$('.scrollable').slimScroll height: '200px'
+	$('.scrollable').slimScroll height: '300px'
 
 	$('.follow-scrollable').slimScroll height: '350px'
 
