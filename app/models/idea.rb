@@ -23,6 +23,9 @@ class Idea < ActiveRecord::Base
   sorted_set :investors_ids
   sorted_set :commenters_ids
 
+  #Store latest idea notifications
+  sorted_set :latest_notifications, maxlength: 100, marshal: true
+
   #Redis Cache counters
   counter :followers_counter
   counter :investors_counter
