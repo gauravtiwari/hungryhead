@@ -90,9 +90,10 @@ class User < ActiveRecord::Base
 
   #Callbacks
   before_save :add_fullname, unless: :is_admin
-  after_save :load_into_soulmate , unless: :is_admin
-  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity , unless: :is_admin
+  after_save :load_into_soulmate, unless: :is_admin
+  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   after_create :increment_counters, :seed_fund, :seed_settings, unless: :is_admin
+  after_commit :rebuild_notifications, on: [:update]
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -230,6 +231,10 @@ class User < ActiveRecord::Base
   #Deletes all dependent activities for this user
   def delete_activity
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+  end
+
+  def rebuild_notifications
+    RebuildNotificationsCacheJob.perform_later(id) if name_changed? || avatar_changed?
   end
 
   protected

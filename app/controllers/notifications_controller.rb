@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
     .map { |n| n.user.latest_notifications.revrange(0, 20).paginate(:page => params[:page], :per_page => 10) }
-    render json: Oj.dump(@notifications.uniq.flatten, compact: true)
+    render json: Oj.dump(@notifications.uniq.flatten, {:mode => :compat})
   end
 
   def ideas
@@ -17,7 +17,7 @@ class NotificationsController < ApplicationController
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
     .map { |n| n.recipient.latest_notifications.revrange(0, 20).paginate(:page => params[:page], :per_page => 10) }
-    render json: Oj.dump(@notifications.uniq.flatten, compact: true)
+    render json: Oj.dump(@notifications.uniq.flatten, {:mode => :compat})
   end
 
   def mark_as_read

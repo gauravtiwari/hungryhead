@@ -17,7 +17,7 @@ class NoteNotificationCacheService
       recipient_user_id: @activity.recipient.id,
       recipient_type: @activity.recipient_type.to_s.downcase,
       id: @activity.id,
-      actor_name_badge: @activity.notification.user.user_name_badge,
+      actor_name_badge: @activity.user.user_name_badge,
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
       actor_avatar: avatar,
       url: Rails.application.routes.url_helpers.profile_path(@activity.user),
