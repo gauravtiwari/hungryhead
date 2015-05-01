@@ -49,7 +49,7 @@ class CreateNotificationCacheService
     if @activity.trackable_type == "User"
       trackable_user_name =   @activity.trackable.name
       trackable_user_id =   @activity.trackable.id
-    elseif @activity.trackable_type == "Idea"
+    elsif @activity.trackable_type == "Idea"
       trackable_user_name = @activity.trackable.student.name
       trackable_user_id =   @activity.trackable.id
     else
@@ -70,19 +70,15 @@ class CreateNotificationCacheService
   end
 
   def options_for_target(target)
-    if @activity.recipient_type == "User"
-      recipient_name =   @activity.recipient.name
-    elseif @activity.recipient_type == "Idea"?
-      recipient_name = @activity.recipient.student.name
-    else
-      recipient_name = @activity.recipient.user.name
-    end
     if @activity.recipient_type == "Idea"
       recipient_user_id =  @activity.recipient.student.id
+      recipient_name = @activity.recipient.student.name
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
+      ecipient_name =   @activity.recipient.name
     else
       recipient_user_id =  @activity.recipient.user.id
+      recipient_name = @activity.recipient.user.name
     end
 
     if !target.nil?
