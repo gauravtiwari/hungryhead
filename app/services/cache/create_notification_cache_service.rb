@@ -46,11 +46,23 @@ class CreateNotificationCacheService
   end
 
   def options_for_object(target)
+    if @activity.trackable_type == "User"
+      trackable_user_name =   @activity.trackable.name
+      trackable_user_id =   @activity.trackable.id
+    elseif @activity.trackable_type == "Idea"
+      trackable_user_name = @activity.trackable.student.name
+      trackable_user_id =   @activity.trackable.id
+    else
+      trackable_user_name = @activity.trackable.user.name
+      trackable_user_id =   @activity.trackable.id
+    end
+
     if !target.nil?
       {
         id: target.id,
-        class_name: target.class.to_s,
-        display_name: target.to_s
+        event_name: target.class.to_s.downcase,
+        trackable_user_id: trackable_user_id,
+        trackable_user_name: trackable_user_name
       }
     else
       nil
@@ -58,7 +70,13 @@ class CreateNotificationCacheService
   end
 
   def options_for_target(target)
-    recipient_name = @activity.recipient_type == "Comment" || @activity.recipient_type == "Share" || @activity.recipient_type == "Investment" || @activity.recipient_type == "Feedback" || @activity.recipient_type == "Note"? @activity.recipient.user.name : @activity.recipient.name
+    if @activity.recipient_type == "User"
+      recipient_name =   @activity.recipient.name
+    elseif @activity.recipient_type == "Idea"?
+      recipient_name = @activity.recipient.student.name
+    else
+      recipient_name = @activity.recipient.user.name
+    end
     if @activity.recipient_type == "Idea"
       recipient_user_id =  @activity.recipient.student.id
     elsif @activity.recipient_type == "User"
