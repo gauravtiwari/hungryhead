@@ -14,8 +14,8 @@ class Share < ActiveRecord::Base
 	#redis caching
 	counter :votes_counter
 	counter :comments_counter
-	set :voters_ids
-	set :commenters_ids
+	sorted_set :voters_ids
+	sorted_set :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
 	after_create :increment_counters
@@ -44,7 +44,7 @@ class Share < ActiveRecord::Base
 
 	def increment_counters
 		shareable.shares_counter.increment
-	  shareable.sharers_ids.add(user_id)
+	  shareable.sharers_ids.add(user_id, created_at.to_i)
 	end
 
 	def decrement_counters

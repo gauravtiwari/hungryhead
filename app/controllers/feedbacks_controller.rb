@@ -34,16 +34,12 @@ class FeedbacksController < ApplicationController
   def create
     @feedback = CreateFeedbackService.new(feedback_params, @idea, current_user).create
     authorize @feedback
-    if @idea.feedbacked?(@user)
-      render json: {error: "Already feedbacked"}
-    else
-      respond_to do |format|
-        if @feedback.save
-          format.json { render :show, status: :created}
-          FeedbackNotificationService.new(@feedback).notify
-        else
-          format.json { render json: @feedback.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @feedback.save
+        FeedbackNotificationService.new(@feedback).notify
+        format.json { render :show, status: :created}
+      else
+        format.json { render json: @feedback.errors, status: :unprocessable_entity }
       end
     end
   end

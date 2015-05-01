@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
     @notifications = Notification.where(recipient_id: @idea.id, published: true)
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
-    .map { |n| n.recipient.latest_notifications.revrange(0, 20).paginate(:page => params[:page], :per_page => 10) }
+    .map { |n| n.recipient.latest_notifications.members.paginate(:page => params[:page], :per_page => 10) }
     render json: Oj.dump(@notifications.uniq.flatten, {:mode => :compat})
   end
 

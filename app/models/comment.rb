@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
 
   #Redis counters and ids cache
   counter :votes_counter
-  set :voters_ids
+  sorted_set :voters_ids
 
   after_create :increment_counters
   before_destroy :decrement_counters, :delete_notification
@@ -75,7 +75,7 @@ class Comment < ActiveRecord::Base
 
   def increment_counters
     commentable.comments_counter.increment
-    commentable.commenters_ids.add(user_id)
+    commentable.commenters_ids.add(user_id, created_at.to_i)
   end
 
   def decrement_counters

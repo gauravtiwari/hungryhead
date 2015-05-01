@@ -16,16 +16,15 @@ class Idea < ActiveRecord::Base
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  set :followers_ids
-  set :voters_ids
-  set :sharers_ids
-  set :feedbackers_ids
-  set :investors_ids
-  set :commenters_ids
+  sorted_set :followers_ids
+  sorted_set :voters_ids
+  sorted_set :sharers_ids
+  sorted_set :feedbackers_ids
+  sorted_set :investors_ids
+  sorted_set :commenters_ids
 
   #Store latest idea notifications
-  set :latest_notifications, maxlength: 100, marshal: true
-  sorted_set :notification_feed
+  sorted_set :latest_notifications, maxlength: 100, marshal: true
 
   #Redis Cache counters
   counter :followers_counter
@@ -143,7 +142,7 @@ class Idea < ActiveRecord::Base
   end
 
   def can_invest?(user)
-    student.balance > 10 && invested?(user)
+    student.balance > 10 && !invested?(user)
   end
 
   def in_team?(user)
@@ -193,7 +192,7 @@ class Idea < ActiveRecord::Base
   def increment_counters
     school.ideas_counter.increment
     student.ideas_counter.increment
-    student.ideas_ids.add(id)
+    student.ideas_ids.add(id, created_at.to_i)
   end
 
   def decrement_counters

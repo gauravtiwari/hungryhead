@@ -8,7 +8,7 @@ class MentionNotificationService
     Pusher.trigger_async("private-user-#{@activity.recipient.id}",
       "new_feed_item",
       {
-        data: @activity.user.latest_notifications.last
+        data: @activity.user.latest_notifications.members.first
       }.to_json
     )
 	end

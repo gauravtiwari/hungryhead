@@ -4,6 +4,9 @@ class InvestmentsController < ApplicationController
   before_action :set_props, only: [:index, :show, :create]
   respond_to :json, :html
 
+  after_action :verify_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   layout "idea"
 
   # GET /investments
@@ -33,9 +36,9 @@ class InvestmentsController < ApplicationController
       authorize @investment
       respond_to do |format|
         if @investment.save
-          format.json { render :show, status: :created}
           UpdateBalanceService.new(@investment).invest
           InvestmentNotificationService.new(@investment).notify
+          format.json { render :show, status: :created}
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
         end

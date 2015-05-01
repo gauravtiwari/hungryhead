@@ -49,8 +49,8 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'localhost:3000'}
-
+  config.action_mailer.default_url_options = { host: 'localhost:3000', port: '3000' }
+  Rails.application.routes.default_url_options = { host: 'localhost:3000', port: '3000' }
 
   config.after_initialize do
     Bullet.enable = false

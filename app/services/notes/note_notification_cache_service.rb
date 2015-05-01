@@ -5,7 +5,7 @@ class NoteNotificationCacheService
   end
 
   def cache
-    @activity.user.latest_notifications.add(activity_json)
+    @activity.user.latest_notifications.add(activity_json, @activity.created_at.to_i)
   end
 
   def activity_json

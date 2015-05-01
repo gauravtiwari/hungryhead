@@ -27,7 +27,7 @@ var LatestFeedFollowItem = React.createClass({
     }
 
     return (
-        <li id={html_id} className="pointer p-l-15 p-r-15 p-b-10 p-t-10 fs-12 clearfix">
+        <li id={html_id} className="pointer p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
             <a className="text-master" href={this.props.item.url}>
             <div className="thumbnail-wrapper d32 user-pic circular inline m-r-10">

@@ -18,7 +18,7 @@ class InvestmentNotificationService
     Pusher.trigger_async("private-user-#{@idea.student.id}",
       "new_feed_item",
       {
-        data:  activity.user.latest_notifications.last
+        data:  activity.user.latest_notifications.members.first
       }.to_json
     )
     idea_notification(activity)
@@ -29,7 +29,7 @@ class InvestmentNotificationService
       Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
         "new_feed_item",
         {
-          data: activity.recipient.latest_notifications.last
+          data: activity.recipient.latest_notifications.members.first
         }.to_json
       )
     end

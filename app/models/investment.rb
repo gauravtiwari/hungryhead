@@ -13,8 +13,8 @@ class Investment < ActiveRecord::Base
 
   #Counters for redis
   counter :votes_counter
-  set :voters_ids
-  set :commenters_ids
+  sorted_set :voters_ids
+  sorted_set :commenters_ids
   counter :comments_counter
 
   #Model Callbacks
@@ -40,14 +40,14 @@ class Investment < ActiveRecord::Base
 	private
 
   def cancel_investment
-    idea.update_attributes(fund: {"balance" => idea.balance - amount })
+    idea.update_attributes(fund: {"balance" => idea.balance - amount }) if idea.balance > 0
     user.update_attributes(fund: {"balance" => user.balance + amount })
   end
 
   def increment_counters
     user.investments_counter.increment
     idea.investors_counter.increment
-    idea.investors_ids.add(user.id)
+    idea.investors_ids.add(user.id, created_at.to_i)
   end
 
   def decrement_counters

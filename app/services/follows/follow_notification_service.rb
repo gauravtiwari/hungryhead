@@ -19,7 +19,7 @@ class FollowNotificationService
     Pusher.trigger_async("private-user-#{@user.id}",
       "new_feed_item",
       {
-        data: activity.user.latest_notifications.last
+        data: activity.user.latest_notifications.members.first
       }.to_json
     )
 
@@ -31,7 +31,7 @@ class FollowNotificationService
       Pusher.trigger_async("idea-feed-#{activity.recipient_id}",
         "new_feed_item",
         {
-          data: activity.recipient.latest_notifications.last
+          data: activity.recipient.latest_notifications.members.first
         }.to_json
       )
     end

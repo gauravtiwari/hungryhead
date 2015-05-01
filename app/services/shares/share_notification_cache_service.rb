@@ -5,9 +5,9 @@ class ShareNotificationCacheService
   end
 
   def cache
-    @activity.user.latest_notifications.add(activity_json)
+    @activity.user.latest_notifications.add(activity_json, @activity.created_at.to_i)
     if @activity.recipient_type == "Idea"
-      @activity.recipient.latest_notifications.add(activity_json)
+      @activity.recipient.latest_notifications.add(activity_json, @activity.created_at.to_i)
     end
   end
 

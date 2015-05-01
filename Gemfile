@@ -52,6 +52,8 @@ gem 'sprockets', '~> 2.12.3'
 #Deal with JSON data
 gem  'hashie'
 
+gem 'ohm'
+
 #Generating auto content for social media channels
 gem 'searchkick'
 
@@ -82,6 +84,8 @@ gem 'omniauth-linkedin-oauth2'
 gem 'pundit'
 gem 'devise-async'
 gem 'responders'
+
+gem 'redis-timeline', github: 'felixclack/redis-timeline'
 
 #Local time
 gem 'local_time'
