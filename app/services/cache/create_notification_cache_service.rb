@@ -83,7 +83,7 @@ class CreateNotificationCacheService
     if !target.nil?
       {
         id: target.id,
-        event_name: @activity.recipient_type.downcase,
+        event_name: @activity.trackable_type.downcase,
         event_user_id: trackable_user_id,
         event_recipient_name: trackable_user_name
       }
@@ -95,19 +95,23 @@ class CreateNotificationCacheService
   def options_for_target(target)
     if @activity.recipient_type == "Idea"
       recipient_user_id =  target.student.id
-      recipient_name = target.student.name
+      recipient_user_name = target.student.name
+      recipient_name = target.name
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
-      recipient_name =   target.name
+      recipient_user_name =   target.name
+      recipient_name = target.name
     else
       recipient_user_id =  target.user.id
+      recipient_user_name = target.user.name
       recipient_name = target.user.name
     end
 
     if !target.nil?
       {
         recipient_user_id: recipient_user_id,
-        recipient: recipient_name,
+        recipient_user_name: recipient_user_name,
+        recipient_name: recipient_name,
         recipient_type: @activity.recipient_type.downcase,
       }
     else

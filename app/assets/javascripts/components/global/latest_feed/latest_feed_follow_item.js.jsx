@@ -7,22 +7,22 @@ var LatestFeedFollowItem = React.createClass({
   },
   render: function() {
     var html_id = "feed_"+this.props.item.id;
-    if(window.currentUser.name === this.props.item.actor) {
+    if(window.currentUser.name === this.props.item.actor.actor_name) {
       var actor = "You";
     } else {
-      var actor = this.props.item.actor;
+      var actor = this.props.item.actor.actor_name;
     }
 
-    if(window.currentUser.name === this.props.item.recipient) {
+    if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
       var recipient = "You"
     } else {
-      var recipient = this.props.item.recipient;
+      var recipient = this.props.item.recipient.recipient_user_name;
     }
 
-    if(this.props.item.actor_avatar) {
-      var placeholder = <img src={this.props.item.actor_avatar} width="32" height="32" />
+    if(this.props.item.actor.actor_avatar) {
+      var placeholder = <img src={this.props.item.actor.actor_avatar} width="32" height="32" />
     } else {
-      var placeholder = <span className="placeholder no-padding bold text-white">{this.props.item.actor_name_badge}
+      var placeholder = <span className="placeholder no-padding bold text-white">{this.props.item.actor.actor_name_badge}
               </span>;
     }
 
