@@ -11,8 +11,8 @@ class CreateNotificationCacheService
 
   def create
     add_activity(@actor, activity)
-    SendNotificationService.new(@activity).user_notification
-    SendNotificationService.new(@activity).idea_notification if @activity.trackable_type == "Idea"
+    SendNotificationService.new(@actor).user_notification
+    SendNotificationService.new(@object).idea_notification if @activity.trackable_type == "Idea"
   end
 
   protected
@@ -22,18 +22,31 @@ class CreateNotificationCacheService
       id: @activity.id,
       verb: @activity.verb,
       actor: options_for_actor(@actor),
-      object: options_for_object(@object),
-      target: options_for_target(@target),
+      event: options_for_object(@object),
+      recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
     }
   end
 
+  def recipient_id
+    if @activity.recipient_type == "User"
+      @activity.recipient_id
+    elsif @activity.recipient_type == "Idea"
+      @activity.recipient.student.id
+    else
+      @activity.recipient.user.id
+    end
+  end
+
   def followers
-    User.find(@actor.followers_ids.members)
+    followers_ids = @actor.followers_ids.members
+    followers = followers_ids.include?(recipient_id.to_s) ? followers_ids : followers_ids.push(recipient_id)
+    User.find(followers)
   end
 
   def add_activity(user, activity_item)
     add_activity_to_user(user, activity_item)
+    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_followers(activity_item) if followers.any?
   end
 
@@ -41,28 +54,38 @@ class CreateNotificationCacheService
     user.latest_notifications.add(activity_item, @activity.created_at.to_i)
   end
 
+  def add_activity_to_idea(idea, activity_item)
+    idea.latest_notifications.add(activity_item, @activity.created_at.to_i)
+  end
+
   def add_activity_to_followers(activity_item)
-    followers.each { |follower| add_activity_to_user(follower, activity_item) }
+    followers.each do |follower|
+      add_activity_to_user(follower, activity_item)
+      SendNotificationService.new(follower).user_notification
+    end
   end
 
   def options_for_object(target)
     if @activity.trackable_type == "User"
-      trackable_user_name =   @activity.trackable.name
-      trackable_user_id =   @activity.trackable.id
+      trackable_user_name =   target.name
+      trackable_user_id =   target.id
     elsif @activity.trackable_type == "Idea"
-      trackable_user_name = @activity.trackable.student.name
-      trackable_user_id =   @activity.trackable.id
+      trackable_user_name = target.student.name
+      trackable_user_id =   target.student.id
+    elsif @activity.trackable_type == "Follow"
+      trackable_user_name = target.follower.name
+      trackable_user_id =   target.follower.id
     else
-      trackable_user_name = @activity.trackable.user.name
-      trackable_user_id =   @activity.trackable.id
+      trackable_user_name = target.user.name
+      trackable_user_id =   target.user.id
     end
 
     if !target.nil?
       {
         id: target.id,
-        event_name: target.class.to_s.downcase,
-        trackable_user_id: trackable_user_id,
-        trackable_user_name: trackable_user_name
+        event_name: @activity.recipient_type.downcase,
+        event_user_id: trackable_user_id,
+        event_recipient_name: trackable_user_name
       }
     else
       nil
@@ -71,21 +94,21 @@ class CreateNotificationCacheService
 
   def options_for_target(target)
     if @activity.recipient_type == "Idea"
-      recipient_user_id =  @activity.recipient.student.id
-      recipient_name = @activity.recipient.student.name
+      recipient_user_id =  target.student.id
+      recipient_name = target.student.name
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
-      ecipient_name =   @activity.recipient.name
+      recipient_name =   target.name
     else
-      recipient_user_id =  @activity.recipient.user.id
-      recipient_name = @activity.recipient.user.name
+      recipient_user_id =  target.user.id
+      recipient_name = target.user.name
     end
 
     if !target.nil?
       {
         recipient_user_id: recipient_user_id,
         recipient: recipient_name,
-        recipient_type: @activity.recipient_type.to_s.downcase,
+        recipient_type: @activity.recipient_type.downcase,
       }
     else
       nil
@@ -98,10 +121,9 @@ class CreateNotificationCacheService
       {
         id: target.id,
         url: profile_path(target),
-        name_badge: @activity.user.user_name_badge,
-        avatar: avatar,
-        class_name: target.class.to_s,
-        display_name: target.to_s
+        actor_name_badge: @activity.user.user_name_badge,
+        actor_avatar: avatar,
+        actor_name: target.name
       }
     else
       nil

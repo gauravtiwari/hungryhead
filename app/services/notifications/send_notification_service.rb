@@ -1,23 +1,23 @@
 class SendNotificationService
 
-  def initialize(activity)
-    @activity = activity
+  def initialize(recipient)
+    @recipient = recipient
   end
 
   def user_notification
-    Pusher.trigger_async("private-user-#{@activity.user.id}",
+    Pusher.trigger_async("private-user-#{@recipient.id}",
       "new_feed_item",
       {
-        data:   @activity.user.latest_notifications.members.last
+        data:   @recipient.latest_notifications.members.last
       }.to_json
     )
   end
 
   def idea_notification
-    Pusher.trigger_async("idea-feed-#{@activity.recipient_id}",
+    Pusher.trigger_async("idea-feed-#{@recipient.id}",
       "new_feed_item",
       {
-        data:  @activity.recipient.latest_notifications.members.last
+        data:  @recipient.latest_notifications.members.last
       }.to_json
     )
   end
