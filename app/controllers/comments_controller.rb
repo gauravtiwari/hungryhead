@@ -20,8 +20,7 @@ class CommentsController < ApplicationController
           "new_comment",
           { data: render(:show)}
         )
-       CommentNotificationService.new(@comment, @commentable).notify
-       CreateMentionService.new(@comment).mention
+       CreateActivityJob.set(wait: 2.seconds).perform_later(@comment.id, @comment.class.to_s)
        expire_fragment("activities/activity-#{@commentable.class.to_s}-#{@commentable.id}-user-#{current_user.id}")
       else
         respond_to do |format|

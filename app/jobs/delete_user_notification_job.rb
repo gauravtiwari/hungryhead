@@ -3,6 +3,10 @@ class DeleteUserNotificationJob < ActiveJob::Base
     ActiveRecord::Base.connection_pool.with_connection do
       Notification.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |notification|
         notification.user.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
+        @followers = User.find(notification.user.followers_ids.members)
+        @followers.each do |f|
+          f.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
+        end
         if notification.recipient_type == "Idea"
           notification.recipient.latest_notifications.remrangebyscore(notification.created_at.to_i, notification.created_at.to_i)
         end

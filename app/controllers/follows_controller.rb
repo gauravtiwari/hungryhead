@@ -17,7 +17,7 @@ class FollowsController < ApplicationController
           follow: current_user.follows?(@followable),
           followers_count: @followable.followers_counter.value
         }
-        FollowNotificationService.new(@follow).notify unless @followable.class.to_s == "School"
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s)
       else
         respond_to do |format|
           format.json {render json: @follow.errors, status: unprocessable_entity}

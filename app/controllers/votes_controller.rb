@@ -10,7 +10,7 @@ class VotesController < ApplicationController
       @vote = CreateVoteService.new(current_user, @votable).vote
       if @vote.save
         render json: {voted: @votable.voted?(current_user), votes_count: @votable.votes_counter.value}
-        VoteNotificationService.new(current_user, @vote, @votable).notify
+        CreateActivityJob.set(wait: 2.seconds).perform_later(@vote.id, @vote.class.to_s)
       else
         render json: @vote.errors, status: :unprocessable_entity
       end

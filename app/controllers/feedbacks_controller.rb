@@ -36,7 +36,7 @@ class FeedbacksController < ApplicationController
     authorize @feedback
     respond_to do |format|
       if @feedback.save
-        FeedbackNotificationService.new(@feedback).notify
+        CreateActivityJob.set(wait: 2.seconds).perform_later(@feedback.id, @feedback.class.to_s)
         format.json { render :show, status: :created}
       else
         format.json { render json: @feedback.errors, status: :unprocessable_entity }

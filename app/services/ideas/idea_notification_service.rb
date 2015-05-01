@@ -1,11 +1,11 @@
 class IdeaNotificationService
 
-  def initialize(idea, user)
+  def initialize(idea)
     @idea = idea
-    @user = user
+    @user = idea.user
   end
 
-  def notify
+  def create
     if activity_exists?
       publish_activity
     else
@@ -22,9 +22,18 @@ class IdeaNotificationService
 
   #Create activity if new idea
   def create_activity
-    @activity = @user.activities.create!(trackable: @idea, recipient: @idea, key: 'idea.create', verb: 'pitched')
-    IdeaNotificationCacheService.new(@activity).cache
+    @activity = @user.activities.create!(
+      trackable: @idea,
+      recipient: @idea,
+      key: 'idea.create',
+      verb: 'pitched'
+    )
+    cache(@activity)
     PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea.id, @user.id, @activity.id)
+  end
+
+  def cache(activity)
+    CreateNotificationCacheService.new(activity).create
   end
 
   #Publish activity if activity exists?

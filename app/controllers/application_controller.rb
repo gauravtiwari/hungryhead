@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_terms
-    if user_signed_in? && !current_user.rules_accepted?
+    if user_signed_in? && !current_user.rules_accepted? && !current_user.admin?
       redirect_to(welcome_path(:hello), notice: "Please accept rules to get started")
     end
   end
