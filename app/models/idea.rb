@@ -192,15 +192,15 @@ class Idea < ActiveRecord::Base
   end
 
   def increment_counters
-    school.ideas_counter.increment
-    student.ideas_counter.increment
-    student.ideas_ids.add(id, created_at.to_i)
+    school.ideas_counter.increment if student.type == "Student"
+    student.ideas_counter.increment if student.type == "Student"
+    student.ideas_ids.add(id, created_at.to_i) if student.type == "Student"
   end
 
   def decrement_counters
-    school.ideas_counter.decrement
-    student.ideas_counter.decrement
-    student.ideas_ids.delete(id)
+    school.ideas_counter.decrement if student.type == "Student"
+    student.ideas_counter.decrement if student.type == "Student"
+    student.ideas_ids.delete(id) if student.type == "Student"
   end
 
   def delete_activity

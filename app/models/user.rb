@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
     loader = Soulmate::Loader.new(type)
     if avatar
       image =  avatar.url(:avatar)
-      resume = school.name
+      resume = mini_bio
     else
       image= "http://placehold.it/30"
     end
@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment if school
+    school.students_counter.increment if school && type != "User"
   end
 
   def decrement_counters

@@ -5,57 +5,47 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+ActiveRecord::Base.transaction do
 
-User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
-User.create!(
-	name: 'Admin User',
-	first_name: 'Admin',
-	last_name: 'User',
-	username: 'adminuser',
-	password: 'hungryheaduser',
-	email: 'admin@hungryhead.org',
-	admin: true,
-	confirmed_at: Time.now
-)
+	Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
+	hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")
 
-hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")
-
-data_hash = JSON.parse(hobbies)
-Hobby.destroy_all
-data_hash.each do |tag|
-	if Hobby.find_by_slug("#{tag.parameterize}").blank?
-		Hobby.new(name: tag, description: tag, description: tag).save
+	data_hash = JSON.parse(hobbies)
+	Hobby.destroy_all
+	data_hash.each do |tag|
+		if Hobby.find_by_slug("#{tag.parameterize}").blank?
+			Hobby.new(name: tag, description: tag, description: tag).save
+		end
 	end
-end
 
-markets = File.read("#{Rails.root}/dump-data/markets.json")
+	markets = File.read("#{Rails.root}/dump-data/markets.json")
 
-data_hash = JSON.parse(markets)
-Market.destroy_all
-data_hash.each do |tag|
-	if Market.find_by_slug("#{tag.parameterize}").blank?
-		Market.new(name: tag, description: tag, description: tag).save
+	data_hash = JSON.parse(markets)
+	Market.destroy_all
+	data_hash.each do |tag|
+		if Market.find_by_slug("#{tag.parameterize}").blank?
+			Market.new(name: tag, description: tag, description: tag).save
+		end
 	end
-end
 
-locations = File.read("#{Rails.root}/dump-data/locations.json")
+	locations = File.read("#{Rails.root}/dump-data/locations.json")
 
-data_hash = JSON.parse(locations)
-Location.destroy_all
-data_hash.each do |tag|
-	if Location.find_by_slug("#{tag.parameterize}").blank?
-		Location.new(name: tag, description: tag, description: tag).save
+	data_hash = JSON.parse(locations)
+	Location.destroy_all
+	data_hash.each do |tag|
+		if Location.find_by_slug("#{tag.parameterize}").blank?
+			Location.new(name: tag, description: tag, description: tag).save
+		end
 	end
-end
 
-subjects = File.read("#{Rails.root}/dump-data/subjects.json")
+	subjects = File.read("#{Rails.root}/dump-data/subjects.json")
 
-data_hash = JSON.parse(subjects)
-Subject.destroy_all
-data_hash.each do |tag|
-	if Subject.find_by_slug("#{tag.parameterize}").blank?
-		Subject.new(name: tag, description: tag, description: tag).save
+	data_hash = JSON.parse(subjects)
+	Subject.destroy_all
+	data_hash.each do |tag|
+		if Subject.find_by_slug("#{tag.parameterize}").blank?
+			Subject.new(name: tag, description: tag, description: tag).save
+		end
 	end
 end

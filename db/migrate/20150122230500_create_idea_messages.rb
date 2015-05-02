@@ -2,8 +2,8 @@ class CreateIdeaMessages < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table :idea_messages do |t|
-      t.integer :student_id, :null => false
-      t.integer :idea_id, :null => false
+      t.references :student, :null => false
+      t.references :idea, :null => false
       t.text :body, :null => false
       t.integer :status
       t.timestamps null: false
