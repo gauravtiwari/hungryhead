@@ -37,6 +37,9 @@ gem 'groupdate'
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
 
+#Build fake data
+gem 'forgery'
+
 #Caching
 gem 'identity_cache'
 gem 'cityhash'

@@ -309,6 +309,7 @@ GEM
       activerecord (>= 3.0.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
+    forgery (0.6.0)
     formatador (0.2.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
@@ -735,6 +736,7 @@ DEPENDENCIES
   figaro
   font-awesome-rails
   foreman
+  forgery
   friendly_id
   gemoji
   github-markdown

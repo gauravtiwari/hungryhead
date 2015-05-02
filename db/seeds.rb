@@ -18,6 +18,8 @@ User.create!(
 	confirmed_at: Time.now
 )
 
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
+
 hobbies = File.read("#{Rails.root}/dump-data/hobbies.json")
 
 data_hash = JSON.parse(hobbies)
