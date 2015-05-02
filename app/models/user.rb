@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   sorted_set :followings_ids
   sorted_set :idea_followings_ids
   sorted_set :ideas_ids
+  sorted_set :trending, maxlength: 20, marshal: true, global: true
+  sorted_set :popular, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true

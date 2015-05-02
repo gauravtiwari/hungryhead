@@ -22,6 +22,8 @@ class Idea < ActiveRecord::Base
   sorted_set :feedbackers_ids
   sorted_set :investors_ids
   sorted_set :commenters_ids
+  sorted_set :trending, maxlength: 20, marshal: true, global: true
+  sorted_set :popular, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
