@@ -14,7 +14,7 @@ var ConversationHeader = React.createClass({
 
     return (
       <div className="col-md-12 conversation-box-header clearfix">
-        <ul className="mailbox-nav m-t-10">
+        <ul className="mailbox-nav m-t-10 no-margin no-padding">
           <li className="mailbox">
             <a href={Routes.conversations_path({box: 'inbox'})}><i className="fa fa-chevron-left m-r-10"></i>All conversations</a>
           </li>

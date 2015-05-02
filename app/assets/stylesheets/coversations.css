@@ -375,7 +375,8 @@ html,body{height:100%;}
   font-size: 40px;
 }
 .no-content.conversations {
-  padding-top: 20%;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 .message-box {
   overflow-y: scroll;
