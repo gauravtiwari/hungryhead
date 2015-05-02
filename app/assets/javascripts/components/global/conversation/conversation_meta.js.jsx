@@ -55,7 +55,7 @@ var ConversationMeta = React.createClass({
     conversation = this.props.active_conversation;
     var cx = React.addons.classSet;
     var classes = cx({
-      'ion-check': this.state.deleting
+      'fa fa-check-circle': this.state.deleting
     });
     var deleteClass = cx({
       'fa fa-spinner fa-spin': this.state.deleting
@@ -63,43 +63,43 @@ var ConversationMeta = React.createClass({
     var delete_text = this.state.sure ? 'Are you sure?' : '';
 
     var action_style = {
-      fontSize: '14px' 
+      fontSize: '14px'
     }
 
     if(this.state.sure) {
       var confirm_delete = <span>{delete_text}<a style={action_style} onClick={this.handleDelete}><i className={classes}></i> confirm</a> or <a style={action_style} onClick={this.cancelDelete}> cancel</a></span>;
     } else {
-      var confirm_delete = <a onClick={this.checkDelete} rel="nofollow" className="margin-right"><i className="ion-trash-b"></i> {delete_text}</a>;
-    } 
+      var confirm_delete = <a onClick={this.checkDelete} rel="nofollow" className="m-r-10"><i className="fa fa-trash"></i> {delete_text}</a>;
+    }
 
     var participants = _.map(this.props.active_conversation.participants, function(participant){
-      return <img key={Math.random()} src={participant.sender_avatar} width="40px" className="margin-right" />
-    }); 
+      return <img key={Math.random()} src={participant.sender_avatar} width="40px" className="m-r-10" />
+    });
 
     if(this.props.active_conversation.is_trashed) {
       var conversation_actions = ""
     } else {
       var conversation_actions = <div className="conversation-actions pull-right">
             <a onClick={this.props.handleReply}>
-              <i className="ion-reply margin-right"></i>
-            </a>             
-            {confirm_delete}               
-          </div>; 
+              <i className="fa fa-reply m-r-10"></i>
+            </a>
+            {confirm_delete}
+          </div>;
     }
-    
+
 
     return (
-       <div className="conversation-meta regular-padding clearfix">
+       <div className="conversation-meta padding-10 clearfix">
           {conversation_actions}
           <div className="participants">
             <div className="participant">
               {participants}
             </div>
           </div>
-          <div className="subject margin-right">
+          <div className="subject m-r-10">
             <h6>
               {this.props.active_conversation.subject}
-            </h6>                 
+            </h6>
           </div>
            <small className="text-muted">
             {moment(this.props.active_conversation.created_at).fromNow()}
@@ -111,5 +111,5 @@ var ConversationMeta = React.createClass({
 
 });
 
-       
+
 

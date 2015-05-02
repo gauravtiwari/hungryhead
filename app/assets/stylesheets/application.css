@@ -18,6 +18,7 @@
  *= require sweetalert
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar
+ *= require plugins/jquery-menuclipper/jquery.menuclipper
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min
 
@@ -35,6 +36,7 @@
  *= require profile
  *= require login
  *= require school
+ *= require coversations
  *= require search
  *= require comments
  *= require footer

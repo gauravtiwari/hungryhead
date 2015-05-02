@@ -47,6 +47,7 @@
 //= require plugins/jquery-ios-list/jquery.ioslist.min
 //= require plugins/imagesloaded/imagesloaded.pkgd.min
 //= require plugins/jquery-actual/jquery.actual.min
+//= require plugins/jquery-menuclipper/jquery.menuclipper
 //= require plugins/jquery-scrollbar/jquery.scrollbar.min
 //= require react
 //= require react-infinite
@@ -54,6 +55,8 @@
 
 // Core Javascripts
 //= require core/js/pages
+//= require core/js/pages.email
+//= require core/js/pages.social
 
 // Turbolinks and plugins
 //= require_tree .

@@ -4,6 +4,8 @@ class ConversationsController < ApplicationController
   before_action :get_conversation, except: [:index, :recent, :empty_trash]
   before_action :get_box, only: [:index, :show, :recent]
 
+  layout "home"
+
   def index
     @conversations = @conversations.paginate(page: params[:page], per_page: 10)
   end

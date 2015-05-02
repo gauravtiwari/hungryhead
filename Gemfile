@@ -30,6 +30,9 @@ gem 'nprogress-rails'
 gem 'jquery-datatables-rails', '~> 3.2.0'
 gem 'lodash-rails'
 
+#Group date
+gem 'groupdate'
+
 #Cache for jbuilder
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'

@@ -319,6 +319,8 @@ GEM
     goldiloader (0.0.9)
       activerecord (>= 3.2, < 4.3)
       activesupport (>= 3.2, < 4.3)
+    groupdate (2.4.0)
+      activesupport (>= 3)
     guard (2.12.5)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -737,6 +739,7 @@ DEPENDENCIES
   gemoji
   github-markdown
   goldiloader
+  groupdate
   guard-livereload
   hashie
   hirb

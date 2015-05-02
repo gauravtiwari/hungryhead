@@ -114,7 +114,7 @@ var ConversationListBoxItem = React.createClass({
   render: function() {
   var cx = React.addons.classSet;
   var classes = cx({
-    'ion-check': this.state.deleting
+    'fa fa-check-circle': this.state.deleting
   });
   var deleteClass = cx({
     'fa fa-spinner fa-spin': this.state.deleting
@@ -125,7 +125,7 @@ var ConversationListBoxItem = React.createClass({
   var delete_text = this.state.sure ? 'Are you sure?' : '';
 
   var action_style = {
-    fontSize: '14px' 
+    fontSize: '14px'
   }
 
   var conversation_status_classes = cx({
@@ -137,24 +137,24 @@ var ConversationListBoxItem = React.createClass({
   if(this.state.sure) {
     var confirm_delete = <span>{delete_text}<a style={action_style} onClick={this.handleDelete}><i className={classes}></i> confirm</a> or <a style={action_style} onClick={this.cancelDelete}> cancel</a></span>;
   } else {
-    var confirm_delete = <a onClick={this.checkDelete} rel="nofollow"><i className="ion-trash-b"></i> {delete_text}</a>;
-  } 
+    var confirm_delete = <a onClick={this.checkDelete} rel="nofollow"><i className="fa fa-trash"></i> {delete_text}</a>;
+  }
 
   var participantImage = _.map(this.props.conversation.participants, function(participant) {
     return <a key={Math.random()}  href="javascript:void(0)" data-popover-href={participant.sender_path} className='load-card'>
-    <img width="40px" className="participant-avatar margin-right" src={participant.sender_avatar} alt="Avatar img 20121207 022806" />
+    <img width="40px" className="participant-avatar m-r-10" src={participant.sender_avatar} alt="Avatar img 20121207 022806" />
     </a>;
   });
 
   if(this.state.is_unread) {
-    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="padding-right"><i className="ion-checkmark-circled"></i></a>
+    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="padding-right"><i className="fa fa-check-circled"></i></a>
   } else {
     var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as unread" onClick={this.markAsRead} className="padding-right"><i className="fa fa-fw fa-circle-o"></i></a>
   }
 
   if(this.props.conversation.is_trashed) {
     var conversation_actions = <a onClick={this.restoreConversation}>
-              <i className="ion-refresh"></i> <i className={restoringClass}></i>
+              <i className="fa fa-refresh"></i> <i className={restoringClass}></i>
             </a>
   } else {
     var conversation_actions = confirm_delete;
@@ -162,18 +162,18 @@ var ConversationListBoxItem = React.createClass({
   return (
     <div className={conversation_status_classes}>
       <div className="participants col-md-3">
-        <div className="participant">   
+        <div className="participant">
           {participantImage}
         </div>
       </div>
       <div className="conversation-body col-md-6">
-        <div className="subject margin-right">
+        <div className="subject m-r-10">
           <a href={this.props.conversation.conversation_path}>{this.props.conversation.subject}</a>
-          <span className="text-muted"> ({this.props.conversation.messages_count})</span>    
+          <span className="text-muted"> ({this.props.conversation.messages_count})</span>
         </div>
 
-        <div className="last-message clearfix margin-right" dangerouslySetInnerHTML={{__html: jQuery.truncate(this.props.conversation.last_message_body, {length: 50})}}>
-              
+        <div className="last-message clearfix m-r-10" dangerouslySetInnerHTML={{__html: jQuery.truncate(this.props.conversation.last_message_body, {length: 50})}}>
+
         </div>
          <small>
           <span className="text-muted">
@@ -183,7 +183,7 @@ var ConversationListBoxItem = React.createClass({
       </div>
        <div className="conversation-actions pull-right">
            {mark_as_read}
-           {conversation_actions}   
+           {conversation_actions}
         </div>
     </div>
     );
