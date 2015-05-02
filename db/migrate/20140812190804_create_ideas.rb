@@ -3,7 +3,7 @@ class CreateIdeas < ActiveRecord::Migration
   def change
     create_table :ideas do |t|
 
-      t.integer :student_id, :null => false
+      t.references :student, :null => false
 
       t.string :name
       t.string :slug, :unique => true
@@ -20,7 +20,7 @@ class CreateIdeas < ActiveRecord::Migration
 
       t.boolean :looking_for_team, default: false
 
-      t.integer :school_id
+      t.references :school
 
       t.integer :status, default: 0
       t.integer :privacy, default: 0

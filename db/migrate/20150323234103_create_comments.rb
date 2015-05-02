@@ -2,17 +2,17 @@ class CreateComments < ActiveRecord::Migration
   disable_ddl_transaction!
   def self.up
     create_table :comments, :force => true do |t|
-      t.integer :commentable_id
-      t.string :commentable_type
+      t.references :commentable, polymorphic: true
       t.string :title
       t.text :body
       t.string :subject
-      t.integer :user_id, :null => false
-      t.integer :parent_id, :lft, :rgt
+      t.references :user, :null => false
+      t.references :parent, :lft, :rgt
       t.timestamps
     end
 
     add_index :comments, :user_id, algorithm: :concurrently
+    add_index :comments, :parent_id, algorithm: :concurrently
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
   end
 

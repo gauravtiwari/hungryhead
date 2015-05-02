@@ -22,7 +22,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.jsonb  :media, :default => "{}"
       t.jsonb  :settings, :default => "{}"
       t.jsonb  :fund, :default => "{}"
-      t.integer :school_id
+
+      t.references :school
 
       t.string :cached_location_list
       t.string :cached_market_list

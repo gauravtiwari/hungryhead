@@ -3,8 +3,8 @@ class CreateInvestments < ActiveRecord::Migration
     create_table :investments do |t|
       t.integer :amount, :null => false
       t.string :note, :null => false
-      t.integer :user_id, :null => false
-      t.integer :idea_id, :null => false
+      t.references :user, :null => false
+      t.references :idea, :null => false
       t.jsonb :parameters, default: "{}"
       t.timestamps null: false
     end
