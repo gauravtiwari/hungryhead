@@ -1,8 +1,8 @@
 class CreateVoteNotificationService
 
-  def initialize(user)
-    @user = user
-    @vote = vote.user
+  def initialize(vote)
+    @user = vote.voter
+    @vote = vote
     @votable = vote.votable
   end
 

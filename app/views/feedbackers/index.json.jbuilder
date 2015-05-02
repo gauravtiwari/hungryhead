@@ -3,7 +3,7 @@ json.payload do
   json.listings @feedbackers.each do |i|
     json.name i.name
     json.avatar i.avatar.url(:avatar)
-    json.uuid SecureRandom.hex(6)
+    json.uuid SecureRandom.hex(10)
     json.role i.role
     json.path profile_path(i)
     json.locations i.location_list.each do |tag|

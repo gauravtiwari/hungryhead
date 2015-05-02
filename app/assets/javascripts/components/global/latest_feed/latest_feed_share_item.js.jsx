@@ -1,10 +1,5 @@
 
 var LatestFeedShareItem = React.createClass({
-  mixins: [SetIntervalMixin],
-  componentDidMount: function() {
-    var interval = this.props.item.created_at || 60000;
-    this.setInterval(this.forceUpdate.bind(this), interval);
-  },
   render: function() {
     var html_id = "feed_"+this.props.item.id;
 
@@ -14,11 +9,17 @@ var LatestFeedShareItem = React.createClass({
       var actor = this.props.item.actor.actor_name;
     }
 
-    if(this.props.item.actor_avatar) {
+    if(this.props.item.actor.actor_avatar) {
       var placeholder = <img src={this.props.item.actor.actor_avatar} width="32" height="32" />
     } else {
       var placeholder = <span className="placeholder no-padding bold text-white">{this.props.item.actor.actor_name_badge}
               </span>;
+    }
+
+    if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
+      var recipient = "your "+ this.props.item.recipient.recipient_type + ' ' + this.props.item.recipient.recipient_name;
+    } else {
+      var recipient = this.props.item.recipient.recipient_user_name.split(' ')[0] + ' ' + this.props.item.recipient.recipient_type;
     }
 
     return (
@@ -34,9 +35,8 @@ var LatestFeedShareItem = React.createClass({
               {this.props.item.verb}
             </span>
             <span className="recipient p-l-5">
-              {this.props.item.recipient.recipient_name}
+              {recipient}
             </span>
-          <span className="date p-l-10 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
           </span>
         </li>
       );

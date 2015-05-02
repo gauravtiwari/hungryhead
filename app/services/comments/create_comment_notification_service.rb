@@ -17,7 +17,7 @@ class CreateCommentNotificationService
     mention if @comment.body.scan(/@\w+/).present?
 	end
 
-  def cache
+  def cache(activity)
     CreateNotificationCacheService.new(activity).create
   end
 

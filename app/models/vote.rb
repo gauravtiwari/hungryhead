@@ -20,7 +20,7 @@ class Vote < ActiveRecord::Base
 
   def increment_counter
     votable.votes_counter.increment
-    votable.voters_ids.add(voter.id)
+    votable.voters_ids.add(voter.id, created_at.to_i)
   end
 
   def decrement_counter

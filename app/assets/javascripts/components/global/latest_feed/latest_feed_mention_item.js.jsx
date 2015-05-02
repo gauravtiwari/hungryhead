@@ -1,10 +1,5 @@
 
 var LatestFeedMentionItem = React.createClass({
-  mixins: [SetIntervalMixin],
-  componentDidMount: function() {
-    var interval = this.props.item.created_at || 60000;
-    this.setInterval(this.forceUpdate.bind(this), interval);
-  },
   render: function() {
     var html_id = "feed_"+this.props.item.id;
 
@@ -14,8 +9,8 @@ var LatestFeedMentionItem = React.createClass({
       var actor = this.props.item.actor.actor_name;
     }
 
-    if(this.props.item.actor_avatar) {
-      var placeholder = <img src={this.props.item.actor.actor_avatar} width="32" height="32" />
+    if(this.props.item.actor.actor_avatar) {
+      var placeholder = <img src={this.props.item.actor.actor_avatar} width="40" height="40" />
     } else {
       var placeholder = <span className="placeholder no-padding bold text-white">{this.props.item.actor.actor_name_badge}
               </span>;
@@ -24,22 +19,21 @@ var LatestFeedMentionItem = React.createClass({
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-12 clearfix">
           <span className="inline">
-            <a className="text-master" href={this.props.item.url}>
+            <a className="text-master" href={this.props.item.actor.url}>
               <div className="thumbnail-wrapper d32 user-pic circular inline m-r-10">
                 {placeholder}
               </div>
               <strong>{actor}</strong>
             </a>
-            <span className="verb p-l-5">
+            <span className="verb p-l-5 inline">
               {this.props.item.verb}
             </span>
-            <span className="recipient p-l-5">
-              {this.props.item.recipient.recipient_name}
+            <span className="recipient p-l-5 inline">
+              {this.props.item.recipient.recipient_name.split(' ')[0]}
             </span>
-            <span className="recipient p-l-5">
-              in a {this.props.item.recipient.recipient_type}
+            <span className="recipient p-l-5 inline">
+              in a comment
             </span>
-          <span className="date p-l-10 fs-11 text-danger">{moment(Date.parse(this.props.item.created_at)).fromNow()}</span>
           </span>
         </li>
       );

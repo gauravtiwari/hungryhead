@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
   end
 
   def check_commentables
-    @commentables = ["Idea", "Feedback", "Investment", "Note"]
+    @commentables = ["Idea", "Feedback", "Investment", "Note", "Share"]
   end
 
   def find_comment

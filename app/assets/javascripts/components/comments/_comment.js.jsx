@@ -113,7 +113,7 @@ var Comment = React.createClass({
     var html_id = "comment_"+comment.id;
     var index = this.props.index;
 
-    if(comment.is_owner) {
+    if(comment.user_id == window.currentUser.id) {
       if(this.state.sure) {
         var confirm_delete = <span>{delete_text} <a className="text-danger" onClick={this.handleDelete.bind(this, index, comment.id)}><i className={classes}></i> confirm</a> or <a onClick={this.cancelDelete}> cancel</a></span>;
       } else {

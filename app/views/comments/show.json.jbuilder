@@ -3,8 +3,7 @@ json.comment do
   json.comment markdownify(@comment.body)
   json.user_url profile_card_path(@comment.user)
   json.name @comment.user.name
-  json.is_owner current_user == @comment.user
-  json.uuid SecureRandom.hex(4)
+  json.uuid SecureRandom.hex(10)
   json.avatar @comment.user.avatar.url(:avatar)
   json.vote_url vote_path(votable_type: @comment.class.to_s, votable_id: @comment.id)
   json.voted @comment.voters_ids.members.include? current_user.id.to_s

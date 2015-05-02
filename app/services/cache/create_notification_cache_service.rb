@@ -13,6 +13,7 @@ class CreateNotificationCacheService
     add_activity(@actor, activity)
     SendNotificationService.new(@actor).user_notification
     SendNotificationService.new(@object).idea_notification if @activity.trackable_type == "Idea"
+    SendNotificationService.new(@target).idea_notification if @activity.recipient_type == "Idea"
   end
 
   protected
@@ -47,6 +48,7 @@ class CreateNotificationCacheService
   def add_activity(user, activity_item)
     add_activity_to_user(user, activity_item)
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
+    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
     add_activity_to_followers(activity_item) if followers.any?
   end
 
@@ -75,6 +77,9 @@ class CreateNotificationCacheService
     elsif @activity.trackable_type == "Follow"
       trackable_user_name = target.follower.name
       trackable_user_id =   target.follower.id
+    elsif @activity.trackable_type == "Vote"
+      trackable_user_name = target.voter.name
+      trackable_user_id =   target.voter.id
     else
       trackable_user_name = target.user.name
       trackable_user_id =   target.user.id
@@ -135,4 +140,3 @@ class CreateNotificationCacheService
   end
 
 end
-
