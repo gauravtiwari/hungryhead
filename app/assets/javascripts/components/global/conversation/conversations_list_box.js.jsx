@@ -70,9 +70,9 @@ var ConversationsListBox = React.createClass({
       });
     } else {
       if (this.state.loading) {
-       var conversationsList = <div className="no-content conversations"><i className="fa fa-spinner fa-spin"></i> <h1>Loading conversations </h1></div>
+       var conversationsList = <div className="no-content conversations text-center"><i className="fa fa-spinner fa-spin"></i> <h1>Loading conversations</h1></div>
       } else {
-        var conversationsList = <div className="no-content conversations"><i className="fa fa-fw fa-inbox"></i> <h1>No {this.state.mailbox} messages</h1></div>
+        var conversationsList = <div className="no-content conversations text-center"><i className="fa fa-fw fa-inbox"></i> <h1>No {this.state.mailbox} messages</h1></div>
       }
     }
 

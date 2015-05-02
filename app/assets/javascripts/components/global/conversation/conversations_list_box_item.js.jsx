@@ -147,9 +147,9 @@ var ConversationListBoxItem = React.createClass({
   });
 
   if(this.state.is_unread) {
-    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="padding-right"><i className="fa fa-check-circled"></i></a>
+    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="p-r-10"><i className="fa fa-check-circled"></i></a>
   } else {
-    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as unread" onClick={this.markAsRead} className="padding-right"><i className="fa fa-fw fa-circle-o"></i></a>
+    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as unread" onClick={this.markAsRead} className="p-r-10"><i className="fa fa-fw fa-circle-o"></i></a>
   }
 
   if(this.props.conversation.is_trashed) {
