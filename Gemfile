@@ -40,6 +40,9 @@ gem 'jbuilder'
 #Build fake data
 gem 'forgery'
 
+#Bulk import
+gem 'activerecord-import'
+
 #Caching
 gem 'identity_cache'
 gem 'cityhash'

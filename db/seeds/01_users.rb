@@ -2,7 +2,10 @@
 #into db
 ActiveRecord::Base.transaction do
 
+  users = []
+
   User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
+
   User.create!(
     name: 'Admin User',
     first_name: 'Admin',
@@ -83,7 +86,7 @@ ActiveRecord::Base.transaction do
 
 
   1.upto(100) { |i|
-    Student.create!(
+    users << Student.new(
       name: Forgery::Name.full_name,
       first_name: Forgery::Name.first_name,
       last_name: Forgery::Name.last_name,
@@ -99,4 +102,6 @@ ActiveRecord::Base.transaction do
       confirmed_at: Time.now
     )
   }
+
+  Student.import users
 end
