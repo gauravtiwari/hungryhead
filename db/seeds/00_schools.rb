@@ -7,6 +7,8 @@ ActiveRecord::Base.transaction do
   School.create!(
     name: 'Lancaster University',
     location_list: 'Lancaster',
+    cover: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/photo1.jpg'),
+    logo: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/lancaster-logo.png'),
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@lancs.ac.uk',
   )
@@ -14,6 +16,7 @@ ActiveRecord::Base.transaction do
   School.create!(
     name: 'Manchester University',
     location_list: 'Manchester',
+    cover: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/photo2-copy.jpg'),
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mancs.ac.uk',
   )

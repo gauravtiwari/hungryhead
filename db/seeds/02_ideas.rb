@@ -1,7 +1,7 @@
 #this is seeds file for loading test schools
 #into db
 ActiveRecord::Base.transaction do
-  1.upto(1000) { |i|
+  1.upto(50) { |i|
     Idea.create!(
       name: Forgery::Name.company_name + i.to_s,
       high_concept_pitch:  Forgery::LoremIpsum.words(5),

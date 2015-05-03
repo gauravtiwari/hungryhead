@@ -10,6 +10,7 @@ ActiveRecord::Base.transaction do
     last_name: 'User',
     username: 'adminuser',
     password: 'hungryheaduser',
+    avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
     email: 'admin@hungryhead.org',
     admin: true,
     confirmed_at: Time.now
@@ -21,6 +22,7 @@ ActiveRecord::Base.transaction do
     last_name: "Tiwari",
     username: "gaurav",
     password: 'password',
+    avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
     mini_bio: Forgery::LoremIpsum.words(5),
     school_id: 1,
     location_list: "Lancaster",
@@ -37,6 +39,7 @@ ActiveRecord::Base.transaction do
     last_name: "Singh",
     username: "parul",
     password: 'password',
+    avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/3x.jpg'),
     mini_bio: Forgery::LoremIpsum.words(5),
     school_id: 1,
     location_list: "Lancaster",
@@ -83,7 +86,7 @@ ActiveRecord::Base.transaction do
   )
 
 
-  1.upto(10000) { |i|
+  1.upto(100) { |i|
 
     Student.create!(
       name: Forgery::Name.full_name,
@@ -91,6 +94,7 @@ ActiveRecord::Base.transaction do
       last_name: Forgery::Name.last_name,
       username: Forgery::Internet.user_name + i.to_s,
       password: 'password',
+      avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
       mini_bio: Forgery::LoremIpsum.words(5),
       school_id: [*1..9].sample,
       location_list: Forgery::Address.city,
