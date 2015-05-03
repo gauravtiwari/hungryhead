@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   include ActiveModel::Validations
+  include Rails.application.routes.url_helpers
   include IdentityCache
   include Redis::Objects
 
@@ -227,7 +228,7 @@ class User < ActiveRecord::Base
       image= "http://placehold.it/30"
     end
     loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-      "link" => Rails.application.routes.url_helpers.profile_path(self)
+      "link" => profile_path(self)
       })
   end
 
@@ -238,16 +239,16 @@ class User < ActiveRecord::Base
 
   def increment_counters
     school.students_counter.increment if school && type != "User"
-    User.latest << user_json
-    User.popular.add(id, 0)
-    User.trending.add(id, 0)
+    User.latest << user_json unless type == "User"
+    User.popular.add(id, 0) unless type == "User"
+    User.trending.add(id, 0) unless type == "User"
   end
 
   def decrement_counters
     school.students_counter.decrement if school && school.students_counter.value > 0
-    User.latest.delete(user_json)
-    User.popular.delete(id)
-    User.trending.delete(id)
+    User.latest.delete(user_json) unless type == "User"
+    User.popular.delete(id) unless type == "User"
+    User.trending.delete(id) unless type == "User"
   end
 
   def user_json

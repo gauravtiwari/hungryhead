@@ -503,9 +503,6 @@ GEM
       slop (~> 3.4)
     puma (2.11.2)
       rack (>= 1.1, < 2.0)
-    punching_bag (0.4.0)
-      railties (>= 3.2, < 5)
-      voight_kampff (~> 0.2)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     pusher (0.14.4)
@@ -688,18 +685,11 @@ GEM
     uuidtools (2.1.5)
     vegas (0.1.11)
       rack (>= 1.0.0)
-    voight_kampff (0.2.2)
-      httpclient (~> 2.2)
-      nokogiri (~> 1.6)
     warden (1.2.3)
       rack (>= 1.0)
     wicked (1.1.1)
       rails (>= 3.0.7)
     will_paginate (3.0.7)
-    wisper (1.6.0)
-    wisper-activerecord (0.3.0)
-      activerecord (>= 3.0.0)
-      wisper (~> 1.3)
 
 PLATFORMS
   ruby
@@ -789,7 +779,6 @@ DEPENDENCIES
   postgres-copy
   pry
   puma
-  punching_bag
   pundit
   pusher
   rack-contrib
@@ -832,5 +821,3 @@ DEPENDENCIES
   uuidtools
   wicked
   will_paginate
-  wisper
-  wisper-activerecord
