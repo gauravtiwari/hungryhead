@@ -2,19 +2,18 @@
 #into db
 ActiveRecord::Base.transaction do
 
-  User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
-
-  User.create!(
-    name: 'Admin User',
-    first_name: 'Admin',
-    last_name: 'User',
-    username: 'adminuser',
-    password: 'hungryheaduser',
-    avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
-    email: 'admin@hungryhead.org',
-    admin: true,
-    confirmed_at: Time.now
-  )
+  #User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
+#
+  #User.create!(
+  #  name: 'Admin User',
+  #  first_name: 'Admin',
+  #  last_name: 'User',
+  #  username: 'adminuser',
+  #  password: 'hungryheaduser',
+  #  email: 'admin@hungryhead.org',
+  #  admin: true,
+  #  confirmed_at: Time.now
+  #)
 
   Student.create!(
     name: "Gaurav Tiwari",
@@ -59,6 +58,7 @@ ActiveRecord::Base.transaction do
     password: 'password',
     mini_bio: Forgery::LoremIpsum.words(5),
     school_id: 2,
+    avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
     location_list: "Manchester",
     email: "stuart@hungryhead.org",
     fund: {balance: 1000},
@@ -86,7 +86,7 @@ ActiveRecord::Base.transaction do
   )
 
 
-  1.upto(30) { |i|
+  1.upto(100) { |i|
 
     Student.create!(
       name: Forgery::Name.full_name,
@@ -94,7 +94,6 @@ ActiveRecord::Base.transaction do
       last_name: Forgery::Name.last_name,
       username: Forgery::Internet.user_name + i.to_s,
       password: 'password',
-      avatar: File.new('/Users/gaurav/HungryHead/hungryhead_school_app/app/assets/images/profiles/avatar2x.jpg'),
       mini_bio: Forgery::LoremIpsum.words(5),
       school_id: [*1..9].sample,
       location_list: Forgery::Address.city,

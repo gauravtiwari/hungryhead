@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   #List to store trending and popular users
   sorted_set :trending, global: true
   sorted_set :popular, global: true
+
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
