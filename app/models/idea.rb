@@ -23,8 +23,8 @@ class Idea < ActiveRecord::Base
   list :commenters_ids
 
   #Set to store trending and popular ideas
-  sorted_set :trending, maxlength: 20, marshal: true, global: true
-  sorted_set :popular, maxlength: 20, marshal: true, global: true
+  sorted_set :trending, global: true
+  sorted_set :popular, global: true
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
