@@ -16,7 +16,7 @@ class Idea < ActiveRecord::Base
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  list :followers_ids
+  set :followers_ids
   list :voters_ids
   list :sharers_ids
   list :feedbackers_ids

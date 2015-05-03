@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
   layout "home"
 
   def index
-    ids = current_user.followings_ids.values
+    ids = current_user.followings_ids.members
     ids.push(current_user.id)
     @activities = Activity.where(user_id: ids, published: true)
     .includes(:trackable, :user, :recipient)

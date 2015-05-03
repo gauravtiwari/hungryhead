@@ -58,37 +58,68 @@
             </div>
         </div>
     </div>
-    <% if current_user.ideas_counter.value > 0 %>
-        <div class="widget-16 text-white panel panel-transparent no-margin widget-loader-circle">
-            <div class="panel-heading">
-                <div class="panel-title b-b b-white p-b-5">Idea Leaderboard</div>
+    <div class="widget-16 panel no-margin widget-loader-circle">
+        <div class="panel-heading">
+            <div class="panel-title b-grey b-b p-b-5">
+              People you may know
             </div>
-            <% current_user.ideas.each do |idea| %>
-                <div class="widget-16-header text-white padding-20">
-                    <span class="icon-thumbnail placeholder bg-master-light pull-left text-white"><%= idea.name_badge %></span>
-                    <div class="pull-left">
-                        <p class="all-caps bold small no-margin overflow-ellipsis "><%= idea.name %></p>
-                        <h5 class="small no-margin overflow-ellipsis text-white"><%= idea.high_concept_pitch %></h5>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="padding-20">
-                    <div class="row">
-                        <div class="col-md-4 b-r b-white b-dashed no-padding text-center">
-                            <p class="bold small no-margin ">Followers</p>
-                            <p class="bold  no-margin text-warning "><%= idea.followers_counter.value %></p>
-                        </div>
-                        <div class="col-md-4 b-r b-white b-dashed no-padding text-center">
-                            <p class="bold small no-margin ">Raised</p>
-                            <p class="bold  no-margin text-warning "><%= idea.balance %></p>
-                        </div>
-                        <div class="col-md-4  text-center">
-                            <p class="bold small no-margin ">Feedbacks</p>
-                            <p class="bold  no-margin text-warning "><%= idea.feedbackers_counter.value %></p>
-                        </div>
-                    </div>
-                </div>
-            <% end %>
         </div>
-    <% end %>
+        <div class="panel-body">
+            <ul class="list-unstyled">
+                <li class="m-r-10">
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
+                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
+                        </span><% end %>
+                    </div>
+                </li>
+                <li>
+                    <div class="thumbnail-wrapper d32 circular b-white">
+                        <div class="bg-master text-center text-white">
+                            <span>+34</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <br/>
+             <a href="#">
+                <span class="small bold pull-right">See all</span>
+              </a>
+            </div>
+        </div>
   </div>

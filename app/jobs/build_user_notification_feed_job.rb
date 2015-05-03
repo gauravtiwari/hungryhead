@@ -5,7 +5,7 @@ class BuildUserNotificationFeedJob < ActiveJob::Base
       @user = User.find(user_id)
       @user.notification_feed.clear
       notification_sets  = []
-      User.find(@user.followers_ids.values).each do |follower|
+      User.find(@user.followers_ids.members).each do |follower|
        notification_sets =  follower.latest_notifications
       end
       notification_sets.push(@user.latest_notifications)

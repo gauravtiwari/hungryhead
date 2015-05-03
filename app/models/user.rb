@@ -15,9 +15,9 @@ class User < ActiveRecord::Base
   acts_as_tagger
 
   #Sorted set to store followers, followings ids and latest activities
-  list :followers_ids
-  list :followings_ids
-  list :idea_followings_ids
+  set :followers_ids
+  set :followings_ids
+  set :idea_followings_ids
   list :ideas_ids
 
   #List to store trending and popular users
@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
         #rebuild user feed after every name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
         #Find all followers and followings and update their feed.
-        User.where(id: followers_ids.values | followings_ids.values).find_each do |user|
+        User.where(id: followers_ids.members | followings_ids.members).find_each do |user|
           RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(user.id)
         end
       end

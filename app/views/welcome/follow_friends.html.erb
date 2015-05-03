@@ -22,11 +22,12 @@
    								    <div class="divider b-b text-green b-grey b-md b-small"></div>
    								  <div>
    								  	<ul class="no-style p-t-20 follow-scrollable">
-                        <%= @friends.each do |friend| %>
+                        <% @friends.each do |friend| %>
+                        <% if friend != current_user %>
 													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
 													<div class="followable-info col-md-6 no-padding">
 
-                            <div class="thumbnail-wrapper d48 circular bordered b-<%= friend.theme %>">
+                            <div class="thumbnail-wrapper d48 circular bordered b-<%= friend.theme %> m-r-10">
                               <% if friend.avatar.present? %>
                                 <%= image_tag(friend.avatar.url(:avatar), :"data-src" => "#{friend.avatar.url(:avatar)}", :"data-src-retina" => "#{friend.avatar.url(:square)}", width: "55", height: "55") %>
                               <% else %>
@@ -39,8 +40,9 @@
 														<h4 class="no-margin"><a href=""><%= friend.name %></a></h4>
 														<p><%= friend.mini_bio %></p>
 													</div>
-                            <%= react_component('Follow',{:followed => followed?(friend)}, {:id => "follow-component"}) %>
+                          <%= react_component('Follow',{:followed => followed?(friend)}, {:id => "follow-component"}) %>
 													</li>
+                        <% end %>
                         <% end %>
    								  	</ul>
    								  </div>

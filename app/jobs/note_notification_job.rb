@@ -7,7 +7,7 @@ class NoteNotificationJob < ActiveJob::Base
       @note = Note.find(note_id)
       @activity = Activity.find(activity_id)
       # Send notifications to followers
-      User.find(@user.followers_ids.values).each do |f|
+      User.find(@user.followers_ids.members).each do |f|
         #Calll notification service to deliver the notification to followers
         SendNotificationService.new(@user, @activity).user_notification
         #send mail to users if subscribed
