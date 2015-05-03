@@ -3,7 +3,6 @@ class Idea < ActiveRecord::Base
   #included modules
   include IdentityCache
   include Redis::Objects
-  acts_as_punchable
 
   #Includes concerns
   include Commentable
@@ -24,8 +23,9 @@ class Idea < ActiveRecord::Base
   list :commenters_ids
 
   #Set to store trending and popular ideas
-  list :trending, maxlength: 20, marshal: true, global: true
-  list :popular, maxlength: 20, marshal: true, global: true
+  sorted_set :trending, maxlength: 20, marshal: true, global: true
+  sorted_set :popular, maxlength: 20, marshal: true, global: true
+  list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
@@ -197,12 +197,27 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.increment if student.type == "Student"
     student.ideas_counter.increment if student.type == "Student"
     student.ideas_ids <<  id if student.type == "Student"
+    Idea.latest << idea_json
+    Idea.popular.add(id, 0)
+    Idea.trending.add(id, 0)
   end
 
   def decrement_counters
     school.ideas_counter.decrement if student.type == "Student"
     student.ideas_counter.decrement if student.type == "Student"
     student.ideas_ids.delete(id) if student.type == "Student"
+    Idea.latest.delete(idea_json)
+    Idea.popular.delete(id)
+    Idea.trending.delete(id)
+  end
+
+  def idea_json
+    {
+      id: id,
+      name: name,
+      pitch: high_concept_pitch,
+      url: idea_path(self)
+    }
   end
 
   def delete_activity

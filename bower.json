@@ -8,6 +8,7 @@
         "pusher": "latest",
         "sweetalert": "latest",
         "slimScroll": "latest",
+        "react-infinite": "latest",
         "bootstrap-tagsinput": "latest"
 
     }

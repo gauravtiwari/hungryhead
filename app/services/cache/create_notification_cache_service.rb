@@ -11,9 +11,9 @@ class CreateNotificationCacheService
 
   def create
     add_activity(@actor, activity)
-    SendNotificationService.new(@actor, @activity).user_notification
-    SendNotificationService.new(@object, @activity).idea_notification if @activity.trackable_type == "Idea"
-    SendNotificationService.new(@target, @activity).idea_notification if @activity.recipient_type == "Idea"
+    SendNotificationService.new(@actor, activity).user_notification
+    SendNotificationService.new(@object, activity).idea_notification if @activity.trackable_type == "Idea"
+    SendNotificationService.new(@target, activity).idea_notification if @activity.recipient_type == "Idea" && @activity.trackable_type != "Idea"
   end
 
   protected
@@ -41,8 +41,8 @@ class CreateNotificationCacheService
 
   def followers
     followers_ids = @actor.followers_ids.values
-    followers = followers_ids.include?(recipient_id.to_s) ? followers_ids : followers_ids.push(recipient_id)
-    User.find(followers)
+    followers = (@actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s)) ? followers_ids.push(recipient_id) : followers_ids
+    User.find(followers_ids)
   end
 
   def add_activity(user, activity_item)
@@ -63,7 +63,7 @@ class CreateNotificationCacheService
   def add_activity_to_followers(activity_item)
     followers.each do |follower|
       add_activity_to_user(follower, activity_item)
-      SendNotificationService.new(follower, @activity).user_notification
+      SendNotificationService.new(follower, activity).user_notification
     end
   end
 

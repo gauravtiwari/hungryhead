@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
   include ActiveModel::Validations
   include IdentityCache
   include Redis::Objects
-  include Wisper::Publisher
-  include Wisper.model
 
   #Concerns for User class
   include Followable
@@ -14,7 +12,6 @@ class User < ActiveRecord::Base
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
-  acts_as_punchable
 
   #Sorted set to store followers, followings ids and latest activities
   list :followers_ids
@@ -23,8 +20,9 @@ class User < ActiveRecord::Base
   list :ideas_ids
 
   #List to store trending and popular users
-  list :trending, maxlength: 20, marshal: true, global: true
-  list :popular, maxlength: 20, marshal: true, global: true
+  sorted_set :trending, maxlength: 20, marshal: true, global: true
+  sorted_set :popular, maxlength: 20, marshal: true, global: true
+  list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
@@ -96,7 +94,7 @@ class User < ActiveRecord::Base
 
   #Callbacks
   before_save :add_fullname, :seed_fund, :seed_settings, unless: :is_admin
-  after_save :load_into_soulmate, unless: :is_admin
+  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   after_create :increment_counters, unless: :is_admin
 
@@ -194,6 +192,19 @@ class User < ActiveRecord::Base
     [:username]
   end
 
+  def rebuild_notifications
+    if name_changed? || avatar_changed?
+      unless admin?
+        #rebuild user feed after every name and avatar update.
+        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
+        #Find all followers and followings and update their feed.
+        User.where(id: followers_ids.values | followings_ids.values).find_each do |user|
+          RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(user.id)
+        end
+      end
+    end
+  end
+
   #Load data to redis using soulmate after_save
   def load_into_soulmate
     unless admin?
@@ -227,10 +238,25 @@ class User < ActiveRecord::Base
 
   def increment_counters
     school.students_counter.increment if school && type != "User"
+    User.latest << user_json
+    User.popular.add(id, 0)
+    User.trending.add(id, 0)
   end
 
   def decrement_counters
     school.students_counter.decrement if school && school.students_counter.value > 0
+    User.latest.delete(user_json)
+    User.popular.delete(id)
+    User.trending.delete(id)
+  end
+
+  def user_json
+    {
+      id: id,
+      name: name,
+      description: mini_bio,
+      url: profile_path(self)
+    }
   end
 
   #Deletes all dependent activities for this user

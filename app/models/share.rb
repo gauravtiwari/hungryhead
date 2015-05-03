@@ -44,11 +44,15 @@ class Share < ActiveRecord::Base
 
 	def increment_counters
 		shareable.shares_counter.increment
+		Idea.popular.increment(shareable_id) if shareable_type == "Idea"
+		User.popular.increment(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 	  shareable.sharers_ids << user_id
 	end
 
 	def decrement_counters
 		shareable.shares_counter.decrement
+		Idea.popular.decrement(shareable_id) if shareable_type == "Idea"
+		User.popular.decrement(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 	  shareable.sharers_ids.delete(user_id)
 	end
 

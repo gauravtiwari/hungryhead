@@ -75,11 +75,15 @@ class Comment < ActiveRecord::Base
 
   def increment_counters
     commentable.comments_counter.increment
+    Idea.popular.increment(commentable_id) if commentable_type == "Idea"
+    User.popular.increment(commentable.user.id)
     commentable.commenters_ids << user_id
   end
 
   def decrement_counters
     commentable.comments_counter.decrement
+    Idea.popular.decrement(commentable_id) if commentable_type == "Idea"
+    User.popular.decrement(commentable.user.id)
     commentable.commenters_ids.delete(user_id)
   end
 

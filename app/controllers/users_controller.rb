@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def show
     @badges = @user.badges.group_by(&:id)
-    @user.punch(request) if @user != current_user
+    User.trending.increment(@user.id) if @user != current_user
     respond_to do |format|
       format.html {render :show} if @user.type == "User"
       format.html {render :show} if @user.type == "Student"

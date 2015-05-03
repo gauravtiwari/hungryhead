@@ -176,8 +176,8 @@ CREATE TABLE comments (
     subject character varying,
     user_id integer NOT NULL,
     parent_id integer,
-    lft_id integer,
-    rgt_id integer,
+    lft integer,
+    rgt integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );

@@ -19,6 +19,8 @@ class Follow < ActiveRecord::Base
     follower.followings_ids << followable_id if followable_type == "User"
     follower.idea_followings_ids << followable_id if followable_type == "Idea"
     followable.followers_ids << follower_id
+    Idea.popular.increment(followable_id) if followable_type == "Idea"
+    User.popular.increment(followable_id) if followable_type == "User"
 
     #Send stats via pusher
     publish_stats
@@ -30,6 +32,9 @@ class Follow < ActiveRecord::Base
     follower.followings_ids.delete(followable_id) if followable_type == "User"
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
     followable.followers_ids.delete(follower_id)
+
+    Idea.popular.decrement(followable_id) if followable_type == "Idea"
+    User.popular.decrement(followable_id) if followable_type == "User"
 
     #Send stats via pusher
     publish_stats

@@ -19,7 +19,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    @idea.punch(request) if @idea.student != current_user
+    Idea.trending.increment(@idea.id) if @idea.student != current_user
   end
 
   def card

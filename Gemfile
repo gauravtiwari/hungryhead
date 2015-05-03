@@ -71,10 +71,6 @@ gem 'sanitize'
 gem 'gemoji'
 gem 'auto_html'
 
-#wisper for pubsub
-gem 'wisper'
-gem 'wisper-activerecord'
-
 #Deployment
 gem 'foreman'
 
@@ -248,9 +244,7 @@ gem 'mina'
 gem 'mina-sidekiq', :require => false
 gem 'mina-nginx', :require => false
 
-#Trending/Popular
-gem "punching_bag"
-
+#Skylight
 gem "skylight"
 
 group :development, :test do
