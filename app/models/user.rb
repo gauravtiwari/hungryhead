@@ -17,12 +17,14 @@ class User < ActiveRecord::Base
   acts_as_punchable
 
   #Sorted set to store followers, followings ids and latest activities
-  sorted_set :followers_ids
-  sorted_set :followings_ids
-  sorted_set :idea_followings_ids
-  sorted_set :ideas_ids
-  sorted_set :trending, maxlength: 20, marshal: true, global: true
-  sorted_set :popular, maxlength: 20, marshal: true, global: true
+  list :followers_ids
+  list :followings_ids
+  list :idea_followings_ids
+  list :ideas_ids
+
+  #List to store trending and popular users
+  list :trending, maxlength: 20, marshal: true, global: true
+  list :popular, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true

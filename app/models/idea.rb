@@ -16,16 +16,16 @@ class Idea < ActiveRecord::Base
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  sorted_set :followers_ids
-  sorted_set :voters_ids
-  sorted_set :sharers_ids
-  sorted_set :feedbackers_ids
-  sorted_set :investors_ids
-  sorted_set :commenters_ids
+  list :followers_ids
+  list :voters_ids
+  list :sharers_ids
+  list :feedbackers_ids
+  list :investors_ids
+  list :commenters_ids
 
   #Set to store trending and popular ideas
-  sorted_set :trending, maxlength: 20, marshal: true, global: true
-  sorted_set :popular, maxlength: 20, marshal: true, global: true
+  list :trending, maxlength: 20, marshal: true, global: true
+  list :popular, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
@@ -134,11 +134,11 @@ class Idea < ActiveRecord::Base
   end
 
   def invested?(user)
-    investors_ids.members.include?(user.id.to_s)
+    investors_ids.values.include?(user.id.to_s)
   end
 
   def feedbacked?(user)
-    feedbackers_ids.members.include?(user.id.to_s)
+    feedbackers_ids.values.include?(user.id.to_s)
   end
 
   def is_owner?(current_user)
@@ -197,7 +197,6 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.increment if student.type == "Student"
     student.ideas_counter.increment if student.type == "Student"
     student.ideas_ids.add(id, created_at.to_i) if student.type == "Student"
-    Idea.trending.add(id, 0)
   end
 
   def decrement_counters

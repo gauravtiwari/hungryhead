@@ -22,7 +22,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
 
   #fetch all followers followed by actor
   def find_followers(notification)
-    followers_ids = notification.user.followers_ids.members
+    followers_ids = notification.user.followers_ids.values
     followers = followers_ids.include?(recipient_id(notification).to_s) ? followers_ids : followers_ids.push(recipient_id(notification).to_s)
     User.find(followers)
   end

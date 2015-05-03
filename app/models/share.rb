@@ -14,8 +14,8 @@ class Share < ActiveRecord::Base
 	#redis caching
 	counter :votes_counter
 	counter :comments_counter
-	sorted_set :voters_ids
-	sorted_set :commenters_ids
+	list :voters_ids
+	list :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
 	after_create :increment_counters

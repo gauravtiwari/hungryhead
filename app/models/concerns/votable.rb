@@ -6,7 +6,7 @@ module Votable
   end
 
   def voted?(user)
-    voters_ids.members.include?(user.id.to_s)
+    voters_ids.values.include?(user.id.to_s)
   end
 
 end

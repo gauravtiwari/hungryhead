@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-      <% User.find(@idea.investors_ids.members).each do |investor| %>
+      <% User.find(@idea.investors_ids.values).each do |investor| %>
         <li class="m-r-10">
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
             <% if investor.avatar.present? %>

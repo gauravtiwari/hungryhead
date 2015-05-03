@@ -22,7 +22,7 @@ class DeleteUserFeedJob < ActiveJob::Base
 
   #Get all followers followed by actor
   def find_followers(activity)
-    followers_ids = activity.user.followers_ids.members
+    followers_ids = activity.user.followers_ids.values
     rec_id = recipient_id(activity)
     followers = followers_ids.include?(rec_id.to_s) ? followers_ids : followers_ids.push(rec_id.to_s)
     User.find(followers)

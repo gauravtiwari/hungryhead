@@ -11,8 +11,8 @@ class Feedback < ActiveRecord::Base
 
   #redis counters
   counter :votes_counter
-  sorted_set :voters_ids
-  sorted_set :commenters_ids
+  list :voters_ids
+  list :commenters_ids
   counter :comments_counter
 
   #Associations

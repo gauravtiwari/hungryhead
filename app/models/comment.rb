@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
 
   #Redis counters and ids cache
   counter :votes_counter
-  sorted_set :voters_ids
+  list :voters_ids
 
   after_create :increment_counters
   before_destroy :decrement_counters, :delete_notification

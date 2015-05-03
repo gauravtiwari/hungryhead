@@ -5,7 +5,7 @@ json.comments @comments.each do |comment|
     json.vote_url vote_path(votable_type: comment.class.to_s, votable_id: comment.id)
     json.uuid SecureRandom.hex(10)
     json.is_owner current_user == comment.user
-    json.voted comment.voters_ids.members.include? current_user.id.to_s
+    json.voted comment.voted?(current_user.id.to_s)
     json.votes_count comment.votes_counter.value
     json.user_url  profile_card_path(comment.user)
     json.name comment.user.name

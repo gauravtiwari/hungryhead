@@ -6,7 +6,7 @@ module Follower
   end
 
   def follows? followable
-    followings_ids.members.include?(followable.id.to_s) || idea_followings_ids.members.include?(followable.id.to_s)
+    followings_ids.values.include?(followable.id.to_s) || idea_followings_ids.values.include?(followable.id.to_s)
   end
 
 end
