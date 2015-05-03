@@ -24,50 +24,24 @@
    								  	<ul class="no-style p-t-20 follow-scrollable">
                         <%= @friends.each do |friend| %>
 													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
-														<div class="followable-info col-md-6 no-padding">
-														<div class="thumbnail-wrapper d48 circular bordered b-danger inline m-r-10">
-                              <%= image_tag(friend.avatar.url(:avatar), width: "55", height: "55", data: {src: {retina: friend.avatar.url(:avatar)}}, data: {src: friend.avatar.url(:avatar)}}) %>
-															<img alt="Avatar" width="55" height="55" data-src-retina="/assets/profiles/avatar2x.jpg" data-src="/assets/profiles/avatar2x.jpg" src="/assets/profiles/avatar2x.jpg">
-														</div>
-															<h4 class="no-margin"><a href="">Gaurav Tiwari</a></h4>
-															<p>I am a student</p>
-														</div>
-														<a href="" class="btn fs-13 btn-green text-white pull-right m-t-20 btn-sm">Follow</a>
+													<div class="followable-info col-md-6 no-padding">
+
+                            <div class="thumbnail-wrapper d48 circular bordered b-<%= friend.theme %>">
+                              <% if friend.avatar.present? %>
+                                <%= image_tag(friend.avatar.url(:avatar), :"data-src" => "#{friend.avatar.url(:avatar)}", :"data-src-retina" => "#{friend.avatar.url(:square)}", width: "55", height: "55") %>
+                              <% else %>
+                                <span class="placeholder bold text-white" width="32px" height="32px">
+                                    <%= friend.user_name_badge %>
+                                </span>
+                              <% end %>
+                            </div>
+
+														<h4 class="no-margin"><a href=""><%= friend.name %></a></h4>
+														<p><%= friend.mini_bio %></p>
+													</div>
+                            <%= react_component('Follow',{:followed => followed?(friend)}, {:id => "follow-component"}) %>
 													</li>
                         <% end %>
-
-													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
-														<div class="followable-info col-md-6 no-padding">
-														<div class="thumbnail-wrapper d48 circular bordered b-complete inline m-r-10">
-															<img alt="Avatar" width="55" height="55" data-src-retina="/assets/profiles/avatar2x.jpg" data-src="/assets/profiles/avatar2x.jpg" src="/assets/profiles/avatar2x.jpg">
-														</div>
-															<h4 class="no-margin"><a href="">Gaurav Tiwari</a></h4>
-															<p>I am a student</p>
-														</div>
-														<a href="" class="btn fs-13 btn-green text-white pull-right m-t-20 btn-sm">Follow</a>
-													</li>
-
-													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
-														<div class="followable-info col-md-6 no-padding">
-														<div class="thumbnail-wrapper d48 circular bordered b-success inline m-r-10">
-															<img alt="Avatar" width="55" height="55" data-src-retina="/assets/profiles/avatar2x.jpg" data-src="/assets/profiles/avatar2x.jpg" src="/assets/profiles/avatar2x.jpg">
-														</div>
-															<h4 class="no-margin"><a href="">Gaurav Tiwari</a></h4>
-															<p>I am a student</p>
-														</div>
-														<a href="" class="btn fs-13 btn-green text-white pull-right m-t-20 btn-sm">Follow</a>
-													</li>
-
-													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
-													<div class="followable-info col-md-6 no-padding">
-													<div class="thumbnail-wrapper d48 circular bordered b-primary inline m-r-10">
-														<img alt="Avatar" width="55" height="55" data-src-retina="/assets/profiles/avatar2x.jpg" data-src="/assets/profiles/avatar2x.jpg" src="/assets/profiles/avatar2x.jpg">
-													</div>
-														<h4 class="no-margin"><a href="">Gaurav Tiwari</a></h4>
-														<p>I am a student</p>
-													</div>
-														<a href="" class="btn fs-13 btn-green text-white pull-right m-t-20 btn-sm">Follow</a>
-													</li>
    								  	</ul>
    								  </div>
    								  <div class="pager wizard m-t-30 clearfix">
