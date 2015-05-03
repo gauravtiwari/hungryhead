@@ -18,6 +18,10 @@ body, p {
 .w110 {
   width: 20%;
 }
+.soulmate-type-suggestions {
+  overflow: scroll;
+  max-height: 300px;
+}
 .displayblock {
   display: block;
 }

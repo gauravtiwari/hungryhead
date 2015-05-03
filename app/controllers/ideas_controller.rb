@@ -13,7 +13,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.where(status: 1).order(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    @ideas = Idea.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /ideas/1

@@ -203,7 +203,7 @@
     };
 
     SuggestionCollection.prototype._renderTypeStart = function(type) {
-      return "\n  <div class=\"soulmate-type panel\"><span class=\"panel-title\">" + type + "</span>\n</div>\n<li class=\"soulmate-type-container\">\n  <ul class=\"soulmate-type-suggestions\">";
+      return "\n  <div class=\"soulmate-type panel " + type + "\"><span class=\"panel-title\">" + type + "</span>\n</div>\n<li class=\"soulmate-type-container\">\n  <ul class=\"soulmate-type-suggestions scrollable\">";
     };
 
     SuggestionCollection.prototype._renderTypeEnd = function() {

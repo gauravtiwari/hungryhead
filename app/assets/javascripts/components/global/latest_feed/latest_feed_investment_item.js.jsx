@@ -16,9 +16,9 @@ var LatestFeedInvestmentItem = React.createClass({
     }
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-12 clearfix">
-          <span className="inline">
-            <a className="text-master" href={this.props.item.actor.url}>
-              <div className="thumbnail-wrapper d32 user-pic circular inline m-r-10">
+          <span className="inline fs-14 text-master">
+            <a className="text-success" href={this.props.item.actor.url}>
+              <div className="thumbnail-wrapper d24 fs-11 user-pic circular inline m-r-10">
                 {placeholder}
               </div>
               <strong>{actor}</strong>

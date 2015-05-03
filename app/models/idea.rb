@@ -22,6 +22,8 @@ class Idea < ActiveRecord::Base
   sorted_set :feedbackers_ids
   sorted_set :investors_ids
   sorted_set :commenters_ids
+
+  #Set to store trending and popular ideas
   sorted_set :trending, maxlength: 20, marshal: true, global: true
   sorted_set :popular, maxlength: 20, marshal: true, global: true
 
@@ -195,6 +197,7 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.increment if student.type == "Student"
     student.ideas_counter.increment if student.type == "Student"
     student.ideas_ids.add(id, created_at.to_i) if student.type == "Student"
+    Idea.trending.add(id, 0)
   end
 
   def decrement_counters

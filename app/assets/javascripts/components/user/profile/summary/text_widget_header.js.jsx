@@ -12,7 +12,7 @@ var TextWidgetHeader = React.createClass({
 	            <div className="panel-controls">
 	                <ul>
 	                    <li>
-	                        <a onClick={this.props.openForm} className="portlet-collapse">{this.props.text}</a>
+	                        <a onClick={this.props.openForm} className="portlet-collapse pointer">{this.props.text}</a>
 	                    </li>
 	                </ul>
 	            </div>

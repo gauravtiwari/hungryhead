@@ -2,8 +2,6 @@
 #into db
 ActiveRecord::Base.transaction do
 
-  users = []
-
   User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
 
   User.create!(
@@ -24,7 +22,7 @@ ActiveRecord::Base.transaction do
     username: "gaurav",
     password: 'password',
     mini_bio: Forgery::LoremIpsum.words(5),
-    school_id: [*1..9].sample,
+    school_id: 1,
     location_list: "Lancaster",
     email: "gaurav@gauravtiwari.co.uk",
     fund: {balance: 1000},
@@ -40,7 +38,7 @@ ActiveRecord::Base.transaction do
     username: "parul",
     password: 'password',
     mini_bio: Forgery::LoremIpsum.words(5),
-    school_id: [*1..9].sample,
+    school_id: 1,
     location_list: "Lancaster",
     email: "parul.rhl@gmail.com",
     fund: {balance: 1000},
@@ -57,7 +55,7 @@ ActiveRecord::Base.transaction do
     username: "stuart",
     password: 'password',
     mini_bio: Forgery::LoremIpsum.words(5),
-    school_id: [*1..9].sample,
+    school_id: 2,
     location_list: "Manchester",
     email: "stuart@hungryhead.org",
     fund: {balance: 1000},
@@ -74,7 +72,7 @@ ActiveRecord::Base.transaction do
     username: "damien",
     mini_bio: Forgery::LoremIpsum.words(5),
     password: 'password',
-    school_id: [*1..9].sample,
+    school_id: 2,
     location_list: "Manchester",
     email: "damien@hungryhead.org",
     fund: {balance: 1000},
@@ -85,8 +83,9 @@ ActiveRecord::Base.transaction do
   )
 
 
-  1.upto(100) { |i|
-    users << Student.new(
+  1.upto(10000) { |i|
+
+    Student.create!(
       name: Forgery::Name.full_name,
       first_name: Forgery::Name.first_name,
       last_name: Forgery::Name.last_name,
@@ -103,5 +102,4 @@ ActiveRecord::Base.transaction do
     )
   }
 
-  Student.import users
 end
