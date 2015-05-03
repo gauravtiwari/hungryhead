@@ -47,7 +47,7 @@ class Investment < ActiveRecord::Base
   def increment_counters
     user.investments_counter.increment
     idea.investors_counter.increment
-    idea.investors_ids.add(user.id, created_at.to_i)
+    idea.investors_ids << user.id
   end
 
   def decrement_counters

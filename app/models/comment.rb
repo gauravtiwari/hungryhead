@@ -75,7 +75,7 @@ class Comment < ActiveRecord::Base
 
   def increment_counters
     commentable.comments_counter.increment
-    commentable.commenters_ids.add(user_id, created_at.to_i)
+    commentable.commenters_ids << user_id
   end
 
   def decrement_counters

@@ -44,7 +44,7 @@ class Share < ActiveRecord::Base
 
 	def increment_counters
 		shareable.shares_counter.increment
-	  shareable.sharers_ids.add(user_id, created_at.to_i)
+	  shareable.sharers_ids << user_id
 	end
 
 	def decrement_counters

@@ -196,7 +196,7 @@ class Idea < ActiveRecord::Base
   def increment_counters
     school.ideas_counter.increment if student.type == "Student"
     student.ideas_counter.increment if student.type == "Student"
-    student.ideas_ids.add(id, created_at.to_i) if student.type == "Student"
+    student.ideas_ids <<  id if student.type == "Student"
   end
 
   def decrement_counters
