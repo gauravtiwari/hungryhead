@@ -3,6 +3,7 @@ class Idea < ActiveRecord::Base
   #included modules
   include IdentityCache
   include Redis::Objects
+  include Rails.application.routes.url_helpers
 
   #Includes concerns
   include Commentable
@@ -177,7 +178,7 @@ class Idea < ActiveRecord::Base
     if published? && everyone?
       loader = Soulmate::Loader.new("ideas")
       loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
-        "link" => Rails.application.routes.url_helpers.idea_path(self)
+        "link" => idea_path(self)
         })
     else
       remove_from_soulmate

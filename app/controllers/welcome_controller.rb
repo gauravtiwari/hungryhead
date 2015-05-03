@@ -7,8 +7,8 @@ class WelcomeController < ApplicationController
   def show
     @user = current_user
     case step
-    when :complete_profile
-      @user.update_attributes(user_params)
+    when :follow_friends
+      @friends = User.where(school_id: @user.school_id)
     end
     render_wizard
   end

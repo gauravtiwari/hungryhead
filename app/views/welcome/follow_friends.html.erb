@@ -22,9 +22,11 @@
    								    <div class="divider b-b text-green b-grey b-md b-small"></div>
    								  <div>
    								  	<ul class="no-style p-t-20 follow-scrollable">
+                        <%= @friends.each do |friend| %>
 													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
 														<div class="followable-info col-md-6 no-padding">
 														<div class="thumbnail-wrapper d48 circular bordered b-danger inline m-r-10">
+                              <%= image_tag(friend.avatar.url(:avatar), width: "55", height: "55", data: {src: {retina: friend.avatar.url(:avatar)}}, data: {src: friend.avatar.url(:avatar)}}) %>
 															<img alt="Avatar" width="55" height="55" data-src-retina="/assets/profiles/avatar2x.jpg" data-src="/assets/profiles/avatar2x.jpg" src="/assets/profiles/avatar2x.jpg">
 														</div>
 															<h4 class="no-margin"><a href="">Gaurav Tiwari</a></h4>
@@ -32,6 +34,7 @@
 														</div>
 														<a href="" class="btn fs-13 btn-green text-white pull-right m-t-20 btn-sm">Follow</a>
 													</li>
+                        <% end %>
 
 													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
 														<div class="followable-info col-md-6 no-padding">
