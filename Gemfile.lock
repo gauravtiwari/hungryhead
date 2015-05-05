@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: b40777154864f6a5316b78be5c3209783681080b
+  revision: 24eb917519d592fc52d6041d6a673116664a58be
   specs:
     simple_form (3.1.0)
       actionpack (~> 4.0)
@@ -408,7 +408,7 @@ GEM
       actionpack (>= 3.0, < 5.0)
       activerecord (>= 3.0, < 5.0)
       railties (>= 3.0, < 5.0)
-    loofah (2.0.1)
+    loofah (2.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.3)
@@ -487,7 +487,7 @@ GEM
     parser (2.2.2.2)
       ast (>= 1.1, < 3.0)
     pg (0.18.1)
-    pg_search (1.0.1)
+    pg_search (1.0.2)
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
@@ -582,7 +582,7 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rinku (1.5.1)
-    rubocop (0.30.1)
+    rubocop (0.31.0)
       astrolabe (~> 1.3)
       parser (>= 2.2.2.1, < 3.0)
       powerpack (~> 0.1)
