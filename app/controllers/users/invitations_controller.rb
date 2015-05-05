@@ -1,9 +1,15 @@
 class Users::InvitationsController < Devise::InvitationsController
   before_filter :update_sanitized_params, only: :update
+  respond_to :json, :html
+
   layout 'join'
 
   def new
-    super
+    self.resource = resource_class.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # PUT /resource/invitation

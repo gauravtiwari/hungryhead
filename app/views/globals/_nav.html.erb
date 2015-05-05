@@ -85,6 +85,12 @@
           <% end %>
 
           <%= content_tag(:li) do %>
+            <%= link_to(friends_invite_path, remote: true) do %>
+              <i class="fa fa-paper-plane"></i>Invite friends
+            <% end %>
+          <% end %>
+
+          <%= content_tag(:li) do %>
             <%= link_to(edit_user_registration_path(current_user)) do %>
               <i class="pg-settings_small"></i>Settings
             <% end %>

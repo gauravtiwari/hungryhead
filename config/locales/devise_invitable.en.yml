@@ -16,8 +16,9 @@ en:
       invitation_instructions:
         subject: 'Invitation instructions'
         hello: 'Hello %{recipient_name}! %{name} has invited you to join %{idea_name}'
+        hello_friend: 'Hello %{recipient_name}! %{name} has invited you to join hungryhead'
         someone_invited_you_idea: '%{name} has invited you to join %{idea_name}, you can accept it through the link below.'
-        someone_invited_you: '%{email} has invited you to join hungryhead, you can accept it through the link below.'
+        someone_invited_you: '%{name} has invited you to join hungryhead, you can accept it through the link below.'
         accept: 'Accept invitation'
         idea_accept: 'Accept idea invitation'
         view_idea: 'View %{idea_name}'

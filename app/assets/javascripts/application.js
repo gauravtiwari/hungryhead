@@ -24,6 +24,7 @@
 //= require underscore
 //= require js-routes
 //= require select2
+//= require cloneya
 //= require local_time
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

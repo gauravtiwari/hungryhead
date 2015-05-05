@@ -1274,7 +1274,7 @@ CREATE TABLE users (
     first_name character varying DEFAULT ''::character varying NOT NULL,
     last_name character varying DEFAULT ''::character varying NOT NULL,
     name character varying DEFAULT ''::character varying NOT NULL,
-    username character varying NOT NULL,
+    username character varying DEFAULT ''::character varying NOT NULL,
     avatar character varying DEFAULT ''::character varying,
     type character varying DEFAULT 'User'::character varying,
     cover character varying DEFAULT ''::character varying,
@@ -2587,6 +2587,13 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 --
 
 CREATE INDEX index_users_on_type ON users USING btree (type);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
 
 
 --

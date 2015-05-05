@@ -96,6 +96,7 @@ class User < ActiveRecord::Base
 
   #Callbacks
   before_save :add_fullname, :seed_fund, :seed_settings, unless: :is_admin
+  before_save :add_username, if: :username_absent?
   after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   after_create :increment_counters, unless: :is_admin
@@ -168,6 +169,21 @@ class User < ActiveRecord::Base
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def username_absent?
+    !username.present?
+  end
+
+  def add_username
+    email_username = self.email.split('@').first
+    num = 1
+    while(User.find_by_username(email_username).present?)
+      username = "#{email_username}#{num}"
+      num += 1
+    end
+
+    self.username = username
   end
 
   # returns and adds first_name and last_name to database

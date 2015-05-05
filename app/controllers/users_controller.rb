@@ -41,8 +41,9 @@ class UsersController < ApplicationController
   end
 
   def user_invite
-    params[:emails].split(", ").each do |email|
-      @user = User.invite!({email: email}, current_user) do |u|
+    users = params[:user][:name].zip(params[:user][:email])
+    users.each do |u|
+      @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
       InviteMailer.invite_friends(@user, current_user).deliver

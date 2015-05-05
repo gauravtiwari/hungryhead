@@ -58,6 +58,7 @@
             </div>
         </div>
     </div>
+    <% if current_user.people_you_may_know.length > 3 %>
     <div class="widget-16 panel no-margin widget-loader-circle">
         <div class="panel-heading">
             <div class="panel-title b-grey b-b p-b-5">
@@ -71,7 +72,6 @@
                 <%= link_to(profile_path(user)) do %>
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
                             <% if user.avatar.present? %>
-
                             <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
 
                             <% else %>
@@ -97,4 +97,5 @@
             </ul>
             </div>
         </div>
+    <% end %>
   </div>

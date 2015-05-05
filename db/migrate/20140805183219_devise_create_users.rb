@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :first_name, null: false, :default => ""
       t.string :last_name, null: false, :default => ""
       t.string :name, null: false, :default => ""
-      t.string :username, null: false
+      t.string :username, :default => "", null: false
       t.string :avatar, :default => ""
       t.string :type, :default => "User", index: true
       t.string :cover, :default => ""
@@ -71,6 +71,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
     end
     add_index :users, :school_id, algorithm: :concurrently
     add_index :users, :email,                :unique => true, algorithm: :concurrently
+    add_index :users, :username,                :unique => true, algorithm: :concurrently
     add_index :users, :slug,                :unique => true, algorithm: :concurrently
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently
     add_index :users, :confirmation_token,   :unique => true, algorithm: :concurrently

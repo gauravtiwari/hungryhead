@@ -1,6 +1,5 @@
-$("body").append("<%= escape_javascript(render partial: 'form') %>"); 
+$("body").append("<%= escape_javascript(render partial: 'form') %>");
 
 $('#inviteFriendsPopup').modal('show');
-$('.tokenize-typehead').tokenfield({
-    limit: 10
-});
+ReactRailsUJS.mountComponents();
+
