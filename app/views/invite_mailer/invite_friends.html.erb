@@ -1,4 +1,4 @@
-<p><%= t("devise.mailer.invitation_instructions.hello_friend", email: @sender.email, recipient_name: @invited.name) %></p>
+<p><%= t("devise.mailer.invitation_instructions.hello_friend", name: @sender.name, recipient_name: @invited.name) %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", name: @sender.name) %></p>
 

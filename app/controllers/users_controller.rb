@@ -42,13 +42,16 @@ class UsersController < ApplicationController
 
   def user_invite
     users = params[:user][:name].zip(params[:user][:email])
+    invited = []
     users.each do |u|
       @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
-      InviteMailer.invite_friends(@user, current_user).deliver
+      InviteMailer.invite_friends(@user, current_user).deliver_later
       @user.invitation_sent_at = Time.now.utc
+      invited << u[0] if u[0].present?
     end
+    render json: {invited: true, msg: "You have succesfully invited #{invited.to_sentence}", status: :created}
   end
 
   def update

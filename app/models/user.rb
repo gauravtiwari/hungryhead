@@ -176,14 +176,17 @@ class User < ActiveRecord::Base
   end
 
   def add_username
-    email_username = self.email.split('@').first
-    num = 1
-    while(User.find_by_username(email_username).present?)
-      username = "#{email_username}#{num}"
-      num += 1
+    email_username = self.name.parameterize
+    if User.find_by_username(email_username).blank?
+      email_username = email_username
+    else
+      num = 1
+      while(User.find_by_username(email_username).present?)
+        email_username = "#{self.name.parameterize}#{num}"
+        num += 1
+      end
     end
-
-    self.username = username
+    self.username = email_username
   end
 
   # returns and adds first_name and last_name to database
@@ -217,7 +220,7 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_notifications
-    if name_changed? || avatar_changed?
+    if name_changed? || avatar_changed? && !id_changed?
       unless admin?
         #rebuild user feed after every name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)

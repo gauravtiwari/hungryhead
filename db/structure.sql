@@ -2590,13 +2590,6 @@ CREATE INDEX index_users_on_type ON users USING btree (type);
 
 
 --
--- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
-
-
---
 -- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 

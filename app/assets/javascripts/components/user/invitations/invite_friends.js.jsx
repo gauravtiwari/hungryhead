@@ -10,8 +10,8 @@ var InviteFriends = React.createClass({
   },
   handleInvite: function(formData) {
     $.post(this.props.path, formData, function(data, textStatus, xhr) {
-      if(data.success){
-        $('body').pgNotification({style: "simple", message: "Invitations sent", position: "top-right", type: "success",timeout: 5000}).show();
+      if(data.invited){
+        $('body').pgNotification({style: "simple", message: data.msg, position: "top-right", type: "success",timeout: 5000}).show();
       }
     });
   },
