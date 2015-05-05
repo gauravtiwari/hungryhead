@@ -11,7 +11,8 @@ class CreateFeedbackNotificationService
       trackable: @feedback,
       verb: 'feedbacked',
       recipient: @idea,
-      key: 'feedback.create'
+      key: 'feedback.create',
+      unread: true
     )
     cache(@activity)
   end

@@ -26,7 +26,8 @@ class CreateIdeaNotificationService
       trackable: @idea,
       recipient: @idea,
       key: 'idea.create',
-      verb: 'pitched'
+      verb: 'pitched',
+      unread: true
     )
     cache(@activity)
     PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea.id, @user.id, @activity.id)

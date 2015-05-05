@@ -11,7 +11,8 @@ class CreateCommentNotificationService
       trackable: @comment,
       recipient: @commentable,
       verb: 'commented',
-      key: 'comment.create'
+      key: 'comment.create',
+      unread: true
     )
     cache(@activity)
     mention if @comment.body.scan(/@\w+/).present?

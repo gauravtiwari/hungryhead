@@ -11,7 +11,8 @@ class CreateFollowNotificationService
       trackable: @follow,
       verb: 'followed',
       recipient: @followable,
-      key: 'follow.create'
+      key: 'follow.create',
+      unread: true
     )
     cache(@activity)
   end

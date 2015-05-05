@@ -10,7 +10,8 @@ class CreateNoteNotificationService
       trackable: @note,
       verb: 'noted',
       recipient: @user,
-      key: 'note.create'
+      key: 'note.create',
+      unread: true
     )
     cache(@activity)
     NoteNotificationJob.set(wait: 5.seconds).perform_later(@note.id, @user.id, @activity.id)

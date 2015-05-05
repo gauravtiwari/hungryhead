@@ -15,7 +15,8 @@ class CreateMentionService
           trackable: @mention,
           verb: 'mentioned',
           recipient: mentionable,
-          key: 'mention.create'
+          key: 'mention.create',
+          unread: true
         )
         cache(@activity)
       end

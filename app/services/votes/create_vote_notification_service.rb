@@ -11,7 +11,8 @@ class CreateVoteNotificationService
       trackable: @vote,
       recipient: @votable,
       verb: 'voted',
-      key: 'vote.create'
+      key: 'vote.create',
+      unread: true
     )
     cache(@activity)
   end

@@ -11,7 +11,8 @@ class CreateInvestmentNotificationService
       trackable: @investment,
       verb: 'invested',
       recipient: @idea,
-      key: 'investment.create'
+      key: 'investment.create',
+      unread: true
     )
     cache(@activity)
   end

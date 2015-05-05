@@ -11,7 +11,8 @@ class CreateShareNotificationService
       trackable: @share,
       verb: 'shared',
       recipient: @shareable,
-      key: 'share.create'
+      key: 'share.create',
+      unread: true
     )
     cache(@activity)
   end
