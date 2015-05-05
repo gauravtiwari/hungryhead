@@ -26,6 +26,7 @@ class CreateNotificationCacheService
       event: options_for_object(@object),
       recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
+      unread: true
     }
   end
 
