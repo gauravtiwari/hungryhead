@@ -119,7 +119,7 @@ class UsersController < ApplicationController
   def activities
     @badges = @user.badges.group_by(&:id)
     @activities = Activity
-    .where(owner_id: @user.id, owner_type: "User")
+    .where(user_id: @user.id)
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
      respond_to do |format|

@@ -44,7 +44,7 @@ var Follow = React.createClass({
       });
     } else {
       var classes = cx({
-        'btn btn-cons padding-5 pull-right text-white m-r-10': true,
+        'btn btn-sm fs-13 padding-5 pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
         'btn-info': !this.state.follow,
         'btn-green semi-bold': this.state.follow
@@ -52,7 +52,9 @@ var Follow = React.createClass({
     }
 
     return (
-        <button onClick={this.handleClick} className={classes} title="Follow"><i className="fa fa-user-plus"></i> {text}</button>
+        <button onClick={this.handleClick} className={classes} title="Follow">
+          <i className="fa fa-user-plus"></i> {text}
+        </button>
     );
   }
 

@@ -54,6 +54,9 @@ var FollowFriends = React.createClass({
 
 
   fetchFriends: function(){
+    $.ajaxSetup ({
+        cache: false
+    });
     $.getJSON(this.props.path, function(json, textStatus) {
       this.setState({
         friends: this.buildElements(json.friends),

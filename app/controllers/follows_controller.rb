@@ -1,17 +1,21 @@
 class FollowsController < ApplicationController
 
   before_action :authenticate_user!
+  after_action :verify_authorized, except: [:index]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   before_action :load_followable
 
   def create
     if current_user.follows?(@followable)
       @follow = CreateFollowService.new(current_user, @followable).unfollow
+      authorize @follow.follower
       render json: {
         follow: current_user.follows?(@followable),
         followers_count: @followable.followers_counter.value
       }
     else
       @follow = CreateFollowService.new(current_user, @followable).follow
+      authorize @follow.follower
       if @follow.save
         render json: {
           follow: current_user.follows?(@followable),
