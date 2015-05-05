@@ -66,60 +66,35 @@
         </div>
         <div class="panel-body">
             <ul class="list-unstyled">
+            <% User.find(current_user.people_you_may_know).each do |user| %>
                 <li class="m-r-10">
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
+                <%= link_to(profile_path(user)) do %>
+                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
+                            <% if user.avatar.present? %>
+
+                            <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
+
+                            <% else %>
+                            <span class="placeholder bold fs-12 text-white">
+                                <%= user.user_name_badge %>
+                            </span>
+                            <% end %>
+
                     </div>
+                    <% end %>
                 </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
+            <% end %>
+            <% if current_user.people_you_may_know.length > 16 %>
+            <li>
+                <div class="thumbnail-wrapper d32 circular b-white">
+                    <div class="bg-master text-center text-white">
+                        <span>+34</span>
                     </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-b-5 m-r-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white"><% if current_user.avatar.present? %><%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "35", height: "35") %><% else %>
-                        <span class="placeholder bold text-white"><%= current_user.first_name.first + current_user.last_name.first %>
-                        </span><% end %>
-                    </div>
-                </li>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white">
-                        <div class="bg-master text-center text-white">
-                            <span>+34</span>
-                        </div>
-                    </div>
-                </li>
+                </div>
+            </li>
+            <% end %>
+
             </ul>
-            <br/>
-             <a href="#">
-                <span class="small bold pull-right">See all</span>
-              </a>
             </div>
         </div>
   </div>

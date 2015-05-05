@@ -1,7 +1,11 @@
 class Users::InvitationsController < Devise::InvitationsController
   before_filter :update_sanitized_params, only: :update
   layout 'join'
-  
+
+  def new
+    super
+  end
+
   # PUT /resource/invitation
   def update
     invitation_token = Devise.token_generator.digest(resource_class, :invitation_token, update_resource_params[:invitation_token])

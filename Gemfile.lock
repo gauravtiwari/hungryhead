@@ -121,7 +121,7 @@ GEM
       terminal-table (~> 1.4)
     builder (3.2.2)
     bulk_cache_fetcher (1.0.0)
-    bullet (4.14.5)
+    bullet (4.14.6)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     callsite (0.0.11)
@@ -496,7 +496,7 @@ GEM
       pg (>= 0.17)
       rails (>= 4.0)
       responders
-    powerpack (0.1.0)
+    powerpack (0.1.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)

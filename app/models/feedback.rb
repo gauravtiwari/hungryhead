@@ -44,7 +44,7 @@ class Feedback < ActiveRecord::Base
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
     Idea.popular.increment(idea_id)
-    User.popular.increment(idea.user.id)
+    User.popular.increment(idea.student.id)
     idea.feedbackers_ids << user.id
   end
 
@@ -52,7 +52,7 @@ class Feedback < ActiveRecord::Base
     user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
     idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
     Idea.popular.decrement(idea_id)
-    User.popular.decrement(idea.user.id)
+    User.popular.decrement(idea.student.id)
     idea.feedbackers_ids.delete(user.id)
   end
 

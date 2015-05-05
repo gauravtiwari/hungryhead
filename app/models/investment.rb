@@ -48,7 +48,7 @@ class Investment < ActiveRecord::Base
     user.investments_counter.increment
     idea.investors_counter.increment
     Idea.popular.increment(idea_id)
-    User.popular.increment(idea.user.id)
+    User.popular.increment(idea.student.id)
     idea.investors_ids << user.id
   end
 
@@ -56,7 +56,7 @@ class Investment < ActiveRecord::Base
     user.investments_counter.decrement if user.investments_counter.value > 0
     idea.investors_counter.decrement if idea.investors_counter.value > 0
     Idea.popular.decrement(idea_id)
-    User.popular.decrement(idea.user.id)
+    User.popular.decrement(idea.student.id)
     idea.investors.delete(user.id)
    end
 

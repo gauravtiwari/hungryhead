@@ -49,21 +49,7 @@
             <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
               <div class="notification-panel">
                 <div class="notification-body scrollable">
-                  <div class="notification-item  clearfix">
-                    <div class="heading">
-                      <a href="#" class="text-danger">
-                        <i class="fa fa-exclamation-triangle m-r-10"></i>
-                        <span class="bold">98% Server Load</span>
-                        <span class="fs-12 m-l-10">Take Action</span>
-                      </a>
-                      <span class="pull-right time">
-                                                  2 mins ago
-                                              </span>
-                    </div>
-                    <div class="option">
-                      <a href="#" class="mark"></a>
-                    </div>
-                  </div>
+                 <%= react_component('LatestFeed', {user_id: current_user.id, channel_name: "private-user-#{current_user.id}", path: notifications_path}.to_json) %>
                 </div>
                 <div class="notification-footer text-center">
                   <a href="#" class="">Read all notifications</a>

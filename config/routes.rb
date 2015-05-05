@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     # joining
     get   '/join' => 'users#join',    as: 'new_user_registration'
 
+    get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
+
     # session handling
     get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
     post    '/login'  => 'users/sessions#create',  as: 'user_session'
@@ -226,7 +228,7 @@ Rails.application.routes.draw do
   end
 
   resources :notes, only: [:create, :destroy, :update]
-
+  resources :activities, only: [:index, :show]
 
   #Vanity urls for users
   get '/:slug', to: SlugRouter.to(:show), as: :profile
