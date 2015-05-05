@@ -261,7 +261,8 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment if school && type != "User"
+    school.students_counter.increment if school
+    school.students_ids << id if school
     User.latest << user_json unless type == "User"
     User.popular.add(id, 0) unless type == "User"
     User.trending.add(id, 0) unless type == "User"
@@ -269,6 +270,7 @@ class User < ActiveRecord::Base
 
   def decrement_counters
     school.students_counter.decrement if school && school.students_counter.value > 0
+    school.students_ids.delete(id) if school
     User.latest.delete(user_json) unless type == "User"
     User.popular.delete(id) unless type == "User"
     User.trending.delete(id) unless type == "User"

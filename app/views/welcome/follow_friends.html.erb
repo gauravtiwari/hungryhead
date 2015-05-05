@@ -20,32 +20,7 @@
    								<div class="col-md-10 auto-margin full-height">
    								    <h2 class="normal no-margin p-b-10 text-green">People your may know</h2>
    								    <div class="divider b-b text-green b-grey b-md b-small"></div>
-   								  <div>
-   								  	<ul class="no-style p-t-20 follow-scrollable">
-                        <% @friends.each do |friend| %>
-                        <% if friend != current_user %>
-													<li class="p-b-10 p-t-10 b-b b-grey clearfix">
-													<div class="followable-info col-md-6 no-padding">
-
-                            <div class="thumbnail-wrapper d48 circular bordered b-<%= friend.theme %> m-r-10">
-                              <% if friend.avatar.present? %>
-                                <%= image_tag(friend.avatar.url(:avatar), :"data-src" => "#{friend.avatar.url(:avatar)}", :"data-src-retina" => "#{friend.avatar.url(:square)}", width: "55", height: "55") %>
-                              <% else %>
-                                <span class="placeholder bold text-white" width="32px" height="32px">
-                                    <%= friend.user_name_badge %>
-                                </span>
-                              <% end %>
-                            </div>
-
-														<h4 class="no-margin"><a href=""><%= friend.name %></a></h4>
-														<p><%= friend.mini_bio %></p>
-													</div>
-                          <%= react_component('Follow',{:followed => followed?(friend)}, {:id => "follow-component"}) %>
-													</li>
-                        <% end %>
-                        <% end %>
-   								  	</ul>
-   								  </div>
+                      <%= react_component('FollowFriends', {path: welcome_path(:follow_friends)}) %>
    								  <div class="pager wizard m-t-30 clearfix">
    								  	<%= link_to("<i class='fa fa-check'></i> Done".html_safe, next_wizard_path, class: 'text-white btn fs-13 btn-sm btn-green pull-right') %>
    								  </div>
