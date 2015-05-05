@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery CloneYa demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <style type="text/css">
+            .demo-wrap{
+                margin: 40px auto;
+                display:block;
+                position:relative;
+                max-width:500px;
+            }
+            .inner-wrap, .inner-inner-wrap{
+                margin-left:10px;
+                padding-left:10px;
+                border-left:1px #ccc solid;
+                padding-bottom:10px;
+                margin-bottom:10px;
+            }
+            input, textarea { 
+                padding: 9px; 
+                border: solid 1px #E5E5E5; 
+                outline: 0; 
+                font: normal 13px/100% Verdana, Tahoma, sans-serif; 
+                width: 200px; 
+                background: #FFFFFF; 
+            } 
+
+            textarea { 
+                width: 400px; 
+                max-width: 400px; 
+                height: 150px; 
+                line-height: 150%; 
+            } 
+
+            input:hover, textarea:hover, 
+            input:focus, textarea:focus { 
+                border-color: #C9C9C9; 
+            } 
+
+            .form label { 
+                margin-left: 10px; 
+                color: #999999; 
+            } 
+
+            .submit input { 
+                width: auto; 
+                padding: 9px 15px; 
+                background: #617798; 
+                border: 0; 
+                font-size: 14px; 
+                color: #FFFFFF; 
+            }
+        </style>
+    </head>
+    <body>
+        <!--simple clone demo start-->
+        <div id="simple-clone" class="demo-wrap">
+            <h2>Simple Cloning</h2>
+            <form class="form" method="post"> 
+
+                <div class="toclone">
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="sname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+
+                    <p class="email"> 
+                        <input type="text" name="email[]" id="semail" /> 
+                        <label for="email">E-mail</label> 
+                    </p> 
+
+                    <p class="web"> 
+                        <input type="text" name="web[]" id="sweb" /> 
+                        <label for="web">Website</label> 
+                    </p>  
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+
+                <p class="submit"> 
+                    <input type="submit" value="Save" /> 
+                </p> 
+
+            </form>
+        </div>
+        <!--simple clone demo end-->
+
+        <!--nested clone demo start-->
+        <div class="nest-clone demo-wrap">
+            <h2>Nested Cloning</h2>
+            <form class="form" method="post"> 
+
+                <div class="toclone">
+                    <strong>Personal Details</strong>
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="sname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+                    <div class="nest-clone inner-wrap">
+                        <div class="toclone">
+                            <strong>Contact Information</strong>
+                            <p class="email"> 
+                                <input type="text" name="email[]" id="semail" /> 
+                                <label for="email">E-mail</label> 
+                            </p> 
+
+                            <p class="web"> 
+                                <input type="text" name="web[]" id="sweb" /> 
+                                <label for="web">Website</label> 
+                            </p>
+
+                            <p class="phone"> 
+                                <input type="text" name="phone[]" id="sphone" /> 
+                                <label for="phone">Phone</label> 
+                            </p>  
+                            <div class="nest-clone inner-inner-wrap">
+                                <div class="toclone">
+                                    <strong>Additional Phone</strong>
+                                    <p class="phone"> 
+                                        <input type="text" name="addphone[]" id="addphone" /> 
+                                        <label for="addphone">Phone</label> 
+                                    </p>  
+                                    <a href="#" class="clone">clone</a>
+                                    <a href="#" class="delete">delete</a>
+                                </div>
+                            </div>
+                            <a href="#" class="clone">clone</a>
+                            <a href="#" class="delete">delete</a>
+                        </div>
+                    </div>
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+
+                <p class="submit"> 
+                    <input type="submit" value="Save" /> 
+                </p> 
+
+            </form>
+        </div>
+        <!--nested clone demo end-->
+
+        <!--nested clone child preserve demo start-->
+        <div class="nest-clone-p demo-wrap">
+            <h2>Nested Cloning with preserveChildCount</h2>
+            <form class="form" method="post"> 
+
+                <div class="toclone">
+                    <strong>Personal Details</strong>
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="sname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+                    <div class="nest-clone-p inner-wrap">
+                        <div class="toclone">
+                            <strong>Contact Information</strong>
+                            <p class="email"> 
+                                <input type="text" name="email[]" id="semail" /> 
+                                <label for="email">E-mail</label> 
+                            </p> 
+
+                            <p class="web"> 
+                                <input type="text" name="web[]" id="sweb" /> 
+                                <label for="web">Website</label> 
+                            </p>
+
+                            <p class="phone"> 
+                                <input type="text" name="phone[]" id="sphone" /> 
+                                <label for="phone">Phone</label> 
+                            </p>  
+                            <div class="nest-clone-p inner-inner-wrap">
+                                <div class="toclone">
+                                    <strong>Additional Phone</strong>
+                                    <p class="phone"> 
+                                        <input type="text" name="addphone[]" id="addphone" /> 
+                                        <label for="addphone">Phone</label> 
+                                    </p>  
+                                    <a href="#" class="clone">clone</a>
+                                    <a href="#" class="delete">delete</a>
+                                </div>
+                            </div>
+                            <a href="#" class="clone">clone</a>
+                            <a href="#" class="delete">delete</a>
+                        </div>
+                    </div>
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+
+                <p class="submit"> 
+                    <input type="submit" value="Save" /> 
+                </p> 
+
+            </form>
+        </div>
+        <!--nested clone child preserve demo end-->
+
+        <!--limit clone demo start-->
+        <div id="limit-clone" class="demo-wrap">
+            <h2>Max 3, Min 2</h2>
+            <form class="form" method="post"> 
+
+                <div class="toclone">
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="lname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+
+                    <p class="email"> 
+                        <input type="text" name="email[]" id="lemail" /> 
+                        <label for="email">E-mail</label> 
+                    </p> 
+
+                    <p class="web"> 
+                        <input type="text" name="web[]" id="lweb" /> 
+                        <label for="web">Website</label> 
+                    </p>  
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+                <div class="toclone">
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="lname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+
+                    <p class="email"> 
+                        <input type="text" name="email[]" id="lemail" /> 
+                        <label for="email">E-mail</label> 
+                    </p> 
+
+                    <p class="web"> 
+                        <input type="text" name="web[]" id="lweb" /> 
+                        <label for="web">Website</label> 
+                    </p>  
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+
+                <p class="submit"> 
+                    <input type="submit" value="Save" /> 
+                </p> 
+
+            </form>
+        </div>
+        <!--limit clone demo end-->
+
+        <!--animated clone demo start-->
+        <div id="animate-clone" class="demo-wrap">
+            <h2>Animated with custom events</h2>
+            <p>(Also see what happens to the id's)</p>
+            <form class="form" method="post"> 
+
+                <div class="toclone" id="anim-clone">
+                    <p class="name"> 
+                        <input type="text" name="name[]" id="aname" /> 
+                        <label for="name">Name</label> 
+                    </p> 
+
+                    <p class="email"> 
+                        <input type="text" name="email[]" id="aemail" /> 
+                        <label for="email">E-mail</label> 
+                    </p> 
+
+                    <p class="web"> 
+                        <input type="text" name="web[]" id="aweb" /> 
+                        <label for="web">Website</label> 
+                    </p>  
+                    <a href="#" class="clone">clone</a>
+                    <a href="#" class="delete">delete</a>
+                </div>
+
+                <p class="submit"> 
+                    <input type="submit" value="Save" /> 
+                </p> 
+
+            </form>
+        </div>
+        <!--animated clone demo end-->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js">
+        </script>
+        <script src="../dist/jquery-cloneya.js"></script>
+        <script>
+            $('#simple-clone').cloneya();
+
+            $('.nest-clone').cloneya();
+
+            $('.nest-clone-p').cloneya({
+                preserveChildCount: true
+            });
+
+            $('#limit-clone').cloneya({
+                maximum: 3,
+                minimum: 2
+            })
+                    .on('maximum.cloneya', function (e, limit, toclone) {
+                        var limitmsg = 'No more than ' + limit + ' clones for you!'
+                        alert(limitmsg);
+                    })
+                    .on('minimum.cloneya', function (e, limit, toclone) {
+                        var limitmsg = 'No less than ' + limit + ' clones for you!'
+                        alert(limitmsg);
+                    });
+
+            $('#animate-clone').cloneya()
+                    .on('before_clone.cloneya', function (event, toclone) {
+                        // do something
+                    })
+                    .on('after_clone.cloneya', function (event, toclone, newclone) {
+                        // do something   
+                    })
+                    .on('before_append.cloneya', function (event, toclone, newclone) {
+                        $(newclone).css('display', 'none');
+                        $(toclone).fadeOut('fast', function () {
+                            $(this).fadeIn('fast');
+                        });
+                    })
+                    .on('after_append.cloneya', function (event, toclone, newclone) {
+                        $(newclone).slideToggle();
+                        console.log('finished cloning ' + toclone.attr('id') + ' to ' + newclone.attr('id'));
+                    })
+                    .off('remove.cloneya')
+                    .on('remove.cloneya', function (event, clone) {
+                        clone.css('background-color', 'red');
+
+                        $(clone).slideToggle('slow', function () {
+                            $(clone).remove();
+                        });
+
+                    })
+                    .on('after_delete.cloneya', function () {
+                        console.log('deleted');
+                    });
+        </script>
+
+
+
+
+    </body>
+</html>

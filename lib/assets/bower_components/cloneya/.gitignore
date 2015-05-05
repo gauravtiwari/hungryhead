@@ -1,0 +1,12 @@
+/README.textile~
+nbproject/*
+/js/
+*~
+*.swp
+*.swo
+.buildpath
+.project
+.settings/
+/node_modules/
+*/node-modules/ 
+.DS_Store
