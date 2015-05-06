@@ -12,24 +12,24 @@
       <% end %>
       <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
         <li class="inline p-r-15 p-l-15 fs-14 bold">
-          <a class="text-brand fs-22" href="" title="Home">
+          <%= link_to(root_path, class: "text-brand fs-22") do %>
             <i class="fa fa-home"></i>
-          </a>
+          <% end %>
         </li>
         <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
-          <a class="text-brand fs-22" href="" title="People">
-            <i class="fa fa-users"></i>
-          </a>
+          <%= link_to(users_path, class: "text-brand fs-22") do %>
+             <i class="fa fa-users"></i>
+           <% end %>
         </li>
         <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-          <a class="text-brand fs-22" href="" title="Ideas">
-            <i class="fa fa-lightbulb-o"></i>
-          </a>
+          <%= link_to(ideas_path, class: "text-brand fs-22") do %>
+             <i class="fa fa-lightbulb-o"></i>
+           <% end %>
         </li>
         <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-          <a class="text-brand fs-22" href="" title="Schools">
+         <%= link_to(schools_path, class: "text-brand fs-22") do %>
             <i class="fa fa-university"></i>
-          </a>
+          <% end %>
         </li>
       </ul>
     </div>

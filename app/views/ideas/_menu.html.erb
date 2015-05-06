@@ -2,7 +2,7 @@
   <div class="profile-nav p-l-10 row">
     <div class="col-md-5 no-padding">
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
-          <li class="inline b-r b-grey b-dashed p-l-10 p-r-15 <%= current_class?(idea_path(@idea)) %>">
+          <li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
             <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
             <% if @idea.student.avatar.present? %>
               <%= image_tag(@idea.student.avatar.url(:avatar), :"data-src" => "#{@idea.student.avatar.url(:avatar)}", :"data-src-retina" => "#{@idea.student.avatar.url(:square)}", width: "55", height: "55") %><% else %>
@@ -10,13 +10,13 @@
               </span>
             <% end %>
             </div>
-            <%= link_to(@idea.student.first_name, profile_path(@idea.student), class: "bold text-success b-b b-grey p-b-5 m-l-45 fs-13") %>
+            <%= link_to(@idea.student.first_name, profile_path(@idea.student), class: "bold m-l-45 fs-13 #{current_class?(idea_path(@idea))}") %>
           </li>
-          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15 <%= current_class?(idea_feedbacks_path(@idea)) %>">
-            <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13") %>
+          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+            <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{current_class?(idea_feedbacks_path(@idea))}") %>
           </li>
-          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15 <%= current_class?(comments_idea_path(@idea)) %>">
-            <%= link_to("Q&A", comments_idea_path(@idea), class: "text-brand bold fs-13") %>
+          <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+            <%= link_to("Q&A", comments_idea_path(@idea), class: "text-brand #{current_class?(comments_idea_path(@idea))} bold fs-13") %>
           </li>
         </ul>
     </div>
@@ -24,7 +24,7 @@
       <% if !policy(@idea).collaborator? %>
         <%= react_component('Follow',{:followed => idea_followed?(@idea)}) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => !@idea.feedbacked?(current_user) }) %>
-        <%= react_component('InvestButton',{ :invested => !@idea.invested?(current_user) }) %>
+        <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested?(@idea) }) %>
       <% else %>
       <div>
         <a class="btn btn-danger btn-cons pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>

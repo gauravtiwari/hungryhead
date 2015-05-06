@@ -7,6 +7,21 @@ if @feedback
 	json.created_at @feedback.created_at
 	json.user_avatar @feedback.user.avatar.url(:mini)
 
+  if feedback.present?
+    json.rate do
+      json.record feedback.id
+      json.voted  feedback.badged?
+      json.vote_url  rate_idea_feedback_path(feedback.idea.slug, feedback.id)
+      json.user_name  feedback.user.name.capitalize
+      json.badge_class  feedback.badges.last.custom_fields[:class] if feedback.badges.length > 0
+      json.badge_name feedback.badges.last.custom_fields[:name].downcase if feedback.badges.length > 0
+      json.id  feedback.id
+      json.badge_bg feedback.badges.last.custom_fields[:bg] if feedback.badges.length > 0
+      json.points feedback.user.points(category: "Feedback_#{feedback.id}")
+      json.votes_count  feedback.votes_counter.value
+    end
+  end
+
   json.meta do
     json.user_name your_name(current_user, false)
     json.idea_name @feedback.idea.name

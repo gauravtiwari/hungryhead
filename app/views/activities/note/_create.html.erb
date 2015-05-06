@@ -28,7 +28,7 @@
 		        <% end %>
 		        <span class="time semi-bold">
 		          <i class="fa fa-clock-o"></i>
-			        	<%= link_to(idea_path(activity.trackable), class: "text-master") do %>
+			        	<%= link_to(note_path(activity.trackable), class: "text-master") do %>
 								<%= time_ago_in_words(activity.created_at) %>
 							<% end %>
 		        </span>

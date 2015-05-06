@@ -57,7 +57,7 @@ class Investment < ActiveRecord::Base
     idea.investors_counter.decrement if idea.investors_counter.value > 0
     Idea.popular.decrement(idea_id)
     User.popular.decrement(idea.student.id)
-    idea.investors.delete(user.id)
+    idea.investors_ids.delete(user.id)
    end
 
   def delete_activity

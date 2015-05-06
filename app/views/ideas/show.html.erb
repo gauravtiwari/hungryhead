@@ -22,13 +22,10 @@
 
 <% if @idea.student != current_user %>
 
-<% if !@idea.invested?(current_user) %>
-  <%= react_component('Invest', render(template: 'ideas/invest.json.jbuilder', locals: {:id => "investment-component"})) %>
-<% end %>
+  <% if !@idea.feedbacked?(current_user) %>
+   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
+  <% end %>
 
-<% if !@idea.feedbacked?(current_user) %>
- <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
-<% end %>
 <% end%>
 
 <% if user_signed_in? && policy(@idea).collaborator? %>

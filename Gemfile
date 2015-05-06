@@ -26,10 +26,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
 
-#Jquery datable
-gem 'jquery-datatables-rails', '~> 3.2.0'
-gem 'lodash-rails'
-
 #Group date
 gem 'groupdate'
 

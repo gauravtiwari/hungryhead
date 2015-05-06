@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def current_class?(test_path)
-    return 'active' if request.path == test_path
+    return 'text-success p-b-5 b-b b-grey' if request.path == test_path
     ''
   end
 

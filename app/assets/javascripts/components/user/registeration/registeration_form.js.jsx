@@ -58,19 +58,21 @@ var RegisterationForm = React.createClass({
   },
 
   onUsernameChange: function(e) {
+    console.log(this.refs.name.getDOMNode().value.trim());
     data = {
-      username: e.target.value
+      username: e.target.value,
+      name: this.refs.name.getDOMNode().value.trim()
     }
     $.ajax({
         data: data,
         url: Routes.check_username_path(),
-        type: "GET",
+        type: "POST",
         dataType: "json",
         success: function ( data ) {
         if(data.available) {
-          $('#invalid-username').text("").hide();
+          $('#invalid-username').remove();
         } else {
-          $('#invalid-username').text(data.error).show();
+          $('body').pgNotification({style: "simple", message: data.error + " \n <strong>" + data.suggestions + "</strong>", position: "top-right", type: "error",timeout: 10000}).show();
         }
         }.bind(this),
         error: function(xhr, status, err) {
@@ -92,13 +94,13 @@ var RegisterationForm = React.createClass({
     $.ajax({
         data: data,
         url: Routes.check_email_path(),
-        type: "GET",
+        type: "POST",
         dataType: "json",
         success: function ( data ) {
         if(data.available) {
-          $('#invalid-email').text("").hide();
+          $('#invalid-email').remove();
         } else {
-          $('#invalid-email').text(data.error).show();
+          $('body').pgNotification({style: "simple", message: data.error, position: "top-right", type: "error",timeout: 10000}).show();
         }
         }.bind(this),
         error: function(xhr, status, err) {
@@ -126,7 +128,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Your full name</label>
-              <input type="text" ref="name" autoComplete="off" name="student[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
+              <input type="text" ref="name" id="name" autoComplete="off" name="student[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
             </div>
           </div>
 

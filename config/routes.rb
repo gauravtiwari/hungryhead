@@ -64,8 +64,8 @@ Rails.application.routes.draw do
   end
 
   #Check if email and username exists
-  get 'check_username', to: 'users#check_username', as: 'check_username'
-  get 'check_email', to: 'users#check_email', as: 'check_email'
+  post 'check_username', to: 'users#check_username', as: 'check_username'
+  post 'check_email', to: 'users#check_email', as: 'check_email'
 
   devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'}
   as :student do
@@ -142,7 +142,7 @@ Rails.application.routes.draw do
   end
 
   #Schools resources
-  resources :schools, path: 'school' do
+  resources :schools do
     get :autocomplete_school_name, :on => :collection
   end
 

@@ -25,6 +25,9 @@ body, p {
 .displayblock {
   display: block;
 }
+.input-group-addon {
+  border:1px solid #e5e8e9 !important;
+}
 .no-content {
   padding: 0;
   margin: 0;
@@ -264,6 +267,9 @@ ul.reactions > div {
 .w32 {
   width: 32px;
   height: 32px;
+}
+.table thead tr th {
+  padding-left: 20px;
 }
 .light-bg {
   background: #fafafa;

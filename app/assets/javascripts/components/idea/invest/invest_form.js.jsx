@@ -18,6 +18,8 @@ render: function() {
 
   return (
     <form id="information-form" role="form" noValidate="novalidate" acceptCharset="UTF-8" ref="invest_form" onSubmit={this._onKeyDown}>
+       <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
+       <h5>Your available funds are: {this.props.idea.user_fund}</h5>
        <div className="form-group">
            <div className="row">
                <div className="form-group">

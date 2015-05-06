@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @badges = @user.badges.group_by(&:id)
     User.trending.increment(@user.id) if @user != current_user
     respond_to do |format|
       format.html {render :show} if @user.type == "User"
@@ -47,7 +46,7 @@ class UsersController < ApplicationController
       @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
-      InviteMailer.invite_friends(@user, current_user).deliver_later
+      InviteMailer.invite_friends(@user, current_user).deliver
       @user.invitation_sent_at = Time.now.utc
       invited << u[0] if u[0].present?
     end
@@ -73,9 +72,11 @@ class UsersController < ApplicationController
 
   def check_username
     user = User.where("username = ?", params[:username]).first
+    @user = User.new(username: params[:username], name: params[:name])
     if user.present?
       render :json =>  {
-        error: "This Username is already taken. Please try another",
+        error: "This Username is already taken. Please try followings \n",
+        suggestions: @user.username_suggestions.to_sentence,
         available: false
       }
     else
@@ -120,7 +121,6 @@ class UsersController < ApplicationController
   end
 
   def activities
-    @badges = @user.badges.group_by(&:id)
     @activities = Activity
     .where(user_id: @user.id)
     .order(created_at: :desc)
@@ -131,23 +131,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def investments
-    @investments = @user
-    .investments
+  def notes
+    @notes = @user
+    .notes
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
     if request.xhr?
-      render :partial=>"users/_sub_pages/investments"
-    end
-  end
-
-  def feedbacks
-    @feedbacks = @user
-    .feedbacks
-    .order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 10)
-    if request.xhr?
-      render :partial=>"users/_sub_pages/feedbacks"
+      render :partial=>"users/_sub_pages/notes"
     end
   end
 
@@ -163,6 +153,7 @@ class UsersController < ApplicationController
   def set_user
     id = params[:slug] || params[:id]
     @user = User.find(id)
+    @badges = @user.badges.group_by(&:id)
   end
 
   # White-listed attributes.

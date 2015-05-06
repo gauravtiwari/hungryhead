@@ -19,92 +19,91 @@
                <div class="clearfix"></div>
            </div>
            <div class="panel-body">
-               <div class="dataTables_wrapper form-inline no-footer" id=
-               "tableWithSearch_wrapper">
+               <div class="form-inline no-footer">
                    <div class="table-responsive">
                        <table class=
-                       "table table-hover demo-table-search dataTable no-footer"
-                       id="tableWithSearch">
+                       "table table-hover no-footer"
+                       >
                            <thead>
                                <tr>
-                                   <th colspan="1"
-                                   rowspan="1">
+                                   <th>
                                        Name
                                    </th>
-                                   <th colspan="1"
-                                   rowspan="1">
+                                   <th>
                                        Elevator Pitch
                                    </th>
-                                   <th colspan="1"
-                                   rowspan="1">
+                                   <th>
                                        Market
                                    </th>
-                                   <th colspan="1"
-                                   rowspan="1">
-                                       Location
-                                   </th>
-                                   <th colspan="1"
-                                   rowspan="1">
-                                       University
-                                   </th>
-                                   <th colspan="1"
-                                   rowspan="1">
-                                       Stats
+                                   <th>
+                                       Follow
                                    </th>
                                </tr>
                            </thead>
                            <tbody>
                           <% @ideas.each do |idea| %>
-                             <tr role="row" class="odd">
+                             <tr role="row" class="<%= cycle("odd", "even") -%>">
                                  <td class=
-                                 "v-align-middle semi-bold sorting_1">
+                                 "v-align-middle semi-bold">
                                      <p>
                                          <%= idea.name %>
                                      </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <p>
-                                         <%= idea.elevator_pitch %>
-                                     </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                  <% idea.market_list.each do |tag| %>
-                                    <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag") do %>
-                                      <%= tag %>
-                                    <% end %>
-                                  <% end %>
-                                 </td>
 
-                                 <td class="v-align-middle">
-                                    <% idea.location_list.each do |tag| %>
-                                      <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag") do %>
-                                        <%= tag %>
-                                      <% end %>
-                                    <% end %>
-                                 </td>
-                                 <td class="v-align-middle">
                                      <p>
                                       <%= link_to(profile_path(idea.school)) do %>
                                          <%= idea.school.name %>
                                       <% end %>
                                      </p>
+                                     <% idea.location_list.each do |tag| %>
+                                       <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag no-margin") do %>
+                                         <%= tag %>
+                                       <% end %>
+                                     <% end %>
                                  </td>
+
                                  <td class="v-align-middle">
-                                     <p>
-                                         <%= idea.followers_counter.value %>
-                                     </p>
-                                     <p>
-                                         <%= idea.balance %>
-                                     </p>
-                                     <p>
-                                         <%= idea.feedbackers_counter.value %>
-                                     </p>
+                                  <h5 class="no-margin"><%= idea.elevator_pitch %></h5>
+                                  <div class="row text-master m-t-15 p-l-10 p-r-10">
+                                      <div class="col-md-4 no-padding p-r-15 text-center b-r b-grey b-dashed">
+                                      <p class="no-margin bold small">Investments</p>
+                                      <p class="no-margin bold text-warning "><%= idea.investors_counter.value %></p>
+                                      </div>
+                                      <div class="col-md-4 text-center b-r b-grey b-dashed">
+                                      <p class="no-margin bold small">Followers</p>
+                                          <p class="no-margin bold text-warning "><%= idea.followers_counter.value %></p>
+                                      </div>
+                                      <div class="col-md-4 text-center">
+                                      <p class="no-margin bold small">Feedbacks</p>
+                                          <p class="no-margin bold text-warning "><%= idea.feedbackers_counter.value %></p>
+                                      </div>
+                                  </div>
+                                 </td>
+
+                                  <td class="v-align-middle">
+                                 <% idea.market_list.each do |tag| %>
+                                   <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag") do %>
+                                     <%= tag %>
+                                   <% end %>
+                                 <% end %>
+
+
+                                  </td>
+
+
+
+
+
+
+                                 <td class="v-align-middle">
+                                  <%= react_component('Follow', {followed: idea_followed?(idea)}) %>
                                  </td>
                              </tr>
                           <% end %>
 
                            </tbody>
                        </table>
+
+
                    </div>
 
                </div>

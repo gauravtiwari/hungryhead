@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   include Follower
   include Mentionable
   include Sluggable
+  include Suggestions
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
@@ -107,6 +108,10 @@ class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
+
+  suggestions_for :username, :num_suggestions => 5,
+      :first_name_attribute => :firstname, :last_name_attribute => :lastname
+
   #Reading models
   acts_as_reader
 
@@ -162,6 +167,14 @@ class User < ActiveRecord::Base
 
   def user_name_badge
     first_name.present? ? first_name.first + last_name.first : add_fullname
+  end
+
+  def firstname
+    self.name.split(' ').first
+  end
+
+  def lastname
+    self.name.split(' ').second
   end
 
   private

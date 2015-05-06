@@ -1,3 +1,9 @@
+json.cache! @friends do
+  json.cache_collection! @friends do |friend|
+    json.partial! 'friend', :friend => friend
+  end
+end
+
 json.friends @friends.each do |friend|
   json.name friend.name
   json.avatar friend.avatar.url(:avatar)
