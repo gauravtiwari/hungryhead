@@ -1,0 +1,69 @@
+<div class="card share post_<%= note.id %>" data-social="item">
+    <div class="circle" data-toggle="tooltip" title="hello" data-container="body"></div>
+    <div class="card-header clearfix">
+      <div class="user-pic">
+        <% if note.user.avatar.present? %>
+          <%= image_tag(note.user.avatar.url(:avatar), :"data-src" => "#{note.user.avatar.url(:avatar)}", :"data-src-retina" => "#{note.user.avatar.url(:square)}", width: "33", height: "33") %>
+          <% else %>
+              <span class="placeholder bold text-white"><%= note.user.first_name.first + note.user.last_name.first %>
+              </span>
+        <% end %>
+      </div>
+
+      <div class="text-master-dark">
+        <%= link_to(your_name(note.user, false), profile_path(note.user), :"data-popover-href" => "#{profile_card_path(note.user)}", class: 'load-card bold') %> shared a note <i class="fa fa-pencil"></i>
+
+        <h6>
+          <% if note.user.locations %>
+              <span class="location semi-bold m-r-10">
+                  <i class="fa fa-map-marker"></i>
+                  <%= note.user.locations.first %>
+              </span>
+            <% end %>
+           <% if note.user.markets %>
+              <span class="location semi-bold m-r-10">
+                  <i class="fa fa-map-marker"></i>
+                  <%= note.user.markets.first %>
+              </span>
+            <% end %>
+            <span class="time semi-bold">
+              <i class="fa fa-clock-o"></i>
+                <%= link_to(note_path(note), class: "text-master") do %>
+                <%= time_ago_in_words(note.created_at) %>
+              <% end %>
+            </span>
+        </h6>
+      </div>
+    </div>
+    <div class="card-description">
+      <div class="activity-content">
+       <% if note.body.length > 450 %>
+        <%= truncate(markdownify(note.body), escape: false, length: 450) %>
+        <%= link_to 'See more', '', class: "read-more-link read-more-#{note.id} clearfix" %>
+        <script type="text/javascript">
+          $('.read-more-<%= note.id %>').on('click', function(e) {
+            e.preventDefault()
+            $(this).closest(".card-description").find(".activity-content").html('<%= escape_javascript markdownify(note.body) %>')
+          })
+        </script>
+      <% else %>
+        <%= markdownify(note.body) %>
+      <% end %>
+      </div>
+    </div>
+    <div class="card-footer clearfix bold">
+
+        <ul class="reactions pull-left">
+          <% voted = note.voted?(current_user) %>
+          <%= react_component('Upvote', {record: note.id, voted: voted, vote_url: vote_path(votable_type: note.class.to_s, votable_id: note.id), votes_count: note.votes_counter.value, voters_path: voters_path(votable_type: note.class.to_s, votable_id: note.id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+        </ul>
+      <div class="clearfix"></div>
+    </div>
+
+<% commentable = note %>
+
+<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
+
+<%= react_component('CommentBox', {data: data, comment_channel: "#{note.class.to_s}-#{note.id}-comments", count: note.comments_counter.value, comments_path: comments_path(commentable_type: note.class.to_s, id: note.id)}) %>
+</div>
+
