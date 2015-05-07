@@ -119,8 +119,8 @@ var LatestFeed = React.createClass({
            <div>
              <ul className="idea-latest-activities no-style no-padding no-margin">
                <Infinite elementHeight={45}
-                containerHeight={250}
-                infiniteLoadBeginBottomOffset={200}
+                containerHeight={200}
+                infiniteLoadBeginBottomOffset={150}
                 onInfiniteLoad={this.handleInfiniteLoad}
                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
                 isInfiniteLoading={this.state.isInfiniteLoading}

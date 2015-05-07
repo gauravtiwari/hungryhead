@@ -4,7 +4,7 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:card, :join_team, :feedbackers, :investors, :team, :comments, :show, :updates, :publish, :unpublish, :invite_team, :followers, :idea, :edit, :update, :destroy]
   before_action :set_user
 
-  after_action :verify_authorized, except: [:index]
+  after_action :verify_authorized, except: [:index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   layout "idea"
 
@@ -24,6 +24,31 @@ class IdeasController < ApplicationController
 
   def card
     render partial: 'shared/idea_card'
+  end
+
+  def latest
+    render json: Oj.dump({
+      list: Idea.latest.values,
+      type: 'Latest Ideas'
+      }, mode: :compat)
+  end
+
+  def popular
+    @ideas = Idea.find(Idea.popular.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
+    render json: Oj.dump({
+      list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
+      type: 'Popular Ideas',
+      next_page: @ideas.next_page
+      }, mode: :compat)
+  end
+
+  def trending
+    @ideas = Idea.find(Idea.trending.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
+    render json: Oj.dump({
+      list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
+      type: 'Trending Ideas',
+      next_page: @ideas.next_page
+      }, mode: :compat)
   end
 
   # PUT /ideas/1/unpublish

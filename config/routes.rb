@@ -169,6 +169,11 @@ Rails.application.routes.draw do
   #Users routes
   resources :users, path: 'people' do
     get :autocomplete_user_name, :on => :collection
+    collection do
+      get :latest
+      get :popular
+      get :trending
+    end
     member do
       get :activities
       put :publish
@@ -198,6 +203,11 @@ Rails.application.routes.draw do
   resources :ideas, path: 'ideas', except: [:new, :edit] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
+    collection do
+      get :latest
+      get :popular
+      get :trending
+    end
     #Member routes
     member do
       put :publish
