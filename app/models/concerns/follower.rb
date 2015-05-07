@@ -5,8 +5,4 @@ module Follower
     has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
   end
 
-  def follows? followable
-    followings_ids.members.include?(followable.id.to_s) || idea_followings_ids.members.include?(followable.id.to_s) || school_followings_ids.members.include?(followable.id.to_s)
-  end
-
 end

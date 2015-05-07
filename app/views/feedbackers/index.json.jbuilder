@@ -11,7 +11,7 @@ json.payload do
         json.url profile_people_path(tag.parameterize)
     end
     json.about_me i.about_me
-    json.is_following current_user.follows?(i)
+    json.is_following i.followers_ids.members.include?(current_user.id.to_s)
     json.followed followed?(i)
     json.not_current_user i != current_user
   end

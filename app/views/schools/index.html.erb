@@ -20,7 +20,7 @@
     <h5 class="no-margin fs-14 bold"><%= link_to(school.name, profile_path(school)) %></h5>
     <h5 class="no-margin"><%= school.location_list %></h5>
     <div class="card-follow-button">
-      <%= react_component('Follow',{:followed => school_followed?(school)}) %>
+      <%= react_component('Follow',{:followed => followed?(school)}) %>
     </div>
     <script type="text/javascript">
        ReactRailsUJS.mountComponents();

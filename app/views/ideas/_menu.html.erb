@@ -22,7 +22,7 @@
     </div>
     <div class="profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
       <% if !policy(@idea).collaborator? %>
-        <%= react_component('Follow',{:followed => idea_followed?(@idea)}) %>
+        <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name} }) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested?(@idea) }) %>
       <% else %>

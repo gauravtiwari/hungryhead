@@ -13,7 +13,7 @@
 			<h2><%= @school.name %></h2>
 			<span><%= truncate(@school.description, length: 50) %></span>
       <div class="card-follow-button">
-        <%= react_component('Follow',{:followed => school_followed?(@school)}) %>
+        <%= react_component('Follow',{:followed => followed?(@school)}) %>
       </div>
       <script type="text/javascript">
          ReactRailsUJS.mountComponents();

@@ -5,7 +5,7 @@
       <%=  render partial: 'school_data' %>
       <%= render partial: 'cover' %>
      <div class="school-action-buttons col-md-5">
-			<%= react_component('Follow', {followed: school_followed?(current_user)}) %>
+			<%= react_component('Follow', {followed: followed?(current_user)}) %>
       <% if current_user.admin? %>
 			  <%= link_to('Edit Profile', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
       <% end %>

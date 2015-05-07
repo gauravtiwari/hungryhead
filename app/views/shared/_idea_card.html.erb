@@ -14,7 +14,7 @@
 			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
       <% if @idea.student != current_user %>
         <div class="card-follow-button">
-          <%= react_component('Follow',{:followed => idea_followed?(@idea)}) %>
+          <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         </div>
         <script type="text/javascript">
            ReactRailsUJS.mountComponents();

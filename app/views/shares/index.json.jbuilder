@@ -10,7 +10,7 @@ json.payload do
        json.url profile_people_path(tag.parameterize)
     end
     json.about_me i.user.mini_bio
-    json.is_following current_user.follows?(i.user)
+    json.is_following i.user.followers_ids.members.include?(current_user.id.to_s)
     json.user_name_badge i.user.first_name.first + i.user.last_name.first
     json.followed followed?(i.user)
     json.not_current_user i.user != current_user

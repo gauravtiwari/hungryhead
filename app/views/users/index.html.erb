@@ -22,7 +22,7 @@
       <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
       <p><%= user.mini_bio %></p>
       <div class="card-follow-button">
-        <%= react_component('Follow',{:followed => school_followed?(user)}) %>
+        <%= react_component('Follow',{:followed => followed?(user)}) %>
       </div>
       <script type="text/javascript">
          ReactRailsUJS.mountComponents();

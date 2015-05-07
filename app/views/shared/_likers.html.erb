@@ -35,7 +35,7 @@
 <div class="auto-overflow">
   <ul class="trending-list p-t-20 no-style">
     <% @likers.each do |f| %>
-      <% cache ["liker_list_follows_#{current_user.follows?(f)}", f] do %>
+      <% cache ["liker_list_follows_#{f.followers_ids.members.include?(current_user.id.to_s)}", f] do %>
        <%= render partial: 'shared/liker', locals: {f: f} %>
       <% end %>
     <% end %>

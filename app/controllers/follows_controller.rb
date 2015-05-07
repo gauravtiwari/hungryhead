@@ -6,11 +6,11 @@ class FollowsController < ApplicationController
   before_action :load_followable
 
   def create
-    if current_user.follows?(@followable)
+    if @followable.followers_ids.members.include?(current_user.id.to_s)
       @follow = CreateFollowService.new(current_user, @followable).unfollow
       skip_authorization
       render json: {
-        follow: current_user.follows?(@followable),
+        follow: @followable.followers_ids.members.include?(current_user.id.to_s),
         followers_count: @followable.followers_counter.value
       }
     else
@@ -18,7 +18,7 @@ class FollowsController < ApplicationController
       authorize @follow.follower
       if @follow.save
         render json: {
-          follow: current_user.follows?(@followable),
+          follow: @followable.followers_ids.members.include?(current_user.id.to_s),
           followers_count: @followable.followers_counter.value
         }
       CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless @follow.followable_type == "School"
