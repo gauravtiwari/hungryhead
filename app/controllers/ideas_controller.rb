@@ -124,7 +124,7 @@ class IdeasController < ApplicationController
       authorize @idea
       if @idea.update(idea_params)
         team = @idea.team_ids.join('')
-        Pusher.trigger_async("presence-idea-collaboration-#{team}", "idea_update_#{@idea.id}", {id: @idea.id, data: render(template: 'ideas/update')}.to_json)
+        Pusher.trigger_async("presence-idea-collaboration-#{team}", "idea_update_#{@idea.id}", {id: @idea.id, data: render(template: 'ideas/show')}.to_json)
       else
         render json: @idea.errors, status: :unprocessable_entity
       end

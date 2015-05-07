@@ -5,7 +5,7 @@ class CreateActivityJob < ActiveJob::Base
       if find_trackable(@trackable)
         false
       else
-        "Create#{trackable_type}NotificationService".constantize.new(@trackable).create unless trackable_type == "Follow" && @trackable.followable.class.to_s == "School"
+        "Create#{trackable_type}NotificationService".constantize.new(@trackable).create
       end
     end
   end

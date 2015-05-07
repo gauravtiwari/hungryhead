@@ -41,6 +41,22 @@ module ApplicationHelper
     end
   end
 
+  def school_followed?(object)
+    if current_user && current_user.school_followings_ids.members.include?(object.id.to_s)
+      followed =  {
+        follow: true,
+        followable_type: object.class.name,
+        followable_id: object.id
+      }
+    else
+      followed = {
+        follow: false,
+        followable_type: object.class.name,
+        followable_id: object.id
+      }
+    end
+  end
+
   def your_name(user, type)
     if user == current_user && type
       "your"

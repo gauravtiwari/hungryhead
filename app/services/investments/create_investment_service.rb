@@ -7,7 +7,8 @@ class CreateInvestmentService
 
   def create
     @investment = Investment.new @params
-    @investment.update_attributes(idea_id: @idea.id, user_id: @user.id)
+    @investment.idea = @idea
+    @investment.user = @user
     @investment
   end
 

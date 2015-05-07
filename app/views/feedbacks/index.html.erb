@@ -1,4 +1,4 @@
-<div class="col-md-9 col-lg-9 col-sm-9 no-padding p-l-15">
+<div class="col-md-8 col-lg-8 col-sm-8 no-padding p-l-15">
   <div class="auto-height box-shadow ">
     <%= render partial: 'ideas/header' %>
   </div>
@@ -10,10 +10,11 @@
   </div>
 </div>
 
-<div class="col-md-3 col-lg-3 col-sm-3">
-  <div class="sidebar auto-height sticky bg-white box-shadow">
+<div class="col-md-4 col-lg-4 col-sm-4">
+  <div class="idea-sidebar auto-height sticky bg-white box-shadow">
     <%= render partial: 'ideas/latest_activities' %>
     <%= render partial: 'ideas/followers' if @idea.followers_counter.value > 0 %>
+    <%= render partial: 'ideas/investors' if @idea.investors_counter.value > 0 %>
   </div>
 </div>
 

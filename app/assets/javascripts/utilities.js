@@ -7,21 +7,22 @@ $(document).ready(function () {
     $('.load-card').popover('destroy');
     el = $(this);
     url = $(this).data('popover-href');
+    el.off('mouseover');
     setTimeout(function() {
-      callback = function(response) {
-        return el.unbind('mousehover').popover({
-          content: response,
+      $.get(url, function(d) {
+        el.popover({
+          content: d,
           html: true,
-          container: 'body',
+          container: 'body'
         }).popover('show');
-      };
-    return $.get(url, '', callback, '');
+      });
     }, 500);
   });
 
   $('.load-card').on('hidden.bs.popover', function () {
     $('.load-card').popover('destroy')
   });
+
 
   $('html').on('mouseup', function(e) {
       if(!$(e.target).closest('.popover').length) {

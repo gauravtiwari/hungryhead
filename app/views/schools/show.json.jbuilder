@@ -3,8 +3,9 @@ json.school do
 		json.url @school.logo.url(:avatar)  if @school.logo
 	end
 	json.cover do
-		json.url @school.cover.url(:cover)  if @school.cover
-		json.position @school.cover_position
+		json.url @school.cover.url(:large)  if @school.cover
+		json.top @school.cover_position if @school.cover
+    json.left @school.cover_left if @school.cover
 	end
 
 	json.is_owner true if current_user

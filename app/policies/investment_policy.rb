@@ -9,7 +9,9 @@ class InvestmentPolicy < ApplicationPolicy
   end
 
   def show?   ; false; end
-  def create? ; current_user != record.idea.student && record.idea.published?; end
+  def create?
+   current_user != record.idea.student && record.idea.published? && !record.idea.invested?(current_user)
+  end
   def destroy?; current_user == record.user; end
 end
 

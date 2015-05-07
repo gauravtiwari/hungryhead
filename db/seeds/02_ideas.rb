@@ -9,7 +9,7 @@ ActiveRecord::Base.transaction do
       description: Forgery::LoremIpsum.words(100),
       location_list: Forgery::Address.city,
       fund: {balance: 0},
-      school_id: [*1..9].sample,
+      school_id: [*1..10].sample,
       sections: {
         market: Forgery::LoremIpsum.paragraphs,
         problems: Forgery::LoremIpsum.paragraphs,
@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
         vision: Forgery::LoremIpsum.paragraphs,
         value_proposition: Forgery::LoremIpsum.paragraphs
       },
-      student_id: [*21..50].sample,
+      student_id: [*120..150].sample,
       looking_for_team: true,
       rules_accepted: true,
       market_list: Forgery::Name.industry

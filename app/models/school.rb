@@ -12,11 +12,12 @@ class School < ActiveRecord::Base
 
 	store_accessor :data, :established, :locations, :website
 	store_accessor :media, :logo_position,
-	:cover_position, :cover_prcessing, :logo_processing
+	:cover_position, :cover_left, :cover_prcessing, :logo_processing
 
 	#Redis Cache counters and ids
-	list :followers_ids
+	set :followers_ids
 	list :students_ids
+	list :teachers_ids
 	list :ideas_ids
 
 	#Counters
@@ -47,6 +48,11 @@ class School < ActiveRecord::Base
 
   def can_score?
   	true
+  end
+
+  def name_badge
+  	words = name.split(' ')
+  	words.map{|w| w.first }.join
   end
 
   def rebuild_cache

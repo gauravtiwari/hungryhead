@@ -17,9 +17,17 @@ var LatestFeedVoteItem = React.createClass({
     }
 
     if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
-      var recipient = "on your "+this.props.item.recipient.recipient_type;
+      if(this.props.item.recipient.recipient_type === "idea") {
+        var recipient = "on your idea "+this.props.item.recipient.recipient_name;
+      } else {
+        var recipient = "on your "+this.props.item.recipient.recipient_type;
+      }
     } else {
-      var recipient = "on " + this.props.item.recipient.recipient_type;
+      if(this.props.item.recipient.recipient_type === "idea") {
+        var recipient = "on " + this.props.item.recipient.recipient_name;
+      } else {
+        var recipient = "on a " + this.props.item.recipient.recipient_type;
+      }
     }
 
     return (

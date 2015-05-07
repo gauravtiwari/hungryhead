@@ -8,7 +8,8 @@ class CreateFeedbackService
 
   def create
     @feedback = Feedback.new @params
-    @feedback.update_attributes(idea: @idea, user: @user)
+    @feedback.idea = @idea
+    @feedback.user = @user
     @feedback
   end
 

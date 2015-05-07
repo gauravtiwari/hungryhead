@@ -18,6 +18,7 @@ class Follow < ActiveRecord::Base
     followable.followers_counter.increment
     follower.followings_ids << followable_id if followable_type == "User"
     follower.idea_followings_ids << followable_id if followable_type == "Idea"
+    follower.school_followings_ids << followable_id if followable_type == "School"
     followable.followers_ids << follower_id
     Idea.popular.increment(followable_id) if followable_type == "Idea"
     User.popular.increment(followable_id) if followable_type == "User"
@@ -31,6 +32,7 @@ class Follow < ActiveRecord::Base
     followable.followers_counter.decrement
     follower.followings_ids.delete(followable_id) if followable_type == "User"
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
+    follower.school_followings_ids.delete(followable_id) if followable_type == "School"
     followable.followers_ids.delete(follower_id)
 
     Idea.popular.decrement(followable_id) if followable_type == "Idea"
@@ -54,7 +56,7 @@ class Follow < ActiveRecord::Base
   end
 
   def delete_notification
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
 
 end

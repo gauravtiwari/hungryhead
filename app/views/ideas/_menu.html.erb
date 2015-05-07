@@ -10,7 +10,7 @@
               </span>
             <% end %>
             </div>
-            <%= link_to(@idea.student.first_name, profile_path(@idea.student), class: "bold m-l-45 fs-13 #{current_class?(idea_path(@idea))}") %>
+            <%= link_to(@idea.name, idea_path(@idea), class: "bold m-l-45 fs-13 #{current_class?(idea_path(@idea))}") %>
           </li>
           <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
             <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{current_class?(idea_feedbacks_path(@idea))}") %>

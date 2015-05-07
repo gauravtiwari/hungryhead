@@ -373,6 +373,43 @@ ul.reactions > div {
   border-bottom-right-radius: 6px;
   border-top: 1px solid #e7e7e7;
 }
+
+.listing-card {
+  overflow: hidden;
+  width: auto;
+  margin-bottom: 25px;
+}
+.listing-header {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin-bottom: 60px;
+  margin-top: 20px;
+  min-width: 275px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.listing-card-logo img {
+  border-radius: 50%;
+}
+.listing-card-logo h2,
+.listing-card-logo h2 a {
+  margin: 0;
+  color: #525252;
+  font-size: 24px;
+  font-weight: normal;
+}
+.listing-card-logo span {
+  color: #999;
+  font-size: 12px;
+}
+.listing-card-stats {
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+  display: block;
+  background: #DAEFFD;
+  width: 100%;
+  border-top: 1px solid #e7e7e7;
+}
 .card-follow-button {
   margin-top: 10px;
 }

@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
-  before_action :authenticate_admin_user!, only: [:new, :create, :destroy]
-  before_action :set_schools, only: [:notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
+  before_action :authenticate_admin_user!, only: [:new, :create, :destroy, :edit]
+  before_action :set_schools, only: [:card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:logo, :email]
 
@@ -10,13 +10,17 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @school = School.all
+    @schools = School.paginate(:page => params[:page], :per_page => 12)
   end
 
   # GET /schools/1
   # GET /schools/1.json
 
   def show
+  end
+
+  def card
+    render partial: 'shared/school_card'
   end
 
   def students
@@ -94,6 +98,6 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schools_params
-       params.require(:school).permit(:id, :email, :name, :description, :website, :logo, :cover, :location_list, :established)
+       params.require(:school).permit(:id, :email, :name, :description, :cover_left, :cover_position, :website, :logo, :cover, :location_list, :established)
     end
 end

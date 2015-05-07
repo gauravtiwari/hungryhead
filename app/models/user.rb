@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   set :followers_ids
   set :followings_ids
   set :idea_followings_ids
+  set :school_followings_ids
   list :ideas_ids
 
   #List to store trending and popular users
@@ -281,16 +282,18 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment if school
-    school.students_ids << id if school
+    school.students_counter.increment if school && type == "Student"
+    school.students_ids << id if school && type == "Student"
+    school.teachers_ids << id if school && type == "Teacher"
     User.latest << user_json unless type == "User"
     User.popular.add(id, 0) unless type == "User"
     User.trending.add(id, 0) unless type == "User"
   end
 
   def decrement_counters
-    school.students_counter.decrement if school && school.students_counter.value > 0
-    school.students_ids.delete(id) if school
+    school.students_counter.decrement if school && school.students_counter.value > 0 && type == "Student"
+    school.students_ids.delete(id) if school && type == "Student"
+    school.teachers_ids.delete(id) if school && type == "Teacher"
     User.latest.delete(user_json) unless type == "User"
     User.popular.delete(id) unless type == "User"
     User.trending.delete(id) unless type == "User"

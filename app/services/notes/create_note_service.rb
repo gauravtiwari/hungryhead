@@ -7,7 +7,7 @@ class CreateNoteService
 
   def create
     @note = Note.new @params
-    @note.update_attributes(user: @user)
+    @note.user = @user
     @note
   end
 

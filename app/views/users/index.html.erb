@@ -1,117 +1,56 @@
-<div class="horz-section col-md-12">
-  <div class="wrapper-small bg-solid text-center panel panel-default">
-    <h2 class="text-white">Find people you would like to connect</h2>
-  </div>
 
-      <div class="container-fluid container-fixed-lg bg-white">
-       <div class="panel panel-transparent">
-           <div class="panel-body">
-               <div class="dataTables_wrapper form-inline no-footer" id=
-               "tableWithSearch_wrapper">
-                   <div class="table-responsive">
-                       <table class=
-                       "table table-hover demo-table-search dataTable no-footer"
-                       id="tableWithSearch">
-                           <thead>
-                               <tr>
-                                   <th class="text-center">
-                                       Name
-                                   </th>
-                                   <th>
-                                       Mini Bio
-                                   </th>
-                                   <th>
-                                       Market Interested
-                                   </th>
-                                   <th class="text-center">
-                                       Follow
-                                   </th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                          <% @users.each do |user| %>
-                             <tr role="row" class="odd">
-                                 <td class="v-align-middle semi-bold sorting_1">
-                                    <div class="thumbnail-wrapper no-float auto-margin displayblock d48 circular bordered b-<%= user.theme %> m-r-10">
-                                     <% if user.avatar.present? %>
-                                     <img data-src="<%= user.avatar.url(:avatar)%>" data-src-retina="<%= user.avatar.url(:avatar)%>" width="55" height="55" src="<%= user.avatar.url(:avatar)%>" />
-                                    <% else %>
-                                      <span class="placeholder bold text-white" width="32px" height="32px">
-                                                       <%= user.user_name_badge %>
-                                                  </span>
-                                    <% end %>
-                                    </div>
-                                    <div class="user-data text-center clearfix">
-                                     <h4 class="no-margin">
-                                         <%= user.name %>
-                                     </h4>
-                                     <p class="fs-13">
-                                      <%= link_to(profile_path(user)) do %>
-                                         <%= user.school.name %>
-                                      <% end %>
-                                     </p>
-                                     <% user.location_list.each do |tag| %>
-                                       <%= link_to(tag_people_path(tag.parameterize), class: "btn btn-tag no-margin") do %>
-                                         <%= tag %>
-                                       <% end %>
-                                     <% end %>
-                                    </div>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <h5 class="no-margin">
-                                        <%= user.mini_bio %>
-                                     </h5>
-                                 </td>
-                                 <td class="v-align-middle">
-                                  <% user.market_list.each do |market| %>
-                                    <%= link_to(market, tag_path(market.parameterize), class: "btn btn-tag no-margin") %>
-                                  <% end %>
-                                 </td>
+<div class="wrapper-small bg-solid text-center panel panel-default">
+<h2 class="text-white">Find people you would like to connect</h2>
+</div>
 
-                                 <td class="v-align-middle">
-                                  <%= react_component('Follow', {followed: followed?(user)}) %>
-                                 </td>
-                             </tr>
-                          <% end %>
-                           </tbody>
-                       </table>
-                   </div>
-                   <div class="row">
-                       <div>
-                           <div class=
-                           "dataTables_paginate paging_bootstrap pagination pull-right"
-                           id="tableWithSearch_paginate">
-                               <ul>
-                                   <li class="prev disabled">
-                                       <a class="pg-arrow_left" href="#"
-                                       style="font-style: italic"></a>
-                                   </li>
-                                   <li class="active">
-                                       <a href="#">1</a>
-                                   </li>
-                                   <li>
-                                       <a href="#">2</a>
-                                   </li>
-                                   <li>
-                                       <a href="#">3</a>
-                                   </li>
-                                   <li class="next">
-                                       <a class="pg-arrow_right" href="#"
-                                       style="font-style: italic"></a>
-                                   </li>
-                               </ul>
-                           </div>
-                           <div class="dataTables_info pull-left" id=
-                           "tableWithSearch_info">
-                               Showing <b>1 to 5</b> of 12 entries
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
+<div class="container">
+  <% @users.each do |user| %>
+  <div class="col-md-3 no-padding p-r-15">
+  <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
+  <%= content_tag(:div, class: 'listing-header  text-center') do %>
+    <%= content_tag(:div, class: 'listing-card-logo') do %>
+    <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
+     <% if user.avatar.present? %>
+       <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
+     <% else %>
+       <span class="placeholder bold text-white">
+         <%= user.user_name_badge.upcase %>
+       </span>
+     <% end %>
+     </div>
+      <h5 class="no-margin fs-14 bold"><%= link_to(user.name, profile_path(user)) %></h5>
+      <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
+      <p><%= user.mini_bio %></p>
+      <div class="card-follow-button">
+        <%= react_component('Follow',{:followed => school_followed?(user)}) %>
+      </div>
+      <script type="text/javascript">
+         ReactRailsUJS.mountComponents();
+      </script>
+    <% end %>
+  <% end %>
+      <div class="listing-card-stats">
+      <ul class="stastics-list">
+        <li>
+          Students
+          <span class="text-master"><i class="fa fa-users"></i> <%= user.followers_counter.value %></span>
+        </li>
+        <li>
+          Followers
+          <span class="text-master"><i class="fa fa-comment"></i> <%= user.feedbacks_counter.value %></span>
+        </li>
+        <li>
+          Ideas
+          <span class="text-master"><i class="fa fa-dollar"></i> <%= user.investments_counter.value %></span>
+        </li>
+      </ul>
     </div>
-
   </div>
+  <% end %>
+  <% end %>
+
+</div>
+
+
 
 

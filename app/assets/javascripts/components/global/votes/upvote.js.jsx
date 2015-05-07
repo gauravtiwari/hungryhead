@@ -40,6 +40,7 @@ var Upvote = React.createClass({
           this.setState({ voted: data.voted });
           this.setState({ vote_url: data.url });
           this.setState({ votes_count: data.votes_count });
+          $.pubsub('publish', 'update_vote_stats', data.votes_count);
           this.forceUpdate();
         }.bind(this),
         error: function(xhr, status, err) {

@@ -6,7 +6,7 @@ module Followable
   end
 
   def followed?(user)
-    followers_ids.members.include? used.id.to_s
+    followers_ids.members.include? user.id.to_s
   end
 
 end

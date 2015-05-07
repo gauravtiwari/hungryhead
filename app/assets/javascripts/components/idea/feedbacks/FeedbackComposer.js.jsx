@@ -39,7 +39,7 @@ var FeedbackComposer = React.createClass({
       success: function ( data ) {
         $("#feedbackFormPopup").modal('hide');
         $.pubsub('publish', 'idea_feedbacked', false);
-        $.pubsub('publish', 'update_feedback_stats', data.idea.feedbacks_count);
+        $.pubsub('publish', 'update_feedback_stats', data.feedbacks_count);
         $('body textarea').trigger('autosize.destroy');
         $('body').pgNotification({style: "simple", message: "<span> You gave feedback to " + data.meta.idea_name +"</span>", position: "bottom-left", type: "success",timeout: 5000}).show();
         this.setState({loading: false});

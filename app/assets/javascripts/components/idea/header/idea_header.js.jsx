@@ -20,7 +20,7 @@ var IdeaHeader = React.createClass({
     }.bind(this));
 
     $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
-      this.setState({feedbacks_count: this.state.feedbacks_count + 1});
+      this.setState({feedbacks_count: data});
     }.bind(this));
   },
 

@@ -1,58 +1,52 @@
-<div class="col-lg-8 auto-margin">
-<div class="panel panel-default no-margin">
 <div class="panel-body p-t-20">
-<h3 class="b-b b-grey p-b-5 pull-left">Create School</h3>
-<div class="row clearfix p-t-20">
-<%= simple_form_for(@school, role: 'form') do |f| %>
-  <div class="col-sm-6">
-    <div class="form-group form-group-default">
-      <label>Email</label>
-      <%= f.input_field :email, class: "form-control", placeholder: 'Enter email'  %>
-    </div>
-    <div class="form-group form-group-default">
-      <label>Name</label>
-      <%= f.input_field :name, class: "form-control", placeholder: 'Enter name'   %>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>Description</label>
-      <%= f.input_field :description, class: "form-control", placeholder: 'Enter description'   %>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>Established</label>
-      <%= f.input_field :established , class: "form-control", placeholder: 'Enter established'  %>
-    </div>
-  </div>
-
-  <div class="col-sm-6">
-    <div class="form-group form-group-default">
-      <label>Location</label>
-      <%= f.input_field :location_list, class: "form-control single-tag", placeholder: 'Enter location'   %>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>Website</label>
-      <%= f.input_field :website, class: "form-control", placeholder: 'Enter website'   %>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>Logo</label>
-      <%= f.input_field :logo, class: "form-control", placeholder: 'Upload logo'   %>
-    </div>
-
-    <div class="form-group form-group-default">
-      <label>Cover</label>
-      <%= f.input_field :cover, class: "form-control", placeholder: 'Upload cover'   %>
-    </div>
-
-    <div class="form-actions">
-      <%= f.button :button, "Create School", class: 'btn btn-cons btn-green text-white pull-right m-t-10' %>
-    </div>
-
-  </div>
-
-        <% end %>
+  <h3 class="b-b b-grey p-b-5 pull-left">Create School</h3>
+  <div class="row clearfix p-t-20">
+    <%= simple_form_for(@school, role: 'form') do |f| %>
+      <div class="col-sm-6">
+        <div class="form-group form-group-default">
+          <label>Email</label>
+          <%= f.input_field :email, class: "form-control", placeholder: 'Enter email'  %>
         </div>
-</div>
+        <div class="form-group form-group-default">
+          <label>Name</label>
+          <%= f.input_field :name, class: "form-control", placeholder: 'Enter name'   %>
+        </div>
+
+        <div class="form-group form-group-default">
+          <label>Description</label>
+          <%= f.input_field :description, class: "form-control", placeholder: 'Enter description'   %>
+        </div>
+
+        <div class="form-group form-group-default">
+          <label>Established</label>
+          <%= f.input_field :established , class: "form-control", placeholder: 'Enter established'  %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group form-group-default">
+          <label>Location</label>
+          <%= f.input_field :location_list, class: "form-control single-tag", placeholder: 'Enter location'   %>
+        </div>
+
+        <div class="form-group form-group-default">
+          <label>Website</label>
+          <%= f.input_field :website, class: "form-control", placeholder: 'Enter website'   %>
+        </div>
+
+        <div class="form-group form-group-default">
+          <label>Logo</label>
+          <%= f.input_field :logo, class: "form-control", placeholder: 'Upload logo'   %>
+        </div>
+
+        <div class="form-group form-group-default">
+          <label>Cover</label>
+          <%= f.input_field :cover, class: "form-control", placeholder: 'Upload cover'   %>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :button, "Create School", class: 'btn btn-cons btn-green text-white pull-right m-t-10' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

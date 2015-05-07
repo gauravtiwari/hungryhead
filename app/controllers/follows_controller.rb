@@ -8,7 +8,7 @@ class FollowsController < ApplicationController
   def create
     if current_user.follows?(@followable)
       @follow = CreateFollowService.new(current_user, @followable).unfollow
-      authorize @follow.follower
+      skip_authorization
       render json: {
         follow: current_user.follows?(@followable),
         followers_count: @followable.followers_counter.value
@@ -21,7 +21,7 @@ class FollowsController < ApplicationController
           follow: current_user.follows?(@followable),
           followers_count: @followable.followers_counter.value
         }
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s)
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless @follow.followable_type == "School"
       else
         respond_to do |format|
           format.json {render json: @follow.errors, status: unprocessable_entity}

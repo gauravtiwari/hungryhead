@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-      <% User.find(@idea.followers_ids.members).each do |follower| %>
+      <% User.find(@idea.followers_ids.members).take(16).each do |follower| %>
         <li class="m-r-10">
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
             <% if follower.avatar.present? %>

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   autocomplete :user, :name, :full => true
 
   def index
-    @users = User.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    @users = User.order(id: :desc).paginate(:page => params[:page], :per_page => 12)
     respond_to do |format|
       format.html
       format.json
