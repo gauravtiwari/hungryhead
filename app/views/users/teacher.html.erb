@@ -1,6 +1,5 @@
 <div class="container">
     <% data = render(template: 'users/show.json.jbuilder') %>
-
     <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
         <%= render partial: 'sidebar', locals: {data: data} %>
     </div>
@@ -23,6 +22,5 @@
         </div>
     </div>
 </div>
-
 <%= render partial: 'send_message' %>
 
