@@ -237,9 +237,9 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_notifications
-    if name_changed? || avatar_changed? && !id_changed?
+    if rebuild_notification? && has_notifications?
       unless admin?
-        #rebuild user feed after every name and avatar update.
+        #rebuild user feed every time name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
         #Find all followers and followings and update their feed.
         User.where(id: followers_ids.members | followings_ids.members).find_each do |user|
@@ -247,6 +247,14 @@ class User < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def rebuild_notification?
+    name_changed? || avatar_changed? && !id_changed?
+  end
+
+  def has_notifications?
+    latest_notifications.members.length > 0
   end
 
   #Load data to redis using soulmate after_save
