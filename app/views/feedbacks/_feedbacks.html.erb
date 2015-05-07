@@ -1,0 +1,13 @@
+<% if @feedbacks.length > 0 %>
+  <% @feedbacks.each do |feedback| %>
+    <%= render partial: 'feedback', locals: {feedback: feedback} %>
+  <% end %>
+  <% else %>
+  <div class="widget-box">
+    <div class="no-content">
+      No feedbacks received.
+    </div>
+  </div>
+<% end %>
+
+<%= will_paginate(@feedbacks, :class => 'pagination-box') %>

@@ -1,0 +1,86 @@
+<div class="card share post_<%= feedback.id %>" data-social="item">
+    <div class="circle" data-toggle="tooltip" title="hello" data-container="body"></div>
+    <div class="card-header clearfix">
+      <div class="user-pic">
+        <% if feedback.user.avatar.present? %>
+          <%= image_tag(feedback.user.avatar.url(:avatar), :"data-src" => "#{feedback.user.avatar.url(:avatar)}", :"data-src-retina" => "#{feedback.user.avatar.url(:square)}", width: "33", height: "33") %>
+          <% else %>
+              <span class="placeholder bold text-white"><%= feedback.user.first_name.first + feedback.user.last_name.first %>
+              </span>
+        <% end %>
+      </div>
+
+      <div class="text-master-dark">
+        <%= link_to(your_name(feedback.user, false), profile_path(feedback.user), :"data-popover-href" => "#{profile_card_path(feedback.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
+
+      <% if feedback.idea.team_ids.include?(current_user.id.to_s) %>
+        your idea
+      <% end %>
+
+      <%= link_to(feedback.idea.name, idea_path(feedback.idea), :"data-popover-href" => "#{card_idea_path(feedback.idea)}", class: 'load-card bold') %>
+        <h6>
+          <% if feedback.user.locations %>
+              <span class="location semi-bold m-r-10">
+                  <i class="fa fa-map-marker"></i>
+                  <%= feedback.user.locations.first %>
+              </span>
+            <% end %>
+           <% if feedback.user.markets %>
+              <span class="location semi-bold m-r-10">
+                  <i class="fa fa-map-marker"></i>
+                  <%= feedback.user.markets.first %>
+              </span>
+            <% end %>
+            <span class="time semi-bold">
+              <i class="fa fa-clock-o"></i>
+                <%= link_to(idea_path(feedback), class: "text-master") do %>
+                <%= time_ago_in_words(feedback.created_at) %>
+              <% end %>
+            </span>
+        </h6>
+      </div>
+    </div>
+    <div class="card-description">
+      <div class="feedback-content">
+       <% if feedback.body.length > 450 %>
+        <%= truncate(markdownify(feedback.body), escape: false, length: 450) %>
+        <%= link_to 'See more', '', class: "read-more-link read-more-#{feedback.id} clearfix" %>
+        <script type="text/javascript">
+          $('.read-more-<%= feedback.id %>').on('click', function(e) {
+            e.preventDefault()
+            $(this).closest(".card-description").find(".feedback-content").html('<%= escape_javascript markdownify(feedback.body) %>')
+          })
+        </script>
+      <% else %>
+        <%= markdownify(feedback.body) %>
+      <% end %>
+      </div>
+    </div>
+    <div class="card-footer clearfix bold">
+      <% if feedback.idea.student_id == current_user.id %>
+        <%= react_component('Rate', {data: render(template: 'feedbacks/show.json.jbuilder', locals: {feedback: feedback})}) %>
+      <% else %>
+        <% if feedback.badged? %>
+          <div class="review-badge pull-right">
+            <div class="thumbnail-wrapper displayblock bg-solid d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= feedback.user.first_name.capitalize %> Earned <%= feedback.badges.last.custom_fields[:name].downcase %> badge">
+                <span class="bold displayblock text-white">
+                  <i class="fa fa-<%= feedback.badges.last.custom_fields[:class] %> fs-16"></i>
+                </span>
+            </div>
+          </div>
+        <% end %>
+        <ul class="reactions pull-left">
+          <% voted = feedback.voted?(current_user) %>
+          <%= react_component('Upvote', {record: feedback.id, voted: voted, vote_url: vote_path(votable_type: feedback.class.to_s, votable_id: feedback.id), votes_count: feedback.votes_counter.value, voters_path: voters_path(votable_type: feedback.class.to_s, votable_id: feedback.id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+        </ul>
+      <% end %>
+      <div class="clearfix"></div>
+    </div>
+
+<% commentable = feedback %>
+
+<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
+
+<%= react_component('CommentBox', {data: data, comment_channel: "#{feedback.class.to_s}-#{feedback.id}-comments", count: feedback.comments_counter.value, comments_path: comments_path(commentable_type: feedback.class.to_s, id: feedback.id)}) %>
+</div>
+
