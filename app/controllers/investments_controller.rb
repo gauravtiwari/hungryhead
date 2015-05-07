@@ -36,7 +36,7 @@ class InvestmentsController < ApplicationController
       authorize @investment
       respond_to do |format|
         if @investment.save
-          UpdateInvestmentBalanceJob.set(wait: 2.seconds).perform_later(@investment.id)
+          UpdateInvestmentBalanceJob.perform_later(@investment.id)
           CreateActivityJob.set(wait: 2.seconds).perform_later(@investment.id, @investment.class.to_s)
           format.json { render :show, status: :created}
         else

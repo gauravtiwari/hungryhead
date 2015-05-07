@@ -17,9 +17,9 @@ var LatestFeedVoteItem = React.createClass({
     }
 
     if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
-      var recipient = "on " + this.props.item.recipient.recipient_user_name.split(' ')[0] + ' ' + this.props.item.recipient.recipient_type;
+      var recipient = "on your "+this.props.item.recipient.recipient_type;
     } else {
-      var recipient = "on his own "+this.props.item.recipient.recipient_type;
+      var recipient = "on " + this.props.item.recipient.recipient_type;
     }
 
     return (

@@ -40,27 +40,22 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="card-description pull-left">
-		<h5 class="hint-text no-margin">
-			<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
-		</h5>
-		<h5 class="small hint-text no-margin"><%= activity.recipient.high_concept_pitch %></h5>
-		<h3 class="text-warning-dark no-margin"><%= activity.recipient.balance %></h3>
+	<div class="card-description">
+		<div class="activity-content">
+			 <% if activity.trackable.note.length > 450 %>
+			  <%= truncate(markdownify(activity.trackable.note), escape: false, length: 450) %>
+			  <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
+			  <script type="text/javascript">
+			    $('.read-more-<%= activity.trackable.id %>').on('click', function(e) {
+			      e.preventDefault()
+			      $(this).closest(".card-description").find(".activity-content").html('<%= escape_javascript markdownify(activity.trackable.note) %>')
+			    })
+			  </script>
+			<% else %>
+			  <%= markdownify(activity.trackable.note) %>
+			<% end %>
+		</div>
 	</div>
-  <div class="card-description">
-   <% if activity.trackable.note.length > 450 %>
-    <%= truncate(markdownify(activity.trackable.note), escape: false, length: 450) %>
-    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
-    <script type="text/javascript">
-      $('.read-more-<%= activity.trackable.id %>').on('click', function(e) {
-        e.preventDefault()
-        $(this).closest(".card-description").find(".activity-content").html('<%= escape_javascript markdownify(activity.trackable.note) %>')
-      })
-    </script>
-  <% else %>
-    <%= markdownify(activity.trackable.note) %>
-  <% end %>
-  </div>
 	  <div class="card-footer clearfix bold">
     <ul class="reactions pull-left">
 		<% voted = activity.trackable.voted?(current_user) %>

@@ -5,18 +5,6 @@
 
       <div class="container-fluid container-fixed-lg bg-white">
        <div class="panel panel-transparent">
-           <div class="panel-heading">
-               <div class="panel-title">
-                   Pages Default Tables Style
-               </div>
-               <div class="pull-right">
-                   <div class="col-xs-12">
-                       <input class="form-control pull-right" id=
-                       "search-table" placeholder="Search" type="text">
-                   </div>
-               </div>
-               <div class="clearfix"></div>
-           </div>
            <div class="panel-body">
                <div class="dataTables_wrapper form-inline no-footer" id=
                "tableWithSearch_wrapper">
@@ -26,114 +14,72 @@
                        id="tableWithSearch">
                            <thead>
                                <tr>
-                                   <th class="sorting_asc" colspan="1"
-                                   rowspan="1" style="width: 186px;"
-                                   tabindex="0">
-                                       Title
+                                   <th class="text-center">
+                                       Name
                                    </th>
-                                   <th class="sorting" colspan="1"
-                                   rowspan="1" style="width: 208px;"
-                                   tabindex="0">
-                                       Places
+                                   <th>
+                                       Mini Bio
                                    </th>
-                                   <th class="sorting" colspan="1"
-                                   rowspan="1" style="width: 229px;"
-                                   tabindex="0">
-                                       Activities
+                                   <th>
+                                       Market Interested
                                    </th>
-                                   <th class="sorting" colspan="1"
-                                   rowspan="1" style="width: 130px;"
-                                   tabindex="0">
-                                       Status
-                                   </th>
-                                   <th class="sorting" colspan="1"
-                                   rowspan="1" style="width: 174px;"
-                                   tabindex="0">
-                                       Last Update
+                                   <th class="text-center">
+                                       Follow
                                    </th>
                                </tr>
                            </thead>
                            <tbody>
-
+                          <% @users.each do |user| %>
                              <tr role="row" class="odd">
-                                 <td class=
-                                 "v-align-middle semi-bold sorting_1">
-                                     <p>
-                                         A day to remember
+                                 <td class="v-align-middle semi-bold sorting_1">
+                                    <div class="thumbnail-wrapper no-float auto-margin displayblock d48 circular bordered b-<%= user.theme %> m-r-10">
+                                     <% if user.avatar.present? %>
+                                     <img data-src="<%= user.avatar.url(:avatar)%>" data-src-retina="<%= user.avatar.url(:avatar)%>" width="55" height="55" src="<%= user.avatar.url(:avatar)%>" />
+                                    <% else %>
+                                      <span class="placeholder bold text-white" width="32px" height="32px">
+                                                       <%= user.user_name_badge %>
+                                                  </span>
+                                    <% end %>
+                                    </div>
+                                    <div class="user-data text-center clearfix">
+                                     <h4 class="no-margin">
+                                         <%= user.name %>
+                                     </h4>
+                                     <p class="fs-13">
+                                      <%= link_to(profile_path(user)) do %>
+                                         <%= user.school.name %>
+                                      <% end %>
                                      </p>
+                                     <% user.location_list.each do |tag| %>
+                                       <%= link_to(tag_people_path(tag.parameterize), class: "btn btn-tag no-margin") do %>
+                                         <%= tag %>
+                                       <% end %>
+                                     <% end %>
+                                    </div>
                                  </td>
                                  <td class="v-align-middle">
-                                     <a class="btn btn-tag" href=
-                                     "#">United States</a><a class=
-                                     "btn btn-tag" href="#">India</a>
-                                     <a class="btn btn-tag" href=
-                                     "#">China</a><a class="btn btn-tag"
-                                     href="#">Africa</a>
+                                     <h5 class="no-margin">
+                                        <%= user.mini_bio %>
+                                     </h5>
                                  </td>
                                  <td class="v-align-middle">
-                                     <p>
-                                         UK was on top of the art world
-                                         18-19 century had the best
-                                         food, best cloths and best
-                                         entertainment back then) it was
-                                         a hyper nation
-                                     </p>
+                                  <% user.market_list.each do |market| %>
+                                    <%= link_to(market, tag_path(market.parameterize), class: "btn btn-tag no-margin") %>
+                                  <% end %>
                                  </td>
+
                                  <td class="v-align-middle">
-                                     <p>
-                                         Public
-                                     </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <p>
-                                         April 13,2014 10:13
-                                     </p>
+                                  <%= react_component('Follow', {followed: followed?(user)}) %>
                                  </td>
                              </tr>
-
-                             <tr role="row" class="even">
-                                 <td class=
-                                 "v-align-middle semi-bold sorting_1">
-                                     <p>
-                                         A day to remember
-                                     </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <a class="btn btn-tag" href=
-                                     "#">United States</a><a class=
-                                     "btn btn-tag" href="#">India</a>
-                                     <a class="btn btn-tag" href=
-                                     "#">China</a><a class="btn btn-tag"
-                                     href="#">Africa</a>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <p>
-                                         UK was on top of the art world
-                                         18-19 century had the best
-                                         food, best cloths and best
-                                         entertainment back then) it was
-                                         a hyper nation
-                                     </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <p>
-                                         Public
-                                     </p>
-                                 </td>
-                                 <td class="v-align-middle">
-                                     <p>
-                                         April 13,2014 10:13
-                                     </p>
-                                 </td>
-                             </tr>
-
+                          <% end %>
                            </tbody>
                        </table>
                    </div>
                    <div class="row">
                        <div>
                            <div class=
-                           "dataTables_paginate paging_bootstrap pagination"
+                           "dataTables_paginate paging_bootstrap pagination pull-right"
                            id="tableWithSearch_paginate">
                                <ul>
                                    <li class="prev disabled">
@@ -155,7 +101,7 @@
                                    </li>
                                </ul>
                            </div>
-                           <div class="dataTables_info" id=
+                           <div class="dataTables_info pull-left" id=
                            "tableWithSearch_info">
                                Showing <b>1 to 5</b> of 12 entries
                            </div>

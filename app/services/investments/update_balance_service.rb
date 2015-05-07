@@ -6,8 +6,6 @@ class UpdateBalanceService
 	def invest
 		@investment.user.update_attributes!(:fund => {"balance" => @investment.user.balance - @investment.amount})
 		@investment.idea.update_attributes!(:fund => {"balance" => @investment.idea.balance + @investment.amount})
-		@investment.idea.save
-		@investment.user.save
 		@investment
 	end
 end

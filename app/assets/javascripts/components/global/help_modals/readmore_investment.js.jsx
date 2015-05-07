@@ -2,7 +2,7 @@
 var ReadMoreInvestment = React.createClass({
   render: function(){
     return (
-        <div className="modal fade slide-right" id="readmoreInvestmentPopup" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+        <div className="modal fade slide-right" id="readmoreInvestmentPopup" tabIndex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
         <div className="modal-dialog ">
             <div className="modal-content">
                 <button type="button" className="close m-t-10 m-r-10" data-dismiss="modal" aria-hidden="true">

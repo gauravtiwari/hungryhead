@@ -2,30 +2,34 @@
 
 var InvestForm = React.createClass({
 
-componentDidMount: function(){
-  var self = this;
-  $.pubsub('subscribe', 'idea_invested', function(msg, data){
-    self.refs.amount.getDOMNode().value = '';
-    self.refs.note.getDOMNode().value = '';
-  });
-},
+  getInitialState: function() {
+    return {
+      available_balance: this.props.idea.user_fund
+    }
+  },
 
-render: function() {
-  var cx = React.addons.classSet;
-  var classes = cx({
-    'fa fa-spinner fa-spin': this.props.loading
-  });
+  updateBalance: function(event) {
+    event.preventDefault();
+    var amount = this.refs.amount.getDOMNode().value.trim();
+    this.setState({available_balance: this.props.idea.user_fund - amount});
+  },
 
+
+  render: function() {
+    var cx = React.addons.classSet;
+    var classes = cx({
+      'fa fa-spinner fa-spin': this.props.loading
+  });
   return (
     <form id="information-form" role="form" noValidate="novalidate" acceptCharset="UTF-8" ref="invest_form" onSubmit={this._onKeyDown}>
        <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-       <h5>Your available funds are: {this.props.idea.user_fund}</h5>
+       <h5>Your available funds are: {this.state.available_balance}</h5>
        <div className="form-group">
            <div className="row">
                <div className="form-group">
                 <div className="col-md-12">
                   <label>Virtual amount</label>
-                  <input ref="amount" name="investment[amount]" className="form-control required" id="amount" placeholder="Type amount ex: 200" type="text" required aria-required="true"/>
+                  <input ref="amount" name="investment[amount]" onBlur={this.updateBalance} className="form-control required" id="amount" placeholder="Type amount ex: 200" type="text" required aria-required="true"/>
                 </div>
                 </div>
                 <div className="form-group">

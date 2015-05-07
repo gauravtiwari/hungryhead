@@ -15,18 +15,8 @@
   <div class="sidebar auto-height sticky bg-white box-shadow">
     <%= render partial: 'latest_activities' %>
     <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
-    <%= render partial: 'feedbackers' if @idea.feedbackers_counter.value > 0 %>
-    <%= render partial: 'investors' if @idea.investors_counter.value > 0 %>
   </div>
 </div>
-
-<% if @idea.student != current_user %>
-
-  <% if !@idea.feedbacked?(current_user) %>
-   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
-  <% end %>
-
-<% end%>
 
 <% if user_signed_in? && policy(@idea).collaborator? %>
   <div class="idea-collaboration-floating-panel">

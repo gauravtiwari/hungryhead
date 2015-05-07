@@ -8,7 +8,7 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @team = User.find(@idea.team)
+    @team = User.find(@idea.team_ids)
     authorize @idea
     @feedbacks = @idea.feedbacks
     .order(id: :desc)

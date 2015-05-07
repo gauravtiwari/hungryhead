@@ -6,20 +6,8 @@
 
       <div class="container-fluid container-fixed-lg bg-white">
        <div class="panel panel-transparent">
-           <div class="panel-heading">
-               <div class="panel-title">
-                   Pages Default Tables Style
-               </div>
-               <div class="pull-right">
-                   <div class="col-xs-12">
-                       <input class="form-control pull-right" id=
-                       "search-table" placeholder="Search" type="text">
-                   </div>
-               </div>
-               <div class="clearfix"></div>
-           </div>
            <div class="panel-body">
-               <div class="form-inline no-footer">
+               <div class="dataTables_wrapper form-inline no-footer">
                    <div class="table-responsive">
                        <table class=
                        "table table-hover no-footer"
@@ -45,11 +33,13 @@
                              <tr role="row" class="<%= cycle("odd", "even") -%>">
                                  <td class=
                                  "v-align-middle semi-bold">
-                                     <p>
-                                         <%= idea.name %>
-                                     </p>
+                                     <h4 class="no-margin">
+                                      <%= link_to(idea_path(idea), :"data-popover-href" => "#{card_idea_path(idea)}", class: 'load-card bold') do %>
+                                        <%= idea.name %>
+                                      <% end %>
+                                     </h4>
 
-                                     <p>
+                                     <p class="fs-13">
                                       <%= link_to(profile_path(idea.school)) do %>
                                          <%= idea.school.name %>
                                       <% end %>
@@ -63,20 +53,6 @@
 
                                  <td class="v-align-middle">
                                   <h5 class="no-margin"><%= idea.elevator_pitch %></h5>
-                                  <div class="row text-master m-t-15 p-l-10 p-r-10">
-                                      <div class="col-md-4 no-padding p-r-15 text-center b-r b-grey b-dashed">
-                                      <p class="no-margin bold small">Investments</p>
-                                      <p class="no-margin bold text-warning "><%= idea.investors_counter.value %></p>
-                                      </div>
-                                      <div class="col-md-4 text-center b-r b-grey b-dashed">
-                                      <p class="no-margin bold small">Followers</p>
-                                          <p class="no-margin bold text-warning "><%= idea.followers_counter.value %></p>
-                                      </div>
-                                      <div class="col-md-4 text-center">
-                                      <p class="no-margin bold small">Feedbacks</p>
-                                          <p class="no-margin bold text-warning "><%= idea.feedbackers_counter.value %></p>
-                                      </div>
-                                  </div>
                                  </td>
 
                                   <td class="v-align-middle">
@@ -90,10 +66,6 @@
                                   </td>
 
 
-
-
-
-
                                  <td class="v-align-middle">
                                   <%= react_component('Follow', {followed: idea_followed?(idea)}) %>
                                  </td>
@@ -105,6 +77,36 @@
 
 
                    </div>
+                   <div class="row">
+                   <div>
+                   <div class="dataTables_info pull-left" id="tableWithExportOptions_info" role="status" aria-live="polite">Showing <b>1 to 5</b> of 57 entries</div>
+
+                   <div class="dataTables_paginate paging_bootstrap pull-right pagination" id="tableWithExportOptions_paginate"><ul>
+                   <li class="prev disabled">
+                    <a href="#"><i class="pg-arrow_left"></i></a>
+                   </li>
+                   <li class="active">
+                    <a href="#">1</a>
+                   </li>
+                   <li>
+                    <a href="#">2</a>
+                  </li>
+                  <li>
+                    <a href="#">3</a>
+                  </li>
+                  <li>
+                    <a href="#">4</a>
+                  </li>
+                  <li>
+                    <a href="#">5</a>
+                  </li>
+                  <li class="next">
+                    <a href="#"><i class="pg-arrow_right"></i></a>
+                  </li>
+                  </ul>
+                  </div>
+                  </div>
+                  </div>
 
                </div>
            </div>

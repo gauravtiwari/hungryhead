@@ -48,8 +48,8 @@
             </a>
             <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
               <div class="notification-panel">
-                <div class="notification-body scrollable">
-                 <%= react_component('LatestFeed', {user_id: current_user.id, channel_name: "private-user-#{current_user.id}", path: notifications_path}.to_json) %>
+                <div class="notification-body scrollable" id="render_notifications">
+
                 </div>
                 <div class="notification-footer text-center">
                   <a href="#" class="">Read all notifications</a>

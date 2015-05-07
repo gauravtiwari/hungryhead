@@ -1,46 +1,27 @@
-<!-- Content
-		================================================== -->
-<div id="content">
-  <!-- profile header -->
-  <div class="idea-header">
-    <%= render partial: "ideas/_partials/idea_header", locals: {idea: @idea} %>
-    <%= render partial: "ideas/_partials/edit_idea_form", locals: {idea: @idea} %>
+<div class="col-md-9 col-lg-9 col-sm-9 no-padding p-l-15">
+  <div class="auto-height box-shadow ">
+    <%= render partial: 'ideas/header' %>
   </div>
-  <!-- end profile header -->
-  <!-- idea menu -->
-  <%= render partial: "ideas/_partials/idea_menu", locals: {idea: @idea} %>
-  <!-- end idea menu -->
-  <div class="container project-page">
-    <div class="row">
-      <div class="col-md-4 aside">
-        <%= render partial: 'shared/leaderboard', resource: @idea %>
-      </div>
-      <div class="col-md-8 project-content">
-       <div class="activity-feed animated fadeIn">
-        <div class="activity-feed-box">
-          <%= render partial: "feedbacks/_sub_pages/feedbacks" %>
-        </div>
-        </div>
-      </div>
+  <%= render partial: 'ideas/menu' %>
+  <div class="m-t-20">
+    <div class="idea-content">
+     <%= render partial: "feedbacks" %>
     </div>
   </div>
 </div>
-<!-- End content -->
+
+<div class="col-md-3 col-lg-3 col-sm-3">
+  <div class="sidebar auto-height sticky bg-white box-shadow">
+    <%= render partial: 'ideas/latest_activities' %>
+    <%= render partial: 'ideas/followers' if @idea.followers_counter.value > 0 %>
+  </div>
 </div>
 
 <% if user_signed_in? && policy(@idea).collaborator? %>
-  <%= render 'ideas/collaboration' %>
+  <div class="idea-collaboration-floating-panel">
+    <%= render 'ideas/collaboration' %>
+  </div>
 <% end %>
 
-<% if @idea.user != current_user %>
-
-  <% if !@idea.invested?(current_user) %>
-    <%= react_component('Invest', render(template: 'ideas/invest.json.jbuilder', locals: {prerender: true, :id => "investment-component"})) %>
-  <% end %>
 
 
-  <% if !@idea.feedbacked?(current_user) %>
-   <%= react_component('FeedbackComposer', {form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name}}) %>
-  <% end %>
-<% end%>
-<!-- End Container -->

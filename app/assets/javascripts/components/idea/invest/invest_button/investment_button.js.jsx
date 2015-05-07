@@ -21,7 +21,7 @@ var InvestButton = React.createClass({
   componentDidMount: function(){
     var self = this;
     $.pubsub('subscribe', 'idea_invested', function(msg, data){
-      self.setState({invested: false});
+      self.setState({invested: true});
     });
   },
 

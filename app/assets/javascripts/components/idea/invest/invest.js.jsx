@@ -11,6 +11,12 @@ var Invest = React.createClass({
     }
   },
 
+  componentDidMount: function() {
+    $('body textarea').on('focus', function(){
+      $(this).autosize();
+    });
+  },
+
   sendInvestment: function(formData, action, amount) {
     this.setState({amount: amount.amount});
     this.setState({loading: true});
@@ -27,6 +33,8 @@ var Invest = React.createClass({
           this.setState({loading: false});
           $("#investPopup").modal('hide');
           $.pubsub('publish', 'idea_invested', true);
+          $.pubsub('publish', 'update_investment_stats', data.idea.amount);
+          $('body textarea').trigger('autosize.destroy');
           $('body').pgNotification({style: "simple", message: "<span>You have successfully invested "+data.idea.amount+ " coins into " + data.idea.name +"</span>", position: "bottom-left", type: "success",timeout: 5000}).show();
         }
       }.bind(this),

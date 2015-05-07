@@ -40,8 +40,8 @@ class Investment < ActiveRecord::Base
 	private
 
   def cancel_investment
-    idea.update_attributes(fund: {"balance" => idea.balance - amount }) if idea.balance > 0
-    user.update_attributes(fund: {"balance" => user.balance + amount })
+    idea.update_attributes!(fund: {"balance" => idea.balance - amount }) if idea.balance > 0
+    user.update_attributes!(fund: {"balance" => user.balance + amount })
   end
 
   def increment_counters
@@ -58,7 +58,7 @@ class Investment < ActiveRecord::Base
     Idea.popular.decrement(idea_id)
     User.popular.decrement(idea.student.id)
     idea.investors_ids.delete(user.id)
-   end
+  end
 
   def delete_activity
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)

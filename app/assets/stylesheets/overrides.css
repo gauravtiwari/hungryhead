@@ -136,6 +136,12 @@ input.error:-webkit-autofill {
 .bg-solid-dark {
   background: #4d86c9!important;
 }
+.b-solid {
+  border-color: #4d86c9;
+}
+.no-float {
+  float: none;
+}
 .card{
   width: 100%;
   border: 0;
