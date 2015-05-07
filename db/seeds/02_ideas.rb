@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
         vision: Forgery::LoremIpsum.paragraphs,
         value_proposition: Forgery::LoremIpsum.paragraphs
       },
-      student_id: [*120..150].sample,
+      student_id: [*65..90].sample,
       looking_for_team: true,
       rules_accepted: true,
       market_list: Forgery::Name.industry

@@ -22,10 +22,9 @@ class User < ActiveRecord::Base
   set :school_followings_ids
   list :ideas_ids
 
-  #List to store trending and popular users
+  #List to store trending, popular and latest users
   sorted_set :trending, global: true
   sorted_set :popular, global: true
-
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
@@ -42,7 +41,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum role: { user: 0, entrepreneur: 1, mentor: 2 }
+  enum role: { user: 0, entrepreneur: 1, mentor: 2, teacher: 3 }
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url

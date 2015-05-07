@@ -27,6 +27,7 @@ ActiveRecord::Base.transaction do
     location_list: "Lancaster",
     email: "gaurav@gauravtiwari.co.uk",
     fund: {balance: 1000},
+    role: 1,
     market_list: "Education, Social, Entrepreneruship",
     settings: {theme: 'solid', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -85,7 +86,7 @@ ActiveRecord::Base.transaction do
     confirmed_at: Time.now
   )
 
-  1.upto(50) { |i|
+  1.upto(30) { |i|
 
     Mentor.create!(
       name: Forgery::Name.full_name,
@@ -96,15 +97,16 @@ ActiveRecord::Base.transaction do
       mini_bio: Forgery::LoremIpsum.words(5),
       school_id: [*1..10].sample,
       location_list: Forgery::Address.city,
-      email: "teacher#{i}@hungryhead.org",
+      email: "mentor#{i}@hungryhead.org",
       fund: {balance: 1000},
+      role: 2,
       market_list: Forgery::Name.industry,
       settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
     )
   }
 
-  1.upto(50) { |i|
+  1.upto(30) { |i|
 
     Teacher.create!(
       name: Forgery::Name.full_name,
@@ -117,6 +119,7 @@ ActiveRecord::Base.transaction do
       location_list: Forgery::Address.city,
       email: "teacher#{i}@hungryhead.org",
       fund: {balance: 1000},
+      role: 3,
       market_list: Forgery::Name.industry,
       settings: {theme: 'primary', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
@@ -124,7 +127,7 @@ ActiveRecord::Base.transaction do
   }
 
 
-  1.upto(50) { |i|
+  1.upto(30) { |i|
 
     Student.create!(
       name: Forgery::Name.full_name,
@@ -133,10 +136,11 @@ ActiveRecord::Base.transaction do
       username: Forgery::Internet.user_name + i.to_s,
       password: 'password',
       mini_bio: Forgery::LoremIpsum.words(5),
-      school_id: [*1..9].sample,
+      school_id: [*1..10].sample,
       location_list: Forgery::Address.city,
       email: "test#{i}@hungryhead.org",
       fund: {balance: 1000},
+      role: 1,
       market_list: Forgery::Name.industry,
       settings: {theme: 'solid', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
