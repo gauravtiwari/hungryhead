@@ -1,0 +1,53 @@
+<div class="sidebar auto-height box-shadow bg-solid">
+  <div class="user-sidebar padding-20">
+    <div class="container-xs-height">
+      <div class="row">
+        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
+          <div class="panel-heading no-padding p-l-10">
+            <div class="panel-title text-white b-b b-white p-b-5">
+              About
+            </div>
+          </div>
+          <div class="p-l-10 p-r-10">
+            <p class="no-margin text-white fs-13">
+            <%= @school.description %>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <% if @school.website.present? %>
+      <div class="row">
+        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
+          <div class="panel-heading no-padding p-l-10 p-t-20">
+            <div class="panel-title text-white b-b b-white p-b-5">
+              Website
+            </div>
+          </div>
+          <div class="p-l-10 p-r-10">
+            <p class="no-margin text-white fs-13">
+              <%= @school.website %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+      <% if @school.location_list.present? %>
+      <div class="row">
+        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
+          <div class="panel-heading no-padding p-l-10 p-t-20">
+            <div class="panel-title text-white b-b b-white p-b-5">
+              Location
+            </div>
+          </div>
+          <div class="p-l-10 p-r-10">
+            <p class="no-margin text-white fs-13">
+              <%= @school.location_list %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
