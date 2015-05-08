@@ -69,7 +69,7 @@ var FollowFriends = React.createClass({
     return (
       <div>
       <ul className="no-style friends-list full-border-light m-t-15 full-border-light-bottom">
-        <Infinite elementHeight={45}
+        <Infinite elementHeight={90}
          containerHeight={400}
          infiniteLoadBeginBottomOffset={300}
          onInfiniteLoad={this.handleInfiniteLoad}
