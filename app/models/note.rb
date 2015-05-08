@@ -11,6 +11,19 @@ class Note < ActiveRecord::Base
   include Sharings
   include Votable
 
+  #Redis counters and cache
+  counter :votes_counter
+  list :voters_ids
+  list :commenters_ids
+  list :sharers_ids
+  counter :shares_counter
+  counter :comments_counter
+
+  #Caching Model
+  cache_has_many :votes, :inverse_name => :votable, :embed => true
+  cache_has_many :comments, :inverse_name => :commentable, embed: true
+  cache_has_many :shares, :inverse_name => :shareable, embed: true
+
   #Model callbacks
   before_destroy :delete_activity
 

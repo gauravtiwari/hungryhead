@@ -11,6 +11,12 @@ class Share < ActiveRecord::Base
 	include Commentable
 	include Votable
 
+	#redis caching
+	counter :votes_counter
+	counter :comments_counter
+	list :voters_ids
+	list :commenters_ids
+
 	before_destroy :decrement_counters, :delete_activity
 	after_create :increment_counters
 
@@ -19,6 +25,10 @@ class Share < ActiveRecord::Base
 
  	#Enumerators to handle status
 	enum status: {pending: 0, shared: 1}
+
+	#Caching Model
+	cache_has_many :votes, :inverse_name => :votable, :embed => true
+	cache_has_many :comments, :inverse_name => :commentable, embed: true
 
 	public
 

@@ -9,6 +9,12 @@ class Feedback < ActiveRecord::Base
 
   has_merit
 
+  #redis counters
+  counter :votes_counter
+  list :voters_ids
+  list :commenters_ids
+  counter :comments_counter
+
   #Associations
   belongs_to :idea, touch: true
   belongs_to :user, touch: true
@@ -17,6 +23,10 @@ class Feedback < ActiveRecord::Base
   enum status: { posted:0, badged:1, flagged:2 }
 
   store_accessor :parameters, :point_earned, :views_count
+
+  #Caching Model
+  cache_has_many :votes, :inverse_name => :votable, :embed => true
+  cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   #Hooks
   before_destroy :decrement_counters, :delete_activity

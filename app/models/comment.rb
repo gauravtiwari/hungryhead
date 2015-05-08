@@ -11,12 +11,19 @@ class Comment < ActiveRecord::Base
   include Votable
   include Mentioner
 
+  #Redis counters and ids cache
+  counter :votes_counter
+  list :voters_ids
+
   after_create :increment_counters
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, touch: true
+
+  #Caching Model
+  cache_has_many :votes, :inverse_name => :votable, :embed => true
 
   #Model Scopes
   default_scope -> { order('created_at DESC') }

@@ -3,9 +3,6 @@ module Followable
 
   included do
     has_many :followers, as: :followable, class_name: 'Follow', dependent: :destroy
-    cache_has_many :followers, :inverse_name => :followable, :embed => true
-    counter :followers_counter
-    set :followers_ids
   end
 
   #users that self follows

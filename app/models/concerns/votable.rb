@@ -4,9 +4,6 @@ module Votable
 
   included do
     has_many :votes, as: :votable, :dependent => :destroy
-    cache_has_many :votes, :inverse_name => :votable, :embed => true
-    list :voters_ids
-    counter :votes_counter
   end
 
   def voted?(user)

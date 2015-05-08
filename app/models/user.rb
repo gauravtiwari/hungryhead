@@ -16,12 +16,18 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
 
-  #Redis data types
   list :ideas_ids
+
+  #List to store trending, popular and latest users
+  sorted_set :trending,  maxlength: 100, global: true
+  sorted_set :popular,  maxlength: 100, global: true
+  list :latest, maxlength: 20, marshal: true, global: true
+
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
 
-  #Redis counters to cache total investments and ideas
+  #Redis counters to cache total followers, followings,
+  #feedbacks, investments and ideas
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter

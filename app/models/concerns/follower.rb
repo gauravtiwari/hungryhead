@@ -3,11 +3,6 @@ module Follower
 
   included do
     has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
-    #Sorted set to store followers, followings ids
-    set :followings_ids
-    set :idea_followings_ids
-    set :school_followings_ids
-    counter :followings_counter
   end
 
   def people_you_may_know

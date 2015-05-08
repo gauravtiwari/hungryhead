@@ -4,9 +4,6 @@ module Investable
 
   included do
     has_many :investments, dependent: :destroy
-    cache_has_many :investments, :embed => true
-    list :investors_ids
-    counter :investors_counter
   end
 
   def can_invest?(user)
