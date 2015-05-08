@@ -134,20 +134,8 @@ class Idea < ActiveRecord::Base
     name.split('')
   end
 
-  def invested?(user)
-    investors_ids.values.include?(user.id.to_s)
-  end
-
-  def feedbacked?(user)
-    feedbackers_ids.values.include?(user.id.to_s)
-  end
-
   def is_owner?(current_user)
     student == current_user
-  end
-
-  def can_invest?(user)
-    student.balance > 10 && !invested?(user)
   end
 
   def in_team?(user)
