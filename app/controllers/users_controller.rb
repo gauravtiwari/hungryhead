@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:check_username, :check_email, :join]
   before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
-  before_action :set_user, except: [:tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
+  before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
   after_action :verify_authorized, :only => [:update, :edit]
@@ -16,6 +16,31 @@ class UsersController < ApplicationController
       format.html
       format.json
     end
+  end
+
+  def latest
+    render json: Oj.dump({
+      list: User.latest.values,
+      type: 'Latest People'
+      }, mode: :compat)
+  end
+
+  def popular
+    @users = User.where(id: User.popular.rangebyscore(0, 100)).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    render json: Oj.dump({
+      list: @users.map{|user| {id: user.id, name: user.name, url: profile_path(user), description: user.mini_bio}},
+      type: 'Popular People',
+      next_page: @users.next_page
+      }, mode: :compat)
+  end
+
+  def trending
+    @users = User.where(id: User.trending.rangebyscore(0,100)).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    render json: Oj.dump({
+      list: @users.map{|user| {id: user.id, name: user.name, url: profile_path(user), description: user.mini_bio}},
+      type: 'Trending People',
+      next_page: @users.next_page
+      }, mode: :compat)
   end
 
   def edit

@@ -19,7 +19,7 @@ class VotesController < ApplicationController
   end
 
   def voters
-    @voters = @votable.votes_for.paginate(:page => params[:page], :per_page => 10)
+    @voters = User.find(@votable.voters_ids.values).paginate(:page => params[:page], :per_page => 10)
     render 'voters/index'
   end
 

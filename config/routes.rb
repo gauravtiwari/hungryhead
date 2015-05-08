@@ -167,7 +167,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:new, :create, :destroy]
 
   #Users routes
-  resources :users, path: 'people' do
+  resources :users, path: 'people', except: [:show] do
     get :autocomplete_user_name, :on => :collection
     collection do
       get :latest

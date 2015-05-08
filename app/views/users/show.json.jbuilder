@@ -21,6 +21,7 @@ json.user do
 		json.school_url profile_path(@user.school) if @user.school
 		json.mini_bio @user.mini_bio
 		json.verified @user.verified?
+		json.type @user.type
 		json.website_url @user.website_url
 		json.facebook_url @user.facebook_url
 		json.linkedin_url @user.linkedin_url

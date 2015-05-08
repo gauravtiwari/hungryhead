@@ -28,13 +28,13 @@ class IdeasController < ApplicationController
 
   def latest
     render json: Oj.dump({
-      list: Idea.latest.values,
+      list: Idea.latest.values.reverse,
       type: 'Latest Ideas'
       }, mode: :compat)
   end
 
   def popular
-    @ideas = Idea.find(Idea.popular.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.where(id: Idea.popular.members).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
       type: 'Popular Ideas',
@@ -43,7 +43,7 @@ class IdeasController < ApplicationController
   end
 
   def trending
-    @ideas = Idea.find(Idea.trending.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.where(id: Idea.trending.members).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
       type: 'Trending Ideas',

@@ -1,6 +1,6 @@
 
 var ModalListing = React.createClass({
-	
+
 	getInitialState: function(){
 		return {
 			listings: [],
@@ -13,10 +13,6 @@ var ModalListing = React.createClass({
 		if(this.isMounted()){
 		  var self = this;
 		  this.loadListings();
-		  $('#modalListingPopup').on('hidden.bs.modal', function () {
-			React.unmountComponentAtNode(document.getElementById('listing_modal'));
-			$('#listing_modal').remove();
-		  });
 		}
 	},
 
@@ -26,7 +22,7 @@ var ModalListing = React.createClass({
 		 $.getJSON(this.props.path, function(data) {
 		  this.setState({
 		    listings: this.buildElements(data.payload.listings),
-			meta: data.payload.meta
+				meta: data.payload.meta
 		  });
 		}.bind(this));
 	},
@@ -82,7 +78,7 @@ var ModalListing = React.createClass({
 				</div>
 			</div>
 			<div className="auto-overflow">
-			 <ul className="trending-list p-t-20 no-style no-padding">
+			 <ul className="modal-list p-t-20 no-style no-padding">
 			  	<Infinite elementHeight={96}
                  containerHeight={500}
                  infiniteLoadBeginBottomOffset={250}

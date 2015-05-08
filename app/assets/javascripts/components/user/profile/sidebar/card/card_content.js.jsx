@@ -3,7 +3,6 @@
 var CardContent = React.createClass({
 
   render: function() {
-    var cx = React.addons.classSet;
 
     if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
@@ -69,8 +68,10 @@ var CardContent = React.createClass({
                           </a>;
     }
 
+    var classes = "profile-card padding-20 box-shadow bg-" + this.props.profile.theme;
+
     return(
-        <div className="profile-card padding-20 bg-solid box-shadow">
+        <div className={classes}>
             <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
             <div className="container-xs-height">
                 <div className="row text-center">

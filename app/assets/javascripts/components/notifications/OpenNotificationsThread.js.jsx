@@ -7,26 +7,23 @@ var OpenNotificationsThread = React.createClass({
   getInitialState: function () {
     return {
       loading: false,
-      active: false, 
+      active: false,
       unread_notifications_count: this.props.unread_notifications_count
     };
   },
 
   openNotifications: function() {
     this.setState({loading: true});
+    $.Pages.init();
     this.setState({active: !this.state.active});
-    var parentdrop = $('li.drop.notification-threads').find('.dropdown');
+    var parentdrop = $('.notification-list').find('.dropdown');
     if(!this.state.active) {
-        React.render(
-          <NotificationList key={Math.random()} path={this.props.path} />,
-          document.getElementById('notifications-threads-section')
-        );
-        parentdrop.removeClass('active');
-        parentdrop.addClass('active');
-        $('body').addClass('stop-scrolling');
+        React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_name={this.props.channel_name} />,
+             document.getElementById('render_notifications'));
+        parentdrop.removeClass('open');
+        parentdrop.addClass('open');
     } else {
-        parentdrop.removeClass('active');
-        $('body').removeClass('stop-scrolling');
+        parentdrop.removeClass('open');
     }
   },
 
@@ -36,9 +33,8 @@ var OpenNotificationsThread = React.createClass({
     }
 
     return(
-        <a className="open-notifications-thread" onClick={this.openNotifications}>
-            <i className="ion-earth"></i>
-            {thread_count}
+        <a href="javascript:;" onClick={this.openNotifications} id="notification-center" className="fa fa-globe b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
+          <span className="bubble font-arial bold">{thread_count}</span>
         </a>
       )
   }

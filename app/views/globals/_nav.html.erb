@@ -43,9 +43,7 @@
         </li>
         <li class="p-r-10 inline">
           <div class="dropdown">
-            <a href="javascript:;" id="notification-center" class="fa fa-globe b-r b-grey p-r-10 b-dashed fs-22 text-brand" data-toggle="dropdown">
-              <span class="bubble font-arial bold">10</span>
-            </a>
+            <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.latest_notifications.members.length, path: notifications_path,  channel_name: "private-user-#{current_user.id}"}) %>
             <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
               <div class="notification-panel">
                 <div class="notification-body scrollable" id="render_notifications">

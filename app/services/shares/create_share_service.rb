@@ -7,7 +7,7 @@ class CreateShareService
 
   def create
     @share = Share.new @params
-    @share.user =
+    @share.user = @user
     @share.parameters = {shareable_name: @idea.name}
     @share.shareable = @idea
     @share.status =  1

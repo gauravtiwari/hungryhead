@@ -1,16 +1,5 @@
-json.cache! @friends do
-  json.cache_collection! @friends do |friend|
-    json.partial! 'friend', :friend => friend
-  end
-end
-
 json.friends @friends.each do |friend|
-  json.name friend.name
-  json.avatar friend.avatar.url(:avatar)
-  json.user_name_badge friend.user_name_badge
-  json.mini_bio friend.mini_bio
-  json.uuid SecureRandom.hex(10)
-  json.followed followed?(friend)
+    json.partial! 'friend', :friend => friend
 end
 
 json.meta do
