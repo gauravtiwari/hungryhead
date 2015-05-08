@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def popular
-    @users = User.where(id: User.popular.rangebyscore(0, 100)).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @users = User.where(id: User.popular.rangebyscore(0, 20)).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
       list: @users.map{|user| {id: user.id, name: user.name, url: profile_path(user), description: user.mini_bio}},
       type: 'Popular People',
