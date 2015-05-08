@@ -127,7 +127,7 @@ ActiveRecord::Base.transaction do
   }
 
 
-  1.upto(30) { |i|
+  1.upto(100) { |i|
 
     Student.create!(
       name: Forgery::Name.full_name,

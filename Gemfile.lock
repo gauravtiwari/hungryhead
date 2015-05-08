@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
-  revision: 15ebc37b3f1b424ce7f5a160d2a8f890023208e6
+  revision: 10b426d9de3fbc917133bae6bb729ef6b16f5d2e
   specs:
     rails-dev-boost (0.3.0)
       railties (>= 3.0)
@@ -216,12 +216,13 @@ GEM
       thor (~> 0.14)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
-    fog (1.29.0)
+    fog (1.30.0)
       fog-atmos
       fog-aws (~> 0.0)
       fog-brightbox (~> 0.4)
       fog-core (~> 1.27, >= 1.27.4)
       fog-ecloud
+      fog-google (>= 0.0.2)
       fog-json
       fog-local
       fog-powerdns (>= 0.1.1)
@@ -259,6 +260,10 @@ GEM
       net-ssh (>= 2.1.3)
     fog-ecloud (0.1.1)
       fog-core
+      fog-xml
+    fog-google (0.0.5)
+      fog-core
+      fog-json
       fog-xml
     fog-json (1.0.1)
       fog-core (~> 1.0)
@@ -454,7 +459,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.12.5)
+    oj (2.12.7)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -502,7 +507,7 @@ GEM
       httpclient (~> 2.5)
       multi_json (~> 1.0)
       signature (~> 0.1.8)
-    rack (1.6.0)
+    rack (1.6.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-livereload (0.3.15)
@@ -644,7 +649,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.4)
+    sprockets-rails (2.3.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
