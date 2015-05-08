@@ -16,25 +16,12 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
 
-  #Sorted set to store followers, followings ids and latest activities
-  set :followers_ids
-  set :followings_ids
-  set :idea_followings_ids
-  set :school_followings_ids
+  #Redis data types
   list :ideas_ids
-
-  #List to store trending, popular and latest users
-  sorted_set :trending,  maxlength: 100, global: true
-  sorted_set :popular,  maxlength: 100, global: true
-  list :latest, maxlength: 20, marshal: true, global: true
-
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
 
-  #Redis counters to cache total followers, followings,
-  #feedbacks, investments and ideas
-  counter :followers_counter
-  counter :followings_counter
+  #Redis counters to cache total investments and ideas
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
@@ -133,12 +120,6 @@ class User < ActiveRecord::Base
 
   def balance_available?(amount)
     balance > amount.to_i
-  end
-
-  def people_you_may_know
-    followings_sets = []
-    User.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
-    followings_sets.map{|f| f.difference(followings_ids) }.flatten - ["#{id}"]
   end
 
   #Login using both email and username
@@ -331,6 +312,5 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
-
 
 end

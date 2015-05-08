@@ -11,12 +11,6 @@ class Investment < ActiveRecord::Base
   include Commentable
   include Votable
 
-  #Counters for redis
-  counter :votes_counter
-  list :voters_ids
-  list :commenters_ids
-  counter :comments_counter
-
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_commit :increment_counters, on: :create

@@ -3,24 +3,27 @@ module Follower
 
   included do
     has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
+    #Sorted set to store followers, followings ids
+    set :followings_ids
+    set :idea_followings_ids
+    set :school_followings_ids
+    counter :followings_counter
   end
 
-  # users that self follows
-  def get_followers
-    user_ids = followers_ids.members
-    User.where(:id => user_ids)
+  def people_you_may_know
+    followings_sets = []
+    User.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
+    followings_sets.map{|f| f.difference(followings_ids) }.flatten - ["#{id}"]
   end
 
   # users that follow self
   def get_followings
-    user_ids = followings_ids.members
-    User.where(:id => user_ids)
+    User.where(:id => followings_ids.members)
   end
 
   # users who follow and are being followed by self
   def friends
-    user_ids = followers_ids(followings_ids)
-    User.where(:id => user_ids)
+    User.where(:id => followers_ids.intersection(followings_ids))
   end
 
   # does the user follow self

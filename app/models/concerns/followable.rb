@@ -3,12 +3,14 @@ module Followable
 
   included do
     has_many :followers, as: :followable, class_name: 'Follow', dependent: :destroy
+    cache_has_many :followers, :inverse_name => :followable, :embed => true
+    counter :followers_counter
+    set :followers_ids
   end
 
   #users that self follows
   def get_followers
-   user_ids = followers_ids.members
-   User.where(:id => user_ids)
+   User.where(:id => followers_ids.members)
   end
 
   # does the user follow self

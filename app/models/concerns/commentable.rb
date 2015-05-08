@@ -3,6 +3,9 @@ module Commentable
 
   included do
     has_many :comments, as: :commentable, :dependent => :destroy
+    cache_has_many :comments, :inverse_name => :commentable, embed: true
+    list :commenters_ids
+    counter :comments_counter
   end
 
   def root_comments
@@ -13,8 +16,8 @@ module Commentable
     self.comments
   end
 
-  def commenters
-    commenters_ids
+  def get_commenters
+    User.where(id: commenters_ids)
   end
 
 end

@@ -15,18 +15,15 @@ class School < ActiveRecord::Base
 	:cover_position, :cover_left, :cover_prcessing, :logo_processing
 
 	#Redis Cache counters and ids
-	set :followers_ids
 	list :students_ids
 	list :teachers_ids
 	list :ideas_ids
 
 	#Counters
-	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
 
 	#Caching Model
-	cache_has_many :followers, :inverse_name => :followable, :embed => true
 	cache_index :slug
 	cache_index :name
 

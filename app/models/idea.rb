@@ -12,33 +12,17 @@ class Idea < ActiveRecord::Base
   include Sluggable
   include Sharings
   include Activist
+  include Scorable
+  include Feedbackable
+  include Investable
 
   acts_as_taggable_on :markets, :locations, :technologies
-
-  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  set :followers_ids
-  list :voters_ids
-  list :sharers_ids
-  list :feedbackers_ids
-  list :investors_ids
-  list :commenters_ids
-
-  #Set to store trending and popular ideas
-  sorted_set :trending, global: true
-  sorted_set :popular, global: true
-  list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
 
   #Redis Cache counters
-  counter :followers_counter
-  counter :investors_counter
-  counter :feedbackers_counter
   counter :views_counter
-  counter :votes_counter
-  counter :shares_counter
-  counter :comments_counter
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
@@ -63,20 +47,10 @@ class Idea < ActiveRecord::Base
   belongs_to :school
 
   #Rest of the assocuations
-  has_many :feedbacks, dependent: :destroy
   has_many :idea_messages, dependent: :destroy
-  has_many :investments, dependent: :destroy
-  has_many :slugs, as: :sluggable, dependent: :destroy
-
-  #Caching Model
-  cache_has_many :feedbacks, :embed => true
-  cache_has_many :investments, :embed => true
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
-  cache_has_many :comments, :inverse_name => :commentable, embed: true
-  cache_has_many :shares, :inverse_name => :shareable, embed: true
   cache_has_many :idea_messages, :embed => true
 
+  #Define Cache index
   cache_index :school_id
   cache_index :slug
 
@@ -134,20 +108,8 @@ class Idea < ActiveRecord::Base
     name.split('')
   end
 
-  def invested?(user)
-    investors_ids.values.include?(user.id.to_s)
-  end
-
-  def feedbacked?(user)
-    feedbackers_ids.values.include?(user.id.to_s)
-  end
-
   def is_owner?(current_user)
     student == current_user
-  end
-
-  def can_invest?(user)
-    student.balance > 10 && !invested?(user)
   end
 
   def in_team?(user)

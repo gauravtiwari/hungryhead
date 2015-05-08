@@ -5,4 +5,9 @@ class Student < User
   cache_has_many :idea_messages, embed: true
 	store_accessor :interests, :locations, :hobbies, :markets
 	store_accessor :education, :year, :subjects
+
+  def student?
+    true
+  end
+
 end
