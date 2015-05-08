@@ -142,7 +142,7 @@ class Idea < ActiveRecord::Base
   end
 
   def invited?(user)
-    team_invites_ids.include? user.id.to_s
+    team_invites_ids.include?(user.id.to_s)
   end
 
   def add_fund
@@ -159,10 +159,14 @@ class Idea < ActiveRecord::Base
     end
   end
 
+  def visible?
+    published? && everyone?
+  end
+
   private
 
   def load_into_soulmate
-    if published? && everyone?
+    if visible?
       loader = Soulmate::Loader.new("ideas")
       loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
         "link" => idea_path(self)
@@ -182,18 +186,20 @@ class Idea < ActiveRecord::Base
   end
 
   def increment_counters
-    school.ideas_counter.increment if student.type == "Student"
-    student.ideas_counter.increment if student.type == "Student"
-    student.ideas_ids <<  id if student.type == "Student"
+    school.ideas_counter.increment
+    student.ideas_counter.increment
+    student.ideas_ids <<  id
+    school.ideas_ids << id
     Idea.latest << idea_json
     Idea.popular.add(id, 0)
     Idea.trending.add(id, 0)
   end
 
   def decrement_counters
-    school.ideas_counter.decrement if student.type == "Student"
-    student.ideas_counter.decrement if student.type == "Student"
-    student.ideas_ids.delete(id) if student.type == "Student"
+    school.ideas_counter.decrement
+    student.ideas_counter.decrement
+    student.ideas_ids.delete(id)
+    school.ideas_ids.delete(id)
     Idea.latest.delete(idea_json)
     Idea.popular.delete(id)
     Idea.trending.delete(id)

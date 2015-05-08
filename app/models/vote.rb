@@ -21,15 +21,15 @@ class Vote < ActiveRecord::Base
   def increment_counter
     votable.votes_counter.increment
     Idea.popular.increment(votable_id) if votable_type == "Idea"
-    User.popular.increment(votable_type == "Idea" ? votable.student.id : votable.user.id)
-    votable.voters_ids << voter.id
+    User.popular.increment(voter_id)
+    votable.voters_ids << voter_id
   end
 
   def decrement_counter
     votable.votes_counter.decrement if votable.votes_counter.value > 0
     Idea.popular.decrement(votable_id) if votable_type == "Idea"
-    User.popular.increment(votable_type == "Idea" ? votable.student.id : votable.user.id)
-    votable.voters_ids.delete(voter.id)
+    User.popular.increment(voter_id)
+    votable.voters_ids.delete(voter_id)
   end
 
   def delete_notification
