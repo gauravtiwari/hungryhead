@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   include Mentionable
   include Sluggable
   include Suggestions
+  include Scorable
 
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
