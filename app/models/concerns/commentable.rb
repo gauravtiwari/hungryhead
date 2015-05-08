@@ -17,4 +17,8 @@ module Commentable
     User.where(id: commenters_ids)
   end
 
+  def commenter
+    commentable_type == "Idea" ? commentable.student.id : commentable.user.id
+  end
+
 end
