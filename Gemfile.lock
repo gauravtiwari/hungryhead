@@ -73,8 +73,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    activity_feed (3.1.0)
-      leaderboard
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     addressable (2.3.8)
@@ -390,8 +388,6 @@ GEM
       sprockets-rails
     json (1.8.2)
     jwt (1.4.1)
-    leaderboard (3.10.0)
-      redis
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.7.0)
@@ -700,7 +696,6 @@ DEPENDENCIES
   aasm
   activerecord-import
   activerecord-session_store!
-  activity_feed
   acts-as-taggable-on
   animate-rails
   auto_html

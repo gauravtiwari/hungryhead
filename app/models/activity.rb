@@ -10,13 +10,4 @@ class Activity < ActiveRecord::Base
    # BuildUserNotificationFeedJob.perform_later(user.id)
   #end
 
-
-  after_save :update_activity_feed
-
-  private
-
-  def update_activity_feed
-    ActivityFeed.add_item(self.user_id, self.id, self.created_at.to_i)
-  end
-
 end
