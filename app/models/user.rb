@@ -66,7 +66,6 @@ class User < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :investments, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Caching Model
   cache_has_many :activities, :embed => true

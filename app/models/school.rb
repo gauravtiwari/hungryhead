@@ -2,6 +2,8 @@ class School < ActiveRecord::Base
 
 	include IdentityCache
 	include Redis::Objects
+
+	#Included concerns
 	include Followable
 	include Sluggable
 

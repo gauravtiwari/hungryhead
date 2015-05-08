@@ -12,6 +12,8 @@ class Idea < ActiveRecord::Base
   include Sluggable
   include Sharings
   include Activist
+  include Investable
+  include Feedbackable
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -63,10 +65,7 @@ class Idea < ActiveRecord::Base
   belongs_to :school
 
   #Rest of the assocuations
-  has_many :feedbacks, dependent: :destroy
   has_many :idea_messages, dependent: :destroy
-  has_many :investments, dependent: :destroy
-  has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Caching Model
   cache_has_many :feedbacks, :embed => true
