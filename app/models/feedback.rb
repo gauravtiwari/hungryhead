@@ -30,7 +30,7 @@ class Feedback < ActiveRecord::Base
 
   #Hooks
   before_destroy :decrement_counters, :delete_activity
-  after_commit :increment_counters, on: :create
+  after_create :increment_counters
 
   public
 

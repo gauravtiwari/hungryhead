@@ -18,7 +18,7 @@ class Share < ActiveRecord::Base
 	list :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
-	after_commit :increment_counters, on: :create
+	after_create :increment_counters
 
 	#Store accessor methods
  	store_accessor :parameters, :shareable_name
