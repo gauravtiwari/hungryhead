@@ -62,18 +62,6 @@ class School < ActiveRecord::Base
     UpdateSchoolCacheJob.perform_later(id)
   end
 
-  def latest_ideas
-  	latest_ideas.values.reverse.take(5)
-  end
-
-  def latest_students
-  	latest_students.values.reverse.take(5)
-  end
-
-  def latest_faculties
-  	latest_faculties.values.reverse.take(5)
-  end
-
 	private
 
 	def load_into_soulmate
