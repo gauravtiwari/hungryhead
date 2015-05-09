@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
   before_action :authenticate_admin_user!, only: [:new, :create, :destroy, :edit]
-  before_action :set_schools, only: [:card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
+  before_action :set_schools, only: [:latest_students, :latest_ideas, :latest_faculties, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:logo, :email]
 
@@ -17,8 +17,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    ids = @school.students_ids.values
-    ids.push(current_user.id)
+    ids = User.where(school_id: @school.id).pluck(:id)
     @activities = Activity.where(user_id: ids, published: true)
     .includes(:trackable, :user, :recipient)
     .order(id: :desc)
@@ -26,23 +25,29 @@ class SchoolsController < ApplicationController
   end
 
   def latest_students
+    @students = @school.latest_students.values.paginate(:page => params[:page], :per_page => 5)
     render json: Oj.dump({
-      list: @school.latest_students.values,
-      type: 'Latest Students'
+      list: @students,
+      type: 'Latest Students',
+      next_page: @students.next_page
       }, mode: :compat)
   end
 
   def latest_ideas
+   @ideas = @school.latest_ideas.values.paginate(:page => params[:page], :per_page => 5)
    render json: Oj.dump({
-    list: @school.latest_ideas.values,
-    type: 'Latest Ideas'
+    list: @ideas,
+    type: 'Latest Ideas',
+    next_page: @ideas.next_page
     }, mode: :compat)
   end
 
   def latest_faculties
+    @faculties = @school.latest_faculties.values.paginate(:page => params[:page], :per_page => 5)
     render json: Oj.dump({
-     list: @school.latest_faculties.values,
-     type: 'Latest Faculties'
+     list: @faculties,
+     type: 'Latest Faculties',
+     next_page: @faculties.next_page
      }, mode: :compat)
   end
 

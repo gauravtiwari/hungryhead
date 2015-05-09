@@ -8,7 +8,8 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :follow_friends
-      @friends = User.find(@user.school.students_ids.values + @user.school.teachers_ids.values - [current_user.id.to_s]).paginate(:page => params[:page], :per_page => 10)
+      ids = User.where(school_id: @user.school_id).pluck(:id) if @user.school_id.present?
+      @friends = User.find(ids - [current_user.id]).paginate(:page => params[:page], :per_page => 10)
     end
     render_wizard
   end

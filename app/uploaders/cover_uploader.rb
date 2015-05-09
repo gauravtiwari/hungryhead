@@ -22,7 +22,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   end
 
   version :large do
-    process :resize_to_fit => [1400, nil]
+    process :resize_to_fill => [1400, nil]
   end
 
   def extension_white_list

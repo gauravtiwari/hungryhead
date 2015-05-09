@@ -24,9 +24,8 @@
 </div>
 <div class="col-md-3 col-sm-4 no-padding">
 <div class="sidebar auto-height white-bg box-shadow">
-  <%= react_component('LatestListings', {path: latest_ideas_schools_path}) %>
-  <%= react_component('LatestListings', {path: latest_users_schools_path}) %>
-  <%= react_component('LatestListings', {path: latest_faculties_schools_path}) %>
+  <%= react_component('LatestListings', {path: latest_ideas_school_path(@school)}) %>
+  <%= react_component('LatestListings', {path: latest_students_school_path(@school)}) %>
 </div>
 </div>
 </div>

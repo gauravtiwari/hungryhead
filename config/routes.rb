@@ -145,7 +145,7 @@ Rails.application.routes.draw do
   #Schools resources
   resources :schools do
     get :autocomplete_school_name, :on => :collection
-    collection do
+    member do
       get :latest_ideas
       get :latest_students
       get :latest_faculties
