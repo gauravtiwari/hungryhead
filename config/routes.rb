@@ -147,8 +147,8 @@ Rails.application.routes.draw do
     get :autocomplete_school_name, :on => :collection
     collection do
       get :latest_ideas
-      get :popular_ideas
-      get :trending_ideas
+      get :latest_students
+      get :latest_faculties
     end
   end
 

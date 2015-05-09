@@ -33,7 +33,7 @@ var LatestIdeasItem = React.createClass({
             <a href={this.props.item.url}>
               <p className="all-caps bold  small no-margin overflow-ellipsis ">{this.props.item.name}</p>
             </a>
-            <p className="small no-margin">{this.props.item.pitch}</p>
+            <p className="small no-margin">{this.props.item.description}</p>
         </div>
         <div className="clearfix"></div>
         </div>

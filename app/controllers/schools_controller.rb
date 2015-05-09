@@ -25,6 +25,27 @@ class SchoolsController < ApplicationController
     .paginate(:page => params[:page], :per_page => 20)
   end
 
+  def latest_students
+    render json: Oj.dump({
+      list: @school.latest_students.values,
+      type: 'Latest Students'
+      }, mode: :compat)
+  end
+
+  def latest_ideas
+   render json: Oj.dump({
+    list: @school.latest_ideas.values,
+    type: 'Latest Ideas'
+    }, mode: :compat)
+  end
+
+  def latest_faculties
+    render json: Oj.dump({
+     list: @school.latest_faculties.values,
+     type: 'Latest Faculties'
+     }, mode: :compat)
+  end
+
   def card
     render partial: 'shared/school_card'
   end

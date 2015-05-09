@@ -24,69 +24,10 @@
 </div>
 <div class="col-md-3 col-sm-4 no-padding">
 <div class="sidebar auto-height white-bg box-shadow">
-    <div class="m-b-10">
-        <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
-            <div class="panel-heading">
-             <div class="panel-title">
-              Latest Ideas
-              </div>
-            </div>
-            <div class="auto-overflow">
-              <ul class="trending-list full-border-light p-t-20 no-style">
-                <% @school.latest_ideas.each do |idea| %>
-                <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
-                  <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">
-                    <%= idea.name_badge %>
-                  </span>
-                  <div class="pull-left">
-                      <p class="all-caps bold  small no-margin overflow-ellipsis "><%= idea.name %></p>
-                      <p class="small no-margin overflow-ellipsis "><%= idea.high_concept_pitch %></p>
-                  </div>
-                  <div class="clearfix"></div>
-                  </div>
-                </li>
-              <% end %>
-
-              </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="m-b-10">
-        <div class="widget-11-2 panel no-border no-margin widget-loader-circle">
-            <div class="panel-heading">
-             <div class="panel-title">
-              Latest Students
-              </div>
-            </div>
-            <div class="auto-overflow">
-              <ul class="trending-list full-border-light p-t-20 no-style">
-              <% @school.latest_students.each do |user| %>
-                <li class="m-b-10">
-                  <div class="widget-16-header p-b-10 p-l-15">
-                  <% if user.avatar.present? %>
-                    <span class="icon-thumbnail pull-left">
-                      <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), src: {retina: user.avatar.url(:avatar) } }, width: "40", height: "40") %>
-                    </span>
-                  <% else %>
-                    <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">
-                      <%= user.user_name_badge %>
-                    </span>
-                  <% end %>
-                  <div class="pull-left">
-                      <p class="all-caps bold  small no-margin overflow-ellipsis "><%= user.name %></p>
-                      <p class="small no-margin overflow-ellipsis "><%= user.mini_bio %></p>
-                  </div>
-                  <div class="clearfix"></div>
-                  </div>
-                </li>
-              <% end %>
-              </ul>
-            </div>
-        </div>
-    </div>
-    </div>
+  <%= react_component('LatestListings', {path: latest_ideas_schools_path}) %>
+  <%= react_component('LatestListings', {path: latest_users_schools_path}) %>
+  <%= react_component('LatestListings', {path: latest_faculties_schools_path}) %>
+</div>
 </div>
 </div>
 </div>
