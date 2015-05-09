@@ -27,14 +27,14 @@ class User < ActiveRecord::Base
   set :followings_ids
   set :idea_followings_ids
   set :school_followings_ids
-  list :latest_ideas, maxlength: 20, marshal: true, global: true
+  list :latest_ideas, maxlength: 20, marshal: true
 
   #Sorted set to store popular and latest user
   sorted_set :trending, global: true
   sorted_set :popular, global: true
 
   #List to store latest users
-  list :latest, maxlength: 20, marshal: true
+  list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
