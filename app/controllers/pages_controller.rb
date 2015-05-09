@@ -22,6 +22,16 @@ class PagesController < ApplicationController
   def privacy
   end
 
+  def get_started
+  end
+
+  def help
+  end
+
+
+  def join
+  end
+
   #Hello page - introduce ourselves
 
   def hello

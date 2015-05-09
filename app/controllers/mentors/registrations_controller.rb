@@ -13,6 +13,18 @@ class Mentors::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def edit
+    super
+  end
+
+  def cancel
+    super
+  end
+
+  def destroy
+    super
+  end
+
   private
 
   protected

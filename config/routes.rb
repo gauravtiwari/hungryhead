@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   get '/learn', to: 'pages#learn', as: :learn
   get '/hello', to: 'pages#hello', as: :hello
   get '/rules', to: 'pages#rules', as: :rules
+
+  get '/help', to: 'pages#help', as: :help
   get '/privacy', to: 'pages#privacy', as: :privacy
+  get '/get-started', to: 'pages#get_started', as: :get_started
   get '/terms-of-use', to: 'pages#terms', as: :terms
   get '/our-story', to: 'pages#story', as: :story
 
@@ -32,8 +35,6 @@ Rails.application.routes.draw do
   as :user do
 
     # joining
-    get   '/join' => 'users#join',    as: 'new_user_registration'
-
     get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
 
     # session handling
@@ -42,24 +43,24 @@ Rails.application.routes.draw do
     get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
 
     # settings & cancellation
-    get '/cancel/:id'   => 'devise/registrations#cancel', as: 'cancel_user_registration'
+    get '/cancel/:id'   => 'users/registrations#cancel', as: 'cancel_user_registration'
     get '/settings/:id' => 'users/registrations#edit',   as: 'edit_user_registration'
     patch '/settings/:id' => 'users/registrations#update', as: 'update_user_registeration'
 
     scope '/account' do
       # password reset
       get   '/reset-password'        => 'users/passwords#new',    as: 'new_user_password'
-      put   '/reset-password'        => 'devise/passwords#update', as: 'user_password'
-      post  '/reset-password'        => 'devise/passwords#create'
+      put   '/reset-password'        => 'users/passwords#update', as: 'user_password'
+      post  '/reset-password'        => 'users/passwords#create'
       get   '/reset-password/change' => 'users/passwords#edit',   as: 'edit_user_password'
 
       # confirmation
       get   '/confirm'        => 'users/confirmations#show',   as: 'user_confirmation'
-      post  '/confirm'        => 'devise/confirmations#create'
+      post  '/confirm'        => 'users/confirmations#create'
       get   '/confirm/resend' => 'users/confirmations#new',    as: 'new_user_confirmation'
 
       # account deletion
-      delete '' => 'devise/registrations#destroy', as: :user_destroy
+      delete '' => 'users/registrations#destroy', as: :user_destroy
     end
   end
 

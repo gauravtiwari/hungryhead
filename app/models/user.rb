@@ -16,6 +16,11 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
 
+  #Sorted set to store followers, followings ids and latest activities
+  set :followers_ids
+  set :followings_ids
+  set :idea_followings_ids
+  set :school_followings_ids
   list :ideas_ids
 
   #List to store trending, popular and latest users
@@ -28,6 +33,8 @@ class User < ActiveRecord::Base
 
   #Redis counters to cache total followers, followings,
   #feedbacks, investments and ideas
+  counter :followers_counter
+  counter :followings_counter
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
@@ -276,18 +283,18 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment if school && type == "Student"
-    school.students_ids << id if school && type == "Student"
-    school.teachers_ids << id if school && type == "Teacher"
+    school.students_counter.increment if student?
+    school.students_ids << id if student?
+    school.teachers_ids << id if teacher?
     User.latest << user_json unless type == "User"
     User.popular.add(id, 0) unless type == "User"
     User.trending.add(id, 0) unless type == "User"
   end
 
   def decrement_counters
-    school.students_counter.decrement if school && school.students_counter.value > 0 && type == "Student"
-    school.students_ids.delete(id) if school && type == "Student"
-    school.teachers_ids.delete(id) if school && type == "Teacher"
+    school.students_counter.decrement if school.students_counter.value > 0 && student?
+    school.students_ids.delete(id) if student?
+    school.teachers_ids.delete(id) if teacher?
     User.latest.delete(user_json) unless type == "User"
     User.popular.delete(id) unless type == "User"
     User.trending.delete(id) unless type == "User"

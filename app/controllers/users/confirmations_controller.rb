@@ -5,7 +5,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   skip_before_filter :require_no_authentication
   skip_before_filter :authenticate_user!
   layout 'join'
-  
+
   def new
     super
   end
@@ -14,11 +14,21 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     super
   end
 
+  def create
+    super
+  end
+
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
     super
   end
 
-  protected
+  def edit
+    super
+  end
+
+  def destroy
+    super
+  end
 
 end

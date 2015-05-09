@@ -47,9 +47,6 @@ class UsersController < ApplicationController
     authorize @user
   end
 
-  def join
-  end
-
   def show
     User.trending.increment(@user.id) if @user != current_user
     respond_to do |format|

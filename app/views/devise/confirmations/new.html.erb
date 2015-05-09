@@ -1,35 +1,26 @@
-<!-- Content 
-================================================== -->
-<div id="content">
-	<div class="container">
-		<div class="fill-form-login small-box panel panel-default">
-			<div class="profile-wrapper-title">
-				<h4>Resend confirmation instructions</h4>
-			</div>
-			<div class="col-md-12 form-login panel-body">
-			<%= simple_form_for(resource, as: resource_name, remote: true, url: confirmation_path(resource_name), html: { method: :post, :class => "confirmation-form form-horizontal" }) do |f| %>
-					  <%= f.error_notification %>
+<div class="register-container full-height sm-p-t-30">
+	<div class="container-sm-height full-height">
+	<div class="row row-sm-height">
+	  <div class="col-sm-12 col-sm-height col-middle">
+	   	<h1 class="bold">Resend confirmation instructions</h1>
+	    <small>Email confirmations takes a few seconds to a minute to arrive. If you haven't recieved it yet, please enter your email to resend it again.</small>
+	    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :class => "form p-t-10 p-b-10", role: 'form' }) do |f| %>
+					  <%= devise_error_messages! %>
 					  <%= f.full_error :confirmation_token %>
 
-					  <div class="form-control-wrapper">
-					  	<label>Email
-						</label>
+					  <div class="form-group">
+					  	<label>Email</label>
 					    <%= f.input_field :login, required: true, autofocus: true,label: false, id: "email", class: "form-control empty", placeholder:"johndoe@example.com"  %>
-					    <span class="material-input"></span>
 					  </div>
 
 					  <div class="login-form-buttons">
-					    <%= f.button :button, "Resend", :class => "main-button", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."} %>
+					    <%= f.button :button, "Resend", :class => "btn btn-success btn-sm fs-13 p-l-10 p-r-10 pull-right", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Submitting..."} %>
+					    <%= link_to('Go back', root_path, :class => "btn btn-danger btn-sm fs-13 p-l-10 p-r-10 pull-left") %>
 					  </div>
 			<% end %>
-
 			<%= render "devise/shared/links" %>
-									
-			</div>
-		</div>
+	  </div>
 	</div>
-
-
+	</div>
 </div>
-<!-- End content -->
 
