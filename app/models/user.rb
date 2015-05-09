@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   sorted_set :popular, global: true
 
   #List to store latest users
-  list :latest, maxlength: 20, marshal: true, global: true
+  list :latest, maxlength: 20, marshal: true
 
   #Store latest user notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
@@ -84,8 +84,6 @@ class User < ActiveRecord::Base
   cache_has_many :followers, :inverse_name => :followable, :embed => true
   cache_has_many :investments, :embed => true
   cache_has_many :feedbacks, :embed => true
-  cache_has_many :activities, :embed => true
-  cache_has_many :notifications, :embed => true
 
   #Identity cache fetch index
   cache_index :school_id
@@ -103,7 +101,7 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, unless: :name_present?
   before_save :add_username, if: :username_absent?
-  after_save :load_into_soulmate, :update_redis_cache, :rebuild_notifications, unless: :is_admin
+  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   after_create :increment_counters, :seed_fund, :seed_settings,  unless: :is_admin
 
@@ -297,26 +295,26 @@ class User < ActiveRecord::Base
 
   def increment_counters
     #Increment counters
-    school.students_counter.increment if school && type == "Student"
+    school.students_counter.increment if school_id.present? && self.type == "Student"
     #Cache lists for school
-    school.latest_students << user_json if school && type == "Student"
-    school.latest_faculties << user_json if school && type == "Teacher"
+    school.latest_students << user_json if school_id.present? && self.type == "Student"
+    school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
-    User.latest << user_json unless type == "User"
-    User.popular.add(user_json, 1) unless type == "User"
-    User.trending.add(user_json, 1) unless type == "User"
+    User.latest << user_json unless self.type == "User"
+    User.popular.add(user_json, 1) unless self.type == "User"
+    User.trending.add(user_json, 1) unless self.type == "User"
   end
 
   def decrement_counters
     #Decrement counters
-    school.students_counter.decrement if school && school.students_counter.value > 0 && type == "Student"
+    school.students_counter.decrement if school_id.present && school.students_counter.value > 0 && self.type == "Student"
     #delete cached lists for school
-    school.latest_students.delete(user_json) if school && type == "Student"
-    school.latest_faculties.delete(user_json) if school && type == "Teacher"
+    school.latest_students.delete(user_json) if school_id.present? && self.type == "Student"
+    school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
-    User.latest.delete(user_json) unless type == "User"
-    User.popular.delete(user_json) unless type == "User"
-    User.trending.delete(user_json) unless type == "User"
+    User.latest.delete(user_json) unless self.type == "User"
+    User.popular.delete(user_json) unless self.type == "User"
+    User.trending.delete(user_json) unless self.type == "User"
   end
 
   def update_redis_cache

@@ -19,9 +19,9 @@ class School < ActiveRecord::Base
 
 	#Redis Cache counters and ids
 	set :followers_ids
-	list :latest_students, maxlength: 20, marshal: true, global: true
-	list :latest_faculties, maxlength: 20, marshal: true, global: true
-	list :latest_ideas, maxlength: 20, marshal: true, global: true
+	list :latest_students, maxlength: 20, marshal: true
+	list :latest_faculties, maxlength: 20, marshal: true
+	list :latest_ideas, maxlength: 20, marshal: true
 
 	#Counters
 	counter :followers_counter
