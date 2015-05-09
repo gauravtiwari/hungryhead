@@ -6,6 +6,11 @@ class UpdateAllActivityJob < ActiveJob::Base
         notification.save
         UpdateNotificationCacheService.new(user, notification).update
       end
+      user.activities.where("parameters ->> 'read' = 'false'").find_each do |activity|
+        activity.read = true
+        activity.save
+        UpdateNotificationCacheService.new(user, activity).update
+      end
     end
   end
 end
