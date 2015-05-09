@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   before_save :add_username, if: :username_absent?
   after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  after_create :increment_counters, :seed_fund, :seed_settings,  unless: :is_admin
+  after_commit :increment_counters, :seed_fund, :seed_settings, on: :create,  unless: :is_admin
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
