@@ -1,8 +1,8 @@
 var LatestListingsItem = React.createClass({
   render: function() {
     if(this.props.item.avatar) {
-      var image = <span className="thumbnail-wrapper d32 circular inline m-t-5">
-          <img data-src={this.props.item.avatar} data-src-retina={this.props.item.avatar}  width="32" height="32" src={this.props.item.avatar} />
+      var image = <span className="icon-thumbnail pull-left inline m-r-15">
+          <img data-src={this.props.item.avatar} data-src-retina={this.props.item.avatar}  width="40px" height="40px" src={this.props.item.avatar} />
         </span>;
     } else {
       var image = <span className="icon-thumbnail placeholder bg-master-light pull-left text-white">{this.props.item.name_badge}</span>;

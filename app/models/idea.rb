@@ -169,7 +169,7 @@ class Idea < ActiveRecord::Base
     {
       id: id,
       name: name,
-      name_badge: name_badge,
+      name_badge: name_badge.upcase,
       description: high_concept_pitch,
       url: idea_path(self),
       created_at: "#{created_at.to_formatted_s(:iso8601)}"
@@ -229,27 +229,27 @@ class Idea < ActiveRecord::Base
     Idea.trending.delete(idea_json)
   end
 
-  # def update_redis_cache
-  #   if rebuild_cache?
-  #     #Get current score
-  #     popular_score = Idea.popular.score(idea_json)
-  #     trending_score = Idea.trending.score(idea_json)
-  #     #Delete cache
-  #     Idea.popular.delete(idea_json)
-  #     Idea.latest.delete(idea_json)
-  #     Idea.trending.delete(idea_json)
-  #     #Regenerate cache with current score
-  #     Idea.popular.add(idea_json, popular_score)
-  #     Idea.trending.add(idea_json, trending_score)
-  #     Idea.latest << idea_json
-  #     #Delete school list cache
-  #     school.latest_ideas.delete(idea_json)
-  #     student.latest_ideas.delete(idea_json)
-  #     #Regenerate school and student ideas list
-  #     school.latest_ideas << idea_json
-  #     student.latest_ideas << idea_json
-  #   end
-  # end
+  def update_redis_cache
+    if rebuild_cache?
+      #Get current score
+      popular_score = Idea.popular.score(idea_json)
+      trending_score = Idea.trending.score(idea_json)
+      #Delete cache
+      Idea.popular.delete(idea_json)
+      Idea.latest.delete(idea_json)
+      Idea.trending.delete(idea_json)
+      #Regenerate cache with current score
+      Idea.popular.add(idea_json, popular_score)
+      Idea.trending.add(idea_json, trending_score)
+      Idea.latest << idea_json
+      #Delete school list cache
+      school.latest_ideas.delete(idea_json)
+      student.latest_ideas.delete(idea_json)
+      #Regenerate school and student ideas list
+      school.latest_ideas << idea_json
+      student.latest_ideas << idea_json
+    end
+  end
 
   def delete_activity
     #Delete idea time from user feed
