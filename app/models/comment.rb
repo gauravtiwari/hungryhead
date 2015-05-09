@@ -15,7 +15,7 @@ class Comment < ActiveRecord::Base
   counter :votes_counter
   list :voters_ids
 
-  after_create :increment_counters
+  after_commit :increment_counters, on: :create
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations

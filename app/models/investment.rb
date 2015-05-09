@@ -19,7 +19,7 @@ class Investment < ActiveRecord::Base
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_create :increment_counters
+  after_commit :increment_counters, on: :create
 
   #Store accessor methods
   store_accessor :parameters, :point_earned, :views_count

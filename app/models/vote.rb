@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 
   #Callbacks for storing cache in redis
   before_destroy :decrement_counter, :delete_notification
-  after_create :increment_counter
+  after_commit :increment_counter, on: :create
 
   private
 

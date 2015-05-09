@@ -7,7 +7,7 @@ class Mention < ActiveRecord::Base
 
   #Model callbacks
   before_destroy :delete_notification, :decrement_counters
-  after_create :increment_counters
+  after_commit :increment_counters, on: :create
 
   private
 
