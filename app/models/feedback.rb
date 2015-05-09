@@ -41,22 +41,29 @@ class Feedback < ActiveRecord::Base
   private
 
   def increment_counters
+    #Increment feedbacks counter for idea and user
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
-    Idea.popular.increment(idea_id)
-    User.popular.increment(idea.student.id)
+    #Increment popularity score
+    Idea.popular.increment(idea.idea_json)
+    User.popular.increment(idea.student.user_json)
+    #Cache feedbacker id
     idea.feedbackers_ids << user.id
   end
 
   def decrement_counters
+    #Decrement feedbacks counter for idea and user
     user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
     idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
-    Idea.popular.decrement(idea_id)
-    User.popular.decrement(idea.student.id)
+    #Decrement popularity score
+    Idea.popular.decrement(idea.idea_json)
+    User.popular.decrement(idea.student.user_json)
+    #Remove cached feedbacker id
     idea.feedbackers_ids.delete(user.id)
   end
 
   def delete_activity
+    #Delete activity item from feed
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 

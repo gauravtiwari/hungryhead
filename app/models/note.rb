@@ -11,11 +11,12 @@ class Note < ActiveRecord::Base
   include Sharings
   include Votable
 
-  #Redis counters and cache
-  counter :votes_counter
+  #Redis counters and lists
   list :voters_ids
   list :commenters_ids
   list :sharers_ids
+  #Counters
+  counter :votes_counter
   counter :shares_counter
   counter :comments_counter
 

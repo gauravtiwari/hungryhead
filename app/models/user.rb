@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
   include IdentityCache
@@ -13,7 +14,11 @@ class User < ActiveRecord::Base
   include Sluggable
   include Suggestions
   include Scorable
+  include Feedbacker
+  include Investor
+  include Commenter
 
+  #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
   acts_as_tagger
 
@@ -22,11 +27,13 @@ class User < ActiveRecord::Base
   set :followings_ids
   set :idea_followings_ids
   set :school_followings_ids
-  list :ideas_ids
+  list :latest_ideas, maxlength: 20, marshal: true, global: true
 
-  #List to store trending, popular and latest users
-  sorted_set :trending,  maxlength: 100, global: true
-  sorted_set :popular,  maxlength: 100, global: true
+  #Sorted set to store popular and latest user
+  sorted_set :trending, global: true
+  sorted_set :popular, global: true
+
+  #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
@@ -39,7 +46,6 @@ class User < ActiveRecord::Base
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
-  counter :views_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -70,10 +76,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
-  has_many :feedbacks, dependent: :destroy
   has_many :notes, dependent: :destroy
-  has_many :investments, dependent: :destroy
-  has_many :comments, dependent: :destroy
 
   #Caching Model
   cache_has_many :activities, :embed => true
@@ -84,6 +87,7 @@ class User < ActiveRecord::Base
   cache_has_many :activities, :embed => true
   cache_has_many :notifications, :embed => true
 
+  #Identity cache fetch index
   cache_index :school_id
   cache_index :type
   cache_index :slug
@@ -99,9 +103,9 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, unless: :name_present?
   before_save :add_username, if: :username_absent?
-  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
+  after_save :load_into_soulmate, :update_redis_cache, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  after_create :increment_counters, :seed_fund, :seed_settings,  unless: :is_admin
+  after_commit :increment_counters, :seed_fund, :seed_settings, on: :create,  unless: :is_admin
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -109,7 +113,7 @@ class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
-
+  #Get username suggestions
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname
 
@@ -120,7 +124,6 @@ class User < ActiveRecord::Base
   acts_as_messageable
 
   #Public methods
-
   public
 
   def can_score?
@@ -144,14 +147,6 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
 
-  def email_required?
-    super && authentications.blank?
-  end
-
-  def password_required?
-    super && authentications.blank?
-  end
-
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
@@ -170,6 +165,19 @@ class User < ActiveRecord::Base
 
   def lastname
     self.name.split(' ').second
+  end
+
+
+  def user_json
+    {
+      id: id,
+      avatar: avatar.url(:avatar),
+      name_badge: user_name_badge,
+      name: name,
+      description: mini_bio,
+      url: profile_path(self),
+      created_at: "#{created_at.to_formatted_s(:iso8601)}"
+    }
   end
 
   private
@@ -203,9 +211,8 @@ class User < ActiveRecord::Base
 
   # returns and adds first_name and last_name to database
   def add_fullname
-    words = self.name.split(" ")
-    self.first_name = words.first
-    self.last_name =  words.last
+    self.first_name = firstname
+    self.last_name =  lastname
   end
 
   #Seeds amount into database on: :create
@@ -232,7 +239,7 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_notifications
-    if rebuild_notification? && has_notifications?
+    if rebuild_cache? && has_notifications?
       unless admin?
         #rebuild user feed every time name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
@@ -244,16 +251,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def rebuild_notification?
-    name_changed? || avatar_changed? && !id_changed?
+  def rebuild_cache?
+    #check if basic info changed and user is not new
+    name_changed? || avatar_changed? || username_changed? && !id_changed?
   end
 
   def has_notifications?
+    #check if user has notifications
     latest_notifications.members.length > 0
   end
 
   #Load data to redis using soulmate after_save
   def load_into_soulmate
+    #Seperate index for each user type
     unless admin?
       if type == "Student"
         soulmate_loader("students")
@@ -266,48 +276,69 @@ class User < ActiveRecord::Base
   end
 
   def soulmate_loader(type)
+    #instantiate soulmate loader to re-generate search index
     loader = Soulmate::Loader.new(type)
-    if avatar
-      image =  avatar.url(:avatar)
-      resume = mini_bio
-    else
-      image= "http://placehold.it/30"
-    end
-    loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-      "link" => profile_path(self)
-      })
+    loader.add(
+      "term" => name,
+      "image" => avatar.url(:avatar),
+      "description" => mini_bio,
+      "id" => id,
+      "data" => {
+        "link" => profile_path(self)
+      }
+    )
   end
 
   def remove_from_soulmate
+    #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("students")
-      loader.remove("id" => id)
+    loader.remove("id" => id)
   end
 
   def increment_counters
+    #Increment counters
     school.students_counter.increment if school && type == "Student"
-    school.students_ids << id if school && type == "Student"
-    school.teachers_ids << id if school && type == "Teacher"
+    #Cache lists for school
+    school.latest_students << user_json if school && type == "Student"
+    school.latest_faculties << user_json if school && type == "Teacher"
+    #Cache sorted set for global leaderboard
     User.latest << user_json unless type == "User"
-    User.popular.add(id, 0) unless type == "User"
-    User.trending.add(id, 0) unless type == "User"
+    User.popular.add(user_json, 1) unless type == "User"
+    User.trending.add(user_json, 1) unless type == "User"
   end
 
   def decrement_counters
+    #Decrement counters
     school.students_counter.decrement if school && school.students_counter.value > 0 && type == "Student"
-    school.students_ids.delete(id) if school && type == "Student"
-    school.teachers_ids.delete(id) if school && type == "Teacher"
+    #delete cached lists for school
+    school.latest_students.delete(user_json) if school && type == "Student"
+    school.latest_faculties.delete(user_json) if school && type == "Teacher"
+    #delete cached sorted set for global leaderboard
     User.latest.delete(user_json) unless type == "User"
-    User.popular.delete(id) unless type == "User"
-    User.trending.delete(id) unless type == "User"
+    User.popular.delete(user_json) unless type == "User"
+    User.trending.delete(user_json) unless type == "User"
   end
 
-  def user_json
-    {
-      id: id,
-      name: name,
-      description: mini_bio,
-      url: profile_path(self)
-    }
+  def update_redis_cache
+    if rebuild_cache? || mini_bio_changed?
+      #get current score
+      popular_score = User.popular.score(user_json)
+      trending_score = User.trending.score(user_json)
+      #Delete cache
+      User.popular.delete(user_json)
+      User.latest.delete(user_json)
+      User.trending.delete(user_json)
+      #Regenerate cache with current score
+      User.popular.add(user_json, popular_score)
+      User.trending.add(user_json, trending_score)
+      User.latest << user_json unless type == "User"
+      #School list cache
+      school.latest_students.delete(user_json) if school && type == "Student"
+      school.latest_faculties.delete(user_json) if school && type == "Teacher"
+      #Regenerate school list
+      school.latest_students << user_json if school && type == "Student"
+      school.latest_faculties << user_json if school && type == "Teacher"
+    end
   end
 
   #Deletes all dependent activities for this user

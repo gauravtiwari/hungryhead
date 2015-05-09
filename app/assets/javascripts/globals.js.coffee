@@ -19,9 +19,9 @@ jQuery(document).ready ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
 	  	.show();
 
-	$('.scrollable').slimScroll height: '300px'
+	$('.scrollable').slimScroll maxHeight: '300px'
 
-	$('.follow-scrollable').slimScroll height: '350px'
+	$('.follow-scrollable').slimScroll maxHeight: '350px'
 
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3

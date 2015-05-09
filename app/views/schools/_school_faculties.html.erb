@@ -6,56 +6,27 @@
         </div>
       </div>
       <div class="auto-overflow">
-        <ul class="trending-list p-t-20 no-style">
-          <li class="m-b-10">
-            <div class="widget-16-header p-b-10 p-l-15">
-            <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-            <div class="pull-left">
-                <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-            </div>
-            <div class="clearfix"></div>
-            </div>
-          </li>
-          <li class="m-b-10">
-            <div class="widget-16-header p-b-10 p-l-15">
-                <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                <div class="pull-left">
-                    <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                    <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-          </li>
-          <li class="m-b-10">
+        <ul class="trending-list p-t-20 full-border-light no-style">
+        <% @school.latest_faculties.each do |user| %>
+         <li class="m-b-10">
            <div class="widget-16-header p-b-10 p-l-15">
-                <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                <div class="pull-left">
-                    <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                    <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-          </li>
-          <li class="m-b-10">
-            <div class="widget-16-header p-b-10 p-l-15">
-                <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">Cl</span>
-                <div class="pull-left">
-                    <p class="all-caps bold  small no-margin overflow-ellipsis ">Clowdy</p>
-                    <p class="small no-margin overflow-ellipsis ">Webarch Sales Analysis</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-          </li>
-
-          <li class="m-b-10">
-            <div class="widget-16-header p-b-10 p-l-15">
-                <div class="pull-right m-t-10 m-r-20">
-                    <p class="all-caps bold  text-brand small no-margin overflow-ellipsis ">See all</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-          </li>
+           <% if user.avatar.present? %>
+             <span class="icon-thumbnail pull-left">
+               <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), src: {retina: user.avatar.url(:avatar) } }, width: "40", height: "40") %>
+             </span>
+           <% else %>
+             <span class="icon-thumbnail placeholder bg-master-light pull-left text-white">
+               <%= user.user_name_badge %>
+             </span>
+           <% end %>
+           <div class="pull-left">
+               <p class="all-caps bold  small no-margin overflow-ellipsis "><%= user.name %></p>
+               <p class="small no-margin overflow-ellipsis "><%= user.mini_bio %></p>
+           </div>
+           <div class="clearfix"></div>
+           </div>
+         </li>
+        <% end %>
         </ul>
       </div>
   </div>

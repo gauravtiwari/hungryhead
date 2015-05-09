@@ -18,7 +18,7 @@ class Share < ActiveRecord::Base
 	list :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
-	after_create :increment_counters
+	after_commit :increment_counters, on: :create
 
 	#Store accessor methods
  	store_accessor :parameters, :shareable_name
@@ -39,25 +39,33 @@ class Share < ActiveRecord::Base
 	private
 
 	def rebuild_cache
+		#rebuild shareable cache counters and sharers ids
 	  UpdateShareCacheJob.perform_later(shareable_id, shareable_type)
 	end
 
 	def increment_counters
+		#Increment counters
 		shareable.shares_counter.increment
-		Idea.popular.increment(shareable_id) if shareable_type == "Idea"
-		User.popular.increment(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
+		#Increment popularity score
+		Idea.popular.increment(shareable.idea_json) if shareable_type == "Idea"
+		User.popular.increment(shareable_type == "Idea" ? shareable.student.user_json : shareable.user.user_json)
+	  #Add sharer_id to shareable cache
 	  shareable.sharers_ids << user_id
 	end
 
 	def decrement_counters
+		#Decrement counters
 		shareable.shares_counter.decrement
-		Idea.popular.decrement(shareable_id) if shareable_type == "Idea"
-		User.popular.decrement(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
+		#Decrement popularity score
+		Idea.popular.decrement(shareable.idea_json) if shareable_type == "Idea"
+		User.popular.decrement(shareable_type == "Idea" ? shareable.student.user_json : shareable.user.user_json)
+		#Delete sharer_id from shareable cache
 	  shareable.sharers_ids.delete(user_id)
 	end
 
 
 	def delete_activity
+		#Delete user feed
 	  DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
 	end
 

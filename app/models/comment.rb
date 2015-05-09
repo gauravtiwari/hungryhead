@@ -74,20 +74,27 @@ class Comment < ActiveRecord::Base
   private
 
   def increment_counters
+    #Increment counters for commentable
     commentable.comments_counter.increment
-    Idea.popular.increment(commentable_id) if commentable_type == "Idea"
-    User.popular.increment(user_id)
+    #Increment popularity score
+    Idea.popular.increment(commentable.idea_json) if commentable_type == "Idea"
+    User.popular.increment(user.user_json)
+    #Cache commenter id
     commentable.commenters_ids << user_id
   end
 
   def decrement_counters
+    #Decrement comments counter
     commentable.comments_counter.decrement if commentable.comments_counter.value > 0
-    Idea.popular.decrement(commentable_id) if commentable_type == "Idea"
-    User.popular.decrement(user_id)
+    #Decrement popularity score
+    Idea.popular.decrement(commentable.idea_json) if commentable_type == "Idea"
+    User.popular.decrement(user.user_json)
+    #delete cached commenter id
     commentable.commenters_ids.delete(user_id)
   end
 
   def delete_notification
+    #Delete activity item from feed
     DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 

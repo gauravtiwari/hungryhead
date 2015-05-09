@@ -40,27 +40,35 @@ class Investment < ActiveRecord::Base
 	private
 
   def cancel_investment
+    #Update idea and user balance
     idea.update_attributes!(fund: {"balance" => idea.balance - amount }) if idea.balance > 0
     user.update_attributes!(fund: {"balance" => user.balance + amount })
   end
 
   def increment_counters
+    #Increment counters
     user.investments_counter.increment
     idea.investors_counter.increment
-    Idea.popular.increment(idea_id)
-    User.popular.increment(idea.student.id)
+    #Increment popularity score
+    Idea.popular.increment(idea.idea_json)
+    User.popular.increment(idea.student.user_json)
+    #Cache investor id into idea
     idea.investors_ids << user.id
   end
 
   def decrement_counters
+    #decrement counters
     user.investments_counter.decrement if user.investments_counter.value > 0
     idea.investors_counter.decrement if idea.investors_counter.value > 0
-    Idea.popular.decrement(idea_id)
-    User.popular.decrement(idea.student.id)
+    #Decrement popularity score
+    Idea.popular.decrement(idea.idea_json)
+    User.popular.decrement(idea.student.user_json)
+    #Remove investor_id from idea cache
     idea.investors_ids.delete(user.id)
   end
 
   def delete_activity
+    #remove activity from database and cache
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 

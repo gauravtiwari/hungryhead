@@ -14,45 +14,34 @@ class Follow < ActiveRecord::Base
 
   #Redis Counters
   def increment_counters
+    #Increment counters
     follower.followings_counter.increment
     followable.followers_counter.increment
+    #Add ids to follower and followable cache
     follower.followings_ids << followable_id if followable_type == "User"
     follower.idea_followings_ids << followable_id if followable_type == "Idea"
     follower.school_followings_ids << followable_id if followable_type == "School"
     followable.followers_ids << follower_id
-    Idea.popular.increment(followable_id) if followable_type == "Idea"
-    User.popular.increment(followable_id) if followable_type == "User"
 
-    #Send stats via pusher
-    publish_stats
+    #Increment popularity score
+    Idea.popular.increment(followable.idea_json) if followable_type == "Idea"
+    User.popular.increment(followable.user_json) if followable_type == "User"
+
   end
 
   def decrement_counters
+    #Decrement counters
     follower.followings_counter.decrement
     followable.followers_counter.decrement
+    #Delete cached ids for follower and followable
     follower.followings_ids.delete(followable_id) if followable_type == "User"
     follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
     follower.school_followings_ids.delete(followable_id) if followable_type == "School"
     followable.followers_ids.delete(follower_id)
+    #Decrement popularity score
+    Idea.popular.decrement(followable.idea_json) if followable_type == "Idea"
+    User.popular.decrement(followable.user_json) if followable_type == "User"
 
-    Idea.popular.decrement(followable_id) if followable_type == "Idea"
-    User.popular.decrement(followable_id) if followable_type == "User"
-
-    #Send stats via pusher
-    publish_stats
-  end
-
-  def publish_stats
-    #Trigger pusher to update stats
-    Pusher.trigger_async("user-stats-#{followable.id}",
-     "user_stats_update",
-       {data:
-         {
-           id: followable.id,
-           followers_count: followable.followers_counter.value
-         }
-       }.to_json
-    )
   end
 
   def delete_notification

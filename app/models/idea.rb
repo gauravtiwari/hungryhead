@@ -60,7 +60,7 @@ class Idea < ActiveRecord::Base
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_commit :increment_counters, on: :create
-  after_save :load_into_soulmate
+  after_save :load_into_soulmate, :update_redis_cache
 
   #Associations
   belongs_to :student, touch: true
@@ -165,6 +165,21 @@ class Idea < ActiveRecord::Base
     published? && everyone?
   end
 
+  def idea_json
+    {
+      id: id,
+      name: name,
+      name_badge: name_badge,
+      pitch: high_concept_pitch,
+      url: idea_path(self),
+      created_at: "#{created_at.to_formatted_s(:iso8601)}"
+    }
+  end
+
+  def rebuild_cache?
+    name_changed? || high_concept_pitch_changed? && !id_changed?
+  end
+
   private
 
   def load_into_soulmate
@@ -188,32 +203,52 @@ class Idea < ActiveRecord::Base
   end
 
   def increment_counters
+    #Increment counters for school and student
     school.ideas_counter.increment
     student.ideas_counter.increment
-    student.ideas_ids <<  id
-    school.ideas_ids << id
+    #Cache latest ideas into a list for user and school, max: 20
+    student.latest_ideas <<  idea_json
+    school.latest_ideas << idea_json
+    #Insert into cache list
     Idea.latest << idea_json
-    Idea.popular.add(id, 0)
-    Idea.trending.add(id, 0)
+    #Insert into cache - popular and trending sorted set
+    Idea.popular.add(idea_json, 1)
+    Idea.trending.add(idea_json, 1)
   end
 
   def decrement_counters
+    #Decrement counters for student and school
     school.ideas_counter.decrement
     student.ideas_counter.decrement
-    student.ideas_ids.delete(id)
-    school.ideas_ids.delete(id)
+    #Remove self from cached list
+    student.latest_ideas.delete(idea_json)
+    school.latest_ideas.delete(idea_json)
+    #Remove self from sorted set
     Idea.latest.delete(idea_json)
-    Idea.popular.delete(id)
-    Idea.trending.delete(id)
+    Idea.popular.delete(idea_json)
+    Idea.trending.delete(idea_json)
   end
 
-  def idea_json
-    {
-      id: id,
-      name: name,
-      pitch: high_concept_pitch,
-      url: idea_path(self)
-    }
+  def update_redis_cache
+    if rebuild_cache?
+      #Get current score
+      popular_score = Idea.popular.score(idea_json)
+      trending_score = Idea.trending.score(idea_json)
+      #Delete cache
+      Idea.popular.delete(idea_json)
+      Idea.latest.delete(idea_json)
+      Idea.trending.delete(idea_json)
+      #Regenerate cache with current score
+      Idea.popular.add(idea_json, popular_score)
+      Idea.trending.add(idea_json, trending_score)
+      Idea.latest << idea_json
+      #School list cache
+      school.latest_ideas.delete(idea_json)
+      student.latest_ideas.delete(idea_json)
+      #Regenerate school list
+      school.latest_ideas << idea_json
+      student.latest_ideas << idea_json
+    end
   end
 
   def delete_activity

@@ -7,6 +7,7 @@ class School < ActiveRecord::Base
 	include Followable
 	include Sluggable
 
+	#Relationship
 	has_many :users
 	has_many :ideas
 
@@ -18,9 +19,9 @@ class School < ActiveRecord::Base
 
 	#Redis Cache counters and ids
 	set :followers_ids
-	list :students_ids
-	list :teachers_ids
-	list :ideas_ids
+	list :latest_students, maxlength: 20, marshal: true, global: true
+	list :latest_faculties, maxlength: 20, marshal: true, global: true
+	list :latest_ideas, maxlength: 20, marshal: true, global: true
 
 	#Counters
 	counter :followers_counter
@@ -61,18 +62,29 @@ class School < ActiveRecord::Base
     UpdateSchoolCacheJob.perform_later(id)
   end
 
+  def latest_ideas
+  	latest_ideas.values.reverse.take(5)
+  end
+
+  def latest_students
+  	latest_students.values.reverse.take(5)
+  end
+
+  def latest_faculties
+  	latest_faculties.values.reverse.take(5)
+  end
+
 	private
 
 	def load_into_soulmate
 		loader = Soulmate::Loader.new("schools")
-		if logo
-		  image =  logo.url(:avatar)
-		  resume = location_list.first
-		else
-		  image= "http://placehold.it/30"
-		end
-		loader.add("term" => name, "image" => image, "description" => resume, "id" => id, "data" => {
-		  "link" => Rails.application.routes.url_helpers.profile_path(self)
+		loader.add(
+			"term" => name,
+			"image" => logo.url(:avatar),
+			"description" => location_list,
+			"id" => id,
+			"data" => {
+		  	"link" => Rails.application.routes.url_helpers.profile_path(self)
 		  })
 	end
 
