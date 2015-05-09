@@ -39,6 +39,8 @@ gem 'forgery'
 #Bulk import
 gem 'activerecord-import'
 
+gem 'order_as_specified'
+
 #Caching
 gem 'identity_cache'
 gem 'cityhash'

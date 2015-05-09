@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
   end
 
   def popular
-    @ideas = Idea.where(id: Idea.popular.members).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.popular_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
       type: 'Popular Ideas',
@@ -43,7 +43,7 @@ class IdeasController < ApplicationController
   end
 
   def trending
-    @ideas = Idea.where(id: Idea.trending.members).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.trending_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
       type: 'Trending Ideas',

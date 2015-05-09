@@ -3,6 +3,7 @@ class Idea < ActiveRecord::Base
   #included modules
   include IdentityCache
   include Redis::Objects
+  extend OrderAsSpecified
   include Rails.application.routes.url_helpers
 
   #Includes concerns
@@ -12,6 +13,7 @@ class Idea < ActiveRecord::Base
   include Sluggable
   include Sharings
   include Activist
+  include Scorable
   include Investable
   include Feedbackable
 

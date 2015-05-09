@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   include IdentityCache
   include Redis::Objects
+  extend OrderAsSpecified
 
   #Concerns for User class
   include Followable
@@ -283,18 +284,18 @@ class User < ActiveRecord::Base
   end
 
   def increment_counters
-    school.students_counter.increment if student?
-    school.students_ids << id if student?
-    school.teachers_ids << id if teacher?
+    school.students_counter.increment if school && type == "Student"
+    school.students_ids << id if school && type == "Student"
+    school.teachers_ids << id if school && type == "Teacher"
     User.latest << user_json unless type == "User"
     User.popular.add(id, 0) unless type == "User"
     User.trending.add(id, 0) unless type == "User"
   end
 
   def decrement_counters
-    school.students_counter.decrement if school.students_counter.value > 0 && student?
-    school.students_ids.delete(id) if student?
-    school.teachers_ids.delete(id) if teacher?
+    school.students_counter.decrement if school && school.students_counter.value > 0 && type == "Student"
+    school.students_ids.delete(id) if school && type == "Student"
+    school.teachers_ids.delete(id) if school && type == "Teacher"
     User.latest.delete(user_json) unless type == "User"
     User.popular.delete(id) unless type == "User"
     User.trending.delete(id) unless type == "User"
