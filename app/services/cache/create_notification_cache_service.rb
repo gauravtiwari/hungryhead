@@ -22,6 +22,7 @@ class CreateNotificationCacheService
     {
       id: @activity.id,
       verb: @activity.verb,
+      type: @activity.class.to_s.downcase,
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),

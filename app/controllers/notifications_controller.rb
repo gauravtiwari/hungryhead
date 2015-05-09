@@ -4,25 +4,31 @@ class NotificationsController < ApplicationController
   before_action :set_user
 
   def index
-    @notifications = current_user.latest_notifications.revrange(0, 100)
+    @notifications = @user.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: @notifications
+    render json: Oj.dump(@notifications, mode: compat)
   end
 
   def ideas
     @idea = Idea.find(params[:id])
     @notifications = @idea.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: @notifications
+    render json: Oj.dump(@notifications, mode: compat)
   end
 
   def mark_as_read
-    @notifications = @user.notifications.order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    @user.notifications.where("parameters ->> 'read' = 'false'").find_each do |notification|
-      notification.read = true
-      notification.save
-    end
-    render :index
+    @notification = params[:type].constantize.find(params[:id])
+    UpdateNotificationCacheService.new(@user, @notification).update
+    @notifications = @idea.latest_notifications.revrange(0, 100)
+    .paginate(:page => params[:page], :per_page => 10)
+    render json: Oj.dump(@notifications, mode: compat)
+  end
+
+  def mark_all_as_read
+    UpdateAllActivityJob.perform_later(@user)
+    @notifications = @idea.latest_notifications.revrange(0, 100)
+    .paginate(:page => params[:page], :per_page => 10)
+    render json: Oj.dump(@notifications, mode: compat)
   end
 
   private

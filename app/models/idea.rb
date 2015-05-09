@@ -242,16 +242,17 @@ class Idea < ActiveRecord::Base
       Idea.popular.add(idea_json, popular_score)
       Idea.trending.add(idea_json, trending_score)
       Idea.latest << idea_json
-      #School list cache
+      #Delete school list cache
       school.latest_ideas.delete(idea_json)
       student.latest_ideas.delete(idea_json)
-      #Regenerate school list
+      #Regenerate school and student ideas list
       school.latest_ideas << idea_json
       student.latest_ideas << idea_json
     end
   end
 
   def delete_activity
+    #Delete idea time from user feed
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
