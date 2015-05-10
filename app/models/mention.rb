@@ -18,12 +18,12 @@ class Mention < ActiveRecord::Base
 
   def increment_counters
     #increment popularity score
-    User.popular.increment(mentionable.user_json) if mentionable_type == "User"
+    User.popular.increment(mentionable_id) if mentionable_type == "User"
   end
 
   def decrement_counters
     #decrement popularity score
-    User.popular.decrement(mentionable.user_json) if mentionable_type == "User"
+    User.popular.decrement(mentionable_id) if mentionable_type == "User"
   end
 
 end

@@ -28,8 +28,8 @@ class Idea < ActiveRecord::Base
   list :commenters_ids
 
   #Set to store trending and popular ideas
-  sorted_set :trending, global: true
-  sorted_set :popular, global: true
+  sorted_set :trending, marshal: true, global: true
+  sorted_set :popular, marshal: true, global: true
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
@@ -212,8 +212,8 @@ class Idea < ActiveRecord::Base
     #Insert into cache list
     Idea.latest << idea_json
     #Insert into cache - popular and trending sorted set
-    Idea.popular.add(idea_json, 1)
-    Idea.trending.add(idea_json, 1)
+    Idea.popular.add(id, 1)
+    Idea.trending.add(id, 1)
   end
 
   def decrement_counters
@@ -225,22 +225,22 @@ class Idea < ActiveRecord::Base
     school.latest_ideas.delete(idea_json)
     #Remove self from sorted set
     Idea.latest.delete(idea_json)
-    Idea.popular.delete(idea_json)
-    Idea.trending.delete(idea_json)
+    Idea.popular.delete(id)
+    Idea.trending.delete(id)
   end
 
   def update_redis_cache
     if rebuild_cache?
       #Get current score
-      popular_score = Idea.popular.score(idea_json)
-      trending_score = Idea.trending.score(idea_json)
+      popular_score = Idea.popular.score(id)
+      trending_score = Idea.trending.score(id)
       #Delete cache
-      Idea.popular.delete(idea_json)
+      Idea.popular.delete(id)
       Idea.latest.delete(idea_json)
-      Idea.trending.delete(idea_json)
+      Idea.trending.delete(id)
       #Regenerate cache with current score
-      Idea.popular.add(idea_json, popular_score)
-      Idea.trending.add(idea_json, trending_score)
+      Idea.popular.add(id, popular_score)
+      Idea.trending.add(id, trending_score)
       Idea.latest << idea_json
       #Delete school list cache
       school.latest_ideas.delete(idea_json)

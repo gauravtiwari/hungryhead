@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
   list :latest_ideas, maxlength: 20, marshal: true
 
   #Sorted set to store popular and latest user
-  sorted_set :trending, global: true
-  sorted_set :popular, global: true
+  sorted_set :trending, marshal: true, global: true
+  sorted_set :popular, marshal: true, global: true
 
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
@@ -301,8 +301,8 @@ class User < ActiveRecord::Base
     school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
     User.latest << user_json unless self.type == "User"
-    User.popular.add(user_json, 1) unless self.type == "User"
-    User.trending.add(user_json, 1) unless self.type == "User"
+    User.popular.add(id, 1) unless self.type == "User"
+    User.trending.add(id, 1) unless self.type == "User"
   end
 
   def decrement_counters
@@ -312,23 +312,23 @@ class User < ActiveRecord::Base
     school.latest_students.delete(user_json) if school_id.present? && self.type == "Student"
     school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
-    User.latest.delete(user_json) unless self.type == "User"
-    User.popular.delete(user_json) unless self.type == "User"
-    User.trending.delete(user_json) unless self.type == "User"
+    User.latest.delete(id) unless self.type == "User"
+    User.popular.delete(id) unless self.type == "User"
+    User.trending.delete(id) unless self.type == "User"
   end
 
   def update_redis_cache
     if rebuild_cache? || mini_bio_changed?
       #get current score
-      popular_score = User.popular.score(user_json)
-      trending_score = User.trending.score(user_json)
+      popular_score = User.popular.score(id)
+      trending_score = User.trending.score(id)
       #Delete cache
-      User.popular.delete(user_json)
+      User.popular.delete(id)
       User.latest.delete(user_json)
-      User.trending.delete(user_json)
+      User.trending.delete(id)
       #Regenerate cache with current score
-      User.popular.add(user_json, popular_score)
-      User.trending.add(user_json, trending_score)
+      User.popular.add(id, popular_score)
+      User.trending.add(id, trending_score)
       User.latest << user_json unless type == "User"
       #School list cache
       school.latest_students.delete(user_json) if school && type == "Student"

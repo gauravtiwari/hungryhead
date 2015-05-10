@@ -50,10 +50,10 @@ class Investment < ActiveRecord::Base
     user.investments_counter.increment
     idea.investors_counter.increment
     #Increment popularity score
-    Idea.popular.increment(idea.idea_json)
-    User.popular.increment(idea.student.user_json)
+    Idea.popular.increment(idea_id)
+    User.popular.increment(idea.student.id)
     #Cache investor id into idea
-    idea.investors_ids << user.id
+    idea.investors_ids << user_id
   end
 
   def decrement_counters
@@ -61,10 +61,10 @@ class Investment < ActiveRecord::Base
     user.investments_counter.decrement if user.investments_counter.value > 0
     idea.investors_counter.decrement if idea.investors_counter.value > 0
     #Decrement popularity score
-    Idea.popular.decrement(idea.idea_json)
-    User.popular.decrement(idea.student.user_json)
+    Idea.popular.decrement(idea_id)
+    User.popular.decrement(idea.student.id)
     #Remove investor_id from idea cache
-    idea.investors_ids.delete(user.id)
+    idea.investors_ids.delete(user_id)
   end
 
   def delete_activity

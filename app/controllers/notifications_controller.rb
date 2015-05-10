@@ -6,14 +6,14 @@ class NotificationsController < ApplicationController
   def index
     @notifications = @user.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: Oj.dump(@notifications, mode: compat)
+    render json: @notifications
   end
 
   def ideas
     @idea = Idea.find(params[:id])
     @notifications = @idea.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: Oj.dump(@notifications, mode: compat)
+    render json: @notifications
   end
 
   def mark_as_read
@@ -21,14 +21,14 @@ class NotificationsController < ApplicationController
     UpdateNotificationCacheService.new(@user, @notification).update
     @notifications = @idea.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: Oj.dump(@notifications, mode: compat)
+    render json: @notifications
   end
 
   def mark_all_as_read
     UpdateAllActivityJob.perform_later(@user)
     @notifications = @idea.latest_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: Oj.dump(@notifications, mode: compat)
+    render json: @notifications
   end
 
   private

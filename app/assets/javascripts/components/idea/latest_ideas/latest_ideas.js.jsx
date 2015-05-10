@@ -98,7 +98,7 @@ var LatestIdeas = React.createClass({
   render: function() {
 
     return (
-      <div className="widget-11-2 m-b-10 panel no-border no-margin widget-loader-circle">
+      <div className="widget-11-2 m-b-10 panel no-border no-margin">
           <div className="panel-heading">
            <div className="panel-title">
             {this.state.type}

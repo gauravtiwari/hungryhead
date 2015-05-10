@@ -43,7 +43,7 @@ class CreateNotificationCacheService
 
   def followers
     followers_ids = @actor.followers_ids.members
-    followers = (@actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s)) ? followers_ids.push(recipient_id) : followers_ids
+    followers = @actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s) ? followers_ids.push(recipient_id) : followers_ids
     User.find(followers_ids)
   end
 

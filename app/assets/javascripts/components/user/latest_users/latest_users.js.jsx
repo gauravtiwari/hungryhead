@@ -98,9 +98,9 @@ var LatestUsers = React.createClass({
   render: function() {
 
     return (
-      <div className="widget-11-2 panel no-border no-margin bg-white">
+      <div className="widget-11-2 panel no-border no-margin bg-white p-b-10">
           <div className="panel-heading">
-           <div className="panel-title">
+           <div className="panel-title b-b b-grey p-b-5">
             {this.state.type}
             </div>
             <div className="panel-controls">

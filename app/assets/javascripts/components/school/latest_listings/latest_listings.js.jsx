@@ -65,7 +65,7 @@ var LatestListings = React.createClass({
   render: function() {
 
     return (
-      <div className="widget-11-2 panel no-border no-margin bg-white">
+      <div className="widget-11-2 panel no-border m-b-10 no-margin bg-white">
           <div className="panel-heading">
            <div className="panel-title">
             {this.state.type}
@@ -81,7 +81,7 @@ var LatestListings = React.createClass({
             </div>
           </div>
           <div className="panel-body full-border-light no-padding">
-            <ul className="trending-list  p-t-10 no-style no-margin" ref="trendingList">
+            <ul className="trending-list p-t-10 no-style no-margin" ref="trendingList">
               <Infinite elementHeight={50}
               containerHeight={200}
               infiniteLoadBeginBottomOffset={150}

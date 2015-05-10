@@ -47,8 +47,8 @@ class Share < ActiveRecord::Base
 		#Increment counters
 		shareable.shares_counter.increment
 		#Increment popularity score
-		Idea.popular.increment(shareable.idea_json) if shareable_type == "Idea"
-		User.popular.increment(shareable_type == "Idea" ? shareable.student.user_json : shareable.user.user_json)
+		Idea.popular.increment(shareable_id) if shareable_type == "Idea"
+		User.popular.increment(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 	  #Add sharer_id to shareable cache
 	  shareable.sharers_ids << user_id
 	end
@@ -57,8 +57,8 @@ class Share < ActiveRecord::Base
 		#Decrement counters
 		shareable.shares_counter.decrement
 		#Decrement popularity score
-		Idea.popular.decrement(shareable.idea_json) if shareable_type == "Idea"
-		User.popular.decrement(shareable_type == "Idea" ? shareable.student.user_json : shareable.user.user_json)
+		Idea.popular.decrement(shareable_id) if shareable_type == "Idea"
+		User.popular.decrement(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 		#Delete sharer_id from shareable cache
 	  shareable.sharers_ids.delete(user_id)
 	end
