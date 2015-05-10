@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def popular
     @users = User.popular_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
-      list: @users,
+      list: @users.map{|user| {id: user.id, name: user.name, url: profile_path(user), description: user.mini_bio}},
       type: 'Popular People',
       next_page: @users.next_page
       }, mode: :compat)
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def trending
     @users = User.trending_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
-      list: @users,
+      list: @users.map{|user| {id: user.id, name: user.name, url: profile_path(user), description: user.mini_bio}},
       type: 'Trending People',
       next_page: @users.next_page
       }, mode: :compat)
