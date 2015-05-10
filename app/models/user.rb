@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
   list :latest_ideas, maxlength: 20, marshal: true
 
   #Sorted set to store popular and latest user
-  sorted_set :trending, marshal: true, global: true
-  sorted_set :popular, marshal: true, global: true
+  sorted_set :trending, global: true
+  sorted_set :popular, global: true
 
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
