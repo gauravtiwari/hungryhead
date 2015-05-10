@@ -23,6 +23,8 @@ jQuery(document).ready ->
 
 	$('.follow-scrollable').slimScroll maxHeight: '350px'
 
+	$('.messages-scrollable').slimScroll height: $(window).height() - 250
+
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
 

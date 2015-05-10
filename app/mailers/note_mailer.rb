@@ -1,8 +1,8 @@
 class NoteMailer < ActionMailer::Base
 
-  def new_idea(idea, user, recipient)
+  def new_note(note, user, recipient)
     @user = user
-    @idea = idea
+    @note = note
     @recipient = recipient
     @subject = "Your friend #{@user.name} shared a note - #{@note.title}"
     mail(:from => @user.email, :to => @recipient.email, :subject => @subject)

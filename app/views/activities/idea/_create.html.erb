@@ -29,7 +29,7 @@
 		        <span class="date semi-bold">
 		            <i class="fa fa-clock"></i>
 			        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
-						<%= time_ago_in_words(activity.created_at) %>
+						<%= local_time_ago(activity.created_at) %>
 					<% end %>
 		        </span>
 		    </h6>

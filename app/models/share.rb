@@ -1,6 +1,5 @@
 class Share < ActiveRecord::Base
 
-	include IdentityCache
 	include Redis::Objects
 
   #Associations
@@ -25,10 +24,6 @@ class Share < ActiveRecord::Base
 
  	#Enumerators to handle status
 	enum status: {pending: 0, shared: 1}
-
-	#Caching Model
-	cache_has_many :votes, :inverse_name => :votable, :embed => true
-	cache_has_many :comments, :inverse_name => :commentable, embed: true
 
 	public
 

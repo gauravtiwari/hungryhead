@@ -1,6 +1,5 @@
 class School < ActiveRecord::Base
 
-	include IdentityCache
 	include Redis::Objects
 
 	#Included concerns
@@ -27,11 +26,6 @@ class School < ActiveRecord::Base
 	counter :followers_counter
 	counter :students_counter
 	counter :ideas_counter
-
-	#Caching Model
-	cache_has_many :followers, :inverse_name => :followable, :embed => true
-	cache_index :slug
-	cache_index :name
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader

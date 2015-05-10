@@ -1,6 +1,5 @@
 class Investment < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   #Associations
@@ -26,10 +25,6 @@ class Investment < ActiveRecord::Base
 
   #Includes modules
   has_merit
-
-  #Caching Model
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
-  cache_has_many :comments, :inverse_name => :commentable, embed: true
 
   public
 

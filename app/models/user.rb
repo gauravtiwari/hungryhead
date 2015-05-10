@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
-  include IdentityCache
+  #redis objects
   include Redis::Objects
+  #order objects in same order as given
   extend OrderAsSpecified
 
   #Concerns for User class
@@ -77,18 +78,6 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :notes, dependent: :destroy
-
-  #Caching Model
-  cache_has_many :activities, :embed => true
-  cache_has_many :followings, :inverse_name => :follower, :embed => true
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_has_many :investments, :embed => true
-  cache_has_many :feedbacks, :embed => true
-
-  #Identity cache fetch index
-  cache_index :school_id
-  cache_index :type
-  cache_index :slug
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader

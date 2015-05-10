@@ -1,8 +1,8 @@
 class Idea < ActiveRecord::Base
 
   #included modules
-  include IdentityCache
   include Redis::Objects
+  #return objects in same order as specificied
   extend OrderAsSpecified
   include Rails.application.routes.url_helpers
 
@@ -69,18 +69,6 @@ class Idea < ActiveRecord::Base
   #Rest of the assocuations
   has_many :idea_messages, dependent: :destroy
 
-  #Caching Model
-  cache_has_many :feedbacks, :embed => true
-  cache_has_many :investments, :embed => true
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
-  cache_has_many :comments, :inverse_name => :commentable, embed: true
-  cache_has_many :shares, :inverse_name => :shareable, embed: true
-  cache_has_many :idea_messages, :embed => true
-
-  cache_index :school_id
-  cache_index :slug
-
   #Includes modules
   has_merit
   has_paper_trail :only => [:name, :description, :elevator_pitch,
@@ -124,7 +112,7 @@ class Idea < ActiveRecord::Base
   end
 
   def name_badge
-    name_split.first + name_split.second
+    (name_split.first + name_split.second).upcase
   end
 
   def user_name

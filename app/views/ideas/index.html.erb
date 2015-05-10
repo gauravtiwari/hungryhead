@@ -77,36 +77,9 @@
 
 
                    </div>
-                   <div class="row">
-                   <div>
-                   <div class="dataTables_info pull-left" id="tableWithExportOptions_info" role="status" aria-live="polite">Showing <b>1 to 5</b> of 57 entries</div>
-
-                   <div class="dataTables_paginate paging_bootstrap pull-right pagination" id="tableWithExportOptions_paginate"><ul>
-                   <li class="prev disabled">
-                    <a href="#"><i class="pg-arrow_left"></i></a>
-                   </li>
-                   <li class="active">
-                    <a href="#">1</a>
-                   </li>
-                   <li>
-                    <a href="#">2</a>
-                  </li>
-                  <li>
-                    <a href="#">3</a>
-                  </li>
-                  <li>
-                    <a href="#">4</a>
-                  </li>
-                  <li>
-                    <a href="#">5</a>
-                  </li>
-                  <li class="next">
-                    <a href="#"><i class="pg-arrow_right"></i></a>
-                  </li>
-                  </ul>
-                  </div>
-                  </div>
-                  </div>
+                 <div class="paging-container p-r-15">
+                     <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+                 </div>
 
                </div>
            </div>

@@ -817,7 +817,8 @@ CREATE TABLE notes (
     status integer,
     user_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -2310,6 +2311,13 @@ CREATE INDEX index_merit_activity_logs_on_action_id ON merit_activity_logs USING
 
 
 --
+-- Name: index_notes_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_notes_on_slug ON notes USING btree (slug);
+
+
+--
 -- Name: index_notes_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2787,4 +2795,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150510084440');
 

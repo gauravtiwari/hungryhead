@@ -1,6 +1,5 @@
 class Feedback < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
   #Includes concerns
   include Commentable
@@ -24,10 +23,6 @@ class Feedback < ActiveRecord::Base
 
   store_accessor :parameters, :point_earned, :views_count
 
-  #Caching Model
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
-  cache_has_many :comments, :inverse_name => :commentable, embed: true
-
   #Hooks
   before_destroy :decrement_counters, :delete_activity
   after_commit :increment_counters, on: :create
@@ -45,7 +40,7 @@ class Feedback < ActiveRecord::Base
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
     #Increment popularity score
-    Idea.popular.increment(idea.idea.id)
+    Idea.popular.increment(idea_id)
     User.popular.increment(idea.student.id)
     #Cache feedbacker id
     idea.feedbackers_ids << user_id

@@ -4,6 +4,7 @@ class CreateNotes < ActiveRecord::Migration
     create_table :notes do |t|
       t.string :title
       t.text :body
+      t.string :slug
       t.integer :status
       t.belongs_to :user, foreign_key: true
 
@@ -11,5 +12,6 @@ class CreateNotes < ActiveRecord::Migration
     end
     add_index :notes, :status, algorithm: :concurrently
     add_index :notes, :user_id, algorithm: :concurrently
+    add_index :notes, :slug, unique: true, algorithm: :concurrently
   end
 end

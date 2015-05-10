@@ -1,6 +1,5 @@
 class Comment < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
@@ -21,9 +20,6 @@ class Comment < ActiveRecord::Base
   #Model Associations
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, touch: true
-
-  #Caching Model
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
 
   #Model Scopes
   default_scope -> { order('created_at DESC') }

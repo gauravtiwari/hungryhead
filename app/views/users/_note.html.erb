@@ -11,7 +11,7 @@
       </div>
 
       <div class="text-master-dark">
-        <%= link_to(your_name(note.user, false), profile_path(note.user), :"data-popover-href" => "#{profile_card_path(note.user)}", class: 'load-card bold') %> shared a note <i class="fa fa-pencil"></i>
+        <%= link_to(your_name(note.user, false), profile_path(note.user), :"data-popover-href" => "#{profile_card_path(note.user)}", class: 'load-card bold') %> shared a note -  <%= link_to(note.title, profile_notes_note_path(@user, note)) %>
 
         <h6>
           <% if note.user.locations %>
@@ -29,7 +29,7 @@
             <span class="time semi-bold">
               <i class="fa fa-clock-o"></i>
                 <%= link_to(note_path(note), class: "text-master") do %>
-                <%= time_ago_in_words(note.created_at) %>
+                <%= local_time_ago(note.created_at) %>
               <% end %>
             </span>
         </h6>

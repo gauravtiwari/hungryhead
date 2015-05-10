@@ -1,13 +1,13 @@
 class Note < ActiveRecord::Base
 
   #Includes Modules
-  include IdentityCache
   include Redis::Objects
 
   belongs_to :user
 
   #Includes concerns
   include Commentable
+  include Sluggable
   include Sharings
   include Votable
 
@@ -20,11 +20,6 @@ class Note < ActiveRecord::Base
   counter :shares_counter
   counter :comments_counter
 
-  #Caching Model
-  cache_has_many :votes, :inverse_name => :votable, :embed => true
-  cache_has_many :comments, :inverse_name => :commentable, embed: true
-  cache_has_many :shares, :inverse_name => :shareable, embed: true
-
   #Model callbacks
   before_destroy :delete_activity
 
@@ -35,6 +30,10 @@ class Note < ActiveRecord::Base
   end
 
   private
+
+  def slug_candidates
+    [:title, [:title, :id]]
+  end
 
   def delete_activity
     DeleteUserFeedJob.perform_later(self.id, self.class.to_s)

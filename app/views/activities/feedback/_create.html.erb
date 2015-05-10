@@ -34,7 +34,7 @@
 		        <span class="time semi-bold">
 		          <i class="fa fa-clock-o"></i>
 			        	<%= link_to(idea_path(activity.trackable), class: "text-master") do %>
-								<%= time_ago_in_words(activity.created_at) %>
+								<%= local_time_ago(activity.created_at) %>
 							<% end %>
 		        </span>
 		    </h6>
@@ -62,7 +62,7 @@
     	<% else %>
 	    	<% if activity.trackable.badged? %>
 		    	<div class="review-badge pull-right">
-		    	  <div class="thumbnail-wrapper displayblock bg-solid d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= activity.user.first_name.capitalize %> Earned <%= activity.trackable.badges.last.custom_fields[:name].downcase %> badge">
+		    	  <div class="thumbnail-wrapper displayblock bg-<%= activity.trackable.badges.last.custom_fields[:bg] %> d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= activity.user.first_name.capitalize %> Earned <%= activity.trackable.badges.last.custom_fields[:name].downcase %> badge">
 		    	      <span class="bold displayblock text-white">
 		    	        <i class="fa fa-<%= activity.trackable.badges.last.custom_fields[:class] %> fs-16"></i>
 		    	      </span>

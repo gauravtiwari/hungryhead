@@ -39,11 +39,8 @@ gem 'forgery'
 #Bulk import
 gem 'activerecord-import'
 
+#order array of records in same order as ids
 gem 'order_as_specified'
-
-#Caching
-gem 'identity_cache'
-gem 'cityhash'
 
 #Inline SVG
 gem 'inline_svg'

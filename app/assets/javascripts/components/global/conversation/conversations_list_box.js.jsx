@@ -87,9 +87,10 @@ var ConversationsListBox = React.createClass({
     }
 
     return (
+      <div className="container p-r-45">
       <div className="conversations-box panel panel-default">
         <div className={conversations_header_classes}>
-          <div className="col-md-4 search-box margin-top">
+          <div className="search-box margin-top">
             <ul className="mailbox-nav no-margin no-padding">
               <li className={this.state.mailbox === 'inbox' ? 'mailbox active' : 'mailbox'}><a href="/conversations?box=inbox">Inbox ({this.state.mailbox_size.inbox_count})</a></li>
               <li className={this.state.mailbox === 'sent' ? 'mailbox active' : 'mailbox'}><a href="/conversations?box=sent">Sent ({this.state.mailbox_size.sentbox_count})</a></li>
@@ -104,6 +105,7 @@ var ConversationsListBox = React.createClass({
             </div>
         </div>
       </div>
+    </div>
       );
 
   },

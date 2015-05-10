@@ -36,7 +36,7 @@ class IdeasController < ApplicationController
   def popular
     @ideas = Idea.popular_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
-      list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
+      list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
       type: 'Popular Ideas',
       next_page: @ideas.next_page
       }, mode: :compat)
@@ -45,7 +45,7 @@ class IdeasController < ApplicationController
   def trending
     @ideas = Idea.trending_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
-      list: @ideas.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), pitch: idea.high_concept_pitch}},
+      list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
       type: 'Trending Ideas',
       next_page: @ideas.next_page
       }, mode: :compat)

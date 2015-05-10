@@ -5,13 +5,11 @@
         <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
           <td class="content-block" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
             <h1 style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 20px; margin: 0; padding: 0;">
-              <%= link_to(profile_url(@user)) do %>
-                <%= @user.name %>
-              <% end %>
+              <%= link_to(@user.name, profile_url(@user)) %>
               has shared a note - <%= @note.title %>
             </h1>
             <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0;">
-              <%= markdownify(@note.body.truncate(limit: 300, escape: false)) %>
+              <%= truncate(@note.body, limit: 300, escape: false) %>
             </p>
           </td>
         </tr>

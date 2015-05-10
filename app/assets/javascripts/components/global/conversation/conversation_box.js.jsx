@@ -88,13 +88,14 @@ var ConversationBox = React.createClass({
     });
     var cx = React.addons.classSet;
     var messages_active_classes = cx({
-      'messages': true,
+      'messages messages-scrollable': true,
       'show': !this.state.replying,
       'hidden': this.state.replying
     });
 
 
   return (
+    <div className="container p-r-45">
     <div className="conversation-box panel panel-default">
       <ConversationHeader mailbox={this.state.mailbox} key={Math.random()} form={this.state.form} />
       <div className="col-md-12 conversations-list-box">
@@ -113,6 +114,7 @@ var ConversationBox = React.createClass({
         </div>
       </div>
     </div>
+  </div>
     );
 
   },

@@ -28,7 +28,7 @@
          ReactRailsUJS.mountComponents();
       </script>
     <% end %>
-  <% end %>
+      <% end %>
       <div class="listing-card-stats">
       <ul class="stastics-list">
         <li>
@@ -47,7 +47,10 @@
     </div>
   </div>
   <% end %>
-  <% end %>
+<% end %>
+<div class="paging-container p-r-15">
+    <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+</div>
 
 </div>
 

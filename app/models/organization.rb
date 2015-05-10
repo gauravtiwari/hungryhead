@@ -1,6 +1,5 @@
 class Organization < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   #Included concerns
@@ -14,14 +13,8 @@ class Organization < ActiveRecord::Base
 
   #Redis Cache counters and ids
   set :followers_ids
-
   #Counters
   counter :followers_counter
-
-  #Caching Model
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_index :slug
-  cache_index :name
 
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
