@@ -2,9 +2,9 @@ class UpdateNotificationCacheService
 
   include Rails.application.routes.url_helpers
 
-  def initialize(user, activity)
+  def initialize(activity)
     @activity = activity #already persist in Postgres
-    @actor = user
+    @actor = activity.user
     @object = activity.trackable
     @target = activity.recipient
   end
@@ -23,16 +23,52 @@ class UpdateNotificationCacheService
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),
-      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
-      unread: false
+      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
   end
 
-  def update_activity(user, activity_item)
-    user.latest_notifications.delete(activity_item)
-    idea.latest_notifications.add(activity_item, @activity.created_at.to_i)
+  def recipient_id
+    if @activity.recipient_type == "User"
+      @activity.recipient_id
+    elsif @activity.recipient_type == "Idea"
+      @activity.recipient.student.id
+    else
+      @activity.recipient.user.id
+    end
   end
 
+  def followers
+    followers_ids = @actor.followers_ids.members
+    followers = @actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s) ? followers_ids.push(recipient_id) : followers_ids
+    User.find(followers_ids)
+  end
+
+  def update_activity(user, activity_item)
+    add_activity_to_user(user, activity_item)
+    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
+    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+    add_activity_to_followers(activity_item) if followers.any?
+  end
+
+  def add_activity_to_user(user, activity_item)
+    user.latest_notifications.remrangebyscore(score_key, score_key)
+    user.latest_notifications.add(activity_item, score_key)
+  end
+
+  def add_activity_to_idea(idea, activity_item)
+    idea.latest_notifications.remrangebyscore(score_key, score_key)
+    idea.latest_notifications.add(activity_item, score_key)
+  end
+
+  def add_activity_to_followers(activity_item)
+    followers.each do |follower|
+      add_activity_to_user(follower, activity_item)
+    end
+  end
+
+  def score_key
+    @activity.created_at.to_i + @activity.id
+  end
 
   def options_for_object(target)
     if @activity.trackable_type == "User"

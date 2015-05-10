@@ -14,6 +14,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cover, :default => ""
       t.string :slug
 
+      t.integer :score
+
       t.string :mini_bio, default: ""
       t.text :about_me, :default => ""
 

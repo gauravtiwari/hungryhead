@@ -90,9 +90,9 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, unless: :name_present?
   before_save :add_username, if: :username_absent?
-  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  after_commit :increment_counters, :seed_fund, :seed_settings, on: :create,  unless: :is_admin
+  after_create :increment_counters, :seed_fund, :seed_settings, unless: :is_admin
+  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -230,10 +230,6 @@ class User < ActiveRecord::Base
       unless admin?
         #rebuild user feed every time name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
-        #Find all followers and followings and update their feed.
-        User.where(id: followers_ids.members | followings_ids.members).find_each do |user|
-          RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(user.id)
-        end
       end
     end
   end

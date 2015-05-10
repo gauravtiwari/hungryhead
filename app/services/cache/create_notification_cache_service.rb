@@ -26,8 +26,7 @@ class CreateNotificationCacheService
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),
-      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}",
-      unread: true
+      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
   end
 
@@ -55,11 +54,11 @@ class CreateNotificationCacheService
   end
 
   def add_activity_to_user(user, activity_item)
-    user.latest_notifications.add(activity_item, @activity.created_at.to_i)
+    user.latest_notifications.add(activity_item, score_key)
   end
 
   def add_activity_to_idea(idea, activity_item)
-    idea.latest_notifications.add(activity_item, @activity.created_at.to_i)
+    idea.latest_notifications.add(activity_item, score_key)
   end
 
   def add_activity_to_followers(activity_item)
@@ -67,6 +66,10 @@ class CreateNotificationCacheService
       add_activity_to_user(follower, activity_item)
       SendNotificationService.new(follower, activity).user_notification
     end
+  end
+
+  def score_key
+    @activity.created_at.to_i + @activity.id
   end
 
   def options_for_object(target)

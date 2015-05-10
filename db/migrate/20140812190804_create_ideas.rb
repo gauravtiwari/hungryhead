@@ -15,6 +15,8 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :logo
       t.string :cover
 
+      t.integer :score
+
       t.string :team_ids, array: true, default: "{}"
       t.string :team_invites_ids, array: true, default: "{}"
 
