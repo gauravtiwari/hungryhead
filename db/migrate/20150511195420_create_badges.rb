@@ -3,8 +3,10 @@ class CreateBadges < ActiveRecord::Migration
   def change
     create_table :badges do |t|
       t.references :badgeable, polymorphic: true, null: false
+      t.references :user, foreign_key: true, null: false
+
       t.string :badge_name, null: false, default: ""
-      t.integer :badge_point, null: false, default: ""
+
       t.string :event, null: false, default: ""
       t.string :description
 

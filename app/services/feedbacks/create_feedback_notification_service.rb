@@ -16,7 +16,7 @@ class CreateFeedbackNotificationService
     )
 
     #Cache notification to user/followers feed
-    CreateNotificationCacheService.new(activity).create
+    CreateNotificationCacheService.new(@activity).create
 
     #Call mention service if any mentionable object is present?
     if @feedback.body.scan(/@\w+/).present?

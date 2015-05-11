@@ -6,7 +6,7 @@ module Badgeable
     has_many :badges, as: :badgeable, dependent: :destroy
   end
 
-  def add_badge! args, options = {}
+  def add_badge! args
     badges.new(args)
   end
 
