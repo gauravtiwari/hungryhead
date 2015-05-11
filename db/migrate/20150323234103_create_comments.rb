@@ -7,7 +7,6 @@ class CreateComments < ActiveRecord::Migration
       t.text :body, null: false, default: ""
 
       t.integer :score, null: false, default: 0
-      t.integer :views, null: false, default: 0
 
       t.references :user, :null => false
       t.integer :parent_id, :lft, :rgt
