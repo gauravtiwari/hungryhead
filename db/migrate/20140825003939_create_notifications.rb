@@ -4,12 +4,17 @@ class CreateNotifications < ActiveRecord::Migration
   # Create table
   def self.up
     create_table :notifications do |t|
-      t.belongs_to :trackable, :polymorphic => true
-      t.belongs_to :user
-      t.string  :key
+
+      t.belongs_to :trackable, :polymorphic => true , null: false
+
+      t.belongs_to :user, null: false
+      t.string  :key, null: false, default: ""
+
       t.jsonb    :parameters, default: "{}"
       t.boolean :published, default: true
-      t.belongs_to :recipient, :polymorphic => true
+
+      t.belongs_to :recipient, :polymorphic => true , null: false
+
       t.timestamps null: false
     end
 

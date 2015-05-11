@@ -29,17 +29,19 @@ class User < ActiveRecord::Base
   set :followings_ids
   set :idea_followings_ids
   set :school_followings_ids
-  list :latest_ideas, maxlength: 20, marshal: true
 
-  #Sorted set to store popular and latest user
-  sorted_set :trending, global: true
-  sorted_set :popular, global: true
+  #Latest ideas
+  list :latest_ideas, maxlength: 5, marshal: true
 
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
-  sorted_set :latest_notifications, maxlength: 100, marshal: true
+  sorted_set :latest_notifications, marshal: true
+
+  #Sorted set to store trending ideas
+  sorted_set :leaderboard, global: true
+  sorted_set :trending, global: true
 
   #Redis counters to cache total followers, followings,
   #feedbacks, investments and ideas
@@ -92,8 +94,8 @@ class User < ActiveRecord::Base
   before_save :add_fullname, unless: :name_present?
   before_save :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  after_create :seed_fund, :seed_settings, unless: :is_admin
-  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
+  before_save :seed_fund, :seed_settings, unless: :is_admin
+  after_save :load_into_soulmate, unless: :is_admin
   after_commit :increment_counters, on: :create
 
   #Model Validations
@@ -169,6 +171,31 @@ class User < ActiveRecord::Base
     }
   end
 
+  def rebuild_notifications
+    if rebuild_cache? && has_notifications?
+      unless admin?
+        #rebuild user feed every time name and avatar update.
+        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
+      end
+    end
+  end
+
+  def update_redis_cache
+    if rebuild_cache? || mini_bio_changed?
+      #Delete cache
+      User.latest.delete(user_json)
+      #Regenerate cache with current score
+      User.latest << user_json unless type == "User"
+      #School list cache
+      school.latest_students.delete(user_json) if school && type == "Student"
+      school.latest_faculties.delete(user_json) if school && type == "Teacher"
+      #Regenerate school list
+      school.latest_students << user_json if school && type == "Student"
+      school.latest_faculties << user_json if school && type == "Teacher"
+    end
+  end
+
+
   private
 
   #returns if a user is admin
@@ -227,15 +254,6 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  def rebuild_notifications
-    if rebuild_cache? && has_notifications?
-      unless admin?
-        #rebuild user feed every time name and avatar update.
-        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
-      end
-    end
-  end
-
   def rebuild_cache?
     #check if basic info changed and user is not new
     name_changed? || avatar_changed? || username_changed? && !id_changed?
@@ -288,8 +306,6 @@ class User < ActiveRecord::Base
     school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
     User.latest << user_json unless self.type == "User"
-    User.popular.add(id, 1) unless self.type == "User"
-    User.trending.add(id, 1) unless self.type == "User"
   end
 
   def decrement_counters
@@ -300,30 +316,6 @@ class User < ActiveRecord::Base
     school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
     User.latest.delete(id) unless self.type == "User"
-    User.popular.delete(id) unless self.type == "User"
-    User.trending.delete(id) unless self.type == "User"
-  end
-
-  def update_redis_cache
-    if rebuild_cache? || mini_bio_changed?
-      #get current score
-      popular_score = User.popular.score(id)
-      trending_score = User.trending.score(id)
-      #Delete cache
-      User.popular.delete(id)
-      User.latest.delete(user_json)
-      User.trending.delete(id)
-      #Regenerate cache with current score
-      User.popular.add(id, popular_score)
-      User.trending.add(id, trending_score)
-      User.latest << user_json unless type == "User"
-      #School list cache
-      school.latest_students.delete(user_json) if school && type == "Student"
-      school.latest_faculties.delete(user_json) if school && type == "Teacher"
-      #Regenerate school list
-      school.latest_students << user_json if school && type == "Student"
-      school.latest_faculties << user_json if school && type == "Teacher"
-    end
   end
 
   #Deletes all dependent activities for this user

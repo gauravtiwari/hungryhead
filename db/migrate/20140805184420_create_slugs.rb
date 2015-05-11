@@ -3,7 +3,8 @@ class CreateSlugs < ActiveRecord::Migration
   def change
     create_table :slugs do |t|
       t.string   :slug,           :null => false
-      t.belongs_to :sluggable, polymorphic: true, index: true
+      t.belongs_to :sluggable, polymorphic: true, index: true, null: false
+
       t.string   :scope
       t.timestamps null: false
     end

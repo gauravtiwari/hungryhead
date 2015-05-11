@@ -2,7 +2,7 @@ class CreateAuthentications < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table :authentications do |t|
-      t.references :user, index: true
+      t.references :user, index: true, null: false
       t.string :provider
       t.string :uid
       t.string :access_token

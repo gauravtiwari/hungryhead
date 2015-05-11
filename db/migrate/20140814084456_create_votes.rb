@@ -2,8 +2,8 @@ class CreateVotes < ActiveRecord::Migration
   disable_ddl_transaction!
   def self.up
     create_table :votes do |t|
-      t.references :votable, :polymorphic => true
-      t.references :voter, :polymorphic => true
+      t.references :votable, :polymorphic => true, null: false
+      t.references :voter, :polymorphic => true, null: false
       t.timestamps null: false
     end
 

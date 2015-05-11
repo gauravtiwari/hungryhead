@@ -21,10 +21,6 @@ class Vote < ActiveRecord::Base
   def increment_counter
     #Increment votes counter
     votable.votes_counter.increment
-    #Increment score for voter and idea
-    Idea.popular.increment(votable_id) if votable_type == "Idea"
-    User.popular.increment(voter_id)
-    #Add voter_id to cache
     votable.voters_ids << voter_id
   end
 
@@ -42,10 +38,6 @@ class Vote < ActiveRecord::Base
   def decrement_counter
     #Decrement score for votable and decrement votes counter
     votable.votes_counter.decrement if votable.votes_counter.value > 0
-    Idea.popular.decrement(votable_id) if votable_type == "Idea"
-    #Decrement popularity score for user
-    User.popular.decrement(voter_id)
-    #Remove voter_id from votable cache
     votable.voters_ids.delete(voter_id)
   end
 

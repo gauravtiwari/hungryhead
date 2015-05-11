@@ -2,9 +2,9 @@ class CreateMentions < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table :mentions do |t|
-      t.belongs_to :mentionable, polymorphic: true
-      t.belongs_to :mentioner, polymorphic: true
-      t.belongs_to :user, index: true, foreign_key: true
+      t.belongs_to :mentionable, null: false, polymorphic: true
+      t.belongs_to :mentioner, null: false, polymorphic: true
+      t.belongs_to :user, index: true, null: false, foreign_key: true
       t.timestamps null: false
     end
 

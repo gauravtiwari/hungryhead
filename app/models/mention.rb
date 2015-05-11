@@ -6,24 +6,13 @@ class Mention < ActiveRecord::Base
   belongs_to :user
 
   #Model callbacks
-  before_destroy :delete_notification, :decrement_counters
-  after_commit :increment_counters, on: :create
+  before_destroy :delete_notification
 
   private
 
   def delete_notification
     #Delete notification
     DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
-  end
-
-  def increment_counters
-    #increment popularity score
-    User.popular.increment(mentionable_id) if mentionable_type == "User"
-  end
-
-  def decrement_counters
-    #decrement popularity score
-    User.popular.decrement(mentionable_id) if mentionable_type == "User"
   end
 
 end

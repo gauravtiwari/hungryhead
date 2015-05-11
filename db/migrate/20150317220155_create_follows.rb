@@ -2,8 +2,8 @@ class CreateFollows < ActiveRecord::Migration
   disable_ddl_transaction!
   def up
     create_table :follows do |t|
-      t.references :followable, polymorphic: true
-      t.references :follower, polymorphic: true
+      t.references :followable, polymorphic: true, null: false
+      t.references :follower, polymorphic: true, null: false
       t.timestamps null: false
     end
 

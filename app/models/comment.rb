@@ -15,6 +15,9 @@ class Comment < ActiveRecord::Base
   counter :votes_counter
   list :voters_ids
 
+  #rank of comment
+  sorted_set :leaderboard, global: true
+
   after_commit :increment_counters, on: :create
   before_destroy :decrement_counters, :delete_notification
 

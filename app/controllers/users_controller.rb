@@ -85,6 +85,8 @@ class UsersController < ApplicationController
           format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
           format.json { render :show, status: :ok }
         end
+        @user.update_redis_cache
+        @user.rebuild_notifications
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }

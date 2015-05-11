@@ -15,10 +15,15 @@ class Note < ActiveRecord::Base
   list :voters_ids
   list :commenters_ids
   list :sharers_ids
+
   #Counters
   counter :votes_counter
   counter :shares_counter
   counter :comments_counter
+  counter :views_counter
+
+  #rank
+  sorted_set :leaderboard, global: true
 
   #Model callbacks
   after_commit :increment_counter, :create_activity, on: :create

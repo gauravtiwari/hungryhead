@@ -13,6 +13,8 @@ class Share < ActiveRecord::Base
 	#redis caching
 	counter :votes_counter
 	counter :comments_counter
+
+	#cached ids
 	list :voters_ids
 	list :commenters_ids
 
@@ -41,9 +43,6 @@ class Share < ActiveRecord::Base
 	def increment_counters
 		#Increment counters
 		shareable.shares_counter.increment
-		#Increment popularity score
-		Idea.popular.increment(shareable_id) if shareable_type == "Idea"
-		User.popular.increment(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 	  #Add sharer_id to shareable cache
 	  shareable.sharers_ids << user_id
 	end
@@ -55,9 +54,6 @@ class Share < ActiveRecord::Base
 	def decrement_counters
 		#Decrement counters
 		shareable.shares_counter.decrement
-		#Decrement popularity score
-		Idea.popular.decrement(shareable_id) if shareable_type == "Idea"
-		User.popular.decrement(shareable_type == "Idea" ? shareable.student.id : shareable.user.id)
 		#Delete sharer_id from shareable cache
 	  shareable.sharers_ids.delete(user_id)
 	end

@@ -11,6 +11,9 @@ class Feedback < ActiveRecord::Base
   list :voters_ids
   list :commenters_ids
 
+  #Rank
+  sorted_set :leaderboard, global: true
+
   #Includes concerns
   include Commentable
   include Sharings
@@ -32,6 +35,12 @@ class Feedback < ActiveRecord::Base
   #Hooks
   before_destroy :decrement_counters, :delete_activity
   after_commit :increment_counters, on: :create
+
+  public
+
+  def can_score?
+    true
+  end
 
   private
 
