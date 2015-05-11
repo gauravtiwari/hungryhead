@@ -18,7 +18,7 @@ class Investment < ActiveRecord::Base
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :remove_badge, :delete_activity
-  after_commit  :update_investment, :increment_counters, :award_badge, :create_activity,  on: :create
+  after_commit  :update_investment, :increment_counters, :create_activity, :award_badge,  on: :create
 
   #Store accessor methods
   store_accessor :parameters, :point_earned, :views_count
@@ -60,11 +60,11 @@ class Investment < ActiveRecord::Base
   end
 
   def award_badge
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.first_investment?
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.investments_counter.value == 0
   end
 
   def remove_badge
-    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.first_investment?
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.investments_counter.value == 0
   end
 
   def decrement_counters

@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+
   before_filter :authenticate_user!
   before_filter :load_votable, only: [:vote, :voters]
 
@@ -13,6 +14,7 @@ class VotesController < ApplicationController
           voted: @votable.voted?(current_user),
           votes_count: @votable.votes_counter.value
         }
+        expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}-user-#{current_user.id}")
       else
         render json: @vote.errors, status: :unprocessable_entity
       end

@@ -20,6 +20,8 @@ class CommentsController < ApplicationController
           "new_comment",
           { data: render(:show)}
         )
+        #Expire activities fragment for trackable
+        expire_fragment("activities/activity-#{@comment.commentable_type}-#{@comment.commentable_id}-user-#{current_user.id}")
       else
         respond_to do |format|
           format.json { render json: @comment.errors,  status: :unprocessable_entity }

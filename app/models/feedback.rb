@@ -25,7 +25,7 @@ class Feedback < ActiveRecord::Base
 
   #Hooks
   before_destroy :decrement_counters, :remove_badge, :delete_activity
-  after_commit :create_activity, :increment_counters, :award_badge, on: :create
+  after_commit :increment_counters, :create_activity, :award_badge, on: :create
 
   public
 
@@ -62,13 +62,13 @@ class Feedback < ActiveRecord::Base
   end
 
   def award_badge
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.first_feedback?
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedback_30?
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.feedbacks_counter.value == 0
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedbacks_counter.value == 29
   end
 
   def remove_badge
-    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.first_feedback?
-    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedback_30?
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.feedbacks_counter.value == 0
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedbacks_counter.value == 29
   end
 
   def delete_activity
