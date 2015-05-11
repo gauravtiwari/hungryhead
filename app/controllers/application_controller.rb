@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -17,8 +16,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me, :password_confirmation) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :username, :terms_accepted, :email, :password, :password_confirmation, :current_password) }
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:name, :password, :password_confirmation,
-             :invitation_token)
+      u.permit(:name, :password, :password_confirmation, :invitation_token)
     end
   end
 
@@ -35,10 +33,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin_user!
     authenticate_user!
-    unless current_user.admin?
-      flash[:alert] = "This area is restricted to administrators only."
-      redirect_to root_path
-    end
+    redirect_to root_path, alert: "This area is restricted to administrators only." unless current_user.admin?
   end
 
   def current_admin_user
@@ -47,15 +42,16 @@ class ApplicationController < ActionController::Base
   end
 
   def check_logged_in
-    unless !user_signed_in?
-      flash[:alert] = "You are already logged in"
-      redirect_to root_path
-    end
+    redirect_to root_path, alert:  "You are already logged in" unless !user_signed_in?
   end
 
 
   def info_for_paper_trail
-    { user_name: current_user.name, user_avatar: current_user.avatar.url(:avatar), owner_url: profile_path(current_user) } if current_user
+    {
+      user_name: current_user.name,
+      user_avatar: current_user.avatar.url(:avatar),
+      owner_url: profile_path(current_user)
+    } if current_user
   end
 
   def check_terms
