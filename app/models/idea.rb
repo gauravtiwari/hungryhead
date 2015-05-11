@@ -16,6 +16,7 @@ class Idea < ActiveRecord::Base
   include Scorable
   include Investable
   include Feedbackable
+  include Badgeable
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -27,13 +28,15 @@ class Idea < ActiveRecord::Base
   list :investors_ids
   list :commenters_ids
 
-  #Set to store trending and leaderboard ideas
-  sorted_set :trending, global: true
+  #Set to store trending
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
   sorted_set :latest_notifications, maxlength: 100, marshal: true
+
+  #Leaderboard ideas
   sorted_set :leaderboard, global: true
+  sorted_set :trending, global: true
 
   #Redis Cache counters
   counter :followers_counter

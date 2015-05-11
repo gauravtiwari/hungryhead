@@ -2,10 +2,6 @@ module Scorable
 
   extend ActiveSupport::Concern
 
-  included do
-    after_update :update_leaderboard
-  end
-
   class_methods do
     # load top 20 users
     def popular_20
@@ -18,13 +14,16 @@ module Scorable
     end
   end
 
-  def update_leaderboard
+  def increment_points!(point)
+    self.score += point
+    self.save!
     self.class.leaderboard[id] = score
   end
 
-  def add_points!(point)
-    self.score = point
+  def increment_views!
+    self.views += point
     self.save!
+    self.class.trending[id] = views
   end
 
 end

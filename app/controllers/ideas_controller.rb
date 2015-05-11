@@ -64,10 +64,6 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     publish_idea_service.on :idea_published do |idea|
-      if !current_user.entrepreneur?
-       current_user.entrepreneur!
-       AwardBadgeJob.set(wait: 5.seconds).perform_later(current_user.id, 2, "Idea_#{idea.id}")
-      end
       render :publish
       CreateActivityJob.set(wait: 5.seconds).perform_later(idea.id, idea.class.to_s)
     end

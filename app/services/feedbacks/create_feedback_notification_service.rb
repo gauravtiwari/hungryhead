@@ -25,12 +25,12 @@ class CreateFeedbackNotificationService
 
     # Award badge if published first feedback
     if @user.first_feedback?
-      AwardBadgeJob.set(wait: 5.seconds).perform_later(@user.id, 3, "Feedback_#{@feedback.id}")
+      #Add badge
     end
 
     # Award badge if published 30 feedbacks
     if @user.feedback_10?
-      AwardBadgeJob.set(wait: 5.seconds).perform_later(@user.id, 5, "Feedback_#{@feedback.id}")
+      #Added badge
     end
 
   end

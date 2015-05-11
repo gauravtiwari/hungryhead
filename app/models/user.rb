@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
+  include Badgeable
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -194,7 +195,6 @@ class User < ActiveRecord::Base
       school.latest_faculties << user_json if school && type == "Teacher"
     end
   end
-
 
   private
 

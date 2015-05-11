@@ -25,7 +25,7 @@ class CreateCommentNotificationService
 
     # Award badge if published 30 comments
     if @user.comments_30?
-      AwardBadgeJob.set(wait: 5.seconds).perform_later(@user.id, 6, "Comment_#{@comment.id}")
+      #added badge
     end
 
 	end

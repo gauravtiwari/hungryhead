@@ -10,6 +10,7 @@ class Note < ActiveRecord::Base
   include Sluggable
   include Sharings
   include Votable
+  include Scorable
 
   #Redis counters and lists
   list :voters_ids
@@ -24,6 +25,7 @@ class Note < ActiveRecord::Base
 
   #rank
   sorted_set :leaderboard, global: true
+  sorted_set :trending, global: true
 
   #Model callbacks
   after_commit :increment_counter, :create_activity, on: :create

@@ -24,11 +24,6 @@ class Vote < ActiveRecord::Base
     votable.voters_ids << voter_id
   end
 
-  def award_badge
-    user_id = votable_type == "Idea" ? votable.student.id : votable.user.id
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user_id, 3, "#{votable_type}_#{votable_id}") if votable.most_voted?
-  end
-
   #Enque notification after commit
   def create_notification
     CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)

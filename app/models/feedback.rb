@@ -13,12 +13,14 @@ class Feedback < ActiveRecord::Base
 
   #Rank
   sorted_set :leaderboard, global: true
+  sorted_set :trending, global: true
 
   #Includes concerns
   include Commentable
   include Sharings
   include Votable
   include Mentioner
+  include Scorable
 
   #Associations
   belongs_to :idea, touch: true
