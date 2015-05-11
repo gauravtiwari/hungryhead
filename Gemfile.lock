@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/krisleech/wisper-activejob.git
+  revision: ab4e020561863dc4781e1432992c34199014525d
+  specs:
+    wisper-activejob (0.0.1)
+      rails (~> 4.2)
+      wisper
+
+GIT
   remote: git://github.com/mailboxer/mailboxer.git
   revision: 51fd6391592aace8a8eb3d1b1a761a9bea81fe1b
   specs:
@@ -816,3 +824,4 @@ DEPENDENCIES
   wicked
   will_paginate
   wisper
+  wisper-activejob!

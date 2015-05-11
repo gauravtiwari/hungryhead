@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
 
   before_action :authenticate_user!
-  before_filter :find_comment, only: [:vote, :update]
-  before_filter :check_commentables, only: [:index, :create]
-  after_action :verify_authorized, :only => [:destroy, :update]
+  before_action :check_commentables, only: [:create_comment_service]
+
+  #Add pundit authorization to delete comment
+  after_action :verify_authorized, :only => [:destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
@@ -12,27 +13,26 @@ class CommentsController < ApplicationController
   end
 
   def create
-    if @commentables.include? params[:comment][:commentable_type]
-      @commentable = params[:comment][:commentable_type].safe_constantize.find(params[:comment][:commentable_id])
-      @comment = CreateCommentService.new(comment_params, @commentable, current_user).create
-      if @comment.save
-        Pusher.trigger_async("#{@comment.commentable_type}-#{@comment.commentable_id}-comments",
-          "new_comment",
-          { data: render(:show)}
-        )
-        #Expire activities fragment for trackable
-        expire_fragment("activities/activity-#{@comment.commentable_type}-#{@comment.commentable_id}-user-#{current_user.id}")
-      else
-        respond_to do |format|
-          format.json { render json: @comment.errors,  status: :unprocessable_entity }
-        end
-      end
+    #If comment created publish via pusher
+    create_comment_service.on :success do |comment|
+      Pusher.trigger_async("#{comment.commentable_type}-#{comment.commentable_id}-comments",
+        "new_comment",
+        { data: render(:show)}
+      )
+    end
+    #Subscribe to create activity
+    create_comment_service.subscribe( CreateActivityJob.new,
+                                on: :create_activity, async: true )
 
-    else
+    #If error render errors
+    create_comment_service.on :error do |comment|
       respond_to do |format|
-       format.json { render json: {error: 'Sorry, unable to comment on this entity'}, status: :unprocessable_entity }
+        format.json { render json: comment.errors,  status: :unprocessable_entity }
       end
     end
+
+    #Call the comment creation service
+    create_comment_service.call
   end
 
   def destroy
@@ -42,6 +42,12 @@ class CommentsController < ApplicationController
     render json: {message: "Comment deleted", deleted: true}
   end
 
+  protected
+
+  def create_comment_service
+    @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
+  end
+
   private
 
   def comment_params
@@ -49,11 +55,18 @@ class CommentsController < ApplicationController
   end
 
   def check_commentables
+    commentable_type = params[:comment][:commentable_type]
+    commentable_id = params[:comment][:commentable_id]
     @commentables = ["Idea", "Feedback", "Investment", "Note", "Share"]
-  end
-
-  def find_comment
-    @comment = Comment.find(params[:id])
+    if @commentables.include? params[:comment][:commentable_type]
+      @commentable = commentable_type.safe_constantize.find(commentable_id)
+    else
+      respond_to do |format|
+       format.json { render json: {
+        error: 'Sorry, unable to comment on this entity'
+        }, status: :unprocessable_entity }
+      end
+    end
   end
 
 end
