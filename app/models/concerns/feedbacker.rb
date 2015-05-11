@@ -14,4 +14,12 @@ module Feedbacker
     Feedback.where(id: id)
   end
 
+  def first_feedback?
+    feedbacks_counter.value == 1
+  end
+
+  def feedback_30?
+    feedbacks_counter.value == 30
+  end
+
 end

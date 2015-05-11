@@ -2,8 +2,8 @@ class Share < ActiveRecord::Base
 
 	include Redis::Objects
 
-  #Associations
-  belongs_to :shareable, polymorphic: true
+	#Associations
+	belongs_to :shareable, polymorphic: true
 	belongs_to :user, touch: true
 
 	#Includes concerns
@@ -17,12 +17,12 @@ class Share < ActiveRecord::Base
 	list :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
-	after_commit :increment_counters, on: :create
+	after_commit :increment_counters, :create_activity, on: :create
 
 	#Store accessor methods
- 	store_accessor :parameters, :shareable_name
+		store_accessor :parameters, :shareable_name
 
- 	#Enumerators to handle status
+		#Enumerators to handle status
 	enum status: {pending: 0, shared: 1}
 
 	public
@@ -48,6 +48,10 @@ class Share < ActiveRecord::Base
 	  shareable.sharers_ids << user_id
 	end
 
+	def create_activity
+		CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+	end
+
 	def decrement_counters
 		#Decrement counters
 		shareable.shares_counter.decrement
@@ -61,7 +65,7 @@ class Share < ActiveRecord::Base
 
 	def delete_activity
 		#Delete user feed
-	  DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+	  DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
 	end
 
 end

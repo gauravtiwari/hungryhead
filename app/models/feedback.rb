@@ -24,8 +24,8 @@ class Feedback < ActiveRecord::Base
   store_accessor :parameters, :point_earned, :views_count
 
   #Hooks
-  before_destroy :decrement_counters, :delete_activity
-  after_commit :increment_counters, on: :create
+  before_destroy :decrement_counters, :remove_badge, :delete_activity
+  after_commit :create_activity, :increment_counters, :award_badge, on: :create
 
   public
 
@@ -57,9 +57,23 @@ class Feedback < ActiveRecord::Base
     idea.feedbackers_ids.delete(user_id)
   end
 
+  def create_activity
+    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+  end
+
+  def award_badge
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.first_feedback?
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedback_30?
+  end
+
+  def remove_badge
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.first_feedback?
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedback_30?
+  end
+
   def delete_activity
     #Delete activity item from feed
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

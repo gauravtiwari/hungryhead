@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 
   #Callbacks for storing cache in redis
   before_destroy :decrement_counter, :delete_notification
-  after_commit :increment_counter, on: :create
+  after_commit :increment_counter, :create_notification, :expire_activity_cache, on: :create
 
   private
 
@@ -28,6 +28,17 @@ class Vote < ActiveRecord::Base
     votable.voters_ids << voter_id
   end
 
+  #Enque notification after commit
+  def create_notification
+    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+  end
+
+  #Expire activity cache after commit
+  def expire_activity_cache
+    expire_fragment("activities/activity-#{votable_type}-#{votable_id}-user-#{voter.id}")
+  end
+
+  #Rollback counters for votable
   def decrement_counter
     #Decrement score for votable and decrement votes counter
     votable.votes_counter.decrement if votable.votes_counter.value > 0
@@ -38,9 +49,10 @@ class Vote < ActiveRecord::Base
     votable.voters_ids.delete(voter_id)
   end
 
+  #Delete notification before destroying vote
   def delete_notification
     #delete notification if record is destroyed
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

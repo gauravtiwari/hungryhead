@@ -6,29 +6,41 @@ class FollowsController < ApplicationController
   before_action :load_followable
 
   def create
-    if @followable.followers_ids.members.include?(current_user.id.to_s)
-      @follow = CreateFollowService.new(current_user, @followable).unfollow
-      skip_authorization
+    if @followable.followed_by?(current_user)
+     unfollow
+    else
+     follow
+    end
+  end
+
+  def follow
+    @follow = current_user.followings.new(followable: @followable)
+    authorize @follow.follower
+    if @follow.save
       render json: {
-        follow: @followable.followers_ids.members.include?(current_user.id.to_s),
+        follow: @followable.followed_by?(current_user),
         followers_count: @followable.followers_counter.value
       }
     else
-      @follow = CreateFollowService.new(current_user, @followable).follow
-      authorize @follow.follower
-      if @follow.save
-        render json: {
-          follow: @followable.followers_ids.members.include?(current_user.id.to_s),
-          followers_count: @followable.followers_counter.value
-        }
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless @follow.followable_type == "School"
-      else
-        respond_to do |format|
-          format.json {render json: @follow.errors, status: unprocessable_entity}
-        end
+      respond_to do |format|
+        format.json {render json: @follow.errors, status: unprocessable_entity}
       end
     end
+  end
 
+  def unfollow
+    @follow = current_user.followings.where(followable: @followable).first
+    authorize @follow.follower
+    if @follow.destroy
+      render json: {
+        follow: @followable.followed_by?(current_user),
+        followers_count: @followable.followers_counter.value
+      }
+    else
+      respond_to do |format|
+        format.json {render json: @follow.errors, status: unprocessable_entity}
+      end
+    end
   end
 
   def followers

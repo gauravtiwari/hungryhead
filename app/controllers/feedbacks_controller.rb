@@ -36,7 +36,6 @@ class FeedbacksController < ApplicationController
     authorize @feedback
     respond_to do |format|
       if @feedback.save
-        CreateActivityJob.set(wait: 2.seconds).perform_later(@feedback.id, @feedback.class.to_s)
         format.json { render :show, status: :created}
       else
         format.json { render json: @feedback.errors, status: :unprocessable_entity }
@@ -45,11 +44,16 @@ class FeedbacksController < ApplicationController
   end
 
   def rate
-    @feedback.badged! if !@feedback.badged?
-    @feedback.add_badge(params[:badge].to_i)
-    AwardBadgeJob.set(wait: 10.seconds).perform_later(@feedback.user.id, params[:badge].to_i, "Feedback_#{@feedback.id}")
-    @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
-    render :rate, locals: {activity: @activity}
+    feedback_badges = [15, 16, 17, 18, 19]
+    if feedback_badges.include?(params[:badge].to_i)
+      @feedback.badged! if !@feedback.badged?
+      @feedback.add_badge(params[:badge].to_i)
+      AwardBadgeJob.set(wait: 10.seconds).perform_later(@feedback.user.id, params[:badge].to_i, "Feedback_#{@feedback.id}")
+      @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
+      render :rate, locals: {activity: @activity}
+    else
+      render json: {error: "Badge does not exist for this entity", status: :unprocessable_entity }
+    end
   end
 
   # PATCH/PUT /feedbacks/1

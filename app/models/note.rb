@@ -21,7 +21,8 @@ class Note < ActiveRecord::Base
   counter :comments_counter
 
   #Model callbacks
-  before_destroy :delete_activity
+  after_commit :increment_counter, :create_activity, on: :create
+  before_destroy :decrement_counter, :delete_activity
 
   public
 
@@ -35,8 +36,20 @@ class Note < ActiveRecord::Base
     [:title, [:title, :id]]
   end
 
+  def increment_counter
+    user.notes_counter.increment
+  end
+
+  def decrement_counter
+    user.notes_counter.decrement
+  end
+
+  def create_activity
+    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+  end
+
   def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

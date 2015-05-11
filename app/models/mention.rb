@@ -13,7 +13,7 @@ class Mention < ActiveRecord::Base
 
   def delete_notification
     #Delete notification
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
   def increment_counters

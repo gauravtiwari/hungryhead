@@ -13,4 +13,8 @@ module Commenter
     self.comments
   end
 
+  def comments_30?
+    comments_counter.value == 30
+  end
+
 end

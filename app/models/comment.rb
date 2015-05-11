@@ -14,7 +14,7 @@ class Comment < ActiveRecord::Base
   counter :votes_counter
   list :voters_ids
 
-  after_commit :increment_counters, on: :create
+  after_commit :increment_counters, :create_notification, :award_badge, :expire_activity_cache, on: :create
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations
@@ -79,6 +79,21 @@ class Comment < ActiveRecord::Base
     commentable.commenters_ids << user_id
   end
 
+  def award_badge
+    #Award badge if published 30 comments
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Comment_#{id}") if user.comments_30?
+  end
+
+  def expire_activity_cache
+    #Expire activities fragment for trackable
+    expire_fragment("activities/activity-#{commentable.class.to_s}-#{commentable.id}-user-#{user.id}")
+  end
+
+  def create_notification
+    #Enque activity creation
+    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+  end
+
   def decrement_counters
     #Decrement comments counter
     commentable.comments_counter.decrement if commentable.comments_counter.value > 0
@@ -91,7 +106,7 @@ class Comment < ActiveRecord::Base
 
   def delete_notification
     #Delete activity item from feed
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

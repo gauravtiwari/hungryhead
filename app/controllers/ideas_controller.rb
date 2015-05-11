@@ -30,7 +30,7 @@ class IdeasController < ApplicationController
     render json: Oj.dump({
       list: Idea.latest.values.reverse,
       type: 'Latest Ideas'
-      }, mode: :compat)
+    }, mode: :compat)
   end
 
   def popular
@@ -39,7 +39,7 @@ class IdeasController < ApplicationController
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
       type: 'Popular Ideas',
       next_page: @ideas.next_page
-      }, mode: :compat)
+    }, mode: :compat)
   end
 
   def trending
@@ -48,7 +48,7 @@ class IdeasController < ApplicationController
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
       type: 'Trending Ideas',
       next_page: @ideas.next_page
-      }, mode: :compat)
+    }, mode: :compat)
   end
 
   # PUT /ideas/1/unpublish

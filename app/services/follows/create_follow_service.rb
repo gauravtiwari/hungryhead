@@ -9,9 +9,7 @@ class CreateFollowService
   end
 
   def unfollow
-    @user.followings.where(followable: @followable).each do |follow|
-      follow.destroy!
-    end
+    @user.followings.where(followable: @followable).first
   end
 
 end

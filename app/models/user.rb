@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   counter :feedbacks_counter
   counter :investments_counter
   counter :ideas_counter
+  counter :notes_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -326,7 +327,7 @@ class User < ActiveRecord::Base
 
   #Deletes all dependent activities for this user
   def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
   protected

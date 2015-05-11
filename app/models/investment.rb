@@ -17,8 +17,8 @@ class Investment < ActiveRecord::Base
   counter :comments_counter
 
   #Model Callbacks
-  before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_commit :increment_counters, on: :create
+  before_destroy :cancel_investment, :decrement_counters, :remove_badge, :delete_activity
+  after_commit  :update_investment, :increment_counters, :award_badge, :create_activity,  on: :create
 
   #Store accessor methods
   store_accessor :parameters, :point_earned, :views_count
@@ -51,6 +51,22 @@ class Investment < ActiveRecord::Base
     idea.investors_ids << user_id
   end
 
+  def update_investment
+    UpdateInvestmentBalanceJob.perform_later(id)
+  end
+
+  def create_activity
+    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
+  end
+
+  def award_badge
+    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.first_investment?
+  end
+
+  def remove_badge
+    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Investment_#{id}") if user.first_investment?
+  end
+
   def decrement_counters
     #decrement counters
     user.investments_counter.decrement if user.investments_counter.value > 0
@@ -64,7 +80,7 @@ class Investment < ActiveRecord::Base
 
   def delete_activity
     #remove activity from database and cache
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

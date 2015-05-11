@@ -12,7 +12,7 @@ module Followable
 
   # does the user follow self
   def followed_by?(user)
-    followers_ids.member?(user)
+    followers_ids.member?(user.id)
   end
 
 end

@@ -43,11 +43,11 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 3,
-  name: "starter",
+  name: "feedbacker",
   level: "beginner",
   type: "user",
   description: "Gave first feedback",
-  custom_fields: { name: "Starter", points: 1,  image: '/assets/badges/beginner.png', created_at: Time.now  }
+  custom_fields: { name: "Feedbacker", points: 1,  image: '/assets/badges/beginner.png', created_at: Time.now  }
 )
 
 Merit::Badge.create!(
@@ -55,7 +55,7 @@ Merit::Badge.create!(
   name: "investor",
   type: "user",
   level: "beginner",
-  description: "First idea investment",
+  description: "First investment",
   custom_fields: { name: "Investor", points: 1,  image: '/assets/badges/investor.png', created_at: Time.now  }
 )
 

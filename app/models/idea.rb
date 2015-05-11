@@ -241,7 +241,7 @@ class Idea < ActiveRecord::Base
 
   def delete_activity
     #Delete idea time from user feed
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

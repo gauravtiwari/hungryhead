@@ -18,4 +18,8 @@ module Investor
     Investment.where(id: id)
   end
 
+  def first_investment?
+    investments_counter.value == 1
+  end
+
 end

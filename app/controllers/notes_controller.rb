@@ -27,7 +27,6 @@ class NotesController < ApplicationController
     @note = CreateNoteService.new(note_params, current_user).create
     authorize @note
     if @note.save
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@note.id, @note.class.to_s)
       render json: { created: true, status: :created}
     else
       render json: @note.errors, status: :unprocessable_entity

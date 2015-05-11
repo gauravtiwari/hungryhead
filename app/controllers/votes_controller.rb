@@ -9,13 +9,14 @@ class VotesController < ApplicationController
     else
       @vote = CreateVoteService.new(current_user, @votable).vote
       if @vote.save
-        render json: {voted: @votable.voted?(current_user), votes_count: @votable.votes_counter.value}
-        CreateActivityJob.set(wait: 2.seconds).perform_later(@vote.id, @vote.class.to_s)
+        render json: {
+          voted: @votable.voted?(current_user),
+          votes_count: @votable.votes_counter.value
+        }
       else
         render json: @vote.errors, status: :unprocessable_entity
       end
     end
-    expire_fragment("activities/activity-#{@votable.class.to_s}-#{@votable.id}-user-#{current_user.id}")
   end
 
   def voters
