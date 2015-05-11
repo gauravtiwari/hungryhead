@@ -14,4 +14,8 @@ module Votable
     User.where(id: voters_ids.values)
   end
 
+  def most_voted?
+    votes_counter.value == 50
+  end
+
 end
