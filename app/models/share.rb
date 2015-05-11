@@ -20,9 +20,9 @@ class Share < ActiveRecord::Base
 	after_commit :increment_counters, :create_activity, on: :create
 
 	#Store accessor methods
-		store_accessor :parameters, :shareable_name
+	store_accessor :parameters, :shareable_name
 
-		#Enumerators to handle status
+	#Enumerators to handle status
 	enum status: {pending: 0, shared: 1}
 
 	public

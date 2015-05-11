@@ -65,9 +65,6 @@ class User < ActiveRecord::Base
   store_accessor :fund, :balance, :invested_amount, :earned_amount
   serialize [:fund, :education, :interests, :profile, :settings], HashSerializer
 
-  #Merit GEM for badges and points
-  has_merit
-
   #Devise for authentication
   devise :invitable, :async, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,

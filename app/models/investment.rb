@@ -23,9 +23,6 @@ class Investment < ActiveRecord::Base
   #Store accessor methods
   store_accessor :parameters, :point_earned, :views_count
 
-  #Includes modules
-  has_merit
-
   public
 
   def can_score?

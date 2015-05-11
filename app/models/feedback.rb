@@ -17,9 +17,6 @@ class Feedback < ActiveRecord::Base
   include Votable
   include Mentioner
 
-  #Gamification
-  has_merit
-
   #Associations
   belongs_to :idea, touch: true
   belongs_to :user, touch: true

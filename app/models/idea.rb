@@ -70,7 +70,6 @@ class Idea < ActiveRecord::Base
   has_many :idea_messages, dependent: :destroy
 
   #Includes modules
-  has_merit
   has_paper_trail :only => [:name, :description, :elevator_pitch,
     :high_concept_pitch, :sections]
 

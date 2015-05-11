@@ -176,8 +176,6 @@ gem 'friendly_id'
 gem 'autosize-rails'
 gem "select2-rails"
 
-gem 'merit'
-
 # Animate.css
 gem 'animate-rails'
 
