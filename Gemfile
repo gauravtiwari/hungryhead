@@ -56,6 +56,10 @@ gem 'sprockets', '~> 2.12.3'
 #Deal with JSON data
 gem  'hashie'
 
+#Pub-sub
+
+gem 'wisper'
+
 #Generating auto content for social media channels
 gem 'searchkick'
 
