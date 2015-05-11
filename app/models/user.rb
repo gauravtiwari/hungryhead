@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum role: { user: 0, entrepreneur: 1, mentor: 2, teacher: 3 }
+  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, teacher: 4 }
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url

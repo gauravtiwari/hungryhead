@@ -12,6 +12,7 @@ ActiveRecord::Base.transaction do
     password: 'hungryheaduser',
     email: 'admin@hungryhead.org',
     admin: true,
+    role: 0,
     confirmed_at: Time.now
   )
 
@@ -46,6 +47,7 @@ ActiveRecord::Base.transaction do
     email: "parul.rhl@gmail.com",
     fund: {balance: 1000},
     verified: true,
+    role: 4,
     market_list: "Education, Social, Ecommerce",
     settings: {theme: 'primary', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -64,6 +66,7 @@ ActiveRecord::Base.transaction do
     email: "stuart@hungryhead.org",
     fund: {balance: 1000},
     verified: true,
+    role: 3,
     market_list: "Education, Entrepreneruship, Music",
     settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -81,6 +84,7 @@ ActiveRecord::Base.transaction do
     email: "damien@hungryhead.org",
     fund: {balance: 1000},
     verified: true,
+    role: 3,
     market_list: "Social, Entrepreneruship, Music",
     settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -99,7 +103,7 @@ ActiveRecord::Base.transaction do
       location_list: Forgery::Address.city,
       email: "mentor#{i}@hungryhead.org",
       fund: {balance: 1000},
-      role: 2,
+      role: 3,
       market_list: Forgery::Name.industry,
       settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
@@ -119,7 +123,7 @@ ActiveRecord::Base.transaction do
       location_list: Forgery::Address.city,
       email: "teacher#{i}@hungryhead.org",
       fund: {balance: 1000},
-      role: 3,
+      role: 4,
       market_list: Forgery::Name.industry,
       settings: {theme: 'primary', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, note_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
