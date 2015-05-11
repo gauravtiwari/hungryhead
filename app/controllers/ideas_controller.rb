@@ -1,14 +1,15 @@
 class IdeasController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :check_terms
-  before_action :set_idea, only: [:card, :join_team, :feedbackers, :investors, :team, :comments, :show, :updates, :publish, :unpublish, :invite_team, :followers, :idea, :edit, :update, :destroy]
-  before_action :set_user
 
+  before_action :authenticate_user!
+  before_action :check_terms
+  before_action :set_idea, except: [:index, :latest, :popular, :trending, :create]
+
+  #Pundit authorization
   after_action :verify_authorized, except: [:index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  layout "idea"
 
-  respond_to :json, :html
+  #Set layout
+  layout "idea"
 
   # GET /ideas
   # GET /ideas.json
@@ -22,10 +23,15 @@ class IdeasController < ApplicationController
     Idea.trending.increment(@idea.id) if @idea.student != current_user
   end
 
+
+  #Get idea card
+  #GET /idea/1/card
   def card
     render partial: 'shared/idea_card'
   end
 
+  #Get latest ideas
+  #GET /ideas/latest
   def latest
     render json: Oj.dump({
       list: Idea.latest.values.reverse,
@@ -33,6 +39,8 @@ class IdeasController < ApplicationController
     }, mode: :compat)
   end
 
+  #GET popular ideas
+  #GET /ideas/popular
   def popular
     @ideas = Idea.popular_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
@@ -42,6 +50,8 @@ class IdeasController < ApplicationController
     }, mode: :compat)
   end
 
+  #GET trending ideas
+  #GET /ideas/trending
   def trending
     @ideas = Idea.trending_20.paginate(:page => params[:page], :per_page => 20)
     render json: Oj.dump({
@@ -51,42 +61,30 @@ class IdeasController < ApplicationController
     }, mode: :compat)
   end
 
-  # PUT /ideas/1/unpublish
+  # PUT /ideas/1/publish
   def publish
-    authorize @idea
-    if @idea.profile_complete?
-      @idea.published!
-      @idea.everyone!
-      #If user not entrepreneur award badge
-      if !@user.entrepreneur?
-        @user.entrepreneur!
-        AwardBadgeJob.set(wait: 2.seconds).perform_later(@user.id, 2, "Idea_#{@idea.id}")
+    publish_idea_service.on :idea_published do |idea|
+      if !current_user.entrepreneur?
+       current_user.entrepreneur!
+       AwardBadgeJob.set(wait: 5.seconds).perform_later(current_user.id, 2, "Idea_#{idea.id}")
       end
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@idea.id, @idea.class.to_s)
-      render json: {
-        is_public: true,
-        msg: "Your idea profile was published successfully",
-        profile_complete: @idea.profile_complete?,
-        published: @idea.published?,
-        url: unpublish_idea_path(@idea)
-      }
-    else
-      render json: {
-        msg: "We couldn't publish your idea profile as it's incomplete",
-        profile_complete: @idea.profile_complete?,
-        published: @idea.published?,
-        url: publish_idea_path(@idea)
-      }
+      render :publish
+      CreateActivityJob.set(wait: 5.seconds).perform_later(idea.id, idea.class.to_s)
     end
+    publish_idea_service.on :error do |idea|
+      render :unpublish
+    end
+
+    publish_idea_service.publish
   end
 
   # PUT /ideas/1/unpublish
   def unpublish
-    authorize @idea
-    @idea.draft!
-    @idea.me!
-    UnpublishIdeaJob.perform_later(@idea)
-    render json: {is_public: false, msg: "Your profile was unpublished successfully", profile_complete: @idea.profile_complete?, published: @idea.published?, url: publish_idea_path(@idea)}
+    publish_idea_service.on :idea_unpublished do |idea|
+      UnpublishIdeaJob.perform_later(idea)
+      render :unpublish
+    end
+    publish_idea_service.unpublish
   end
 
   # GET /ideas/1/updates
@@ -130,14 +128,14 @@ class IdeasController < ApplicationController
   def invite_team
     params[:idea_invite][:invitees].split(", ").each do |id|
       user = User.find(id)
-      InviteTeamJob.perform_later(@user, user, @idea, params[:idea_invite][:message])
+      InviteTeamJob.perform_later(current_user, user, @idea, params[:idea_invite][:message])
     end
     render json: true
   end
 
   # GET /ideas/1/join_team
   def join_team
-    JoinTeamJob.perform_later(@user, @idea.user.id, @idea)
+    JoinTeamJob.perform_later(current_user, @idea.user.id, @idea)
     redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
   end
 
@@ -145,7 +143,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
-    @idea.update_attributes(student_id: @user.id, school_id: @user.school_id)
+    @idea.update_attributes(student_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
     if @idea.save
       render json: {status: :created, location_url: idea_path(@idea)}
@@ -178,9 +176,8 @@ class IdeasController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = current_user
+  def publish_idea_service
+    @publish_idea_service ||= PublishIdeaService.new(@idea, current_user)
   end
 
   def set_idea
