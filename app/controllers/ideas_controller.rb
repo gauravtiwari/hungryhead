@@ -63,9 +63,20 @@ class IdeasController < ApplicationController
         AwardBadgeJob.set(wait: 2.seconds).perform_later(@user.id, 2, "Idea_#{@idea.id}")
       end
       CreateActivityJob.set(wait: 2.seconds).perform_later(@idea.id, @idea.class.to_s)
-      render json: {is_public: true, msg: "Your idea profile was published successfully", profile_complete: @idea.profile_complete?, published: @idea.published?, url: unpublish_idea_path(@idea)}
+      render json: {
+        is_public: true,
+        msg: "Your idea profile was published successfully",
+        profile_complete: @idea.profile_complete?,
+        published: @idea.published?,
+        url: unpublish_idea_path(@idea)
+      }
     else
-      render json: {msg: "We couldn't publish your idea profile as it's incomplete", profile_complete: @idea.profile_complete?, published: @idea.published?, url: publish_idea_path(@idea)}
+      render json: {
+        msg: "We couldn't publish your idea profile as it's incomplete",
+        profile_complete: @idea.profile_complete?,
+        published: @idea.published?,
+        url: publish_idea_path(@idea)
+      }
     end
   end
 

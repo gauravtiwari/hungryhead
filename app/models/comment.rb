@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
   validates :body, :presence => true
+  validates :commentable, :presence => true
   validates :user, :presence => true
 
   include Votable
@@ -14,7 +15,7 @@ class Comment < ActiveRecord::Base
   counter :votes_counter
   list :voters_ids
 
-  after_commit :increment_counters, :create_notification, :award_badge, on: :create
+  after_commit :increment_counters, on: :create
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations
@@ -72,6 +73,7 @@ class Comment < ActiveRecord::Base
   def increment_counters
     #Increment counters for commentable
     commentable.comments_counter.increment
+    user.comments_counter.increment
     #Increment popularity score
     Idea.popular.increment(commentable_id) if commentable_type == "Idea"
     User.popular.increment(user_id)
@@ -79,19 +81,10 @@ class Comment < ActiveRecord::Base
     commentable.commenters_ids << user_id
   end
 
-  def award_badge
-    #Award badge if published 30 comments
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 4, "Comment_#{id}") if user.comments_30?
-  end
-
-  def create_notification
-    #Enque activity creation
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
-  end
-
   def decrement_counters
     #Decrement comments counter
     commentable.comments_counter.decrement if commentable.comments_counter.value > 0
+    user.comments_counter.decrement if user.comments_counter.value > 0
     #Decrement popularity score
     Idea.popular.decrement(commentable_id) if commentable_type == "Idea"
     User.popular.decrement(user_id)

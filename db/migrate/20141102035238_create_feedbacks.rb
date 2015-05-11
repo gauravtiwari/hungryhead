@@ -5,6 +5,7 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.text :body, :null => false
       t.references :idea, :null => false
       t.references :user, :null => false
+      t.string :cached_tag_list
       t.integer :status, default: 0, null: false
       t.jsonb :parameters, default: "{}"
 

@@ -13,19 +13,18 @@ class CommentsController < ApplicationController
   end
 
   def create
-    #If comment created publish via pusher
-    create_comment_service.on :success do |comment|
+    # If comment created publish via pusher
+    create_comment_service.on :comment_created do |comment|
       Pusher.trigger_async("#{comment.commentable_type}-#{comment.commentable_id}-comments",
         "new_comment",
-        { data: render(:show)}
+        { data: render(:show, locals: {comment: comment} )}
       )
+      # Enque activity creation
+      CreateActivityJob.set(wait: 2.seconds).perform_later(comment.id, comment.class.to_s)
     end
-    #Subscribe to create activity
-    create_comment_service.subscribe( CreateActivityJob.new,
-                                on: :create_activity, async: true )
 
     #If error render errors
-    create_comment_service.on :error do |comment|
+    create_comment_service.on :comment_error do |comment|
       respond_to do |format|
         format.json { render json: comment.errors,  status: :unprocessable_entity }
       end
@@ -42,24 +41,16 @@ class CommentsController < ApplicationController
     render json: {message: "Comment deleted", deleted: true}
   end
 
-  protected
-
-  def create_comment_service
-    @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
-  end
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:id, :user_id, :parent_id, :body)
-  end
-
-  def check_commentables
+  def create_comment_service
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
-    @commentables = ["Idea", "Feedback", "Investment", "Note", "Share"]
-    if @commentables.include? params[:comment][:commentable_type]
+
+    if ["Idea", "Feedback", "Investment", "Note", "Share"].include? commentable_type
       @commentable = commentable_type.safe_constantize.find(commentable_id)
+      @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
     else
       respond_to do |format|
        format.json { render json: {
@@ -67,6 +58,10 @@ class CommentsController < ApplicationController
         }, status: :unprocessable_entity }
       end
     end
+  end
+
+  def comment_params
+    params.require(:comment).permit(:id, :parent_id, :body)
   end
 
 end

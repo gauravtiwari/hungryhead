@@ -7,7 +7,7 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :increment_counters, :create_notification, on: :create
+  after_commit :increment_counters, on: :create
   before_destroy :decrement_counters, :delete_notification
 
   private
@@ -26,10 +26,6 @@ class Follow < ActiveRecord::Base
    #Increment popularity score
    Idea.popular.increment(followable_id) if followable_type == "Idea"
    User.popular.increment(followable_id) if followable_type == "User"
-  end
-
-  def create_notification
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
 
   def decrement_counters

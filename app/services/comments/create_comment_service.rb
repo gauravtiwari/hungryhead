@@ -9,15 +9,15 @@ class CreateCommentService
   end
 
   def call
-    comment = Comment.new @params
+    comment = @user.comments.new @params
     comment.commentable = @commentable
-    comment.user = @user
+
     if comment.save
-      publish :success, comment
-      publish :create_activity, @comment.id, @comment.class.to_s
+      publish :comment_created, comment
     else
-      publish :error, comment
+      publish :comment_error, comment
     end
+
   end
 
 end

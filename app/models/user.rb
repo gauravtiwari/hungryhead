@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   include Feedbacker
   include Investor
   include Commenter
+  include Voter
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -46,6 +47,8 @@ class User < ActiveRecord::Base
   counter :followings_counter
   counter :feedbacks_counter
   counter :investments_counter
+  counter :comments_counter
+  counter :votes_counter
   counter :ideas_counter
   counter :notes_counter
 

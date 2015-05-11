@@ -59,7 +59,6 @@ gem  'hashie'
 #Pub-sub
 
 gem 'wisper'
-gem 'wisper-activejob', github: 'krisleech/wisper-activejob'
 
 #Generating auto content for social media channels
 gem 'searchkick'

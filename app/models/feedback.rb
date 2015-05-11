@@ -1,37 +1,40 @@
 class Feedback < ActiveRecord::Base
 
   include Redis::Objects
+
+  #redis counters
+  counter :votes_counter
+  counter :comments_counter
+  counter :views_counter
+
+  #redis list
+  list :voters_ids
+  list :commenters_ids
+
   #Includes concerns
   include Commentable
   include Sharings
   include Votable
+  include Mentioner
 
+  #Gamification
   has_merit
-
-  #redis counters
-  counter :votes_counter
-  list :voters_ids
-  list :commenters_ids
-  counter :comments_counter
 
   #Associations
   belongs_to :idea, touch: true
   belongs_to :user, touch: true
 
+  #Tags for feedback
+  acts_as_taggable_on :tags
+
   #Enums and states
   enum status: { posted:0, badged:1, flagged:2 }
 
-  store_accessor :parameters, :point_earned, :views_count
+  store_accessor :parameters, :tags
 
   #Hooks
-  before_destroy :decrement_counters, :remove_badge, :delete_activity
-  after_commit :increment_counters, :create_activity, :award_badge, on: :create
-
-  public
-
-  def can_score?
-    true
-  end
+  before_destroy :decrement_counters, :delete_activity
+  after_commit :increment_counters, on: :create
 
   private
 
@@ -55,20 +58,6 @@ class Feedback < ActiveRecord::Base
     User.popular.decrement(idea.student.id)
     #Remove cached feedbacker id
     idea.feedbackers_ids.delete(user_id)
-  end
-
-  def create_activity
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
-  end
-
-  def award_badge
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.feedbacks_counter.value == 0
-    AwardBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedbacks_counter.value == 29
-  end
-
-  def remove_badge
-    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 3, "Feedback_#{id}") if user.feedbacks_counter.value == 0
-    RemoveBadgeJob.set(wait: 5.seconds).perform_later(user.id, 5, "Feedback_#{id}") if user.feedbacks_counter.value == 29
   end
 
   def delete_activity

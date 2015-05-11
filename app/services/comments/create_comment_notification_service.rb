@@ -14,16 +14,20 @@ class CreateCommentNotificationService
       key: 'comment.create',
       unread: true
     )
-    cache(@activity)
-    mention if @comment.body.scan(/@\w+/).present?
-	end
 
-  def cache(activity)
+    #Cache notification to user/followers feed
     CreateNotificationCacheService.new(activity).create
-  end
 
-  def mention
-    CreateMentionService.new(@comment).mention
-  end
+    #Call mention service if any mentionable object is present?
+    if @comment.body.scan(/@\w+/).present?
+      CreateMentionService.new(@comment).mention
+    end
+
+    # Award badge if published 30 comments
+    if @user.comments_30?
+      AwardBadgeJob.set(wait: 5.seconds).perform_later(@user.id, 6, "Comment_#{@comment.id}")
+    end
+
+	end
 
 end
