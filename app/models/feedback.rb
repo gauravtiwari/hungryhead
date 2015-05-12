@@ -50,9 +50,6 @@ class Feedback < ActiveRecord::Base
     #Increment feedbacks counter for idea and user
     user.feedbacks_counter.increment
     idea.feedbackers_counter.increment
-    #Increment popularity score
-    Idea.popular.increment(idea_id)
-    User.popular.increment(idea.student.id)
     #Cache feedbacker id
     idea.feedbackers_ids << user_id
   end
@@ -61,9 +58,6 @@ class Feedback < ActiveRecord::Base
     #Decrement feedbacks counter for idea and user
     user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
     idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
-    #Decrement popularity score
-    Idea.popular.decrement(idea_id)
-    User.popular.decrement(idea.student.id)
     #Remove cached feedbacker id
     idea.feedbackers_ids.delete(user_id)
   end

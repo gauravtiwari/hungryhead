@@ -63,14 +63,16 @@ SET default_with_oids = false;
 
 CREATE TABLE activities (
     id integer NOT NULL,
-    trackable_id integer,
-    trackable_type character varying,
-    user_id integer,
-    key character varying,
+    trackable_id integer NOT NULL,
+    trackable_type character varying NOT NULL,
+    user_id integer NOT NULL,
+    score integer DEFAULT 0 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
+    key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
-    recipient_id integer,
-    recipient_type character varying,
+    recipient_id integer NOT NULL,
+    recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -101,7 +103,7 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 CREATE TABLE authentications (
     id integer NOT NULL,
-    user_id integer,
+    user_id integer NOT NULL,
     provider character varying,
     uid character varying,
     access_token character varying,
@@ -132,14 +134,51 @@ ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
 
 
 --
+-- Name: badges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE badges (
+    id integer NOT NULL,
+    badgeable_id integer NOT NULL,
+    badgeable_type character varying NOT NULL,
+    user_id integer NOT NULL,
+    badge_name character varying DEFAULT ''::character varying NOT NULL,
+    event character varying DEFAULT ''::character varying NOT NULL,
+    description character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: badges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE badges_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: badges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE badges_id_seq OWNED BY badges.id;
+
+
+--
 -- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    commentable_id integer,
-    commentable_type character varying,
-    body text,
+    commentable_id integer NOT NULL,
+    commentable_type character varying NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
+    score integer DEFAULT 0 NOT NULL,
     user_id integer NOT NULL,
     parent_id integer,
     lft integer,
@@ -174,9 +213,11 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 CREATE TABLE feedbacks (
     id integer NOT NULL,
-    body text NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
+    score integer DEFAULT 0 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
     cached_tag_list character varying,
     status integer DEFAULT 0 NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
@@ -210,10 +251,10 @@ ALTER SEQUENCE feedbacks_id_seq OWNED BY feedbacks.id;
 
 CREATE TABLE follows (
     id integer NOT NULL,
-    followable_id integer,
-    followable_type character varying,
-    follower_id integer,
-    follower_type character varying,
+    followable_id integer NOT NULL,
+    followable_type character varying NOT NULL,
+    follower_id integer NOT NULL,
+    follower_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -312,13 +353,15 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 CREATE TABLE ideas (
     id integer NOT NULL,
     student_id integer NOT NULL,
-    name character varying,
-    slug character varying,
-    high_concept_pitch character varying DEFAULT ''::character varying,
-    elevator_pitch text DEFAULT ''::text,
+    name character varying NOT NULL,
+    slug character varying DEFAULT ''::character varying NOT NULL,
+    high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
+    elevator_pitch text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text,
     logo character varying,
     cover character varying,
+    score integer DEFAULT 0 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
     team_ids character varying[] DEFAULT '{}'::character varying[],
     team_invites_ids character varying[] DEFAULT '{}'::character varying[],
     looking_for_team boolean DEFAULT false,
@@ -365,7 +408,7 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 CREATE TABLE investments (
     id integer NOT NULL,
     amount integer NOT NULL,
-    note character varying NOT NULL,
+    note character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
@@ -607,11 +650,11 @@ ALTER SEQUENCE markets_id_seq OWNED BY markets.id;
 
 CREATE TABLE mentions (
     id integer NOT NULL,
-    mentionable_id integer,
-    mentionable_type character varying,
-    mentioner_id integer,
-    mentioner_type character varying,
-    user_id integer,
+    mentionable_id integer NOT NULL,
+    mentionable_type character varying NOT NULL,
+    mentioner_id integer NOT NULL,
+    mentioner_type character varying NOT NULL,
+    user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -642,11 +685,13 @@ ALTER SEQUENCE mentions_id_seq OWNED BY mentions.id;
 
 CREATE TABLE notes (
     id integer NOT NULL,
-    title character varying,
-    body text,
-    slug character varying,
+    title character varying DEFAULT ''::character varying NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
+    score integer DEFAULT 0 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
+    slug character varying DEFAULT ''::character varying NOT NULL,
     status integer,
-    user_id integer,
+    user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -677,14 +722,14 @@ ALTER SEQUENCE notes_id_seq OWNED BY notes.id;
 
 CREATE TABLE notifications (
     id integer NOT NULL,
-    trackable_id integer,
-    trackable_type character varying,
-    user_id integer,
-    key character varying,
+    trackable_id integer NOT NULL,
+    trackable_type character varying NOT NULL,
+    user_id integer NOT NULL,
+    key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
-    recipient_id integer,
-    recipient_type character varying,
+    recipient_id integer NOT NULL,
+    recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -901,12 +946,12 @@ ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 CREATE TABLE shares (
     id integer NOT NULL,
-    body text,
+    body text DEFAULT ''::text NOT NULL,
     status integer,
     privacy integer,
-    shareable_id integer,
-    shareable_type character varying,
-    user_id integer,
+    shareable_id integer NOT NULL,
+    shareable_type character varying NOT NULL,
+    user_id integer NOT NULL,
     parameters jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -939,8 +984,8 @@ ALTER SEQUENCE shares_id_seq OWNED BY shares.id;
 CREATE TABLE slugs (
     id integer NOT NULL,
     slug character varying NOT NULL,
-    sluggable_id integer,
-    sluggable_type character varying,
+    sluggable_id integer NOT NULL,
+    sluggable_type character varying NOT NULL,
     scope character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1080,6 +1125,8 @@ CREATE TABLE users (
     type character varying DEFAULT 'User'::character varying,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
+    score integer DEFAULT 0 NOT NULL,
+    views integer DEFAULT 0 NOT NULL,
     mini_bio character varying DEFAULT ''::character varying,
     about_me text DEFAULT ''::text,
     profile jsonb DEFAULT '{}'::jsonb,
@@ -1189,10 +1236,10 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
 CREATE TABLE votes (
     id integer NOT NULL,
-    votable_id integer,
-    votable_type character varying,
-    voter_id integer,
-    voter_type character varying,
+    votable_id integer NOT NULL,
+    votable_type character varying NOT NULL,
+    voter_id integer NOT NULL,
+    voter_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1229,6 +1276,13 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 --
 
 ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges ALTER COLUMN id SET DEFAULT nextval('badges_id_seq'::regclass);
 
 
 --
@@ -1448,6 +1502,14 @@ ALTER TABLE ONLY activities
 
 ALTER TABLE ONLY authentications
     ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: badges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY badges
+    ADD CONSTRAINT badges_pkey PRIMARY KEY (id);
 
 
 --
@@ -1697,6 +1759,13 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 
 
 --
+-- Name: index_activities_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_score ON activities USING btree (score);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1732,6 +1801,20 @@ CREATE INDEX index_authentications_on_user_id ON authentications USING btree (us
 
 
 --
+-- Name: index_badges_on_badge_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_badges_on_badge_name ON badges USING btree (badge_name);
+
+
+--
+-- Name: index_badges_on_badgeable_id_and_badgeable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_badges_on_badgeable_id_and_badgeable_type ON badges USING btree (badgeable_id, badgeable_type);
+
+
+--
 -- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1743,6 +1826,13 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 --
 
 CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
+
+
+--
+-- Name: index_comments_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_score ON comments USING btree (score);
 
 
 --
@@ -1764,6 +1854,13 @@ CREATE INDEX index_feedbacks_on_idea_id ON feedbacks USING btree (idea_id);
 --
 
 CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
+
+
+--
+-- Name: index_feedbacks_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_score ON feedbacks USING btree (score);
 
 
 --
@@ -1848,6 +1945,13 @@ CREATE INDEX index_ideas_on_rules_accepted ON ideas USING btree (rules_accepted)
 --
 
 CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
+
+
+--
+-- Name: index_ideas_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_score ON ideas USING btree (score);
 
 
 --
@@ -1974,6 +2078,13 @@ CREATE INDEX index_mentions_on_mentioner_id_and_mentioner_type ON mentions USING
 --
 
 CREATE INDEX index_mentions_on_user_id ON mentions USING btree (user_id);
+
+
+--
+-- Name: index_notes_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notes_on_score ON notes USING btree (score);
 
 
 --
@@ -2243,6 +2354,13 @@ CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
 
 
 --
+-- Name: index_users_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_score ON users USING btree (score);
+
+
+--
 -- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2310,6 +2428,14 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: badges_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY badges
+    ADD CONSTRAINT badges_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -2445,4 +2571,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150511195420');
 

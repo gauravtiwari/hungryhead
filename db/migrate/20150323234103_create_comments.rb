@@ -16,7 +16,7 @@ class CreateComments < ActiveRecord::Migration
     end
 
     add_index :comments, :user_id, algorithm: :concurrently
-    add_index :comments, :rank, algorithm: :concurrently
+    add_index :comments, :score, algorithm: :concurrently
     add_index :comments, :parent_id, algorithm: :concurrently
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
   end

@@ -48,12 +48,15 @@ class User < ActiveRecord::Base
   #feedbacks, investments and ideas
   counter :followers_counter
   counter :followings_counter
+
   counter :feedbacks_counter
   counter :investments_counter
+
   counter :comments_counter
   counter :votes_counter
   counter :ideas_counter
   counter :notes_counter
+  counter :views_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}

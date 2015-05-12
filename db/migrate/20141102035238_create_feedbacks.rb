@@ -18,7 +18,7 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :feedbacks, :user_id, algorithm: :concurrently
-    add_index :feedbacks, :rank, algorithm: :concurrently
+    add_index :feedbacks, :score, algorithm: :concurrently
     add_index :feedbacks, :parameters, using: :gin
     add_index :feedbacks, :idea_id, algorithm: :concurrently
   end

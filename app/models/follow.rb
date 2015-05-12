@@ -22,10 +22,6 @@ class Follow < ActiveRecord::Base
    follower.idea_followings_ids << followable_id if followable_type == "Idea"
    follower.school_followings_ids << followable_id if followable_type == "School"
    followable.followers_ids << follower_id
-
-   #Increment popularity score
-   Idea.popular.increment(followable_id) if followable_type == "Idea"
-   User.popular.increment(followable_id) if followable_type == "User"
   end
 
   def decrement_counters
@@ -37,11 +33,6 @@ class Follow < ActiveRecord::Base
    follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
    follower.school_followings_ids.delete(followable_id) if followable_type == "School"
    followable.followers_ids.delete(follower_id)
-
-   #Decrement popularity score
-   Idea.popular.decrement(followable_id) if followable_type == "Idea"
-   User.popular.decrement(followable_id) if followable_type == "User"
-
   end
 
   def delete_notification

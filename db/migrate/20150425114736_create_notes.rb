@@ -17,7 +17,7 @@ class CreateNotes < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :notes, :status, algorithm: :concurrently
-    add_index :notes, :rank, algorithm: :concurrently
+    add_index :notes, :score, algorithm: :concurrently
     add_index :notes, :user_id, algorithm: :concurrently
     add_index :notes, :slug, unique: true, algorithm: :concurrently
   end

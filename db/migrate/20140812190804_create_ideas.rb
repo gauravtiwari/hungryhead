@@ -45,7 +45,7 @@ class CreateIdeas < ActiveRecord::Migration
     end
 
     add_index :ideas, :school_id, algorithm: :concurrently
-    add_index :ideas, :rank, algorithm: :concurrently
+    add_index :ideas, :score, algorithm: :concurrently
     add_index :ideas, :student_id, algorithm: :concurrently
     add_index :ideas, :status, algorithm: :concurrently
     add_index :ideas, :privacy, algorithm: :concurrently

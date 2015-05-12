@@ -78,10 +78,7 @@ class Comment < ActiveRecord::Base
     #Increment counters for commentable
     commentable.comments_counter.increment
     user.comments_counter.increment
-    #Increment popularity score
-    Idea.popular.increment(commentable_id) if commentable_type == "Idea"
-    User.popular.increment(user_id)
-    #Cache commenter id
+    #cache commenters ids
     commentable.commenters_ids << user_id
   end
 
@@ -89,10 +86,7 @@ class Comment < ActiveRecord::Base
     #Decrement comments counter
     commentable.comments_counter.decrement if commentable.comments_counter.value > 0
     user.comments_counter.decrement if user.comments_counter.value > 0
-    #Decrement popularity score
-    Idea.popular.decrement(commentable_id) if commentable_type == "Idea"
-    User.popular.decrement(user_id)
-    #delete cached commenter id
+    #cache commenters ids
     commentable.commenters_ids.delete(user_id)
   end
 
