@@ -166,6 +166,10 @@ GEM
       countries (~> 0.11.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.2)
+    crono (0.8.9)
+      activejob (~> 4.0)
+      activerecord (~> 4.0)
+      activesupport (~> 4.0)
     currencies (0.4.2)
     dalli (2.7.4)
     debug_inspector (0.0.2)
@@ -716,6 +720,7 @@ DEPENDENCIES
   carrierwave_direct (~> 0.0.14)
   coffee-rails
   country_select
+  crono
   dalli
   devise
   devise-async

@@ -61,11 +61,11 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 5,
-  name: "commenter",
+  name: "outspoken",
   type: "user",
   level: "medium",
-  description: "First comment",
-  custom_fields: { name: "Commenter", points: 15,  image: '/assets/badges/announcement.png', created_at: Time.now  }
+  description: "50 comments",
+  custom_fields: { name: "Outspoken", points: 15,  image: '/assets/badges/announcement.png', created_at: Time.now  }
 )
 
 Merit::Badge.create!(
@@ -83,7 +83,7 @@ Merit::Badge.create!(
   type: "user",
   level: "expert",
   description: "Left 10 comments",
-  custom_fields: { name: "10 Comments", points: 50,  image: '/assets/badges/top_comments.png', created_at: Time.now  }
+  custom_fields: { name: "10 Comments", points: 10,  image: '/assets/badges/top_comments.png', created_at: Time.now  }
 )
 
 Merit::Badge.create!(
@@ -91,13 +91,12 @@ Merit::Badge.create!(
   name: "wise",
   type: "user",
   level: "medium",
-  description: "10 accepted feedbacks",
+  description: "10 helpful feedbacks",
   custom_fields: { name: "Wise", points: 10,  image: '/assets/badges/wise.png', created_at: Time.now  }
 )
 
-
 Merit::Badge.create!(
-  id: 7,
+  id: 9,
   name: "focussed",
   type: "user",
   level: "expert",
@@ -106,7 +105,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 8,
+  id: 10,
   name: "mentor",
   type: "user",
   level: "expert",
@@ -115,7 +114,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 9,
+  id: 11,
   name: "teacher",
   type: "user",
   level: "expert",
@@ -124,26 +123,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 10,
-  name: "accepted",
-  type: "feedback",
-  level: "beginner",
-  description: "Feedback Accepted",
-  custom_fields: { name: "Accepted", bg: 'master', class: 'thumbs-up', points: 1, created_at: Time.now  }
-)
-
-Merit::Badge.create!(
-  id: 11,
-  name: "rejected",
-  type: "feedback",
-  level: "beginner",
-  description: "Feedback rejected",
-  custom_fields: { name: "Rejected", bg: 'master', class: 'thumbs-down', points: 1, created_at: Time.now  }
-)
-
-
-Merit::Badge.create!(
-  id: 11,
+  id: 12,
   name: "expert",
   type: "user",
   level: "expert",
@@ -152,7 +132,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 12,
+  id: 13,
   name: "idea_award",
   type: "user",
   level: "expert",
@@ -161,7 +141,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 13,
+  id: 14,
   name: "most_voted",
   type: "user",
   level: "expert",

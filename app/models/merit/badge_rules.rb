@@ -31,14 +31,6 @@ module Merit
         (user.updated_at - user.created_at).to_i == 30
       end
 
-      grant_on 'users#update', badge: 'fish', to: :itself do |user|
-        user.rejected_feedbacks_counter == 10
-      end
-
-      grant_on 'users#update', badge: 'orphaned', to: :user do |feedback|
-        feedback.user.orphaned_feedbacks_counter == 10
-      end
-
       #Idea related badges
       grant_on 'ideas#publish', badge: 'entrepreneur', to: :student do |idea|
         idea.student.ideas_counter == 1
@@ -50,15 +42,7 @@ module Merit
       end
 
       grant_on 'feedbacks#rate', badge: 'wise', to: :user do |feedback|
-        feedback.user.accepted_feedbacks_counter == 10
-      end
-
-      grant_on 'feedbacks#accept', badge: 'accepted', to: :itself do |feedback|
-        feedback.accepted?
-      end
-
-      grant_on 'feedbacks#reject', badge: 'rejected', to: :itself do |feedback|
-        feedback.rejected?
+        feedback.user.helpful_feedbacks_counter == 10
       end
 
       #Investment related bages
@@ -67,12 +51,13 @@ module Merit
       end
 
       #Comments related badges
-      grant_on 'comments#create', badge: 'commenter', to: :user do |comment|
-        comment.user.comments_counter == 1
-      end
 
       grant_on 'comments#create', badge: 'commentator', to: :user do |comment|
         comment.user.comments_counter == 10
+      end
+
+      grant_on 'comments#create', badge: 'outspoken', to: :user do |comment|
+        comment.user.comments_counter == 50
       end
 
 

@@ -15,12 +15,20 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.string :cached_tag_list
 
       t.integer :status, default: 0, null: false
+      t.integer :badge, default: 0, null: false
+
       t.jsonb :parameters, default: "{}"
 
       t.timestamps null: false
     end
     add_index :feedbacks, :user_id, algorithm: :concurrently
+
     add_index :feedbacks, :score, algorithm: :concurrently
+    add_index :feedbacks, :views, algorithm: :concurrently
+
+    add_index :feedbacks, :status, algorithm: :concurrently
+    add_index :feedbacks, :badge, algorithm: :concurrently
+
     add_index :feedbacks, :parameters, using: :gin
     add_index :feedbacks, :idea_id, algorithm: :concurrently
   end

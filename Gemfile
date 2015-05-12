@@ -33,6 +33,10 @@ gem 'groupdate'
 
 gem 'merit'
 
+#Cron jobs
+
+gem 'crono'
+
 #Cache for jbuilder
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'

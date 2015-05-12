@@ -31,7 +31,8 @@ class Feedback < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   #Enums and states
-  enum status: { posted:0, accepted: 1, rejected: 2, flagged: 3 }
+  enum status: { posted: 0, accepted: 1, rejected: 2, flagged: 3 }
+  enum badge: { initial: 0, irrelevant: 1, helpful: 2, not_helpful: 3 }
 
   store_accessor :parameters, :tags
 

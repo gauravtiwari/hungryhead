@@ -22,16 +22,16 @@ module Feedbacker
     feedbacks_counter.value == 10
   end
 
-  def accepted_feedbacks_counter
-    feedbacks.where(accepted: true).count
+  def irrelevant_feedbacks_counter
+    feedbacks.where(status: 1).count
   end
 
-  def rejected_feedbacks_counter
-    feedbacks.where(rejected: true).count
+  def helpful_feedbacks_counter
+    feedbacks.where(badge: 2).count
   end
 
-  def orphaned_feedbacks_counter
-    feedbacks.where(accepted: false, rejected: false).count
+  def not_helpful_feedbacks_counter
+    feedbacks.where(badge: 3).count
   end
 
 end
