@@ -6,8 +6,6 @@ class CreateComments < ActiveRecord::Migration
       t.references :commentable, polymorphic: true, null: false
       t.text :body, null: false, default: ""
 
-      t.integer :score, null: false, default: 0
-
       t.references :user, :null => false
       t.integer :parent_id, :lft, :rgt
 
@@ -16,7 +14,6 @@ class CreateComments < ActiveRecord::Migration
     end
 
     add_index :comments, :user_id, algorithm: :concurrently
-    add_index :comments, :score, algorithm: :concurrently
     add_index :comments, :parent_id, algorithm: :concurrently
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
   end

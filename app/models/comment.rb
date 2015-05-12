@@ -10,15 +10,12 @@ class Comment < ActiveRecord::Base
 
   include Votable
   include Mentioner
-  include Scorable
 
   #Redis counters and ids cache
   counter :votes_counter
   list :voters_ids
 
-  #rank of comment
-  sorted_set :leaderboard, global: true
-
+  #Callback hooks
   after_commit :increment_counters, on: :create
   before_destroy :decrement_counters, :delete_notification
 
