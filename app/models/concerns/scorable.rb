@@ -14,16 +14,4 @@ module Scorable
     end
   end
 
-  def increment_points!(point)
-    self.score += point
-    self.save!
-    self.class.leaderboard[id] = score
-  end
-
-  def increment_views!
-    self.views += point
-    self.save!
-    self.class.trending[id] = views
-  end
-
 end

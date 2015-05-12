@@ -20,7 +20,6 @@ class Feedback < ActiveRecord::Base
   include Sharings
   include Votable
   include Mentioner
-  include Scorable
 
   has_merit
 
@@ -32,7 +31,7 @@ class Feedback < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   #Enums and states
-  enum status: { posted:0, badged:1, flagged:2 }
+  enum status: { posted:0, accepted: 1, rejected: 2, flagged: 3 }
 
   store_accessor :parameters, :tags
 

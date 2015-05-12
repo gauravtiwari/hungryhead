@@ -143,6 +143,7 @@ class IdeasController < ApplicationController
     authorize @idea
     if @idea.save
       render json: {status: :created, location_url: idea_path(@idea)}
+      CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
     else
       render json: @idea.errors, status: :unprocessable_entity
     end

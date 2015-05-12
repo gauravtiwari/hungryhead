@@ -14,6 +14,8 @@ class VotesController < ApplicationController
           voted: @votable.voted?(current_user),
           votes_count: @votable.votes_counter.value
         }
+        CreateActivityJob.set(wait: 2.seconds).perform_later(@vote.id, @vote.class.to_s)
+        CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
         expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}-user-#{current_user.id}")
       else
         render json: @vote.errors, status: :unprocessable_entity

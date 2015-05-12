@@ -19,6 +19,7 @@ class WelcomeController < ApplicationController
     case step
     when :hello
       @user.update_attributes(user_params)
+      CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
     end
     sign_in(@user, bypass: true)
     render_wizard @user

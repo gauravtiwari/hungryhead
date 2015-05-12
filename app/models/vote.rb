@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 
   #Callbacks for storing cache in redis
   before_destroy :decrement_counter, :delete_notification
-  after_commit :increment_counter, :create_notification, on: :create
+  after_commit :increment_counter, on: :create
 
   private
 
@@ -22,11 +22,6 @@ class Vote < ActiveRecord::Base
     #Increment votes counter
     votable.votes_counter.increment
     votable.voters_ids << voter_id
-  end
-
-  #Enque notification after commit
-  def create_notification
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
   end
 
   #Rollback counters for votable

@@ -12,6 +12,7 @@ class SharesController < ApplicationController
       @share = CreateShareService.new(share_params, current_user, @shareable).create
       if @share.save
         render :show, status: :created
+        CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
       else
         render json: @share.errors, status: :unprocessible_entity
       end

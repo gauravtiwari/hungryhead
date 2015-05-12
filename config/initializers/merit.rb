@@ -1,7 +1,7 @@
 # Use this hook to configure merit parameters
 Merit.setup do |config|
   # Check rules on each request or in background
-  # config.checks_on_each_request = true
+  config.checks_on_each_request = false
 
   # Define ORM. Could be :active_record (default) and :mongoid
   # config.orm = :active_record
@@ -13,12 +13,12 @@ Merit.setup do |config|
 
   # Define :user_model_name. This model will be used to grand badge if no
   # `:to` option is given. Default is 'User'.
-  # config.user_model_name = 'User'
+  config.user_model_name = 'User'
 
   # Define :current_user_method. Similar to previous option. It will be used
   # to retrieve :user_model_name object if no `:to` option is given. Default
   # is "current_#{user_model_name.downcase}".
-   config.current_user_method = 'current_user'
+  config.current_user_method = 'current_user'
 end
 
 
@@ -46,7 +46,7 @@ Merit::Badge.create!(
   name: "feedbacker",
   level: "beginner",
   type: "user",
-  description: "Gave first feedback",
+  description: "First feedback",
   custom_fields: { name: "Feedbacker", points: 1,  image: '/assets/badges/beginner.png', created_at: Time.now  }
 )
 
@@ -61,21 +61,40 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 5,
-  name: "enthusiast",
+  name: "commenter",
   type: "user",
   level: "medium",
-  description: "Gave 10 feedbacks",
-  custom_fields: { name: "Enthusiast", points: 10,  image: '/assets/badges/feedbacks.png', created_at: Time.now  }
+  description: "First comment",
+  custom_fields: { name: "Commenter", points: 15,  image: '/assets/badges/announcement.png', created_at: Time.now  }
 )
 
 Merit::Badge.create!(
   id: 6,
-  name: "commenter",
+  name: "enthusiast",
   type: "user",
   level: "medium",
-  description: "Published 30 comments",
-  custom_fields: { name: "Active Commenter", points: 15,  image: '/assets/badges/announcement.png', created_at: Time.now  }
+  description: "Visited the site each day for 30 consecutive days.",
+  custom_fields: { name: "Enthusiast", points: 10,  image: '/assets/badges/feedbacks.png', created_at: Time.now  }
 )
+
+Merit::Badge.create!(
+  id: 7,
+  name: "commentator",
+  type: "user",
+  level: "expert",
+  description: "Left 10 comments",
+  custom_fields: { name: "10 Comments", points: 50,  image: '/assets/badges/top_comments.png', created_at: Time.now  }
+)
+
+Merit::Badge.create!(
+  id: 8,
+  name: "wise",
+  type: "user",
+  level: "medium",
+  description: "10 accepted feedbacks",
+  custom_fields: { name: "Wise", points: 10,  image: '/assets/badges/wise.png', created_at: Time.now  }
+)
+
 
 Merit::Badge.create!(
   id: 7,
@@ -106,12 +125,22 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 10,
-  name: "wise",
-  type: "user",
-  level: "medium",
-  description: "10 helpful feedbacks",
-  custom_fields: { name: "Wise", points: 10,  image: '/assets/badges/wise.png', created_at: Time.now  }
+  name: "accepted",
+  type: "feedback",
+  level: "beginner",
+  description: "Feedback Accepted",
+  custom_fields: { name: "Accepted", bg: 'master', class: 'thumbs-up', points: 1, created_at: Time.now  }
 )
+
+Merit::Badge.create!(
+  id: 11,
+  name: "rejected",
+  type: "feedback",
+  level: "beginner",
+  description: "Feedback rejected",
+  custom_fields: { name: "Rejected", bg: 'master', class: 'thumbs-down', points: 1, created_at: Time.now  }
+)
+
 
 Merit::Badge.create!(
   id: 11,
@@ -140,14 +169,6 @@ Merit::Badge.create!(
   custom_fields: { name: "Received 50 votes", points: 50,  image: '/assets/badges/aplus.png', created_at: Time.now  }
 )
 
-Merit::Badge.create!(
-  id: 14,
-  name: "most_commented",
-  type: "user",
-  level: "expert",
-  description: "50 comments",
-  custom_fields: { name: "Received 50 Comments", points: 50,  image: '/assets/badges/top_comments.png', created_at: Time.now  }
-)
 
 
 #Badges for feedbacks

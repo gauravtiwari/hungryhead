@@ -1,5 +1,7 @@
 class CreateFeedbacks < ActiveRecord::Migration
+
   disable_ddl_transaction!
+
   def change
     create_table :feedbacks do |t|
       t.text :body, :null => false, default: ""
@@ -22,4 +24,5 @@ class CreateFeedbacks < ActiveRecord::Migration
     add_index :feedbacks, :parameters, using: :gin
     add_index :feedbacks, :idea_id, algorithm: :concurrently
   end
+
 end
