@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   #order objects in same order as given
   extend OrderAsSpecified
 
+  has_merit
+
   #Concerns for User class
   include Followable
   include Follower
@@ -19,7 +21,6 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
-  include Badgeable
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets

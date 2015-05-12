@@ -29,6 +29,10 @@ gem 'nprogress-rails'
 #Group date
 gem 'groupdate'
 
+#Gamification system
+
+gem 'merit'
+
 #Cache for jbuilder
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'

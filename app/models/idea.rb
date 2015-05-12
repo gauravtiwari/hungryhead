@@ -16,7 +16,8 @@ class Idea < ActiveRecord::Base
   include Scorable
   include Investable
   include Feedbackable
-  include Badgeable
+
+  has_merit
 
   acts_as_taggable_on :markets, :locations, :technologies
 
