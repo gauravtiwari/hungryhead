@@ -22,4 +22,8 @@ module Investor
     investments_counter.value == 1
   end
 
+  def investments_50?
+    investments_counter.value == 50
+  end
+
 end

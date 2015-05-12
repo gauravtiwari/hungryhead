@@ -23,11 +23,6 @@ class CreateCommentNotificationService
       CreateMentionService.new(@comment).mention
     end
 
-    # Award badge if published 30 comments
-    if @user.comments_30?
-      #added badge
-    end
-
 	end
 
 end

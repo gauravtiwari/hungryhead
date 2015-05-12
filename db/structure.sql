@@ -178,7 +178,6 @@ CREATE TABLE comments (
     commentable_id integer NOT NULL,
     commentable_type character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
-    score integer DEFAULT 0 NOT NULL,
     user_id integer NOT NULL,
     parent_id integer,
     lft integer,
@@ -1826,13 +1825,6 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 --
 
 CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
-
-
---
--- Name: index_comments_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_score ON comments USING btree (score);
 
 
 --

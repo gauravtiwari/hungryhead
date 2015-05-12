@@ -13,8 +13,12 @@ module Commenter
     self.comments
   end
 
-  def comments_30?
+  def comments_50?
     comments_counter.value == 30
+  end
+
+  def comments_100?
+    comments_counter.value == 100
   end
 
 end

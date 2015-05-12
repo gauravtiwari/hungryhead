@@ -15,4 +15,8 @@ module Sharings
     User.where(id: sharers_ids.values)
   end
 
+  def popular?
+    shares_counter.value == 50
+  end
+
 end

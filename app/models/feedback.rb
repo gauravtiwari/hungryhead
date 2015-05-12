@@ -21,6 +21,7 @@ class Feedback < ActiveRecord::Base
   include Votable
   include Mentioner
   include Scorable
+  include Badgeable
 
   #Associations
   belongs_to :idea, touch: true
@@ -36,7 +37,7 @@ class Feedback < ActiveRecord::Base
 
   #Hooks
   before_destroy :decrement_counters, :delete_activity
-  after_commit :increment_counters, on: :create
+  after_commit :increment_counters, :award_badge, on: :create
 
   public
 
@@ -52,6 +53,17 @@ class Feedback < ActiveRecord::Base
     idea.feedbackers_counter.increment
     #Cache feedbacker id
     idea.feedbackers_ids << user_id
+  end
+
+  def award_badge
+    CreateBadgeService.new(@feedback,
+      {
+        name: 'Student',
+        user: user,
+        event: 'First feedback',
+        description: 'You gave your first feedback'
+      }
+    ) if user.first_feedback?
   end
 
   def decrement_counters
