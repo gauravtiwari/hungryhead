@@ -203,6 +203,40 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: crono_jobs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE crono_jobs (
+    id integer NOT NULL,
+    job_id character varying NOT NULL,
+    log text,
+    last_performed_at timestamp without time zone,
+    healthy boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: crono_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE crono_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: crono_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
+
+
+--
 -- Name: feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -213,9 +247,9 @@ CREATE TABLE feedbacks (
     user_id integer NOT NULL,
     score integer DEFAULT 0 NOT NULL,
     views integer DEFAULT 0 NOT NULL,
-    accepted boolean DEFAULT false NOT NULL,
     cached_tag_list character varying,
     status integer DEFAULT 0 NOT NULL,
+    badge integer DEFAULT 0 NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
@@ -1461,6 +1495,13 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY feedbacks ALTER COLUMN id SET DEFAULT nextval('feedbacks_id_seq'::regclass);
 
 
@@ -1718,6 +1759,14 @@ ALTER TABLE ONLY badges_sashes
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: crono_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY crono_jobs
+    ADD CONSTRAINT crono_jobs_pkey PRIMARY KEY (id);
 
 
 --
@@ -2083,6 +2132,20 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 
 
 --
+-- Name: index_crono_jobs_on_job_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_crono_jobs_on_job_id ON crono_jobs USING btree (job_id);
+
+
+--
+-- Name: index_feedbacks_on_badge; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_badge ON feedbacks USING btree (badge);
+
+
+--
 -- Name: index_feedbacks_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2104,10 +2167,24 @@ CREATE INDEX index_feedbacks_on_score ON feedbacks USING btree (score);
 
 
 --
+-- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
+
+
+--
 -- Name: index_feedbacks_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_feedbacks_on_views; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_views ON feedbacks USING btree (views);
 
 
 --
@@ -2819,4 +2896,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
+
+INSERT INTO schema_migrations (version) VALUES ('20150512113344');
 
