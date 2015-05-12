@@ -37,7 +37,6 @@ class InvestmentsController < ApplicationController
       respond_to do |format|
         if @investment.save
           format.json { render :show, status: :created}
-          CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
         end

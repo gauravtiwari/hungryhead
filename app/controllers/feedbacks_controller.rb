@@ -42,7 +42,6 @@ class FeedbacksController < ApplicationController
         format.json { render :show, status: :created}
         # Enque activity creation
         CreateActivityJob.set(wait: 2.seconds).perform_later(feedback.id, feedback.class.to_s)
-        CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
       else
         respond_to do |format|
           format.json { render json: feedback.errors,  status: :unprocessable_entity }
@@ -66,7 +65,6 @@ class FeedbacksController < ApplicationController
     if feedback_badges.include?(params[:badge].to_i)
       @feedback.badged! if !@feedback.badged?
       @feedback.add_badge(params[:badge].to_i)
-      CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
       @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
       render :rate, locals: {activity: @activity}
     else

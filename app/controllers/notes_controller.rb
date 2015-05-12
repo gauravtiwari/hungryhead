@@ -28,7 +28,6 @@ class NotesController < ApplicationController
     authorize @note
     if @note.save
       render json: { created: true, status: :created}
-      CheckUnprocessedMeritActionsJob.set(wait: 2.seconds).perform_later
     else
       render json: @note.errors, status: :unprocessable_entity
     end
