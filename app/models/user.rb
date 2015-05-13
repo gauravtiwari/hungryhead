@@ -307,6 +307,9 @@ class User < ActiveRecord::Base
     school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
     User.latest << user_json unless self.type == "User"
+
+    #Add leaderboard score
+    User.leaderboard.add(id, points)
   end
 
   def decrement_counters
@@ -317,6 +320,9 @@ class User < ActiveRecord::Base
     school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
     User.latest.delete(id) unless self.type == "User"
+
+    #delete leaderboard for this user
+    User.leaderboard.delete(id)
   end
 
   #Deletes all dependent activities for this user
