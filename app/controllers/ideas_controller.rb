@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     Idea.trending.increment(@idea.id) if @idea.student != current_user
+    @idea.views_counter.increment if @idea.student != current_user
   end
 
 
