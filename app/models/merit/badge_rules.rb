@@ -23,8 +23,28 @@ module Merit
     def initialize
 
       #User related badges
-      grant_on 'welcome#update', badge: 'just-registered', :model_name => 'User' do |user|
+      grant_on 'welcome#show', badge: 'just-registered', :model_name => 'User' do |user|
         user.rules_accepted?
+      end
+
+      grant_on 'users#update', badge: 'autobiographer', to: :itself, temporary: true do |user|
+        user.about_me.present?
+      end
+
+      grant_on 'welcome#show', badge: 'top-10', :model_name => 'User' do |user|
+        User.count <= 10
+      end
+
+      grant_on 'welcome#show', badge: 'top-100', :model_name => 'User' do |user|
+        User.count <= 100
+      end
+
+      grant_on 'welcome#show', badge: 'top-1000', :model_name => 'User' do |user|
+        User.count <= 1000
+      end
+
+      grant_on 'welcome#show', badge: 'top-10000', :model_name => 'User' do |user|
+        User.count <= 10000
       end
 
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
@@ -64,5 +84,6 @@ module Merit
         comment.user.comments_counter.value == 50
       end
     end
+
   end
 end
