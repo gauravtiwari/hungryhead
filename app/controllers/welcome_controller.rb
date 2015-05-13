@@ -19,6 +19,7 @@ class WelcomeController < ApplicationController
     case step
     when :hello
       @user.update_attributes(user_params)
+      UserWelcomeService.new(@user).welcome
     end
     sign_in(@user, bypass: true)
     render_wizard @user

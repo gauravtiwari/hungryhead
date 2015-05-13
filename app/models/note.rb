@@ -28,7 +28,7 @@ class Note < ActiveRecord::Base
   sorted_set :trending, global: true
 
   #Model callbacks
-  after_commit :increment_counter, :create_activity, on: :create
+  after_commit :increment_counter, on: :create
   before_destroy :decrement_counter, :delete_activity
 
   public
@@ -49,10 +49,6 @@ class Note < ActiveRecord::Base
 
   def decrement_counter
     user.notes_counter.decrement
-  end
-
-  def create_activity
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
   end
 
   def delete_activity

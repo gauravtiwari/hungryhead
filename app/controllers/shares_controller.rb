@@ -16,6 +16,7 @@ class SharesController < ApplicationController
         render json: @share.errors, status: :unprocessible_entity
       end
     end
+    CreateActivityJob.set(wait: 2.seconds).perform_later(@share.id, @share.class.to_s)
   end
 
   def sharers

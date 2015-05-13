@@ -17,7 +17,6 @@ class FollowsController < ApplicationController
     @follow = current_user.followings.new(followable: @followable)
     authorize @follow.follower
     if @follow.save
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless followable_type == "School"
       render json: {
         follow: @followable.followed_by?(current_user),
         followers_count: @followable.followers_counter.value
@@ -27,6 +26,7 @@ class FollowsController < ApplicationController
         format.json {render json: @follow.errors, status: unprocessable_entity}
       end
     end
+    CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless followable_type == "School"
   end
 
   def unfollow

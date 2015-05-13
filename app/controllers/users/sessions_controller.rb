@@ -13,9 +13,6 @@ class Users::SessionsController < Devise::SessionsController
 	def create
 		self.resource = warden.authenticate!(auth_options)
 		@session = self.resource
-		if self.resource.sign_in_count == 1 && !self.resource.admin?
-			Users::UserWelcomeService.new(self.resource, profile_path(self.resource)).welcome
-		end
 	  set_flash_message(:notice, :signed_in) if is_flashing_format?
 	  sign_in(resource_name, resource)
 	  yield resource if block_given?

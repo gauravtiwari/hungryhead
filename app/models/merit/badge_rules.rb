@@ -31,14 +31,18 @@ module Merit
         (user.updated_at - user.created_at).to_i == 30
       end
 
+      grant_on 'sessions#create', badge: 'focussed', :model_name => 'User' do |user|
+        (user.updated_at - user.created_at).to_i == 100
+      end
+
       #Idea related badges
       grant_on 'ideas#publish', badge: 'entrepreneur', to: :student do |idea|
-        idea.student.ideas_counter == 1
+        idea.student.ideas_counter.value == 1
       end
 
       #Feedback related badges
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        feedback.user.feedbacks_counter == 1
+        feedback.user.feedbacks_counter.value == 1
       end
 
       grant_on 'feedbacks#rate', badge: 'wise', to: :user do |feedback|
@@ -47,42 +51,18 @@ module Merit
 
       #Investment related bages
       grant_on 'investments#create', badge: 'investor', to: :user do |investment|
-        investment.user.investments_counter == 1
+        investment.user.investments_counter.value == 1
       end
 
       #Comments related badges
 
       grant_on 'comments#create', badge: 'commentator', to: :user do |comment|
-        comment.user.comments_counter == 10
+        comment.user.comments_counter.value == 10
       end
 
       grant_on 'comments#create', badge: 'outspoken', to: :user do |comment|
-        comment.user.comments_counter == 50
+        comment.user.comments_counter.value == 50
       end
-
-
-      # If it creates user, grant badge
-      # Should be "current_user" after registration for badge to be granted.
-      # grant_on 'users#create', badge: 'just-registered', to: :itself
-
-      # If it has 10 comments, grant commenter-10 badge
-      # grant_on 'comments#create', badge: 'commenter', level: 10 do |comment|
-      #   comment.user.comments.count == 10
-      # end
-
-      # If it has 5 votes, grant relevant-commenter badge
-      # grant_on 'comments#vote', badge: 'relevant-commenter',
-      #   to: :user do |comment|
-      #
-      #   comment.votes.count == 5
-      # end
-
-      # Changes his name by one wider than 4 chars (arbitrary ruby code case)
-      # grant_on 'registrations#update', badge: 'autobiographer',
-      #   temporary: true, model_name: 'User' do |user|
-      #
-      #   user.name.length > 4
-      # end
     end
   end
 end

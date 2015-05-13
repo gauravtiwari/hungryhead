@@ -1,12 +1,16 @@
-class Users::UserWelcomeService
+class UserWelcomeService
 
-  def initialize(resource, profile_url)
-    @resource = resource
-    @profile_url = profile_url
+  def initialize(user)
+    @user = user
   end
 
   def welcome
-    @resource.activities.create!(trackable: @resource, verb: 'joined', recipient: @resource, key: 'user.create')
+    @user.activities.create!(
+      trackable: @user,
+      verb: 'joined',
+      recipient: @user,
+      key: 'user.create'
+    )
   end
 
 end

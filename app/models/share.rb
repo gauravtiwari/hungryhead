@@ -19,7 +19,7 @@ class Share < ActiveRecord::Base
 	list :commenters_ids
 
 	before_destroy :decrement_counters, :delete_activity
-	after_commit :increment_counters, :create_activity, on: :create
+	after_commit :increment_counters, on: :create
 
 	#Store accessor methods
 	store_accessor :parameters, :shareable_name
@@ -45,10 +45,6 @@ class Share < ActiveRecord::Base
 		shareable.shares_counter.increment
 	  #Add sharer_id to shareable cache
 	  shareable.sharers_ids << user_id
-	end
-
-	def create_activity
-		CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
 	end
 
 	def decrement_counters

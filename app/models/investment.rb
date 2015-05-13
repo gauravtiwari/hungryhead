@@ -18,7 +18,7 @@ class Investment < ActiveRecord::Base
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_commit  :update_investment, :increment_counters, :create_activity,  on: :create
+  after_commit  :increment_counters,  on: :create
 
   #Store accessor methods
   store_accessor :parameters, :point_earned, :views_count
@@ -43,14 +43,6 @@ class Investment < ActiveRecord::Base
     idea.investors_counter.increment
     #Cache investor id into idea
     idea.investors_ids << user_id
-  end
-
-  def update_investment
-    UpdateInvestmentBalanceJob.perform_later(id)
-  end
-
-  def create_activity
-    CreateActivityJob.set(wait: 2.seconds).perform_later(self.id, self.class.to_s)
   end
 
   def decrement_counters

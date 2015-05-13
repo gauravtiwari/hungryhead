@@ -31,6 +31,7 @@ class NotesController < ApplicationController
     else
       render json: @note.errors, status: :unprocessable_entity
     end
+    CreateActivityJob.set(wait: 2.seconds).perform_later(@note.id, @note.class.to_s)
   end
 
   # PATCH/PUT /notes/1
