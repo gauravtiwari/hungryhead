@@ -14,6 +14,7 @@ class DeleteUserFeedJob < ActiveJob::Base
           activity.recipient.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
+        #finally remove from recipient ticker and notification
         recipient_user(activity).ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         recipient_user(activity).friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
 
