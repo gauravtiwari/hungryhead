@@ -10,7 +10,7 @@ class PublishIdeaJob < ActiveJob::Base
       User.find(@user.followers_ids.members).each do |f|
         Pusher.trigger_async("private-user-#{f.id}",
           "new_feed_item",
-          {data: @activity.user.friends_notifications.rangebyscore(@activity.created_at.to_i, @activity.created_at.to_i)}.to_json
+          {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
         )
         #send mail to users if subscribed
         IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true

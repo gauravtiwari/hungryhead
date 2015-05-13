@@ -44,31 +44,30 @@ class UpdateNotificationCacheService
   end
 
   def update_activity(user, activity_item)
-    add_activity_to_user(user, activity_item)
     add_activity_to_user_profile(user, activity_item) #this is for user personal profile
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
     add_activity_to_followers(activity_item) if followers.any?
   end
 
-  def add_activity_to_user(user, activity_item)
-    user.friends_notifications.remrangebyscore(score_key, score_key)
-    user.friends_notifications.add(activity_item, score_key)
+  def add_activity_to_friends_ticker(user, activity_item)
+    user.ticker.remrangebyscore(score_key, score_key)
+    user.ticker.add(activity_item, score_key)
   end
 
   #This is for user profile page to show latest personal activities
   def add_activity_to_user_profile(user, activity_item)
-    user.personal_activities << activity_item
+    user.latest_activities << activity_item
   end
 
   def add_activity_to_idea(idea, activity_item)
-    idea.public_notifications.remrangebyscore(score_key, score_key)
-    idea.public_notifications.add(activity_item, score_key)
+    idea.ticker.remrangebyscore(score_key, score_key)
+    idea.ticker.add(activity_item, score_key)
   end
 
   def add_activity_to_followers(activity_item)
     followers.each do |follower|
-      add_activity_to_user(follower, activity_item)
+      add_activity_to_friends_ticker(follower, activity_item)
     end
   end
 
