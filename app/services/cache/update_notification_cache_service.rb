@@ -27,27 +27,44 @@ class UpdateNotificationCacheService
     }
   end
 
-  def recipient_id
+  #Get recipient user
+  def recipient_user
     if @activity.recipient_type == "User"
-      @activity.recipient_id
+      @activity.recipient
     elsif @activity.recipient_type == "Idea"
-      @activity.recipient.student.id
+      @activity.recipient.student
     else
-      @activity.recipient.user.id
+      @activity.recipient.user
     end
   end
 
+  #Get user followers
   def followers
     followers_ids = @actor.followers_ids.members
-    followers = @actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s) ? followers_ids.push(recipient_id) : followers_ids
     User.find(followers_ids)
   end
 
+  #Update activity for all tickers
   def update_activity(user, activity_item)
-    add_activity_to_user_profile(user, activity_item) #this is for user personal profile
+    #add activity to user personal profile
+    add_activity_to_user_profile(user, activity_item)
+    #push notification into friends notifications
+    add_notification_for_recipient(recipient_user, activity_item)
+    #add notification to idea ticker
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+    #add notification to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
+  end
+
+  #Add notification to recipients
+  def add_notification_for_recipient(recipient_user, activity_item)
+    #delete from notifications
+    recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
+    recipient_user.friends_notifications.add(activity_item, score_key)
+    #delete from recipient ticker
+    recipient_user.ticker.remrangebyscore(score_key, score_key)
+    recipient_user.ticker.add(activity_item, score_key)
   end
 
   def add_activity_to_friends_ticker(user, activity_item)
@@ -57,20 +74,24 @@ class UpdateNotificationCacheService
 
   #This is for user profile page to show latest personal activities
   def add_activity_to_user_profile(user, activity_item)
+    user.latest_activities.delete(activity_item)
     user.latest_activities << activity_item
   end
 
+  #reAdd activity to idea ticker
   def add_activity_to_idea(idea, activity_item)
     idea.ticker.remrangebyscore(score_key, score_key)
     idea.ticker.add(activity_item, score_key)
   end
 
+  #readd notifications to followers tickers
   def add_activity_to_followers(activity_item)
     followers.each do |follower|
       add_activity_to_friends_ticker(follower, activity_item)
     end
   end
 
+  #calculate score key
   def score_key
     @activity.created_at.to_i + @activity.id
   end

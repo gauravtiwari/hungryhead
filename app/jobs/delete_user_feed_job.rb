@@ -14,6 +14,9 @@ class DeleteUserFeedJob < ActiveJob::Base
           activity.recipient.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
+        recipient_user.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        recipient_user.friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+
         #finally destroy the activity
         activity.destroy if activity.present?
       end
@@ -29,13 +32,13 @@ class DeleteUserFeedJob < ActiveJob::Base
   end
 
   #Get recipient id //user
-  def recipient_id(activity)
+  def recipient_user(activity)
     if activity.recipient_type == "User"
-      activity.recipient.id
+      activity.recipient
     elsif activity.recipient_type == "Idea"
-      activity.recipient.student.id
+      activity.recipient.student
     else
-      activity.recipient.user.id
+      activity.recipient.user
     end
   end
 

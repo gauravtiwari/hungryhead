@@ -30,29 +30,45 @@ class CreateNotificationCacheService
     }
   end
 
-  def recipient_id
+  #Find recipient user
+  def recipient_user
     if @activity.recipient_type == "User"
-      @activity.recipient_id
+      @activity.recipient
     elsif @activity.recipient_type == "Idea"
-      @activity.recipient.student.id
+      @activity.recipient.student
     else
-      @activity.recipient.user.id
+      @activity.recipient.user
     end
   end
 
+  #Get followers
   def followers
     followers_ids = @actor.followers_ids.members
-    followers = @actor.id != recipient_id && !followers_ids.include?(recipient_id.to_s) ? followers_ids.push(recipient_id) : followers_ids
     User.find(followers_ids)
   end
 
+  #Add activity to different tickers
   def add_activity(user, activity_item)
-    add_activity_to_user_profile(user, activity_item) #only for user personal activities
+    #only for user personal activities
+    add_activity_to_user_profile(user, activity_item)
+    #Send notification to recipient
+    add_notification_for_recipient(recipient_user, activity_item)
+    #Add activity to idea ticker if recipient is idea
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+    #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
   end
 
+  #add activity to recipient notifications
+  def add_notification_for_recipient(recipient_user, activity_item)
+    #add to notifications
+    recipient_user.friends_notifications.add(activity_item, score_key)
+    #add to ticker
+    recipient_user.ticker.add(activity_item, score_key)
+  end
+
+  #add activity to friends ticker
   def add_activity_to_friends_ticker(user, activity_item)
     user.ticker.add(activity_item, score_key)
   end
@@ -62,10 +78,12 @@ class CreateNotificationCacheService
     user.latest_activities << activity_item
   end
 
+  #Add activity to idea ticker if recipient is idea
   def add_activity_to_idea(idea, activity_item)
     idea.ticker.add(activity_item, score_key)
   end
 
+  #Add activity to followers ticker
   def add_activity_to_followers(activity_item)
     followers.each do |follower|
       add_activity_to_friends_ticker(follower, activity_item)
@@ -73,6 +91,7 @@ class CreateNotificationCacheService
     end
   end
 
+  #generate redis key
   def score_key
     @activity.created_at.to_i + @activity.id
   end
