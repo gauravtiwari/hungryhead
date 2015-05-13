@@ -1,0 +1,9 @@
+<%
+  stats = {
+    followers_count: @user.followers_counter.value,
+    feedbacks_count: @user.feedbacks_counter.value,
+    investments_count: @user.investments_counter.value,
+    score: User.leaderboard.score(@user.id)
+  }.to_json
+%>
+<%= react_component('CardStats', {data: stats}) %>
