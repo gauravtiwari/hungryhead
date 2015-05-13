@@ -145,11 +145,13 @@ class UpdateNotificationCacheService
     end
 
     if !target.nil?
+     badge_description = @activity.badge_description if @activity.badge_description.present?
       {
         recipient_user_id: recipient_user_id,
         recipient_user_name: recipient_user_name,
         recipient_url: recipient_url,
         recipient_name: recipient_name,
+        badge_description: badge_description || nil,
         recipient_type: @activity.recipient_type.downcase,
       }
     else
