@@ -36,15 +36,15 @@ module Merit
       end
 
       grant_on 'welcome#show', badge: 'top-100', :model_name => 'User' do |user|
-        User.count <= 100
+        User.count <= 100 && user.id > 10
       end
 
       grant_on 'welcome#show', badge: 'top-1000', :model_name => 'User' do |user|
-        User.count <= 1000
+        User.count <= 1000 && user.id > 100
       end
 
       grant_on 'welcome#show', badge: 'top-10000', :model_name => 'User' do |user|
-        User.count <= 10000
+        User.count <= 10000 && user.id > 1000
       end
 
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
