@@ -10,6 +10,7 @@ class CreateBadgeNotificationService
       recipient: @resource,
       verb: 'badged',
       key: 'badge.create',
+      badge_description: description,
       unread: true
     )
 

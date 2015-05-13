@@ -111,13 +111,16 @@ class UpdateNotificationCacheService
       recipient_user_id =  target.student.id
       recipient_user_name = target.student.name
       recipient_name = target.name
+      recipient_url = profile_path(target)
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
       recipient_user_name =   target.name
       recipient_name = target.name
+      recipient_url = profile_path(target)
     else
       recipient_user_id =  target.user.id
       recipient_user_name = target.user.name
+      recipient_url = profile_path(target.user)
       recipient_name = target.user.name
     end
 
@@ -125,6 +128,7 @@ class UpdateNotificationCacheService
       {
         recipient_user_id: recipient_user_id,
         recipient_user_name: recipient_user_name,
+        recipient_url: recipient_url,
         recipient_name: recipient_name,
         recipient_type: @activity.recipient_type.downcase,
       }

@@ -8,7 +8,6 @@ class ReputationChangeObserver
       Idea.where(sash_id: changed_data[:sash_id]).first ||
       Feedback.where(sash_id: changed_data[:sash_id]).first
 
-
     if resource.class.to_s == "User"
       user = resource
     elsif resource.class.to_s == "Idea"

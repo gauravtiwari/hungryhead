@@ -23,7 +23,7 @@ module Merit
     def initialize
 
       #User related badges
-      grant_on 'welcome#show', badge: 'just-registered', :model_name => 'User' do |user|
+      grant_on 'welcome#show', badge: 'community', :model_name => 'User' do |user|
         user.rules_accepted?
       end
 

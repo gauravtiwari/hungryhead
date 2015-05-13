@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   sorted_set :friends_notifications, marshal: true
 
   #List to store last 10 activities
-  list :personal_activities, maxlength: 10, marshal: true
+  list :personal_activities, maxlength: 5, marshal: true
 
   #Sorted set to store trending ideas
   sorted_set :leaderboard, global: true

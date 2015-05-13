@@ -18,7 +18,7 @@ class NotificationsController < ApplicationController
 
   def personal
     @notifications = @user.personal_activities.values
-    render json: @notifications
+    render json: {items: @notifications}
   end
 
   def mark_as_read

@@ -102,10 +102,10 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index, :update] do
     member do
       get :ideas
-      get :personal
     end
     collection do
       post :mark_as_read
+      get :personal
     end
   end
 

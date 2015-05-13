@@ -10,7 +10,7 @@ module Feedable
     # Serialize parameters Hash
     serialize :parameters, HashSerializer
     #Serialize JSON
-    store_accessor :parameters, :verb, :meta, :unread
+    store_accessor :parameters, :verb, :meta, :unread, :badge_description
   end
 
 end

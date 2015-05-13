@@ -37,7 +37,7 @@ var CardStats = React.createClass({
         <div className="p-l-25 p-r-45">
           <h3 className="no-margin p-b-25 no-padding text-master text-center">{this.state.score}</h3>
 
-          <div className="row p-b-25">
+            <div className="row p-b-25">
 
             <div className="col-md-4 text-center">
               <p className="hint-text all-caps font-montserrat small no-margin">Views</p>
@@ -52,12 +52,13 @@ var CardStats = React.createClass({
             <p className="hint-text all-caps font-montserrat small no-margin ">Invested</p>
             <p className="all-caps font-montserrat  no-margin text-warning ">{this.state.investments_count}</p>
             </div>
-
+          </div>
+          <div className="row p-t-25 p-b-25">
             <div className="col-md-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin ">Followers</p>
               <p className="all-caps font-montserrat no-margin text-success ">{this.state.followers_count}</p>
               </div>
-            </div>
+
 
             <div className="col-md-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin">Notes</p>
@@ -68,7 +69,8 @@ var CardStats = React.createClass({
               <p className="hint-text all-caps font-montserrat small no-margin">Comments</p>
               <p className="all-caps font-montserrat no-margin text-success">{this.state.comments_count}</p>
             </div>
-        </div>
+          </div>
+      </div>
       </div>
     )
   }

@@ -1,3 +1,3 @@
 <div class="box-shadow">
-  <%= react_component('LatestFeed', {user_id: @user.id, channel_name: "private-user-#{@user.id}", path: personal_notifications_path}.to_json) %>
+  <%= react_component('LatestUserActivities', {user_id: @user.id, channel_name: "private-user-#{@user.id}", path: personal_notifications_path}.to_json) %>
 </div>

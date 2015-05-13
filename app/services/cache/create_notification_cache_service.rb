@@ -111,14 +111,17 @@ class CreateNotificationCacheService
   def options_for_target(target)
     if @activity.recipient_type == "Idea"
       recipient_user_id =  target.student.id
+      recipient_url = profile_path(target)
       recipient_user_name = target.student.name
       recipient_name = target.name
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
+      recipient_url = profile_path(target)
       recipient_user_name =   target.name
       recipient_name = target.name
     else
       recipient_user_id =  target.user.id
+      recipient_url = profile_path(target.user)
       recipient_user_name = target.user.name
       recipient_name = target.user.name
     end
@@ -127,6 +130,7 @@ class CreateNotificationCacheService
       {
         recipient_user_id: recipient_user_id,
         recipient_user_name: recipient_user_name,
+        recipient_url: recipient_url,
         recipient_name: recipient_name,
         recipient_type: @activity.recipient_type.downcase,
       }
