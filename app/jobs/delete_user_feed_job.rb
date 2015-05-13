@@ -14,8 +14,8 @@ class DeleteUserFeedJob < ActiveJob::Base
           activity.recipient.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
-        recipient_user.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
-        recipient_user.friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        recipient_user(activity).ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        recipient_user(activity).friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
 
         #finally destroy the activity
         activity.destroy if activity.present?

@@ -14,8 +14,8 @@ class DeleteUserNotificationJob < ActiveJob::Base
           notification.recipient.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
         end
 
-        recipient_user.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
-        recipient_user.friends_notifications.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
+        recipient_user(notification).ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
+        recipient_user(notification).friends_notifications.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
 
         #finally destroy the notification from DB
         notification.destroy if notification.present?
@@ -25,6 +25,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
 
   #fetch all followers followed by actor
   def find_followers(notification)
+    followers_ids = notification.user.followers_ids.members
     User.find(followers_ids)
   end
 
