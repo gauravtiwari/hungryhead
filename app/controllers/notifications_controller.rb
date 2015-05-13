@@ -16,6 +16,11 @@ class NotificationsController < ApplicationController
     render json: @notifications
   end
 
+  def personal
+    @notifications = @user.personal_activities.values
+    render json: @notifications
+  end
+
   def mark_as_read
     @notification = params[:type].constantize.find(params[:id])
     UpdateNotificationCacheService.new(@user, @notification).update
