@@ -43,7 +43,7 @@ class CreateNotificationCacheService
 
   #Get followers
   def followers
-    followers_ids = @actor.followers_ids.members
+    followers_ids = @actor.followers_ids.members - [recipient_user.id]
     User.find(followers_ids)
   end
 
