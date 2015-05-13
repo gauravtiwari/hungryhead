@@ -181,7 +181,7 @@ class UsersController < ApplicationController
   def set_user
     id = params[:slug] || params[:id]
     @user = User.find(id)
-    @badges = @user.badges.group_by(&:id)
+    @badges = @user.badges.group_by(&:level)
   end
 
   # White-listed attributes.

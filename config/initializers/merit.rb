@@ -25,7 +25,7 @@ end
 #User related
 Merit::Badge.create!(
   id: 1,
-  name: "just-registered",
+  name: "community",
   level: "bronze",
   description: "Joined the community",
   custom_fields: { name: "Community",  points: 2 }

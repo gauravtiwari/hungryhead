@@ -4,9 +4,19 @@ class ReputationChangeObserver
     description = changed_data[:description]
 
     # If user is your meritable model, you can query for it doing:
-    user = User.where(sash_id: changed_data[:sash_id]).first
+    resource = User.where(sash_id: changed_data[:sash_id]).first ||
+      Idea.where(sash_id: changed_data[:sash_id]).first ||
+      Feedback.where(sash_id: changed_data[:sash_id]).first
 
-    # When did it happened:
-    datetime = changed_data[:granted_at]
+
+    if resource.class.to_s == "User"
+      user = resource
+    elsif resource.class.to_s == "Idea"
+      user = resource.student
+    else
+      user = resource.user
+    end
+
+    CreateBadgeNotificationService.new(resource, description).create
   end
 end

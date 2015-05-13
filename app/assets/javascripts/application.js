@@ -28,6 +28,7 @@
 //= require slimScroll
 //= require jquery.atwho
 //= require typer
+//= require nvd3
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require moment

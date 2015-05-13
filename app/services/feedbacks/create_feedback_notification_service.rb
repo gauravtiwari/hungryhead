@@ -23,16 +23,6 @@ class CreateFeedbackNotificationService
       CreateMentionService.new(@feedback).mention
     end
 
-    # Award badge if published first feedback
-    if @user.first_feedback?
-      #Add badge
-    end
-
-    # Award badge if published 30 feedbacks
-    if @user.feedback_10?
-      #Added badge
-    end
-
   end
 
 end

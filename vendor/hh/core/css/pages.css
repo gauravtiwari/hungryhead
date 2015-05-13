@@ -41,7 +41,7 @@ Generated From LESS
 html {
   height: 100%;
 }
-/* Body Triggers for layout options 
+/* Body Triggers for layout options
 ------------------------------------------------------------------
 */
 body {
@@ -130,7 +130,7 @@ body.dashboard .page-container {
   height: 40px;
   right: 19px;
 }
-/* Header 
+/* Header
 ------------------------------------
 */
 .header {
@@ -198,7 +198,7 @@ body.dashboard .page-container {
 .header .search-link:hover {
   opacity: 1;
 }
-/* Bootstrap navbar 
+/* Bootstrap navbar
 ------------------------------------
 */
 .navbar {
@@ -225,7 +225,7 @@ body.dashboard .page-container {
   border-radius: 0;
   background-color: transparent !important;
 }
-/* Main Menu Sidebar 
+/* Main Menu Sidebar
 ------------------------------------
 */
 .page-sidebar {
@@ -516,7 +516,7 @@ body.dashboard .page-container {
 [data-toggle-pin="sidebar"] > i:before {
   content: "\f10c";
 }
-/* Sidebar icon holder 
+/* Sidebar icon holder
 ------------------------------------
 */
 .icon-thumbnail {
@@ -549,7 +549,7 @@ body.dashboard .page-container {
 .nav-collapse.collapse {
   height: 100%  !important;
 }
-/* Quick View 
+/* Quick View
 ------------------------------------
 */
 .quickview-wrapper {
@@ -815,7 +815,7 @@ body.dashboard .page-container {
 .page-sidebar ~ .page-container {
   padding-left: 70px;
 }
-/* Page Container 
+/* Page Container
 ------------------------------------
 */
 .page-container {
@@ -916,7 +916,7 @@ body.dashboard .page-container {
   font-weight: 300;
   text-shadow: none;
 }
-/* Overlay Search 
+/* Overlay Search
 ------------------------------------
 */
 .overlay {
@@ -996,7 +996,7 @@ body.dashboard .page-container {
 .jumbotron h1 {
   font-size: 44px;
 }
-/* Pages Image Icon Sent - Pixel Perfect 
+/* Pages Image Icon Sent - Pixel Perfect
 ------------------------------------
 */
 .icon-set {
@@ -1753,7 +1753,7 @@ body {
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
 }
-/* Headings 
+/* Headings
 ------------------------------------
 */
 h1,
@@ -1927,7 +1927,7 @@ hr.double {
 hr.dotted {
   border-style: dotted none none;
 }
-/* Font Sizes 
+/* Font Sizes
 ------------------------------------
 */
 .small-text {
@@ -1954,7 +1954,7 @@ hr.dotted {
 .light {
   font-weight: 300 !important;
 }
-/* Misc 
+/* Misc
 ------------------------------------
 */
 .logo {
@@ -2017,7 +2017,7 @@ hr.dotted {
 .bg-primary-lighter {
   background-color: #e2deef;
 }
-/* Complete 
+/* Complete
 ------------------------------------
 */
 .bg-complete {
@@ -2035,7 +2035,7 @@ hr.dotted {
 .bg-complete-lighter {
   background-color: #daeffd;
 }
-/* Success 
+/* Success
 ------------------------------------
 */
 .bg-success {
@@ -2071,7 +2071,7 @@ hr.dotted {
 .bg-info-lighter {
   background-color: #d8dadc;
 }
-/* Danger 
+/* Danger
 ------------------------------------
 */
 .bg-danger {
@@ -2110,7 +2110,7 @@ hr.dotted {
 /* More Color Options
 ------------------------------------
 */
-/* Menu 
+/* Menu
 ------------------------------------
 */
 .bg-menu-dark {
@@ -2296,6 +2296,9 @@ hr.dotted {
 .font-heading {
   font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.font-helvetica {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 /* Wells
 ------------------------------------
 */
@@ -2372,7 +2375,7 @@ hr.dotted {
     line-height: 17px;
   }
 }
-/* For Windows : Fixes 
+/* For Windows : Fixes
 ------------------------------------
 */
 .windows body,
@@ -3607,7 +3610,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
 .pgn .alert {
   margin: 0;
 }
-/* Simple 
+/* Simple
 ------------------------------------
 */
 .pgn-simple .alert {
@@ -3619,7 +3622,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   max-height: 250px;
   overflow: hidden;
 }
-/* Bar 
+/* Bar
 ------------------------------------
 */
 .pgn-bar {
@@ -3681,7 +3684,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
     -webkit-transform: translateY(0);
   }
 }
-/* Circle 
+/* Circle
 ------------------------------------
 */
 .pgn-circle .alert {
@@ -3781,7 +3784,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
     width: 300px;
   }
 }
-/* Flip 
+/* Flip
 ------------------------------------
 */
 .pgn-wrapper[data-position^='top-'] .pgn-flip {
@@ -4083,7 +4086,7 @@ body > .pgn-wrapper {
 .progress-striped .bar-info {
   background-color: #3b4752;
 }
-/* Circular Progress : indeterminate 
+/* Circular Progress : indeterminate
 ------------------------------------
 */
 .progress-circle-indeterminate {
@@ -4111,7 +4114,7 @@ body > .pgn-wrapper {
 .progress-circle-indeterminate.progress-circle-complete {
   background-image: url('../assets/core/img/progress/progress-circle-complete.svg');
 }
-/* Circular Progress 
+/* Circular Progress
 ------------------------------------
 */
 .progress-circle {
@@ -4459,7 +4462,7 @@ body > .pgn-wrapper {
 .nav-tabs.nav-tabs-right ~ .tab-content {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-/* Tabs : Simple 
+/* Tabs : Simple
 ------------------------------------
 */
 .nav-tabs-simple {
@@ -4646,7 +4649,7 @@ body > .pgn-wrapper {
     font-size: 0.6em;
   }
 }
-/* Tabs : Fill-up 
+/* Tabs : Fill-up
 ------------------------------------
 */
 .nav-tabs-fillup {
@@ -5428,7 +5431,7 @@ fieldset[disabled] .form-control {
   font-size: 18px;
   line-height: 22px;
 }
-/* Checkboxes and Radio buttons 
+/* Checkboxes and Radio buttons
 --------------------------------------------------
 */
 .radio,
@@ -5703,7 +5706,7 @@ fieldset[disabled] .form-control {
     width: 100%;
   }
 }
-/* Form Groups 
+/* Form Groups
 --------------------------------------------------
 */
 .form-group {
@@ -6209,7 +6212,7 @@ https://github.com/eternicode/bootstrap-datepicker
   text-shadow: none;
   border: 0;
 }
-/* Timepicker 
+/* Timepicker
 https://github.com/m3wolf/bootstrap3-timepicker
 */
 .bootstrap-timepicker-widget table td a i {
@@ -7030,7 +7033,7 @@ div.cs-skin-slide .cs-options ul li.cs-selected span {
 /*------------------------------------------------------------------
 [16. Tables and Datatables]
 */
-/* Generic Tables 
+/* Generic Tables
 ------------------------------------
 */
 .table {
@@ -7159,7 +7162,7 @@ div.cs-skin-slide .cs-options ul li.cs-selected span {
 .fht-table {
   margin-bottom: 0 !important;
 }
-/* Data-tables 
+/* Data-tables
 ------------------------------------
 */
 .table.dataTable.no-footer {
@@ -7759,7 +7762,7 @@ input.list-view-search {
   height: 100%;
   width: 100%;
 }
-/* Cover 
+/* Cover
 ------------------------------------
 */
 .social-wrapper .social .jumbotron {
@@ -7802,7 +7805,7 @@ input.list-view-search {
   min-width: 100%;
   min-height: 100%;
 }
-/* Feed 
+/* Feed
 ------------------------------------
 */
 .social-user-profile {
@@ -7829,7 +7832,7 @@ input.list-view-search {
 .social-wrapper .social .feed > .day:hover > .timeline:after {
   background: #48b0f7;
 }
-/* Cards 
+/* Cards
 ------------------------------------
 */
 .card {
@@ -8167,7 +8170,7 @@ input.list-view-search {
 .toggle-email-sidebar {
   display: none;
 }
-/* Email Components 
+/* Email Components
 --------------------------------------------------
 */
 .email-wrapper {
@@ -8481,7 +8484,7 @@ input.list-view-search {
   margin-left: -30px;
   margin-right: -30px;
 }
-/* Email App Top Header 
+/* Email App Top Header
 --------------------------------------------------
 */
 .header-wrapper-email {
@@ -8493,7 +8496,7 @@ input.list-view-search {
 .header-wrapper-email .btn:hover {
   text-decoration: none;
 }
-/* Responsive Handler : Email App 
+/* Responsive Handler : Email App
 --------------------------------------------------
 */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
@@ -9170,7 +9173,7 @@ Responsive Util
   position: absolute;
   top: 50%;
 }
-/* Responsive Handlers : Lockscreen 
+/* Responsive Handlers : Lockscreen
 ------------------------------------
 */
 @media (max-width: 767px) {
@@ -9205,7 +9208,7 @@ Responsive Util
   Adapted from Vertical Timeline by Sebastiano Guerriero
   http://codyhouse.co/gem/vertical-timeline/
 */
-/* -------------------------------- 
+/* --------------------------------
 
 Modules - reusable parts of our design
 
@@ -9232,9 +9235,9 @@ Modules - reusable parts of our design
   background-color: #fff;
   z-index: 10;
 }
-/* -------------------------------- 
+/* --------------------------------
 
-Main components 
+Main components
 
 -------------------------------- */
 .timeline {
@@ -9917,7 +9920,7 @@ Main components
   }
 }
 /*------------------------------------------------------------------
-[26. Vector Map : Mapplic Plugin] 
+[26. Vector Map : Mapplic Plugin]
 */
 .mapplic-container {
   width: 100%;
@@ -10397,7 +10400,7 @@ Main components
   text-align: right;
   margin-right: 10px;
 }
-/* Thumbnail for icons and profile pics 
+/* Thumbnail for icons and profile pics
 ------------------------------------
 */
 .thumbnail-wrapper {
@@ -10538,14 +10541,14 @@ Main components
   background: transparent;
   border: none;
 }
-/* Scroll 
+/* Scroll
 ------------------------------------
 */
 .scrollable {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-/* Overides 
+/* Overides
 ------------------------------------
 */
 .no-padding {
@@ -10628,7 +10631,7 @@ Main components
 .scroll-x-hidden {
   overflow-x: hidden !important;
 }
-/* Generic Padding Helpers 
+/* Generic Padding Helpers
 ------------------------------------
 */
 .p-t-5 {
@@ -11204,7 +11207,7 @@ Main components
 .b-blank {
   border-color: #000;
 }
-/* Border Helpers 
+/* Border Helpers
 ------------------------------------
 */
 .b-a,
@@ -11469,7 +11472,7 @@ Main components
 .col-bottom {
   vertical-align: bottom;
 }
-/* columns of same height styles 
+/* columns of same height styles
 ------------------------------------
 */
 .container-xs-height {
@@ -11711,7 +11714,7 @@ Main components
 .previewer {
   height: 35px;
 }
-/* Demo Widths For GIF Animations 
+/* Demo Widths For GIF Animations
 ------------------------------------
 */
 .demo-bg-hinted {
