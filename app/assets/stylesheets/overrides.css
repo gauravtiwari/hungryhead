@@ -23,6 +23,10 @@ body, p {
   max-height: 300px;
 }
 
+.profile-cards {
+  min-height: 180px;
+  max-height: 180px;
+}
 .badge {
   padding: .4em .8em .4em .2em;
   margin: 0 3px 3px 0;

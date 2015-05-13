@@ -12,7 +12,7 @@
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require font-awesome
  *= require sweetalert
- *= require nvd3
+ * require nvd3
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar
  *= require plugins/jquery-menuclipper/jquery.menuclipper

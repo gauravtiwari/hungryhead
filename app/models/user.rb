@@ -34,12 +34,14 @@ class User < ActiveRecord::Base
 
   #Latest ideas
   list :latest_ideas, maxlength: 5, marshal: true
-
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
-  sorted_set :latest_notifications, marshal: true
+  sorted_set :friends_notifications, marshal: true
+
+  #List to store last 10 activities
+  list :personal_activities, maxlength: 10, marshal: true
 
   #Sorted set to store trending ideas
   sorted_set :leaderboard, global: true
@@ -262,7 +264,7 @@ class User < ActiveRecord::Base
 
   def has_notifications?
     #check if user has notifications
-    latest_notifications.members.length > 0
+    friends_notifications.members.length > 0
   end
 
   #Load data to redis using soulmate after_save

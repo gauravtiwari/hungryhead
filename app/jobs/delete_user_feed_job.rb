@@ -2,16 +2,16 @@ class DeleteUserFeedJob < ActiveJob::Base
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
       Activity.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |activity|
-        activity.user.latest_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        activity.user.friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
 
         #Remove activity from follower and recipient
         find_followers(activity).each do |f|
-          f.latest_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+          f.friends_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
         #Remove from idea feed if it's an idea activity
         if activity.recipient_type == "Idea"
-          activity.recipient.latest_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+          activity.recipient.public_notifications.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
         #finally destroy the activity

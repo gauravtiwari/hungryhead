@@ -51,13 +51,13 @@ class UpdateNotificationCacheService
   end
 
   def add_activity_to_user(user, activity_item)
-    user.latest_notifications.remrangebyscore(score_key, score_key)
-    user.latest_notifications.add(activity_item, score_key)
+    user.friends_notifications.remrangebyscore(score_key, score_key)
+    user.friends_notifications.add(activity_item, score_key)
   end
 
   def add_activity_to_idea(idea, activity_item)
-    idea.latest_notifications.remrangebyscore(score_key, score_key)
-    idea.latest_notifications.add(activity_item, score_key)
+    idea.public_notifications.remrangebyscore(score_key, score_key)
+    idea.public_notifications.add(activity_item, score_key)
   end
 
   def add_activity_to_followers(activity_item)

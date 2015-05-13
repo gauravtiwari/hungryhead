@@ -33,7 +33,7 @@ class Idea < ActiveRecord::Base
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest idea notifications
-  sorted_set :latest_notifications, maxlength: 100, marshal: true
+  sorted_set :public_notifications, maxlength: 100, marshal: true
 
   #Leaderboard ideas
   sorted_set :leaderboard, global: true
