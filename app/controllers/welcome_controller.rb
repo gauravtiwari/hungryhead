@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
   layout "home"
 
   def show
+    @welcome = current_user #for merit to avoid console errors
     @user = current_user
     case step
     when :follow_friends
@@ -15,6 +16,7 @@ class WelcomeController < ApplicationController
   end
 
   def update
+    @welcome = current_user #for merit to avoid console errors
     @user = current_user
     case step
     when :hello
