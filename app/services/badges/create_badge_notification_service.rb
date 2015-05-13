@@ -1,13 +1,13 @@
 class CreateBadgeNotificationService
 
-	def initialize(resource, description)
-		@resource = resource
+	def initialize(user, description)
+		@user = user
 	end
 
 	def create
     @activity = @user.notifications.create!(
-      trackable: @resource,
-      recipient: @resource,
+      trackable: @user,
+      recipient: @user,
       verb: 'badged',
       key: 'badge.create',
       badge_description: description,
