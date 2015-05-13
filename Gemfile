@@ -195,10 +195,6 @@ gem 'carrierwave-imageoptimizer'
 gem 'carrierwave_backgrounder'
 gem 'carrierwave-aws'
 
-
-#Unread models
-gem 'unread'
-
 #Background Job processing
 gem 'sidekiq'
 gem 'sucker_punch'

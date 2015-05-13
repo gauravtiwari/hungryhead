@@ -113,9 +113,6 @@ class User < ActiveRecord::Base
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname
 
-  #Reading models
-  acts_as_reader
-
   #Messaging system
   acts_as_messageable
 

@@ -11,8 +11,6 @@ module Feedable
     serialize :parameters, HashSerializer
     #Serialize JSON
     store_accessor :parameters, :verb, :meta, :unread
-    #reading notifications and activities
-    acts_as_readable :on => :created_at
   end
 
 end
