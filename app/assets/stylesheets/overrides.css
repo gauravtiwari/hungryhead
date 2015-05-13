@@ -24,8 +24,8 @@ body, p {
 }
 
 .profile-cards {
-  min-height: 180px;
-  max-height: 360px;
+  min-height: 270px;
+  max-height: 270px;
 }
 .badge {
   padding: .4em .8em .4em .2em;

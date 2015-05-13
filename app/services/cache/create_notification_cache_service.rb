@@ -11,7 +11,6 @@ class CreateNotificationCacheService
 
   def create
     add_activity(@actor, activity)
-    SendNotificationService.new(@actor, activity).user_notification
     SendNotificationService.new(@object, activity).idea_notification if @activity.trackable_type == "Idea"
     SendNotificationService.new(@target, activity).idea_notification if @activity.recipient_type == "Idea" && @activity.trackable_type != "Idea"
   end
@@ -66,6 +65,7 @@ class CreateNotificationCacheService
     recipient_user.friends_notifications.add(activity_item, score_key)
     #add to ticker
     recipient_user.ticker.add(activity_item, score_key)
+    SendNotificationService.new(recipient_user, activity).user_notification
   end
 
   #add activity to friends ticker

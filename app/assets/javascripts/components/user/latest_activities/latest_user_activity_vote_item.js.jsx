@@ -5,13 +5,13 @@ var LatestUserActivityVoteItem = React.createClass({
 
     if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
       if(this.props.item.recipient.recipient_type === "idea") {
-        var recipient = "on your idea "+this.props.item.recipient.recipient_name;
+        var recipient = "on your idea "+ <a href={this.props.item.recipient_url}>this.props.item.recipient.recipient_name</a>;
       } else {
         var recipient = "on your "+this.props.item.recipient.recipient_type;
       }
     } else {
       if(this.props.item.recipient.recipient_type === "idea") {
-        var recipient = "on " + this.props.item.recipient.recipient_name;
+        var recipient = "on " + <a href={this.props.item.recipient_url}>this.props.item.recipient.recipient_name</a>;
       } else {
         var recipient = "on a " + this.props.item.recipient.recipient_type;
       }

@@ -8,7 +8,7 @@ class ReputationChangeObserver
       Idea.where(sash_id: changed_data[:sash_id]).first ||
       Feedback.where(sash_id: changed_data[:sash_id]).first
 
-    if resource.class.to_s == "User"
+    if resource.class.to_s == "User" || "Student" || "Teacher" || "Mentor"
       user = resource
     elsif resource.class.to_s == "Idea"
       user = resource.student
@@ -16,6 +16,6 @@ class ReputationChangeObserver
       user = resource.user
     end
 
-    CreateBadgeNotificationService.new(resource, description).create
+    CreateBadgeNotificationService.new(user, description).create
   end
 end
