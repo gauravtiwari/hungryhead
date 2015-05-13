@@ -21,6 +21,12 @@ class NotificationsController < ApplicationController
     render json: {items: @notifications}
   end
 
+  def friends
+    @notifications = @user.friends_notifications.revrange(0, 100)
+    .paginate(:page => params[:page], :per_page => 10)
+    render json: @notifications
+  end
+
   def mark_as_read
     @notification = params[:type].constantize.find(params[:id])
     UpdateNotificationCacheService.new(@user, @notification).update
