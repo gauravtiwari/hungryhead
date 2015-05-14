@@ -36,10 +36,13 @@ class FeedbacksController < ApplicationController
   def create
     # If feedback created publish via pusher
     create_feedback_service.on :new_feedback do |feedback|
-      authorize  feedback
+      @feedback = feedback #for merit
+      authorize feedback
       if feedback.save
-        #render response
-        format.json { render :show, status: :created}
+        respond_to do |format|
+          #render response
+          format.json { render :show, status: :created}
+        end
         # Enque activity creation
         CreateActivityJob.set(wait: 2.seconds).perform_later(feedback.id, feedback.class.to_s)
       else

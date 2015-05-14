@@ -15,6 +15,7 @@ class CommentsController < ApplicationController
   def create
     # If comment created publish via pusher
     create_comment_service.on :comment_created do |comment|
+      @comment = comment
       Pusher.trigger_async("#{comment.commentable_type}-#{comment.commentable_id}-comments",
         "new_comment",
         { data: render(:show, locals: {comment: comment} )}

@@ -36,8 +36,8 @@ class InvestmentsController < ApplicationController
       authorize @investment
       respond_to do |format|
         if @investment.save
-          UpdateInvestmentBalanceJob.perform_later(id)
-          format.json { render :show, status: :created}
+          UpdateInvestmentBalanceJob.perform_later(@investment.id)
+          format.json { render :show, status: :created }
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
         end

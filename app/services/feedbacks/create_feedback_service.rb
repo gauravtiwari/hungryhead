@@ -1,5 +1,7 @@
 class CreateFeedbackService
 
+  include Wisper::Publisher
+
   def initialize(params, idea, user)
     @params = params
     @idea = idea

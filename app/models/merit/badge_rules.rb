@@ -45,35 +45,35 @@ module Merit
 
       #Idea related badges
 
-      grant_on 'ideas#update', badge: 'lean', to: :student do |idea|
-        idea.student.ideas_counter.value == 1
+      grant_on 'ideas#publish', badge: 'lean', to: :student do |idea|
+        idea.student.ideas_counter.value == 1 && Idea.leaderboard.score(idea.id) == 5
       end
 
-      grant_on 'ideas#update', badge: 'entrepreneur', multiple: true, to: :student do |idea|
+      grant_on 'ideas#publish', badge: 'entrepreneur', multiple: true, to: :student do |idea|
         Idea.leaderboard.score(idea.id) == 10000
       end
 
-      grant_on 'ideas#update', badge: 'validated', multiple: true, to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'validated', multiple: true, to: :itself do |idea|
         Idea.leaderboard.score(idea.id) == 10000
       end
 
-      grant_on 'ideas#update', badge: 'popular-idea', to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'popular-idea', to: :itself do |idea|
         Idea.leaderboard.score(idea.id) == 5000
       end
 
-      grant_on 'ideas#update', badge: 'market-fit', to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'market-fit', to: :itself do |idea|
         Idea.leaderboard.score(idea.id) == 2500
       end
 
-      grant_on 'ideas#update', badge: 'viral', to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'viral', to: :itself do |idea|
         (DateTime.now - idea.created_at).to_i == 3 && Idea.leaderboard.score(idea.id) == 500
       end
 
-      grant_on 'ideas#update', badge: 'disrupt', to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'disrupt', to: :itself do |idea|
         (DateTime.now - idea.created_at).to_i == 5 && Idea.leaderboard.score(idea.id) == 1000
       end
 
-      grant_on 'ideas#update', badge: 'traction', to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'traction', to: :itself do |idea|
         (DateTime.now - idea.created_at).to_i == 10 && Idea.leaderboard.score(idea.id)/10 == 100
       end
 
@@ -83,6 +83,7 @@ module Merit
       end
 
       #Feedback related badges
+
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
         feedback.user.feedbacks_counter.value == 1 && Feedback.leaderboard.score(feedback.id) == 25
       end
