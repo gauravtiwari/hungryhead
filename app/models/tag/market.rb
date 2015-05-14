@@ -1,4 +1,7 @@
 class Market < ActiveRecord::Base
+
+  extend FriendlyId
+  friendly_id :slug_candidates
   include Sluggable
 
   private
