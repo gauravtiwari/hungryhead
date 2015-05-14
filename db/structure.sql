@@ -2418,6 +2418,20 @@ CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
 
 
 --
+-- Name: index_posts_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_level ON posts USING btree (level);
+
+
+--
+-- Name: index_posts_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_posts_on_sash_id ON posts USING btree (sash_id);
+
+
+--
 -- Name: index_posts_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
