@@ -15,14 +15,12 @@ module Merit
     def initialize
 
       #Users related scoring
-      score 2, :on => 'users#update', category: 'user' do |user|
-        user.about_me.present?
+      score 2, :on => 'users#update', category: 'autobiographer' do |user|
+        user.about_me.present? && user.points(category: 'autobiographer') == 0
       end
 
       #Comments related
-      score 5, :on => 'comments#create', category: 'comment', to: :user do |comment|
-        comment.votes_counter.value == 5
-      end
+      score 2, :on => 'comments#create', category: 'comment', to: :user
 
       #Feedbacks related
       score 5, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
@@ -36,14 +34,10 @@ module Merit
       end
 
       #Investment related
-      score 5, :on => 'investments#create', to: :user, category: 'investment' do |investment|
-        investment.votes_counter.value == 5
-      end
+      score 5, :on => 'investments#create', to: :user, category: 'investment'
 
       #Posts
-      score 5, :on => 'posts#create', to: :user, category: 'post' do |post|
-        Post.leaderboard.score(post.id) == 5
-      end
+      score 5, :on => 'posts#create', to: :user, category: 'post'
 
       #Ideas
       score 5, :on => 'ideas#publish', to: :student, category: 'idea'
