@@ -19,40 +19,34 @@ module Merit
         user.about_me.present?
       end
 
-      score 2, :on => 'follows#create', category: 'follow' do |follow|
-        follow.followable.followers_counter.value == 200 && follow.followable_type != "School"
-      end
-
-      score 5, :on => 'follows#create', category: 'follow' do |follow|
-        follow.followable.followers_counter.value == 500 && follow.followable_type != "School"
-      end
-
-      score 10, :on => 'follows#create', category: 'follow' do |follow|
-        follow.followable.followers_counter.value == 1000 && follow.followable_type != "School"
-      end
-
-      #Comments related
-      score 1, :on => 'comments#create', to: [:commentable], category: 'comment'
-
       #Feedbacks related
-      score 1, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
+      score 5, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
 
-      score 5, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.accepted? && feedback.helpful?
       end
 
-      score 1, :on => 'investments#create', to: [:idea, :user], category: 'investment'
+      score 2, :on => 'feedbacks#rate', to: :idea_owner, category: 'user' do |feedback|
+        feedback.accepted?
+      end
 
-      score 1, :on => 'notes#create', to: [:user], category: 'note'
+      #Investment related
+      score 5, :on => 'investments#create', to: [:user], category: 'investment'
 
+      #Posts
+      score 5, :on => 'posts#create', to: [:user], category: 'post'
+
+      #Ideas
       score 5, :on => 'ideas#publish', to: [:student], category: 'idea'
 
-      score 1, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|
+      #Share
+      score 10, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|
         share.user != share.shareable_user
       end
 
+      #Votes
       score 5, :on => 'votes#vote', to: [:votable, :votable_user], category: 'vote' do |vote|
-        vote.votable_type != "Share" || vote.votable_type != "Investment" && vote.voter != vote.votable_user
+        vote.votable_type != "Investment" && vote.voter != vote.votable_user
       end
 
     end

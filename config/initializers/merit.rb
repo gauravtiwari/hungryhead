@@ -28,7 +28,7 @@ Merit::Badge.create!(
   name: "community",
   level: "bronze",
   description: "Joined the community",
-  custom_fields: { name: "Community" }
+  custom_fields: { name: "Community", points: 1 }
 )
 
 Merit::Badge.create!(
@@ -36,304 +36,216 @@ Merit::Badge.create!(
   name: "autobiographer",
   level: "bronze",
   description: "Completed the about me section",
-  custom_fields: { name: "Autobiographer" }
+  custom_fields: { name: "Autobiographer", points: 2 }
 )
 
 Merit::Badge.create!(
   id: 3,
-  name: "top-10",
+  name: "social",
   level: "bronze",
-  description: "First 10 to join the site",
-  custom_fields: { name: "Top 10"}
+  description: "Connected with 200 people",
+  custom_fields: { name: "Social", points: 10 }
 )
 
 Merit::Badge.create!(
   id: 4,
-  name: "top-100",
+  name: "lean",
   level: "bronze",
-  description: "First 100 to join the site",
-  custom_fields: { name: "Top 100"}
+  description: "Pitched first startup idea",
+  custom_fields: { name: "Lean", points: 5 }
 )
 
 Merit::Badge.create!(
   id: 5,
-  name: "top-1000",
+  name: "growth-hacking",
   level: "bronze",
-  description: "First 1000 to join the site",
-  custom_fields: { name: "Top 1000"}
+  description: "Shared idea and increased idea score by 100 in 3 days",
+  custom_fields: { name: "Growth Hacking", points: 25 }
 )
 
 Merit::Badge.create!(
   id: 6,
-  name: "top-10000",
+  name: "feedbacker",
   level: "bronze",
-  description: "First 10000 to join the site",
-  custom_fields: { name: "Top 10000" }
+  description: "Feedback with score of 25",
+  custom_fields: { name: "Feedbacker", points: 5 }
 )
 
 Merit::Badge.create!(
   id: 7,
-  name: "beta",
+  name: "investor",
   level: "bronze",
-  description: "Joined private beta site and published an idea",
-  custom_fields: { name: "Beta"}
+  description: "First investment",
+  custom_fields: { name: "Investor", points: 1 }
 )
 
 Merit::Badge.create!(
   id: 8,
-  name: "social",
-  level: "bronze",
-  description: "Followed 200 people",
-  custom_fields: { name: "Social"}
+  name: "angel-investor",
+  level: "gold",
+  description: "60 investments in a year of amount between 100 to 300",
+  custom_fields: { name: "Angel Investor", points: 100  }
 )
-
 
 Merit::Badge.create!(
   id: 9,
-  name: "student",
-  level: "bronze",
-  description: "Pitched first idea",
-  custom_fields: { name: "Student"}
+  name: "vc",
+  level: "gold",
+  description: "150 investments in a year of amount between 500 to 700",
+  custom_fields: { name: "VC", points: 200  }
 )
 
 Merit::Badge.create!(
   id: 10,
-  name: "lean",
-  level: "bronze",
-  description: "Pitched first idea with score of 5",
-  custom_fields: { name: "Lean"}
+  name: "commentator",
+  level: "silver",
+  description: "Left 10 comments",
+  custom_fields: { name: "Commentator", points: 5 }
 )
 
 Merit::Badge.create!(
   id: 11,
-  name: "pivot",
-  level: "bronze",
-  description: "Changed the idea",
-  custom_fields: { name: "Pivotted" }
+  name: "collaborative",
+  level: "gold",
+  description: "50 comments with cummulative score of 50",
+  custom_fields: { name: "Collaborative", points: 25 }
 )
 
 Merit::Badge.create!(
   id: 12,
-  name: "growth-hacking",
-  level: "bronze",
-  description: "Shared idea and increased idea score by 50",
-  custom_fields: { name: "Growth Hacking" }
+  name: "pundit",
+  level: "gold",
+  description: "100 comments with cummulative score of 500",
+  custom_fields: { name: "Pundit", points: 50 }
 )
 
 Merit::Badge.create!(
   id: 13,
-  name: "feedbacker",
+  name: "enthusiast",
   level: "bronze",
-  description: "First feedback with score of 5",
-  custom_fields: { name: "Feedbacker" }
+  description: "Visited the site each day for 30 consecutive days.",
+  custom_fields: { name: "Enthusiast", points: 15 }
 )
 
 Merit::Badge.create!(
   id: 14,
-  name: "investor",
+  name: "focussed",
+  level: "silver",
+  description: "Visited the site each day for 100 consecutive days.",
+  custom_fields: { name: "Focussed", points: 50 }
+)
+
+Merit::Badge.create!(
+  id: 15,
+  name: "early-adopter",
   level: "bronze",
-  description: "First investment",
-  custom_fields: { name: "Investor" }
+  description: "Voted on 10 new ideas",
+  custom_fields: { name: "Early Adopter", points: 5 }
 )
 
 Merit::Badge.create!(
   id: 16,
-  name: "angel-investor",
-  level: "gold",
-  description: "60 investments in a year",
-  custom_fields: { name: "Angel Investor" }
+  name: "influencer",
+  level: "silver",
+  description: "10 posts with score of 500",
+  custom_fields: { name: "Influencer", points: 25 }
 )
 
 Merit::Badge.create!(
   id: 17,
-  name: "VC",
-  level: "gold",
-  description: "150 investments in a year",
-  custom_fields: { name: "VC" }
+  name: "market-fit",
+  level: "silver",
+  description: "Idea with score of 500",
+  custom_fields: { name: "Product Market Fit", points: 15 }
 )
 
 Merit::Badge.create!(
   id: 18,
-  name: "commentator",
+  name: "viral",
   level: "silver",
-  description: "Left 10 comments",
-  custom_fields: { name: "Commentator" }
+  description: "Idea with score of 500 in 3 days",
+  custom_fields: { name: "Viral", points: 50 }
 )
 
 Merit::Badge.create!(
   id: 19,
-  name: "outspoken",
-  level: "silver",
-  description: "Left 25 comments",
-  custom_fields: { name: "Outspoken" }
+  name: "disrupt",
+  level: "gold",
+  description: "Idea with score of 1000 in 5 days",
+  custom_fields: { name: "Disruptive", points: 100 }
 )
 
 Merit::Badge.create!(
   id: 20,
-  name: "collaborative",
-  level: "gold",
-  description: "50 comments with score of 5",
-  custom_fields: { name: "Collaborative" }
-)
-
-Merit::Badge.create!(
-  id: 21,
-  name: "pundit",
-  level: "gold",
-  description: "100 comments with score of 10",
-  custom_fields: { name: "Pundit" }
-)
-
-Merit::Badge.create!(
-  id: 22,
-  name: "enthusiast",
-  level: "bronze",
-  description: "Visited the site each day for 30 consecutive days.",
-  custom_fields: { name: "Enthusiast" }
-)
-
-Merit::Badge.create!(
-  id: 23,
-  name: "early-adopter",
-  level: "silver",
-  description: "Voted first on 10 new ideas",
-  custom_fields: { name: "Early Adopter" }
-)
-
-Merit::Badge.create!(
-  id: 24,
-  name: "influencer",
-  level: "gold",
-  description: "10 notes with score of 15",
-  custom_fields: { name: "Influencer" }
-)
-
-
-Merit::Badge.create!(
-  id: 25,
-  name: "market-fit",
-  level: "silver",
-  description: "Idea with score of 50",
-  custom_fields: { name: "Product Market Fit" }
-)
-
-Merit::Badge.create!(
-  id: 26,
-  name: "social-proof",
-  level: "silver",
-  description: "Idea with score of 100",
-  custom_fields: { name: "Social Proof" }
-)
-
-Merit::Badge.create!(
-  id: 27,
-  name: "viral",
-  level: "gold",
-  description: "Idea with score of 50 in 5 days",
-  custom_fields: { name: "Viral" }
-)
-
-Merit::Badge.create!(
-  id: 28,
-  name: "disrupt",
-  level: "gold",
-  description: "Idea with score of 100 in 5 days",
-  custom_fields: { name: "Disruptive" }
-)
-
-Merit::Badge.create!(
-  id: 29,
   name: "traction",
-  level: "gold",
-  description: "Idea with daily score of 10 for 10 days",
+  level: "silver",
+  description: "Idea with daily score of 100 for 10 days",
   custom_fields: { name: "Traction" }
 )
 
 Merit::Badge.create!(
-  id: 30,
-  name: "pundit",
-  level: "gold",
-  description: "Left 10 comments with score of 5",
-  custom_fields: { name: "Pundit" }
-)
-
-Merit::Badge.create!(
-  id: 31,
-  name: "wise",
-  level: "gold",
-  description: "10 helpful feedbacks",
-  custom_fields: { name: "Wise" }
-)
-
-Merit::Badge.create!(
-  id: 32,
-  name: "focussed",
-  level: "gold",
-  description: "Visited the site each day for 100 consecutive days.",
-  custom_fields: { name: "Focussed" }
-)
-
-Merit::Badge.create!(
-  id: 33,
+  id: 21,
   name: "mentor",
-  level: "expert",
-  description: "Feedbacked 10 ideas",
-  custom_fields: { name: "Mentor" }
+  level: "silver",
+  description: "10 helpful feedbacks",
+  custom_fields: { name: "Mentor", points: 25 }
 )
 
 Merit::Badge.create!(
-  id: 34,
-  name: "teacher",
-  level: "expert",
-  description: "Feedback with a score of 10",
-  custom_fields: { name: "Teacher" }
-)
-
-Merit::Badge.create!(
-  id: 35,
+  id: 22,
   name: "guru",
-  level: "guru",
-  description: "Accepted feedback with score of 40 or more",
-  custom_fields: { name: "Guru" }
+  level: "gold",
+  description: "100 helpful feedbacks",
+  custom_fields: { name: "Guru", points: 100 }
 )
 
 Merit::Badge.create!(
-  id: 36,
+  id: 23,
   name: "entrepreneur",
   level: "gold",
   description: "Successfully validated a startup idea",
-  custom_fields: { name: "Entrepreneur" }
+  custom_fields: { name: "Entrepreneur", points: 500 }
 )
 
 Merit::Badge.create!(
-  id: 37,
-  name: "good-feedback",
+  id: 24,
+  name: "validated",
   level: "gold",
-  description: "Feedback score of 25 or more",
-  custom_fields: { name: "Good Feedback" }
+  description: "Validated startup idea",
+  custom_fields: { name: "Validated", points: 500 }
+)
+
+#Feedback badges
+
+Merit::Badge.create!(
+  id: 25,
+  name: "popular-feedback",
+  level: "silver",
+  description: "Feedback with score of 500 or more",
+  custom_fields: { name: "Popular Feedback" }
 )
 
 Merit::Badge.create!(
-  id: 38,
-  name: "great-feedback",
-  level: "gold",
-  description: "Feedback score of 100 or more",
-  custom_fields: { name: "Great Feedback" }
+  id: 26,
+  name: "popular-post",
+  level: "silver",
+  description: "Post with score of 500 or more",
+  custom_fields: { name: "Popular Post" }
 )
 
+Merit::Badge.create!(
+  id: 27,
+  name: "popular-comment",
+  level: "silver",
+  description: "Comment with score of 500 or more",
+  custom_fields: { name: "Popular Comment" }
+)
 
 Merit::Badge.create!(
-  id: 39,
+  id: 28,
   name: "popular-idea",
-  level: "gold",
-  description: "Idea with a score of 25 or more",
+  level: "silver",
+  description: "Idea with a score of 25000 or more",
   custom_fields: { name: "Popular Idea" }
 )
 
-Merit::Badge.create!(
-  id: 40,
-  name: "famous-idea",
-  level: "gold",
-  description: "Idea with a score of 100 or more",
-  custom_fields: { name: "Famous Idea" }
-)

@@ -14,8 +14,8 @@ module Votable
     User.where(id: voters_ids.values)
   end
 
-  def popular?
-    votes_counter.value == 100
+  def votes_score
+    votes_counter.value * 5
   end
 
 end

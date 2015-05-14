@@ -112,13 +112,9 @@ class Idea < ActiveRecord::Base
     true
   end
 
-  def score
-    votes_counter.value +
-    comments_counter.value +
-    investors_counter.value +
-    feedbackers_counter.value +
-    shares_counter.value +
-    views_counter.value
+  #Get commulative score
+  def cummulative_score
+    votes_score + comments_score
   end
 
   def founder?(user)

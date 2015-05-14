@@ -8,8 +8,6 @@ class Mention < ActiveRecord::Base
   #Model callbacks
   before_destroy :delete_notification
 
-  has_merit
-
   private
 
   def delete_notification

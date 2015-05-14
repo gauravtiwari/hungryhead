@@ -1,6 +1,11 @@
 class Investment < ActiveRecord::Base
 
   include Redis::Objects
+  #Counters for redis
+  counter :votes_counter
+  list :voters_ids
+  list :commenters_ids
+  counter :comments_counter
 
   #Associations
   belongs_to :user, touch: true
@@ -9,12 +14,6 @@ class Investment < ActiveRecord::Base
   #Includes concerns
   include Commentable
   include Votable
-
-  #Counters for redis
-  counter :votes_counter
-  list :voters_ids
-  list :commenters_ids
-  counter :comments_counter
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
@@ -27,6 +26,11 @@ class Investment < ActiveRecord::Base
 
   def can_score?
     false
+  end
+
+  #Get commulative score
+  def cummulative_score
+    votes_score + comments_score
   end
 
 	private

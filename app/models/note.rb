@@ -2,19 +2,6 @@ class Note < ActiveRecord::Base
 
   #Includes Modules
   include Redis::Objects
-  extend FriendlyId
-
-  friendly_id :slug_candidates
-
-  belongs_to :user
-
-  #Includes concerns
-  include Commentable
-  include Sluggable
-  include Sharings
-  include Votable
-  include Scorable
-
   #Redis counters and lists
   list :voters_ids
   list :commenters_ids
@@ -30,6 +17,19 @@ class Note < ActiveRecord::Base
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
+  extend FriendlyId
+
+  friendly_id :slug_candidates
+
+  belongs_to :user
+
+  #Includes concerns
+  include Commentable
+  include Sluggable
+  include Sharings
+  include Votable
+  include Scorable
+
   #Model callbacks
   after_commit :increment_counter, on: :create
   before_destroy :decrement_counter, :delete_activity
@@ -40,11 +40,9 @@ class Note < ActiveRecord::Base
     true
   end
 
-  def score
-    votes_counter.value +
-    comments_counter.value +
-    shares_counter.value +
-    views_counter.value
+  #Get commulative score
+  def cummulative_score
+    votes_score + comments_score
   end
 
   private

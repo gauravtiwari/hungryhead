@@ -18,12 +18,8 @@ module Investor
     Investment.where(id: id)
   end
 
-  def first_investment?
-    investments_counter.value == 1
-  end
-
-  def investments_50?
-    investments_counter.value == 50
+  def investments_score
+    investments_counter.value * 5
   end
 
 end

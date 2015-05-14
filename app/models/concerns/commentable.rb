@@ -21,4 +21,8 @@ module Commentable
     commentable_type == "Idea" ? commentable.student.id : commentable.user.id
   end
 
+  def comments_score
+    comments.inject(0){|sum, comment| sum + comment.comment_votes_counter.value * 5}
+  end
+
 end

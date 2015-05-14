@@ -6,6 +6,7 @@ class Feedback < ActiveRecord::Base
   counter :votes_counter
   counter :comments_counter
   counter :views_counter
+  counter :shares_counter
 
   #redis list
   list :voters_ids
@@ -20,6 +21,8 @@ class Feedback < ActiveRecord::Base
   include Sharings
   include Votable
   include Mentioner
+
+  has_merit
 
   #Associations
   belongs_to :idea, touch: true
@@ -42,6 +45,10 @@ class Feedback < ActiveRecord::Base
 
   def can_score?
     true
+  end
+
+  def idea_owner
+    idea.student
   end
 
   private

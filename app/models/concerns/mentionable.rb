@@ -4,4 +4,5 @@ module Mentionable
   included do
     has_many :mentions, as: :mentionable, :dependent => :destroy
   end
+
 end

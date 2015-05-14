@@ -31,22 +31,6 @@ module Merit
         user.about_me.present?
       end
 
-      grant_on 'welcome#show', badge: 'top-10', :model_name => 'User' do |user|
-        user.id <= 10
-      end
-
-      grant_on 'welcome#show', badge: 'top-100', :model_name => 'User' do |user|
-        user.id <= 100 && user.id > 10
-      end
-
-      grant_on 'welcome#show', badge: 'top-1000', :model_name => 'User' do |user|
-        user.id <= 1000 && user.id > 100
-      end
-
-      grant_on 'welcome#show', badge: 'top-10000', :model_name => 'User' do |user|
-        user.id <= 10000 && user.id > 1000
-      end
-
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
         (user.updated_at - user.created_at).to_i == 30
       end
@@ -75,7 +59,7 @@ module Merit
 
       #Share related badges
       grant_on 'shares#create', badge: 'growth-hacking', to: :user do |share|
-        share.votes_counter.value >= 50
+        share.votes_counter.value * 5 >= 50
       end
 
       #Feedback related badges
@@ -97,10 +81,6 @@ module Merit
 
       grant_on 'comments#create', badge: 'commentator', to: :user do |comment|
         comment.user.comments_counter.value >= 10
-      end
-
-      grant_on 'comments#create', badge: 'outspoken', to: :user do |comment|
-        comment.user.comments_counter.value >= 50
       end
 
       grant_on 'comments#create', badge: 'collaborative', to: :user do |comment|

@@ -1,6 +1,12 @@
 class Share < ActiveRecord::Base
 
 	include Redis::Objects
+	#redis caching
+	counter :votes_counter
+	counter :comments_counter
+	#cached ids
+	list :voters_ids
+	list :commenters_ids
 
 	#Associations
 	belongs_to :shareable, polymorphic: true
@@ -10,14 +16,6 @@ class Share < ActiveRecord::Base
 	include Commentable
 	include Votable
 
-	#redis caching
-	counter :votes_counter
-	counter :comments_counter
-
-	#cached ids
-	list :voters_ids
-	list :commenters_ids
-
 	before_destroy :decrement_counters, :delete_activity
 	after_commit :increment_counters, on: :create
 
@@ -25,7 +23,7 @@ class Share < ActiveRecord::Base
 	store_accessor :parameters, :shareable_name
 
 	#Enumerators to handle status
-	enum status: {pending: 0, shared: 1}
+	enum status: {shared: 0}
 
 	public
 
@@ -33,12 +31,12 @@ class Share < ActiveRecord::Base
 		false
 	end
 
-	def score
-	  votes_counter.value +
-	  comments_counter.value +
-	  views_counter.value
+	#Get commulative score
+	def cummulative_score
+	  votes_score + comments_score
 	end
 
+	#Get shareable user - idea(student) || user
 	def shareable_user
 	  shareable_type == "Idea" ? shareable.student : shareable.user
 	end
