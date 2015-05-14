@@ -13,16 +13,24 @@ module Merit
     include Merit::PointRulesMethods
 
     def initialize
-      # score 10, :on => 'users#update' do
-      #   user.name.present?
-      # end
-      #
-      # score 15, :on => 'reviews#create', :to => [:reviewer, :reviewed]
-      #
-      # score 20, :on => [
-      #   'comments#create',
-      #   'photos#create'
-      # ]
+
+      score 2, :on => 'users#update' do
+        user.about_me.present?
+      end
+
+      score 2, :on => 'users#update' do
+        user.followers_counter.value == 5
+      end
+
+      score 1, :on => 'comments#create', to: [:commentable, :user]
+      score 5, :on => 'feedbacks#create', to: [:idea]
+      score 2, :on => 'investments#create', to: [:idea]
+      score 1, :on => 'notes#create', to: [:user]
+      score 5, :on => 'ideas#publish', to: [:student]
+      score 2, :on => 'shares#create', to: [:shareable, :user]
+      score 1, :on => 'votes#vote', to: [:votable, :voter]
+
+
     end
   end
 end
