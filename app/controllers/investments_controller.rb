@@ -63,6 +63,6 @@ class InvestmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def investment_params
-      params.require(:investment).permit(:id, :amount, :note)
+      params.require(:investment).permit(:id, :amount, :message)
     end
 end

@@ -34,8 +34,8 @@ var InvestForm = React.createClass({
                 </div>
                 <div className="form-group">
                 <div className="col-md-12 p-t-10">
-                  <label htmlFor="note">Add investment note <span className="small text-danger">(*optional)</span></label>
-                  <textarea ref="note" name="investment[note]" className="form-control empty" id="note" placeholder="Type here..." />
+                  <label htmlFor="message">Add investment message <span className="small text-danger">(*optional)</span></label>
+                  <textarea ref="message" name="investment[message]" className="form-control empty" id="message" placeholder="Type here..." />
                 </div>
                </div>
                <p className="hint-text small clearfix p-t-10">

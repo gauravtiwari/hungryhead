@@ -8,11 +8,12 @@ class CreateNoteNotificationService
   def create
     @activity = @user.activities.create!(
       trackable: @post,
-      verb: 'postd',
+      verb: 'posted',
       recipient: @user,
       key: 'post.create',
       unread: true
     )
+
     cache(@activity)
     PostNotificationJob.set(wait: 5.seconds).perform_later(@post.id, @user.id, @activity.id)
   end

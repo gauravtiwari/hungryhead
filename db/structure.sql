@@ -436,7 +436,7 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 CREATE TABLE investments (
     id integer NOT NULL,
     amount integer NOT NULL,
-    note character varying,
+    message character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,

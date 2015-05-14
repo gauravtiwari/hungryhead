@@ -3,7 +3,7 @@ class CreateInvestments < ActiveRecord::Migration
     create_table :investments do |t|
 
       t.integer :amount, :null => false
-      t.string :note
+      t.string :message
 
       t.references :user, :null => false
       t.references :idea, :null => false
