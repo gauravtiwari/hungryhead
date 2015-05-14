@@ -21,6 +21,10 @@ module Follower
     User.where(:id => followers_ids.intersection(followings_ids))
   end
 
+  def friends_count
+    followers_ids.intersection(followings_ids).count
+  end
+
   # does the user follow self
   def followed_by?(user)
     followers_ids.member?(user.id)

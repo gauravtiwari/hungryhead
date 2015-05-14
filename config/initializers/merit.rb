@@ -91,7 +91,7 @@ Merit::Badge.create!(
   id: 9,
   name: "vc",
   level: "gold",
-  description: "150 investments in a year of amount between 500 to 700",
+  description: "150 investments in a year of amount between 500 to 900",
   custom_fields: { name: "VC", points: 200  }
 )
 
@@ -106,8 +106,8 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 11,
   name: "collaborative",
-  level: "gold",
-  description: "50 comments with cummulative score of 50",
+  level: "silver",
+  description: "50 comments with cummulative score of 250",
   custom_fields: { name: "Collaborative", points: 25 }
 )
 
@@ -115,7 +115,7 @@ Merit::Badge.create!(
   id: 12,
   name: "pundit",
   level: "gold",
-  description: "100 comments with cummulative score of 500",
+  description: "100 comments with cummulative score of 1000",
   custom_fields: { name: "Pundit", points: 50 }
 )
 
@@ -245,7 +245,7 @@ Merit::Badge.create!(
   id: 28,
   name: "popular-idea",
   level: "silver",
-  description: "Idea with a score of 25000 or more",
+  description: "Idea with a score of 5000",
   custom_fields: { name: "Popular Idea" }
 )
 

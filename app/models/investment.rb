@@ -28,11 +28,6 @@ class Investment < ActiveRecord::Base
     false
   end
 
-  #Get commulative score
-  def cummulative_score
-    votes_score + comments_score
-  end
-
 	private
 
   def cancel_investment

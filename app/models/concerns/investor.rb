@@ -18,8 +18,12 @@ module Investor
     Investment.where(id: id)
   end
 
-  def investments_score
-    investments_counter.value * 5
+  def angel_investor?
+    investments.where("amount < ? AND amount > ?", 100, 300).count == 60
+  end
+
+  def vc?
+    investments.where("amount < ? AND amount > ?", 900, 500).count == 150
   end
 
 end

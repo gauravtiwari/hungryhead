@@ -130,6 +130,10 @@ class User < ActiveRecord::Base
     true
   end
 
+  def joined_within_a_year?
+    (DateTime.now - created_at).to_i <= 365
+  end
+
   def mailboxer_email(object)
     email
   end

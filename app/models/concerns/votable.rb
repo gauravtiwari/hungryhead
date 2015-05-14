@@ -14,8 +14,4 @@ module Votable
     User.where(id: voters_ids.values)
   end
 
-  def votes_score
-    votes_counter.value * 5
-  end
-
 end

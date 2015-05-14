@@ -31,11 +31,6 @@ class Share < ActiveRecord::Base
 		false
 	end
 
-	#Get commulative score
-	def cummulative_score
-	  votes_score + comments_score
-	end
-
 	#Get shareable user - idea(student) || user
 	def shareable_user
 	  shareable_type == "Idea" ? shareable.student : shareable.user

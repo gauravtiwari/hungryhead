@@ -15,8 +15,4 @@ module Sharings
     User.where(id: sharers_ids.values)
   end
 
-  def shares_score
-    shares_counter.value * 10
-  end
-
 end

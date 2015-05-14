@@ -14,14 +14,6 @@ module Feedbacker
     Feedback.where(id: id)
   end
 
-  def first_feedback?
-    feedbacks_counter.value == 1
-  end
-
-  def feedback_10?
-    feedbacks_counter.value == 10
-  end
-
   def irrelevant_feedbacks_counter
     feedbacks.where(status: 1).count
   end

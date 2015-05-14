@@ -112,11 +112,6 @@ class Idea < ActiveRecord::Base
     true
   end
 
-  #Get commulative score
-  def cummulative_score
-    votes_score + comments_score
-  end
-
   def founder?(user)
     student == user
   end

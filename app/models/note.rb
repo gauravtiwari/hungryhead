@@ -40,11 +40,6 @@ class Note < ActiveRecord::Base
     true
   end
 
-  #Get commulative score
-  def cummulative_score
-    votes_score + comments_score
-  end
-
   private
 
   def slug_candidates
