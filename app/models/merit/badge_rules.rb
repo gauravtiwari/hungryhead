@@ -132,7 +132,7 @@ module Merit
       end
 
       grant_on 'comments#create', badge: 'popular-comment', to: :itself do |comment|
-        Comment.leaderboard.score(comment.id) == 500
+        comment.votes_counter.value == 500
       end
 
       #Posts related badges

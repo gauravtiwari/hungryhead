@@ -19,6 +19,11 @@ module Merit
         user.about_me.present?
       end
 
+      #Comments related
+      score 5, :on => 'comments#create', category: 'comment', to: :user do |comment|
+        comment.votes_counter.value == 5
+      end
+
       #Feedbacks related
       score 5, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
 
@@ -31,13 +36,17 @@ module Merit
       end
 
       #Investment related
-      score 5, :on => 'investments#create', to: [:user], category: 'investment'
+      score 5, :on => 'investments#create', to: :user, category: 'investment' do |investment|
+        investment.votes_counter.value == 5
+      end
 
       #Posts
-      score 5, :on => 'posts#create', to: [:user], category: 'post'
+      score 5, :on => 'posts#create', to: :user, category: 'post' do |post|
+        Post.leaderboard.score(post.id) == 5
+      end
 
       #Ideas
-      score 5, :on => 'ideas#publish', to: [:student], category: 'idea'
+      score 5, :on => 'ideas#publish', to: :student, category: 'idea'
 
       #Share
       score 10, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|
