@@ -47,14 +47,14 @@ class UpdateNotificationCacheService
   #Update activity for all tickers
   def update_activity(user, activity_item)
     #add activity to user personal profile
-    add_activity_to_user_profile(user, activity_item)
+    add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #push notification into friends notifications
-    add_notification_for_recipient(recipient_user, activity_item)
+    add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged"
     #add notification to idea ticker
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
     #add notification to followers ticker
-    add_activity_to_followers(activity_item) if followers.any?
+    add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
   end
 
   #Add notification to recipients
