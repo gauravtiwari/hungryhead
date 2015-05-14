@@ -39,8 +39,8 @@ module Merit
         (user.updated_at - user.created_at).to_i == 100
       end
 
-      grant_on 'follows#create', badge: 'social', to: :follower do |follower|
-        follower.friends_count == 200
+      grant_on 'follows#create', badge: 'social', to: :follower do |follow|
+        follow.follower.friends_count == 200
       end
 
       #Idea related badges
