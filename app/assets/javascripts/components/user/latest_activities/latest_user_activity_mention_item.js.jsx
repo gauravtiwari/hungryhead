@@ -10,7 +10,7 @@ var LatestUserActivityMentionItem = React.createClass({
               <i className="fa fa-at"></i> {this.props.item.verb}
             </span>
             <span className="recipient p-l-5 inline">
-              <a href={this.props.item.recipient_url}>{this.props.item.recipient.recipient_name.split(' ')[0]}</a>
+              <a href={this.props.item.recipient.recipient_url}>{this.props.item.recipient.recipient_name.split(' ')[0]}</a>
             </span>
             <span className="recipient p-l-5 inline">
               in a comment

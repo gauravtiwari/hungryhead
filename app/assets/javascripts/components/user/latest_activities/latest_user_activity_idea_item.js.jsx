@@ -9,7 +9,7 @@ var LatestUserActivityIdeaItem = React.createClass({
               <i className="fa fa-lightbulb-o"></i> {this.props.item.verb}
             </span>
             <span className="recipient p-l-5">
-              <a href={this.props.item.recipient_url}>{this.props.item.recipient.recipient_name}</a>
+              <a href={this.props.item.recipient.recipient_url}>{this.props.item.recipient.recipient_name}</a>
             </span>
           </span>
         </li>

@@ -2,6 +2,7 @@ class CreateBadgeNotificationService
 
 	def initialize(user, description)
 		@user = user
+    @description = description
 	end
 
 	def create
@@ -10,7 +11,7 @@ class CreateBadgeNotificationService
       recipient: @user,
       verb: 'badged',
       key: 'badge.create',
-      badge_description: description,
+      badge_description: @description,
       unread: true
     )
 

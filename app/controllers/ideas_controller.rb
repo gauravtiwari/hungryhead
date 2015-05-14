@@ -72,7 +72,7 @@ class IdeasController < ApplicationController
       render :unpublish
     end
 
-    publish_idea_service.publish
+    publish_idea_service.publish_idea
   end
 
   # PUT /ideas/1/unpublish
@@ -81,7 +81,7 @@ class IdeasController < ApplicationController
       UnpublishIdeaJob.perform_later(idea)
       render :unpublish
     end
-    publish_idea_service.unpublish
+    publish_idea_service.unpublish_idea
   end
 
   # GET /ideas/1/updates
@@ -178,7 +178,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.find(params[:id])
+    @idea = Idea.friendly.find(params[:id])
     authorize @idea
   end
 

@@ -10,7 +10,7 @@ var LatestUserActivityInvestmentItem = React.createClass({
               <i className="fa fa-fa-dollar"></i> {this.props.item.verb}
             </span>
             <span className="recipient p-l-5">
-              in <a href={this.props.item.recipient_url}>{this.props.item.recipient.recipient_name}</a>
+              in <a href={this.props.item.recipient.recipient_url}>{this.props.item.recipient.recipient_name}</a>
             </span>
           </span>
         </li>

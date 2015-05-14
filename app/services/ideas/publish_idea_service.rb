@@ -7,7 +7,7 @@ class PublishIdeaService
     @user = user
   end
 
-  def publish
+  def publish_idea
     if @idea.profile_complete?
       @idea.published!
       @idea.everyone!
@@ -17,7 +17,7 @@ class PublishIdeaService
     end
   end
 
-  def unpublish
+  def unpublish_idea
     @idea.draft!
     @idea.me!
     publish :idea_unpublished, @idea

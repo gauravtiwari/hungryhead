@@ -16,7 +16,7 @@ var LatestUserActivityFollowItem = React.createClass({
               <i className="fa fa-user-plus"></i> {this.props.item.verb}
             </span>
             <span className="recipient p-l-5">
-              <a href={this.props.item.recipient_url}>{recipient}</a>
+              <a href={this.props.item.recipient.recipient_url}>{recipient}</a>
             </span>
           </span>
         </li>

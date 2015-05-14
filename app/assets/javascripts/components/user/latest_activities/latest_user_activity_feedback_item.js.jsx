@@ -10,7 +10,7 @@ var LatestUserActivityFeedbackItem = React.createClass({
              <i className="fa fa-comment"></i> left a feedback for
             </span>
             <span className="recipient p-l-5">
-               <a href={this.props.item.recipient_url}>{this.props.item.recipient.recipient_name}</a>
+               <a href={this.props.item.recipient.recipient_url}>{this.props.item.recipient.recipient_name}</a>
             </span>
           </span>
         </li>
