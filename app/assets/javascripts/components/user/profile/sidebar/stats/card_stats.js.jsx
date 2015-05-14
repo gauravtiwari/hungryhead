@@ -9,7 +9,7 @@ var CardStats = React.createClass({
       investments_count: data.investments_count,
       views_count: data.views_count,
       comments_count: data.comments_count,
-      notes_count: data.notes_count,
+      posts_count: data.posts_count,
       score: data.score
     }
   },
@@ -62,7 +62,7 @@ var CardStats = React.createClass({
 
             <div className="col-md-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin">Notes</p>
-              <p className="all-caps font-montserrat no-margin text-success">{this.state.notes_count}</p>
+              <p className="all-caps font-montserrat no-margin text-success">{this.state.posts_count}</p>
             </div>
 
             <div className="col-md-4 text-center m-t-10">
