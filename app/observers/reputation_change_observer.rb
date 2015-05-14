@@ -11,7 +11,7 @@ class ReputationChangeObserver
 
     resource.class.leaderboard[resource.id] = resource.points
 
-    if resource.class.to_s == "User" || "Student" || "Teacher" || "Mentor"
+    if resource.class.to_s == "User" || resource.class.to_s == "Student" || resource.class.to_s == "Teacher" || resource.class.to_s == "Mentor"
       user = resource
     elsif resource.class.to_s == "Idea"
       user = resource.student

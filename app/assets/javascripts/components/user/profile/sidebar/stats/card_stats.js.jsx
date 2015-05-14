@@ -61,7 +61,7 @@ var CardStats = React.createClass({
 
 
             <div className="col-md-4 text-center m-t-10">
-              <p className="hint-text all-caps font-montserrat small no-margin">Notes</p>
+              <p className="hint-text all-caps font-montserrat small no-margin">Posts</p>
               <p className="all-caps font-montserrat no-margin text-success">{this.state.posts_count}</p>
             </div>
 

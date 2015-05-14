@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
 
-    if ["Idea", "Feedback", "Investment", "Note", "Share"].include? commentable_type
+    if ["Idea", "Feedback", "Investment", "Post", "Share"].include? commentable_type
       @commentable = commentable_type.safe_constantize.find(commentable_id)
       @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
     else

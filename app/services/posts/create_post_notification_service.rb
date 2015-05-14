@@ -1,4 +1,4 @@
-class CreateNoteNotificationService
+class CreatePostNotificationService
 
   def initialize(post)
     @post = post

@@ -60,7 +60,7 @@ var LatestFeed = React.createClass({
         } else if(item.verb === "mentioned"){
           elements.push(<LatestFeedMentionItem key={Math.random()} item={item} />)
         } else if(item.verb === "posted"){
-          elements.push(<LatestFeedNoteItem key={Math.random()} item={item} />)
+          elements.push(<LatestFeedPostItem key={Math.random()} item={item} />)
         } else if(item.verb === "shared"){
           elements.push(<LatestFeedShareItem key={Math.random()} item={item} />)
         }

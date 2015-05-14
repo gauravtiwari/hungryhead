@@ -60,7 +60,7 @@ var LatestUserActivities = React.createClass({
       } else if(item.verb === "mentioned"){
         return <LatestUserActivityMentionItem key={Math.random()} item={item} />;
       } else if(item.verb === "posted"){
-        return <LatestUserActivityNoteItem key={Math.random()} item={item} />;
+        return <LatestUserActivityPostItem key={Math.random()} item={item} />;
       } else if(item.verb === "shared"){
         return <LatestUserActivityShareItem key={Math.random()} item={item} />;
       }
