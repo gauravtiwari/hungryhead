@@ -2,6 +2,8 @@ class Note < ActiveRecord::Base
 
   #Includes Modules
   include Redis::Objects
+  extend FriendlyId
+  friendly_id :slug_candidates
 
   belongs_to :user
 

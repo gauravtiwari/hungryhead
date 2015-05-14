@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   #order objects in same order as given
   extend OrderAsSpecified
 
+  extend FriendlyId
+  friendly_id :slug_candidates
+
   has_merit
 
   #Concerns for User class

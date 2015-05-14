@@ -1,6 +1,8 @@
 class School < ActiveRecord::Base
 
 	include Redis::Objects
+	extend FriendlyId
+	friendly_id :slug_candidates
 
 	#Included concerns
 	include Followable

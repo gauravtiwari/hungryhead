@@ -1,23 +1,24 @@
 class Idea < ActiveRecord::Base
 
+  include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
   #return objects in same order as specificied
   extend OrderAsSpecified
-  include Rails.application.routes.url_helpers
+
+  extend FriendlyId
+  friendly_id :slug_candidates
 
   #Includes concerns
   include Commentable
   include Votable
   include Followable
-  include Sluggable
   include Sharings
   include Activist
   include Scorable
   include Investable
   include Feedbackable
-
-  has_merit
+  include Sluggable
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -73,6 +74,7 @@ class Idea < ActiveRecord::Base
   #Rest of the assocuations
   has_many :idea_messages, dependent: :destroy
 
+  has_merit
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,
     :high_concept_pitch, :sections]
@@ -190,16 +192,16 @@ class Idea < ActiveRecord::Base
   end
 
   def slug_candidates
-    [:name, [:name, :id]]
+    [:name]
   end
 
   def increment_counters
     #Increment counters for school and student
-    school.ideas_counter.increment
-    student.ideas_counter.increment
+    school.ideas_counter.increment if school
+    student.ideas_counter.increment if student
     #Cache latest ideas into a list for user and school, max: 20
-    student.latest_ideas <<  idea_json
-    school.latest_ideas << idea_json
+    student.latest_ideas <<  idea_json if student
+    school.latest_ideas << idea_json if school
     #Insert into cache list
     Idea.latest << idea_json
   end
