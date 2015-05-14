@@ -6,9 +6,6 @@ class CreateNotes < ActiveRecord::Migration
       t.string :title, null: false, default: ""
       t.text :body, null: false, default: ""
 
-      t.integer :score, null: false, default: 0
-      t.integer :views, null: false, default: 0
-
       t.string :slug, null: false, default: ""
 
       t.integer :status
@@ -17,7 +14,6 @@ class CreateNotes < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :notes, :status, algorithm: :concurrently
-    add_index :notes, :score, algorithm: :concurrently
     add_index :notes, :user_id, algorithm: :concurrently
     add_index :notes, :slug, unique: true, algorithm: :concurrently
   end

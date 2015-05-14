@@ -3,6 +3,7 @@ class Note < ActiveRecord::Base
   #Includes Modules
   include Redis::Objects
   extend FriendlyId
+
   friendly_id :slug_candidates
 
   belongs_to :user
@@ -37,6 +38,13 @@ class Note < ActiveRecord::Base
 
   def can_score?
     true
+  end
+
+  def score
+    votes_counter.value +
+    comments_counter.value +
+    shares_counter.value +
+    views_counter.value
   end
 
   private

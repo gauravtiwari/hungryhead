@@ -8,10 +8,6 @@ class CreateActivities < ActiveRecord::Migration
 
       t.belongs_to :user, null: false
 
-      t.integer :score , null: false, default: 0
-
-      t.integer :views, null: false, default: 0
-
       t.string  :key , null: false, default: ""
 
       t.jsonb    :parameters, default: "{}"
@@ -26,7 +22,6 @@ class CreateActivities < ActiveRecord::Migration
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
     add_index :activities, [:published], algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently
-    add_index :activities, :score, algorithm: :concurrently
   end
   # Drop table
   def self.down

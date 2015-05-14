@@ -8,6 +8,8 @@ class ReputationChangeObserver
       Idea.where(sash_id: changed_data[:sash_id]).first ||
       Feedback.where(sash_id: changed_data[:sash_id]).first
 
+    resource.class.leaderboard[resource.id] = resource.points
+
     if resource.class.to_s == "User" || "Student" || "Teacher" || "Mentor"
       user = resource
     elsif resource.class.to_s == "Idea"

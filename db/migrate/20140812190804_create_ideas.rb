@@ -15,10 +15,6 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :logo
       t.string :cover
 
-      t.integer :score, null: false, default: 0
-
-      t.integer :views, null: false, default: 0
-
       t.string :team_ids, array: true, default: "{}"
       t.string :team_invites_ids, array: true, default: "{}"
 
@@ -45,7 +41,6 @@ class CreateIdeas < ActiveRecord::Migration
     end
 
     add_index :ideas, :school_id, algorithm: :concurrently
-    add_index :ideas, :score, algorithm: :concurrently
     add_index :ideas, :student_id, algorithm: :concurrently
     add_index :ideas, :status, algorithm: :concurrently
     add_index :ideas, :privacy, algorithm: :concurrently

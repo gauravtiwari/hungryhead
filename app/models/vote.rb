@@ -11,6 +11,12 @@ class Vote < ActiveRecord::Base
   before_destroy :decrement_counter, :delete_notification
   after_commit :increment_counter, on: :create
 
+  public
+
+  def votable_user
+    votable_type == "Idea" ? votable.student : votable.user
+  end
+
   private
 
   def rebuild_cache

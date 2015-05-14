@@ -66,8 +66,6 @@ CREATE TABLE activities (
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
     user_id integer NOT NULL,
-    score integer DEFAULT 0 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
@@ -245,8 +243,6 @@ CREATE TABLE feedbacks (
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
-    score integer DEFAULT 0 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     cached_tag_list character varying,
     status integer DEFAULT 0 NOT NULL,
     badge integer DEFAULT 0 NOT NULL,
@@ -392,8 +388,6 @@ CREATE TABLE ideas (
     description text DEFAULT ''::text,
     logo character varying,
     cover character varying,
-    score integer DEFAULT 0 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     team_ids character varying[] DEFAULT '{}'::character varying[],
     team_invites_ids character varying[] DEFAULT '{}'::character varying[],
     looking_for_team boolean DEFAULT false,
@@ -854,8 +848,6 @@ CREATE TABLE notes (
     id integer NOT NULL,
     title character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
-    score integer DEFAULT 0 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     status integer,
     user_id integer NOT NULL,
@@ -1322,8 +1314,6 @@ CREATE TABLE users (
     type character varying DEFAULT 'User'::character varying,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
-    score integer DEFAULT 0 NOT NULL,
-    views integer DEFAULT 0 NOT NULL,
     mini_bio character varying DEFAULT ''::character varying,
     about_me text DEFAULT ''::text,
     profile jsonb DEFAULT '{}'::jsonb,
@@ -2048,13 +2038,6 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 
 
 --
--- Name: index_activities_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_score ON activities USING btree (score);
-
-
---
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2160,13 +2143,6 @@ CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
 
 
 --
--- Name: index_feedbacks_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_score ON feedbacks USING btree (score);
-
-
---
 -- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2178,13 +2154,6 @@ CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
-
-
---
--- Name: index_feedbacks_on_views; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_views ON feedbacks USING btree (views);
 
 
 --
@@ -2262,13 +2231,6 @@ CREATE INDEX index_ideas_on_rules_accepted ON ideas USING btree (rules_accepted)
 --
 
 CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
-
-
---
--- Name: index_ideas_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_score ON ideas USING btree (score);
 
 
 --
@@ -2395,13 +2357,6 @@ CREATE INDEX index_mentions_on_mentioner_id_and_mentioner_type ON mentions USING
 --
 
 CREATE INDEX index_mentions_on_user_id ON mentions USING btree (user_id);
-
-
---
--- Name: index_notes_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notes_on_score ON notes USING btree (score);
 
 
 --
@@ -2668,13 +2623,6 @@ CREATE INDEX index_users_on_role ON users USING btree (role);
 --
 
 CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
-
-
---
--- Name: index_users_on_score; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_score ON users USING btree (score);
 
 
 --

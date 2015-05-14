@@ -55,34 +55,72 @@ module Merit
         (user.updated_at - user.created_at).to_i == 100
       end
 
+      grant_on 'follows#create', badge: 'social', to: :follower do |follower|
+        follower.followings_counter.value == 200
+      end
+
       #Idea related badges
-      grant_on 'ideas#publish', badge: 'entrepreneur', to: :student do |idea|
+
+      grant_on 'ideas#publish', badge: 'student', to: :student do |idea|
         idea.student.ideas_counter.value == 1
       end
 
+      grant_on 'ideas#publish', badge: 'lean', to: :student do |idea|
+        idea.student.ideas_counter.value == 1 && Idea.leaderboard.score(idea.id) >= 5
+      end
+
+      grant_on 'ideas#publish', badge: 'entrepreneur', to: :student do |idea|
+        Idea.leaderboard.score(idea.id) >= 200
+      end
+
+      #Share related badges
+      grant_on 'shares#create', badge: 'growth-hacking', to: :user do |share|
+        share.votes_counter.value >= 50
+      end
+
       #Feedback related badges
+
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        feedback.user.feedbacks_counter.value == 1
+        feedback.user.feedbacks_counter.value >= 1
       end
 
       grant_on 'feedbacks#rate', badge: 'wise', to: :user do |feedback|
-        feedback.user.helpful_feedbacks_counter == 10
+        feedback.user.helpful_feedbacks_counter >= 10
       end
 
       #Investment related bages
       grant_on 'investments#create', badge: 'investor', to: :user do |investment|
-        investment.user.investments_counter.value == 1
+        investment.user.investments_counter.value >= 1
       end
 
       #Comments related badges
 
       grant_on 'comments#create', badge: 'commentator', to: :user do |comment|
-        comment.user.comments_counter.value == 10
+        comment.user.comments_counter.value >= 10
       end
 
       grant_on 'comments#create', badge: 'outspoken', to: :user do |comment|
-        comment.user.comments_counter.value == 50
+        comment.user.comments_counter.value >= 50
       end
+
+      grant_on 'comments#create', badge: 'collaborative', to: :user do |comment|
+        comment.user.comments_counter.value >= 50 &&  comment.user.comments_score >= 250
+      end
+
+      grant_on 'comments#create', badge: 'pundit', to: :user do |comment|
+        comment.user.comments_counter.value >= 100 &&  comment.user.comments_score >= 1000
+      end
+
+      #votes related badges
+      grant_on 'votes#vote', badge: 'early-adopter', to: :voter do |vote|
+        vote.voter.count_idea_votes >= 10
+      end
+
+      #note related badges
+      grant_on 'notes#create', badge: 'influencer', to: :user do |note|
+        note.user.notes_counter.value >= 10 && note.notes_score >= 50
+      end
+
     end
 
   end

@@ -21,4 +21,8 @@ module Commenter
     comments_counter.value == 100
   end
 
+  def comments_score
+    comments.inject(0){ |sum, comment| sum + comment.votes_counter.value }
+  end
+
 end

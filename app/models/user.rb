@@ -64,6 +64,7 @@ class User < ActiveRecord::Base
   counter :ideas_counter
   counter :notes_counter
   counter :views_counter
+  counter :shares_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}

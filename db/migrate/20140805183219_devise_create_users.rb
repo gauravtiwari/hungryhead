@@ -14,10 +14,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cover, :default => ""
       t.string :slug
 
-      t.integer :score, null: false, default: 0
-
-      t.integer :views, null: false, default: 0
-
       t.string :mini_bio, default: ""
       t.text :about_me, :default => ""
 
@@ -74,7 +70,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :users, :school_id, algorithm: :concurrently
-    add_index :users, :score, algorithm: :concurrently
     add_index :users, :email,                :unique => true, algorithm: :concurrently
     add_index :users, :slug,                :unique => true, algorithm: :concurrently
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently

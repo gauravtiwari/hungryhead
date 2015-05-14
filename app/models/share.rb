@@ -33,6 +33,16 @@ class Share < ActiveRecord::Base
 		false
 	end
 
+	def score
+	  votes_counter.value +
+	  comments_counter.value +
+	  views_counter.value
+	end
+
+	def shareable_user
+	  shareable_type == "Idea" ? shareable.student : shareable.user
+	end
+
 	private
 
 	def rebuild_cache

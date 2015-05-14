@@ -112,6 +112,15 @@ class Idea < ActiveRecord::Base
     true
   end
 
+  def score
+    votes_counter.value +
+    comments_counter.value +
+    investors_counter.value +
+    feedbackers_counter.value +
+    shares_counter.value +
+    views_counter.value
+  end
+
   def founder?(user)
     student == user
   end
