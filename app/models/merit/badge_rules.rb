@@ -32,11 +32,11 @@ module Merit
       end
 
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
-        (user.updated_at - user.created_at).to_i == 30
+        (user.updated_at.to_date - user.created_at.to_date).to_i == 30
       end
 
       grant_on 'sessions#create', badge: 'focussed', :model_name => 'User' do |user|
-        (user.updated_at - user.created_at).to_i == 100
+        (user.updated_at.to_date - user.created_at.to_date).to_i == 100
       end
 
       grant_on 'follows#create', badge: 'social', to: :follower do |follow|
@@ -66,26 +66,26 @@ module Merit
       end
 
       grant_on 'ideas#publish', badge: 'viral', to: :itself do |idea|
-        (DateTime.now - idea.created_at).to_i == 3 && Idea.leaderboard.score(idea.id) == 500
+        (DateTime.now.to_date - idea.created_at.to_date).to_i == 3 && Idea.leaderboard.score(idea.id) == 500
       end
 
       grant_on 'ideas#publish', badge: 'disrupt', to: :itself do |idea|
-        (DateTime.now - idea.created_at).to_i == 5 && Idea.leaderboard.score(idea.id) == 1000
+        (DateTime.now.to_date - idea.created_at.to_date).to_i == 5 && Idea.leaderboard.score(idea.id) == 1000
       end
 
       grant_on 'ideas#publish', badge: 'traction', to: :itself do |idea|
-        (DateTime.now - idea.created_at).to_i == 10 && Idea.leaderboard.score(idea.id)/10 == 100
+        (DateTime.now.to_date - idea.created_at.to_date).to_i == 10 && Idea.leaderboard.score(idea.id)/10 == 100
       end
 
       #Share related badges
       grant_on 'shares#create', badge: 'growth-hacking', multiple: true, to: :user do |share|
-        (DateTime.now - share.created_at).to_i <= 3 && share.votes_counter.value * 5 == 50
+        (DateTime.now.to_date - share.created_at.to_date).to_i <= 3 && share.votes_counter.value * 5 == 50
       end
 
       #Feedback related badges
 
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        feedback.user.feedbackers_counter.value == 1 && Feedback.leaderboard.score(feedback.id) == 25
+        feedback.user.feedbacks_counter.value == 1 && Feedback.leaderboard.score(feedback.id) == 25
       end
 
       grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
