@@ -930,7 +930,9 @@ CREATE TABLE posts (
     status integer,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    sash_id integer,
+    level integer DEFAULT 0
 );
 
 
@@ -2846,4 +2848,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
 
 INSERT INTO schema_migrations (version) VALUES ('20150512113344');
+
+INSERT INTO schema_migrations (version) VALUES ('20150514213100');
 

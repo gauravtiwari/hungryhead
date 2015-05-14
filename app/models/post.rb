@@ -18,8 +18,9 @@ class Post < ActiveRecord::Base
   sorted_set :trending, global: true
 
   extend FriendlyId
-
   friendly_id :slug_candidates
+
+  has_merit
 
   belongs_to :user
 
