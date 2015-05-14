@@ -2138,10 +2138,24 @@ CREATE INDEX index_feedbacks_on_idea_id ON feedbacks USING btree (idea_id);
 
 
 --
+-- Name: index_feedbacks_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_level ON feedbacks USING btree (level);
+
+
+--
 -- Name: index_feedbacks_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
+
+
+--
+-- Name: index_feedbacks_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 
 
 --
@@ -2208,6 +2222,13 @@ CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (stu
 
 
 --
+-- Name: index_ideas_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_level ON ideas USING btree (level);
+
+
+--
 -- Name: index_ideas_on_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2226,6 +2247,13 @@ CREATE INDEX index_ideas_on_privacy ON ideas USING btree (privacy);
 --
 
 CREATE INDEX index_ideas_on_rules_accepted ON ideas USING btree (rules_accepted);
+
+
+--
+-- Name: index_ideas_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_sash_id ON ideas USING btree (sash_id);
 
 
 --
@@ -2621,6 +2649,13 @@ CREATE INDEX index_users_on_invited_by_id_and_invited_by_type ON users USING btr
 
 
 --
+-- Name: index_users_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_level ON users USING btree (level);
+
+
+--
 -- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2632,6 +2667,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 --
 
 CREATE INDEX index_users_on_role ON users USING btree (role);
+
+
+--
+-- Name: index_users_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_sash_id ON users USING btree (sash_id);
 
 
 --
