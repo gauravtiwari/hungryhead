@@ -85,11 +85,11 @@ module Merit
       #Feedback related badges
 
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        feedback.user.feedbacks_counter.value == 1 && Feedback.leaderboard.score(feedback.id) == 25
+        feedback.user.feedbackers_counter.value == 1 && Feedback.leaderboard.score(feedback.id) == 25
       end
 
       grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
-        feedback.idea.feedbacks_counter == 1
+        feedback.idea.feedbackers_counter.value == 1
       end
 
       grant_on 'feedbacks#create', badge: 'mentor', to: :user do |feedback|

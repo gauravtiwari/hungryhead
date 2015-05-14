@@ -65,6 +65,7 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     publish_idea_service.on :idea_published do |idea|
+      @idea = idea
       render :publish
       CreateActivityJob.set(wait: 5.seconds).perform_later(idea.id, idea.class.to_s)
     end
