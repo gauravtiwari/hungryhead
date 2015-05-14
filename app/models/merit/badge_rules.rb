@@ -49,7 +49,7 @@ module Merit
         idea.student.ideas_counter.value == 1 && Idea.leaderboard.score(idea.id) >= 5
       end
 
-      grant_on 'ideas#publish', badge: 'entrepreneur', to: :student do |idea|
+      grant_on 'ideas#publish', badge: 'entrepreneur', multiple: true, to: :student do |idea|
         Idea.leaderboard.score(idea.id) == 10000
       end
 
@@ -57,12 +57,24 @@ module Merit
         Idea.leaderboard.score(idea.id) == 10000
       end
 
-      grant_on 'ideas#publish', badge: 'popular-idea', multiple: true, to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'popular-idea', to: :itself do |idea|
         Idea.leaderboard.score(idea.id) == 5000
       end
 
-      grant_on 'ideas#publish', badge: 'market-fit', multiple: true, to: :itself do |idea|
+      grant_on 'ideas#publish', badge: 'market-fit', to: :itself do |idea|
         Idea.leaderboard.score(idea.id) == 2500
+      end
+
+      grant_on 'ideas#publish', badge: 'viral', to: :itself do |idea|
+        (DateTime.now - idea.created_at).to_i == 3 && Idea.leaderboard.score(idea.id) == 500
+      end
+
+      grant_on 'ideas#publish', badge: 'disrupt', to: :itself do |idea|
+        (DateTime.now - idea.created_at).to_i == 5 && Idea.leaderboard.score(idea.id) == 1000
+      end
+
+      grant_on 'ideas#publish', badge: 'traction', to: :itself do |idea|
+        (DateTime.now - idea.created_at).to_i == 10 && Idea.leaderboard.score(idea.id)/10 == 100
       end
 
       #Share related badges
@@ -78,6 +90,18 @@ module Merit
 
       grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
         feedback.idea.feedbacks_counter == 1
+      end
+
+      grant_on 'feedbacks#create', badge: 'mentor', to: :user do |feedback|
+        feedback.user.helpful_feedbacks_counter == 10
+      end
+
+      grant_on 'feedbacks#create', badge: 'guru', to: :user do |feedback|
+        feedback.user.helpful_feedbacks_counter == 100
+      end
+
+      grant_on 'feedbacks#create', badge: 'popular-feedback', to: :itself do |feedback|
+        Feedback.leaderboard.score(feedback.id) == 500
       end
 
       #Investment related bages
@@ -107,9 +131,17 @@ module Merit
         comment.user.comments_counter.value == 100 &&  comment.user.comments_score == 1000
       end
 
+      grant_on 'comments#create', badge: 'popular-comment', to: :itself do |comment|
+        Comment.leaderboard.score(comment.id) == 500
+      end
+
       #Posts related badges
       grant_on 'posts#create', badge: 'influencer', to: :user do |post|
         post.user.posts_counter.value == 10 &&  Post.leaderboard.score(post.id) == 500
+      end
+
+      grant_on 'posts#create', badge: 'popular-post', to: :itself do |post|
+        Post.leaderboard.score(post.id) == 500
       end
 
       #votes related badges
