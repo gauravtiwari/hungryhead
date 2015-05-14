@@ -22,7 +22,7 @@
           var public_channel = pusher.subscribe("public-notifications");
           if(channel) {
             channel.bind('new_badge', function(data) {
-              $('body').pgNotification({style: "simple", message: "You have earned a "+data.data.custom_fields.name+" badge ", position: "top-right", type: "success",timeout: 5000}).show();
+              $('body').pgNotification({style: "simple", message: data.message, position: "top-right", type: "success",timeout: 5000}).show();
             });
             channel.bind('new_notification', function(data){
               $('body').pgNotification({style: "simple", message: data.data.msg, position: "top-right", type: "success",timeout: 5000}).show();

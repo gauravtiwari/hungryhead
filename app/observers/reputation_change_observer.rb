@@ -18,6 +18,12 @@ class ReputationChangeObserver
       user = resource.user
     end
 
-    CreateBadgeNotificationService.new(user, description).create
+    Pusher.trigger_async("private-user-#{user.id}",
+      "new_badge",
+      {
+        message:   "You have been #{description}"
+      }.to_json
+    )
+
   end
 end
