@@ -1,7 +1,10 @@
 class AddFieldsToIdeas < ActiveRecord::Migration
+  disable_ddl_transaction!
   def self.up
-    add_column :ideas, :sash_id, :integer, index: true
-    add_column :ideas, :level, :integer, :default => 0, index: true
+    add_column :ideas, :sash_id, :integer
+    add_column :ideas, :level, :integer, :default => 0
+    add_index :ideas, :sash_id, algorithm: :concurrently
+    add_index :ideas, :level, algorithm: :concurrently
   end
 
   def self.down

@@ -14,6 +14,7 @@ class Investment < ActiveRecord::Base
   #Includes concerns
   include Commentable
   include Votable
+  has_merit
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
