@@ -1,6 +1,9 @@
 class Comment < ActiveRecord::Base
 
   include Redis::Objects
+  #Redis counters and ids cache
+  counter :votes_counter
+  list :voters_ids
 
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
@@ -10,10 +13,6 @@ class Comment < ActiveRecord::Base
 
   include Votable
   include Mentioner
-
-  #Redis counters and ids cache
-  counter :votes_counter
-  list :voters_ids
 
   #Callback hooks
   after_commit :increment_counters, on: :create

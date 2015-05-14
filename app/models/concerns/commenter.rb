@@ -13,14 +13,6 @@ module Commenter
     self.comments
   end
 
-  def comments_50?
-    comments_counter.value == 30
-  end
-
-  def comments_100?
-    comments_counter.value == 100
-  end
-
   def comments_score
     comments.inject(0){ |sum, comment| sum + comment.votes_counter.value }
   end
