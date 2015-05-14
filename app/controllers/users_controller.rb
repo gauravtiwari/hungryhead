@@ -156,18 +156,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def notes
-    @notes = @user
-    .notes
+  def posts
+    @posts = @user
+    .posts
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
     if request.xhr?
-      render :partial=>"notes"
+      render :partial=>"posts"
     end
   end
 
-  def note
-    @note = Note.find(params[:id])
+  def post
+    @post = Note.find(params[:id])
   end
 
   private

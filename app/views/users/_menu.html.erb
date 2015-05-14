@@ -4,7 +4,7 @@
 			<%= link_to('Profile', profile_path(@user), class: "bold #{current_class?(profile_path(@user))} p-b-5 fs-13") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
-			<%= link_to('Notes', profile_notes_path(@user), class: "bold fs-13 #{current_class?(profile_notes_path(@user))} ") %>
+			<%= link_to('Notes', profile_posts_path(@user), class: "bold fs-13 #{current_class?(profile_posts_path(@user))} ") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Activities', profile_activities_path(@user), class: "bold fs-13 #{current_class?(profile_activities_path(@user))} ") %>

@@ -144,11 +144,9 @@ module Merit
         Post.leaderboard.score(post.id) == 500
       end
 
-      #votes related badges
-
       #note related badges
-      grant_on 'notes#create', badge: 'influencer', to: :user do |note|
-        note.user.notes_counter.value == 10 && note.notes_score >= 50
+      grant_on 'posts#create', badge: 'influencer', to: :user do |post|
+        post.user.posts_counter.value == 10 && post.posts_score >= 50
       end
 
     end
