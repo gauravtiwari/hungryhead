@@ -25,7 +25,7 @@ var LatestFeedPostItem = React.createClass({
               <strong>{actor}</strong>
             </a>
             <span className="verb p-l-5">
-              shared a note
+              shared a post
             </span>
           </span>
         </li>

@@ -1,5 +1,6 @@
 <div class="container">
     <% data = render(template: 'users/show.json.jbuilder') %>
+
     <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
         <%= render partial: 'sidebar', locals: {data: data} %>
     </div>
@@ -13,6 +14,15 @@
             <%= render partial: 'menu' %>
         </div>
 
+        <div class="badges-box m-t-20 clearfix">
+            <div class="col-md-6 no-padding p-r-15">
+                <%= render partial: 'latest_activities' %>
+            </div>
+            <div class="col-md-6 no-padding p-l-15">
+                <%= render partial: 'stats' %>
+            </div>
+        </div>
+
         <div class="student-ideas">
             <%= render partial: 'ideas' %>
         </div>
@@ -22,5 +32,6 @@
         </div>
     </div>
 </div>
+
 <%= render partial: 'send_message' %>
 

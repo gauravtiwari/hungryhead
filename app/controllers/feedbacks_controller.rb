@@ -92,8 +92,11 @@ class FeedbacksController < ApplicationController
       @feedback = Feedback.find(params[:id])
     end
 
-    def create_feedback_service
+    def set_props
       @idea = Idea.friendly.find(params[:idea_id])
+    end
+
+    def create_feedback_service
       @create_feedback_service ||= CreateFeedbackService.new(feedback_params, @idea, current_user)
     end
 
