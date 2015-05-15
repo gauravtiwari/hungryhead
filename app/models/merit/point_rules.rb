@@ -20,7 +20,7 @@ module Merit
       end
 
       #Comments related
-      score 2, :on => 'comments#create', category: 'comment', to: :user
+      score 2, :on => 'comments#create', category: 'comment', to: [:commentable]
 
       #Feedbacks related
       score 5, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
@@ -35,9 +35,6 @@ module Merit
 
       #Investment related
       score 5, :on => 'investments#create', to: :user, category: 'investment'
-
-      #Posts
-      score 5, :on => 'posts#create', to: :user, category: 'post'
 
       #Ideas
       score 5, :on => 'ideas#publish', to: :student, category: 'idea'
