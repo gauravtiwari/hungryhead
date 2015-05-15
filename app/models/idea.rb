@@ -204,6 +204,7 @@ class Idea < ActiveRecord::Base
     school.latest_ideas << idea_json if school
     #Insert into cache list
     Idea.latest << idea_json
+    Idea.trending.add(id, 1)
   end
 
   def decrement_counters
@@ -215,21 +216,7 @@ class Idea < ActiveRecord::Base
     school.latest_ideas.delete(idea_json)
     #Remove self from sorted set
     Idea.latest.delete(idea_json)
-  end
-
-  def update_redis_cache
-    if rebuild_cache?
-      #Delete it from latest list
-      Idea.latest.delete(idea_json)
-      #Regenerate cache with current score
-      Idea.latest << idea_json
-      #Delete school list cache
-      school.latest_ideas.delete(idea_json)
-      student.latest_ideas.delete(idea_json)
-      #Regenerate school and student ideas list
-      school.latest_ideas << idea_json
-      student.latest_ideas << idea_json
-    end
+    Idea.trending.delete(id)
   end
 
   def delete_activity

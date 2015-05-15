@@ -66,7 +66,8 @@ class FeedbacksController < ApplicationController
   def rate
     feedback_badges = [15, 16, 17, 18, 19]
     if feedback_badges.include?(params[:badge].to_i)
-      @feedback.badged! if !@feedback.badged?
+      @feedback.accepted! if !@feedback.accepted?
+      @feedback.helpful!
       @feedback.add_badge(params[:badge].to_i)
       @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
       render :rate, locals: {activity: @activity}

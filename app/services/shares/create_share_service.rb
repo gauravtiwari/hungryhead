@@ -10,7 +10,7 @@ class CreateShareService
     @share.user = @user
     @share.parameters = {shareable_name: @idea.name}
     @share.shareable = @idea
-    @share.status =  1
+    @share.status =  0
     @share
   end
 

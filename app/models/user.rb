@@ -131,7 +131,7 @@ class User < ActiveRecord::Base
   end
 
   def joined_within_a_year?
-    (DateTime.now.to_i - self.created_at.to_i) <= 365
+    (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
   end
 
   def mailboxer_email(object)
@@ -321,6 +321,7 @@ class User < ActiveRecord::Base
 
     #Add leaderboard score
     User.leaderboard.add(id, points)
+    User.trending.add(id, 1)
   end
 
   def decrement_counters
@@ -334,6 +335,7 @@ class User < ActiveRecord::Base
 
     #delete leaderboard for this user
     User.leaderboard.delete(id)
+    User.trending.delete(id)
   end
 
   #Deletes all dependent activities for this user

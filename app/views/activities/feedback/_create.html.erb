@@ -60,13 +60,11 @@
     	<% if activity.recipient.student_id == current_user.id %>
     		<%= react_component('Rate', {data: render(template: 'feedbacks/rate.json.jbuilder', locals: {activity: activity})}) %>
     	<% else %>
-	    	<% if activity.trackable.badged? %>
+	    	<% if activity.trackable.accepted? %>
 		    	<div class="review-badge pull-right">
-		    	  <div class="thumbnail-wrapper displayblock bg-<%= activity.trackable.badges.last.custom_fields[:bg] %> d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= activity.user.first_name.capitalize %> Earned <%= activity.trackable.badges.last.custom_fields[:name].downcase %> badge">
-		    	      <span class="bold displayblock text-white">
-		    	        <i class="fa fa-<%= activity.trackable.badges.last.custom_fields[:class] %> fs-16"></i>
-		    	      </span>
-		    	  </div>
+		    	  <a href="#" class="badge text-white font-helvetica">
+		    	      <span class="badge-type bronze"></span>Accepted
+		    	  </a>
 		    	</div>
 	    	<% end %>
 	    	<ul class="reactions pull-left">

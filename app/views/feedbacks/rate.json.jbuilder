@@ -1,6 +1,6 @@
 json.rate do
   json.record activity.trackable_id
-  json.voted  activity.trackable.badged?
+  json.voted  activity.trackable.accepted?
   json.vote_url  rate_idea_feedback_path(activity.recipient.slug, activity.trackable_id)
   json.user_name  activity.user.name.capitalize
   json.badge_class  activity.trackable.badges.last.custom_fields[:class] if activity.trackable.badges.length > 0

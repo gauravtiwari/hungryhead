@@ -10,7 +10,7 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def trending_20
-      self.where(id: self.trending.revrange(0, 20)).order_as_specified(id: self.popular.revrange(0, 20))
+      self.where(id: self.trending.revrange(0, 20)).order_as_specified(id: self.trending.revrange(0, 20))
     end
   end
 
