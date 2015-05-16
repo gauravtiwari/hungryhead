@@ -33,7 +33,7 @@ class Feedback < ActiveRecord::Base
 
   #Enums and states
   enum status: { posted: 0, badged: 1, flagged: 2 }
-  enum badge: { initial: 0, irrelevant: 1, helpful: 2, unhelpful: 3 }
+  enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
 
   store_accessor :parameters, :tags
 

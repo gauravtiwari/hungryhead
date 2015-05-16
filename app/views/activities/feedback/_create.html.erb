@@ -61,7 +61,7 @@
     		<% rated = activity.trackable.badged? %>
     		<%= react_component('Rate', {rate: {record: activity.trackable.id, user_name: activity.recipient.student.name, badge_name: activity.trackable.badge, rated: rated, rate_url: rate_idea_feedback_path(activity.recipient.slug, activity.trackable.id)}}) %>
     	<% else %>
-	    	<% if activity.trackable.accepted? %>
+	    	<% if activity.trackable.badged? %>
 		    	<div class="review-badge pull-right">
 		    	  <a href="#" class="badge text-white font-helvetica">
 		    	      <span class="badge-type bronze"></span>Accepted

@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   scope :users, -> { where(role: 0) }
 
   #Callbacks
-  before_save :add_fullname, unless: :name_present?
+  before_save :add_fullname, if: :name_not_present?
   before_save :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_fund, :seed_settings, unless: :is_admin
@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
     admin?
   end
 
-  def name_present?
+  def name_not_present?
     !first_name.present? && !last_name.present?
   end
 
@@ -315,7 +315,7 @@ class User < ActiveRecord::Base
     school.latest_students << user_json if school_id.present? && self.type == "Student"
     school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
-    User.latest << user_json unless self.type == "User"
+    User.latest << user_json unless type == "User"
 
     #Add leaderboard score
     User.leaderboard.add(id, points)
@@ -324,12 +324,12 @@ class User < ActiveRecord::Base
 
   def decrement_counters
     #Decrement counters
-    school.students_counter.decrement if school_id.present && school.students_counter.value > 0 && self.type == "Student"
+    school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
     #delete cached lists for school
     school.latest_students.delete(user_json) if school_id.present? && self.type == "Student"
     school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
-    User.latest.delete(id) unless self.type == "User"
+    User.latest.delete(id) unless type == "User"
 
     #delete leaderboard for this user
     User.leaderboard.delete(id)

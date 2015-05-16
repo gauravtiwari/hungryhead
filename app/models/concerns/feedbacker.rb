@@ -15,15 +15,15 @@ module Feedbacker
   end
 
   def irrelevant_feedbacks_counter
-    feedbacks.where(status: 1).count
+    feedbacks.where(badge: 3).count
   end
 
   def helpful_feedbacks_counter
-    feedbacks.where(badge: 2).count
+    feedbacks.where(badge: 1).count
   end
 
   def not_helpful_feedbacks_counter
-    feedbacks.where(badge: 3).count
+    feedbacks.where(badge: 2).count
   end
 
 end
