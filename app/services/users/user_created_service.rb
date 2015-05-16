@@ -13,11 +13,11 @@ class UserCreatedService
     @user.school.students_counter.increment if @user.type == "Student"
 
     #Cache lists for school
-    @user.school.latest_students << id if  @user.type == "Student"
-    @user.school.latest_faculties << id if @user.type == "Teacher"
+    @user.school.latest_students << @user.id if  @user.type == "Student"
+    @user.school.latest_faculties << @user.id if @user.type == "Teacher"
 
     #Cache sorted set for global leaderboard
-    User.latest << id unless type == "User"
+    User.latest << @user.id unless @user.type == "User"
 
     #Add leaderboard score
     User.leaderboard.add(@user.id, @user.points)

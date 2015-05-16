@@ -20,11 +20,12 @@ class Idea < ActiveRecord::Base
 
   after_create do |idea|
     #increment counters
-    broadcast(:record_created, idea)
+    IdeaCreatedService.new(idea).call
   end
 
   after_save do |idea|
     #rebuild slug
+    IdeaSavedService.new(idea).call
     broadcast(:sluggable_saved, idea)
   end
 

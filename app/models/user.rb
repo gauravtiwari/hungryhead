@@ -39,13 +39,13 @@ class User < ActiveRecord::Base
 
   after_create do |user|
     #increment counters
-    broadcast(:record_created, user)
+    UserCreatedService.new(user).call
   end
 
   after_save do |user|
     #rebuild cache
     broadcast(:sluggable_saved, user)
-    broadcast(:record_saved, user)
+    UserSavedService.new(user).call
   end
 
   #Callbacks
