@@ -32,8 +32,8 @@ class Feedback < ActiveRecord::Base
   acts_as_taggable_on :tags
 
   #Enums and states
-  enum status: { posted: 0, accepted: 1, rejected: 2, flagged: 3 }
-  enum badge: { initial: 0, irrelevant: 1, helpful: 2, not_helpful: 3 }
+  enum status: { posted: 0, badged: 1, flagged: 2 }
+  enum badge: { initial: 0, irrelevant: 1, helpful: 2, unhelpful: 3 }
 
   store_accessor :parameters, :tags
 
@@ -59,6 +59,9 @@ class Feedback < ActiveRecord::Base
     idea.feedbackers_counter.increment
     #Cache feedbacker id
     idea.feedbackers_ids << user_id
+
+    #Add to leaderboard
+    Feedback.leaderboard.add(id, points)
   end
 
   def decrement_counters
@@ -67,6 +70,9 @@ class Feedback < ActiveRecord::Base
     idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
     #Remove cached feedbacker id
     idea.feedbackers_ids.delete(user_id)
+
+    #Remove from leaderboard
+    Feedback.leaderboard.delete(id)
   end
 
   def delete_activity

@@ -2,7 +2,7 @@ class FeedbacksController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_feedback, only: [:rate, :show, :destroy]
-  before_action :set_props, only: [:index, :show, :create_feedback_service]
+  before_action :set_props, only: [:index, :show, :create, :rate]
 
   #Pundit authorization
   after_action :verify_authorized, :only => [:create, :destroy]
@@ -35,7 +35,9 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks.json
   def create
     # If feedback created publish via pusher
-    create_feedback_service.on :new_feedback do |feedback|
+    @create_feedback_service = CreateFeedbackService.new(feedback_params, @idea, current_user)
+
+    @create_feedback_service.on :new_feedback do |feedback|
       @feedback = feedback #for merit
       authorize feedback
       if feedback.save
@@ -53,27 +55,29 @@ class FeedbacksController < ApplicationController
     end
 
     #If error render errors
-    create_feedback_service.on :feedback_validation_error do |feedback|
+    @create_feedback_service.on :feedback_validation_error do |feedback|
       respond_to do |format|
         format.json { render json: feedback.errors,  status: :unprocessable_entity }
       end
     end
 
     #Call the feedback creation service
-    create_feedback_service.call
+    @create_feedback_service.call
   end
 
   def rate
-    feedback_badges = [15, 16, 17, 18, 19]
-    if feedback_badges.include?(params[:badge].to_i)
-      @feedback.accepted! if !@feedback.accepted?
-      @feedback.helpful!
-      @feedback.add_badge(params[:badge].to_i)
-      @activity = Activity.find_by_trackable_id_and_trackable_type(@feedback.id, @feedback.class.to_s)
-      render :rate, locals: {activity: @activity}
-    else
-      render json: {error: "Badge does not exist for this entity", status: :unprocessable_entity }
-    end
+    @feedback.badged! if !@feedback.badged?
+    @feedback.badge = params[:badge]
+    @feedback.save
+    render json: {
+      rate: {
+        record: @feedback.id,
+        rated: @feedback.badged?,
+        user_name: @idea.student.name,
+        badge_name: @feedback.badge,
+        rate_url: rate_idea_feedback_path(@feedback.idea.slug, @feedback.id)
+      }
+    }
   end
 
   # DELETE /feedbacks/1
@@ -94,10 +98,6 @@ class FeedbacksController < ApplicationController
 
     def set_props
       @idea = Idea.friendly.find(params[:idea_id])
-    end
-
-    def create_feedback_service
-      @create_feedback_service ||= CreateFeedbackService.new(feedback_params, @idea, current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

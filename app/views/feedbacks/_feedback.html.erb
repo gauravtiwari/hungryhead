@@ -58,7 +58,8 @@
     </div>
     <div class="card-footer clearfix bold">
       <% if feedback.idea.student_id == current_user.id %>
-        <%= react_component('Rate', {data: render(template: 'feedbacks/show.json.jbuilder', locals: {feedback: feedback})}) %>
+      <% rated = feedback.badged? %>
+      <%= react_component('Rate', {rate: {record: feedback.id, user_name: feedback.idea.student.name, badge_name: feedback.badge, rated: rated, rate_url: rate_idea_feedback_path(feedback.idea.slug, feedback.id)}}) %>
       <% else %>
         <% if feedback.badged? %>
           <div class="review-badge pull-right">

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     render json: Oj.dump({
       list: User.latest.values,
       type: 'Latest People'
-      }, mode: :compat)
+    }, mode: :compat)
   end
 
   def popular

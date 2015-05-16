@@ -42,7 +42,7 @@ var LatestUsers = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        elements.push(<LatestUsersItem key={item.id} item={item} />);
+        elements.push(<LatestUsersItem key={Math.random()} item={item} />);
       });
       return elements;
   },
@@ -143,14 +143,6 @@ var LatestUsers = React.createClass({
           </div>
       </div>
     );
-  },
+  }
 
-  componentDidUpdate: function() {
-    this._scrollToBottom();
-  },
-
-  _scrollToBottom: function() {
-    var ul = this.refs.trendingList.getDOMNode();
-    ul.scrollTop = ul.scrollHeight;
-  },
 });
