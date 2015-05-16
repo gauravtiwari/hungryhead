@@ -103,12 +103,12 @@ class User < ActiveRecord::Base
   scope :users, -> { where(role: 0) }
 
   #Callbacks
-  before_save :add_fullname, if: :first_name
-  before_save :add_username, if: :username
+  before_save :add_fullname, if: :name_not_present?
+  before_save :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_fund, :seed_settings, unless: :is_admin
-  after_create :increment_counters
   after_save :load_into_soulmate, unless: :is_admin
+  after_commit :increment_counters, on: :create
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -213,6 +213,14 @@ class User < ActiveRecord::Base
     admin?
   end
 
+  def name_not_present?
+    !first_name.present? && !last_name.present?
+  end
+
+  def username_absent?
+    !username.present?
+  end
+
   def add_username
     email_username = self.name.parameterize
     if User.find_by_username(email_username).blank?
@@ -220,7 +228,7 @@ class User < ActiveRecord::Base
     else
       num = 1
       while(User.find_by_username(email_username).present?)
-        email_username = "#{self.name.parameterize}#{num}"
+        email_username = "#{name.parameterize}#{num}"
         num += 1
       end
     end
