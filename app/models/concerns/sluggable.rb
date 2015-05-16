@@ -4,7 +4,7 @@ module Sluggable
 
   included do
     has_many :slugs, as: :sluggable, dependent: :destroy
-    after_save :create_slug
+    after_commit :create_slug, on: [:create, :update]
   end
 
   private
