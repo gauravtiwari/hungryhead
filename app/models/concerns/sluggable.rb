@@ -4,13 +4,13 @@ module Sluggable
 
   included do
     has_many :slugs, as: :sluggable, dependent: :destroy
-    after_commit :create_slug, on: [:create, :update]
+    after_save :create_slug
   end
 
   private
 
   def create_slug
-    return if !slug_changed? || slug == slugs.last.try(:slug)
+    return if slug == slugs.last.try(:slug)
     previous = slugs.where('lower(slug) = ?', slug.downcase)
     previous.delete_all
     slugs.create!(slug: slug)

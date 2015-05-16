@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var MainContent = React.createClass({
-  
+
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
     return {

@@ -81,7 +81,7 @@ var Problems = React.createClass({
           {error}
           <div className="panel-heading p-l-60 p-b-10">
             <div className="panel-title b-b b-grey p-b-5 text-master">List problems</div>
-            <div className="panel-controls">
+            <div className="panel-controls p-r-60">
             <ul>
               <li>
                 <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>

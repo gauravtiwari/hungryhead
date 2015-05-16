@@ -77,11 +77,11 @@ var Solutions = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel bg-light-blue box-shadow">
+        <div className="panel box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
             <div className="panel-title b-b b-grey p-b-5 text-master">List solutions</div>
-            <div className="panel-controls">
+            <div className="panel-controls p-r-60">
             <ul>
               <li>
                 <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>

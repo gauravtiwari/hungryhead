@@ -1,6 +1,6 @@
 
 <div class="wrapper-small bg-solid text-center panel panel-default">
-<h2 class="text-white">Find people you would like to connect</h2>
+  <h2 class="text-white">Find and <span class="semi-bold b-b b-white p-b-5">connect</span> with people on hungryhead</h2>
 </div>
 
 <div class="container">
@@ -20,13 +20,19 @@
      </div>
       <h5 class="no-margin fs-14 bold"><%= link_to(user.name, profile_path(user)) %></h5>
       <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
-      <p><%= user.mini_bio %></p>
-      <div class="card-follow-button">
-        <%= react_component('Follow',{:followed => followed?(user)}) %>
-      </div>
-      <script type="text/javascript">
-         ReactRailsUJS.mountComponents();
-      </script>
+      <p class="fs-12"><%= truncate(user.mini_bio, length: 40) %></p>
+      <% if current_user != user %>
+        <div class="card-follow-button">
+          <%= react_component('Follow',{:followed => followed?(user)}) %>
+        </div>
+        <script type="text/javascript">
+           ReactRailsUJS.mountComponents();
+        </script>
+      <% else %>
+        <%= link_to(profile_path(user), class: 'btn btn-danger btn-sm text-white') do %>
+        <span class="text-white"><i class="fa fa-share"></i> View profile</span>
+        <% end %>
+      <% end %>
     <% end %>
       <% end %>
       <div class="listing-card-stats">

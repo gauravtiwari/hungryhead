@@ -50,7 +50,7 @@ var Video = React.createClass({
     }
 
     var text = this.state.editable ? <span><i className="ion-close"></i> Cancel </span> : <span><i className="ion-edit"></i> Edit video</span>;
-    
+
     if(this.props.idea.video_html) {
       var html = this.props.idea.video_html;
     } else {

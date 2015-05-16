@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_merit
 
   #Concerns for User class
+  include Sluggable
   include Followable
   include Follower
   include Mentionable
@@ -27,7 +28,6 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
-  include Sluggable
 
   attr_accessor :login
 
@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
   before_save :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_fund, :seed_settings, unless: :is_admin
-  after_save :load_into_soulmate, unless: :is_admin
   after_create :increment_counters
+  after_save :load_into_soulmate, :create_slug, unless: :is_admin
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -172,38 +172,12 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
-
-  def user_json
-    {
-      id: id,
-      name: name,
-      description: mini_bio,
-      url: profile_path(self),
-      created_at: "#{created_at.to_formatted_s(:iso8601)}"
-    }
-  end
-
   def rebuild_notifications
     if rebuild_cache? && has_notifications?
       unless admin?
         #rebuild user feed every time name and avatar update.
         RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
       end
-    end
-  end
-
-  def update_redis_cache
-    if rebuild_cache? || mini_bio_changed?
-      #Delete cache
-      User.latest.delete(user_json)
-      #Regenerate cache with current score
-      User.latest << user_json unless type == "User"
-      #School list cache
-      school.latest_students.delete(user_json) if school && type == "Student"
-      school.latest_faculties.delete(user_json) if school && type == "Teacher"
-      #Regenerate school list
-      school.latest_students << user_json if school && type == "Student"
-      school.latest_faculties << user_json if school && type == "Teacher"
     end
   end
 
@@ -313,10 +287,10 @@ class User < ActiveRecord::Base
     #Increment counters
     school.students_counter.increment if school_id.present? && self.type == "Student"
     #Cache lists for school
-    school.latest_students << user_json if school_id.present? && self.type == "Student"
-    school.latest_faculties << user_json if school_id.present? && self.type == "Teacher"
+    school.latest_students << id if school_id.present? && self.type == "Student"
+    school.latest_faculties << id if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
-    User.latest << user_json unless type == "User"
+    User.latest << id unless type == "User"
 
     #Add leaderboard score
     User.leaderboard.add(id, points)
@@ -327,8 +301,8 @@ class User < ActiveRecord::Base
     #Decrement counters
     school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
     #delete cached lists for school
-    school.latest_students.delete(user_json) if school_id.present? && self.type == "Student"
-    school.latest_faculties.delete(user_json) if school_id.present? && self.type == "Teacher"
+    school.latest_students.delete(id) if school_id.present? && self.type == "Student"
+    school.latest_faculties.delete(id) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
     User.latest.delete(id) unless type == "User"
 

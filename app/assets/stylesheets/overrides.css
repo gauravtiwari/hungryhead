@@ -25,6 +25,9 @@ body, p {
 .panel {
   margin-bottom: 10px;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 .cup-bg {
   background: #fff url('/assets/can4.png') center center no-repeat;
 }

@@ -40,7 +40,7 @@ var ElevatorPitch = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'idea-plan text-master': true,
+      'idea-plan text-white': true,
       'hidden': this.state.editable,
       'show': !this.state.editable
     });
@@ -60,22 +60,22 @@ var ElevatorPitch = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel bg-white box-shadow">
+        <div className="panel bg-danger box-shadow">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-master">Elevator Pitch</div>
-            <div className="panel-controls">
+            <div className="panel-title b-b b-grey p-b-5 text-white">Elevator Pitch</div>
+            <div className="panel-controls p-r-60">
             <ul>
               <li>
-                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-master fs-12" onClick={this.openPitchForm}>{text}</a>
+                <a className="portlet-close text-white fs-12" onClick={this.openPitchForm}>{text}</a>
               </li>
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-master">
+          <div className="panel-body p-l-60 p-r-60 text-white">
             <h3 onClick={this.openMarketForm} className={classes} dangerouslySetInnerHTML={{__html: html}}></h3>
             <ElevatorPitchForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handlePitchSubmit= {this.handlePitchSubmit} form={this.props.idea} />
           </div>
@@ -85,10 +85,10 @@ var ElevatorPitch = React.createClass({
        return (
       <div className="panel bg-white box-shadow">
         <div className="panel-heading p-l-60 p-b-10">
-          <div className="panel-title b-b b-grey p-b-5 text-master">Elevator Pitch</div>
+          <div className="panel-title b-b b-grey p-b-5 text-white">Elevator Pitch</div>
         </div>
-        <div className="panel-body p-l-60 p-r-60 text-master">
-          <div className={classes}><h3 className="no-margin text-master" dangerouslySetInnerHTML={{__html: html}}></h3></div>
+        <div className="panel-body p-l-60 p-r-60 text-white">
+          <div className={classes}><h3 className="no-margin text-white" dangerouslySetInnerHTML={{__html: html}}></h3></div>
         </div>
       </div>
     );

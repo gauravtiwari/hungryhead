@@ -20,7 +20,7 @@ var LatestListings = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        elements.push(<LatestListingsItem key={item.id} item={item} />);
+        elements.push(<LatestListingsItem key={Math.random()} item={item} />);
       });
       return elements;
   },
@@ -65,7 +65,7 @@ var LatestListings = React.createClass({
   render: function() {
 
     return (
-      <div className="widget-11-2 panel no-border m-b-10 no-margin bg-white">
+      <div className="widget-11-2 panel no-border p-b-10 no-margin bg-white">
           <div className="panel-heading">
            <div className="panel-title">
             {this.state.type}

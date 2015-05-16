@@ -24,7 +24,7 @@ class Idea < ActiveRecord::Base
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_create :increment_counters
-  after_save :load_into_soulmate
+  after_save :load_into_soulmate, :update_redis_cache
 
 
   acts_as_taggable_on :markets, :locations, :technologies
@@ -159,18 +159,8 @@ class Idea < ActiveRecord::Base
     published? && everyone?
   end
 
-  def idea_json
-    {
-      id: id,
-      name: name,
-      description: high_concept_pitch,
-      url: idea_path(self),
-      created_at: "#{created_at.to_formatted_s(:iso8601)}"
-    }
-  end
-
   def rebuild_cache?
-    name_changed? || high_concept_pitch_changed? && !id_changed?
+    slug_changed? || name_changed? || high_concept_pitch_changed? && !id_changed?
   end
 
   private
@@ -200,10 +190,10 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.increment if school
     student.ideas_counter.increment if student
     #Cache latest ideas into a list for user and school, max: 20
-    student.latest_ideas <<  idea_json if student
-    school.latest_ideas << idea_json if school
+    student.latest_ideas <<  id if student
+    school.latest_ideas << id if school
     #Insert into cache list
-    Idea.latest << idea_json
+    Idea.latest << id
     Idea.trending.add(id, 1)
     Idea.leaderboard.add(id, points)
   end
@@ -213,10 +203,10 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.decrement
     student.ideas_counter.decrement
     #Remove self from cached list
-    student.latest_ideas.delete(idea_json)
-    school.latest_ideas.delete(idea_json)
+    student.latest_ideas.delete(id)
+    school.latest_ideas.delete(id)
     #Remove self from sorted set
-    Idea.latest.delete(idea_json)
+    Idea.latest.delete(id)
     Idea.trending.delete(id)
     Idea.leaderboard.delete(id)
   end
