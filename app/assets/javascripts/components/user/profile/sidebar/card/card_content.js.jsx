@@ -86,7 +86,7 @@ var CardContent = React.createClass({
                        <h3 className="no-margin text-white">
                            {this.props.profile.name} {verified_badge}
                        </h3>
-                       <p className="no-margin text-white fs-14">{this.props.profile.mini_bio}</p>
+                       <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>
                        <p className="text-white m-t-5 small">
                          {school}{location}
                        </p>

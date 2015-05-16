@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user
+  before_action :set_user, except: [:personal]
 
   def index
     @notifications = @user.ticker.revrange(0, 100)
@@ -14,11 +14,6 @@ class NotificationsController < ApplicationController
     @notifications = @idea.ticker.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
     render json: @notifications
-  end
-
-  def personal
-    @notifications = @user.latest_activities.values
-    render json: {items: @notifications}
   end
 
   def friends

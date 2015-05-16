@@ -1,8 +1,7 @@
 var LatestUserActivities = React.createClass({
   getInitialState: function(){
     return {
-      feed: [],
-      next_page: null,
+      activities: this.props.activities,
       closed: true,
       count: null
     };
@@ -10,7 +9,6 @@ var LatestUserActivities = React.createClass({
 
   componentDidMount: function() {
     if(this.isMounted()){
-      this.fetchNotifications();
       var feed_channel = pusher.subscribe(this.props.channel_name);
       if(feed_channel) {
         feed_channel.bind('new_feed_item', function(data){
@@ -27,15 +25,6 @@ var LatestUserActivities = React.createClass({
       }
     }
 
-  },
-
-  fetchNotifications: function(){
-    $.getJSON(this.props.path, function(json, textStatus) {
-      this.setState({
-        activities: json.items,
-        next_page: json.next_page
-    });
-    }.bind(this));
   },
 
   render: function(){
@@ -73,7 +62,7 @@ var LatestUserActivities = React.createClass({
             <i className="fa fa-bars text-danger"></i>  Latest activities
             </div>
           </div>
-          <div className="panel-body no-margin no-padding">
+          <div className="panel-body no-margin no-padding p-b-15">
              <ul className="p-l-20 p-r-20 no-style no-padding no-margin">
                {activities}
              </ul>

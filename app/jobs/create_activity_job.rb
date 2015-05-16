@@ -11,7 +11,8 @@ class CreateActivityJob < ActiveJob::Base
   end
 
   def find_trackable(trackable)
-    Activity.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s).exists? ||
-    Notification.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s).exists?
+    @activity = Activity.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s)
+    @notification = Notification.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s)
+    @activity.exists? && @activity.first.published? || @notification.exists? && @notification.first.published?
   end
 end

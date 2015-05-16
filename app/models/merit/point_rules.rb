@@ -20,10 +20,10 @@ module Merit
       end
 
       #Comments related
-      score 2, :on => 'comments#create', category: 'comment', to: [:commentable]
+      score 2, :on => 'comments#create', category: 'comment', to: :commentable
 
       #Feedbacks related
-      score 5, :on => 'feedbacks#create', category: 'feedback', to: [:idea, :student]
+      score 5, :on => 'feedbacks#create', category: 'feedback', to: :idea
 
       score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.accepted? && feedback.helpful?
@@ -37,7 +37,9 @@ module Merit
       score 5, :on => 'investments#create', to: :user, category: 'investment'
 
       #Ideas
-      score 5, :on => 'ideas#publish', to: :student, category: 'idea'
+      score 5, :on => 'ideas#publish', to: :student, category: 'idea_publish' do |idea|
+        idea.user.points(category: 'idea_publish') == 0
+      end
 
       #Share
       score 10, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|

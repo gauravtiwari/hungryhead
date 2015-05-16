@@ -43,7 +43,7 @@ jQuery(document).ready ->
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
 			$('.sticky').css(position: "fixed", width: "16.90rem", height: "auto")
-			$('.profile-sidebar.sticky').css(position: "fixed", width: "23.75rem", height: "auto")
+			$('.profile-sidebar.sticky').css(position: "fixed", width: "22.80rem", height: "auto")
 			$('.idea-sidebar.sticky').css(position: "fixed", width: "21.90rem", height: "auto")
 		else
 			$('.sticky').css(position: "relative", width: "100%")

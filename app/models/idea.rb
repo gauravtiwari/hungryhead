@@ -205,6 +205,7 @@ class Idea < ActiveRecord::Base
     #Insert into cache list
     Idea.latest << idea_json
     Idea.trending.add(id, 1)
+    Idea.leaderboard.add(id, points)
   end
 
   def decrement_counters
@@ -217,6 +218,7 @@ class Idea < ActiveRecord::Base
     #Remove self from sorted set
     Idea.latest.delete(idea_json)
     Idea.trending.delete(id)
+    Idea.leaderboard.delete(id)
   end
 
   def delete_activity

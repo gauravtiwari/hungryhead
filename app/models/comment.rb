@@ -68,6 +68,11 @@ class Comment < ActiveRecord::Base
     true
   end
 
+  #Get commentable user - idea(student) || user
+  def commentable_user
+    commentable_type == "Idea" ? commentable.student : commentable.user
+  end
+
   private
 
   def increment_counters

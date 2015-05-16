@@ -22,10 +22,11 @@ body, p {
   overflow: scroll;
   max-height: 300px;
 }
-
-.profile-cards {
-  min-height: 270px;
-  max-height: 270px;
+.panel {
+  margin-bottom: 10px;
+}
+.cup-bg {
+  background: #fff url('/assets/can4.png') center center no-repeat;
 }
 .badge {
   padding: .4em .8em .4em .2em;

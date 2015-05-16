@@ -24,7 +24,7 @@ var CardStats = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'widget-16 panel no-border no-margin profile-cards box-shadow': true
+      'widget-16 panel no-border cup-bg profile-cards box-shadow': true
     });
 
     return(
@@ -37,7 +37,7 @@ var CardStats = React.createClass({
         <div className="p-l-25 p-r-45">
           <h3 className="no-margin p-b-25 no-padding text-master text-center">Score: {this.state.score}</h3>
 
-            <div className="row p-b-25">
+            <div className="row">
 
             <div className="col-md-4 text-center">
               <p className="hint-text all-caps font-montserrat small no-margin">Views</p>
@@ -53,7 +53,7 @@ var CardStats = React.createClass({
             <p className="all-caps font-montserrat  no-margin text-success ">{this.state.investments_count}</p>
             </div>
           </div>
-          <div className="row p-t-25 p-b-25">
+          <div className="row p-t-15 p-b-15">
             <div className="col-md-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin ">Followers</p>
               <p className="all-caps font-montserrat no-margin text-success ">{this.state.followers_count}</p>

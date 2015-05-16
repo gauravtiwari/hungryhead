@@ -17,7 +17,7 @@ class CreateIdeaNotificationService
 
   #Check if activity exists for idea?
   def activity_exists?
-    Activity.where(trackable_id: @idea.id, key: "create").exists?
+    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').exists?
   end
 
   #Create activity if new idea
@@ -42,8 +42,7 @@ class CreateIdeaNotificationService
     Activity.where(trackable_id: @idea.id, trackable_type: "Idea").find_each do |activity|
       if activity && !activity.published?
         activity.published = true
-        activity.save!
-        true
+        activity.save
       end
     end
   end

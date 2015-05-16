@@ -1,13 +1,13 @@
 <% if @user.followers_counter.value > 0 %>
-<div class="widget-16 panel no-margin widget-loader-circle">
+<div class="widget-16 panel box-shadow">
     <div class="panel-heading">
         <div class="panel-title b-b b-grey p-b-5">
-          <i class="fa fa-users text-danger"></i> Followers
+          <i class="fa fa-users text-danger"></i> Latest followers
         </div>
     </div>
     <div class="panel-body">
         <ul class="list-unstyled">
-            <% @user.get_followers.take(16).each do |follower| %>
+            <% @user.get_followers.take(7).each do |follower| %>
                 <li class="m-r-10">
                     <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
                         <%= link_to(profile_path(follower)) do %>
@@ -23,11 +23,11 @@
                 </li>
             <% end %>
 
-            <% if @user.followers_counter.value > 8 %>
+            <% if @user.followers_counter.value > 7 %>
                 <li>
                     <div class="thumbnail-wrapper d32 circular b-white">
                         <div class="bg-master text-center text-white">
-                            <span>+34</span>
+                            <span>+<%= @user.followers_counter.value - 7 %></span>
                         </div>
                     </div>
                 </li>

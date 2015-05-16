@@ -1,14 +1,14 @@
 <% if @user.badges.length > 0 %>
-<div class="widget-16 panel no-margin box-shadow">
+<div class="widget-16 panel box-shadow">
     <div class="panel-heading">
         <div class="panel-title b-b b-grey p-b-5">
-          <i class="fa fa-shield text-danger"></i> Badges
+          <i class="fa fa-shield text-danger"></i> Latest badges
         </div>
     </div>
 
     <div class="panel-body">
         <div class="user-badges">
-            <%  @badges.take(8).each do |id, badge| %>
+            <%  @badges.take(5).each do |id, badge| %>
                 <div class="m-t-10">
                     <% badge.each do |b| %>
                         <p class="m-b-10 inline">
@@ -19,11 +19,11 @@
                     <% end %>
                 </div>
             <% end %>
-            <% if @user.badges.length > 8 %>
+            <% if @user.badges.length > 5 %>
                 <li>
                     <div class="thumbnail-wrapper d32 circular b-white">
                         <div class="bg-master text-center text-white">
-                            <span>+34</span>
+                            <span>+<%= @badges.length - 5 %></span>
                         </div>
                     </div>
                 </li>
