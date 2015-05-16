@@ -1,7 +1,11 @@
 class Post < ActiveRecord::Base
 
+  #Publish events using wisper
+  include Wisper::Publisher
+
   #Includes Modules
   include Redis::Objects
+
   #Redis counters and lists
   list :voters_ids
   list :commenters_ids

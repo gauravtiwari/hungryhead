@@ -1,5 +1,9 @@
 class School < ActiveRecord::Base
 
+	#Publish events using wisper
+	include Wisper::Publisher
+
+	#redis objects
 	include Redis::Objects
 
 	#Included concerns

@@ -1,5 +1,9 @@
 class Organization < ActiveRecord::Base
 
+  #Publish events using wisper
+  include Wisper::Publisher
+
+  #redis data types
   include Redis::Objects
 
   #Included concerns

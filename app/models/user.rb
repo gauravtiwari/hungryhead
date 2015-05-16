@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
   #Callbacks
   before_save :add_fullname, if: :name_not_present?
   before_save :add_username, if: :username_absent?
-  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_data, unless: :is_admin
+  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
