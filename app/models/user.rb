@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
 
   #External modules
   include ActiveModel::Validations
-
+  include Rails.application.routes.url_helpers
+  #redis objects
+  include Redis::Objects
   #order objects in same order as given
   extend OrderAsSpecified
 
@@ -25,9 +27,6 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
-
-  #user related concerns - redis and after_destroy methods
-  include UserConcerns
 
   attr_accessor :login
 
@@ -51,10 +50,55 @@ class User < ActiveRecord::Base
   end
 
   #Callbacks
-  before_save :add_fullname
+  before_save :add_fullname, if: :name_not_present?
   before_save :add_username, if: :username_absent?
-  before_save :seed_data, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
+  before_save :seed_data, unless: :is_admin
+
+  #Tagging System
+  acts_as_taggable_on :hobbies, :locations, :subjects, :markets
+  acts_as_tagger
+
+  #Sorted set to store followers, followings ids and latest activities
+  set :followers_ids
+  set :followings_ids
+  set :idea_followings_ids
+  set :school_followings_ids
+
+  #Latest ideas
+  list :latest_ideas, maxlength: 5, marshal: true
+  #List to store latest users
+  list :latest, maxlength: 20, marshal: true, global: true
+
+  #Store latest user notifications
+  sorted_set :ticker, marshal: true
+  sorted_set :friends_notifications, marshal: true
+
+  #List to store last 10 activities
+  list :latest_activities, maxlength: 5, marshal: true
+
+  #Sorted set to store trending ideas
+  sorted_set :leaderboard, global: true
+  sorted_set :trending, global: true
+
+  #Redis counters to cache total followers, followings,
+  #feedbacks, investments and ideas
+  counter :followers_counter
+  counter :followings_counter
+
+  counter :feedbacks_counter
+  counter :investments_counter
+
+  counter :comments_counter
+  counter :votes_counter
+  counter :ideas_counter
+  counter :posts_counter
+  counter :views_counter
+  counter :shares_counter
+
+  #Enumerators to handle states
+  enum state: { inactive: 0, published: 1}
+  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, teacher: 4 }
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
@@ -107,6 +151,15 @@ class User < ActiveRecord::Base
     balance > amount.to_i
   end
 
+  #Login using both email and username
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.username || self.email
+  end
+
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
@@ -141,6 +194,10 @@ class User < ActiveRecord::Base
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def name_not_present?
+    !first_name.present? && !last_name.present?
   end
 
   def username_absent?
@@ -195,5 +252,31 @@ class User < ActiveRecord::Base
     #check if user has notifications
     ticker.members.length > 0
   end
+
+  def remove_from_soulmate
+    #Remove search index if :record destroyed
+    loader = Soulmate::Loader.new("students")
+    loader.remove("id" => id)
+  end
+
+  def decrement_counters
+    #Decrement counters
+    school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
+    #delete cached lists for school
+    school.latest_students.delete(id) if school_id.present? && self.type == "Student"
+    school.latest_faculties.delete(id) if school_id.present? && self.type == "Teacher"
+    #delete cached sorted set for global leaderboard
+    User.latest.delete(id) unless type == "User"
+
+    #delete leaderboard for this user
+    User.leaderboard.delete(id)
+    User.trending.delete(id)
+  end
+
+  #Deletes all dependent activities for this user
+  def delete_activity
+    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+  end
+
 
 end
