@@ -42,7 +42,7 @@ var LatestIdeas = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        elements.push(<LatestIdeasItem key={item.id} item={item} />);
+        elements.push(<LatestIdeasItem key={Math.random()} item={item} />);
       });
       return elements;
   },

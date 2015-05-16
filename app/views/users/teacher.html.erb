@@ -16,15 +16,19 @@
 
         <div class="badges-box m-t-20 clearfix">
             <div class="col-md-6 no-padding p-r-15">
-                <%= render partial: 'latest_activities' %>
+                <%= render partial: 'badges' %>
+                <%= render partial: 'followers' %>
+                <%= render partial: 'followings' %>
+                <%= render partial: 'posts' %>
             </div>
-            <div class="col-md-6 no-padding p-l-15">
+            <div class="col-md-6 no-padding">
                 <%= render partial: 'stats' %>
+                <%= render partial: 'ideas' %>
             </div>
         </div>
 
         <div class="student-ideas">
-            <%= render partial: 'ideas' %>
+
         </div>
 
         <div class="summary white-bg box-shadow m-t-15 m-b-15">

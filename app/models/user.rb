@@ -191,6 +191,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_redis_cache
+    if rebuild_cache? || mini_bio_changed?
+      #Delete cache
+      User.latest.delete(user_json)
+      #Regenerate cache with current score
+      User.latest << user_json unless type == "User"
+      #School list cache
+      school.latest_students.delete(user_json) if school && type == "Student"
+      school.latest_faculties.delete(user_json) if school && type == "Teacher"
+      #Regenerate school list
+      school.latest_students << user_json if school && type == "Student"
+      school.latest_faculties << user_json if school && type == "Teacher"
+    end
+  end
+
   private
 
   #returns if a user is admin
