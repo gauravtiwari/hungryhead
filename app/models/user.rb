@@ -1,10 +1,9 @@
 class User < ActiveRecord::Base
 
+  #Publish events using wisper
   include Wisper::Publisher
-
   #External modules
   include ActiveModel::Validations
-  include Rails.application.routes.url_helpers
   #redis objects
   include Redis::Objects
   #order objects in same order as given
