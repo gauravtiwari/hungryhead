@@ -17,9 +17,6 @@ class Post < ActiveRecord::Base
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
-  extend FriendlyId
-  friendly_id :slug_candidates
-
   has_merit
 
   belongs_to :user
@@ -30,6 +27,11 @@ class Post < ActiveRecord::Base
   include Sharings
   include Votable
   include Scorable
+
+  after_save do |post|
+    #rebuild slug
+    broadcast(:sluggable_saved, post)
+  end
 
   #Model callbacks
   after_create :increment_counter

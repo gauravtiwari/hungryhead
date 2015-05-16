@@ -1,8 +1,6 @@
 class Organization < ActiveRecord::Base
 
   include Redis::Objects
-  extend FriendlyId
-  friendly_id :slug_candidates
 
   #Included concerns
   include Followable
@@ -20,6 +18,11 @@ class Organization < ActiveRecord::Base
 
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
+
+  after_save do |organization|
+    #rebuild slug
+    broadcast(:sluggable_saved, organization)
+  end
 
   #Callbacks hooks
   after_save :load_into_soulmate

@@ -1,13 +1,10 @@
 class Idea < ActiveRecord::Base
 
-  include Rails.application.routes.url_helpers
-  #included modules
-  include Redis::Objects
+  #Publish events via wisper
+  include Wisper::Publisher
+
   #return objects in same order as specificied
   extend OrderAsSpecified
-
-  extend FriendlyId
-  friendly_id :slug_candidates
 
   #Includes concerns
   include Commentable
@@ -20,45 +17,21 @@ class Idea < ActiveRecord::Base
   include Feedbackable
   include Sluggable
 
+  #Store after_destroy actions and redis objects fields
+  include IdeaConcerns
+
+  after_create do |idea|
+    #increment counters
+    broadcast(:record_created, idea)
+  end
+
+  after_save do |idea|
+    #rebuild slug
+    broadcast(:sluggable_saved, idea)
+  end
+
   #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
-  before_create :add_fund
-  after_create :increment_counters
-  after_save :load_into_soulmate, :update_redis_cache
-
-
-  acts_as_taggable_on :markets, :locations, :technologies
-
-  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
-  set :followers_ids
-  list :voters_ids
-  list :sharers_ids
-  list :feedbackers_ids
-  list :investors_ids
-  list :commenters_ids
-
-  #Set to store trending
-  list :latest, maxlength: 20, marshal: true, global: true
-
-  #Store latest idea notifications
-  sorted_set :ticker, maxlength: 100, marshal: true
-
-  #Leaderboard ideas
-  sorted_set :leaderboard, global: true
-  sorted_set :trending, global: true
-
-  #Redis Cache counters
-  counter :followers_counter
-  counter :investors_counter
-  counter :feedbackers_counter
-  counter :views_counter
-  counter :votes_counter
-  counter :shares_counter
-  counter :comments_counter
-
-  #Enumerators for handling states
-  enum status: { draft:0, published:1, reviewed:2 }
-  enum privacy: { me:0, everyone:2 }
+  before_save :add_fund
 
   #Scopes
   scope :published_ideas, -> { where(status: 1) }
@@ -159,61 +132,11 @@ class Idea < ActiveRecord::Base
     published? && everyone?
   end
 
-  def rebuild_cache?
-    slug_changed? || name_changed? || high_concept_pitch_changed? && !id_changed?
-  end
-
   private
 
-  def load_into_soulmate
-    if visible?
-      loader = Soulmate::Loader.new("ideas")
-      loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
-        "link" => idea_path(self)
-        })
-    else
-      remove_from_soulmate
-    end
-  end
-
-  def remove_from_soulmate
-    loader = Soulmate::Loader.new("ideas")
-    loader.remove("id" => id)
-  end
 
   def slug_candidates
     [:name]
-  end
-
-  def increment_counters
-    #Increment counters for school and student
-    school.ideas_counter.increment if school
-    student.ideas_counter.increment if student
-    #Cache latest ideas into a list for user and school, max: 20
-    student.latest_ideas <<  id if student
-    school.latest_ideas << id if school
-    #Insert into cache list
-    Idea.latest << id
-    Idea.trending.add(id, 1)
-    Idea.leaderboard.add(id, points)
-  end
-
-  def decrement_counters
-    #Decrement counters for student and school
-    school.ideas_counter.decrement
-    student.ideas_counter.decrement
-    #Remove self from cached list
-    student.latest_ideas.delete(id)
-    school.latest_ideas.delete(id)
-    #Remove self from sorted set
-    Idea.latest.delete(id)
-    Idea.trending.delete(id)
-    Idea.leaderboard.delete(id)
-  end
-
-  def delete_activity
-    #Delete idea time from user feed
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

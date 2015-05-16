@@ -1,8 +1,6 @@
 class School < ActiveRecord::Base
 
 	include Redis::Objects
-	extend FriendlyId
-	friendly_id :slug_candidates
 
 	#Included concerns
 	include Followable
@@ -37,6 +35,11 @@ class School < ActiveRecord::Base
 
 	validates :name, :presence => true,
 	:on => :create
+
+	after_save do |school|
+	  #rebuild slug
+	  broadcast(:sluggable_saved, school)
+	end
 
 	#Slug candidates for school
 	def slug_candidates
