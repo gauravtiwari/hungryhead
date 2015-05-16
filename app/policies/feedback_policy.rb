@@ -10,7 +10,9 @@ class FeedbackPolicy < ApplicationPolicy
 
   def show?   ; false; end
   def create?
-    current_user != record.idea.student && record.idea.published? && !record.idea.feedbacked?(current_user)
+    current_user != record.idea.student &&
+    record.idea.published? &&
+    !record.idea.feedbacked?(current_user)
   end
   def destroy?; current_user == record.user; end
 end

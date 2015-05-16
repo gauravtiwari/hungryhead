@@ -162,7 +162,6 @@ class Idea < ActiveRecord::Base
     {
       id: id,
       name: name,
-      name_badge: name_badge.upcase,
       description: high_concept_pitch,
       url: idea_path(self),
       created_at: "#{created_at.to_formatted_s(:iso8601)}"

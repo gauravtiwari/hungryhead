@@ -128,7 +128,7 @@ module Merit
       # ################################################################
 
       grant_on 'ideas#show', badge: 'market-fit', to: :itself do |idea|
-        Idea.leaderboard.score(idea.id) == 2500
+        Idea.leaderboard.score(idea.id) >= 2500
       end
 
       #Check everytime comment is created //hack
@@ -194,24 +194,38 @@ module Merit
         # => Feedback related badges
       ##############################
 
+      # 1. Feedbacker
       grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        feedback.user.feedbacks_counter.value == 1 &&
         Feedback.leaderboard.score(feedback.id) >= 25
       end
 
-      grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
-        feedback.idea.feedbackers_counter.value == 1 &&
-        feedback.user.feedbacks_counter.value >= 10
+      grant_on 'comments#create', badge: 'feedbacker', to: :commentable_user do |comment|
+        comment.commentable_type == "Feedback" &&
+        Feedback.leaderboard.score(comment.commentable_id) >= 25
       end
 
+      grant_on 'votes#create', badge: 'feedbacker', to: :votable_user do |vote|
+        vote.votable_type == "Feedback" &&
+        Feedback.leaderboard.score(vote.votable_id) >= 25
+      end
+
+
+      #2. Early adopter
+      grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
+        feedback.idea.feedbackers_counter.value == 1
+      end
+
+      # 3. Mentor
       grant_on 'feedbacks#create', badge: 'mentor', to: :user do |feedback|
         feedback.user.helpful_feedbacks_counter >= 10
       end
 
+      # 4. Guru
       grant_on 'feedbacks#create', badge: 'guru', to: :user do |feedback|
         feedback.user.helpful_feedbacks_counter >= 100
       end
 
+      # 5. Popular Feedback
       #Based on comment //hack
       grant_on 'comments#create', badge: 'popular-feedback', to: :commentable do |comment|
         comment.commentable_type == "Feedback" &&
@@ -221,7 +235,7 @@ module Merit
       #Based on vote //hack
       grant_on 'votes#vote', badge: 'popular-feedback', to: :votable do |vote|
         vote.votable_type == "Feedback" &&
-        Feedback.leaderboard.score(vote.commentable_id) >= 500
+        Feedback.leaderboard.score(vote.votable_id) >= 500
       end
 
       ##############################
@@ -229,7 +243,7 @@ module Merit
       # #############################
 
       grant_on 'investments#create', badge: 'investor', to: :user do |investment|
-        investment.user.investments_counter.value == 1
+        investment.user.investments_counter.value >= 5
       end
 
       grant_on 'investments#create', badge: 'angel-investor', to: :user do |investment|
@@ -250,27 +264,28 @@ module Merit
         comment.user.comments_counter.value >= 10
       end
 
-      grant_on 'comments#create', badge: 'collaborative', to: :user do |comment|
-        comment.user.comments_counter.value >= 50 &&
-        comment.user.comments_score >= 250
-      end
-
-      grant_on 'comments#create', badge: 'pundit', to: :user do |comment|
-        comment.user.comments_counter.value >= 100 &&
-        comment.user.comments_score >= 1000
-      end
-
       grant_on 'votes#vote', badge: 'popular-comment', to: :votable do |vote|
-        vote.votable_type == "Comment" && vote.votable.votes_counter.value == 500
+        vote.votable_type == "Comment" &&
+        vote.votable.votes_counter.value >= 500
+      end
+
+      grant_on 'votes#vote', badge: 'collaborative', to: :votable_user do |vote|
+        vote.votable_type == "Comment" &&
+        vote.votable_user.comments_counter.value >= 50 &&
+        vote.votable_user.comments_score >= 250
+      end
+
+      grant_on 'votes#vote', badge: 'pundit', to: :votable_user do |vote|
+        vote.votable_type == "Comment" &&
+        vote.votable_user.comments_counter.value >= 100 &&
+        vote.votable_user.comments_score >= 1000
       end
 
       ###########################
         # => Posts related badges
       # #########################
-      grant_on 'posts#create', badge: 'influencer', to: :user do |post|
-        post.user.posts_counter.value == 10 &&  Post.leaderboard.score(post.id) == 500
-      end
 
+      # TO POST
       #Based on comment to keep checking //hack
       grant_on 'comments#create', badge: 'popular-post', to: :commentable do |comment|
         comment.commentable_type == "Post" && Post.leaderboard.score(comment.commentable_id) == 500
@@ -279,6 +294,19 @@ module Merit
       #Based on vote to keep checking //hack
       grant_on 'votes#vote', badge: 'popular-post', to: :votable do |vote|
         vote.votable_type == "Post" && Post.leaderboard.score(vote.votable_id) == 500
+      end
+
+      # TO USER
+      #Based on comment to keep checking //hack
+      grant_on 'comments#create', badge: 'influencer', to: :commentable_user do |comment|
+        comment.commentable_type == "Post" &&
+        Post.leaderboard.score(comment.commentable_id) >= 500
+      end
+
+      #Based on vote to keep checking //hack
+      grant_on 'votes#vote', badge: 'influencer', to: :votable_user do |vote|
+        vote.votable_type == "Post" &&
+        Post.leaderboard.score(vote.votable_id) >= 500
       end
 
 

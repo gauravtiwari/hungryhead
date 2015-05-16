@@ -175,8 +175,6 @@ class User < ActiveRecord::Base
   def user_json
     {
       id: id,
-      avatar: avatar.url(:avatar),
-      name_badge: user_name_badge,
       name: name,
       description: mini_bio,
       url: profile_path(self),

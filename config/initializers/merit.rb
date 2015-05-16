@@ -27,7 +27,7 @@ Merit::Badge.create!(
   id: 1,
   name: "community",
   level: "bronze",
-  description: "Joined the community",
+  description: "Joined the site",
   custom_fields: { name: "Community", points: 1 }
 )
 
@@ -35,7 +35,7 @@ Merit::Badge.create!(
   id: 2,
   name: "autobiographer",
   level: "bronze",
-  description: "Completed the about me section",
+  description: "Completed the about me section on profile page",
   custom_fields: { name: "Autobiographer", points: 2 }
 )
 
@@ -139,8 +139,8 @@ Merit::Badge.create!(
   id: 15,
   name: "early-adopter",
   level: "bronze",
-  description: "Voted on 10 new ideas",
-  custom_fields: { name: "Early Adopter", points: 5 }
+  description: "First feedback on a idea",
+  custom_fields: { name: "Early Adopter", points: 2 }
 )
 
 Merit::Badge.create!(

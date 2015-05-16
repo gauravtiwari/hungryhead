@@ -2,7 +2,7 @@ class FeedbacksController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_feedback, only: [:rate, :show, :destroy]
-  before_action :set_props, only: [:index, :show, :create_feedback_service]
+  before_action :set_props, only: [:create, :index, :show]
 
   #Pundit authorization
   after_action :verify_authorized, :only => [:create, :destroy]
@@ -34,33 +34,20 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    # If feedback created publish via pusher
-    create_feedback_service.on :new_feedback do |feedback|
-      @feedback = feedback #for merit
-      authorize feedback
-      if feedback.save
-        respond_to do |format|
-          #render response
-          format.json { render :show, status: :created}
-        end
-        # Enque activity creation
-        CreateActivityJob.set(wait: 2.seconds).perform_later(feedback.id, feedback.class.to_s)
-      else
-        respond_to do |format|
-          format.json { render json: feedback.errors,  status: :unprocessable_entity }
-        end
-      end
-    end
-
-    #If error render errors
-    create_feedback_service.on :feedback_validation_error do |feedback|
+    # If feedback created render and create activity
+    @feedback =  CreateFeedbackService.new(feedback_params, @idea, current_user).create
+    authorize @feedback
+    if @feedback.save
       respond_to do |format|
-        format.json { render json: feedback.errors,  status: :unprocessable_entity }
+        format.json { render :show, status: :created}
+      end
+      # Enque activity creation
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@feedback.id, @feedback.class.to_s)
+    else
+      respond_to do |format|
+        format.json { render json: @feedback.errors,  status: :unprocessable_entity }
       end
     end
-
-    #Call the feedback creation service
-    create_feedback_service.call
   end
 
   def rate
@@ -94,10 +81,6 @@ class FeedbacksController < ApplicationController
 
     def set_props
       @idea = Idea.friendly.find(params[:idea_id])
-    end
-
-    def create_feedback_service
-      @create_feedback_service ||= CreateFeedbackService.new(feedback_params, @idea, current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
