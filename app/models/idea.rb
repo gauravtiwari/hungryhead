@@ -20,6 +20,13 @@ class Idea < ActiveRecord::Base
   include Feedbackable
   include Sluggable
 
+  #CallBack hooks
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
+  before_create :add_fund
+  after_create :increment_counters
+  after_save :load_into_soulmate
+
+
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Cache ids of followers, voters, sharers, feedbackers, investors and activities
@@ -60,12 +67,6 @@ class Idea < ActiveRecord::Base
   #Upload logos and covers
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
-
-  #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
-  before_create :add_fund
-  after_commit :increment_counters, on: :create
-  after_save :load_into_soulmate
 
   #Associations
   belongs_to :student, touch: true

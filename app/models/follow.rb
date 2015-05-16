@@ -7,7 +7,7 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :increment_counters, on: :create
+  after_create :increment_counters
   before_destroy :decrement_counters, :delete_notification
 
   private

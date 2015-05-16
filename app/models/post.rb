@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
   include Scorable
 
   #Model callbacks
-  after_commit :increment_counter, on: :create
+  after_create :increment_counter
   before_destroy :decrement_counter, :delete_activity
 
   public

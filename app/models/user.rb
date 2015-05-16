@@ -11,19 +11,41 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates
 
+  #Scopes for searching
+  scope :entrepreneurs, -> { where(role: 1) }
+  scope :users, -> { where(role: 0) }
+
   has_merit
 
   #Concerns for User class
   include Followable
   include Follower
   include Mentionable
-  include Sluggable
   include Suggestions
   include Scorable
   include Feedbacker
   include Investor
   include Commenter
   include Voter
+  include Sluggable
+
+  attr_accessor :login
+
+  #Model Relationships
+  belongs_to :school
+
+  has_many :authentications, :dependent => :destroy
+  has_many :activities, :dependent => :destroy
+  has_many :notifications, :dependent => :destroy
+  has_many :posts, dependent: :destroy
+
+  #Callbacks
+  before_save :add_fullname, if: :name_not_present?
+  before_save :add_username, if: :username_absent?
+  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
+  before_save :seed_fund, :seed_settings, unless: :is_admin
+  after_save :load_into_soulmate, unless: :is_admin
+  after_create :increment_counters
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -84,31 +106,10 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :registerable, :authentication_keys => [:login]
 
-  attr_accessor :login
-
-  #Model Relationships
-  belongs_to :school
-
-  has_many :authentications, :dependent => :destroy
-  has_many :activities, :dependent => :destroy
-  has_many :notifications, :dependent => :destroy
-  has_many :posts, dependent: :destroy
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
   mount_uploader :cover, CoverUploader
-
-  #Scopes for searching
-  scope :entrepreneurs, -> { where(role: 1) }
-  scope :users, -> { where(role: 0) }
-
-  #Callbacks
-  before_save :add_fullname, if: :name_not_present?
-  before_save :add_username, if: :username_absent?
-  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  before_save :seed_fund, :seed_settings, unless: :is_admin
-  after_save :load_into_soulmate, unless: :is_admin
-  after_commit :increment_counters, on: :create
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
