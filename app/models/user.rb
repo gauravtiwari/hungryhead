@@ -39,13 +39,13 @@ class User < ActiveRecord::Base
 
   after_create do |user|
     #increment counters
-    UserCreatedService.new(user).call
+    UserCreatedService.new(user).call unless admin?
   end
 
   after_save do |user|
     #rebuild cache
     broadcast(:sluggable_saved, user)
-    UserSavedService.new(user).call
+    UserSavedService.new(user).call unless admin?
   end
 
   #Callbacks
@@ -179,15 +179,6 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
-  def rebuild_notifications
-    if rebuild_cache? && has_notifications?
-      unless admin?
-        #rebuild user feed every time name and avatar update.
-        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
-      end
-    end
-  end
-
   private
 
   #returns if a user is admin
@@ -240,16 +231,6 @@ class User < ActiveRecord::Base
   #Slug attributes for friendly id
   def slug_candidates
     [:username]
-  end
-
-  def rebuild_cache?
-    #check if basic info changed and user is not new
-    name_changed? || avatar_changed? || username_changed? && !id_changed?
-  end
-
-  def has_notifications?
-    #check if user has notifications
-    ticker.members.length > 0
   end
 
   def remove_from_soulmate

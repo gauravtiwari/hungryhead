@@ -1,5 +1,7 @@
 class IdeaSavedService
 
+  include Rails.application.routes.url_helpers
+
   def initialize(idea)
     @idea = idea
   end
@@ -22,6 +24,11 @@ class IdeaSavedService
     else
       remove_from_soulmate
     end
+  end
+
+  def remove_from_soulmate
+    loader = Soulmate::Loader.new("ideas")
+    loader.remove("id" => @idea.id)
   end
 
 end
