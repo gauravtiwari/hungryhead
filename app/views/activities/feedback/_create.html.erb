@@ -64,7 +64,7 @@
 	    	<% if activity.trackable.badged? %>
 		    	<div class="review-badge pull-right">
 		    	  <a href="#" class="badge text-white font-helvetica">
-		    	      <span class="badge-type bronze"></span>Accepted
+		    	      <span class="badge-type bronze"></span><%= activity.trackable.badge %>
 		    	  </a>
 		    	</div>
 	    	<% end %>

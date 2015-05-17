@@ -83,7 +83,7 @@ var ElevatorPitch = React.createClass({
       );
     } else {
        return (
-      <div className="panel bg-white box-shadow">
+      <div className="panel bg-danger box-shadow">
         <div className="panel-heading p-l-60 p-b-10">
           <div className="panel-title b-b b-grey p-b-5 text-white">Elevator Pitch</div>
         </div>

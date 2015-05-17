@@ -82,6 +82,7 @@ class Idea < ActiveRecord::Base
   cache_index :sash_id
   cache_index :level
   cache_index :school_id
+  cache_index :student_id
 
   cache_has_many :followers, :inverse_name => :followable, :embed => true
   cache_has_many :feedbacks, :embed => true

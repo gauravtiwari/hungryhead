@@ -25,27 +25,27 @@ class SchoolsController < ApplicationController
   end
 
   def latest_students
-    @students = @school.latest_students.values.paginate(:page => params[:page], :per_page => 5)
+    @students = Student.find(@school.latest_students.values).paginate(:page => params[:page], :per_page => 5)
     render json: Oj.dump({
-      list: @students,
+      list: @students.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
       type: 'Latest Students',
       next_page: @students.next_page
       }, mode: :compat)
   end
 
   def latest_ideas
-   @ideas = @school.latest_ideas.values.paginate(:page => params[:page], :per_page => 5)
+   @ideas = Idea.find(@school.latest_ideas.values).paginate(:page => params[:page], :per_page => 5)
    render json: Oj.dump({
-    list: @ideas,
+    list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
     type: 'Latest Ideas',
     next_page: @ideas.next_page
     }, mode: :compat)
   end
 
   def latest_faculties
-    @faculties = @school.latest_faculties.values.paginate(:page => params[:page], :per_page => 5)
+    @faculties = Teacher.find(@school.latest_faculties.values).paginate(:page => params[:page], :per_page => 5)
     render json: Oj.dump({
-     list: @faculties,
+     list: @faculties.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
      type: 'Latest Faculties',
      next_page: @faculties.next_page
      }, mode: :compat)
