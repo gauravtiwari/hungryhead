@@ -1,7 +1,6 @@
 class SlugChangeListener
 
-  def sluggable_saved(sluggable)
-    return if sluggable.slugs.last.try(:slug)
+  def slug_changed(sluggable)
     previous = sluggable.slugs.where('lower(slug) = ?', sluggable.slug.downcase)
     previous.delete_all
     sluggable.slugs.create!(slug: sluggable.slug)

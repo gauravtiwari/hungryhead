@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
 
   after_save do |user|
     #rebuild cache
-    broadcast(:sluggable_saved, user)
+    broadcast(:slug_changed, user) if slug_changed? || !slugs.last.try(:slug).present?
     UserSavedService.new(user).call unless admin?
   end
 

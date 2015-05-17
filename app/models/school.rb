@@ -42,7 +42,7 @@ class School < ActiveRecord::Base
 
 	after_save do |school|
 	  #rebuild slug
-	  broadcast(:sluggable_saved, school)
+	  broadcast(:slug_changed, school) if slug_changed? || !slugs.last.try(:slug).present?
 	end
 
 	#Slug candidates for school

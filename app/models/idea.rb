@@ -26,7 +26,7 @@ class Idea < ActiveRecord::Base
   after_save do |idea|
     #rebuild slug
     IdeaSavedService.new(idea).call
-    broadcast(:sluggable_saved, idea)
+    broadcast(:slug_changed, idea) if slug_changed? || !slugs.last.try(:slug).present?
   end
 
   #CallBack hooks

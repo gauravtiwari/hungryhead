@@ -34,7 +34,7 @@ class Post < ActiveRecord::Base
 
   after_save do |post|
     #rebuild slug
-    broadcast(:sluggable_saved, post)
+    broadcast(:slug_changed, post) if slug_changed? || !slugs.last.try(:slug).present?
   end
 
   #Model callbacks

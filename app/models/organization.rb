@@ -25,7 +25,7 @@ class Organization < ActiveRecord::Base
 
   after_save do |organization|
     #rebuild slug
-    broadcast(:sluggable_saved, organization)
+    broadcast(:slug_changed, organization) if slug_changed? || !slugs.last.try(:slug).present?
   end
 
   #Callbacks hooks
