@@ -25,7 +25,6 @@ class Idea < ActiveRecord::Base
   after_create :increment_counters
   after_save :load_into_soulmate
 
-
   acts_as_taggable_on :markets, :locations, :technologies
 
   #Cache ids of followers, voters, sharers, feedbackers, investors and activities
@@ -70,24 +69,25 @@ class Idea < ActiveRecord::Base
   #Associations
   belongs_to :student, touch: true
   belongs_to :school
-
-  #Rest of the assocuations
   has_many :idea_messages, dependent: :destroy
-  has_many :slugs, as: :sluggable, dependent: :destroy
 
 
+  #Model caching indexing
   cache_index :slug
   cache_index :sash_id
   cache_index :level
   cache_index :school_id
   cache_index :student_id
 
+  #Model caching embeds
   cache_has_many :followers, :inverse_name => :followable, :embed => true
   cache_has_many :feedbacks, :embed => true
   cache_has_many :investments, :embed => true
 
 
+  #Gamification
   has_merit
+
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,
     :high_concept_pitch, :sections]

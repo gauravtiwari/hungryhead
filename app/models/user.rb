@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
 
+  #Gamification
   has_merit
 
   #Concerns for User class
@@ -38,6 +39,7 @@ class User < ActiveRecord::Base
   has_many :notifications, :dependent => :destroy
   has_many :posts, dependent: :destroy
 
+  #Model caching
   cache_index :slug
   cache_index :sash_id
   cache_index :level
