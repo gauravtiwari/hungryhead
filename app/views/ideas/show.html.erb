@@ -5,8 +5,16 @@
   <%= render partial: 'menu' %>
   <div class="m-t-20">
     <div class="idea-content">
+      <div class="col-md-6 no-padding p-r-15">
+        <%= render partial: 'badges' %>
+      </div>
+      <div class="col-md-6 no-padding">
+       <%= render partial: 'card_stats' %>
+      </div>
+      <div class="clearfix">
       <% sections = render(template: 'ideas/show.json.jbuilder') %>
       <%= react_component('MainContent', {data: sections}) %>
+      </div>
     </div>
   </div>
 </div>

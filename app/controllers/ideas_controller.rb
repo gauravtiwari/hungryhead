@@ -43,22 +43,20 @@ class IdeasController < ApplicationController
   #GET popular ideas
   #GET /ideas/popular
   def popular
-    @ideas = Idea.popular_20.paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.popular_20
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
       type: 'Popular Ideas',
-      next_page: @ideas.next_page
     }, mode: :compat)
   end
 
   #GET trending ideas
   #GET /ideas/trending
   def trending
-    @ideas = Idea.trending_20.paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.trending_20
     render json: Oj.dump({
       list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
-      type: 'Trending Ideas',
-      next_page: @ideas.next_page
+      type: 'Trending Ideas'
     }, mode: :compat)
   end
 
@@ -180,6 +178,7 @@ class IdeasController < ApplicationController
 
   def set_idea
     @idea = Idea.friendly.find(params[:id])
+    @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end
 

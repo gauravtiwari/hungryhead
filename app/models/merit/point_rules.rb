@@ -26,11 +26,11 @@ module Merit
       score 5, :on => 'feedbacks#create', category: 'feedback', to: :idea
 
       score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
-        feedback.accepted? && feedback.helpful?
+        feedback.badged? && feedback.helpful?
       end
 
       score 2, :on => 'feedbacks#rate', to: :idea_owner, category: 'user' do |feedback|
-        feedback.accepted?
+        feedback.badged?
       end
 
       #Investment related

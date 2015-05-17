@@ -168,7 +168,7 @@ module Merit
       grant_on 'ideas#show', badge: 'traction', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         days <= 10 &&
-        Idea.leaderboard.score(idea.id)/days == 100
+        Idea.leaderboard.score(idea.id)/days >= 100
       end
 
       #####################################
@@ -195,10 +195,6 @@ module Merit
       ##############################
 
       # 1. Feedbacker
-      grant_on 'feedbacks#create', badge: 'feedbacker', to: :user do |feedback|
-        Feedback.leaderboard.score(feedback.id) >= 25
-      end
-
       grant_on 'comments#create', badge: 'feedbacker', to: :commentable_user do |comment|
         comment.commentable_type == "Feedback" &&
         Feedback.leaderboard.score(comment.commentable_id) >= 25

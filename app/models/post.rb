@@ -20,6 +20,9 @@ class Post < ActiveRecord::Base
 
   has_merit
 
+  extend FriendlyId
+  friendly_id :slug_candidates
+
   belongs_to :user
 
   #Includes concerns

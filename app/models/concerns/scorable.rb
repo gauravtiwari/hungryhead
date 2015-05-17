@@ -14,7 +14,7 @@ module Scorable
     end
 
     def latest_listing
-      self.fetch_multi(self.latest.values)
+      self.fetch_multi(self.latest.values.reverse)
     end
 
   end

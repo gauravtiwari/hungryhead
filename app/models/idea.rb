@@ -8,6 +8,12 @@ class Idea < ActiveRecord::Base
   #return objects in same order as specificied
   extend OrderAsSpecified
 
+  #Gamification
+  has_merit
+
+  extend FriendlyId
+  friendly_id :slug_candidates
+
   #Includes concerns
   include Sluggable
   include Commentable
@@ -22,7 +28,6 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_create :increment_counters
   after_save :load_into_soulmate
 
   acts_as_taggable_on :markets, :locations, :technologies
@@ -83,10 +88,6 @@ class Idea < ActiveRecord::Base
   cache_has_many :followers, :inverse_name => :followable, :embed => true
   cache_has_many :feedbacks, :embed => true
   cache_has_many :investments, :embed => true
-
-
-  #Gamification
-  has_merit
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,
@@ -195,19 +196,6 @@ class Idea < ActiveRecord::Base
 
   def slug_candidates
     [:name]
-  end
-
-  def increment_counters
-    #Increment counters for school and student
-    school.ideas_counter.increment if school
-    student.ideas_counter.increment if student
-    #Cache latest ideas into a list for user and school, max: 20
-    student.latest_ideas <<  id if student
-    school.latest_ideas << id if school
-    #Insert into cache list
-    Idea.latest << id
-    Idea.trending.add(id, 1)
-    Idea.leaderboard.add(id, points)
   end
 
   def decrement_counters

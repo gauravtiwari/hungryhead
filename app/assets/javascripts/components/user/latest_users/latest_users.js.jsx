@@ -6,7 +6,7 @@ var LatestUsers = React.createClass({
       list: [],
       type: null,
       current_path: this.props.path,
-      next_page: null,
+      loading: true,
       done: false
     }
   },
@@ -18,69 +18,36 @@ var LatestUsers = React.createClass({
   },
 
   loadTrending: function() {
+    this.setState({loading: true});
     this.setState({current_path: Routes.trending_users_path(), done: false});
     $.getJSON(Routes.trending_users_path(), function(json, textStatus) {
       this.setState({
-        list: this.buildElements(json.list),
+        list: json.list,
         type: json.type,
-        next_page: json.next_page
+        loading: false
       });
     }.bind(this));
   },
 
   loadPopular: function() {
+    this.setState({loading: true});
     this.setState({current_path: Routes.popular_users_path(), done: false});
     $.getJSON(Routes.popular_users_path(), function(json, textStatus) {
       this.setState({
-        list: this.buildElements(json.list),
+        list: json.list,
         type: json.type,
-        next_page: json.next_page
+        loading: false
       });
     }.bind(this));
   },
 
-  buildElements: function(feed) {
-      var elements = [];
-      _.map(feed, function(item){
-        elements.push(<LatestUsersItem key={Math.random()} item={item} />);
-      });
-      return elements;
-  },
-
-  loadMoreItems: function() {
-    var self = this;
-    if(!self.state.done) {
-      $.ajax({
-        url: this.state.current_path + "?page=" + this.state.next_page,
-        success: function(data) {
-          var new_elements = self.buildElements(data.list)
-          self.setState({next_page: data.next_page, isInfiniteLoading: false,  list: self.state.list.concat(new_elements)});
-          if(self.state.next_page === null) {
-            self.setState({done: true, isInfiniteLoading: false});
-            event.stopPropagation();
-          }
-        }
-      });
-    }
-  },
-
-  handleInfiniteLoad: function() {
-    if(this.state.next_page != null) {
-      this.loadMoreItems();
-    }
-  },
-
-  elementInfiniteLoad: function() {
-    return;
-  },
-
   resetList: function() {
-    this.setState({current_path: Routes.latest_users_path(), done: false});
+    this.setState({current_path: Routes.latest_users_path(), done: false, loading: true});
     $.getJSON(Routes.latest_users_path(), function(json, textStatus) {
       this.setState({
-        list: this.buildElements(json.list),
+        list: json.list,
         type: json.type,
-        next_page: json.next_page
+        loading: false
       });
     }.bind(this));
   },
@@ -88,14 +55,25 @@ var LatestUsers = React.createClass({
   fetchList: function(){
     $.getJSON(this.state.current_path, function(json, textStatus) {
       this.setState({
-        list: this.buildElements(json.list),
+        list: json.list,
         type: json.type,
-        next_page: json.next_page
+        loading: false
     });
     }.bind(this));
   },
 
   render: function() {
+
+    var users = _.map(this.state.list, function(item){
+        return <LatestUsersItem key={Math.random()} item={item} />;
+      });
+
+    if(this.state.loading) {
+      var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>
+    } else {
+      var content = users
+    }
+
 
     return (
       <div className="widget-11-2 panel no-border no-margin bg-white p-b-10">
@@ -129,16 +107,8 @@ var LatestUsers = React.createClass({
             </div>
           </div>
           <div className="panel-body full-border-light no-padding">
-            <ul className="trending-list  p-t-10 no-style no-margin" ref="trendingList">
-              <Infinite elementHeight={45}
-              containerHeight={200}
-              infiniteLoadBeginBottomOffset={150}
-              onInfiniteLoad={this.handleInfiniteLoad}
-              loadingSpinnerDelegate={this.elementInfiniteLoad()}
-              isInfiniteLoading={this.state.isInfiniteLoading}
-              >
-               {this.state.list}
-              </Infinite>
+            <ul className="trending-list  scrollable p-t-10 no-style no-margin" ref="trendingList">
+              {content}
             </ul>
           </div>
       </div>
