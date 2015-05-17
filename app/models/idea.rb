@@ -1,11 +1,13 @@
 class Idea < ActiveRecord::Base
 
-  #Publish events via wisper
-  include Wisper::Publisher
+  include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
   #return objects in same order as specificied
   extend OrderAsSpecified
+
+  extend FriendlyId
+  friendly_id :slug_candidates
 
   #Includes concerns
   include Commentable
@@ -16,22 +18,13 @@ class Idea < ActiveRecord::Base
   include Scorable
   include Investable
   include Feedbackable
-  include Sluggable
-
-  after_create do |idea|
-    #increment counters
-    IdeaCreatedService.new(idea).call
-  end
-
-  after_save do |idea|
-    #rebuild slug
-    IdeaSavedService.new(idea).call
-    broadcast(:slug_changed, idea) if slug_changed? || !slugs.last.try(:slug).present?
-  end
 
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
-  before_save :add_fund
+  before_create :add_fund
+  after_create :increment_counters
+  after_save :load_into_soulmate, :create_slug
+
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -80,6 +73,7 @@ class Idea < ActiveRecord::Base
 
   #Rest of the assocuations
   has_many :idea_messages, dependent: :destroy
+  has_many :slugs, as: :sluggable, dependent: :destroy
 
   has_merit
   #Includes modules
@@ -171,6 +165,28 @@ class Idea < ActiveRecord::Base
 
   private
 
+  def create_slug
+    return if slug == slugs.last.try(:slug)
+    previous = slugs.where('lower(slug) = ?', slug.downcase)
+    previous.delete_all
+    slugs.create!(slug: slug)
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
+
+  def load_into_soulmate
+    if visible?
+      loader = Soulmate::Loader.new("ideas")
+      loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
+        "link" => idea_path(self)
+        })
+    else
+      remove_from_soulmate
+    end
+  end
+
   def remove_from_soulmate
     loader = Soulmate::Loader.new("ideas")
     loader.remove("id" => id)
@@ -178,6 +194,19 @@ class Idea < ActiveRecord::Base
 
   def slug_candidates
     [:name]
+  end
+
+  def increment_counters
+    #Increment counters for school and student
+    school.ideas_counter.increment if school
+    student.ideas_counter.increment if student
+    #Cache latest ideas into a list for user and school, max: 20
+    student.latest_ideas <<  id if student
+    school.latest_ideas << id if school
+    #Insert into cache list
+    Idea.latest << id
+    Idea.trending.add(id, 1)
+    Idea.leaderboard.add(id, points)
   end
 
   def decrement_counters

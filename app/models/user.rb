@@ -1,13 +1,15 @@
 class User < ActiveRecord::Base
 
-  #Publish events using wisper
-  include Wisper::Publisher
   #External modules
   include ActiveModel::Validations
+  include Rails.application.routes.url_helpers
   #redis objects
   include Redis::Objects
   #order objects in same order as given
   extend OrderAsSpecified
+
+  extend FriendlyId
+  friendly_id :slug_candidates
 
   #Scopes for searching
   scope :entrepreneurs, -> { where(role: 1) }
@@ -16,7 +18,6 @@ class User < ActiveRecord::Base
   has_merit
 
   #Concerns for User class
-  include Sluggable
   include Followable
   include Follower
   include Mentionable
@@ -36,23 +37,15 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :posts, dependent: :destroy
-
-  after_create do |user|
-    #increment counters
-    UserCreatedService.new(user).call unless admin?
-  end
-
-  after_save do |user|
-    #rebuild cache
-    broadcast(:slug_changed, user) if slug_changed? || !slugs.last.try(:slug).present?
-    UserSavedService.new(user).call unless admin?
-  end
+  has_many :slugs, as: :sluggable, dependent: :destroy
 
   #Callbacks
   before_save :add_fullname, if: :name_not_present?
   before_save :add_username, if: :username_absent?
-  before_save :seed_data, unless: :is_admin
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
+  before_save :seed_fund, :seed_settings, unless: :is_admin
+  after_create :increment_counters
+  after_save :load_into_soulmate, :create_slug, unless: :is_admin
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -179,7 +172,27 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
+  def rebuild_notifications
+    if rebuild_cache? && has_notifications?
+      unless admin?
+        #rebuild user feed every time name and avatar update.
+        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
+      end
+    end
+  end
+
   private
+
+  def create_slug
+    return if slug == slugs.last.try(:slug)
+    previous = slugs.where('lower(slug) = ?', slug.downcase)
+    previous.delete_all
+    slugs.create!(slug: slug)
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
 
   #returns if a user is admin
   def is_admin
@@ -214,8 +227,13 @@ class User < ActiveRecord::Base
     self.last_name =  lastname
   end
 
+  #Seeds amount into database on: :create
+  def seed_fund
+    self.fund = {balance: 1000}
+  end
+
   #Seeds settings into database on: :create
-  def seed_data
+  def seed_settings
     self.settings = {
       theme: 'solid',
       idea_notifications: true,
@@ -225,7 +243,6 @@ class User < ActiveRecord::Base
       post_notifications: true,
       weekly_mail: true
     }
-    self.fund = {balance: 1000}
   end
 
   #Slug attributes for friendly id
@@ -233,10 +250,62 @@ class User < ActiveRecord::Base
     [:username]
   end
 
+  def rebuild_cache?
+    #check if basic info changed and user is not new
+    name_changed? || avatar_changed? || username_changed? && !id_changed?
+  end
+
+  def has_notifications?
+    #check if user has notifications
+    ticker.members.length > 0
+  end
+
+  #Load data to redis using soulmate after_save
+  def load_into_soulmate
+    #Seperate index for each user type
+    unless admin?
+      if type == "Student"
+        soulmate_loader("students")
+      elsif type == "Mentor"
+        soulmate_loader("mentors")
+      elsif type == "Teacher"
+        soulmate_loader("teachers")
+      end
+    end
+  end
+
+  def soulmate_loader(type)
+    #instantiate soulmate loader to re-generate search index
+    loader = Soulmate::Loader.new(type)
+    loader.add(
+      "term" => name,
+      "image" => avatar.url(:avatar),
+      "description" => mini_bio,
+      "id" => id,
+      "data" => {
+        "link" => profile_path(self)
+      }
+    )
+  end
+
   def remove_from_soulmate
     #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("students")
     loader.remove("id" => id)
+  end
+
+  def increment_counters
+    #Increment counters
+    school.students_counter.increment if school_id.present? && self.type == "Student"
+    #Cache lists for school
+    school.latest_students << id if school_id.present? && self.type == "Student"
+    school.latest_faculties << id if school_id.present? && self.type == "Teacher"
+    #Cache sorted set for global leaderboard
+    User.latest << id unless type == "User"
+
+    #Add leaderboard score
+    User.leaderboard.add(id, points)
+    User.trending.add(id, 1)
   end
 
   def decrement_counters
@@ -258,5 +327,15 @@ class User < ActiveRecord::Base
     DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
+  protected
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
 
 end

@@ -9,6 +9,6 @@ class CreateSlugs < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :slugs, :sluggable_id, algorithm: :concurrently
-    add_index :slugs, [:slug, :sluggable_type], :unique => true, algorithm: :concurrently
+    add_index :slugs, :slug,  algorithm: :concurrently
   end
 end

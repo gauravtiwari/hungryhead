@@ -1,8 +1,5 @@
 class Post < ActiveRecord::Base
 
-  #Publish events using wisper
-  include Wisper::Publisher
-
   #Includes Modules
   include Redis::Objects
 
@@ -31,11 +28,6 @@ class Post < ActiveRecord::Base
   include Sharings
   include Votable
   include Scorable
-
-  after_save do |post|
-    #rebuild slug
-    broadcast(:slug_changed, post) if slug_changed? || !slugs.last.try(:slug).present?
-  end
 
   #Model callbacks
   after_create :increment_counter

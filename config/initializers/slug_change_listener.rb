@@ -1,1 +1,0 @@
-Wisper.subscribe(SlugChangeListener.new)

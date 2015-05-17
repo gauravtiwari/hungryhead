@@ -2544,10 +2544,10 @@ CREATE INDEX index_shares_on_user_id ON shares USING btree (user_id);
 
 
 --
--- Name: index_slugs_on_slug_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slugs_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_slugs_on_slug_and_sluggable_type ON slugs USING btree (slug, sluggable_type);
+CREATE INDEX index_slugs_on_slug ON slugs USING btree (slug);
 
 
 --

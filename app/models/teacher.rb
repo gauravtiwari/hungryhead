@@ -1,5 +1,6 @@
 class Teacher < User
-	store_accessor :interests, :locations, :hobbies, :markets
+
+  store_accessor :interests, :locations, :hobbies, :markets
 
   public
 

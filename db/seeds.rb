@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-ActiveRecord::Base.transaction do
+
 
 	Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 
@@ -48,4 +48,3 @@ ActiveRecord::Base.transaction do
 			Subject.new(name: tag, description: tag, description: tag).save
 		end
 	end
-end

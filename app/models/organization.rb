@@ -1,8 +1,5 @@
 class Organization < ActiveRecord::Base
 
-  #Publish events using wisper
-  include Wisper::Publisher
-
   #redis data types
   include Redis::Objects
 
@@ -22,11 +19,6 @@ class Organization < ActiveRecord::Base
 
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
-
-  after_save do |organization|
-    #rebuild slug
-    broadcast(:slug_changed, organization) if slug_changed? || !slugs.last.try(:slug).present?
-  end
 
   #Callbacks hooks
   after_save :load_into_soulmate

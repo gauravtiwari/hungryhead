@@ -1,8 +1,5 @@
 class School < ActiveRecord::Base
 
-	#Publish events using wisper
-	include Wisper::Publisher
-
 	#redis objects
 	include Redis::Objects
 
@@ -39,11 +36,6 @@ class School < ActiveRecord::Base
 
 	validates :name, :presence => true,
 	:on => :create
-
-	after_save do |school|
-	  #rebuild slug
-	  broadcast(:slug_changed, school) if slug_changed? || !slugs.last.try(:slug).present?
-	end
 
 	#Slug candidates for school
 	def slug_candidates
