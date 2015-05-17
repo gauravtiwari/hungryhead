@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
   #GET /ideas/latest
   def latest
     render json: Oj.dump({
-      list: Idea.latest.values.reverse,
+      list: Idea.latest_listing.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), description: idea.high_concept_pitch} },
       type: 'Latest Ideas'
     }, mode: :compat)
   end

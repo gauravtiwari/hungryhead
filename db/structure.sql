@@ -1384,6 +1384,37 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
+-- Name: version_associations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE version_associations (
+    id integer NOT NULL,
+    version_id integer,
+    foreign_key_name character varying NOT NULL,
+    foreign_key_id integer
+);
+
+
+--
+-- Name: version_associations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE version_associations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: version_associations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE version_associations_id_seq OWNED BY version_associations.id;
+
+
+--
 -- Name: versions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1398,7 +1429,8 @@ CREATE TABLE versions (
     owner_url character varying,
     object_changes json,
     object json,
-    created_at timestamp without time zone
+    created_at timestamp without time zone,
+    transaction_id integer
 );
 
 
@@ -1711,6 +1743,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY version_associations ALTER COLUMN id SET DEFAULT nextval('version_associations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
 
 
@@ -2007,6 +2046,14 @@ ALTER TABLE ONLY tags
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: version_associations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY version_associations
+    ADD CONSTRAINT version_associations_pkey PRIMARY KEY (id);
 
 
 --
@@ -2705,10 +2752,31 @@ CREATE INDEX index_users_on_type ON users USING btree (type);
 
 
 --
+-- Name: index_version_associations_on_foreign_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_version_associations_on_foreign_key ON version_associations USING btree (foreign_key_name, foreign_key_id);
+
+
+--
+-- Name: index_version_associations_on_version_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_version_associations_on_version_id ON version_associations USING btree (version_id);
+
+
+--
 -- Name: index_versions_on_item_type_and_item_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (item_type, item_id);
+
+
+--
+-- Name: index_versions_on_transaction_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_versions_on_transaction_id ON versions USING btree (transaction_id);
 
 
 --
@@ -2906,4 +2974,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150425140518');
 INSERT INTO schema_migrations (version) VALUES ('20150512113344');
 
 INSERT INTO schema_migrations (version) VALUES ('20150514213100');
+
+INSERT INTO schema_migrations (version) VALUES ('20150517032505');
+
+INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 

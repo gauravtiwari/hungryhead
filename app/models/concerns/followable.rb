@@ -7,7 +7,7 @@ module Followable
 
   #users that self follows
   def get_followers
-   User.where(:id => followers_ids.members)
+   User.fetch_multi(followers_ids.members)
   end
 
   # does the user follow self

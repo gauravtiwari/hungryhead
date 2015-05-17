@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  include IdentityCache
+
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
@@ -38,6 +40,20 @@ class User < ActiveRecord::Base
   has_many :notifications, :dependent => :destroy
   has_many :posts, dependent: :destroy
   has_many :slugs, as: :sluggable, dependent: :destroy
+
+  cache_index :slug
+  cache_index :sash_id
+  cache_index :level
+  cache_index :school_id
+
+  cache_has_many :notifications, :embed => true
+  cache_has_many :activities, :embed => true
+  cache_has_many :posts, :embed => true
+  cache_has_many :slugs, :inverse_name => :sluggable, :embed => true
+  cache_has_many :followers, :inverse_name => :followable, :embed => true
+  cache_has_many :feedbacks, :embed => true
+  cache_has_many :investments, :embed => true
+  cache_has_many :followings, :inverse_name => :follower, :embed => true
 
   #Callbacks
   before_save :add_fullname, if: :name_not_present?
@@ -99,7 +115,6 @@ class User < ActiveRecord::Base
   store_accessor :settings, :theme, :idea_notifications, :post_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
-  serialize [:fund, :education, :interests, :profile, :settings], HashSerializer
 
   #Devise for authentication
   devise :invitable, :async, :database_authenticatable, :registerable,

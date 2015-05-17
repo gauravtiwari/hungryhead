@@ -1,5 +1,7 @@
 class Idea < ActiveRecord::Base
 
+  include IdentityCache
+
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
@@ -74,6 +76,17 @@ class Idea < ActiveRecord::Base
   #Rest of the assocuations
   has_many :idea_messages, dependent: :destroy
   has_many :slugs, as: :sluggable, dependent: :destroy
+
+
+  cache_index :slug
+  cache_index :sash_id
+  cache_index :level
+  cache_index :school_id
+
+  cache_has_many :followers, :inverse_name => :followable, :embed => true
+  cache_has_many :feedbacks, :embed => true
+  cache_has_many :investments, :embed => true
+
 
   has_merit
   #Includes modules

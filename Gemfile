@@ -41,6 +41,10 @@ gem 'crono'
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
 
+#Model caching
+gem 'identity_cache'
+gem 'cityhash'        # optional, for faster hashing (C-Ruby only)
+
 #Build fake data
 gem 'forgery'
 
@@ -164,7 +168,7 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem 'shareable'
 
 #Log versions
-gem 'paper_trail', '~> 4.0.0.beta2'
+gem 'paper_trail', '~> 4.0.0.rc1'
 
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'country_select'

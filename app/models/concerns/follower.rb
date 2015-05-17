@@ -13,7 +13,7 @@ module Follower
 
   # users that follow self
   def get_followings
-    User.where(:id => followings_ids.members)
+    User.fetch_multi(followings_ids.members)
   end
 
   # users who follow and are being followed by self

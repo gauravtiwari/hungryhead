@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def latest
     render json: Oj.dump({
-      list: User.latest.values,
+      list: User.latest_listing.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
       type: 'Latest People'
     }, mode: :compat)
   end
@@ -180,7 +180,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.find(id)
+    @user = User.fetch_by_slug(id).first
     @badges = @user.badges.group_by(&:level)
   end
 

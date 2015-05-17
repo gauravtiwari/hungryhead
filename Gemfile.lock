@@ -79,6 +79,8 @@ GEM
     ambry (0.3.1)
     animate-rails (1.0.8)
       rails
+    ar_transaction_changes (1.0.1)
+      activerecord (>= 3.0, < 5.0)
     arel (6.0.0)
     ast (2.0.0)
     astrolabe (1.3.0)
@@ -145,6 +147,7 @@ GEM
       uuidtools
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    cityhash (0.8.1)
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.0)
@@ -358,6 +361,9 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     i18n_data (0.7.0)
+    identity_cache (0.2.4)
+      activerecord (>= 3.2)
+      ar_transaction_changes (~> 1.0)
     image_optimizer (1.3.0)
     inflecto (0.0.2)
     inline_svg (0.5.2)
@@ -457,7 +463,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.12.7)
+    oj (2.12.8)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -716,6 +722,7 @@ DEPENDENCIES
   carrierwave-mimetype-fu
   carrierwave_backgrounder
   carrierwave_direct (~> 0.0.14)
+  cityhash
   coffee-rails
   country_select
   crono
@@ -739,6 +746,7 @@ DEPENDENCIES
   hirb
   html-pipeline
   htmlbeautifier
+  identity_cache
   inline_svg
   jbuilder
   jquery-atwho-rails
@@ -770,7 +778,7 @@ DEPENDENCIES
   omniauth-linkedin-oauth2
   omniauth-twitter
   order_as_specified
-  paper_trail (~> 4.0.0.beta2)
+  paper_trail (~> 4.0.0.rc1)
   pg
   pg_search
   postgres-copy
