@@ -50,10 +50,12 @@ class Post < ActiveRecord::Base
 
   def increment_counter
     user.posts_counter.increment
+    Post.leaderboard.add(id, points)
   end
 
   def decrement_counter
     user.posts_counter.decrement
+    Post.leaderboard.delete(id)
   end
 
   def delete_activity
