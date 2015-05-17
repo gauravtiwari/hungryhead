@@ -12,7 +12,7 @@ module Sluggable
   private
 
   def create_slug
-    return if !slug_changed? || slug == slugs.last.try(:slug)
+    return if slug == slugs.last.try(:slug)
     previous = slugs.where('lower(slug) = ?', slug.downcase)
     previous.delete_all
     slugs.create!(slug: slug)

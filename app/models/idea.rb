@@ -8,10 +8,8 @@ class Idea < ActiveRecord::Base
   #return objects in same order as specificied
   extend OrderAsSpecified
 
-  extend FriendlyId
-  friendly_id :slug_candidates
-
   #Includes concerns
+  include Sluggable
   include Commentable
   include Votable
   include Followable
@@ -25,7 +23,7 @@ class Idea < ActiveRecord::Base
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_create :increment_counters
-  after_save :load_into_soulmate, :create_slug
+  after_save :load_into_soulmate
 
 
   acts_as_taggable_on :markets, :locations, :technologies
@@ -178,17 +176,6 @@ class Idea < ActiveRecord::Base
   end
 
   private
-
-  def create_slug
-    return if slug == slugs.last.try(:slug)
-    previous = slugs.where('lower(slug) = ?', slug.downcase)
-    previous.delete_all
-    slugs.create!(slug: slug)
-  end
-
-  def should_generate_new_friendly_id?
-    slug.blank? || name_changed?
-  end
 
   def load_into_soulmate
     if visible?

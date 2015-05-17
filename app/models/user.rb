@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
   #order objects in same order as given
   extend OrderAsSpecified
 
-  extend FriendlyId
-  friendly_id :slug_candidates
-
   #Scopes for searching
   scope :entrepreneurs, -> { where(role: 1) }
   scope :users, -> { where(role: 0) }
@@ -20,6 +17,7 @@ class User < ActiveRecord::Base
   has_merit
 
   #Concerns for User class
+  include Sluggable
   include Followable
   include Follower
   include Mentionable
@@ -39,7 +37,6 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :posts, dependent: :destroy
-  has_many :slugs, as: :sluggable, dependent: :destroy
 
   cache_index :slug
   cache_index :sash_id
@@ -61,7 +58,7 @@ class User < ActiveRecord::Base
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_fund, :seed_settings, unless: :is_admin
   after_create :increment_counters
-  after_save :load_into_soulmate, :create_slug, unless: :is_admin
+  after_save :load_into_soulmate, unless: :is_admin
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -197,17 +194,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def create_slug
-    return if slug == slugs.last.try(:slug)
-    previous = slugs.where('lower(slug) = ?', slug.downcase)
-    previous.delete_all
-    slugs.create!(slug: slug)
-  end
-
-  def should_generate_new_friendly_id?
-    slug.blank? || name_changed?
-  end
 
   #returns if a user is admin
   def is_admin
