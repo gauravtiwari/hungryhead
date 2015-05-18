@@ -41,10 +41,6 @@ gem 'crono'
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
 
-#Model caching
-gem 'identity_cache'
-gem 'cityhash'        # optional, for faster hashing (C-Ruby only)
-
 #Build fake data
 gem 'forgery'
 
