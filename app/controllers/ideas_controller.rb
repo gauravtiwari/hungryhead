@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
   #GET /ideas/latest
   def latest
     render json: Oj.dump({
-      list: Idea.latest_listing.map{|idea| {id: idea.id, name: idea.name, url: idea_path(idea), description: idea.elevator_pitch} },
+      list: Idea.latest_listing,
       type: 'Latest Ideas'
     }, mode: :compat)
   end
@@ -43,9 +43,8 @@ class IdeasController < ApplicationController
   #GET popular ideas
   #GET /ideas/popular
   def popular
-    @ideas = Idea.popular_20
     render json: Oj.dump({
-      list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.elevator_pitch}},
+      list: Idea.popular_20,
       type: 'Popular Ideas',
     }, mode: :compat)
   end
@@ -55,7 +54,7 @@ class IdeasController < ApplicationController
   def trending
     @ideas = Idea.trending_20
     render json: Oj.dump({
-      list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.elevator_pitch}},
+      list: Idea.trending_20,
       type: 'Trending Ideas'
     }, mode: :compat)
   end

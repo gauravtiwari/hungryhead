@@ -20,15 +20,14 @@ class UsersController < ApplicationController
 
   def latest
     render json: Oj.dump({
-      list: User.latest_listing.map{|user| {id: user.id, name: user.name, avatar: user.avatar.url(:avatar), name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
+      list: User.latest_listing,
       type: 'Latest People'
     }, mode: :compat)
   end
 
   def popular
-    @users = User.popular_20
     render json: Oj.dump({
-      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, avatar: user.avatar.url(:avatar), url: profile_path(user), description: user.mini_bio}},
+      list: User.popular_20,
       type: 'Popular People'
       }, mode: :compat)
   end
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
   def trending
     @users = User.trending_20
     render json: Oj.dump({
-      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, avatar: user.avatar.url(:avatar), url: profile_path(user), description: user.mini_bio}},
+      list: User.trending_20,
       type: 'Trending People'
       }, mode: :compat)
   end
