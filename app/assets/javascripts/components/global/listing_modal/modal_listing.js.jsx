@@ -5,7 +5,8 @@ var ModalListing = React.createClass({
 		return {
 			listings: [],
 			meta: [],
-			done: false
+			done: false,
+			loading: true
 		};
 	},
 
@@ -21,11 +22,13 @@ var ModalListing = React.createClass({
 
 
 	loadListings: function() {
+		this.setState({loading: true});
 		$.ajaxSetup({ cache: false });
 		 $.getJSON(this.props.path, function(data) {
 		  this.setState({
 		    listings: this.buildElements(data.payload.listings),
-				meta: data.payload.meta
+				meta: data.payload.meta,
+				loading: false
 		  });
 		}.bind(this));
 	},
@@ -68,6 +71,20 @@ var ModalListing = React.createClass({
 	},
 
 	render: function() {
+
+		if(this.state.loading) {
+			var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>;
+		} else {
+			var content = 	<Infinite elementHeight={96}
+                 containerHeight={500}
+                 infiniteLoadBeginBottomOffset={250}
+                 onInfiniteLoad={this.handleInfiniteLoad}
+                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                 isInfiniteLoading={this.state.isInfiniteLoading}
+                 >
+                  {this.state.listings}
+                 </Infinite>;
+		}
 		return(
 			<div className="modal fade stick-up" tabIndex="-1" role="dialog" id="modalListingPopup" aria-labelledby="modalListingPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 			<div className="modal-dialog modal-md">
@@ -82,15 +99,7 @@ var ModalListing = React.createClass({
 			</div>
 			<div className="panel-body no-padding full-border-light auto-overflow">
 			 <ul className="modal-list p-t-20 no-style no-padding">
-			  	<Infinite elementHeight={96}
-                 containerHeight={500}
-                 infiniteLoadBeginBottomOffset={250}
-                 onInfiniteLoad={this.handleInfiniteLoad}
-                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                 isInfiniteLoading={this.state.isInfiniteLoading}
-                 >
-                  {this.state.listings}
-                 </Infinite>
+			 		{content}
 			  </ul>
 			</div>
 			</div>
