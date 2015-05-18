@@ -19,10 +19,10 @@ var Upvote = React.createClass({
   loadVoters: function() {
     this.setState({loading: true});
     var path = this.props.voters_path;
-    $('body').append($('<div>', {class: 'voters_list', id: 'voters_modal'}));
+    $('body').append($('<div>', {class: 'voters_list', id: 'listing_modal'}));
     React.render(
       <ModalListing path={path} key={Math.random()}  />,
-      document.getElementById('voters_modal')
+      document.getElementById('listing_modal')
     );
     this.setState({loading: false});
     $('#modalListingPopup').modal('show');

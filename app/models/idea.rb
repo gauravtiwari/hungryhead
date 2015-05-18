@@ -1,7 +1,5 @@
 class Idea < ActiveRecord::Base
 
-  include IdentityCache
-
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
@@ -75,19 +73,6 @@ class Idea < ActiveRecord::Base
   belongs_to :student, touch: true
   belongs_to :school
   has_many :idea_messages, dependent: :destroy
-
-
-  #Model caching indexing
-  cache_index :slug
-  cache_index :sash_id
-  cache_index :level
-  cache_index :school_id
-  cache_index :student_id
-
-  #Model caching embeds
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_has_many :feedbacks, :embed => true
-  cache_has_many :investments, :embed => true
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,

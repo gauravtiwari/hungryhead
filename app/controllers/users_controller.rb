@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def latest
     render json: Oj.dump({
-      list: User.latest_listing.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
+      list: User.latest_listing.map{|user| {id: user.id, name: user.name, avatar: user.avatar.url(:avatar), name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
       type: 'Latest People'
     }, mode: :compat)
   end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def popular
     @users = User.popular_20
     render json: Oj.dump({
-      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
+      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, avatar: user.avatar.url(:avatar), url: profile_path(user), description: user.mini_bio}},
       type: 'Popular People'
       }, mode: :compat)
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def trending
     @users = User.trending_20
     render json: Oj.dump({
-      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
+      list: @users.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, avatar: user.avatar.url(:avatar), url: profile_path(user), description: user.mini_bio}},
       type: 'Trending People'
       }, mode: :compat)
   end
@@ -178,7 +178,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.fetch_by_slug(id).first
+    @user = User.find(id)
     @badges = @user.badges.group_by(&:level)
   end
 

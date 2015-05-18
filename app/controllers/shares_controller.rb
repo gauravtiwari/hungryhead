@@ -1,11 +1,11 @@
 class SharesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_share, only: [:show, :destroy, :likers]
+  before_filter :find_share, only: [:show, :destroy]
+  before_filter :load_shareable, only: [:create, :sharers]
   after_action :verify_authorized, :only => [:destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def create
-    @shareable = Idea.find(params[:shareable_id])
     if @shareable.shared?(current_user)
       render json: {error: 'Already shared'}
     else
@@ -20,8 +20,7 @@ class SharesController < ApplicationController
   end
 
   def sharers
-    @shareable = Idea.find(params[:shareable_id])
-    @sharers = @shareable.shares.paginate(:page => params[:page], :per_page => 10)
+    @sharers = User.find(@shareable.sharers_ids.values).paginate(:page => params[:page], :per_page => 10)
     render :index
   end
 
@@ -35,7 +34,18 @@ class SharesController < ApplicationController
 
   private
   def share_params
-    params.require(:share).permit(:body, :shareable_id, :shareable_type)
+    params.require(:share).permit(:body)
+  end
+
+  def load_shareable
+    @shareables = ["Idea", "Feedback", "Post"]
+    if @shareables.include? params[:shareable_type]
+      @shareable = params[:shareable_type].safe_constantize.find(params[:shareable_id])
+    else
+      respond_to do |format|
+       format.html { render json: {error: 'Sorry, unable to share this entity'}, status: :unprocessable_entity }
+      end
+    end
   end
 
   def find_share

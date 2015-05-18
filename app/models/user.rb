@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  include IdentityCache
-
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
@@ -38,21 +36,6 @@ class User < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :posts, dependent: :destroy
-
-  #Model caching
-  cache_index :slug
-  cache_index :sash_id
-  cache_index :level
-  cache_index :school_id
-
-  cache_has_many :notifications, :embed => true
-  cache_has_many :activities, :embed => true
-  cache_has_many :posts, :embed => true
-  cache_has_many :slugs, :inverse_name => :sluggable, :embed => true
-  cache_has_many :followers, :inverse_name => :followable, :embed => true
-  cache_has_many :feedbacks, :embed => true
-  cache_has_many :investments, :embed => true
-  cache_has_many :followings, :inverse_name => :follower, :embed => true
 
   #Callbacks
   before_save :add_fullname, if: :name_not_present?

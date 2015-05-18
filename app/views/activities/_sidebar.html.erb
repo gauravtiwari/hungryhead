@@ -21,37 +21,11 @@
                             <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
                         <% end %>
                     </h3>
-                    <p class="text-white m-t-5 small">
-                        <%  if current_user.location_list.first %>
-                            <span>
-                                <i class="fa fa-map-marker"></i>
-                                <%= current_user.location_list.first %>
-                            </span>
-                        <% end %>
-                        <% if current_user.school  %>
-                            <span class="clearfix">
-                                <i class="fa fa-university"></i>
-                                <%= current_user.school_name %>
-                            </span>
-                        <% end %>
-                    </p>
+                    <p class="small text-white"><%= current_user.mini_bio %></p>
+                    <%= link_to(profile_path(current_user), class: 'text-white') do %>
+                        <i class="fa fa-pencil"></i> Edit profile
+                    <% end %>
                 </div>
-            <div class="widget-16 text-white panel panel-transparent no-margin widget-loader-circle">
-            <div class="row text-white m-t-15 p-l-10 p-r-10">
-                <div class="col-md-4 text-center no-padding b-r b-white b-dashed">
-                <p class="no-margin bold"><i class="fa fa-dollar"></i></p>
-                <p class="no-margin bold text-warning "><%= current_user.investments_counter.value %></p>
-                </div>
-                <div class="col-md-4 text-center no-padding b-r b-white b-dashed">
-                <p class="no-margin bold"><i class="fa fa-users"></i></p>
-                    <p class="no-margin bold text-warning "><%= current_user.followers_counter.value %></p>
-                </div>
-                <div class="col-md-4 no-padding text-center">
-                <p class="no-margin bold"><i class="fa fa-lightbulb-o"></i></p>
-                    <p class="no-margin bold text-warning "><%= current_user.ideas_counter.value %></p>
-                </div>
-            </div>
-            </div>
             </div>
         </div>
     </div>

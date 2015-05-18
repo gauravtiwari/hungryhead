@@ -1,19 +1,19 @@
 json.payload do
 
-  json.listings @feedbackers.each do |i|
-    json.name i.name
-    json.avatar i.avatar.url(:avatar)
+  json.listings @feedbackers.each do |feedbacker|
+    json.name feedbacker.name
+    json.avatar feedbacker.avatar.url(:avatar)
     json.uuid SecureRandom.hex(10)
-    json.role i.role
+    json.role feedbacker.role
     json.path profile_path(i)
-    json.locations i.location_list.each do |tag|
+    json.locations feedbacker.location_list.each do |tag|
         json.tag tag
         json.url profile_people_path(tag.parameterize)
     end
-    json.about_me i.about_me
-    json.is_following i.followers_ids.members.include?(current_user.id.to_s)
-    json.followed followed?(i)
-    json.not_current_user i != current_user
+    json.about_me feedbacker.about_me
+    json.is_following feedbacker.followed_by?(current_user)
+    json.followed followed?(feedbacker)
+    json.not_current_user feedbacker != current_user
   end
 
   json.meta do

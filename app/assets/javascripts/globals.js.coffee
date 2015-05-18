@@ -22,6 +22,7 @@ jQuery(document).ready ->
 	$('.scrollable').slimScroll maxHeight: '300px'
 
 	$('.follow-scrollable').slimScroll maxHeight: '350px'
+	$('.latest-scrollable').slimScroll maxHeight: '200px'
 
 	$('.messages-scrollable').slimScroll height: $(window).height() - 250
 

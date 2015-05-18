@@ -83,7 +83,7 @@ var LatestIdeas = React.createClass({
                     <li className="hidden-xlg">
                       <div className="dropdown">
                         <a data-target="#" className="pointer" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                          <i className="portlet-icon portlet-icon-settings"></i>
+                          <i className="portlet-icon portlet-icon-settings m-r-10"></i>
                         </a>
                         <ul className="dropdown-menu pull-right" role="menu">
                           <li>
@@ -104,7 +104,7 @@ var LatestIdeas = React.createClass({
             </div>
           </div>
           <div className="panel-body no-padding full-border-light">
-            <ul className="trending-list scrollable p-t-10 no-style" ref="trendingList">
+            <ul className="trending-list latest-scrollable p-t-10 no-style" ref="trendingList">
              {content}
             </ul>
           </div>

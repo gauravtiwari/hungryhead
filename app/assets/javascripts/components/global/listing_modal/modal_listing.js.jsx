@@ -13,6 +13,9 @@ var ModalListing = React.createClass({
 		if(this.isMounted()){
 		  var self = this;
 		  this.loadListings();
+	    $("#modalListingPopup").on("hidden.bs.modal", function (e) {
+	    	$('#listing_modal').remove();
+	    });
 		}
 	},
 
@@ -73,11 +76,11 @@ var ModalListing = React.createClass({
 
 			<div className="panel-heading">
 				<button type="button" className="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span className="sr-only">Close</span></button>
-				<div className="panel-title b-b b-grey p-b-5">
+				<div className="panel-title">
 				  {this.state.meta.label}
 				</div>
 			</div>
-			<div className="auto-overflow">
+			<div className="panel-body no-padding full-border-light auto-overflow">
 			 <ul className="modal-list p-t-20 no-style no-padding">
 			  	<Infinite elementHeight={96}
                  containerHeight={500}

@@ -1,16 +1,35 @@
 var LatestUsersItem = React.createClass({
 
   render: function() {
+    var cx = React.addons.classSet;
+
+    var icon_classes = cx ({
+      'pull-left p-b-20': true,
+      'fa fa-star': this.props.type == "Popular People",
+      'fa fa-line-chart': this.props.type == "Trending People",
+      'fa fa-bars': this.props.type == "Latest People"
+    });
+
+    if(this.props.item.avatar) {
+      var image = <div className="thumbnail-wrapper d32 inline circular b-white m-r-5 m-b-5 b-a b-white">
+        <img data-src={this.props.item.avatar} data-src-retina={this.props.item.avatar} width="32" height="32" src={this.props.item.avatar} />
+      </div>
+    } else {
+      var image = <div className="thumbnail-wrapper d32 inline circular b-white m-r-5 m-b-5 b-a b-white">
+      <span className="placeholder inline bold fs-12 text-white">
+        {this.props.item.name_badge}
+      </span>
+      </div>
+    }
+
     return (
       <li className="m-b-10">
         <div className="widget-16-header p-b-10 p-l-15 p-r-15">
-        <div className="pull-left">
-            <a href={this.props.item.url}>
-              <p className="all-caps bold  small no-margin overflow-ellipsis ">{this.props.item.name}</p>
-            </a>
-            <p className="small no-margin">{this.props.item.description}</p>
-        </div>
-        <div className="clearfix"></div>
+          <span>
+            {image}
+            <a className="bold small no-margin" href={this.props.item.url}>{this.props.item.name}</a>
+            <span className="small no-margin displayblock">{this.props.item.description}</span>
+          </span>
         </div>
       </li>
     );

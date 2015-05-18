@@ -1,19 +1,19 @@
 json.payload do
 
-  json.listings @likers.each do |i|
-    json.name your_name(i.voter, false)
-    json.avatar i.voter.avatar.url(:avatar)
+  json.listings @likers.each do |liker|
+    json.name your_name(liker, false)
+    json.avatar liker.avatar.url(:avatar)
     json.uuid SecureRandom.hex(10)
-    json.path profile_path(i.voter)
-    json.locations i.voter.location_list.each do |tag|
+    json.path profile_path(liker)
+    json.locations liker.location_list.each do |tag|
         json.tag tag
         json.url profile_people_path(tag.parameterize)
     end
-    json.about_me i.voter.mini_bio
-    json.is_following i.voter.followers_ids.members.include?(current_user.id.to_s)
-    json.user_name_badge i.voter.user_name_badge
-    json.followed followed?(i.voter)
-    json.not_current_user i.voter != current_user
+    json.about_me liker.mini_bio
+    json.is_following liker.followers_ids.members.include?(current_user.id.to_s)
+    json.user_name_badge liker.user_name_badge
+    json.followed followed?(liker)
+    json.not_current_user liker != current_user
   end
 
   json.meta do

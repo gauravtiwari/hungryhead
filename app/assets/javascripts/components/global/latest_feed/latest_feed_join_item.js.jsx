@@ -18,7 +18,7 @@ var LatestFeedJoinItem = React.createClass({
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix">
           <span className="inline text-master">
             <a className="text-complete" href={this.props.item.actor.url}>
-              <div className="thumbnail-wrapper d24 fs-11 user-pic circular inline m-r-10">
+              <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
                 {placeholder}
               </div>
               <strong>{actor}</strong>

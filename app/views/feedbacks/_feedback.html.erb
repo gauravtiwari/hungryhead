@@ -63,11 +63,13 @@
       <% else %>
         <% if feedback.badged? %>
           <div class="review-badge pull-right">
-            <div class="thumbnail-wrapper displayblock bg-solid d32 circular b-white m-r-5 m-b-5 b-a b-white" data-container="body" data-toggle="tooltip" data-placement="top" title="<%= feedback.user.first_name.capitalize %> Earned <%= feedback.badges.last.custom_fields[:name].downcase %> badge">
-                <span class="bold displayblock text-white">
-                  <i class="fa fa-<%= feedback.badges.last.custom_fields[:class] %> fs-16"></i>
-                </span>
-            </div>
+            <% feedback.badges.each do |b| %>
+            <p class="m-b-10 inline">
+             <%= link_to(badge_path(b.name), class: "badge text-white font-helvetica", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
+                 <span class="badge-type <%= b.level %>"></span><%= b.custom_fields[:name] %>
+             <% end %>
+            </p>
+            <% end %>
           </div>
         <% end %>
         <ul class="reactions pull-left">

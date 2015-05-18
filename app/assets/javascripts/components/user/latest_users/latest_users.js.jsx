@@ -64,9 +64,10 @@ var LatestUsers = React.createClass({
 
   render: function() {
 
+    var type = this.state.type;
     var users = _.map(this.state.list, function(item){
-        return <LatestUsersItem key={Math.random()} item={item} />;
-      });
+        return <LatestUsersItem key={Math.random()} type={type} item={item} />;
+    });
 
     if(this.state.loading) {
       var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>
@@ -76,7 +77,7 @@ var LatestUsers = React.createClass({
 
 
     return (
-      <div className="widget-11-2 panel no-border no-margin bg-white p-b-10">
+      <div className="widget-11-2 panel no-border no-margin bg-white">
           <div className="panel-heading">
            <div className="panel-title">
             {this.state.type}
@@ -85,8 +86,8 @@ var LatestUsers = React.createClass({
                 <ul>
                     <li className="hidden-xlg">
                       <div className="dropdown">
-                        <a data-target="#" className="pointer" href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                          <i className="portlet-icon portlet-icon-settings"></i>
+                        <a className="pointer" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                          <i className="portlet-icon portlet-icon-settings m-r-10"></i>
                         </a>
                         <ul className="dropdown-menu pull-right" role="menu">
                           <li>
@@ -106,8 +107,8 @@ var LatestUsers = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light no-padding">
-            <ul className="trending-list  scrollable p-t-10 no-style no-margin" ref="trendingList">
+          <div className="panel-body full-border-light full-border-light-bottom no-padding">
+            <ul className="trending-list latest-scrollable p-t-10 no-padding no-style no-margin" ref="trendingList">
               {content}
             </ul>
           </div>
