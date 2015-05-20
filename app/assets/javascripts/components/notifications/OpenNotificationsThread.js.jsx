@@ -19,7 +19,7 @@ var OpenNotificationsThread = React.createClass({
     var parentdrop = $('.notification-list').find('.dropdown');
     if(!this.state.active) {
         React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_name={this.props.channel_name} />,
-             document.getElementById('render_notifications'));
+             document.getElementById('threads_section'));
         parentdrop.removeClass('open');
         parentdrop.addClass('open');
     } else {

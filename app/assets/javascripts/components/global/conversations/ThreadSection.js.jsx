@@ -22,7 +22,7 @@ var ThreadSection = React.createClass({
   },
 
   loadConversations: function() {
-    $.getJSON(this.props.path, function(data) { 
+    $.getJSON(this.props.path, function(data) {
       this.setState({
         threads: this.buildElements(data.conversations),
         conversations_count: data.conversations_count,
@@ -69,12 +69,12 @@ var ThreadSection = React.createClass({
   },
 
   render: function() {
-    
+
     return(
     <div>
       <div className="notification-section-header clearfix">
         <a href={Routes.conversations_path({box: 'inbox'})}>Inbox ({this.state.conversations_count}) </a>
-        <div className="show-all"><a href={Routes.new_message_path()}> Send new message </a></div>
+        <div className="show-all pull-right bold"><a className=" text-complete" href={Routes.new_message_path()}> Send new message </a></div>
       </div>
       <div className="notification-conversations-list">
         <Infinite elementHeight={80}
@@ -89,7 +89,7 @@ var ThreadSection = React.createClass({
       </div>
     </div>
       );
-      
+
   }
 
 });
