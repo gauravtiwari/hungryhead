@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     Idea.trending.increment(@idea.id) if @idea.student != current_user
+    @comments = @idea.root_comments.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
     @idea.views_counter.increment if @idea.student != current_user
   end
 

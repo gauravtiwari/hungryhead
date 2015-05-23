@@ -35,7 +35,7 @@ var ThreadListItem = React.createClass({
 
     return (
     <div className={conversation_status_classes}>
-      <div className="participants">
+      <div className="participants m-r-10">
         <div className="participant">
           <img key={Math.random()} width="40px" className="participant-avatar margin-right" src={this.props.conversation.sender_avatar} alt="Avatar img 20121207 022806" />
         </div>
@@ -43,11 +43,11 @@ var ThreadListItem = React.createClass({
       <div className="conversation-body">
         <div className="subject margin-right">
           <a href={this.props.conversation.conversation_path}>{this.props.conversation.subject}</a>
-          <span className="text-muted"> ({this.props.conversation.messages_count})</span>    
+          <span className="text-muted"> ({this.props.conversation.messages_count})</span>
         </div>
 
         <div className="last-message clearfix" dangerouslySetInnerHTML={{__html: this.props.conversation.last_message_body}}>
-              
+
         </div>
          <small>
           <span className="text-muted">
