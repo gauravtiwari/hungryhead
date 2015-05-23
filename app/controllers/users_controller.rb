@@ -119,10 +119,8 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @followers = @user.followers_by_type('User')
-    respond_to do |format|
-      format.html
-    end
+    @followers =@user.get_followers.paginate(:page => params[:page], :per_page => 9)
+    render 'follows/followers'
   end
 
   def delete_cover
@@ -135,10 +133,8 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @following = @user.following_by_type('User')
-    respond_to do |format|
-      format.html
-    end
+    @followings = @user.get_followings.paginate(:page => params[:page], :per_page => 9)
+    render 'follows/followings'
   end
 
   def activities

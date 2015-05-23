@@ -5,12 +5,13 @@ json.payload do
     json.avatar feedbacker.avatar.url(:avatar)
     json.uuid SecureRandom.hex(10)
     json.role feedbacker.role
-    json.path profile_path(i)
+    json.path profile_path(feedbacker)
     json.locations feedbacker.location_list.each do |tag|
         json.tag tag
-        json.url profile_people_path(tag.parameterize)
+        json.url tag_people_path(tag.parameterize)
     end
-    json.about_me feedbacker.about_me
+    json.about_me follower.mini_bio
+    json.user_name_badge follower.user_name_badge
     json.is_following feedbacker.followed_by?(current_user)
     json.followed followed?(feedbacker)
     json.not_current_user feedbacker != current_user
