@@ -10,7 +10,11 @@ class WelcomeController < ApplicationController
     case step
     when :follow_friends
       ids = User.where(school_id: @user.school_id).pluck(:id) if @user.school_id.present?
-      @friends = User.find(ids - [current_user.id]).paginate(:page => params[:page], :per_page => 10)
+      if ids
+        @friends = User.find(ids - [current_user.id]).paginate(:page => params[:page], :per_page => 10)
+      else
+        skip_step
+      end
     end
     render_wizard
   end
@@ -21,7 +25,7 @@ class WelcomeController < ApplicationController
     case step
     when :hello
       @user.update_attributes(user_params)
-      UserWelcomeService.new(@user).welcome
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, @user.class.to_s)
     end
     sign_in(@user, bypass: true)
     render_wizard @user

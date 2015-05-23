@@ -1,4 +1,4 @@
-<div class="col-md-8 col-lg-8 col-sm-8 no-padding p-l-15">
+<div class="col-md-9 col-lg-8 col-sm-8 no-padding p-l-15">
   <div class="auto-height box-shadow ">
     <%= render partial: 'header' %>
   </div>
@@ -13,8 +13,9 @@
   </div>
 </div>
 
-<div class="col-md-4 col-lg-4 col-sm-4">
-  <div class="idea-sidebar auto-height sticky bg-white box-shadow">
+<div class="col-md-3 col-lg-4 col-sm-4">
+  <div class="idea-sidebar auto-height bg-white box-shadow">
+    <%= react_component('LatestFeed', {idea_id: @idea.id, path: ideas_notification_path(@idea), channel_name: "idea-feed-#{@idea.id}"}.to_json) %>
     <%= render partial: 'card_stats' %>
     <%= render partial: 'badges' %>
     <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
@@ -27,36 +28,6 @@
     <%= render 'collaboration' %>
   </div>
 <% end %>
-
-<div class="modal fade slide-right" id="modalSlideLeft" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-    <div class="modal-content-wrapper">
-        <div class="modal-content table-block">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
-            <div class="modal-body no-padding">
-               <%= render partial: 'latest_activities' %>
-            </div>
-        </div>
-    </div>
-    <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade slide-right" id="modalSlideComments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-md">
-    <div class="modal-content-wrapper">
-        <div class="modal-content table-block">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
-            <div class="modal-body no-padding">
-               <%= render partial: "comments" %>
-            </div>
-        </div>
-    </div>
-    <!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
-</div>
 
 
 

@@ -36,7 +36,8 @@ var CommentForm = React.createClass({
   render: function () {
     var cx = React.addons.classSet;
     var classes = cx({
-      'add-comment-form margin-left': true
+      'add-comment-form margin-left': true,
+      'bg-white p-b-20': this.props.white
     });
 
     if(this.props.imgSrc) {

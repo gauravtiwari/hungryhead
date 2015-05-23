@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     users = params[:user][:name].zip(params[:user][:email])
     invited = []
     users.each do |u|
-      @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
+      @user = Mentor.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
       InviteMailer.invite_friends(@user, current_user).deliver
@@ -145,6 +145,13 @@ class UsersController < ApplicationController
      respond_to do |format|
       format.html
       format.js
+    end
+  end
+
+  def activity
+    @activity = @user.activities.find(params[:id])
+    respond_to do |format|
+      format.html
     end
   end
 

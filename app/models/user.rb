@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
-  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9]+\Z/, message: "should not contain empty spaces or symbols" }
+  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9-]+\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
   #Get username suggestions

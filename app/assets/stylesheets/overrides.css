@@ -9,6 +9,10 @@ body, p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
 .textarea {
   line-height: 1.4;
 }

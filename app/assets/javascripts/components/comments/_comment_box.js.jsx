@@ -38,6 +38,10 @@ var CommentBox = React.createClass({
 
   componentDidMount: function() {
     if(this.isMounted()) {
+      if(this.state.standalone) {
+        this.loadComments();
+      }
+      $('.comments-scollable').slimScroll({height: $(window).height() - 170});
       var comment_channel = pusher.subscribe(this.props.comment_channel);
         if(comment_channel) {
         comment_channel.bind('new_comment', function(data){
@@ -64,6 +68,7 @@ var CommentBox = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
+        $('body textarea').trigger('autosize.destroy');
         this.setState({visible: false});
         $("#comment_"+data.comment.id).effect('highlight', {color: '#f7f7f7'} , 3000);
         this.setState({button_loading: false});
@@ -113,7 +118,7 @@ var CommentBox = React.createClass({
 
     var comments_box = cx({
       'commentapp comment-box': true,
-      'white-background': this.state.standalone
+      'standalone': this.state.standalone
     });
 
     var comment_loading_classes = cx({
@@ -121,7 +126,7 @@ var CommentBox = React.createClass({
     });
     if(this.state.comments_path && !this.state.show_comment_bar) {
     var pagination =  <div className="pagination-box text-center show padding-5">
-              <a onClick={this.loadMoreComments}><i className="ion-refresh"></i> {this.state.text}</a>
+              <a onClick={this.loadMoreComments} className="pointer"><i className="ion-refresh"></i> {this.state.text}</a>
             </div>;
     } else {
       var pagination = "";
@@ -130,16 +135,16 @@ var CommentBox = React.createClass({
 
     var text = this.state.count > 1 || this.state.count === 0 ? 'comments' : 'comment';
 
-    if(this.state.count > 0 && this.state.show_comment_bar) {
+    if(this.state.count > 0 && this.state.show_comment_bar && !this.state.standalone) {
       var show_comment_bar =  <div className="comments">
-            <span><a className="b-b b-grey p-b-5" onClick={this.loadComments}><i className={comment_loading_classes}></i> Show {this.state.count} {text}</a></span>
+            <span><a className="b-b b-grey p-b-5 pointer" onClick={this.loadComments}><i className={comment_loading_classes}></i> Show {this.state.count} {text}</a></span>
           </div>;
     }
 
     return (
       <div className={comments_box}>
-        <CommentForm loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
-        <CommentList form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
+        <CommentForm white={this.props.white || false}  loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
+        <CommentList scrollable={this.props.scrollable || false} form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
         {show_comment_bar}
         {pagination}
         {no_comments}

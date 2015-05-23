@@ -3,6 +3,7 @@ module Scorable
   extend ActiveSupport::Concern
 
   class_methods do
+    include Rails.application.routes.url_helpers
     # load top 20 users/ideas/feedbacks
     def popular_20
       list = Redis::List.new("popular_20_#{self.to_s.downcase}", marshal: true)

@@ -21,7 +21,7 @@ var OpenConversationsThread = React.createClass({
   openConversations: function() {
     this.setState({loading: true});
     this.setState({active: !this.state.active});
-    var parentdrop = $('li.conversation-threads').find('.dropdown');
+    var parentdrop = $('li.conversation-threads').find('.conversation-dropdown');
     if(!this.state.active) {
         React.render(
           <ThreadSection key={Math.random()} path={this.props.path} />,
@@ -38,11 +38,11 @@ var OpenConversationsThread = React.createClass({
 
   render: function() {
     if(this.state.unread_messages_count > 0) {
-      var thread_count = <span>{this.state.unread_messages_count}</span>
+      var thread_count = <span className="bubble font-arial bold">{this.state.unread_messages_count}</span>
     }
     return(
         <a className="fa fa-envelope b-r b-grey p-r-10 b-dashed fs-22 text-brand pointer" onClick={this.openConversations}>
-          <span className="bubble font-arial bold">{thread_count}</span>
+          {thread_count}
         </a>
       )
   }

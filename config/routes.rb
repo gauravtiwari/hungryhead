@@ -185,6 +185,7 @@ Rails.application.routes.draw do
       get :popular
       get :trending
     end
+
     member do
       get :activities
       put :publish
@@ -259,6 +260,7 @@ Rails.application.routes.draw do
   get '/:slug/posts', to: SlugRouter.to(:posts), as: :profile_posts
   get '/:slug/posts/:id', to: SlugRouter.to(:post), as: :profile_posts_post
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
+  get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
   get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas

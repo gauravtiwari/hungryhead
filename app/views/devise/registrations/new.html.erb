@@ -8,7 +8,7 @@
 	    <p>
 	      <small>Hey there, fill this form to create an account. <strong>Make sure you use your school email address.</strong></small>
 	    </p>
-	    <% data = {url: autocomplete_school_name_schools_path, school_namecsrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token} %>
+	    <% data = {url: autocomplete_school_name_schools_path, csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token} %>
 			<%= react_component('Register', {form: data}.to_json) %>
 	  </div>
 	</div>

@@ -3,7 +3,7 @@
 // BEGIN VENDOR JS FOR PAGES
 
 
-//= require plugins/pace/pace.min
+// require plugins/pace/pace.min
 //= require jquery2
 //  require jquery.turbolinks
 //= require jquery-form

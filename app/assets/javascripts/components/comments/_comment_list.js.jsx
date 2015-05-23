@@ -21,22 +21,20 @@ var CommentList = React.createClass({
 
     });
 
+    var cx = React.addons.classSet;
+
+    var comment_classes = cx({
+      "comment-list timeline-activity list-unstyled": true,
+      "comments-scollable": this.props.scrollable
+    });
+
     return (
 
-      <ul id={css_id} className="comment-list timeline-activity list-unstyled" ref="commentList">
+      <ul id={css_id} className={comment_classes} ref="commentList">
        { commentNodes }
       </ul>
 
     )
-  },
-  componentDidUpdate: function() {
-    this._scrollToBottom();
-  },
-
-
-  _scrollToBottom: function() {
-    var ul = this.refs.commentList.getDOMNode();
-    ul.scrollTop = ul.scrollHeight;
   }
 
 });

@@ -1,29 +1,28 @@
-<!-- Content
-		================================================== -->
-
-<div id="content">
-  <!-- profile header -->
-  <div class="idea-header">
-    <%= render partial: "ideas/_partials/idea_header", locals: {idea: @idea} %>
-    <%= render partial: "ideas/_partials/edit_idea_form", locals: {idea: @idea} %>
+<div class="col-md-8 col-lg-8 col-sm-8 no-padding p-l-15">
+  <div class="auto-height box-shadow ">
+    <%= render partial: 'ideas/header' %>
   </div>
-  <!-- end profile header -->
-  <!-- idea menu -->
-  <%= render partial: "ideas/_partials/idea_menu", locals: {idea: @idea} %>
-  <!-- end idea menu -->
-  <div class="container project-page">
-    <div class="row">
-      <div class="col-md-4 aside">
-        <%= render partial: 'shared/leaderboard', resource: @idea %>
-      </div>
-
-      <div class="col-md-8 project-content">
-        <%= render partial: "feedbacks/_sub_pages/feedback", locals: {feedback: @feedback} %>
-      </div>
+  <%= render partial: 'ideas/menu' %>
+  <div class="m-t-20">
+    <div class="idea-content">
+     <%= render partial: "feedback", locals: {feedback: @feedback} %>
     </div>
   </div>
 </div>
 
+<div class="col-md-4 col-lg-4 col-sm-4">
+  <div class="idea-sidebar auto-height sticky bg-white box-shadow">
+    <%= render partial: 'ideas/latest_activities' %>
+    <%= render partial: 'ideas/followers' if @idea.followers_counter.value > 0 %>
+    <%= render partial: 'ideas/investors' if @idea.investors_counter.value > 0 %>
+  </div>
+</div>
+
 <% if user_signed_in? && policy(@idea).collaborator? %>
-  <%= render 'ideas/collaboration' %>
+  <div class="idea-collaboration-floating-panel">
+    <%= render 'ideas/collaboration' %>
+  </div>
 <% end %>
+
+
+

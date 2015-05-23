@@ -20,6 +20,10 @@ class FeedbacksController < ApplicationController
     @feedbacks = @idea.feedbacks
     .order(id: :desc)
     .paginate(:page => params[:page], :per_page => 20)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /feedbacks/1

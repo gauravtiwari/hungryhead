@@ -2,7 +2,7 @@
 	All application CSS assets - checkout vendor assets/css directory
 
  * BEGIN VENDOR CSS FOR PAGES
- *= require plugins/pace/pace-theme-flash
+ * require plugins/pace/pace-theme-flash
  *= require animate
  *= require jquery.atwho
  *= require jquery-ui/autocomplete

@@ -14,9 +14,6 @@ class CreateBadgeNotificationService
       badge_description: @description,
       unread: true
     )
-
-    #Cache notification to user/followers feed
-    CreateNotificationCacheService.new(@activity).create
 	end
 
 end

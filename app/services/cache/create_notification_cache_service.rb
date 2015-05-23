@@ -51,7 +51,7 @@ class CreateNotificationCacheService
     #only for user personal activities
     add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #Send notification to recipient
-    add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged"
+    add_notification_for_recipient(recipient_user, activity_item)
     #Add activity to idea ticker if recipient is idea
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
@@ -129,7 +129,7 @@ class CreateNotificationCacheService
   def options_for_target(target)
     if @activity.recipient_type == "Idea"
       recipient_user_id =  target.student.id
-      recipient_url = profile_path(target)
+      recipient_url = idea_path(target)
       recipient_user_name = target.student.name
       recipient_name = target.name
     elsif @activity.recipient_type == "User"

@@ -39,7 +39,7 @@
     <div class="visible-lg visible-md m-t-10">
       <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
       <li class="p-r-10 inline drop conversation-threads">
-          <div class="dropdown">
+          <div class="dropdown conversation-dropdown">
           <%= react_component('OpenConversationsThread', {path: recent_conversations_path(box: 'inbox'), unread_messages_count:current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
             <div class="dropdown-menu notification-toggle right-zero">
               <div class="notification-panel">
@@ -60,8 +60,8 @@
          <%= react_component('SharePost', {form: render(template: 'globals/form.json.jbuilder')}) %>
         </li>
         <li class="p-r-10 inline">
-          <div class="dropdown">
-          <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.friends_notifications.members.length, path: notifications_path,  channel_name: "private-user-#{current_user.id}"}) %>
+          <div class="dropdown notification-dropdown">
+          <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.friends_notifications.members.length, path: friends_notifications_path(current_user),  channel_name: "private-user-#{current_user.id}"}) %>
             <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
               <div class="notification-panel">
                 <div class="notification-body scrollable" id="render_notifications">
