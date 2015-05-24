@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
     case step
     when :hello
       @user.update_attributes(user_params)
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, @user.class.to_s)
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User")
     end
     sign_in(@user, bypass: true)
     render_wizard @user
