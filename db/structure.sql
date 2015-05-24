@@ -849,6 +849,7 @@ CREATE TABLE notifications (
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
     user_id integer NOT NULL,
+    parent_id integer,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     published boolean DEFAULT true,
