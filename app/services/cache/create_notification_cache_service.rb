@@ -21,12 +21,21 @@ class CreateNotificationCacheService
     {
       id: @activity.id,
       verb: @activity.verb,
+      activity_id: find_activity_id,
       type: @activity.class.to_s.downcase,
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
+  end
+
+  def find_activity_id
+    if @activity.class.to_s == "Activity"
+      return @activity.id
+    elsif @activity.class.to_s == "Notification"
+      return @activity.parent_id
+    end
   end
 
   #Find recipient user

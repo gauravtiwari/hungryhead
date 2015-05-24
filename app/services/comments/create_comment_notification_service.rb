@@ -10,6 +10,7 @@ class CreateCommentNotificationService
     @activity = @user.notifications.create!(
       trackable: @comment,
       recipient: @commentable,
+      parent_id: find_parent_activity,
       verb: 'commented',
       key: 'comment.create',
       unread: true
@@ -24,5 +25,10 @@ class CreateCommentNotificationService
     end
 
 	end
+
+  def find_parent_activity
+    @activity = Activity.where(trackable: @commentable).first
+    @activity.id
+  end
 
 end

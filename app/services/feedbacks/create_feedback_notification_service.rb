@@ -22,7 +22,6 @@ class CreateFeedbackNotificationService
     if @feedback.body.scan(/@\w+/).present?
       CreateMentionService.new(@feedback).mention
     end
-
   end
 
 end

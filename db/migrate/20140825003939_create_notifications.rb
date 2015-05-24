@@ -8,6 +8,9 @@ class CreateNotifications < ActiveRecord::Migration
       t.belongs_to :trackable, :polymorphic => true , null: false
 
       t.belongs_to :user, null: false
+
+      t.integer :parent_id, default: nil
+
       t.string  :key, null: false, default: ""
 
       t.jsonb    :parameters, default: "{}"

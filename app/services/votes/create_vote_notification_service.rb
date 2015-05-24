@@ -10,6 +10,7 @@ class CreateVoteNotificationService
     @activity = @user.notifications.create!(
       trackable: @vote,
       recipient: @votable,
+      parent_id: find_parent_activity,
       verb: 'voted',
       key: 'vote.create',
       unread: true
@@ -19,6 +20,16 @@ class CreateVoteNotificationService
 
   def cache(activity)
     CreateNotificationCacheService.new(activity).create
+  end
+
+  def find_parent_activity
+    if @vote.votable_type == "Comment"
+      @activity = Activity.where(trackable: @votable.commentable).first
+      return @activity.id
+    elsif condition
+      @activity = Activity.where(trackable: @votable).first
+      return @activity.id
+    end
   end
 
 end
