@@ -43,7 +43,7 @@ var CommentBox = React.createClass({
       }
       $('.comments-scollable').slimScroll({height: $(window).height() - 170});
       var comment_channel = pusher.subscribe(this.props.comment_channel);
-        if(comment_channel) {
+      if(comment_channel) {
         comment_channel.bind('new_comment', function(data){
           var response = JSON.parse(data.data);
           var comment = response.comment;

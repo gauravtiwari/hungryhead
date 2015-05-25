@@ -27,6 +27,7 @@ var OpenConversationsThread = React.createClass({
           <ThreadSection key={Math.random()} path={this.props.path} />,
           document.getElementById('threads-section')
         );
+        ReactRailsUJS.mountComponents();
         parentdrop.removeClass('open');
         parentdrop.addClass('open');
         $('body').addClass('stop-scrolling');

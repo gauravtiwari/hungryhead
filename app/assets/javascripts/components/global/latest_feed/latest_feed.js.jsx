@@ -22,9 +22,8 @@ var LatestFeed = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.fetchNotifications();
-      var feed_channel = pusher.subscribe(this.props.channel_name);
-      if(feed_channel) {
-        feed_channel.bind('new_feed_item', function(data){
+      if(channel) {
+        channel.bind('new_feed_item', function(data){
           var new_item = this.buildElements([data.data])
           var newState = React.addons.update(this.state, {
               feed : {
@@ -117,7 +116,7 @@ var LatestFeed = React.createClass({
           </div>
           <div className="panel-body full-border-light no-margin auto-overflow no-padding">
            <div>
-             <ul className="idea-latest-activities no-style no-padding no-margin">
+             <ul className="latest-activities no-style no-padding no-margin">
                <Infinite elementHeight={60}
                 containerHeight={250}
                 infiniteLoadBeginBottomOffset={200}

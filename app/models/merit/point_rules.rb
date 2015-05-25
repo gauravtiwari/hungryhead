@@ -20,7 +20,9 @@ module Merit
       end
 
       #Comments related
-      score 2, :on => 'comments#create', category: 'comment', to: :commentable
+      score 2, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
+        comment.commentable_user != comment.user
+      end
 
       #Feedbacks related
       score 5, :on => 'feedbacks#create', category: 'feedback', to: :idea

@@ -61,7 +61,7 @@
         </li>
         <li class="p-r-10 inline">
           <div class="dropdown notification-dropdown">
-          <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.friends_notifications.members.length, path: friends_notifications_path(current_user),  channel_name: "private-user-#{current_user.id}"}) %>
+          <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.friends_notifications.members.length, path: friends_notifications_path(current_user)}) %>
             <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
               <div class="notification-panel">
                 <div class="notification-body scrollable" id="render_notifications">

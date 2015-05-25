@@ -20,6 +20,7 @@ var OpenNotificationsThread = React.createClass({
     if(!this.state.active) {
         React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_name={this.props.channel_name} />,
              document.getElementById('render_notifications'));
+       ReactRailsUJS.mountComponents();
        parentdrop.removeClass('open');
        parentdrop.addClass('open');
        $('body').addClass('stop-scrolling');
