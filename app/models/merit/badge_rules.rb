@@ -208,7 +208,7 @@ module Merit
 
       #2. Early adopter
       grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
-        feedback.idea.feedbackers_counter.value == 1
+        feedback.user.feedbacks_counter.value >= 10 && feedback.idea.feedbackers_counter.value == 1
       end
 
       # 3. Mentor

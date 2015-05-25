@@ -20,7 +20,6 @@ class Feedback < ActiveRecord::Base
   include Commentable
   include Sharings
   include Votable
-  include Mentioner
 
   has_merit
 

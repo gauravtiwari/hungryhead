@@ -26,7 +26,7 @@ class CreateVoteNotificationService
     if @vote.votable_type == "Comment"
       @activity = Activity.where(trackable: @votable.commentable).first
       return @activity.id
-    elsif condition
+    else
       @activity = Activity.where(trackable: @votable).first
       return @activity.id
     end

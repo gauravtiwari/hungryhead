@@ -28,10 +28,8 @@ var CommentForm = React.createClass({
       insertTpl: '@${username}',
       displayTpl: "<li data-value='@${name}'>${name} <small>${username}</small></li>",
     });
-
     e.stopPropagation();
   },
-
 
   render: function () {
     var cx = React.addons.classSet;

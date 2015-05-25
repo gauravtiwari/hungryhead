@@ -145,6 +145,7 @@ class IdeasController < ApplicationController
     @idea.update_attributes(student_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
     if @idea.save
+      Idea.leaderboard.add(id, points)
       render json: {status: :created, location_url: idea_path(@idea)}
     else
       render json: @idea.errors, status: :unprocessable_entity

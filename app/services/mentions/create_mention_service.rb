@@ -14,6 +14,7 @@ class CreateMentionService
         @activity = @user.notifications.create!(
           trackable: @mention,
           verb: 'mentioned',
+          parent_id:
           recipient: mentionable,
           key: 'mention.create',
           unread: true
@@ -22,6 +23,16 @@ class CreateMentionService
       end
     end
 	end
+
+  def find_parent_activity
+    if @mentioner.class.to_s == "Comment"
+      @activity = Activity.where(trackable: @mentioner.commentable).first
+      return @activity.id
+    else
+      @activity = Activity.where(trackable: @mentioner).first
+      return @activity.id
+    end
+  end
 
   def cache(activity)
     CreateNotificationCacheService.new(activity).create

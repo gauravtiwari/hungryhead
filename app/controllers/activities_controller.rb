@@ -1,7 +1,6 @@
 class ActivitiesController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :find_user, only: [:show]
   before_filter :check_terms
 
   layout "home"
@@ -18,14 +17,8 @@ class ActivitiesController < ApplicationController
   def show
     @activity = Activity.find(params[:id])
     respond_to do |format|
-      format.html
+      format.js
     end
-  end
-
-  private
-
-  def find_user
-    @user = User.find(params[:user_id])
   end
 
 end
