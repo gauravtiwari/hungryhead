@@ -14,7 +14,7 @@ class CreateMentionService
         @activity = @user.notifications.create!(
           trackable: @mention,
           verb: 'mentioned',
-          parent_id:
+          parent_id: find_parent_activity,
           recipient: mentionable,
           key: 'mention.create',
           unread: true
