@@ -1,0 +1,14 @@
+var $el = $('body');
+$el.append("<%= j render partial: 'activity' %>");
+
+$('#activityModal').modal('show');
+
+ReactRailsUJS.mountComponents();
+
+$("#activityModal").on("hidden.bs.modal", function (e) {
+  $('#activityModal').remove();
+});
+
+$('body textarea').on('focus', function(){
+  $(this).autosize();
+});
