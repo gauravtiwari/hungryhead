@@ -19,7 +19,7 @@ module Sluggable
   end
 
   def should_generate_new_friendly_id?
-    slug.blank?
+    slug.blank? || name_changed? unless self.class.to_s == "Post"
   end
 
 end
