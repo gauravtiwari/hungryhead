@@ -587,26 +587,13 @@ GEM
     react-source (0.13.3)
     redcarpet (3.2.3)
     redis (3.2.1)
-    redis-actionpack (4.0.0)
-      actionpack (~> 4)
-      redis-rack (~> 1.5.0)
-      redis-store (~> 1.1.0)
-    redis-activesupport (4.0.0)
-      activesupport (~> 4)
-      redis-store (~> 1.1.0)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.0)
       redis (>= 3.0.2)
-    redis-rack (1.5.0)
-      rack (~> 1.5)
-      redis-store (~> 1.1.0)
-    redis-rails (4.0.0)
-      redis-actionpack (~> 4)
-      redis-activesupport (~> 4)
-      redis-store (~> 1.1.0)
-    redis-store (1.1.4)
-      redis (>= 2.2)
+    redis-session-store (0.8.0)
+      actionpack (>= 3, < 5)
+      redis
     ref (1.0.5)
     request_store (1.1.0)
     require_all (1.3.2)
@@ -822,7 +809,7 @@ DEPENDENCIES
   react-rails (~> 1.0)
   redis
   redis-objects
-  redis-rails
+  redis-session-store
   responders
   rubocop
   ruby-beautify

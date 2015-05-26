@@ -136,7 +136,7 @@ gem 'showdown-rails'
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
-gem 'redis-rails'
+gem 'redis-session-store'
 
 #Redis objects
 gem 'redis-objects'
