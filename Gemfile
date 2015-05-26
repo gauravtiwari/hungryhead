@@ -13,16 +13,17 @@ end
 gem 'chosen-rails'
 
 gem 'compass-rails'
+
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
 gem 'pg_search'
 
 gem 'coffee-rails'
-gem 'sass', '~> 3.4.5'
+gem 'sass'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.0'
+gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -62,7 +63,7 @@ gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
-gem 'sprockets', '~> 2.12.3'
+gem 'sprockets'
 #API
 
 #Deal with JSON data

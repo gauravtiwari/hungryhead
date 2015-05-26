@@ -13,6 +13,7 @@
  *= require font-awesome
  *= require sweetalert
  *= require chosen
+ *= require ImageSelect
  * require nvd3
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar

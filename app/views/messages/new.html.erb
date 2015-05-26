@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="new-conversation-box panel panel-default">
+    <div class="new-conversation-box col-md-8 auto-margin panel panel-default">
       <div class="conversation-box-header clearfix">
          <ul class="mailbox-nav margin-top">
           <li class="mailbox">
@@ -10,29 +10,9 @@
       </div>
       <div class="form-box">
         <div class="new-conversation-form-header">
-          <h1>Send Message</h1>
+          <h5 class="bold">Send a Message</h5>
         </div>
-        <div class="new-conversation-form">
-          <%= simple_form_for(Mailboxer::Message.new, url: messages_path, :method => :post, role: "form") do |f| %>
-            <div class="form-group">
-              <%= label_tag 'message[subject]', 'Subject' %>
-              <%= f.input_field :subject, class: "form-control", :required => true, :placeholder => "Type Subject..." %>
-            </div>
-
-            <div class="form-group">
-              <%= label_tag 'message[body]', 'Message' %>
-              <%= f.input_field :body, class: "form-control", :required => true, :placeholder => "Type Message..." %>
-            </div>
-
-            <div class="form-group">
-              <%= label_tag 'recipients', 'Choose recipients' %>
-              <%= select_tag 'recipients', recipients_options, :width => '50%', :multiple => true, :class => 'form-control chosen-select', :"data-placeholder" => "Select recipients" %>
-            </div>
-
-            <%= button_tag 'Send', class: 'btn btn-primary' %>
-          <% end %>
-        </div>
-
+        <%= render partial: 'form' %>
       </div>
     </div>
   </div>

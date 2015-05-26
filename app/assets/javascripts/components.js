@@ -8,4 +8,5 @@
 //= require_tree ./components/user/profile/cover/
 //= require_tree ./components/idea/publish_idea_button/
 //= require_tree ./components/global/follow/
+//= require_tree ./components/global/notifications/
 //= require_tree ./components/idea/invite_team/

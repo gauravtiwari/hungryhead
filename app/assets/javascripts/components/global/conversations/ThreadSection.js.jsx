@@ -74,7 +74,7 @@ var ThreadSection = React.createClass({
     <div>
       <div className="notification-section-header clearfix">
         <a href={Routes.conversations_path({box: 'inbox'})}>Inbox ({this.state.conversations_count}) </a>
-        <div className="show-all pull-right bold"><a className=" text-complete" href={Routes.new_message_path()}> Send new message </a></div>
+        <div className="show-all pull-right bold"><a className=" text-complete" href={Routes.new_message_path()} data-remote="true"> Send new message </a></div>
       </div>
       <div className="notification-conversations-list">
         <Infinite elementHeight={80}

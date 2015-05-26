@@ -145,7 +145,7 @@ GEM
       uuidtools
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    chosen-rails (1.3.0)
+    chosen-rails (1.4.1)
       coffee-rails (>= 3.2)
       compass-rails (>= 1.1.2)
       railties (>= 3.0)
@@ -175,8 +175,10 @@ GEM
       sass (>= 3.3.0, < 3.5)
     compass-import-once (1.0.5)
       sass (>= 3.2, < 3.5)
-    compass-rails (2.0.1)
+    compass-rails (2.0.4)
       compass (~> 1.0.0)
+      sass-rails (<= 5.0.1)
+      sprockets (< 2.13)
     connection_pool (2.2.0)
     cookiejar (0.3.2)
     countries (0.11.4)
@@ -193,7 +195,7 @@ GEM
     currencies (0.4.2)
     dalli (2.7.4)
     debug_inspector (0.0.2)
-    devise (3.5.0)
+    devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -440,7 +442,7 @@ GEM
     metamagic (3.1.7)
       rails (>= 3.0.0)
     method_source (0.8.2)
-    mime-types (2.5)
+    mime-types (2.6.1)
     mimetype-fu (0.1.2)
     mina (0.3.4)
       open4 (~> 1.3.4)
@@ -623,7 +625,7 @@ GEM
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.4.1)
     sass (3.4.14)
-    sass-rails (5.0.3)
+    sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
@@ -819,8 +821,8 @@ DEPENDENCIES
   ruby-beautify
   ruby-filemagic
   sanitize
-  sass (~> 3.4.5)
-  sass-rails (~> 5.0.0)
+  sass
+  sass-rails
   searchkick
   select2-rails
   shareable
@@ -832,11 +834,11 @@ DEPENDENCIES
   slim (>= 1.1.0)
   soulmate
   spring
-  sprockets (~> 2.12.3)
+  sprockets
   sucker_punch
   therubyracer
   turbolinks
-  uglifier (>= 1.3.0)
+  uglifier
   underscore-rails
   unf
   uuidtools

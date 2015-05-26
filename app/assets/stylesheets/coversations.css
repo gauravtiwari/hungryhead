@@ -277,6 +277,7 @@ html,body{height:100%;}
 .mailbox-nav {
   list-style: none;
   float: left;
+  padding:0;
 }
 .mailbox-nav .mailbox {
   float:left;
