@@ -1101,38 +1101,6 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 
 --
--- Name: sessions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sessions (
-    id integer NOT NULL,
-    session_id character varying NOT NULL,
-    data text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE sessions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
-
-
---
 -- Name: shares; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1695,13 +1663,6 @@ ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY shares ALTER COLUMN id SET DEFAULT nextval('shares_id_seq'::regclass);
 
 
@@ -1991,14 +1952,6 @@ ALTER TABLE ONLY sashes
 
 ALTER TABLE ONLY schools
     ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
-
-
---
--- Name: sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sessions
-    ADD CONSTRAINT sessions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2564,20 +2517,6 @@ CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
 
 
 --
--- Name: index_sessions_on_session_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_sessions_on_session_id ON sessions USING btree (session_id);
-
-
---
--- Name: index_sessions_on_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_sessions_on_updated_at ON sessions USING btree (updated_at);
-
-
---
 -- Name: index_shares_on_shareable_id_and_shareable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2903,8 +2842,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140830232833');
 INSERT INTO schema_migrations (version) VALUES ('20140928202143');
 
 INSERT INTO schema_migrations (version) VALUES ('20141003131909');
-
-INSERT INTO schema_migrations (version) VALUES ('20141004015347');
 
 INSERT INTO schema_migrations (version) VALUES ('20141018180129');
 
