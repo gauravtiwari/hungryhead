@@ -7,7 +7,6 @@
 		balance: "<%= current_user.fund['balance'] %>",
 		id: "<%= current_user.id %>",
 		email: "<%= current_user.email %>",
-		badges: "<%= current_user.badges.length %>",
 		ideas: "<%= current_user.ideas_counter.value if current_user.type == "Student" %>",
 		feedbacks: "<%= current_user.feedbacks_counter.value %>",
 		investments: "<%= current_user.investments_counter.value %>",

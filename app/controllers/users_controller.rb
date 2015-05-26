@@ -123,6 +123,9 @@ class UsersController < ApplicationController
     render 'follows/followers'
   end
 
+  def about
+  end
+
   def delete_cover
     @user.remove_cover!
     @user.save

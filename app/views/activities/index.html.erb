@@ -6,7 +6,7 @@
   <div class="col-md-6">
     <div class="activity-feed auto-height m-t-20">
         <div class="activity-feed-box live">
-          <%= render partial: 'activities' %>
+          <%= render_activities(@activities) %>
         </div>
         <% if @activities.next_page %>
           <div class="pagination-box text-center">

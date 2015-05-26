@@ -257,6 +257,7 @@ Rails.application.routes.draw do
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
+  get '/:slug/about', to: SlugRouter.to(:about), as: :profile_about
   get '/:slug/posts', to: SlugRouter.to(:posts), as: :profile_posts
   get '/:slug/posts/:id', to: SlugRouter.to(:post), as: :profile_posts_post
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities

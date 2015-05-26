@@ -4,6 +4,9 @@
 			<%= link_to('Profile', profile_path(@user), class: "bold #{current_class?(profile_path(@user))} p-b-5 fs-13") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+			<%= link_to('About', profile_about_path(@user), class: "bold fs-13 #{current_class?(profile_about_path(@user))} ") %>
+		</li>
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Posts', profile_posts_path(@user), class: "bold fs-13 #{current_class?(profile_posts_path(@user))} ") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
