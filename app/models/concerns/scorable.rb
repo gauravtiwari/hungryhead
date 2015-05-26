@@ -8,20 +8,20 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def popular_20
-      Rails.cache.fetch_multi(cache_key, expires_in: 2.days) do
+      Rails.cache.fetch_multi(cache_key, expires_in: 24.hours) do
         self.where(id: self.leaderboard.revrange(0, 20)).order_as_specified(id: self.leaderboard.revrange(0, 20))
       end
     end
 
     # load top 20 users/ideas/feedbacks
     def trending_20
-      Rails.cache.fetch_multi(cache_key, expires_in: 2.days) do
+      Rails.cache.fetch_multi(cache_key, expires_in: 24.hours) do
         self.where(id: self.trending.revrange(0, 20)).order_as_specified(id: self.trending.revrange(0, 20))
       end
     end
 
     def latest_listing
-      Rails.cache.fetch_multi(cache_key, expires_in: 2.days) do
+      Rails.cache.fetch_multi(cache_key, expires_in: 24.hours) do
         self.where(id: self.latest.values.reverse).order_as_specified(id: self.latest.values.reverse)
       end
     end
