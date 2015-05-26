@@ -13,6 +13,10 @@ body, p {
   height: 100%;
   overflow: hidden;
 }
+
+.idea-content img {
+  width: 100%;
+}
 .textarea {
   line-height: 1.4;
 }

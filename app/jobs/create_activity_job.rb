@@ -1,9 +1,13 @@
 class CreateActivityJob < ActiveJob::Base
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
-      @trackable = trackable_type.constantize.find(trackable_id)
+      if trackable_type.constantize.find(trackable_id).present?
+        @trackable = trackable_type.constantize.find(trackable_id)
+      else
+        return false
+      end
       if find_trackable(@trackable)
-        false
+        return false
       else
         "Create#{trackable_type}NotificationService".constantize.new(@trackable).create
       end

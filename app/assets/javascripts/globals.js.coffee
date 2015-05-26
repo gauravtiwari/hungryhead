@@ -13,7 +13,7 @@ jQuery(document).ready ->
 	$('#edit-profile').validate();
 	$('#pitch_idea_form').validate();
 	$('#valid-form').validate();
-	$("[data-toggle='tooltip']").tooltip()
+	$("[data-toggle='tooltip']").tooltip();
 
 	$.each flashMessages, (key, value) ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}

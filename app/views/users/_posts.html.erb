@@ -5,14 +5,14 @@
             <i class="fa fa-share text-white"></i> Latest posts
         </div>
     </div>
-    <% @user.posts.each do |post| %>
+    <% cached_posts(@user).each do |post| %>
         <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
             <div class="pull-left">
                 <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
-                    <%= link_to(post.title, post_path(post), class: "text-white") %>
+                    <%= link_to(post[:title], post[:url], class: "text-white") %>
                 </h5>
                 <p class="small no-margin clearfix text-white">
-                    <%= truncate(post.body, length: 50, escape: false) %>
+                    <%= post[:excerpt] %>
                 </p>
             </div>
             <div class="clearfix"></div>

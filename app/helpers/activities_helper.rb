@@ -15,4 +15,8 @@ module ActivitiesHelper
     content_for(name, content, &block)
   end
 
+  def cache_key_for_activities activity
+   "activities/activity-#{activity.trackable_type}-#{activity.trackable_id}-user-#{current_user.id}"
+  end
+
 end

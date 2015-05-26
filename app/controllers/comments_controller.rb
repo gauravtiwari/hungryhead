@@ -22,6 +22,7 @@ class CommentsController < ApplicationController
       )
       # Enque activity creation
       CreateActivityJob.set(wait: 2.seconds).perform_later(comment.id, comment.class.to_s)
+      expire_fragment("activities/activity-#{@comment.commentable_type}-#{@comment.commentable_id}-user-#{current_user.id}")
     end
 
     #If error render errors

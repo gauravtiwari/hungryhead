@@ -19,6 +19,7 @@
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
+//= require chosen-jquery
 //= require jquery.truncate
 //= require jquery.soulmate
 //= require underscore
