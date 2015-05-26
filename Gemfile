@@ -136,6 +136,7 @@ gem 'showdown-rails'
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
+gem 'redis-rails'
 
 #Redis objects
 gem 'redis-objects'
@@ -161,9 +162,6 @@ gem 'bower-rails'
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
 gem 'jquery-validation-rails'
 gem 'modernizr-rails'
-
-#Active Record Session
-gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
 #Social Share
 gem 'shareable'
