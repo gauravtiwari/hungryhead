@@ -108,7 +108,7 @@ var LatestFeed = React.createClass({
   render: function(){
 
     return(
-      <div className="widget-11-2 panel b-b b-light-grey no-margin">
+      <div className="widget-11-2 panel p-b-10 b-b b-light-grey no-margin">
           <div className="panel-heading">
            <div className="panel-title">
             Latest activities
