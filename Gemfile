@@ -253,7 +253,7 @@ gem "skylight"
 
 group :development, :test do
   gem 'better_errors'
-  gem 'rack-mini-profiler', require: false
+  #gem 'rack-mini-profiler', require: false
   gem 'hirb'
   gem 'rails_best_practices'
   gem 'brakeman'

@@ -1,6 +1,6 @@
 <div class="box-shadow bg-white">
   <div class="profile-nav p-l-10 row">
-    <div class="col-md-5 no-padding">
+    <div class="col-md-6 no-padding">
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
           <li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
             <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
@@ -10,7 +10,7 @@
               </span>
             <% end %>
             </div>
-            <%= link_to(@idea.name, idea_path(@idea), class: "bold m-l-45 fs-13 #{current_class?(idea_path(@idea))}") %>
+            <%= link_to("Idea", idea_path(@idea), class: "bold m-l-45 fs-13 #{current_class?(idea_path(@idea))}") %>
           </li>
           <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
             <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{current_class?(idea_feedbacks_path(@idea))}", remote: true) %>
@@ -20,14 +20,14 @@
           </li>
         </ul>
     </div>
-    <div class="col-md-7 profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
+    <div class="col-md-6 profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
       <% if !policy(@idea).collaborator? %>
         <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {csrf_param: request_forgery_protection_token, idea_slug: @idea.slug, csrf_token: form_authenticity_token, idea_name: @idea.name} }) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested?(@idea) }) %>
       <% else %>
       <div>
-        <a class="btn btn-danger btn-cons pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
+        <a class="btn btn-danger btn-sm fs-13 padding-5 p-l-10 p-r-10 pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
       </div>
        <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
         <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.me?, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>

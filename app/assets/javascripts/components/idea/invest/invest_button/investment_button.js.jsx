@@ -42,7 +42,7 @@ var InvestButton = React.createClass({
     });
 
     var invested_classes = cx({
-      'btn btn-cons padding-5 pull-right m-r-10': true,
+      'btn btn-sm fs-13 padding-5  p-l-10 p-r-10 pull-right m-r-10': true,
       'btn-info': !this.state.invested,
       'btn-green text-white semi-bold': this.state.invested
     });

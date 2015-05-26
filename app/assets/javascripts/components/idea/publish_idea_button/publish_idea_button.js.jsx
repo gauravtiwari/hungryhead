@@ -27,11 +27,11 @@ var PublishIdeaButton = React.createClass({
       dataType: "json",
       success: function ( data ) {
         this.setState({
-         privacy: data.current_privacy, 
-         is_public: data.is_public, 
+         privacy: data.current_privacy,
+         is_public: data.is_public,
          is_team: data.is_team,
          published: data.published,
-         url: data.url 
+         url: data.url
        });
         this.setState({disabled: false});
         $('body').pgNotification({style: "simple", message: data.msg, position: "bottom-left", type: "danger",timeout: 5000}).show();
@@ -45,10 +45,10 @@ var PublishIdeaButton = React.createClass({
   render: function() {
     var text = this.state.is_public && this.state.published ? 'Published' : 'Team';
     var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible only to team members';
-    
+
     var cx = React.addons.classSet;
     var classes = cx({
-      'btn btn-cons pull-right': true,
+      'btn btn-sm fs-13 padding-5 p-l-10 p-r-10 m-r-10 pull-right': true,
       'privacy-team btn-info': !this.state.is_public,
       'privacy-public btn-success': this.state.is_public
     });
