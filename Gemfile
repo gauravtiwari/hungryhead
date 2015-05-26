@@ -9,6 +9,10 @@ gem 'pg'
 group :production do
   gem 'rails_12factor'
 end
+
+gem 'chosen-rails'
+
+gem 'compass-rails'
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
 gem 'pg_search'
@@ -21,8 +25,6 @@ gem 'sass-rails', '~> 5.0.0'
 gem 'uglifier', '>= 1.3.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
-
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
