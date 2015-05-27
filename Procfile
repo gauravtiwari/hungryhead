@@ -4,3 +4,5 @@ redis: redis-server
 #database: postgres -D /usr/local/var/postgres
 # web: bundle exec rails s -u -p $PORT webrick
 worker: bundle exec sidekiq -c ${SIDEKIQ_CONCURRENCY:=3}
+
+cron: bundle exec crono RAILS_ENV=development
