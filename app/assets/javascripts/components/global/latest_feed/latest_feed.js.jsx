@@ -23,7 +23,7 @@ var LatestFeed = React.createClass({
     if(this.isMounted()){
       this.fetchNotifications();
       if(channel) {
-        channel.bind('new_feed_item', function(data){
+        channel.bind(this.props.channel_event, function(data){
           var new_item = this.buildElements([data.data])
           var newState = React.addons.update(this.state, {
               feed : {
@@ -98,8 +98,7 @@ var LatestFeed = React.createClass({
 
   fetchNotifications: function(){
     $.getJSON(this.props.path, function(json, textStatus) {
-      var unread = _.findWhere(json.items, {unread: true});
-      console.log(unread);
+      console.log(json);
       this.setState({
         feed: this.buildElements(json.items),
         next_page: json.next_page

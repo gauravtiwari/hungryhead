@@ -75,7 +75,7 @@ class CreateNotificationCacheService
     recipient_user.friends_notifications.add(activity_item, score_key)
     #add to ticker
     recipient_user.ticker.add(activity_item, score_key)
-    SendNotificationService.new(recipient_user, activity).user_notification if recipient_user != @activity.user
+    SendNotificationService.new(recipient_user, activity).friend_notification if recipient_user != @activity.user
   end
 
   #add activity to friends ticker

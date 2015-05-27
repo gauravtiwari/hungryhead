@@ -52,7 +52,7 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = { host: 'localhost:3000', port: '3000' }
 
   config.after_initialize do
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.alert = true
     Bullet.bullet_logger = true
     Bullet.console = true

@@ -18,12 +18,14 @@ var OpenNotificationsThread = React.createClass({
     this.setState({active: !this.state.active});
     var parentdrop = $('.notification-list').find('.notification-dropdown');
     if(!this.state.active) {
-        React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_name={this.props.channel_name} />,
+        React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_event={this.props.channel_event} />,
              document.getElementById('render_notifications'));
        ReactRailsUJS.mountComponents();
        parentdrop.removeClass('open');
        parentdrop.addClass('open');
-       this.clearCounter();
+       if(this.state.unread_notifications_count > 0 ) {
+        this.clearCounter();
+       }
        $('body').addClass('stop-scrolling');
     } else {
         parentdrop.removeClass('open');
