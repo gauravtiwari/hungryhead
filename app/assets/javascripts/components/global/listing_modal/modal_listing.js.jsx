@@ -75,7 +75,7 @@ var ModalListing = React.createClass({
 		if(this.state.loading) {
 			var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>;
 		} else {
-			var content = 	<Infinite elementHeight={96}
+			var content = 	<Infinite elementHeight={80}
                  containerHeight={500}
                  infiniteLoadBeginBottomOffset={250}
                  onInfiniteLoad={this.handleInfiniteLoad}

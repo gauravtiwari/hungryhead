@@ -22,6 +22,8 @@ var LatestFeed = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.fetchNotifications();
+       var unread = _.findWhere(this.state.feed, {unread: true});
+       console.log(unread);
       if(channel) {
         channel.bind('new_feed_item', function(data){
           var new_item = this.buildElements([data.data])

@@ -19,12 +19,21 @@ class UpdateNotificationCacheService
     {
       id: @activity.id,
       verb: @activity.verb,
+      activity_id: find_activity_id,
       type: @activity.class.to_s.downcase,
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
+  end
+
+  def find_activity_id
+    if @activity.class.to_s == "Activity"
+      return @activity.id
+    elsif @activity.class.to_s == "Notification"
+      return @activity.parent_id
+    end
   end
 
   #Get recipient user
@@ -49,7 +58,7 @@ class UpdateNotificationCacheService
     #add activity to user personal profile
     add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #push notification into friends notifications
-    add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged"
+    add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
     #add notification to idea ticker
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
     add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
