@@ -7,7 +7,11 @@
     <div class="activity-feed auto-height m-t-20">
         <div class="activity-feed-box live">
           <% if @activities.length > 0 %>
-            <%= render_activities(@activities) %>
+            <% @activities.each do |activity| %>
+              <% cache(cache_key_for_activities(activity), skip_digest: true) do %>
+                <%= render_activity(activity) %>
+              <% end %>
+            <% end %>
           <% else %>
             <div class="card share" data-social="item">
                  <div class="card-description text-center">

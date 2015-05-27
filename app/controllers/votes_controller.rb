@@ -7,6 +7,7 @@ class VotesController < ApplicationController
     authorize @votable
     if @votable.voted?(current_user)
       CreateVoteService.new(current_user, @votable).unvote
+      expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}-user-#{current_user.id}")
     else
       @vote = CreateVoteService.new(current_user, @votable).vote
       if @vote.save
@@ -15,7 +16,7 @@ class VotesController < ApplicationController
           votes_count: @votable.votes_counter.value
         }
         CreateActivityJob.set(wait: 2.seconds).perform_later(@vote.id, @vote.class.to_s)
-        expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}")
+        expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}-user-#{current_user.id}")
       else
         render json: @vote.errors, status: :unprocessable_entity
       end

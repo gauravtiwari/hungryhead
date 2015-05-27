@@ -24,7 +24,7 @@ var LatestFeedShareItem = React.createClass({
     if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
       var recipient = "your "+ this.props.item.recipient.recipient_type + ' ' + this.props.item.recipient.recipient_name;
     } else {
-      var recipient = this.props.item.recipient.recipient_user_name.split(' ')[0] + ' ' + this.props.item.recipient.recipient_type;
+      var recipient = this.props.item.recipient.recipient_name;
     }
 
     return (
