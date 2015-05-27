@@ -1,0 +1,22 @@
+<div class="activity-feed auto-height m-t-20">
+  <div class="activity-feed-box live">
+    <% if @activities.length > 0 %>
+      <% @activities.each do |activity| %>
+        <% cache(["beta", activity]) do %>
+          <%= render_activity(activity) %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="card share" data-social="item">
+           <div class="card-description text-center">
+             <h2 class="text-master">No Activities to view</h2>
+           </div>
+       </div>
+    <% end %>
+  </div>
+  <% if @activities.next_page %>
+    <div class="pagination-box text-center">
+      <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+    </div>
+  <% end %>
+</div>
