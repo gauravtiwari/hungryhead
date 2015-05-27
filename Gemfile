@@ -204,7 +204,6 @@ gem 'sucker_punch'
 
 # Image Processing
 gem "mini_magick"
-gem "ruby-filemagic"
 gem 'unf'
 
 # Sideqiq Interface
