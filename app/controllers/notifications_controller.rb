@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_user, except: [:personal]
+  before_action :set_user
 
   def index
     @notifications = @user.ticker.revrange(0, 100)
@@ -24,7 +24,7 @@ class NotificationsController < ApplicationController
 
   def mark_as_read
     @notification = params[:type].constantize.find(params[:id])
-    UpdateNotificationCacheService.new(@user, @notification).update
+    UpdateNotificationCacheService.new(@notification).update
     @notifications = @user.ticker.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
     render json: @notifications

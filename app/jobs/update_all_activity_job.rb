@@ -1,15 +1,15 @@
 class UpdateAllActivityJob < ActiveJob::Base
   def perform(user)
     ActiveRecord::Base.connection_pool.with_connection do
-      user.notifications.where("parameters ->> 'read' = 'false'").find_each do |notification|
-        notification.read = true
+      Notification.where(id: user.friends_notifications.members.map{|m| m[:id]}).where("parameters ->> 'unread' = 'true'").find_each do |notification|
+        notification.unread = false
         notification.save
-        UpdateNotificationCacheService.new(user, notification).update
+        UpdateNotificationCacheService.new(notification).update
       end
-      user.activities.where("parameters ->> 'read' = 'false'").find_each do |activity|
-        activity.read = true
+      Notification.where(id: user.friends_notifications.members.map{|m| m[:id]}).where("parameters ->> 'unread' = 'true'").find_each do |activity|
+        activity.unread = false
         activity.save
-        UpdateNotificationCacheService.new(user, activity).update
+        UpdateNotificationCacheService.new(activity).update
       end
     end
   end

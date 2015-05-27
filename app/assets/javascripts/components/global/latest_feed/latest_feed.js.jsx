@@ -22,8 +22,6 @@ var LatestFeed = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.fetchNotifications();
-       var unread = _.findWhere(this.state.feed, {unread: true});
-       console.log(unread);
       if(channel) {
         channel.bind('new_feed_item', function(data){
           var new_item = this.buildElements([data.data])
@@ -100,6 +98,8 @@ var LatestFeed = React.createClass({
 
   fetchNotifications: function(){
     $.getJSON(this.props.path, function(json, textStatus) {
+      var unread = _.findWhere(json.items, {unread: true});
+      console.log(unread);
       this.setState({
         feed: this.buildElements(json.items),
         next_page: json.next_page
