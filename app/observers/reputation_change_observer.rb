@@ -10,7 +10,6 @@ class ReputationChangeObserver
       Post.where(sash_id: changed_data[:sash_id]).first
 
     resource.class.leaderboard[resource.id] = resource.points
-    resource.touch
 
     if resource.class.to_s == "User" || resource.class.to_s == "Student" || resource.class.to_s == "Teacher" || resource.class.to_s == "Mentor"
       user = resource
