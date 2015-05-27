@@ -35,15 +35,15 @@ module Merit
       end
 
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
-        (user.updated_at.to_date - user.created_at.to_date).to_i == 30
+        user.sign_in_count >= 30
       end
 
       grant_on 'sessions#create', badge: 'focussed', :model_name => 'User' do |user|
-        (user.updated_at.to_date - user.created_at.to_date).to_i == 100
+        user.sign_in_count >= 100
       end
 
       grant_on 'follows#create', badge: 'social', to: :follower do |follow|
-        follow.follower.friends_count == 200
+        follow.follower.friends_count >= 200
       end
 
       ##############################
@@ -162,8 +162,9 @@ module Merit
       # ################################################################
 
       grant_on 'ideas#show', badge: 'viral', to: :itself do |idea|
+        days = (DateTime.now.to_date - idea.created_at.to_date).to_i <= 3
         idea.published? &&
-        (DateTime.now.to_date - idea.created_at.to_date).to_i <= 3 &&
+        days.between?(1, 3) &&
         Idea.trending.score(idea.id) >= 500
       end
 
@@ -171,8 +172,9 @@ module Merit
       # => Check everytime idea is viewed to grant disrupt badge to IDEA
       # ################################################################
       grant_on 'ideas#show', badge: 'disrupt', to: :itself do |idea|
+        days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        (DateTime.now.to_date - idea.created_at.to_date).to_i <= 5 &&
+        days.between?(1, 5) &&
         Idea.trending.score(idea.id) >= 1000
       end
 
@@ -181,9 +183,9 @@ module Merit
       # ################################################################
 
       grant_on 'ideas#show', badge: 'traction', to: :itself do |idea|
-        idea.published? &&
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
-        days <= 10 &&
+        idea.published? &&
+        days.between?(5, 10) &&
         Idea.leaderboard.score(idea.id)/days >= 100
       end
 
@@ -195,14 +197,16 @@ module Merit
       # => Check everytime idea is viewed to grant growth-hacking badge to USER
       # ################################################################
       grant_on 'votes#create', badge: 'growth-hacking', multiple: true, to: :votable_user do |vote|
+        days = (DateTime.now.to_date - vote.votable.created_at.to_date).to_i
         vote.votable_type == "Share" &&
-        (DateTime.now.to_date - vote.votable.created_at.to_date).to_i <= 3 &&
+        days.between?(1, 3) &&
         vote.votable.votes_counter.value == 50
       end
 
       grant_on 'comments#create', badge: 'growth-hacking', multiple: true, to: :commentable_user do |comment|
+        days = (DateTime.now.to_date - comment.commentable.created_at.to_date).to_i
         comment.commentable_type == "Share" &&
-        (DateTime.now.to_date - comment.commentable.created_at.to_date).to_i <= 3 &&
+        days.between?(1, 3) &&
         comment.commentable.votes_counter.value == 50
       end
 
