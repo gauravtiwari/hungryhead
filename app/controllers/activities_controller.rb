@@ -8,18 +8,14 @@ class ActivitiesController < ApplicationController
   def index
     ids = current_user.followings_ids.members
     ids.push(current_user.id)
-    activities_ids = Activity.where(user_id: ids, published: true).order(id: :desc).pluck(:id)
-    activities = BulkCacheFetcher.new(Rails.cache).fetch(activities_ids) do |activities_ids|
-      Activity.includes([:trackable, :user, :recipient])
-      .find(activities_ids)
-    end
-    @activities = activities.paginate(:page => params[:page], :per_page => 20)
+    @activities = Activity.where(user_id: ids, published: true)
+      .includes(:trackable, :user, :recipient)
+      .order(id: :desc)
+      .paginate(:page => params[:page], :per_page => 20)
   end
 
   def show
-    @activity = BulkCacheFetcher.new(Rails.cache).fetch(params[:id], expire: 2.hours) do
-      Activity.includes([:trackable, :user, :recipient]).find(params[:id])
-    end
+    @activity = Activity.find(params[:id])
     respond_to do |format|
       format.js
     end

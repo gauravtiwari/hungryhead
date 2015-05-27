@@ -24,8 +24,8 @@ class Feedback < ActiveRecord::Base
   has_merit
 
   #Associations
-  belongs_to :idea, touch: true
-  belongs_to :user, touch: true
+  belongs_to :idea
+  belongs_to :user
 
   #Tags for feedback
   acts_as_taggable_on :tags

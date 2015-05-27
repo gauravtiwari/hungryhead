@@ -70,7 +70,7 @@ class Idea < ActiveRecord::Base
   mount_uploader :cover, CoverUploader
 
   #Associations
-  belongs_to :student, touch: true
+  belongs_to :student
   belongs_to :school
   has_many :idea_messages, dependent: :destroy
 

@@ -10,7 +10,7 @@ class Share < ActiveRecord::Base
 
 	#Associations
 	belongs_to :shareable, polymorphic: true, touch: true
-	belongs_to :user, touch: true
+	belongs_to :user
 
 	#Includes concerns
 	include Commentable
