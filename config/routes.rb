@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     end
     collection do
       post :mark_as_read
+      post :mark_all_as_read
       get :personal
       get :friends
     end

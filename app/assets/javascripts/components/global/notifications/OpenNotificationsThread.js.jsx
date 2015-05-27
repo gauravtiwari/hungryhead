@@ -23,11 +23,18 @@ var OpenNotificationsThread = React.createClass({
        ReactRailsUJS.mountComponents();
        parentdrop.removeClass('open');
        parentdrop.addClass('open');
+       this.clearCounter();
        $('body').addClass('stop-scrolling');
     } else {
         parentdrop.removeClass('open');
         $('body').removeClass('stop-scrolling');
     }
+  },
+
+  clearCounter: function() {
+    $.post(Routes.mark_all_as_read_notifications_path(), function(json, textStatus) {
+        this.setState({unread_notifications_count: json.count});
+    }.bind(this));
   },
 
   render: function() {

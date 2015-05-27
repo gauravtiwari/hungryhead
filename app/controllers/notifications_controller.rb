@@ -27,14 +27,14 @@ class NotificationsController < ApplicationController
     UpdateNotificationCacheService.new(@notification).update
     @notifications = @user.ticker.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: @notifications
+    render json: {count: 0}
   end
 
   def mark_all_as_read
     UpdateAllActivityJob.perform_later(@user)
     @notifications = @user.ticker.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 10)
-    render json: @notifications
+    render json: {count: 0}
   end
 
   private
