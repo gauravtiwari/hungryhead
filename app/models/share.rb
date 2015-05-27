@@ -9,7 +9,7 @@ class Share < ActiveRecord::Base
 	list :commenters_ids
 
 	#Associations
-	belongs_to :shareable, polymorphic: true, touch: true
+	belongs_to :shareable, polymorphic: true
 	belongs_to :user
 
 	#Includes concerns

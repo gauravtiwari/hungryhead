@@ -5,7 +5,7 @@
   </div>
 
   <div class="col-md-6">
-    <%= cache(["beta", @activities]) do %>
+    <%= cache(["beta", current_user, @activities]) do %>
       <%= render partial: 'activities' %>
     <% end %>
   </div>

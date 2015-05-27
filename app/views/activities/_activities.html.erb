@@ -2,7 +2,7 @@
   <div class="activity-feed-box live">
     <% if @activities.length > 0 %>
       <% @activities.each do |activity| %>
-        <% cache(["beta", activity]) do %>
+        <% cache(["beta", current_user, activity]) do %>
           <%= render_activity(activity) %>
         <% end %>
       <% end %>

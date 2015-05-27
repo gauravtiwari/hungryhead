@@ -5,7 +5,7 @@
   <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-body v-align-middle">
-          <% cache(["beta", @activity]) do %>
+          <% cache(["beta", current_user, @activity]) do %>
             <%= render_activity(@activity) %>
           <% end %>
         </div>
