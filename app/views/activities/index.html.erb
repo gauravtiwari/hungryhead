@@ -6,7 +6,15 @@
   <div class="col-md-6">
     <div class="activity-feed auto-height m-t-20">
         <div class="activity-feed-box live">
-          <%= render_activities(@activities) %>
+          <% if @activities.length > 0 %>
+            <%= render_activities(@activities) %>
+          <% else %>
+            <div class="card share" data-social="item">
+                 <div class="card-description text-center">
+                   <h2 class="text-master">No Activities to view</h2>
+                 </div>
+             </div>
+          <% end %>
         </div>
         <% if @activities.next_page %>
           <div class="pagination-box text-center">

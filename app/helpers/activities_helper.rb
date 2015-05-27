@@ -16,7 +16,7 @@ module ActivitiesHelper
   end
 
   def cache_key_for_activities activity
-   "activities/activity-#{activity.trackable_type}-#{activity.trackable_id}-user-#{current_user.id}"
+   "activities/activity-#{activity.trackable_type}-#{activity.trackable_id}"
   end
 
 end
