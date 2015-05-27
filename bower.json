@@ -10,8 +10,7 @@
         "slimScroll": "latest",
         "react-infinite": "latest",
         "bootstrap-tagsinput": "latest",
-        "d3": "latest",
-        "nvd3": "latest"
+        "jquery.scrollbar": "latest"
 
     }
   },
