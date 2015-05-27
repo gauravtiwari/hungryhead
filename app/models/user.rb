@@ -162,6 +162,10 @@ class User < ActiveRecord::Base
     first_name.present? ? first_name.first + last_name.first : add_fullname
   end
 
+  def unread_notifications
+    friends_notifications.members.select{|m| m[:unread] == true}.count
+  end
+
   def firstname
     self.name.split(' ').first
   end
