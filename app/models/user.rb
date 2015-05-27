@@ -84,6 +84,7 @@ class User < ActiveRecord::Base
   counter :ideas_counter
   counter :posts_counter
   counter :views_counter
+  counter :activities_counter
   counter :shares_counter
 
   #Enumerators to handle states

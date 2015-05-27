@@ -1,73 +1,12 @@
 <div class="sidebar auto-height sticky box-shadow bg-solid">
-  <div class="user-sidebar padding-20">
-    <div class="container-xs-height">
-        <div class="row text-center">
-            <div class="social-user-profile auto-margin">
-                <div class="thumbnail-wrapper d48 circular bordered b-white">
-                    <% if current_user.avatar.present? %>
-                        <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "55", height: "55") %>
-                    <% else %>
-                        <span class="placeholder bold text-white" width="32px" height="32px">
-                            <%= current_user.user_name_badge %>
-                        </span>
-                    <% end %>
-                </div>
-
-                </div>
-                <div class="p-l-10 p-r-10">
-                    <h3 class="no-margin text-white">
-                        <%= current_user.name %>
-                        <% if current_user.verified? %>
-                            <i class="fa fa-check-circle text-white fs-16 m-l-10"></i>
-                        <% end %>
-                    </h3>
-                    <p class="small text-white"><%= current_user.mini_bio %></p>
-                    <%= link_to(profile_path(current_user), class: 'text-white') do %>
-                        <i class="fa fa-pencil"></i> Edit profile
-                    <% end %>
-                </div>
-            </div>
-        </div>
-    </div>
-    <%= react_component('LatestUsers', {path: latest_users_path}) %>
-    <% if current_user.people_you_may_know.length > 3 %>
-    <div class="widget-16 panel no-margin widget-loader-circle">
-        <div class="panel-heading">
-            <div class="panel-title b-grey b-b p-b-5">
-              People you may know
-            </div>
-        </div>
-        <div class="panel-body">
-            <ul class="list-unstyled">
-            <% User.find(current_user.people_you_may_know).take(5).each do |user| %>
-                <li class="m-r-10">
-                <%= link_to(profile_path(user)) do %>
-                    <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-                            <% if user.avatar.present? %>
-                            <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
-
-                            <% else %>
-                            <span class="placeholder bold fs-12 text-white">
-                                <%= user.user_name_badge %>
-                            </span>
-                            <% end %>
-
-                    </div>
-                    <% end %>
-                </li>
-            <% end %>
-            <% if current_user.people_you_may_know.length > 16 %>
-            <li>
-                <div class="thumbnail-wrapper d32 circular b-white">
-                    <div class="bg-master text-center text-white">
-                        <span>+34</span>
-                    </div>
-                </div>
-            </li>
-            <% end %>
-
-            </ul>
-            </div>
-        </div>
+    <% cache(["beta", "home_sidebar_card", current_user]) do %>
+        <%= render partial: 'sidebar_card' %>
     <% end %>
-  </div>
+
+    <%= react_component('LatestUsers', {path: latest_users_path}) %>
+
+    <% if current_user.people_you_may_know.length > 3 %>
+        <%= render partial: 'people_you_may_know' %>
+    <% end %>
+
+</div>
