@@ -1,9 +1,9 @@
 class Mention < ActiveRecord::Base
 
   #Model relationships
-  belongs_to :mentionable, polymorphic: true
-  belongs_to :mentioner, polymorphic: true
-  belongs_to :user
+  belongs_to :mentionable, polymorphic: true, touch: true
+  belongs_to :mentioner, polymorphic: true, touch: true
+  belongs_to :user, touch: true
 
   #Model callbacks
   before_destroy :delete_notification

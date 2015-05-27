@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :commentable, :polymorphic => true, touch: true
 
   #Model Scopes

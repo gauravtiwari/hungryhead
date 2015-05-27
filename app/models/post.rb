@@ -23,7 +23,7 @@ class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug_candidates
 
-  belongs_to :user
+  belongs_to :user, touch: true
 
   #Includes concerns
   include Commentable
