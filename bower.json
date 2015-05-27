@@ -9,8 +9,7 @@
         "sweetalert": "latest",
         "slimScroll": "latest",
         "react-infinite": "latest",
-        "bootstrap-tagsinput": "latest",
-        "jquery.scrollbar": "latest"
+        "bootstrap-tagsinput": "latest"
 
     }
   },

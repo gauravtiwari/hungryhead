@@ -43,7 +43,7 @@
 //= require plugins/imagesloaded/imagesloaded.pkgd.min
 //= require plugins/jquery-actual/jquery.actual.min
 //= require plugins/jquery-menuclipper/jquery.menuclipper
-//= require jquery.scrollbar
+//= require plugins/jquery-scrollbar/jquery.scrollbar.min
 //= require react
 //= require react-infinite
 //= require react_ujs
