@@ -2,7 +2,6 @@
 	All application CSS assets - checkout vendor assets/css directory
 
  * BEGIN VENDOR CSS FOR PAGES
- * require plugins/pace/pace-theme-flash
  *= require animate
  *= require jquery.atwho
  *= require jquery-ui/autocomplete
@@ -14,9 +13,8 @@
  *= require sweetalert
  *= require chosen
  *= require ImageSelect
- * require nvd3
  *= require bootstrap-tagsinput
- *= require plugins/jquery-scrollbar/jquery.scrollbar
+ *= require jquery.scrollbar
  *= require plugins/jquery-menuclipper/jquery.menuclipper
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min

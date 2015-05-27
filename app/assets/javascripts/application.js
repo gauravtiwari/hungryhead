@@ -2,8 +2,6 @@
 
 // BEGIN VENDOR JS FOR PAGES
 
-
-// require plugins/pace/pace.min
 //= require jquery2
 //  require jquery.turbolinks
 //= require jquery-form
@@ -30,8 +28,6 @@
 //= require slimScroll
 //= require jquery.atwho
 //= require typer
-// require d3
-// require nvd3
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require moment
@@ -47,7 +43,7 @@
 //= require plugins/imagesloaded/imagesloaded.pkgd.min
 //= require plugins/jquery-actual/jquery.actual.min
 //= require plugins/jquery-menuclipper/jquery.menuclipper
-//= require plugins/jquery-scrollbar/jquery.scrollbar.min
+//= require jquery.scrollbar
 //= require react
 //= require react-infinite
 //= require react_ujs
