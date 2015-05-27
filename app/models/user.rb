@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   sorted_set :ticker, marshal: true
   sorted_set :friends_notifications, marshal: true
 
-  #List to store last 10 activities
+  #List to store last 5 activities
   list :latest_activities, maxlength: 5, marshal: true
 
   #Sorted set to store trending ideas

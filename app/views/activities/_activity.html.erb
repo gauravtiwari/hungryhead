@@ -6,7 +6,9 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-body v-align-middle">
-            <%= render_activity(@activity) %>
+            <% cache("v1", activity) do %>
+              <%= render_activity(@activity) %>
+            <% end %>
           </div>
         </div>
     </div>
