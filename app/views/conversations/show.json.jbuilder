@@ -10,7 +10,7 @@ json.active_conversation do
 	json.is_unread @conversation.is_unread?(current_user)
 	json.participants @conversation.participants.select{ |p| p != current_user }.each do |participant|
 		json.sender_avatar participant.avatar.url(:avatar)
-		json.sender_path profile_card_path(participant)
+		json.sender_path profile_path(participant)
 	end
 	json.conversation_path conversation_path(@conversation)
 	json.mark_read_path mark_as_read_conversation_path(@conversation)
@@ -25,7 +25,7 @@ json.messages @receipts.includes(:message).each do |receipt|
 	json.mailbox_type  @conversation.is_trashed?(current_user) ? 'Trashed' : receipt.mailbox_type.titlecase
 	json.sender_name receipt.message.sender.name
 	json.created_at receipt.message.created_at
-	json.sender_path profile_card_path(receipt.message.sender)
+	json.sender_path profile_path(receipt.message.sender)
 end
 json.conversations @conversations.includes(:messages).each do |conversation|
 	json.(conversation, :id, :subject, :created_at)
@@ -33,7 +33,7 @@ json.conversations @conversations.includes(:messages).each do |conversation|
 	json.messages_count conversation.count_messages
 	conversation.participants.select{ |p| p != current_user }.take(1).each do |participant|
 		json.sender_avatar participant.avatar.url(:avatar)
-		json.sender_path profile_card_path(participant)
+		json.sender_path profile_path(participant)
 	end
 	json.last_message_body markdownify(conversation.last_message.body)
 	json.last_message_created_at conversation.last_message.created_at

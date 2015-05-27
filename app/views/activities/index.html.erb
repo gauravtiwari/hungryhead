@@ -8,9 +8,7 @@
         <div class="activity-feed-box live">
           <% if @activities.length > 0 %>
             <% @activities.each do |activity| %>
-              <% cache(cache_key_for_activities(activity), skip_digest: true) do %>
-                <%= render_activity(activity) %>
-              <% end %>
+              <%= render_activity(activity) %>
             <% end %>
           <% else %>
             <div class="card share" data-social="item">

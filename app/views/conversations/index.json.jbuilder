@@ -14,7 +14,7 @@ json.conversations @conversations.includes(:messages).each do |conversation|
 	json.messages_count conversation.count_messages
 	json.participants conversation.participants.select{ |p| p != current_user }.each do |participant|
 		json.sender_avatar participant.avatar.url(:avatar)
-		json.sender_path profile_card_path(participant)
+		json.sender_path profile_path(participant)
 	end
 	if conversation.last_message
 		json.last_message_body markdownify(conversation.last_message.body)

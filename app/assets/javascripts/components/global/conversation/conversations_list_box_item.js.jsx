@@ -141,7 +141,7 @@ var ConversationListBoxItem = React.createClass({
   }
 
   var participantImage = _.map(this.props.conversation.participants, function(participant) {
-    return <a key={Math.random()}  href="javascript:void(0)" data-popover-href={participant.sender_path} className='load-card'>
+    return <a key={Math.random()}  href={participant.sender_path}>
     <img width="40px" className="participant-avatar m-r-10" src={participant.sender_avatar} alt="Avatar img 20121207 022806" />
     </a>;
   });

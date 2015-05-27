@@ -17,7 +17,7 @@ var ConversationList = React.createClass({
     <div className={active_class}>
       <div className="participants">
         <div className="participant">
-        <a href="javascript:void(0)" data-popover-href={this.props.conversation.sender_path} className='load-card'>
+        <a href={this.props.conversation.sender_path}>
           <img width="40px" className="participant-avatar m-r-10" src={this.props.conversation.sender_avatar} alt="Avatar img 20121207 022806" />
         </a>
         </div>

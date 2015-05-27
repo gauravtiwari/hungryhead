@@ -7,14 +7,14 @@ var ConversationMessagesList = React.createClass({
     return (
       <div className="message opened">
         <div className="participants padding-10 full-width">
-          <span className={this.props.message.mailbox_type === "Trashed"? 'badge danger pull-right' : 'badge primary pull-right'}>{this.props.message.mailbox_type}</span>
+          <span className={this.props.message.mailbox_type === "Trashed"? 'message-badge padding-5 fs-12 b-rad-sm bg-danger text-white pull-right' : 'message-badge padding-5 fs-12 b-rad-sm bg-solid text-white pull-right'}>{this.props.message.mailbox_type}</span>
           <div className="participant">
-            <a href="javascript:void(0)" data-popover-href={this.props.message.sender_path} className='load-card'>
+            <a href={this.props.message.sender_path}>
               <img width="40px" className="participant-avatar float-left m-r-10" src={this.props.message.sender_avatar} alt="Avatar img 20121207 022806" />
             </a>
           </div>
           <span>
-            <a href="javascript:void(0)" data-popover-href={this.props.message.sender_path} className='load-card'>{this.props.message.sender_name}</a>
+            <a href={this.props.message.sender_path}>{this.props.message.sender_name}</a>
           </span>
           <small className="text-muted clearfix">
            {moment(this.props.message.created_at).fromNow()}
