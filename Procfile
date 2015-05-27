@@ -5,4 +5,4 @@ redis: redis-server
 # web: bundle exec rails s -u -p $PORT webrick
 worker: bundle exec sidekiq -c ${SIDEKIQ_CONCURRENCY:=3}
 
-cron: bundle exec crono RAILS_ENV=development
+cron: bundle exec crono
