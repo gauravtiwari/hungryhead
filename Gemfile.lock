@@ -400,6 +400,7 @@ GEM
       sprockets-rails
     json (1.8.2)
     jwt (1.5.0)
+    kgio (2.9.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.7.0)
@@ -514,8 +515,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.11.3)
-      rack (>= 1.1, < 2.0)
     pundit (1.0.0)
       activesupport (>= 3.0.0)
     pusher (0.14.5)
@@ -572,6 +571,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
+    raindrops (0.13.0)
     rake (10.4.2)
     rb-fsevent (0.9.5)
     rb-inotify (0.9.5)
@@ -695,6 +695,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.1)
     unicode_utils (1.4.0)
+    unicorn (4.9.0)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     uniform_notifier (1.9.0)
     uuidtools (2.1.5)
     vegas (0.1.11)
@@ -792,7 +796,6 @@ DEPENDENCIES
   pg_search
   postgres-copy
   pry
-  puma
   pundit
   pusher
   rack-contrib
@@ -831,6 +834,7 @@ DEPENDENCIES
   uglifier
   underscore-rails
   unf
+  unicorn
   uuidtools
   wicked
   will_paginate

@@ -122,8 +122,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'puma'
-
+gem 'unicorn'
 
 #State machines
 gem 'aasm'
