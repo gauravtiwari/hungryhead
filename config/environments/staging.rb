@@ -48,8 +48,8 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: '46.101.22.180' }
-  Rails.application.routes.default_url_options = { host: '46.101.22.180' }
+  config.action_mailer.default_url_options = { host: '46.101.18.217' }
+  Rails.application.routes.default_url_options = { host: '46.101.18.217' }
 
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
