@@ -98,7 +98,6 @@ var LatestFeed = React.createClass({
 
   fetchNotifications: function(){
     $.getJSON(this.props.path, function(json, textStatus) {
-      console.log(json);
       this.setState({
         feed: this.buildElements(json.items),
         next_page: json.next_page

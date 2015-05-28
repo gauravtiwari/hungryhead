@@ -12,8 +12,6 @@ end
 
 gem 'chosen-rails'
 
-gem 'compass-rails'
-
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
 gem 'pg_search'
@@ -122,8 +120,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'puma'
-
+gem 'unicorn'
 
 #State machines
 gem 'aasm'

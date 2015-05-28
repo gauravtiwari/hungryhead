@@ -3,7 +3,7 @@ json.payload do
   json.listings @sharers.each do |sharer|
     json.name your_name(sharer, false)
     json.avatar sharer.avatar.url(:avatar)
-    json.uuid SecureRandom.hex(10)
+    json.uuid sharer.uid
     json.path profile_path(sharer)
     json.locations sharer.location_list.each do |tag|
        json.tag tag

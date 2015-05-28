@@ -1,15 +1,19 @@
-worker_processes 2
+# config/unicorn.rb
+if ENV["RAILS_ENV"] == "development"
+  worker_processes 1
+else
+  worker_processes 3
+  working_directory "#{ENV['STACK_PATH']}"
+  stderr_path "#{ENV['STACK_PATH']}/log/unicorn.stderr.log"
+  stdout_path "#{ENV['STACK_PATH']}/log/unicorn.stdout.log"
+end
 
-working_directory "#{ENV['STACK_PATH']}"
 
 listen "/tmp/web_server.sock", :backlog => 64
 
 timeout 30
 
 pid '/tmp/web_server.pid'
-
-stderr_path "#{ENV['STACK_PATH']}/log/unicorn.stderr.log"
-stdout_path "#{ENV['STACK_PATH']}/log/unicorn.stdout.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
