@@ -1,6 +1,6 @@
 ---
 staging:
-  after_rails:
+  last_thing:
     -
       apply_during: all
       destination: /tmp/rake_task.sh
@@ -9,7 +9,7 @@ staging:
       source: /.cloud66/scripts/rake_task.sh
       sudo: true
       target: rails
-  after_symlink:
+  last_thing:
     -
       apply_during: build_only
       destination: /tmp/dbseed.sh
