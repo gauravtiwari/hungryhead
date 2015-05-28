@@ -1,6 +1,6 @@
 ---
 sidekiq:
-  :verbose: false
+  :verbose: true
   :pidfile: ./tmp/pids/sidekiq.pid
   :concurrency: 5
   :timeout: 30
