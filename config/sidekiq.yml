@@ -1,17 +1,15 @@
 ---
-sidekiq:
-  :verbose: true
-  :pidfile: ./tmp/pids/sidekiq.pid
+:verbose: true
+:concurrency: 5
+:timeout: 30
+development:
   :concurrency: 5
-  :timeout: 30
-  development:
-    :concurrency: 5
-  staging:
-    :concurrency: 10
-  production:
-    :concurrency: 20
-  :queues:
-    - default
-    - [mailers]
-    - [high_priority, 2]
-    - [low_priority, 2]
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 20
+:queues:
+  - default
+  - [mailers]
+  - [high_priority, 2]
+  - [low_priority, 2]
