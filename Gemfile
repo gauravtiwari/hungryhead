@@ -92,6 +92,7 @@ gem 'jquery-turbolinks'
 #Authentication Authorization and Social Signup
 gem 'devise'
 gem 'devise_invitable'
+gem 'devise_uid'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
