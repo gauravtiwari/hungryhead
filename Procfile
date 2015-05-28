@@ -1,4 +1,4 @@
-web: bundle exec puma --config config/puma.rb
+web: bundle exec puma -e $RACK_ENV -b unix:///tmp/web_server.sock --pidfile /tmp/web_server.pid -d --config config/puma.rb
 #web: bundle exec unicorn_rails -p 3000 -c ./config/unicorn.rb
 #redis: redis-server
 #database: postgres -D /usr/local/var/postgres
