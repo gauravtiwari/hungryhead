@@ -15,6 +15,5 @@ staging:
       source: /.cloud66/dbseed.sh
       destination: /tmp/dbseed.sh
       execute: true
-      sudo: true
-      run_on: all_servers
+      run_on: single_server
       target: rails
