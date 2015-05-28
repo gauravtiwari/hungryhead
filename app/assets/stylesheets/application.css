@@ -11,8 +11,8 @@
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require font-awesome
  *= require sweetalert
- * require chosen
- * require ImageSelect
+ *= require chosen
+ *= require ImageSelect
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar
  *= require plugins/jquery-menuclipper/jquery.menuclipper
