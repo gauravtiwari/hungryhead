@@ -8,6 +8,13 @@
 #   [200, { 'Content-Type' => 'text/plain', 'Content-Length' => body.length.to_s }, [body]]
 # end
 
+environment 'staging'
+daemonize true
+port 3000
+threads 8,32
+preload_app!
+workers 3
+
 environment 'development'
 daemonize false
 port 3000

@@ -1,35 +1,37 @@
-# /config/unicorn.rb
+worker_processes 2
 
-worker_processes ENV["UNICORN_COUNT"] && ENV["UNICORN_COUNT"].to_i || 3
-timeout ENV["UNICORN_TIMEOUT"] && ENV["UNICORN_TIMEOUT"].to_i || 30
+working_directory "#{ENV['STACK_PATH']}"
+
+listen "/tmp/web_server.sock", :backlog => 64
+
+timeout 30
+
+pid '/tmp/web_server.pid'
+
+stderr_path "#{ENV['STACK_PATH']}/log/unicorn.stderr.log"
+stdout_path "#{ENV['STACK_PATH']}/log/unicorn.stdout.log"
+
 preload_app true
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
+
+check_client_connection false
 
 before_fork do |server, worker|
-  # Replace with MongoDB or whatever
-  if defined?(ActiveRecord::Base)
-    ActiveRecord::Base.connection.disconnect!
-    Rails.logger.info('Disconnected from ActiveRecord')
+  old_pid = '/tmp/web_server.pid.oldbin'
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
+    end
   end
 
-  # # If you are using Redis but not Resque, change this
-  # if defined?(Resque)
-  # Resque.redis.quit
-  # Rails.logger.info('Disconnected from Redis')
-  # end
-
-  sleep 1
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
-  # Replace with MongoDB or whatever
-  if defined?(ActiveRecord::Base)
+  defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
-    Rails.logger.info('Connected to ActiveRecord')
-  end
-
-  # # If you are using Redis but not Resque, change this
-  # if defined?(Resque)
-  # Resque.redis = ENV['REDIS_URI']
-  # Rails.logger.info('Connected to Redis')
-  # end
 end
