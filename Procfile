@@ -3,6 +3,6 @@ web: bundle exec puma --config config/puma.rb
 redis: redis-server
 #database: postgres -D /usr/local/var/postgres
 # web: bundle exec rails s -u -p $PORT webrick
-worker: bundle exec sidekiq -c ${SIDEKIQ_CONCURRENCY:=3}
+worker: bundle exec sidekiq -c $SIDEKIQ_CONCURRENCY
 
 cron: bundle exec crono
