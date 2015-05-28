@@ -7,7 +7,7 @@ Rails.application.config.session_store :redis_session_store, {
     db: 2,
     expire_after: 120.minutes,
     key_prefix: 'hungryhead:session:',
-    host: 'localhost', # Redis host name, default is localhost
+    host: ENV['$REDIS_ADDRESS'] || "localhost", # Redis host name, default is localhost
     port: 6379   # Redis port, default is 6379
   }
 }

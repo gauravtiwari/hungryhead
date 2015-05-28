@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   #Devise for authentication
-  devise :invitable, :async, :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :registerable, :authentication_keys => [:login]
 

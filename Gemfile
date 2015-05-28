@@ -97,7 +97,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-linkedin-oauth2'
 gem 'pundit'
-gem 'devise-async'
+#gem 'devise-async'
 gem 'responders'
 
 #Local time
