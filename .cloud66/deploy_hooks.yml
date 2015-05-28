@@ -1,6 +1,6 @@
 ---
 staging:
-  last_thing:
+  after_rails:
     -
       apply_during: all
       destination: /tmp/rake_task.sh
@@ -9,11 +9,12 @@ staging:
       source: /.cloud66/scripts/rake_task.sh
       sudo: true
       target: rails
-  last_thing:
+  after_rails:
     -
       apply_during: build_only
+      source: /.cloud66/dbseed.sh
       destination: /tmp/dbseed.sh
       execute: true
-      run_on: single_server
-      source: /.cloud66/dbseed.sh
+      sudo: true
+      run_on: all_servers
       target: rails
