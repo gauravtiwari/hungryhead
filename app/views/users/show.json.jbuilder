@@ -35,7 +35,7 @@ json.user do
 		json.location_url tag_people_path(tag: @user.location_list.first.parameterize) if @user.location_list.first
 	end
 
-	json.id @user.id
+	json.id @user.uid
 	json.is_owner @user == current_user
 	json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 	json.name @user.name

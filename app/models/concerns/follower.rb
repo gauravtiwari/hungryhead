@@ -22,7 +22,7 @@ module Follower
   end
 
   def is_friend?(user)
-    followings_ids.member?(user.id)
+    user.followings_ids.member?(id)
   end
 
   def friends_count
