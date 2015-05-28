@@ -26,11 +26,6 @@ Rails.application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.precompile += %w( .svg .eot .woff .ttf)
 
-  # Debug mode disables concatenation and preprocessing of assets.
-  # This option may cause significant delays in view rendering with a large
-  # number of complex assets.
-  config.assets.debug = false
-
   config.react.addons = true
 
   config.logger = Logger.new(STDOUT)
@@ -39,6 +34,11 @@ Rails.application.configure do
   )
 
   config.active_record.raise_in_transactional_callbacks = true
+
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  config.assets.debug = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
 

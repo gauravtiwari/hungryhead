@@ -12,8 +12,6 @@ end
 
 gem 'chosen-rails'
 
-gem 'compass-rails'
-
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
 gem 'pg_search'

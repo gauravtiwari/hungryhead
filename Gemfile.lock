@@ -737,7 +737,6 @@ DEPENDENCIES
   carrierwave_direct (~> 0.0.14)
   chosen-rails
   coffee-rails
-  compass-rails
   country_select
   crono
   dalli
