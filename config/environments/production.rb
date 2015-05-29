@@ -34,19 +34,21 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
+  config.assets.enabled = true
+  config.assets.precompile += %w(.svg .eot .woff .ttf)
+
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'img', 'icons')
-
-  config.assets.precompile += %w(.svg .eot .woff .ttf)
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'fonts')
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'img')
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'css')
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'js')
 
 
   config.react.addons = true
 
   config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
-  config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
