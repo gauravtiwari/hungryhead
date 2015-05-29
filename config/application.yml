@@ -1,8 +1,8 @@
 development:
   ASSET_KEY: "GOOGM74ZATVPEKMLAM4F"
   ASSET_SECRET: "zM9k6/bodUIkbMmCsWZLPbeDy4Xm2guMKsWSPAHJ"
-  ASSET_BUCKET_NAME: "hungryhead_user_assets"
-  PUBLIC_ASSET_BUCKET_NAME: "hungryhead_assets"
+  ASSET_BUCKET_NAME: "hungryhead-user-assets"
+  PUBLIC_ASSET_BUCKET_NAME: "hungryhead-assets"
   PUSHER_APP_ID: "84302"
   PUSHER_APP_KEY: "a248114cc98a1f63cec5"
   PUSHER_APP_SECRET: "14b9398a1ec43310fde2"
