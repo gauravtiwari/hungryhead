@@ -24,8 +24,11 @@ AssetSync.configure do |config|
   config.manifest = true
 
   config.custom_headers = {
-    "\.(ttf|otf|eot|woff|svg)$" => {
-      access_control_allow_origin: '*'
+    ".*\.(ttf|otf|eot|woff|svg|swf)$" => {
+      access_control_allow_origin: "*",
+      access_control_max_age: 1728000,
+      access_control_request_method: "*",
+      access_control_allow_methods: "*"
     }
   }
   #
