@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: '104.155.35.35'}
+  config.action_mailer.default_url_options = { host: 'production.hungryhead.co'}
 
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
@@ -59,7 +59,7 @@ Rails.application.configure do
     :password  => ENV["MANDRILL_API_KEY"],
     :enable_starttls_auto => true,
     :authentication => 'login',
-    :domain => 'hungryhead.org',
+    :domain => 'hungryhead.co',
   }
 
 
