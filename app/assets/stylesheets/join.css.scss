@@ -10,6 +10,11 @@
   margin: 0 auto;
   overflow-x: hidden;
 }
+
+.join-photo {
+ background-image: image-url('Hungryhead_header.jpg');
+}
+
 .join-wrapper .join .cover-photo:before {
   background-image: image-url("linear_gradient.png");
   background-repeat: repeat-x;

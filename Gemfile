@@ -173,13 +173,6 @@ gem 'country_select'
 # SEO
 gem 'friendly_id'
 
-
-#Admin
-#gem 'activeadmin', github: 'activeadmin'
-#gem 'inherited_resources'
-#gem 'active_skin'
-#gem 'activeadmin_hstore_editor'
-
 #JQuery AutoSize
 
 gem 'autosize-rails'
@@ -194,7 +187,6 @@ gem 'carrierwave_direct', '~> 0.0.14'
 gem 'carrierwave-mimetype-fu'
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave_backgrounder'
-#gem 'carrierwave-aws'
 
 
 #Sync assets with cloudfront
@@ -245,13 +237,10 @@ gem 'metamagic'
 #UUID generation
 gem 'uuidtools'
 
-#Deployment
-gem 'mina'
-gem 'mina-sidekiq', :require => false
-gem 'mina-nginx', :require => false
-
 #Skylight
 gem "skylight"
+
+gem "bugsnag"
 
 group :development, :test do
   gem 'better_errors'
