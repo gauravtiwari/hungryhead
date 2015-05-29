@@ -8,6 +8,15 @@ class ApplicationController < ActionController::Base
   helper_method :xeditable?
   helper_method :search_content
   before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :authenticate_basic
+
+  def authenticate_basic
+    if Rails.env.production?
+      authenticate_or_request_with_http_basic do |username, password|
+        username == "hungryhead_testing" && password == "production_testing"
+      end
+    end
+  end
 
   protected
 
