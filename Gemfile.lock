@@ -526,6 +526,7 @@ GEM
     rack (1.6.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
+    rack-cors (0.4.0)
     rack-livereload (0.3.15)
       rack
     rack-protection (1.5.3)
@@ -797,6 +798,7 @@ DEPENDENCIES
   pundit
   pusher
   rack-contrib
+  rack-cors
   rack-livereload
   rails (= 4.2.1)
   rails-dev-boost!

@@ -242,6 +242,10 @@ gem "skylight"
 
 gem "bugsnag"
 
+group :production, :staging do
+  gem 'rack-cors', :require => 'rack/cors'
+end
+
 group :development, :test do
   gem 'better_errors'
   #gem 'rack-mini-profiler', require: false
