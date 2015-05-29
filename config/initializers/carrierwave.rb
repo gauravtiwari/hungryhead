@@ -14,7 +14,7 @@ CarrierWave.configure do |config|
 
   config.validate_unique_filename = false
   config.validate_filename_format = false
-  config.validate_remote_net_url_format = false      
+  config.validate_remote_net_url_format = false
 
   config.aws_credentials = {
     access_key_id:     ENV['S3_KEY'],

@@ -3,7 +3,7 @@
 // BEGIN VENDOR JS FOR PAGES
 
 //= require jquery2
-//=  require jquery.turbolinks
+//  require jquery.turbolinks
 //= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
@@ -47,7 +47,7 @@
 //= require react
 //= require react-infinite
 //= require react_ujs
-//= require pusher_turbolinks
+
 
 // Core Javascripts
 //= require core/js/pages
@@ -55,8 +55,6 @@
 
 // Turbolinks and plugins
 //= require_tree .
-//= require nprogress
-//= require nprogress-turbolinks
-//= require turbolinks
+// require turbolinks
 
 //Turbolinks.enableTransitionCache();
