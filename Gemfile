@@ -242,9 +242,6 @@ gem "skylight"
 
 gem "bugsnag"
 
-#Force www
-gem 'rack-canonical-host'
-
 group :development, :test do
   gem 'better_errors'
   #gem 'rack-mini-profiler', require: false

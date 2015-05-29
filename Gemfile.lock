@@ -524,9 +524,6 @@ GEM
       multi_json (~> 1.0)
       signature (~> 0.1.8)
     rack (1.6.1)
-    rack-canonical-host (0.1.0)
-      addressable
-      rack (~> 1.0)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-livereload (0.3.15)
@@ -799,7 +796,6 @@ DEPENDENCIES
   pry
   pundit
   pusher
-  rack-canonical-host
   rack-contrib
   rack-livereload
   rails (= 4.2.1)
