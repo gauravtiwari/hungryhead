@@ -7,7 +7,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimetypeFu
   process :set_content_type
 
-  storage :aws
+  storage :fog
 
   def process_uri(uri)
     return URI.parse(uri)

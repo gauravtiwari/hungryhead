@@ -194,11 +194,11 @@ gem 'carrierwave_direct', '~> 0.0.14'
 gem 'carrierwave-mimetype-fu'
 gem 'carrierwave-imageoptimizer'
 gem 'carrierwave_backgrounder'
-gem 'carrierwave-aws'
+#gem 'carrierwave-aws'
 
 
 #Sync assets with cloudfront
-gem "fog", "~>1.20", require: "fog/aws/storage"
+gem "fog-google"
 gem 'asset_sync'
 
 #Background Job processing

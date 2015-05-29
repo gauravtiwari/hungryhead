@@ -10,7 +10,7 @@ class LogoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   #storage :file
-  storage :aws
+  storage :fog
 
 
   def process_uri(uri)
@@ -29,11 +29,11 @@ class LogoUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [110, 110]
   end
 
-  version :thumb do 
+  version :thumb do
     process :resize_to_fill => [307, 153]
   end
 
-  version :large_thumb do 
+  version :large_thumb do
     process :resize_to_fill => [353, 313]
   end
 
