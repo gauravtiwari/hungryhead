@@ -2,7 +2,7 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-use Rack::CanonicalHost do |env|
+use Rack::CanonicalHost, ignore: ['api.hungryhead.co'] do |env|
   case env['RACK_ENV'].to_sym
     when :staging then ENV['CANONICAL_HOST']
     when :production then ENV['CANONICAL_HOST']
