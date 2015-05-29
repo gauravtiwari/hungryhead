@@ -1,9 +1,12 @@
 AssetSync.configure do |config|
 
+  storage: :fog
+
   config.fog_provider = 'Google'
   config.google_storage_access_key_id     = ENV['ASSET_KEY']
   config.google_storage_secret_access_key = ENV['ASSET_SECRET']
   config.fog_directory = ENV['PUBLIC_ASSET_BUCKET_NAME']
+  config.fog_path_style = true
 
   # Invalidate a file on a cdn after uploading files
   # config.cdn_distribution_id = "12345"
