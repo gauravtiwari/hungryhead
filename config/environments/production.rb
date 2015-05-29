@@ -39,6 +39,8 @@ Rails.application.configure do
 
   config.react.addons = true
 
+  config.asset_host = 'http://d2on167u5w9qv7.cloudfront.net'
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: '104.155.35.35'}

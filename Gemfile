@@ -196,6 +196,11 @@ gem 'carrierwave-imageoptimizer'
 gem 'carrierwave_backgrounder'
 gem 'carrierwave-aws'
 
+
+#Sync assets with cloudfront
+gem "fog", "~>1.20", require: "fog/aws/storage"
+gem 'asset_sync'
+
 #Background Job processing
 gem 'sidekiq'
 gem 'sucker_punch'

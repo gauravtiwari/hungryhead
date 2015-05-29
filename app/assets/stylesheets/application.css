@@ -6,8 +6,6 @@
  *= require jquery.atwho
  *= require jquery-ui/autocomplete
  *= require select2-bootstrap
- *= require nprogress
- *= require nprogress-bootstrap
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require font-awesome
  *= require sweetalert
