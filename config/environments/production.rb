@@ -42,7 +42,7 @@ Rails.application.configure do
 
   config.react.addons = true
 
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
+  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.hungryhead.co"
   config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true
