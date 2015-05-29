@@ -67,7 +67,6 @@
   transform: translateY(-50%);
 }
 .cta {
-  background: url("/assets/cta.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

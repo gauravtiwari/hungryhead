@@ -36,9 +36,6 @@ body, p {
 .overflow-hidden {
   overflow: hidden;
 }
-.cup-bg {
-  background: #fff url('/assets/can4.png') center center no-repeat;
-}
 .badge {
   padding: .4em .8em .4em .2em;
   margin: 0 3px 3px 0;
