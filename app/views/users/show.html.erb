@@ -1,7 +1,7 @@
 <div class="container">
     <% data = render(template: 'users/show.json.jbuilder') %>
 
-    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
+    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar" data-turbolinks-permanent>
         <%= render partial: 'sidebar', locals: {data: data} %>
     </div>
 
@@ -14,12 +14,12 @@
             <%= render partial: 'menu' %>
         </div>
 
-        <div class="badges-box m-t-20 clearfix">
+        <div class="badges-box m-t-20 clearfix" id="profile_content" data-turbolinks-temporary>
             <div class="col-md-6 no-padding p-r-15">
                 <%= render partial: 'badges' %>
                 <%= render partial: 'followers' %>
                 <%= render partial: 'followings' %>
-                <%= render partial: 'posts' %>
+                <%= render partial: 'profile_posts' %>
             </div>
             <div class="col-md-6 no-padding">
                 <%= render partial: 'stats' %>
