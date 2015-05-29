@@ -193,8 +193,6 @@ gem 'carrierwave_backgrounder'
 gem "fog-google"
 gem 'asset_sync', github: 'Fodoj/asset_sync'
 
-gem 'font_assets'
-
 #Background Job processing
 gem 'sidekiq'
 gem 'sucker_punch'

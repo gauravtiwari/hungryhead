@@ -1,0 +1,14 @@
+---
+production:
+  postgresql:
+    configuration:
+      postgis: true
+      version: "9.4.1"
+  rails:
+    configuration:
+      extra_packages:
+        - chrony
+      nginx:
+        cors:
+          methods: "GET, OPTIONS"
+          origin: "*"
