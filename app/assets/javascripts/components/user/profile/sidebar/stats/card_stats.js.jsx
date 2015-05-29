@@ -27,8 +27,12 @@ var CardStats = React.createClass({
       'widget-16 panel no-border cup-bg profile-cards box-shadow': true
     });
 
+    var styles = {
+      background: "#fff image-url('can4.png') center center no-repeat";
+    }
+
     return(
-      <div className={classes}>
+      <div className={classes} style={styles}>
         <div className="panel-heading">
           <div className="panel-title b-b b-grey p-b-5">
           <i className="fa fa-star text-danger"></i> Reputation
