@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/Fodoj/asset_sync.git
+  revision: 6f8333c8c2a9e2d743260f2a325c25d3ba93c1bc
+  specs:
+    asset_sync (1.1.0)
+      activemodel
+      fog (>= 1.8.0)
+      unf
+
+GIT
   remote: git://github.com/mailboxer/mailboxer.git
   revision: 51fd6391592aace8a8eb3d1b1a761a9bea81fe1b
   specs:
@@ -78,10 +87,6 @@ GEM
     animate-rails (1.0.8)
       rails
     arel (6.0.0)
-    asset_sync (1.1.0)
-      activemodel
-      fog (>= 1.8.0)
-      unf
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
@@ -713,7 +718,7 @@ DEPENDENCIES
   activerecord-import
   acts-as-taggable-on
   animate-rails
-  asset_sync
+  asset_sync!
   auto_html
   autoprefixer-rails
   autosize-rails

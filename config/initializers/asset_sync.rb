@@ -1,6 +1,5 @@
 AssetSync.configure do |config|
 
-  storage = :fog
   config.fog_provider = 'Google'
   config.google_storage_access_key_id     = ENV['ASSET_KEY']
   config.google_storage_secret_access_key = ENV['ASSET_SECRET']
