@@ -1,6 +1,6 @@
 ---
 production:
-  after_symlink:
+  after_rails:
     -
       apply_during: build_only
       destination: /tmp/dbseed.sh
@@ -19,7 +19,7 @@ staging:
       source: /.cloud66/scripts/rake_task.sh
       sudo: true
       target: rails
-  after_symlink:
+  after_rails:
     -
       apply_during: build_only
       source: /.cloud66/dbseed.sh
