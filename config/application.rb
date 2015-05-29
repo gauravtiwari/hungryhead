@@ -24,6 +24,8 @@ module HungryheadSchoolApp
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    config.assets.paths << Rails.root.join('vendor', 'hh')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins')
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/*"]
     config.autoload_paths += Dir["#{config.root}/app/observers/*"]
