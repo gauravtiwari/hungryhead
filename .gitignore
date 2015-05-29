@@ -25,3 +25,5 @@ public/assets/
 
 # Ignore application configuration
 .elasticbeanstalk/
+config/skylight.yml
+config/application.yml
