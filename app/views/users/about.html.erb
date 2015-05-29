@@ -1,20 +1,18 @@
 <div class="container">
   <% data = render(template: 'users/show.json.jbuilder') %>
 
-  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
+  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar" data-turbolinks-permanent>
       <%= render partial: 'sidebar', locals: {data: data} %>
   </div>
 
-  <div class="col-md-8 col-sm-8">
+  <div class="col-md-8 col-sm-8" id="profile_content" data-turbolinks-temporary>
       <div class="profile-nav box-shadow bg-white">
           <%= render partial: 'menu' %>
       </div>
 
-  <div class="activity-feed auto-height m-t-20">
-      <div class="summary white-bg box-shadow m-t-15 m-b-15">
-          <%= react_component("TextWidget", {data: data}) %>
+      <div class="activity-feed auto-height m-t-20">
+         <%= render partial: 'about', locals: {data: data} %>
       </div>
-  </div>
   </div>
 </div>
 

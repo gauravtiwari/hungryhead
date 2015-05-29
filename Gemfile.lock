@@ -16,6 +16,13 @@ GIT
       activemodel (~> 4.0)
 
 GIT
+  remote: git://github.com/rails/turbolinks.git
+  revision: f1286dde9709541902d3c099ef39df6d5fd44e61
+  specs:
+    turbolinks (3.0.0)
+      coffee-rails
+
+GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: 10b426d9de3fbc917133bae6bb729ef6b16f5d2e
   specs:
@@ -683,8 +690,6 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    turbolinks (2.5.3)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -829,7 +834,7 @@ DEPENDENCIES
   sprockets
   sucker_punch
   therubyracer
-  turbolinks
+  turbolinks!
   uglifier
   underscore-rails
   unf

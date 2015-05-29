@@ -124,6 +124,10 @@ class UsersController < ApplicationController
   end
 
   def about
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def delete_cover
@@ -145,15 +149,16 @@ class UsersController < ApplicationController
     .where(user_id: @user.id)
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
-     respond_to do |format|
-      format.html
+    respond_to do |format|
       format.js
+      format.html
     end
   end
 
   def activity
     @activity = @user.activities.find(params[:id])
     respond_to do |format|
+      format.js
       format.html
     end
   end
@@ -163,13 +168,19 @@ class UsersController < ApplicationController
     .posts
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
-    if request.xhr?
-      render :partial=>"posts"
+
+    respond_to do |format|
+      format.js
+      format.html
     end
   end
 
   def post
     @post = Post.find(params[:id])
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private
