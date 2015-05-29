@@ -242,8 +242,9 @@ gem "skylight"
 
 gem "bugsnag"
 
-#Force www
-gem 'rack-canonical-host'
+group :production, :staging do
+  gem 'rack-cors', :require => 'rack/cors'
+end
 
 group :development, :test do
   gem 'better_errors'
