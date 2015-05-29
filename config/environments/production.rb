@@ -36,13 +36,14 @@ Rails.application.configure do
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
+  config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
 
   config.assets.precompile += %w( .svg .eot .woff .ttf)
 
 
   config.react.addons = true
 
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.hungryhead.co"
+  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
   config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true
