@@ -29,6 +29,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
+  config.assets.compress = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -39,7 +40,7 @@ Rails.application.configure do
 
   config.react.addons = true
 
-  config.asset_host = 'http://d2on167u5w9qv7.cloudfront.net'
+  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
   config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true
@@ -76,7 +77,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
