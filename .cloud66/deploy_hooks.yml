@@ -12,7 +12,7 @@ production:
 staging:
   after_rails:
     -
-      apply_during: all
+      apply_during: build_only
       destination: /tmp/rake_task.sh
       execute: true
       run_on: all_servers
