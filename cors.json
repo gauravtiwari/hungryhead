@@ -1,0 +1,10 @@
+[
+    {
+      "origin": ["http://hungryhead.co"],
+      "responseHeader": ["Content-Type"],
+      "Access-Control-Request-Method": "*",
+      "Access-Control-Allow-Origin": "*",
+      "method": ["GET"],
+      "maxAgeSeconds": 3600
+    }
+]
