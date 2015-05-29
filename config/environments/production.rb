@@ -37,6 +37,8 @@ Rails.application.configure do
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
   config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'fonts')
+  config.assets.paths << Rails.root.join('vendor', 'hh', 'img', 'icons')
 
   config.assets.precompile += %w( .svg .eot .woff .ttf)
 
@@ -44,6 +46,7 @@ Rails.application.configure do
   config.react.addons = true
 
   config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+  config.font_assets.origin = 'http://production.hungryhead.co'
   config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true

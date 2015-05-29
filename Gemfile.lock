@@ -337,6 +337,8 @@ GEM
       nokogiri (~> 1.5, >= 1.5.11)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
+    font_assets (0.1.11)
+      rack
     foreigner (1.7.4)
       activerecord (>= 3.0.0)
     foreman (0.78.0)
@@ -749,6 +751,7 @@ DEPENDENCIES
   figaro
   fog-google
   font-awesome-rails
+  font_assets
   foreman
   forgery
   friendly_id
