@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'production.hungryhead.co'}
+  config.action_mailer.default_url_options = { host: 'hungryhead.co'}
 
   config.action_mailer.smtp_settings = {
     :address   => "smtp.mandrillapp.com",
