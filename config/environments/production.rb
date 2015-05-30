@@ -44,10 +44,9 @@ Rails.application.configure do
   config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'img')
   config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'css')
   config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'js')
-
   config.react.addons = true
 
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
