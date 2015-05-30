@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   autocomplete :user, :name, :full => true
 
   def index
-    @users = User.order(id: :desc).paginate(:page => params[:page], :per_page => 12)
+    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 12)
     respond_to do |format|
       format.html
       format.json
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    User.trending.increment(@user.id) if @user != current_user
+    User.trending.increment(@user.id) if @user != current_user && @user.published?
     @user.views_counter.increment if @user != current_user
     respond_to do |format|
       format.html {render :show} if @user.type == "User"
@@ -119,7 +119,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @followers =@user.get_followers.paginate(:page => params[:page], :per_page => 9)
+    @followers = @user.get_followers.paginate(:page => params[:page], :per_page => 9)
     render 'follows/followers'
   end
 

@@ -9,8 +9,12 @@ class User < ActiveRecord::Base
   extend OrderAsSpecified
 
   #Scopes for searching
-  scope :entrepreneurs, -> { where(role: 1) }
+  scope :students, -> { where(role: 1) }
+  scope :entrepreneurs, -> { where(role: 2) }
+  scope :mentors, -> { where(role: 3) }
+  scope :teachers, -> { where(role: 4) }
   scope :users, -> { where(role: 0) }
+  scope :published, -> { where(state: 1) }
 
   #Gamification
   has_merit
