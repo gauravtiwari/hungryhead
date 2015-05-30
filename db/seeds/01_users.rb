@@ -13,6 +13,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@hungryhead.org',
     admin: true,
     role: 0,
+    state: 0,
     confirmed_at: Time.now
   )
 
@@ -28,6 +29,7 @@ ActiveRecord::Base.transaction do
     email: "gaurav@gauravtiwari.co.uk",
     fund: {balance: 1000},
     role: 1,
+    state: 1,
     market_list: "Education, Social, Entrepreneruship",
     settings: {theme: 'solid', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -46,6 +48,7 @@ ActiveRecord::Base.transaction do
     fund: {balance: 1000},
     verified: true,
     role: 4,
+    state: 1,
     market_list: "Education, Social, Ecommerce",
     settings: {theme: 'primary', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -64,6 +67,7 @@ ActiveRecord::Base.transaction do
     fund: {balance: 1000},
     verified: true,
     role: 3,
+    state: 1,
     market_list: "Education, Entrepreneruship, Music",
     settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -82,6 +86,7 @@ ActiveRecord::Base.transaction do
     fund: {balance: 1000},
     verified: true,
     role: 3,
+    state: 1,
     market_list: "Social, Entrepreneruship, Music",
     settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
     confirmed_at: Time.now
@@ -101,6 +106,7 @@ ActiveRecord::Base.transaction do
       email: "mentor#{i}@hungryhead.org",
       fund: {balance: 1000},
       role: 3,
+      state: 1,
       market_list: Forgery::Name.industry,
       settings: {theme: 'danger', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
@@ -121,6 +127,7 @@ ActiveRecord::Base.transaction do
       email: "teacher#{i}@hungryhead.org",
       fund: {balance: 1000},
       role: 4,
+      state: 1,
       market_list: Forgery::Name.industry,
       settings: {theme: 'primary', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
       confirmed_at: Time.now
@@ -142,6 +149,7 @@ ActiveRecord::Base.transaction do
       email: "test#{i}@hungryhead.org",
       fund: {balance: 1000},
       role: 1,
+      state: 1,
       market_list: Forgery::Name.industry,
       settings: {theme: 'solid', idea_notifications: true, feedback_notifications: true, investment_notifications: true, follow_notifications: true, post_notifications: true, weekly_mail: true},
       confirmed_at: Time.now

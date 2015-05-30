@@ -11,6 +11,12 @@ class CreateUserNotificationService
       recipient: @user,
       key: 'user.create'
     )
+    publish_user #publish user
+  end
+
+  def publish_user
+    @user.published!
+    @user.save
   end
 
 end

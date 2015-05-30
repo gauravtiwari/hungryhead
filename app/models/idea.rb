@@ -59,10 +59,12 @@ class Idea < ActiveRecord::Base
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
-  enum privacy: { me:0, everyone:2 }
+  enum privacy: { team: 0, school: 1, everyone: 2 }
 
   #Scopes
-  scope :published_ideas, -> { where(status: 1) }
+  scope :published, -> { where(status: 1) }
+  scope :school, -> { where(privacy: 1) }
+  scope :public_ideas, -> { where(privacy: 2) }
   scope :for_user, lambda {|user| where("student_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Upload logos and covers

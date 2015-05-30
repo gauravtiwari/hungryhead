@@ -11,7 +11,7 @@ module Scorable
       max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
       cache_key = "#{self}/popular-#{max_updated_at}"
       Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.where(id: self.leaderboard.revrange(0, 20))
+        self.published.where(id: self.leaderboard.revrange(0, 20))
         .order_as_specified(id: self.leaderboard.revrange(0, 20))
         .map{|object| send("#{self.to_s.downcase}_json", object)}
       end
@@ -22,7 +22,7 @@ module Scorable
       max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
       cache_key = "#{self}/trending-#{max_updated_at}"
       Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.where(id: self.trending.revrange(0, 20))
+        self.published.where(id: self.trending.revrange(0, 20))
         .order_as_specified(id: self.trending.revrange(0, 20))
         .map{|object| send("#{self.to_s.downcase}_json", object)}
       end
@@ -32,7 +32,7 @@ module Scorable
       max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
       cache_key = "#{self}/latest-#{max_updated_at}"
       Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.where(id: self.latest.values.reverse)
+        self.published.where(id: self.latest.values.reverse)
         .order_as_specified(id: self.latest.values.reverse)
         .map{|object| send("#{self.to_s.downcase}_json", object)}
       end

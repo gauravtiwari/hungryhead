@@ -20,6 +20,8 @@ ActiveRecord::Base.transaction do
       student_id: [*75..90].sample,
       looking_for_team: true,
       rules_accepted: true,
+      status: 1,
+      privacy: 2,
       market_list: Forgery::Name.industry
     )
  }

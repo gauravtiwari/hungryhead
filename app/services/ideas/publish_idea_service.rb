@@ -19,7 +19,7 @@ class PublishIdeaService
 
   def unpublish_idea
     @idea.draft!
-    @idea.me!
+    @idea.team!
     publish :idea_unpublished, @idea
   end
 
