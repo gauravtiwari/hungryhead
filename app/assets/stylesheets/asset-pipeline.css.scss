@@ -221,15 +221,15 @@ html[dir="rtl"] .select2-search input {
   src: url('core/fonts/helveticaneue/helveticaneue.eot');
   src: url('core/fonts/helveticaneue/helveticaneue.eot?#iefix') format('embedded-opentype'), url('core/fonts/helveticaneue/helveticaneue.woff') format('woff'), url('core/fonts/helveticaneue/helveticaneue.ttf') format('truetype'), url('core/fonts/helveticaneue/helveticaneue.svg') format('svg');
   font-weight: 300;
-  font-style: italic;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Helvetica Neue Bold';
   src: url('core/fonts/helveticaneue/helveticaneuebold.eot');
   src: url('core/fonts/helveticaneue/helveticaneuebold.eot?#iefix') format('embedded-opentype'), url('core/fonts/helveticaneue/helveticaneuebold.woff') format('woff'), url('core/fonts/helveticaneue/helveticaneuebold.ttf') format('truetype'), url('core/fonts/helveticaneue/helveticaneuebold.svg') format('svg');
-  font-weight: 300;
-  font-style: italic;
+  font-weight: bold;
+  font-style: normal;
 }
 
 
