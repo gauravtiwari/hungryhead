@@ -2,6 +2,8 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
+Rails.application.config.assets.precompile += %w( react_ujs.js )
+Rails.application.config.assets.precompile += %w( jquery2.js )
 Rails.application.config.assets.precompile += %w( pages-icon/pages-icon.eot)
 Rails.application.config.assets.precompile += %w( pages-icon/pages-icon.svg)
 Rails.application.config.assets.precompile += %w( pages-icon/pages-icon.ttf)
