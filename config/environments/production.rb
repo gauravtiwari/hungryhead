@@ -45,7 +45,6 @@ Rails.application.configure do
   config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'css')
   config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'js')
 
-
   config.react.addons = true
 
   config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
