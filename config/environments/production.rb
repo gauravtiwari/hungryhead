@@ -34,14 +34,6 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
-  config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'img', 'icons')
-
-  config.assets.precompile += %w( .svg .eot .woff .ttf)
-
   config.assets.enabled = true
   config.react.addons = true
 

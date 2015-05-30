@@ -27,6 +27,14 @@ module HungryheadSchoolApp
     config.assets.paths << Rails.root.join('vendor', 'hh')
     config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins')
     config.assets.paths << Rails.root.join('vendor', 'hh', 'core')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'fonts', 'pages-icon')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'fonts', 'montserrat')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'img', 'icons')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'img', 'progress')
 
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/*"]
@@ -35,6 +43,7 @@ module HungryheadSchoolApp
     config.autoload_paths += Dir["#{config.root}/app/controllers/*"]
     config.autoload_paths += Dir["#{config.root}/app/services/*"]
     config.autoload_paths += Dir["#{config.root}/app/lib/*"]
+
     config.app_generators.scaffold_controller = :scaffold_controller
 
     #Background job processing
