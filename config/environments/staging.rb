@@ -86,11 +86,11 @@ Rails.application.configure do
   config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+  config.action_controller.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
 
   config.middleware.insert_before 0, "Rack::Cors" do
     allow do
-      origins "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+      origins "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
       resource '*', :headers => :any, :methods => [:get, :options]
     end
   end
