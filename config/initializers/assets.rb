@@ -10,6 +10,7 @@ Rails.application.config.assets.precompile += %w( icons/noti-cross-2x.png)
 Rails.application.config.assets.precompile += %w( icons/noti-cross.png)
 Rails.application.config.assets.precompile += %w( icons/top-tray.png)
 Rails.application.config.assets.precompile += %w( icons/top-tray_2x.png)
+Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf)
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
