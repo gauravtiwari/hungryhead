@@ -28,9 +28,7 @@ module HungryheadSchoolApp
     config.assets.paths << Rails.root.join('vendor', 'hh', 'plugins')
     config.assets.paths << Rails.root.join('vendor', 'hh', 'core')
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-    config.assets.paths << Rails.root.join('vendor', 'hh', 'fonts')
+    config.assets.paths << Rails.root.join('vendor', 'hh', 'core', 'fonts')
 
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/*"]
