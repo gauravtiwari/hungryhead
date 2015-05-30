@@ -42,10 +42,6 @@ Rails.application.configure do
 
   config.assets.precompile += %w( .svg .eot .woff .ttf)
 
-
-  config.react.addons = true
-
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
   config.assets.enabled = true
   config.react.addons = true
 
