@@ -234,7 +234,7 @@ html[dir="rtl"] .select2-search input {
 
 
 .alert .close {
-  background: asset-url("core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
+  background: asset-url('core/img/icons/noti-cross.png') no-repeat scroll 0 0 transparent;
 }
 .progress-bar-indeterminate {
   background: asset-url('core/img/progress/progress-bar-master.svg') no-repeat top left;
@@ -276,10 +276,10 @@ html[dir="rtl"] .select2-search input {
   background-image: asset-url('core/img/progress/progress-circle-complete.svg');
 }
 .editor-icon {
-  background-image: asset-url("core/img/editor_tray.png");
+  background-image: asset-url('core/img/editor_tray.png');
 }
 .social-wrapper .social .cover-photo:before {
-  background-image: asset-url("core/img/linear_gradient.png");
+  background-image: asset-url('core/img/linear_gradient.png');
 }
 
 .widget-1:before {
@@ -290,9 +290,9 @@ html[dir="rtl"] .select2-search input {
     background: asset-url('core/img/icons/top_tray_2x.png');
   }
   .editor-icon {
-    background-image: asset-url("core/img/editor_tray_2x.png");
+    background-image: asset-url('core/img/editor_tray_2x.png');
   }
   .alert .close {
-    background: asset-url("core/img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
+    background: asset-url('core/img/icons/noti-cross-2x.png') no-repeat scroll 0 0 transparent;
   }
 }
