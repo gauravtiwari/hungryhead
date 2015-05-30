@@ -29,5 +29,7 @@
     </div>
 </div>
 
-<%= render partial: 'send_message' %>
+<% if current_user.is_friend?(@user) %>
+    <%= render partial: 'send_message' %>
+<% end %>
 
