@@ -18,7 +18,7 @@
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-          document.head.innerHTML += '<%= stylesheet_link_tag 'windows.chrome.fix' %>'
+          document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
       }
     </script>
     <%= csrf_meta_tags %>
