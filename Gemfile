@@ -191,7 +191,7 @@ gem 'carrierwave_backgrounder'
 
 #Sync assets with cloudfront
 gem "fog-google"
-gem 'asset_sync', github: 'Fodoj/asset_sync'
+gem 'asset_sync'
 
 #Background Job processing
 gem 'sidekiq'
