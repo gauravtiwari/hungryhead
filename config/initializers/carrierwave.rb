@@ -5,8 +5,7 @@ CarrierWave.configure do |config|
   config.fog_credentials = {
      :provider                         => 'Google',
      :google_storage_access_key_id     => ENV['ASSET_KEY'],
-     :google_storage_secret_access_key => ENV['ASSET_SECRET'],
-     path_style: true
+     :google_storage_secret_access_key => ENV['ASSET_SECRET']
   }
 
   config.fog_directory = ENV['ASSET_BUCKET_NAME']
