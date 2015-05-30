@@ -740,6 +740,7 @@ DEPENDENCIES
   devise_invitable
   devise_uid
   em-http-request
+  execjs
   ezcrypto
   figaro
   fog-google

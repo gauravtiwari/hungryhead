@@ -148,6 +148,7 @@ gem 'goldiloader'
 gem 'nokogiri'
 
 #React JS
+gem 'execjs'
 gem 'therubyracer', platforms: :ruby
 gem 'react-rails', '~> 1.0'
 
