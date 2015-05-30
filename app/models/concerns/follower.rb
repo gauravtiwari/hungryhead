@@ -7,7 +7,7 @@ module Follower
 
   def people_you_may_know
     followings_sets = []
-    User.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
+    User.published.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
     followings_sets.map{|f| f.difference(followings_ids) }.flatten - ["#{id}"]
   end
 
