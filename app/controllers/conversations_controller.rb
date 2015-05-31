@@ -64,7 +64,7 @@ class ConversationsController < ApplicationController
   end
 
   def get_box
-    if params[:box].empty? or !["inbox","sent","trash"].include?(params[:box])
+    if params[:box].present? or !["inbox","sent","trash"].include?(params[:box])
       params[:box] = 'inbox'
       if params[:action] == "show"
         redirect_to(conversation_path(@conversation, box: params[:box]))

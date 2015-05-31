@@ -148,7 +148,7 @@ class Idea < ActiveRecord::Base
   def profile_complete?
     if [self.name, self.high_concept_pitch, self.elevator_pitch,
       self.description, self.market, self.solutions, self.problems,
-      self.value_proposition].any?{|f| f.empty? }
+      self.value_proposition].any?{|f| f.present? }
       return false
     else
       return true
