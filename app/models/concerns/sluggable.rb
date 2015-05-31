@@ -19,7 +19,7 @@ module Sluggable
   end
 
   def should_generate_new_friendly_id?
-    slug.empty?
+    slug.present?
   end
 
 end

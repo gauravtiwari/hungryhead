@@ -159,11 +159,11 @@ class User < ActiveRecord::Base
   end
 
   def school_name
-    school_id.empty? ? school.name : ""
+    school_id.present? ? school.name : ""
   end
 
   def user_name_badge
-    first_name.empty? ? first_name.first + last_name.first : add_fullname
+    first_name.present? ? first_name.first + last_name.first : add_fullname
   end
 
   def unread_notifications
@@ -195,20 +195,20 @@ class User < ActiveRecord::Base
   end
 
   def name_not_present?
-    !first_name.empty? && !last_name.empty?
+    !first_name.present? && !last_name.present?
   end
 
   def username_absent?
-    !username.empty?
+    !username.present?
   end
 
   def add_username
     email_username = self.name.parameterize
-    if User.find_by_username(email_username).empty?
+    if User.find_by_username(email_username).blank?
       email_username = email_username
     else
       num = 1
-      while(User.find_by_username(email_username).empty?)
+      while(User.find_by_username(email_username).blank?)
         email_username = "#{name.parameterize}#{num}"
         num += 1
       end
@@ -299,10 +299,10 @@ class User < ActiveRecord::Base
 
   def increment_counters
     #Increment counters
-    school.students_counter.increment if school_id.empty? && self.type == "Student"
+    school.students_counter.increment if school_id.present? && self.type == "Student"
     #Cache lists for school
-    school.latest_students << id if school_id.empty? && self.type == "Student"
-    school.latest_faculties << id if school_id.empty? && self.type == "Teacher"
+    school.latest_students << id if school_id.present? && self.type == "Student"
+    school.latest_faculties << id if school_id.present? && self.type == "Teacher"
     #Cache sorted set for global leaderboard
     User.latest << id unless type == "User"
 
@@ -313,10 +313,10 @@ class User < ActiveRecord::Base
 
   def decrement_counters
     #Decrement counters
-    school.students_counter.decrement if school_id.empty? && school.students_counter.value > 0 && self.type == "Student"
+    school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
     #delete cached lists for school
-    school.latest_students.delete(id) if school_id.empty? && self.type == "Student"
-    school.latest_faculties.delete(id) if school_id.empty? && self.type == "Teacher"
+    school.latest_students.delete(id) if school_id.present? && self.type == "Student"
+    school.latest_faculties.delete(id) if school_id.present? && self.type == "Teacher"
     #delete cached sorted set for global leaderboard
     User.latest.delete(id) unless type == "User"
 
