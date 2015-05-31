@@ -1,6 +1,6 @@
 [
     {
-      "origin": ["http://hungryhead.co"],
+      "origin": ["https://hungryhead.co"],
       "responseHeader": ["Content-Type"],
       "Access-Control-Request-Method": "*",
       "Access-Control-Allow-Origin": "*",
