@@ -177,7 +177,7 @@ class Idea < ActiveRecord::Base
     if visible?
       loader = Soulmate::Loader.new("ideas")
       loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
-        "link" => idea_path(self)
+        "link" => idea_path(slug)
         })
     else
       remove_from_soulmate
