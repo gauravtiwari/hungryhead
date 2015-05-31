@@ -55,7 +55,7 @@ class FollowsController < ApplicationController
     @follwables = ["Idea", "Student", "School", "Mentor", "Teacher", "User"]
     if @follwables.include? params[:followable_type]
       followable_type = params[:followable_type]
-      unless followable_type.safe_constantize.find(params[:followable_id]).blank?
+      unless followable_type.safe_constantize.find(params[:followable_id]).empty?
         @followable = followable_type.safe_constantize.find(params[:followable_id])
       else
         raise ActiveRecord::RecordNotFound
