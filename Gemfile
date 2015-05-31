@@ -63,6 +63,9 @@ gem 'sprockets'
 #Deal with JSON data
 gem  'hashie'
 
+#404 page customize
+gem 'gaffe'
+
 #Pub-sub
 
 gem 'wisper'

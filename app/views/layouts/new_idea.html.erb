@@ -9,7 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= javascript_tag do %>
       window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
     <% end %>
@@ -18,7 +19,7 @@
     <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
     <![endif]-->
-    <script type="text/javascript">
+    <script type="text/javascript" data-turbolinks-eval=false>
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
@@ -27,7 +28,7 @@
     </script>
 
     <% if user_signed_in? %>
-      <%= javascript_tag do %>
+      <%= javascript_tag 'data-turbolinks-eval' => false  do %>
           var pusher = new Pusher("<%= ENV['PUSHER_APP_KEY'] %>");
           var channel = pusher.subscribe("private-user-<%= current_user.id %>");
           var public_channel = pusher.subscribe("public-notifications");

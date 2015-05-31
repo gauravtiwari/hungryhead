@@ -9,13 +9,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
     <![endif]-->
-    <script type="text/javascript" data-turbolinks-eval=false>
+    <script type="text/javascript">
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
@@ -26,10 +25,20 @@
     <%= yield :head %>
   </head>
 
-  <body class="fixed-header <%= user_signed_in? ? '' : 'menu-behind' %>">
-    <%= yield %>
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
-    <% end %>
+  <body class="fixed-header menu-behind error-page mac desktop">
+    <div class="page-container">
+      <% if user_signed_in? %>
+        <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
+      <% elsif params[:action] == "index" %>
+       <%= render partial: 'globals/guest_nav' %>
+      <% else %>
+        <%= render partial: 'globals/page_nav' %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+   <div class="pull-bottom sm-pull-bottom full-width relative">
+    <%= render partial: 'globals/footer' %>
+   </div>
   </body>
 </html>
