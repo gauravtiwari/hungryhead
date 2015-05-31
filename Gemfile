@@ -6,10 +6,6 @@ gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-group :production do
-  gem 'rails_12factor'
-end
-
 gem 'chosen-rails'
 
 #gem 'rack-mini-profiler', require: false
