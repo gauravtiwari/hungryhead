@@ -38,6 +38,20 @@ Generated From LESS
 /*------------------------------------------------------------------
 [1. Layouts]
 */
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat-Regular'), url(//fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYAzyDMXhdD8sAj6OAJTFsBI.woff2) format('woff2'), url(//fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff'), asset-url('core/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat-Bold'), url(//fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcmaVI6zN22yiurzcBKxPjFE.woff2) format('woff2'), url(//fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcnbFhgvWbfSbdVg11QabG8w.woff) format('woff'), asset-url('core/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+
 html {
   height: 100%;
 }
@@ -121,7 +135,7 @@ body.dashboard .page-container {
   -webkit-animation: none;
   animation: none;
   top: 73px;
-  background: url('../assets/core/img/progress/progress-circle-success.svg') no-repeat top left;
+  background: url('core/img/progress/progress-circle-success.svg') no-repeat top left;
   background-size: 100% auto;
   margin: 0 auto;
   border-width: 0;
