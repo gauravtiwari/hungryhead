@@ -141,3 +141,21 @@ input.list-view-search{
 [data-ios="true"] .list-view-fake-header {
 	width: 288px; /*scrollbars aren't visible in iOS devices, so make the headers wider */
 }
+
+//Bootstrap-List
+.list-group-item{
+    border: 1px solid @color-master-lighter;
+    &.active, &.active:hover, &.active:focus{
+        background-color:@color-success-light;
+        border-color:@color-success-light;
+    }
+}
+
+.list-group-item:first-child{
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.list-group-item:last-child{
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}

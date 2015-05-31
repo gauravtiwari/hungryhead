@@ -8,10 +8,10 @@ html {
 ------------------------------------------------------------------
 */
 body {
-    background-color: @color-master-lightest;
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: @color-master-lightest;
     &.fixed-header {
         .header {
             position: fixed;
@@ -815,16 +815,13 @@ body {
     }
 }
 
-.page-sidebar ~ .page-container{
-    padding-left: @layout-sidepanel-width-collapsed;
-}
 /* Page Container 
 ------------------------------------
 */
 .page-container {
     width:100%;
     height:100%;
-    background-color: inherit;
+    padding-left: @layout-sidepanel-width-collapsed;
     .page-content-wrapper{
         min-height: 100%;
         position: relative;
@@ -884,22 +881,19 @@ body {
         text-transform:uppercase;
         display: block;
         a {
-            margin-left: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+            font-family: 'Montserrat';
+            font-size: 11px !important;
+            font-weight: 400;
+            color: #7b7d82;
+            &.active {
+                font-weight: 600;
+                color:#0090d9;
+            }
         }
         li {
             padding-left:0px;
-            p {
-                font-family: 'Montserrat';
-                font-size: 11px !important;
-                font-weight: 400;
-                color: #7b7d82;
-                margin: 0;
-            }
-            .active {
-                font-weight: 600;
-                font-size: 11px;
-                color:#0090d9;
-            }
         }
         & > li {
             & + li {
@@ -916,7 +910,7 @@ body {
 .breadcrumb a, 
 .breadcrumb i, 
 .breadcrumb span,.breadcrumb li {
-        color: #515050;
+        color: #7b7d82;
         font-weight: 300;
         text-shadow: none;
 }

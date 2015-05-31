@@ -214,25 +214,6 @@ html[dir="rtl"] .select2-search input {
   font-style: italic;
 }
 
-
-/* Helvetica Neue */
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: asset-url('core/fonts/helveticaneue/helveticaneue.eot');
-  src: asset-url('core/fonts/helveticaneue/helveticaneue.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/helveticaneue/helveticaneue.woff') format('woff'), asset-url('core/fonts/helveticaneue/helveticaneue.ttf') format('truetype'), asset-url('core/fonts/helveticaneue/helveticaneue.svg') format('svg');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue Bold';
-  src: asset-url('core/fonts/helveticaneue/helveticaneuebold.eot');
-  src: asset-url('core/fonts/helveticaneue/helveticaneuebold.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/helveticaneue/helveticaneuebold.woff') format('woff'), asset-url('core/fonts/helveticaneue/helveticaneuebold.ttf') format('truetype'), asset-url('core/fonts/helveticaneue/helveticaneuebold.svg') format('svg');
-  font-weight: bold;
-  font-style: normal;
-}
-
-
 .alert .close {
   background: asset-url('core/img/icons/noti-cross.png') no-repeat scroll 0 0 transparent;
 }

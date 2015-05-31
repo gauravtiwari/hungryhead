@@ -148,8 +148,18 @@ form legend {
             }
         }
     }
+    input[type="radio"]:focus{ 
+        & + label{
+            color:@color-master-dark;
+            &:before{
+                background-color: @color-master-light;
+            }
+        }
+    }
     input[type=radio] {
-        display: none;
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
     input[type=radio][disabled] {
         & + label {
@@ -210,7 +220,9 @@ input[type=radio]:checked + label:before{
         }
     }
     input[type=checkbox] {
-        display: none;
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
     &.checkbox-circle {
         label {
@@ -226,12 +238,20 @@ input[type=radio]:checked + label:before{
         & + label {
             //color: #4d5056;
             &:before {
-                border-width: 8px;
+                border-width: 8.5px;
             }
             &::after {
                 font-family:'FontAwesome';
                 content:"\F00C";
                 color: #fff;
+            }
+        }
+    }
+    input[type="checkbox"]:focus{ 
+        & + label{
+            color:@color-master-dark;
+            &:before{
+                background-color: @color-master-light;
             }
         }
     }
@@ -255,9 +275,6 @@ input[type=radio]:checked + label:before{
         }
         input[type=checkbox]:checked {
             & + label {
-                // &::after {
-                //     content:""
-                // }
                 position: relative;
                 // margin-right: 0;
                 &::after {
@@ -337,6 +354,13 @@ input[type=checkbox]:checked + label{
             }
         }  
     }
+}
+@media (min-width: 768px) and (max-width: 991px){
+  form .row [class*="col-md-"]:not(:first-child), 
+  form .row [class*="col-md-"]:not(:last-child){
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 /* Form layouts  : Horizontal
 --------------------------------------------------
@@ -560,6 +584,9 @@ input[type=checkbox]:checked + label{
             background: none;
         }
     }
+    & textarea.form-control{
+        padding-top: 5px;
+    }
     label {
         margin: 0;
         display: block;
@@ -592,7 +619,15 @@ input[type=checkbox]:checked + label{
         min-height: 18px;
         height: 18px;
     }
-
+    &.form-group-default-select{
+        overflow: visible;
+        .ui-select-container.ui-select-bootstrap.dropdown {
+            .ui-select-match{
+                padding-top: 6px;
+                height: 23px;
+            }
+        }
+    }
     &.form-group-default-select2{
         padding: 0;
         & > label{
@@ -1164,6 +1199,19 @@ http://ivaynberg.github.io/select2/
     z-index: 700;
 }
 
+.ui-select-bootstrap .ui-select-choices-row.active > a{
+    background: @color-master-lighter;
+    border-radius: 3px;
+    color: @color-master;
+}
+.ui-select-bootstrap > .ui-select-choices{
+    background-color: #fff;
+    // box-shadow: 0px 4px 5px rgba(0,​ 0,​ 0,​ 0.15);
+}
+.ui-select-choices-group-label{
+    color: @color-master-dark;
+    font-weight: bold;
+}
 .modal-open{
     .select2-drop-active{
         z-index: 1051;
@@ -1215,6 +1263,7 @@ https://github.com/timschlechter/bootstrap-tagsinput
         border: none;
         margin-bottom: 0px;
         min-height: 25px;
+        min-width: 10em !important;
     }
     .tag {
         vertical-align: middle;
@@ -1863,6 +1912,10 @@ div.cs-skin-slide{
     transition-delay: 0.55s;
 }
 
+/* Dropzone for Angular */
+.dropzone[dropzone="dropzone"] input[type="file"]{
+    visibility: hidden;
+}
 /* end overrides */
 
 /* Demo specifc classes */
