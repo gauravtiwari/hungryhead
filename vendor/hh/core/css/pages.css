@@ -10067,80 +10067,80 @@ Main components
   z-index: 1;
 }
 .mapplic-pin {
-  background-image: url('../../assets/img/maps/marker-master.svg');
+  background-image: url('core/img/maps/marker-master.svg');
   background-size: contain;
 }
 .mapplic-pin.pulse {
-  background-image: url('../../assets/img/maps/pulse-master.svg');
+  background-image: url('core/img/maps/pulse-master.svg');
 }
 .mapplic-pin.pulse.green {
-  background-image: url('../../assets/img/maps/pulse-success.svg');
+  background-image: url('core/img/maps/pulse-success.svg');
 }
 .mapplic-pin.pulse.blue {
-  background-image: url('../../assets/img/maps/pulse-complete.svg');
+  background-image: url('core/img/maps/pulse-complete.svg');
 }
 .mapplic-pin.pulse.purple {
-  background-image: url('../../assets/img/maps/pulse-primary.svg');
+  background-image: url('core/img/maps/pulse-primary.svg');
 }
 .mapplic-pin.pulse.yellow {
-  background-image: url('../../assets/img/maps/pulse-warning.svg');
+  background-image: url('core/img/maps/pulse-warning.svg');
 }
 .mapplic-pin.pulse.red {
-  background-image: url('../../assets/img/maps/pulse-danger.svg');
+  background-image: url('core/img/maps/pulse-danger.svg');
 }
 .mapplic-pin.pulse-alt {
-  background-image: url('../../assets/img/maps/pulse-alt-master.svg');
+  background-image: url('core/img/maps/pulse-alt-master.svg');
 }
 .mapplic-pin.pulse-alt.green {
-  background-image: url('../../assets/img/maps/pulse-alt-success.svg');
+  background-image: url('core/img/maps/pulse-alt-success.svg');
 }
 .mapplic-pin.pulse-alt.blue {
-  background-image: url('../../assets/img/maps/pulse-alt-complete.svg');
+  background-image: url('core/img/maps/pulse-alt-complete.svg');
 }
 .mapplic-pin.pulse-alt.purple {
-  background-image: url('../../assets/img/maps/pulse-alt-primary.svg');
+  background-image: url('core/img/maps/pulse-alt-primary.svg');
 }
 .mapplic-pin.pulse-alt.yellow {
-  background-image: url('../../assets/img/maps/pulse-alt-warning.svg');
+  background-image: url('core/img/maps/pulse-alt-warning.svg');
 }
 .mapplic-pin.pulse-alt.red {
-  background-image: url('../../assets/img/maps/pulse-alt-danger.svg');
+  background-image: url('core/img/maps/pulse-alt-danger.svg');
 }
 .mapplic-pin.marker {
-  background-image: url('../../assets/img/maps/marker-master.svg');
+  background-image: url('core/img/maps/marker-master.svg');
 }
 .mapplic-pin.marker.green {
-  background-image: url('../../assets/img/maps/marker-success.svg');
+  background-image: url('core/img/maps/marker-success.svg');
 }
 .mapplic-pin.marker.blue {
-  background-image: url('../../assets/img/maps/marker-complete.svg');
+  background-image: url('core/img/maps/marker-complete.svg');
 }
 .mapplic-pin.marker.purple {
-  background-image: url('../../assets/img/maps/marker-primary.svg');
+  background-image: url('core/img/maps/marker-primary.svg');
 }
 .mapplic-pin.marker.yellow {
-  background-image: url('../../assets/img/maps/marker-warning.svg');
+  background-image: url('core/img/maps/marker-warning.svg');
 }
 .mapplic-pin.marker.red {
-  background-image: url('../../assets/img/maps/marker-danger.svg');
+  background-image: url('core/img/maps/marker-danger.svg');
 }
 .mapplic-pin.marker-alt {
-  background-image: url('../../assets/img/maps/marker-alt-master.svg');
+  background-image: url('core/img/maps/marker-alt-master.svg');
 }
 .mapplic-pin.marker-alt.green {
-  background-image: url('../../assets/img/maps/marker-alt-success.svg');
+  background-image: url('core/img/maps/marker-alt-success.svg');
 }
 .mapplic-pin.marker-alt.blue {
-  background-image: url('../../assets/img/maps/marker-alt-complete.svg');
+  background-image: url('core/img/maps/marker-alt-complete.svg');
 }
 .mapplic-pin.marker-alt.purple {
-  background-image: url('../../assets/img/maps/marker-alt-primary.svg');
+  background-image: url('core/img/maps/marker-alt-primary.svg');
 }
 .mapplic-pin.marker-alt.yellow {
-  background-image: url('../../assets/img/maps/marker-alt-warning.svg');
+  background-image: url('core/img/maps/marker-alt-warning.svg');
 }
 .mapplic-pin.marker-alt.red {
-  background-image: url('../../assets/img/maps/marker-alt-danger.svg');
+  background-image: url('core/img/maps/marker-alt-danger.svg');
 }
 /*------------------------------------------------------------------
 [27. Widgets]
@@ -10164,7 +10164,7 @@ Main components
   opacity: .69;
 }
 .widget-1:after {
-  background-image: url("../../assets/img/dashboard/pages_hero.jpg");
+  background-image: url("core/img/dashboard/pages_hero.jpg");
   background-size: cover;
   content: " ";
   left: 0;
@@ -10205,7 +10205,7 @@ Main components
   background: rgba(255, 255, 255, 0.3);
 }
 .widget-2:after {
-  background-image: url("../../assets/img/social/person-cropped.jpg");
+  background-image: url("core/img/social/person-cropped.jpg");
 }
 .widget-3 a {
   text-decoration: none;
@@ -10414,7 +10414,7 @@ Main components
 }
 .widget-18-post {
   height: 342px;
-  background: url('../../assets/img/social/quote.jpg');
+  background: url('core/img/social/quote.jpg');
   background-position: center center;
   background-size: cover;
 }
@@ -11685,7 +11685,7 @@ Main components
   opacity: 0.87;
 }
 .builder a.active:before {
-  background-image: url('../../assets/img//demo/tick.svg');
+  background-image: url('core/img//demo/tick.svg');
   width: 23px;
   height: 23px;
   content: '';
