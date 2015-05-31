@@ -15,16 +15,11 @@ jQuery(document).ready ->
 	$('#valid-form').validate();
 	$("[data-toggle='tooltip']").tooltip();
 
+	$.Pages.init()
+
 	$.each flashMessages, (key, value) ->
 	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
 	  	.show();
-
-	$('.scrollable').slimScroll maxHeight: '300px'
-
-	$('.follow-scrollable').slimScroll maxHeight: '350px'
-	$('.latest-scrollable').slimScroll maxHeight: '200px'
-
-	$('.messages-scrollable').slimScroll height: $(window).height() - 250
 
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
@@ -39,8 +34,6 @@ jQuery(document).ready ->
 		$('.profile-card').show()
 		$(@).closest('.edit-profile').hide()
 
-	#$('.chat-inner').slimScroll height: $(window).height() - 103
-
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
 			$('.sticky').css(position: "fixed", width: "16.90rem", height: "auto")
@@ -53,8 +46,6 @@ jQuery(document).ready ->
 	if Modernizr.mq 'only screen and (max-width: 991px)'
 		$('.col-md-3').each ->
 			$(@).removeClass 'no-padding'
-
-	$('.list-view-wrapper').scrollbar()
 
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()
