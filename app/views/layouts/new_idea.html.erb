@@ -16,9 +16,11 @@
     <% end %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
     <!--[if lte IE 9]>
-    <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
     <![endif]-->
+
     <script type="text/javascript" data-turbolinks-eval=false>
       window.onload = function() {
         // fix for windows 8
@@ -45,21 +47,29 @@
         }
       <% end %>
     <% end %>
+
     <%= csrf_meta_tags %>
+
     <% if user_signed_in? %>
       <%= render partial: 'shared/current_user' %>
     <% end %>
+
     <%= yield :head %>
+
   </head>
 
   <body class="fixed-header menu-behind">
+
     <div class="page-container">
       <%= render partial: 'globals/nav', locals: {bg: 'bg-white'} %>
+
       <div class="page-content-wrapper">
         <div class="content">
           <%= yield %>
         </div>
       </div>
     </div>
+
   </body>
+
 </html>
