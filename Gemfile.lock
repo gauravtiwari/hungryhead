@@ -339,6 +339,8 @@ GEM
     formatador (0.2.5)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    gaffe (1.0.2)
+      rails (>= 3.2.0)
     gemoji (2.1.0)
     github-markdown (0.6.8)
     globalid (0.3.5)
@@ -743,6 +745,7 @@ DEPENDENCIES
   foreman
   forgery
   friendly_id
+  gaffe
   gemoji
   github-markdown
   goldiloader
