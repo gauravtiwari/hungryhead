@@ -20,7 +20,7 @@ class Suggester
       "#{last_name[0]}#{first_name}",
       "#{last_name}#{first_name[0]}",
       "#{last_name}#{first_name}"
-    ].uniq.reject { |s| s.blank? }
+    ].uniq.reject { |s| s.empty? }
   end
 
   # Generates suggestions and making sure they are not in unavailable_suggestions
@@ -31,7 +31,7 @@ class Suggester
 
     results    = []
     candidates = name_combinations.clone
-    while results.size < number_of_suggestions && !candidates.blank?
+    while results.size < number_of_suggestions && !candidates.empty?
       candidate = candidates.shift
       if candidate.length <= 4
         # Don't add the candidate to result

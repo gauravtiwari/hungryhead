@@ -14,7 +14,7 @@
 	data_hash = JSON.parse(hobbies)
 	Hobby.destroy_all
 	data_hash.each do |tag|
-		if Hobby.find_by_slug("#{tag.parameterize}").blank?
+		if Hobby.find_by_slug("#{tag.parameterize}").empty?
 			Hobby.new(name: tag, description: tag, description: tag).save
 		end
 	end
@@ -24,7 +24,7 @@
 	data_hash = JSON.parse(markets)
 	Market.destroy_all
 	data_hash.each do |tag|
-		if Market.find_by_slug("#{tag.parameterize}").blank?
+		if Market.find_by_slug("#{tag.parameterize}").empty?
 			Market.new(name: tag, description: tag, description: tag).save
 		end
 	end
@@ -34,7 +34,7 @@
 	data_hash = JSON.parse(locations)
 	Location.destroy_all
 	data_hash.each do |tag|
-		if Location.find_by_slug("#{tag.parameterize}").blank?
+		if Location.find_by_slug("#{tag.parameterize}").empty?
 			Location.new(name: tag, description: tag, description: tag).save
 		end
 	end
@@ -44,7 +44,7 @@
 	data_hash = JSON.parse(subjects)
 	Subject.destroy_all
 	data_hash.each do |tag|
-		if Subject.find_by_slug("#{tag.parameterize}").blank?
+		if Subject.find_by_slug("#{tag.parameterize}").empty?
 			Subject.new(name: tag, description: tag, description: tag).save
 		end
 	end
