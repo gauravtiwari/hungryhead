@@ -78,10 +78,10 @@ var Plan = React.createClass({
             <div className="panel-controls p-r-60">
             <ul>
               <li>
-                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize pointer text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-master fs-12" onClick={this.openPlanForm}>{text}</a>
+                <a className="portlet-close pointer text-master fs-12" onClick={this.openPlanForm}>{text}</a>
               </li>
             </ul>
             </div>

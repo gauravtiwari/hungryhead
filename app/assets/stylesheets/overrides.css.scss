@@ -101,7 +101,18 @@ body, p {
   height: calc(100% - 103px);
 }
 .quickview-wrapper .nav-tabs {
-  background-color: #2b303b;
+  background-color: #5b98e0;
+}
+.quickview-wrapper .nav-tabs > li > a {
+  color: #fff;
+}
+.quickview-wrapper .nav-tabs > li > a:hover {
+  color: #fff;
+  opacity: 1;
+}
+.quickview-wrapper .nav-tabs > li.active > a {
+  color: #fff;
+  opacity: 1;
 }
 .thumbnail-wrapper.bordered.d100 {
   line-height: 110px;

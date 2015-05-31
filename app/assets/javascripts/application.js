@@ -3,7 +3,7 @@
 // BEGIN VENDOR JS FOR PAGES
 
 //= require jquery2
-//= require jquery.turbolinks
+//  require jquery.turbolinks
 //= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
@@ -13,13 +13,6 @@
 //= require jquery-ui/position
 //= require jquery-ui/draggable
 //= require jquery-ui/effect.all
-//= require plugins/jquery-unveil/jquery.unveil.min
-//= require plugins/jquery-bez/jquery.bez.min
-//= require plugins/jquery-ios-list/jquery.ioslist.min
-//= require plugins/imagesloaded/imagesloaded.pkgd.min
-//= require plugins/jquery-actual/jquery.actual.min
-//= require plugins/jquery-menuclipper/jquery.menuclipper
-//= require plugins/jquery-scrollbar/jquery.scrollbar.min
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -44,6 +37,13 @@
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
+//= require plugins/jquery-unveil/jquery.unveil.min
+//= require plugins/jquery-bez/jquery.bez.min
+//= require plugins/jquery-ios-list/jquery.ioslist.min
+//= require plugins/imagesloaded/imagesloaded.pkgd.min
+//= require plugins/jquery-actual/jquery.actual.min
+//= require plugins/jquery-menuclipper/jquery.menuclipper
+//= require plugins/jquery-scrollbar/jquery.scrollbar.min
 //= require react
 //= require react-infinite
 //= require react_ujs
@@ -54,7 +54,6 @@
 
 // Turbolinks and plugins
 //= require_tree .
-//= pusher_turbolinks
-//= require turbolinks
+// require turbolinks
 
 //Turbolinks.enableTransitionCache();

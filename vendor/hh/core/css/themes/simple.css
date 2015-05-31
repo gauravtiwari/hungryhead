@@ -1592,8 +1592,8 @@ body.dashboard .page-container {
   z-index: 602;
 }
 .panel-heading a {
-  color: #51646b !important;
-  opacity: .4;
+  color: #51646b;
+  opacity: .8;
 }
 .panel-heading a.portlet-refresh {
   -webkit-transition: opacity 0.3s ease;

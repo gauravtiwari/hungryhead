@@ -1,14 +1,14 @@
 <div id="quickview" class="quickview-wrapper" data-pages="quickview">
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs bg-solid">
     <li class="">
       <a href="#quickview-notes" data-toggle="tab">Notes</a>
     </li>
     <li>
-      <a href="#quickview-alerts" data-toggle="tab">Alerts</a>
+      <a href="#quickview-notifications" data-toggle="tab">Notifications</a>
     </li>
     <li class="active">
-      <a href="#quickview-chat" data-toggle="tab">Chat</a>
+      <a href="#quickview-conversations" data-toggle="tab">Conversations</a>
     </li>
   </ul>
   <a class="btn-link quickview-toggle" data-toggle-element="#quickview" data-toggle="quickview"><i class="pg-close"></i></a>
@@ -85,15 +85,15 @@
     </div>
     <!-- END Notes !-->
     <!-- BEGIN Alerts !-->
-    <div class="tab-pane fade no-padding" id="quickview-alerts">
-      <div class="view-port clearfix" id="alerts">
+    <div class="tab-pane fade no-padding" id="quickview-notifications">
+      <div class="view-port clearfix" id="notifications">
         <!-- BEGIN Alerts View !-->
         <div class="view bg-white">
           <!-- BEGIN View Header !-->
           <div class="navbar navbar-default navbar-sm">
             <div class="navbar-inner">
               <!-- BEGIN Header Controler !-->
-              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
                 <i class="pg-more"></i>
               </a>
               <!-- END Header Controler !-->
@@ -119,9 +119,9 @@
               <!-- END List Group Header!-->
               <ul>
                 <!-- BEGIN List Group Item!-->
-                <li class="alert-list">
+                <li class="notification-list">
                   <!-- BEGIN Alert Item Set Animation using data-view-animation !-->
-                  <a href="javascript:;" class="" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+                  <a href="javascript:;" class="" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
                     <p class="col-xs-height col-middle">
                       <span class="text-warning fs-10"><i class="fa fa-circle"></i></span>
                     </p>
@@ -147,20 +147,19 @@
       </div>
     </div>
     <!-- END Alerts !-->
-    <div class="tab-pane fade in active no-padding" id="quickview-chat">
-      <div class="view-port clearfix" id="chat">
+    <div class="tab-pane fade in active no-padding" id="quickview-conversations">
+      <div class="view-port clearfix" id="conversations">
         <div class="view bg-white">
           <!-- BEGIN View Header !-->
           <div class="navbar navbar-default">
             <div class="navbar-inner">
               <!-- BEGIN Header Controler !-->
-              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
                 <i class="pg-plus"></i>
               </a>
               <!-- END Header Controler !-->
               <div class="view-heading">
-                Chat List
-                <div class="fs-11">Show All</div>
+                Conversations
               </div>
               <!-- BEGIN Header Controler !-->
               <a href="#" class="inline action p-r-10 pull-right link text-master">
@@ -176,8 +175,8 @@
                 a</div>
               <ul>
                 <!-- BEGIN Chat User List Item  !-->
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/1x.jpg" data-src="assets/profiles/1.jpg" src="assets/profiles/1x.jpg" class="col-top">
@@ -198,8 +197,8 @@
                 d</div>
               <ul>
                 <!-- BEGIN Chat User List Item  !-->
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/1x.jpg" data-src="assets/profiles/1.jpg" src="assets/profiles/1x.jpg" class="col-top">
@@ -220,8 +219,8 @@
                 e</div>
               <ul>
                 <!-- BEGIN Chat User List Item  !-->
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/1x.jpg" data-src="assets/profiles/1.jpg" src="assets/profiles/1x.jpg" class="col-top">
@@ -240,8 +239,8 @@
               <div class="list-view-group-header text-uppercase">b</div>
               <ul>
                 <!-- BEGIN Chat User List Item  !-->
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/2x.jpg" data-src="assets/profiles/2.jpg" src="assets/profiles/2x.jpg" class="col-top">
@@ -255,8 +254,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
                 <!-- BEGIN Chat User List Item  !-->
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -270,8 +269,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -285,8 +284,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -300,8 +299,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -315,8 +314,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -330,8 +329,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -345,8 +344,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -360,8 +359,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -375,8 +374,8 @@
                 </li>
                 <!-- END Chat User List Item  !-->
 
-                <li class="chat-user-list clearfix">
-                  <a data-view-animation="push-parrallax" data-view-port="#chat" data-navigate="view" class="" href="#">
+                <li class="conversations-user-list clearfix">
+                  <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" class="" href="#">
                     <span class="col-xs-height col-middle">
                     <span class="thumbnail-wrapper d32 circular bg-success">
                         <img width="34" height="34" alt="" data-src-retina="assets/profiles/3x.jpg" data-src="assets/profiles/3.jpg" src="assets/profiles/3x.jpg" class="col-top">
@@ -394,11 +393,11 @@
           </div>
         </div>
         <!-- BEGIN Conversation View  !-->
-        <div class="view chat-view bg-white clearfix" >
+        <div class="view conversations-view bg-white clearfix" >
           <!-- BEGIN Header  !-->
           <div class="navbar navbar-default">
             <div class="navbar-inner">
-              <a href="javascript:;" class="link text-master inline action p-l-10" data-navigate="view" data-view-port="#chat" data-view-animation="push-parrallax">
+              <a href="javascript:;" class="link text-master inline action p-l-10" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
                 <i class="pg-arrow_left"></i>
               </a>
               <div class="view-heading">
@@ -412,10 +411,10 @@
           </div>
           <!-- END Header  !-->
           <!-- BEGIN Conversation  !-->
-          <div class="chat-inner">
+          <div class="conversations-inner">
             <!-- BEGIN From Me Message  !-->
             <div class="message clearfix">
-              <div class="chat-bubble from-me">
+              <div class="conversations-bubble from-me">
                 Hello there
               </div>
             </div>
@@ -425,22 +424,22 @@
               <div class="profile-img-wrapper m-t-5 inline">
                 <img class="col-top" width="30" height="30" src="assets/profiles/avatar_small.jpg" alt="" data-src="assets/profiles/avatar_small.jpg" data-src-retina="assets/profiles/avatar_small2x.jpg">
               </div>
-              <div class="chat-bubble from-them">
+              <div class="conversations-bubble from-them">
                 Hey
               </div>
             </div>
             <!-- END From Them Message  !-->
             <!-- BEGIN From Me Message  !-->
             <div class="message clearfix">
-              <div class="chat-bubble from-me">
+              <div class="conversations-bubble from-me">
                 Did you check out Pages framework ?
               </div>
             </div>
             <!-- END From Me Message  !-->
             <!-- BEGIN From Me Message  !-->
             <div class="message clearfix">
-              <div class="chat-bubble from-me">
-                Its an awesome chat
+              <div class="conversations-bubble from-me">
+                Its an awesome conversations
               </div>
             </div>
             <!-- END From Me Message  !-->
@@ -449,7 +448,7 @@
               <div class="profile-img-wrapper m-t-5 inline">
                 <img class="col-top" width="30" height="30" src="assets/profiles/avatar_small.jpg" alt="" data-src="assets/profiles/avatar_small.jpg" data-src-retina="assets/profiles/avatar_small2x.jpg">
               </div>
-              <div class="chat-bubble from-them">
+              <div class="conversations-bubble from-them">
                 Yea
               </div>
             </div>
@@ -463,7 +462,7 @@
                 <a href="#" class="link text-master"><i class="fa fa-plus-circle"></i></a>
               </div>
               <div class="col-xs-8 no-padding">
-                <input type="text" class="form-control chat-input" data-chat-input="" data-chat-conversation="#my-conversation" placeholder="Say something">
+                <input type="text" class="form-control conversations-input" data-conversations-input="" data-conversations-conversation="#my-conversation" placeholder="Say something">
               </div>
               <div class="col-xs-2 link text-master m-l-10 m-t-15 p-l-10 b-l b-grey col-top">
                 <a href="#" class="link text-master"><i class="pg-camera"></i></a>

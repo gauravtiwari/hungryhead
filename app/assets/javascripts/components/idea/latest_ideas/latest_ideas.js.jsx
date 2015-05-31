@@ -107,7 +107,7 @@ var LatestIdeas = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body no-padding full-border-light scrollable">
+          <div className="panel-body no-padding full-border-light scrollable" style={styles}>
             <ul className="trending-list p-t-10 no-style" ref="trendingList" style={styles}>
              {content}
             </ul>
