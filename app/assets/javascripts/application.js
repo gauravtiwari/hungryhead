@@ -51,7 +51,6 @@
 
 // Core Javascripts
 //= require core/js/pages
-//= require core/js/pages.email
 
 // Turbolinks and plugins
 //= require_tree .
