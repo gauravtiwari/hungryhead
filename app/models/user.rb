@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_save :seed_fund, :seed_settings, unless: :is_admin
   after_create :increment_counters
-  after_save :load_into_soulmate, :delete_latest_cache, :rebuild_notifications, unless: :is_admin
+  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -253,14 +253,6 @@ class User < ActiveRecord::Base
   def has_notifications?
     #check if user has notifications
     ticker.members.length > 0
-  end
-
-  def delete_latest_cache
-    if rebuild_cache? || mini_bio_changed?
-      $redis.del("popular_20_user")
-      $redis.del("trending_20_user")
-      $redis.del("latest_listing_user")
-    end
   end
 
   #Load data to redis using soulmate after_save
