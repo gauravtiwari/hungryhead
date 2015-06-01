@@ -1,12 +1,12 @@
 <%
   stats = {
-    followers_count: number_to_human(@idea.followers_counter.value),
-    feedbacks_count: number_to_human(@idea.feedbackers_counter.value),
-    investments_count: number_to_human(@idea.investors_counter.value),
-    views_count: number_to_human(@idea.views_counter.value),
-    comments_count: number_to_human(@idea.comments_counter.value),
-    votes_count: number_to_human(@idea.votes_counter.value),
-    score: number_to_human(Idea.leaderboard.score(@idea.id))
+    followers_count: number_to_human(@idea.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    feedbacks_count: number_to_human(@idea.feedbackers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    investments_count: number_to_human(@idea.investors_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    views_count: number_to_human(@idea.views_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    comments_count: number_to_human(@idea.comments_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    votes_count: number_to_human(@idea.votes_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    score: number_to_human(Idea.leaderboard.score(@idea.id),  :format => '%n%u', :units => { :thousand => 'K' })
   }.to_json
 %>
 <%= react_component('IdeaCardStats', {data: stats}) %>
