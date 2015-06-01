@@ -1,0 +1,73 @@
+<div id="conversationsPanel" class="quickview-wrapper open" data-pages="quickview">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs bg-solid auto-margin">
+    <li class="active">
+      <a>Conversations</a>
+    </li>
+  </ul>
+  <a class="btn-link quickview-toggle" data-toggle-element="#conversationsPanel" data-toggle="sidePanel"><i class="pg-close"></i></a>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane fade no-padding in active" id="quickview-conversations">
+
+      <div class="view-port clearfix" id="conversations">
+        <div class="view bg-white" id="conversations-list-view">
+          <div class="navbar navbar-default">
+            <div class="navbar-inner">
+              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
+                <i class="pg-plus"></i>
+              </a>
+              <div class="view-heading">
+                Conversations
+              </div>
+              <a href="#" class="inline action p-r-10 pull-right link text-master">
+                <i class="pg-more"></i>
+              </a>
+            </div>
+          </div>
+
+          <% if @conversations.empty? %>
+            <div class="no-content hint-text">No conversations</div>
+          <% else %>
+            <div data-init-list-view="ioslist" class="list-view boreded no-top-border">
+              <% @conversations.each do |conversation| %>
+              <div class="list-view-group-container">
+                <div class="list-view-group-header text-uppercase">
+                  <%= conversation.last_message.sender.name.first %>
+                </div>
+                <ul>
+                  <li class="conversations-user-list clearfix">
+                    <a  class="" href="<%= conversation_path(conversation.id) %>" data-remote="true">
+                      <span class="col-xs-height col-middle">
+                        <% if conversation.last_message.sender.avatar.present? %>
+                          <span class="thumbnail-wrapper d32 circular bg-success">
+                              <%= image_tag(conversation.last_message.sender.avatar.url(:avatar), data: {src: {retina: conversation.last_message.sender.avatar.url(:avatar)}, src: conversation.last_message.sender.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+                          </span>
+                        <% else %>
+                          <div class="thumbnail-wrapper d32 inline circular">
+                            <span class="placeholder bold text-white">
+                              <%= conversation.last_message.sender.user_name_badge %>
+                            </span>
+                          </div>
+                        <% end %>
+                      </span>
+                      <p class="p-l-10 col-xs-height col-middle col-xs-12">
+                        <span class="text-master"><%= conversation.last_message.sender.name %></span>
+                        <span class="block text-master hint-text fs-12"><%= truncate(conversation.last_message.body, length: 50) %></span>
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="view conversations-view bg-white clearfix" id="conversation-messages-view">
+
+        </div>
+        <!-- END Conversation View  !-->
+      </div>
+    </div>
+  </div>
+</div>
