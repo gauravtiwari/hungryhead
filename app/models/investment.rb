@@ -12,7 +12,6 @@ class Investment < ActiveRecord::Base
   belongs_to :idea
 
   #Includes concerns
-  include Sluggable
   include Commentable
   include Votable
 
@@ -30,14 +29,6 @@ class Investment < ActiveRecord::Base
   end
 
 	private
-
-  def should_generate_new_friendly_id?
-    slug.blank? || uuid_changed?
-  end
-
-  def slug_candidates
-    [:uuid]
-  end
 
   def cancel_investment
     #Update idea and user balance

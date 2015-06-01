@@ -21,12 +21,8 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
 
-  extend FriendlyId
-  friendly_id :slug_candidates
-
   #Includes concerns
   include Commentable
-  include Sluggable
   include Sharings
   include Votable
   include Scorable
@@ -42,14 +38,6 @@ class Post < ActiveRecord::Base
   end
 
   private
-
-  def slug_candidates
-    [:uuid]
-  end
-
-  def should_generate_new_friendly_id?
-    slug.blank? || uuid_changed?
-  end
 
   def increment_counter
     user.posts_counter.increment

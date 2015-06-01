@@ -18,7 +18,6 @@ class Feedback < ActiveRecord::Base
   sorted_set :trending, global: true
 
   #Includes concerns
-  include Sluggable
   include Commentable
   include Sharings
   include Votable
@@ -51,14 +50,6 @@ class Feedback < ActiveRecord::Base
   end
 
   private
-
-  def slug_candidates
-    [:uuid]
-  end
-
-  def should_generate_new_friendly_id?
-    slug.blank? || uuid_changed?
-  end
 
   def increment_counters
     #Increment feedbacks counter for idea and user

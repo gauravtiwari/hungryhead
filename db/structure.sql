@@ -83,7 +83,6 @@ CREATE TABLE activities (
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     uuid uuid DEFAULT uuid_generate_v4(),
-    slug character varying DEFAULT ''::character varying NOT NULL,
     published boolean DEFAULT true,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
@@ -185,7 +184,6 @@ ALTER SEQUENCE badges_sashes_id_seq OWNED BY badges_sashes.id;
 
 CREATE TABLE comments (
     id integer NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
     commentable_id integer NOT NULL,
     commentable_type character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
@@ -258,7 +256,6 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 CREATE TABLE feedbacks (
     id integer NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
-    slug character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
@@ -365,7 +362,6 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 CREATE TABLE idea_messages (
     id integer NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
     student_id integer NOT NULL,
     idea_id integer NOT NULL,
     body text NOT NULL,
@@ -457,7 +453,6 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 CREATE TABLE investments (
     id integer NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
-    slug character varying DEFAULT ''::character varying NOT NULL,
     amount integer NOT NULL,
     message character varying,
     user_id integer NOT NULL,
@@ -951,7 +946,6 @@ CREATE TABLE posts (
     uuid uuid DEFAULT uuid_generate_v4(),
     title character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
-    slug character varying DEFAULT ''::character varying NOT NULL,
     status integer,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1301,7 +1295,6 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
-    uid character varying DEFAULT ''::character varying NOT NULL,
     email character varying NOT NULL,
     first_name character varying DEFAULT ''::character varying NOT NULL,
     last_name character varying DEFAULT ''::character varying NOT NULL,
@@ -1355,7 +1348,8 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    uid character varying
 );
 
 
@@ -2067,17 +2061,17 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 
 
 --
--- Name: index_activities_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_slug ON activities USING btree (slug);
-
-
---
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
+
+
+--
+-- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
 
 
 --
@@ -2193,13 +2187,6 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 
 
 --
--- Name: index_feedbacks_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_slug ON feedbacks USING btree (slug);
-
-
---
 -- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2211,6 +2198,13 @@ CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
 
 
 --
@@ -2333,17 +2327,17 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 
 
 --
--- Name: index_investments_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_investments_on_slug ON investments USING btree (slug);
-
-
---
 -- Name: index_investments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
+
+
+--
+-- Name: index_investments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investments_on_uuid ON investments USING btree (uuid);
 
 
 --
@@ -2508,13 +2502,6 @@ CREATE INDEX index_posts_on_sash_id ON posts USING btree (sash_id);
 
 
 --
--- Name: index_posts_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_posts_on_slug ON posts USING btree (slug);
-
-
---
 -- Name: index_posts_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2526,6 +2513,13 @@ CREATE INDEX index_posts_on_status ON posts USING btree (status);
 --
 
 CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
+
+
+--
+-- Name: index_posts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_posts_on_uuid ON posts USING btree (uuid);
 
 
 --
@@ -2739,6 +2733,13 @@ CREATE INDEX index_users_on_type ON users USING btree (type);
 
 
 --
+-- Name: index_users_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_uid ON users USING btree (uid);
+
+
+--
 -- Name: index_version_associations_on_foreign_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2862,9 +2863,9 @@ ALTER TABLE ONLY shares
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('1');
-
 INSERT INTO schema_migrations (version) VALUES ('20140805183219');
+
+INSERT INTO schema_migrations (version) VALUES ('20140805183225');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184102');
 
@@ -2965,4 +2966,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150514213100');
 INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
+
+INSERT INTO schema_migrations (version) VALUES ('20150528181322');
 
