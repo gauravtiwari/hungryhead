@@ -51,6 +51,20 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -250,7 +264,9 @@ CREATE TABLE feedbacks (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    slug character varying DEFAULT ''::character varying NOT NULL
 );
 
 
@@ -441,7 +457,9 @@ CREATE TABLE investments (
     idea_id integer NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    slug character varying DEFAULT ''::character varying NOT NULL
 );
 
 
@@ -933,7 +951,8 @@ CREATE TABLE posts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    uuid uuid DEFAULT uuid_generate_v4()
 );
 
 
@@ -2161,6 +2180,13 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 
 
 --
+-- Name: index_feedbacks_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_feedbacks_on_slug ON feedbacks USING btree (slug);
+
+
+--
 -- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2172,6 +2198,13 @@ CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
 
 
 --
@@ -2294,10 +2327,24 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 
 
 --
+-- Name: index_investments_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_investments_on_slug ON investments USING btree (slug);
+
+
+--
 -- Name: index_investments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
+
+
+--
+-- Name: index_investments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_investments_on_uuid ON investments USING btree (uuid);
 
 
 --
@@ -2480,6 +2527,13 @@ CREATE INDEX index_posts_on_status ON posts USING btree (status);
 --
 
 CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
+
+
+--
+-- Name: index_posts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_posts_on_uuid ON posts USING btree (uuid);
 
 
 --
@@ -2926,4 +2980,16 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601110556');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601110725');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601111000');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601111354');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601112946');
+
+INSERT INTO schema_migrations (version) VALUES ('20150601113031');
 
