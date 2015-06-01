@@ -61,6 +61,10 @@ class School < ActiveRecord::Base
 
 	private
 
+	def should_generate_new_friendly_id?
+	  slug.blank? || name_changed?
+	end
+
 	def load_into_soulmate
 		loader = Soulmate::Loader.new("schools")
 		loader.add(

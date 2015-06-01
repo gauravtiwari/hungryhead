@@ -32,12 +32,16 @@ class Investment < ActiveRecord::Base
 
 	private
 
+  def should_generate_new_friendly_id?
+    slug.blank? || uuid_changed?
+  end
+
   def slug_candidates
     [:uuid]
   end
 
   def add_uuid
-    self.uuid = "#{self.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
+    self.uuid = "#{self.class.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
   end
 
   def cancel_investment

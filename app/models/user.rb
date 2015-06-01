@@ -194,6 +194,10 @@ class User < ActiveRecord::Base
     admin?
   end
 
+  def should_generate_new_friendly_id?
+    slug.blank? || username_changed?
+  end
+
   def name_not_present?
     !first_name.present? && !last_name.present?
   end

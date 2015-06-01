@@ -48,10 +48,6 @@ class Feedback < ActiveRecord::Base
     [:uuid]
   end
 
-  def add_uuid
-    self.uuid = "#{self.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
-  end
-
   def can_score?
     true
   end
@@ -61,6 +57,15 @@ class Feedback < ActiveRecord::Base
   end
 
   private
+
+
+  def should_generate_new_friendly_id?
+    slug.blank? || uuid_changed?
+  end
+
+  def add_uuid
+    self.uuid = "#{self.class.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
+  end
 
   def increment_counters
     #Increment feedbacks counter for idea and user
