@@ -10,7 +10,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> shared a post - <%= link_to(activity.trackable.title, profile_posts_post_path(activity.user, activity.trackable)) %>
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> shared a post - <%= link_to(activity.trackable.title, profile_posts_post_path(activity.user, activity.trackable.uuid)) %>
 
 		   	<h6>
 		   		<% if activity.user.locations %>

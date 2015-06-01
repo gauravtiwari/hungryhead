@@ -10,7 +10,7 @@
 	    </div>
 
 	    <div class="text-master-dark">
-	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> left a <i class="fa fa-comment"></i> <%= link_to('feedback', idea_feedback_path(activity.recipient, activity.trackable.uuid)) %> for
 
 			<% if activity.recipient.team_ids.include?(current_user.id.to_s) %>
 				your idea
@@ -32,7 +32,7 @@
 		        <% end %>
 		        <span class="time semi-bold">
 		          <i class="fa fa-clock-o"></i>
-			        	<%= link_to(idea_path(activity.trackable), class: "text-master") do %>
+			        	<%= link_to(idea_feedback_path(activity.recipient, activity.trackable.uuid), class: "text-master") do %>
 								<%= local_time_ago(activity.created_at) %>
 							<% end %>
 		        </span>

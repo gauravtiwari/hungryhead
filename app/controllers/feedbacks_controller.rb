@@ -29,7 +29,7 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks/1
   # GET /feedbacks/1.json
   def show
-    @team = User.find(@idea.team)
+    @team = User.find(@idea.team_ids)
     authorize @feedback.idea
     @feedbacks = @feedback.comment_threads
     .paginate(:page => params[:page], :per_page => 20)
@@ -97,7 +97,7 @@ class FeedbacksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
-      @feedback = Feedback.find(params[:id])
+      @feedback = Feedback.find_by_uuid(params[:id])
     end
 
     def set_props
