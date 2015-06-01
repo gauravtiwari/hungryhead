@@ -17,7 +17,7 @@ class Investment < ActiveRecord::Base
   include Votable
 
   #Model Callbacks
-  before_save :add_uuid
+  before_create :add_uuid
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_create  :increment_counters
 

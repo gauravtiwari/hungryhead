@@ -1,6 +1,7 @@
 class Feedback < ActiveRecord::Base
 
   include Redis::Objects
+  has_merit
 
   #redis counters
   counter :votes_counter
@@ -22,8 +23,6 @@ class Feedback < ActiveRecord::Base
   include Sharings
   include Votable
 
-  has_merit
-
   #Associations
   belongs_to :idea
   belongs_to :user
@@ -38,15 +37,11 @@ class Feedback < ActiveRecord::Base
   store_accessor :parameters, :tags
 
   #Hooks
-  before_save :add_uuid
+  before_create :add_uuid
   before_destroy :decrement_counters, :delete_activity
   after_create :increment_counters
 
   public
-
-  def slug_candidates
-    [:uuid]
-  end
 
   def can_score?
     true
@@ -58,6 +53,9 @@ class Feedback < ActiveRecord::Base
 
   private
 
+  def slug_candidates
+    [:uuid]
+  end
 
   def should_generate_new_friendly_id?
     slug.blank? || uuid_changed?

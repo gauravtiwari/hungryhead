@@ -18,12 +18,10 @@ class Post < ActiveRecord::Base
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
-  has_merit
+  belongs_to :user
 
   extend FriendlyId
   friendly_id :slug_candidates
-
-  belongs_to :user
 
   #Includes concerns
   include Commentable
@@ -34,7 +32,7 @@ class Post < ActiveRecord::Base
 
   #Model callbacks
   after_create :increment_counter
-  before_save :add_uuid
+  before_create :add_uuid
   before_destroy :decrement_counter, :delete_activity
 
   public
