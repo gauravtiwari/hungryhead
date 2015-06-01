@@ -3,16 +3,6 @@ production:
   after_rails:
     -
       apply_during: all
-      destination: /tmp/dbseed.sh
-      execute: true
-      run_on: single_server
-      source: /.cloud66/dbseed.sh
-      target: rails
-
-staging:
-  after_rails:
-    -
-      apply_during: all
       destination: /tmp/rake_task.sh
       execute: true
       run_on: all_servers
@@ -22,8 +12,8 @@ staging:
   after_rails:
     -
       apply_during: all
-      source: /.cloud66/dbseed.sh
       destination: /tmp/dbseed.sh
       execute: true
       run_on: single_server
+      source: /.cloud66/dbseed.sh
       target: rails
