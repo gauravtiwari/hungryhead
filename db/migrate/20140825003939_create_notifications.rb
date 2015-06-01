@@ -14,6 +14,7 @@ class CreateNotifications < ActiveRecord::Migration
       t.string  :key, null: false, default: ""
 
       t.jsonb    :parameters, default: "{}"
+
       t.boolean :published, default: true
 
       t.belongs_to :recipient, :polymorphic => true , null: false

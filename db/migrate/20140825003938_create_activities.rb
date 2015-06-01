@@ -10,7 +10,11 @@ class CreateActivities < ActiveRecord::Migration
 
       t.string  :key , null: false, default: ""
 
-      t.jsonb    :parameters, default: "{}"
+      t.jsonb :parameters, default: "{}"
+
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
+
+      t.string :slug, :unique => true, null: false, default: ""
 
       t.boolean :published, default: true
 
@@ -21,6 +25,7 @@ class CreateActivities < ActiveRecord::Migration
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
     add_index :activities, [:published], algorithm: :concurrently
+    add_index :activities, :slug, algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently
   end
   # Drop table
