@@ -82,6 +82,8 @@ CREATE TABLE activities (
     user_id integer NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    slug character varying DEFAULT ''::character varying NOT NULL,
     published boolean DEFAULT true,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
@@ -183,6 +185,7 @@ ALTER SEQUENCE badges_sashes_id_seq OWNED BY badges_sashes.id;
 
 CREATE TABLE comments (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     commentable_id integer NOT NULL,
     commentable_type character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
@@ -254,6 +257,8 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 CREATE TABLE feedbacks (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    slug character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
@@ -264,9 +269,7 @@ CREATE TABLE feedbacks (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    uuid uuid DEFAULT uuid_generate_v4(),
-    slug character varying DEFAULT ''::character varying NOT NULL
+    level integer DEFAULT 0
 );
 
 
@@ -362,6 +365,7 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 CREATE TABLE idea_messages (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     student_id integer NOT NULL,
     idea_id integer NOT NULL,
     body text NOT NULL,
@@ -397,6 +401,7 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 CREATE TABLE ideas (
     id integer NOT NULL,
     student_id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     name character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
@@ -451,15 +456,15 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 
 CREATE TABLE investments (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    slug character varying DEFAULT ''::character varying NOT NULL,
     amount integer NOT NULL,
     message character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
-    slug character varying DEFAULT ''::character varying NOT NULL
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -903,6 +908,7 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 CREATE TABLE organizations (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     email character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
     slug character varying NOT NULL,
@@ -943,6 +949,7 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 CREATE TABLE posts (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     title character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
@@ -951,8 +958,7 @@ CREATE TABLE posts (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    uuid uuid DEFAULT uuid_generate_v4()
+    level integer DEFAULT 0
 );
 
 
@@ -1125,6 +1131,7 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 CREATE TABLE shares (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     body text DEFAULT ''::text NOT NULL,
     status integer,
     privacy integer,
@@ -2061,6 +2068,13 @@ CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities U
 
 
 --
+-- Name: index_activities_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_slug ON activities USING btree (slug);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2183,7 +2197,7 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 -- Name: index_feedbacks_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_feedbacks_on_slug ON feedbacks USING btree (slug);
+CREATE INDEX index_feedbacks_on_slug ON feedbacks USING btree (slug);
 
 
 --
@@ -2198,13 +2212,6 @@ CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
 --
 
 CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
-
-
---
--- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
 
 
 --
@@ -2330,7 +2337,7 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 -- Name: index_investments_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_investments_on_slug ON investments USING btree (slug);
+CREATE INDEX index_investments_on_slug ON investments USING btree (slug);
 
 
 --
@@ -2338,13 +2345,6 @@ CREATE UNIQUE INDEX index_investments_on_slug ON investments USING btree (slug);
 --
 
 CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
-
-
---
--- Name: index_investments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_investments_on_uuid ON investments USING btree (uuid);
 
 
 --
@@ -2527,13 +2527,6 @@ CREATE INDEX index_posts_on_status ON posts USING btree (status);
 --
 
 CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
-
-
---
--- Name: index_posts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_posts_on_uuid ON posts USING btree (uuid);
 
 
 --
@@ -2877,6 +2870,8 @@ ALTER TABLE ONLY shares
 
 SET search_path TO "$user",public;
 
+INSERT INTO schema_migrations (version) VALUES ('1');
+
 INSERT INTO schema_migrations (version) VALUES ('20140805183219');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184102');
@@ -2980,16 +2975,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601110556');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601110725');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601111000');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601111354');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601112946');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601113031');
 
