@@ -1,6 +1,5 @@
 class Notification < ActiveRecord::Base
   include Feedable
-  include NotificationRenderable
 
   public
 
