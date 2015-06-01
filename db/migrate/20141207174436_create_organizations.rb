@@ -2,8 +2,6 @@ class CreateOrganizations < ActiveRecord::Migration
   def change
     create_table :organizations do |t|
 
-      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
-
       t.string :email, :null => false, default: ""
       t.string :name, :null => false, unique: true
 

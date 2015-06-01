@@ -3,8 +3,6 @@ class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments, :force => true do |t|
 
-      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
-
       t.references :commentable, polymorphic: true, null: false
 
       t.text :body, null: false, default: ""

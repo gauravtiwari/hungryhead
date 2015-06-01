@@ -908,7 +908,6 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 CREATE TABLE organizations (
     id integer NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
     email character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
     slug character varying NOT NULL,
@@ -1302,6 +1301,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 CREATE TABLE users (
     id integer NOT NULL,
+    uid character varying DEFAULT ''::character varying NOT NULL,
     email character varying NOT NULL,
     first_name character varying DEFAULT ''::character varying NOT NULL,
     last_name character varying DEFAULT ''::character varying NOT NULL,
@@ -1355,8 +1355,7 @@ CREATE TABLE users (
     invited_by_type character varying,
     invitations_count integer DEFAULT 0,
     sash_id integer,
-    level integer DEFAULT 0,
-    uid character varying
+    level integer DEFAULT 0
 );
 
 
@@ -2740,13 +2739,6 @@ CREATE INDEX index_users_on_type ON users USING btree (type);
 
 
 --
--- Name: index_users_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_uid ON users USING btree (uid);
-
-
---
 -- Name: index_version_associations_on_foreign_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2973,6 +2965,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150514213100');
 INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
-
-INSERT INTO schema_migrations (version) VALUES ('20150528181322');
 

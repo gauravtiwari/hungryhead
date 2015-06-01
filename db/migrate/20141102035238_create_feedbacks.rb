@@ -7,8 +7,6 @@ class CreateFeedbacks < ActiveRecord::Migration
 
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
 
-      t.string :slug, :unique => true, null: false, default: ""
-
       t.text :body, :null => false, default: ""
 
       t.references :idea, :null => false
@@ -30,10 +28,11 @@ class CreateFeedbacks < ActiveRecord::Migration
     add_index :feedbacks, :status, algorithm: :concurrently
     add_index :feedbacks, :badge, algorithm: :concurrently
 
-    add_index :feedbacks, :slug, algorithm: :concurrently
+    add_index :feedbacks, :uuid, algorithm: :concurrently
 
     add_index :feedbacks, :parameters, using: :gin
     add_index :feedbacks, :idea_id, algorithm: :concurrently
+
   end
 
 end

@@ -1,6 +1,9 @@
 class CreateMeritActions < ActiveRecord::Migration
+
   def self.up
+
     create_table :merit_actions do |t|
+
       t.integer :user_id
       t.string  :action_method
       t.integer :action_value
@@ -11,6 +14,7 @@ class CreateMeritActions < ActiveRecord::Migration
       t.boolean :processed, default: false
       t.timestamps null: false
     end
+
   end
 
   def self.down

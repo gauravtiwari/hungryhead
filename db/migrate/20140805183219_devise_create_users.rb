@@ -3,15 +3,21 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
 
+      t.string :uid, null: false, default: ""
+
       ## Database authenticatable
       t.string :email, :null => false
+
       t.string :first_name, null: false, :default => ""
       t.string :last_name, null: false, :default => ""
+
       t.string :name, null: false, :default => ""
+
       t.string :username, null: false, :default => ""
       t.string :avatar, :default => ""
       t.string :type, :default => "User", index: true
       t.string :cover, :default => ""
+
       t.string :slug
 
       t.string :mini_bio, default: ""
@@ -69,6 +75,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
       t.timestamps null: false
     end
+
     add_index :users, :school_id, algorithm: :concurrently
     add_index :users, :email,                :unique => true, algorithm: :concurrently
     add_index :users, :slug,                :unique => true, algorithm: :concurrently

@@ -3,6 +3,6 @@ class AddIdeaIndexes < ActiveRecord::Migration
   def change
     add_index :investments, :user_id, algorithm: :concurrently
     add_index :investments, :idea_id, algorithm: :concurrently
-    add_index :investments, :slug, algorithm: :concurrently
+    add_index :investments, :uuid, algorithm: :concurrently
   end
 end

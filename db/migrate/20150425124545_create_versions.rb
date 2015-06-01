@@ -1,5 +1,7 @@
 class CreateVersions < ActiveRecord::Migration
+
   disable_ddl_transaction!
+
   def change
     create_table :versions do |t|
       t.string   :item_type, :null => false
@@ -13,6 +15,9 @@ class CreateVersions < ActiveRecord::Migration
       t.json     :object
       t.datetime :created_at
     end
+
     add_index :versions, [:item_type, :item_id], algorithm: :concurrently
+
   end
+
 end

@@ -6,8 +6,6 @@ class CreateInvestments < ActiveRecord::Migration
 
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
 
-      t.string :slug, :unique => true, null: false, default: ""
-
       t.integer :amount, :null => false
 
       t.string :message

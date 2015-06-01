@@ -3,8 +3,6 @@ class CreateIdeaMessages < ActiveRecord::Migration
   def change
     create_table :idea_messages do |t|
 
-      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
-
       t.references :student, :null => false
       t.references :idea, :null => false
 
