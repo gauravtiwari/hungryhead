@@ -34,6 +34,7 @@ class Post < ActiveRecord::Base
 
   #Model callbacks
   after_create :increment_counter
+  before_save :add_uuid
   before_destroy :decrement_counter, :delete_activity
 
   public
@@ -45,8 +46,12 @@ class Post < ActiveRecord::Base
   private
 
   def slug_candidates
-    [:title, [:title, :id]]
+    [:uuid]
   end
+
+ def add_uuid
+   self.uuid = "#{self.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
+ end
 
   def increment_counter
     user.posts_counter.increment

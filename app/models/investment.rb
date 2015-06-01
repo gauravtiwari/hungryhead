@@ -12,10 +12,12 @@ class Investment < ActiveRecord::Base
   belongs_to :idea
 
   #Includes concerns
+  include Sluggable
   include Commentable
   include Votable
 
   #Model Callbacks
+  before_save :add_uuid
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_create  :increment_counters
 
@@ -29,6 +31,14 @@ class Investment < ActiveRecord::Base
   end
 
 	private
+
+  def slug_candidates
+    [:uuid]
+  end
+
+  def add_uuid
+    self.uuid = "#{self.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
+  end
 
   def cancel_investment
     #Update idea and user balance

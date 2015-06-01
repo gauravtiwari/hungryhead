@@ -17,6 +17,7 @@ class Feedback < ActiveRecord::Base
   sorted_set :trending, global: true
 
   #Includes concerns
+  include Sluggable
   include Commentable
   include Sharings
   include Votable
@@ -37,10 +38,19 @@ class Feedback < ActiveRecord::Base
   store_accessor :parameters, :tags
 
   #Hooks
+  before_save :add_uuid
   before_destroy :decrement_counters, :delete_activity
   after_create :increment_counters
 
   public
+
+  def slug_candidates
+    [:uuid]
+  end
+
+  def add_uuid
+    self.uuid = "#{self.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
+  end
 
   def can_score?
     true
