@@ -162,7 +162,7 @@ module Merit
       # ################################################################
 
       grant_on 'ideas#show', badge: 'viral', to: :itself do |idea|
-        days = (DateTime.now.to_date - idea.created_at.to_date).to_i <= 3
+        days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
         days.between?(1, 3) &&
         Idea.trending.score(idea.id) >= 500
