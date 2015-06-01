@@ -3,6 +3,7 @@ var IdeaHeader = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
     return {
+      data: data,
       idea: data.idea,
       raised: data.stats.raised,
       feedbacks_count: data.stats.feedbacks_counter,
@@ -27,6 +28,7 @@ var IdeaHeader = React.createClass({
   render: function() {
     return (
       <div className="idea-header bg-solid">
+        <IdeaCover data= {this.state.data} />
         <IdeaProfile idea={this.state.idea} />
         <IdeaStats raised={this.state.raised} feedbacks_count={this.state.feedbacks_count} votes_count={this.state.votes_count} />
       </div>

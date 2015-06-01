@@ -88,8 +88,8 @@ class Idea < ActiveRecord::Base
   store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
   :website
 
-  store_accessor :media, :logo_position, :logo_processing,
-  :cover_position, :cover_processing
+  store_accessor :media, :logo_position, :cover_position,
+  :cover_left, :cover_prcessing, :logo_processing
 
   store_accessor :sections, :video, :video_html, :market, :problems, :solutions, :vision, :value_proposition
 
