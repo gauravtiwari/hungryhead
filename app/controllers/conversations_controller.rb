@@ -8,10 +8,19 @@ class ConversationsController < ApplicationController
 
   def index
     @conversations = @conversations.paginate(page: params[:page], per_page: 10)
+    respond_to do |format|
+      format.js
+      format.html
+      format.json
+    end
   end
 
   def recent
-    @conversations = @mailbox.inbox.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+    @conversations = @mailbox.inbox.order(created_at: :desc).paginate(page: params[:page], per_page: 20)
+    respond_to do |format|
+      format.js
+      format.json
+    end
   end
 
   def show
@@ -31,7 +40,7 @@ class ConversationsController < ApplicationController
 
   def reply
     @reply = current_user.reply_to_conversation(@conversation, params[:body])
-    render :reply, status: :created
+    Pusher.trigger_async("conversation-#{@conversation.id}-reply", "conversation_new_message", {id: @conversation.id, data: render(template: 'conversations/reply')}.to_json)
   end
 
   def destroy
@@ -64,7 +73,7 @@ class ConversationsController < ApplicationController
   end
 
   def get_box
-    if params[:box].present? or !["inbox","sent","trash"].include?(params[:box])
+    if params[:box].blank? or !["inbox","sent","trash"].include?(params[:box])
       params[:box] = 'inbox'
       if params[:action] == "show"
         redirect_to(conversation_path(@conversation, box: params[:box]))

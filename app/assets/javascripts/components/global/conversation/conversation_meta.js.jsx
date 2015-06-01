@@ -73,7 +73,7 @@ var ConversationMeta = React.createClass({
     }
 
     var participants = _.map(this.props.active_conversation.participants, function(participant){
-      return <img key={Math.random()} src={participant.sender_avatar} width="40px" className="m-r-10" />
+      return <ConversationParticipant participant={participant} />
     });
 
     if(this.props.active_conversation.is_trashed) {

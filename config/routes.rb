@@ -213,7 +213,7 @@ Rails.application.routes.draw do
   end
 
   #Ideas routes
-  resources :ideas, path: 'ideas', except: [:new, :edit] do
+  resources :ideas, except: [:new, :edit] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
     collection do

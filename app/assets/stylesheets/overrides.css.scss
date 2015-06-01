@@ -100,6 +100,10 @@ body, p {
   height: -webkit-calc(100% - 103px);
   height: calc(100% - 103px);
 }
+.alert-list {
+  border-bottom-color: #e9eaed !important;
+  border-bottom: 1px solid;
+}
 .quickview-wrapper .nav-tabs {
   background-color: #5b98e0;
 }
@@ -202,7 +206,7 @@ input.error:-webkit-autofill {
   border-color: #4d86c9;
 }
 .no-float {
-  float: none;
+  float: none!important;
 }
 .card{
   width: 100%;

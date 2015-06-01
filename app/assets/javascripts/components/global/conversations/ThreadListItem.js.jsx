@@ -33,29 +33,36 @@ var ThreadListItem = React.createClass({
       'unread': this.props.conversation.is_unread
     });
 
+    if(this.props.conversation.sender_avatar) {
+      var placeholder = <img  width="40px" className="participant-avatar m-r-10" src={this.props.conversation.sender_avatar} width="32" height="32" />
+    } else {
+      var placeholder = <span className="thumbnail-wrapper d32 circular inline  m-r-10">
+        <span className="placeholder no-padding bold text-white participant-avatar">{this.props.conversation.sender_name_badge}
+              </span></span>;
+    }
+
     return (
-    <div className={conversation_status_classes}>
-      <div className="participants m-r-10">
-        <div className="participant">
-          <img key={Math.random()} width="40px" className="participant-avatar margin-right" src={this.props.conversation.sender_avatar} alt="Avatar img 20121207 022806" />
-        </div>
+        <div className="list-view-group-container">
+          <div className="list-view-group-header text-uppercase">
+            a
+          </div>
+          <ul>
+            <li className="conversations-user-list clearfix">
+              <a data-view-animation="push-parrallax" data-view-port="#conversations" data-navigate="view" className="" href="#">
+                <span className="col-xs-height col-middle">
+                  {placeholder}
+                </span>
+                <p className="p-l-10 col-xs-height col-middle col-xs-12">
+                  <span className="text-master">{this.props.conversation.subject}</span>
+                  <span className="block text-master hint-text fs-12" dangerouslySetInnerHTML={{__html: this.props.conversation.last_message_body}}></span>
+                  <span className="text-muted">
+                    {moment(this.props.conversation.last_message_created_at).fromNow()}
+                  </span>
+                </p>
+              </a>
+            </li>
+          </ul>
       </div>
-      <div className="conversation-body">
-        <div className="subject margin-right">
-          <a href={this.props.conversation.conversation_path}>{this.props.conversation.subject}</a>
-          <span className="text-muted"> ({this.props.conversation.messages_count})</span>
-        </div>
-
-        <div className="last-message clearfix" dangerouslySetInnerHTML={{__html: this.props.conversation.last_message_body}}>
-
-        </div>
-         <small>
-          <span className="text-muted">
-            {moment(this.props.conversation.last_message_created_at).fromNow()}
-          </span>
-          </small>
-      </div>
-    </div>
     );
   }
 
