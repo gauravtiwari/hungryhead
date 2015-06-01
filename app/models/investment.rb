@@ -17,7 +17,6 @@ class Investment < ActiveRecord::Base
   include Votable
 
   #Model Callbacks
-  before_create :add_uuid
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_create  :increment_counters
 
@@ -38,10 +37,6 @@ class Investment < ActiveRecord::Base
 
   def slug_candidates
     [:uuid]
-  end
-
-  def add_uuid
-    self.uuid = "#{self.class.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
   end
 
   def cancel_investment

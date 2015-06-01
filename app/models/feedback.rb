@@ -37,7 +37,6 @@ class Feedback < ActiveRecord::Base
   store_accessor :parameters, :tags
 
   #Hooks
-  before_create :add_uuid
   before_destroy :decrement_counters, :delete_activity
   after_create :increment_counters
 
@@ -59,10 +58,6 @@ class Feedback < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     slug.blank? || uuid_changed?
-  end
-
-  def add_uuid
-    self.uuid = "#{self.class.to_s.downcase}-#{self.id}" + SecureRandom.hex(6)
   end
 
   def increment_counters
