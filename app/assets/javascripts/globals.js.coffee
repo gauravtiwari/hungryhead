@@ -6,7 +6,17 @@ jQuery(document).ready ->
 	$('body textarea').focus ->
 		$(this).autosize()
 
-	$('#form-register').validate();
+	$.validator.addMethod 'lettersonly', ((value, element) ->
+	  @optional(element) or /^[a-z]+$/i.test(value)
+	), 'Letters only please'
+
+	$('#form-register').validate()
+
+	$('#formUsername').rules 'add', minlength: 5
+	$('#formUsername').rules 'add', lettersonly: true
+
+	$('#formPassword').rules 'add', minlength: 6
+
 	$('#form-login').validate();
 	$('#information-form').validate();
 	$('#feedback_form').validate();

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var TeacherRegisterationForm = React.createClass({
-  
+
   getInitialState: function(){
     return {
       form: this.props.form,
@@ -55,28 +55,32 @@ var TeacherRegisterationForm = React.createClass({
     data = {
       username: e.target.value
     }
-    $.ajax({
-        data: data,
-        url: Routes.check_username_path(),
-        type: "GET",
-        dataType: "json",
-        success: function ( data ) {
-        if(data.available) {
-          $('#invalid-username').text("").hide();
-        } else {
-          $('#invalid-username').text(data.error).show();
-        }
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(err.toString());
-        }.bind(this)
-    });
-  },
-
-  fillName: function(e){
-    var fname = $(this.refs.fname.getDOMNode()).val();
-    var lname = $(this.refs.lname.getDOMNode()).val();
-    $(this.refs.fullname.getDOMNode()).val(fname +" " + lname)
+    var target = e.target;
+    if($(this.refs.name.getDOMNode().length) != 0) {
+      $.ajax({
+          data: data,
+          url: Routes.check_username_path(),
+          type: "GET",
+          dataType: "json",
+          success: function ( data ) {
+          if(data.available) {
+              $('#invalid-username').remove();
+            } else {
+              $('body').pgNotification({
+                style: "simple",
+                message: data.error + " \n <strong>" + data.suggestions + "</strong>." + " We have selected one for you.",
+                position: "top-right", type: "error",
+                timeout: 10000
+              }).show();
+              $(target).val(data.suggested);
+              $(target).focus();
+            }
+          }.bind(this),
+          error: function(xhr, status, err) {
+            console.error(err.toString());
+          }.bind(this)
+      });
+    }
   },
 
   onEmailChange: function(e) {
@@ -112,7 +116,7 @@ var TeacherRegisterationForm = React.createClass({
     var loading_class = cx ({
       'fa fa-spinner fa-spin': this.props.loading
     });
-    return (  
+    return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" action="index.html" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
         <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
@@ -122,7 +126,7 @@ var TeacherRegisterationForm = React.createClass({
               <input type="text" ref="name" autoComplete="off" name="teacher[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
             </div>
           </div>
-          
+
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Email</label>
@@ -135,7 +139,7 @@ var TeacherRegisterationForm = React.createClass({
         <div className="row">
           <div className="col-sm-12">
             <div className="form-group">
-              <label>Select your school</label>
+              <label>University/College name</label>
               <input type="text" name="teacher[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
             </div>
           </div>
@@ -152,7 +156,7 @@ var TeacherRegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="teacher[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required="true" aria-required="true" />
+              <input type="password" name="teacher[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
         </div>
@@ -165,12 +169,12 @@ var TeacherRegisterationForm = React.createClass({
             </div>
           </div>
           <div className="col-md-6 text-right">
-            <span>Already registered?<a href="/login" className="text-info small"> Login</a></span>
+            <span className="fs-12">Already registered?<a href="/login" className="text-primary bold"> Login</a></span>
           </div>
         </div>
         <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
         <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
-      </form>   
+      </form>
     )
   },
 

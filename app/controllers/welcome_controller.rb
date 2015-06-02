@@ -9,11 +9,16 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :follow_friends
-      ids = User.published.where(school_id: @user.school_id).pluck(:id) if @user.school_id.present?
+      if @user.school_id.present?
+        ids = User.published.where(school_id: @user.school_id).where.not(id: current_user.id).pluck(:id)
+        ids.push(@user.invited_by.followings_ids.members) if @user.invited_by.present?
+      elsif @user.invited_by.present?
+        ids = @user.invited_by.followings_ids.members
+      end
       if ids.empty?
         skip_step
       else
-        @friends = User.published.find(ids - [current_user.id]).paginate(:page => params[:page], :per_page => 10)
+        @friends = User.published.find(ids).paginate(:page => params[:page], :per_page => 10)
       end
     end
     render_wizard

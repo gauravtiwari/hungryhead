@@ -58,39 +58,36 @@ var RegisterationForm = React.createClass({
   },
 
   onUsernameChange: function(e) {
-    console.log(this.refs.name.getDOMNode().value.trim());
     data = {
       username: e.target.value,
       name: this.refs.name.getDOMNode().value.trim()
     }
-    $.ajax({
-        data: data,
-        url: Routes.check_username_path(),
-        type: "POST",
-        dataType: "json",
-        success: function ( data ) {
-        if(data.available) {
-          $('#invalid-username').remove();
-        } else {
-          $('body').pgNotification({
-            style: "simple",
-            message: data.error + " \n <strong>" + data.suggestions + "</strong>",
-            position: "top-right", type: "error",
-            timeout: 10000
-          }).show();
-          $(e.target).val(data.suggested);
-        }
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(err.toString());
-        }.bind(this)
-    });
-  },
-
-  fillName: function(e){
-    var fname = $(this.refs.fname.getDOMNode()).val();
-    var lname = $(this.refs.lname.getDOMNode()).val();
-    $(this.refs.fullname.getDOMNode()).val(fname +" " + lname)
+    var target = e.target;
+    if($(this.refs.name.getDOMNode().length) != 0) {
+      $.ajax({
+          data: data,
+          url: Routes.check_username_path(),
+          type: "POST",
+          dataType: "json",
+          success: function ( data ) {
+          if(data.available) {
+            $('#invalid-username').remove();
+          } else {
+            $('body').pgNotification({
+              style: "simple",
+              message: data.error + " \n <strong>" + data.suggestions + "</strong>." + " We have selected one for you.",
+              position: "top-right", type: "error",
+              timeout: 10000
+            }).show();
+            $(target).val(data.suggested);
+            $(target).focus();
+          }
+          }.bind(this),
+          error: function(xhr, status, err) {
+            console.error(err.toString());
+          }.bind(this)
+      });
+    }
   },
 
   onEmailChange: function(e) {
@@ -141,7 +138,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
@@ -151,7 +148,7 @@ var RegisterationForm = React.createClass({
         <div className="row">
           <div className="col-sm-12">
             <div className="form-group">
-              <label>Select your school <small className="fs-8 text-danger">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
+              <label>Select your University/College <small className="fs-8 text-danger">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
               <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
             </div>
           </div>
@@ -171,7 +168,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="student[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required="true" aria-required="true" />
+              <input type="password" name="student[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
         </div>
@@ -187,8 +184,12 @@ var RegisterationForm = React.createClass({
             <span className="fs-12">Already registered?<a className="fs-13" href="/login" className="text-primary bold"> Login</a></span>
           </div>
         </div>
-        <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
-        <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
+        <button className="btn btn-complete btn-sm fs-13 m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
+
+        <a className="btn btn-primary btn-sm fs-13 m-l-10 m-t-10" href="/">Back</a>
+        <div className="pull-right text-right">
+          <span className="fs-12">Faculty?<a className="fs-13" href="/teachers_join" className="text-primary bold"> Click to join</a></span>
+        </div>
       </form>
     )
   },
