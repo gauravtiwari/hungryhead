@@ -72,7 +72,13 @@ var RegisterationForm = React.createClass({
         if(data.available) {
           $('#invalid-username').remove();
         } else {
-          $('body').pgNotification({style: "simple", message: data.error + " \n <strong>" + data.suggestions + "</strong>", position: "top-right", type: "error",timeout: 10000}).show();
+          $('body').pgNotification({
+            style: "simple",
+            message: data.error + " \n <strong>" + data.suggestions + "</strong>",
+            position: "top-right", type: "error",
+            timeout: 10000
+          }).show();
+          $(e.target).val(data.suggested);
         }
         }.bind(this),
         error: function(xhr, status, err) {

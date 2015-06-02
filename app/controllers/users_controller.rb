@@ -70,7 +70,11 @@ class UsersController < ApplicationController
       @user.invitation_sent_at = Time.now.utc
       invited << u[0] if u[0].present?
     end
-    render json: {invited: true, msg: "You have succesfully invited #{invited.to_sentence}", status: :created}
+    render json: {
+      invited: true,
+      msg: "You have succesfully invited #{invited.to_sentence}",
+      status: :created
+    }
   end
 
   def update
@@ -80,7 +84,7 @@ class UsersController < ApplicationController
         if @user.username_changed?
           redirect_to profile_path(@user)
         else
-          format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
+          format.html { redirect_to profile_path(@user), notice: 'Profile was succesfully updated.' }
           format.json { render :show, status: :ok }
         end
         @user.rebuild_notifications
@@ -98,6 +102,7 @@ class UsersController < ApplicationController
       render :json =>  {
         error: "This Username is already taken. Please try followings \n",
         suggestions: @user.username_suggestions.to_sentence,
+        suggested: @user.username_suggestions.first,
         available: false
       }
     else
