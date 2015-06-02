@@ -3312,6 +3312,15 @@ Misc buttons
 .alert-info .close {
   background-position: -67px -10px !important;
 }
+
+.alert-notice {
+  background-color: #e1f0fd;
+  color: #3f6d92;
+  border-color: #3f6d92;
+}
+.alert-notice .close {
+  background-position: -67px -10px !important;
+}
 .alert-success {
   background-color: #daf0ee;
   color: #2b6d67;

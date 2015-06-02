@@ -3315,6 +3315,14 @@ Misc buttons
 .notification-info .close {
   background-position: -67px -10px !important;
 }
+.notification-notice {
+  background-color: #daeffd;
+  color: #2b6a94;
+  border-color: #2b6a94;
+}
+.notification-notice .close {
+  background-position: -67px -10px !important;
+}
 .notification-success {
   background-color: #cff5f2;
   color: #0a7c71;

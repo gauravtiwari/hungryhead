@@ -48,6 +48,7 @@
 //= require autocomplete-rails
 //= require pnotify
 //= require unobtrusive_flash
+//= require flashes
 //= require react
 //= require react-infinite
 //= require react_ujs

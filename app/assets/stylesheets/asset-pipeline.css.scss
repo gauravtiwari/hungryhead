@@ -216,6 +216,7 @@ html[dir="rtl"] .select2-search input {
 
 .alert .close {
   background: asset-url('core/img/icons/noti-cross.png') no-repeat scroll 0 0 transparent;
+  background-position: -9px -10px;
 }
 .progress-bar-indeterminate {
   background: asset-url('core/img/progress/progress-bar-master.svg') no-repeat top left;
@@ -275,5 +276,6 @@ html[dir="rtl"] .select2-search input {
   }
   .alert .close {
     background: asset-url('core/img/icons/noti-cross-2x.png') no-repeat scroll 0 0 transparent;
+    background-position: -9px -10px;
   }
 }
