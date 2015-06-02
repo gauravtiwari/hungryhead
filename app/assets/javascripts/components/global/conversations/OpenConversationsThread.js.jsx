@@ -19,21 +19,12 @@ var OpenConversationsThread = React.createClass({
    },
 
   openConversations: function() {
-    this.setState({loading: true});
-    this.setState({active: !this.state.active});
-    var parentdrop = $('li.conversation-threads').find('.conversation-dropdown');
-    if(!this.state.active) {
-        React.render(
-          <ThreadSection key={Math.random()} path={this.props.path} />,
-          document.getElementById('threads-section')
-        );
-        ReactRailsUJS.mountComponents();
-        parentdrop.removeClass('open');
-        parentdrop.addClass('open');
-        $('body').addClass('stop-scrolling');
+    if($('#conversationsPanel').length) {
+      $('#conversationsPanel').addClass('open');
     } else {
-        parentdrop.removeClass('open');
-        $('body').removeClass('stop-scrolling');
+      $.getScript(this.props.path, function(data, textStatus) {
+        /*optional stuff to do after getScript */
+      });
     }
   },
 

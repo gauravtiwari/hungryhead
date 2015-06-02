@@ -51,6 +51,20 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -68,6 +82,7 @@ CREATE TABLE activities (
     user_id integer NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
+    uuid uuid DEFAULT uuid_generate_v4(),
     published boolean DEFAULT true,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
@@ -240,6 +255,7 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 CREATE TABLE feedbacks (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
@@ -381,6 +397,7 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 CREATE TABLE ideas (
     id integer NOT NULL,
     student_id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     name character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
@@ -435,6 +452,7 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 
 CREATE TABLE investments (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     amount integer NOT NULL,
     message character varying,
     user_id integer NOT NULL,
@@ -925,9 +943,9 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 CREATE TABLE posts (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     title character varying DEFAULT ''::character varying NOT NULL,
     body text DEFAULT ''::text NOT NULL,
-    slug character varying DEFAULT ''::character varying NOT NULL,
     status integer,
     user_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1106,6 +1124,7 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 CREATE TABLE shares (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     body text DEFAULT ''::text NOT NULL,
     status integer,
     privacy integer,
@@ -2049,6 +2068,13 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 
 
 --
+-- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
+
+
+--
 -- Name: index_authentications_on_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2175,6 +2201,13 @@ CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
 
 
 --
+-- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
+
+
+--
 -- Name: index_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2298,6 +2331,13 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 --
 
 CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
+
+
+--
+-- Name: index_investments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investments_on_uuid ON investments USING btree (uuid);
 
 
 --
@@ -2462,13 +2502,6 @@ CREATE INDEX index_posts_on_sash_id ON posts USING btree (sash_id);
 
 
 --
--- Name: index_posts_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_posts_on_slug ON posts USING btree (slug);
-
-
---
 -- Name: index_posts_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2480,6 +2513,13 @@ CREATE INDEX index_posts_on_status ON posts USING btree (status);
 --
 
 CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
+
+
+--
+-- Name: index_posts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_posts_on_uuid ON posts USING btree (uuid);
 
 
 --
@@ -2824,6 +2864,8 @@ ALTER TABLE ONLY shares
 SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20140805183219');
+
+INSERT INTO schema_migrations (version) VALUES ('20140805183225');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184102');
 

@@ -3,29 +3,38 @@
   <head>
     <title>Hungryhead - An idea simulation platform</title>
     <%= favicon_link_tag 'favicon.ico' %>
+
     <meta content="An idea simulation platform" name="description" />
     <meta content="hungryhead" name="author" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
     <!--[if lte IE 9]>
-    <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
     <![endif]-->
-    <script type="text/javascript">
+
+    <script type="text/javascript" data-turbolinks-eval=false>
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
           document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
       }
     </script>
+
     <%= csrf_meta_tags %>
     <%= yield :head %>
+
   </head>
 
-  <body class="fixed-header menu-behind error-page mac desktop">
+  <body class="fixed-header menu-behind error-page">
+
     <div class="page-container">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
@@ -37,8 +46,11 @@
 
       <%= yield %>
     </div>
-   <div class="pull-bottom sm-pull-bottom full-width relative">
-    <%= render partial: 'globals/footer' %>
-   </div>
+
+    <div class="pull-bottom sm-pull-bottom full-width relative">
+      <%= render partial: 'globals/footer' %>
+    </div>
+
   </body>
+
 </html>

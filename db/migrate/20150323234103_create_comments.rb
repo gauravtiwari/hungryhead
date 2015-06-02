@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments, :force => true do |t|
 
       t.references :commentable, polymorphic: true, null: false
+
       t.text :body, null: false, default: ""
 
       t.references :user, :null => false
@@ -16,9 +17,11 @@ class CreateComments < ActiveRecord::Migration
     add_index :comments, :user_id, algorithm: :concurrently
     add_index :comments, :parent_id, algorithm: :concurrently
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
+
   end
 
   def self.down
     drop_table :comments
   end
+
 end

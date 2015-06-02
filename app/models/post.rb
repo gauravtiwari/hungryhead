@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
 
   #Includes Modules
   include Redis::Objects
+  has_merit
 
   #Redis counters and lists
   list :voters_ids
@@ -18,16 +19,10 @@ class Post < ActiveRecord::Base
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
-  has_merit
-
-  extend FriendlyId
-  friendly_id :slug_candidates
-
   belongs_to :user
 
   #Includes concerns
   include Commentable
-  include Sluggable
   include Sharings
   include Votable
   include Scorable
@@ -43,10 +38,6 @@ class Post < ActiveRecord::Base
   end
 
   private
-
-  def slug_candidates
-    [:title, [:title, :id]]
-  end
 
   def increment_counter
     user.posts_counter.increment

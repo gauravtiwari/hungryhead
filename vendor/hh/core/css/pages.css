@@ -1292,20 +1292,20 @@ body.dashboard .page-container {
 /* Chat Components
 --------------------------------------------------
 */
-.chat-view .chat-inner {
+.conversations-view .conversations-inner {
   padding: 15px;
   overflow-x: hidden;
   height: calc(100% - 103px);
 }
-.chat-view .message {
+.conversations-view .message {
   margin-bottom: 10px;
   line-height: 30px;
 }
-.chat-view .profile-img-wrapper {
+.conversations-view .profile-img-wrapper {
   height: 28px;
   width: 28px;
 }
-.chat-view .chat-bubble {
+.conversations-view .conversations-bubble {
   position: relative;
   border-radius: 12px;
   padding: 4px 12px;
@@ -1315,17 +1315,17 @@ body.dashboard .page-container {
   max-width: 60%;
   white-space: normal;
 }
-.chat-view .chat-bubble > p {
+.conversations-view .conversations-bubble > p {
   margin: 0;
 }
-.chat-view .chat-bubble.from-me {
+.conversations-view .conversations-bubble.from-me {
   background: #daeffd;
   color: #2c2c2c;
   opacity: 0.8;
   float: right;
   border: 1px solid rgba(0, 0, 0, 0.07);
 }
-.chat-view .chat-bubble.from-them {
+.conversations-view .conversations-bubble.from-them {
   color: #2c2c2c;
   background: #f0f0f0;
   position: relative;
@@ -1333,27 +1333,27 @@ body.dashboard .page-container {
   float: left;
   border: 1px solid #f0f5f8;
 }
-.chat-view .chat-input {
+.conversations-view .conversations-input {
   border: 0;
   height: 45px;
 }
-.chat-view .chat-input:focus,
-.chat-view .chat-input:active {
+.conversations-view .conversations-input:focus,
+.conversations-view .conversations-input:active {
   background-color: #fff;
 }
-.chat-view .user-controls {
+.conversations-view .user-controls {
   padding-top: 12px;
 }
 /* Chat User List
 --------------------------------------------------
 */
-.chat-user-list > a {
+.conversations-user-list > a {
   height: 60px;
 }
 /* Alert List
 --------------------------------------------------
 */
-.alert-list > a {
+.notification-list > a {
   height: 45px;
 }
 /*------------------------------------------------------------------
@@ -1592,8 +1592,8 @@ body.dashboard .page-container {
   z-index: 602;
 }
 .panel-heading a {
-  color: #626262 !important;
-  opacity: .4;
+  color: #626262;
+  opacity: .8;
 }
 .panel-heading a.portlet-refresh {
   -webkit-transition: opacity 0.3s ease;
@@ -3241,7 +3241,7 @@ Misc buttons
 /*------------------------------------------------------------------
 [7. Alerts]
 */
-.alert {
+.notification {
   background-image: none;
   box-shadow: none;
   text-shadow: none;
@@ -3252,27 +3252,27 @@ Misc buttons
   -webkit-transition: all 0.2s linear 0s;
   transition: all 0.2s linear 0s;
 }
-.alert.bordered {
+.notification.bordered {
   border-width: 1px;
 }
-.alert .link {
+.notification .link {
   color: #ce8f22;
   font-weight: bold;
 }
-.alert .alert-heading {
+.notification .notification-heading {
   color: #ce8f22 !important;
   margin-bottom: 5px;
   font-weight: 600;
 }
-.alert .btn-small {
+.notification .btn-small {
   position: relative;
   top: -3.5px;
 }
-.alert .button-set .btn {
+.notification .button-set .btn {
   position: relative;
   top: 8px;
 }
-.alert .close {
+.notification .close {
   background: url("core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
   background-position: -9px -10px;
   width: 10px;
@@ -3283,49 +3283,49 @@ Misc buttons
   margin-left: 20px;
   font-size: 0;
 }
-.alert .close:hover {
+.notification .close:hover {
   opacity: 1;
 }
 /* Alert : Color Options
 ------------------------------------
 */
-.alert-danger,
-.alert-error {
+.notification-danger,
+.notification-error {
   background-color: #fddddd;
   color: #933432;
   border-color: #933432;
 }
-.alert-danger .close,
-.alert-error .close {
+.notification-danger .close,
+.notification-error .close {
   background-position: -95px -10px !important;
 }
-.alert-warning {
+.notification-warning {
   background-color: #fef6dd;
   color: #957d32;
   border-color: #957d32;
 }
-.alert-info {
+.notification-info {
   background-color: #daeffd;
   color: #2b6a94;
   border-color: #2b6a94;
 }
-.alert-info .close {
+.notification-info .close {
   background-position: -67px -10px !important;
 }
-.alert-success {
+.notification-success {
   background-color: #cff5f2;
   color: #0a7c71;
   border-color: #0a7c71;
 }
-.alert-success .close {
+.notification-success .close {
   background-position: -38px -10px !important;
 }
-.alert-default {
+.notification-default {
   background-color: #fff;
   color: #626262;
   border-color: #e6e6e6;
 }
-.alert-default .close {
+.notification-default .close {
   background-position: -67px -10px !important;
 }
 /*------------------------------------------------------------------
@@ -3544,40 +3544,40 @@ Misc buttons
 .notification-panel .notification-footer a:hover {
   opacity: .74;
 }
-/* Simple alerts
+/* Simple notifications
 --------------------------------------------------
 */
-.alerts-container {
+.notifications-container {
   position: fixed;
   width: 350px;
   right: 20px;
   z-index: 999;
   top: 80px;
 }
-.alerts-container[data-placement$='-left'] {
+.notifications-container[data-placement$='-left'] {
   left: 100px;
   right: auto;
 }
-.alerts-container[data-placement$='-right'] {
+.notifications-container[data-placement$='-right'] {
   right: 20px;
   left: auto;
 }
-.alerts-container[data-placement^='top-'] {
+.notifications-container[data-placement^='top-'] {
   top: 80px;
   bottom: auto;
 }
-.alerts-container[data-placement^='bottom-'] {
+.notifications-container[data-placement^='bottom-'] {
   top: auto;
   bottom: 20px;
 }
-.alerts-container[data-placement='bottom-right'] .alert:last-child,
-.alerts-container[data-placement='bottom-left'] .alert:last-child {
+.notifications-container[data-placement='bottom-right'] .notification:last-child,
+.notifications-container[data-placement='bottom-left'] .notification:last-child {
   margin-bottom: 0;
 }
-.alerts-container .alert {
+.notifications-container .notification {
   position: relative;
 }
-.alerts-container .alert .close {
+.notifications-container .notification .close {
   position: absolute;
   right: 9px;
   top: 15px;
@@ -3620,13 +3620,13 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   position: relative;
   margin: 10px;
 }
-.pgn .alert {
+.pgn .notification {
   margin: 0;
 }
 /* Simple
 ------------------------------------
 */
-.pgn-simple .alert {
+.pgn-simple .notification {
   padding-top: 13px;
   padding-bottom: 13px;
   max-width: 500px;
@@ -3642,25 +3642,25 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   overflow: hidden;
   margin: 0;
 }
-.pgn-bar .alert {
+.pgn-bar .notification {
   border-radius: 0;
   padding-top: 13px;
   padding-bottom: 13px;
   max-height: 91px;
 }
-.pgn-wrapper[data-position='top'] .pgn-bar .alert {
+.pgn-wrapper[data-position='top'] .pgn-bar .notification {
   animation: slideInFromTop 0.5s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
   -webkit-animation: slideInFromTop 0.5s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
   transform-origin: top left;
   -webkit-transform-origin: top left;
 }
-.pgn-wrapper[data-position='bottom'] .pgn-bar .alert {
+.pgn-wrapper[data-position='bottom'] .pgn-bar .notification {
   animation: slideInFromBottom 0.5s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
   -webkit-animation: slideInFromBottom 0.5s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
   transform-origin: bottom left;
   -webkit-transform-origin: bottom left;
 }
-.pgn-bar .alert span {
+.pgn-bar .notification span {
   opacity: 0;
   animation: fadeIn 0.3s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
   -webkit-animation: fadeIn 0.3s cubic-bezier(0.05, 0.74, 0.27, 0.99) forwards;
@@ -3700,7 +3700,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
 /* Circle
 ------------------------------------
 */
-.pgn-circle .alert {
+.pgn-circle .notification {
   border-radius: 300px;
   animation: fadeInCircle 0.3s ease forwards, resizeCircle 0.3s 0.4s cubic-bezier(0.25, 0.25, 0.4, 1.6) forwards;
   -webkit-animation: fadeInCircle 0.3s ease forwards, resizeCircle 0.3s 0.4s cubic-bezier(0.25, 0.25, 0.4, 1.6) forwards;
@@ -3710,23 +3710,23 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   -webkit-transform: translateZ(0);
   position: relative;
 }
-.pgn-wrapper[data-position$='-right'] .pgn-circle .alert {
+.pgn-wrapper[data-position$='-right'] .pgn-circle .notification {
   float: right;
 }
-.pgn-wrapper[data-position$='-left'] .pgn-circle .alert {
+.pgn-wrapper[data-position$='-left'] .pgn-circle .notification {
   float: left;
 }
-.pgn-circle .alert > div > div.pgn-thumbnail > div {
+.pgn-circle .notification > div > div.pgn-thumbnail > div {
   border-radius: 50%;
   overflow: hidden;
   width: 48px;
   height: 48px;
 }
-.pgn-circle .alert > div > div.pgn-thumbnail > div > img {
+.pgn-circle .notification > div > div.pgn-thumbnail > div > img {
   width: 100%;
   height: 100%;
 }
-.pgn-circle .alert > div > div.pgn-message > div {
+.pgn-circle .notification > div > div.pgn-message > div {
   opacity: 0;
   height: 47px;
   padding-left: 9px;
@@ -3738,10 +3738,10 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   word-break: break-all;
   word-wrap: break-word;
 }
-.pgn-circle .alert > div > div.pgn-message > div p:only-child {
+.pgn-circle .notification > div > div.pgn-message > div p:only-child {
   padding: 12px 0;
 }
-.pgn-circle .alert .close {
+.pgn-circle .notification .close {
   margin-top: -12px;
   position: absolute;
   right: 18px;
@@ -3750,14 +3750,14 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
   animation: fadeIn .3s .5s ease forwards;
   -webkit-animation: fadeIn .3s .5s ease forwards;
 }
-.pgn-circle .alert p {
+.pgn-circle .notification p {
   margin-bottom: 0;
 }
-.pgn-circle .alert > div {
+.pgn-circle .notification > div {
   display: table;
   height: 100%;
 }
-.pgn-circle .alert > div > div {
+.pgn-circle .notification > div > div {
   display: table-cell;
   vertical-align: middle;
 }
@@ -3806,11 +3806,11 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
 .pgn-wrapper[data-position^='bottom-'] .pgn-flip {
   bottom: -30px;
 }
-.pgn-wrapper[data-position^='bottom-'] .pgn-flip .alert {
+.pgn-wrapper[data-position^='bottom-'] .pgn-flip .notification {
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
 }
-.pgn-flip .alert {
+.pgn-flip .notification {
   -webkit-transform-origin: 50% 0%;
   transform-origin: 50% 0%;
   box-shadow: 0 6px 4px -3px rgba(0, 0, 0, 0.2);
@@ -3909,7 +3909,7 @@ body > .pgn-wrapper[data-position^='top-'] {
   top: 80px;
   bottom: auto;
 }
-.pgn-circle .alert .close {
+.pgn-circle .notification .close {
   margin-top: -4px;
 }
 body > .pgn-wrapper {
@@ -3929,8 +3929,8 @@ body > .pgn-wrapper {
     left: 10px !important;
     right: 10px !important;
   }
-  body > .pgn-wrapper[data-position$='-right'] .alert,
-  body > .pgn-wrapper[data-position$='-left'] .alert {
+  body > .pgn-wrapper[data-position$='-right'] .notification,
+  body > .pgn-wrapper[data-position$='-left'] .notification {
     max-width: 100%;
     width: 100%;
   }
@@ -12816,7 +12816,7 @@ Main components
     background-image: url("core/img/editor_tray_2x.png");
     background-size: 480px 40px;
   }
-  .alert .close {
+  .notification .close {
     background: url("core/img/icons/noti-cross-2x.png") no-repeat scroll 0 0 transparent;
     background-position: -9px -10px;
     width: 10px;

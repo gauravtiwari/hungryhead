@@ -80,8 +80,8 @@ var LatestListings = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light no-padding">
-            <ul className="trending-list p-t-10 no-style no-margin" ref="trendingList">
+          <div className="panel-body full-border-light scrollable no-padding">
+            <ul className="trending-list p-t-10 no-style no-margin">
               <Infinite elementHeight={50}
               containerHeight={200}
               infiniteLoadBeginBottomOffset={150}

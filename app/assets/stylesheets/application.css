@@ -10,6 +10,8 @@
  *= require font-awesome
  *= require sweetalert
  *= require chosen
+ *= require nprogress
+ *= require nprogress-bootstrap
  *= require ImageSelect
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar

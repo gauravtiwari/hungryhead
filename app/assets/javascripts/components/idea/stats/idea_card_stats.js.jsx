@@ -49,7 +49,7 @@ var IdeaCardStats = React.createClass({
               <p className="all-caps font-montserrat no-margin text-success">{this.state.feedbacks_count}</p>
             </div>
             <div className="col-md-4 text-center">
-            <p className="hint-text all-caps font-montserrat small no-margin ">Invested</p>
+            <p className="hint-text all-caps font-montserrat small no-margin ">Raised</p>
             <p className="all-caps font-montserrat  no-margin text-success ">{this.state.investments_count}</p>
             </div>
           </div>

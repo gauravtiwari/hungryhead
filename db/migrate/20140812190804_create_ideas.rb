@@ -5,7 +5,10 @@ class CreateIdeas < ActiveRecord::Migration
 
       t.references :student, :null => false
 
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
+
       t.string :name, null: false
+
       t.string :slug, :unique => true, null: false, default: ""
 
       t.string :high_concept_pitch, default: "", null: false

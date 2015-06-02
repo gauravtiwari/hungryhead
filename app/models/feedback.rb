@@ -1,6 +1,7 @@
 class Feedback < ActiveRecord::Base
 
   include Redis::Objects
+  has_merit
 
   #redis counters
   counter :votes_counter
@@ -20,8 +21,6 @@ class Feedback < ActiveRecord::Base
   include Commentable
   include Sharings
   include Votable
-
-  has_merit
 
   #Associations
   belongs_to :idea

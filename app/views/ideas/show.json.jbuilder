@@ -3,6 +3,13 @@ json.idea do
   json.logo do
     json.url @idea.logo.url(:avatar) if @idea.logo
   end
+
+  json.cover do
+    json.url @idea.cover.url(:cover)  if @idea.cover
+    json.top @idea.cover_position if @idea.cover
+    json.left @idea.cover_left if @idea.cover
+  end
+
   json.school_name @idea.school.name
   json.school_url profile_path(@idea.school)
   json.location @idea.location_list.each do |location|

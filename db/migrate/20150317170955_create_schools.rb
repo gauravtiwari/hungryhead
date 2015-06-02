@@ -1,5 +1,7 @@
 class CreateSchools < ActiveRecord::Migration
+
   disable_ddl_transaction!
+
   def change
     create_table :schools do |t|
 
@@ -19,9 +21,13 @@ class CreateSchools < ActiveRecord::Migration
       t.jsonb :customizations, default: "{}"
 
       t.timestamps null: false
+
     end
+
     add_index :schools, :name, unique: true, algorithm: :concurrently
     add_index :schools, :slug, unique: true, algorithm: :concurrently
     add_index :schools, :email, unique: true, algorithm: :concurrently
+
   end
+
 end

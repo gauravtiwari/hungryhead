@@ -67,10 +67,10 @@ var ElevatorPitch = React.createClass({
             <div className="panel-controls p-r-60">
             <ul>
               <li>
-                <a className="portlet-maximize text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize pointer text-white m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-white fs-12" onClick={this.openPitchForm}>{text}</a>
+                <a className="portlet-close pointer text-white fs-12" onClick={this.openPitchForm}>{text}</a>
               </li>
             </ul>
             </div>

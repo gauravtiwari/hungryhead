@@ -72,6 +72,10 @@ var LatestIdeas = React.createClass({
       var content = ideas
     }
 
+    var styles = {
+      maxHeight: '250px'
+    }
+
     return (
       <div className="widget-11-2 p-b-10 panel no-border no-margin">
           <div className="panel-heading">
@@ -103,8 +107,8 @@ var LatestIdeas = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body no-padding full-border-light">
-            <ul className="trending-list latest-scrollable p-t-10 no-style" ref="trendingList">
+          <div className="panel-body no-padding full-border-light scrollable" style={styles}>
+            <ul className="trending-list p-t-10 no-style" ref="trendingList" style={styles}>
              {content}
             </ul>
           </div>

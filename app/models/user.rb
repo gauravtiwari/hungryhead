@@ -42,10 +42,10 @@ class User < ActiveRecord::Base
   has_many :posts, dependent: :destroy
 
   #Callbacks
-  before_save :add_fullname, if: :name_not_present?
-  before_save :add_username, if: :username_absent?
+  before_create :add_fullname, if: :name_not_present?
+  before_create :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  before_save :seed_fund, :seed_settings, unless: :is_admin
+  before_create :seed_fund, :seed_settings, unless: :is_admin
   after_create :increment_counters
   after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
 
@@ -192,6 +192,10 @@ class User < ActiveRecord::Base
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || username_changed?
   end
 
   def name_not_present?

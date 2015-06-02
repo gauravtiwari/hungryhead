@@ -1,0 +1,75 @@
+<div class="navbar navbar-default">
+  <div class="navbar-inner">
+    <a href="javascript:;" class="link text-master inline action p-l-10" id="back-to-conversations">
+      <i class="pg-arrow_left"></i>
+    </a>
+    <div class="view-heading">
+      <% @conversation.participants.select{ |p| p != current_user }.each do |participant| %>
+       <% if participant.avatar.present? %>
+         <span class="thumbnail-wrapper auto-margin d32 circular bg-success">
+             <%= image_tag(participant.avatar.url(:avatar), data: {src: {retina: participant.avatar.url(:avatar)}, src: participant.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+         </span>
+       <% else %>
+         <div class="thumbnail-wrapper d32 auto-margin inline circular">
+           <span class="placeholder bold text-white">
+             <%= participant.user_name_badge %>
+           </span>
+         </div>
+       <% end %>
+      <div class="fs-11 hint-text">Online</div>
+    <% end %>
+    </div>
+    <a href="#" class="link text-master inline action p-r-10 pull-right ">
+      <i class="pg-more"></i>
+    </a>
+  </div>
+</div>
+<div class="conversations-inner" id="conversation-<%= @conversation.id %>">
+  <!-- BEGIN From Me Message  !-->
+  <% @receipts.includes(:message).each do |receipt| %>
+    <% if receipt.message.sender == current_user %>
+      <div class="message clearfix">
+        <div class="conversations-bubble from-me">
+          <%= markdownify(receipt.message.body) %>
+        </div>
+      </div>
+    <% else %>
+    <div class="message clearfix">
+     <% if receipt.message.sender.avatar.present? %>
+       <div class="profile-img-wrapper m-t-5 inline">
+           <%= image_tag(receipt.message.sender.avatar.url(:avatar), data: {src: {retina: receipt.message.sender.avatar.url(:avatar)}, src: receipt.message.sender.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+        </div>
+     <% else %>
+       <div class="thumbnail-wrapper d32 inline circular">
+         <span class="placeholder bold text-white">
+           <%= receipt.message.sender.user_name_badge %>
+         </span>
+       </div>
+     <% end %>
+      <div class="conversations-bubble from-them">
+        <%= markdownify(receipt.message.body) %>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="b-t b-grey bg-white clearfix p-l-10 p-r-10">
+  <div class="row">
+    <div class="col-xs-1 p-t-15">
+      <a href="#" class="link text-master"><i class="fa fa-plus-circle"></i></a>
+    </div>
+    <div class="col-xs-8 no-padding">
+      <input type="text" class="form-control conversations-input" data-chat-input data-chat-conversation="#conversation-<%= @conversation.id %>" placeholder="Say something">
+    </div>
+    <div class="col-xs-2 link text-master m-l-10 m-t-15 p-l-10 b-l b-grey col-top">
+      <a href="#" class="link text-master"><i class="pg-camera"></i></a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#back-to-conversations').on('click', function(){
+    $("#conversation-messages-view").hide().removeClass('animated fadeIn');
+    $("#conversations-list-view").show().addClass('animated FadeIn');;
+  });
+</script>

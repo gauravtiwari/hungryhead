@@ -88,8 +88,8 @@ class Idea < ActiveRecord::Base
   store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
   :website
 
-  store_accessor :media, :logo_position, :logo_processing,
-  :cover_position, :cover_processing
+  store_accessor :media, :logo_position, :cover_position,
+  :cover_left, :cover_prcessing, :logo_processing
 
   store_accessor :sections, :video, :video_html, :market, :problems, :solutions, :vision, :value_proposition
 
@@ -148,7 +148,7 @@ class Idea < ActiveRecord::Base
   def profile_complete?
     if [self.name, self.high_concept_pitch, self.elevator_pitch,
       self.description, self.market, self.solutions, self.problems,
-      self.value_proposition].any?{|f| f.present? }
+      self.value_proposition].any?{|f| f.blank? }
       return false
     else
       return true
@@ -164,6 +164,10 @@ class Idea < ActiveRecord::Base
   end
 
   private
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
+  end
 
   def load_into_soulmate
     if visible?

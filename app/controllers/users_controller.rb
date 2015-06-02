@@ -176,7 +176,7 @@ class UsersController < ApplicationController
   end
 
   def post
-    @post = Post.find(params[:id])
+    @post = Post.find_by_uuid(params[:id])
     respond_to do |format|
       format.js
       format.html

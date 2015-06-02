@@ -1,11 +1,11 @@
 <div class="container">
   <% data = render(template: 'users/show.json.jbuilder') %>
 
-  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar" data-turbolinks-permanent>
+  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
       <%= render partial: 'sidebar', locals: {data: data} %>
   </div>
 
-  <div class="col-md-8 col-sm-8" id="profile_content" data-turbolinks-temporary>
+  <div class="col-md-8 col-sm-8" id="profile_content">
     <div class="profile-nav box-shadow bg-white">
         <%= render partial: 'menu' %>
     </div>
