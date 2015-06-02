@@ -15,11 +15,9 @@ jQuery(document).ready ->
 	$('#valid-form').validate();
 	$("[data-toggle='tooltip']").tooltip();
 
-	$.Pages.init()
+	#Initialize Pages modules
 
-	$.each flashMessages, (key, value) ->
-	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
-	  	.show();
+	$.Pages.init()
 
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
