@@ -46,6 +46,8 @@
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
+//= require pnotify
+//= require unobtrusive_flash
 //= require react
 //= require react-infinite
 //= require react_ujs

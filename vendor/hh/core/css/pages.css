@@ -2288,6 +2288,9 @@ hr.dotted {
 .font-montserrat {
   font-family: 'Montserrat' !important;
 }
+.font-opensans {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
 .font-georgia {
   font-family: Georgia !important;
 }

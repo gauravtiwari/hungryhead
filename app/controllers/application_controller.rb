@@ -1,14 +1,22 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  # Pundit Authorization
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  protect_from_forgery with: :exception
-  helper_method :xeditable?
-  helper_method :search_content
+  #Devise Permitted paramaters
   before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  #Flash messages from rails
+  after_filter :prepare_unobtrusive_flash
+
+  #Temporary basic auth
   before_filter :authenticate_basic
+
+  protected
 
   def authenticate_basic
     if Rails.env.production?
@@ -17,8 +25,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
-  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :name, :school_id, :terms_accepted, :remember_me, :name) }

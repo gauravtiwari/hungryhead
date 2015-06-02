@@ -9,7 +9,8 @@
         "sweetalert": "latest",
         "slimScroll": "latest",
         "react-infinite": "latest",
-        "bootstrap-tagsinput": "latest"
+        "bootstrap-tagsinput": "latest",
+        "pnotify": "latest"
 
     }
   },

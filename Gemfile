@@ -66,6 +66,9 @@ gem  'hashie'
 #404 page customize
 gem 'gaffe'
 
+#Flash messages from rails
+gem 'unobtrusive_flash', '>=3'
+
 #Pub-sub
 
 gem 'wisper'

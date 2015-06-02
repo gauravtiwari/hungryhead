@@ -18,6 +18,7 @@
  *= require plugins/jquery-menuclipper/jquery.menuclipper
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min
+ *= require pnotify
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
  *= require core/css/pages-icons
