@@ -129,11 +129,12 @@ var TeacherRegisterationForm = React.createClass({
 
           <div className="col-sm-6">
             <div className="form-group form-group-default">
-              <label>Email</label>
-              <input type="email" name="teacher[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
-              <span id="invalid-email"></span>
+              <label>Username</label>
+              <input type="text" name="teacher[username]" id="formUsername" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
+              <span id="invalid-username"></span>
             </div>
           </div>
+
         </div>
 
         <div className="row">
@@ -145,18 +146,19 @@ var TeacherRegisterationForm = React.createClass({
           </div>
         </div>
         <div className="row">
+
           <div className="col-sm-6">
             <div className="form-group form-group-default">
-              <label>Username</label>
-              <input type="text" name="teacher[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
-              <span id="invalid-username"></span>
+              <label>Email</label>
+              <input type="email" name="teacher[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <span id="invalid-email"></span>
             </div>
           </div>
 
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="teacher[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
+              <input type="password" name="teacher[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
         </div>
