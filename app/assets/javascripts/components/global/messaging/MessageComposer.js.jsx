@@ -24,9 +24,8 @@ var MessageComposer = React.createClass({
       <div className="message-form">
         <div className="message-form-textarea">
          <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this._onKeyDown }>
-            <p><input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } /></p>
             <p><textarea ref="body" name="message[body]" placeholder="Type your message here..." className="message-composer form-control empty" value={this.state.text} onChange={this._onChange}/></p>
-          
+
           <div className="send-button float-right">
             <button type="submit" id="post_message" className="btn main-button"><i className={loading_classes}></i> Send </button>
           </div>
@@ -34,7 +33,7 @@ var MessageComposer = React.createClass({
         </div>
       </div>
 
-      
+
     );
   },
 

@@ -25,7 +25,6 @@ var IdeaMessageComposer = React.createClass({
         <div className="row">
           <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this._onKeyDown }>
             <div className="col-xs-9 no-padding">
-                <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
                 <textarea type="text" value={this.state.text} onChange={this._onChange} data-chat-input data-chat-conversation="#idea-conversation" ref="body" id="message" name="idea_message[body]" className="form-control chat-input" placeholder="Type and enter to send" />
             </div>
             <div className="col-xs-2 link text-master m-l-10 m-t-15 p-l-10 b-l b-grey col-top">
