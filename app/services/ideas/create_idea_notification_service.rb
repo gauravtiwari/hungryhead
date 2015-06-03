@@ -6,18 +6,18 @@ class CreateIdeaNotificationService
   end
 
   def create
-    if activity_exists?
-      publish_activity
-    else
+    if activity_empty?
       create_activity
+    else
+      publish_activity
     end
   end
 
   private
 
   #Check if activity exists for idea?
-  def activity_exists?
-    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').exists?
+  def activity_empty?
+    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').empty?
   end
 
   #Create activity if new idea

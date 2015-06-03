@@ -3,7 +3,7 @@
 $(document).ready ->
   $(window).bind 'rails:flash', (e, params) ->
     $('body').pgNotification(
-      style: 'circle'
+      style: 'simple'
       message: params.message
       position: 'bottom-left'
       type: params.type
