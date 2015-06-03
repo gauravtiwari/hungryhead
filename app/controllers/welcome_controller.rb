@@ -34,7 +34,7 @@ class WelcomeController < ApplicationController
 
     when :hello
       @user.update_attributes(user_params)
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User") unless Activity.where(trackable: @user)
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User") if Activity.where(trackable: @user).empty?
     end
 
     sign_in(@user, bypass: true)

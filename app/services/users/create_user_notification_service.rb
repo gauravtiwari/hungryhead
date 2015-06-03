@@ -22,7 +22,7 @@ class CreateUserNotificationService
 
   def increment_counters
     #Increment counters
-    @user.school.students_counter.increment if school_id.present? && self.type == "Student"
+    @user.school.students_counter.increment if @user.school_id.present? && @user.type == "Student"
     #Cache lists for school
     @user.school.latest_students << @user.id if @user.school_id.present? && @user.type == "Student"
     @user.school.latest_faculties << @user.id if @user.school_id.present? && @user.type == "Teacher"
