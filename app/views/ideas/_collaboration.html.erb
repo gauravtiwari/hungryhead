@@ -18,7 +18,7 @@
          <div class="tab-pane fade in active no-padding" id=
          "quickview-chat">
              <div class="view-port clearfix" id="chat">
-              <%= react_component('CollaborationBox', {form: {user_id: current_user.id, action:idea_idea_messages_path(@idea), csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token}}.to_json) %>
+              <%= react_component('CollaborationBox', {form: {user_id: current_user.id, action:idea_idea_messages_path(@idea) }}.to_json) %>
              </div>
          </div>
      </div>

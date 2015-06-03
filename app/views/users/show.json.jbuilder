@@ -37,12 +37,12 @@ json.user do
 
 	json.id @user.uid
 	json.is_owner @user == current_user
-	json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
+	json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT"
 	json.name @user.name
 	json.badge @user.first_name.first + @user.last_name.first
 
 	json.about_me do
 		json.content @user.about_me
-		json.form action: user_path(@user), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
+		json.form action: user_path(@user), method: "PUT"
 	end
 end

@@ -4,8 +4,6 @@ module IdeasHelper
       idea = {
         form: {
           action: idea_investments_path(@idea),
-          csrf_param: request_forgery_protection_token,
-          csrf_token: form_authenticity_token,
           idea_id: @idea.id
         },
         name: @idea.name,

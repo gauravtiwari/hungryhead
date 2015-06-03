@@ -20,7 +20,7 @@ json.idea do
     json.name market
     json.url profile_path(market.parameterize)
   end
-  json.form action: idea_path(@idea), method: "PUT", idea_id: @idea.id, csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
+  json.form action: idea_path(@idea), method: "PUT", idea_id: @idea.id
 end
 
 json.stats do

@@ -10,5 +10,5 @@ json.school do
 
 	json.is_owner true if current_user
 
-	json.form action: school_path(@school), method: "PUT", csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
+	json.form action: school_path(@school), method: "PUT"
 end
