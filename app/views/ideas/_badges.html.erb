@@ -1,4 +1,3 @@
-<% if @idea.badges.length > 0 %>
 <div class="widget-16 panel box-shadow">
     <div class="panel-heading">
         <div class="panel-title b-b b-grey p-b-5">
@@ -8,6 +7,7 @@
 
     <div class="panel-body">
         <div class="user-badges">
+        <% if @idea.badges.length > 0 %>
             <%  @badges.each do |id, badge| %>
                 <div class="m-t-10">
                     <% badge.take(6).each do |b| %>
@@ -27,7 +27,10 @@
                     </div>
                 </div>
             <% end %>
+        <% else %>
+        <div class="no-content hint-text"> No Badges received</div>
+
+        <% end %>
         </div>
     </div>
 </div>
-<% end %>

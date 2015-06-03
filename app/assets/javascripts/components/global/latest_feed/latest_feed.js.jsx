@@ -15,6 +15,7 @@ var LatestFeed = React.createClass({
       feed: [],
       next_page: null,
       closed: true,
+      loading: true,
       count: null
     };
   },
@@ -100,14 +101,17 @@ var LatestFeed = React.createClass({
     $.getJSON(this.props.path, function(json, textStatus) {
       this.setState({
         feed: this.buildElements(json.items),
-        next_page: json.next_page
+        next_page: json.next_page,
+        loading: false
     });
     }.bind(this));
   },
 
   render: function(){
 
-    if(this.state.feed.length > 0) {
+    if(this.state.loading) {
+      var content = <div className="no-content hint-text"><i className="fa fa-spinner fa-spin"></i></div>;
+    } else if(this.state.feed.length > 0) {
       var content =  <Infinite elementHeight={60}
                 containerHeight={250}
                 infiniteLoadBeginBottomOffset={200}
@@ -118,7 +122,7 @@ var LatestFeed = React.createClass({
                  {this.state.feed}
                 </Infinite>;
     } else {
-      var content = <div className="no-content hint-text">No notifications</div>
+      var content = <div className="no-content hint-text">No Updates</div>
     }
 
     return(

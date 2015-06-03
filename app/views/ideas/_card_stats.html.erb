@@ -6,7 +6,7 @@
     views_count: number_to_human(@idea.views_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     comments_count: number_to_human(@idea.comments_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     votes_count: number_to_human(@idea.votes_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
-    score: number_to_human(Idea.leaderboard.score(@idea.id),  :format => '%n%u', :units => { :thousand => 'K' })
+    score: number_to_human(Idea.leaderboard.score(@idea.id),  :format => '%n%u', :units => { :thousand => 'K' }) || 0
   }.to_json
 %>
 <%= react_component('IdeaCardStats', {data: stats}) %>

@@ -43,8 +43,8 @@ var PublishIdeaButton = React.createClass({
   },
 
   render: function() {
-    var text = this.state.is_public && this.state.published ? 'Published' : 'Team';
-    var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible only to team members';
+    var text = this.state.is_public && this.state.published ? 'Published' : 'Private';
+    var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible to you and team members';
 
     var cx = React.addons.classSet;
     var classes = cx({
@@ -54,8 +54,8 @@ var PublishIdeaButton = React.createClass({
     });
 
     var icon_class = cx({
-      "ion-locked": !this.state.is_public,
-      "ion-unlocked": this.state.is_public
+      "fa fa-lock": !this.state.is_public,
+      "fa fa-unlock-alt": this.state.is_public
     });
 
     return (

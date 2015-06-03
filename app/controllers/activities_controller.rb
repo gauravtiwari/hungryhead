@@ -17,14 +17,10 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    activity = Activity.find(params[:id])
-    max_updated_at = activity.updated_at.try(:utc).try(:to_s, :number)
-    cache_key = "activity/#{activity.id}-#{max_updated_at}"
-    @activity = Rails.cache.fetch(cache_key, expires_in: 2.hours) do
+    @activity = Activity.find(params[:id])
       respond_to do |format|
         format.js
       end
-    end
   end
 
 end

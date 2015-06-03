@@ -11,7 +11,7 @@ end
 
 listen "/tmp/web_server.sock", :backlog => 64
 
-timeout 30
+timeout 120
 
 pid '/tmp/web_server.pid'
 

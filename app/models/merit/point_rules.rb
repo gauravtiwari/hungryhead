@@ -40,7 +40,7 @@ module Merit
 
       #Ideas
       score 5, :on => 'ideas#publish', to: :student, category: 'idea_publish' do |idea|
-        idea.student.points(category: 'idea_publish') == 0
+        idea.student.points(category: 'idea_publish') == 0 && idea.published?
       end
 
       #Share
