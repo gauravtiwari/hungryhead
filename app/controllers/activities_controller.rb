@@ -6,18 +6,24 @@ class ActivitiesController < ApplicationController
   layout "home"
 
   def index
-    ids = current_user.followings_ids.members
-    ids.push(current_user.id)
-    @activities = Activity.where(user_id: ids, published: true)
-      .includes([:trackable, :user])
-      .order(id: :desc)
-      .paginate(:page => params[:page], :per_page => 20)
+    max_updated_at = Activity.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    cache_key = "activities/all-#{max_updated_at}"
+    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
+      @activities = Activity.where(published: true)
+        .includes([:trackable, :user])
+        .order(id: :desc)
+        .paginate(:page => params[:page], :per_page => 20)
+    end
   end
 
   def show
     @activity = Activity.find(params[:id])
-    respond_to do |format|
-      format.js
+    max_updated_at = @activity.updated_at.try(:utc).try(:to_s, :number)
+    cache_key = "activity/#{@activity.id}-#{max_updated_at}"
+    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
