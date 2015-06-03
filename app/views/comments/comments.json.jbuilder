@@ -1,6 +1,5 @@
 
-json.form action: comments_path, csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token,
-commentable_id: record.id, commentable_type: record.class.to_s
+json.form action: comments_path, commentable_id: record.id, commentable_type: record.class.to_s
 
 json.comments comments.each do |comment|
   json.cache! ['comment', comment], expires_in: 10.minutes do

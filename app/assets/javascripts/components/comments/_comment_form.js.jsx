@@ -53,7 +53,6 @@ var CommentForm = React.createClass({
         {imgSrc}
       </div>
       <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit }>
-        <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
         <textarea className="form-control empty" onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
         <input ref="commentable_id" type="hidden" value= { this.props.form.commentable_id } name= "comment[commentable_id]"/>
         <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" />

@@ -38,7 +38,6 @@ var ConversationReplyForm = React.createClass({
       <div className={classes}>
         <form ref="form" className="search-conversation" acceptCharset="UTF-8" method="post" onSubmit={ this.handleMessageSubmit }>
           <div className="form-group">
-            <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token }/>
             <textarea type="text" className="form-control" ref="body" name="body" placeholder="Write your message..." autofocus />
             <div className='form-buttons pull-right m-t-20'>
               <button className="btn btn-primary m-r-15"><i className={loadingClass}></i> Send Message <div className="ripple-wrapper"></div></button>

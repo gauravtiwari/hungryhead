@@ -1,6 +1,5 @@
 json.current_user_id current_user.id
 
-json.form csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 json.mailbox @box
 json.mailbox_size do
 	json.inbox_count @mailbox.inbox.length

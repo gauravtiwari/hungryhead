@@ -12,7 +12,7 @@ var OpenFeedbackButton = React.createClass({
     this.setState({loading: true});
     $('body').append($('<div>', {class: 'feedback_modal', id: 'feedback_modal'}));
     React.render(
-      <FeedbackComposer form={this.props.form} key={Math.random()}  />,
+      <FeedbackComposer key={Math.random()}  />,
       document.getElementById('feedback_modal')
     );
     this.setState({loading: false});

@@ -8,7 +8,6 @@ var ConversationsListBox = React.createClass({
       conversations: [],
       mailbox_size: [],
       mailbox: [],
-      form:[],
       recipients_options: "",
       current_user_id: null,
       messaging: false
@@ -31,7 +30,6 @@ var ConversationsListBox = React.createClass({
           current_user_id: data.current_user_id,
           recipients_options: data.recipients_options,
           mailbox_size: data.mailbox_size,
-          form: data.form,
           loading: false
         });
     }.bind(this));

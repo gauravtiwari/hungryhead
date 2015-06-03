@@ -7,7 +7,6 @@ var ConversationBox = React.createClass({
     return {
       conversations: [],
       messages: [],
-      form: [],
       search_form: [],
       mailbox: [],
       recipients_options: "",
@@ -31,8 +30,7 @@ var ConversationBox = React.createClass({
           messages: data.messages,
           mailbox: data.mailbox,
           recipients_options: data.recipients_options,
-          active_conversation: data.active_conversation,
-          form: data.conversation.form
+          active_conversation: data.active_conversation
         });
     }.bind(this));
   },
@@ -97,7 +95,7 @@ var ConversationBox = React.createClass({
   return (
     <div className="container p-r-45">
     <div className="conversation-box panel panel-default">
-      <ConversationHeader mailbox={this.state.mailbox} key={Math.random()} form={this.state.form} />
+      <ConversationHeader mailbox={this.state.mailbox} key={Math.random()} />
       <div className="col-md-12 conversations-list-box">
         <div className="col-md-4 conversations-list scrollable">
           {conversationslist}
@@ -106,7 +104,7 @@ var ConversationBox = React.createClass({
         <div className="col-md-8 message-box">
           <div className="conversation">
             <ConversationMeta removeConversation={this.removeConversation} key={Math.random()} handleReply={this.handleReply} key={Math.random()} active_conversation={this.state.active_conversation} />
-            <ConversationReplyForm loading={this.state.loading} handleReplySubmit={this.handleReplySubmit} cancelReplying={this.cancelReplying} replying={this.state.replying} form={this.state.form} active_conversation={this.state.active_conversation} />
+            <ConversationReplyForm loading={this.state.loading} handleReplySubmit={this.handleReplySubmit} cancelReplying={this.cancelReplying} replying={this.state.replying} active_conversation={this.state.active_conversation} />
             <div className={messages_active_classes}>
               {messagesList}
             </div>

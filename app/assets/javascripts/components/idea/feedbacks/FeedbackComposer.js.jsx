@@ -90,7 +90,6 @@ var FeedbackComposer = React.createClass({
               <form id="feedback_form" ref="form" role="form" noValidate="novalidate" className={form_classes} acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
                 <div className="row">
                     <div className="col-md-12">
-                      <input ref="token" type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
                       <div className="form-group">
                         <label htmlFor="body">What you think works, not works and recommendations for this idea? </label>
                         <textarea ref="body"  onClick={this.loadMentionables}  name="feedback[body]" placeholder="Type your feedback here ..." className="feedback_message-composer form-control fs-14 m-t-5" required aria-required="true" />

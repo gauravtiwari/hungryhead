@@ -1,8 +1,10 @@
+
 json.mailbox @box.titlecase
+
 json.conversation do
 	json.(@conversation, :id)
-	json.form uuid: SecureRandom.hex(7), reply_conversation_path: reply_conversation_path(@conversation), csrf_param: request_forgery_protection_token, csrf_token: form_authenticity_token
 end
+
 json.active_conversation do
 	json.(@conversation, :id, :subject, :created_at)
 	json.uuid SecureRandom.hex(7)
@@ -29,6 +31,7 @@ json.messages @receipts.includes(:message).each do |receipt|
 	json.created_at receipt.message.created_at
 	json.sender_path profile_path(receipt.message.sender)
 end
+
 json.conversations @conversations.includes(:messages).each do |conversation|
 	json.(conversation, :id, :subject, :created_at)
 	json.uuid SecureRandom.hex(6)
