@@ -28,14 +28,8 @@
           document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
       }
     </script>
-
     <%= csrf_meta_tags %>
-    <% if user_signed_in? %>
-      <%= render partial: 'shared/current_user' %>
-    <% end %>
-
     <%= yield :head %>
-
   </head>
 
   <body class="fixed-header menu-behind">

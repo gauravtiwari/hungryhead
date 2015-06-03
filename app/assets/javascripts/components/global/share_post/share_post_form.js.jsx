@@ -51,7 +51,6 @@ var SharePostForm = React.createClass({
                     <form id="share_post_form" ref="form" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this.handleSubmit }>
                       <div className="row">
                           <div className="col-md-12">
-                            <input ref="token" type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
                             <div className="form-group">
                               <label htmlFor="title">Type your share body</label>
                               <input ref="title" className="form-control fs-14 m-t-5 empty" name="post[title]" placeholder="Type title for this post..." />

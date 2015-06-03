@@ -1,11 +1,11 @@
 
 <script type="text/javascript">
+
 	var u = {
-		id: "<%= current_user.id %>",
+		id: "<%= current_user.uid %>",
 		name: "<%= current_user.name %>",
 		user_name_badge: "<%= current_user.first_name.first + current_user.last_name.first %>",
 		balance: "<%= current_user.fund['balance'] %>",
-		id: "<%= current_user.id %>",
 		email: "<%= current_user.email %>",
 		ideas: "<%= current_user.ideas_counter.value if current_user.type == "Student" %>",
 		feedbacks: "<%= current_user.feedbacks_counter.value %>",
@@ -17,4 +17,5 @@
 		csrf_token: "<%= form_authenticity_token %>"
 	}
 	window.currentUser = u;
+
 </script>

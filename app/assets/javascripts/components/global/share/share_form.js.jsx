@@ -53,7 +53,6 @@ var ShareForm = React.createClass({
                     <form id="share_form" ref="form" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this.handleSubmit }>
                       <div className="row">
                           <div className="col-md-12">
-                            <input ref="token" type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
                             <div className="form-group">
                               <label htmlFor="body">Type your share message</label>
                               <textarea ref="message" className="form-control fs-14 m-t-5 empty" name="share[body]" placeholder="Type your message..." />

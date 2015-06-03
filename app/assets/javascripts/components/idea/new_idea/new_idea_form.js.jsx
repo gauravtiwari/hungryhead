@@ -30,7 +30,6 @@ var NewIdeaForm = React.createClass({
     return (
       <form className="pitch_idea_form" ref="form" id="publish-your-idea" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={this._onSubmit}>
         <input name="utf8" type="hidden" value="✓" />
-        <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <h5>If you need help, click on question mark to open help popups. <a className="fa fa-question-circle" onClick={this.newIdeaModalHelp}></a></h5>
         <div className="idea-basics m-t-20">
           <div className="col-md-6 no-padding p-r-15">

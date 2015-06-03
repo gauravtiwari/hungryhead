@@ -9,7 +9,6 @@ var Share = React.createClass({
   getInitialState: function () {
      return {
       loading: false,
-      form: JSON.parse(this.props.form),
       css_class: this.props.css_class,
       shared: this.props.shared,
       share_url: this.props.share_url,
@@ -59,7 +58,7 @@ var Share = React.createClass({
     if(this.isMounted()) {
       $('body').append($('<div>', {class: 'idea_share_form', id: 'idea_share_form'}));
       React.render(
-        <ShareForm key={this.props.record} loading={this.state.loading} shareable_name={this.props.shareable_name} form={this.state.form.form} handleShareSubmit={this.handleShareSubmit} />,
+        <ShareForm key={this.props.record} loading={this.state.loading} shareable_name={this.props.shareable_name} handleShareSubmit={this.handleShareSubmit} />,
         document.getElementById('idea_share_form')
       );
       $('#sharePopup').modal('show');

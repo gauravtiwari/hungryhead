@@ -45,9 +45,11 @@
     </script>
 
     <%= csrf_meta_tags %>
+
     <% if user_signed_in? %>
       <%= render partial: 'shared/current_user' %>
     <% end %>
+
     <%= yield :head %>
 
   </head>

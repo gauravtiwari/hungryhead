@@ -6,8 +6,7 @@ var SharePost = React.createClass({
   mixins: [PureRenderMixin],
   getInitialState: function () {
      return {
-      loading: false,
-      form: JSON.parse(this.props.form)
+      loading: false
     };
   },
 
@@ -37,7 +36,7 @@ var SharePost = React.createClass({
     if(this.isMounted()) {
       $('body').append($('<div>', {class: 'share_post_form', id: 'share_post_form'}));
       React.render(
-        <SharePostForm key={Math.random()} loading={this.state.loading} form={this.state.form.form} handleSharePostSubmit={this.handleSharePostSubmit} />,
+        <SharePostForm key={Math.random()} loading={this.state.loading} handleSharePostSubmit={this.handleSharePostSubmit} />,
         document.getElementById('share_post_form')
       );
       $.Pages.init();
