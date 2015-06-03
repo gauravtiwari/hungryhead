@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
+
   #redis objects
   include Redis::Objects
   #order objects in same order as given
@@ -46,8 +47,11 @@ class User < ActiveRecord::Base
   before_create :add_username, if: :username_absent?
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_create :seed_fund, :seed_settings, unless: :is_admin
-  after_create :increment_counters
-  after_save :load_into_soulmate, :rebuild_notifications, unless: :is_admin
+
+  #Notify to wisper listner service
+  after_save do |user|
+    UserSavedService.new(user).call if rebuild_cache? || mini_bio_changed?
+  end
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -178,13 +182,14 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
-  def rebuild_notifications
-    if rebuild_cache? && has_notifications?
-      unless admin?
-        #rebuild user feed every time name and avatar update.
-        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
-      end
-    end
+  def rebuild_cache?
+    #check if basic info changed and user is not new
+    name_changed? || avatar_changed? || username_changed? && !id_changed?
+  end
+
+  def has_notifications?
+    #check if user has notifications
+    ticker.members.length > 0
   end
 
   private
@@ -249,62 +254,10 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  def rebuild_cache?
-    #check if basic info changed and user is not new
-    name_changed? || avatar_changed? || username_changed? && !id_changed?
-  end
-
-  def has_notifications?
-    #check if user has notifications
-    ticker.members.length > 0
-  end
-
-  #Load data to redis using soulmate after_save
-  def load_into_soulmate
-    #Seperate index for each user type
-    unless admin?
-      if type == "Student"
-        soulmate_loader("students")
-      elsif type == "Mentor"
-        soulmate_loader("mentors")
-      elsif type == "Teacher"
-        soulmate_loader("teachers")
-      end
-    end
-  end
-
-  def soulmate_loader(type)
-    #instantiate soulmate loader to re-generate search index
-    loader = Soulmate::Loader.new(type)
-    loader.add(
-      "term" => name,
-      "image" => avatar.url(:avatar),
-      "description" => mini_bio,
-      "id" => id,
-      "data" => {
-        "link" => profile_path(self)
-      }
-    )
-  end
-
   def remove_from_soulmate
     #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("students")
     loader.remove("id" => id)
-  end
-
-  def increment_counters
-    #Increment counters
-    school.students_counter.increment if school_id.present? && self.type == "Student"
-    #Cache lists for school
-    school.latest_students << id if school_id.present? && self.type == "Student"
-    school.latest_faculties << id if school_id.present? && self.type == "Teacher"
-    #Cache sorted set for global leaderboard
-    User.latest << id unless type == "User"
-
-    #Add leaderboard score
-    User.leaderboard.add(id, points)
-    User.trending.add(id, 1)
   end
 
   def decrement_counters
