@@ -1,4 +1,5 @@
 class CreateActivityJob < ActiveJob::Base
+
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
       if trackable_type.constantize.find(trackable_id).present?
@@ -15,8 +16,9 @@ class CreateActivityJob < ActiveJob::Base
   end
 
   def find_trackable(trackable)
-    @activity = Activity.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s)
-    @notification = Notification.where(trackable_id: trackable.id, trackable_type: trackable.class.to_s)
+    @activity = Activity.where(trackable: trackable)
+    @notification = Notification.where(trackable: trackable)
     @activity.exists? && @activity.first.published? || @notification.exists? && @notification.first.published?
   end
+
 end

@@ -1,7 +1,10 @@
 class WelcomeController < ApplicationController
+
   include Wicked::Wizard
-  before_filter :authenticate_user!, :user
+
+  before_filter :authenticate_user!, :set_user
   steps :hello, :follow_friends
+
   layout "home"
 
   def show
@@ -28,10 +31,12 @@ class WelcomeController < ApplicationController
     @welcome = current_user #for merit to avoid console errors
     @user = current_user
     case step
+
     when :hello
       @user.update_attributes(user_params)
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User")
+      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User") unless Activity.where(trackable: @user)
     end
+
     sign_in(@user, bypass: true)
     render_wizard @user
   end
@@ -46,7 +51,7 @@ class WelcomeController < ApplicationController
     profile_path(@user)
   end
 
-  def user
+  def set_user
     @user = current_user
   end
 

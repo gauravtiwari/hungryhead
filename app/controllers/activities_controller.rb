@@ -8,8 +8,8 @@ class ActivitiesController < ApplicationController
   def index
     max_updated_at = Activity.maximum(:updated_at).try(:utc).try(:to_s, :number)
     cache_key = "activities/all-#{max_updated_at}"
-    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-      @activities = Activity.where(published: true)
+    @activities = Rails.cache.fetch(cache_key, expires_in: 2.hours) do
+     Activity.where(published: true)
         .includes([:trackable, :user])
         .order(id: :desc)
         .paginate(:page => params[:page], :per_page => 20)
@@ -17,10 +17,10 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
-    max_updated_at = @activity.updated_at.try(:utc).try(:to_s, :number)
-    cache_key = "activity/#{@activity.id}-#{max_updated_at}"
-    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
+    activity = Activity.find(params[:id])
+    max_updated_at = activity.updated_at.try(:utc).try(:to_s, :number)
+    cache_key = "activity/#{activity.id}-#{max_updated_at}"
+    @activity = Rails.cache.fetch(cache_key, expires_in: 2.hours) do
       respond_to do |format|
         format.js
       end
