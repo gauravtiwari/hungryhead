@@ -10,7 +10,6 @@ CarrierWave.configure do |config|
 
   config.fog_directory = ENV['ASSET_BUCKET_NAME']
 
-  config.fog_region = 'eu-east-1'
   # config.aws_bucket = ENV['S3_BUCKET_NAME']
   # config.aws_acl    = :public_read
   config.asset_host = "//#{ENV['ASSET_BUCKET_NAME']}.storage.googleapis.com"
