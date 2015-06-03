@@ -137,6 +137,8 @@ class User < ActiveRecord::Base
     true
   end
 
+  def after_password_reset; end
+
   def joined_within_a_year?
     (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
   end

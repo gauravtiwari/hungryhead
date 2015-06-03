@@ -1,7 +1,9 @@
 json.user do
+
 	json.avatar do
 		json.url @user.avatar.url(:avatar) if @user.avatar
 	end
+
 	json.cover do
 		json.url @user.cover.url(:cover) if @user.cover
 		json.top @user.cover_position if @user.cover

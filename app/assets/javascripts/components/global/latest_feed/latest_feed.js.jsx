@@ -107,6 +107,20 @@ var LatestFeed = React.createClass({
 
   render: function(){
 
+    if(this.state.feed.length > 0) {
+      var content =  <Infinite elementHeight={60}
+                containerHeight={250}
+                infiniteLoadBeginBottomOffset={200}
+                onInfiniteLoad={this.handleInfiniteLoad}
+                loadingSpinnerDelegate={this.elementInfiniteLoad()}
+                isInfiniteLoading={this.state.isInfiniteLoading}
+                >
+                 {this.state.feed}
+                </Infinite>;
+    } else {
+      var content = <div className="no-content hint-text">No notifications</div>
+    }
+
     return(
       <div className="widget-11-2 panel p-b-10 b-b b-light-grey no-margin">
           <div className="panel-heading">
@@ -117,15 +131,7 @@ var LatestFeed = React.createClass({
           <div className="panel-body full-border-light no-margin auto-overflow no-padding">
            <div>
              <ul className="latest-activities scrollable no-style no-padding no-margin">
-               <Infinite elementHeight={60}
-                containerHeight={250}
-                infiniteLoadBeginBottomOffset={200}
-                onInfiniteLoad={this.handleInfiniteLoad}
-                loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                isInfiniteLoading={this.state.isInfiniteLoading}
-                >
-                 {this.state.feed}
-                </Infinite>
+              {content}
              </ul>
             </div>
           </div>

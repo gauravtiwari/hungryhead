@@ -1,10 +1,4 @@
-
-<div class="wrapper-small bg-solid text-center panel panel-default">
-  <h2 class="text-white">Find and <span class="semi-bold b-b b-white p-b-5">connect</span> with people on hungryhead</h2>
-</div>
-
-<div class="container">
-  <% @users.each do |user| %>
+  <% @students.each do |user| %>
   <div class="col-md-3 no-padding p-r-15">
   <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
   <%= content_tag(:div, class: 'listing-header  text-center') do %>
@@ -55,11 +49,5 @@
   <% end %>
 <% end %>
 <div class="paging-container p-r-15">
-    <%= will_paginate(@users, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    <%= will_paginate(@students, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
 </div>
-
-</div>
-
-
-
-

@@ -1,8 +1,18 @@
 <div class="school-data text-center text-white col-md-5">
-    <%= image_tag(@school.logo.url(:avatar)) %>
-    <h1 class="bold">
+    <% data = render(template: 'schools/show.json.jbuilder') %>
+
+    <div class="user-profile auto-margin">
+        <div class="d100">
+            <div class="profile-logo">
+              <%= react_component('SchoolLogo', {data: data}) %>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="bold clearfix p-t-20 displayblock">
         <%= @school.name %>
     </h1>
+
     <div class="row m-t-20">
         <div class="col-md-4 text-center b-r b-white b-dashed">
             <h1 class="all-caps bold small fs-16">Students</h1>

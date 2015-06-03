@@ -260,12 +260,14 @@ Rails.application.routes.draw do
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
   get '/:slug/about', to: SlugRouter.to(:about), as: :profile_about
   get '/:slug/posts', to: SlugRouter.to(:posts), as: :profile_posts
+  get '/:slug/events', to: SlugRouter.to(:events), as: :profile_events
+  get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
   get '/:slug/posts/:id', to: SlugRouter.to(:post), as: :profile_posts_post
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
-  get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
+  get '/:slug/student_ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks
   get '/:slug/investments', to: SlugRouter.to(:investments), as: :profile_investments

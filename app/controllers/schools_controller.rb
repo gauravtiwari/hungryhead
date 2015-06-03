@@ -56,7 +56,14 @@ class SchoolsController < ApplicationController
   end
 
   def students
-    @ideas = Idea.where(school_id: @school.id).limit(4)
+    @students = User.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
+    if request.xhr?
+      render :partial=>"schools/students"
+    end
+  end
+
+  def events
+    @ideas = Event.where(school_id: @school.id).limit(4)
     @students = User.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/content/students"
@@ -64,10 +71,9 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @entrepreneurs = User.where(school_id: @school.id).limit(4)
     @ideas = Idea.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
-      render :partial=>"schools/content/ideas"
+      render :partial=>"schools/ideas"
     end
   end
 

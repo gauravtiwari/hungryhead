@@ -15,7 +15,7 @@ class UserSavedService
 
   def rebuild_notifications
     #Rebuild user feed every time name and avatar update.
-    RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(@user.id)
+    RebuildNotificationsCacheJob.set(wait: 20.seconds).perform_later(@user.id)
   end
 
   #Load data to redis using soulmate after_save
