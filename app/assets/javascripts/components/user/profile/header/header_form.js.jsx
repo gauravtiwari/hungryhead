@@ -52,7 +52,6 @@ var UserProfileHeaderForm = React.createClass ({
       'fa fa-spinner fa-spin': this.state.loading
     });
     return (<form id="edit-profile-form" ref="header_form" onSubmit={this._onKeyDown} noValidate="novalidate" className="simple_form edit_user" acceptCharset="UTF-8" >
-        <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
         <div className="row">
           <div className="col-md-6">
             <h3>Fill your Data</h3>

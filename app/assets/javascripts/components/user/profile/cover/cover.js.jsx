@@ -149,7 +149,6 @@ var Cover = React.createClass({
                 <input type="file" ref="cover" style={{"display" : "none"}} name="user[cover]" id="user_cover" />
                 <input type="hidden" ref="position" name="user[cover_position]" value={top} />
                 <input type="hidden" ref="position" name="user[cover_left]" value={left} />
-                <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
               </form>
               <div id="coverpic" style={imageStyle}>
                 {image}

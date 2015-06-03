@@ -22,7 +22,6 @@ var InvestForm = React.createClass({
   });
   return (
     <form id="information-form" role="form" noValidate="novalidate" acceptCharset="UTF-8" ref="invest_form" onSubmit={this._onKeyDown}>
-       <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
        <h5>Your available funds are: {this.state.available_balance}</h5>
        <div className="form-group">
            <div className="row">

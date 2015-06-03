@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var MentorRegisterationForm = React.createClass({
-  
+
   getInitialState: function(){
     return {
       form: this.props.form,
@@ -112,9 +112,8 @@ var MentorRegisterationForm = React.createClass({
     var loading_class = cx ({
       'fa fa-spinner fa-spin': this.props.loading
     });
-    return (  
+    return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group form-group-default">
@@ -122,7 +121,7 @@ var MentorRegisterationForm = React.createClass({
               <input type="text" ref="name" autoComplete="off" name="mentor[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
             </div>
           </div>
-          
+
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Email</label>
@@ -170,7 +169,7 @@ var MentorRegisterationForm = React.createClass({
         </div>
         <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
         <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
-      </form>   
+      </form>
     )
   },
 

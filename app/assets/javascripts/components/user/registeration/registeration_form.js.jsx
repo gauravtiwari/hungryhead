@@ -126,7 +126,6 @@ var RegisterationForm = React.createClass({
 
     return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group form-group-default">

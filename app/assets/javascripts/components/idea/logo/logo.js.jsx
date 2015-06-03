@@ -64,8 +64,7 @@ var Logo = React.createClass({
         <div id="idea_image">
           <form ref="logoForm" method="POST" action={this.state.form.action} id="logo-upload" className="logo-form" onChange={this._onChange} encType="multipart/form-data">
             <input type="hidden" name="_method" value={this.state.form.method} />
-            <input type="file" ref="logo" style={{"display" : "none"}} name="idea[logo]" id="idea_logo" />
-            <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
+            <input type="file" ref="logo" style={{"display" : "none"}} name="idea[logo]" id="idea_logo" />>
           </form>
           <div id="userpic">
           <div className="logo">

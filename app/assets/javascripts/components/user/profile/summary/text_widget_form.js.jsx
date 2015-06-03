@@ -35,9 +35,8 @@ var TextWidgetForm = React.createClass({
     return(
       <div className={classes}>
         <form ref="about_widget" className="form" action={this.props.form.action} onSubmit={this._onKeyDown}>
-          <div className="form-group">  
+          <div className="form-group">
             <textarea ref="about_me" onChange={this.updateWordCount} className ="textarea wysiwyg form-control empty" type="text" name="user[about_me]" defaultValue={this.state.text} placeholder= "Write about yourself" autofocus="true" />
-            <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
             <div className="widget-buttons m-t-20">
               <button type="submit" id="update_section" className={save_button_class}>
                 <i className={loading_class}></i> Save

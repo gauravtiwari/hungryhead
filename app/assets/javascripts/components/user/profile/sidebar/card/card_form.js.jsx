@@ -38,7 +38,6 @@ var CardForm = React.createClass({
                       <div className="panel panel-default no-border">
                         <div className="panel-body no-padding no-border">
                           <form ref="profile_form" noValidate="novalidate" className="edit_user" id="edit_user" method="put" onSubmit={this._onKeyDown} acceptCharset="UTF-8">
-                            <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
                             <div className="col-md-6">
                               <div className="form-group">
                                   <label>Your name</label>

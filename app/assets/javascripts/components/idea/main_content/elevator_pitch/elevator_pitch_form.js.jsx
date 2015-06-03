@@ -24,7 +24,6 @@ var ElevatorPitchForm = React.createClass({
     return (
       <div className={classes}>
          <form id="plan-edit-form" ref="pitch_form" className="pitch-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
              <label className="m-b-10">Edit your elevator pitch.</label>
              <textarea ref="elevator_pitch" className="form-control empty" defaultValue={elevator_pitch} name="idea[elevator_pitch]" placeholder='Edit your elevator pitch' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">

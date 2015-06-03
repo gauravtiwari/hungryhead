@@ -44,7 +44,6 @@ var Avatar = React.createClass({
           <form ref="avatarForm" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
             <input type="hidden" name="_method" value={this.state.form.method} />
             <input type="file" ref="avatar" style={{"display" : "none"}} direct = "true" name="user[avatar]" id="user_avatar" />
-            <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
           </form>
           <div id="userpic">
           <div className="avatar">
