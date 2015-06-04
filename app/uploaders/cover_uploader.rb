@@ -2,11 +2,14 @@
 
 class CoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  #include ::CarrierWave::Backgrounder::Delay
+  include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MimeTypes
   include CarrierWave::MimetypeFu
-  process :set_content_type
 
+  include Piet::CarrierWaveExtension
+  process :optimize
+
+  process :set_content_type
   storage :fog
 
   def process_uri(uri)

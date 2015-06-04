@@ -14,7 +14,7 @@ class School < ActiveRecord::Base
 	acts_as_taggable_on :locations
 
 	store_accessor :data, :established, :locations, :website
-	store_accessor :media, :logo_position,
+	store_accessor :media, :logo_position, :logo_tmp, :cover_tmp,
 	:cover_position, :cover_left, :cover_prcessing, :logo_processing
 
 	#Redis Cache counters and ids
@@ -32,7 +32,9 @@ class School < ActiveRecord::Base
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader
+	store_in_background :logo
 	mount_uploader :cover, CoverUploader
+	store_in_background :cover
 
 	validates :name, :presence => true,
 	:on => :create

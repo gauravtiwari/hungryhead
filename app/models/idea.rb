@@ -67,10 +67,6 @@ class Idea < ActiveRecord::Base
   scope :public_ideas, -> { where(privacy: 2) }
   scope :for_user, lambda {|user| where("student_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
-  #Upload logos and covers
-  mount_uploader :logo, LogoUploader
-  mount_uploader :cover, CoverUploader
-
   #Associations
   belongs_to :student
   belongs_to :school
@@ -89,9 +85,15 @@ class Idea < ActiveRecord::Base
   :website
 
   store_accessor :media, :logo_position, :cover_position,
-  :cover_left, :cover_prcessing, :logo_processing
+  :cover_left, :cover_prcessing, :logo_processing, :logo_tmp, :cover_tmp
 
   store_accessor :sections, :video, :video_html, :market, :problems, :solutions, :vision, :value_proposition
+
+  #Upload logos and covers
+  mount_uploader :logo, LogoUploader
+  store_in_background :logo
+  mount_uploader :cover, CoverUploader
+  store_in_background :cover
 
   #Auto HTML for youtube video
   auto_html_for :video do
