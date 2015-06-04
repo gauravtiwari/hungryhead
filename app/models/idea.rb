@@ -91,9 +91,7 @@ class Idea < ActiveRecord::Base
 
   #Upload logos and covers
   mount_uploader :logo, LogoUploader
-  store_in_background :logo
   mount_uploader :cover, CoverUploader
-  store_in_background :cover
 
   #Auto HTML for youtube video
   auto_html_for :video do

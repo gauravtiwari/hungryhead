@@ -2,12 +2,9 @@
 
 class CoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  include ::CarrierWave::Backgrounder::Delay
+  #include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MimeTypes
   include CarrierWave::MimetypeFu
-
-  include Piet::CarrierWaveExtension
-  process :optimize
 
   process :set_content_type
   storage :fog

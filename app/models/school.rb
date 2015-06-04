@@ -32,9 +32,7 @@ class School < ActiveRecord::Base
 
 	#Mount carrierwave
 	mount_uploader :logo, LogoUploader
-	store_in_background :logo
 	mount_uploader :cover, CoverUploader
-	store_in_background :cover
 
 	validates :name, :presence => true,
 	:on => :create

@@ -50,9 +50,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Notify to wisper listner service
-  after_save do |user|
-    UserSavedService.new(user).call if rebuild_cache? || mini_bio_changed?
-  end
+  after_commit :run_user_save_service, on: :update
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -116,9 +114,7 @@ class User < ActiveRecord::Base
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
-  store_in_background :avatar
   mount_uploader :cover, CoverUploader
-  store_in_background :cover
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
@@ -202,6 +198,10 @@ class User < ActiveRecord::Base
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def run_user_save_service
+    UserSavedService.new(self).call if rebuild_cache? || mini_bio_changed?
   end
 
   def should_generate_new_friendly_id?

@@ -188,10 +188,6 @@ gem 'animate-rails'
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave_direct', '~> 0.0.14'
 gem 'carrierwave-mimetype-fu'
-gem 'carrierwave-imageoptimizer'
-gem 'piet-binary'
-gem 'carrierwave_backgrounder'
-
 
 #Sync assets with cloudfront
 gem "fog-google"

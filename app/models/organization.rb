@@ -18,9 +18,7 @@ class Organization < ActiveRecord::Base
   counter :followers_counter
 
   mount_uploader :logo, LogoUploader
-  store_in_background :logo
   mount_uploader :cover, CoverUploader
-  store_in_background :cover
 
   #Callbacks hooks
   after_save :load_into_soulmate
