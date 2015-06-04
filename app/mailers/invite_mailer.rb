@@ -10,12 +10,12 @@ class InviteMailer < ActionMailer::Base
     mail(:from => from.email, :to => @user.email, :subject => subject)
   end
 
-  def invite_friends(user, from)
-    @invited = user
-    @sender = from
-    @token = user.raw_invitation_token
-    subject = "#{from.name} has invited you to join hungryhead"
+  def invite_friends(user_id, from_id)
+    @invited = User.find(user_id)
+    @sender = User.find(from_id)
+    @token = @invited.raw_invitation_token
+    subject = "#{@sender.name} has invited you to join hungryhead"
     @invitation_link = accept_user_invitation_url(:invitation_token => @token)
-    mail(:from => from.email, :bcc => from, :to => @invited.email, :subject => subject)
+    mail(:from => @sender.email, :to => @invited.email, :subject => subject)
   end
 end

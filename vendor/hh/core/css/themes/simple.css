@@ -3290,13 +3290,15 @@ Misc buttons
 ------------------------------------
 */
 .alert-danger,
-.alert-error {
+.alert-error,
+.alert-alert {
   background-color: #fbe3e3;
   color: #8d4546;
   border-color: #8d4546;
 }
 .alert-danger .close,
-.alert-error .close {
+.alert-error .close,
+.alert-alert .close {
   background-position: -95px -10px !important;
 }
 .alert-warning {
