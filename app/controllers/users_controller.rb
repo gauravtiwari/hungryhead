@@ -62,19 +62,28 @@ class UsersController < ApplicationController
   def user_invite
     users = params[:user][:name].zip(params[:user][:email])
     invited = []
+    users.delete(["", ""])
     users.each do |u|
       @user = Mentor.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
-      InviteMailer.invite_friends(@user.id, current_user.id).deliver_later!(wait: 5.seconds)
       @user.invitation_sent_at = Time.now.utc
+      InviteMailer.invite_friends(@user, current_user).deliver  if @user.errors.empty?
       invited << u[0] if u[0].present?
     end
-    render json: {
-      invited: true,
-      msg: "You have succesfully invited #{invited.to_sentence}",
-      status: :created
-    }
+    if @user.errors.empty?
+      render json: {
+        invited: true,
+        msg: "You have succesfully invited #{invited.to_sentence}",
+        status: :created
+      }
+    else
+      render json: {
+        invited: false,
+        msg: "Something went wrong, please try again",
+        status: :created
+      }
+    end
   end
 
   def update

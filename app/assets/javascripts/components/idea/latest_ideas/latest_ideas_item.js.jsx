@@ -2,7 +2,7 @@ var LatestIdeasItem = React.createClass({
 
   render: function() {
     return (
-      <li className="m-b-10">
+      <li className="m-b-15">
         <div className="widget-16-header p-l-15 p-r-15">
 
         <p className="no-margin">

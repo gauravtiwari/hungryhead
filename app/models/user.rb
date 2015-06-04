@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   include Voter
 
   attr_accessor :login
+  attr_reader :raw_invitation_token
 
   #Model Relationships
   belongs_to :school
@@ -108,7 +109,7 @@ class User < ActiveRecord::Base
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   #Devise for authentication
-  devise :uid, :invitable, :database_authenticatable, :registerable,
+  devise :invitable, :uid, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
     :registerable, :authentication_keys => [:login]
 
