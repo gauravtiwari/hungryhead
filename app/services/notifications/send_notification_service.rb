@@ -23,13 +23,4 @@ class SendNotificationService
     )
   end
 
-  def idea_notification
-    Pusher.trigger_async("idea-feed-#{@recipient.id}",
-      "new_idea_ticker_item",
-      {
-        data:  @activity
-      }.to_json
-    )
-  end
-
 end

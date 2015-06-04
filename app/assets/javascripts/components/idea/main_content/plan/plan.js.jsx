@@ -51,7 +51,7 @@ var Plan = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'idea-plan fs-15': true,
+      'idea-plan fs-16': true,
       'hidden': this.state.editable,
       'show': !this.state.editable
     });
@@ -94,7 +94,7 @@ var Plan = React.createClass({
       );
     } else {
        return (
-      <div className="panel bg-light-blue box-shadow">
+      <div className="panel bg-white box-shadow">
           <div className="panel-heading p-l-60 p-b-10">
             <div className="panel-title b-b b-grey p-b-5 text-master">Idea</div>
           </div>

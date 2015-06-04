@@ -24,7 +24,7 @@
 			<% end %>
 			<% end %>
 			<% end %>
-		<% else %>
+		<% elsif @user.student? %>
 			<%= link_to('Post Idea', new_idea_path(:rules), class: "btn btn-info btn-cons pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10", title: "Publish idea") %>
 		<% end %>
 	</div>

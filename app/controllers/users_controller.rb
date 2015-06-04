@@ -47,6 +47,7 @@ class UsersController < ApplicationController
   def show
     User.trending.increment(@user.id) if @user != current_user && @user.published?
     @user.views_counter.increment if @user != current_user
+    @user.touch
     respond_to do |format|
       format.html {render :show} if @user.type == "User"
       format.html {render :show} if @user.type == "Student"

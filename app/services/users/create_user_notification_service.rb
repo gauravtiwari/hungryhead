@@ -26,6 +26,7 @@ class CreateUserNotificationService
     #Cache lists for school
     @user.school.latest_students << @user.id if @user.school_id.present? && @user.type == "Student"
     @user.school.latest_faculties << @user.id if @user.school_id.present? && @user.type == "Teacher"
+
     #Cache sorted set for global leaderboard
     User.latest << @user.id unless @user.type == "User"
 

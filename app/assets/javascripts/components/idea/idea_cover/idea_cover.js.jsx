@@ -135,7 +135,7 @@ var IdeaCover = React.createClass({
         };
         var image = <img className="cover-photo" id="ideacover_preview" src={this.state.cover.url} />;
       } else {
-        var image = "";
+        var image = <div className="no-content hint-text">Demo Image</div>;
         var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
       }
 
@@ -158,7 +158,7 @@ var IdeaCover = React.createClass({
         )
      } else {
        return (
-      <div className={drag_class} data-social="cover" id="cover-wrap" id="cover-wrap">
+      <div className={drag_class} data-pages="parallax" data-social="cover" id="cover-wrap">
            <div id="coverpic" style={imageStyle}>
             {image}
            </div>

@@ -26,7 +26,7 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_update :load_into_soulmate
+  after_save :load_into_soulmate
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -40,10 +40,6 @@ class Idea < ActiveRecord::Base
 
   #Set to store trending
   list :latest, maxlength: 20, marshal: true, global: true
-
-  #Store latest idea notifications
-  sorted_set :ticker, maxlength: 100, marshal: true
-
   #Leaderboard ideas
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true

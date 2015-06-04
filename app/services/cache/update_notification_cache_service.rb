@@ -60,9 +60,6 @@ class UpdateNotificationCacheService
     add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #push notification into friends notifications
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
-    #add notification to idea ticker
-    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
-    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
     #add notification to followers ticker
     add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
   end
@@ -86,12 +83,6 @@ class UpdateNotificationCacheService
   def add_activity_to_user_profile(user, activity_item)
     user.latest_activities.delete(activity_item)
     user.latest_activities << activity_item
-  end
-
-  #reAdd activity to idea ticker
-  def add_activity_to_idea(idea, activity_item)
-    idea.ticker.remrangebyscore(score_key, score_key)
-    idea.ticker.add(activity_item, score_key)
   end
 
   #readd notifications to followers tickers

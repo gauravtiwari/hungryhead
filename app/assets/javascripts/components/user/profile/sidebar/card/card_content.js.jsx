@@ -57,15 +57,17 @@ var CardContent = React.createClass({
     }
 
     if(this.props.profile.location_name) {
-      var location =  <a className="b-l b-white b-dashed text-white p-l-10" href={this.props.profile.location_url}>
+      var location =  <a className="text-white p-l-10" href={this.props.profile.location_url}>
                           <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
                          </a>;
     }
 
     if(this.props.profile.school_url) {
-      var school = <a className="text-white p-r-10" href={this.props.profile.school_url}>
+      var school = <a className="text-white b-r b-white b-dashed p-r-10" href={this.props.profile.school_url}>
                           <i className="fa fa-university"></i> {this.props.profile.school_name}
                           </a>;
+    } else {
+      var school = "";
     }
 
     var classes = "profile-card padding-20 box-shadow bg-" + this.props.profile.theme;
@@ -83,7 +85,7 @@ var CardContent = React.createClass({
                         </div>
                     </div>
                    <div className="clearfix p-l-10 p-r-10 p-t-10">
-                       <h3 className="no-margin text-white">
+                       <h3 className="no-margin bold text-white">
                            {this.props.profile.name} {verified_badge}
                        </h3>
                        <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>

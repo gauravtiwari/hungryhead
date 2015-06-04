@@ -51,6 +51,12 @@ var LatestUserActivities = React.createClass({
       }
     });
 
+    if(activities.length > 0) {
+      var content  = activities;
+    } else {
+      var content = <div className="no-content hint-text">No latest activities</div>;
+    }
+
     return(
       <div className="widget-11-2 panel profile-cards no-margin">
           <div className="panel-heading">
@@ -60,7 +66,7 @@ var LatestUserActivities = React.createClass({
           </div>
           <div className="panel-body no-margin no-padding p-b-15">
              <ul className="p-l-20 p-r-20 no-style no-padding no-margin">
-               {activities}
+               {content}
              </ul>
           </div>
       </div>

@@ -31,7 +31,6 @@ var MainContent = React.createClass({
   render: function() {
       return (
         <div>
-          <ElevatorPitch idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
           <Plan idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
           <Problems idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
           <Solutions idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />

@@ -1,4 +1,4 @@
-<div class="sidebar auto-height sticky box-shadow bg-solid">
+<div class="sidebar auto-height sticky box-shadow bg-<%= current_user.theme %>">
     <% cache(["beta", "home_sidebar_card", current_user]) do %>
         <%= render partial: 'sidebar_card' %>
     <% end %>

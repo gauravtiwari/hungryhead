@@ -1,22 +1,26 @@
-<% if @user.posts_counter.value > 0 %>
 <div class="widget-16 text-white panel bg-danger">
     <div class="panel-heading">
         <div class="panel-title b-b b-white p-b-5">
             <i class="fa fa-share text-white"></i> Latest posts
         </div>
     </div>
-    <% cached_posts(@user).each do |post| %>
-        <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
-            <div class="pull-left">
-                <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
-                    <%= link_to(post[:title], post[:url], class: "text-white") %>
-                </h5>
-                <p class="small no-margin clearfix text-white">
-                    <%= post[:excerpt] %>
-                </p>
+    <% if @user.posts_counter.value > 0 %>
+        <% cached_posts(@user).each do |post| %>
+            <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
+                <div class="pull-left">
+                    <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
+                        <%= link_to(post[:title], post[:url], class: "text-white") %>
+                    </h5>
+                    <p class="small no-margin clearfix text-white">
+                        <%= post[:excerpt] %>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
+        <% end %>
+    <% else %>
+        <div class="text-center fs-22 p-b-20 hint-text text-white">
+            0 Posts Published
         </div>
     <% end %>
 </div>
-<% end %>

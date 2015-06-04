@@ -49,8 +49,10 @@ class User < ActiveRecord::Base
   before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
-  #Notify to wisper listner service
-  after_commit :run_user_save_service, on: :update
+  #Call Service to update cache
+  after_save do |user|
+    RecordSavedJob.set(wait: 10.seconds).perform_later(user.id, "User") if rebuild_cache? || mini_bio_changed?
+  end
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :subjects, :markets
@@ -200,10 +202,6 @@ class User < ActiveRecord::Base
     admin?
   end
 
-  def run_user_save_service
-    UserSavedService.new(self).call if rebuild_cache? || mini_bio_changed?
-  end
-
   def should_generate_new_friendly_id?
     slug.blank? || username_changed?
   end
@@ -244,7 +242,7 @@ class User < ActiveRecord::Base
   #Seeds settings into database on: :create
   def seed_settings
     self.settings = {
-      theme: 'solid',
+      theme: "#{user.type.downcase}",
       idea_notifications: true,
       feedback_notifications: true,
       investment_notifications: true,

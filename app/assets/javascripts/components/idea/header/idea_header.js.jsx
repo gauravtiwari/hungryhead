@@ -11,26 +11,12 @@ var IdeaHeader = React.createClass({
     }
   },
 
-  componentDidMount: function() {
-    $.pubsub('subscribe', 'update_investment_stats', function(msg, data){
-      this.setState({raised: data + this.state.raised});
-    }.bind(this));
-
-    $.pubsub('subscribe', 'update_vote_stats', function(msg, data){
-      this.setState({votes_count: this.state.votes_count + 1});
-    }.bind(this));
-
-    $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
-      this.setState({feedbacks_count: data});
-    }.bind(this));
-  },
-
   render: function() {
     return (
       <div className="idea-header bg-solid">
         <IdeaCover data= {this.state.data} />
         <IdeaProfile idea={this.state.idea} />
-        <IdeaStats raised={this.state.raised} feedbacks_count={this.state.feedbacks_count} votes_count={this.state.votes_count} />
+        <IdeaPitch idea={this.state.idea} />
       </div>
     );
   }

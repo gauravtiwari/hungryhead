@@ -11,8 +11,6 @@ class CreateNotificationCacheService
 
   def create
     add_activity(@actor, activity)
-    SendNotificationService.new(@object, activity).idea_notification if @activity.trackable_type == "Idea"
-    SendNotificationService.new(@target, activity).idea_notification if @activity.recipient_type == "Idea" && @activity.trackable_type != "Idea"
   end
 
   protected
@@ -62,9 +60,7 @@ class CreateNotificationCacheService
     add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #Send notification to recipient
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
-    #Add activity to idea ticker if recipient is idea
-    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
-    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
   end
@@ -86,11 +82,6 @@ class CreateNotificationCacheService
   #This is for user profile page to show latest personal activities
   def add_activity_to_user_profile(user, activity_item)
     user.latest_activities << activity_item
-  end
-
-  #Add activity to idea ticker if recipient is idea
-  def add_activity_to_idea(idea, activity_item)
-    idea.ticker.add(activity_item, score_key)
   end
 
   #Add activity to followers ticker
