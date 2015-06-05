@@ -483,6 +483,40 @@ ALTER SEQUENCE investments_id_seq OWNED BY investments.id;
 
 
 --
+-- Name: invite_requests; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invite_requests (
+    id integer NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    url character varying DEFAULT ''::character varying NOT NULL,
+    type character varying DEFAULT 'Mentor'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: invite_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE invite_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invite_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE invite_requests_id_seq OWNED BY invite_requests.id;
+
+
+--
 -- Name: locations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1191,6 +1225,74 @@ ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
 
 
 --
+-- Name: starburst_announcement_views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE starburst_announcement_views (
+    id integer NOT NULL,
+    user_id integer,
+    announcement_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: starburst_announcement_views_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE starburst_announcement_views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: starburst_announcement_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE starburst_announcement_views_id_seq OWNED BY starburst_announcement_views.id;
+
+
+--
+-- Name: starburst_announcements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE starburst_announcements (
+    id integer NOT NULL,
+    title text,
+    body text,
+    start_delivering_at timestamp without time zone,
+    stop_delivering_at timestamp without time zone,
+    limit_to_users text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    category text
+);
+
+
+--
+-- Name: starburst_announcements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE starburst_announcements_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: starburst_announcements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE starburst_announcements_id_seq OWNED BY starburst_announcements.id;
+
+
+--
 -- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1557,6 +1659,13 @@ ALTER TABLE ONLY investments ALTER COLUMN id SET DEFAULT nextval('investments_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY invite_requests ALTER COLUMN id SET DEFAULT nextval('invite_requests_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY locations ALTER COLUMN id SET DEFAULT nextval('locations_id_seq'::regclass);
 
 
@@ -1697,6 +1806,20 @@ ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY starburst_announcement_views ALTER COLUMN id SET DEFAULT nextval('starburst_announcement_views_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY starburst_announcements ALTER COLUMN id SET DEFAULT nextval('starburst_announcements_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
 
 
@@ -1828,6 +1951,14 @@ ALTER TABLE ONLY ideas
 
 ALTER TABLE ONLY investments
     ADD CONSTRAINT investments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invite_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invite_requests
+    ADD CONSTRAINT invite_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -1988,6 +2119,22 @@ ALTER TABLE ONLY shares
 
 ALTER TABLE ONLY slugs
     ADD CONSTRAINT slugs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: starburst_announcement_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY starburst_announcement_views
+    ADD CONSTRAINT starburst_announcement_views_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: starburst_announcements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY starburst_announcements
+    ADD CONSTRAINT starburst_announcements_pkey PRIMARY KEY (id);
 
 
 --
@@ -2338,6 +2485,13 @@ CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
 --
 
 CREATE INDEX index_investments_on_uuid ON investments USING btree (uuid);
+
+
+--
+-- Name: index_invite_requests_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_invite_requests_on_type ON invite_requests USING btree (type);
 
 
 --
@@ -2796,6 +2950,13 @@ CREATE INDEX punchable_index ON punches USING btree (punchable_type, punchable_i
 
 
 --
+-- Name: starburst_announcement_view_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX starburst_announcement_view_index ON starburst_announcement_views USING btree (user_id, announcement_id);
+
+
+--
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2968,4 +3129,12 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604153907');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604153908');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604153909');
+
+INSERT INTO schema_migrations (version) VALUES ('20150605120916');
 
