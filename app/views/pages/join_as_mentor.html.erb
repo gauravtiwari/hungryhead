@@ -58,37 +58,7 @@
                             <p class="fs-16 text-white">Let's get started</p>
                         </div>
                     </div>
-                    <div class="row">
-                      <%= simple_form_for(InviteRequest.new, remote: true, class: 'm-t-40 m-b-5 clearfix') do %>
-                      <div class="col-sm-4 auto-margin">
-                        <div class="form-group form-group-default">
-                          <label>Your Name</label>
-                          <input type="email" class="form-control" placeholder="John Smith">
-                        </div>
-                      </div>
-
-                      <div class="col-sm-4 auto-margin">
-                        <div class="form-group form-group-default">
-                          <label>Website url</label>
-                          <input type="email" class="form-control" placeholder="http://www.website.com">
-                        </div>
-                      </div>
-
-                      <div class="col-sm-4 auto-margin">
-                        <div class="form-group form-group-default input-group input-group-attached col-xs-12">
-                          <label>Email Address</label>
-                          <input type="email" class="form-control" placeholder="email@abc.com">
-
-                        </div>
-                        <span class="input-group-btn">
-                          <button class="btn btn-danger pull-right btn-cons" type="button">Sign Up</button>
-                        </span>
-                        <p class="fs-12 pull-right text-right m-t-20 text-white">
-                          Be first to find out when we Launch our product.
-                        </p>
-                      </div>
-                      <% end %>
-                    </div>
+                    <%= react_component('JoinAsMentorForm') %>
                 </div>
             </div>
         </div>

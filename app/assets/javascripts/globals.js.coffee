@@ -21,6 +21,7 @@ jQuery(document).ready ->
 
 
 	$('#form-login').validate();
+	$('#new_invite_request').validate();
 	$('#information-form').validate();
 	$('#feedback_form').validate();
 	$('#edit-profile').validate();

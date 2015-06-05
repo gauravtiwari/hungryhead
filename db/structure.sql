@@ -1225,74 +1225,6 @@ ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
 
 
 --
--- Name: starburst_announcement_views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE starburst_announcement_views (
-    id integer NOT NULL,
-    user_id integer,
-    announcement_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: starburst_announcement_views_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE starburst_announcement_views_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: starburst_announcement_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE starburst_announcement_views_id_seq OWNED BY starburst_announcement_views.id;
-
-
---
--- Name: starburst_announcements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE starburst_announcements (
-    id integer NOT NULL,
-    title text,
-    body text,
-    start_delivering_at timestamp without time zone,
-    stop_delivering_at timestamp without time zone,
-    limit_to_users text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    category text
-);
-
-
---
--- Name: starburst_announcements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE starburst_announcements_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: starburst_announcements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE starburst_announcements_id_seq OWNED BY starburst_announcements.id;
-
-
---
 -- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1806,20 +1738,6 @@ ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY starburst_announcement_views ALTER COLUMN id SET DEFAULT nextval('starburst_announcement_views_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY starburst_announcements ALTER COLUMN id SET DEFAULT nextval('starburst_announcements_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
 
 
@@ -2119,22 +2037,6 @@ ALTER TABLE ONLY shares
 
 ALTER TABLE ONLY slugs
     ADD CONSTRAINT slugs_pkey PRIMARY KEY (id);
-
-
---
--- Name: starburst_announcement_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY starburst_announcement_views
-    ADD CONSTRAINT starburst_announcement_views_pkey PRIMARY KEY (id);
-
-
---
--- Name: starburst_announcements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY starburst_announcements
-    ADD CONSTRAINT starburst_announcements_pkey PRIMARY KEY (id);
 
 
 --
@@ -2957,13 +2859,6 @@ CREATE INDEX punchable_index ON punches USING btree (punchable_type, punchable_i
 
 
 --
--- Name: starburst_announcement_view_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX starburst_announcement_view_index ON starburst_announcement_views USING btree (user_id, announcement_id);
-
-
---
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3136,12 +3031,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
-
-INSERT INTO schema_migrations (version) VALUES ('20150604153907');
-
-INSERT INTO schema_migrations (version) VALUES ('20150604153908');
-
-INSERT INTO schema_migrations (version) VALUES ('20150604153909');
 
 INSERT INTO schema_migrations (version) VALUES ('20150605120916');
 
