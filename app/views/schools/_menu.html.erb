@@ -1,4 +1,4 @@
-<div class="profile-nav row p-l-15">
+<div class="profile-nav overflow-hidden p-l-15">
 	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
 		<li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
 			<%= link_to('Profile', profile_path(@school), class: "bold #{current_class?(profile_path(@school))} p-b-5 fs-13") %>
@@ -17,7 +17,7 @@
 		</li>
 	</ul>
 
-	<div class="pull-right profile-action-buttons p-t-10 p-b-10 col-md-5">
+	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
 		<%= react_component('Follow', {followed: followed?(@school)}) %>
 			<% if current_user.admin? %>
 				<%= content_tag(:div) do %>

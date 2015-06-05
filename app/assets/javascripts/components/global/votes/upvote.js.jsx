@@ -65,7 +65,7 @@ var Upvote = React.createClass({
       var voters =<a onClick={this.loadVoters} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
     }
 
-    return (<li className="inline m-r-10 fs-14 bold">
+    return (<li className="inline m-r-10 fs-14 bold pointer">
               <a data-toggle="tooltip" data-container="body" title={text} onClick={this.handleClick}>
                 {heart}
               </a>

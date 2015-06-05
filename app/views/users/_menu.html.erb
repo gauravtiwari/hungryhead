@@ -1,4 +1,4 @@
-<div class="profile-nav row p-l-15">
+<div class="profile-nav displayblock overflow-hidden p-l-15">
 	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
 		<li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
 			<%= link_to('Profile', profile_path(@user), class: "bold #{current_class?(profile_path(@user))} p-b-5 fs-13") %>
@@ -14,7 +14,7 @@
 		</li>
 	</ul>
 
-	<div class="pull-right profile-action-buttons p-t-10 p-b-10 col-md-5">
+	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
 		<% if @user != current_user %>
 			<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
 		<% if current_user.is_friend?(@user) %>

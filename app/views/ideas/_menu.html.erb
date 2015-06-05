@@ -1,8 +1,8 @@
 <div class="box-shadow bg-white">
-  <div class="profile-nav p-l-10 row">
+  <div class="profile-nav p-l-10 overflow-hidden">
     <div class="col-md-6 no-padding">
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
-          <li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
+          <li class="inline b-r b-grey b-dashed p-r-15">
             <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
             <% if @idea.student.avatar.present? %>
               <%= image_tag(@idea.student.avatar.url(:avatar), :"data-src" => "#{@idea.student.avatar.url(:avatar)}", :"data-src-retina" => "#{@idea.student.avatar.url(:square)}", width: "55", height: "55") %><% else %>
@@ -20,7 +20,7 @@
           </li>
         </ul>
     </div>
-    <div class="col-md-6 profile-action-buttons pull-right p-t-10 p-b-10 p-r-20 col-md-7">
+    <div class="profile-action-buttons pull-right p-t-10 p-b-10">
       <% if !policy(@idea).collaborator? %>
         <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>

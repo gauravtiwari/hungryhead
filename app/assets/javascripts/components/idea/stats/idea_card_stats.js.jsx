@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var IdeaCardStats = React.createClass({
+
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
     return {
@@ -25,7 +26,7 @@ var IdeaCardStats = React.createClass({
       self.setState({followers_count: data});
     });
     $.pubsub('subscribe', 'update_investment_stats', function(msg, data){
-      var sum = data + this.state.raised;
+      var sum = +data + +(this.state.raised);
       this.setState({raised: sum});
     }.bind(this));
 
@@ -36,6 +37,15 @@ var IdeaCardStats = React.createClass({
     $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
       this.setState({feedbacks_count: data});
     }.bind(this));
+  },
+
+  openLeaderboardHelpModal: function() {
+    $('body').append($('<div>', {class: 'idea_leaderboard_help_modal', id: 'idea_leaderboard_help_modal'}));
+    React.render(<IdeaLeaderboardHelpModal key={Math.random()} />,
+      document.getElementById('idea_leaderboard_help_modal')
+    );
+    ReactRailsUJS.mountComponents();
+    $('#leaderboardHelpModal').modal('show');
   },
 
   render: function() {
@@ -50,7 +60,7 @@ var IdeaCardStats = React.createClass({
           <div className="panel-title b-b b-grey p-b-5">
             <i className="fa fa-star text-danger"></i> Reputation
           </div>
-          <a className="know-more">
+          <a className="know-more" onClick={this.openLeaderboardHelpModal}>
             <i className="fa fa-question-circle pull-right fs-22"></i>
           </a>
         </div>

@@ -19,7 +19,12 @@
      <% end %>
      </div>
       <h5 class="no-margin fs-14 bold"><%= link_to(user.name, profile_path(user)) %></h5>
-      <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
+      <% if user.location_list.present? %>
+        <h5 class="no-margin text-master">
+          <i class="fa fa-map-marker"></i>
+          <%= user.location_list %>
+        </h5>
+      <% end %>
       <p class="fs-12"><%= truncate(user.mini_bio, length: 30) %></p>
       <% if current_user != user %>
         <div class="card-follow-button">

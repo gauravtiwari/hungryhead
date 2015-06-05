@@ -22,6 +22,9 @@ class PagesController < ApplicationController
   def privacy
   end
 
+  def join_as_mentor
+  end
+
   def get_started
   end
 
