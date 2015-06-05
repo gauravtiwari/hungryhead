@@ -189,9 +189,6 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave_direct', '~> 0.0.14'
 gem 'carrierwave-mimetype-fu'
 
-#Active Admin
-gem 'activeadmin', github: 'activeadmin'
-
 #Sync assets with cloudfront
 gem "fog-google"
 gem 'asset_sync'
