@@ -2488,6 +2488,13 @@ CREATE INDEX index_investments_on_uuid ON investments USING btree (uuid);
 
 
 --
+-- Name: index_invite_requests_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_invite_requests_on_email ON invite_requests USING btree (email);
+
+
+--
 -- Name: index_invite_requests_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 

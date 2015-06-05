@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :mentions
-
   authenticated do
     root :to => 'activities#index', as: :authenticated
   end
@@ -199,6 +197,8 @@ Rails.application.routes.draw do
       put :about_me
     end
   end
+
+  resources :invite_requests, only: [:create]
 
   #Comments resources
   resources :comments, only: [:create, :update, :index, :destroy]

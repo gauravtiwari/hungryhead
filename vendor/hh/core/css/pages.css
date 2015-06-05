@@ -990,6 +990,23 @@ body.dashboard .page-container {
 .jumbotron h1 {
   font-size: 44px;
 }
+[data-pages-bg-image] {
+  background-size: cover;
+  position: relative;
+}
+[data-pages-bg-image] > * {
+  z-index: 1;
+  position: relative;
+}
+[data-pages-bg-image] > .bg-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: .4;
+}
 /* Pages Image Icon Sent - Pixel Perfect
 ------------------------------------
 */
@@ -11589,6 +11606,9 @@ Main components
   display: table-cell;
   float: none;
 }
+section.last:before {
+  content: '';
+}
 @media (min-width: 768px) {
   .container-sm-height {
     display: table;
@@ -12400,6 +12420,9 @@ Main components
   .container-fluid {
     padding-left: 0;
     padding-right: 0;
+  }
+  .jumbotron .container {
+    max-width: 100%;
   }
   .page-container .page-content-wrapper .content {
     padding-top: 48px;

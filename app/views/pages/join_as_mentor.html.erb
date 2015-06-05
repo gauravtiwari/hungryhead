@@ -1,16 +1,19 @@
 <div class="join-wrapper bg-white p-b-60">
-<div class="jumbotron bg-info" style="height: 300px">
+<div class="join" data-pages="social">
+<div class="jumbotron" data-pages="parallax" data-social="cover">
+    <div class="join-photo">
     <div class="container vmiddle">
-    <div class="row p-t-30">
-          <div class="col-md-6 auto-margin text-center">
-              <div class="hero-section">
-                  <h1 class="text-white">Join as mentor</h1>
-                  <p class="text-white fs-16">
-                    We are looking for people who realise that entrenreneurship is a "Process". Help students explore entrepreneurship</p>
+    <div class="row">
+          <div class="col-md-8 auto-margin">
+              <div class="hero-section text-center">
+                  <h1 class="text-white">Join as a mentor</h1>
+                  <p class="text-white fs-16">Help students explore entrepreneurship</p>
               </div><!-- /End Intro-Section -->
           </div><!-- /End Col -->
       </div><!-- /End Row -->
   </div>
+  </div>
+</div>
 </div>
 
 <div class="page-container">
@@ -56,9 +59,35 @@
                         </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-12 text-center">
-                        <%= link_to('Join me for Beta', get_started_path, class: "btn btn-color") %>
+                      <%= simple_form_for(InviteRequest.new, remote: true, class: 'm-t-40 m-b-5 clearfix') do %>
+                      <div class="col-sm-4 auto-margin">
+                        <div class="form-group form-group-default">
+                          <label>Your Name</label>
+                          <input type="email" class="form-control" placeholder="John Smith">
+                        </div>
                       </div>
+
+                      <div class="col-sm-4 auto-margin">
+                        <div class="form-group form-group-default">
+                          <label>Website url</label>
+                          <input type="email" class="form-control" placeholder="http://www.website.com">
+                        </div>
+                      </div>
+
+                      <div class="col-sm-4 auto-margin">
+                        <div class="form-group form-group-default input-group input-group-attached col-xs-12">
+                          <label>Email Address</label>
+                          <input type="email" class="form-control" placeholder="email@abc.com">
+
+                        </div>
+                        <span class="input-group-btn">
+                          <button class="btn btn-danger pull-right btn-cons" type="button">Sign Up</button>
+                        </span>
+                        <p class="fs-12 pull-right text-right m-t-20 text-white">
+                          Be first to find out when we Launch our product.
+                        </p>
+                      </div>
+                      <% end %>
                     </div>
                 </div>
             </div>

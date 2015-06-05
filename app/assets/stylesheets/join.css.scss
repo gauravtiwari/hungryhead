@@ -1,5 +1,5 @@
 .join-wrapper .join .jumbotron {
-  height: 70vh;
+  height: 50vh;
 }
 .learn-wrapper .learn .jumbotron {
   height: 40vh;
@@ -12,7 +12,7 @@
 }
 
 .join-photo {
- background-image: image-url('Hungryhead_header.jpg');
+ background-image: image-url('bg_pattern_3.jpg');
 }
 
 .join-wrapper .join .cover-photo:before {
@@ -72,7 +72,7 @@
   transform: translateY(-50%);
 }
 .cta {
-  background: image-url("cta.jpg") no-repeat center center;
+  background: image-url("hero_researching.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

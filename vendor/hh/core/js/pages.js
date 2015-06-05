@@ -61,6 +61,44 @@
         return $('body').hasClass('mobile') ? "mobile" : "desktop";
     }
 
+    Pages.prototype.setBackgroundImage = function() {
+        $('[data-pages-bg-image]').each(function() {
+            var _elem = $(this)
+            var defaults = {
+                pagesBgImage: "",
+                lazyLoad: 'true',
+                progressType: '',
+                progressColor:'',
+                bgOverlay:'',
+                bgOverlayClass:'',
+                overlayOpacity:0,
+            }
+            var data = _elem.data();
+            $.extend( defaults, data );
+            var url = defaults.pagesBgImage;
+            var color = defaults.bgOverlay;
+            var opacity = defaults.overlayOpacity;
+
+            var overlay = $('<div class="bg-overlay"></div>');
+            overlay.addClass(defaults.bgOverlayClass);
+            overlay.css({
+                'background-color': color,
+                'opacity': 1
+            });
+            _elem.append(overlay);
+
+            var img = new Image();
+            img.src = url;
+            img.onload = function(){
+                _elem.css({
+                    'background-image': 'url(' + url + ')'
+                });
+                _elem.children('.bg-overlay').css({'opacity': opacity});
+            }
+
+        })
+    }
+
     Pages.prototype.setFullScreen = function(element) {
         // Supports most browsers and their versions.
         var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullscreen;
@@ -327,6 +365,7 @@
         // init layout
         this.initSidebar();
         this.initDropDown();
+        this.setBackgroundImage();
         this.initFormGroupDefault();
         this.initSlidingTabs();
         this.initNotificationCenter();
