@@ -242,7 +242,7 @@ class User < ActiveRecord::Base
   #Seeds settings into database on: :create
   def seed_settings
     self.settings = {
-      theme: "#{user.type.downcase}",
+      theme: "#{type.downcase}",
       idea_notifications: true,
       feedback_notifications: true,
       investment_notifications: true,

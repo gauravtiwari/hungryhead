@@ -10,19 +10,17 @@
       </div>
       <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
        <li class="p-r-15 fs-16 inline">
-         <%= link_to(learn_path) do %>
-           <span class="text-white">Learn</span>
+         <%= link_to(story_path) do %>
+           <span class="text-white">About</span>
          <% end %>
        </li>
        <li class="p-r-15 fs-16 inline">
-         <%= link_to(story_path) do %>
-           <span class="text-white">Story</span>
+         <%= link_to(how_it_works_path) do %>
+           <span class="text-white">How it works? </span>
          <% end %>
        </li>
        <li class="fs-16 inline">
-         <%= link_to(help_path) do %>
-           <span class="text-white">Help</span>
-         <% end %>
+         <%= link_to("Questions <i class='fa fa-question-circle'></i>".html_safe, help_path, class: 'btn btn-ghost') %>
        </li>
       </ul>
     </div>
@@ -31,14 +29,10 @@
   <div class=" pull-right">
     <div class="visible-lg visible-md m-t-10">
       <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
-        <%= link_to(get_started_path, title: "Student Join", class: 'btn btn-rounded bg-transparent') do %>
-          <span class="text-white fs-16">Join</span>
-        <% end %>
+        <%= link_to('Join', get_started_path, title: "Student Join", class: 'btn btn-ghost') %>
       </div>
       <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
-        <%= link_to(new_user_session_path, class: "btn btn-rounded bg-transparent") do %>
-          <span class="text-white">Login</span>
-        <% end %>
+        <%= link_to('Login', new_user_session_path, class: "btn btn-ghost") %>
       </div>
     </div>
   </div>

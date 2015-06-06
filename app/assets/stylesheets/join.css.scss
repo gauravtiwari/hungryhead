@@ -2,7 +2,7 @@
   height: 50vh;
 }
 .learn-wrapper .learn .jumbotron {
-  height: 40vh;
+  height: 50vh;
 }
 .join-wrapper .join .cover-photo,
 .learn-wrapper .learn .cover-photo {
@@ -12,7 +12,7 @@
 }
 
 .join-photo {
- background-image: image-url('bg_pattern_3.jpg');
+ background-image: image-url('Hungryhead_header.jpg');
 }
 
 .join-wrapper .join .cover-photo:before {
@@ -56,7 +56,10 @@
   background-color: #10cfbd;
 }
 .learn-photo {
-  background-position: 20% 40%;
+  background: image-url("bg_pattern_3.jpg") no-repeat center center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
 }
 .join-wrapper .join .cover-photo .pull-bottom {
   z-index: 2;
@@ -72,7 +75,7 @@
   transform: translateY(-50%);
 }
 .cta {
-  background: #fff;
+  background: image-url("cta.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;

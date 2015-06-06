@@ -8,6 +8,11 @@ body, p {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
+  line-height: 25px;
+  margin: 0px 0px 10px 0px;
+  font-style: normal;
+  white-space: normal;
 }
 .stop-scrolling {
   height: 100%;

@@ -25,6 +25,9 @@ class PagesController < ApplicationController
   def join_as_mentor
   end
 
+  def how_it_works
+  end
+
   def get_started
   end
 

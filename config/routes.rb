@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/terms-of-use', to: 'pages#terms', as: :terms
   get '/join-as-mentor', to: 'pages#join_as_mentor', as: :join_as_mentor
   get '/our-story', to: 'pages#story', as: :story
+  get '/how-it-works', to: 'pages#how_it_works', as: :how_it_works
 
   #Soulmate search engine
   mount Soulmate::Server, :at => "/search"

@@ -47,7 +47,7 @@ var JoinAsMentorForm = React.createClass({
         </div>
       </form>;
     } else {
-      var content = <div className="text-center text-white">Your invite request has been submitted. We will be in touch.</div>
+      var content = <h3 className="text-center text-white">Your invite request has been submitted. We will be in touch.</h3>
     }
 
     return (
