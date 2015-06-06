@@ -1,6 +1,5 @@
 <div class="learn-wrapper bg-white">
-
-  <div class="learn swiper-container" data-pages="social">
+  <div class="learn" data-pages="social">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
       <div class="learn-photo">
         <div class="container vmiddle">
@@ -19,33 +18,39 @@
       </div>
       </div>
     </div>
-
   </div>
 
-  <div class="page-container bg-white">
+  <div class="what-section bg-white">
     <div class="wrapper-small">
       <div class="col-md-7 auto-margin">
         <div class="p-b-30">
-          <h2 class="normal">Things to know about Hungryhead:</h2>
+          <h2 class="normal">What is Hungryhead? </h2>
           <div class="divider b-b b-grey b-md b-small"></div>
         </div>
         <div>
           <h3 class="m-t-30 semi-bold">1. Hungryhead is a new way to explore entrepreneurship. </h3>
             <p class="fs-16">
-              We want to fundamentally change the way entrepreneurship has been pursued worldwide. Till now, teaching has been an evolutionary process where one generation passed on the knowledge to the next generation. People wrote books, invented courses and used various other methadologies to teach next generation how to do certain things.
+               We realised that there can be a completely different approach towards entrepreneurship, approach where both learning and building happens in parallel. Currently, the approach most entrepreneurs take is: theoretical, isolating and incremental to build and develop ideas. Hence, they end up building unnecessary products wasting time, energy and resources.
             </p>
 
             <p class="fs-16">
-              Now, some of the things does require "teaching" however, some don't, like entrepreneurship and that's what we want to change with hungryhead. Instead, of reading outdated books or acquiring knowlege it let's one explore by doing, now.
+             The solution we have created is an engaging platform that simulates the real world of idea building into an online virtual environment. We bring together like-minded people for collaboration. The simulation occurs at a number of levels,
             </p>
 
-          </p>
+            <ul class="fs-16">
+              <li class="m-b-10"> Ideas can receive feedbacks and votes to simulate mentoring,</li>
+              <li class="m-b-10"> Ideas can raise virtual investments, which simulates funding,</li>
+              <li class="m-b-10"> Team building by connecting with relevant people</li>
+              <li> Available to anyone, anywhere. *</li>
+            </ul>
+
+            <p class="fs-16 bold m-t-20"> Most importantly, it's practical</p>
         </div>
 
         <div>
           <h3 class="m-t-30 semi-bold">2. Anyone can <%= link_to('join', new_student_registration_path) %> our community</h3>
           <p class="fs-16">
-            Hungryhead is currently open for Students studying in colleges and universities. Mentors can join hungryhead by requesting an invite, please, <%= link_to("click here", join_as_mentor_path) %>. If you are a teacher or faculty in a college or university, please, <%= link_to("click here", new_teacher_registration_path) %>
+            Hungryhead is currently open for students studying in colleges and universities. Mentors can join hungryhead by requesting an invite, please, <%= link_to("click here", join_as_mentor_path) %>. If you are a teacher or faculty in a college or university, please, <%= link_to("click here", new_teacher_registration_path) %>
           </p>
         </div>
 
@@ -70,22 +75,14 @@
         <div>
           <h3 class="m-t-30 semi-bold">5. Idea privacy and sharing.</h3>
           <p class="fs-16">
-            Intellectual property and privacy has taken a great importance nowadays
-            Privacy topic requires more exploration but briefly, anyone can control privacy of their idea on hungryhead.
+            Briefly, anyone can control privacy of their idea on hungryhead. You can either keep your idea private, public or share with people you know.
           </p>
         </div>
 
         <div>
           <h3 class="m-t-30 semi-bold">6. Find people who can help you with your idea.</h3>
-          <p>
-            Together with mentors and teachers you can explore your idea and learn
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">8. Our Mission.</h3>
-          <p>
-            Our missing is to make entrepreneurship practical and traditional.
+          <p class="fs-16">
+            Team building is an important aspect of entrepreneurship.
           </p>
         </div>
 
@@ -93,30 +90,62 @@
     </div>
   </div>
 
-  <div class="page-wrapper horz-section relative">
-    <section id="cta" class="cta">
-          <div class="cta-overlay">
-              <div class="container">
-                  <div class="wrapper-lg">
-                      <div class="row">
-                          <div class="col-md-8 col-md-offset-2 text-center">
-                              <h1 class="text-white bold">Does this align with you?</h1>
-                              <p class="fs-16 text-white">Let's get started</p>
-                          </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12 text-center">
-                          <%= link_to('Join me for Beta', get_started_path, class: "btn btn-color") %>
-                        </div>
+  <section class="bg-master-lightest p-b-85 p-t-75">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-7 col-md-7 auto-margin no-padding xs-p-l-15 xs-p-r-15">
+            <div class="p-b-30">
+              <h2 class="normal">Why Hungryhead? </h2>
+              <div class="divider b-b b-grey b-md b-small"></div>
+            </div>
+            <div>
+              <p class="fs-16">
+              Learning and acquiring knowledge are two different things - learning happens always in the present whereas knowledge about something is always of the past. Learning is very critical for entrepreneurship because it helps one see facts in that moment.
 
-                      </div>
-                  </div>
-              </div>
+                We realised that there can be a completely different approach towards entrepreneurship.The approach most entrepreneurs take currenly are: theoretical, isolating and incremental to build ideas. Hence, a lot of entrepreneurs end up building unnecessary products wasting time, energy and resources.
+
+                We see a fundamental problem with this approach i.e. our understanding about learning.
+              </p>
+              <p class="fs-16">
+                Now, some of the things does require "teaching" (technical knowledge) however, some don't, like entrepreneurship and that's what we want to change with hungryhead. We want to fundamentally change the way entrepreneurship has been pursued worldwide. Instead, of reading outdated books or acquiring knowlege it let's one practically explore by doing, now.
+              </p>
+              <p class="fs-16">
+                We have built a platform that we realise has potential to fix this problem.
+              </p>
+            </div>
           </div>
-      </section>
-  </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <%= render partial: 'globals/footer' %>
+
 
 </div>
+
+<section id="mission" class="mission">
+    <div class="bg-overlay">
+        <div class="container">
+            <div class="wrapper-small">
+                <div class="row p-b-40">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <h3 class="global">
+                          <%= image_tag("badges/scholar.png", width: "100px", height: "100px") %>
+                        </h3>
+                        <h1 class="text-master bold">
+                          Our mission is to make entrepreneurship a traditional career path, globally.
+                        </h1>
+                        <div class="text-center p-t-20">
+                          <%= link_to('Join us for Beta', get_started_path, class: "btn btn-color") %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="clearfix"></div>
+<%= render partial: 'globals/footer' %>
 

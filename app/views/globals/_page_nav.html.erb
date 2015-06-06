@@ -8,23 +8,21 @@
         <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
       <% end %>
       </div>
-      <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-        <li class="p-r-15 fs-16 inline">
-          <%= link_to(learn_path) do %>
-            <span class="text-master">Learn</span>
-          <% end %>
-        </li>
-        <li class="p-r-15 fs-16 inline">
-          <%= link_to(get_started_path) do %>
-            <span class="text-master">Story</span>
-          <% end %>
-        </li>
-        <li class="fs-16 inline">
-          <%= link_to(help_path) do %>
-            <span class="text-master">Help</span>
-          <% end %>
-        </li>
-      </ul>
+     <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+      <li class="p-r-15 fs-16 inline">
+        <%= link_to(story_path) do %>
+          <span class="text-master">About</span>
+        <% end %>
+      </li>
+      <li class="p-r-15 fs-16 inline">
+        <%= link_to(how_it_works_path) do %>
+          <span class="text-master">How it works? </span>
+        <% end %>
+      </li>
+      <li class="fs-16 inline">
+        <%= link_to("Questions?".html_safe, help_path, class: 'text-master') %>
+      </li>
+     </ul>
     </div>
   </div>
 

@@ -14,6 +14,21 @@ body, p {
   font-style: normal;
   white-space: normal;
 }
+
+.content-23.v-center, .content-23 .v-center {
+  display: table;
+  width: 100%;
+}
+
+.content-23.custom-bg {
+  background-image: image-url('building-ecosystem.png');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.bg-master-lightest {
+  background: #fafafa;
+}
 .stop-scrolling {
   height: 100%;
   overflow: hidden;
