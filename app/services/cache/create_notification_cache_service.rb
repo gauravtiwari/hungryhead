@@ -56,11 +56,8 @@ class CreateNotificationCacheService
 
   #Add activity to different tickers
   def add_activity(user, activity_item)
-    #only for user personal activities
-    add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #Send notification to recipient
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
-
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
   end
@@ -77,11 +74,6 @@ class CreateNotificationCacheService
   #add activity to friends ticker
   def add_activity_to_friends_ticker(user, activity_item)
     user.ticker.add(activity_item, score_key)
-  end
-
-  #This is for user profile page to show latest personal activities
-  def add_activity_to_user_profile(user, activity_item)
-    user.latest_activities << activity_item
   end
 
   #Add activity to followers ticker
