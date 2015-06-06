@@ -54,12 +54,22 @@ class CreateNotificationCacheService
     User.find(followers_ids)
   end
 
+  def commentors
+    commenters_ids = @activity.recipient.commenters_ids.values
+    followers_ids = @actor.followers_ids.members
+    ids = commenters_ids - followers_ids - [recipient_user.id]
+    User.find(ids)
+  end
+
   #Add activity to different tickers
   def add_activity(user, activity_item)
     #Send notification to recipient
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
+
+    #Send notification to commenters
+    add_activity_to_commentors(activity_item) if @activity.trackable_type == "Comment"
   end
 
   #add activity to recipient notifications
@@ -69,6 +79,14 @@ class CreateNotificationCacheService
     #add to ticker
     recipient_user.ticker.add(activity_item, score_key)
     SendNotificationService.new(recipient_user, activity).friend_notification if recipient_user != @activity.user
+  end
+
+  def add_activity_to_commentors(activity_item)
+    commentors.each do |commenter|
+      add_activity_to_friends_ticker(commenter, activity_item)
+      commenter.friends_notifications.add(activity_item, score_key)
+      SendNotificationService.new(commenter, activity).user_notification
+    end
   end
 
   #add activity to friends ticker

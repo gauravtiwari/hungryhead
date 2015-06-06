@@ -30,13 +30,15 @@ class WelcomeController < ApplicationController
   def update
     @welcome = current_user #for merit to avoid console errors
     @user = current_user
-    case step
-
-    when :hello
-      @user.update_attributes(user_params)
-      CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User") if Activity.where(trackable: @user).empty?
+    if @user.rules_accepted?
+      redirect_to root_path
+    else
+      case step
+      when :hello
+        @user.update_attributes(user_params)
+        CreateActivityJob.set(wait: 2.seconds).perform_later(@user.id, "User") if Activity.where(trackable: @user).empty?
+      end
     end
-
     sign_in(@user, bypass: true)
     render_wizard @user
   end
