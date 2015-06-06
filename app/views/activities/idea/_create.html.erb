@@ -9,10 +9,10 @@
 		    <% end %>
 	    </div>
 
-	    <div class="text-master-dark">
+	    <div class="text-master-dark overflow-hidden">
 	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %>
 	    	pitched <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
-		   	<h6>
+		   	<h6 class="no-margin">
 		   		<% if activity.user.locations %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>

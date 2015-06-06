@@ -23,7 +23,7 @@ class UpdateNotificationCacheService
       type: @activity.class.to_s.downcase,
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
-      unread: false,
+      unread: true,
       recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }

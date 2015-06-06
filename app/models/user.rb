@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
   #Call Service to update cache
   after_save do |user|
     RecordSavedJob.set(wait: 10.seconds).perform_later(user.id, "User") if rebuild_cache? || mini_bio_changed?
+    RebuildNotificationsCacheJob.set(wait: 20.seconds).perform_later(id) if rebuild_cache?
   end
 
   #Tagging System
@@ -72,9 +73,6 @@ class User < ActiveRecord::Base
   #Store latest user notifications
   sorted_set :ticker, marshal: true
   sorted_set :friends_notifications, marshal: true
-
-  #List to store last 5 activities
-  list :latest_activities, maxlength: 5, marshal: true
 
   #Sorted set to store trending ideas
   sorted_set :leaderboard, global: true

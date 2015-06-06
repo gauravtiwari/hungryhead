@@ -9,10 +9,10 @@
 		    <% end %>
 	    </div>
 
-	    <div class="text-master-dark">
+	    <div class="text-master-dark overflow-hidden">
 	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> shared a post - <%= link_to(activity.trackable.title, profile_posts_post_path(activity.user, activity.trackable.uuid)) %>
 
-		   	<h6>
+		   	<h6 class="no-margin">
 		   		<% if activity.user.locations %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>

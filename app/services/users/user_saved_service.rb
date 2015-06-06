@@ -8,15 +8,9 @@ class UserSavedService
 
   def call
     load_into_soulmate
-    rebuild_notifications if @user.rebuild_cache? && @user.has_notifications?
   end
 
   private
-
-  def rebuild_notifications
-    #Rebuild user feed every time name and avatar update.
-    RebuildNotificationsCacheJob.set(wait: 20.seconds).perform_later(@user.id)
-  end
 
   #Load data to redis using soulmate after_save
   def load_into_soulmate
