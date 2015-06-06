@@ -9,13 +9,12 @@ class InviteRequestsController < ApplicationController
     @invite_request = InviteRequest.new(invite_request_params)
 
     if @invite_request.save
-     flash[:success] = "Thank you, we have received your invite request and we will be in touch soon."
+     flash[:success] = "Thank you #{@invite_request.name} for submitting your request. We will be in touch."
      render json: {
       created: true,
       status: :created
     }
     else
-     flash[:error] = "Something went wrong"
      render json: @invite_request.errors, status: :unprocessable_entity, created: false
     end
 
