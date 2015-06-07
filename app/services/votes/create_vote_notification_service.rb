@@ -25,10 +25,10 @@ class CreateVoteNotificationService
   def find_parent_activity
     if @vote.votable_type == "Comment"
       @activity = Activity.where(trackable: @votable.commentable).first
-      return @activity.id
+      return @activity.uuid
     else
       @activity = Activity.where(trackable: @votable).first
-      return @activity.id
+      return @activity.uuid
     end
   end
 

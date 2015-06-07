@@ -31,7 +31,7 @@ class CreateNotificationCacheService
 
   def find_activity_id
     if @activity.class.to_s == "Activity"
-      return @activity.id
+      return @activity.uuid
     elsif @activity.class.to_s == "Notification"
       return @activity.parent_id
     end
@@ -143,7 +143,7 @@ class CreateNotificationCacheService
       recipient_name = target.name
     else
       recipient_user_id =  target.user.id
-      recipient_url = profile_path(target.user)
+      recipient_url = profile_activities_activity_path(target.user, find_activity_id)
       recipient_user_name = target.user.name
       recipient_name = target.user.name
     end

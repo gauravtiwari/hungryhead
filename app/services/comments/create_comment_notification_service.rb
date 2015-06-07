@@ -28,7 +28,7 @@ class CreateCommentNotificationService
 
   def find_parent_activity
     @activity = Activity.where(trackable: @commentable).first
-    @activity.id
+    @activity.uuid
   end
 
 end

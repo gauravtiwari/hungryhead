@@ -27,10 +27,10 @@ class CreateMentionService
   def find_parent_activity
     if @mentioner.class.to_s == "Comment"
       @activity = Activity.where(trackable: @mentioner.commentable).first
-      return @activity.id
+      return @activity.uuid
     else
       @activity = Activity.where(trackable: @mentioner).first
-      return @activity.id
+      return @activity.uuid
     end
   end
 
