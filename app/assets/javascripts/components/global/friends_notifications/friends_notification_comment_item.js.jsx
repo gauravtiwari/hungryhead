@@ -17,7 +17,13 @@ var FriendsNotificationCommentItem = React.createClass({
     if(this.props.item.recipient.recipient_type === "idea") {
       var recipient = this.props.item.recipient.recipient_name;
     } else {
-      var recipient = "";
+      var recipient = this.props.item.recipient.recipient_type;
+    }
+
+    if(window.currentUser.name === this.props.item.recipient.recipient_user_name) {
+      var recipient_owner = "on your " + this.props.item.recipient.recipient_type
+    } else {
+      var recipient_owner = "on ";
     }
 
     if(this.props.item.actor.actor_avatar) {
@@ -36,7 +42,7 @@ var FriendsNotificationCommentItem = React.createClass({
                </a>
                <span>
                  <span className="text-master p-l-5">{this.props.item.verb}</span>
-                 <span className="text-master p-l-5">on your {this.props.item.recipient.recipient_type}</span>
+                 <span className="text-master p-l-5">{recipient_owner}</span>
                  <span className="recipient p-l-5 text-master">
                    <a href={this.props.item.recipient.recipient_url}>{recipient}</a>
                  </span>

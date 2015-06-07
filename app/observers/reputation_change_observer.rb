@@ -1,5 +1,6 @@
 # reputation_change_observer.rb
 class ReputationChangeObserver
+
   def update(changed_data)
     description = changed_data[:description]
 
@@ -26,6 +27,6 @@ class ReputationChangeObserver
       }.to_json
     )
 
-    CreateBadgeNotificationService.new(user, description).create
   end
+
 end
