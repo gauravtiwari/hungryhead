@@ -31,7 +31,7 @@ class UpdateNotificationCacheService
 
   def find_activity_id
     if @activity.class.to_s == "Activity"
-      return @activity.id
+      return @activity.uuid
     elsif @activity.class.to_s == "Notification"
       return @activity.parent_id
     end
@@ -98,16 +98,16 @@ class UpdateNotificationCacheService
   end
 
   def options_for_object(target)
-    if target.trackable_type == "User"
+    if @activity.trackable_type == "User"
       trackable_user_name =   target.name
       trackable_user_id =   target.id
-    elsif target.trackable_type == "Idea"
+    elsif @activity.trackable_type == "Idea"
       trackable_user_name = target.student.name
       trackable_user_id =   target.student.id
-    elsif target.trackable_type == "Follow"
+    elsif @activity.trackable_type == "Follow"
       trackable_user_name = target.follower.name
       trackable_user_id =   target.follower.id
-    elsif target.trackable_type == "Vote"
+    elsif @activity.trackable_type == "Vote"
       trackable_user_name = target.voter.name
       trackable_user_id =   target.voter.id
     else
@@ -128,12 +128,12 @@ class UpdateNotificationCacheService
   end
 
   def options_for_target(target)
-    if target.recipient_type == "Idea"
+    if @activity.recipient_type == "Idea"
       recipient_user_id =  target.student.id
       recipient_user_name = target.student.name
       recipient_name = target.name
-      recipient_url = idea_path(target)
-    elsif target.recipient_type == "User"
+      recipient_url = profile_path(target)
+    elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
       recipient_user_name =   target.name
       recipient_name = target.name
@@ -141,16 +141,18 @@ class UpdateNotificationCacheService
     else
       recipient_user_id =  target.user.id
       recipient_user_name = target.user.name
-      recipient_url = profile_path(target.user)
+      recipient_url = profile_activities_activity_path(target.user, find_activity_id)
       recipient_name = target.user.name
     end
 
     if !target.nil?
+     badge_description = @activity.badge_description if @activity.badge_description.present?
       {
         recipient_user_id: recipient_user_id,
         recipient_user_name: recipient_user_name,
         recipient_url: recipient_url,
         recipient_name: recipient_name,
+        badge_description: badge_description || nil,
         recipient_type: @activity.recipient_type.downcase,
       }
     else

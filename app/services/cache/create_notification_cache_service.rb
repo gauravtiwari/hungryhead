@@ -101,16 +101,16 @@ class CreateNotificationCacheService
   end
 
   def options_for_object(target)
-    if target.trackable_type == "User"
+    if @activity.trackable_type == "User"
       trackable_user_name =   target.name
       trackable_user_id =   target.id
-    elsif target.trackable_type == "Idea"
+    elsif @activity.trackable_type == "Idea"
       trackable_user_name = target.student.name
       trackable_user_id =   target.student.id
-    elsif target.trackable_type == "Follow"
+    elsif @activity.trackable_type == "Follow"
       trackable_user_name = target.follower.name
       trackable_user_id =   target.follower.id
-    elsif target.trackable_type == "Vote"
+    elsif @activity.trackable_type == "Vote"
       trackable_user_name = target.voter.name
       trackable_user_id =   target.voter.id
     else
@@ -121,7 +121,7 @@ class CreateNotificationCacheService
     if !target.nil?
       {
         id: target.id,
-        event_name: target.trackable_type.downcase,
+        event_name: @activity.trackable_type.downcase,
         event_user_id: trackable_user_id,
         event_recipient_name: trackable_user_name
       }
@@ -131,13 +131,13 @@ class CreateNotificationCacheService
   end
 
   def options_for_target(target)
-    if target.recipient_type == "Idea"
+    if @activity.recipient_type == "Idea"
       recipient_user_id =  target.student.id
       recipient_url = idea_path(target)
       recipient_user_name = target.student.name
       recipient_name = target.name
-    elsif target.recipient_type == "User"
-      recipient_user_id = target.recipient_id
+    elsif @activity.recipient_type == "User"
+      recipient_user_id = @activity.recipient_id
       recipient_url = profile_path(target)
       recipient_user_name =   target.name
       recipient_name = target.name
@@ -154,7 +154,7 @@ class CreateNotificationCacheService
         recipient_user_name: recipient_user_name,
         recipient_url: recipient_url,
         recipient_name: recipient_name,
-        recipient_type: target.recipient_type.downcase,
+        recipient_type: @activity.recipient_type.downcase,
       }
     else
       nil
