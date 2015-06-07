@@ -11,11 +11,12 @@ class Students::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new(sign_up_params)
+    build_resource(sign_up_params)
+    @user = resource
     @user.skip_confirmation!
     @user.save
     if @user.persisted?
-      RegistrationMailer.welcome_email(resource.id).deliver_later(wait: 5.seconds)
+      RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
       respond_with @user, location: after_sign_up_path_for(@user)
     else
       respond_with @user
