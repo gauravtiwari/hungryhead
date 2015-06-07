@@ -29,9 +29,9 @@ var CoverEditMenu =  React.createClass({
         'fa fa-spinner fa-spin': this.props.loading
       });
 
-	if(this.props.cover.url !== null){
+	if(this.props.cover.has_cover){
         var menu =  <div className="dropdown pull-right">
-        <button href="" className="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button className="profile-dropdown-toggle fa fa-camera text-white" title="Cover dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <ul className="dropdown-menu profile-dropdown" role="menu">
                    <li><a onClick={this.props.handleReposition}><i className="fa fa-bars"></i> Reposition</a></li>
                     <li><a href="#" onClick={this.props.triggerOpen}><i className="fa fa-upload"></i> Upload New</a></li>
@@ -40,19 +40,14 @@ var CoverEditMenu =  React.createClass({
                     </a></li>
                   </ul></div>;
       } else {
-        var menu = 
-        <div className="dropdown pull-right">
-        <button href="" className="profile-dropdown-toggle fa fa-camera text-white" title="" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-        <ul className="dropdown-menu profile-dropdown" role="menu">
-                    <li><a href="#" onClick={this.props.triggerOpen}>Upload cover</a></li>
-                  </ul></div>;
+        var menu = " ";
       }
 
 		return (
 
       <div className="cover-edit-menu fs-22" id="cover-edit-menu">
           <div className={spinner_class}>
-            <span className="text-white fs-14">Please wait... <i className="ion-load-d"></i></span> 
+            <span className="text-white fs-14"> Please wait... <i className="fa fa-spinner fa-spin"></i></span>
           </div>
 
           <div className={change_icon_class}>

@@ -14,10 +14,16 @@ body, p {
   font-style: normal;
   white-space: normal;
 }
+span {
+  line-height: 1.6;
+}
 
 .content-23.v-center, .content-23 .v-center {
   display: table;
   width: 100%;
+}
+.fs-50 {
+  font-size: 50px;
 }
 
 .content-23.custom-bg {

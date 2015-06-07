@@ -3,14 +3,26 @@ class MentionsController < ApplicationController
 
   def mentionables
     @mentionable = params[:mentionable_type].constantize.find(params[:id])
-    if @mentionable.class.to_s == "Idea"
-      mentionable = @mentionable.student
+
+    if params[:mentionable_type] == "Idea"
+      mentionable_user = @mentionable.student
     else
-      mentionable = @mentionable.user
+      mentionable_user = @mentionable.user
     end
-    @mentionables = Array.new
-    @mentionables.push(name: mentionable.name, path: profile_path(mentionable), username: mentionable.username) if mentionable != current_user
-    @mentionable.comment_threads.includes(:user).map { |c| @mentionables.push({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) unless @mentionables.include?({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) && c.user == current_user }
+
+    commenters = @mentionable.commenters_ids.values
+
+    ids = commenters - [current_user.id] - [mentionable_user.id]
+
+    @mentionables = Rails.cache.fetch("#{params[:mentionable_type].downcase}-#{@mentionable.comments_counter}-mentions", expires: 2.hours) do
+      User.find(ids).map { |user|
+        {
+          id: user.uid,
+          name: user.name,
+          username: user.username
+        }
+      }
+    end
     render json: @mentionables
   end
 

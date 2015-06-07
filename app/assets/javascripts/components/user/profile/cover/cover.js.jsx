@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var Cover = React.createClass({
+
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
 
@@ -124,19 +125,23 @@ var Cover = React.createClass({
         $('.inner-profile-content').show();
       }
 
-      if(this.state.cover.url !== null){
+      if(this.state.cover.has_cover){
         var top = this.state.top || "auto";
         var left = this.state.left || "auto";
         var imageStyle = {
           position: 'absolute',
           right: 'auto',
           top: '' + top + '',
-          left: '' + left + '',
+          left: '' + left + ''
         };
         var image = <img className="cover-photo" id="usercover_preview" src={this.state.cover.url} />;
       } else {
-        var image = "";
-        var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
+        if(this.state.is_owner) {
+          var handle = <h2 className="text-master m-t-90 fs-50"><i className="fa fa-upload fs-50"></i> Click to upload cover</h2>;
+          var image = <div className="no-content bold z-index-10" onClick={this.triggerOpen}>{handle}</div>;
+        } else {
+          var image = <img className="cover-photo" src={this.state.cover.url} />;
+        }
       }
 
 

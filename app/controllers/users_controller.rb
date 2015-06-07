@@ -49,10 +49,8 @@ class UsersController < ApplicationController
     @user.views_counter.increment if @user != current_user
     @user.touch
     respond_to do |format|
-      format.html {render :show} if @user.type == "User"
-      format.html {render :show} if @user.type == "Student"
-      format.html {render :mentor} if @user.type == "Mentor"
-      format.html {render :teacher} if @user.type == "Teacher"
+      format.html
+      format.json
     end
   end
 

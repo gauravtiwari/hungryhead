@@ -1,2 +1,2 @@
-<%= react_component('IdeaCover', {data: render(template: 'ideas/show.json.jbuilder')} ) %>
+<%= react_component('IdeaCover', {data: render(template: 'ideas/show.json.jbuilder')} ) if @idea.cover.present? %>
 

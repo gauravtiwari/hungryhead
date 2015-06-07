@@ -5,9 +5,10 @@ json.idea do
   end
 
   json.cover do
-    json.url @idea.cover.url(:cover)  if @idea.cover
+    json.url @idea.cover.present? ? @idea.cover.url(:cover) : "#{root_url}assets/building-ecosystem.png"
     json.top @idea.cover_position if @idea.cover
     json.left @idea.cover_left if @idea.cover
+    json.has_cover @idea.cover.present?
   end
 
   json.school_name @idea.school.name

@@ -12,9 +12,14 @@ var IdeaHeader = React.createClass({
   },
 
   render: function() {
+    if(this.state.idea.cover.has_cover || this.state.data.meta.is_owner) {
+      var cover = <IdeaCover data= {this.state.data} />
+    } else {
+      var cover = ""
+    }
     return (
       <div className="idea-header bg-solid">
-        <IdeaCover data= {this.state.data} />
+        {cover}
         <IdeaProfile idea={this.state.idea} />
         <IdeaPitch idea={this.state.idea} />
       </div>

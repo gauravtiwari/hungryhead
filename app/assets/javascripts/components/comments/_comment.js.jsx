@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
+
 var converter = new Showdown.converter();
+
 var SetIntervalMixin = {
     componentWillMount: function() {
         this.intervals = [];
@@ -120,8 +122,6 @@ var Comment = React.createClass({
         var confirm_delete = <a className="text-danger" onClick={this.checkDelete}><i className="fa fa-trash-o"></i> {delete_text}</a>;
       }
     }
-
-    console.log(window.currentUser.id)
 
     if(this.state.comment.avatar) {
       var imgSrc = <img width="40px" src={ this.state.comment.avatar } />;

@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @commentable = params[:commentable_type].safe_constantize.find(params[:id])
+    @commentable = params[:commentable_type].safe_constantize.find_by_uuid(params[:id])
     @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
   end
 

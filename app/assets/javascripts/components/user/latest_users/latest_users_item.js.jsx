@@ -28,7 +28,7 @@ var LatestUsersItem = React.createClass({
           <span>
             {image}
             <a className="bold small no-margin" href={this.props.item.url}>{this.props.item.name}</a>
-            <span className="small no-margin displayblock">{this.props.item.description}</span>
+            <span className="small no-margin overflow-hidden displayblock">{this.props.item.description}</span>
           </span>
         </div>
       </li>

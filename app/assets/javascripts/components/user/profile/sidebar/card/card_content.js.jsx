@@ -29,10 +29,6 @@ var CardContent = React.createClass({
       }
     }
 
-    if(this.props.profile.verified) {
-      var verified_badge = <i className="fa fa-check-circle text-white fs-16 m-l-10"></i>;
-    }
-
     if(this.props.profile.website_url) {
       var website_url =  <li className="inline">
                             <a className="text-white p-r-10" href={this.props.profile.website_url} ><i className="fa fa-rss"></i></a>                         </li>;
@@ -63,7 +59,7 @@ var CardContent = React.createClass({
     }
 
     if(this.props.profile.school_url) {
-      var school = <a className="text-white b-r b-white b-dashed p-r-10" href={this.props.profile.school_url}>
+      var school = <a className="text-white p-r-10" href={this.props.profile.school_url}>
                           <i className="fa fa-university"></i> {this.props.profile.school_name}
                           </a>;
     } else {
@@ -77,16 +73,19 @@ var CardContent = React.createClass({
             <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
             <div className="container-xs-height">
                 <div className="row text-center">
-                    <div className="user-profile auto-margin">
-                        <div className="thumbnail-wrapper d100 circular bordered b-white">
-                            <div className="profile-avatar">
-                              <Avatar data={this.props.data} />
-                            </div>
-                        </div>
-                    </div>
-                   <div className="clearfix p-l-10 p-r-10 p-t-10">
+                  <div className="user-profile auto-margin">
+                      <div className="thumbnail-wrapper d100 circular bordered b-white">
+                          <div className="profile-avatar">
+                            <Avatar data={this.props.data} />
+                          </div>
+                      </div>
+                  </div>
+                  <div className="clearfix p-l-10 p-r-10 p-t-10">
                        <h3 className="no-margin bold text-white">
-                           {this.props.profile.name} {verified_badge}
+                           {this.props.profile.name}
+                           <div className="role-badge inline m-l-10 v-middle" data-toggle="tooltip" data-container="body" title={this.props.profile.role}>
+                             <img src={this.props.profile.role_badge} alt="Student" width="30px" height="30px" />
+                           </div>
                        </h3>
                        <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>
                        <p className="text-white m-t-5 small">

@@ -124,7 +124,7 @@ var IdeaCover = React.createClass({
         $('.inner-profile-content').show();
       }
 
-      if(this.state.cover.url !== null){
+      if(this.state.cover.has_cover){
         var top = this.state.top || "auto";
         var left = this.state.left || "auto";
         var imageStyle = {
@@ -135,8 +135,12 @@ var IdeaCover = React.createClass({
         };
         var image = <img className="cover-photo" id="ideacover_preview" src={this.state.cover.url} />;
       } else {
-        var image = <div className="no-content hint-text">Demo Image</div>;
-        var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
+        if(this.state.is_owner) {
+          var handle = <h2 className="text-master m-t-90 fs-50"><i className="fa fa-upload fs-50"></i> Click to upload demo cover</h2>;
+          var image = <div className="no-content bold z-index-10" onClick={this.triggerOpen}>{handle}</div>;
+        } else {
+          var image = "";
+        }
       }
 
 

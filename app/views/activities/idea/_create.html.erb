@@ -55,11 +55,11 @@
 
 	    <ul class="reactions pull-left">
 				<% voted = activity.trackable.voted?(current_user) %>
-				<%= react_component('Upvote', {record: activity.trackable_id, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+				<%= react_component('Upvote', {record: activity.trackable.uuid, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 
 				<% shared = activity.trackable.shared?(current_user) %>
 
-				<%= react_component('Share', {record: activity.trackable_id, shareable_name: activity.trackable.name, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), shares_count: activity.trackable.shares_counter.value, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+				<%= react_component('Share', {record: activity.trackable.uuid, shareable_name: activity.trackable.name, shared: shared, share_url: shares_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable.uuid), shares_count: activity.trackable.shares_counter.value, sharers_path: sharers_path(shareable_type: activity.trackable_type, shareable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left'}.to_json) %>
 			</ul>
 
 	   	<div class="clearfix"></div>
@@ -70,5 +70,5 @@
 
 <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
 
-<%= react_component('CommentBox', {data: data, comment_channel: "#{activity.trackable_type}-#{activity.trackable_id}-comments", count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
+<%= react_component('CommentBox', {data: data, comment_channel: "#{activity.trackable_type}-#{activity.trackable.uuid}-comments", count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable.uuid)}) %>
 </div>
