@@ -9,7 +9,7 @@ class CreateNotifications < ActiveRecord::Migration
 
       t.belongs_to :user, null: false
 
-      t.integer :parent_id, default: nil
+      t.uuid :parent_id, default: nil
 
       t.string  :key, null: false, default: ""
 
