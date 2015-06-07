@@ -132,7 +132,7 @@ class UpdateNotificationCacheService
       recipient_user_id =  target.student.id
       recipient_user_name = target.student.name
       recipient_name = target.name
-      recipient_url = profile_path(target)
+      recipient_url = idea_path(target)
     elsif @activity.recipient_type == "User"
       recipient_user_id = @activity.recipient_id
       recipient_user_name =   target.name
