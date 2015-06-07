@@ -58,13 +58,13 @@ class CreateNotificationCacheService
   def add_activity(user, activity_item)
 
     #Add activity to user profile
-    add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
+    add_activity_to_user_profile(user, activity_item)
 
     #Send notification to recipient
-    add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
+    add_notification_for_recipient(recipient_user, activity_item) unless @activity.user == recipient_user
 
     #Add activity to followers ticker
-    add_activity_to_followers(activity_item) if followers.any? && @activity.verb != "badged"
+    add_activity_to_followers(activity_item) if followers.any?
 
   end
 
@@ -101,16 +101,16 @@ class CreateNotificationCacheService
   end
 
   def options_for_object(target)
-    if @activity.trackable_type == "User"
+    if target.trackable_type == "User"
       trackable_user_name =   target.name
       trackable_user_id =   target.id
-    elsif @activity.trackable_type == "Idea"
+    elsif target.trackable_type == "Idea"
       trackable_user_name = target.student.name
       trackable_user_id =   target.student.id
-    elsif @activity.trackable_type == "Follow"
+    elsif target.trackable_type == "Follow"
       trackable_user_name = target.follower.name
       trackable_user_id =   target.follower.id
-    elsif @activity.trackable_type == "Vote"
+    elsif target.trackable_type == "Vote"
       trackable_user_name = target.voter.name
       trackable_user_id =   target.voter.id
     else
@@ -121,7 +121,7 @@ class CreateNotificationCacheService
     if !target.nil?
       {
         id: target.id,
-        event_name: @activity.trackable_type.downcase,
+        event_name: target.trackable_type.downcase,
         event_user_id: trackable_user_id,
         event_recipient_name: trackable_user_name
       }
@@ -131,13 +131,13 @@ class CreateNotificationCacheService
   end
 
   def options_for_target(target)
-    if @activity.recipient_type == "Idea"
+    if target.recipient_type == "Idea"
       recipient_user_id =  target.student.id
       recipient_url = idea_path(target)
       recipient_user_name = target.student.name
       recipient_name = target.name
-    elsif @activity.recipient_type == "User"
-      recipient_user_id = @activity.recipient_id
+    elsif target.recipient_type == "User"
+      recipient_user_id = target.recipient_id
       recipient_url = profile_path(target)
       recipient_user_name =   target.name
       recipient_name = target.name
@@ -149,14 +149,12 @@ class CreateNotificationCacheService
     end
 
     if !target.nil?
-      badge_description = @activity.badge_description if @activity.badge_description.present?
       {
         recipient_user_id: recipient_user_id,
         recipient_user_name: recipient_user_name,
         recipient_url: recipient_url,
         recipient_name: recipient_name,
-        badge_description: badge_description || nil,
-        recipient_type: @activity.recipient_type.downcase,
+        recipient_type: target.recipient_type.downcase,
       }
     else
       nil
