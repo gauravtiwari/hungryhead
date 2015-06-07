@@ -23,7 +23,7 @@ class UpdateNotificationCacheService
       type: @activity.class.to_s.downcase,
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
-      unread: true,
+      unread: @activity.unread,
       recipient: options_for_target(@target),
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
@@ -56,6 +56,8 @@ class UpdateNotificationCacheService
 
   #Update activity for all tickers
   def update_activity(user, activity_item)
+    #add activity to user personal profile
+    add_activity_to_user_profile(user, activity_item) unless @activity.verb == "badged"
     #push notification into friends notifications
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.verb == "badged" || @activity.user == recipient_user
     #add notification to followers ticker
@@ -75,6 +77,12 @@ class UpdateNotificationCacheService
   def add_activity_to_friends_ticker(user, activity_item)
     user.ticker.remrangebyscore(score_key, score_key)
     user.ticker.add(activity_item, score_key)
+  end
+
+  #This is for user profile page to show latest personal activities
+  def add_activity_to_user_profile(user, activity_item)
+    user.latest_activities.remrangebyscore(score_key, score_key)
+    user.latest_activities.add(activity_item, score_key)
   end
 
   #readd notifications to followers tickers

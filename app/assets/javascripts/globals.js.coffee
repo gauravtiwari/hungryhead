@@ -7,7 +7,7 @@ jQuery(document).ready ->
 		$(this).autosize()
 
 	$.validator.addMethod 'lettersonly', ((value, element) ->
-	  @optional(element) or /^[a-z]+$/i.test(value)
+	  @optional(element) or /^[a-z@-_]+$/i.test(value)
 	), 'Letters only please'
 
 	$('#form-register').validate()

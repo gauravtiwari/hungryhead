@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
+  include Activist
 
   attr_accessor :login
   attr_reader :raw_invitation_token
@@ -69,6 +70,9 @@ class User < ActiveRecord::Base
   list :latest_ideas, maxlength: 5, marshal: true
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
+
+  #List to store last 5 activities
+  sorted_set :latest_activities, marshal: true
 
   #Store latest user notifications
   sorted_set :ticker, marshal: true

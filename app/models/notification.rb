@@ -20,7 +20,7 @@ class Notification < ActiveRecord::Base
   end
 
   def refresh_friends_notifications
-    user.friends_notifications.remrangebyrank(20, user.friends_notifications.members.length)
+    user.friends_notifications.remrangebyrank(50, user.friends_notifications.members.length)
   end
 
 end
