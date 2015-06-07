@@ -30,10 +30,10 @@ class UpdateNotificationCacheService
   end
 
   def find_activity_id
-    if @activity.class.to_s == "Activity"
-      return @activity.uuid
-    elsif @activity.class.to_s == "Notification"
+    if @activity.class.to_s == "Notification"
       return @activity.parent_id
+    else
+      return @activity.uuid
     end
   end
 

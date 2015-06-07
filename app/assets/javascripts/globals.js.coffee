@@ -13,11 +13,10 @@ jQuery(document).ready ->
 	$('#form-register').validate()
 
 	try
-		$('#formUsername').rules 'add', minlength: 5
+		$('#formUsername').rules 'add', minlength: 3
 		$('#formUsername').rules 'add', lettersonly: true
 		$('#formPassword').rules 'add', minlength: 6
 	catch e
-
 
 
 	$('#form-login').validate();

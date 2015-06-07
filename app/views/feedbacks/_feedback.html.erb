@@ -9,13 +9,11 @@
         <% end %>
       </div>
 
-      <div class="text-master-dark">
+      <div class="text-master-dark overflow-hidden">
         <%= link_to(your_name(feedback.user, false), profile_path(feedback.user), :"data-popover-href" => "#{profile_card_path(feedback.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
-
-      <% if feedback.idea.team_ids.include?(current_user.id.to_s) %>
-        your idea
-      <% end %>
-
+        <% if feedback.idea.team_ids.include?(current_user.id.to_s) %>
+          your idea
+        <% end %>
       <%= link_to(feedback.idea.name, idea_path(feedback.idea), :"data-popover-href" => "#{card_idea_path(feedback.idea)}", class: 'load-card bold') %>
         <h6>
           <% if feedback.user.locations %>
