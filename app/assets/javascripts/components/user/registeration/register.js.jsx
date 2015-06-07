@@ -21,12 +21,12 @@ var Register = React.createClass({
       dataType: "json",
       success: function ( data ) {
         if(data.name) {
-          $('body').pgNotification({style: "simple", message: "Registeration Successful. Please confirm your email.", position: "top-right", type: "success",timeout: 5000}).show();
+          $('body').pgNotification({style: "simple", message: "Registeration Successful. You will receive an email shortly. Redirecting...", position: "top-right", type: "success",timeout: 5000}).show();
           setTimeout(function(){
             window.location.href = Routes.root_path;
           }, 3000);
         }
-      this.setState({loading: false});
+        this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({loading: false});
