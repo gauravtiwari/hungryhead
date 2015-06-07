@@ -22,6 +22,7 @@ class Activity < ActiveRecord::Base
   def delete_older_notifications
     refresh_friends_notifications
     refresh_ticker
+    profile_latest_activities
   end
 
   def refresh_ticker
@@ -30,6 +31,10 @@ class Activity < ActiveRecord::Base
 
   def refresh_friends_notifications
     user.friends_notifications.remrangebyrank(50, user.friends_notifications.members.length)
+  end
+
+  def profile_latest_activities
+    user.latest_activities.remrangebyrank(5, user.latest_activities.members.length)
   end
 
 end
