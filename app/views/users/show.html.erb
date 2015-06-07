@@ -6,8 +6,13 @@
     </div>
 
     <div class="col-md-8 col-sm-8">
-        <div class="cover">
-            <%= render partial: 'cover' %>
+        <div class="social" data-pages="social">
+            <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
+              <%=  render partial: 'user_badge' %>
+              <div class="cover">
+                <%= render partial: 'cover' %>
+              </div>
+            </div>
         </div>
 
         <div class="box-shadow bg-white">
