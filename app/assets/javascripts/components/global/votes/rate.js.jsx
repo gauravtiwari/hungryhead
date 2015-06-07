@@ -41,17 +41,14 @@ var Rate = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
-    var title = this.state.rate.user_name + ' found this feedback ' + this.state.rate.badge_name;
+    var title = 'You' + ' found this feedback ' + this.state.rate.badge_name;
     var badge_classes = 'activity-badges-list panel panel-default no-style no-margin inline no-border auto-overflow show-badges-list-'+this.props.record;
 
     if(this.state.rate.rated) {
       return (
-        <p className="inline m-b-10 pull-right">
-         <a className="badge text-white font-helvetica" data-container="body" data-toggle="tooltip" data-placement="top" title={title}>
-           <span className="badge-type bronze"></span>
-            {this.state.rate.badge_name}
-         </a>
-        </p>
+        <span className="inline m-b-10 pull-right">
+          {title}
+        </span>
         );
     } else {
       return (

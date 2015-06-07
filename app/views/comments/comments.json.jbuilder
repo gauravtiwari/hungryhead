@@ -3,8 +3,9 @@ json.form action: comments_path, commentable_id: record.id, commentable_type: re
 
 json.comments comments.each do |comment|
   json.cache! ['comment', comment], expires_in: 10.minutes do
-    json.(comment, :id, :user_id, :commentable_id, :commentable_type, :created_at)
+    json.(comment, :id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
+    json.user_id comment.user.uid
     json.vote_url vote_path(votable_type: comment.class.to_s, votable_id: comment.id)
     json.uuid SecureRandom.hex(10)
     json.is_owner current_user == comment.user

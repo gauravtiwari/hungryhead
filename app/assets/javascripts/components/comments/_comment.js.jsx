@@ -121,6 +121,8 @@ var Comment = React.createClass({
       }
     }
 
+    console.log(window.currentUser.id)
+
     if(this.state.comment.avatar) {
       var imgSrc = <img width="40px" src={ this.state.comment.avatar } />;
     } else {
