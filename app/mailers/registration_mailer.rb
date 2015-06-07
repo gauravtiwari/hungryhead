@@ -4,7 +4,8 @@ class RegistrationMailer < ActionMailer::Base
 
   def welcome_email(user_id)
     @user = User.find(user_id)
-    if user.present?
+    attachments.inline['hungryhead.png'] = File.read('assets/imageshungryhead.png')
+    if @user.present?
       @subject = "#{@user.name}: Welcome to hungryhead"
       mail(to: @user.email, subject: @subject)
     else
