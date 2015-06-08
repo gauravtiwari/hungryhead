@@ -29,7 +29,7 @@ var CardStats = React.createClass({
 
     return(
       <div className={classes}>
-        <div className="panel-heading">
+        <div className="panel-heading bg-light-blue-lightest m-b-10">
           <div className="panel-title b-b b-grey p-b-5">
           <i className="fa fa-star text-danger"></i> Reputation
           </div>

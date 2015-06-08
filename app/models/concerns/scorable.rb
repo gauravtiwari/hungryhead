@@ -78,7 +78,7 @@ module Scorable
         name: idea.name,
         name_badge: idea.name_badge,
         url: idea_path(idea),
-        description: idea.elevator_pitch
+        description: idea.high_concept_pitch
       }
     end
 

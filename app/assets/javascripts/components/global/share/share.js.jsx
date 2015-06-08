@@ -85,7 +85,7 @@ var Share = React.createClass({
               </span> :  <a data-toggle="tooltip" data-container="body" title={text} className="fa fa-share-square-o" onClick={this.openShareBox}>
               </a>;
 
-    return (<li className="inline p-l-10 fs-14">
+    return (<li className="inline text-black  p-l-10 fs-14">
               {share_link}{voters}
             </li>
 

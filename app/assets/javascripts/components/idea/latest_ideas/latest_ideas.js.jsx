@@ -16,7 +16,7 @@ var LatestIdeas = React.createClass({
       var ideas_channel = pusher.subscribe("ideas-channel");
       if(ideas_channel) {
         ideas_channel.bind('new_idea', function(data){
-          var new_item = data.data
+          var new_item = [data.data]
           var newState = React.addons.update(this.state, {
               list : {
                 $unshift : new_item
@@ -87,12 +87,12 @@ var LatestIdeas = React.createClass({
     }
 
     var styles = {
-      maxHeight: '250px'
+      maxHeight: '300px'
     }
 
     return (
-      <div className="widget-11-2 p-b-10 panel panel-default no-border no-margin">
-          <div className="panel-heading bg-master-lightest">
+      <div className="widget-11-2 p-b-10 panel no-border no-margin">
+          <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
             {this.state.type}
             </div>
@@ -122,7 +122,7 @@ var LatestIdeas = React.createClass({
             </div>
           </div>
           <div className="panel-body no-padding full-border-light scrollable" style={styles}>
-            <ul className="trending-list p-t-10 no-style" ref="trendingList" style={styles}>
+            <ul className="trending-list no-padding no-style" ref="trendingList" style={styles}>
              {content}
             </ul>
           </div>

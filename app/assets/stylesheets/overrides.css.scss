@@ -56,6 +56,9 @@ body, p {
 .idea-content img {
   width: 100%;
 }
+.idea-content p {
+  color: #242d30 !important;
+}
 .profile-action-buttons {
   float: right;
 }
@@ -282,6 +285,10 @@ input.error:-webkit-autofill {
 }
 .panel .panel-heading {
   min-height: 0;
+}
+
+.bg-light-blue-lightest {
+  background: #f5f9fc;
 }
 .panel.panel-default {
   border: 1px solid rgba(0, 0, 0, 0.07);

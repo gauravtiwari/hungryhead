@@ -1,10 +1,12 @@
-<div class="widget-16 panel box-shadow">
-    <div class="panel-heading">
+<div class="widget-16 panel box-shadow no-border">
+    <div class="panel-heading bg-light-blue-lightest m-b-20">
         <div class="panel-title b-b b-grey p-b-5">
           <i class="fa fa-user-plus text-danger"></i> Latest followings
         </div>
     </div>
     <div class="panel-body">
+    <ul class="list-unstyled no-margin">
         <%= react_component('ListingWidget', {listing: @user.get_followings.take(7).map{|u| {name: u.name, name_badge: u.user_name_badge, avatar: u.avatar.url(:avatar),  url: profile_path(u)}}, count: @user.followings_counter.value, path: followings_user_path(@user), type: 'followings' }.to_json) %>
+      </ul>
     </div>
 </div>

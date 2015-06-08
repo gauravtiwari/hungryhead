@@ -25,11 +25,11 @@ var LatestUsersItem = React.createClass({
     var html_id = "idea_" + this.props.item.id;
 
     return (
-      <li className="m-b-10" id={html_id}>
-        <div className="widget-16-header p-b-10 p-l-15 p-r-15">
+      <li id={html_id}>
+        <div className="widget-16-header p-b-10">
           <span>
             {image}
-            <a className="bold small no-margin" href={this.props.item.url}>{this.props.item.name}</a>
+            <a className="bold small no-margin text-black" href={this.props.item.url}>{this.props.item.name}</a>
             <span className="small no-margin overflow-hidden displayblock">{this.props.item.description}</span>
           </span>
         </div>

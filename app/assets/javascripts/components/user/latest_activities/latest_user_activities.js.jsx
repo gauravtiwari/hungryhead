@@ -58,8 +58,8 @@ var LatestUserActivities = React.createClass({
     }
 
     return(
-      <div className="widget-11-2 panel profile-cards no-margin">
-          <div className="panel-heading">
+      <div className="widget-11-2 panel profile-cards no-margin no-border">
+          <div className="panel-heading bg-light-blue-lightest m-b-10">
            <div className="panel-title b-b b-grey p-b-5">
             <i className="fa fa-bars text-danger"></i>  Latest activities
             </div>

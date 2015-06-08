@@ -22,11 +22,11 @@ var LatestFeedFeedbackItem = React.createClass({
     }
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix" onClick={this.loadActivity}>
-          <span className="inline text-master">
+          <span className="inline">
             <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong className="inline p-r-5">{actor}</strong>
+            <strong className="inline p-r-5 text-black">{actor}</strong>
             left a feedback for {this.props.item.recipient.recipient_name}
           </span>
         </li>

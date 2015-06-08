@@ -17,7 +17,7 @@ var LatestUsers = React.createClass({
         var users_channel = pusher.subscribe("users-channel");
         if(users_channel) {
           users_channel.bind('new_user', function(data){
-            var new_item = data.data
+            var new_item = [data.data]
             var newState = React.addons.update(this.state, {
                 list : {
                   $unshift : new_item
@@ -28,7 +28,6 @@ var LatestUsers = React.createClass({
             $("#user_"+data.data.id).addClass('animated fadeInDown');
           }.bind(this));
         }
-      }
     }
   },
 
@@ -96,8 +95,8 @@ var LatestUsers = React.createClass({
     }
 
     return (
-      <div className="widget-11-2 panel panel-default no-border b-t b-grey no-margin bg-white">
-          <div className="panel-heading bg-master-lightest">
+      <div className="widget-11-2 panel no-border b-t b-grey p-b-10 no-margin bg-white">
+          <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
             {this.state.type}
             </div>
@@ -126,7 +125,7 @@ var LatestUsers = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light scrollable full-border-light-bottom no-padding no-margin"  style={styles}>
+          <div className="panel-body full-border-light scrollable no-padding no-margin"  style={styles}>
             <ul className="trending-list p-t-10 no-padding no-style no-margin" ref="trendingList" style={styles}>
               {content}
             </ul>

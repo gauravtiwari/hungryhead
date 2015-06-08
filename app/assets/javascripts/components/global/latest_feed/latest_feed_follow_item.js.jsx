@@ -11,7 +11,7 @@ var LatestFeedFollowItem = React.createClass({
     }
 
     if(window.currentUser.name === this.props.item.recipient.recipient_name) {
-      var recipient = "You"
+      var recipient = "you"
     } else {
       var recipient = this.props.item.recipient.recipient_name.split(' ')[0];
     }
@@ -25,11 +25,11 @@ var LatestFeedFollowItem = React.createClass({
 
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix">
-          <span className="inline text-master">
+          <span className="inline">
             <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong className="inline p-r-5">{actor}</strong>
+            <strong className="inline p-r-5 text-black">{actor}</strong>
             {this.props.item.verb} <a className="text-complete" href={this.props.item.recipient.recipient_url}>{recipient}</a>
           </span>
         </li>
