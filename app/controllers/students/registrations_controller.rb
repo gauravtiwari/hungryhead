@@ -15,8 +15,11 @@ class Students::RegistrationsController < Devise::RegistrationsController
     if params[:student][:email].split('@').last == @school_domain.domain
       build_resource(sign_up_params)
       @user = resource
+
+      #Skip confirmation for beta, // this needs to changed once we go live
       @user.skip_confirmation_notification!
       @user.save
+
       if @user.persisted?
         RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
         respond_with @user, location: after_sign_up_path_for(@user)
