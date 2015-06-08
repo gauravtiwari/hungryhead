@@ -2,7 +2,7 @@
     <% data = render(template: 'schools/show.json.jbuilder') %>
 
     <div class="user-profile auto-margin">
-        <div class="d100">
+        <div class="thumbnail-wrapper d100">
             <div class="profile-logo">
               <%= react_component('SchoolLogo', {data: data}) %>
             </div>

@@ -14,9 +14,6 @@ body, p {
   font-style: normal;
   white-space: normal;
 }
-span {
-  line-height: 1.6;
-}
 
 .content-23.v-center, .content-23 .v-center {
   display: table;
@@ -164,7 +161,7 @@ span {
   color: #fff;
   opacity: 1;
 }
-.thumbnail-wrapper.bordered.d100 {
+.thumbnail-wrapper.d100 {
   line-height: 110px;
 }
 .textarea:focus {

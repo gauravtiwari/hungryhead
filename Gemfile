@@ -138,6 +138,9 @@ gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 gem 'redis-session-store'
 
+#Connection pool
+gem 'connection_pool'
+
 #Redis objects
 gem 'redis-objects'
 
