@@ -35,7 +35,7 @@ var LatestFeedCommentItem = React.createClass({
               {placeholder}
             </div>
             <strong className="inline p-r-5 text-black">{actor}</strong>
-            {this.props.item.verb}{recipient}
+            {this.props.item.verb} {recipient}
           </span>
         </li>
       );

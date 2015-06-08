@@ -126,7 +126,7 @@ var FriendsNotifications = React.createClass({
     }
     return(
 
-      <div id="notificationsPanel" className="quickview-wrapper" data-pages="quickview">
+      <div id="notificationsPanel" className="quickview-wrapper p-b-20" data-pages="quickview">
         <div className="tab-content">
           <div className="tab-pane fade  in active no-padding" id="quickview-notifications">
             <div className="view-port clearfix" id="notifications">

@@ -94,7 +94,7 @@ var LatestIdeas = React.createClass({
       <div className="widget-11-2 p-b-10 panel no-border no-margin">
           <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
-            {this.state.type}
+              {this.state.type}
             </div>
             <div className="panel-controls">
                 <ul>

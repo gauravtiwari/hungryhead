@@ -10,7 +10,7 @@ module MessagesHelper
   	def markdownify(content)
 		context = {
 		  :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-		  :base_url   => "http://localhost:3000/students",
+		  :base_url   => "http://localhost:3000/",
 		  :gfm => false
 		}
 		pipeline = HTML::Pipeline.new [
@@ -26,7 +26,7 @@ module MessagesHelper
 	def linkify(content)
 		context = {
 		  :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-		  :base_url   => "http://localhost:3000/students",
+		  :base_url   => "http://localhost:3000/",
 		  :gfm => true
 		}
 		pipeline = HTML::Pipeline.new [
@@ -42,7 +42,7 @@ module MessagesHelper
 	def sanitizify(content)
 		context = {
 		  :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-		  :base_url   => "http://localhost:3000/students"
+		  :base_url   => "http://localhost:3000/"
 		}
 		pipeline = HTML::Pipeline.new [
 		  HTML::Pipeline::SanitizationFilter

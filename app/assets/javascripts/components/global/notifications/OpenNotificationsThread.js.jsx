@@ -12,6 +12,17 @@ var OpenNotificationsThread = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    if(this.isMounted()){
+      if(channel) {
+        channel.bind('new_notifications_count', function(data){
+          this.setState({unread_notifications_count: data.data});
+        }.bind(this));
+      }
+    }
+
+  },
+
   openNotifications: function() {
     this.setState({loading: true});
     if(!this.state.active) {
