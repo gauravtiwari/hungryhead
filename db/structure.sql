@@ -38,20 +38,6 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 
 --
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
-
-
---
 -- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -3048,6 +3034,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
 
 INSERT INTO schema_migrations (version) VALUES ('20150605120916');
-
-INSERT INTO schema_migrations (version) VALUES ('20150608011358');
 
