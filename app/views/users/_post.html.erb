@@ -10,7 +10,7 @@
         <% end %>
       </div>
 
-      <div class="text-master-dark">
+      <div class="text-master-dark overflow-hidden">
         <%= link_to(your_name(post.user, false), profile_path(post.user), :"data-popover-href" => "#{profile_card_path(post.user)}", class: 'load-card bold') %> shared a post -  <%= link_to(post.title, profile_posts_post_path(@user, post)) %>
 
         <h6>
@@ -52,7 +52,6 @@
       </div>
     </div>
     <div class="card-footer clearfix bold">
-
         <ul class="reactions pull-left">
           <% voted = post.voted?(current_user) %>
           <%= react_component('Upvote', {record: post.id, voted: voted, vote_url: vote_path(votable_type: post.class.to_s, votable_id: post.id), votes_count: post.votes_counter.value, voters_path: voters_path(votable_type: post.class.to_s, votable_id: post.id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
