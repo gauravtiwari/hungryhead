@@ -26,13 +26,8 @@ var LatestFeedFeedbackItem = React.createClass({
             <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong>{actor}</strong>
-            <span className="verb p-l-5">
-             left a feedback for
-            </span>
-            <span className="recipient p-l-5">
-               {this.props.item.recipient.recipient_name}
-            </span>
+            <strong className="inline p-r-5">{actor}</strong>
+            left a feedback for {this.props.item.recipient.recipient_name}
           </span>
         </li>
       );

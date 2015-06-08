@@ -26,11 +26,8 @@ var LatestFeedPostItem = React.createClass({
             <div className="thumbnail-wrapper fs-11 d32 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong>{actor}</strong>
-
-            <span className="verb p-l-5">
-              shared a post
-            </span>
+            <strong className="inline p-r-5">{actor}</strong>
+            shared a post
           </span>
         </li>
       );

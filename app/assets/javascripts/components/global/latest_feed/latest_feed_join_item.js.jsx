@@ -20,13 +20,8 @@ var LatestFeedJoinItem = React.createClass({
             <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong>{actor}</strong>
-            <span className="verb p-l-5">
-              {this.props.item.verb}
-            </span>
-            <span className="recipient p-l-5">
-              hungryhead
-            </span>
+            <strong className="inline p-r-5">{actor}</strong>
+            {this.props.item.verb} hungryhead
           </span>
         </li>
       );

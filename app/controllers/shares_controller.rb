@@ -40,7 +40,7 @@ class SharesController < ApplicationController
   def load_shareable
     @shareables = ["Idea", "Feedback", "Post"]
     if @shareables.include? params[:shareable_type]
-      @shareable = params[:shareable_type].safe_constantize.find(params[:shareable_id])
+      @shareable = params[:shareable_type].safe_constantize.find_by_uuid(params[:shareable_id])
     else
       respond_to do |format|
        format.html { render json: {error: 'Sorry, unable to share this entity'}, status: :unprocessable_entity }

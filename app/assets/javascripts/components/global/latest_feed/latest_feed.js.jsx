@@ -113,7 +113,7 @@ var LatestFeed = React.createClass({
       var content = <div className="no-content hint-text"><i className="fa fa-spinner fa-spin"></i></div>;
     } else if(this.state.feed.length > 0) {
       var content =  <Infinite elementHeight={60}
-                containerHeight={250}
+                containerHeight={350}
                 infiniteLoadBeginBottomOffset={200}
                 onInfiniteLoad={this.handleInfiniteLoad}
                 loadingSpinnerDelegate={this.elementInfiniteLoad()}

@@ -1,32 +1,32 @@
---- 
-cucumber: 
+---
+cucumber:
   adapter: postgresql
   database: hungryhead_school_app_test
   encoding: unicode
-  pool: 5
-default: 
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+default:
   adapter: postgresql
   encoding: unicode
-  pool: 5
-development: 
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+development:
   adapter: postgresql
   username: gaurav
   host: localhost
   database: hungryhead_school_app_development
   encoding: unicode
-  pool: 5
-production: 
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+production:
   adapter: postgresql
   database: hungryhead_school_app_production
   encoding: unicode
-  pool: 5
-staging: 
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+staging:
   adapter: postgresql
   database: hungryhead_school_app_staging
   encoding: unicode
-  pool: 5
-test: 
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+test:
   adapter: postgresql
   database: hungryhead_school_app_test
   encoding: unicode
-  pool: 5
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>

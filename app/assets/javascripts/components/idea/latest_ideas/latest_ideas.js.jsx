@@ -13,6 +13,20 @@ var LatestIdeas = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()) {
       this.fetchList();
+      var ideas_channel = pusher.subscribe("ideas-channel");
+      if(ideas_channel) {
+        ideas_channel.bind('new_idea', function(data){
+          var new_item = data.data
+          var newState = React.addons.update(this.state, {
+              list : {
+                $unshift : new_item
+              }
+          });
+          this.setState(newState);
+          $("#idea_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          $("#idea_"+data.data.id).addClass('animated fadeInDown');
+        }.bind(this));
+      }
     }
   },
 
@@ -77,8 +91,8 @@ var LatestIdeas = React.createClass({
     }
 
     return (
-      <div className="widget-11-2 p-b-10 panel no-border no-margin">
-          <div className="panel-heading">
+      <div className="widget-11-2 p-b-10 panel panel-default no-border no-margin">
+          <div className="panel-heading bg-master-lightest">
            <div className="panel-title">
             {this.state.type}
             </div>

@@ -1,8 +1,10 @@
 var LatestIdeasItem = React.createClass({
 
   render: function() {
+    var html_id = "idea_" + this.props.item.id;
+
     return (
-      <li className="m-b-10">
+      <li className="m-b-10" id={html_id}>
         <div className="widget-16-header p-l-15 p-r-15">
 
         <p className="no-margin">

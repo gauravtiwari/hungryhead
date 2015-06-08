@@ -62,7 +62,7 @@ module Scorable
     #User JSON
     def user_json(user)
       {
-        id: user.id,
+        id: user.uid,
         name: user.name,
         name_badge: user.user_name_badge,
         avatar: user.avatar.url(:avatar),
@@ -74,7 +74,7 @@ module Scorable
     #Idea JSON
     def idea_json(idea)
       {
-        id: idea.id,
+        id: idea.uuid,
         name: idea.name,
         name_badge: idea.name_badge,
         url: idea_path(idea),

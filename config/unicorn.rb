@@ -11,11 +11,12 @@ end
 
 listen "/tmp/web_server.sock", :backlog => 64
 
-timeout 1200
+timeout 300
 
 pid '/tmp/web_server.pid'
 
 preload_app true
+
 GC.respond_to?(:copy_on_write_friendly=) and
   GC.copy_on_write_friendly = true
 

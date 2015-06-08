@@ -1,5 +1,7 @@
 class CreateUserNotificationService
 
+  include Rails.application.routes.url_helpers
+
   def initialize(user)
     @user = user
   end
@@ -33,6 +35,24 @@ class CreateUserNotificationService
     #Add leaderboard score
     User.leaderboard.add(@user.id, @user.points)
     User.trending.add(@user.id, 1)
+
+    Pusher.trigger_async("users-channel",
+      "new_user",
+      {data: user_json(@user)}.to_json
+    )
+
+  end
+
+  #User JSON
+  def user_json(user)
+    {
+      id: user.uid,
+      name: user.name,
+      name_badge: user.user_name_badge,
+      avatar: user.avatar.url(:avatar),
+      url: profile_path(user),
+      description: user.mini_bio
+    }
   end
 
 end
