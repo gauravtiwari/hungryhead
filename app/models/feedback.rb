@@ -19,7 +19,6 @@ class Feedback < ActiveRecord::Base
 
   #Includes concerns
   include Commentable
-  include Sharings
   include Votable
 
   #Associations

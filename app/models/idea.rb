@@ -17,7 +17,6 @@ class Idea < ActiveRecord::Base
   include Commentable
   include Votable
   include Followable
-  include Sharings
   include Activist
   include Scorable
   include Investable

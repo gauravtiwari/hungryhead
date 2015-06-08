@@ -56,14 +56,6 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 5,
-  name: "growth-hacking",
-  level: "bronze",
-  description: "Shared idea and increased idea score by 100 in 3 days",
-  custom_fields: { name: "Growth Hacking", points: 25 }
-)
-
-Merit::Badge.create!(
   id: 6,
   name: "feedbacker",
   level: "bronze",
