@@ -16,7 +16,7 @@
             <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{current_class?(idea_feedbacks_path(@idea))}", remote: true) %>
           </li>
           <li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
-            <%= link_to("Chat", comments_idea_path(@idea), data: { toggle: "modal", target: "#modalSlideComments"}, class: "text-brand bold fs-13", remote: true) %>
+            <%= link_to("Q/A", comments_idea_path(@idea), data: { toggle: "modal", target: "#modalSlideComments"}, class: "text-brand bold fs-13", remote: true) %>
           </li>
         </ul>
     </div>
