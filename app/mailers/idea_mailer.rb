@@ -1,5 +1,7 @@
 class IdeaMailer < ActionMailer::Base
 
+  layout 'mailer'
+
   def new_idea(idea, user, recipient)
     @user = user
     @idea = idea

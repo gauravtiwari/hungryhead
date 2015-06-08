@@ -1,5 +1,7 @@
 class PostMailer < ActionMailer::Base
 
+  layout 'mailer'
+
   def new_post(post, user, recipient)
     @user = user
     @post = post

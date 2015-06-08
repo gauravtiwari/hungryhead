@@ -6,6 +6,9 @@ class CreateSchools < ActiveRecord::Migration
     create_table :schools do |t|
 
       t.string :email, :null => false, default: ""
+
+      t.string :domain, :null => false, default: ""
+
       t.string :name, :null => false, unique: true
 
       t.string :slug, :null => false, unique: true

@@ -9,8 +9,7 @@ var RegisterationForm = React.createClass({
       email: "",
       username: "",
       school_id: "",
-      name: "",
-      school_domain: ".edu"
+      name: ""
     };
   },
 
@@ -155,10 +154,10 @@ var RegisterationForm = React.createClass({
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group form-group-default input-group">
-              <label>Email</label>
+              <label>School/University Email</label>
               <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span className="input-group-addon" id="school_domain">
-                {this.state.school_domain}
+                .ac.uk
               </span>
               <span id="invalid-email"></span>
             </div>

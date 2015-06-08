@@ -11,15 +11,23 @@ class Students::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    build_resource(sign_up_params)
-    @user = resource
-    @user.skip_confirmation!
-    @user.save
-    if @user.persisted?
-      RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
-      respond_with @user, location: after_sign_up_path_for(@user)
+    @school_domain = School.find(params[:student][:school_id])
+    if params[:student][:email].split('@').last == @school_domain.domain
+      build_resource(sign_up_params)
+      @user = resource
+      @user.skip_confirmation!
+      @user.save
+      if @user.persisted?
+        RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
+        respond_with @user, location: after_sign_up_path_for(@user)
+      else
+        respond_with @user
+      end
     else
-      respond_with @user
+      flash[:error] = "Your email doesn't match with your school email. Please verify and try again!"
+      render :json =>  {
+              error: "Your email doesn't match with your school email. Please verify and try again!"
+            }
     end
   end
 

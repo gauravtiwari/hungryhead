@@ -1120,6 +1120,7 @@ CREATE TABLE schema_migrations (
 CREATE TABLE schools (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
+    domain character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
     slug character varying NOT NULL,
     description text,

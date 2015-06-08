@@ -9,6 +9,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Lancaster',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@lancs.ac.uk',
+    domain: 'lancs.ac.uk',
     website: 'lancs.ac.uk'
   )
 
@@ -17,6 +18,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Manchester',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mancs.ac.uk',
+    domain: 'mancs.ac.uk',
     website: 'mancs.ac.uk'
   )
 
@@ -25,6 +27,7 @@ ActiveRecord::Base.transaction do
     location_list: 'London',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@icl.ac.uk',
+    domain: 'icl.ac.uk',
     website: 'icl.ac.uk'
   )
 
@@ -33,6 +36,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Cambridge',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@cam.ac.uk',
+    domain: 'cam.ac.uk',
     website: 'cam.ac.uk'
   )
 
@@ -41,6 +45,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Salford',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@salford.ac.uk',
+    domain: 'salford.ac.uk',
     website: 'salford.ac.uk'
   )
 
@@ -49,6 +54,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Preston',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@uclan.ac.uk',
+    domain: 'uclan.ac.uk',
     website: 'uclan.ac.uk'
   )
 
@@ -57,6 +63,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Manchester',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mmu.ac.uk',
+    domain: 'mmu.ac.uk',
     website: 'mmu.ac.uk'
   )
 
@@ -65,6 +72,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Oxford',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@oxford.ac.uk',
+    domain: 'oxford.ac.uk',
     website: 'oxford.ac.uk'
   )
 
@@ -73,6 +81,7 @@ ActiveRecord::Base.transaction do
     location_list: 'London',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@ucl.ac.uk',
+    domain: 'ucl.ac.uk',
     website: 'ucl.ac.uk'
   )
 
@@ -81,6 +90,7 @@ ActiveRecord::Base.transaction do
     location_list: 'Bristol',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@bristol.ac.uk',
+    domain: 'bristol.ac.uk',
     website: 'bristol.ac.uk'
   )
 

@@ -1,5 +1,7 @@
 class RegistrationMailer < ActionMailer::Base
 
+  layout 'mailer'
+
   default from: "no-reply@hungryhead.co"
 
   def welcome_email(user_id)

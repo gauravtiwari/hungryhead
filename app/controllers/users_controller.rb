@@ -122,7 +122,7 @@ class UsersController < ApplicationController
     if user.present?
       render :json =>  {
         name: user.name.split(' ').first,
-        error: "This Email is already taken. Please login",
+        error: "You email is already registered. Please login",
         available: false
       }
     else

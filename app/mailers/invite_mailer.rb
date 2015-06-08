@@ -1,4 +1,7 @@
 class InviteMailer < ActionMailer::Base
+
+  layout 'mailer'
+
   def invite_team(user, from, idea, msg)
     @user = user
     @resource = from

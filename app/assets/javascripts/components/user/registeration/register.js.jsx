@@ -26,6 +26,7 @@ var Register = React.createClass({
             window.location.href = Routes.root_path;
           }, 3000);
         }
+
         this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
