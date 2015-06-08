@@ -249,7 +249,6 @@ Rails.application.routes.draw do
 
   end
 
-  resources :posts, only: [:create, :destroy, :update]
   resources :activities, only: [:index, :show]
 
   #Vanity urls for users
@@ -258,10 +257,8 @@ Rails.application.routes.draw do
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
   get '/:slug/about', to: SlugRouter.to(:about), as: :profile_about
-  get '/:slug/posts', to: SlugRouter.to(:posts), as: :profile_posts
   get '/:slug/events', to: SlugRouter.to(:events), as: :profile_events
   get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
-  get '/:slug/posts/:id', to: SlugRouter.to(:post), as: :profile_posts_post
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students

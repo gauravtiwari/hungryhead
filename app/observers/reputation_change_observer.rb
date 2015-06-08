@@ -8,7 +8,6 @@ class ReputationChangeObserver
     resource = User.where(sash_id: changed_data[:sash_id]).first ||
       Idea.where(sash_id: changed_data[:sash_id]).first ||
       Feedback.where(sash_id: changed_data[:sash_id]).first
-      Post.where(sash_id: changed_data[:sash_id]).first
 
     resource.class.leaderboard[resource.id] = resource.points
 

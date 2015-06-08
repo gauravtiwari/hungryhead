@@ -42,7 +42,6 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
-  has_many :posts, dependent: :destroy
 
   #Callbacks
   before_create :add_fullname, if: :name_not_present?
@@ -93,10 +92,8 @@ class User < ActiveRecord::Base
   counter :comments_counter
   counter :votes_counter
   counter :ideas_counter
-  counter :posts_counter
   counter :views_counter
   counter :activities_counter
-  counter :shares_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -106,7 +103,7 @@ class User < ActiveRecord::Base
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
-  store_accessor :settings, :theme, :idea_notifications, :post_notifications, :feedback_notifications,
+  store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
@@ -249,7 +246,6 @@ class User < ActiveRecord::Base
       feedback_notifications: true,
       investment_notifications: true,
       follow_notifications: true,
-      post_notifications: true,
       weekly_mail: true
     }
   end
