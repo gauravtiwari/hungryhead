@@ -12,7 +12,7 @@ var LatestUserActivityPostItem = React.createClass({
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix">
           <span className="inline text-master">
-            <span className="verb b-b b-grey p-b-5">
+            <span className="verb">
               <i className="fa fa-share"></i> shared a <a onClick={this.loadActivity}>post</a>
             </span>
           </span>

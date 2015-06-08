@@ -50,7 +50,7 @@
 			<% end %>
 			</div>
 
-	    <div class="share-box padding-10 bg-success-lighter">
+	    <div class="share-box padding-10 bg-master-lightest">
 	     <% if activity.trackable.shareable.description.length > 450 %>
 		    <%= truncate(markdownify(activity.trackable.shareable.description), escape: false, length: 450) %>
 		    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>

@@ -59,6 +59,14 @@ body, p {
 .idea-content p {
   color: #242d30 !important;
 }
+.share-box p {
+  font-size: 14px;
+}
+.idea-content  ul > li, .idea-content  ol > li {
+  padding-left: 0px;
+  line-height: 18px;
+  margin-bottom: 1em;
+}
 .profile-action-buttons {
   float: right;
 }
