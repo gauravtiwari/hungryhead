@@ -43,11 +43,6 @@ module Merit
         idea.student.points(category: 'idea_publish') == 0 && idea.published?
       end
 
-      #Share
-      score 10, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|
-        share.user != share.shareable_user
-      end
-
       #Votes
       score 5, :on => 'votes#vote', to: [:votable, :votable_user], category: 'vote' do |vote|
         vote.votable_type != "Investment" && vote.voter != vote.votable_user

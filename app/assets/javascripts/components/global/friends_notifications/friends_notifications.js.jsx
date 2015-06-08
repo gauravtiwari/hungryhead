@@ -60,10 +60,6 @@ var FriendsNotifications = React.createClass({
           elements.push(<FriendsNotificationVoteItem key={Math.random()} item={item} />)
         } else if(item.verb === "mentioned"){
           elements.push(<FriendsNotificationMentionItem key={Math.random()} item={item} />)
-        } else if(item.verb === "posted"){
-          elements.push(<FriendsNotificationPostItem key={Math.random()} item={item} />)
-        } else if(item.verb === "shared"){
-          elements.push(<FriendsNotificationShareItem key={Math.random()} item={item} />)
         }
       });
       return elements;

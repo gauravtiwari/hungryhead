@@ -93,7 +93,6 @@ Rails.application.routes.draw do
   get '/:tag/people',  to: 'tags#people', as: 'tag_people'
   get '/:tag/ideas',  to: 'tags#show', as: 'tag'
   match '/voters', to: 'votes#voters', via: :get, as: 'voters'
-  match '/sharers', to: 'shares#sharers', via: :get, as: 'sharers'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome
@@ -203,13 +202,6 @@ Rails.application.routes.draw do
 
   #Comments resources
   resources :comments, only: [:create, :update, :index, :destroy]
-
-  #Shares resources
-  resources :shares, only: [:create, :destroy, :show] do
-    member do
-      get :sharers
-    end
-  end
 
   #Ideas routes
   resources :ideas, except: [:new, :edit] do

@@ -189,27 +189,6 @@ module Merit
         Idea.leaderboard.score(idea.id)/days >= 100
       end
 
-      #####################################
-      # => Share related badges
-      #####################################
-
-      ##################################################################
-      # => Check everytime idea is viewed to grant growth-hacking badge to USER
-      # ################################################################
-      grant_on 'votes#create', badge: 'growth-hacking', multiple: true, to: :votable_user do |vote|
-        days = (DateTime.now.to_date - vote.votable.created_at.to_date).to_i
-        vote.votable_type == "Share" &&
-        days.between?(1, 3) &&
-        vote.votable.votes_counter.value == 50
-      end
-
-      grant_on 'comments#create', badge: 'growth-hacking', multiple: true, to: :commentable_user do |comment|
-        days = (DateTime.now.to_date - comment.commentable.created_at.to_date).to_i
-        comment.commentable_type == "Share" &&
-        days.between?(1, 3) &&
-        comment.commentable.votes_counter.value == 50
-      end
-
       ##############################
         # => Feedback related badges
       ##############################
@@ -295,34 +274,6 @@ module Merit
         vote.votable_type == "Comment" &&
         vote.votable_user.comments_counter.value >= 100 &&
         vote.votable_user.comments_score >= 1000
-      end
-
-      ###########################
-        # => Posts related badges
-      # #########################
-
-      # TO POST
-      #Based on comment to keep checking //hack
-      grant_on 'comments#create', badge: 'popular-post', to: :commentable do |comment|
-        comment.commentable_type == "Post" && Post.leaderboard.score(comment.commentable_id) == 500
-      end
-
-      #Based on vote to keep checking //hack
-      grant_on 'votes#vote', badge: 'popular-post', to: :votable do |vote|
-        vote.votable_type == "Post" && Post.leaderboard.score(vote.votable_id) == 500
-      end
-
-      # TO USER
-      #Based on comment to keep checking //hack
-      grant_on 'comments#create', badge: 'influencer', to: :commentable_user do |comment|
-        comment.commentable_type == "Post" &&
-        Post.leaderboard.score(comment.commentable_id) >= 500
-      end
-
-      #Based on vote to keep checking //hack
-      grant_on 'votes#vote', badge: 'influencer', to: :votable_user do |vote|
-        vote.votable_type == "Post" &&
-        Post.leaderboard.score(vote.votable_id) >= 500
       end
 
 

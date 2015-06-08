@@ -7,9 +7,6 @@
 			<%= link_to('About', profile_about_path(@user), class: "bold fs-13 #{current_class?(profile_about_path(@user))} ") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
-			<%= link_to('Posts', profile_posts_path(@user), class: "bold fs-13 #{current_class?(profile_posts_path(@user))} ") %>
-		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Activities', profile_activities_path(@user), class: "bold fs-13 #{current_class?(profile_activities_path(@user))} ") %>
 		</li>
 	</ul>

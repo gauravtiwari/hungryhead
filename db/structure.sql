@@ -972,43 +972,6 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE posts (
-    id integer NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
-    title character varying DEFAULT ''::character varying NOT NULL,
-    body text DEFAULT ''::text NOT NULL,
-    status integer,
-    user_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    sash_id integer,
-    level integer DEFAULT 0
-);
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
-
-
---
 -- Name: punches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1151,44 +1114,6 @@ CREATE SEQUENCE schools_id_seq
 --
 
 ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
-
-
---
--- Name: shares; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE shares (
-    id integer NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
-    body text DEFAULT ''::text NOT NULL,
-    status integer,
-    privacy integer,
-    shareable_id integer NOT NULL,
-    shareable_type character varying NOT NULL,
-    user_id integer NOT NULL,
-    parameters jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: shares_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE shares_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: shares_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE shares_id_seq OWNED BY shares.id;
 
 
 --
@@ -1690,13 +1615,6 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY punches ALTER COLUMN id SET DEFAULT nextval('punches_id_seq'::regclass);
 
 
@@ -1719,13 +1637,6 @@ ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::reg
 --
 
 ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY shares ALTER COLUMN id SET DEFAULT nextval('shares_id_seq'::regclass);
 
 
 --
@@ -1985,14 +1896,6 @@ ALTER TABLE ONLY organizations
 
 
 --
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
-
-
---
 -- Name: punches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2022,14 +1925,6 @@ ALTER TABLE ONLY sashes
 
 ALTER TABLE ONLY schools
     ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
-
-
---
--- Name: shares_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY shares
-    ADD CONSTRAINT shares_pkey PRIMARY KEY (id);
 
 
 --
@@ -2552,41 +2447,6 @@ CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
 
 
 --
--- Name: index_posts_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_level ON posts USING btree (level);
-
-
---
--- Name: index_posts_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_sash_id ON posts USING btree (sash_id);
-
-
---
--- Name: index_posts_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_status ON posts USING btree (status);
-
-
---
--- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
-
-
---
--- Name: index_posts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_posts_on_uuid ON posts USING btree (uuid);
-
-
---
 -- Name: index_punches_on_average_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2619,20 +2479,6 @@ CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
 --
 
 CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
-
-
---
--- Name: index_shares_on_shareable_id_and_shareable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_shares_on_shareable_id_and_shareable_type ON shares USING btree (shareable_id, shareable_type);
-
-
---
--- Name: index_shares_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_shares_on_user_id ON shares USING btree (user_id);
 
 
 --
@@ -2898,27 +2744,11 @@ ALTER TABLE ONLY mailboxer_notifications
 
 
 --
--- Name: posts_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
 -- Name: receipts_on_notification_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_receipts
     ADD CONSTRAINT receipts_on_notification_id FOREIGN KEY (notification_id) REFERENCES mailboxer_notifications(id);
-
-
---
--- Name: shares_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY shares
-    ADD CONSTRAINT shares_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -3007,15 +2837,11 @@ INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317220155');
 
-INSERT INTO schema_migrations (version) VALUES ('20150321215014');
-
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
 
 INSERT INTO schema_migrations (version) VALUES ('20150421231158');
-
-INSERT INTO schema_migrations (version) VALUES ('20150425114736');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 
@@ -3024,8 +2850,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
 
 INSERT INTO schema_migrations (version) VALUES ('20150512113344');
-
-INSERT INTO schema_migrations (version) VALUES ('20150514213100');
 
 INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 

@@ -3,7 +3,7 @@
     followers_count: number_to_human(@user.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     feedbacks_count: number_to_human(@user.feedbacks_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     investments_count: number_to_human(@user.investments_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
-    posts_count: number_to_human(@user.posts_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
+    ideas_count: number_to_human(@user.ideas_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     views_count: number_to_human(@user.views_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     comments_count: number_to_human(@user.comments_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }),
     score: number_to_human(User.leaderboard.score(@user.id),  :format => '%n%u', :units => { :thousand => 'K' })

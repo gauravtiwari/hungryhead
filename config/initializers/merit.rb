@@ -144,14 +144,6 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 16,
-  name: "influencer",
-  level: "silver",
-  description: "10 posts with score of 500",
-  custom_fields: { name: "Influencer", points: 25 }
-)
-
-Merit::Badge.create!(
   id: 17,
   name: "market-fit",
   level: "silver",
@@ -223,14 +215,6 @@ Merit::Badge.create!(
   level: "silver",
   description: "Feedback with score of 500 or more",
   custom_fields: { name: "Popular Feedback" }
-)
-
-Merit::Badge.create!(
-  id: 26,
-  name: "popular-post",
-  level: "silver",
-  description: "Post with score of 500 or more",
-  custom_fields: { name: "Popular Post" }
 )
 
 Merit::Badge.create!(
