@@ -29,6 +29,11 @@ Rails.application.routes.draw do
   #Pusher authentication route
   post "pusher/auth"
 
+  mount Help::Engine => "/help"
+
+  # Upgrade path for old browsers
+
+  get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
 
   # Authentication
   devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}

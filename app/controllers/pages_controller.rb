@@ -31,16 +31,11 @@ class PagesController < ApplicationController
   def get_started
   end
 
-  def help
-  end
-
-
   def join
+
   end
 
-  #Hello page - introduce ourselves
-
-  def hello
+  def upgrade_browser
   end
 
   #Getting started page for ideas
