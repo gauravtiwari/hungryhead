@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hungryhead - An idea simulation platform</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+
+    <meta content="An idea simulation platform" name="description" />
+    <meta content="hungryhead" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <!--[if lte IE 9]>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
+    <![endif]-->
+
+    <script type="text/javascript" data-turbolinks-eval=false>
+      window.onload = function() {
+        // fix for windows 8
+        if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+          document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
+      }
+    </script>
+
+    <%= csrf_meta_tags %>
+
+    <%= yield :head %>
+
+  </head>
+
+  <body class="fixed-header">
+    <div class="page-sidebar" data-pages="sidebar">
+      <div id="appMenu" class="sidebar-overlay-slide from-top">
+      </div>
+      <!-- BEGIN SIDEBAR HEADER -->
+      <div class="sidebar-header text-center bg-solid-dark">
+        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="22">
+      </div>
+      <!-- END SIDEBAR HEADER -->
+      <!-- BEGIN SIDEBAR MENU -->
+      <div class="sidebar-menu">
+        <ul class="menu-items">
+          <li class="m-t-30">
+            <a href="#" class="detailed">
+              <span class="title">Story</span>
+            </a>
+          </li>
+          <li class="">
+            <a href="#">
+              <span class="title">Get Started</span>
+            </a>
+          </li>
+
+          <li class="">
+            <a href="#">
+              <span class="title">Questions</span>
+            </a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <!-- END SIDEBAR MENU -->
+    </div>
+    <!-- END SIDEBAR -->
+    <div class="page-container">
+      <% if params[:action] == "index" %>
+       <%= render partial: 'globals/guest_nav_tablet' %>
+      <% else %>
+        <%= render partial: 'globals/page_nav_tablet' %>
+      <% end %>
+
+      <div class="page-content-wrapper">
+        <div class="content">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>

@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
   #Temporary basic auth
   before_filter :authenticate_basic
 
+  #Device specific templates
+  before_action :set_device_type
+
   protected
 
   def authenticate_basic
@@ -84,6 +87,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
       flash[:notice] = "You are not authorized to perform this action"
     end
+  end
+
+  def set_device_type
+    request.variant = :phone if browser.mobile?
+    request.variant = :tablet if browser.tablet?
   end
 
 end
