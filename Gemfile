@@ -25,9 +25,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'nprogress-rails'
 
-#Varnish
-gem 'lacquer'
-
 #Group date
 gem 'groupdate'
 
