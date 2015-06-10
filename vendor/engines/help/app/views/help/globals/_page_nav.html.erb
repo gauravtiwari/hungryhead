@@ -1,0 +1,41 @@
+<!-- START HEADER -->
+<div class="header bg-info-dark b-b b-grey box-shadow" style="background-color: #3e4f6d!important;">
+<div class="container">
+  <div class=" pull-left sm-table">
+    <div class="header-inner">
+      <div class="brand inline">
+      <%= link_to(main_app.root_path) do %>
+        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+      <% end %>
+      </div>
+     <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+      <li class="p-r-15 fs-16 inline">
+        <%= link_to(main_app.story_path) do %>
+          <span class="text-white">Story</span>
+        <% end %>
+      </li>
+      <li class="p-r-15 fs-16 inline">
+        <%= link_to(main_app.how_it_works_path) do %>
+          <span class="text-white">How it works? </span>
+        <% end %>
+      </li>
+      <li class="fs-16 inline">
+        <%= link_to("Questions?".html_safe, help.root_path, class: 'text-white') %>
+      </li>
+     </ul>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <div class="visible-lg visible-md m-t-10">
+      <div class="pull-right p-t-10 fs-16 font-heading">
+        <div class="dropdown pull-right">
+          <%= link_to(main_app.get_started_path, title: "Click to Register", class: "inline") do %>
+            <span class="text-white fs-16">Get Started</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

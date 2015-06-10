@@ -10,7 +10,6 @@
                       <h1 class="text-white">Practically explore entrepreneurship with peers and mentors</h1>
                       <p class="text-white fs-16">Hungryhead is a new way of exploring entrepreneurship as a career path. Instead of cramming business books and old-age business mantras, it helps you learn by doing.</p>
                       <div class="btn-box m-t-20">
-                        <%= link_to('Login', new_user_session_path, class: "btn btn-ghost") %>
                         <%= link_to('Get Started', get_started_path, class: "btn btn-ghost m-l-10") %>
                       </div>
                   </div>
@@ -96,19 +95,19 @@
     <section id="cta" class="cta">
           <div class="cta-overlay">
               <div class="container">
-                  <div class="wrapper-lg">
+                  <div class="wrapper-small p-b-100">
                       <div class="row">
                           <div class="col-md-8 col-md-offset-2 text-center">
-                              <h1 class="text-white bold">Does this align with you?</h1>
-                              <p class="fs-16 text-white">Let's get started</p>
+                              <%= image_tag('badges/welcome.png') %>
+                              <h1 class="text-white bold m-t-20">Let's get to know each other.</h1>
+                              <p class="fs-16 text-white">Find us on</p>
+                              <div class="social_icons m-t-30">
+                                <i class="fa fa-twitter inline fs-40 text-white"></i>
+                                <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
+                              </div>
                           </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-12 text-center">
-                          <%= link_to('Join me for Beta', get_started_path, class: "btn btn-color") %>
-                        </div>
 
-                      </div>
                   </div>
               </div>
           </div>

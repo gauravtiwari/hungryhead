@@ -1,0 +1,49 @@
+<div class="page-container p-b-60 bg-white overflow-hidden">
+<div class="help-header bg-master-lightest p-t-20 p-b-20 box-shadow">
+  <div class="container">
+  <small class="hint-text fs-16 v-middle p-l-15">
+    Help <i class="fa fa-chevron-right fs-12"></i>
+  </small>
+  <h2 class="p-l-15"><%= @category.name %></h2>
+  </div>
+</div>
+<div class="container">
+<div class="container-inner p-l-15 p-r-15">
+  <div class="help-main-content m-t-50">
+    <div class="col-md-9 col-sm-8 no-padding p-r-15">
+      <div class="articles-list p-b-20" id="help_articles">
+      <% @category.articles.each do |article| %>
+        <h6>
+          <%= link_to(article.title, "##{article.title.parameterize}") %>
+        </h6>
+      <% end %>
+      </div>
+      <hr>
+      <div class="help-content">
+        <% @category.articles.each do |article| %>
+          <section id="<%= article.title.parameterize %>" class="p-b-40">
+            <h4 class="bold"><%= article.title %></h4>
+            <p><%= article.body.html_safe %></p>
+          </section>
+        <% end %>
+      </div>
+    </div>
+
+    <nav class="col-md-3 no-padding p-l-15">
+      <div id="help_sidebar">
+        <ul class="nav padding-10">
+          <h4 class="b-b b-grey p-b-5">Categories</h4>
+          <li>
+            <% @categories.each do |category| %>
+              <%= content_tag(:h6) do %>
+                <%= link_to(category.name, help_category_path(category)) %>
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+</div>
+</div>
