@@ -33,7 +33,7 @@
 
   </head>
 
-  <body class="fixed-header <%= user_signed_in? ? '' : 'menu-behind' %>">
+  <body class="fixed-header <%= user_signed_in? ? '' : 'menu-behind' %> <%= controller_name %> <%= action_name %>">
     <%= yield %>
 
   </body>

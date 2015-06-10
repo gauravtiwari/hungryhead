@@ -31,7 +31,15 @@ p {
 .fs-30 {
   font-size: 30px;
 }
-
+.registrations {
+  background: #fafafa;
+}
+.select2-container .select2-choice {
+  box-shadow: none;
+}
+.select2-container .select2-choice > .select2-chosen {
+  padding-left: 0;
+}
 .content-23.custom-bg {
   background-image: image-url('building-ecosystem.png');
   background-position: 50% 50%;

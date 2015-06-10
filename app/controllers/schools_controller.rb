@@ -3,7 +3,7 @@ class SchoolsController < ApplicationController
   before_action :authenticate_admin_user!, only: [:new, :create, :destroy, :edit]
   before_action :set_schools, only: [:latest_students, :latest_ideas, :latest_faculties, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
-  autocomplete :school, :name, :full => true, :extra_data => [:logo, :email]
+  autocomplete :school, :name, :full => true, :extra_data => [:domain]
 
   layout 'home'
 

@@ -62,9 +62,12 @@ var JoinAsMentorForm = React.createClass({
         </div>
 
         <div className="col-sm-6 col-md-4 auto-margin">
-          <div className="form-group form-group-default">
+          <div className="form-group form-group-default input-group">
+            <span className="input-group-addon bg-solid-dark text-white">
+              http://
+            </span>
             <label>Reference website</label>
-            <input className="string url required form-control" placeholder="http:// linkedin, about me url..." type="url" name="invite_request[url]" id="invite_request_url" />
+            <input className="string url required form-control" placeholder="linkedin, about me url..." type="url" name="invite_request[url]" id="invite_request_url" />
           </div>
         </div>
 
