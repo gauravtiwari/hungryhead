@@ -8,19 +8,16 @@
         <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
       <% end %>
       </div>
-     <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-      <li class="p-r-15 fs-16 inline">
+     <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+      <li class="p-r-15 fs-14 inline font-heading">
         <%= link_to(story_path) do %>
           <span class="text-master">Story</span>
         <% end %>
       </li>
-      <li class="p-r-15 fs-16 inline">
+      <li class="p-r-15 fs-14 inline font-heading">
         <%= link_to(how_it_works_path) do %>
           <span class="text-master">How it works? </span>
         <% end %>
-      </li>
-      <li class="fs-16 inline">
-        <%= link_to("Questions?".html_safe, help_path, class: 'text-master') %>
       </li>
      </ul>
     </div>
@@ -28,14 +25,20 @@
 
   <div class="pull-right">
     <div class="visible-lg visible-md m-t-10">
-      <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
-        <div class="dropdown pull-right">
-          <%= link_to(get_started_path, title: "Click to Register", class: "inline") do %>
-            <span class="text-master fs-16">Get Started</span>
+      <div class="pull-left p-t-5 font-heading">
+        <div class="pull-right">
+          <%= link_to(get_started_path, title: "Find more information", class: "btn btn-master bg-transparent inline") do %>
+            <span class="text-master">Get Started</span>
           <% end %>
         </div>
+
+        <div class="pull-right p-r-20">
+          <%= link_to(help_path, title: "Questions?", class: "btn btn-master bg-transparent inline") do %>
+            <span class="text-master">Questions?</span>
+          <% end %>
+        </div>
+
       </div>
-      <a href="" title="" class="pull-left p-t-10 fs-16 font-heading"><span class="text-master">Login</span></a>
     </div>
   </div>
   </div>
