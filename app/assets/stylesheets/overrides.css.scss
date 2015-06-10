@@ -25,6 +25,12 @@ p {
 .fs-50 {
   font-size: 50px;
 }
+.fs-40 {
+  font-size: 40px;
+}
+.fs-30 {
+  font-size: 30px;
+}
 
 .content-23.custom-bg {
   background-image: image-url('building-ecosystem.png');
@@ -260,7 +266,7 @@ input.error:-webkit-autofill {
   background: #4d86c9!important;
 }
 .b-solid {
-  border-color: #4d86c9;
+  border-color: #4d86c9!important;
 }
 .no-float {
   float: none!important;

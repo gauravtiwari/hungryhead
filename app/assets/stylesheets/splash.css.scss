@@ -1,5 +1,3 @@
-
-
 /* Splash Wrapper LESS */
 
 .auto-margin {
@@ -68,4 +66,50 @@
 }
 .slider-caption input[type="submit"] {
   float: right;
+}
+
+@media (max-width: 768px) {
+  .slider-caption {
+    padding-top: 30%;
+  }
+  .splash-wrapper {
+    background: image-url('banner_1.jpg') no-repeat;
+    height: 100%;
+  }
+}
+
+@media (max-width: 568px) {
+  .splash-wrapper {
+    background: image-url('banner_1.jpg') no-repeat;
+    height: 170vh;
+  }
+  .slider-caption {
+    padding-bottom: 60px;
+    padding-top: 10%;
+  }
+  .jumbotron h1 {
+    font-size: 35px;
+  }
+  .slider-caption h1 {
+    font-size: 35px;
+    line-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-caption {
+    padding-bottom: 60px;
+    padding-top: 10%;
+  }
+  .splash-wrapper {
+    background: image-url('banner_1.jpg') no-repeat;
+    height: 110vh;
+  }
+  .jumbotron h1 {
+    font-size: 35px;
+  }
+  .slider-caption h1 {
+    font-size: 35px;
+    line-height: 48px;
+  }
 }
