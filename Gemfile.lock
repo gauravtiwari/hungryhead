@@ -267,7 +267,7 @@ GEM
       mime-types
       net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
-    fog-ecloud (0.1.1)
+    fog-ecloud (0.1.2)
       fog-core
       fog-xml
     fog-google (0.0.5)
@@ -283,7 +283,7 @@ GEM
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
-    fog-profitbricks (0.0.2)
+    fog-profitbricks (0.0.3)
       fog-core
       fog-xml
       nokogiri
@@ -340,7 +340,7 @@ GEM
       activesupport (>= 3.2, < 4.3)
     groupdate (2.4.0)
       activesupport (>= 3)
-    guard (2.12.5)
+    guard (2.12.6)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
@@ -397,6 +397,10 @@ GEM
     json (1.8.3)
     jwt (1.5.0)
     kgio (2.9.3)
+    lacquer (0.6.5)
+      activesupport (>= 2.3.10)
+      erubis
+      i18n (~> 0.4)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.7.0)
@@ -437,7 +441,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     modernizr-rails (2.7.1)
-    momentjs-rails (2.10.2)
+    momentjs-rails (2.10.3)
       railties (>= 3.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
@@ -568,7 +572,7 @@ GEM
       rails (>= 3.1)
       react-source (~> 0.13)
     react-source (0.13.3)
-    redcarpet (3.3.0)
+    redcarpet (3.3.1)
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -607,7 +611,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
-    searchkick (0.8.7)
+    searchkick (0.9.0)
       activemodel
       elasticsearch (>= 1)
       hashie
@@ -660,7 +664,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
     sucker_punch (1.5.0)
       celluloid (~> 0.16.0)
-    temple (0.7.5)
+    temple (0.7.6)
     terminal-table (1.4.5)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
@@ -677,7 +681,7 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    underscore-rails (1.8.2)
+    underscore-rails (1.8.3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
@@ -763,6 +767,7 @@ DEPENDENCIES
   jquery-validation-rails
   js-routes
   json
+  lacquer
   less-rails
   local_time
   lol_dba
