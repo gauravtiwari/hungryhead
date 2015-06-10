@@ -32,6 +32,9 @@ gem 'groupdate'
 
 gem 'merit'
 
+#Mountanable engines
+gem 'help', path: "vendor/engines/help"
+
 #Cron jobs
 
 gem 'crono'
@@ -127,6 +130,9 @@ gem 'unicorn'
 #State machines
 gem 'aasm'
 
+#Browser gem
+gem 'browser'
+
 #ShowDown
 
 gem 'showdown-rails'
@@ -173,11 +179,13 @@ gem 'shareable'
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc1'
 
-gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'simple_form'
 gem 'country_select'
 
 # SEO
 gem 'friendly_id'
+
+gem 'htmlcompressor'
 
 #JQuery AutoSize
 
