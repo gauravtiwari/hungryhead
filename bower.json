@@ -10,7 +10,8 @@
         "slimScroll": "latest",
         "react-infinite": "latest",
         "bootstrap-tagsinput": "latest",
-        "pnotify": "latest"
+        "pnotify": "latest",
+        "fastclick": "latest"
 
     }
   },

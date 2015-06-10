@@ -29,12 +29,12 @@
     "react": ">= 0.12.2"
   },
   "homepage": "https://github.com/seatgeek/react-infinite",
-  "version": "0.3.4",
-  "_release": "0.3.4",
+  "version": "0.4.0",
+  "_release": "0.4.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.3.4",
-    "commit": "66df539739ad97d5a4c92714c70f14bdd9d730c5"
+    "tag": "0.4.0",
+    "commit": "a4cff502ac0e68dd59ddb6ce65f4b91c5a9764e3"
   },
   "_source": "git://github.com/seatgeek/react-infinite.git",
   "_target": "*",
