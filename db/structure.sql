@@ -324,6 +324,72 @@ ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
 
 
 --
+-- Name: help_articles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE help_articles (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    slug character varying NOT NULL,
+    category_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: help_articles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE help_articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: help_articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE help_articles_id_seq OWNED BY help_articles.id;
+
+
+--
+-- Name: help_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE help_categories (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    slug character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: help_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE help_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: help_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE help_categories_id_seq OWNED BY help_categories.id;
+
+
+--
 -- Name: hobbies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1489,6 +1555,20 @@ ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY help_articles ALTER COLUMN id SET DEFAULT nextval('help_articles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY help_categories ALTER COLUMN id SET DEFAULT nextval('help_categories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY hobbies ALTER COLUMN id SET DEFAULT nextval('hobbies_id_seq'::regclass);
 
 
@@ -1749,6 +1829,22 @@ ALTER TABLE ONLY feedbacks
 
 ALTER TABLE ONLY follows
     ADD CONSTRAINT follows_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: help_articles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY help_articles
+    ADD CONSTRAINT help_articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: help_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY help_categories
+    ADD CONSTRAINT help_categories_pkey PRIMARY KEY (id);
 
 
 --
@@ -2178,6 +2274,27 @@ CREATE INDEX index_follows_on_followable_id_and_followable_type ON follows USING
 --
 
 CREATE INDEX index_follows_on_follower_id_and_follower_type ON follows USING btree (follower_id, follower_type);
+
+
+--
+-- Name: index_help_articles_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_help_articles_on_category_id ON help_articles USING btree (category_id);
+
+
+--
+-- Name: index_help_articles_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_help_articles_on_slug ON help_articles USING btree (slug);
+
+
+--
+-- Name: index_help_categories_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_help_categories_on_slug ON help_categories USING btree (slug);
 
 
 --
@@ -2858,4 +2975,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
 
 INSERT INTO schema_migrations (version) VALUES ('20150605120916');
+
+INSERT INTO schema_migrations (version) VALUES ('20150610172254');
+
+INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 

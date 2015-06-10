@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/hello', to: 'pages#hello', as: :hello
   get '/rules', to: 'pages#rules', as: :rules
 
-  get '/help', to: 'pages#help', as: :help
   get '/privacy', to: 'pages#privacy', as: :privacy
   get '/get-started', to: 'pages#get_started', as: :get_started
   get '/terms-of-use', to: 'pages#terms', as: :terms
