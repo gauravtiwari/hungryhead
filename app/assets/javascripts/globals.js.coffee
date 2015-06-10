@@ -18,7 +18,6 @@ jQuery(document).ready ->
 		$('#formPassword').rules 'add', minlength: 6
 	catch e
 
-
 	$('#form-login').validate();
 	$('#new_invite_request').validate();
 	$('#information-form').validate();

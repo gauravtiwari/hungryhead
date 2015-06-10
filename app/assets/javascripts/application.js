@@ -41,6 +41,7 @@
 //= require bootstrap-tagsinput
 //= require moment
 //= require classie
+//= require fastclick
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require jquery.autosize

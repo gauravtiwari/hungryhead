@@ -7,6 +7,6 @@ $(document).ready ->
       message: params.message
       position: 'bottom-left'
       type: params.type
-      timeout: 50000).show()
+      timeout: 10000).show()
     return
   return
