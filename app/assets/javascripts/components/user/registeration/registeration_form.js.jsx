@@ -42,15 +42,12 @@ var RegisterationForm = React.createClass({
                   return {
                     text: item.label,
                     value: item.value,
-                    id: item.id,
-                    domain: item.domain
+                    id: item.id
                   };
                 })
               };
             }
           }
-        }).on("select2-selecting", function(e) {
-          self.setState({school_domain: e.choice.domain});
         });
       };
     })(this));
@@ -90,9 +87,8 @@ var RegisterationForm = React.createClass({
   },
 
   onEmailChange: function(e) {
-   $(this.refs.email.getDOMNode()).val($(this.refs.student_email_username.getDOMNode()).val().trim() + '@' + this.state.school_domain.trim());
    data = {
-      email: $(this.refs.email.getDOMNode()).val()
+      email: e.target.value
     }
     $.ajax({
         data: data,
@@ -144,15 +140,7 @@ var RegisterationForm = React.createClass({
         </div>
 
         <div className="row">
-          <div className="col-sm-6 col-md-6">
-            <div className="form-group">
-              <label>Username</label>
-              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
-              <span id="invalid-username"></span>
-            </div>
-          </div>
-
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-12 col-md-12">
             <div className="form-group">
               <label>Select your University/College</label>
               <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
@@ -160,16 +148,27 @@ var RegisterationForm = React.createClass({
             </div>
           </div>
         </div>
+
         <div className="row">
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-12 col-md-12">
             <div className="form-group form-group-default input-group">
-              <label>Uni/School Email</label>
-              <input type="text" ref="student_email_username" name="student[student_email_username]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
-              <input type="hidden" ref="email" name="student[email]" autoComplete="off" className="form-control" />
+              <label>Uni/College Email</label>
+              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span className="input-group-addon bg-solid-dark text-white" id="school_domain">
                 {this.state.school_domain}
               </span>
               <span id="invalid-email"></span>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+
+          <div className="col-sm-6 col-md-6">
+            <div className="form-group form-group-default">
+              <label>Username</label>
+              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+              <span id="invalid-username"></span>
             </div>
           </div>
 
@@ -179,6 +178,7 @@ var RegisterationForm = React.createClass({
               <input type="password" name="student[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
+
         </div>
 
         <div className="row m-t-10">
