@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  acts_as_copy_target
+
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
