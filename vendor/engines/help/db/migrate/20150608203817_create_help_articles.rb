@@ -4,7 +4,7 @@ class CreateHelpArticles < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.string :slug, null: false
-      t.references :category, index: true, foreign_key: true
+      t.integer :category_id, index: true
 
       t.timestamps null: false
     end
