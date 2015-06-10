@@ -1,5 +1,6 @@
 class InviteRequest < ActiveRecord::Base
 
+  acts_as_copy_target
   #Model Validations
   validates :email, :presence => true,
   :uniqueness => {
@@ -8,5 +9,6 @@ class InviteRequest < ActiveRecord::Base
   }
   validates :name, :presence => true
   validates :url, :presence => true
+
 
 end

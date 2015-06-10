@@ -12,6 +12,7 @@ class InviteRequestsController < ApplicationController
      flash[:success] = "Thank you #{@invite_request.name} for submitting your request. We will be in touch."
      render json: {
       created: true,
+      name: @invite_request.name,
       status: :created
     }
     else
