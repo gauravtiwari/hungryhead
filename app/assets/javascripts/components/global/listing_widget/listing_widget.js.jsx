@@ -27,7 +27,7 @@ var ListingWidget = React.createClass({
       return <ListingWidgetItem item={item} key={Math.random()} />
     });
 
-    if(items.length > 0) {
+    if(this.state.listing.length > 0) {
       var content = items;
     } else {
       var content = <div className="text-center hint-text fs-22">{this.state.count} {this.props.type}</div>;

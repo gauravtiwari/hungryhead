@@ -1104,6 +1104,37 @@ ALTER SEQUENCE read_marks_id_seq OWNED BY read_marks.id;
 
 
 --
+-- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE roles (
+    id integer NOT NULL,
+    name character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+
+
+--
 -- Name: sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1709,6 +1740,13 @@ ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::regclass);
 
 
@@ -2005,6 +2043,14 @@ ALTER TABLE ONLY punches
 
 ALTER TABLE ONLY read_marks
     ADD CONSTRAINT read_marks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
 
 
 --
@@ -2979,4 +3025,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150605120916');
 INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
+
+INSERT INTO schema_migrations (version) VALUES ('20150611085138');
 

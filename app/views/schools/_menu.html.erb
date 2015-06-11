@@ -1,7 +1,14 @@
 <div class="profile-nav overflow-hidden p-l-15">
 	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
-		<li class="inline b-r b-grey b-dashed p-l-10 p-r-15">
-			<%= link_to('Profile', profile_path(@school), class: "bold #{current_class?(profile_path(@school))} p-b-5 fs-13") %>
+		<li class="inline b-r b-grey b-dashed p-r-15">
+			<div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
+			<% if @school.logo.present? %>
+			  <%= image_tag(@school.logo.url(:avatar), :"data-src" => "#{@school.logo.url(:avatar)}", :"data-src-retina" => "#{@school.logo.url(:square)}", width: "55", height: "55") %><% else %>
+			  <span class="placeholder bold text-white" width="32px" height="32px"><%= @school.name_badge %>
+			  </span>
+			<% end %>
+			</div>
+			<%= link_to('Profile', profile_path(@school), class: "bold #{current_class?(profile_path(@school))} p-b-5 fs-13 m-l-45") %>
 		</li>
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Students', profile_students_path(@school), class: "bold fs-13 #{current_class?(profile_students_path(@school))} ") %>
@@ -12,8 +19,11 @@
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Events', profile_events_path(@school), class: "bold fs-13 #{current_class?(profile_events_path(@school))} ") %>
 		</li>
-		<li class="inline p-l-15 p-r-15">
+		<li class="inline p-l-15 b-r b-grey b-dashed p-r-15">
 			<%= link_to('Enterprise support', profile_supports_path(@school), class: "bold fs-13 #{current_class?(profile_supports_path(@school))} ") %>
+		</li>
+		<li class="inline p-l-15 p-r-15">
+			<%= link_to('Resources', profile_supports_path(@school), class: "bold fs-13 #{current_class?(profile_supports_path(@school))} ") %>
 		</li>
 	</ul>
 

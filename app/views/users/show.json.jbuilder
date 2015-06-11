@@ -23,10 +23,10 @@ json.user do
 		json.school_url profile_path(@user.school) if @user.school
 		json.mini_bio @user.mini_bio
 		json.type @user.type
-		json.website_url @user.website_url
-		json.facebook_url @user.facebook_url
-		json.linkedin_url @user.linkedin_url
-		json.twitter_url @user.twitter_url
+		json.website_url url_with_protocol(@user.website_url)
+		json.facebook_url url_with_protocol(@user.facebook_url)
+		json.linkedin_url url_with_protocol(@user.linkedin_url)
+		json.twitter_url url_with_protocol(@user.twitter_url)
 		json.location_name @user.location_list.first if @user.location_list
 		json.markets @user.market_list.each do |tag|
 			json.tag tag

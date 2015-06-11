@@ -21,6 +21,13 @@ Rails.application.routes.draw do
   #Soulmate search engine
   mount Soulmate::Server, :at => "/search"
 
+
+  #Get roles path
+
+  resources :roles, only: [:index] do
+    get :autocomplete_role_name, :on => :collection
+  end
+
   #Sidekiq
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'

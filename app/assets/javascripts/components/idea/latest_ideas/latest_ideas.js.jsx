@@ -83,7 +83,11 @@ var LatestIdeas = React.createClass({
     if(this.state.loading) {
       var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>
     } else {
-      var content = ideas
+      if(this.state.list.length > 0) {
+        var content = ideas
+      } else {
+        var content = <div className="no-content light p-t-40">0 ideas published</div>
+      }
     }
 
     var styles = {

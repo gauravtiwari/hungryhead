@@ -118,7 +118,7 @@ var LatestFeed = React.createClass({
                  {this.state.feed}
                 </Infinite>;
     } else {
-      var content = <div className="no-content hint-text">No Updates</div>
+      var content = <div className="no-content hint-text p-b-40 p-t-40">No latest updates</div>
     }
 
     return(

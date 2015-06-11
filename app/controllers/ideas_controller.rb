@@ -25,6 +25,11 @@ class IdeasController < ApplicationController
     @idea.touch
   end
 
+  def roles
+    @roles = ["Mentor", "My School", "Friends", "Peers", "Public"]
+    render json: @roles
+  end
+
 
   #Get idea card
   #GET /idea/1/card

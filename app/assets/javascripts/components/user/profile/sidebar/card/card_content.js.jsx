@@ -31,24 +31,24 @@ var CardContent = React.createClass({
 
     if(this.props.profile.website_url) {
       var website_url =  <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.website_url} ><i className="fa fa-rss"></i></a>                         </li>;
+                            <a className="text-white p-r-10" target="_blank" href={this.props.profile.website_url} ><i className="fa fa-rss fs-14"></i></a>                         </li>;
     }
 
     if(this.props.profile.facebook_url) {
       var facebook_url =  <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.facebook_url} ><i className="fa fa-facebook"></i></a>
+                            <a className="text-white p-r-10" target="_blank" href={this.props.profile.facebook_url} ><i className="fa fa-facebook fs-14"></i></a>
                           </li>;
     }
 
     if(this.props.profile.linkedin_url) {
       var linkedin_url =  <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.linkedin_url} ><i className="fa fa-linkedin"></i></a>
+                            <a className="text-white p-r-10" target="_blank" href={this.props.profile.linkedin_url} ><i className="fa fa-linkedin fs-14"></i></a>
                           </li>;
     }
 
     if(this.props.profile.twitter_url) {
       var twitter_url =  <li className="inline">
-                            <a className="text-white p-r-10" href={this.props.profile.twitter_url} ><i className="fa fa-twitter"></i></a>
+                            <a className="text-white p-r-10" target="_blank" href={this.props.profile.twitter_url} ><i className="fa fa-twitter fs-14"></i></a>
                           </li>;
     }
 

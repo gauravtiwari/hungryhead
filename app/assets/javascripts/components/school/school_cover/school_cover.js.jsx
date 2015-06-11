@@ -47,10 +47,10 @@ var SchoolCover = React.createClass({
   handleCoverDrag: function(){
    var self = this;
    $("#coverpic").draggable({
-    containment: "cover-wrap",
+    containment: "cover-wrap-school",
     cursor: "crosshair",
     drag:function(event, ui) {
-      var wrapper = $("#cover-wrap").offset();
+      var wrapper = $("#cover-wrap-school").offset();
       ui.position.left = Math.min( 100, ui.position.left );
       ui.position.top = Math.min( 100, ui.position.top );
       self.setState({top:  ui.position.top, left: ui.position.left});
@@ -147,7 +147,7 @@ var SchoolCover = React.createClass({
       if(this.state.is_owner) {
         return (
 
-          <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap">
+          <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap-school">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />
                 <input type="file" ref="cover" style={{"display" : "none"}} name="school[cover]" id="school_cover" />
@@ -162,7 +162,7 @@ var SchoolCover = React.createClass({
         )
      } else {
        return (
-      <div className={drag_class} data-social="cover" id="cover-wrap" id="cover-wrap">
+      <div className={drag_class} data-social="cover" id="cover-wrap-school" id="cover-wrap-school">
            <div id="coverpic" style={imageStyle}>
             {image}
            </div>
