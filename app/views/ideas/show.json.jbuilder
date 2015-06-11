@@ -19,7 +19,7 @@ json.idea do
   end
   json.market @idea.market_list.each do |market|
     json.name market
-    json.url profile_path(market.parameterize)
+    json.url tag_path(market.parameterize)
   end
   json.form action: idea_path(@idea), method: "PUT", idea_id: @idea.id
 end

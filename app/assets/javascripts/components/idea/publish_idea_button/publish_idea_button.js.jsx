@@ -8,7 +8,6 @@ var PublishIdeaButton = React.createClass({
       privacy: this.props.current_privacy,
       is_public: this.props.is_public,
       loading: false,
-      idea: this.props.idea,
       published: this.props.published,
       profile_complete: this.props.profile_complete,
       loading: false
@@ -17,18 +16,6 @@ var PublishIdeaButton = React.createClass({
 
   componentDidMount: function() {
     $('[data-toggle="tooltip"]').tooltip();
-  },
-
-  renderPrivacyPopup: function(e) {
-    e.preventDefault();
-    this.setState({loading: true});
-    $('body').append($('<div>', {class: 'privacy_modal', id: 'privacy_modal'}));
-    React.render(
-      <PublishIdeaPopup privacy={this.props.current_privacy} idea={this.state.idea} key={Math.random()}  />,
-      document.getElementById('privacy_modal')
-    );
-    this.setState({loading: false});
-    $("#privacyPopup").modal('show');
   },
 
   handleClick: function ( event ) {
@@ -72,7 +59,7 @@ var PublishIdeaButton = React.createClass({
     });
 
     return (
-        <a data-toggle="tooltip" data-placement="top" data-original-title={title} onClick={this.renderPrivacyPopup} className={classes} ><i className={icon_class}></i> {text}</a>
+        <a data-toggle="tooltip" data-placement="top" data-original-title={title} onClick={this.handleClick} className={classes} ><i className={icon_class}></i> {text}</a>
     )
   },
 

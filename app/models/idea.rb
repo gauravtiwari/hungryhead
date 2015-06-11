@@ -136,6 +136,11 @@ class Idea < ActiveRecord::Base
     team_invites_ids.include?(user.id.to_s)
   end
 
+  def fetch_team
+    ids = team_ids.push(student_id.to_s)
+    User.find(ids)
+  end
+
   def add_fund
     self.fund = {"balance" => 0}
   end

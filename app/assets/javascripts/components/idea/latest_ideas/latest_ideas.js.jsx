@@ -91,7 +91,7 @@ var LatestIdeas = React.createClass({
     }
 
     var styles = {
-      maxHeight: '300px'
+      maxHeight: '200px'
     }
 
     return (

@@ -17,6 +17,7 @@
   <div class="idea-sidebar auto-height bg-white box-shadow">
     <%= render partial: 'card_stats' %>
     <%= render partial: 'badges' %>
+    <%= render partial: 'team'%>
     <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
     <%= render partial: 'investors' if @idea.investors_counter.value > 0 %>
   </div>
