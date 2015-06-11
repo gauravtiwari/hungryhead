@@ -16,6 +16,7 @@ ActiveRecord::Base.transaction do
     confirmed_at: Time.now
   )
 
+
   Student.create!(
     name: "Gaurav Tiwari",
     first_name: "Gaurav",
