@@ -17,19 +17,31 @@ body, p {
 p {
   margin: 0px 0px 10px 0px;
 }
-
+.block-title {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.auto-width {
+  width: auto;
+}
 .content-23.v-center, .content-23 .v-center {
   display: table;
   width: 100%;
 }
 .fs-50 {
   font-size: 50px;
+  line-height: 1.6;
 }
 .fs-40 {
   font-size: 40px;
+  line-height: 1.6;
 }
 .fs-30 {
   font-size: 30px;
+  line-height: 1.6;
 }
 
 .select2-container .select2-choice {
@@ -233,6 +245,7 @@ input.error:-webkit-autofill {
 
 .fs-22 {
 	font-size: 22px;
+  line-height: 1.6;
 }
 .text-green {
 	color: #00b27f!important;

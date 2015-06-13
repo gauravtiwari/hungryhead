@@ -53,6 +53,9 @@ var CommentBox = React.createClass({
               }
           });
           this.setState(newState);
+          console.log(comment.id);
+          $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          $("#comment_"+comment.id).addClass('animated fadeInDown');
           this.setState({count: this.state.count+1 });
         }.bind(this));
       }

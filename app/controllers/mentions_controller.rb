@@ -10,14 +10,15 @@ class MentionsController < ApplicationController
       mentionable_user = @mentionable.user
     end
 
-    commenters = @mentionable.commenters_ids.values
+    commenters = @mentionable.commenters_ids.values.uniq
 
-    ids = commenters + [mentionable_user.id]
+    ids = (commenters + [mentionable_user.id]).uniq
 
     ids.delete(current_user.id.to_s)
+    uniq_ids = ids.uniq
 
     @mentionables = Rails.cache.fetch("#{params[:mentionable_type].downcase}-#{@mentionable.comments_counter}-mentions", expires: 2.hours) do
-      User.find(ids).map { |user|
+      User.find(uniq_ids).map { |user|
         {
           id: user.uid,
           name: user.name,

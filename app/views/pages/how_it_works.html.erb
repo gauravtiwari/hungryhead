@@ -2,117 +2,268 @@
 <div class="learn-wrapper bg-white">
   <div class="learn" data-pages="social">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
-        <div class="learn-photo">
+        <div class="how-photo">
         <div class="container vmiddle">
-        <div class="row p-t-40">
-              <div class="col-md-8 auto-margin">
-                  <div class="hero-section">
-                      <h1 class="text-white">Practically explore entrepreneurship with peers and mentors</h1>
-                      <p class="text-white fs-16">Hungryhead is a new way of exploring entrepreneurship as a career path. Instead of cramming business books and old-age business mantras, it helps you learn by doing.</p>
-                      <div class="btn-box m-t-20">
-                        <%= link_to('Get Started', get_started_path, class: "btn btn-ghost m-l-10") %>
-                      </div>
-                  </div>
+        <div class="col-md-4 p-t-40">
+          <div class="hero-section inner">
+              <h1 class="text-white">
+                How it works
+              </h1>
+              <p class="text-white">Understand the basic building blocks</p>
+              <div class="btn-box m-t-20">
+                <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
               </div>
+          </div>
           </div>
       </div>
       </div>
     </div>
   </div>
 
-  <div class="page-container bg-white">
-    <div class="wrapper-small">
-      <div class="col-md-7 auto-margin">
-        <div class="p-b-30">
-          <h2 class="normal">Things to know about Hungryhead:</h2>
-          <div class="divider b-b b-grey b-md b-small"></div>
-        </div>
-        <div>
-          <h3 class="m-t-30 semi-bold">1. Hungryhead is a new way to explore entrepreneurship. </h3>
-            <p class="fs-16">
-              We want to fundamentally change the way entrepreneurship has been pursued worldwide. Till now, teaching has been an evolutionary process where one generation passed on the knowledge to the next generation. People wrote books, invented courses and used various other methadologies to teach next generation how to do certain things.
-            </p>
-
-            <p class="fs-16">
-              Now, some of the things does require "teaching" however, some don't, like entrepreneurship and that's what we want to change with hungryhead. Instead, of reading outdated books or acquiring knowlege it let's one explore by doing, now.
-            </p>
-
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">2. Anyone can <%= link_to('join', new_student_registration_path) %> our community</h3>
-          <p class="fs-16">
-            Hungryhead is currently open for Students studying in colleges and universities. Mentors can join hungryhead by requesting an invite, please, <%= link_to("click here", join_as_mentor_path) %>. If you are a teacher or faculty in a college or university, please, <%= link_to("click here", new_teacher_registration_path) %>
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">3. It's all about collaboration.</h3>
-          <p class="fs-16">
-            Collaboration is an important aspect of entrepreneurship therefore, we have created a platform where collaboration takes the first seat so, that everyone can clearly communicate their ideas to peers and mentors.
-          </p>
-          <p class="fs-16">
-            Together with mentors and peers anyone can practically explore idea and see wether their idea has some legs.
-          </p>
-
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">4. You own 100% of your idea.</h3>
-          <p class="fs-16">
-            We don't take any ownership in anyone's idea.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">5. Idea privacy and sharing.</h3>
-          <p class="fs-16">
-            Intellectual property and privacy has taken a great importance nowadays
-            Privacy topic requires more exploration but briefly, anyone can control privacy of their idea on hungryhead.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">6. Find people who can help you with your idea.</h3>
-          <p>
-            Together with mentors and teachers you can explore your idea and learn
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30 semi-bold">8. Our Mission.</h3>
-          <p>
-            Our missing is to make entrepreneurship practical and traditional.
-          </p>
-        </div>
-
-      </div>
+  <div class="profile-nav displayblock overflow-hidden p-l-15">
+    <div class="container text-center">
+      <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/about">Join</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Complete your profile</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Connect</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Share skills</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Pitch your idea</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Collaborate in realtime</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Measure and Validate</a>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div class="page-wrapper horz-section relative">
-    <section id="cta" class="cta">
-          <div class="cta-overlay">
-              <div class="container">
-                  <div class="wrapper-small p-b-100">
-                      <div class="row">
-                          <div class="col-md-8 col-md-offset-2 text-center">
-                              <%= image_tag('badges/welcome.png') %>
-                              <h1 class="text-white bold m-t-20">Let's get to know each other.</h1>
-                              <p class="fs-16 text-white">Find us on</p>
-                              <div class="social_icons m-t-30">
-                                <i class="fa fa-twitter inline fs-40 text-white"></i>
-                                <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
-                              </div>
+  <!-- BEGIN CONTENT SECTION -->
+  <section class=" bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-5">
+            <h5 class="block-title hint-text no-margin">Join hungryhead</h5>
+            <h1 class="m-t-5 m-b-20">Create account.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+          </div>
+          <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md">
+              <%= image_tag('product/join.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="content-mask-md">
+              <%= image_tag('product/profile.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+            </div>
+          </div>
+          <div class="col-sm-6 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-6">
+            <h5 class="block-title hint-text no-margin">Connect with peers</h5>
+            <h1 class="m-t-5 m-b-20">Follow people from around the world</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md">
+              <%= image_tag('product/follow_friends.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-5 xs-p-l-15 xs-p-r-15">
+            <div class="text-center">
+              <i class="fa fa-search fs-50"></i>
+            </div>
+            <div class="content-mask-md m-t-20">
+              <%= image_tag('product/tag.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+          <div class="col-sm-6 col-sm-offset-1">
+            <h5 class="block-title hint-text no-margin">Share Skills</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-6">
+            <h5 class="block-title hint-text no-margin">Pitch Idea</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+          <div class="col-sm-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md">
+              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
+                <div class="screen">
+                  <div class="iphone-border">
+                    <%= image_tag('product/pitch_idea.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="text-center">
+              <%= image_tag('badges/cup.png') %>
+            </div>
+            <div class="content-mask-md text-center m-t-20">
+              <%= image_tag('product/idea_badges.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+          <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <h5 class="block-title hint-text no-margin">Practical Gamification</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
+        <div class="row">
+          <div class="col-sm-6">
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+          <div class="col-sm-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md text-center">
+              <%= image_tag('product/comment.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-5">
+            <div class="content-mask-md">
+              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
+                <div class="screen">
+                  <div class="iphone-border">
+                    <%= image_tag('product/leaderboard.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <h5 class="block-title hint-text no-margin">Measure and Validate</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <section id="mission" class="mission">
+      <div class="bg-overlay">
+          <div class="container">
+              <div class="wrapper-small">
+                  <div class="row p-b-60">
+                      <div class="col-md-8 col-md-offset-2 text-center">
+                          <h3 class="global">
+                            <%= image_tag("badges/scholar.png", width: "100px", height: "100px") %>
+                          </h3>
+                          <h1 class="text-white bold m-t-20">
+                            Our mission is to make entrepreneurship a traditional career path, globally.
+                          </h1>
+                          <div class="social_icons m-t-30">
+                            <i class="fa fa-twitter inline fs-40 text-white"></i>
+                            <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
                           </div>
                       </div>
-
                   </div>
               </div>
           </div>
-      </section>
-  </div>
+      </div>
+  </section>
+
   <%= render partial: 'globals/footer' %>
 </div>
 <% end %>

@@ -63,7 +63,7 @@ var JoinAsMentorForm = React.createClass({
 
         <div className="col-sm-6 col-md-4 auto-margin">
           <div className="form-group form-group-default input-group">
-            <span className="input-group-addon bg-solid-dark text-white">
+            <span className="input-group-addon bg-master text-master">
               http://
             </span>
             <label>Reference website</label>

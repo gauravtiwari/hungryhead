@@ -171,7 +171,7 @@ module Merit
       ##################################################################
       # => Check everytime idea is viewed to grant disrupt badge to IDEA
       # ################################################################
-      grant_on 'ideas#show', badge: 'disrupt', to: :itself do |idea|
+      grant_on 'ideas#show', badge: 'disruptive', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
         days.between?(1, 5) &&

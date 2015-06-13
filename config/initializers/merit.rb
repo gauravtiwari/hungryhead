@@ -153,7 +153,7 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 19,
-  name: "disrupt",
+  name: "disruptive",
   level: "gold",
   description: "Idea with score of 1000 in 5 days",
   custom_fields: { name: "Disruptive", points: 100 }

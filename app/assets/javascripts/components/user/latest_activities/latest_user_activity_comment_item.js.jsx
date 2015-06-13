@@ -11,8 +11,8 @@ var LatestUserActivityCommentItem = React.createClass({
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix">
           <span className="inline text-master">
             <span className="verb">
-              <i className="fa fa-comment"></i> {this.props.item.verb}
-              on a <a onClick={this.loadActivity}>{this.props.item.recipient.recipient_type}</a>
+              <i className="fa fa-comment m-r-5"></i>
+              {this.props.item.verb} on a <a onClick={this.loadActivity}>{this.props.item.recipient.recipient_type}</a>
             </span>
           </span>
         </li>

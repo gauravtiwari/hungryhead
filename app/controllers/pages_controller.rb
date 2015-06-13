@@ -28,6 +28,9 @@ class PagesController < ApplicationController
   def how_it_works
   end
 
+  def product
+  end
+
   def get_started
   end
 

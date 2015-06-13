@@ -15,8 +15,13 @@
         <% end %>
       </li>
       <li class="p-r-15 fs-14 inline font-heading">
+        <%= link_to(product_path) do %>
+          <span class="text-master">Product</span>
+        <% end %>
+      </li>
+      <li class="p-r-15 fs-14 inline font-heading">
         <%= link_to(how_it_works_path) do %>
-          <span class="text-master">How it works? </span>
+          <span class="text-master">How it works </span>
         <% end %>
       </li>
      </ul>
@@ -25,19 +30,11 @@
 
   <div class="pull-right">
     <div class="visible-lg visible-md m-t-10">
+      <div class="pull-left p-t-10  p-r-20 font-heading">
+        <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-master') %>
+      </div>
       <div class="pull-left p-t-5 font-heading">
-        <div class="pull-right">
-          <%= link_to(get_started_path, title: "Find more information", class: "btn btn-master bg-transparent inline") do %>
-            <span class="text-master">Get Started</span>
-          <% end %>
-        </div>
-
-        <div class="pull-right p-r-20">
-          <%= link_to(help_path, title: "Questions?", class: "btn btn-master bg-transparent inline") do %>
-            <span class="text-master">Questions?</span>
-          <% end %>
-        </div>
-
+        <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-master text-master bg-transparent inline') %>
       </div>
     </div>
   </div>

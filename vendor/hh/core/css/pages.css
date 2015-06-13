@@ -2306,6 +2306,14 @@ hr.dotted {
 }
 .font-opensans {
   font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-weight: 300;
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  font-style: normal;
+  white-space: normal;
 }
 .font-georgia {
   font-family: Georgia !important;
@@ -11362,6 +11370,9 @@ Main components
 }
 .b-grey {
   border-color: #e6e6e6;
+}
+.b-lightgrey {
+  border-color: #eee;
 }
 .b-white {
   border-color: #fff;
