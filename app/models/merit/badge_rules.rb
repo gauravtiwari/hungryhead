@@ -76,6 +76,27 @@ module Merit
         Idea.leaderboard.score(vote.votable_id) >= 5
       end
 
+      ##################################################################
+      # Check everytime idea is viewed to grant investable badge to IDEA
+      # ################################################################
+
+      grant_on 'ideas#show', badge: 'investable', to: :itself do |idea|
+        idea.published? &&
+        Idea.leaderboard.score(idea.id) >= 1000
+      end
+
+      grant_on 'comments#create', badge: 'investable', to: :commentable do |comment|
+        comment.commentable_type == "Idea" &&
+        comment.commentable.published? &&
+        Idea.leaderboard.score(comment.commentable_id) >= 1000
+      end
+
+      grant_on 'votes#create', badge: 'investable', to: :votable do |vote|
+        vote.votable_type == "Idea" &&
+        vote.votable.published? &&
+        Idea.leaderboard.score(vote.votable_id) >= 1000
+      end
+
       ################################################################
       # => Check everytime idea is viewed/voted/commented to grant entrepreneur badge
       ################################################################

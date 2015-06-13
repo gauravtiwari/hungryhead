@@ -136,9 +136,17 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
+  id: 15,
+  name: "investable",
+  level: "broze",
+  description: "Idea Score 1000 or more",
+  custom_fields: { name: "Investable", points: 2 }
+)
+
+Merit::Badge.create!(
   id: 17,
   name: "market-fit",
-  level: "silver",
+  level: "broze",
   description: "Idea with score of 500",
   custom_fields: { name: "Product Market Fit", points: 15 }
 )
@@ -220,7 +228,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 28,
   name: "popular-idea",
-  level: "silver",
+  level: "bronze",
   description: "Idea with a score of 5000",
   custom_fields: { name: "Popular Idea" }
 )
