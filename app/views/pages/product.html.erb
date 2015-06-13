@@ -1,0 +1,176 @@
+<%= cache(['beta', 'page', 'v1']) do %>
+<div class="learn-wrapper bg-white">
+  <div class="learn" data-pages="social">
+    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+        <div class="product-photo">
+        <div class="container vmiddle">
+        <div class="col-md-4 p-t-40">
+          <div class="hero-section inner">
+              <h1 class="text-white">
+                Product
+              </h1>
+              <p class="text-white">Understand the core building blocks</p>
+              <div class="btn-box m-t-20">
+                <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
+              </div>
+          </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-nav bg-master-lightest displayblock overflow-hidden p-l-15">
+    <div class="container text-center">
+      <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/about">Community</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Collaboration</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Gamification</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Rewards</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 p-b-65 p-t-55">
+    <div class="container">
+      <div class="md-p-l-20 xs-no-padding clearfix">
+        <div class="col-sm-4 no-padding">
+          <div class="p-r-40 md-pr-30 text-center">
+            <%= image_tag('badges/top_comments.png', class: "m-b-20") %>
+            <h6 class="block-title p-b-5">Collaboration <i class="pg-arrow_right m-l-10"></i></h6>
+            <p class="m-b-30 font-opensans">Awesome notepad app. It gives you a quick and simple notepad editing experience when you write notes.</p>
+          </div>
+          <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
+        </div>
+        <div class="col-sm-4 no-padding">
+          <div class="p-r-40 md-pr-30 text-center">
+            <%= image_tag('badges/welcome.png', class: "m-b-20") %>
+            <h6 class="block-title p-b-5">Community <i class="pg-arrow_right m-l-10"></i></h6>
+            <p class="m-b-30 font-opensans">Quick chat helps you to Keep in touch with your friends and colleagues while working. It has a unique responsive design.</p>
+          </div>
+          <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
+        </div>
+        <div class="col-sm-4 no-padding">
+          <div class="p-r-40 md-pr-30 text-center">
+            <%= image_tag('badges/cup.png', class: "m-b-20") %>
+            <h6 class="block-title p-b-5">Gamification <i class="pg-arrow_right m-l-10"></i></h6>
+            <p class="m-b-30 font-opensans">This is a very young collection of charts, with the goal of keeping these components very customizable.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
+        <div class="row">
+          <div class="col-sm-6">
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md">
+              <%= image_tag('product/comment.png', class: "image-responsive-height pull-right auto-width lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="content-mask-md m-t-40">
+              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
+                <div class="screen">
+                  <div class="iphone-border">
+                    <%= image_tag('product/tag.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
+            <h5 class="block-title hint-text no-margin">Exclusive Community</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+        <div class="row">
+          <div class="col-sm-6">
+            <h5 class="block-title hint-text no-margin">Practical Gamification</h5>
+            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
+            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          </div>
+          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md m-t-40">
+              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
+                <div class="screen">
+                  <div class="iphone-border">
+                    <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <div class="page-wrapper horz-section relative">
+    <section id="cta" class="cta">
+          <div class="cta-overlay">
+              <div class="container">
+                  <div class="wrapper-small p-b-100">
+                      <div class="row">
+                          <div class="col-md-8 col-md-offset-2 text-center">
+                              <%= image_tag('badges/welcome.png') %>
+                              <h1 class="text-white bold m-t-20">Let's get to know each other.</h1>
+                              <p class="fs-16 text-white">Find us on</p>
+                              <div class="social_icons m-t-30">
+                                <i class="fa fa-twitter inline fs-40 text-white"></i>
+                                <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+      </section>
+  </div>
+  <%= render partial: 'globals/footer' %>
+</div>
+<% end %>
+
