@@ -92,8 +92,8 @@ var CardForm = React.createClass({
                                 <span className="help"> e.g. "Programming, Marketing"</span>
                                 <input defaultValue={hobbies} className="string optional form-control hobbie_list three-tags" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" id="user_hobby_list" />
                               </div>
-                            <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
-                            <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>
+                              <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
+                              <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>
                             </div>
                           </form>
                         </div>

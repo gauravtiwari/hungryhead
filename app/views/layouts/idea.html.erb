@@ -59,7 +59,7 @@
 
   <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'no-header menu-behind' %>">
 
-    <div class="<%= user_signed_in? ? 'container' : 'page-container' %>">
+    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
