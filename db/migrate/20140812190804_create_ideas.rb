@@ -28,6 +28,8 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :status, default: 0
       t.integer :privacy, default: 0
 
+      t.boolean :investable, default: false
+
       t.boolean :rules_accepted, index: true, default: false
 
       t.jsonb :settings, default: "{}"

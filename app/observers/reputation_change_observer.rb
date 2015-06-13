@@ -15,6 +15,7 @@ class ReputationChangeObserver
       user = resource
     elsif resource.class.to_s == "Idea"
       user = resource.student
+      resource.update_attribute!(investable: true) if resource.class.leaderboard[resource.id]
     else
       user = resource.user
     end
