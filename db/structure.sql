@@ -477,6 +477,7 @@ CREATE TABLE ideas (
     school_id integer,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
+    investable boolean DEFAULT false,
     rules_accepted boolean DEFAULT false,
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,

@@ -136,7 +136,7 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 15,
+  id: 16,
   name: "investable",
   level: "broze",
   description: "Idea Score 1000 or more",
