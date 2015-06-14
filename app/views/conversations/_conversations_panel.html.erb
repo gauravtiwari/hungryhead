@@ -5,6 +5,7 @@
       <a><i class="fa fa-weixin"></i> Conversations</a>
     </li>
   </ul>
+
   <a class="btn-link quickview-toggle" data-toggle-element="#conversationsPanel" data-toggle="sidePanel"><i class="pg-close text-white"></i></a>
   <!-- Tab panes -->
   <div class="tab-content">
@@ -21,9 +22,9 @@
               <div class="view-heading">
                 Conversations
               </div>
-              <a href="#" class="inline action p-r-10 pull-right link text-master">
-                <i class="pg-more"></i>
-              </a>
+              <%= link_to(conversations_path, class: "inline action p-r-10 pull-right link text-master") do %>
+                All <i class="pg-more"></i>
+              <% end %>
             </div>
           </div>
 
@@ -38,7 +39,7 @@
                 </div>
                 <ul>
                   <li class="conversations-user-list clearfix">
-                    <a  class="" href="<%= conversation_path(conversation.id) %>" data-remote="true">
+                    <a href="<%= conversation_path(conversation.id) %>">
                       <span class="col-xs-height col-middle">
                         <% if conversation.last_message.sender.avatar.present? %>
                           <span class="thumbnail-wrapper d32 circular bg-success">
@@ -64,10 +65,6 @@
             </div>
           <% end %>
         </div>
-        <div class="view conversations-view bg-white clearfix" id="conversation-messages-view">
-
-        </div>
-        <!-- END Conversation View  !-->
       </div>
     </div>
   </div>

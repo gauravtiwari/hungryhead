@@ -129,9 +129,6 @@ var FriendsNotifications = React.createClass({
               <div className="view bg-white">
                 <div className="navbar navbar-default navbar-sm bg-solid">
                   <div className="navbar-inner">
-                    <a href="javascript:;" className="inline action p-l-10 link text-white" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
-                      <i className="pg-more"></i>
-                    </a>
                     <div className="view-heading text-white">
                       Friends Notifications
                     </div>
