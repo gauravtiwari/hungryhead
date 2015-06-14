@@ -39,23 +39,9 @@
     <div class="visible-lg visible-md m-t-10">
       <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-15 p-r-10">
       <li class="p-r-10 inline drop conversation-threads">
-          <div class="dropdown conversation-dropdown">
-          <%= react_component('OpenConversationsThread', {path: recent_conversations_path(box: 'inbox'), unread_messages_count:current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
-            <div class="dropdown-menu notification-toggle right-zero">
-              <div class="notification-panel">
-                <div class="notification-body" id="threads-section">
+        <%= react_component('OpenConversationsThread', {path: recent_conversations_path(box: 'inbox'), unread_messages_count:current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
+      </li>
 
-                </div>
-                <div class="notification-footer text-center">
-                  <a href="#" class="">Read all notifications</a>
-                  <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
-                    <i class="pg-refresh_new"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
         <li class="p-r-10 inline">
           <div class="dropdown notification-dropdown">
           <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.unread_notifications, path: friends_notifications_path, channel_event: "new_friend_notification_item"}) %>

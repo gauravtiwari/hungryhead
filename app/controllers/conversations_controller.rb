@@ -45,11 +45,13 @@ class ConversationsController < ApplicationController
 
   def destroy
     @conversation.move_to_trash(current_user)
+    flash[:success] = "Conversation moved to trash"
     render json: {deleted: true, id: @conversation.id, message: "Conversation moved to trash"}
   end
 
   def restore
     @conversation.untrash(current_user)
+    flash[:success] = "Conversation restored to inbox"
     render json: {restored: true, id: @conversation.id, message: "Conversation restored to inbox"}
   end
 

@@ -73,7 +73,7 @@ var ConversationMeta = React.createClass({
     }
 
     var participants = _.map(this.props.active_conversation.participants, function(participant){
-      return <ConversationParticipant participant={participant} />
+      return <ConversationParticipant participant={participant} key={Math.random()} />
     });
 
     if(this.props.active_conversation.is_trashed) {
@@ -86,7 +86,6 @@ var ConversationMeta = React.createClass({
             {confirm_delete}
           </div>;
     }
-
 
     return (
        <div className="conversation-meta padding-10 clearfix">

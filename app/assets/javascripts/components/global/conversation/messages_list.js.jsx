@@ -3,6 +3,12 @@
  */
 
 var ConversationMessagesList = React.createClass({
+
+  componentDidMount: function() {
+    var newHeight = $("html").height() - 220 + "px";
+    $(".message-box .messages").css("height", newHeight.toString());
+  },
+
   render: function() {
 
     if(this.props.message.sender_avatar) {
@@ -25,7 +31,7 @@ var ConversationMessagesList = React.createClass({
           <span>
             <a href={this.props.message.sender_path}>{this.props.message.sender_name}</a>
           </span>
-          <small className="text-muted clearfix">
+          <small className="text-muted displayblock">
            {moment(this.props.message.created_at).fromNow()}
           </small>
         </div>

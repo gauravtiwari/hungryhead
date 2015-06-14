@@ -9,6 +9,22 @@ var CardForm = React.createClass({
       $('.three-tags').tagsinput({maxTags: 3});
     }
   },
+
+  selectHobbies: function(e){
+    $( e.target).autocomplete({
+      minLength: 0,
+      source: Routes.autocomplete_hobby_name_hobbies_path(),
+      focus: function( event, ui ) {
+        return false;
+      },
+      select: function( event, ui ) {
+        $( "#user_institution_id" ).val( ui.item.id );
+        $( "#autocomplete_hobbies_name" ).val( ui.item.value );
+        return false;
+      }
+    });
+  },
+
   render: function() {
     var cx = React.addons.classSet;
     var markets = this.props.profile.markets.map(function(market){
@@ -90,7 +106,7 @@ var CardForm = React.createClass({
                               <div className="form-group">
                                 <label>Interests/Hobbies</label>
                                 <span className="help"> e.g. "Programming, Marketing"</span>
-                                <input defaultValue={hobbies} className="string optional form-control hobbie_list three-tags" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" id="user_hobby_list" />
+                                <input defaultValue={hobbies} onKeyup={this.selectHobbies} className="string optional form-control" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" id="user_hobby_list" />
                               </div>
                               <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
                               <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>

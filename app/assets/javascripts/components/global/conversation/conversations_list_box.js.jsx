@@ -17,7 +17,13 @@ var ConversationsListBox = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()) {
       this.loadConversations();
+      $(window).resize(this.sizeContent);
     }
+  },
+
+  sizeContent: function() {
+    var newHeight = $("html").height() - 180 + "px";
+    $(".conversations-list").css("height", newHeight.toString());
   },
 
   loadConversations: function(){
@@ -50,6 +56,9 @@ var ConversationsListBox = React.createClass({
     this.setState({
       conversations: new_conversations
     });
+    if(new_conversations.length === 0) {
+      window.location.reload();
+    }
   },
 
   render: function() {
@@ -75,7 +84,7 @@ var ConversationsListBox = React.createClass({
     }
 
     var conversation_active_classes = cx({
-      'conversations-list': true
+      'conversations-list scrollable': true
     });
 
     if(this.state.mailbox === 'trash') {

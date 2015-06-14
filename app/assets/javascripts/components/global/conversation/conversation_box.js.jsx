@@ -19,16 +19,25 @@ var ConversationBox = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.loadConversation();
+      $(window).resize(this.sizeContent);
     }
+  },
+
+  sizeContent: function() {
+    var newHeight = $("html").height() - 220 + "px";
+    $(".message-box .messages").css("height", newHeight.toString());
+    $(".conversations-list").css("height", $("html").height() - 150 + "px");
   },
 
   loadConversation: function(){
     $.ajaxSetup({ cache: false });
+    this.setState({loading: true});
     $.getJSON(this.props.source, function(data, textStatus) {
         this.setState({
           conversations: data.conversations,
           messages: data.messages,
           mailbox: data.mailbox,
+          loading: false,
           recipients_options: data.recipients_options,
           active_conversation: data.active_conversation
         });
@@ -40,13 +49,12 @@ var ConversationBox = React.createClass({
     $(".message-box .messages").slimScroll({destroy: true});
     this.setState({replying: true});
   },
+
   cancelReplying: function(e) {
     e.preventDefault();
     this.setState({replying: false});
-    $('.message-box .messages').slimScroll({
-      height: $(window).height()-220
-    });
   },
+
   handleReplySubmit: function(formdata) {
     this.setState({loading: true});
     $.ajaxSetup({ cache: false });
@@ -54,9 +62,6 @@ var ConversationBox = React.createClass({
       var new_messages = this.state.messages.reverse().concat(data);
       this.setState({messages: new_messages.reverse()});
       this.setState({replying: false, loading: false});
-      $('.message-box .messages').slimScroll({
-        height: $(window).height()-220
-      });
     }.bind(this));
   },
 
@@ -84,35 +89,37 @@ var ConversationBox = React.createClass({
         return <ConversationMessagesList key={message.uuid} message={message} />
       }
     });
+
     var cx = React.addons.classSet;
+
     var messages_active_classes = cx({
       'messages scrollable': true,
       'show': !this.state.replying,
       'hidden': this.state.replying
     });
 
-
-  return (
-    <div className="container p-r-45">
-    <div className="conversation-box panel panel-default">
-      <ConversationHeader mailbox={this.state.mailbox} key={Math.random()} />
-      <div className="col-md-12 conversations-list-box">
-        <div className="col-md-4 conversations-list scrollable">
-          {conversationslist}
-        </div>
-
-        <div className="col-md-8 message-box">
-          <div className="conversation">
-            <ConversationMeta removeConversation={this.removeConversation} key={Math.random()} handleReply={this.handleReply} key={Math.random()} active_conversation={this.state.active_conversation} />
-            <ConversationReplyForm loading={this.state.loading} handleReplySubmit={this.handleReplySubmit} cancelReplying={this.cancelReplying} replying={this.state.replying} active_conversation={this.state.active_conversation} />
-            <div className={messages_active_classes}>
-              {messagesList}
-            </div>
+    return (
+      <div className="container p-r-45">
+        <div className="conversation-box panel panel-default">
+          <ConversationHeader mailbox={this.state.mailbox} key={Math.random()} />
+          <div className="col-md-12 conversations-list-box">
+            <div className="col-md-4 no-padding">
+              <div className="conversations-list scrollable">
+                 {conversationslist}
+               </div>
+             </div>
+             <div className="col-md-8 message-box">
+               <div className="conversation">
+                 <ConversationMeta removeConversation={this.removeConversation} key={Math.random()} handleReply={this.handleReply} key={Math.random()} active_conversation={this.state.active_conversation} />
+                 <ConversationReplyForm loading={this.state.loading} handleReplySubmit={this.handleReplySubmit} cancelReplying={this.cancelReplying} replying={this.state.replying} active_conversation={this.state.active_conversation} />
+                 <div className={messages_active_classes}>
+                   {messagesList}
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
     );
 
   },

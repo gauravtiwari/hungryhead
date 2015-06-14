@@ -1,5 +1,8 @@
 Mailboxer.setup do |config|
 
+  config.notification_mailer = NotificationMailer
+  config.message_mailer = MessageMailer
+
   #Configures if you application uses or not email sending for Notifications and Messages
   config.uses_emails = true
 
@@ -18,7 +21,9 @@ Mailboxer.setup do |config|
   #Configures maximum length of the message subject and body
   config.subject_max_length = 255
   config.body_max_length = 32000
+
   config.custom_deliver_proc = ->(mailer, mailable, recipient) do
     mailer.send_email(mailable, recipient).deliver_later
   end
+
 end

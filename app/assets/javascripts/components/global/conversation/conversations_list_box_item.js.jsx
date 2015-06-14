@@ -25,22 +25,7 @@ var ConversationListBoxItem = React.createClass({
       success: function ( data ) {
         this.setState({deleting: false});
         this.setState({sure: false});
-        if(data.deleted){
-            var options =  {
-              content: data.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
-            this.props.removeConversation(this.props.conversation.id);
-          } else if(data.error) {
-             var options =  {
-              content: data.error.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
-          }
+        this.props.removeConversation(this.props.conversation.id);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -52,21 +37,6 @@ var ConversationListBoxItem = React.createClass({
     $('[data-toggle="tooltip"]').tooltip('destroy');
     $.post(Routes.mark_as_read_conversation_path(this.props.conversation.id), function(data){
       this.setState({is_unread: data.unread});
-      if(data.unread){
-        var options =  {
-          content: "Conversation has marked unread",
-          style: "snackbar", // add a custom class to your snackbar
-          timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-        }
-        $.snackbar(options);
-      } else {
-         var options =  {
-          content: "Conversation has marked read",
-          style: "snackbar", // add a custom class to your snackbar
-          timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-        }
-        $.snackbar(options);
-      }
       $('[data-toggle="tooltip"]').tooltip();
     }.bind(this));
   },
@@ -80,22 +50,7 @@ var ConversationListBoxItem = React.createClass({
       dataType: "json",
       success: function ( data ) {
         this.setState({restoring: false});
-        if(data.restored){
-            var options =  {
-              content: data.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
-            this.props.updateConversations(data.id);
-          } else if(data.error) {
-             var options =  {
-              content: data.error.message,
-              style: "snackbar", // add a custom class to your snackbar
-              timeout: 3000 // time in milliseconds after the snackbar autohides, 0 is disabled
-            }
-            $.snackbar(options);
-          }
+        this.props.updateConversations(data.id);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -141,11 +96,11 @@ var ConversationListBoxItem = React.createClass({
   }
 
   var participantImage = _.map(this.props.conversation.participants, function(participant) {
-    return <ConversationParticipant participant={participant} />;
+    return <ConversationParticipant participant={participant} key={Math.random()} />;
   });
 
   if(this.state.is_unread) {
-    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="p-r-10"><i className="fa fa-check-circled"></i></a>
+    var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as read" onClick={this.markAsRead} className="p-r-10"><i className="fa fa-check-circle"></i></a>
   } else {
     var mark_as_read = <a data-toggle="tooltip" data-placement="top" title="Mark as unread" onClick={this.markAsRead} className="p-r-10"><i className="fa fa-fw fa-circle-o"></i></a>
   }

@@ -23,7 +23,7 @@ var MessageSection = React.createClass({
 
   sizeContent: function() {
       var newHeight = $("html").height() - 103 + "px";
-      $(".chat-inner").css("height", newHeight,toString());
+      $(".chat-inner").css("height", newHeight.toString());
   },
 
   componentDidMount: function() {

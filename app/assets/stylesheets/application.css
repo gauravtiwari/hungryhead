@@ -7,7 +7,6 @@
  *= require jquery-ui/autocomplete
  *= require select2-bootstrap
  *= require plugins/boostrapv3/css/bootstrap.min
- *= require font-awesome
  *= require sweetalert
  *= require chosen
  * require nprogress
@@ -18,6 +17,7 @@
  *= require plugins/jquery-menuclipper/jquery.menuclipper
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min
+ *= require font-awesome
  *= require pnotify
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES

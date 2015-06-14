@@ -12774,6 +12774,10 @@ section.last:before {
     height: auto;
   }
 }
+
+.pull-reset {
+  float: none !important;
+}
 /*** Phones ***/
 @media (max-width: 480px) {
   body {

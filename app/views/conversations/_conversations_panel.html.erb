@@ -1,11 +1,11 @@
 <div id="conversationsPanel" class="quickview-wrapper open" data-pages="quickview">
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs bg-solid auto-margin">
-    <li class="active">
-      <a>Conversations</a>
+  <ul class="nav nav-tabs bg-solid text-center auto-margin">
+    <li class="active pull-reset">
+      <a><i class="fa fa-weixin"></i> Conversations</a>
     </li>
   </ul>
-  <a class="btn-link quickview-toggle" data-toggle-element="#conversationsPanel" data-toggle="sidePanel"><i class="pg-close"></i></a>
+  <a class="btn-link quickview-toggle" data-toggle-element="#conversationsPanel" data-toggle="sidePanel"><i class="pg-close text-white"></i></a>
   <!-- Tab panes -->
   <div class="tab-content">
     <div class="tab-pane fade no-padding in active" id="quickview-conversations">
@@ -14,8 +14,9 @@
         <div class="view bg-white" id="conversations-list-view">
           <div class="navbar navbar-default">
             <div class="navbar-inner">
-              <a href="javascript:;" class="inline action p-l-10 link text-master" data-navigate="view" data-view-port="#conversations" data-view-animation="push-parrallax">
-                <i class="pg-plus"></i>
+              <%= link_to(new_message_path, remote: true, class: "inline action p-l-10 link text-master") do %>
+                <i class="pg-plus"></i> New
+              <% end %>
               </a>
               <div class="view-heading">
                 Conversations
