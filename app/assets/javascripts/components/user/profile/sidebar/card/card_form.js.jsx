@@ -69,22 +69,22 @@ var CardForm = React.createClass({
                               <div className="form-group">
                                   <label>Website url</label>
                                   <span className="help"> e.g. "www.example.com"</span>
-                                  <input className="string form-control" type="text" placeholder="Enter Website url" defaultValue={this.props.profile.website_url}  name="user[website_url]" id="user_website_url" />
+                                  <input className="string form-control" type="url" placeholder="Enter Website url" defaultValue={this.props.profile.website_url}  name="user[website_url]" id="user_website_url" />
                               </div>
                               <div className="form-group">
                                   <label>Linkedin url</label>
                                   <span className="help"> e.g. "www.linkedin.com/john"</span>
-                                  <input className="string form-control" type="text" placeholder="Enter Linkedin url" defaultValue={this.props.profile.linkedin_url}  name="user[linkedin_url]" id="user_linkedin_url" />
+                                  <input className="string form-control" type="url" placeholder="Enter Linkedin url" defaultValue={this.props.profile.linkedin_url}  name="user[linkedin_url]" id="user_linkedin_url" />
                               </div>
                               <div className="form-group">
                                   <label>Facebook url</label>
                                   <span className="help"> e.g. "www.facebook.com/john"</span>
-                                  <input className="string form-control" type="text" placeholder="Enter Facebook url" defaultValue={this.props.profile.facebook_url}  name="user[facebook_url]" id="user_facebook_url" />
+                                  <input className="string form-control" type="url" placeholder="Enter Facebook url" defaultValue={this.props.profile.facebook_url}  name="user[facebook_url]" id="user_facebook_url" />
                               </div>
                               <div className="form-group">
                                   <label>Twitter url</label>
                                   <span className="help"> e.g. "www.twitter.com/john"</span>
-                                  <input className="string form-control" type="text" placeholder="Enter Twitter url" defaultValue={this.props.profile.twitter_url}  name="user[twitter_url]" id="user_twitter_url" />
+                                  <input className="string form-control" type="url" placeholder="Enter Twitter url" defaultValue={this.props.profile.twitter_url}  name="user[twitter_url]" id="user_twitter_url" />
                               </div>
 
                               <div className="form-group">
@@ -109,8 +109,10 @@ var CardForm = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    var formData = $( this.refs.profile_form.getDOMNode() ).serialize();
-    this.props.saveSidebarWidget(formData, this.props.form.action);
+    if($(this.refs.profile_form.getDOMNode()).valid()) {
+      var formData = $( this.refs.profile_form.getDOMNode() ).serialize();
+      this.props.saveSidebarWidget(formData, this.props.form.action);
+    }
   }
 
 });

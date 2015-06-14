@@ -24,6 +24,7 @@ jQuery(document).ready ->
 	$('#feedback_form').validate();
 	$('#edit-profile').validate();
 	$('#pitch_idea_form').validate();
+	$('#editProfileFormPopup').validate();
 	$('#valid-form').validate();
 	$("[data-toggle='tooltip']").tooltip();
 
