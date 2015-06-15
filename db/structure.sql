@@ -1076,40 +1076,6 @@ ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
 
 
 --
--- Name: punches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE punches (
-    id integer NOT NULL,
-    punchable_id integer NOT NULL,
-    punchable_type character varying(20) NOT NULL,
-    starts_at timestamp without time zone NOT NULL,
-    ends_at timestamp without time zone NOT NULL,
-    average_time timestamp without time zone NOT NULL,
-    hits integer DEFAULT 1 NOT NULL
-);
-
-
---
--- Name: punches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE punches_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: punches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE punches_id_seq OWNED BY punches.id;
-
-
---
 -- Name: read_marks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1773,13 +1739,6 @@ ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organization
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY punches ALTER COLUMN id SET DEFAULT nextval('punches_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_seq'::regclass);
 
 
@@ -2082,14 +2041,6 @@ ALTER TABLE ONLY notifications
 
 ALTER TABLE ONLY organizations
     ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
-
-
---
--- Name: punches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY punches
-    ADD CONSTRAINT punches_pkey PRIMARY KEY (id);
 
 
 --
@@ -2693,13 +2644,6 @@ CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
 
 
 --
--- Name: index_punches_on_average_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_punches_on_average_time ON punches USING btree (average_time);
-
-
---
 -- Name: index_read_marks_on_user_id_and_readable_type_and_readable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2952,13 +2896,6 @@ CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_
 
 
 --
--- Name: punchable_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX punchable_index ON punches USING btree (punchable_type, punchable_id);
-
-
---
 -- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3095,8 +3032,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150317220155');
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150421231158');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 
