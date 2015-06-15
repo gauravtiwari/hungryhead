@@ -525,7 +525,7 @@ CREATE TABLE impressions (
     user_id integer NOT NULL,
     controller_name character varying,
     action_name character varying,
-    referre json,
+    referrer character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

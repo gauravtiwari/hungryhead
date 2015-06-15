@@ -6,7 +6,7 @@ class CreateImpressions < ActiveRecord::Migration
       t.integer :user_id, null: false
       t.string :controller_name
       t.string :action_name
-      t.json :referre
+      t.string :referrer
       t.timestamps null: false
     end
     add_index :impressions, :impressionable_type
