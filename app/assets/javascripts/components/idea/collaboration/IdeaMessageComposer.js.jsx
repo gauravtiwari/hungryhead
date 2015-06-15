@@ -48,7 +48,7 @@ var IdeaMessageComposer = React.createClass({
       var text = this.refs.body.getDOMNode().value.trim();
       if (text) {
          var formData = $( this.refs.form.getDOMNode() ).serialize();
-        this.props.onMessageSubmit(formData, this.props.form.action, {body: text});
+        this.props.onMessageSubmit(formData, this.props.form.action, text);
       }
       this.setState({text: ''});
   }

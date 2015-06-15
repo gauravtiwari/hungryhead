@@ -171,6 +171,16 @@ var CollaborationBox = React.createClass({
   },
 
   handleMessageSubmit: function ( formData, action, body ) {
+    message = {
+      body: body,
+      uuid: Math.random(),
+      user_id: window.currentUser.id,
+      user_name: window.currentUser.name,
+      user_avatar: window.currentUser.avatar,
+      user_name_badge: window.currentUser.user_name_badge
+    }
+    var new_message = this.state.messages.concat(message);
+    this.setState({messages: new_message});
     this.setState({loading: true});
     $.ajaxSetup({ cache: false });
     $.ajax({

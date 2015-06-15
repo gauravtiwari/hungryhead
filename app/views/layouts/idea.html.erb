@@ -74,5 +74,10 @@
     </div>
 
   </body>
+  <% if user_signed_in? && policy(@idea).collaborator? %>
+    <div class="idea-collaboration-floating-panel">
+      <%= render 'collaboration' %>
+    </div>
+  <% end %>
 
 </html>

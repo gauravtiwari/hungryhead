@@ -7,7 +7,7 @@ var MessageSection = React.createClass({
     if(this.props.messages) {
       var messages = this.props.messages;
       var messageListItems = this.props.messages.map(function(message){
-      return <MessageListItem message= {message} key={message.uuid} />
+        return <MessageListItem message= {message} key={message.uuid} />
       });
     }
 

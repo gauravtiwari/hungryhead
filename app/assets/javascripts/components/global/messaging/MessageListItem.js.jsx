@@ -14,6 +14,7 @@ var SetIntervalMixin = {
 };
 
 var MessageListItem = React.createClass({
+
   mixins: [SetIntervalMixin],
   componentDidMount: function() {
     var interval = this.props.message.created_at || 60000;
@@ -54,7 +55,7 @@ var MessageListItem = React.createClass({
     }
     return (
       <div className="message clearfix">
-      {message}
+        {message}
       </div>
     );
   }
