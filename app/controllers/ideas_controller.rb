@@ -6,7 +6,7 @@ class IdeasController < ApplicationController
 
   #Pundit authorization
   after_action :verify_authorized, except: [:index, :popular, :trending, :latest]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from Pundit::NotAuthorizedError, with: :idea_not_authorized
 
   #Set layout
   layout "idea"
@@ -176,6 +176,15 @@ class IdeasController < ApplicationController
   end
 
   private
+
+  #Error message if user not authorised
+  def idea_not_authorized
+    if request.xhr?
+      render json: {error: "Not found"}, :status => 404
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
 
   def publish_idea_service
     @publish_idea_service ||= PublishIdeaService.new(@idea, current_user)

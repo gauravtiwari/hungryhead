@@ -22,6 +22,10 @@ class StudentPolicy < ApplicationPolicy
     current_user == record
   end
 
+  def card?
+    show?
+  end
+
   def publish?
   	current_user == record
   end

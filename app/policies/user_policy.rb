@@ -1,4 +1,5 @@
 class UserPolicy < ApplicationPolicy
+
   def index?
   	current_user == record
   end
@@ -22,11 +23,16 @@ class UserPolicy < ApplicationPolicy
     current_user == record
   end
 
+  def card?
+    show?
+  end
+
   def publish?
   	current_user == record
   end
   def show?   ; record.published?  end
   def create? ; current_user == record; end
   def destroy?; current_user == record; end
+
 end
 
