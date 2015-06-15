@@ -32,6 +32,10 @@ json.user do
 			json.tag tag
 			json.url tag_people_path(tag: tag.parameterize)
 		end
+		json.skills @user.skill_list.each do |tag|
+			json.tag tag
+			json.url tag_people_path(tag: tag.parameterize)
+		end
 		json.markets @user.market_list.each do |tag|
 			json.tag tag
 			json.url tag_people_path(tag: tag.parameterize)

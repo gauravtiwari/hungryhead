@@ -24,6 +24,7 @@ var CardForm = React.createClass({
       this.selectHobbies();
       this.selectLocations();
       this.selectMarkets();
+      this.selectSkills();
     }
   },
 
@@ -174,6 +175,55 @@ var CardForm = React.createClass({
     })(this));
   },
 
+  selectSkills: function(e){
+    var $skillsSelect = $('#skills_select');
+    var self = this;
+    $skillsSelect.each((function(_this) {
+      return function(i, e) {
+        var select;
+        select = $(e);
+        return $(select).select2({
+          minimumInputLength: 2,
+          placeholder: select.data('placeholder'),
+          tags: true,
+          maximumSelectionSize: 3,
+          ajax: {
+            url: Routes.autocomplete_skill_name_skills_path(),
+            dataType: 'json',
+            type: 'GET',
+            cache: true,
+            quietMillis: 50,
+            data: function(term) {
+              return {
+                term: term
+              };
+            },
+            results: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return {
+                    text: item.label,
+                    value: item.value,
+                    id: item.id
+                  };
+                })
+              };
+            }
+          },
+          id: function(object) {
+            return object.text;
+          },
+          initSelection: function (element, callback) {
+            var skills = self.props.profile.skills.map(function(skill){
+              return {id: Math.random(), text: skill.tag}
+            });
+            callback(skills);
+          }
+        });
+      };
+    })(this));
+  },
+
   render: function() {
     var cx = React.addons.classSet;
     var markets = this.props.profile.markets.map(function(market){
@@ -182,6 +232,10 @@ var CardForm = React.createClass({
 
     var hobbies = this.props.profile.hobbies.map(function(hobby){
       return hobby.tag
+    });
+
+    var skills = this.props.profile.skills.map(function(skill){
+      return skill.tag
     });
 
     var loadingClass = cx({
@@ -254,8 +308,14 @@ var CardForm = React.createClass({
 
                               <div className="form-group">
                                 <label>Interests/Hobbies</label>
-                                <span className="help"> e.g. "Programming, Marketing"</span>
+                                <span className="help"> e.g. "Games, Football"</span>
                                 <input defaultValue={hobbies} autoComplete="off" id="hobbies_select" className="string optional form-control" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" />
+                              </div>
+
+                              <div className="form-group">
+                                <label>Skills</label>
+                                <span className="help"> e.g. "Programming, Marketing"</span>
+                                <input defaultValue={skills} autoComplete="off" id="skills_select" className="string optional form-control" placeholder="What skills do you have?" type="text" name="user[skill_list]" />
                               </div>
                               <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
                               <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>

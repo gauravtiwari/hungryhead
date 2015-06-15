@@ -131,6 +131,11 @@ Rails.application.routes.draw do
     get :autocomplete_hobby_name, :on => :collection
   end
 
+  #Skill autocomplete system
+  resources :skills, only: [:index] do
+    get :autocomplete_skill_name, :on => :collection
+  end
+
   #markets autocomplete system
   resources :markets, only: [:index] do
     get :autocomplete_market_name, :on => :collection

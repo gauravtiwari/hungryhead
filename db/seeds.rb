@@ -30,9 +30,10 @@
 	end
 
 
-	skill = File.read("#{Rails.root}/dump-data/skills.json")
+	skills = File.read("#{Rails.root}/dump-data/skills.json")
 
-	data_hash = JSON.parse(markets)
+	data_hash = JSON.parse(skills)
+
 	Skill.destroy_all
 	data_hash.each do |tag|
 		if Skill.find_by_slug("#{tag.parameterize}").blank?
