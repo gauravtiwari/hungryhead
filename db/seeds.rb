@@ -29,6 +29,18 @@
 		end
 	end
 
+
+	skill = File.read("#{Rails.root}/dump-data/skills.json")
+
+	data_hash = JSON.parse(markets)
+	Skill.destroy_all
+	data_hash.each do |tag|
+		if Skill.find_by_slug("#{tag.parameterize}").blank?
+			Skill.new(name: tag, description: tag, description: tag).save
+		end
+	end
+
+
 	locations = File.read("#{Rails.root}/dump-data/locations.json")
 
 	data_hash = JSON.parse(locations)

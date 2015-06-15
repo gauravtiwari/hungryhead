@@ -1142,37 +1142,6 @@ ALTER SEQUENCE read_marks_id_seq OWNED BY read_marks.id;
 
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE roles (
-    id integer NOT NULL,
-    name character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE roles_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
-
-
---
 -- Name: sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1249,6 +1218,39 @@ CREATE SEQUENCE schools_id_seq
 --
 
 ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
+
+
+--
+-- Name: skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE skills (
+    id integer NOT NULL,
+    name character varying,
+    slug character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE skills_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE skills_id_seq OWNED BY skills.id;
 
 
 --
@@ -1785,13 +1787,6 @@ ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::regclass);
 
 
@@ -1800,6 +1795,13 @@ ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::reg
 --
 
 ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skills ALTER COLUMN id SET DEFAULT nextval('skills_id_seq'::regclass);
 
 
 --
@@ -2099,14 +2101,6 @@ ALTER TABLE ONLY read_marks
 
 
 --
--- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY roles
-    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
-
-
---
 -- Name: sashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2120,6 +2114,14 @@ ALTER TABLE ONLY sashes
 
 ALTER TABLE ONLY schools
     ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: skills_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY skills
+    ADD CONSTRAINT skills_pkey PRIMARY KEY (id);
 
 
 --
@@ -2726,6 +2728,13 @@ CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
 
 
 --
+-- Name: index_skills_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_skills_on_slug ON skills USING btree (slug);
+
+
+--
 -- Name: index_slugs_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3075,6 +3084,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150312183534');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183535');
 
+INSERT INTO schema_migrations (version) VALUES ('20150312183540');
+
 INSERT INTO schema_migrations (version) VALUES ('20150312183545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
@@ -3106,8 +3117,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150605120916');
 INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
-
-INSERT INTO schema_migrations (version) VALUES ('20150611085138');
 
 INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 
