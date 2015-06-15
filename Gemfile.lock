@@ -375,7 +375,7 @@ GEM
       loofah (>= 2.0)
       nokogiri (~> 1.6)
     ipaddress (0.8.0)
-    jbuilder (2.2.16)
+    jbuilder (2.3.0)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-atwho-rails (1.1.0)
