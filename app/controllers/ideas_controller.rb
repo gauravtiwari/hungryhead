@@ -194,7 +194,7 @@ class IdeasController < ApplicationController
 
   #Views tracking for idea
   def track_views
-    unless session[track_key] && @idea.student != current_user
+    unless session[track_key] && @idea.student == current_user
       session[track_key] = true
       Idea.trending.increment(@idea.id)
       @idea.views_counter.increment
@@ -203,7 +203,7 @@ class IdeasController < ApplicationController
   end
 
   def track_key
-    ('Idea-' + @idea.id + '-visited-by-' + current_user.id).to_sym
+    ('Idea-' + @idea.id + '-visited-by-').to_sym
   end
 
   # WhiteListed Params

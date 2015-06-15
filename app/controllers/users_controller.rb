@@ -184,7 +184,7 @@ class UsersController < ApplicationController
 
   #Views tracking for idea
   def track_views
-    unless session[track_key] && @user != current_user
+    unless session[track_key] && @user == current_user
       session[track_key] = true
       User.trending.increment(@user.id)
       @user.views_counter.increment
@@ -193,7 +193,7 @@ class UsersController < ApplicationController
   end
 
   def track_key
-    ('User-' + @user.id + '-visited-by-' + current_user.id).to_sym
+    ("User-" + "#{@user.id}" + "-visited-by-" + "#{current_user.id}").to_sym
   end
 
   # Use callbacks to share common setup or constraints between actions.
