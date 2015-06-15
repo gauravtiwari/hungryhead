@@ -11,7 +11,7 @@ class CreateImpressions < ActiveRecord::Migration
     end
     add_index :impressions, :impressionable_type
     add_index :impressions, :impressionable_id
-    add_index :impressions, :ip_address, unique: true
+    add_index :impressions, :ip_address
     add_index :impressions, :user_id
   end
 end

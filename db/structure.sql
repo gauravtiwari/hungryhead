@@ -2500,7 +2500,7 @@ CREATE INDEX index_impressions_on_impressionable_type ON impressions USING btree
 -- Name: index_impressions_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_impressions_on_ip_address ON impressions USING btree (ip_address);
+CREATE INDEX index_impressions_on_ip_address ON impressions USING btree (ip_address);
 
 
 --
