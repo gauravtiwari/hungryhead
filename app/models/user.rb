@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   include Commenter
   include Voter
   include Activist
+  include Impressionable
+  include Impressioner
 
   attr_accessor :login
   attr_reader :raw_invitation_token

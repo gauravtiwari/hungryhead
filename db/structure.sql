@@ -514,6 +514,43 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 
 
 --
+-- Name: impressions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE impressions (
+    id integer NOT NULL,
+    impressionable_id integer NOT NULL,
+    impressionable_type character varying NOT NULL,
+    ip_address character varying NOT NULL,
+    user_id integer NOT NULL,
+    controller_name character varying,
+    action_name character varying,
+    referre json,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: impressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE impressions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: impressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE impressions_id_seq OWNED BY impressions.id;
+
+
+--
 -- Name: investments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1622,6 +1659,13 @@ ALTER TABLE ONLY ideas ALTER COLUMN id SET DEFAULT nextval('ideas_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY impressions ALTER COLUMN id SET DEFAULT nextval('impressions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY investments ALTER COLUMN id SET DEFAULT nextval('investments_id_seq'::regclass);
 
 
@@ -1908,6 +1952,14 @@ ALTER TABLE ONLY idea_messages
 
 ALTER TABLE ONLY ideas
     ADD CONSTRAINT ideas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY impressions
+    ADD CONSTRAINT impressions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2426,6 +2478,34 @@ CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
 --
 
 CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
+
+
+--
+-- Name: index_impressions_on_impressionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_impressionable_id ON impressions USING btree (impressionable_id);
+
+
+--
+-- Name: index_impressions_on_impressionable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_impressionable_type ON impressions USING btree (impressionable_type);
+
+
+--
+-- Name: index_impressions_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_impressions_on_ip_address ON impressions USING btree (ip_address);
+
+
+--
+-- Name: index_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_user_id ON impressions USING btree (user_id);
 
 
 --
@@ -3028,4 +3108,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 
 INSERT INTO schema_migrations (version) VALUES ('20150611085138');
+
+INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 

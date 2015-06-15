@@ -21,6 +21,8 @@ class Idea < ActiveRecord::Base
   include Scorable
   include Investable
   include Feedbackable
+  include Impressionable
+
 
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
