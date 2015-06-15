@@ -20,9 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    track_views
-    @idea.views_counter.increment if @idea.student != current_user
-    @idea.touch
+    PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.student == current_user
   end
 
   def roles
@@ -190,20 +188,6 @@ class IdeasController < ApplicationController
     @idea = Idea.friendly.find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
-  end
-
-  #Views tracking for idea
-  def track_views
-    unless session[track_key] && @idea.student == current_user
-      session[track_key] = true
-      Idea.trending.increment(@idea.id)
-      @idea.views_counter.increment
-      PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
-    end
-  end
-
-  def track_key
-    ('Idea-' + @idea.id + '-visited-by-').to_sym
   end
 
   # WhiteListed Params

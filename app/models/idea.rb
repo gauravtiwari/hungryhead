@@ -23,7 +23,6 @@ class Idea < ActiveRecord::Base
   include Feedbackable
   include Impressionable
 
-
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund

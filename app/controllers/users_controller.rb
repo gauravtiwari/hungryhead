@@ -45,8 +45,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    track_views
-    @user.touch
+    PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip) unless @user == current_user
     respond_to do |format|
       format.html
       format.json
@@ -180,20 +179,6 @@ class UsersController < ApplicationController
   def user_not_authorized
     flash[:error] = "You are not authorized to perform this action."
     render json: {error: "You are not authorized to perform this action"}
-  end
-
-  #Views tracking for idea
-  def track_views
-    unless session[track_key] && @user == current_user
-      session[track_key] = true
-      User.trending.increment(@user.id)
-      @user.views_counter.increment
-      PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip)
-    end
-  end
-
-  def track_key
-    ("User-" + "#{@user.id}" + "-visited-by-" + "#{current_user.id}").to_sym
   end
 
   # Use callbacks to share common setup or constraints between actions.
