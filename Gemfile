@@ -143,6 +143,7 @@ gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 gem 'redis-session-store'
+gem 'redis-namespace'
 
 #Connection pool
 gem 'connection_pool'

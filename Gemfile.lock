@@ -799,6 +799,7 @@ DEPENDENCIES
   rbeautify
   react-rails (~> 1.0)
   redis
+  redis-namespace
   redis-objects
   redis-session-store
   responders
