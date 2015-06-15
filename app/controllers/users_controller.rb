@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
+
   before_filter :authenticate_user!, except: [:check_username, :check_email, :join]
   before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
   before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :only => [:update, :edit, :show]
+  after_action :verify_authorized, :except => [:check_username, :check_email, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
+
   autocomplete :user, :name, :full => true
 
   def index
@@ -69,6 +71,7 @@ class UsersController < ApplicationController
       InviteMailer.invite_friends(@user, current_user).deliver  if @user.errors.empty?
       invited << u[0] if u[0].present?
     end
+
     if @user.errors.empty?
       render json: {
         invited: true,
@@ -82,6 +85,7 @@ class UsersController < ApplicationController
         status: :created
       }
     end
+
   end
 
   def update

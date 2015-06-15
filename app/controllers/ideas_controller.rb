@@ -140,26 +140,29 @@ class IdeasController < ApplicationController
   # POST /ideas
   # POST /ideas.json
   def create
+
     @idea = Idea.new(idea_params)
     @idea.update_attributes(student_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
+
     if @idea.save
       render json: {status: :created, location_url: idea_path(@idea)}
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
+
   end
 
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
-      authorize @idea
-      if @idea.update(idea_params)
-        team = @idea.team_ids.join('')
-        Pusher.trigger_async("presence-idea-collaboration-#{team}", "idea_update_#{@idea.id}", {id: @idea.id, data: render(template: 'ideas/show')}.to_json)
-      else
-        render json: @idea.errors, status: :unprocessable_entity
-      end
+    authorize @idea
+    if @idea.update(idea_params)
+      team = @idea.team_ids.join('')
+      Pusher.trigger_async("presence-idea-collaboration-#{team}", "idea_update_#{@idea.id}", {id: @idea.id, data: render(template: 'ideas/show')}.to_json)
+    else
+      render json: @idea.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /ideas/1
