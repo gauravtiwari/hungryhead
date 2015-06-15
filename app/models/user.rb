@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   #Tagging System
-  acts_as_taggable_on :hobbies, :locations, :subjects, :markets
+  acts_as_taggable_on :hobbies, :locations, :subjects, :markets, :skills
   acts_as_tagger
 
   #Sorted set to store followers, followings ids and latest activities
