@@ -193,7 +193,7 @@ class UsersController < ApplicationController
   end
 
   def track_key
-    (user_url(@user) + '-visited').to_sym
+    ('User-' + @user.id + '-visited-by-' + current_user.id).to_sym
   end
 
   # Use callbacks to share common setup or constraints between actions.

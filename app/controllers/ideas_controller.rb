@@ -203,7 +203,7 @@ class IdeasController < ApplicationController
   end
 
   def track_key
-    (idea_url(@idea) + '-visited').to_sym
+    ('Idea-' + @idea.id + '-visited-by-' + current_user.id).to_sym
   end
 
   # WhiteListed Params
