@@ -23,12 +23,6 @@ class IdeasController < ApplicationController
     PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.student == current_user
   end
 
-  def roles
-    @roles = ["Mentor", "My School", "Friends", "Peers", "Public"]
-    render json: @roles
-  end
-
-
   #Get idea card
   #GET /idea/1/card
   def card

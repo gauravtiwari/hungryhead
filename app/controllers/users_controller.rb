@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :only => [:update, :edit]
+  after_action :verify_authorized, :only => [:update, :edit, :show]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    authorize @user
     PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip) unless @user == current_user
     respond_to do |format|
       format.html
@@ -177,8 +178,11 @@ class UsersController < ApplicationController
 
   #Error message if user not authorised
   def user_not_authorized
-    flash[:error] = "You are not authorized to perform this action."
-    render json: {error: "You are not authorized to perform this action"}
+    if request.xhr?
+      render json: {error: "Not found"}, :status => 404
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
