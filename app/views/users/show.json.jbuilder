@@ -28,6 +28,10 @@ json.user do
 		json.linkedin_url url_with_protocol(@user.linkedin_url)
 		json.twitter_url url_with_protocol(@user.twitter_url)
 		json.location_name @user.location_list.first if @user.location_list
+		json.locations @user.location_list.each do |tag|
+			json.tag tag
+			json.url tag_people_path(tag: tag.parameterize)
+		end
 		json.markets @user.market_list.each do |tag|
 			json.tag tag
 			json.url tag_people_path(tag: tag.parameterize)

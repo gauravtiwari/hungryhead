@@ -3,26 +3,175 @@
 
 var CardForm = React.createClass({
 
+  getInitialState: function() {
+    return {
+      loading: false
+      }
+  },
+
   componentDidMount: function() {
     if(this.isMounted()){
+      $.pubsub('subscribe', 'sidebar_widget_saving', function(msg, data){
+        this.setState({loading: data});
+      }.bind(this));
+
+      $("#editProfileFormPopup").on("hidden.bs.modal", function (e) {
+        $('#edit_profile_form_modal').remove();
+      });
+
       $('.single-tag').tagsinput({maxTags: 1});
       $('.three-tags').tagsinput({maxTags: 3});
+      this.selectHobbies();
+      this.selectLocations();
+      this.selectMarkets();
     }
   },
 
   selectHobbies: function(e){
-    $( e.target).autocomplete({
-      minLength: 0,
-      source: Routes.autocomplete_hobby_name_hobbies_path(),
-      focus: function( event, ui ) {
-        return false;
-      },
-      select: function( event, ui ) {
-        $( "#user_institution_id" ).val( ui.item.id );
-        $( "#autocomplete_hobbies_name" ).val( ui.item.value );
-        return false;
-      }
-    });
+    var $hobbiesSelect = $('#hobbies_select');
+    var self = this;
+    $hobbiesSelect.each((function(_this) {
+      return function(i, e) {
+        var select;
+        select = $(e);
+        return $(select).select2({
+          minimumInputLength: 2,
+          placeholder: select.data('placeholder'),
+          tags: true,
+          maximumSelectionSize: 3,
+          ajax: {
+            url: Routes.autocomplete_hobby_name_hobbies_path(),
+            dataType: 'json',
+            type: 'GET',
+            cache: true,
+            quietMillis: 50,
+            data: function(term) {
+              return {
+                term: term
+              };
+            },
+            results: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return {
+                    text: item.label,
+                    value: item.value,
+                    id: item.id
+                  };
+                })
+              };
+            }
+          },
+          id: function(object) {
+            return object.text;
+          },
+          initSelection: function (element, callback) {
+            var hobbies = self.props.profile.hobbies.map(function(hobby){
+              return {id: Math.random(), text: hobby.tag}
+            });
+            callback(hobbies);
+          }
+        });
+      };
+    })(this));
+  },
+
+  selectLocations: function(e){
+    var $locationsSelect = $('#locations_select');
+    var self = this;
+    $locationsSelect.each((function(_this) {
+      return function(i, e) {
+        var select;
+        select = $(e);
+        return $(select).select2({
+          minimumInputLength: 2,
+          placeholder: select.data('placeholder'),
+          tags: true,
+          maximumSelectionSize: 1,
+          ajax: {
+            url: Routes.autocomplete_location_name_locations_path(),
+            dataType: 'json',
+            type: 'GET',
+            cache: true,
+            quietMillis: 50,
+            data: function(term) {
+              return {
+                term: term
+              };
+            },
+            results: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return {
+                    text: item.label,
+                    value: item.value,
+                    id: item.id
+                  };
+                })
+              };
+            }
+          },
+          id: function(object) {
+            return object.text;
+          },
+          initSelection: function (element, callback) {
+            var locations = self.props.profile.locations.map(function(location){
+              return {id: Math.random(), text: location.tag}
+            });
+            callback(locations);
+          }
+        });
+      };
+    })(this));
+  },
+
+  selectMarkets: function(e){
+    var $marketsSelect = $('#markets_select');
+    var self = this;
+    $marketsSelect.each((function(_this) {
+      return function(i, e) {
+        var select;
+        select = $(e);
+        return $(select).select2({
+          minimumInputLength: 2,
+          placeholder: select.data('placeholder'),
+          tags: true,
+          maximumSelectionSize: 3,
+          ajax: {
+            url: Routes.autocomplete_market_name_markets_path(),
+            dataType: 'json',
+            type: 'GET',
+            cache: true,
+            quietMillis: 50,
+            data: function(term) {
+              return {
+                term: term
+              };
+            },
+            results: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return {
+                    text: item.label,
+                    value: item.value,
+                    id: item.id
+                  };
+                })
+              };
+            }
+          },
+          id: function(object) {
+            return object.text;
+          },
+          initSelection: function (element, callback) {
+            var markets = self.props.profile.markets.map(function(market){
+              return {id: Math.random(), text: market.tag}
+            });
+            callback(markets);
+          }
+        });
+      };
+    })(this));
   },
 
   render: function() {
@@ -36,7 +185,7 @@ var CardForm = React.createClass({
     });
 
     var loadingClass = cx({
-      'fa fa-spinner fa-spin': this.props.loading
+      'fa fa-spinner fa-spin': this.state.loading
     });
 
     return(
@@ -73,12 +222,12 @@ var CardForm = React.createClass({
                               <div className="form-group">
                                 <label>Location you are based</label>
                                 <span className="help"> e.g. "Lancaster"</span>
-                                <input defaultValue={this.props.profile.location_name} className="string optional location_list single-tag" placeholder="Location where you are based?" type="text" name="user[location_list]" id="user_location_list" />
+                                <input defaultValue={this.props.profile.location_name} className="string optional location_list" placeholder="Location where you are based?" type="text" name="user[location_list]" id="locations_select" />
                               </div>
                               <div className="form-group">
                                 <label>Markets interested</label>
                                 <span className="help"> e.g. "Ecommerce, SASS"</span>
-                                <input defaultValue={markets} className="string optional form-control market_list three-tags" placeholder="Which markets interests you?" type="text" name="user[market_list]" id="user_market_list" />
+                                <input defaultValue={markets} className="string optional form-control market_list" placeholder="Which markets interests you?" type="text" name="user[market_list]" id="markets_select" />
                               </div>
                             </div>
                             <div className="col-md-6">
@@ -106,7 +255,7 @@ var CardForm = React.createClass({
                               <div className="form-group">
                                 <label>Interests/Hobbies</label>
                                 <span className="help"> e.g. "Programming, Marketing"</span>
-                                <input defaultValue={hobbies} onKeyup={this.selectHobbies} className="string optional form-control" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" id="user_hobby_list" />
+                                <input defaultValue={hobbies} autoComplete="off" id="hobbies_select" className="string optional form-control" placeholder="Which hobbies or interests you have?" type="text" name="user[hobby_list]" />
                               </div>
                               <button name="commit" className="btn btn-success btn-cons pull-right"><i className={loadingClass}></i> Save</button>
                               <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-cons pull-right">Cancel</a>

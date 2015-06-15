@@ -13,6 +13,7 @@ var Card = React.createClass({
   },
 
   saveSidebarWidget:function(formData, action) {
+    $.pubsub('publish', 'sidebar_widget_saving', true);
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
@@ -23,6 +24,7 @@ var Card = React.createClass({
         this.setState({profile: data.user.profile});
         $('#editProfileFormPopup').modal('hide');
         $('body').pgNotification({style: "simple", message: "Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
+        $.pubsub('publish', 'sidebar_widget_saving', false);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());

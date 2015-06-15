@@ -25,6 +25,7 @@ module HungryheadSchoolApp
     # config.time_zone = 'Central Time (US & Canada)'
 
     config.assets.paths << File.join(Rails.root, "/vendor/hh")
+    config.assets.paths << File.join(Rails.root, "/vendor/assets")
 
     config.autoload_paths += Dir["#{config.root}/app/models/*"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/*"]

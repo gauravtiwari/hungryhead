@@ -70,9 +70,9 @@ var CardContent = React.createClass({
 
     return(
         <div className={classes}>
-            <a onClick={this.props.openForm} className="pull-right pointer displayblock text-white">{this.props.text}</a>
             <div className="container-xs-height">
                 <div className="row text-center">
+                <a onClick={this.props.openForm} className="pull-right pointer p-r-20 displayblock text-white">{this.props.text}</a>
                   <div className="user-profile auto-margin">
                       <div className="thumbnail-wrapper d100 circular bordered b-white">
                           <div className="profile-avatar">
