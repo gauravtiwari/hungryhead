@@ -19,6 +19,9 @@
   right: -90%;
   padding: 0;
 }
+.conversations-user-list.unread {
+  background-color: #fafafa;
+}
 .message-list, .thread-list {
   font-size: 14px;
   margin: 0;

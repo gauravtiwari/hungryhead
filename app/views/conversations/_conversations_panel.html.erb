@@ -31,14 +31,11 @@
           <% if @conversations.empty? %>
             <div class="no-content hint-text">No conversations</div>
           <% else %>
-            <div data-init-list-view="ioslist" class="list-view boreded no-top-border">
+            <div class="list-view boreded no-top-border">
               <% @conversations.each do |conversation| %>
-              <div class="list-view-group-container">
-                <div class="list-view-group-header text-uppercase">
-                  <%= conversation.last_message.sender.name.first %>
-                </div>
+              <div class="list-view-group-container no-padding">
                 <ul>
-                  <li class="conversations-user-list clearfix">
+                  <li class="conversations-user-list clearfix <%= conversation.is_unread?(current_user) ? 'unread' : 'read' %>">
                     <a href="<%= conversation_path(conversation.id) %>">
                       <span class="col-xs-height col-middle">
                         <% if conversation.last_message.sender.avatar.present? %>
@@ -55,6 +52,9 @@
                       </span>
                       <p class="p-l-10 col-xs-height col-middle col-xs-12">
                         <span class="text-master"><%= conversation.last_message.sender.name %></span>
+                        <% if conversation.is_unread?(current_user) %>
+                          <span class="text-danger inline fs-11 m-l-10">New</span>
+                        <% end %>
                         <span class="block text-master hint-text fs-12"><%= truncate(conversation.last_message.body, length: 50) %></span>
                       </p>
                     </a>
