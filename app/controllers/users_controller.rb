@@ -153,6 +153,7 @@ class UsersController < ApplicationController
   end
 
   def activities
+    authorize @user
     @activities = Activity
     .where(user_id: @user.id)
     .order(created_at: :desc)
@@ -164,6 +165,7 @@ class UsersController < ApplicationController
   end
 
   def activity
+    authorize @user
     @activity = @user.activities.find(params[:id])
     respond_to do |format|
       format.js

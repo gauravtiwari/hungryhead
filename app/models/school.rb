@@ -10,6 +10,7 @@ class School < ActiveRecord::Base
 	#Relationship
 	has_many :users
 	has_many :ideas
+	belongs_to :admin, class_name: 'User', foreign_key: "admin_id"
 
 	acts_as_taggable_on :locations
 

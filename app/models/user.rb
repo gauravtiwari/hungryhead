@@ -141,6 +141,10 @@ class User < ActiveRecord::Base
     true
   end
 
+  def school_owner?
+    school_admin?
+  end
+
   def after_password_reset; end
 
   def joined_within_a_year?

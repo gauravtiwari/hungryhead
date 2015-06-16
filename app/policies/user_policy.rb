@@ -27,6 +27,10 @@ class UserPolicy < ApplicationPolicy
     show?
   end
 
+  def activities?
+    show?
+  end
+
   def publish?
   	current_user == record
   end

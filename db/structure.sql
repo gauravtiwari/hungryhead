@@ -1163,7 +1163,8 @@ CREATE TABLE schools (
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    admin_id integer DEFAULT 1 NOT NULL
 );
 
 
@@ -2651,6 +2652,13 @@ CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON re
 
 
 --
+-- Name: index_schools_on_admin_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_admin_id ON schools USING btree (admin_id);
+
+
+--
 -- Name: index_schools_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3054,4 +3062,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 
 INSERT INTO schema_migrations (version) VALUES ('20150615210512');
+
+INSERT INTO schema_migrations (version) VALUES ('20150616132242');
 
