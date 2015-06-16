@@ -392,8 +392,8 @@ var CardForm = React.createClass({
                             <div className="col-md-6">
 
                               <div className="form-group">
-                                <label>Education</label>
-                                <span className="help"> e.g. "Lancaster"</span>
+                                <label>Education/Subjects Studied</label>
+                                <span className="help"> e.g. "Computer Science, Marketing"</span>
                                 <input defaultValue={subjects} className="form-control string optional location_list full-width" data-placeholder="Subjects you have studied?" type="text" name="user[subject_list]" id="subjects_select" />
                               </div>
 

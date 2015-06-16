@@ -1,4 +1,4 @@
-<div class="container p-b-60">
+<div class="container">
   <div class="social-wrapper container">
     <div class="social" data-pages="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
@@ -12,34 +12,152 @@
         </div>
     </div>
 
+
+
     <div class="box-shadow bg-white">
       <%= render partial: 'menu' %>
     </div>
 
-    <div class="content p-t-20">
-      <div class="col-md-3 col-sm-3 no-padding col-lg-3 col-xlg-3">
-          <%= render partial: 'school_card' %>
-      </div>
-      <div class="col-md-6">
-        <div class="activity-feed auto-height">
-          <div class="share-post panel panel-default m-b-20">
-            <form role="form">
-                <div class="form-group-attached">
-                    <div class="form-group form-group-default">
-                        <label class="b-b b-grey p-b-5">Share updates</label>
-                        <textarea type="text" placeholder="What's happening?" class="form-control p-t-20 p-b-40" name="projectName" required autofocus="true"></textarea>
-                    </div>
+
+    <div class="content no-padding p-b-60">
+      <!-- BEGIN CONTENT SECTION -->
+      <section class="m-t-20 no-overflow" id="join">
+
+          <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                <div class="row top-picks">
+                  <div class="top-pick-descrip col-md-12">
+                    <h1>Browse People</h1>
+                    <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
+                    <div class="border-back"></div>
+                  </div>
+
                 </div>
-            </form>
+                  <% @students.each do |user| %>
+                  <div class="col-md-3 no-padding p-r-15">
+                  <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
+                  <%= content_tag(:div, class: 'listing-header  text-center') do %>
+                    <%= content_tag(:div, class: 'listing-card-logo') do %>
+                    <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
+                     <% if user.avatar.present? %>
+                       <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
+                     <% else %>
+                       <span class="placeholder bold text-white">
+                         <%= user.user_name_badge.upcase %>
+                       </span>
+                     <% end %>
+                     </div>
+                      <h5 class="no-margin fs-14 bold"><%= link_to(user.name, profile_path(user)) %></h5>
+                      <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
+                      <p class="fs-12"><%= truncate(user.mini_bio, length: 30) %></p>
+                      <% if current_user != user %>
+                        <div class="card-follow-button">
+                          <%= react_component('Follow',{:followed => followed?(user)}) %>
+                        </div>
+                        <script type="text/javascript">
+                           ReactRailsUJS.mountComponents();
+                        </script>
+                      <% else %>
+                        <%= link_to(profile_path(user), class: 'btn btn-danger btn-sm text-white') do %>
+                        <span class="text-white"><i class="fa fa-share"></i> View profile</span>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                      <% end %>
+                      <div class="listing-card-stats">
+                      <ul class="stastics-list">
+                        <li>
+                          Students
+                          <span class="text-master"><i class="fa fa-users"></i> <%= user.followers_counter.value %></span>
+                        </li>
+                        <li>
+                          Followers
+                          <span class="text-master"><i class="fa fa-comment"></i> <%= user.feedbacks_counter.value %></span>
+                        </li>
+                        <li>
+                          Ideas
+                          <span class="text-master"><i class="fa fa-dollar"></i> <%= user.investments_counter.value %></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <% end %>
+                <% end %>
+
+
           </div>
-          <%= render_activities(@activities) %>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-4 no-padding">
-      <div class="sidebar auto-height white-bg box-shadow">
-        <%= react_component('LatestListings', {path: latest_people_school_path(@school)}) %>
-      </div>
-      </div>
+
+      </section>
+      <!-- END CONTENT SECTION -->
+
+      <!-- BEGIN CONTENT SECTION -->
+      <section class="m-t-20 no-overflow" id="join">
+
+          <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+                <div class="row top-picks">
+                  <div class="top-pick-descrip col-md-12">
+                    <h1>Browse Ideas</h1>
+                    <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
+                    <div class="border-back"></div>
+                  </div>
+
+                </div>
+                   <% @ideas.each do |idea| %>
+                   <div class="col-md-3 no-padding p-r-15">
+                   <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
+                   <%= content_tag(:div, class: 'listing-header  text-center') do %>
+                     <%= content_tag(:div, class: 'listing-card-logo') do %>
+                     <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
+                      <% if idea.logo.present? %>
+                        <%= image_tag(idea.logo.url(:avatar), width: "50px") %>
+                      <% else %>
+                        <span class="placeholder bold text-white">
+                          <%= idea.name_badge.upcase %>
+                        </span>
+                      <% end %>
+                      </div>
+                       <h5 class="no-margin fs-14 bold"><%= link_to(idea.name, idea_path(idea)) %></h5>
+                       <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= idea.location_list %></h5>
+                       <p class="fs-12"><%= truncate(idea.high_concept_pitch, length: 30) %></p>
+                       <% if current_user != idea.user %>
+                         <div class="card-follow-button">
+                           <%= react_component('Follow',{:followed => followed?(idea)}) %>
+                         </div>
+                         <script type="text/javascript">
+                            ReactRailsUJS.mountComponents();
+                         </script>
+                       <% else %>
+                         <%= link_to(idea_path(idea), class: 'btn btn-danger btn-sm text-white') do %>
+                         <span class="text-white"><i class="fa fa-share"></i> View profile</span>
+                         <% end %>
+                       <% end %>
+                     <% end %>
+                       <% end %>
+                       <div class="listing-card-stats">
+                       <ul class="stastics-list">
+                         <li>
+                           Students
+                           <span class="text-master"><i class="fa fa-users"></i> <%= idea.followers_counter.value %></span>
+                         </li>
+                         <li>
+                           Followers
+                           <span class="text-master"><i class="fa fa-comment"></i> <%= idea.feedbackers_counter.value %></span>
+                         </li>
+                         <li>
+                           Ideas
+                           <span class="text-master"><i class="fa fa-dollar"></i> <%= idea.investors_counter.value %></span>
+                         </li>
+                       </ul>
+                     </div>
+                   </div>
+                   <% end %>
+                 <% end %>
+          </div>
+
+      </section>
+      <!-- END CONTENT SECTION -->
+
     </div>
   </div>
+</div>
+</div>
 </div>

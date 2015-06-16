@@ -18,6 +18,8 @@ class SchoolsController < ApplicationController
 
   def show
     ids = User.where(school_id: @school.id).pluck(:id)
+    @students = User.where(school_id: @school.id).limit(4)
+    @ideas = Idea.where(school_id: @school.id).limit(4)
     @activities = Activity.where(user_id: ids, published: true)
     .includes(:trackable, :user, :recipient)
     .order(id: :desc)

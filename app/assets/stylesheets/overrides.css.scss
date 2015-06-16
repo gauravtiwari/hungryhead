@@ -535,7 +535,6 @@ ul.reactions > div {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin-bottom: 60px;
   margin-top: 20px;
-  min-width: 275px;
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -633,4 +632,44 @@ ul.reactions > div {
 }
 .chosen-results li {
   border-bottom: 1px solid #e7e7e7;
+}
+
+/* Header */
+
+.top-pick-descrip {
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.top-picks {
+    position: relative;
+}
+
+.top-pick-descrip h1 {
+    min-width: 10px;
+    display: inline-block;
+    margin:0 0 10px;
+    line-height: 23px;
+    padding: 0 40px;
+    z-index: 2;
+    background: #eef0f0;
+}
+
+.top-pick-descrip p {
+    max-width: 500px;
+    color: #666666;
+    font-size: 11px;
+    line-height: 18px;
+    margin: auto;
+}
+
+.border-back {
+    position: absolute;
+    top:10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: image-url('title-contin.png');
+    z-index: -1;
 }

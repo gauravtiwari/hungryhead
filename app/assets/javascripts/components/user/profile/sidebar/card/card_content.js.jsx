@@ -94,19 +94,19 @@ var CardContent = React.createClass({
 
 
     if(markets.length > 0) {
-      var market_content = <div className="m-b-15 p-l-20 p-r-20 p-t-20"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+      var market_content = <div className="p-b-15 p-l-20 p-r-20 p-t-20"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
     }
 
     if(hobbies.length > 0) {
-      var hobbies_content = <div className="m-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+      var hobbies_content = <div className="p-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
     }
 
     if(skills.length > 0){
-      var skills_content = <div className="p-l-20 p-r-20 p-b-20"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+      var skills_content = <div className="p-b-15 p-l-20 p-r-20 p-b-20"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
     if(subjects.length > 0){
-      var subjects_content = <div className="m-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
+      var subjects_content = <div className="p-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
     }
 
 
