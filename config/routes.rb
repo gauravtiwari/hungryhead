@@ -123,6 +123,11 @@ Rails.application.routes.draw do
     get :autocomplete_market_name, :on => :collection
   end
 
+  #subjects autocomplete system
+  resources :subjects, only: [:index] do
+    get :autocomplete_subject_name, :on => :collection
+  end
+
   #locations autocomplete system
   resources :locations, only: [:index] do
     get :autocomplete_location_name, :on => :collection
