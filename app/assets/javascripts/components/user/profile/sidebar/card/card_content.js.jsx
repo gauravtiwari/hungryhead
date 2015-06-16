@@ -65,21 +65,15 @@ var CardContent = React.createClass({
     }
 
     if(this.props.profile.location_name) {
-      var location = <div className="m-b-10"><span className="text-master bold">
-        <i className="fa fa-map-marker"></i> Lives in</span>
-        <span className="clearfix text-brand p-t-5 displayblock"><a className="text-brand" href={this.props.profile.location_url}>
-                          {this.props.profile.location_name}
-                         </a></span>
-      </div>;
+      var location = <a className="text-white" href={this.props.profile.location_url}>
+                          <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
+                         </a>;
     }
 
     if(this.props.profile.school_url) {
-      var school = <div className="m-b-10"><span className="text-master bold">
-        <i className="fa fa-university"></i> Studying in</span>
-        <span className="clearfix text-brand p-t-5 displayblock"><a className="text-brand p-r-10" href={this.props.profile.school_url}>
-                           {this.props.profile.school_name}
-                          </a></span>
-      </div>;
+      var school = <a className="text-white p-l-10" href={this.props.profile.school_url}>
+                           <i className="fa fa-university"></i> {this.props.profile.school_name}
+                          </a>;
     } else {
       var school = "";
     }
@@ -88,15 +82,15 @@ var CardContent = React.createClass({
 
 
     if(markets.length > 0) {
-      var market_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-smile-o"></i> Interested in</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+      var market_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
     }
 
     if(hobbies.length > 0) {
-      var hobbies_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-heart"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+      var hobbies_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
     }
 
     if(skills.length > 0){
-      var skills_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+      var skills_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
     return(
@@ -116,10 +110,11 @@ var CardContent = React.createClass({
                        <h3 className="no-margin bold text-white">
                            {this.props.profile.name}
                            <div className="role-badge inline m-l-10 v-middle" data-toggle="tooltip" data-container="body" title={this.props.profile.role}>
-                             <img src={this.props.profile.role_badge} alt="Student" width="30px" height="30px" />
+                             <img src={this.props.profile.role_badge} alt={this.props.profile.role_badge} width="30px" height="30px" />
                            </div>
                        </h3>
                        <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>
+                       <p className="no-margin text-white fs-12">{location}{school}</p>
                        <ul className="social-list text-white m-t-5 small no-style">
                         {website_url}
                         {linkedin_url}
@@ -130,10 +125,8 @@ var CardContent = React.createClass({
                 </div>
             </div>
         </div>
-        <div className="padding-20 box-shadow bg-white">
+        <div className="padding-20 box-shadow bg-master-lightest">
           <ul className="text-master m-t-5 small no-style">
-            {location}
-            {school}
             {market_content}
             {hobbies_content}
             {skills_content}
