@@ -30,7 +30,7 @@ class UserPolicy < ApplicationPolicy
   def publish?
   	current_user == record
   end
-  def show?   ; record.published?  end
+  def show?   ; record.published? || record == current_user  end
   def create? ; current_user == record; end
   def destroy?; current_user == record; end
 

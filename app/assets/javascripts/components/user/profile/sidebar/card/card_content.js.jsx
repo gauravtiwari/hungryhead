@@ -6,7 +6,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
-        return <li className="inline" key={Math.random()}><a className="text-white p-r-10" href={market.url} >#{market.tag}</a></li>
+        return <li className="inline" key={Math.random()}><a className="text-brand p-r-10" href={market.url} >#{market.tag}</a></li>
       });
 
     } else {
@@ -19,13 +19,25 @@ var CardContent = React.createClass({
 
     if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
       var hobbies = this.props.profile.hobbies.map(function(hobby){
-        return <li className="inline"  key={Math.random()}><a className="text-white p-r-10" href={hobby.url} >#{hobby.tag}</a></li>
+        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={hobby.url} >#{hobby.tag}</a></li>
       });
     } else {
       if(this.props.is_owner) {
-        var hobbies = <em className="sidebar_filler clearfix"> What interests you? ex: Technology, Programming, Science etc.</em>
+        var hobbies = <em className="sidebar_filler clearfix"> What interests you? ex: Games, Football, Science etc.</em>
       } else {
         var hobbies = "";
+      }
+    }
+
+    if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
+      var skills = this.props.profile.skills.map(function(skill){
+        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={skill.url} >#{skill.tag}</a></li>
+      });
+    } else {
+      if(this.props.is_owner) {
+        var skills = <em className="sidebar_filler clearfix"> What are your skills? ex: Technology, Programming, Marketing etc.</em>
+      } else {
+        var skills = "";
       }
     }
 
@@ -53,22 +65,42 @@ var CardContent = React.createClass({
     }
 
     if(this.props.profile.location_name) {
-      var location =  <a className="text-white p-l-10" href={this.props.profile.location_url}>
-                          <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
-                         </a>;
+      var location = <div className="m-b-10"><span className="text-master bold">
+        <i className="fa fa-map-marker"></i> Lives in</span>
+        <span className="clearfix text-brand p-t-5 displayblock"><a className="text-brand" href={this.props.profile.location_url}>
+                          {this.props.profile.location_name}
+                         </a></span>
+      </div>;
     }
 
     if(this.props.profile.school_url) {
-      var school = <a className="text-white p-r-10" href={this.props.profile.school_url}>
-                          <i className="fa fa-university"></i> {this.props.profile.school_name}
-                          </a>;
+      var school = <div className="m-b-10"><span className="text-master bold">
+        <i className="fa fa-university"></i> Studying in</span>
+        <span className="clearfix text-brand p-t-5 displayblock"><a className="text-brand p-r-10" href={this.props.profile.school_url}>
+                           {this.props.profile.school_name}
+                          </a></span>
+      </div>;
     } else {
       var school = "";
     }
 
     var classes = "profile-card padding-20 box-shadow bg-" + this.props.profile.theme;
 
+
+    if(markets.length > 0) {
+      var market_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-smile-o"></i> Interested in</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+    }
+
+    if(hobbies.length > 0) {
+      var hobbies_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-heart"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+    }
+
+    if(skills.length > 0){
+      var skills_content = <div className="m-b-10"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+    }
+
     return(
+      <div className="profile-card-sidebar">
         <div className={classes}>
             <div className="container-xs-height">
                 <div className="row text-center">
@@ -88,12 +120,6 @@ var CardContent = React.createClass({
                            </div>
                        </h3>
                        <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>
-                       <p className="text-white m-t-5 small">
-                         {school}{location}
-                       </p>
-                       <ul className="text-white m-t-5 small no-style">
-                         {markets}{hobbies}
-                       </ul>
                        <ul className="social-list text-white m-t-5 small no-style">
                         {website_url}
                         {linkedin_url}
@@ -104,6 +130,16 @@ var CardContent = React.createClass({
                 </div>
             </div>
         </div>
+        <div className="padding-20 box-shadow bg-white">
+          <ul className="text-master m-t-5 small no-style">
+            {location}
+            {school}
+            {market_content}
+            {hobbies_content}
+            {skills_content}
+          </ul>
+        </div>
+      </div>
     )
   }
 });

@@ -13,6 +13,10 @@
             <%= render partial: 'menu' %>
         </div>
 
+        <div class="summary white-bg box-shadow m-t-15 m-b-15">
+            <%= react_component("TextWidget", {data: data}) %>
+        </div>
+
         <div class="badges-box m-t-20 clearfix" id="profile_content">
             <div class="col-md-6 no-padding p-r-15">
                 <%= render partial: 'badges' %>

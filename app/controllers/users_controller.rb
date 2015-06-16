@@ -138,13 +138,6 @@ class UsersController < ApplicationController
     render 'follows/followers'
   end
 
-  def about
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-
   def delete_cover
     @user.remove_cover!
     @user.save
@@ -200,7 +193,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :mini_bio, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
       :email, :terms_accepted, :first_name, :last_name, :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
-      :name, :avatar, :subject_list, :cover, :about_me, :website_url, :facebook_url,
+      :name, :avatar, :cover, :about_me, :website_url, :facebook_url,
       :twitter_url, :linkedin_url, :location_list, :hobby_list, :skill_list, :market_list, :idea_notifications,
       :investment_notifications, :feedback_notifications, :follow_notifications, :weekly_mail)
   end

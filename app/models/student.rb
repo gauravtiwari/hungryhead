@@ -6,7 +6,6 @@ class Student < User
 
   #JSONB postgres store  accessors
   store_accessor :interests, :locations, :hobbies, :markets
-	store_accessor :education, :year, :subjects
 
   before_create :add_role
 
