@@ -22,7 +22,6 @@ json.user do
 		json.school_name @user.school.name if @user.school
 		json.school_url profile_path(@user.school) if @user.school
 		json.mini_bio @user.mini_bio
-		json.type @user.type
 		json.website_url url_with_protocol(@user.website_url)
 		json.facebook_url url_with_protocol(@user.facebook_url)
 		json.linkedin_url url_with_protocol(@user.linkedin_url)
@@ -33,6 +32,10 @@ json.user do
 			json.url tag_people_path(tag: tag.parameterize)
 		end
 		json.skills @user.skill_list.each do |tag|
+			json.tag tag
+			json.url tag_people_path(tag: tag.parameterize)
+		end
+		json.subjects @user.subject_list.each do |tag|
 			json.tag tag
 			json.url tag_people_path(tag: tag.parameterize)
 		end

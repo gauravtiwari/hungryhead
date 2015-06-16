@@ -41,6 +41,18 @@ var CardContent = React.createClass({
       }
     }
 
+    if(this.props.profile.subjects && this.props.profile.subjects.length > 0 ) {
+      var subjects = this.props.profile.subjects.map(function(subject){
+        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={subject.url} >#{subject.tag}</a></li>
+      });
+    } else {
+      if(this.props.is_owner) {
+        var subjects = <em className="sidebar_filler clearfix"> Which subjects you have studied? ex: Computer Science, Psychology, Philosphy etc.</em>
+      } else {
+        var subjects = "";
+      }
+    }
+
     if(this.props.profile.website_url) {
       var website_url =  <li className="inline">
                             <a className="text-white p-r-10" target="_blank" href={this.props.profile.website_url} ><i className="fa fa-rss fs-14"></i></a>                         </li>;
@@ -93,6 +105,11 @@ var CardContent = React.createClass({
       var skills_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
+    if(subjects.length > 0){
+      var subjects_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
+    }
+
+
     return(
       <div className="profile-card-sidebar">
         <div className={classes}>
@@ -128,6 +145,7 @@ var CardContent = React.createClass({
         <div className="padding-20 box-shadow bg-master-lightest">
           <ul className="text-master m-t-5 small no-style">
             {market_content}
+            {subjects_content}
             {hobbies_content}
             {skills_content}
           </ul>

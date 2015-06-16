@@ -26,6 +26,7 @@ var CardForm = React.createClass({
       this.selectMarkets();
       this.selectSkills();
       this.schoolSelect();
+      this.selectSubjects();
     }
   },
 
@@ -176,6 +177,55 @@ var CardForm = React.createClass({
     })(this));
   },
 
+  selectSubjects: function(e){
+    var $subjectsSelect = $('#subjects_select');
+    var self = this;
+    $subjectsSelect.each((function(_this) {
+      return function(i, e) {
+        var select;
+        select = $(e);
+        return $(select).select2({
+          minimumInputLength: 2,
+          placeholder: select.data('placeholder'),
+          tags: true,
+          maximumSelectionSize: 3,
+          ajax: {
+            url: Routes.autocomplete_subject_name_subjects_path(),
+            dataType: 'json',
+            type: 'GET',
+            cache: true,
+            quietMillis: 50,
+            data: function(term) {
+              return {
+                term: term
+              };
+            },
+            results: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return {
+                    text: item.label,
+                    value: item.value,
+                    id: item.id
+                  };
+                })
+              };
+            }
+          },
+          id: function(object) {
+            return object.text;
+          },
+          initSelection: function (element, callback) {
+            var subjects = self.props.profile.subjects.map(function(subject){
+              return {id: Math.random(), text: subject.tag}
+            });
+            callback(subjects);
+          }
+        });
+      };
+    })(this));
+  },
+
   schoolSelect: function() {
     var $schoolSelect = $('#school_select');
     var self = this;
@@ -279,6 +329,10 @@ var CardForm = React.createClass({
       return skill.tag
     });
 
+    var subjects = this.props.profile.subjects.map(function(subject){
+      return subject.tag
+    });
+
     var loadingClass = cx({
       'fa fa-spinner fa-spin': this.state.loading
     });
@@ -315,6 +369,11 @@ var CardForm = React.createClass({
                                   <input className="string required form-control" required="required" aria-required="true" type="text" placeholder="I am founder or student of ..." defaultValue={this.props.profile.mini_bio}  name="user[mini_bio]" id="user_mini_bio" />
                               </div>
                               <div className="form-group">
+                                <label>Location you are based</label>
+                                <span className="help"> e.g. "Lancaster"</span>
+                                <input defaultValue={this.props.profile.location_name} className="form-control string optional location_list full-width" data-placeholder="Location where you are based?" type="text" name="user[location_list]" id="locations_select" />
+                              </div>
+                              <div className="form-group">
                                 <label>Select your University/College</label>
                                 <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-placeholder="Type and choose your school from the list" className="form-control full-width" />
                                 <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
@@ -331,11 +390,13 @@ var CardForm = React.createClass({
                               </div>
                             </div>
                             <div className="col-md-6">
+
                               <div className="form-group">
-                                <label>Location you are based</label>
+                                <label>Education</label>
                                 <span className="help"> e.g. "Lancaster"</span>
-                                <input defaultValue={this.props.profile.location_name} className="form-control string optional location_list full-width" data-placeholder="Location where you are based?" type="text" name="user[location_list]" id="locations_select" />
+                                <input defaultValue={subjects} className="form-control string optional location_list full-width" data-placeholder="Subjects you have studied?" type="text" name="user[subject_list]" id="subjects_select" />
                               </div>
+
                               <div className="form-group">
                                   <label>Website url</label>
                                   <span className="help"> e.g. "www.example.com"</span>

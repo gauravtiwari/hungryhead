@@ -1,4 +1,6 @@
+
 var LatestUserActivities = React.createClass({
+
   getInitialState: function(){
     return {
       activities: this.props.activities,

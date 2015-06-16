@@ -28,7 +28,7 @@ class CreateUserNotificationService
     #Cache lists for school
     @user.school.latest_people << @user.id if @user.school_id.present?
     #Cache sorted set for global leaderboard
-    User.latest << @user.id unless @user.type == "User"
+    User.latest << @user.id
 
     #Add leaderboard score
     User.leaderboard.add(@user.id, @user.points)
