@@ -46,7 +46,7 @@ render: function() {
       <a className="btn btn-primary btn-cons m-t-10" href="/account/reset-password">Forgot your password? </a>
       <div className="col-md-12 no-padding m-t-20">
         <a className="clearfix" href="/account/confirm/resend">{confirmation_text}</a>
-        <a className="clearfix" href="/students_join">{account_text}</a>
+        <a className="clearfix" href="/join">{account_text}</a>
       </div>
     </form>
   );

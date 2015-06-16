@@ -7,7 +7,7 @@ module Investable
   end
 
   def can_invest?(user)
-    student.balance > 10 && !invested?(user)
+    user.balance > 10 && !invested?(user)
   end
 
   def invested?(user)

@@ -34,8 +34,6 @@ class DeleteUserFeedJob < ActiveJob::Base
   def recipient_user(activity)
     if activity.recipient_type == "User"
       activity.recipient
-    elsif activity.recipient_type == "Idea"
-      activity.recipient.student
     else
       activity.recipient.user
     end

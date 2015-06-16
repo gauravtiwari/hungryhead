@@ -2,7 +2,7 @@ class CreateIdeaNotificationService
 
   def initialize(idea)
     @idea = idea
-    @user = idea.student
+    @user = idea.user
   end
 
   def create

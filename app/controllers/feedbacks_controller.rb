@@ -77,7 +77,7 @@ class FeedbacksController < ApplicationController
       rate: {
         record: @feedback.id,
         rated: @feedback.badged?,
-        user_name: @idea.student.name,
+        user_name: @idea.user.name,
         badge_name: @feedback.badge,
         rate_url: rate_idea_feedback_path(@feedback.idea.slug, @feedback.id)
       }

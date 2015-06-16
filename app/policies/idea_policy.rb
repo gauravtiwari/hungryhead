@@ -9,7 +9,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def follow?
-    current_user != record.student
+    current_user != record.user
   end
 
   def show?

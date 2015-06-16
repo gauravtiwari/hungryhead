@@ -9,11 +9,11 @@ class PublishIdeaJob < ActiveJob::Base
       @idea = Idea.find(idea_id)
       @activity = Activity.find(activity_id)
 
-      #Increment counters for school and student
+      #Increment counters for school and user
       @idea.school.ideas_counter.increment if @idea.school
-      @idea.student.ideas_counter.increment if @idea.student
+      @idea.user.ideas_counter.increment if @idea.user
       #Cache latest ideas into a list for user and school, max: 20
-      @idea.student.latest_ideas <<  @idea.id if @idea.student
+      @idea.user.latest_ideas <<  @idea.id if @idea.user
       @idea.school.latest_ideas << @idea.id if @idea.school
       #Insert into cache list
       Idea.latest << @idea.id

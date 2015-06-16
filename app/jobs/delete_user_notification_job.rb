@@ -34,8 +34,6 @@ class DeleteUserNotificationJob < ActiveJob::Base
   def recipient_user(notification)
     if notification.recipient_type == "User"
       notification.recipient
-    elsif notification.recipient_type == "Idea"
-      notification.recipient.student
     else
       notification.recipient.user
     end

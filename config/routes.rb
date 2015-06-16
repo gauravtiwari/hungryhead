@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}
   as :user do
 
+    get   '/join' => 'users/registrations#new',    as: 'new_user_registration'
+    post  '/join' => 'users/registrations#create', as: 'user_registration'
+
     # joining
     get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
 
@@ -72,27 +75,6 @@ Rails.application.routes.draw do
   #Check if email and username exists
   post 'check_username', to: 'users#check_username', as: 'check_username'
   post 'check_email', to: 'users#check_email', as: 'check_email'
-
-  devise_for :students, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'students/registrations'}
-  as :student do
-    # joining
-    get   '/students_join' => 'students/registrations#new',    as: 'new_student_registration'
-    post  '/students_join' => 'students/registrations#create', as: 'student_registration'
-  end
-
-  devise_for :mentors, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'mentors/registrations'}
-  as :mentor do
-    # mentor joining
-    get   '/mentors_join' => 'mentors/registrations#new',    as: 'new_mentor_registration'
-    post  '/mentors_join' => 'mentors/registrations#create', as: 'mentor_registration'
-  end
-
-  devise_for :teachers, skip: [:sessions, :passwords, :confirmations, :registrations], controllers: {sessions: 'users/sessions',  invitations: "users/invitations", :confirmations => "users/confirmations", registrations: 'teachers/registrations'}
-  as :teacher do
-    # teacher joining
-    get   '/teachers_join' => 'teachers/registrations#new',    as: 'new_teacher_registration'
-    post  '/teachers_join' => 'teachers/registrations#create', as: 'teacher_registration'
-  end
 
   match '/vote',  to: 'votes#vote', via: :put, as: 'vote'
   get '/:tag/people',  to: 'tags#people', as: 'tag_people'
@@ -151,8 +133,7 @@ Rails.application.routes.draw do
     get :autocomplete_school_name, :on => :collection
     member do
       get :latest_ideas
-      get :latest_students
-      get :latest_faculties
+      get :latest_people
     end
   end
 

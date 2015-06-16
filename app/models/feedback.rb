@@ -45,7 +45,7 @@ class Feedback < ActiveRecord::Base
   end
 
   def idea_owner
-    idea.student
+    idea.user
   end
 
   private

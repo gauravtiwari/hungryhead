@@ -43,9 +43,12 @@ class User < ActiveRecord::Base
   #Model Relationships
   belongs_to :school
 
+  #has_many relationships
   has_many :authentications, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
+  has_many :ideas, dependent: :destroy, autosave: true
+  has_many :idea_messages, dependent: :destroy, autosave: true
 
   #Callbacks
   before_create :add_fullname, if: :name_not_present?
@@ -110,6 +113,8 @@ class User < ActiveRecord::Base
   store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
+  #JSONB postgres store  accessors
+  store_accessor :interests, :locations, :hobbies, :markets
 
   #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,
@@ -249,7 +254,7 @@ class User < ActiveRecord::Base
   #Seeds settings into database on: :create
   def seed_settings
     self.settings = {
-      theme: "#{type.downcase}",
+      theme: "#{role.downcase}",
       idea_notifications: true,
       feedback_notifications: true,
       investment_notifications: true,
@@ -265,18 +270,17 @@ class User < ActiveRecord::Base
 
   def remove_from_soulmate
     #Remove search index if :record destroyed
-    loader = Soulmate::Loader.new("students")
+    loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
   end
 
   def decrement_counters
     #Decrement counters
-    school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
+    school.people_counter.decrement if school_id.present? && school.people_counter.value >
     #delete cached lists for school
-    school.latest_students.delete(id) if school_id.present? && self.type == "Student"
-    school.latest_faculties.delete(id) if school_id.present? && self.type == "Teacher"
+    school.latest_people.delete(id) if school_id.present?
     #delete cached sorted set for global leaderboard
-    User.latest.delete(id) unless type == "User"
+    User.latest.delete(id)
 
     #delete leaderboard for this user
     User.leaderboard.delete(id)

@@ -39,8 +39,8 @@ module Merit
       score 5, :on => 'investments#create', to: :user, category: 'investment'
 
       #Ideas
-      score 5, :on => 'ideas#publish', to: :student, category: 'idea_publish' do |idea|
-        idea.student.points(category: 'idea_publish') == 0 && idea.published?
+      score 5, :on => 'ideas#publish', to: :user, category: 'idea_publish' do |idea|
+        idea.user.points(category: 'idea_publish') == 0 && idea.published?
       end
 
       #Votes

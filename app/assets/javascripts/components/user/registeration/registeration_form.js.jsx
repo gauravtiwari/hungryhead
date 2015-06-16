@@ -126,15 +126,15 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6 col-md-6">
             <div className="form-group form-group-default">
               <label>First Name</label>
-              <input type="text" ref="first_name" id="first_name" autoComplete="off" name="student[first_name]" placeholder="John" className="form-control" required aria-required="true" />
+              <input type="text" ref="first_name" id="first_name" autoComplete="off" name="user[first_name]" placeholder="John" className="form-control" required aria-required="true" />
             </div>
           </div>
 
           <div className="col-sm-6 col-md-6">
             <div className="form-group form-group-default">
               <label>Last Name</label>
-              <input type="text" ref="last_name" id="last_name" autoComplete="off" name="student[last_name]" placeholder="Smith" className="form-control" required aria-required="true" />
-              <input type="hidden" ref="name" id="name" autoComplete="off" name="student[name]" />
+              <input type="text" ref="last_name" id="last_name" autoComplete="off" name="user[last_name]" placeholder="Smith" className="form-control" required aria-required="true" />
+              <input type="hidden" ref="name" id="name" autoComplete="off" name="user[name]" />
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12 col-md-12">
             <div className="form-group">
               <label>Select your University/College</label>
-              <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
+              <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
               <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
             </div>
           </div>
@@ -153,7 +153,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12 col-md-12">
             <div className="form-group form-group-default input-group">
               <label>Uni/College Email</label>
-              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <input type="email" name="user[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span className="input-group-addon bg-solid-dark text-white" id="school_domain">
                 {this.state.school_domain}
               </span>
@@ -167,7 +167,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6 col-md-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="user[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
@@ -175,7 +175,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6 col-md-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="student[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
+              <input type="password" name="user[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
 
@@ -184,7 +184,7 @@ var RegisterationForm = React.createClass({
         <div className="row m-t-10">
           <div className="col-md-6 col-md-6">
             <div className="checkbox check-success">
-              <input type="checkbox" name="student[terms_accepted]" value="1" id="checkbox1" defaultChecked />
+              <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
               <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
             </div>
           </div>

@@ -16,7 +16,7 @@ var Register = React.createClass({
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
-      url: Routes.student_registration_path(),
+      url: Routes.user_registration_path(),
       type: "POST",
       dataType: "json",
       success: function ( data ) {

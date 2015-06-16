@@ -54,9 +54,9 @@ module Merit
       # => Check everytime idea is viewed/voted/commented to grant lean badge
       #########################################################
 
-      grant_on 'ideas#show', badge: 'lean', to: :student do |idea|
+      grant_on 'ideas#show', badge: 'lean', to: :user do |idea|
         idea.published? &&
-        idea.student.ideas_counter.value >= 1 &&
+        idea.user.ideas_counter.value >= 1 &&
         Idea.leaderboard.score(idea.id) >= 5
       end
 
@@ -101,7 +101,7 @@ module Merit
       # => Check everytime idea is viewed/voted/commented to grant entrepreneur badge
       ################################################################
 
-      grant_on 'ideas#show', badge: 'entrepreneur', to: :student do |idea|
+      grant_on 'ideas#show', badge: 'entrepreneur', to: :user do |idea|
         idea.published? &&
         Idea.leaderboard.score(idea.id) >= 10000
       end

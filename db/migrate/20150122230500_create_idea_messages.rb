@@ -3,7 +3,7 @@ class CreateIdeaMessages < ActiveRecord::Migration
   def change
     create_table :idea_messages do |t|
 
-      t.references :student, :null => false
+      t.references :user, :null => false
       t.references :idea, :null => false
 
       t.text :body, :null => false

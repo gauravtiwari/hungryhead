@@ -22,13 +22,12 @@ class School < ActiveRecord::Base
 	set :followers_ids
 
 	#Latest caches
-	list :latest_students, maxlength: 20, marshal: true
-	list :latest_faculties, maxlength: 20, marshal: true
+	list :latest_people, maxlength: 20, marshal: true
 	list :latest_ideas, maxlength: 20, marshal: true
 
 	#Counters
 	counter :followers_counter
-	counter :students_counter
+	counter :people_counter
 	counter :ideas_counter
 
 	#Mount carrierwave

@@ -312,7 +312,7 @@ var CardForm = React.createClass({
                               <div className="form-group">
                                   <label>Mini Bio</label>
                                   <span className="help"> e.g. "Student, interested in startups"</span>
-                                  <input className="string required form-control" required="required" aria-required="true" type="text" placeholder="I am founder or student ..." defaultValue={this.props.profile.mini_bio}  name="user[mini_bio]" id="user_mini_bio" />
+                                  <input className="string required form-control" required="required" aria-required="true" type="text" placeholder="I am founder or student of ..." defaultValue={this.props.profile.mini_bio}  name="user[mini_bio]" id="user_mini_bio" />
                               </div>
                               <div className="form-group">
                                 <label>Select your University/College</label>

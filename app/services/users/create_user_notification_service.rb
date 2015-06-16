@@ -24,11 +24,9 @@ class CreateUserNotificationService
 
   def increment_counters
     #Increment counters
-    @user.school.students_counter.increment if @user.school_id.present? && @user.type == "Student"
+    @user.school.people_counter.increment if @user.school_id.present?
     #Cache lists for school
-    @user.school.latest_students << @user.id if @user.school_id.present? && @user.type == "Student"
-    @user.school.latest_faculties << @user.id if @user.school_id.present? && @user.type == "Teacher"
-
+    @user.school.latest_people << @user.id if @user.school_id.present?
     #Cache sorted set for global leaderboard
     User.latest << @user.id unless @user.type == "User"
 

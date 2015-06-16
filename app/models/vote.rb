@@ -14,7 +14,7 @@ class Vote < ActiveRecord::Base
   public
 
   def votable_user
-    votable_type == "Idea" ? votable.student : votable.user
+    votable.user
   end
 
   private

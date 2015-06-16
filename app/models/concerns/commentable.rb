@@ -18,7 +18,7 @@ module Commentable
   end
 
   def commenter
-    commentable_type == "Idea" ? commentable.student.id : commentable.user.id
+    commentable.user.id
   end
 
   def comments_score

@@ -4,11 +4,7 @@ class MentionsController < ApplicationController
   def mentionables
     @mentionable = params[:mentionable_type].constantize.find(params[:id])
 
-    if params[:mentionable_type] == "Idea"
-      mentionable_user = @mentionable.student
-    else
-      mentionable_user = @mentionable.user
-    end
+    mentionable_user = @mentionable.user
 
     commenters = @mentionable.commenters_ids.values.uniq
 

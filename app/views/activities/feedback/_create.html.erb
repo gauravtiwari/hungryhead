@@ -56,13 +56,13 @@
 	    </div>
     </div>
     <div class="card-footer clearfix bold">
-    	<% if activity.recipient.student_id == current_user.id %>
+    	<% if activity.recipient.user_id == current_user.id %>
     		<% rated = activity.trackable.badged? %>
-    		<%= react_component('Rate', {rate: {record: activity.trackable.uuid, user_name: activity.recipient.student.name, badge_name: activity.trackable.badge, rated: rated, rate_url: rate_idea_feedback_path(activity.recipient.slug, activity.trackable.uuid)}}) %>
+    		<%= react_component('Rate', {rate: {record: activity.trackable.uuid, user_name: activity.recipient.user.name, badge_name: activity.trackable.badge, rated: rated, rate_url: rate_idea_feedback_path(activity.recipient.slug, activity.trackable.uuid)}}) %>
     	<% else %>
 	    	<% if activity.trackable.badged? %>
 		    	<div class="review-badge pull-right">
-		    	 	<%= link_to(activity.recipient.student.name, profile_path(activity.recipient.student)) %> found this feedback <%= activity.trackable.badge %>
+		    	 	<%= link_to(activity.recipient.user.name, profile_path(activity.recipient.user)) %> found this feedback <%= activity.trackable.badge %>
 		    	</div>
 	    	<% end %>
 	    	<ul class="reactions pull-left">

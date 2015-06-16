@@ -68,9 +68,9 @@ class Comment < ActiveRecord::Base
     true
   end
 
-  #Get commentable user - idea(student) || user
+  #Get commentable user
   def commentable_user
-    commentable_type == "Idea" ? commentable.student : commentable.user
+    commentable.user
   end
 
   private

@@ -41,8 +41,6 @@ class UpdateNotificationCacheService
   def recipient_user
     if @activity.recipient_type == "User"
       @activity.recipient
-    elsif @activity.recipient_type == "Idea"
-      @activity.recipient.student
     else
       @activity.recipient.user
     end
@@ -101,9 +99,6 @@ class UpdateNotificationCacheService
     if @activity.trackable_type == "User"
       trackable_user_name =   target.name
       trackable_user_id =   target.id
-    elsif @activity.trackable_type == "Idea"
-      trackable_user_name = target.student.name
-      trackable_user_id =   target.student.id
     elsif @activity.trackable_type == "Follow"
       trackable_user_name = target.follower.name
       trackable_user_id =   target.follower.id
@@ -129,8 +124,8 @@ class UpdateNotificationCacheService
 
   def options_for_target(target)
     if @activity.recipient_type == "Idea"
-      recipient_user_id =  target.student.id
-      recipient_user_name = target.student.name
+      recipient_user_id =  target.user.id
+      recipient_user_name = target.user.name
       recipient_name = target.name
       recipient_url = idea_path(target)
     elsif @activity.recipient_type == "User"

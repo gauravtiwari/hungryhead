@@ -19,7 +19,7 @@ class IdeaMessagesController < ApplicationController
   # POST /idea_messages.json
   def create
     @idea_message = IdeaMessage.new(idea_message_params)
-    @idea_message.update_attributes(student_id: current_user.id, idea: @idea)
+    @idea_message.update_attributes(user_id: current_user.id, idea: @idea)
     authorize @idea_message
     if @idea_message.save
       Pusher.trigger("presence-idea-collaboration-#{@idea.team_ids.join('')}", "collaboration_new_message", {id: @idea_message.id, data: render(template: 'idea_messages/show')}.to_json)

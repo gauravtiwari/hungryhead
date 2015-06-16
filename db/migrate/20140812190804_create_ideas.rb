@@ -3,7 +3,7 @@ class CreateIdeas < ActiveRecord::Migration
   def change
     create_table :ideas do |t|
 
-      t.references :student, :null => false
+      t.references :user, :null => false
 
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
 

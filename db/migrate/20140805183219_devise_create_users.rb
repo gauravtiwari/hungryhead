@@ -13,7 +13,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.string :username, null: false, :default => ""
       t.string :avatar, :default => ""
-      t.string :type, :default => "User", index: true
+
       t.string :cover, :default => ""
 
       t.string :slug

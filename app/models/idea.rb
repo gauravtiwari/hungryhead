@@ -61,10 +61,10 @@ class Idea < ActiveRecord::Base
   scope :published, -> { where(status: 1) }
   scope :school, -> { where(privacy: 1) }
   scope :public_ideas, -> { where(privacy: 2) }
-  scope :for_user, lambda {|user| where("student_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
+  scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
-  belongs_to :student
+  belongs_to :user
   belongs_to :school
   has_many :idea_messages, dependent: :destroy
 
@@ -110,7 +110,7 @@ class Idea < ActiveRecord::Base
   end
 
   def founder?(user)
-    student == user
+    user == user
   end
 
   def name_badge
@@ -126,7 +126,7 @@ class Idea < ActiveRecord::Base
   end
 
   def is_owner?(current_user)
-    student == current_user
+    user == current_user
   end
 
   def in_team?(user)
@@ -138,7 +138,7 @@ class Idea < ActiveRecord::Base
   end
 
   def fetch_team
-    ids = team_ids.push(student_id.to_s)
+    ids = team_ids.push(user_id.to_s)
     User.find(ids)
   end
 
@@ -191,11 +191,11 @@ class Idea < ActiveRecord::Base
   end
 
   def decrement_counters
-    #Decrement counters for student and school
+    #Decrement counters for user and school
     school.ideas_counter.decrement
-    student.ideas_counter.decrement
+    user.ideas_counter.decrement
     #Remove self from cached list
-    student.latest_ideas.delete(id)
+    user.latest_ideas.delete(id)
     school.latest_ideas.delete(id)
     #Remove self from sorted set
     Idea.latest.delete(id)

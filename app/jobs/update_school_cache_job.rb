@@ -5,11 +5,11 @@ class UpdateSchoolCacheJob < ActiveJob::Base
     @school = School.find(id)
 
     #reset all counters
-    @school.students_counter.reset
+    @school.people_counter.reset
     @school.ideas_counter.reset
 
     #rebuild all counters
-    @school.students_counter.incr(@school.users.size)
+    @school.people_counter.incr(@school.users.size)
     @school.ideas_counter.incr(@school.ideas.size)
 
   end
