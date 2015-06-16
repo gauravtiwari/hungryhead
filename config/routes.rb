@@ -243,7 +243,7 @@ Rails.application.routes.draw do
   get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
-  get '/:slug/students', to: SlugRouter.to(:students), as: :profile_students
+  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
   get '/:slug/student_ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
