@@ -1,4 +1,5 @@
 class CreateEvents < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
     create_table :events do |t|
       t.string :title, null: false, default: ""
@@ -8,6 +9,7 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :start_time, null: false, default: DateTime.now
       t.datetime :end_time, null: false, default: DateTime.now
       t.boolean :guest_invites, default: false
+      t.boolean :private, default: true
 
       t.timestamps null: false
     end
