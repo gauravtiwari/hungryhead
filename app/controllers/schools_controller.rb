@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
   before_action :authenticate_admin_user!, only: [:new, :create, :destroy, :edit]
-  before_action :set_schools, only: [:latest_students, :latest_ideas, :latest_faculties, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
+  before_action :set_schools, only: [:latest_people, :latest_ideas, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:domain]
 
@@ -24,12 +24,12 @@ class SchoolsController < ApplicationController
     .paginate(:page => params[:page], :per_page => 20)
   end
 
-  def latest_students
-    @students = Student.find(@school.latest_students.values).paginate(:page => params[:page], :per_page => 5)
+  def latest_people
+    @people = User.find(@school.latest_people.values).paginate(:page => params[:page], :per_page => 5)
     render json: Oj.dump({
-      list: @students.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
+      list: @people.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
       type: 'Latest Students',
-      next_page: @students.next_page
+      next_page: @people.next_page
       }, mode: :compat)
   end
 
@@ -40,15 +40,6 @@ class SchoolsController < ApplicationController
     type: 'Latest Ideas',
     next_page: @ideas.next_page
     }, mode: :compat)
-  end
-
-  def latest_faculties
-    @faculties = Teacher.find(@school.latest_faculties.values).paginate(:page => params[:page], :per_page => 5)
-    render json: Oj.dump({
-     list: @faculties.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
-     type: 'Latest Faculties',
-     next_page: @faculties.next_page
-     }, mode: :compat)
   end
 
   def card

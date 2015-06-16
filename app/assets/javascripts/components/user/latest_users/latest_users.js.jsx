@@ -126,7 +126,7 @@ var LatestUsers = React.createClass({
             </div>
           </div>
           <div className="panel-body full-border-light scrollable no-padding no-margin"  style={styles}>
-            <ul className="trending-list p-t-10 no-padding no-style no-margin" ref="trendingList" style={styles}>
+            <ul className="trending-list no-padding no-style no-margin" ref="trendingList" style={styles}>
               {content}
             </ul>
           </div>

@@ -19,7 +19,6 @@
     <div class="content p-t-20">
       <div class="col-md-3 col-sm-3 no-padding col-lg-3 col-xlg-3">
           <%= render partial: 'school_card' %>
-          <%= render partial: 'school_faculties' %>
       </div>
       <div class="col-md-6">
         <div class="activity-feed auto-height">
@@ -38,8 +37,7 @@
       </div>
       <div class="col-md-3 col-sm-4 no-padding">
       <div class="sidebar auto-height white-bg box-shadow">
-        <%= react_component('LatestListings', {path: latest_ideas_school_path(@school)}) %>
-        <%= react_component('LatestListings', {path: latest_students_school_path(@school)}) %>
+        <%= react_component('LatestListings', {path: latest_people_school_path(@school)}) %>
       </div>
       </div>
     </div>

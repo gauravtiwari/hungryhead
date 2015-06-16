@@ -94,19 +94,19 @@ var CardContent = React.createClass({
 
 
     if(markets.length > 0) {
-      var market_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+      var market_content = <div className="m-b-15 p-l-20 p-r-20 p-t-20"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
     }
 
     if(hobbies.length > 0) {
-      var hobbies_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+      var hobbies_content = <div className="m-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
     }
 
     if(skills.length > 0){
-      var skills_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+      var skills_content = <div className="p-l-20 p-r-20 p-b-20"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
     if(subjects.length > 0){
-      var subjects_content = <div className="m-b-15"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
+      var subjects_content = <div className="m-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
     }
 
 
@@ -126,13 +126,10 @@ var CardContent = React.createClass({
                   <div className="clearfix p-l-10 p-r-10 p-t-10">
                        <h3 className="no-margin bold text-white">
                            {this.props.profile.name}
-                           <div className="role-badge inline m-l-10 v-middle" data-toggle="tooltip" data-container="body" title={this.props.profile.role}>
-                             <img src={this.props.profile.role_badge} alt={this.props.profile.role_badge} width="30px" height="30px" />
-                           </div>
                        </h3>
                        <p className="no-margin text-white fs-12 p-t-10">{this.props.profile.mini_bio}</p>
-                       <p className="no-margin text-white fs-12">{location}{school}</p>
-                       <ul className="social-list text-white m-t-5 small no-style">
+                       <p className="no-margin text-white fs-12 p-t-5">{location}{school}</p>
+                       <ul className="social-list text-white p-t-5 small no-style">
                         {website_url}
                         {linkedin_url}
                         {facebook_url}
@@ -142,14 +139,14 @@ var CardContent = React.createClass({
                 </div>
             </div>
         </div>
-        <div className="padding-20 box-shadow bg-master-lightest">
-          <ul className="text-master m-t-5 small no-style">
+
+          <ul className="text-master small no-style no-margin bg-white">
             {market_content}
             {subjects_content}
             {hobbies_content}
             {skills_content}
           </ul>
-        </div>
+
       </div>
     )
   }
