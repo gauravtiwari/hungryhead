@@ -51,13 +51,3 @@
 			Location.new(name: tag, description: tag, description: tag).save
 		end
 	end
-
-	subjects = File.read("#{Rails.root}/dump-data/subjects.json")
-
-	data_hash = JSON.parse(subjects)
-	Subject.destroy_all
-	data_hash.each do |tag|
-		if Subject.find_by_slug("#{tag.parameterize}").blank?
-			Subject.new(name: tag, description: tag, description: tag).save
-		end
-	end
