@@ -7,7 +7,7 @@
 		user_name_badge: "<%= current_user.first_name.first + current_user.last_name.first %>",
 		balance: "<%= current_user.fund['balance'] %>",
 		email: "<%= current_user.email %>",
-		ideas: "<%= current_user.ideas_counter.value if current_user.type == "Student" %>",
+		ideas: "<%= current_user.ideas_counter.value %>",
 		feedbacks: "<%= current_user.feedbacks_counter.value %>",
 		investments: "<%= current_user.investments_counter.value %>",
 		avatar: "<%= current_user.avatar.url(:avatar) %>",
