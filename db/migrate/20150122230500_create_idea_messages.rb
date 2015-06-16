@@ -14,6 +14,6 @@ class CreateIdeaMessages < ActiveRecord::Migration
     end
 
     add_index :idea_messages, :idea_id, algorithm: :concurrently
-    add_index :idea_messages, :student_id, algorithm: :concurrently
+    add_index :idea_messages, :user_id, algorithm: :concurrently
   end
 end

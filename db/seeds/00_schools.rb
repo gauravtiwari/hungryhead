@@ -10,6 +10,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@lancs.ac.uk',
     domain: 'lancs.ac.uk',
+    admin_id: 2,
     website: 'lancs.ac.uk'
   )
 
@@ -19,6 +20,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mancs.ac.uk',
     domain: 'mancs.ac.uk',
+    admin_id: 2,
     website: 'mancs.ac.uk'
   )
 
@@ -28,6 +30,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@icl.ac.uk',
     domain: 'icl.ac.uk',
+    admin_id: 2,
     website: 'icl.ac.uk'
   )
 
@@ -37,6 +40,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@cam.ac.uk',
     domain: 'cam.ac.uk',
+    admin_id: 3,
     website: 'cam.ac.uk'
   )
 
@@ -46,6 +50,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@salford.ac.uk',
     domain: 'salford.ac.uk',
+    admin_id: 4,
     website: 'salford.ac.uk'
   )
 
@@ -55,6 +60,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@uclan.ac.uk',
     domain: 'uclan.ac.uk',
+    admin_id: 2,
     website: 'uclan.ac.uk'
   )
 
@@ -64,6 +70,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mmu.ac.uk',
     domain: 'mmu.ac.uk',
+    admin_id: 2,
     website: 'mmu.ac.uk'
   )
 
@@ -73,6 +80,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@oxford.ac.uk',
     domain: 'oxford.ac.uk',
+    admin_id: 2,
     website: 'oxford.ac.uk'
   )
 
@@ -82,6 +90,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@ucl.ac.uk',
     domain: 'ucl.ac.uk',
+    admin_id: 2,
     website: 'ucl.ac.uk'
   )
 
@@ -91,6 +100,7 @@ ActiveRecord::Base.transaction do
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@bristol.ac.uk',
     domain: 'bristol.ac.uk',
+    admin_id: 2,
     website: 'bristol.ac.uk'
   )
 

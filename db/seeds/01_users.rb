@@ -17,7 +17,7 @@ ActiveRecord::Base.transaction do
   )
 
 
-  Student.create!(
+  User.create!(
     name: "Gaurav Tiwari",
     first_name: "Gaurav",
     last_name: "Tiwari",
@@ -34,7 +34,7 @@ ActiveRecord::Base.transaction do
     confirmed_at: Time.now
   )
 
-  Teacher.create!(
+  User.create!(
     name: "Parul Singh",
     first_name: "Parul",
     last_name: "Singh",
@@ -52,7 +52,7 @@ ActiveRecord::Base.transaction do
     confirmed_at: Time.now
   )
 
-  Mentor.create!(
+  User.create!(
     name: "Stuart Logan",
     first_name: "Stuart",
     last_name: "Logan",
@@ -70,7 +70,7 @@ ActiveRecord::Base.transaction do
     confirmed_at: Time.now
   )
 
-  Mentor.create!(
+  User.create!(
     name: "Damien Sheils",
     first_name: "Damien",
     last_name: "Sheils",
@@ -90,7 +90,7 @@ ActiveRecord::Base.transaction do
 
   1.upto(30) { |i|
 
-    Mentor.create!(
+    User.create!(
       name: Forgery::Name.full_name,
       first_name: Forgery::Name.first_name,
       last_name: Forgery::Name.last_name,
@@ -110,7 +110,7 @@ ActiveRecord::Base.transaction do
 
   1.upto(30) { |i|
 
-    Teacher.create!(
+    User.create!(
       name: Forgery::Name.full_name,
       first_name: Forgery::Name.first_name,
       last_name: Forgery::Name.last_name,
@@ -131,7 +131,7 @@ ActiveRecord::Base.transaction do
 
   1.upto(100) { |i|
 
-    Student.create!(
+    User.create!(
       name: Forgery::Name.full_name,
       first_name: Forgery::Name.first_name,
       last_name: Forgery::Name.last_name,

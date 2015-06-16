@@ -428,7 +428,7 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 CREATE TABLE idea_messages (
     id integer NOT NULL,
-    student_id integer NOT NULL,
+    user_id integer NOT NULL,
     idea_id integer NOT NULL,
     body text NOT NULL,
     status integer,
@@ -462,7 +462,7 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 
 CREATE TABLE ideas (
     id integer NOT NULL,
-    student_id integer NOT NULL,
+    user_id integer NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
     name character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
@@ -1155,6 +1155,7 @@ CREATE TABLE schools (
     email character varying DEFAULT ''::character varying NOT NULL,
     domain character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
+    admin_id integer DEFAULT 1 NOT NULL,
     slug character varying NOT NULL,
     description text,
     logo character varying,
@@ -1163,8 +1164,7 @@ CREATE TABLE schools (
     data jsonb DEFAULT '{}'::jsonb,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    admin_id integer DEFAULT 1 NOT NULL
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1255,39 +1255,6 @@ ALTER SEQUENCE slugs_id_seq OWNED BY slugs.id;
 
 
 --
--- Name: subjects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE subjects (
-    id integer NOT NULL,
-    name character varying,
-    slug character varying,
-    description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: subjects_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE subjects_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: subjects_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE subjects_id_seq OWNED BY subjects.id;
-
-
---
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1365,7 +1332,6 @@ CREATE TABLE users (
     name character varying DEFAULT ''::character varying NOT NULL,
     username character varying DEFAULT ''::character varying NOT NULL,
     avatar character varying DEFAULT ''::character varying,
-    type character varying DEFAULT 'User'::character varying,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
     mini_bio character varying DEFAULT ''::character varying,
@@ -1775,13 +1741,6 @@ ALTER TABLE ONLY slugs ALTER COLUMN id SET DEFAULT nextval('slugs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY subjects ALTER COLUMN id SET DEFAULT nextval('subjects_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -2085,14 +2044,6 @@ ALTER TABLE ONLY slugs
 
 
 --
--- Name: subjects_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY subjects
-    ADD CONSTRAINT subjects_pkey PRIMARY KEY (id);
-
-
---
 -- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2365,10 +2316,10 @@ CREATE INDEX index_idea_messages_on_idea_id ON idea_messages USING btree (idea_i
 
 
 --
--- Name: index_idea_messages_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_idea_messages_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (student_id);
+CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_id);
 
 
 --
@@ -2428,10 +2379,10 @@ CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
 
 
 --
--- Name: index_ideas_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_ideas_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
+CREATE INDEX index_ideas_on_user_id ON ideas USING btree (user_id);
 
 
 --
@@ -2715,13 +2666,6 @@ CREATE INDEX index_slugs_on_sluggable_type_and_sluggable_id ON slugs USING btree
 
 
 --
--- Name: index_subjects_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_subjects_on_slug ON subjects USING btree (slug);
-
-
---
 -- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2838,13 +2782,6 @@ CREATE UNIQUE INDEX index_users_on_slug ON users USING btree (slug);
 --
 
 CREATE INDEX index_users_on_state ON users USING btree (state);
-
-
---
--- Name: index_users_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_type ON users USING btree (type);
 
 
 --
@@ -3031,8 +2968,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150312183535');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183540');
 
-INSERT INTO schema_migrations (version) VALUES ('20150312183545');
-
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317220155');
@@ -3062,6 +2997,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 
 INSERT INTO schema_migrations (version) VALUES ('20150615210512');
-
-INSERT INTO schema_migrations (version) VALUES ('20150616132242');
 

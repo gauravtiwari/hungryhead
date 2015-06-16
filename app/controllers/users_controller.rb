@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     invited = []
     users.delete(["", ""])
     users.each do |u|
-      @user = Mentor.invite!({name: u[0], email: u[1]}, current_user) do |u|
+      @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
       @user.invitation_sent_at = Time.now.utc
