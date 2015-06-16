@@ -250,6 +250,44 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 
 --
+-- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE events (
+    id integer NOT NULL,
+    title character varying DEFAULT ''::character varying NOT NULL,
+    user_id integer NOT NULL,
+    description character varying DEFAULT ''::character varying NOT NULL,
+    location character varying DEFAULT ''::character varying NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-16 23:40:58.979271'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-16 23:40:58.979298'::timestamp without time zone NOT NULL,
+    guest_invites boolean DEFAULT false,
+    private boolean DEFAULT true,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE events_id_seq OWNED BY events.id;
+
+
+--
 -- Name: feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1578,6 +1616,13 @@ ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY feedbacks ALTER COLUMN id SET DEFAULT nextval('feedbacks_id_seq'::regclass);
 
 
@@ -1857,6 +1902,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY crono_jobs
     ADD CONSTRAINT crono_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
 
 
 --
@@ -2242,6 +2295,27 @@ CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_crono_jobs_on_job_id ON crono_jobs USING btree (job_id);
+
+
+--
+-- Name: index_events_on_end_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_end_time ON events USING btree (end_time);
+
+
+--
+-- Name: index_events_on_start_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
+
+
+--
+-- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
@@ -3054,4 +3128,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150610172254');
 INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 
 INSERT INTO schema_migrations (version) VALUES ('20150615210512');
+
+INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 
