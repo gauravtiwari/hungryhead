@@ -1,0 +1,47 @@
+<div class="container p-b-60">
+  <div class="social-wrapper container">
+    <div class="social" data-pages="social">
+        <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
+          <%=  render partial: 'school_data' %>
+          <%= render partial: 'cover' %>
+         <div class="school-action-buttons col-md-5">
+          <% if current_user.admin? %>
+            <%= link_to('Edit Profile', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
+          <% end %>
+        </div>
+        </div>
+    </div>
+
+    <div class="box-shadow bg-white">
+      <%= render partial: 'menu' %>
+    </div>
+
+    <div class="content p-t-20">
+      <div class="col-md-3 col-sm-3 no-padding col-lg-3 col-xlg-3">
+          <%= render partial: 'school_card' %>
+          <%= render partial: 'school_faculties' %>
+      </div>
+      <div class="col-md-6">
+        <div class="activity-feed auto-height">
+          <div class="share-post panel panel-default m-b-20">
+            <form role="form">
+                <div class="form-group-attached">
+                    <div class="form-group form-group-default">
+                        <label class="b-b b-grey p-b-5">Share updates</label>
+                        <textarea type="text" placeholder="What's happening?" class="form-control p-t-20 p-b-40" name="projectName" required autofocus="true"></textarea>
+                    </div>
+                </div>
+            </form>
+          </div>
+          <%= render_activities(@activities) %>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-4 no-padding">
+      <div class="sidebar auto-height white-bg box-shadow">
+        <%= react_component('LatestListings', {path: latest_ideas_school_path(@school)}) %>
+        <%= react_component('LatestListings', {path: latest_students_school_path(@school)}) %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
