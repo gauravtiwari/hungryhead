@@ -627,6 +627,8 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
+    sidekiq-status (0.5.3)
+      sidekiq (>= 2.7, < 3.4)
     signature (0.1.8)
     simple_form (3.1.0)
       actionpack (~> 4.0)
@@ -813,6 +815,7 @@ DEPENDENCIES
   shareable
   showdown-rails
   sidekiq
+  sidekiq-status
   simple_form
   sinatra (>= 1.3.0)
   skylight
