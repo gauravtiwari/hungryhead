@@ -40,7 +40,7 @@ class Vote < ActiveRecord::Base
   #Delete notification before destroying vote
   def delete_notification
     #delete notification if record is destroyed
-    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

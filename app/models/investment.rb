@@ -54,7 +54,7 @@ class Investment < ActiveRecord::Base
 
   def delete_activity
     #remove activity from database and cache
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

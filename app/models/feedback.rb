@@ -74,7 +74,7 @@ class Feedback < ActiveRecord::Base
 
   def delete_activity
     #Delete activity item from feed
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
   end
 
 end

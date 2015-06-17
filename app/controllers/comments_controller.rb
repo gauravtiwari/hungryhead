@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
         { data: render(:show, locals: {comment: comment} )}
       )
       # Enque activity creation
-      CreateActivityJob.set(wait: 2.seconds).perform_later(comment.id, comment.class.to_s)
+      CreateActivityJob.perform_later(comment.id, comment.class.to_s)
     end
 
     #If error render errors

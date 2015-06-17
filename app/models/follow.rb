@@ -36,7 +36,7 @@ class Follow < ActiveRecord::Base
   end
 
   def delete_notification
-    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s) unless followable_type == "School"
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
 
 end

@@ -50,7 +50,7 @@ class FeedbacksController < ApplicationController
           format.json { render :show, status: :created}
         end
         # Enque activity creation
-        CreateActivityJob.set(wait: 2.seconds).perform_later(feedback.id, feedback.class.to_s)
+        CreateActivityJob.perform_later(feedback.id, feedback.class.to_s)
       else
         respond_to do |format|
           format.json { render json: feedback.errors,  status: :unprocessable_entity }

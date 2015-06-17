@@ -93,7 +93,7 @@ class Comment < ActiveRecord::Base
 
   def delete_notification
     #Delete activity item from feed
-    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

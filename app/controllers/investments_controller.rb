@@ -47,7 +47,7 @@ class InvestmentsController < ApplicationController
         format.json { render json: {error: "Insufficient Balance #{current_user.fund['balance']}"}, status: :unprocessable_entity }
       end
     end
-    CreateActivityJob.set(wait: 2.seconds).perform_later(@investment.id, @investment.class.to_s)
+    CreateActivityJob.perform_later(@investment.id, @investment.class.to_s)
   end
 
   private

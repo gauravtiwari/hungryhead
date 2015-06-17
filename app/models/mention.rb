@@ -12,7 +12,7 @@ class Mention < ActiveRecord::Base
 
   def delete_notification
     #Delete notification
-    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
   end
 
 end

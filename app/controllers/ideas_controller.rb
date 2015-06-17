@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    PersistViewsCountJob.set(wait: 1.minute).perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.user == current_user
+    PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.user == current_user
   end
 
   #Get idea card
@@ -61,7 +61,7 @@ class IdeasController < ApplicationController
   def publish
     publish_idea_service.on :idea_published do |idea|
       render :publish
-      CreateActivityJob.set(wait: 5.seconds).perform_later(idea.id, idea.class.to_s)
+      CreateActivityJob.perform_later(idea.id, idea.class.to_s)
     end
     publish_idea_service.on :error do |idea|
       render :unpublish
