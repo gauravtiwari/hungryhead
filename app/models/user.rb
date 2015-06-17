@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   include Activist
   include Impressionable
   include Impressioner
+  include Eventable
 
   attr_accessor :login
   attr_reader :raw_invitation_token
