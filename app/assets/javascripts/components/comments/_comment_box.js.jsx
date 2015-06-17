@@ -147,7 +147,7 @@ var CommentBox = React.createClass({
     return (
       <div className={comments_box}>
         <CommentForm white={this.props.white || false}  loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
-        <CommentList scrollable={this.props.scrollable || false} form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
+        <CommentList form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
         {show_comment_bar}
         {pagination}
         {no_comments}

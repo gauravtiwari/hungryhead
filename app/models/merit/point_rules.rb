@@ -27,6 +27,10 @@ module Merit
       #Feedbacks related
       score 5, :on => 'feedbacks#create', category: 'feedback', to: :idea
 
+      score 5, :on => 'follows#create', category: 'follow', to: :followable do |follow|
+        follow.followable_type == "Idea"
+      end
+
       score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.helpful?
       end
@@ -36,7 +40,7 @@ module Merit
       end
 
       #Investment related
-      score 5, :on => 'investments#create', to: :user, category: 'investment'
+      score 25, :on => 'investments#create', to: [:user, :idea], category: 'investment'
 
       #Ideas
       score 5, :on => 'ideas#publish', to: :user, category: 'idea_publish' do |idea|

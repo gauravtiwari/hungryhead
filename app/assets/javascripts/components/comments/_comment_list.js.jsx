@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var CommentList = React.createClass({
+
   render: function () {
 
     var comments = this.props.comments;
@@ -24,8 +25,7 @@ var CommentList = React.createClass({
     var cx = React.addons.classSet;
 
     var comment_classes = cx({
-      "comment-list timeline-activity list-unstyled": true,
-      "comments-scollable": this.props.scrollable
+      "comment-list timeline-activity list-unstyled": true
     });
 
     return (

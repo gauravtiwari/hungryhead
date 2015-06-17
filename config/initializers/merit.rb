@@ -138,7 +138,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 16,
   name: "investable",
-  level: "broze",
+  level: "bronze",
   description: "Idea Score 1000 or more",
   custom_fields: { name: "Investable", points: 2 }
 )

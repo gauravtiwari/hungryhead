@@ -1,5 +1,5 @@
 
-json.form action: comments_path, commentable_id: record.id, commentable_type: record.class.to_s
+json.form action: comments_path, commentable_id: record.uuid, commentable_type: record.class.to_s
 
 json.comments comments.each do |comment|
   json.cache! ['comment', comment], expires_in: 10.minutes do

@@ -17,7 +17,7 @@ end
 
 
 if @comments.next_page
-  json.comments_path comments_path(commentable_type: @commentable.class.to_s, id: @commentable.id, page: @comments.next_page)
+  json.comments_path comments_path(commentable_type: @commentable.class.to_s, id: @commentable.uuid, page: @comments.next_page)
 end
 
 

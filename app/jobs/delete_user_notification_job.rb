@@ -9,11 +9,6 @@ class DeleteUserNotificationJob < ActiveJob::Base
           f.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
         end
 
-        #if recipient is idea, remove from the idea feed
-        if notification.recipient_type == "Idea"
-          notification.recipient.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
-        end
-
         #finally remove from recipient ticker and notification
         recipient_user(notification).ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
         recipient_user(notification).friends_notifications.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
@@ -34,6 +29,8 @@ class DeleteUserNotificationJob < ActiveJob::Base
   def recipient_user(notification)
     if notification.recipient_type == "User"
       notification.recipient
+    elsif notification.recipient_type == "Idea"
+      notification.recipient.user
     else
       notification.recipient.user
     end

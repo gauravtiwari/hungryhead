@@ -15,12 +15,12 @@ class ReputationChangeObserver
       user = resource
     elsif resource.class.to_s == "Idea"
       user = resource.user
-      resource.update_attribute!(investable: true) if resource.class.leaderboard[resource.id] > 1000
+      resource.update_attribute(investable: true) if resource.class.leaderboard[resource.id] > 1000
     else
       user = resource.user
     end
 
-    Pusher.trigger_async("private-user-#{user.id}",
+    Pusher.trigger_async("private-user-#{user.uid}",
       "new_badge",
       {
         message:   "You have been #{description}"

@@ -23,6 +23,21 @@ p {
   letter-spacing: 0.03em;
 }
 
+.comment-box .user-pic {
+  float: left;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.comment-box .user-pic .placeholder {
+  width:32px;
+  text-align:center;
+}
+
+.comment-box .comment .placeholder {
+  padding-top: 8px;
+}
+
 .idea-meta h4 {
   line-height: 1.6;
 }
