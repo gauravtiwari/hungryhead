@@ -20,7 +20,9 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.user == current_user
+    if current_user.impressions.where(impressionable: @record).empty? && current_user != idea.user
+      PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
+    end
   end
 
   #Get idea card
@@ -131,7 +133,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/join_team
   def join_team
-    JoinTeamJob.perform_later(current_user, @idea.user.id, @idea)
+    JoinTeamJob.perform_later(current_user, @idea.user.uid, @idea)
     redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
   end
 

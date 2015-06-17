@@ -40,6 +40,7 @@ class Idea < ActiveRecord::Base
 
   #Set to store trending
   list :latest, maxlength: 20, marshal: true, global: true
+
   #Leaderboard ideas
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true

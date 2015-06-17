@@ -27,7 +27,7 @@ class PublishIdeaJob < ActiveJob::Base
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
-        Pusher.trigger_async("private-user-#{f.id}",
+        Pusher.trigger_async("private-user-#{f.uid}",
           "new_feed_item",
           {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
         )
