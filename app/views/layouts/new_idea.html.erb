@@ -33,7 +33,7 @@
 
       <%= javascript_tag 'data-turbolinks-eval' => false  do %>
           var pusher = new Pusher("<%= ENV['PUSHER_APP_KEY'] %>");
-          var channel = pusher.subscribe("private-user-<%= current_user.id %>");
+          var channel = pusher.subscribe("private-user-<%= current_user.uid %>");
           var public_channel = pusher.subscribe("public-notifications");
 
           if(channel) {

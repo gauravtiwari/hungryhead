@@ -1,4 +1,4 @@
-json.current_user_id current_user.id
+json.current_user_id current_user.uid
 
 json.mailbox @box
 json.mailbox_size do
