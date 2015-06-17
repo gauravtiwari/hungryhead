@@ -56,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def card
+    authorize @user
     render partial: 'shared/user_card'
   end
 

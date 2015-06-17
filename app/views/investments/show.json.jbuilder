@@ -2,6 +2,7 @@ json.idea do
   json.form action: idea_investments_path(@idea), investable_id: @idea.id, investor_id: current_user.id, idea_id: @idea.id
   json.name @idea.name
   json.can_invest @idea.can_invest?(current_user)
+  json.investable @idea.investable?
   json.idea_fund @idea.balance
   json.user_avatar current_user.avatar.url(:avatar)
   json.amount @investment.amount

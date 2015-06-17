@@ -14,13 +14,13 @@ var MainContent = React.createClass({
   componentDidMount: function() {
     if(this.isMounted() && this.state.meta.is_owner) {
       this.updateContent();
-      var id = this.state.idea.id;
+      var id = this.state.idea.uuid;
     }
   },
 
   updateContent: function() {
     var self = this;
-    var id = this.state.idea.id;
+    var id = this.state.idea.uuid;
     idea_collaboration_channel.bind('idea_update_'+id, function(data) {
       var response = JSON.parse(data.data);
       $.pubsub('publish', 'closeSectionForm', false);

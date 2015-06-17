@@ -41,6 +41,8 @@ class CreateNotificationCacheService
   def recipient_user
     if @activity.recipient_type == "User"
       @activity.recipient
+    elsif @activity.recipient_type == "Idea"
+      @activity.recipient.user
     elsif
       @activity.recipient.user
     end

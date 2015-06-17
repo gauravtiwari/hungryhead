@@ -4,11 +4,40 @@ var IdeaHeader = React.createClass({
     var data = JSON.parse(this.props.data);
     return {
       data: data,
-      idea: data.idea,
-      raised: data.stats.raised,
-      feedbacks_count: data.stats.feedbacks_counter,
-      votes_count: data.stats.votes_counter
+      idea: data.idea
     }
+  },
+
+  saveIdeaForm:function(formData, action) {
+    $.pubsub('publish', 'idea_edit_form_saving', true);
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      data: formData,
+      url: action,
+      type: "PUT",
+      dataType: "json",
+      success: function ( data ) {
+        this.setState({idea: data.idea});
+        $('#editIdeaFormPopup').modal('hide');
+        $('body').pgNotification({style: "simple", message: "Idea Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
+        $.pubsub('publish', 'idea_edit_form_saving', false);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  openForm: function() {
+    $('body').append($('<div>', {class: 'edit_idea_form_modal', id: 'edit_idea_form_modal'}));
+    React.render(<IdeaEditForm key={this.state.idea.uuid} closeForm={this.closeForm} openForm={this.openForm} idea={this.state.idea} form={this.state.idea.form} saveIdeaForm={this.saveIdeaForm} />,
+      document.getElementById('edit_idea_form_modal')
+    );
+    $('#editIdeaFormPopup').modal('show');
+  },
+
+  closeForm: function() {
+    $('#editIdeaFormPopup').modal('hide');
   },
 
   render: function() {
@@ -17,10 +46,17 @@ var IdeaHeader = React.createClass({
     } else {
       var cover = ""
     }
+
+    if(this.state.data.meta.is_owner) {
+
+        var text = <span className="fa fa-pencil"> Edit</span>;
+    } else {
+      var text = "";
+    }
     return (
       <div className="idea-header bg-solid">
         {cover}
-        <IdeaProfile idea={this.state.idea} />
+        <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
         <IdeaPitch idea={this.state.idea} />
       </div>
     );

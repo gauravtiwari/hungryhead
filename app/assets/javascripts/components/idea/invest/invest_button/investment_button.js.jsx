@@ -4,7 +4,7 @@
 var InvestButton = React.createClass({
 
   getInitialState: function () {
-    return {loading: false, invested: this.props.invested};
+    return {loading: false, invested: this.props.invested, investable: this.props.idea.investable};
   },
 
   openInvestBox: function () {
@@ -43,7 +43,8 @@ var InvestButton = React.createClass({
 
     var invested_classes = cx({
       'btn btn-sm fs-13 padding-5  p-l-10 p-r-10 pull-right m-r-10': true,
-      'btn-info': !this.state.invested,
+      'btn-info': !this.state.invested && this.state.investable,
+      'btn-info light': !this.state.investable,
       'btn-green text-white semi-bold': this.state.invested
     });
 

@@ -101,7 +101,7 @@ class Idea < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false }
   validates :high_concept_pitch, :presence => true, length: {within: 20..50}
-  validates :elevator_pitch, :presence => true, length: {within: 50..140}
+  validates :elevator_pitch, :presence => true, length: {within: 100..140}
 
   public
 
@@ -109,8 +109,8 @@ class Idea < ActiveRecord::Base
     true
   end
 
-  def founder?(user)
-    user == user
+  def founder?(current_user)
+    user == current_user
   end
 
   def name_badge

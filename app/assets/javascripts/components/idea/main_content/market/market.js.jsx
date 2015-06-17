@@ -25,7 +25,7 @@ var Market = React.createClass({
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
-      url: Routes.idea_path(this.props.idea.id),
+      url: this.props.meta.idea_path,
       type: "PUT",
       dataType: "json",
       success: function ( data ) {

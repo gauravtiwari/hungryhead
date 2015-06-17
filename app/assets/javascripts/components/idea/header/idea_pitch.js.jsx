@@ -9,7 +9,7 @@ var IdeaPitch= React.createClass({
 
     return (
       <div className="col-md-6">
-        <h3 className="text-white  p-t-20 p-b-20" dangerouslySetInnerHTML={{__html: html}}></h3>
+        <h4 className="text-white p-t-40 p-b-20" dangerouslySetInnerHTML={{__html: html}}></h4>
       </div>
     );
   }

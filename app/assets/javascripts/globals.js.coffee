@@ -26,6 +26,12 @@ jQuery(document).ready ->
 	$('#pitch_idea_form').validate();
 	$('#editProfileFormPopup').validate();
 	$('#valid-form').validate();
+
+	try
+		$('#idea_high_concept_pitch').rules 'add', minlength: 20, maxlength: 50
+		$('#idea_elevator_pitch').rules 'add', minlength: 100, maxlength: 140
+	catch e
+
 	$("[data-toggle='tooltip']").tooltip();
 
 	#Initialize Pages modules

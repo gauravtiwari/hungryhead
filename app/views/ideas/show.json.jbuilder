@@ -1,5 +1,5 @@
 json.idea do
-  json.(@idea, :id, :name, :description, :high_concept_pitch, :profile, :elevator_pitch, :sections, :video_html, :video)
+  json.(@idea, :uuid, :name, :description, :high_concept_pitch, :profile, :elevator_pitch, :sections, :video_html, :video)
   json.logo do
     json.url @idea.logo.url(:avatar) if @idea.logo
   end
@@ -15,13 +15,13 @@ json.idea do
   json.school_url profile_path(@idea.school)
   json.location @idea.location_list.each do |location|
     json.name location
-    json.url profile_path(location.parameterize)
+    json.url tag_path(location.parameterize)
   end
   json.market @idea.market_list.each do |market|
     json.name market
     json.url tag_path(market.parameterize)
   end
-  json.form action: idea_path(@idea), method: "PUT", idea_id: @idea.id
+  json.form action: idea_path(@idea), method: "PUT", idea_id: @idea.uuid
 end
 
 json.stats do
