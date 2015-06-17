@@ -208,6 +208,7 @@ gem 'asset_sync'
 #Background Job processing
 gem 'sidekiq'
 gem 'sucker_punch'
+gem 'sidekiq-status'
 
 # Image Processing
 gem "mini_magick"
