@@ -126,7 +126,7 @@ class IdeasController < ApplicationController
   def invite_team
     params[:idea_invite][:invitees].split(", ").each do |id|
       user = User.find(id)
-      InviteTeamJob.perform_later(current_user, user, @idea, params[:idea_invite][:message])
+      InviteTeamJob.perform_later(current_user.id, user.id, @idea.id, params[:idea_invite][:message])
     end
     render json: true
   end
