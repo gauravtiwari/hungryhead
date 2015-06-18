@@ -5,7 +5,8 @@
       </div>
       <div class="panel-controls">
           <ul>
-              <li><%= react_component('InviteLink') %></li>
+              <li><%= react_component('InviteLink', {path: idea_team_invites_path(@idea.slug)}) %>
+              </li>
           </ul>
       </div>
 

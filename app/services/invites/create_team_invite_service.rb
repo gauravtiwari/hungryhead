@@ -1,4 +1,4 @@
-class CreateInviteTeamService
+class CreateTeamInviteService
 
   def initialize(reciever, current_user, idea, message)
     @reciever = reciever
@@ -9,10 +9,10 @@ class CreateInviteTeamService
 
   def create
     @team_invite = @idea.team_invites.new(
-      inviter: current_user,
+      inviter: @current_user,
       invited: @reciever,
       idea: @idea,
-      msg: message,
+      msg: @message,
       token: Devise.friendly_token(24)
     )
     @team_invite

@@ -1,10 +1,16 @@
 
 var InviteLink = React.createClass({
 
+	getInitialState: function() {
+		return {
+			path: this.props.path
+		};
+	},
+
 	loadInvitePopup: function() {
       $('body').append($('<div>', {class: 'invite_form_modal', id: 'invite_form_modal'}));
       React.render(
-		  <InviteTeam key={Math.random()} />,
+		  <InviteTeam key={Math.random()} path={this.state.path} />,
 		  document.getElementById('invite_form_modal')
 		);
       this.setState({loading: false});

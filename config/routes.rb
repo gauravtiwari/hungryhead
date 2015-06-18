@@ -191,8 +191,6 @@ Rails.application.routes.draw do
 
   resources :invite_requests, only: [:create]
 
-  resources :team_invites, only: [:create, :update, :destroy]
-
   #Comments resources
   resources :comments, only: [:create, :update, :index, :destroy]
 
@@ -200,6 +198,8 @@ Rails.application.routes.draw do
   resources :ideas, except: [:new, :edit] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
+    resources :team_invites, only: [:create, :update, :destroy]
+
     collection do
       get :latest
       get :popular
