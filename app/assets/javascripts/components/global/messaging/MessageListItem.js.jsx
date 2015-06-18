@@ -39,7 +39,7 @@ var MessageListItem = React.createClass({
     } else {
       var avatar = <div className="thumbnail-wrapper d32 circular bordered b-white">
               <span className="placeholder bold text-white">
-                {message.user_name.split(' ')[0].split('')[0]}{message.user_name.split(' ')[1].split('')[0]}
+                {message.user_badge}
               </span>
             </div>;
     }

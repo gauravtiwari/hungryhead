@@ -9,9 +9,9 @@ class JoinTeamJob < ActiveJob::Base
 
         msg = "<a href='#{Rails.application.routes.url_helpers.profile_path(user)}'>#{user.name}</a> has just joined "+ "<a href='#{Rails.application.routes.url_helpers.idea_path(idea)}'>#{idea.name}</a> team".html_safe
 
-        Pusher.trigger("private-user-#{rec_id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
+        Pusher.trigger("presence-user-#{rec_id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
       else
-        Pusher.trigger("private-user-#{user.uid}", "new_notification", {data: {id: notification.id, msg: "You are already in #{idea.name} team" } }.to_json)
+        Pusher.trigger("presence-user-#{user.uid}", "new_notification", {data: {id: notification.id, msg: "You are already in #{idea.name} team" } }.to_json)
       end
     end
   end

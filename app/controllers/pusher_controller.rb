@@ -9,6 +9,7 @@ class PusherController < ApplicationController
         :user_info => {
           :user_id => current_user.uid,
           :name => current_user.name,
+          :name_badge => current_user.user_name_badge,
           :email => current_user.email,
           :avatar => current_user.avatar.url(:avatar),
           :url => profile_path(current_user)

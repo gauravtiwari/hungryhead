@@ -11,17 +11,19 @@ var IdeaCardStats = React.createClass({
       views_count: data.views_count,
       comments_count: data.comments_count,
       votes_count: data.votes_count,
-      score: data.score
+      score: data.score,
+      width: null
     }
   },
 
   calculateScore: function() {
     var remaining = this.state.score/10000
-    return remaining * 100
+    this.setState({width: remaining * 100});
   },
 
   componentDidMount: function() {
     var self = this;
+    this.calculateScore();
     $.pubsub('subscribe', 'update_followers_stats', function(msg, data){
       self.setState({followers_count: data});
     });
@@ -70,7 +72,7 @@ var IdeaCardStats = React.createClass({
             <div style={{width: '50%'}} className="text-center auto-margin">
                 <div className="progress-text text-center text-success fs-16 p-b-10 bold">Score: {this.state.score}/10K</div>
                 <div className="progress">
-                    <div className="progress-bar progress-bar-success" style={{width: this.calculateScore() + '%'}}></div>
+                    <div className="progress-bar progress-bar-success" style={{width: this.state.width + '%'}}></div>
                 </div>
             </div>
 

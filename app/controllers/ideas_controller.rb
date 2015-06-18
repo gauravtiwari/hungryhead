@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    if current_user.impressions.where(impressionable: @record).empty? && current_user != idea.user
+    if current_user.impressions.where(impressionable: @idea).empty? && current_user != @idea.user
       PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
     end
   end
@@ -158,8 +158,7 @@ class IdeasController < ApplicationController
   def update
     authorize @idea
     if @idea.update(idea_params)
-      team = @idea.team_ids.join('')
-      Pusher.trigger_async("presence-idea-collaboration-#{team}", "idea_update_#{@idea.uuid}", {id: @idea.uuid, data: render(template: 'ideas/show')}.to_json)
+      Pusher.trigger_async("presence-idea-collaboration-#{@idea.slug}", "idea_update_#{@idea.slug}", {id: @idea.uuid, data: render(template: 'ideas/show')}.to_json)
     else
       render json: @idea.errors, status: :unprocessable_entity
     end

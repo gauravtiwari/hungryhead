@@ -47,15 +47,15 @@ var CommentBox = React.createClass({
         comment_channel.bind('new_comment', function(data){
           var response = JSON.parse(data.data);
           var comment = response.comment;
-          var newState = React.addons.update(this.state, {
-              comments : {
-                $unshift : [comment]
-              }
-          });
-          this.setState(newState);
-          console.log(comment.id);
-          $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
-          $("#comment_"+comment.id).addClass('animated fadeInDown');
+          if(channel.members.me.id != comment.user_id) {
+            var newState = React.addons.update(this.state, {
+                comments : {
+                  $unshift : [comment]
+                }
+            });
+            this.setState(newState);
+            $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          }
           this.setState({count: this.state.count+1 });
         }.bind(this));
       }
@@ -71,9 +71,16 @@ var CommentBox = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
+        var comment = data.comment;
+        var newState = React.addons.update(this.state, {
+            comments : {
+              $unshift : [comment]
+            }
+        });
+        this.setState(newState);
+        $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
         $('body textarea').trigger('autosize.destroy');
         this.setState({visible: false});
-        $("#comment_"+data.comment.id).effect('highlight', {color: '#f7f7f7'} , 3000);
         this.setState({button_loading: false});
       }.bind(this),
       error: function(xhr, status, err) {

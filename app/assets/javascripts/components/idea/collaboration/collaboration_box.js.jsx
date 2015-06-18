@@ -119,7 +119,7 @@ var CollaborationBox = React.createClass({
         "class": "thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white"
       })
       content = placeholder.append($("<span>", {
-        text: member.info.name.split(' ')[0].split('')[0] + member.info.name.split(' ')[1].split('')[0],
+        text: member.info.name_badge,
         "class": "placeholder bold text-white"
       }))
     }
@@ -145,10 +145,12 @@ var CollaborationBox = React.createClass({
       if(!$('body').hasClass('show-collaboration')) {
         self.speak(response)
       }
-      var messages = self.state.messages.reverse();
-      var newMessages = [response].concat(messages);
-      self.setState({messages: newMessages.reverse()});
-      $("#message-"+response.uuid).effect('highlight', {color: '#f2f2f2'} , 3000);
+      if(idea_collaboration_channel.members.me.id != response.user_id) {
+        var messages = self.state.messages.reverse();
+        var newMessages = [response].concat(messages);
+        self.setState({messages: newMessages.reverse()});
+        $("#message-"+response.uuid).effect('highlight', {color: '#f2f2f2'} , 3000);
+      }
     });
   },
 

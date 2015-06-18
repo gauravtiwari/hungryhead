@@ -9,11 +9,13 @@ body, p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
+  color: #333;
   white-space: normal;
 }
 
 p {
   margin: 0px 0px 10px 0px;
+  color: #242d30 !important;
 }
 .block-title {
   font-family: 'Montserrat';
@@ -22,7 +24,15 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
-
+.commentapp.comment-box.standalone {
+  margin-top: 30px;
+  border: 0;
+}
+.panel-body p,
+.activity-content p {
+  color: #242d30 !important;
+  word-wrap: break-word;
+}
 .comment-box .user-pic {
   float: left;
   border-radius: 50%;
@@ -112,6 +122,8 @@ p {
   padding-left: 0px;
   line-height: 18px;
   margin-bottom: 1em;
+  color: #242d30 !important;
+  font-size: 14px;
 }
 .profile-action-buttons {
   float: right;

@@ -1,6 +1,6 @@
 <div class="idea-collaboration-floating-panel">
 <%= javascript_tag do %>
-	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.team_ids.join('') %>");
+	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.slug %>");
 <% end %>
 
 <%= react_component('OpenCollaborationBox') %>
@@ -12,7 +12,7 @@
              <a><i class="fa fa-comment"></i> Team Chat</a>
          </li>
      </ul>
-     <a class="btn-link quickview-toggle pg-close" data-toggle=
+     <a class="btn-link quickview-toggle pg-close text-white" data-toggle=
      "quickview"></a>
      <div class="tab-content">
          <div class="tab-pane fade in active no-padding" id=

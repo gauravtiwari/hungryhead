@@ -20,7 +20,7 @@ class ReputationChangeObserver
       user = resource.user
     end
 
-    Pusher.trigger_async("private-user-#{user.uid}",
+    Pusher.trigger_async("presence-user-#{user.uid}",
       "new_badge",
       {
         message:   "You have been #{description}"

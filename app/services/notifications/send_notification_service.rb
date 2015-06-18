@@ -6,14 +6,14 @@ class SendNotificationService
   end
 
   def user_notification
-    Pusher.trigger_async("private-user-#{@recipient.uid}",
+    Pusher.trigger_async("presence-user-#{@recipient.uid}",
       "new_ticker_item",
       {
         data:   @activity
       }.to_json
     )
     #Send counters updates
-    Pusher.trigger_async("private-user-#{@recipient.uid}",
+    Pusher.trigger_async("presence-user-#{@recipient.uid}",
       "new_notifications_count",
       {
         data:   @recipient.unread_notifications
@@ -22,7 +22,7 @@ class SendNotificationService
   end
 
   def friend_notification
-    Pusher.trigger_async("private-user-#{@recipient.uid}",
+    Pusher.trigger_async("presence-user-#{@recipient.uid}",
       "new_friend_notification_item",
       {
         data:   @activity
@@ -30,7 +30,7 @@ class SendNotificationService
     )
 
     #send counters updates
-    Pusher.trigger_async("private-user-#{@recipient.uid}",
+    Pusher.trigger_async("presence-user-#{@recipient.uid}",
       "new_notifications_count",
       {
         data:   @recipient.unread_notifications

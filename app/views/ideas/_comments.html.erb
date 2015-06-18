@@ -1,7 +1,7 @@
-<div class="modal fade fill-in stop-scrolling" id="modalSlideComments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade slide-right stop-scrolling" id="modalSlideComments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
   <div class="modal-dialog modal-md">
-      <div class="modal-content">
+      <div class="modal-content scrollable">
         <div class="modal-body no-padding">
         <% commentable = @idea %>
         <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
