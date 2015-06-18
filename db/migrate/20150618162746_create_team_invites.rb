@@ -10,7 +10,7 @@ class CreateTeamInvites < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :team_invites, [:inviter, :invited, :idea], unique: true
+    add_index :team_invites, [:inviter_id, :invited_id, :idea_id], unique: true
     add_index :team_invites, :token
   end
 end

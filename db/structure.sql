@@ -1392,6 +1392,42 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
+-- Name: team_invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE team_invites (
+    id integer NOT NULL,
+    inviter_id integer,
+    invited_id integer,
+    idea_id integer,
+    msg text,
+    pending boolean DEFAULT true NOT NULL,
+    token character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: team_invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE team_invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: team_invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE team_invites_id_seq OWNED BY team_invites.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1840,6 +1876,13 @@ ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY team_invites ALTER COLUMN id SET DEFAULT nextval('team_invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -2158,6 +2201,14 @@ ALTER TABLE ONLY taggings
 
 ALTER TABLE ONLY tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: team_invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY team_invites
+    ADD CONSTRAINT team_invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -2823,6 +2874,41 @@ CREATE INDEX index_tags_on_slug ON tags USING btree (slug);
 
 
 --
+-- Name: index_team_invites_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_idea_id ON team_invites USING btree (idea_id);
+
+
+--
+-- Name: index_team_invites_on_invited_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_invited_id ON team_invites USING btree (invited_id);
+
+
+--
+-- Name: index_team_invites_on_inviter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_inviter_id ON team_invites USING btree (inviter_id);
+
+
+--
+-- Name: index_team_invites_on_inviter_id_and_invited_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_team_invites_on_inviter_id_and_invited_id_and_idea_id ON team_invites USING btree (inviter_id, invited_id, idea_id);
+
+
+--
+-- Name: index_team_invites_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_token ON team_invites USING btree (token);
+
+
+--
 -- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3016,6 +3102,14 @@ ALTER TABLE ONLY mailboxer_receipts
 
 
 --
+-- Name: team_invites_idea_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY team_invites
+    ADD CONSTRAINT team_invites_idea_id_fk FOREIGN KEY (idea_id) REFERENCES ideas(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -3130,4 +3224,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150610172255');
 INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 
 INSERT INTO schema_migrations (version) VALUES ('20150616232524');
+
+INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 
