@@ -1,7 +1,7 @@
 class TeamInvitePolicy < ApplicationPolicy
 
   def update?
-  	current_user == record.inviter || record.invited
+  	current_user == record.inviter
   end
 
   def create?
