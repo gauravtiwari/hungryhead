@@ -15,20 +15,30 @@ var InviteTeam = React.createClass({
 
 	handleTeamInvite: function(formData) {
 		this.setState({loading: true});
-	    $.ajaxSetup({ cache: false });
-	    $.ajax({
-	      data: formData,
-	      url: this.props.path,
-	      type: "POST",
-	      dataType: "json",
-	      success: function ( data ) {
-	        $("#inviteTeamPopup").modal('hide');
-	        this.setState({loading: false});
-	      }.bind(this),
-	      error: function(xhr, status, err) {
-	        console.error(this.props.url, status, err.toString());
-	      }.bind(this)
-	    });
+		$.ajaxSetup({ cache: false });
+		$.ajax({
+		  data: formData,
+		  url: this.props.path,
+		  type: "POST",
+		  dataType: "json",
+		  success: function ( data ) {
+		  	if(data.error){
+		  		$('body').pgNotification({
+		  			style: "simple",
+		  			message: data.error,
+		  			position: "bottom-left",
+		  			type: "danger",
+		  			timeout: 5000
+		  		}).show();
+		  	} else {
+		  		$("#inviteTeamPopup").modal('hide');
+		  	}
+		  	this.setState({loading: false});
+		  }.bind(this),
+		  error: function(xhr, status, err) {
+		    console.error(this.props.url, status, err.toString());
+		  }.bind(this)
+		});
 	},
 
 	selectTeam: function(e){
