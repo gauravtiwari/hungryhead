@@ -18,6 +18,7 @@ class TeamInvitesController < ApplicationController
         @team_invite = CreateTeamInviteService.new(user, current_user, @idea, params[:team_invite][:message]).create
         authorize @team_invite
         if @team_invite.save
+          #Send invitations to recipients
           InviteTeamJob.perform_later(@team_invite.id)
           render json: {success: "Successfully invited #{user.name}"}, status: :created
         else
