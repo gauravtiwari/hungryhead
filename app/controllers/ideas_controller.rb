@@ -124,15 +124,19 @@ class IdeasController < ApplicationController
 
   # POST /ideas/1/invite_team
   def invite_team
-    params[:idea_invite][:invitees].split(", ").each do |id|
-      user = User.find(id)
+    invitees = []
+    params[:idea_invite][:invitees].split(", ").each do |user_id|
+      user = User.find(user_id)
+      invitees << user.name
       if @idea.in_team?(user) || @idea.invited?(user)
         render json: {error: 'Already in team'}, status: 200
       else
-        InviteTeamJob.perform_later(current_user.id, user.id, @idea.id, params[:idea_invite][:message])
+        Idea.transaction do
+          InviteTeamJob.perform_later(current_user.id, user_id, @idea.id, params[:idea_invite][:message])
+        end
       end
     end
-    render json: true
+    render json: {success: "Successfully invited #{invitees.to_sentence}"}, status: 200
   end
 
   # GET /ideas/1/join_team

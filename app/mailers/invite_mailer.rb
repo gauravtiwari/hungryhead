@@ -6,7 +6,6 @@ class InviteMailer < ActionMailer::Base
     @user = user
     @resource = from
     @idea = idea
-    @msg = msg
     subject = "#{from.name} has invited you to join his idea #{idea.name}"
     @view_link = idea_url(@idea)
     @invitation_link = join_team_idea_url(@idea)
