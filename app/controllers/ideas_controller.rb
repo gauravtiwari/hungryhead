@@ -126,7 +126,11 @@ class IdeasController < ApplicationController
   def invite_team
     params[:idea_invite][:invitees].split(", ").each do |id|
       user = User.find(id)
-      InviteTeamJob.perform_later(current_user.id, user.id, @idea.id, params[:idea_invite][:message])
+      if @idea.in_team?(user) || @idea.invited?(user)
+        render json: 'Already in team', status: 200
+      else
+        InviteTeamJob.perform_later(current_user.id, user.id, @idea.id, params[:idea_invite][:message])
+      end
     end
     render json: true
   end
