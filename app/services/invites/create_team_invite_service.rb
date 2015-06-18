@@ -8,14 +8,14 @@ class CreateTeamInviteService
   end
 
   def create
-    @team_invite = @idea.team_invites.new(
+    team_invite = @idea.team_invites.new(
       inviter: @current_user,
       invited: @reciever,
       idea: @idea,
       msg: @message,
       token: Devise.friendly_token(24)
     )
-    @team_invite
+    team_invite
   end
 
 end

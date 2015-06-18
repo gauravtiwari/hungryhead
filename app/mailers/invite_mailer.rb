@@ -2,14 +2,14 @@ class InviteMailer < ActionMailer::Base
 
   layout 'mailer'
 
-  def invite_team(user, from, idea, msg)
-    @user = user
-    @resource = from
-    @idea = idea
-    subject = "#{from.name} has invited you to join his idea #{idea.name}"
+  def invite_team(team_invite)
+    @user = team_invite.invited
+    @resource = team_invite.inviter
+    @idea = team_invite.idea
+    subject = "#{@resource.name} has invited you to join #{@idea.name}"
     @view_link = idea_url(@idea)
-    @invitation_link = join_team_idea_url(@idea)
-    mail(:from => from.email, :to => @user.email, :subject => subject)
+    @invitation_link = idea_team_invite_url(@idea.slug, team_invite.id, token: team_invite.token)
+    mail(:from => @resource.email, :to => @user.email, :subject => subject)
   end
 
   def invite_friends(user, from)

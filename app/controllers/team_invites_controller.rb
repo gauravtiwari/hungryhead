@@ -13,18 +13,13 @@ class TeamInvitesController < ApplicationController
       user = User.find(user_id)
       if @idea.in_team?(user) || @idea.invited?(user)
         skip_authorization
-        render json: {error: "Can't invite #{user.name}. Already in #{@idea.name} team"}, status: 200
+        render json: {error: "Can't invite #{user.name}. Already in #{@idea.name} team"}, status: :unprocessable_entity
       else
-        @team_invite = CreateTeamInviteService.new(
-          user,
-          current_user,
-          @idea,
-          params[:team_invite][:message]
-        )
-        @team_invite.authorize
+        @team_invite = CreateTeamInviteService.new(user, current_user, @idea, params[:team_invite][:message]).create
+        authorize @team_invite
         if @team_invite.save
           InviteTeamJob.perform_later(@team_invite.id)
-          render json: {success: "Successfully invited #{user.name}"}, status: 200
+          render json: {success: "Successfully invited #{user.name}"}, status: :created
         else
           render json: @team_invite.errors, status: :unprocessable_entity
         end
