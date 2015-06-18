@@ -8,14 +8,25 @@ class CreateTeamInviteNotificationService
   end
 
   def create
-    @activity = @inviter.notifications.create!(
-      trackable: @team_invite,
-      verb: 'invited',
-      recipient: @invited,
-      key: 'team_invite.create',
-      unread: true
-    )
-    cache(@activity)
+    if @team_invite.pending?
+      @activity = @inviter.notifications.create!(
+        trackable: @team_invite,
+        verb: 'invited',
+        recipient: @invited,
+        key: 'team_invite.create',
+        unread: true
+      )
+      cache(@activity)
+    else
+      @activity = @inviter.notifications.create!(
+        trackable: @team_invite,
+        verb: 'joined',
+        recipient: @inviter,
+        key: 'team_invite.joined',
+        unread: true
+      )
+      cache(@activity)
+    end
   end
 
   def cache(activity)

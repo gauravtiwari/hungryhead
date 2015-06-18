@@ -58,13 +58,13 @@ class CreateNotificationCacheService
   def add_activity(user, activity_item)
 
     #Add activity to user profile
-    add_activity_to_user_profile(user, activity_item)
+    add_activity_to_user_profile(user, activity_item) unless @activity.trackable_type == "TeamInvite"
 
     #Send notification to recipient
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.user == recipient_user
 
     #Add activity to followers ticker
-    add_activity_to_followers(activity_item) if followers.any?
+    add_activity_to_followers(activity_item) if followers.any? && @activity.trackable_type != "TeamInvite"
 
   end
 
@@ -73,7 +73,7 @@ class CreateNotificationCacheService
     #add to notifications
     recipient_user.friends_notifications.add(activity_item, score_key)
     #add to ticker
-    recipient_user.ticker.add(activity_item, score_key)
+    recipient_user.ticker.add(activity_item, score_key) unless @activity.trackable_type == "TeamInvite"
     SendNotificationService.new(recipient_user, activity).friend_notification if recipient_user != @activity.user
   end
 
@@ -113,6 +113,7 @@ class CreateNotificationCacheService
     elsif @activity.trackable_type == "TeamInvite"
       trackable_user_name = target.inviter.name
       trackable_user_id =   target.inviter.id
+      event_url = target.pending? ? idea_team_invite_url(target.idea, target.id) : nil
     else
       trackable_user_name = target.user.name
       trackable_user_id =   target.user.id
@@ -123,6 +124,7 @@ class CreateNotificationCacheService
         id: target.id,
         event_name: @activity.trackable_type.downcase,
         event_user_id: trackable_user_id,
+        event_url: event_url || nil,
         event_recipient_name: trackable_user_name
       }
     else

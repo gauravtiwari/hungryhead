@@ -55,11 +55,11 @@ class UpdateNotificationCacheService
   #Update activity for all tickers
   def update_activity(user, activity_item)
     #add activity to user personal profile
-    add_activity_to_user_profile(user, activity_item)
+    add_activity_to_user_profile(user, activity_item) unless @activity.trackable_type == "TeamInvite"
     #push notification into friends notifications
     add_notification_for_recipient(recipient_user, activity_item) unless @activity.user == recipient_user
     #add notification to followers ticker
-    add_activity_to_followers(activity_item) if followers.any?
+    add_activity_to_followers(activity_item) if followers.any? &&  @activity.trackable_type != "TeamInvite"
   end
 
   #Add notification to recipients
@@ -68,8 +68,8 @@ class UpdateNotificationCacheService
     recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
     recipient_user.friends_notifications.add(activity_item, score_key)
     #delete from recipient ticker
-    recipient_user.ticker.remrangebyscore(score_key, score_key)
-    recipient_user.ticker.add(activity_item, score_key)
+    recipient_user.ticker.remrangebyscore(score_key, score_key) unless @activity.trackable_type == "TeamInvite"
+    recipient_user.ticker.add(activity_item, score_key) unless @activity.trackable_type == "TeamInvite"
   end
 
   def add_activity_to_friends_ticker(user, activity_item)
@@ -96,7 +96,7 @@ class UpdateNotificationCacheService
   end
 
   def options_for_object(target)
-    if @activity.trackable_type == "User"
+   if @activity.trackable_type == "User"
       trackable_user_name =   target.name
       trackable_user_id =   target.id
     elsif @activity.trackable_type == "Follow"
@@ -105,6 +105,10 @@ class UpdateNotificationCacheService
     elsif @activity.trackable_type == "Vote"
       trackable_user_name = target.voter.name
       trackable_user_id =   target.voter.id
+    elsif @activity.trackable_type == "TeamInvite"
+      trackable_user_name = target.inviter.name
+      trackable_user_id =   target.inviter.id
+      event_url = target.pending? ? idea_team_invite_url(target.idea, target.id) : nil
     else
       trackable_user_name = target.user.name
       trackable_user_id =   target.user.id
@@ -115,6 +119,7 @@ class UpdateNotificationCacheService
         id: target.id,
         event_name: @activity.trackable_type.downcase,
         event_user_id: trackable_user_id,
+        event_url: event_url || nil,
         event_recipient_name: trackable_user_name
       }
     else

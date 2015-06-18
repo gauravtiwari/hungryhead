@@ -19,6 +19,9 @@ class TeamInvitesController < ApplicationController
         authorize @team_invite
         if @team_invite.save
           invited << user.name
+          unless @idea.team_invites_ids.include?(@team_invite.invited_id)
+            @idea.team_invites_ids << @team_invite.invited_id
+          end
           #Send invitations to recipients
           InviteTeamJob.set(wait: 2.seconds).perform_later(@team_invite.id)
         else
@@ -26,6 +29,8 @@ class TeamInvitesController < ApplicationController
         end
       end
     end
+
+    @idea.save!
 
     if @team_invite.errors.empty?
       render json: {success: "Successfully invited #{invited.to_sentence}"}, status: :created
@@ -41,15 +46,18 @@ class TeamInvitesController < ApplicationController
   def show
     @idea = Idea.friendly.find(params[:idea_id])
     authorize @team_invite
-    if current_user == @team_invite.invited
+    if current_user == @team_invite.invited && @team_invite.pending?
       @team_invite = UpdateTeamInviteService.new(@team_invite).join_team_invite
       if @team_invite.save
         JoinTeamJob.perform_later(@team_invite.id)
+        @idea.team_ids << @team_invite.invited_id
+        @idea.team_invites_ids.delete(@team_invite.invited_id.to_s)
+        @idea.save!
         redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
       end
     else
       respond_to do |format|
-         format.html { redirect_to idea_url(@idea), notice: 'Something went wrong.' }
+         format.html { redirect_to idea_url(@idea), notice: "You are already in #{@idea.name} team" }
        end
     end
   end

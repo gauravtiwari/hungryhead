@@ -3,13 +3,15 @@
       <div class="panel-title b-b b-grey p-b-5">
         <i class="fa fa-users text-danger"></i> Team Members
       </div>
-      <div class="panel-controls">
-          <ul>
-              <li><%= react_component('InviteLink', {path: idea_team_invites_path(@idea.slug)}) %>
-              </li>
-          </ul>
-      </div>
-
+      <% if @idea.founder?(current_user) %>
+        <div class="panel-controls">
+            <ul>
+                <li>
+                  <%= react_component('InviteLink', {path: idea_team_invites_path(@idea.slug)}) %>
+                </li>
+            </ul>
+        </div>
+      <% end %>
   </div>
 <div class="panel-body">
     <ul class="list-unstyled">
