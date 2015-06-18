@@ -13,6 +13,16 @@ class InviteMailer < ActionMailer::Base
     mail(:from => @resource.email, :to => @user.email, :subject => subject)
   end
 
+  def joined_team(team_invite)
+    @user = team_invite.inviter
+    @resource = team_invite.invited
+    @idea = team_invite.idea
+    @team_invite = team_invite
+    subject = "#{@resource.name} have successfully joined #{@idea.name}"
+    @view_link = idea_url(@idea)
+    mail(:from => @resource.email, :to => @user.email, :subject => subject)
+  end
+
   def invite_friends(user, from)
     @invited = user
     @sender = from

@@ -1,6 +1,6 @@
 class TeamInvitesController < ApplicationController
 
-  before_action :set_team_invite, only: [:destroy, :update]
+  before_action :set_team_invite, only: [:destroy, :update, :show]
   before_action :authenticate_user!
 
   #Pundit authorization
@@ -38,10 +38,42 @@ class TeamInvitesController < ApplicationController
     end
   end
 
-  def update
+  def show
+    @idea = Idea.friendly.find(params[:idea_id])
     authorize @team_invite
-    JoinTeamJob.perform_later(current_user, @idea.user.uid, @idea)
-    redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
+    if current_user == @team_invite.invited
+      @team_invite = UpdateTeamInviteService.new(@team_invite).join_team_invite
+      if @team_invite.save
+        JoinTeamJob.perform_later(@team_invite.id)
+        redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
+      end
+    else
+      respond_to do |format|
+         format.html { redirect_to idea_url(@idea), notice: 'Something went wrong.' }
+       end
+    end
+  end
+
+  def update
+    @idea = Idea.friendly.find(params[:idea_id])
+    authorize @team_invite
+    if current_user == @team_invite.inviter
+      @team_invite = UpdateTeamInviteService.new(@team_invite).update_team_invite
+      if @team_invite.save
+        InviteTeamJob.set(wait: 2.seconds).perform_later(@team_invite.id)
+        redirect_to idea_path(@idea), notice: "You have successfully reinvited #{@team_invite.invited.name}"
+      end
+    elsif current_user == @team_invite.invited
+      @team_invite = UpdateTeamInviteService.new(@team_invite).join_team_invite
+      if @team_invite.save
+        JoinTeamJob.perform_later(@team_invite.id)
+        redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
+      end
+    else
+      respond_to do |format|
+         format.html { redirect_to idea_url(@idea), notice: 'Something went wrong.' }
+       end
+    end
   end
 
   def destroy
@@ -59,7 +91,11 @@ class TeamInvitesController < ApplicationController
   end
 
   def user_not_authorized
-    render json: {error: "You are not authorised to perform this action"}, status: 404
+    if request.xhr?
+      render json: {error: "You are not authorised to perform this action"}, status: 404
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
 end

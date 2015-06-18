@@ -8,6 +8,10 @@ class TeamInvitePolicy < ApplicationPolicy
     current_user == record.idea.user
   end
 
+  def show?
+    current_user == record.invited
+  end
+
   def destroy?
   	current_user == record.inviter
   end

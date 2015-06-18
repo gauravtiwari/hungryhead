@@ -198,7 +198,7 @@ Rails.application.routes.draw do
   resources :ideas, except: [:new, :edit] do
     #idea messages
     resources :idea_messages, only: [:create, :destroy, :show, :index]
-    resources :team_invites, only: [:create, :update, :destroy]
+    resources :team_invites, only: [:create, :update, :destroy, :show]
 
     collection do
       get :latest

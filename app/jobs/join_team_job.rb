@@ -1,18 +1,27 @@
 class JoinTeamJob < ActiveJob::Base
 
-  def perform(user, rec_id, idea)
+  def perform(invite_id)
+
     ActiveRecord::Base.connection_pool.with_connection do
-      if !idea.team.include? user.id.to_s
-        idea.team.push(user.id.to_s)
-        idea.team_invites.delete(user.id.to_s)
-        idea.save
 
-        msg = "<a href='#{Rails.application.routes.url_helpers.profile_path(user)}'>#{user.name}</a> has just joined "+ "<a href='#{Rails.application.routes.url_helpers.idea_path(idea)}'>#{idea.name}</a> team".html_safe
+      @team_invite = TeamInvite.find(invite_id)
 
-        Pusher.trigger("presence-user-#{rec_id}", "new_notification", {data: {id: notification.id, msg: msg } }.to_json)
-      else
-        Pusher.trigger("presence-user-#{user.uid}", "new_notification", {data: {id: notification.id, msg: "You are already in #{idea.name} team" } }.to_json)
+      @idea = Idea.find(@team_invite.idea_id)
+
+      unless @idea.team_invites_ids.include?(@team_invite.invited_id)
+       @idea.team_ids.push(@team_invite.invited_id)
+       @idea.team_invites_ids.delete(@team_invite.invited_id)
+       @idea.save
       end
+
+      #Send mails to recipients
+      InviteMailer.joined_team(@team_invite).deliver_later
+      #Create an activity after invite
+      CreateActivityJob.perform_later(@team_invite.id, @team_invite.class.to_s)
+
+      @team_invite.update_attribute(pending: false)
+      @team_invite.save
+
     end
   end
 
