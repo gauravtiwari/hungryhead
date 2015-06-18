@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :except => [:check_username, :check_email, :index, :popular, :trending, :latest]
+  after_action :verify_authorized, :except => [:autocomplete_user_name, :check_username, :check_email, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"

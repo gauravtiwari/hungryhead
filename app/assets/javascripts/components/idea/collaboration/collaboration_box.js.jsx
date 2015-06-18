@@ -74,7 +74,7 @@ var CollaborationBox = React.createClass({
   showTyping: function(member) {
   if(member.id != idea_collaboration_channel.members.me.id) {
      var user = $("#typing_status")
-      var typing = $("<div>", {
+      var typing = $("<span>", {
         "class": "typing",
         text: member.info.name+' is typing...'
       })
@@ -156,20 +156,16 @@ var CollaborationBox = React.createClass({
 
   speak: function(message) {
 
-    var bubble = $("<li>", {
+    var bubble = $("<div>", {
       "class": "bubble"
     })
 
-    var bubble_image = bubble.prepend($("<img>", {
-      "class": "bubble-image",
-      src: message.user_avatar,
-      valign: "left"
-    }))
-
-    var content = bubble_image.append($("<p>", {
+    var content = bubble.append($("<p>", {
       "class": "bubble-content",
-      text: message.body
+      text: message.user_name + ' wrote: ' + message.body
     }));
+
+    $('body').pgNotification({style: "simple", message: content, position: "bottom-left", type: "info",timeout: 10000}).show();
   },
 
   handleMessageSubmit: function ( formData, action, body ) {

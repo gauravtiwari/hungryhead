@@ -23,6 +23,10 @@ class UserPolicy < ApplicationPolicy
     current_user == record
   end
 
+  def autocomplete_user_name
+    true
+  end
+
   def card?
     show?
   end
