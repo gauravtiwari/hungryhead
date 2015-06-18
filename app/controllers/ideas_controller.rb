@@ -122,28 +122,6 @@ class IdeasController < ApplicationController
     render partial: 'ideas/_partials/team'
   end
 
-  # POST /ideas/1/invite_team
-  def invite_team
-    invitees = []
-    params[:idea_invite][:invitees].split(", ").each do |user_id|
-      user = User.find(user_id)
-      invitees << user.name
-      if @idea.in_team?(user) || @idea.invited?(user)
-        render json: {error: 'Already in team'}, status: 200
-      else
-        @team_invite = CreateTeamInviteService.new(user, current_user, @idea, params[:idea_invite][:message] )
-        InviteTeamJob.perform_later(@team_invite.id)
-      end
-    end
-    render json: {success: "Successfully invited #{invitees.to_sentence}"}, status: 200
-  end
-
-  # GET /ideas/1/join_team
-  def join_team
-    JoinTeamJob.perform_later(current_user, @idea.user.uid, @idea)
-    redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
-  end
-
   # POST /ideas
   # POST /ideas.json
   def create

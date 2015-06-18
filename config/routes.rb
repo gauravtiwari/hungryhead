@@ -191,6 +191,8 @@ Rails.application.routes.draw do
 
   resources :invite_requests, only: [:create]
 
+  resources :team_invites, only: [:create, :update, :destroy]
+
   #Comments resources
   resources :comments, only: [:create, :update, :index, :destroy]
 
@@ -216,7 +218,6 @@ Rails.application.routes.draw do
       get :team
       get :comments
       get :updates
-      post :invite_team
       get :followers
     end
 

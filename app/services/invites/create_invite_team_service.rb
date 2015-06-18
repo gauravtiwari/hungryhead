@@ -8,7 +8,7 @@ class CreateInviteTeamService
   end
 
   def create
-    @team_invite = @idea.team_invites.create!(
+    @team_invite = @idea.team_invites.new(
       inviter: current_user,
       invited: @reciever,
       idea: @idea,

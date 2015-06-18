@@ -18,7 +18,7 @@ var InviteTeam = React.createClass({
 		$.ajaxSetup({ cache: false });
 		$.ajax({
 		  data: formData,
-		  url: this.props.path,
+		  url: Routes.team_invite_path(),
 		  type: "POST",
 		  dataType: "json",
 		  success: function ( data ) {
@@ -116,19 +116,16 @@ var InviteTeam = React.createClass({
 			          <form className="form-default" ref="form" onSubmit={this._onKeyDown} role="form">
 			              <div className="form-group">
 			                <label className="text-master" htmlFor='invite[message]'>Type message</label>
-			                <textarea ref="msg" name='idea_invite[message]' cols= "3" placeholder= "Type a personalized message... (optional)" className= "form-control empty" />
+			                <textarea ref="msg" name='team_invite[msg]' cols= "3" placeholder= "Type a personalized message... (optional)" className= "form-control empty" />
 			              </div>
-
 			              <div className="form-group">
 			                <label className="text-master" htmlFor='invitees'>Add team members</label>
-			                <input type="text" name="idea_invite[invitees]" className='user_list' data-placeholder="Start typing name ..." required id="teams_select" />
+			                <input type="text" name="team_invite[invitees]" className='user_list' data-placeholder="Start typing name ..." required id="teams_select" />
 			                <span id="no-message"></span>
 			              </div>
-
 			              <div className="form-buttons">
 			                <button className='btn btn-primary'><i className={loading_classes}></i> Invite</button>
 			              </div>
-
 			            </form>
 			          </div>
 			        </div>
