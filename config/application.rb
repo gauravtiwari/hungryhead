@@ -51,7 +51,14 @@ module HungryheadSchoolApp
     config.react.react_js = lambda {File.read(::Rails.application.assets.resolve('react.js'))}
     config.react.component_filenames = ['components.js']
 
+    # config/application.rb
 
+    config.generators do |g|
+      g.assets = false
+      g.helper = false
+      g.view_specs      false
+      g.helper_specs    false
+    end
     config.active_record.schema_format = :sql
 
     #config.skylight.environments += ['production']
