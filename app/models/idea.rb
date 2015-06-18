@@ -68,6 +68,7 @@ class Idea < ActiveRecord::Base
   belongs_to :user
   belongs_to :school
   has_many :idea_messages, dependent: :destroy
+  has_many :team_invites, dependent: :destroy
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,
