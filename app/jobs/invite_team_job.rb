@@ -15,7 +15,6 @@ class InviteTeamJob < ActiveJob::Base
       InviteMailer.invite_team(@team_invite).deliver_later
       #Create an activity after invite
       CreateActivityJob.perform_later(@team_invite.id, @team_invite.class.to_s)
-
     end
   end
 end
