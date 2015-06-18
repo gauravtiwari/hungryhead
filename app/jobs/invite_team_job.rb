@@ -1,14 +1,15 @@
 class InviteTeamJob < ActiveJob::Base
 
-  def perform(user_id, reciever_id, idea_id, msg)
+  def perform(invite_id)
     ActiveRecord::Base.connection_pool.with_connection do
-      @idea = Idea.lock.find(idea_id)
-      @user = User.find(user_id)
-      @reciever = User.find(reciever_id)
-      InviteMailer.invite_team(@reciever, @user, @idea, msg).deliver_later
-      @idea.team_invites_ids.push(reciever_id)
-      @idea.save
-      CreateActivityJob.perform_later(@user.id, "TeamInvite")
+      @team_invite = TeamInvite.find(invite_id)
+      InviteMailer.invite_team(@team_invite).deliver_later
+      Idea.transaction do
+        @idea = Idea.lock.find(@team_invite.idea_id)
+        @idea.team_invites_ids.push(reciever_id)
+        @idea.save
+      end
+      CreateActivityJob.perform_later(@team_invite.id, @team_invite.class.to_s)
     end
   end
 end

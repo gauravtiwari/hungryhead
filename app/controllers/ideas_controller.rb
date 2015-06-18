@@ -131,10 +131,8 @@ class IdeasController < ApplicationController
       if @idea.in_team?(user) || @idea.invited?(user)
         render json: {error: 'Already in team'}, status: 200
       else
-        Idea.transaction do
-          CreateTeamInviteService.new(user, current_user, @idea, params[:idea_invite][:message] )
-          InviteTeamJob.perform_later(current_user.id, user_id, @idea.id, params[:idea_invite][:message])
-        end
+        @team_invite = CreateTeamInviteService.new(user, current_user, @idea, params[:idea_invite][:message] )
+        InviteTeamJob.perform_later(@team_invite.id)
       end
     end
     render json: {success: "Successfully invited #{invitees.to_sentence}"}, status: 200
