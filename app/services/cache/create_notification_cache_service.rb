@@ -110,6 +110,9 @@ class CreateNotificationCacheService
     elsif @activity.trackable_type == "Vote"
       trackable_user_name = target.voter.name
       trackable_user_id =   target.voter.id
+    elsif @activity.trackable_type == "TeamInvite"
+      trackable_user_name = target.inviter.name
+      trackable_user_id =   target.inviter.id
     else
       trackable_user_name = target.user.name
       trackable_user_id =   target.user.id

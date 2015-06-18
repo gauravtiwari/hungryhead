@@ -6,8 +6,8 @@ class InviteTeamJob < ActiveJob::Base
 
       #Save user_id cache into Idea table
       Idea.transaction do
-        @idea = Idea.lock.find(@team_invite.idea_id)
-        @idea.team_invites_ids.push(user_id)
+        @idea = Idea.lock(true).find(@team_invite.idea_id)
+        @idea.team_invites_ids.push(@team_invite.invited_id)
         @idea.save
       end
 
