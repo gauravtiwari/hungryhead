@@ -110,8 +110,8 @@ var FriendsNotifications = React.createClass({
       var content = <div className="no-content hint-text">Loading <i className="fa fa-spinner fa-spin"></i></div>;
     } else {
 
-        var content  = <Infinite elementHeight={60}
-                   containerHeight={$(window).height() - 20}
+        var content  = <Infinite elementHeight={65}
+                   containerHeight={$(window).height() - 40}
                    infiniteLoadBeginBottomOffset={200}
                    onInfiniteLoad={this.handleInfiniteLoad}
                    loadingSpinnerDelegate={this.elementInfiniteLoad()}
@@ -136,7 +136,7 @@ var FriendsNotifications = React.createClass({
                   </div>
                 </div>
                   <div className="list-view boreded no-top-border">
-                    <ul className="no-style no-padding no-margin">
+                    <ul className="no-style no-padding no-margin p-b-20">
                       {content}
                     </ul>
                   </div>

@@ -21,6 +21,12 @@ var FriendsNotificationMentionItem = React.createClass({
               </span>;
     }
 
+    if(this.props.item.recipient.recipient_name == window.currentUser.name) {
+      var recipient_name = "you";
+    } else {
+      var recipient_name = this.props.item.recipient.recipient_name;
+    }
+
     return (<li className="alert-list padding-10" id={html_id}>
                <div className="p-l-10 col-xs-height col-middle col-xs-9 overflow-ellipsis fs-13">
                  <a className="text-complete" href={this.props.item.actor.url}>
@@ -33,7 +39,7 @@ var FriendsNotificationMentionItem = React.createClass({
                    <span className="verb p-l-5 inline text-master">
                      {this.props.item.verb}
                    </span>
-                   <span className="text-master p-l-5">{this.props.item.recipient.recipient_name}</span>
+                   <span className="text-master p-l-5">{recipient_name}</span>
                    <span className="recipient p-l-5">
                      in a comment
                    </span>

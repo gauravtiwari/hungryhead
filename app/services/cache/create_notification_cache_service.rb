@@ -43,7 +43,7 @@ class CreateNotificationCacheService
       @activity.recipient
     elsif @activity.recipient_type == "Idea"
       @activity.recipient.user
-    elsif
+    else
       @activity.recipient.user
     end
   end
@@ -56,30 +56,40 @@ class CreateNotificationCacheService
 
   #Add activity to different tickers
   def add_activity(user, activity_item)
-
     #Add activity to user profile
     add_activity_to_user_profile(user, activity_item)
 
     #Send notification to recipient
-    add_notification_for_recipient(recipient_user, activity_item) unless @activity.user == recipient_user
+    add_notification_for_recipient(activity_item) unless @activity.user == recipient_user
 
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
 
+    #Add notification to commenters
+    add_activity_to_commenters(activity_item) if @activity.trackable_type == "Comment"
   end
 
   #add activity to recipient notifications
-  def add_notification_for_recipient(recipient_user, activity_item)
+  def add_notification_for_recipient(activity_item)
     #add to notifications
     recipient_user.friends_notifications.add(activity_item, score_key)
     #add to ticker
     recipient_user.ticker.add(activity_item, score_key)
+    SendNotificationService.new(recipient_user, activity).user_notification if recipient_user != @activity.user
     SendNotificationService.new(recipient_user, activity).friend_notification if recipient_user != @activity.user
   end
 
   #This is for user profile page to show latest personal activities
   def add_activity_to_user_profile(user, activity_item)
     user.latest_activities.add(activity_item, score_key)
+  end
+
+  def add_activity_to_commenters(activity_item)
+    @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
+    User.find(@ids).each do |commenter|
+      add_activity_to_friends_ticker(commenter, activity_item)
+      SendNotificationService.new(commenter, activity).user_notification
+    end
   end
 
   #add activity to friends ticker

@@ -21,6 +21,12 @@ var LatestFeedMentionItem = React.createClass({
               </span>;
     }
 
+    if(this.props.item.recipient.recipient_name == window.currentUser.name) {
+      var recipient_name = "you";
+    } else {
+      var recipient_name = this.props.item.recipient.recipient_name;
+    }
+
     return (
         <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix" onClick={this.loadActivity}>
           <span className="inline">
@@ -28,7 +34,7 @@ var LatestFeedMentionItem = React.createClass({
               {placeholder}
             </div>
             <strong className="inline p-r-5 text-black">{actor}</strong>
-             {this.props.item.verb} {this.props.item.recipient.recipient_name.split(' ')[0]} in a comment
+             {this.props.item.verb} {recipient_name} in a comment
           </span>
         </li>
       );

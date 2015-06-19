@@ -4,7 +4,7 @@ body.menu-behind .header .brand {
   padding-left: 25px;
 }
 body, p {
-  line-height: 1.5;
+  line-height: 1.6;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,11 +12,18 @@ body, p {
   color: #333;
   white-space: normal;
 }
-
+body.show-collaboration {
+  overflow: hidden;
+}
 p {
   margin: 0px 0px 10px 0px;
 }
-
+.comment-body p:last-child {
+  margin-bottom: 0;
+}
+.comment-body p {
+  font-size: 13px;
+}
 .btn-tags {
   padding-top: 0px;
   padding-bottom: 0px;

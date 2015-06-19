@@ -13,7 +13,7 @@ var LatestUserActivityFeedbackItem = React.createClass({
           <span className="inline text-master">
             <span className="verb">
              <i className="fa fa-comment"></i> left a <a onClick={this.loadActivity}>feedback</a> for
-             <a href={this.props.item.recipient.recipient_url}>{this.props.item.recipient.recipient_name}</a>
+             <a href={this.props.item.recipient.recipient_url}> {this.props.item.recipient.recipient_name}</a>
             </span>
           </span>
         </li>

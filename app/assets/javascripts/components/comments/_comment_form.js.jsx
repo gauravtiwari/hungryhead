@@ -23,7 +23,7 @@ var CommentForm = React.createClass({
     $(e.target).autosize();
     $(e.target).atwho({
       at:"@",
-      'data': Routes.mentionables_path(this.props.form.commentable_type, this.props.form.commentable_id),
+      data: Routes.mentionables_path(this.props.form.commentable_type, this.props.form.commentable_id),
       search_key: "username",
       insertTpl: '@${username}',
       displayTpl: "<li data-value='@${name}'>${name} <small>${username}</small></li>",
@@ -53,7 +53,7 @@ var CommentForm = React.createClass({
         {imgSrc}
       </div>
       <form ref="form" className="add-comment" acceptCharset="UTF-8" method="post" onSubmit={ this.handleSubmit }>
-        <textarea className="form-control empty" onClick={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
+        <textarea className="form-control empty" onFocus={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
         <input ref="commentable_id" type="hidden" value= { this.props.form.commentable_id } name= "comment[commentable_id]"/>
         <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" />
         <button type="submit" id="post_comment" className="main-button m-t-10 pull-right"><i className={this.props.loading}></i> Post</button>

@@ -31,11 +31,13 @@ var OpenNotificationsThread = React.createClass({
              document.getElementById('notifications_panel'));
        ReactRailsUJS.mountComponents();
        $('#notificationsPanel').addClass('open');
+       $('body').toggleClass('show-collaboration');
        if(this.state.unread_notifications_count > 0 ) {
         this.clearCounter();
        }
     } else {
         $('#notificationsPanel').removeClass('open');
+        $('body').toggleClass('show-collaboration');
     }
   },
 

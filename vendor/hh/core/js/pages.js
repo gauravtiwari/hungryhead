@@ -1510,6 +1510,7 @@
         var elem = $(this).attr('data-toggle-element');
         if (Modernizr.csstransitions) {
             $(elem).toggleClass('open');
+            $('body').toggleClass('show-collaboration');
         } else {
             var width = $(elem).width();
             if (!$(elem).hasClass('open-ie')) {

@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_commit on: :update do |user|
+  after_save do |user|
     RecordSavedJob.set(wait: 10.seconds).perform_later(user.id, "User") if rebuild_cache? || mini_bio_changed?
     RebuildNotificationsCacheJob.set(wait: 20.seconds).perform_later(id) if rebuild_cache?
   end

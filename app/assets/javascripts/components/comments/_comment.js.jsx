@@ -134,7 +134,7 @@ var Comment = React.createClass({
     var html = converter.makeHtml(this.state.comment.comment);
 
     return (
-       <li key={this.props.key} className="comment padding-10 fs-12 p-b-10" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>
+       <li key={this.props.key} className="comment padding-15 fs-12 p-b-10" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>
          <div className="box-generic">
             <div className="user-pic m-r-10 pull-left inline">
               <a href="javascript:void(0)" data-popover-href={this.state.comment.user_url} className='load-card'>

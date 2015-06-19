@@ -41,6 +41,8 @@ class UpdateNotificationCacheService
   def recipient_user
     if @activity.recipient_type == "User"
       @activity.recipient
+    elsif @activity.recipient_type == "Idea"
+      @activity.recipient.user
     else
       @activity.recipient.user
     end
@@ -57,19 +59,28 @@ class UpdateNotificationCacheService
     #add activity to user personal profile
     add_activity_to_user_profile(user, activity_item)
     #push notification into friends notifications
-    add_notification_for_recipient(recipient_user, activity_item) unless @activity.user == recipient_user
+    add_notification_for_recipient(activity_item) unless @activity.user == recipient_user
     #add notification to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
+    #Add notification to commenters
+    add_activity_to_commenters(activity_item) if @activity.trackable_type == "Comment"
   end
 
   #Add notification to recipients
-  def add_notification_for_recipient(recipient_user, activity_item)
+  def add_notification_for_recipient(activity_item)
     #delete from notifications
     recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
     recipient_user.friends_notifications.add(activity_item, score_key)
     #delete from recipient ticker
     recipient_user.ticker.remrangebyscore(score_key, score_key)
     recipient_user.ticker.add(activity_item, score_key)
+  end
+
+  def add_activity_to_commenters(activity_item)
+    @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
+    User.find(@ids).each do |commenter|
+      add_activity_to_friends_ticker(commenter, activity_item)
+    end
   end
 
   def add_activity_to_friends_ticker(user, activity_item)

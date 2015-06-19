@@ -26,7 +26,6 @@ var LatestFeed = React.createClass({
       this.fetchNotifications();
       if(channel) {
         channel.bind(this.props.channel_event, function(data){
-          console.log(data);
           var new_item = this.buildElements([data.data])
           var newState = React.addons.update(this.state, {
               feed : {
