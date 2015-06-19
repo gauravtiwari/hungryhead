@@ -17,6 +17,28 @@ p {
   margin: 0px 0px 10px 0px;
   color: #242d30 !important;
 }
+.panel-title span {
+  color: #242d30;
+}
+.btn-tags {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 13px;
+  padding-right: 13px;
+  font-size: 13px;
+  line-height: 17px;
+  color: #333;
+  font-weight: normal;
+  background-color: #f0f0f0;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
 .block-title {
   font-family: 'Montserrat';
   font-weight: 400;

@@ -6,7 +6,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
-        return <li className="inline" key={Math.random()}><a className="text-brand p-r-10" href={market.url} >#{market.tag}</a></li>
+        return <li className="inline m-b-15" key={Math.random()}><a className="m-r-10 btn-tags padding-5 text-master" href={market.url} >{market.tag}</a></li>
       });
 
     } else {
@@ -19,7 +19,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
       var hobbies = this.props.profile.hobbies.map(function(hobby){
-        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={hobby.url} >#{hobby.tag}</a></li>
+        return <li className="inline m-b-15"  key={Math.random()}><a className="m-r-10 btn-tags padding-5 text-master" href={hobby.url} >{hobby.tag}</a></li>
       });
     } else {
       if(this.props.is_owner) {
@@ -31,7 +31,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
       var skills = this.props.profile.skills.map(function(skill){
-        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={skill.url} >#{skill.tag}</a></li>
+        return <li className="inline m-b-15"  key={Math.random()}><a className="m-r-10 btn-tags padding-5 text-master" href={skill.url} >{skill.tag}</a></li>
       });
     } else {
       if(this.props.is_owner) {
@@ -43,7 +43,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.subjects && this.props.profile.subjects.length > 0 ) {
       var subjects = this.props.profile.subjects.map(function(subject){
-        return <li className="inline"  key={Math.random()}><a className="text-brand p-r-10" href={subject.url} >#{subject.tag}</a></li>
+        return <li className="inline m-b-15"  key={Math.random()}><a className="m-r-10 btn-tags padding-5 text-master" href={subject.url} >{subject.tag}</a></li>
       });
     } else {
       if(this.props.is_owner) {
@@ -94,19 +94,19 @@ var CardContent = React.createClass({
 
 
     if(markets.length > 0) {
-      var market_content = <div className="p-b-15 p-l-20 p-r-20 p-t-20"><span className="text-master bold"><i className="fa fa-briefcase"></i> Markets interested</span> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+      var market_content = <div className="p-b-10 p-l-20 p-r-20 p-t-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-briefcase text-danger"></i> Markets interested</h6> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
     }
 
     if(hobbies.length > 0) {
-      var hobbies_content = <div className="p-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-smile-o"></i> Likes</span> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+      var hobbies_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-smile-o text-danger"></i> Likes</h6> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
     }
 
     if(skills.length > 0){
-      var skills_content = <div className="p-b-15 p-l-20 p-r-20 p-b-20"><span className="text-master bold"><i className="fa fa-graduation-cap"></i> Knows about</span> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+      var skills_content = <div className="p-b-10 p-l-20 p-r-20 p-b-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-graduation-cap text-danger"></i> Knows about</h6> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
     if(subjects.length > 0){
-      var subjects_content = <div className="p-b-15 p-l-20 p-r-20"><span className="text-master bold"><i className="fa fa-book"></i> Studied </span> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
+      var subjects_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-book text-danger"></i> Studied </h6> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
     }
 
 

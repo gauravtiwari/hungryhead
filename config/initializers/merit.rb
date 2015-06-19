@@ -27,7 +27,7 @@ Merit::Badge.create!(
   id: 1,
   name: "community",
   level: "bronze",
-  description: "Joined the site",
+  description: "Joined the website",
   custom_fields: { name: "Community", points: 1, type: "user" }
 )
 
@@ -43,7 +43,7 @@ Merit::Badge.create!(
   id: 3,
   name: "social",
   level: "bronze",
-  description: "Connected with 200 people",
+  description: "Followed/Connected with 200 people",
   custom_fields: { name: "Social", points: 10, type: "user" }
 )
 
@@ -51,7 +51,7 @@ Merit::Badge.create!(
   id: 4,
   name: "lean",
   level: "bronze",
-  description: "Pitched first startup idea",
+  description: "Pitched first startup idea with score of 5",
   custom_fields: { name: "Lean", points: 5, type: "user" }
 )
 
@@ -59,7 +59,7 @@ Merit::Badge.create!(
   id: 6,
   name: "feedbacker",
   level: "bronze",
-  description: "Feedback with score of 25",
+  description: "A Feedback with score of 25",
   custom_fields: { name: "Feedbacker", points: 5, type: "user" }
 )
 
@@ -67,7 +67,7 @@ Merit::Badge.create!(
   id: 7,
   name: "investor",
   level: "bronze",
-  description: "First investment",
+  description: "5 startup idea investments",
   custom_fields: { name: "Investor", points: 1, type: "user" }
 )
 
@@ -91,7 +91,7 @@ Merit::Badge.create!(
   id: 10,
   name: "commentator",
   level: "silver",
-  description: "Left 10 comments",
+  description: "Wrote 10 comments",
   custom_fields: { name: "Commentator", points: 5, type: "user" }
 )
 
@@ -99,7 +99,7 @@ Merit::Badge.create!(
   id: 11,
   name: "collaborative",
   level: "silver",
-  description: "50 comments with cummulative score of 250",
+  description: "Wrote 50 comments with a total score of 250",
   custom_fields: { name: "Collaborative", points: 25, type: "user" }
 )
 
@@ -107,7 +107,7 @@ Merit::Badge.create!(
   id: 12,
   name: "pundit",
   level: "gold",
-  description: "100 comments with cummulative score of 1000",
+  description: "Wrote 100 comments with a total score of 1000",
   custom_fields: { name: "Pundit", points: 50, type: "user" }
 )
 
@@ -131,7 +131,7 @@ Merit::Badge.create!(
   id: 15,
   name: "early-adopter",
   level: "bronze",
-  description: "First feedback on a idea",
+  description: "First feedback on 5 ideas",
   custom_fields: { name: "Early Adopter", points: 2, type: "user" }
 )
 
@@ -139,7 +139,7 @@ Merit::Badge.create!(
   id: 16,
   name: "investable",
   level: "bronze",
-  description: "Idea Score 1000 or more",
+  description: "Idea Score of 1000 or more",
   custom_fields: { name: "Investable", points: 2, type: "idea" }
 )
 
@@ -147,7 +147,7 @@ Merit::Badge.create!(
   id: 17,
   name: "market-fit",
   level: "bronze",
-  description: "Idea with score of 500",
+  description: "Idea Score of 500 or more",
   custom_fields: { name: "Product Market Fit", points: 15, type: "idea" }
 )
 
@@ -155,7 +155,7 @@ Merit::Badge.create!(
   id: 18,
   name: "viral",
   level: "silver",
-  description: "Idea with score of 500 in 3 days",
+  description: "Idea score of 500 in 3 days",
   custom_fields: { name: "Viral", points: 50, type: "idea" }
 )
 
@@ -163,7 +163,7 @@ Merit::Badge.create!(
   id: 19,
   name: "disruptive",
   level: "gold",
-  description: "Idea with score of 1000 in 5 days",
+  description: "Idea score of 1000 in 5 days",
   custom_fields: { name: "Disruptive", points: 100, type: "idea" }
 )
 
@@ -171,7 +171,7 @@ Merit::Badge.create!(
   id: 20,
   name: "traction",
   level: "silver",
-  description: "Idea with daily score of 100 for 10 days",
+  description: "Idea with daily score of 100 or more for 10 days",
   custom_fields: { name: "Traction", type: "idea" }
 )
 
@@ -214,7 +214,7 @@ Merit::Badge.create!(
   name: "popular-feedback",
   level: "silver",
   description: "Feedback with score of 500 or more",
-  custom_fields: { name: "Popular Feedback", type: "user" }
+  custom_fields: { name: "Popular Feedback", type: "feedback" }
 )
 
 Merit::Badge.create!(
@@ -222,7 +222,7 @@ Merit::Badge.create!(
   name: "popular-comment",
   level: "silver",
   description: "Comment with score of 500 or more",
-  custom_fields: { name: "Popular Comment" , type: "user" }
+  custom_fields: { name: "Popular Comment" , type: "comment" }
 )
 
 Merit::Badge.create!(

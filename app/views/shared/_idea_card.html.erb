@@ -12,7 +12,7 @@
       </div>
 			<h2><%= @idea.name %></h2>
 			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
-      <% if @idea.user != current_user %>
+      <% if !@idea.in_team?(current_user) %>
         <div class="card-follow-button">
           <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         </div>

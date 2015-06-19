@@ -63,7 +63,7 @@ var IdeaCardStats = React.createClass({
             <i className="fa fa-star text-danger"></i> Reputation
           </div>
           <a className="know-more" onClick={this.openLeaderboardHelpModal}>
-            <i className="fa fa-question-circle pull-right fs-22"></i>
+            <i className="fa fa-question-circle pull-right fs-16 text-black"></i>
           </a>
         </div>
         <div className="p-l-25 p-r-45">

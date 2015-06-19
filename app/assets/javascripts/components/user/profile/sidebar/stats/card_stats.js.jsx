@@ -21,6 +21,15 @@ var CardStats = React.createClass({
     });
   },
 
+  openLeaderboardHelpModal: function() {
+    $('body').append($('<div>', {class: 'user_leaderboard_help_modal', id: 'user_leaderboard_help_modal'}));
+    React.render(<IdeaLeaderboardHelpModal key={Math.random()} />,
+      document.getElementById('user_leaderboard_help_modal')
+    );
+    ReactRailsUJS.mountComponents();
+    $('#leaderboardHelpModal').modal('show');
+  },
+
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
@@ -31,8 +40,11 @@ var CardStats = React.createClass({
       <div className={classes}>
         <div className="panel-heading bg-light-blue-lightest m-b-10">
           <div className="panel-title b-b b-grey p-b-5">
-          <i className="fa fa-star text-danger"></i> Reputation
+            <i className="fa fa-star text-danger"></i> Reputation
           </div>
+          <a className="know-more" onClick={this.openLeaderboardHelpModal}>
+            <i className="fa fa-question-circle pull-right fs-16 text-black"></i>
+          </a>
         </div>
         <div className="p-l-25 p-r-45">
           <h3 className="no-margin p-b-25 no-padding text-master text-center">Score: {this.state.score}</h3>

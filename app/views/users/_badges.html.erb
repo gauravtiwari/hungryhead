@@ -4,6 +4,9 @@
         <div class="panel-title b-b b-grey p-b-5">
           <i class="fa fa-shield text-danger"></i> Latest badges
         </div>
+        <a class="know-more" data-toggle="modal" data-target="#peopleBadgesHelpModal">
+          <i class="fa fa-question-circle pull-right fs-16 text-black"></i>
+        </a>
     </div>
 
     <div class="panel-body">
@@ -32,3 +35,51 @@
     </div>
 </div>
 <% end %>
+
+<div class="modal fade slide-right" id="peopleBadgesHelpModal" tabIndex="-1" role="dialog" aria-labelledby="newIdeaHelpModalLabel" aria-hidden="true">
+ <div class="modal-dialog full-height">
+ <div class="modal-content-wrapper">
+     <div class="modal-content table-block scrollable">
+         <button type="button" class="close m-t-10 m-r-10" data-dismiss="modal" aria-hidden="true">
+             <i class="pg-close"></i>
+         </button>
+         <div class="modal-header">
+             <h5 class="text-left p-b-5 b-b b-grey pull-left"><span class="semi-bold">User Badges</span> Description</h5>
+         </div>
+         <div class="modal-body clearfix" id="badges_help_modal">
+             <div class="row m-t-20">
+                 <div class="col-md-12">
+                  <div class="table-content">
+                    <p>
+                        A person receives a badge after it has successfully completed a milestone. Here is a list of current badges that you can receive:
+                    </p>
+                  </div>
+                  <table class="table table-striped badges-help-table m-t-40">
+                      <thead>
+                          <tr>
+                              <th>Badge Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <% Merit::Badge.select {|badge| badge.custom_fields[:type] ==  "user"}.each do |badge| %>
+                          <tr>
+                              <td>
+                              <p class="m-b-10 inline">
+                                <%= link_to(badge_path(badge.name), class: "badge text-white font-helvetica") do %>
+                                    <span class="badge-type <%= badge.level %>"></span><%= badge.custom_fields[:name] %>
+                                <% end %>
+                                </p>
+                            </td>
+                              <td><%= badge.description %> </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ </div>
+ </div>
