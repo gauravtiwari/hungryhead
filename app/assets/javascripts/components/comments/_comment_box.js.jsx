@@ -47,7 +47,7 @@ var CommentBox = React.createClass({
         comment_channel.bind('new_comment', function(data){
           var response = JSON.parse(data.data);
           var comment = response.comment;
-          if(channel.members.me.id != comment.user_id) {
+          if(presence_channel.members.me.id != comment.user_id) {
             var newState = React.addons.update(this.state, {
                 comments : {
                   $unshift : [comment]
