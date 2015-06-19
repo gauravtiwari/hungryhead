@@ -90,7 +90,7 @@ var CardContent = React.createClass({
       var school = "";
     }
 
-    var classes = "profile-card padding-20  p-t-40 box-shadow bg-" + this.props.profile.theme;
+    var classes = "profile-card padding-20  p-t-40 box-shadow bg-solid";
 
 
     if(markets.length > 0) {

@@ -35,10 +35,14 @@ module Merit
       end
 
       grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
-        user.sign_in_count >= 30
+        days = (DateTime.now.to_date - user.created_at.to_date).to_i
+        days == 30 &&
+        user.sign_in_count >=30
       end
 
       grant_on 'sessions#create', badge: 'focussed', :model_name => 'User' do |user|
+        days = (DateTime.now.to_date - user.created_at.to_date).to_i
+        days == 100 &&
         user.sign_in_count >= 100
       end
 
@@ -149,8 +153,10 @@ module Merit
       # ################################################################
 
       grant_on 'ideas#show', badge: 'popular-idea', to: :itself do |idea|
+        days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        Idea.trending.score(idea.id) >= 200
+        days.between?(1, 10) &&
+        Idea.trending.score(idea.id) >= 500
       end
 
 
@@ -210,6 +216,15 @@ module Merit
         Idea.leaderboard.score(idea.id)/days >= 100
       end
 
+      ##################################################################
+      # => Check everytime idea is viewed to grant exit badge to User
+      # ################################################################
+
+      grant_on 'ideas#show', badge: 'exit', multiple: true, to: :user do |idea|
+        idea.published? &&
+        idea.validated?
+      end
+
       ##############################
         # => Feedback related badges
       ##############################
@@ -227,8 +242,8 @@ module Merit
 
 
       #2. Early adopter
-      grant_on 'feedbacks#create', badge: 'early-adopter', multiple: true, to: :user do |feedback|
-        feedback.user.feedbacks_counter.value >= 10 && feedback.idea.feedbackers_counter.value == 1
+      grant_on 'feedbacks#create', badge: 'early-adopter', to: :user do |feedback|
+        feedback.user.feedbacks_counter.value >= 5
       end
 
       # 3. Mentor
@@ -241,17 +256,16 @@ module Merit
         feedback.user.helpful_feedbacks_counter >= 100
       end
 
-      # 5. Popular Feedback
+      # 5. Popular Feedback - Pundit
       #Based on comment //hack
-      grant_on 'comments#create', badge: 'popular-feedback', to: :commentable do |comment|
-        comment.commentable_type == "Feedback" &&
-        Feedback.leaderboard.score(comment.commentable_id) >= 500
-      end
-
-      #Based on vote //hack
-      grant_on 'votes#vote', badge: 'popular-feedback', to: :votable do |vote|
+      grant_on 'votes#vote', badge: 'pundit', to: :votable_user do |vote|
         vote.votable_type == "Feedback" &&
         Feedback.leaderboard.score(vote.votable_id) >= 500
+      end
+
+      grant_on 'comments#create', badge: 'pundit', to: :commentable_user do |comment|
+        comment.commentable_type == "Feedback" &&
+        Feedback.leaderboard.score(comment.commentable_id) >= 500
       end
 
       ##############################
@@ -280,23 +294,11 @@ module Merit
         comment.user.comments_counter.value >= 10
       end
 
-      grant_on 'votes#vote', badge: 'popular-comment', to: :votable do |vote|
-        vote.votable_type == "Comment" &&
-        vote.votable.votes_counter.value >= 500
-      end
-
       grant_on 'votes#vote', badge: 'collaborative', to: :votable_user do |vote|
         vote.votable_type == "Comment" &&
         vote.votable_user.comments_counter.value >= 50 &&
-        vote.votable_user.comments_score >= 250
+        vote.votable_user.comments_score >= 500
       end
-
-      grant_on 'votes#vote', badge: 'pundit', to: :votable_user do |vote|
-        vote.votable_type == "Comment" &&
-        vote.votable_user.comments_counter.value >= 100 &&
-        vote.votable_user.comments_score >= 1000
-      end
-
 
     end
 

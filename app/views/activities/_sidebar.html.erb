@@ -1,8 +1,7 @@
-<div class="sidebar auto-height sticky box-shadow bg-<%= current_user.theme %>">
+<div class="sidebar auto-height sticky box-shadow bg-solid">
     <% cache(["beta", "home_sidebar_card", current_user]) do %>
         <%= render partial: 'sidebar_card' %>
     <% end %>
-
     <%= react_component('LatestIdeas', {path: latest_ideas_path}) %>
 
     <% if current_user.people_you_may_know.length > 3 %>

@@ -14,10 +14,7 @@ json.user do
 	json.profile do
 		json.name @user.name
 		json.username @user.username
-		json.role_badge "#{root_url}assets/badges/#{@user.role}.png"
-		json.role @user.role.capitalize
 		json.email @user.email
-		json.theme @user.theme
 		json.school_id @user.school.id if @user.school
 		json.school_name @user.school.name if @user.school
 		json.school_url profile_path(@user.school) if @user.school

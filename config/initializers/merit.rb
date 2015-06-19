@@ -28,7 +28,7 @@ Merit::Badge.create!(
   name: "community",
   level: "bronze",
   description: "Joined the website",
-  custom_fields: { name: "Community", points: 1, type: "user" }
+  custom_fields: { name: "Community", type: "user" }
 )
 
 Merit::Badge.create!(
@@ -36,7 +36,7 @@ Merit::Badge.create!(
   name: "autobiographer",
   level: "bronze",
   description: "Completed the about me section on profile page",
-  custom_fields: { name: "Autobiographer", points: 2, type: "user" }
+  custom_fields: { name: "Autobiographer", type: "user" }
 )
 
 Merit::Badge.create!(
@@ -44,7 +44,7 @@ Merit::Badge.create!(
   name: "social",
   level: "bronze",
   description: "Followed/Connected with 200 people",
-  custom_fields: { name: "Social", points: 10, type: "user" }
+  custom_fields: { name: "Social", type: "user" }
 )
 
 Merit::Badge.create!(
@@ -52,75 +52,67 @@ Merit::Badge.create!(
   name: "lean",
   level: "bronze",
   description: "Pitched first startup idea with score of 5",
-  custom_fields: { name: "Lean", points: 5, type: "user" }
+  custom_fields: { name: "Lean", type: "user" }
+)
+
+Merit::Badge.create!(
+  id: 5,
+  name: "feedbacker",
+  level: "bronze",
+  description: "Feedback with score of 25",
+  custom_fields: { name: "Feedbacker", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 6,
-  name: "feedbacker",
+  name: "investor",
   level: "bronze",
-  description: "A Feedback with score of 25",
-  custom_fields: { name: "Feedbacker", points: 5, type: "user" }
+  description: "5 startup idea investments",
+  custom_fields: { name: "Investor", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 7,
-  name: "investor",
-  level: "bronze",
-  description: "5 startup idea investments",
-  custom_fields: { name: "Investor", points: 1, type: "user" }
+  name: "angel-investor",
+  level: "silver",
+  description: "60 investments in a year of amount between 100 to 300",
+  custom_fields: { name: "Angel Investor", type: "user"  }
 )
 
 Merit::Badge.create!(
   id: 8,
-  name: "angel-investor",
+  name: "vc",
   level: "gold",
-  description: "60 investments in a year of amount between 100 to 300",
-  custom_fields: { name: "Angel Investor", points: 100, type: "user"  }
+  description: "150 investments in a year of amount between 500 to 900",
+  custom_fields: { name: "VC", type: "user"  }
 )
 
 Merit::Badge.create!(
   id: 9,
-  name: "vc",
-  level: "gold",
-  description: "150 investments in a year of amount between 500 to 900",
-  custom_fields: { name: "VC", points: 200, type: "user"  }
+  name: "commentator",
+  level: "bronze",
+  description: "Posted 10 comments",
+  custom_fields: { name: "Commentator", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 10,
-  name: "commentator",
+  name: "collaborative",
   level: "silver",
-  description: "Wrote 10 comments",
-  custom_fields: { name: "Commentator", points: 5, type: "user" }
+  description: "Posted 50 or more comments with a total score of 500",
+  custom_fields: { name: "Collaborative", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 11,
-  name: "collaborative",
-  level: "silver",
-  description: "Wrote 50 comments with a total score of 250",
-  custom_fields: { name: "Collaborative", points: 25, type: "user" }
+  name: "enthusiast",
+  level: "bronze",
+  description: "Visited the site each day for 30 consecutive days.",
+  custom_fields: { name: "Enthusiast", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 12,
-  name: "pundit",
-  level: "gold",
-  description: "Wrote 100 comments with a total score of 1000",
-  custom_fields: { name: "Pundit", points: 50, type: "user" }
-)
-
-Merit::Badge.create!(
-  id: 13,
-  name: "enthusiast",
-  level: "bronze",
-  description: "Visited the site each day for 30 consecutive days.",
-  custom_fields: { name: "Enthusiast", points: 15, type: "user" }
-)
-
-Merit::Badge.create!(
-  id: 14,
   name: "focussed",
   level: "silver",
   description: "Visited the site each day for 100 consecutive days.",
@@ -128,47 +120,47 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 15,
+  id: 13,
   name: "early-adopter",
   level: "bronze",
-  description: "First feedback on 5 ideas",
-  custom_fields: { name: "Early Adopter", points: 2, type: "user" }
+  description: "Feedbacked 5 startup ideas",
+  custom_fields: { name: "Early Adopter", type: "user" }
+)
+
+Merit::Badge.create!(
+  id: 14,
+  name: "investable",
+  level: "bronze",
+  description: "Idea Score of 1000 or more",
+  custom_fields: { name: "Investable", type: "idea" }
+)
+
+Merit::Badge.create!(
+  id: 15,
+  name: "market-fit",
+  level: "bronze",
+  description: "Idea Score of 500 or more",
+  custom_fields: { name: "Product Market Fit", type: "idea" }
 )
 
 Merit::Badge.create!(
   id: 16,
-  name: "investable",
-  level: "bronze",
-  description: "Idea Score of 1000 or more",
-  custom_fields: { name: "Investable", points: 2, type: "idea" }
+  name: "viral",
+  level: "silver",
+  description: "Idea score of 500 in 3 days",
+  custom_fields: { name: "Viral", type: "idea" }
 )
 
 Merit::Badge.create!(
   id: 17,
-  name: "market-fit",
-  level: "bronze",
-  description: "Idea Score of 500 or more",
-  custom_fields: { name: "Product Market Fit", points: 15, type: "idea" }
+  name: "disruptive",
+  level: "gold",
+  description: "Idea score of 1000 in 5 days",
+  custom_fields: { name: "Disruptive", type: "idea" }
 )
 
 Merit::Badge.create!(
   id: 18,
-  name: "viral",
-  level: "silver",
-  description: "Idea score of 500 in 3 days",
-  custom_fields: { name: "Viral", points: 50, type: "idea" }
-)
-
-Merit::Badge.create!(
-  id: 19,
-  name: "disruptive",
-  level: "gold",
-  description: "Idea score of 1000 in 5 days",
-  custom_fields: { name: "Disruptive", points: 100, type: "idea" }
-)
-
-Merit::Badge.create!(
-  id: 20,
   name: "traction",
   level: "silver",
   description: "Idea with daily score of 100 or more for 10 days",
@@ -176,60 +168,59 @@ Merit::Badge.create!(
 )
 
 Merit::Badge.create!(
-  id: 21,
+  id: 19,
   name: "mentor",
   level: "silver",
-  description: "10 helpful feedbacks",
-  custom_fields: { name: "Mentor", points: 25, type: "user" }
+  description: "Gave 10 helpful feedbacks",
+  custom_fields: { name: "Mentor", type: "user" }
+)
+
+Merit::Badge.create!(
+  id: 20,
+  name: "guru",
+  level: "gold",
+  description: "Gave 100 helpful feedbacks",
+  custom_fields: { name: "Guru", type: "user" }
+)
+
+Merit::Badge.create!(
+  id: 21,
+  name: "entrepreneur",
+  level: "gold",
+  description: "Successfully validated a startup idea (Idea Score: 10K)",
+  custom_fields: { name: "Entrepreneur", type: "user" }
 )
 
 Merit::Badge.create!(
   id: 22,
-  name: "guru",
+  name: "validated",
   level: "gold",
-  description: "100 helpful feedbacks",
-  custom_fields: { name: "Guru", points: 100, type: "user" }
+  description: "Validated startup idea (Idea Score: 10K)",
+  custom_fields: { name: "Validated", type: "idea" }
 )
 
+#Feedback badges
 Merit::Badge.create!(
   id: 23,
-  name: "entrepreneur",
-  level: "gold",
-  description: "Successfully validated a startup idea",
-  custom_fields: { name: "Entrepreneur", points: 500, type: "user" }
+  name: "pundit",
+  level: "silver",
+  description: "Feedback with score of 500 or more",
+  custom_fields: { name: "Pundit", type: "feedback" }
 )
 
 Merit::Badge.create!(
   id: 24,
-  name: "validated",
-  level: "gold",
-  description: "Validated startup idea",
-  custom_fields: { name: "Validated", points: 500, type: "idea" }
+  name: "popular-idea",
+  level: "bronze",
+  description: "Idea with 500 unique views within 10 days",
+  custom_fields: { name: "Popular Idea", type: "idea" }
 )
-
-#Feedback badges
 
 Merit::Badge.create!(
   id: 25,
-  name: "popular-feedback",
-  level: "silver",
-  description: "Feedback with score of 500 or more",
-  custom_fields: { name: "Popular Feedback", type: "feedback" }
-)
-
-Merit::Badge.create!(
-  id: 27,
-  name: "popular-comment",
-  level: "silver",
-  description: "Comment with score of 500 or more",
-  custom_fields: { name: "Popular Comment" , type: "comment" }
-)
-
-Merit::Badge.create!(
-  id: 28,
-  name: "popular-idea",
-  level: "bronze",
-  description: "Idea with a score of 5000",
-  custom_fields: { name: "Popular Idea", type: "idea" }
+  name: "Exit",
+  level: "gold",
+  description: "Successful Exit: Invested in a validated idea and made return on investment",
+  custom_fields: { name: "Exit", type: "user" }
 )
 
