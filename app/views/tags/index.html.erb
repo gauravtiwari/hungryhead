@@ -1,0 +1,91 @@
+<div id="content">
+  <div class="horz-section text-center">
+      <div class="wrapper-small bg-solid panel panel-default">
+          <h2 class="text-white"><%= pluralize(@ideas.size, 'Idea') %> <span class="text-white">tagged with</span> <strong><%= params[:tag].capitalize.strip.gsub('-', ' ') %></strong></h2>
+          <p class="large text-white">Description.</p>
+      </div>
+    </div>
+    <div class="container-fluid container-fixed-lg bg-white">
+         <div class="panel panel-transparent col-md-12">
+             <div class="panel-body">
+                 <div class="dataTables_wrapper form-inline no-footer">
+                     <div class="table-responsive">
+                         <table class=
+                         "table table-hover no-footer"
+                         >
+                             <thead>
+                                 <tr>
+                                     <th>
+                                         Name
+                                     </th>
+                                     <th>
+                                         Elevator Pitch
+                                     </th>
+                                     <th>
+                                         Market
+                                     </th>
+                                     <th>
+                                         Follow
+                                     </th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                            <% @ideas.each do |idea| %>
+                               <tr role="row" class="<%= cycle("odd", "even") -%>">
+                                   <td class=
+                                   "v-align-middle semi-bold">
+                                       <h4 class="no-margin">
+                                        <%= link_to(idea_path(idea), :"data-popover-href" => "#{card_idea_path(idea)}", class: 'load-card bold') do %>
+                                          <%= idea.name %>
+                                        <% end %>
+                                       </h4>
+
+                                       <p class="fs-13">
+                                        <%= link_to(profile_path(idea.school)) do %>
+                                           <%= idea.school.name %>
+                                        <% end %>
+                                       </p>
+                                       <% idea.location_list.each do |tag| %>
+                                         <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag no-margin") do %>
+                                           <%= tag %>
+                                         <% end %>
+                                       <% end %>
+                                   </td>
+
+                                   <td class="v-align-middle">
+                                    <h5 class="no-margin"><%= idea.elevator_pitch %></h5>
+                                   </td>
+
+                                    <td class="v-align-middle">
+                                   <% idea.market_list.each do |tag| %>
+                                     <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag") do %>
+                                       <%= tag %>
+                                     <% end %>
+                                   <% end %>
+
+
+                                    </td>
+
+
+                                   <td class="v-align-middle">
+                                    <%= react_component('Follow', {followed: followed?(idea)}) %>
+                                   </td>
+                               </tr>
+                            <% end %>
+
+                             </tbody>
+                         </table>
+
+
+                     </div>
+                   <div class="paging-container p-r-15">
+                       <%= will_paginate(@ideas, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+                   </div>
+
+                 </div>
+             </div>
+         </div>
+      </div>
+
+    </div>
+</div>
