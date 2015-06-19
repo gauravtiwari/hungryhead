@@ -59,13 +59,6 @@ var IdeaLeaderboardHelpModal = React.createClass({
                             <li className="m-b-10"><span className="bold">Comment: </span> For every comment, an idea earns 2 points</li>
                            </ul>
                          </div>
-                         <div>
-                           <h3 className="m-t-30">2. Elevator pitch</h3>
-                           <p className="bold">Don't SPAM; Don't be a Jerk</p>
-                           <p>
-                             Project creators set a funding goal and deadline. If people like a project, they can pledge money to make it happen. Funding on Kickstarter is all-or-nothing — projects must reach their funding goals to receive any money. All-or-nothing funding might seem scary, but it’s amazingly effective in creating momentum and rallying people around an idea. To date, an impressive 44% of projects have reached their funding goals.
-                           </p>
-                         </div>
                        </div>
                    </div>
                </div>

@@ -6,14 +6,13 @@ var OpenCollaborationBox = React.createClass({
 
   OpenCollaboration: function() {
     if(this.isMounted()) {
-	  if($('body').hasClass('show-collaboration')) {
+	   if($('body').hasClass('show-collaboration')) {
 			 $('body').removeClass('show-collaboration');
 			 $('.quickview-wrapper').removeClass('open');
-		  }
-		else {
+		  } else {
 			 $('body').addClass('show-collaboration' );
 			 $('.quickview-wrapper').addClass('open');
-		}
+		  }
     }
   },
 

@@ -29,7 +29,7 @@ var MessageSection = React.createClass({
   componentDidMount: function() {
     $(window).resize(this.sizeContent);
     this._scrollToBottom();
-    $('a[data-toggle="quickview"], .content').on('click', function(){
+    $('a[data-toggle="quickview"]').on('click', function(){
       $('body').removeClass('show-collaboration');
       $('.quickview-wrapper').removeClass('open');
     });
