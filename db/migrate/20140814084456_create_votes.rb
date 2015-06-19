@@ -8,7 +8,7 @@ class CreateVotes < ActiveRecord::Migration
     end
 
     add_index :votes, [:voter_id, :voter_type], algorithm: :concurrently
-    add_index :votes, [:votable_id, :votable_type], algorithm: :concurrently
+    add_index :votes, [:votable_id, :votable_type, :voter_id], algorithm: :concurrently, unique: true
   end
 
   def self.down

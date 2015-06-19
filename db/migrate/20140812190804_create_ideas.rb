@@ -7,12 +7,14 @@ class CreateIdeas < ActiveRecord::Migration
 
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
 
-      t.string :name, null: false
+      t.string :name, null: false, :unique => true
 
       t.string :slug, :unique => true, null: false, default: ""
 
       t.string :high_concept_pitch, default: "", null: false
+
       t.text :elevator_pitch, default: "", null: false
+
       t.text :description, default: ""
 
       t.string :logo
@@ -29,6 +31,8 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :privacy, default: 0
 
       t.boolean :investable, default: false
+
+      t.boolean :validated, null: false, default: false
 
       t.boolean :rules_accepted, index: true, default: false
 

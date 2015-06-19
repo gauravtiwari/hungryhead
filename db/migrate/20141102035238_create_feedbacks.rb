@@ -28,6 +28,8 @@ class CreateFeedbacks < ActiveRecord::Migration
     add_index :feedbacks, :status, algorithm: :concurrently
     add_index :feedbacks, :badge, algorithm: :concurrently
 
+    add_index :feedbacks, [:user_id, :idea_id], unique: true, algorithm: :concurrently
+
     add_index :feedbacks, :uuid, algorithm: :concurrently
 
     add_index :feedbacks, :parameters, using: :gin

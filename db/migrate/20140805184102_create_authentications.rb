@@ -12,6 +12,7 @@ class CreateAuthentications < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_index :authentications, [:uid], algorithm: :concurrently
+    add_index :authentications, [:uid, :provider, :access_token], unique: true, algorithm: :concurrently
     add_index :authentications, [:provider], algorithm: :concurrently
     add_index :authentications, [:access_token], algorithm: :concurrently
   end
