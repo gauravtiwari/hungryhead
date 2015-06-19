@@ -6,7 +6,6 @@ class CreateFollows < ActiveRecord::Migration
       t.references :follower, polymorphic: true, null: false
       t.timestamps null: false
     end
-    add_index :follows, [:follower_id, :followable_id, :followable_type], unique: true, algorithm: :concurrently
   end
 
   def down

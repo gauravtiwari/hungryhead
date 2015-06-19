@@ -259,8 +259,8 @@ CREATE TABLE events (
     user_id integer NOT NULL,
     description character varying DEFAULT ''::character varying NOT NULL,
     location character varying DEFAULT ''::character varying NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-19 17:37:14.91293'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-19 17:37:14.912954'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-19 23:37:32.994247'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-19 23:37:32.994284'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -516,6 +516,7 @@ CREATE TABLE ideas (
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
     investable boolean DEFAULT false,
+    validated boolean DEFAULT false NOT NULL,
     rules_accepted boolean DEFAULT false,
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
@@ -2265,6 +2266,13 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 
 
 --
+-- Name: index_activities_on_trackable_id_and_trackable_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_activities_on_trackable_id_and_trackable_type_and_key ON activities USING btree (trackable_id, trackable_type, key);
+
+
+--
 -- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2290,6 +2298,13 @@ CREATE INDEX index_authentications_on_provider ON authentications USING btree (p
 --
 
 CREATE INDEX index_authentications_on_uid ON authentications USING btree (uid);
+
+
+--
+-- Name: index_authentications_on_uid_and_provider_and_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_authentications_on_uid_and_provider_and_access_token ON authentications USING btree (uid, provider, access_token);
 
 
 --
@@ -2419,24 +2434,17 @@ CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
 
 
 --
+-- Name: index_feedbacks_on_user_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_feedbacks_on_user_id_and_idea_id ON feedbacks USING btree (user_id, idea_id);
+
+
+--
 -- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
-
-
---
--- Name: index_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_followables ON follows USING btree (followable_id, followable_type);
-
-
---
--- Name: index_followers; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_followers ON follows USING btree (follower_id, follower_type);
 
 
 --
@@ -2594,6 +2602,13 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 
 
 --
+-- Name: index_investments_on_idea_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_investments_on_idea_id_and_user_id ON investments USING btree (idea_id, user_id);
+
+
+--
 -- Name: index_investments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2734,6 +2749,13 @@ CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notificat
 
 
 --
+-- Name: index_notifications_on_trackable_id_and_trackable_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_notifications_on_trackable_id_and_trackable_type_and_key ON notifications USING btree (trackable_id, trackable_type, key);
+
+
+--
 -- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2829,6 +2851,13 @@ CREATE INDEX index_slugs_on_sluggable_id ON slugs USING btree (sluggable_id);
 --
 
 CREATE INDEX index_slugs_on_sluggable_id_and_sluggable_type ON slugs USING btree (sluggable_id, sluggable_type);
+
+
+--
+-- Name: index_slugs_on_sluggable_id_and_sluggable_type_and_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_slugs_on_sluggable_id_and_sluggable_type_and_slug ON slugs USING btree (sluggable_id, sluggable_type, slug);
 
 
 --
@@ -3042,10 +3071,10 @@ CREATE INDEX index_votes_on_votable_id ON votes USING btree (votable_id);
 
 
 --
--- Name: index_votes_on_votable_id_and_votable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_votable_id_and_votable_type_and_voter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_votes_on_votable_id_and_votable_type ON votes USING btree (votable_id, votable_type);
+CREATE UNIQUE INDEX index_votes_on_votable_id_and_votable_type_and_voter_id ON votes USING btree (votable_id, votable_type, voter_id);
 
 
 --
