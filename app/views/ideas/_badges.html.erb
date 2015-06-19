@@ -46,44 +46,39 @@
              <i class="pg-close"></i>
          </button>
          <div class="modal-header">
-             <h5 class="text-left p-b-5"><span class="semi-bold">Idea </span> Glossary</h5>
+             <h5 class="text-left p-b-5 b-b b-grey pull-left"><span class="semi-bold">Idea Badges</span> Description</h5>
          </div>
-         <div class="modal-body" id="badges_help_modal">
-             <div class="row">
+         <div class="modal-body clearfix" id="badges_help_modal">
+             <div class="row m-t-20">
                  <div class="col-md-12">
-                   <div>
-                     <h3 class="m-t-30">1. Idea Name.</h3>
-                     <p>An idea receive a badge after specific milestones. Here are a list of idea badges that an idea can earn: </p>
-                   </div>
-                      <div class="table-content">
-                          <p>
-                              We use markdown for text formatting. Please use the syntax on the right to style/format your text.
-                              You can find more information here <a href="http://daringfireball.net/projects/markdown/syntax">http://daringfireball.net/projects/markdown/syntax</a>
-                          </p>
-                      </div>
-                      <table class="table table-bordered modal-markdown-help-table">
-                          <thead>
-                              <tr>
-                                  <th>Badge</th>
-                                  <th>Description</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            <% Merit::Badge.select {|badge| badge.type ==  "idea"}.each do |badge| %>
-                              <tr>
-                                  <td>
-                                  <p class="m-b-10 inline">
-                                    <%= link_to(badge_path(badge.name), class: "badge text-white font-helvetica") do %>
-                                        <span class="badge-type <%= badge.level %>"></span><%= badge.custom_fields[:name] %>
-                                    <% end %>
-                                    </p>
-                                </td>
-                                  <td><%= badge.custom_fields[:description]%> </td>
-                              </tr>
-                            <% end %>
-                          </tbody>
-                      </table>
+                  <div class="table-content">
+                    <p>
+                        An idea receives a badge after it has completed a milestones. Here is a list of current idea badges:
+                    </p>
                   </div>
+                  <table class="table table-striped badges-help-table m-t-40">
+                      <thead>
+                          <tr>
+                              <th>Badge Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <% Merit::Badge.select {|badge| badge.custom_fields[:type] ==  "idea"}.each do |badge| %>
+                          <tr>
+                              <td>
+                              <p class="m-b-10 inline">
+                                <%= link_to(badge_path(badge.name), class: "badge text-white font-helvetica") do %>
+                                    <span class="badge-type <%= badge.level %>"></span><%= badge.custom_fields[:name] %>
+                                <% end %>
+                                </p>
+                            </td>
+                              <td><%= badge.description %> </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                </div>
              </div>
          </div>
      </div>

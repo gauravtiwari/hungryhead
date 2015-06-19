@@ -146,7 +146,7 @@ Merit::Badge.create!(
 Merit::Badge.create!(
   id: 17,
   name: "market-fit",
-  level: "broze",
+  level: "bronze",
   description: "Idea with score of 500",
   custom_fields: { name: "Product Market Fit", points: 15, type: "idea" }
 )

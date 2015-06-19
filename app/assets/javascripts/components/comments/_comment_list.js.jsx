@@ -25,7 +25,8 @@ var CommentList = React.createClass({
     var cx = React.addons.classSet;
 
     var comment_classes = cx({
-      "comment-list timeline-activity list-unstyled": true
+      "comment-list timeline-activity no-margin list-unstyled": true,
+      'b-t b-grey': this.props.standalone && comments.length === 0
     });
 
     return (
