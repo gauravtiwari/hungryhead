@@ -9,14 +9,14 @@
 	    <% end %>
     </div>
 
-    <div class="text-master-dark overflow-hidden">
+    <div class="text-master overflow-hidden">
     	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> invested <i class="fa fa-fw fa-dollar"></i><%= activity.trackable.amount %> in
 		<% if activity.recipient.in_team?(current_user) %>
 			your idea
 		<% end %>
 
 		<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
-	   	<h6 class="no-margin">
+	   	<h6 class="no-margin p-t-5">
 	   		<% if activity.user.locations %>
 		        <span class="location semi-bold m-r-10">
 		            <i class="fa fa-map-marker"></i>

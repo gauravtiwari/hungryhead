@@ -15,11 +15,8 @@ body, p {
 
 p {
   margin: 0px 0px 10px 0px;
-  color: #242d30 !important;
 }
-.panel-title span {
-  color: #242d30;
-}
+
 .btn-tags {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -49,8 +46,10 @@ p {
 .select2-container-multi .select2-choices {
   box-shadow: none;
 }
+.commentapp.comment-box.standalone .add-comment-form {
+  padding-top: 30px;
+}
 .commentapp.comment-box.standalone {
-  margin-top: 30px;
   border: 0;
 }
 .panel-body p,

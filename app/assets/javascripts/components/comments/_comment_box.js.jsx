@@ -151,8 +151,15 @@ var CommentBox = React.createClass({
           </div>;
     }
 
+    if(this.props.standalone) {
+      var heading = <h4 className="p-l-20 p-r-20"><i className="fa fa-comment-o"></i> Ask questions</h4>
+    } else {
+      var heading = "";
+    }
+
     return (
       <div className={comments_box}>
+        {heading}
         <CommentForm white={this.props.white || false}  loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
         <CommentList form={ this.state.form } standalone={this.props.standalone || false} onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
         {show_comment_bar}
