@@ -9,7 +9,7 @@
   <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
   <%= content_tag(:div, class: 'listing-header  text-center') do %>
     <%= content_tag(:div, class: 'listing-card-logo') do %>
-    <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
+    <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
      <% if user.avatar.present? %>
        <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
      <% else %>
