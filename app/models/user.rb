@@ -59,8 +59,8 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save do |user|
-    RecordSavedJob.set(wait: 10.seconds).perform_later(user.id, "User") if rebuild_cache? || mini_bio_changed?
-    RebuildNotificationsCacheJob.set(wait: 20.seconds).perform_later(id) if rebuild_cache?
+    RecordSavedJob.set(wait: 1.minute).perform_later(user.id, "User") if rebuild_search? && published?
+    RebuildNotificationsCacheJob.set(wait: 1.minute).perform_later(id) if rebuild_cache? && published?
   end
 
   #Tagging System
@@ -196,6 +196,10 @@ class User < ActiveRecord::Base
 
   def lastname
     self.name.split(' ').second
+  end
+
+  def rebuild_search?
+    name_changed? || avatar_changed? || mini_bio_changed?
   end
 
   def rebuild_cache?

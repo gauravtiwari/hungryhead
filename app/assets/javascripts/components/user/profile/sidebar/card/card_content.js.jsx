@@ -90,23 +90,23 @@ var CardContent = React.createClass({
       var school = "";
     }
 
-    var classes = "profile-card padding-20 box-shadow bg-" + this.props.profile.theme;
+    var classes = "profile-card padding-20  p-t-40 box-shadow bg-" + this.props.profile.theme;
 
 
     if(markets.length > 0) {
-      var market_content = <div className="p-b-10 p-l-20 p-r-20 p-t-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-briefcase text-danger"></i> Markets interested</h6> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
+      var market_content = <div className="p-b-10 p-l-20 p-r-20 p-t-20"><h6 className="text-master bold font-montserrat all-caps"><i className="fa fa-briefcase text-danger"></i> Markets interested</h6> <span className="clearfix text-brand p-t-5 displayblock">{markets}</span></div>;
     }
 
     if(hobbies.length > 0) {
-      var hobbies_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-smile-o text-danger"></i> Likes</h6> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
+      var hobbies_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-master bold font-montserrat all-caps"><i className="fa fa-smile-o text-danger"></i> Likes</h6> <span className="clearfix text-brand p-t-5 displayblock">{hobbies}</span></div>;
     }
 
     if(skills.length > 0){
-      var skills_content = <div className="p-b-10 p-l-20 p-r-20 p-b-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-graduation-cap text-danger"></i> Knows about</h6> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
+      var skills_content = <div className="p-b-10 p-l-20 p-r-20 p-b-20"><h6 className="text-master bold font-montserrat all-caps"><i className="fa fa-graduation-cap text-danger"></i> Knows about</h6> <span className="clearfix text-brand p-t-5 displayblock">{skills}</span></div>;
     }
 
     if(subjects.length > 0){
-      var subjects_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-black bold font-montserrat all-caps"><i className="fa fa-book text-danger"></i> Studied </h6> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
+      var subjects_content = <div className="p-b-10 p-l-20 p-r-20"><h6 className="text-master bold font-montserrat all-caps"><i className="fa fa-book text-danger"></i> Studied </h6> <span className="clearfix text-brand p-t-5 displayblock">{subjects}</span></div>;
     }
 
 

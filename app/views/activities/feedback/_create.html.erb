@@ -65,11 +65,11 @@
 		    	 	<%= link_to(activity.recipient.user.name, profile_path(activity.recipient.user)) %> found this feedback <%= activity.trackable.badge %>
 		    	</div>
 	    	<% end %>
-	    	<ul class="reactions pull-left">
-					<% voted = activity.trackable.voted?(current_user) %>
-					<%= react_component('Upvote', {record: activity.trackable.uuid, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left'}.to_json) %>
-				</ul>
-			<% end %>
+	    <% end %>
+    	<ul class="reactions pull-left">
+				<% voted = activity.trackable.voted?(current_user) %>
+				<%= react_component('Upvote', {record: activity.trackable.uuid, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+			</ul>
       <div class="clearfix"></div>
     </div>
 
