@@ -186,10 +186,13 @@ gem 'country_select'
 # SEO
 gem 'friendly_id'
 
+#Compress HTML output in production
 gem 'htmlcompressor'
 
-#JQuery AutoSize
+#Postgresql replication
+gem 'ar-octopus', :require => 'octopus'
 
+#JQuery AutoSize
 gem 'autosize-rails'
 gem "select2-rails"
 

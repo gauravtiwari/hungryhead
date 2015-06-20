@@ -71,6 +71,9 @@ GEM
     ambry (0.3.1)
     animate-rails (1.0.8)
       rails
+    ar-octopus (0.8.5)
+      activerecord (>= 3.2.0)
+      activesupport (>= 3.2.0)
     arel (6.0.0)
     asset_sync (1.1.0)
       activemodel
@@ -709,6 +712,7 @@ DEPENDENCIES
   activerecord-import
   acts-as-taggable-on
   animate-rails
+  ar-octopus
   asset_sync
   auto_html
   autoprefixer-rails
