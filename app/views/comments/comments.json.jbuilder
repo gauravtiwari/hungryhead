@@ -2,7 +2,7 @@
 json.form action: comments_path, commentable_id: record.uuid, commentable_type: record.class.to_s
 
 json.comments comments.each do |comment|
-  json.cache! ['comment', comment], expires_in: 10.minutes do
+  json.cache! [ @commentable, 'comments', comment], expires_in: 2.hours do
     json.(comment, :id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
     json.user_id comment.user.uid

@@ -1,5 +1,5 @@
 json.comments @comments.each do |comment|
-  json.cache! ['v1', comment], expires_in: 1.minutes do
+  json.cache! [@commentable, 'comments', comment], expires_in: 2.hours do
     json.(comment, :id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
     json.user_id comment.user.uid

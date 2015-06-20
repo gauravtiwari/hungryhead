@@ -1,19 +1,22 @@
 
-<div class="wrapper-small bg-solid text-center panel panel-default">
-  <h2 class="text-white">
-    People who earned
-    <span class="bold b-b b-white p-b-5"><%= params[:id].capitalize %></span>
-    badge
-  </h2>
-  <p class="m-b-10 inline text-white">
-    <%= link_to(badge_path(@badge.name), class: "badge text-white font-helvetica") do %>
-        <span class="badge-type <%= @badge.level %>"></span><%= @badge.custom_fields[:name] %>
-    <% end %>
-    : <%= @badge.description %>
-  </p>
-</div>
+<% cache(["beta", @badge.name]) do %>
+  <div class="wrapper-small bg-solid text-center panel panel-default">
+    <h2 class="text-white">
+      People who earned
+      <span class="bold b-b b-white p-b-5"><%= params[:id].capitalize %></span>
+      badge
+    </h2>
+    <p class="m-b-10 inline text-white">
+      <%= link_to(badge_path(@badge.name), class: "badge text-white font-helvetica") do %>
+          <span class="badge-type <%= @badge.level %>"></span><%= @badge.custom_fields[:name] %>
+      <% end %>
+      : <%= @badge.description %>
+    </p>
+  </div>
+<% end %>
 
 <div class="container">
+<% cache(["beta", "badge", @users]) do %>
   <% @users.each do |user| %>
   <div class="col-md-3 no-padding p-r-15">
   <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
@@ -68,6 +71,7 @@
     </div>
   </div>
   <% end %>
+<% end %>
 <% end %>
 <div class="paging-container p-r-15">
     <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
