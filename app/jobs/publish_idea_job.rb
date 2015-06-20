@@ -10,11 +10,11 @@ class PublishIdeaJob < ActiveJob::Base
       @activity = Activity.find(activity_id)
 
       #Increment counters for school and user
-      @idea.school.ideas_counter.increment if @idea.school
-      @idea.user.ideas_counter.increment if @idea.user
+      @idea.school.ideas_counter.increment
+      @user.ideas_counter.increment
       #Cache latest ideas into a list for user and school, max: 20
-      @idea.user.latest_ideas <<  @idea.id if @idea.user
-      @idea.school.latest_ideas << @idea.id if @idea.school
+      @user.latest_ideas <<  @idea.id
+      @idea.school.latest_ideas << @idea.id
       #Insert into cache list
       Idea.latest << @idea.id
       Idea.trending.add(@idea.id, 1)
@@ -25,10 +25,12 @@ class PublishIdeaJob < ActiveJob::Base
         {data: idea_json(@idea)}.to_json
       )
 
+      @user.followings.create!(followable: @followable)
+
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
         Pusher.trigger_async("private-user-#{f.uid}",
-          "new_feed_item",
+          "new_ticker_item",
           {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
         )
 

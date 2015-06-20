@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save do |user|
-    RecordSavedJob.set(wait: 1.minute).perform_later(user.id, "User") if rebuild_search? || id_changed?
+    RecordSavedJob.set(wait: 1.minute).perform_later(user.id, "User") if rebuild_search?
     RebuildNotificationsCacheJob.set(wait: 1.minute).perform_later(id) if rebuild_cache? && published?
   end
 
@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_search?
-    name_changed? || avatar_changed? || mini_bio_changed? && published?
+    published?
   end
 
   def rebuild_cache?
