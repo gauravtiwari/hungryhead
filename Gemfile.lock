@@ -372,7 +372,7 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     i18n_data (0.7.0)
-    identity_cache (0.2.4)
+    identity_cache (0.2.5)
       activerecord (>= 3.2)
       ar_transaction_changes (~> 1.0)
     inflecto (0.0.2)
