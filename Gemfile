@@ -137,6 +137,9 @@ gem 'browser'
 
 gem 'showdown-rails'
 
+#Makara for postgresql distributed reads
+gem 'makara', github: 'taskrabbit/makara'
+
 #Autocomplete  + Redis
 
 gem 'rack-contrib'
