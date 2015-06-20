@@ -17,5 +17,6 @@
 		csrf_token: "<%= form_authenticity_token %>"
 	}
 	window.currentUser = u;
+	window.PUSHER_APP_KEY = "<%= ENV['PUSHER_APP_KEY'] %>";
 
 </script>
