@@ -189,9 +189,6 @@ gem 'friendly_id'
 #Compress HTML output in production
 gem 'htmlcompressor'
 
-#Postgresql replication
-gem 'ar-octopus', :require => 'octopus'
-
 #JQuery AutoSize
 gem 'autosize-rails'
 gem "select2-rails"
