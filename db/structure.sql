@@ -259,8 +259,8 @@ CREATE TABLE events (
     user_id integer NOT NULL,
     description character varying DEFAULT ''::character varying NOT NULL,
     location character varying DEFAULT ''::character varying NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-20 12:02:54.007247'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-20 12:02:54.007269'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-20 12:15:13.37711'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-20 12:15:13.377133'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -3096,46 +3096,6 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- Name: mb_opt_outs_on_conversations_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mailboxer_conversation_opt_outs
-    ADD CONSTRAINT mb_opt_outs_on_conversations_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
-
-
---
--- Name: mentions_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mentions
-    ADD CONSTRAINT mentions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
--- Name: notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mailboxer_notifications
-    ADD CONSTRAINT notifications_on_conversation_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
-
-
---
--- Name: receipts_on_notification_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mailboxer_receipts
-    ADD CONSTRAINT receipts_on_notification_id FOREIGN KEY (notification_id) REFERENCES mailboxer_notifications(id);
-
-
---
--- Name: team_invites_idea_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY team_invites
-    ADD CONSTRAINT team_invites_idea_id_fk FOREIGN KEY (idea_id) REFERENCES ideas(id);
 
 
 --
