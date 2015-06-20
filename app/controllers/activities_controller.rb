@@ -18,9 +18,9 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find_by_uuid(params[:id])
-      respond_to do |format|
-        format.js
-      end
+    respond_to do |format|
+      format.js
+    end
   end
 
 end

@@ -2,10 +2,11 @@
 default:
   adapter: 'postgresql_makara'
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+  pool: <%= ENV["DB_POOL"] || 5 %>
   makara:
     blacklist_duration: 5
     master_ttl: 5
+    sticky: true
     connections:
       - role: master
       - role: slave
@@ -16,10 +17,11 @@ development:
   host: localhost
   database: hungryhead_school_app_development
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+  pool: <%= ENV["DB_POOL"] || 5 %>
   makara:
     blacklist_duration: 5
     master_ttl: 5
+    sticky: true
     connections:
       - role: master
       - role: slave
@@ -28,10 +30,11 @@ production:
   adapter: 'postgresql_makara'
   database: hungryhead_school_app_production
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+  pool: <%= ENV["DB_POOL"] || 20 %>
   makara:
     blacklist_duration: 5
     master_ttl: 5
+    sticky: true
     connections:
       - role: master
       - role: slave
@@ -40,10 +43,11 @@ staging:
   adapter: 'postgresql_makara'
   database: hungryhead_school_app_staging
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
+  pool: <%= ENV["DB_POOL"] || 25 %>
   makara:
     blacklist_duration: 5
     master_ttl: 5
+    sticky: true
     connections:
       - role: master
       - role: slave
