@@ -13,10 +13,10 @@ class PublishIdeaJob < ActiveJob::Base
       @idea.school.ideas_counter.increment
       @user.ideas_counter.increment
       #Cache latest ideas into a list for user and school, max: 20
-      @user.latest_ideas <<  @idea.id
-      @idea.school.latest_ideas << @idea.id
+      @user.latest_ideas <<  @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
+      @idea.school.latest_ideas << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
       #Insert into cache list
-      Idea.latest << @idea.id
+      Idea.latest << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
       Idea.trending.add(@idea.id, 1)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
@@ -25,7 +25,7 @@ class PublishIdeaJob < ActiveJob::Base
         {data: idea_json(@idea)}.to_json
       )
 
-      @user.followings.create!(followable: @followable)
+      @user.followings.create!(followable: @idea)
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
@@ -33,7 +33,6 @@ class PublishIdeaJob < ActiveJob::Base
           "new_ticker_item",
           {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
         )
-
         #send mail to users if subscribed
         IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
       end

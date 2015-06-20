@@ -11,8 +11,6 @@ json.idea do
     json.has_cover @idea.cover.present?
   end
 
-  json.school_name @idea.school.name
-  json.school_url profile_path(@idea.school)
   json.location @idea.location_list.each do |location|
     json.name location
     json.url tag_path(location.parameterize)

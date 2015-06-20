@@ -1,92 +1,68 @@
-<div class="horz-section">
-  <div class="wrapper-small bg-solid text-center panel panel-default">
-    <h2 class="text-white">Find ideas you would like to browse,</h2>
-    <span class="large text-white">or <%= link_to('pitch your own idea', new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> to validate with others</span>
-  </div>
 
-      <div class="container">
-      <div class="col-md-12">
-       <div class="panel panel-transparent bg-white">
-           <div class="panel-body">
-               <div class="dataTables_wrapper form-inline no-footer">
-                   <div class="table-responsive">
-                       <table class=
-                       "table table-hover no-footer"
-                       >
-                           <thead>
-                               <tr>
-                                   <th>
-                                       Name
-                                   </th>
-                                   <th>
-                                       Elevator Pitch
-                                   </th>
-                                   <th>
-                                       Market
-                                   </th>
-                                   <th>
-                                       Follow
-                                   </th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                          <% @ideas.each do |idea| %>
-                             <tr role="row" class="<%= cycle("odd", "even") -%>">
-                                 <td class=
-                                 "v-align-middle semi-bold">
-                                     <h4 class="no-margin">
-                                      <%= link_to(idea_path(idea), :"data-popover-href" => "#{card_idea_path(idea)}", class: 'load-card bold') do %>
-                                        <%= idea.name %>
-                                      <% end %>
-                                     </h4>
+<div class="wrapper-small bg-solid text-center panel panel-default">
+ <h2 class="text-white">Find ideas you would like to browse,</h2>
+   <span class="large text-white">or <%= link_to('pitch your own idea', new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> to validate with others</span>
+</div>
 
-                                     <p class="fs-13">
-                                      <%= link_to(profile_path(idea.school)) do %>
-                                         <%= idea.school.name %>
-                                      <% end %>
-                                     </p>
-                                     <% idea.location_list.each do |tag| %>
-                                       <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag no-margin") do %>
-                                         <%= tag %>
-                                       <% end %>
-                                     <% end %>
-                                 </td>
-
-                                 <td class="v-align-middle">
-                                  <h5 class="no-margin"><%= idea.elevator_pitch %></h5>
-                                 </td>
-
-                                  <td class="v-align-middle">
-                                 <% idea.market_list.each do |tag| %>
-                                   <%= link_to(tag_path(tag.parameterize), class: "btn btn-tag") do %>
-                                     <%= tag %>
-                                   <% end %>
-                                 <% end %>
-
-
-                                  </td>
-
-
-                                 <td class="v-align-middle">
-                                  <%= react_component('Follow', {followed: followed?(idea)}) %>
-                                 </td>
-                             </tr>
-                          <% end %>
-
-                           </tbody>
-                       </table>
-
-
-                   </div>
-                 <div class="paging-container p-r-15">
-                     <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-                 </div>
-
-               </div>
-           </div>
-       </div>
+<div class="container">
+  <% @ideas.each do |idea| %>
+  <div class="col-md-3 no-padding p-r-15">
+  <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
+  <%= content_tag(:div, class: 'listing-header  text-center') do %>
+    <%= content_tag(:div, class: 'listing-card-logo') do %>
+    <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
+       <span class="placeholder bold text-white">
+         <%= idea.name_badge.upcase %>
+       </span>
+     </div>
+      <h5 class="no-margin fs-14 bold"><%= link_to(idea.name, idea_path(idea)) %></h5>
+      <p class="fs-12"><%= truncate(idea.high_concept_pitch, length: 30) %></p>
+      <% if idea.market_list.present? %>
+        <p class="no-margin text-master">
+          <% idea.market_list.each do |tag| %>
+            <%= link_to(tag_path(tag.parameterize), class: "fs-12 btn-tags padding-5 m-r-10") do %>
+              <%= tag %>
+            <% end %>
+          <% end %>
+        </p>
+      <% end %>
+      <% if current_user != idea.user %>
+        <div class="card-follow-button m-t-20 clearfix">
+          <%= react_component('Follow',{:followed => followed?(idea)}) %>
+        </div>
+        <script type="text/javascript">
+           ReactRailsUJS.mountComponents();
+        </script>
+      <% else %>
+        <%= link_to(idea_path(idea), class: 'btn btn-danger btn-sm text-white m-t-20 clearfix') do %>
+        <span class="text-white"><i class="fa fa-share"></i> View idea</span>
+        <% end %>
+      <% end %>
+    <% end %>
+      <% end %>
+      <div class="listing-card-stats">
+      <ul class="stastics-list">
+        <li>
+          Followers
+          <span class="text-master"><i class="fa fa-users"></i> <%= idea.followers_counter.value %></span>
+        </li>
+        <li>
+          Feedbacks
+          <span class="text-master"><i class="fa fa-comment"></i> <%= idea.feedbackers_counter.value %></span>
+        </li>
+        <li>
+          Investments
+          <span class="text-master"><i class="fa fa-dollar"></i> <%= idea.investors_counter.value %></span>
+        </li>
+      </ul>
     </div>
   </div>
-  </div>
+  <% end %>
+<% end %>
+<div class="paging-container p-r-15">
+    <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+</div>
+
+</div>
 
 
