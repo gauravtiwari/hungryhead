@@ -54,6 +54,7 @@ class Idea < ActiveRecord::Base
   counter :votes_counter
   counter :shares_counter
   counter :comments_counter
+  counter :idea_messages_counter
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }

@@ -1,42 +1,44 @@
-<!-- START HEADER -->
-<div class="header bg-white b-b b-grey box-shadow">
-<div class="container">
-  <div class=" pull-left sm-table">
-    <div class="header-inner">
-      <div class="brand inline">
-      <%= link_to(root_path) do %>
-        <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
-      <% end %>
+<% cache("page_nav") do %>
+  <!-- START HEADER -->
+  <div class="header bg-white b-b b-grey box-shadow">
+  <div class="container">
+    <div class=" pull-left sm-table">
+      <div class="header-inner">
+        <div class="brand inline">
+        <%= link_to(root_path) do %>
+          <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
+        <% end %>
+        </div>
+       <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+        <li class="p-r-15 fs-14 inline font-heading">
+          <%= link_to(story_path) do %>
+            <span class="text-master">Story</span>
+          <% end %>
+        </li>
+        <li class="p-r-15 fs-14 inline font-heading">
+          <%= link_to(product_path) do %>
+            <span class="text-master">Product</span>
+          <% end %>
+        </li>
+        <li class="p-r-15 fs-14 inline font-heading">
+          <%= link_to(how_it_works_path) do %>
+            <span class="text-master">How it works </span>
+          <% end %>
+        </li>
+       </ul>
       </div>
-     <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-      <li class="p-r-15 fs-14 inline font-heading">
-        <%= link_to(story_path) do %>
-          <span class="text-master">Story</span>
-        <% end %>
-      </li>
-      <li class="p-r-15 fs-14 inline font-heading">
-        <%= link_to(product_path) do %>
-          <span class="text-master">Product</span>
-        <% end %>
-      </li>
-      <li class="p-r-15 fs-14 inline font-heading">
-        <%= link_to(how_it_works_path) do %>
-          <span class="text-master">How it works </span>
-        <% end %>
-      </li>
-     </ul>
     </div>
-  </div>
 
-  <div class="pull-right">
-    <div class="visible-lg visible-md m-t-10">
-      <div class="pull-left p-t-10  p-r-20 font-heading">
-        <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-master') %>
-      </div>
-      <div class="pull-left p-t-5 font-heading">
-        <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-master text-master bg-transparent inline') %>
+    <div class="pull-right">
+      <div class="visible-lg visible-md m-t-10">
+        <div class="pull-left p-t-10  p-r-20 font-heading">
+          <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-master') %>
+        </div>
+        <div class="pull-left p-t-5 font-heading">
+          <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-master text-master bg-transparent inline') %>
+        </div>
       </div>
     </div>
+    </div>
   </div>
-  </div>
-</div>
+<% end %>
