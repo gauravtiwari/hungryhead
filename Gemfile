@@ -42,6 +42,7 @@ gem 'crono'
 #Cache for jbuilder
 gem 'bulk_cache_fetcher'
 gem 'jbuilder'
+gem 'jbuilder_cache_multi'
 
 #Build fake data
 gem 'forgery'

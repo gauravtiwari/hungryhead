@@ -6,7 +6,9 @@
           <div class="modal-body no-border no-padding bg-white">
            <% if @feedbacks.length > 0 %>
              <% @feedbacks.each do |feedback| %>
-               <%= render partial: 'feedback', locals: {feedback: feedback} %>
+              <% cache(feedback) do %>
+                <%= render partial: 'feedback', locals: {feedback: feedback} %>
+              <% end %>
              <% end %>
              <% else %>
              <div class="widget-box">
