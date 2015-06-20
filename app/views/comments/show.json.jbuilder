@@ -1,5 +1,5 @@
 json.comment do
-  json.cache! [comment.commentable, 'comments', comment], expires_in: 2.hours do
+  json.cache! [comment.commentable, comment], expires_in: 2.hours do
     json.(comment, :id, :parent_id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
     json.user_url profile_card_path(comment.user)
