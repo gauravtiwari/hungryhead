@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  include IdentityCache
   acts_as_copy_target
 
   #External modules
@@ -51,6 +52,10 @@ class User < ActiveRecord::Base
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
 
+  cache_has_many :ideas, embed: true
+  cache_has_many :impressions, embed: true
+  cache_index :slug, :unique => true
+
   #Callbacks
   before_create :add_fullname, if: :name_not_present?
   before_create :add_username, if: :username_absent?
@@ -72,6 +77,7 @@ class User < ActiveRecord::Base
   set :followings_ids
   set :idea_followings_ids
   set :school_followings_ids
+  set :impressioners_ids
 
   #Latest ideas
   list :latest_ideas, maxlength: 5, marshal: true

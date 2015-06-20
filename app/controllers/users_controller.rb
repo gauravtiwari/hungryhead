@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
-    if @user.impressions.where(impressionable: @user).empty? && @user != current_user
+    if current_user.impressioners_ids.member?(@user.id) && @user != current_user
       PersistViewsCountJob.perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip)
     end
     respond_to do |format|
@@ -190,7 +190,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.find(id)
+    @user = User.fetch_by_slug(id)
     @badges = @user.badges.group_by(&:level)
   end
 

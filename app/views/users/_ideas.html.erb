@@ -1,12 +1,11 @@
-<% ideas = Idea.for_user(@user) %>
 <div class="widget-16 text-white panel bg-green">
     <div class="panel-heading">
         <div class="panel-title b-b b-white p-b-5">
             <i class="fa fa-lightbulb-o text-white"></i> Ideas
         </div>
     </div>
-    <% if ideas.size > 0 %>
-    <% ideas.each do |idea| %>
+    <% if @user.fetch_ideas.length > 0 %>
+    <% @user.fetch_ideas.each do |idea| %>
         <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
             <div class="pull-left">
                 <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">

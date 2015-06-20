@@ -37,6 +37,7 @@ class Idea < ActiveRecord::Base
   list :feedbackers_ids
   list :investors_ids
   list :commenters_ids
+  set :impressioners_ids
 
   #Set to store trending
   list :latest, maxlength: 20, marshal: true, global: true
