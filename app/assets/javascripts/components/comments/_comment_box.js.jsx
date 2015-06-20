@@ -41,7 +41,6 @@ var CommentBox = React.createClass({
       if(this.state.standalone) {
         this.loadComments();
       }
-      $('.comments-scollable').slimScroll({height: $(window).height() - 170});
       var comment_channel = pusher.subscribe(this.props.comment_channel);
       if(comment_channel) {
         comment_channel.bind('new_comment', function(data){

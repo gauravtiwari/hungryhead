@@ -13,8 +13,8 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
+    <%= render partial: 'shared/current_user' if user_signed_in? %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lte IE 9]>
@@ -30,27 +30,19 @@
     </script>
 
     <%= csrf_meta_tags %>
-
-    <% if user_signed_in? %>
-      <%= render partial: 'shared/current_user' %>
-    <% end %>
-
     <%= yield :head %>
 
   </head>
 
   <body class="fixed-header menu-behind">
-
     <div class="page-container">
       <%= render partial: 'globals/nav', locals: {bg: 'bg-white'} %>
-
       <div class="page-content-wrapper">
         <div class="content">
           <%= yield %>
         </div>
       </div>
     </div>
-
   </body>
 
 </html>

@@ -13,8 +13,7 @@
 		avatar: "<%= current_user.avatar.url(:avatar) %>",
 		role: "<%= current_user.role %>",
 		user_url:  "<%= user_url(current_user) %>",
-		csrf_param: "<%= request_forgery_protection_token %>",
-		csrf_token: "<%= form_authenticity_token %>"
+		authenticated: "<%= user_signed_in? %>"
 	}
 	window.currentUser = u;
 	window.PUSHER_APP_KEY = "<%= ENV['PUSHER_APP_KEY'] %>";
