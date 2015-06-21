@@ -15,6 +15,19 @@
     <% cache_if(user_signed_in?, current_user) do %>
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
+
+    <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
+      <script>
+        idea = {
+          name: "<%= @idea.name %>",
+          slug: "<%= @idea.slug %>",
+          id: "<%= @idea.uuid %>"
+        }
+
+        window.idea = idea;
+      </script>
+    <% end %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 

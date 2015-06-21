@@ -26,8 +26,6 @@ var CollaborationBox = React.createClass({
       this.addCollaborationMessage();
       }.bind(this));
 
-    var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-" + this.state.meta.slug);
-
     idea_collaboration_channel.bind('pusher:subscription_succeeded', function(members) {
       members.each(self.add_member);
     });

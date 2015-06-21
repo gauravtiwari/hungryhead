@@ -16,6 +16,10 @@ module IdeasHelper
       }
   end
 
+  def idea_collaboration?
+    params[:controller] == "ideas" && params[:action] != "index" && user_signed_in?
+  end
+
   def cache_key_for_idea(idea)
     investors = idea.investors_counter.value
     followers = idea.followers_counter.value
