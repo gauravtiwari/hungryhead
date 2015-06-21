@@ -17,15 +17,16 @@
     <% end %>
 
     <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
-      <script type="text/javascript">
-        idea = {
-          name: "<%= @idea.name %>",
-          slug: "<%= @idea.slug %>",
-          id: "<%= @idea.uuid %>"
-        }
-
-        window.idea = idea;
-      </script>
+      <% if idea_collaboration? %>
+        <script type="text/javascript">
+          idea = {
+            name: "<%= @idea.name %>",
+            slug: "<%= @idea.slug %>",
+            id: "<%= @idea.uuid %>"
+          }
+          window.idea = idea;
+        </script>
+      <% end %>
     <% end %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
