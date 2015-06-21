@@ -13,14 +13,18 @@
       </div>
   </div>
 
-  <div class="box-shadow bg-white">
-    <%= render partial: 'menu' %>
-  </div>
+    <div class="box-shadow bg-white">
+      <%= render partial: 'menu' %>
+    </div>
 
-  <div class="content p-t-20">
-  <div class="activity-feed auto-height">
-    <%= render partial: 'students' %>
-  </div>
-  </div>
+    <div class="content p-t-20">
+      <div class="people-list auto-height">
+        <% cache(["school_peopel", cache_key_for_school_people]) do %>
+          <% @students.each do |idea| %>
+            <%= render partial: 'students', locals: {user: user}  %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   </div>
