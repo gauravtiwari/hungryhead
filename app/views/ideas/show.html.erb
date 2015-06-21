@@ -26,18 +26,23 @@
   <div class="col-md-3 col-lg-4 col-sm-4">
     <div class="idea-sidebar auto-height bg-white box-shadow">
       <%= render partial: 'card_stats' %>
-      <% cache(["badges", @idea.badges.length) do %>
+
+      <% cache(["badges", @idea.badges.length]) do %>
         <%= render partial: 'badges' %>
       <% end %>
+
       <% cache(@idea) do %>
         <%= render partial: 'team'%>
       <% end %>
+
       <% cache(["followers", @idea.followers_counter.value]) %>
         <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
       <% end %>
+
       <% cache(["investors", @idea.investors_counter.value]) %>
         <%= render partial: 'investors' if @idea.investors_counter.value > 0 %>
       <% end %>
+
     </div>
   </div>
 </div>

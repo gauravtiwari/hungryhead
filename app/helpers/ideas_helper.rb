@@ -20,7 +20,7 @@ module IdeasHelper
     investors = idea.investors_counter.value
     followers = idea.followers_counter.value
     feedbackers = idea.feedbackers_counter.value
-    followed = idea.followed_by(current_user)
+    followed = idea.followed_by?(current_user)
     "#{idea}/investors-#{investors}/followers-#{followers}/feedbackers-#{feedbackers}/followed-#{followed}"
   end
 
