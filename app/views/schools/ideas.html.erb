@@ -1,26 +1,35 @@
   <div class="container">
-  <div class="social-wrapper container">
-  <div class="social" data-pages="social">
-      <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-        <%=  render partial: 'school_data' %>
-        <%= render partial: 'cover' %>
-       <div class="school-action-buttons col-md-5">
+    <div class="social-wrapper container">
+      <div class="social" data-pages="social">
+          <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
+            <% cache(["school_data", cache_key_for_school(@school)]) do %>
+              <%=  render partial: 'school_data' %>
+            <% end %>
 
-        <% if current_user.admin? %>
-          <%= link_to('Edit Profile', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
+            <% cache(["cover", @school]) do %>
+              <%= render partial: 'cover' %>
+            <% end %>
+
+           <div class="school-action-buttons col-md-5">
+              <% if current_user == @school.admin %>
+                <%= link_to('Dashboard', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
+              <% end %>
+            </div>
+          </div>
+      </div>
+
+      <div class="box-shadow bg-white">
+        <% cache(["school_menu", @school]) do %>
+          <%= render partial: 'menu' %>
         <% end %>
       </div>
+
+      <div class="content p-t-20">
+        <div class="ideas-list auto-height">
+          <% cache(["school_data", cache_key_for_ideas]) do %>
+            <%= render partial: 'ideas' %>
+          <% end %>
+        </div>
       </div>
-  </div>
-
-  <div class="box-shadow bg-white">
-    <%= render partial: 'menu' %>
-  </div>
-
-  <div class="content p-t-20">
-  <div class="activity-feed auto-height">
-    <%= render partial: 'ideas' %>
-  </div>
-  </div>
-  </div>
+    </div>
   </div>

@@ -22,6 +22,12 @@ module IdeasHelper
     "ideas/published-#{count}-#{max_updated_at}"
   end
 
-
+  def cache_key_for_idea(idea)
+    investors = idea.investors_counter.value
+    followers = idea.followers_counter.value
+    feedbackers = idea.feedbackers_counter.value
+    followed = idea.followed_by(current_user)
+    "#{idea}/investors-#{investors}/followers-#{followers}/feedbackers-#{feedbackers}/followed-#{followed}"
+  end
 
 end
