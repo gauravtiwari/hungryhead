@@ -258,7 +258,7 @@ gem 'metamagic'
 gem 'uuidtools'
 
 #Skylight
-gem "skylight"
+#gem "skylight"
 
 gem "bugsnag"
 
