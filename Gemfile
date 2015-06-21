@@ -139,7 +139,7 @@ gem 'browser'
 gem 'showdown-rails'
 
 #Makara for postgresql distributed reads
-gem 'makara', github: 'taskrabbit/makara'
+#gem 'makara', github: 'taskrabbit/makara'
 
 #Adding identity cache for model caching
 gem 'identity_cache'

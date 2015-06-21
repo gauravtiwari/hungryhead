@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    if @idea.impressioners_ids.member?(current_user.id) && @user != current_user
+    if !@idea.impressioners_ids.member?(current_user.id) && @user != current_user
       PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
     end
   end
