@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   include Impressionable
   include Impressioner
   include Eventable
+  include SocialAuthenticable
 
   attr_accessor :login
   attr_reader :raw_invitation_token
@@ -125,7 +126,7 @@ class User < ActiveRecord::Base
 
   #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :confirmable,
+    :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable,
     :registerable, :authentication_keys => [:login]
 
 
@@ -216,6 +217,19 @@ class User < ActiveRecord::Base
   def has_notifications?
     #check if user has notifications
     ticker.members.length > 0
+  end
+
+  def email_required?
+    super && authentications.blank?
+  end
+  def password_required?
+    super && authentications.blank?
+  end
+
+  #Override Devise's update with password to allow registration edits without password entry
+  def update_with_password(params={})
+    params.delete(:current_password)
+    self.update_without_password(params)
   end
 
   private

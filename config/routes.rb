@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
 
   # Authentication
-  devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}
+  devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations",  :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'users/registrations', :confirmations => "users/confirmations"}
   as :user do
 
     get   '/join' => 'users/registrations#new',    as: 'new_user_registration'
