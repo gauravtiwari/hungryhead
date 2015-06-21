@@ -6,7 +6,7 @@
       </div>
     <% end %>
 
-    <% cache(["idea_menu", @idea, @idea.user]) do %>
+    <% cache(["idea_menu", @idea, @idea.fetch_user]) do %>
       <%= render partial: 'menu' %>
     <% end %>
 

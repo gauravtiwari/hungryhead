@@ -1,5 +1,8 @@
 class Idea < ActiveRecord::Base
 
+  include IdentityCache
+  cache_index :slug, :unique => true
+
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
@@ -71,6 +74,8 @@ class Idea < ActiveRecord::Base
   belongs_to :school
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
+
+  cache_belongs_to :user
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,

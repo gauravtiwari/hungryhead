@@ -175,7 +175,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.friendly.find(params[:id])
+    @idea = Idea.fetch_by_slug(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end
