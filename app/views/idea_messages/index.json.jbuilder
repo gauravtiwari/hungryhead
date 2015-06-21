@@ -12,7 +12,7 @@ if @idea_messages
 	end
 
 	json.meta do
-		json.cache! @idea_messages.count, expires_in: 2.hours do
+		json.cache! ["idea_messages", @idea.idea_messages_counter.value], expires_in: 2.hours do
 	    json.current_page @idea_messages.current_page
 	    json.next_page @idea_messages.next_page
 	    json.prev_page @idea_messages.previous_page

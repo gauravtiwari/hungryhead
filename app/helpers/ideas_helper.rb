@@ -1,7 +1,7 @@
 module IdeasHelper
 
 	def invested?
-      idea = {
+      {
         form: {
           action: idea_investments_path(@idea),
           idea_id: @idea.id
@@ -15,5 +15,13 @@ module IdeasHelper
         has_invested: !@idea.invested?(current_user)
       }
   end
+
+  def cache_key_for_ideas
+    count          = Idea.published.count
+    max_updated_at = Idea.published.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "ideas/published-#{count}-#{max_updated_at}"
+  end
+
+
 
 end
