@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
-    if current_user.impressioners_ids.member?(@user.id) && @user != current_user
+    if @user.impressioners_ids.member?(current_user.id) && @user != current_user
       PersistViewsCountJob.perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip)
     end
     respond_to do |format|
