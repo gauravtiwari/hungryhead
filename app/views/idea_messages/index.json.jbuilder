@@ -16,6 +16,7 @@ if @idea_messages
 	    json.current_page @idea_messages.current_page
 	    json.next_page @idea_messages.next_page
 	    json.prev_page @idea_messages.previous_page
+	    json.slug @idea.slug
 	  end
   end
 end

@@ -1,8 +1,4 @@
 <div class="idea-collaboration-floating-panel">
-<%= javascript_tag do %>
-	var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.slug %>");
-<% end %>
-
 <%= react_component('OpenCollaborationBox') %>
 <div id="live_message"></div>
 <div class="quickview-wrapper" data-pages="quickview" id=
