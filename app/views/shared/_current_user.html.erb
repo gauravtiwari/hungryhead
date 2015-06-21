@@ -11,7 +11,7 @@
 		investments: "<%= current_user.investments_counter.value %>",
 		avatar: "<%= current_user.avatar.url(:avatar) %>",
 		role: "<%= current_user.role %>",
-		user_url:  "<%= user_url(current_user) %>",
+		user_url:  "<%= profile_url(current_user) %>",
 		authenticated: "<%= user_signed_in? %>"
 	}
 	window.currentUser = u;
