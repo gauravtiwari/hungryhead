@@ -35,11 +35,11 @@
         <%= render partial: 'team'%>
       <% end %>
 
-      <% cache(["followers", @idea.followers_counter.value]) %>
+      <% cache(["followers", @idea.followers_counter.value]) do %>
         <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
       <% end %>
 
-      <% cache(["investors", @idea.investors_counter.value]) %>
+      <% cache(["investors", @idea.investors_counter.value]) do %>
         <%= render partial: 'investors' if @idea.investors_counter.value > 0 %>
       <% end %>
 
