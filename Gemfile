@@ -26,7 +26,7 @@ gem 'turbolinks', github: 'rails/turbolinks'
 gem 'nprogress-rails'
 
 #Distrubuted query
-gem 'makara', github: 'taskrabbit/makara'
+#gem 'makara', github: 'taskrabbit/makara'
 
 #Group date
 gem 'groupdate'
