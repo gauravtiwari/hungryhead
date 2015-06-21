@@ -29,6 +29,9 @@
           <% @ideas.each do |idea| %>
             <%= render partial: 'ideas', locals: {idea: idea}  %>
           <% end %>
+          <div class="paging-container p-r-15">
+            <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+          </div>
         </div>
       </div>
     </div>

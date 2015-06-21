@@ -38,7 +38,7 @@
               </div>
             </div>
             <% @students.limit(4).each do |user| %>
-              <%= render partial: 'students' locals: {user: user}%>
+              <%= render partial: 'students', locals: {user: user}%>
             <% end %>
         </div>
       </section>

@@ -16,7 +16,7 @@ module UserHelper
     investments = user.investments_counter.value
     followers = user.followers_counter.value
     feedbacks = user.feedbacks_counter.value
-    followed = user.followed_by(current_user)
+    followed = user.followed_by?(current_user)
     "#{user}/investments-#{investments}/followers-#{followers}/feedbacks-#{feedbacks}/followed-#{followed}"
   end
 

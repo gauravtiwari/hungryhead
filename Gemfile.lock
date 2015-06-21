@@ -15,6 +15,13 @@ GIT
       coffee-rails
 
 GIT
+  remote: git://github.com/taskrabbit/makara.git
+  revision: d25d6f94a7103d05232203eb7015aa599699d6fd
+  specs:
+    makara (0.3.3)
+      activerecord (>= 3.0.0)
+
+GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: 5e63d51f29426f06c96d7ff074beda56cf5f2369
   specs:
@@ -785,6 +792,7 @@ DEPENDENCIES
   local_time
   lol_dba
   mailboxer!
+  makara!
   mandrill-rails
   merit
   meta_request
