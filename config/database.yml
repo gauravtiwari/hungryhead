@@ -1,25 +1,54 @@
 ---
 default:
-  adapter: 'postgresql'
+  adapter: 'postgresql_makara'
   encoding: unicode
   pool: <%= ENV["DB_POOL"] || 5 %>
-
+  makara:
+    blacklist_duration: 5
+    master_ttl: 5
+    sticky: true
+    connections:
+      - role: master
+      - role: slave
+      - role: slave
 development:
-  adapter: 'postgresql'
+  adapter: 'postgresql_makara'
   username: gaurav
   host: localhost
   database: hungryhead_school_app_development
   encoding: unicode
   pool: <%= ENV["DB_POOL"] || 5 %>
-
+  makara:
+    blacklist_duration: 5
+    master_ttl: 5
+    sticky: true
+    connections:
+      - role: master
+      - role: slave
+      - role: slave
 production:
-  adapter: 'postgresql'
+  adapter: 'postgresql_makara'
   database: hungryhead_school_app_production
   encoding: unicode
   pool: <%= ENV["DB_POOL"] || 20 %>
-
+  makara:
+    blacklist_duration: 5
+    master_ttl: 5
+    sticky: true
+    connections:
+      - role: master
+      - role: slave
+      - role: slave
 staging:
-  adapter: 'postgresql'
+  adapter: 'postgresql_makara'
   database: hungryhead_school_app_staging
   encoding: unicode
   pool: <%= ENV["DB_POOL"] || 25 %>
+  makara:
+    blacklist_duration: 5
+    master_ttl: 5
+    sticky: true
+    connections:
+      - role: master
+      - role: slave
+      - role: slave
