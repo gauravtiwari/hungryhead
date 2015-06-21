@@ -16,10 +16,10 @@ production:
   adapter: 'postgresql'
   database: hungryhead_school_app_production
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 20 %>
+  pool: <%= ENV["DB_POOL"] || 50 %>
 
 staging:
   adapter: 'postgresql'
   database: hungryhead_school_app_staging
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 25 %>
+  pool: <%= ENV["DB_POOL"] || 50 %>
