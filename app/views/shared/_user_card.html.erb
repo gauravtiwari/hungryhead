@@ -1,40 +1,42 @@
-<%= content_tag(:div, class: 'popover-card') do %>
-	<%= content_tag(:div, class: 'popover-header  text-center') do %>
-		<%= content_tag(:div, class: 'popover-card-logo') do %>
-     <div class="thumbnail-wrapper d48 auto-margin circular b-white m-r-5 m-b-5">
-      <% if @user.avatar.present? %>
-			 <%= image_tag(@user.avatar.url(:avatar), width: "50px") %>
-      <% else %>
-          <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
-          </span>
-      <% end %>
-      </div>
-			<h2><%= @user.name %></h2>
-			<span><%= truncate(@user.mini_bio, length: 100) %></span>
-			<% if @user != current_user %>
-				<div class="card-follow-button" id="follow-button">
-					<%= react_component('Follow',{:followed => followed?(@user)}) %>
-				<script type="text/javascript">
-				   ReactRailsUJS.mountComponents();
-				</script>
-				</div>
-			<% end %>
-		<% end %>
-	<% end %>
-  <div class="popover-card-stats">
-    <ul class="stastics-list">
-      <li>
-        Followers
-        <span><i class="fa fa-users"></i> <%= @user.followers_counter.value %></span>
-      </li>
-      <li>
-        Investments
-        <span><i class="fa fa-dollar"></i> <%= @user.investments_counter.value %></span>
-      </li>
-      <li>
-        Feedbacks
-        <span><i class="fa fa-comment"></i> <%= @user.feedbacks_counter.value %></span>
-      </li>
-    </ul>
-  </div>
+<% cache(cache_key_for_user(@user)) do %>
+  <%= content_tag(:div, class: 'popover-card') do %>
+  	<%= content_tag(:div, class: 'popover-header  text-center') do %>
+  		<%= content_tag(:div, class: 'popover-card-logo') do %>
+       <div class="thumbnail-wrapper d48 auto-margin circular b-white m-r-5 m-b-5">
+        <% if @user.avatar.present? %>
+  			 <%= image_tag(@user.avatar.url(:avatar), width: "50px") %>
+        <% else %>
+            <span class="placeholder bold text-white"><%= @user.first_name.first + @user.last_name.first %>
+            </span>
+        <% end %>
+        </div>
+  			<h2><%= @user.name %></h2>
+  			<span><%= truncate(@user.mini_bio, length: 100) %></span>
+  			<% if @user != current_user %>
+  				<div class="card-follow-button" id="follow-button">
+  					<%= react_component('Follow',{:followed => followed?(@user)}) %>
+  				<script type="text/javascript">
+  				   ReactRailsUJS.mountComponents();
+  				</script>
+  				</div>
+  			<% end %>
+  		<% end %>
+  	<% end %>
+    <div class="popover-card-stats">
+      <ul class="stastics-list">
+        <li>
+          Followers
+          <span><i class="fa fa-users"></i> <%= @user.followers_counter.value %></span>
+        </li>
+        <li>
+          Investments
+          <span><i class="fa fa-dollar"></i> <%= @user.investments_counter.value %></span>
+        </li>
+        <li>
+          Feedbacks
+          <span><i class="fa fa-comment"></i> <%= @user.feedbacks_counter.value %></span>
+        </li>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
