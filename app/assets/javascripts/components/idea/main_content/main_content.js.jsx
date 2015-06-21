@@ -4,6 +4,7 @@ var MainContent = React.createClass({
 
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
+    console.log(data.meta);
     return {
       idea: data.idea,
       form: data.idea.form,
