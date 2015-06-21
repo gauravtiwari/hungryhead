@@ -16,12 +16,6 @@ module IdeasHelper
       }
   end
 
-  def cache_key_for_ideas
-    count          = Idea.published.count
-    max_updated_at = Idea.published.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    "ideas/published-#{count}-#{max_updated_at}"
-  end
-
   def cache_key_for_idea(idea)
     investors = idea.investors_counter.value
     followers = idea.followers_counter.value

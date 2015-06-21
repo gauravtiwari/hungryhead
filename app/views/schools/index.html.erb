@@ -3,8 +3,7 @@
 </div>
 
 <div class="container">
-  <% cache(cache_key_for_schools) do %>
-    <% @schools.each do |school| %>
+  <% @schools.each do |school| %>
     <% cache(cache_key_for_school(school)) do %>
     <div class="col-md-3 no-padding p-r-15">
     <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
@@ -46,7 +45,6 @@
         </ul>
       </div>
     </div>
-    <% end %>
     <% end %>
     <% end %>
   <% end %>

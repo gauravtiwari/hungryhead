@@ -26,10 +26,8 @@
 
       <div class="content p-t-20">
         <div class="ideas-list auto-height">
-          <% cache(["school_ideas", cache_key_for_ideas]) do %>
-            <% @ideas.each do |idea| %>
-              <%= render partial: 'ideas', locals: {idea: idea}  %>
-            <% end %>
+          <% @ideas.each do |idea| %>
+            <%= render partial: 'ideas', locals: {idea: idea}  %>
           <% end %>
         </div>
       </div>

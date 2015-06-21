@@ -40,28 +40,25 @@
             <% @students.limit(4).each do |user| %>
               <%= render partial: 'students' locals: {user: user}%>
             <% end %>
-          <% end %>
         </div>
       </section>
       <!-- END CONTENT SECTION -->
 
       <!-- BEGIN CONTENT SECTION -->
-      <% cache(["school_ideas", cache_key_for_ideas]) do %>
-        <section class="m-t-20 no-overflow" id="join">
-            <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-              <div class="row top-picks">
-                <div class="top-pick-descrip col-md-12">
-                  <h1>Browse Ideas</h1>
-                  <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
-                  <div class="border-back"></div>
-                </div>
+      <section class="m-t-20 no-overflow" id="join">
+          <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="row top-picks">
+              <div class="top-pick-descrip col-md-12">
+                <h1>Browse Ideas</h1>
+                <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
+                <div class="border-back"></div>
               </div>
-              <% @ideas.limit(4).each do |idea| %>
-                  <%= render partial: 'ideas', locals: {idea: idea} %>
-              <% end %>
             </div>
-        </section>
-      <% end %>
+            <% @ideas.limit(4).each do |idea| %>
+                <%= render partial: 'ideas', locals: {idea: idea} %>
+            <% end %>
+          </div>
+      </section>
       <!-- END CONTENT SECTION -->
 
     </div>
