@@ -5,7 +5,7 @@
 
 <div class="container">
   <% @ideas.each do |idea| %>
-    <% cache(idea) do %>
+    <% cache([idea, current_user]) do %>
       <div class="col-md-3 no-padding p-r-15">
       <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
       <%= content_tag(:div, class: 'listing-header  text-center') do %>
@@ -61,7 +61,7 @@
     <% end %>
   <% end %>
   <div class="paging-container p-r-15">
-      <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
   </div>
 </div>
 

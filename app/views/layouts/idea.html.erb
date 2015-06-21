@@ -17,7 +17,7 @@
     <% end %>
 
     <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
-      <script>
+      <script type="text/javascript">
         idea = {
           name: "<%= @idea.name %>",
           slug: "<%= @idea.slug %>",
