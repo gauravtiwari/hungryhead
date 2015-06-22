@@ -80,12 +80,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  #Error message if user not authorised
   def user_not_authorized
     if request.xhr?
-      render json: {error: {message: "You are not authorized to perform this action"}}
+      render json: {error: "Not found"}, :status => 404
     else
-      redirect_to root_path
-      flash[:notice] = "You are not authorized to perform this action"
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 

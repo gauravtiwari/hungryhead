@@ -1,9 +1,13 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
-  before_action :authenticate_admin_user!, only: [:new, :create, :destroy, :edit]
+  before_filter :check_terms, except: :autocomplete_user_name
   before_action :set_schools, only: [:latest_people, :latest_ideas, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:domain]
+
+  #Verify user access
+  after_action :verify_authorized, :only => [:new, :autocomplete_school_name, :create, :update, :destroy]
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout 'home'
 
