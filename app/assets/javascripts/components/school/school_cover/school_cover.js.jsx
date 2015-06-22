@@ -136,7 +136,7 @@ var SchoolCover = React.createClass({
         var image = <img className="cover-photo" id="schoolcover_preview" src={this.state.cover.url} />;
       } else {
         if(this.state.is_owner) {
-        var handle = <h2 className="text-master pull-right fs-50"><i className="fa fa-upload fs-50"></i> Click to upload cover</h2>;
+        var handle = <h2 className="text-white pull-right fs-50"><i className="fa fa-upload fs-50"></i> Click to upload cover</h2>;
         var image = <div className="no-content bold z-index-10" onClick={this.triggerOpen}>{handle}</div>;
       } else {
         var image = <img className="cover-photo" src={this.state.cover.url} />;

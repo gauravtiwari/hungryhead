@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :title, null: false, default: ""
-      t.references :user, null: false, default: ""
+      t.belongs_to :eventable, null: false, default: "", polymorphic: true
       t.string :description, null: false, default: ""
       t.string :location, null: false, default: ""
       t.datetime :start_time, null: false, default: DateTime.now

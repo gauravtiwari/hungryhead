@@ -15,18 +15,22 @@
       <%= link_to(idea.name, idea_path(idea)) %>
     </h5>
     <p class="fs-14 m-t-5">
-    <span>
-      Based in:
-      <% idea.cached_location_list.each do |tag| %>
-        <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
-      <% end %>
-    </span>
-    <span>
-      Market:
-      <% idea.cached_market_list.each do |tag| %>
-        <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
-      <% end %>
-    </span>
+    <% if idea.cached_location_list.present? %>
+      <span>
+        Based in:
+        <% idea.location_list.each do |tag| %>
+          <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
+        <% end %>
+      </span>
+    <% end %>
+    <% if idea.cached_market_list.present? %>
+      <span>
+        Market:
+        <% idea.market_list.each do |tag| %>
+          <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
+        <% end %>
+      </span>
+    <% end %>
     </p>
     <p class="fs-14 m-t-5">
       <%= idea.elevator_pitch %>

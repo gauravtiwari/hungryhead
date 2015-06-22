@@ -2,29 +2,27 @@
   <div class="social-wrapper container">
     <div class="social" data-pages="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-
           <% cache(["school_data", cache_key_for_school(@school)]) do %>
             <%=  render partial: 'school_data' %>
           <% end %>
-
           <% cache(["cover", @school]) do %>
             <%= render partial: 'cover' %>
           <% end %>
         </div>
     </div>
 
-  <div class="box-shadow bg-white full-border-light-bottom">
-    <% cache(["school_menu", @school]) do %>
-      <%= render partial: 'menu' %>
-    <% end %>
-  </div>
-
-  <div class="content p-t-20 overflow-hidden">
-    <div class="col-md-3 no-padding p-r-15">
-      <%= render partial: 'school_card' %>
+    <div class="box-shadow bg-white full-border-light-bottom">
+      <% cache(["school_menu", @school]) do %>
+        <%= render partial: 'menu' %>
+      <% end %>
     </div>
-    <div class="col-md-9 no-padding">
-    <div class="panel box-shadow">
+
+    <div class="content p-t-20 overflow-hidden">
+      <div class="col-md-3 no-padding p-r-15">
+        <%= render partial: 'school_card' %>
+      </div>
+      <div class="col-md-9 no-padding">
+      <div class="panel box-shadow">
         <ul class="nav nav-tabs nav-tabs-simple">
             <li class="active">
                 <a data-toggle="tab" href="#tab_people">
@@ -44,29 +42,30 @@
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane active" id="tab_people">
-              <div class="row column-seperation">
-                <table class="table no-margin">
-                  <tbody>
-                    <% @students.each do |user| %>
-                      <%= render partial: 'student', locals: {user: user} %>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-              <div class="text-center m-t-20">
-                <%= link_to("Browse all people", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
-              </div>
+          <div class="tab-pane active" id="tab_people">
+            <div class="row column-seperation">
+              <table class="table no-margin">
+                <tbody>
+                  <% @students.each do |user| %>
+                    <%= render partial: 'student', locals: {user: user} %>
+                  <% end %>
+                </tbody>
+              </table>
             </div>
+            <div class="text-center m-t-20">
+              <%= link_to("Browse all people", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
+            </div>
+          </div>
 
-            <div class="tab-pane" id="tab_ideas">
-            </div>
+          <div class="tab-pane" id="tab_ideas">
+          </div>
 
-            <div class="tab-pane" id="tab_events">
-            </div>
+          <div class="tab-pane" id="tab_events">
+          </div>
+
         </div>
+      </div>
+      </div>
     </div>
-    </div>
-  </div>
   </div>
   </div>
