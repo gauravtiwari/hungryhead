@@ -1,69 +1,98 @@
-<div class="wrapper-small bg-solid text-center panel panel-default">
- <h2 class="text-white">Find ideas you would like to browse,</h2>
-   <span class="large text-white">or <%= link_to('pitch your own idea', new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> to validate with others</span>
+<div class="wrapper-small idea-bg-gradient">
+  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <div class="hero-text inner">
+      <h2 class="text-white">Browse ideas</h2>
+      <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+    </div>
+  </div>
 </div>
 
-<div class="container">
-  <% @ideas.each do |idea| %>
-    <% cache([idea, current_user]) do %>
-      <div class="col-md-3 no-padding p-r-15">
-      <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
-      <%= content_tag(:div, class: 'listing-header  text-center') do %>
-        <%= content_tag(:div, class: 'listing-card-logo') do %>
-        <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
-           <span class="placeholder bold text-white">
-             <%= idea.name_badge.upcase %>
-           </span>
-         </div>
-          <h5 class="no-margin fs-14 bold"><%= link_to(idea.name, idea_path(idea)) %></h5>
-          <p class="fs-12"><%= truncate(idea.high_concept_pitch, length: 30) %></p>
-          <% if idea.market_list.present? %>
-            <p class="no-margin text-master">
-              <% idea.market_list.each do |tag| %>
-                <%= link_to(tag_path(tag.parameterize), class: "fs-12 btn-tags padding-5 m-r-10") do %>
-                  <%= tag %>
-                <% end %>
+<div class="container p-t-40 p-b-80">
+  <div class="idea-list">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
+          <th>Follow to get updates</th>
+          <th class="text-center">Idea Stats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @ideas.each do |idea| %>
+        <tr class="full-border-light-bottom">
+          <td class="no-padding p-t-25 p-b-20" class="no-border">
+            <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
+             <% if idea.logo.present? %>
+               <%= image_tag(user.logo.url(:avatar), width: "50px") %>
+             <% else %>
+               <span class="placeholder bold text-white">
+                 <%= idea.name_badge.upcase %>
+               </span>
+             <% end %>
+             </div>
+          </td>
+          <td style="max-width: 350px;" class="idea-info font-opensans no-border">
+            <h5 class="no-margin fs-16 bold">
+              <%= link_to(idea.name, idea_path(idea)) %>
+            </h5>
+            <p class="fs-14 m-t-5">
+            <span>
+              Based in:
+              <% idea.location_list.each do |tag| %>
+                <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
               <% end %>
+            </span>
+            <span>
+              Market:
+              <% idea.market_list.each do |tag| %>
+                <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
+              <% end %>
+            </span>
             </p>
-          <% end %>
-          <% if current_user != idea.user %>
-            <div class="card-follow-button m-t-20 clearfix">
+            <p class="fs-14 m-t-5">
+              <%= idea.elevator_pitch %>
+            </p>
+          </td>
+          <td style="display:table-cell; vertical-align:middle;" class="no-border text-center">
+            <div class="card-follow-button">
               <%= react_component('Follow',{:followed => followed?(idea)}) %>
             </div>
             <script type="text/javascript">
                ReactRailsUJS.mountComponents();
             </script>
-          <% else %>
-            <%= link_to(idea_path(idea), class: 'btn btn-danger btn-sm text-white m-t-20 clearfix') do %>
-            <span class="text-white"><i class="fa fa-share"></i> View idea</span>
-            <% end %>
-          <% end %>
+          </td>
+          <td style="min-width: 300px; display:table-cell; vertical-align:middle;" class="no-border text-center no-padding p-l-20">
+            <ul class="stastics-list">
+              <li class="clearfix">
+                Followers
+                <span class="text-master">
+                  <%= number_to_human(idea.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+                </span>
+              </li>
+              <li class="clearfix pull-reset">
+                Feebacks
+                <span class="text-master">
+                <%= number_to_human(idea.feedbackers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+                </span>
+              </li>
+              <li class="clearfix pull-reset">
+                Votes
+                <span class="text-master">
+                <%= number_to_human(idea.votes_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+                </span>
+              </li>
+            </ul>
+          </td>
+        </tr>
         <% end %>
-          <% end %>
-          <div class="listing-card-stats">
-          <ul class="stastics-list">
-            <li>
-              Followers
-              <span class="text-master"><i class="fa fa-users"></i> <%= idea.followers_counter.value %></span>
-            </li>
-            <li>
-              Feedbacks
-              <span class="text-master"><i class="fa fa-comment"></i> <%= idea.feedbackers_counter.value %></span>
-            </li>
-            <li>
-              Investments
-              <span class="text-master"><i class="fa fa-dollar"></i> <%= idea.investors_counter.value %></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    <% end %>
-    <% end %>
-  <% end %>
+      </tbody>
+    </table>
+  </div>
   <div class="paging-container p-r-15">
-    <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+      <%= will_paginate(@idea, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
   </div>
 </div>
-
+</div>
 
 

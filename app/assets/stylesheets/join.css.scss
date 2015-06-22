@@ -110,8 +110,17 @@
   transform: translateY(-50%);
 }
 .cta {
-  background: image-url("hero03.jpg") no-repeat center center;
+
+
+  background: -webkit-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* W3C */
+
+
 }
+
 .mission {
   background: image-url("building-ecosystem.png") no-repeat center center;
   -webkit-background-size: cover;
@@ -127,7 +136,7 @@
   background: transparent;
 }
 .cta-overlay {
-  background: rgba(51, 51, 51, 0.6);
+  background: rgba(51, 51, 51, 0.4);
 }
 .bg-overlay {
   background: rgba(51, 51, 51, 0.2);

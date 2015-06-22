@@ -84,7 +84,7 @@
               The fundamental idea is to create a culture of cross-pollination where serious students from around the world can share skills, collaborate on a startup idea and achieve shared goals, together.
             </p>
             <h5 class="m-b-20">
-              Connect with an exclusive community of world-class students who are serious about entrepreneurship.
+              <%= link_to('Join today', new_user_registration_path, class: 'b-b b-grey p-b-5 bold') %> to connect with an exclusive community of world-class students who are serious about entrepreneurship.
             </h5>
           </div>
           <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
@@ -102,17 +102,18 @@
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
-            <div class="content-mask-md">
+            <div class="content-mask-md m-t-20">
               <%= image_tag('product/comment.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
             </div>
           </div>
           <div class="col-sm-5 col-md-offset-2 xs-p-l-15 xs-p-r-15">
-            <h1 class="m-t-5 m-b-20">The world itself is a great collaboration.</h1>
+            <h1 class="m-t-5 m-b-20">The world is a collaboration.</h1>
+            <h5>Collaboration takes place when there is a relationship.</h5>
             <p class="m-b-20">
-              Ideas become bigger and useful when they are shared that's why we have integrated tools to help you share, measure and build your startup idea securely with peers.
+              We have created a practical platform for students who are serious about entrepreneurship to collaborate, share and build startup ideas securely with peers.
             </p>
             <h5 class="m-b-20">
-              If you feel like being part of an idea or want to contribute your skills. Just hop into a conversation/chat and introduce yourself.
+              If you feel like being part of an idea or want to contribute your skills. Just hop into a conversation and introduce yourself.
             </h5>
           </div>
       </div>
@@ -130,14 +131,12 @@
               Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
             </p>
             <h5 class="m-b-20">
-              You can collaborate, invest in useful ideas using our virtual currency, make return on your investments, validate ideas and earn badges.
+              You can collaborate, invest in useful ideas using our virtual currency, make return on your investments, validate ideas and earn friendly badges.
             </h5>
           </div>
           <div class="col-sm-6 col-md-offset-1 xs-p-l-15 xs-p-r-15">
-            <div class="content-mask-md m-t-40">
-              <div class="content-mask-md m-t-20 text-center">
-                <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
-              </div>
+            <div class="content-mask-md m-t-40 text-center">
+              <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
             </div>
           </div>
       </div>
@@ -152,7 +151,6 @@
                   <div class="wrapper-small p-b-100">
                       <div class="row">
                           <div class="col-md-8 col-md-offset-2 text-center">
-                              <%= image_tag('badges/welcome.png') %>
                               <h1 class="text-white bold m-t-20">Let's get to know each other.</h1>
                               <p class="fs-16 text-white">Find us on</p>
                               <div class="social_icons m-t-30">
