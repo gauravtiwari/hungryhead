@@ -55,10 +55,11 @@
           <div class="col-sm-5">
             <h1 class="m-t-5 m-b-20">Create an account.</h1>
             <p class="m-b-20">
-              If you are an university or college student you can get started by creating an account. You will need your university or college email address to create an account.
+              If you are an university or college student you can <%= link_to('get started', new_user_registration_path, class: 'b-b b-grey p-b-5') %> by creating an account.
+              <span class="small hint-text">You will need your university or college email address.</span>
             </p>
             <h5 class="m-b-20">
-              If you are mentor or an alumni please request an invite.
+              If you are an alumni or interested in contributing your expertise please <%= link_to('Request an invite', request_invite_path, class: 'b-b b-grey p-b-5 bold') %>.
             </h5>
           </div>
           <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
@@ -83,7 +84,7 @@
           <div class="col-sm-6 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
             <h1 class="m-t-5 m-b-20">Complete your profile.</h1>
             <p class="m-b-20">
-              Complete your profile - enter markets you are interested in, locations you based, skills you have and your hobbies.
+              Complete your profile to get discovered easily - enter markets you are interested in, locations you are based, skills you have, subjects studied and your hobbies.
             </p>
             <h5 class="m-b-20">
               Filling these details will help others in finding you.
