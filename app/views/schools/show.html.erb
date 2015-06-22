@@ -10,59 +10,63 @@
           <% cache(["cover", @school]) do %>
             <%= render partial: 'cover' %>
           <% end %>
-
-          <% if current_user == @school.admin %>
-           <div class="school-action-buttons col-md-5">
-      			  <%= link_to('Dashboard', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
-        		</div>
-          <% end %>
-
         </div>
     </div>
 
-    <div class="box-shadow bg-white">
-      <% cache(["school_menu", @school]) do %>
-        <%= render partial: 'menu' %>
-      <% end %>
+  <div class="box-shadow bg-white full-border-light-bottom">
+    <% cache(["school_menu", @school]) do %>
+      <%= render partial: 'menu' %>
+    <% end %>
+  </div>
+
+  <div class="content p-t-20 overflow-hidden">
+    <div class="col-md-3 no-padding p-r-15">
+      <%= render partial: 'school_card' %>
     </div>
+    <div class="col-md-9 no-padding">
+    <div class="panel box-shadow">
+        <ul class="nav nav-tabs nav-tabs-simple">
+            <li class="active">
+                <a data-toggle="tab" href="#tab_people">
+                  <i class="fa fa-graduation-cap"></i> Latest People
+                </a>
+            </li>
+            <li class="">
+                <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
+                  <i class="fa fa-lightbulb-o"></i> Latest Ideas
+                <% end %>
+            </li>
+            <li class="">
+                <a data-toggle="tab" href="#tab_ideas">
+                  <i class="fa fa-calendar"></i> Latest Events
+                </a>
+            </li>
+        </ul>
 
-    <div class="content no-padding p-b-60">
-      <!-- BEGIN CONTENT SECTION -->
-      <section class="m-t-20 no-overflow" id="join">
-        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="row top-picks">
-              <div class="top-pick-descrip col-md-12">
-                <h1>Browse People</h1>
-                <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
-                <div class="border-back"></div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_people">
+              <div class="row column-seperation">
+                <table class="table no-margin">
+                  <tbody>
+                    <% @students.each do |user| %>
+                      <%= render partial: 'student', locals: {user: user} %>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-center m-t-20">
+                <%= link_to("Browse all people", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
               </div>
             </div>
-            <% @students.limit(4).each do |user| %>
-              <%= render partial: 'students', locals: {user: user}%>
-            <% end %>
+
+            <div class="tab-pane" id="tab_ideas">
+            </div>
+
+            <div class="tab-pane" id="tab_events">
+            </div>
         </div>
-      </section>
-      <!-- END CONTENT SECTION -->
-
-      <!-- BEGIN CONTENT SECTION -->
-      <section class="m-t-20 no-overflow" id="join">
-          <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="row top-picks">
-              <div class="top-pick-descrip col-md-12">
-                <h1>Browse Ideas</h1>
-                <p>Vestibulum id est quam, sit amet rutrum arcu. Sed commodo leo nisi, eget luctus odio. Maecenas auctor purus a eros posuere.</p>
-                <div class="border-back"></div>
-              </div>
-            </div>
-            <% @ideas.limit(4).each do |idea| %>
-                <%= render partial: 'ideas', locals: {idea: idea} %>
-            <% end %>
-          </div>
-      </section>
-      <!-- END CONTENT SECTION -->
-
+    </div>
     </div>
   </div>
-</div>
-</div>
-</div>
+  </div>
+  </div>

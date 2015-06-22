@@ -188,12 +188,14 @@ var RegisterationForm = React.createClass({
               <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
             </div>
           </div>
-         <div className="pull-right text-right">
-            <span className="fs-12">Faculty?<a className="fs-13" href="/teachers_join" className="text-primary bold"> Click to join</a></span>
-          </div>
+         <div className="pull-right">
+           <div className="checkbox check-complete">
+            <input type="checkbox" name="user[role]" value="faculty" id="checkbox2" />
+            <label htmlFor="checkbox2">Are you a Faculty member? Check</label>
+           </div>
+         </div>
         </div>
         <button className="btn btn-complete btn-sm fs-13 m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
-
         <a className="btn btn-primary btn-sm fs-13 m-l-10 m-t-10" href="/">Back</a>
       </form>
     )

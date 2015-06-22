@@ -42,26 +42,34 @@
               <%= user.mini_bio %>
               <span>
                 Live in:
-                <% user.location_list.each do |tag| %>
-                  <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                <% if user.location_list.present? %>
+                  <% user.location_list.each do |tag| %>
+                    <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                  <% end %>
                 <% end %>
               </span>
               <span>
                 Studying:
+                <% if user.subject_list.present? %>
                 <% user.subject_list.each do |tag| %>
                   <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                <% end %>
                 <% end %>
               </span>
               <span>
                 Interested in:
+                <% if user.market_list.present? %>
                 <% user.market_list.each do |tag| %>
                   <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                <% end %>
                 <% end %>
               </span>
               <span>
                 Knows about:
+                <% if user.skill_list.present? %>
                 <% user.skill_list.each do |tag| %>
                   <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                <% end %>
                 <% end %>
               </span>
             </p>

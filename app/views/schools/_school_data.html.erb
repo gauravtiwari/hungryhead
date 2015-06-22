@@ -13,18 +13,18 @@
         <%= @school.name %>
     </h1>
 
-    <div class="row m-t-20">
+    <div class="row m-t-20 font-opensans">
         <div class="col-md-4 text-center b-r b-white b-dashed">
             <h1 class="all-caps bold small fs-16">Students</h1>
-            <p class="all-caps bold  no-margin fs-16"><%= @school.people_counter.value %></p>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.people_counter.value %></p>
         </div>
         <div class="col-md-4 text-center b-r b-white b-dashed">
             <h1 class="all-caps bold small fs-16">Ideas</h1>
-            <p class="all-caps bold  no-margin fs-16"><%= @school.ideas_counter.value %></p>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.ideas_counter.value %></p>
         </div>
         <div class="col-md-4 text-center">
             <h1 class="all-caps bold small fs-16">Followers</h1>
-            <p class="all-caps bold  no-margin fs-16"><%= @school.followers_counter.value %></p>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.followers_counter.value %></p>
         </div>
     </div>
 </div>

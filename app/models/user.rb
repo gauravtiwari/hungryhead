@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   scope :students, -> { where(role: 1) }
   scope :entrepreneurs, -> { where(role: 2) }
   scope :mentors, -> { where(role: 3) }
-  scope :teachers, -> { where(role: 4) }
+  scope :faculties, -> { where(role: 4) }
   scope :users, -> { where(role: 0) }
   scope :published, -> { where(state: 1) }
 
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, teacher: 4 }
+  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, faculty: 4 }
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url

@@ -13,22 +13,22 @@
         <% end %>
         <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
           <li class="inline p-r-15 p-l-15 fs-14 bold">
-            <%= link_to(root_path, class: "text-brand fs-22 #{current_class?(root_path)}") do %>
+            <%= link_to(root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : 'text-brand'}") do %>
               <i class="fa fa-home"></i>
             <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
-            <%= link_to(users_path, class: "text-brand fs-22 #{current_class?(users_path)}") do %>
+            <%= link_to(users_path, class: "fs-22 #{request.path == users_path ? current_class?(users_path) : 'text-brand'}") do %>
                <i class="fa fa-users"></i>
              <% end %>
           </li>
-          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-            <%= link_to(ideas_path, class: "text-brand fs-22") do %>
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
+            <%= link_to(ideas_path, class: "fs-22 #{request.path == ideas_path ? current_class?(ideas_path) : 'text-brand'}") do %>
                <i class="fa fa-lightbulb-o"></i>
              <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-           <%= link_to(schools_path, class: "text-brand fs-22") do %>
+           <%= link_to(schools_path, class: "fs-22 #{request.path == schools_path ? current_class?(schools_path) : 'text-brand'}") do %>
               <i class="fa fa-university"></i>
             <% end %>
           </li>
@@ -63,7 +63,7 @@
         </ul>
         <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
           <%= link_to(profile_path(current_user)) do %>
-            <span class="fs-14 bold text-brand"><%= current_user.first_name %></span>
+            <span class="fs-14 bold <%= request.path == profile_path(current_user) ? current_class?(profile_path(current_user)) : 'text-brand' %>"><%= current_user.first_name %></span>
           <% end %>
         </div>
         <div class="dropdown pull-right">
@@ -72,7 +72,7 @@
             <% if current_user.avatar.present? %>
               <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "32", height: "32") %>
             <% else %>
-              <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.first_name.first + current_user.last_name.first %></span>
+              <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.user_name_badge %></span>
             <% end %>
             </span>
           </button>

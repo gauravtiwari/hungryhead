@@ -1,5 +1,7 @@
 class School < ActiveRecord::Base
 
+	#Model caching
+	include IdentityCache
 	#redis objects
 	include Redis::Objects
 
@@ -11,6 +13,11 @@ class School < ActiveRecord::Base
 	has_many :users
 	has_many :ideas
 	belongs_to :admin, class_name: 'User', foreign_key: "admin_id"
+
+	cache_has_many :users, embed: true
+	cache_has_many :ideas, embed: true
+
+	cache_index :slug, :unique => true
 
 	acts_as_taggable_on :locations
 

@@ -9,48 +9,24 @@ var CardContent = React.createClass({
         return <a className="text-white fs-13 m-l-5 lighter-text" href={market.url} > @{market.tag} </a>;
       });
 
-    } else {
-      if(this.props.is_owner) {
-        var markets = <em className="sidebar_filler clearfix">Which markets are you interested in? ex: finance, ecommerce</em>;
-      } else {
-        var markets = "";
-      }
     }
 
     if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
       var hobbies = this.props.profile.hobbies.map(function(hobby){
         return <a className="text-white fs-13 m-l-5 lighter-text" href={hobby.url} > @{hobby.tag} </a>;
       });
-    } else {
-      if(this.props.is_owner) {
-        var hobbies = <em className="sidebar_filler clearfix"> What interests you? ex: Games, Football, Science etc.</em>
-      } else {
-        var hobbies = "";
-      }
     }
 
     if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
       var skills = this.props.profile.skills.map(function(skill){
         return <a key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={skill.url} > @{skill.tag} </a>;
       });
-    } else {
-      if(this.props.is_owner) {
-        var skills = <em className="sidebar_filler clearfix"> What are your skills? ex: Technology, Programming, Marketing etc.</em>
-      } else {
-        var skills = "";
-      }
     }
 
     if(this.props.profile.subjects && this.props.profile.subjects.length > 0 ) {
       var subjects = this.props.profile.subjects.map(function(subject){
         return <a className="text-white fs-13 m-l-5 lighter-text" href={subject.url} > @{subject.tag} </a>;
       });
-    } else {
-      if(this.props.is_owner) {
-        var subjects = <em className="sidebar_filler clearfix"> Which subjects you have studied? ex: Computer Science, Psychology, Philosphy etc.</em>
-      } else {
-        var subjects = "";
-      }
     }
 
     if(this.props.profile.website_url) {
@@ -92,6 +68,29 @@ var CardContent = React.createClass({
 
     var classes = "profile-card padding-20  p-t-40 box-shadow bg-solid";
 
+    if(this.props.markets) {
+      var market_content =  <span>Markets interested in: {markets}</span>;
+    } else {
+      var market_content = ""
+    }
+
+    if(this.props.skills) {
+      var skill_content =   <span className="m-l-5">Knows about: {skills}</span>;
+    } else {
+      var skill_content = ""
+    }
+
+    if(this.props.hobbies) {
+      var hobby_content =    <span className="m-l-5">Likes: {hobbies}</span>;
+    } else {
+      var hobby_content = ""
+    }
+
+    if(this.props.subjects) {
+      var subject_content =  <span className="m-l-5">Studying: {subjects}</span>;
+    } else {
+      var subject_content = ""
+    }
 
     return(
       <div className="profile-card-sidebar">
@@ -115,14 +114,10 @@ var CardContent = React.createClass({
                         <p className="no-margin text-white fs-12 p-t-5">{location}{school}</p>
                        </p>
                        <p className="text-white about-list fs-14">
-                         Markets interested in:
-                         {markets}
-                         <span className="m-l-5">Knows about:</span>
-                         {skills}
-                         <span className="m-l-5">Studying:</span>
-                         {subjects}
-                         <span className="m-l-5">Likes:</span>
-                         {hobbies}
+                          {market_content}
+                          {skill_content}
+                          {subject_content}
+                          {hobby_content}
                        </p>
                        <ul className="social-list text-white p-t-5 small no-style">
                         {website_url}

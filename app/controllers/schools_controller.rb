@@ -10,20 +10,16 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.paginate(:page => params[:page], :per_page => 12)
+    @schools = School.paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /schools/1
   # GET /schools/1.json
 
   def show
-    ids = User.where(school_id: @school.id).pluck(:id)
-    @students = User.where(school_id: @school.id).limit(4)
-    @ideas = Idea.where(school_id: @school.id).limit(4)
-    @activities = Activity.where(user_id: ids, published: true)
-    .includes(:trackable, :user, :recipient)
-    .order(id: :desc)
-    .paginate(:page => params[:page], :per_page => 20)
+    @students = User.where(id: @school.latest_people.values.reverse)
+    .order_as_specified(id: @school.latest_people.values.reverse)
+    .limit(10)
   end
 
   def latest_people
@@ -36,12 +32,10 @@ class SchoolsController < ApplicationController
   end
 
   def latest_ideas
-   @ideas = Idea.find(@school.latest_ideas.values).paginate(:page => params[:page], :per_page => 5)
-   render json: Oj.dump({
-    list: @ideas.map{|idea| {id: idea.id, name: idea.name, name_badge: idea.name_badge, url: idea_path(idea), description: idea.high_concept_pitch}},
-    type: 'Latest Ideas',
-    next_page: @ideas.next_page
-    }, mode: :compat)
+    @ideas = Idea.find(@school.latest_ideas.values)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def card

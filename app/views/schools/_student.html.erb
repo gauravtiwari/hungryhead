@@ -1,0 +1,84 @@
+<% cache(cache_key_for_user(user)) do %>
+    <tr class="full-border-light-bottom">
+      <td class="p-t-25 no-border">
+        <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
+         <% if user.avatar.present? %>
+           <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
+         <% else %>
+           <span class="placeholder bold text-white">
+             <%= user.user_name_badge.upcase %>
+           </span>
+         <% end %>
+         </div>
+      </td>
+      <td style="max-width: 350px;" class="people-info font-opensans no-border">
+        <h5 class="no-margin fs-16 bold"><%= link_to(user.name, profile_path(user)) %>
+        <% if user.school.logo.present? %>
+         <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
+        <% end %>
+        </h5>
+        <p class="fs-14 m-t-5">
+          <%= user.mini_bio %>
+          <% if user.location_list.present? %>
+          <span>
+            Live in:
+              <% user.location_list.each do |tag| %>
+                <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+              <% end %>
+          </span>
+          <% end %>
+          <% if user.subject_list.present? %>
+          <span>
+            Studying:
+            <% user.subject_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+            <% end %>
+          </span>
+          <% end %>
+          <% if user.market_list.present? %>
+          <span>
+            Interested in:
+            <% user.market_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+            <% end %>
+          </span>
+          <% end %>
+          <% if user.skill_list.present? %>
+          <span>
+            Knows about:
+            <% user.skill_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+            <% end %>
+          </span>
+          <% end %>
+        </p>
+      </td>
+      <td style="display:table-cell; vertical-align:middle;" class="no-border">
+      <% if current_user != user %>
+        <div class="card-follow-button">
+          <%= react_component('Follow',{:followed => followed?(user)}) %>
+        </div>
+        <script type="text/javascript">
+           ReactRailsUJS.mountComponents();
+        </script>
+      <% end %>
+
+      </td>
+      <td style="display:table-cell; vertical-align:middle; min-width: 200px;" class="no-border">
+        <ul class="stastics-list">
+          <li class="clearfix">
+            Followers
+            <span class="text-master">
+              <%= number_to_human(user.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+            </span>
+          </li>
+          <li class="clearfix pull-reset">
+            Score
+            <span class="text-master">
+              <%= number_to_human(User.leaderboard.score(user.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+            </span>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <% end %>

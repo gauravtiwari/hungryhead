@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   autocomplete :user, :name, :full => true
 
   def index
-    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 12)
+    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.json
@@ -198,7 +198,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :mini_bio, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
       :email, :terms_accepted, :first_name, :last_name, :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
-      :name, :avatar, :cover, :about_me, :website_url, :facebook_url,
+      :name, :avatar, :cover, :about_me, :website_url, :facebook_url, :role,
       :twitter_url, :linkedin_url, :location_list, :hobby_list, :subject_list, :skill_list, :market_list, :idea_notifications,
       :investment_notifications, :feedback_notifications, :follow_notifications, :weekly_mail)
   end
