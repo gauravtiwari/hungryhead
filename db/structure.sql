@@ -259,8 +259,8 @@ CREATE TABLE events (
     user_id integer NOT NULL,
     description character varying DEFAULT ''::character varying NOT NULL,
     location character varying DEFAULT ''::character varying NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-21 17:34:23.338923'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-21 17:34:23.338949'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-22 21:22:42.183305'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-22 21:22:42.183327'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -1089,6 +1089,7 @@ CREATE TABLE organizations (
     cover character varying,
     media jsonb DEFAULT '{}'::jsonb,
     data jsonb DEFAULT '{}'::jsonb,
+    cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1201,6 +1202,7 @@ CREATE TABLE schools (
     cover character varying,
     media jsonb DEFAULT '{}'::jsonb,
     data jsonb DEFAULT '{}'::jsonb,
+    cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
