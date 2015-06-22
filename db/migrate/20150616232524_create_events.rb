@@ -14,8 +14,9 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :events, :user_id, algorithm: :concurrently
+    add_index :events, [:eventable_id, :eventable_type], algorithm: :concurrently
     add_index :events, :start_time, algorithm: :concurrently
+    add_index :events, :private, algorithm: :concurrently
     add_index :events, :end_time, algorithm: :concurrently
   end
 end
