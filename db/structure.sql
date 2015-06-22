@@ -256,11 +256,12 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 CREATE TABLE events (
     id integer NOT NULL,
     title character varying DEFAULT ''::character varying NOT NULL,
-    user_id integer NOT NULL,
+    eventable_id integer NOT NULL,
+    eventable_type character varying DEFAULT ''::character varying NOT NULL,
     description character varying DEFAULT ''::character varying NOT NULL,
     location character varying DEFAULT ''::character varying NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-22 21:22:42.183305'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-22 21:22:42.183327'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-22 21:58:28.9775'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-22 21:58:28.977523'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -2373,17 +2374,24 @@ CREATE INDEX index_events_on_end_time ON events USING btree (end_time);
 
 
 --
+-- Name: index_events_on_eventable_id_and_eventable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_eventable_id_and_eventable_type ON events USING btree (eventable_id, eventable_type);
+
+
+--
+-- Name: index_events_on_private; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_private ON events USING btree (private);
+
+
+--
 -- Name: index_events_on_start_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
-
-
---
--- Name: index_events_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_on_user_id ON events USING btree (user_id);
 
 
 --
