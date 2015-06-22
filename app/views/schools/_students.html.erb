@@ -1,0 +1,13 @@
+<div class="row column-seperation">
+  <table class="table no-margin">
+    <tbody>
+      <% @students.each do |user| %>
+        <%= render partial: 'users/user', locals: {user: user} %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="text-center m-t-20">
+  <%= link_to("Browse all people", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
+</div>

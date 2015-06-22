@@ -43,18 +43,7 @@
 
         <div class="tab-content">
           <div class="tab-pane active" id="tab_people">
-            <div class="row column-seperation">
-              <table class="table no-margin">
-                <tbody>
-                  <% @students.each do |user| %>
-                    <%= render partial: 'student', locals: {user: user} %>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-            <div class="text-center m-t-20">
-              <%= link_to("Browse all people", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
-            </div>
+            <%= render partial: 'students' %>
           </div>
 
           <div class="tab-pane" id="tab_ideas">

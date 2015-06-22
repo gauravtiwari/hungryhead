@@ -4,6 +4,10 @@ class InstitutionPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    record.admin == current_user
+  end
+
   def unfollow?
     current_user == record.follower
   end

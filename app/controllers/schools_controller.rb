@@ -94,6 +94,7 @@ class SchoolsController < ApplicationController
   # PATCH/PUT /schools/1
   # PATCH/PUT /schools/1.json
   def update
+    authorize @school
     respond_to do |format|
       if @school.update(schools_params)
         format.html { redirect_to @school, notice: 'School was succesfully updated.' }

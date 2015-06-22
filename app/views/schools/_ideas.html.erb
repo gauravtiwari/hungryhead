@@ -2,11 +2,12 @@
   <table class="table no-margin">
     <tbody>
       <% @ideas.each do |idea| %>
-        <%= render partial: 'idea', locals: {idea: idea} %>
+        <%= render partial: 'ideas/idea', locals: {idea: idea} %>
       <% end %>
     </tbody>
   </table>
 </div>
+
 <div class="text-center m-t-20">
   <%= link_to("Browse all ideas", profile_ideas_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
 </div>
