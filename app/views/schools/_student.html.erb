@@ -18,7 +18,7 @@
     </h5>
     <p class="fs-14 m-t-5">
       <%= user.mini_bio %>
-      <% if user.location_list.present? %>
+      <% if user.cached_location_list.present? %>
       <span>
         Live in:
           <% user.location_list.each do |tag| %>
@@ -26,7 +26,7 @@
           <% end %>
       </span>
       <% end %>
-      <% if user.subject_list.present? %>
+      <% if user.cached_subject_list.present? %>
       <span>
         Studying:
         <% user.subject_list.each do |tag| %>
@@ -34,7 +34,7 @@
         <% end %>
       </span>
       <% end %>
-      <% if user.market_list.present? %>
+      <% if user.cached_market_list.present? %>
       <span>
         Interested in:
         <% user.market_list.each do |tag| %>
@@ -42,7 +42,7 @@
         <% end %>
       </span>
       <% end %>
-      <% if user.skill_list.present? %>
+      <% if user.cached_skill_list.present? %>
       <span>
         Knows about:
         <% user.skill_list.each do |tag| %>

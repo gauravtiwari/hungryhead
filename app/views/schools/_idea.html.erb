@@ -17,13 +17,13 @@
     <p class="fs-14 m-t-5">
     <span>
       Based in:
-      <% idea.location_list.each do |tag| %>
+      <% idea.cached_location_list.each do |tag| %>
         <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
       <% end %>
     </span>
     <span>
       Market:
-      <% idea.market_list.each do |tag| %>
+      <% idea.cached_market_list.each do |tag| %>
         <%= link_to("@#{tag.downcase}", tag_path(tag.parameterize), class: "text-black light") %>
       <% end %>
     </span>

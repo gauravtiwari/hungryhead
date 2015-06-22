@@ -12,4 +12,12 @@ module UserHelper
 		current_user == user
 	end
 
+  def cache_key_for_user(user)
+    investments = user.investments_counter.value
+    followers = user.followers_counter.value
+    feedbacks = user.feedbacks_counter.value
+    followed = user.followed_by?(current_user)
+    "user-#{user.updated_at.to_i}/investments-#{investments}/followers-#{followers}/feedbacks-#{feedbacks}/followed-#{followed}"
+  end
+
 end

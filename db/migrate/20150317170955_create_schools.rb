@@ -23,6 +23,8 @@ class CreateSchools < ActiveRecord::Migration
       t.jsonb :media, default: "{}"
       t.jsonb :data, default: "{}"
 
+      t.string :cached_location_list
+
       t.jsonb :customizations, default: "{}"
 
       t.timestamps null: false
