@@ -76,6 +76,7 @@ class Idea < ActiveRecord::Base
   has_many :team_invites, dependent: :destroy
 
   cache_belongs_to :user
+  cache_index :status, :privacy, :uuid, :school_id
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,

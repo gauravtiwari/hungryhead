@@ -16,6 +16,7 @@ class School < ActiveRecord::Base
 
 	cache_has_many :users, embed: true
 	cache_has_many :ideas, embed: true
+	cache_belongs_to :admin
 
 	cache_index :slug, :unique => true
 

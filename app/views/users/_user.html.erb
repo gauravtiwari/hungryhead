@@ -12,8 +12,8 @@
   </td>
   <td style="max-width: 350px;" class="people-info font-opensans no-border">
     <h5 class="no-margin fs-16 bold"><%= link_to(user.name, profile_path(user)) %>
-    <% if user.school.logo.present? %>
-     <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
+    <% if user.fetch_school.logo.present? %>
+     <%= image_tag(user.fetch_school.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
     <% end %>
     </h5>
     <p class="fs-14 m-t-5">

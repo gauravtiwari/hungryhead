@@ -2,9 +2,7 @@
   <div class="social-wrapper container">
     <div class="social" data-pages="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-          <% cache(["school_data", cache_key_for_school(@school)]) do %>
-            <%=  render partial: 'school_data' %>
-          <% end %>
+          <%=  render partial: 'school_data' %>
           <% cache(["cover", @school]) do %>
             <%= render partial: 'cover' %>
           <% end %>
@@ -19,7 +17,9 @@
 
     <div class="content p-t-20 overflow-hidden">
       <div class="col-md-3 no-padding p-r-15">
-        <%= render partial: 'school_card' %>
+        <% cache(["school_card", @school]) do %>
+          <%= render partial: 'school_card' %>
+        <% end %>
       </div>
       <div class="col-md-9 no-padding">
       <div class="panel box-shadow">
@@ -43,7 +43,9 @@
 
         <div class="tab-content">
           <div class="tab-pane active" id="tab_people">
-            <%= render partial: 'students' %>
+            <% cache(cache_key_for_school_users(@school)) do %>
+              <%= render partial: 'students' %>
+            <% end %>
           </div>
 
           <div class="tab-pane" id="tab_ideas">

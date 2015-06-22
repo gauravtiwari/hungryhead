@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.fetch_users.published.limit(10)
+    @students = @school.fetch_users.select{|u| u.state = "published"}
   end
 
   def latest_people

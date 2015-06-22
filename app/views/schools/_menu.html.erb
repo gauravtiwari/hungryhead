@@ -23,7 +23,7 @@
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
 		<%= react_component('Follow', {followed: followed?(@school)}) %>
-	    <% if current_user == @school.admin %>
+	    <% if current_user == @school.fetch_admin %>
 	     <div>
 				  <%= link_to('Dashboard', edit_school_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
 	  		</div>
