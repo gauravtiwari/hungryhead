@@ -118,7 +118,7 @@ class SchoolsController < ApplicationController
     def set_schools
       @user = current_user
       id = params[:id] || params[:slug]
-      @school = School.find(id)
+      @school = School.fetch_by_slug(id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
