@@ -6,7 +6,7 @@
 }
 
 .splash-wrapper {
-  background: linear-gradient(to bottom, transparent 0%, transparent 90%, #fff 100%), image-url('banner_1.jpg') no-repeat;
+  background: linear-gradient(to bottom, transparent 0%, transparent 90%, #fff 100%), image-url('hero03.jpg') no-repeat;
   position: absolute;
   background-size: cover;
   display: block;
@@ -24,7 +24,7 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(51,51,51,0.5);
 }
 .btn-ghost {
   background: transparent;

@@ -1,6 +1,12 @@
 .join-wrapper .join .jumbotron {
   height: 60vh;
 }
+.product-wrapper .product .jumbotron {
+  height: 50vh;
+}
+.how-wrapper .how .jumbotron {
+  height: 50vh;
+}
 .learn-wrapper .learn .jumbotron {
   height: 60vh;
 }
@@ -10,7 +16,6 @@
 .join-photo:before,
 .learn-photo:before,
 .story-photo:before,
-.how-photo:before,
 .product-photo:before,
 .join-mentor-photo:before {
   background: rgba(51, 51, 51, 0.5);
@@ -65,25 +70,33 @@
 .story-photo {
   background: image-url("patterns/uLrWbwC.jpg");
 }
+.product-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.how-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.how-photo {
+
+  background: -webkit-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* W3C */
+
+}
 .product-photo {
-  background: image-url("building-ecosystem.png");
-  background-position: 20% 30%;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
+ background: -webkit-linear-gradient(90deg, #F1F2B5 10%, #135058 90%); /* Chrome 10+, Saf5.1+ */
+ background:    -moz-linear-gradient(90deg, #F1F2B5 10%, #135058 90%); /* FF3.6+ */
+ background:     -ms-linear-gradient(90deg, #F1F2B5 10%, #135058 90%); /* IE10 */
+ background:      -o-linear-gradient(90deg, #F1F2B5 10%, #135058 90%); /* Opera 11.10+ */
+ background:         linear-gradient(90deg, #F1F2B5 10%, #135058 90%); /* W3C */
 }
 .join-mentor-photo {
   background: image-url("patterns/syudJMa.png");
 }
 .join-wrapper .join .cover-photo .pull-bottom {
   z-index: 2;
-}
-.how-photo {
-  background: image-url("hero_researching.jpg");
-  background-position: 20% 30%;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
 }
 
 .vmiddle {

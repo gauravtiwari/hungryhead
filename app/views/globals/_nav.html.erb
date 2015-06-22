@@ -13,12 +13,12 @@
         <% end %>
         <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
           <li class="inline p-r-15 p-l-15 fs-14 bold">
-            <%= link_to(root_path, class: "text-brand fs-22") do %>
+            <%= link_to(root_path, class: "text-brand fs-22 #{current_class?(root_path)}") do %>
               <i class="fa fa-home"></i>
             <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
-            <%= link_to(users_path, class: "text-brand fs-22") do %>
+            <%= link_to(users_path, class: "text-brand fs-22 #{current_class?(users_path)}") do %>
                <i class="fa fa-users"></i>
              <% end %>
           </li>

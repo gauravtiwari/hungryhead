@@ -16,7 +16,7 @@
                     <% badge.each do |b| %>
                         <p class="m-b-10 inline">
                         <%= link_to(badge_path(b.name), class: "badge text-white", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
-                            <span class="badge-type <%= id %>"></span><%= b.custom_fields[:name] %>
+                            <i class="fa fa-star badge-type <%= id %>"></i><%= b.custom_fields[:name] %>
                         <% end %>
                         </p>
                     <% end %>

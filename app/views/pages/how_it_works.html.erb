@@ -1,15 +1,15 @@
 <%= cache(['beta', 'how_it_works', 'v1']) do %>
-<div class="learn-wrapper bg-white">
-  <div class="learn" data-pages="social">
+<div class="how-wrapper bg-white">
+  <div class="how" data-pages="social">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
         <div class="how-photo">
         <div class="container vmiddle">
-        <div class="col-md-4 p-t-40">
-          <div class="hero-section inner">
+        <div class="col-md-4 p-t-40 auto-margin no-padding">
+          <div class="hero-section inner text-center">
               <h1 class="text-white">
                 How it works
               </h1>
-              <p class="text-white">Understand the basic building blocks</p>
+              <p class="text-white">Understand the technical bits</p>
               <div class="btn-box m-t-20">
                 <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
               </div>
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="profile-nav displayblock overflow-hidden p-l-15">
+  <div class="profile-nav bg-master-lighter displayblock overflow-hidden p-l-15">
     <div class="container text-center">
       <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
         <li class="inline p-l-15 p-r-15">
@@ -49,75 +49,75 @@
   </div>
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class=" bg-master-lightest p-b-85 p-t-75 no-overflow" id="join">
+  <section class=" bg-master-lightest wrapper-small no-overflow" id="join">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-5">
-            <h5 class="block-title hint-text no-margin">Join hungryhead</h5>
-            <h1 class="m-t-5 m-b-20">Create account.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
+            <h1 class="m-t-5 m-b-20">Create an account.</h1>
+            <p class="m-b-20">
+              If you are an university or college student you can get started by creating an account. You will need your university or college email address to create an account.
+            </p>
+            <h5 class="m-b-20">
+              If you are mentor or an alumni please request an invite.
+            </h5>
           </div>
           <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
               <%= image_tag('product/join.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="p-b-85 p-t-75 no-overflow" id="complete_your_profile">
+  <section class="wrapper-small no-overflow" id="complete_your_profile">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-4">
             <div class="content-mask-md">
-              <%= image_tag('product/profile.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+              <%= image_tag('product/connect-community.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a box-shadow") %>
             </div>
           </div>
           <div class="col-sm-6 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
-            <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+            <h1 class="m-t-5 m-b-20">Complete your profile.</h1>
+            <p class="m-b-20">
+              Complete your profile - enter markets you are interested in, locations you based, skills you have and your hobbies.
+            </p>
+            <h5 class="m-b-20">
+              Filling these details will help others in finding you.
+            </h5>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow" id="connect">
+  <section class="bg-master-lightest wrapper-small no-overflow" id="connect">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-6">
-            <h5 class="block-title hint-text no-margin">Connect with peers</h5>
-            <h1 class="m-t-5 m-b-20">Follow people from around the world</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+            <h1 class="m-t-5 m-b-20">Connect with peers</h1>
+            <p class="m-b-20">
+              Connect and communicate with students from around the world.
+            </p>
           </div>
           <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
               <%= image_tag('product/follow_friends.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="p-b-85 p-t-75 no-overflow" id="share_skills">
+  <section class="wrapper-small no-overflow" id="share_skills">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-5 xs-p-l-15 xs-p-r-15">
             <div class="text-center">
               <i class="fa fa-search fs-50"></i>
@@ -127,27 +127,31 @@
             </div>
           </div>
           <div class="col-sm-6 col-sm-offset-1">
-            <h5 class="block-title hint-text no-margin">Share Skills</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+            <h1 class="m-t-5 m-b-20">Share Your Skills</h1>
+            <p class="m-b-20">
+              You can offer your skills and expertise if you don't have an startup idea and can collaborate and learn.
+            </p>
+            <p class="hint-text font-arial small-text col-md-8 no-padding">
+              This is something extra to give users an exceptional user experience with a condensed menu.
+            </p>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow" id="pitch_idea">
+  <section class="bg-master-lightest wrapper-small no-overflow" id="pitch_idea">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-6">
-            <h5 class="block-title hint-text no-margin">Pitch Idea</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+            <h1 class="m-t-5 m-b-20">Pitch Your Idea.</h1>
+            <p class="m-b-20">
+              If you have an startup idea you create your idea profile. Your idea won't be published until you publish it.
+            </p>
+            <h5 class="m-b-20">
+              You can control who can see your idea using privacy tools.
+            </h5>
           </div>
           <div class="col-sm-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
@@ -160,50 +164,48 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="p-b-85 p-t-75 no-overflow" id="collaboration">
+  <section class="wrapper-small no-overflow" id="collaboration">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
           <div class="col-sm-5">
             <div class="content-mask-md text-center">
               <%= image_tag('product/comment.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
             </div>
           </div>
-          <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
-            <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <h1 class="m-t-5 m-b-20">Collaborate with peers.</h1>
+            <p class="m-b-20">
+              Hop into a conversation and introduce yourself. If you have an idea share it with others and encourage them to leave a feedback. If you have any feedback or questions for others ideas, visit their profiles and collaborate.
+            </p>
+            <h5 class="hint-text font-arial small-text col-md-8 no-padding">
+              All communicates happens in realtime.
+            </h5>
           </div>
-        </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow" id="measure">
+  <section class="bg-master-lightest wrapper-small no-overflow" id="measure">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
-          <div class="col-sm-6">
-            <h5 class="block-title hint-text no-margin">Measure and Validate</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          <div class="col-sm-5">
+            <h1 class="m-t-5 m-b-20">Measure metrices and validate.</h1>
+            <p class="m-b-20">
+              Analyse how your idea is performing, understand areas your idea needs improvments.
+            </p>
           </div>
-        <div class="col-sm-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+        <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
           <div class="content-mask-md">
             <%= image_tag('product/leaderboard.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
           </div>
-        </div>
         </div>
       </div>
     </div>

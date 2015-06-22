@@ -22,7 +22,7 @@ class PagesController < ApplicationController
   def privacy
   end
 
-  def join_as_mentor
+  def request_invite
   end
 
   def how_it_works

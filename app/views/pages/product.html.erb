@@ -1,26 +1,26 @@
 <%= cache(['beta', 'product', 'v1']) do %>
-<div class="learn-wrapper bg-white">
-  <div class="learn" data-pages="social">
+<div class="product-wrapper bg-white">
+  <div class="product" data-pages="social">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
         <div class="product-photo">
         <div class="container vmiddle">
-        <div class="col-md-4 p-t-40">
-          <div class="hero-section inner">
+        <div class="col-md-6 p-t-40 auto-margin">
+          <div class="hero-section inner text-center">
               <h1 class="text-white">
-                Product
+                Our Product
               </h1>
-              <p class="text-white">Understand the core building blocks</p>
+              <p class="text-white fs-16">Understand the core building blocks</p>
               <div class="btn-box m-t-20">
                 <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
               </div>
-          </div>
+            </div>
           </div>
       </div>
       </div>
     </div>
   </div>
 
-  <div class="profile-nav bg-master-lightest displayblock overflow-hidden p-l-15">
+  <div class="profile-nav bg-master-lighter displayblock overflow-hidden p-l-15">
     <div class="container text-center">
       <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
         <li class="inline p-l-15 p-r-15">
@@ -32,30 +32,31 @@
         <li class="inline p-l-15 p-r-15">
           <a class="bold fs-14 font-opensans" href="/gaurav/activities">Gamification</a>
         </li>
-        <li class="inline p-l-15 p-r-15">
-          <a class="bold fs-14 font-opensans" href="/gaurav/activities">Rewards</a>
-        </li>
       </ul>
     </div>
   </div>
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="p-b-85 p-t-75 p-b-65 p-t-55">
+  <section class="wrapper-small p-b-65 p-t-55">
     <div class="container">
       <div class="md-p-l-20 xs-no-padding clearfix">
         <div class="col-sm-4 no-padding">
           <div class="p-r-40 md-pr-30 text-center">
-            <%= image_tag('badges/top_comments.png', class: "m-b-20") %>
-            <h6 class="block-title p-b-5">Collaboration <i class="pg-arrow_right m-l-10"></i></h6>
-            <p class="m-b-30 font-opensans">Awesome notepad app. It gives you a quick and simple notepad editing experience when you write notes.</p>
+            <%= image_tag('badges/welcome.png', class: "m-b-20") %>
+            <h6 class="block-title p-b-5">Community <i class="pg-arrow_right m-l-10"></i></h6>
+              <p class="m-b-30 font-opensans">
+                Connect with peers from around the world.
+              </p>
           </div>
           <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
         </div>
         <div class="col-sm-4 no-padding">
           <div class="p-r-40 md-pr-30 text-center">
-            <%= image_tag('badges/welcome.png', class: "m-b-20") %>
-            <h6 class="block-title p-b-5">Community <i class="pg-arrow_right m-l-10"></i></h6>
-            <p class="m-b-30 font-opensans">Quick chat helps you to Keep in touch with your friends and colleagues while working. It has a unique responsive design.</p>
+            <%= image_tag('badges/top_comments.png', class: "m-b-20") %>
+            <h6 class="block-title p-b-5">Collaboration <i class="pg-arrow_right m-l-10"></i></h6>
+              <p class="m-b-30 font-opensans">
+                Make ideas useful and achieve shared goals.
+              </p>
           </div>
           <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
         </div>
@@ -63,83 +64,82 @@
           <div class="p-r-40 md-pr-30 text-center">
             <%= image_tag('badges/cup.png', class: "m-b-20") %>
             <h6 class="block-title p-b-5">Gamification <i class="pg-arrow_right m-l-10"></i></h6>
-            <p class="m-b-30 font-opensans">This is a very young collection of charts, with the goal of keeping these components very customizable.</p>
+            <p class="m-b-30 font-opensans">
+              Because hard stuffs in life should be fun.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
+
   <!-- BEGIN CONTENT SECTION -->
-  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
+  <section class="bg-master-lightest wrapper-small no-overflow">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <h5 class="block-title hint-text no-margin">Realtime Collaboration</h5>
-        <div class="row">
-          <div class="col-sm-6">
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
+          <div class="col-sm-5">
+            <h1 class="m-t-5 m-b-20">Culture of Cross Pollination.</h1>
+            <p class="m-b-20">
+              The fundamental idea is to create a culture of cross-pollination where serious students from around the world can share skills, collaborate on a startup idea and achieve shared goals, together.
+            </p>
+            <h5 class="m-b-20">
+              Connect with an exclusive community of world-class students who are serious about entrepreneurship.
+            </h5>
           </div>
-          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
+          <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
+            <div class="content-mask-md text-center">
+              <%= image_tag('product/connect-community.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="wrapper-small no-overflow">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+          <div class="col-sm-5">
             <div class="content-mask-md">
-              <%= image_tag('product/comment.png', class: "image-responsive-height pull-right auto-width lazy b-lightgrey b-a") %>
+              <%= image_tag('product/comment.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
             </div>
           </div>
-        </div>
+          <div class="col-sm-5 col-md-offset-2 xs-p-l-15 xs-p-r-15">
+            <h1 class="m-t-5 m-b-20">The world itself is a great collaboration.</h1>
+            <p class="m-b-20">
+              Ideas become bigger and useful when they are shared that's why we have integrated tools to help you share, measure and build your startup idea securely with peers.
+            </p>
+            <h5 class="m-b-20">
+              If you feel like being part of an idea or want to contribute your skills. Just hop into a conversation/chat and introduce yourself.
+            </h5>
+          </div>
       </div>
     </div>
   </section>
   <!-- END CONTENT SECTION -->
 
   <!-- BEGIN CONTENT SECTION -->
-  <section class="p-b-85 p-t-75 no-overflow">
+  <section class="bg-master-lightest wrapper-small no-overflow">
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-5">
+            <h1 class="m-t-5 m-b-20">Seriousness and fun goes together.</h1>
+            <p class="m-b-20">
+              Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
+            </p>
+            <h5 class="m-b-20">
+              You can collaborate, invest in useful ideas using our virtual currency, make return on your investments, validate ideas and earn badges.
+            </h5>
+          </div>
+          <div class="col-sm-6 col-md-offset-1 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md m-t-40">
-              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
-                <div class="screen">
-                  <div class="iphone-border">
-                    <%= image_tag('product/tag.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
-                  </div>
-                </div>
+              <div class="content-mask-md m-t-20 text-center">
+                <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
               </div>
             </div>
           </div>
-          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
-            <h5 class="block-title hint-text no-margin">Exclusive Community</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END CONTENT SECTION -->
-
-  <!-- BEGIN CONTENT SECTION -->
-  <section class="bg-master-lightest p-b-85 p-t-75 no-overflow">
-    <div class="container">
-      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-        <div class="row">
-          <div class="col-sm-6">
-            <h5 class="block-title hint-text no-margin">Practical Gamification</h5>
-            <h1 class="m-t-5 m-b-20">Easier to remember and access.</h1>
-            <p class="m-b-20">Menu clipping makes it easier to keep track of the page you are at & helps you to identify menu labels using abbreviations</p>
-            <p class="hint-text font-arial small-text col-md-8 no-padding">This is something extra to give users an exceptional user experience with a condensed menu.</p>
-          </div>
-          <div class="col-sm-6 xs-p-l-15 xs-p-r-15">
-            <div class="content-mask-md m-t-40">
-              <div class="text-center">
-                <%= image_tag('badges/cup.png') %>
-              </div>
-              <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a") %>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>

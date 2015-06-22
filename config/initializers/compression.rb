@@ -5,14 +5,7 @@ Rails.application.configure do
   # break unless Rails.env.production?
   break unless ENV['ENABLE_COMPRESSION'] == '1'
 
-  # Strip all comments from JavaScript files, even copyright notices.
-  # By doing so, you are legally required to acknowledge
-  # the use of the software somewhere in your Web site or app:
   uglifier = Uglifier.new output: { comments: :copyright }
-
-  # To keep all comments instead or only keep copyright notices (the default):
-  # uglifier = Uglifier.new output: { comments: :all }
-  # uglifier = Uglifier.new output: { comments: :copyright }
 
   config.assets.compile = true
   config.assets.debug = false
