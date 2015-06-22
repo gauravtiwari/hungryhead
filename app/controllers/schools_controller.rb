@@ -17,9 +17,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = User.where(id: @school.latest_people.values.reverse)
-    .order_as_specified(id: @school.latest_people.values.reverse)
-    .limit(10)
+    @students = @school.fetch_users.published.limit(10)
   end
 
   def latest_people
@@ -32,7 +30,7 @@ class SchoolsController < ApplicationController
   end
 
   def latest_ideas
-    @ideas = Idea.find(@school.latest_ideas.values)
+    @ideas = @school.fetch_ideas.published.limit(10)
     respond_to do |format|
       format.js
     end
