@@ -1,31 +1,32 @@
-  <div class="container">
-  <div class="social-wrapper container">
-  <div class="social" data-pages="social">
-      <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-        <%=  render partial: 'school_data' %>
-        <%= render partial: 'cover' %>
-       <div class="school-action-buttons col-md-5">
-
-        <% if current_user.admin? %>
-          <%= link_to('Edit Profile', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
-        <% end %>
+  <div class="wrapper-small people-bg-gradient">
+    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <div class="hero-text inner">
+        <h2 class="text-white">Browse People</h2>
+        <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'p-b-5 b-b b-white') %></h5>
       </div>
-      </div>
+    </div>
   </div>
 
-    <div class="box-shadow bg-white">
-      <%= render partial: 'menu' %>
+  <div class="container p-t-40 p-b-80">
+    <div class="people-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
+            <th>Connect</th>
+            <th class="text-center">Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <%= render partial: 'user', locals: {user: user} %>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-
-    <div class="content p-t-20">
-      <div class="people-list auto-height">
-        <% @students.each do |idea| %>
-          <%= render partial: 'students', locals: {user: user}  %>
-        <% end %>
-        <div class="paging-container p-r-15">
-            <%= will_paginate(@students, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-        </div>
-      </div>
-    </div>
+  <div class="paging-container p-r-15">
+      <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+  </div>
   </div>
   </div>

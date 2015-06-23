@@ -77,8 +77,8 @@ Rails.application.routes.draw do
   post 'check_email', to: 'users#check_email', as: 'check_email'
 
   match '/vote',  to: 'votes#vote', via: :put, as: 'vote'
-  get '/:tag/people',  to: 'tags#people', as: 'tag_people'
-  get '/:tag/ideas',  to: 'tags#show', as: 'tag'
+  get '/:tag/tagged_people',  to: 'tags#people', as: 'tag_people'
+  get '/:tag/tagged_ideas',  to: 'tags#show', as: 'tag'
   match '/voters', to: 'votes#voters', via: :get, as: 'voters'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
@@ -244,9 +244,9 @@ Rails.application.routes.draw do
   get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
-  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
-  get '/:slug/student_ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
+  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
+  get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/latest_ideas', to: SlugRouter.to(:latest_ideas), as: :profile_latest_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks

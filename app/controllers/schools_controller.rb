@@ -24,15 +24,6 @@ class SchoolsController < ApplicationController
     @students = @school.fetch_users.select{|u| u.state = "published"}.take(10)
   end
 
-  def latest_people
-    @people = User.find(@school.latest_people.values).paginate(:page => params[:page], :per_page => 5)
-    render json: Oj.dump({
-      list: @people.map{|user| {id: user.id, name: user.name, name_badge: user.user_name_badge, url: profile_path(user), description: user.mini_bio}},
-      type: 'Latest Students',
-      next_page: @people.next_page
-      }, mode: :compat)
-  end
-
   def latest_ideas
     @ideas = @school.fetch_ideas.select{|u| u.status = "published"}.take(10)
     respond_to do |format|
@@ -44,8 +35,8 @@ class SchoolsController < ApplicationController
     render partial: 'shared/school_card'
   end
 
-  def students
-    @students = User.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
+  def people
+    @users = @school.fetch_users.select{|u| u.state = "published"}.paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/students"
     end
@@ -60,7 +51,7 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = Idea.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
+    @ideas = @school.fetch_ideas.select{|u| u.status = "published"}.paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/ideas"
     end
