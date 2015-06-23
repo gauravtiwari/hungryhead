@@ -8,6 +8,7 @@ class School < ActiveRecord::Base
 	#Included concerns
 	include Followable
 	include Sluggable
+	include Eventable
 
 	#Relationship
 	has_many :users
@@ -15,6 +16,7 @@ class School < ActiveRecord::Base
 	belongs_to :admin, class_name: 'User', foreign_key: "admin_id"
 
 	cache_has_many :users, embed: true
+	cache_has_many :events, :inverse_name => :eventable, embed: true
 	cache_has_many :ideas, embed: true
 	cache_belongs_to :admin
 

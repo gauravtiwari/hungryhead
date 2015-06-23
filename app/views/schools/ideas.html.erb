@@ -1,38 +1,48 @@
-  <div class="container">
-    <div class="social-wrapper container">
-      <div class="social" data-pages="social">
-          <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-            <% cache(["school_data", cache_key_for_school(@school)]) do %>
-              <%=  render partial: 'school_data' %>
-            <% end %>
-
-            <% cache(["cover", @school]) do %>
-              <%= render partial: 'cover' %>
-            <% end %>
-
-           <div class="school-action-buttons col-md-5">
-              <% if current_user == @school.admin %>
-                <%= link_to('Dashboard', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
-              <% end %>
-            </div>
+  <div class="wrapper-small idea-bg-gradient">
+    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <% data = render(template: 'schools/show.json.jbuilder') %>
+      <div class="user-profile auto-margin">
+          <div class="thumbnail-wrapper d100">
+              <div class="profile-logo">
+                <%= react_component('SchoolLogo', {data: data}) %>
+              </div>
           </div>
       </div>
-
-      <div class="box-shadow bg-white">
-        <% cache(["school_menu", @school]) do %>
-          <%= render partial: 'menu' %>
-        <% end %>
-      </div>
-
-      <div class="content p-t-20">
-        <div class="ideas-list auto-height">
-          <% @ideas.each do |idea| %>
-            <%= render partial: 'ideas', locals: {idea: idea}  %>
-          <% end %>
-          <div class="paging-container p-r-15">
-            <%= will_paginate(@ideas, class: 'bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-          </div>
-        </div>
+      <div class="hero-text inner clearfix">
+        <h2 class="text-white">Browse ideas</h2>
+        <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
       </div>
     </div>
+  </div>
+
+  <div class="box-shadow bg-white full-border-light-bottom">
+    <div class="container">
+      <% cache(["school_menu", @school]) do %>
+        <%= render partial: 'menu' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container p-t-40 p-b-80">
+    <div class="idea-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
+            <th>Follow to get updates</th>
+            <th class="text-center">Idea Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ideas.each do |idea| %>
+            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
+        <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    </div>
+  </div>
   </div>

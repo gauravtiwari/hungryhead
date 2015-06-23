@@ -3,7 +3,7 @@ module Eventable
   extend ActiveSupport::Concern
 
   included do
-    has_many :events, dependent: :destroy
+    has_many :events, as: :eventable, dependent: :destroy
   end
 
 end

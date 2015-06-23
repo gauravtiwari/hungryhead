@@ -1,7 +1,6 @@
 class Idea < ActiveRecord::Base
 
   include IdentityCache
-  cache_index :slug, :unique => true
 
   include Rails.application.routes.url_helpers
   #included modules
@@ -76,6 +75,7 @@ class Idea < ActiveRecord::Base
   has_many :team_invites, dependent: :destroy
 
   cache_belongs_to :user
+  cache_index :slug, :unique => true
   cache_index :status, :privacy, :uuid, :school_id
 
   #Includes modules

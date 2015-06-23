@@ -1,32 +1,49 @@
   <div class="wrapper-small people-bg-gradient">
     <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-      <div class="hero-text inner">
+      <% data = render(template: 'schools/show.json.jbuilder') %>
+      <div class="user-profile auto-margin">
+          <div class="thumbnail-wrapper d100">
+              <div class="profile-logo">
+                <%= react_component('SchoolLogo', {data: data}) %>
+              </div>
+          </div>
+      </div>
+      <div class="hero-text inner clearfix">
         <h2 class="text-white">Browse People</h2>
         <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
       </div>
     </div>
   </div>
 
-  <div class="container p-t-40 p-b-80">
-    <div class="people-list">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
-            <th>Connect</th>
-            <th class="text-center">Stats</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <%= render partial: 'users/user', locals: {user: user} %>
-          <% end %>
-        </tbody>
-      </table>
+
+  <div class="box-shadow bg-white full-border-light-bottom">
+    <div class="container">
+      <% cache(["school_menu", @school]) do %>
+        <%= render partial: 'menu' %>
+      <% end %>
     </div>
-  <div class="paging-container p-r-15">
-      <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
   </div>
-  </div>
+
+  <div class="container p-t-40 p-b-80">
+      <div class="people-list">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
+              <th>Connect</th>
+              <th class="text-center">Stats</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <%= render partial: 'users/user', locals: {user: user} %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="paging-container p-r-15">
+        <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+      </div>
+    </div>
   </div>
