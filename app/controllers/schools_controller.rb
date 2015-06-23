@@ -21,7 +21,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.fetch_users.select{|u| u.state = "published"}
+    @students = @school.fetch_users.select{|u| u.state = "published"}.take(10)
   end
 
   def latest_people
@@ -34,7 +34,7 @@ class SchoolsController < ApplicationController
   end
 
   def latest_ideas
-    @ideas = @school.fetch_ideas.published.limit(10)
+    @ideas = @school.fetch_ideas.select{|u| u.status = "published"}.take(10)
     respond_to do |format|
       format.js
     end
