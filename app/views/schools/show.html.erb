@@ -43,9 +43,7 @@
 
         <div class="tab-content">
           <div class="tab-pane active" id="tab_people">
-            <% cache(cache_key_for_school_users(@school)) do %>
-              <%= render partial: 'students' %>
-            <% end %>
+            <%= render partial: 'students' %>
           </div>
 
           <div class="tab-pane" id="tab_ideas">

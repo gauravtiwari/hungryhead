@@ -23,7 +23,7 @@ module UserHelper
     followers = user.followers_counter.value
     feedbacks = user.feedbacks_counter.value
     followed = user.followed_by?(current_user)
-    "user-#{user.updated_at.to_i}/investments-#{investments}/followers-#{followers}/feedbacks-#{feedbacks}/followed-#{followed}"
+    "user-#{user.id}-#{user.updated_at.try(:to_s, :number)}/investments-#{investments}/followers-#{followers}/feedbacks-#{feedbacks}/followed-#{followed}"
   end
 
 end

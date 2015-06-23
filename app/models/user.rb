@@ -55,7 +55,6 @@ class User < ActiveRecord::Base
 
   cache_has_many :ideas, embed: true
   cache_belongs_to :school
-  cache_has_many :impressions, embed: true
 
   cache_index :slug, :unique => true
   cache_index :state, :school_id

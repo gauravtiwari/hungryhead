@@ -1,5 +1,7 @@
 class Follow < ActiveRecord::Base
 
+  include IdentityCache
+
   belongs_to :follower, polymorphic: true
   belongs_to :followable, polymorphic: true
 
