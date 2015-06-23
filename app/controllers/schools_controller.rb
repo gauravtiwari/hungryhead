@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
-  before_filter :authenticate_user!, only: [:show, :activities, :students, :ideas, :update, :edit]
+  before_filter :authenticate_user!, except: :autocomplete_user_name
   before_filter :check_terms, except: :autocomplete_user_name
-  before_action :set_schools, only: [:latest_people, :latest_ideas, :card, :notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
+  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :people, :ideas, :update, :destroy]
   respond_to :html, :json
   autocomplete :school, :name, :full => true, :extra_data => [:domain]
 
