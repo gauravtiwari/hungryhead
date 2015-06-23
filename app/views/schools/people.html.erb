@@ -2,7 +2,7 @@
     <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
       <div class="hero-text inner">
         <h2 class="text-white">Browse People</h2>
-        <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'p-b-5 b-b b-white') %></h5>
+        <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <% @users.each do |user| %>
-            <%= render partial: 'user', locals: {user: user} %>
+            <%= render partial: 'users/user', locals: {user: user} %>
           <% end %>
         </tbody>
       </table>
