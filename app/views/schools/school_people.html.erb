@@ -42,8 +42,10 @@
           </tbody>
         </table>
       </div>
-      <div class="paging-container p-r-15">
-        <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-      </div>
+      <% if @users.next_page %>
+        <div class="paging-container p-r-15">
+          <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+        </div>
+      <% end %>
     </div>
   </div>

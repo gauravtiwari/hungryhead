@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
-  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :people, :ideas, :update, :destroy]
+  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :school_people, :ideas, :update, :destroy]
 
   #Respond JSON
   respond_to :html, :json
@@ -37,7 +37,7 @@ class SchoolsController < ApplicationController
     render partial: 'shared/school_card'
   end
 
-  def people
+  def school_people
     @users = @school.fetch_users.select{|u| u.state = "published"}.paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/students"

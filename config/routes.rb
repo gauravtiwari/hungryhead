@@ -102,11 +102,7 @@ Rails.application.routes.draw do
   end
 
   #Tagging system
-  resources :tags, only: [:show] do
-    member do
-      get :people
-    end
-  end
+  resources :tags, only: [:show]
 
   #Hobby autocomplete system
   resources :hobbies, only: [:index] do
@@ -138,7 +134,6 @@ Rails.application.routes.draw do
     get :autocomplete_school_name, :on => :collection
     member do
       get :latest_ideas
-      get :latest_people
     end
   end
 
@@ -165,7 +160,7 @@ Rails.application.routes.draw do
   resources :badges, only: :show
 
   #Users routes
-  resources :users, path: 'people', except: [:show] do
+  resources :users, except: [:show] do
     get :autocomplete_user_name, :on => :collection
 
     collection do
@@ -245,7 +240,7 @@ Rails.application.routes.draw do
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
-  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
+  get '/:slug/people', to: SlugRouter.to(:school_people), as: :profile_people
   get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/latest_ideas', to: SlugRouter.to(:latest_ideas), as: :profile_latest_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers

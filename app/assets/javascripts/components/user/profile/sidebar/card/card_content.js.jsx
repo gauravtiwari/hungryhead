@@ -8,7 +8,6 @@ var CardContent = React.createClass({
       var markets = this.props.profile.markets.map(function(market){
         return <a className="text-white fs-13 m-l-5 lighter-text" href={market.url} > @{market.tag} </a>;
       });
-
     }
 
     if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
@@ -68,25 +67,25 @@ var CardContent = React.createClass({
 
     var classes = "profile-card padding-20  p-t-40 box-shadow bg-solid";
 
-    if(this.props.markets) {
+    if(markets) {
       var market_content =  <span>Markets interested in: {markets}</span>;
     } else {
       var market_content = ""
     }
 
-    if(this.props.skills) {
+    if(skills) {
       var skill_content =   <span className="m-l-5">Knows about: {skills}</span>;
     } else {
       var skill_content = ""
     }
 
-    if(this.props.hobbies) {
+    if(hobbies) {
       var hobby_content =    <span className="m-l-5">Likes: {hobbies}</span>;
     } else {
       var hobby_content = ""
     }
 
-    if(this.props.subjects) {
+    if(subjects) {
       var subject_content =  <span className="m-l-5">Studying: {subjects}</span>;
     } else {
       var subject_content = ""
