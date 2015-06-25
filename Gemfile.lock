@@ -27,7 +27,7 @@ PATH
     help (0.0.1)
       browser
       friendly_id
-      rails (~> 4.2.1)
+      rails
       simple_form
 
 GEM
