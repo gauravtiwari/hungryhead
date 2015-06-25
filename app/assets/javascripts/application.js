@@ -58,7 +58,6 @@
 
 // Core Javascripts
 //= require core/js/pages
-//= require core/js/pages.calendar
 
 // Turbolinks and plugins
 //= require pusher_init

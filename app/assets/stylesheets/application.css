@@ -38,6 +38,7 @@
  *= require search
  *= require users
  *= require comments
+ *= require events
  *= require help
  *= require footer
  *= require idea_profile

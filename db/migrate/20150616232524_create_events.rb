@@ -5,7 +5,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title, null: false, default: ""
       t.belongs_to :eventable, null: false, default: "", polymorphic: true
       t.string :description, null: false, default: ""
-      t.string :location, null: false, default: ""
+      t.string :cover, null: false, default: ""
+      t.string :cached_location_list
       t.datetime :start_time, null: false, default: DateTime.now
       t.datetime :end_time, null: false, default: DateTime.now
       t.boolean :guest_invites, default: false

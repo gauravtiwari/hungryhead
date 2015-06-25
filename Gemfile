@@ -186,7 +186,6 @@ gem 'shareable'
 gem 'paper_trail', '~> 4.0.0.rc1'
 
 gem 'simple_form'
-gem 'country_select'
 
 # SEO
 gem 'friendly_id'
@@ -266,6 +265,8 @@ end
 
 group :development, :test do
   gem 'better_errors'
+  gem 'derailed'
+  gem "stackprof"
   #gem 'rack-mini-profiler', require: false
   gem 'hirb'
   gem 'rails_best_practices'

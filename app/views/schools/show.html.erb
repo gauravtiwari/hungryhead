@@ -25,19 +25,19 @@
       <div class="panel box-shadow">
         <ul class="nav nav-tabs nav-tabs-simple">
             <li class="active">
-                <a data-toggle="tab" href="#tab_people">
-                  <i class="fa fa-graduation-cap"></i> Latest People
-                </a>
+              <a data-toggle="tab" href="#tab_people">
+                <i class="fa fa-graduation-cap"></i> Latest People
+              </a>
             </li>
             <li class="">
-                <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
-                  <i class="fa fa-lightbulb-o"></i> Latest Ideas
-                <% end %>
+              <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
+                <i class="fa fa-lightbulb-o"></i> Latest Ideas
+              <% end %>
             </li>
             <li class="">
-                <a data-toggle="tab" href="#tab_ideas">
-                  <i class="fa fa-calendar"></i> Latest Events
-                </a>
+              <%= link_to("#tab_events", data: {toggle: 'tab', url: profile_events_path(@school)}, id: 'load_school_events') do %>
+                <i class="fa fa-calendar"></i> Latest Events
+              <% end %>
             </li>
         </ul>
 

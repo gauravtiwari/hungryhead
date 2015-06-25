@@ -1,0 +1,57 @@
+<tr class="full-border-light-bottom">
+  <td class="p-t-25 no-border">
+    <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
+     <% if event.cover.present? %>
+       <%= image_tag(event.cover.url(:avatar), width: "50px") %>
+     <% else %>
+       <span class="placeholder bold text-white">
+         <%= event.name_badge.upcase %>
+       </span>
+     <% end %>
+     </div>
+  </td>
+  <td style="max-width: 350px;" class="people-info font-opensans no-border">
+    <h5 class="no-margin fs-16 bold"><%= link_to(event.name, profile_path(user)) %>
+    <% if event.fetch_eventable.logo.present? %>
+     <%= image_tag(event.fetch_eventable.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
+    <% end %>
+    </h5>
+    <p class="fs-14 m-t-5">
+      <%= event.description %>
+      <% if event.cached_location_list.present? %>
+        <span>
+          <% event.location_list.each do |tag| %>
+            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+          <% end %>
+        </span>
+      <% end %>
+    </p>
+  </td>
+  <td style="display:table-cell; vertical-align:middle;" class="no-border">
+    <% if current_user != user %>
+      <div class="card-follow-button">
+        <%= react_component('Follow',{:followed => followed?(user)}) %>
+      </div>
+      <script type="text/javascript">
+         ReactRailsUJS.mountComponents();
+      </script>
+    <% end %>
+  </td>
+  <td style="display:table-cell; vertical-align:middle; min-width: 200px;" class="no-border">
+    <ul class="stastics-list">
+      <li class="clearfix">
+        Going
+        <span class="text-master">
+          <%= number_to_human(event.attendees_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+        </span>
+      </li>
+      <li class="clearfix pull-reset">
+        May be
+        <span class="text-master">
+          <%= number_to_human(User.leaderboard.score(event.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+        </span>
+      </li>
+    </ul>
+  </td>
+</tr>
+

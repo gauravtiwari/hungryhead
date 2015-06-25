@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
-  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :people, :ideas, :update, :destroy]
+  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :events,  :people, :ideas, :update, :destroy]
 
   #Respond JSON
   respond_to :html, :json
@@ -39,16 +39,17 @@ class SchoolsController < ApplicationController
 
   def people
     @users = @school.fetch_users.select{|u| u.state == "published"}.paginate(:page => params[:page], :per_page => 20)
-    if request.xhr?
-      render :partial=>"schools/students"
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
   def events
-    @ideas = Event.where(school_id: @school.id).limit(4)
-    @students = User.where(school_id: @school.id).paginate(:page => params[:page], :per_page => 20)
-    if request.xhr?
-      render :partial=>"schools/content/students"
+    @ideas = Event.where(eventable: @school).limit(4)
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

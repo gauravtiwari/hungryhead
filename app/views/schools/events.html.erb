@@ -1,0 +1,20 @@
+<div class="wrapper-small events-bg-gradient">
+  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <% data = render(template: 'schools/show.json.jbuilder') %>
+    <div class="user-profile auto-margin">
+        <div class="thumbnail-wrapper d100">
+            <div class="profile-logo">
+              <%= react_component('SchoolLogo', {data: data}) %>
+            </div>
+        </div>
+    </div>
+    <div class="hero-text inner clearfix">
+      <h2 class="text-white">Browse events</h2>
+      <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+</div>

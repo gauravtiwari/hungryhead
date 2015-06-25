@@ -15,7 +15,13 @@
         "jqueryui-touch-punch": "latest",
         "hammerjs": "latest"
 
-    }
+    },
+    "ignoredDependencies": [
+       "bootstrap",
+       "jquery",
+       "react",
+       "jquery-ui"
+    ]
   },
   "vendor": {
     "name": "bower-rails generated vendor assets",
