@@ -11,7 +11,9 @@
         "react-infinite": "latest",
         "bootstrap-tagsinput": "latest",
         "pnotify": "latest",
-        "fastclick": "latest"
+        "fastclick": "latest",
+        "jqueryui-touch-punch": "latest",
+        "hammerjs": "latest"
 
     }
   },

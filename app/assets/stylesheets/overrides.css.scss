@@ -27,6 +27,9 @@ p {
 .comment-body p {
   padding-right:20px;
 }
+table tr:last-child {
+  border-bottom: 0;
+}
 .btn-tags {
   padding-top: 0px;
   padding-bottom: 0px;

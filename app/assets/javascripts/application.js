@@ -19,6 +19,8 @@
 //= require plugins/jquery-actual/jquery.actual.min
 //= require plugins/jquery-menuclipper/jquery.menuclipper
 //= require plugins/jquery-scrollbar/jquery.scrollbar.min
+//= require jqueryui-touch-punch
+//= require hammerjs
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -56,6 +58,7 @@
 
 // Core Javascripts
 //= require core/js/pages
+//= require core/js/pages.calendar
 
 // Turbolinks and plugins
 //= require pusher_init
