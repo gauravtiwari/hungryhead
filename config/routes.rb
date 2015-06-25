@@ -240,7 +240,7 @@ Rails.application.routes.draw do
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
-  get '/:slug/people', to: SlugRouter.to(:school_people), as: :profile_people
+  get '/:slug/people', to: SlugRouter.to(:people), as: :profile_people
   get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/latest_ideas', to: SlugRouter.to(:latest_ideas), as: :profile_latest_ideas
   get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers

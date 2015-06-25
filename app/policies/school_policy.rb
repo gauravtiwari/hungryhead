@@ -1,4 +1,4 @@
-class InstitutionPolicy < ApplicationPolicy
+class SchoolPolicy < ApplicationPolicy
 
   def follow?
     true
