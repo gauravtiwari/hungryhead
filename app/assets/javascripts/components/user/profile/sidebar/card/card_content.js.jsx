@@ -6,25 +6,25 @@ var CardContent = React.createClass({
 
     if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
-        return <a className="text-white fs-13 m-l-5 lighter-text" href={market.url} > @{market.tag} </a>;
+        return <a key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={market.url} > @{market.tag} </a>;
       });
     }
 
     if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
       var hobbies = this.props.profile.hobbies.map(function(hobby){
-        return <a className="text-white fs-13 m-l-5 lighter-text" href={hobby.url} > @{hobby.tag} </a>;
+        return <a key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={hobby.url} > @{hobby.tag} </a>;
       });
     }
 
     if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
       var skills = this.props.profile.skills.map(function(skill){
-        return <a key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={skill.url} > @{skill.tag} </a>;
+        return <a key={Math.random()} key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={skill.url} > @{skill.tag} </a>;
       });
     }
 
     if(this.props.profile.subjects && this.props.profile.subjects.length > 0 ) {
       var subjects = this.props.profile.subjects.map(function(subject){
-        return <a className="text-white fs-13 m-l-5 lighter-text" href={subject.url} > @{subject.tag} </a>;
+        return <a key={Math.random()} className="text-white fs-13 m-l-5 lighter-text" href={subject.url} > @{subject.tag} </a>;
       });
     }
 

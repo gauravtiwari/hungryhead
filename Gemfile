@@ -2,14 +2,15 @@ ruby '2.2.2'
 source 'https://rubygems.org'
 
 source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
   gem 'rails-assets-jquery-bez'
-  gem 'rails-assets-iOSList'
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'
   gem 'rails-assets-jquery.scrollbar'
+  gem 'rails-assets-eventemitter'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-pusher'
@@ -23,7 +24,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-underscore'
   gem 'rails-assets-font-awesome'
-  gem 'rails-assets-showdown'
   gem 'rails-assets-momentjs'
   gem 'rails-assets-jquery.validate'
   gem 'rails-assets-autosize'
@@ -42,13 +42,14 @@ gem 'sass'
 gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
 gem 'uglifier'
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
 #Group date
 gem 'groupdate'
+
+#Showdown
+gem 'showdown-rails'
 
 #Gamification system
 gem 'merit'

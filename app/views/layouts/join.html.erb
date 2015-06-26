@@ -32,9 +32,22 @@
 
   </head>
 
-  <body class="fixed-header <%= user_signed_in? ? '' : 'menu-behind' %> <%= controller_name %> <%= action_name %>">
-    <%= yield %>
+  <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'no-header menu-behind' %> <%= controller_name %> <%= action_name %>">
+    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
+      <% if user_signed_in? %>
+        <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
+      <% end %>
 
+      <% if user_signed_in? %>
+        <div class="page-content-wrapper">
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
+    </div>
   </body>
 
 </html>

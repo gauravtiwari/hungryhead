@@ -23,6 +23,7 @@ jQuery(document).ready ->
 	$('#information-form').validate();
 	$('#feedback_form').validate();
 	$('#edit-profile').validate();
+	$('#edit_school').validate();
 	$('#pitch_idea_form').validate();
 	$('#editProfileFormPopup').validate();
 	$('#valid-form').validate();

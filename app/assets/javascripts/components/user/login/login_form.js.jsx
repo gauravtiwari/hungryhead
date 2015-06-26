@@ -35,7 +35,7 @@ render: function() {
         <div className="col-md-6 no-padding">
           <div className="checkbox check-success">
             <input type="checkbox" name="user[remember_me]" value="1" id="checkbox1" defaultChecked/>
-            <label for="checkbox1">Keep Me Signed in</label>
+            <label htmlFor="checkbox1">Keep Me Signed in</label>
           </div>
         </div>
         <div className="col-md-6 text-right">

@@ -9,7 +9,7 @@
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require sweetalert
  *= require bootstrap-tagsinput
- *= require plugins/jquery-scrollbar/jquery.scrollbar
+ *= require jquery.scrollbar
  *= require plugins/jquery-menuclipper/jquery.menuclipper
  *= require plugins/bootstrap-select2/select2
  *= require plugins/switchery/css/switchery.min

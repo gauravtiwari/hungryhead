@@ -1,5 +1,4 @@
-<% cache(["menu", current_user, current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s, current_user.unread_notifications]) do %>
-  <div class="header <%= bg if bg %> b-b b-grey box-shadow">
+<div class="header <%= bg if bg %> b-b b-grey box-shadow">
   <div class="container">
     <div class=" pull-left sm-table">
       <div class="header-inner  p-t-10">
@@ -108,5 +107,4 @@
       </div>
     </div>
   </div>
-  </div>
-<% end %>
+</div>

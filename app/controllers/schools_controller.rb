@@ -1,7 +1,7 @@
 class SchoolsController < ApplicationController
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
-  before_action :set_schools, only: [:latest_ideas, :card, :show, :edit, :events,  :people, :ideas, :update, :destroy]
+  before_action :set_schools, except: [:new, :create, :autocomplete_school_name]
 
   #Respond JSON
   respond_to :html, :json
@@ -23,11 +23,15 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.fetch_users.select{|u| u.state == "published"}.take(10)
+    @students = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }.first(10)
+  end
+
+  # GET /schools/1/dashboard
+  def dashboard
   end
 
   def latest_ideas
-    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.take(10)
+    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }.first(10)
     respond_to do |format|
       format.js
     end
@@ -38,7 +42,7 @@ class SchoolsController < ApplicationController
   end
 
   def people
-    @users = @school.fetch_users.select{|u| u.state == "published"}.paginate(:page => params[:page], :per_page => 20)
+    @users = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js
@@ -54,7 +58,7 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.paginate(:page => params[:page], :per_page => 20)
+    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/ideas"
     end

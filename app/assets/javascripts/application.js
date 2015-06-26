@@ -1,7 +1,8 @@
 //All application JS assets - checkout vendor assets directory
 
 // BEGIN VENDOR JS FOR PAGES
-
+//
+//= require jquery
 //= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
@@ -11,15 +12,16 @@
 //= require jquery-ui/position
 //= require jquery-ui/draggable
 //= require jquery-ui/effect.all
-//= require query.unveil
-//= require jquery.bez
-//= require iOSList
+//= require jquery-unveil
+//= require jquery-bez
+//= require plugins/jquery-ios-list/jquery.ioslist.min
+//= require eventemitter
 //= require imagesloaded
 //= require jquery.actual
 //= require plugins/jquery-menuclipper/jquery.menuclipper
 //= require jquery.scrollbar
 //= require hammerjs
-//= require jquery_ujs
+//= require jquery-ujs
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
@@ -34,11 +36,11 @@
 //= require typer
 //= require sweetalert
 //= require bootstrap-tagsinput
-//= require moment
+//= require momentjs
 //= require classie
 //= require fastclick
 //= require jquery.validate
-//= require jquery.validate.additional-methods
+//= require jquery.validate/additional-methods
 //= require jquery.autosize
 //= require showdown
 //= require autocomplete-rails
@@ -50,11 +52,7 @@
 //= require react_ujs
 
 
-// Core Javascripts
+// Custom Javascripts
 //= require core/js/pages
-
-// Turbolinks and plugins
 //= require pusher_init
 //= require_tree .
-
-//Turbolinks.enableTransitionCache();

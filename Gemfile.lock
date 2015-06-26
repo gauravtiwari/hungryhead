@@ -340,10 +340,6 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-atwho-rails (1.3.2)
-    jquery-rails (4.0.4)
-      rails-dom-testing (~> 1.0)
-      railties (>= 4.2.0)
-      thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     js-routes (1.0.1)
@@ -457,12 +453,11 @@ GEM
     rails-assets-bootstrap-tokenfield (0.7.0)
     rails-assets-classie (1.0.1)
     rails-assets-eventEmitter (4.2.11)
+    rails-assets-eventemitter (1.0.0)
     rails-assets-eventie (1.0.6)
     rails-assets-fastclick (1.0.6)
     rails-assets-font-awesome (4.3.0)
     rails-assets-hammerjs (2.0.4)
-    rails-assets-iOSList (2.0.6)
-      rails-assets-jquery (~> 2.0.3)
     rails-assets-imagesloaded (3.1.8)
       rails-assets-eventEmitter (~> 4.0)
       rails-assets-eventie (>= 1.0.4, < 2)
@@ -486,7 +481,6 @@ GEM
     rails-assets-react (0.13.3)
     rails-assets-react-infinite (0.4.0)
       rails-assets-react (>= 0.12.2)
-    rails-assets-showdown (1.1.0)
     rails-assets-slimScroll (1.3.6)
       rails-assets-jquery (>= 1.7)
     rails-assets-sweetalert (1.0.1)
@@ -576,6 +570,9 @@ GEM
       thor (~> 0.14)
     sexp_processor (4.6.0)
     shellany (0.0.1)
+    showdown-rails (0.0.4)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
     sidekiq (3.3.4)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.1.1)
@@ -692,7 +689,6 @@ DEPENDENCIES
   identity_cache
   jbuilder
   jquery-atwho-rails
-  jquery-rails
   jquery-ui-rails
   js-routes
   json
@@ -723,11 +719,12 @@ DEPENDENCIES
   rails-assets-bootstrap-tagsinput!
   rails-assets-bootstrap-tokenfield!
   rails-assets-classie!
+  rails-assets-eventemitter!
   rails-assets-fastclick!
   rails-assets-font-awesome!
   rails-assets-hammerjs!
-  rails-assets-iOSList!
   rails-assets-imagesloaded!
+  rails-assets-jquery!
   rails-assets-jquery-bez!
   rails-assets-jquery-form!
   rails-assets-jquery-ujs!
@@ -740,7 +737,6 @@ DEPENDENCIES
   rails-assets-pnotify!
   rails-assets-pusher!
   rails-assets-react-infinite!
-  rails-assets-showdown!
   rails-assets-slimScroll!
   rails-assets-sweetalert!
   rails-assets-underscore!
@@ -761,6 +757,7 @@ DEPENDENCIES
   sass-rails
   searchkick
   select2-rails
+  showdown-rails
   sidekiq
   sidekiq-status
   simple_form

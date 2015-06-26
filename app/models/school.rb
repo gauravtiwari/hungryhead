@@ -11,11 +11,13 @@ class School < ActiveRecord::Base
 	include Eventable
 
 	#Relationship
-	has_many :users
+	has_many :students, -> { where role: 1 }, class_name: 'User'
 	has_many :ideas
+	has_many :faculties, -> { where role: 4 }, class_name: 'User'
 	belongs_to :admin, class_name: 'User', foreign_key: "admin_id"
 
-	cache_has_many :users, embed: true
+	cache_has_many :students, embed: true
+	cache_has_many :faculties, embed: true
 	cache_has_many :events, :inverse_name => :eventable, embed: true
 	cache_has_many :ideas, embed: true
 	cache_belongs_to :admin

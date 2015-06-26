@@ -1,4 +1,4 @@
 //All application JS assets - checkout vendor assets directory
 
-//= require jquery2
+//= require jquery
 //= require phone/base

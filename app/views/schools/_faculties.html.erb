@@ -1,0 +1,40 @@
+<div class="sidebar auto-height box-shadow bg-white m-t-10">
+  <div class="user-sidebar padding-20">
+    <div class="container-xs-height">
+      <div class="row">
+        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
+          <div class="panel-heading no-padding p-l-10">
+            <div class="panel-title text-master b-b b-grey p-b-5">
+              Faculties
+            </div>
+          </div>
+          <div class="p-l-10 p-r-10">
+            <ul class="no-style m-t-10">
+              <% @school.fetch_faculties.each do |user| %>
+                <li class="p-t-10 p-b-10">
+                  <div class="inline m-r-10">
+                    <div class="thumbnail-wrapper text-master d32 circular auto-margin m-r-5 m-b-5">
+                       <% if user.avatar.present? %>
+                         <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
+                       <% else %>
+                         <span class="placeholder bold text-white">
+                           <%= user.user_name_badge.upcase %>
+                         </span>
+                       <% end %>
+                     </div>
+                   </div>
+                   <div class="faculty-content inline">
+                    <%= link_to(profile_path(user), class: "no-margin bold text-brand fs-13") do %>
+                      <%= user.name %>
+                    <% end %>
+                    <p class="no-margin fs-13"><%= user.mini_bio %></p>
+                   </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
