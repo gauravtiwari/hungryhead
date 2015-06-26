@@ -3,13 +3,11 @@
 	<div class="container-sm-height full-height">
 	<div class="row row-sm-height">
 	  <div class="col-sm-12 col-sm-height col-middle">
-	   	<h1 class="bold">Join hungryhead</h1>
-	    <h3>Hungryhead is a new way to explore
-	    	<span class="bold">entrepreneurship for student entrepreneurs.
-	    	<div class="fa fa-question-circle" data-toggle="modal" data-target="#entrepreneurShipModal"></div>
-       </span>
-      </h3>
-      <%= link_to(omniauth_authorize_path(@user, :twitter), class: "btn btn-complete m-b-20 login button-twitter", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Logging in..."}) do %> <i class="fa fa-twitter"></i> Signup with Twitter <% end %>
+	   	<h1 class="bold b-b b-grey p-b-5 pull-left">Join</h1>
+	    <h5 class="clearfix">Hungryhead is a new way to explore
+	    	<span class="bold">entrepreneurship <div class="fa fa-question-circle" data-toggle="modal" data-target="#entrepreneurShipModal"></div>
+       </span> for student entrepreneurs
+      </h5>
 			<%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
 	  </div>
 	</div>

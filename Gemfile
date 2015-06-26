@@ -33,16 +33,11 @@ gem 'crono'
 #Cache for jbuilder
 gem 'jbuilder'
 
-#Build fake data
-
 #Bulk import
 gem 'activerecord-import'
 
 #order array of records in same order as ids
 gem 'order_as_specified'
-
-#Inline SVG
-gem 'inline_svg'
 
 #Font awesome
 gem "font-awesome-rails"
@@ -81,8 +76,6 @@ gem 'foreman'
 gem 'devise'
 gem 'devise_invitable'
 gem 'devise_uid'
-gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'pundit'
 
 gem 'responders'
@@ -169,9 +162,6 @@ gem 'jquery-validation-rails'
 
 #Modernizer
 gem 'modernizr-rails'
-
-#Social Share
-gem 'shareable'
 
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc1'

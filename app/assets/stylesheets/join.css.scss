@@ -13,7 +13,21 @@
 .join-photo {
  background-image: image-url('patterns/giftly.png');
 }
-
+.or-seperator span {
+  background-color: #eef0f0;
+  display:inline-block;
+  position: relative;
+  z-index: 10;
+}
+.or-seperator:before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 3px;
+  left:0;
+  margin-top: 10px;
+  background: image-url('title-contin.png');
+}
 .story-content-photo {
   background-image: image-url('dream-big.jpg');
   -webkit-background-size: cover;

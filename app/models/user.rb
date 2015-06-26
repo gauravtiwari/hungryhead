@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   include Impressionable
   include Impressioner
   include Eventable
-  include SocialAuthenticable
 
   attr_accessor :login
   attr_reader :raw_invitation_token
