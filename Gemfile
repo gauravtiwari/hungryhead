@@ -256,11 +256,8 @@ end
 
 group :development, :test do
   gem 'better_errors'
-  gem 'derailed'
-  gem 'stackprof'
   gem 'forgery'
-
-  #gem 'rack-mini-profiler', require: false
+  gem 'rack-mini-profiler', require: false
   gem 'hirb'
   gem 'rails_best_practices'
   gem 'brakeman'
