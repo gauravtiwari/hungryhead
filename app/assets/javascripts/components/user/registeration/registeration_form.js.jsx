@@ -191,7 +191,7 @@ var RegisterationForm = React.createClass({
          <div className="pull-right">
            <div className="checkbox check-complete">
             <input type="checkbox" name="user[role]" value="faculty" id="checkbox2" />
-            <label htmlFor="checkbox2">Are you a Faculty member? Check</label>
+            <label htmlFor="checkbox2">Are you a Faculty member?</label>
            </div>
          </div>
         </div>
