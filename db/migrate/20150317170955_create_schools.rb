@@ -20,15 +20,13 @@ class CreateSchools < ActiveRecord::Migration
 
       t.string :slug, :null => false, unique: true
 
-      t.string :enquiry_email, :null => false, default: ""
-
-      t.string :enquiry_phone, :null => false, default: ""
+      t.string :phone, :null => false, default: ""
 
       t.string :website_url, :null => false, default: ""
 
       t.string :facebook_url, :null => false, default: ""
 
-      t.string :twitter_email, :null => false, default: ""
+      t.string :twitter_url, :null => false, default: ""
 
       t.jsonb :media, default: "{}"
       t.jsonb :data, default: "{}"

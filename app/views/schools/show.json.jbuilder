@@ -13,9 +13,12 @@ json.school do
 
 		json.name @school.name
 		json.badge @school.name_badge
-
+		json.email @school.email
+		json.phone @school.phone
+		json.website_url @school.website_url
+		json.twitter_url @school.twitter_url
+		json.facebook_url @school.facebook_url
 		json.is_owner current_user == @school.fetch_admin
-
 		json.form action: school_path(@school), method: "PUT"
 	end
 end
