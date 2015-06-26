@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  helper_method :help_user
+
   #Devise Permitted paramaters
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
@@ -18,6 +20,11 @@ class ApplicationController < ActionController::Base
 
   #Device specific templates
   before_action :set_device_type
+
+  def help_user
+    current_user
+  end
+
 
   protected
 

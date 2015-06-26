@@ -19,9 +19,12 @@ PATH
   specs:
     help (0.0.1)
       browser
+      devise
       friendly_id
+      pundit
       rails
       simple_form
+      unobtrusive_flash
 
 GEM
   remote: https://rubygems.org/

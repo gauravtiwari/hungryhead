@@ -261,8 +261,8 @@ CREATE TABLE events (
     description character varying DEFAULT ''::character varying NOT NULL,
     cover character varying DEFAULT ''::character varying NOT NULL,
     cached_location_list character varying,
-    start_time timestamp without time zone DEFAULT '2015-06-25 12:39:02.220733'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-25 12:39:02.220757'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-26 19:28:03.733864'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-26 19:28:03.733892'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -372,6 +372,7 @@ CREATE TABLE help_articles (
     title character varying,
     body text,
     slug character varying NOT NULL,
+    published boolean DEFAULT true,
     category_id integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
