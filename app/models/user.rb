@@ -129,8 +129,6 @@ class User < ActiveRecord::Base
   store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
-  #JSONB postgres store  accessors
-  store_accessor :interests, :locations, :hobbies, :markets
 
   #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,

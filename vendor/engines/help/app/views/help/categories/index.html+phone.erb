@@ -12,7 +12,14 @@
     <div class="help-main-content m-t-50">
       <div class="col-md-12 col-sm-8 no-padding p-r-15">
         <div class="help-content">
-          <div class="no-content"><i class="fa fa-frown-o"></i> uhho.. No Help Articles Found</div>
+          <div class="no-content">
+            <i class="fa fa-frown-o"></i> uhho.. No Help Articles Found
+          </div>
+          <div class="text-center">
+            <% if current_user && current_user.admin? %>
+              <%= link_to('Add category', new_category_path, remote: true) %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

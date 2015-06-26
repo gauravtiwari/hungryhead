@@ -22,7 +22,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.text :about_me, :default => ""
 
       t.jsonb  :profile, :default => "{}"
-      t.jsonb  :interests, :default => "{}"
       t.jsonb  :media, :default => "{}"
       t.jsonb  :settings, :default => "{}"
       t.jsonb  :fund, :default => "{}"
@@ -33,8 +32,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cached_market_list
       t.string :cached_skill_list
       t.string :cached_subject_list
-      t.string :cached_technology_list
-      t.string :cached_service_list
+      t.string :cached_hobby_list
 
       t.boolean :verified, default: false
       t.boolean :admin, default: false
