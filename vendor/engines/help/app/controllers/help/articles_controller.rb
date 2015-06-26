@@ -1,7 +1,7 @@
 require_dependency "help/application_controller"
 
 module Help
-  class CategoriesController < ApplicationController
+  class ArticlesController < ApplicationController
     #Verify user access
     after_action :verify_authorized
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -12,7 +12,6 @@ module Help
     end
 
     def create
-      @category = Category.find(params[:category_id])
       @article = Article.new(article_params)
       authorize @article
       if @article.save
@@ -24,7 +23,7 @@ module Help
     private
 
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :published, :category_id)
     end
 
   end

@@ -1,3 +1,4 @@
+<% cache(["beta", current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
 <div class="modal fade stick-up" id="articlePopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -11,8 +12,23 @@
                 <div class="new-category-form">
                   <%= simple_form_for(@article, remote: true) do |f| %>
                     <div class="form-group">
-                      <%= label_tag 'category[name]', 'Name' %>
-                      <%= f.input_field :name, name: 'category[name]', class: "form-control", :required => true, :placeholder => "Enter Category name..." %>
+                      <%= f.input_field :title, name: 'article[title]', class: "form-control", :required => true, :placeholder => "Enter article title..." %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.input_field :body, name: 'article[body]', class: "form-control", :required => true, :placeholder => "Enter body..." %>
+                    </div>
+                    <div class="form-group">
+                        <%= f.association :category %>
+                    </div>
+                    <div class="row m-t-10">
+                      <div class="col-md-6 col-md-6">
+                        <div class="form-group">
+                            <div class="checkbox check-success">
+                              <input type="checkbox" name="article[published]" value="1" id="article_published" />
+                              <label for="article_published">Published</label>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                     <%= button_tag 'Send', class: 'btn btn-primary' %>
                   <% end %>
@@ -21,3 +37,4 @@
         </div>
     </div>
 </div>
+<% end %>

@@ -1,10 +1,14 @@
+<% cache(["beta", @category, @category.articles.published.count, current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
 <div class="page-container p-b-60 bg-white overflow-hidden">
 <div class="help-header bg-master-lightest p-t-20 p-b-20 box-shadow">
   <div class="container">
-  <small class="hint-text fs-16 v-middle p-l-15">
-    Help <i class="fa fa-chevron-right fs-12"></i>
-  </small>
+    <small class="hint-text fs-16 v-middle p-l-15">
+      Help <i class="fa fa-chevron-right fs-12"></i>
+    </small>
     <h2 class="p-l-15"><%= @category.name %></h2>
+    <% if current_user && current_user.admin? %>
+      <%= link_to('Create new Article', new_article_path, remote: true, class: 'pull-right') %>
+    <% end %>
   </div>
 </div>
 <div class="container">
@@ -12,7 +16,7 @@
   <div class="help-main-content m-t-50">
     <div class="col-md-9 col-sm-8 no-padding p-r-15">
       <div class="articles-list p-b-20" id="help_articles">
-      <% @category.articles.each do |article| %>
+      <% @category.articles.published.each do |article| %>
         <h6>
           <%= link_to(article.title, "##{article.title.parameterize}") %>
         </h6>
@@ -23,7 +27,7 @@
         <% @category.articles.each do |article| %>
           <section id="<%= article.title.parameterize %>" class="p-b-40">
             <h4 class="bold"><%= article.title %></h4>
-            <p><%= article.body.html_safe %></p>
+            <p><%= simple_format article.body %></p>
           </section>
         <% end %>
       </div>
@@ -40,7 +44,7 @@
               <% end %>
             <% end %>
           </li>
-          <% if current_user.admin? %>
+          <% if current_user && current_user.admin? %>
             <li><h6><%= link_to('Add category', new_category_path, remote: true) %></h6></li>
           <% end %>
         </ul>
@@ -50,3 +54,4 @@
 </div>
 </div>
 </div>
+<% end %>

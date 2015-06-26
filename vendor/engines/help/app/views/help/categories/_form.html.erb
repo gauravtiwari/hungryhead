@@ -1,3 +1,4 @@
+<% cache(["beta", current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
 <div class="modal fade stick-up" id="categoryPopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -21,3 +22,4 @@
         </div>
     </div>
 </div>
+<% end %>

@@ -40,7 +40,7 @@ module Help
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.friendly.find(params[:id])
+      @category = Category.includes(:articles).friendly.find(params[:id])
     end
 
     def category_params
