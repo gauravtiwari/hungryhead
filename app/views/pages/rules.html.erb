@@ -1,67 +1,86 @@
-<%= cache(['beta', 'rules', 'v1']) do %>
-<div class="container-fluid col-md-8 auto-margin">
-    <div class="m-t-50" id="rootwizard">
-        <ul class=
-        "nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-        <li class="active">
-                <a data-toggle="tab" href="#tab1"><i class=
-                "fa fa-list-ul tab-icon"></i>
-                <span>Rules</span>
-                </a>
-            </li>
-            <li class="">
-                <a data-toggle="tab" href="#tab2"><i class=
-                "fa fa-users tab-icon"></i> <span>Follow Friends</span></a>
-            </li>
-        </ul>
-        <div class="tab-content">
-        		<div class="tab-pane padding-20 active slide-left" id="tab1">
-        		      <div class="row row-same-height">
-     								<div class="col-md-10 auto-margin">
-     								    <h2 class="normal p-b-20">Things to know about Hungryhead:</h2>
-     								    <div class="divider b-b b-grey b-md b-small"></div>
-     								  <div>
-	     								  <h3 class="m-t-30">1. Ideas must be created to share with others.</h3>
-	     								  <p>
-	     								 		We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-	     								  </p>
-     								  </div>
-     								  <div>
-	     								  <h3 class="m-t-30">2. Ideas must be useful</h3>
-	     								  <p>
-	     								  	The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
-	     								  </p>
-     								  </div>
-     								  <div>
-	     								  <p class="bold">3. Don't SPAM; Don't be a Jerk</p>
-	     								  <p>
-	     								  	Project creators set a funding goal and deadline. If people like a project, they can pledge money to make it happen. Funding on Kickstarter is all-or-nothing — projects must reach their funding goals to receive any money. All-or-nothing funding might seem scary, but it’s amazingly effective in creating momentum and rallying people around an idea. To date, an impressive 44% of projects have reached their funding goals.
-	     								  </p>
-     								  </div>
-
-       								<div class="rule-accept p-t-20">
-  	   									<%= simple_form_for(@user, url: wizard_path, class: 'clearfix', method: :patch) do |f| %>
-  												<div class="checkbox check-success">
-  												  <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted' %>
-  												  <label for="rules_accepted">I understand</label>
-  												</div>
-  	   									<% end %>
-     									</div>
-     								</div>
-
-     								<div class="pager wizard m-t-20 clearfix">
-     									<%= link_to("<i class='fa fa-arrow-right'></i> Follow friends".html_safe, next_wizard_path, class: 'text-white btn btn-cons btn-green pull-right') %>
-     								</div>
-        		      </div>
-        		  </div>
-
-        		<div class="tab-pane slide-left padding-20" id="tab2">
-        		    <h1>
-        		        Tab2 you.
-        		    </h1>
-        		</div>
-
-        </div>
+<%= cache(['beta', 'story', 'v1']) do %>
+<div class="learn-wrapper bg-white p-b-60">
+  <div class="learn" data-pages="social">
+    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+        <div class="rules-photo inner">
+        <div class="container vmiddle">
+        <div class="row">
+              <div class="col-md-8 auto-margin text-center">
+                  <div class="hero-section m-t-20 z-index-10">
+                      <h1 class="text-white">
+                        Our rules
+                      </h1>
+                      <p class="text-white no-margin fs-16">
+                        Make the most out of hungryhead
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
     </div>
+  </div>
+
+  <section class="story">
+    <div class="wrapper-small">
+      <div class="col-md-6 auto-margin">
+         <div>
+          <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't SPAM </h3>
+          <p>
+            We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+          </p>
+      </div>
+      <div>
+          <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Respect</h3>
+          <p>
+            The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+          </p>
+      </div>
+
+      <div>
+          <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't Steal</h3>
+          <p>
+            The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+          </p>
+      </div>
+
+      <div>
+          <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Share</h3>
+          <p>
+            The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+          </p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission" class="mission">
+      <div class="bg-overlay">
+          <div class="container">
+              <div class="wrapper-small">
+                  <div class="row p-b-60">
+                      <div class="col-md-8 col-md-offset-2 text-center">
+                          <h3 class="global">
+                            <%= image_tag("badges/scholar.png", width: "100px", height: "100px") %>
+                          </h3>
+                          <h1 class="text-white bold m-t-20">
+                            Our mission is to make entrepreneurship a traditional career path, globally.
+                          </h1>
+                          <div class="social_icons m-t-30">
+                            <i class="fa fa-twitter inline fs-40 text-white"></i>
+                            <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
 </div>
+
+<div class="clearfix"></div>
+<%= render partial: 'globals/footer' %>
+
 <% end %>
+

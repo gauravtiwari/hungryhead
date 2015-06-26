@@ -30,6 +30,7 @@
 .learn-photo:before,
 .product-photo:before,
 .story-photo:before,
+.rules-photo:before,
 .story-content-photo:before,
 .join-mentor-photo:before {
   background: rgba(51, 51, 51, 0.5);
@@ -62,6 +63,7 @@
 .learn-photo,
 .join-mentor-photo,
 .how-photo,
+.rules-photo,
 .story-photo,
 .product-photo {
   width: 100%;
@@ -81,6 +83,13 @@
   overflow-x: hidden;
 }
 
+.rules-photo {
+  background: -webkit-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* W3C */
+}
 .learn-photo {
   background: -webkit-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Chrome 10+, Saf5.1+ */
   background:    -moz-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* FF3.6+ */
