@@ -8,10 +8,6 @@
  *= require select2-bootstrap
  *= require plugins/boostrapv3/css/bootstrap.min
  *= require sweetalert
- *= require chosen
- *= require nprogress
- *= require nprogress-bootstrap
- *= require ImageSelect
  *= require bootstrap-tagsinput
  *= require plugins/jquery-scrollbar/jquery.scrollbar
  *= require plugins/jquery-menuclipper/jquery.menuclipper

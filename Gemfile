@@ -5,13 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg'
-
-gem 'chosen-rails'
-
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
-gem 'pg_search'
-
 gem 'coffee-rails'
 gem 'sass'
 # Use SCSS for stylesheets
@@ -21,34 +16,24 @@ gem 'uglifier'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', github: 'rails/turbolinks'
-gem 'nprogress-rails'
-
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
-
 #Group date
 gem 'groupdate'
 
 #Gamification system
-
 gem 'merit'
 
 #Mountanable engines
 gem 'help', path: "vendor/engines/help"
 
 #Cron jobs
-
 gem 'crono'
 
 #Cache for jbuilder
-gem 'bulk_cache_fetcher'
 gem 'jbuilder'
-gem 'jbuilder_cache_multi'
 
 #Build fake data
-gem 'forgery'
 
 #Bulk import
 gem 'activerecord-import'
@@ -77,7 +62,6 @@ gem 'gaffe'
 gem 'unobtrusive_flash', '>=3'
 
 #Pub-sub
-
 gem 'wisper'
 
 #Generating auto content for social media channels
@@ -93,9 +77,6 @@ gem 'auto_html'
 #Deployment
 gem 'foreman'
 
-#Adds turbolinks
-gem 'jquery-turbolinks'
-
 #Authentication Authorization and Social Signup
 gem 'devise'
 gem 'devise_invitable'
@@ -103,7 +84,7 @@ gem 'devise_uid'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'pundit'
-#gem 'devise-async'
+
 gem 'responders'
 
 #Local time
@@ -113,24 +94,23 @@ gem 'local_time'
 gem 'wicked'
 
 #encrypt
-gem 'ezcrypto'
 gem 'underscore-rails'
 
+#Tagging
 gem 'acts-as-taggable-on'
 
 #Ruby Races
 gem 'less-rails'
 gem 'autoprefixer-rails'
 
+#Autocomplete rails
 gem 'rails4-autocomplete'
 
+#JSON generator
 gem 'oj'
 
 # Server
-gem 'unicorn'
-
-#State machines
-gem 'aasm'
+gem 'passenger'
 
 #Browser gem
 gem 'browser'
@@ -143,7 +123,6 @@ gem 'identity_cache'
 gem 'cityhash'        # optional, for faster hashing (C-Ruby only)
 
 #Autocomplete  + Redis
-
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
@@ -162,21 +141,32 @@ gem 'mandrill-rails'
 #Eager load associations
 gem 'goldiloader'
 
+#Parser
 gem 'nokogiri'
 
 #React JS
 gem 'execjs'
-gem 'therubyracer', platforms: :ruby
 gem 'react-rails', '~> 1.0'
 
+#Parse JSON
 gem 'json'
 
+#Moment JS
 gem 'momentjs-rails'
+
+#JS routes
 gem 'js-routes'
 
+#Bower
 gem 'bower-rails'
+
+#Mailboxer
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
+
+#JQuery validation
 gem 'jquery-validation-rails'
+
+#Modernizer
 gem 'modernizr-rails'
 
 #Social Share
@@ -185,6 +175,7 @@ gem 'shareable'
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc1'
 
+#Simple form
 gem 'simple_form'
 
 # SEO
@@ -195,14 +186,15 @@ gem 'htmlcompressor'
 
 #JQuery AutoSize
 gem 'autosize-rails'
+
+#Select 2
 gem "select2-rails"
 
 # Animate.css
 gem 'animate-rails'
 
 #Image upload and manipulations
-gem 'carrierwave', '~> 0.10.0'
-gem 'carrierwave_direct', '~> 0.0.14'
+gem 'carrierwave'
 gem 'carrierwave-mimetype-fu'
 
 #Sync assets with cloudfront
@@ -211,7 +203,6 @@ gem 'asset_sync'
 
 #Background Job processing
 gem 'sidekiq'
-gem 'sucker_punch'
 gem 'sidekiq-status'
 
 # Image Processing
@@ -222,8 +213,7 @@ gem 'unf'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 
-
-#Voting
+#Voting and commenting
 gem 'awesome_nested_set'
 
 #Intercom
@@ -266,7 +256,9 @@ end
 group :development, :test do
   gem 'better_errors'
   gem 'derailed'
-  gem "stackprof"
+  gem 'stackprof'
+  gem 'forgery'
+
   #gem 'rack-mini-profiler', require: false
   gem 'hirb'
   gem 'rails_best_practices'

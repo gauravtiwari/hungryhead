@@ -25,10 +25,6 @@
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
-//= require nprogress
-//= require nprogress-turbolinks
-//= require chosen-jquery
-//= require ImageSelect.jquery
 //= require jquery.truncate
 //= require jquery.soulmate
 //= require underscore
@@ -61,9 +57,6 @@
 
 // Turbolinks and plugins
 //= require pusher_init
-// require pusher_turbolinks
 //= require_tree .
-// require jquery.turbolinks
-// require turbolinks
 
 //Turbolinks.enableTransitionCache();
