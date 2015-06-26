@@ -110,7 +110,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'passenger'
+gem 'unicorn'
 
 #Browser gem
 gem 'browser'
@@ -146,6 +146,7 @@ gem 'nokogiri'
 
 #React JS
 gem 'execjs'
+gem 'therubyracer', platforms: :ruby
 gem 'react-rails', '~> 1.0'
 
 #Parse JSON

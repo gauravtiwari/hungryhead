@@ -377,6 +377,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    libv8 (3.16.14.7)
     listen (2.10.1)
       celluloid (~> 0.16.0)
       rb-fsevent (>= 0.9.3)
@@ -532,6 +533,7 @@ GEM
     redis-session-store (0.8.0)
       actionpack (>= 3, < 5)
       redis
+    ref (1.0.5)
     request_store (1.1.0)
     require_all (1.3.2)
     responders (2.1.0)
@@ -610,6 +612,9 @@ GEM
     stackprof (0.2.7)
     temple (0.7.6)
     terminal-table (1.4.5)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -752,6 +757,7 @@ DEPENDENCIES
   spring
   sprockets
   stackprof
+  therubyracer
   uglifier
   underscore-rails
   unf
