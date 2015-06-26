@@ -7,7 +7,6 @@ module Feedable
     belongs_to :user
     # Define ownership to a resource targeted by this activity
     belongs_to :recipient, :polymorphic => true
-
     #Serialize JSON
     store_accessor :parameters, :verb, :meta, :unread, :badge_description
   end
