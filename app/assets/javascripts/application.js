@@ -2,7 +2,6 @@
 
 // BEGIN VENDOR JS FOR PAGES
 
-//= require jquery2
 //= require jquery-form
 //= require plugins/boostrapv3/js/bootstrap.min
 //= require plugins/jquery/jquery-easy
@@ -12,14 +11,13 @@
 //= require jquery-ui/position
 //= require jquery-ui/draggable
 //= require jquery-ui/effect.all
-//= require plugins/jquery-unveil/jquery.unveil.min
-//= require plugins/jquery-bez/jquery.bez.min
-//= require plugins/jquery-ios-list/jquery.ioslist.min
-//= require plugins/imagesloaded/imagesloaded.pkgd.min
-//= require plugins/jquery-actual/jquery.actual.min
+//= require query.unveil
+//= require jquery.bez
+//= require iOSList
+//= require imagesloaded
+//= require jquery.actual
 //= require plugins/jquery-menuclipper/jquery.menuclipper
-//= require plugins/jquery-scrollbar/jquery.scrollbar.min
-//= require jqueryui-touch-punch
+//= require jquery.scrollbar
 //= require hammerjs
 //= require jquery_ujs
 //= require jquery.cookie

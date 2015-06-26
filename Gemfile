@@ -4,6 +4,13 @@ source 'https://rubygems.org'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
+  gem 'rails-assets-jquery-unveil'
+  gem 'rails-assets-jquery-bez'
+  gem 'rails-assets-iOSList'
+  gem 'rails-assets-imagesloaded'
+  gem 'rails-assets-jquery.actual'
+  gem 'rails-assets-jquery.scrollbar'
+  gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-pusher'
   gem 'rails-assets-sweetalert'
@@ -11,8 +18,16 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-react-infinite'
   gem 'rails-assets-bootstrap-tagsinput'
   gem 'rails-assets-pnotify'
+  gem 'rails-assets-modernizr'
   gem 'rails-assets-fastclick'
   gem 'rails-assets-hammerjs'
+  gem 'rails-assets-underscore'
+  gem 'rails-assets-font-awesome'
+  gem 'rails-assets-showdown'
+  gem 'rails-assets-momentjs'
+  gem 'rails-assets-jquery.validate'
+  gem 'rails-assets-autosize'
+  gem 'rails-assets-animate.css'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -52,9 +67,6 @@ gem 'activerecord-import'
 
 #order array of records in same order as ids
 gem 'order_as_specified'
-
-#Font awesome
-gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
@@ -100,9 +112,6 @@ gem 'local_time'
 #Step by step wizard
 gem 'wicked'
 
-#encrypt
-gem 'underscore-rails'
-
 #Tagging
 gem 'acts-as-taggable-on'
 
@@ -121,9 +130,6 @@ gem 'unicorn'
 
 #Browser gem
 gem 'browser'
-
-#ShowDown
-gem 'showdown-rails'
 
 #Adding identity cache for model caching
 gem 'identity_cache'
@@ -159,20 +165,11 @@ gem 'react-rails', '~> 1.0'
 #Parse JSON
 gem 'json'
 
-#Moment JS
-gem 'momentjs-rails'
-
 #JS routes
 gem 'js-routes'
 
 #Mailboxer
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
-
-#JQuery validation
-gem 'jquery-validation-rails'
-
-#Modernizer
-gem 'modernizr-rails'
 
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc1'
@@ -186,14 +183,8 @@ gem 'friendly_id'
 #Compress HTML output in production
 gem 'htmlcompressor'
 
-#JQuery AutoSize
-gem 'autosize-rails'
-
 #Select 2
 gem "select2-rails"
-
-# Animate.css
-gem 'animate-rails'
 
 #Image upload and manipulations
 gem 'carrierwave'
