@@ -1,0 +1,11 @@
+
+var $el = $('body');
+
+$el.append("<%= j render partial: 'form' %>");
+
+$('#articlePopupModal').modal('show');
+
+$('body').on('focus', 'textarea', function(event) {
+  event.preventDefault();
+  $(this).autosize();
+});

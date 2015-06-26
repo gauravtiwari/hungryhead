@@ -1,0 +1,23 @@
+<div class="modal fade stick-up" id="articlePopupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix text-left">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <i class="pg-close fs-14"></i>
+                </button>
+                <h5>Create <span class="semi-bold b-b b-grey p-b-5"> new category</span></h5>
+            </div>
+            <div class="modal-body">
+                <div class="new-category-form">
+                  <%= simple_form_for(@article, remote: true) do |f| %>
+                    <div class="form-group">
+                      <%= label_tag 'category[name]', 'Name' %>
+                      <%= f.input_field :name, name: 'category[name]', class: "form-control", :required => true, :placeholder => "Enter Category name..." %>
+                    </div>
+                    <%= button_tag 'Send', class: 'btn btn-primary' %>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
