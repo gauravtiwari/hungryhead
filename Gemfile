@@ -1,6 +1,20 @@
 ruby '2.2.2'
 source 'https://rubygems.org'
 
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-tokenfield'
+  gem 'rails-assets-classie'
+  gem 'rails-assets-jquery-form'
+  gem 'rails-assets-pusher'
+  gem 'rails-assets-sweetalert'
+  gem 'rails-assets-slimScroll'
+  gem 'rails-assets-react-infinite'
+  gem 'rails-assets-bootstrap-tagsinput'
+  gem 'rails-assets-pnotify'
+  gem 'rails-assets-fastclick'
+  gem 'rails-assets-hammerjs'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
@@ -150,9 +164,6 @@ gem 'momentjs-rails'
 
 #JS routes
 gem 'js-routes'
-
-#Bower
-gem 'bower-rails'
 
 #Mailboxer
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
