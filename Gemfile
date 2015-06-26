@@ -257,7 +257,7 @@ end
 group :development, :test do
   gem 'better_errors'
   gem 'forgery'
-  gem 'rack-mini-profiler', require: false
+  #gem 'rack-mini-profiler', require: false
   gem 'hirb'
   gem 'rails_best_practices'
   gem 'brakeman'

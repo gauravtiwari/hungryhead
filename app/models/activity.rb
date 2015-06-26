@@ -1,5 +1,6 @@
 class Activity < ActiveRecord::Base
 
+  include IdentityCache
   include Renderable
   include Feedable
 
