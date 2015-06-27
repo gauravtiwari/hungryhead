@@ -11,7 +11,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@lancs.ac.uk',
     domain: 'lancs.ac.uk',
     admin_id: 2,
-    website: 'lancs.ac.uk'
+    website_url: 'lancs.ac.uk'
   )
 
   School.create!(
@@ -21,7 +21,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@mancs.ac.uk',
     domain: 'mancs.ac.uk',
     admin_id: 2,
-    website: 'mancs.ac.uk'
+    website_url: 'mancs.ac.uk'
   )
 
   School.create!(
@@ -31,7 +31,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@icl.ac.uk',
     domain: 'icl.ac.uk',
     admin_id: 2,
-    website: 'icl.ac.uk'
+    website_url: 'icl.ac.uk'
   )
 
   School.create!(
@@ -41,7 +41,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@cam.ac.uk',
     domain: 'cam.ac.uk',
     admin_id: 3,
-    website: 'cam.ac.uk'
+    website_url: 'cam.ac.uk'
   )
 
   School.create!(
@@ -51,7 +51,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@salford.ac.uk',
     domain: 'salford.ac.uk',
     admin_id: 4,
-    website: 'salford.ac.uk'
+    website_url: 'salford.ac.uk'
   )
 
   School.create!(
@@ -61,7 +61,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@uclan.ac.uk',
     domain: 'uclan.ac.uk',
     admin_id: 2,
-    website: 'uclan.ac.uk'
+    website_url: 'uclan.ac.uk'
   )
 
   School.create!(
@@ -71,7 +71,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@mmu.ac.uk',
     domain: 'mmu.ac.uk',
     admin_id: 2,
-    website: 'mmu.ac.uk'
+    website_url: 'mmu.ac.uk'
   )
 
   School.create!(
@@ -81,7 +81,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@oxford.ac.uk',
     domain: 'oxford.ac.uk',
     admin_id: 2,
-    website: 'oxford.ac.uk'
+    website_url: 'oxford.ac.uk'
   )
 
   School.create!(
@@ -91,7 +91,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@ucl.ac.uk',
     domain: 'ucl.ac.uk',
     admin_id: 2,
-    website: 'ucl.ac.uk'
+    website_url: 'ucl.ac.uk'
   )
 
   School.create!(
@@ -101,7 +101,7 @@ ActiveRecord::Base.transaction do
     email: 'admin@bristol.ac.uk',
     domain: 'bristol.ac.uk',
     admin_id: 2,
-    website: 'bristol.ac.uk'
+    website_url: 'bristol.ac.uk'
   )
 
 end

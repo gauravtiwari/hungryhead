@@ -10,6 +10,10 @@ jQuery(document).ready ->
 	  @optional(element) or /^[a-z@-_-]+$/i.test(value)
 	), 'Letters only please'
 
+	$.validator.addMethod 'phoneUK', ((phone_number, element) ->
+	  @optional(element) or phone_number.length > 9 and phone_number.match(/^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/)
+	), 'Please specify a valid phone number'
+
 	$('#form-register').validate()
 
 	try
@@ -23,7 +27,6 @@ jQuery(document).ready ->
 	$('#information-form').validate();
 	$('#feedback_form').validate();
 	$('#edit-profile').validate();
-	$('#edit_school').validate();
 	$('#pitch_idea_form').validate();
 	$('#editProfileFormPopup').validate();
 	$('#valid-form').validate();

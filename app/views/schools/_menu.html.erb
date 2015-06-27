@@ -25,7 +25,7 @@
 		<%= react_component('Follow', {followed: followed?(@school)}) %>
 	    <% if current_user == @school.fetch_admin %>
 	     <div>
-				  <%= link_to('Dashboard', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
+				  <%= link_to('Update Profile', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
 	  		</div>
 	    <% end %>
 	</div>

@@ -26,7 +26,6 @@ class School < ActiveRecord::Base
 
 	acts_as_taggable_on :locations
 
-	store_accessor :data, :established, :locations, :website
 	store_accessor :media, :logo_position, :logo_tmp, :cover_tmp,
 	:cover_position, :cover_left, :cover_prcessing, :logo_processing
 

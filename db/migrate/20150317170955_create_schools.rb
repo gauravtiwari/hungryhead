@@ -29,7 +29,6 @@ class CreateSchools < ActiveRecord::Migration
       t.string :twitter_url, :null => false, default: ""
 
       t.jsonb :media, default: "{}"
-      t.jsonb :data, default: "{}"
 
       t.string :cached_location_list
 
