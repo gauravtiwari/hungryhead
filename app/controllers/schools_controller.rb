@@ -64,6 +64,15 @@ class SchoolsController < ApplicationController
     end
   end
 
+  # GET /school/1/comments
+  def comments
+    @comments = @school.root_comments.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # GET /schools/new
   def new
     @school = School.new

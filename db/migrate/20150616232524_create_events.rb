@@ -5,6 +5,7 @@ class CreateEvents < ActiveRecord::Migration
       t.belongs_to :eventable, null: false, default: "", polymorphic: true
       t.string :title, null: false, default: ""
       t.text :description, null: false, default: ""
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address

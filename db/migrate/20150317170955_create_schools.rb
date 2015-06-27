@@ -7,6 +7,8 @@ class CreateSchools < ActiveRecord::Migration
 
       t.string :email, :null => false, default: ""
 
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
+
       t.string :domain, :null => false, default: ""
 
       t.string :name, :null => false, unique: true

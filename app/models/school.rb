@@ -9,6 +9,7 @@ class School < ActiveRecord::Base
 	include Followable
 	include Sluggable
 	include Eventable
+	include Commentable
 
 	#Relationship
 	has_many :students, -> { where role: 1 }, class_name: 'User'

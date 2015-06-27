@@ -16,6 +16,9 @@
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Ideas', profile_ideas_path(@school), class: "bold fs-13 #{current_class?(profile_ideas_path(@school))} ") %>
 		</li>
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+		  <%= link_to("Ask questions?", profile_comments_path(@school), data: { toggle: "modal", target: "#modalSlideComments"}, class: "text-brand bold fs-13", remote: true) %>
+		</li>
 	</ul>
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
