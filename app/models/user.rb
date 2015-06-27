@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
 
   #has_many relationships
   has_many :activities, :dependent => :destroy
+  has_many :attendences, class_name: 'Attendee', :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true

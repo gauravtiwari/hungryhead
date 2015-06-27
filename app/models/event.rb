@@ -20,5 +20,6 @@ class Event < ActiveRecord::Base
   enum status: { closed:0, open:1 }
 
   belongs_to :eventable, polymorphic: true
+  has_many :attendees
 
 end
