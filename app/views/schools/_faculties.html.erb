@@ -1,9 +1,8 @@
 <div class="sidebar auto-height box-shadow bg-white m-t-10">
-  <div class="user-sidebar padding-20">
+  <div class="user-sidebar">
     <div class="container-xs-height">
-      <div class="row">
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-10">
+        <div class="widget-11-2 panel panel-transparent no-border no-margin">
+          <div class="panel-heading bg-light-blue-lightest">
             <div class="panel-title text-master b-b b-grey p-b-5">
               Faculties
             </div>
@@ -17,7 +16,7 @@
               </ul>
             </div>
           </div>
-          <div class="p-l-10 p-r-10">
+          <div class="p-l-15 p-r-15">
             <ul class="no-style m-t-10">
               <% @school.fetch_faculties.each do |user| %>
                 <li class="p-t-10 p-b-10">
@@ -43,7 +42,6 @@
             </ul>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

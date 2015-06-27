@@ -7,6 +7,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :description, null: false, default: ""
       t.string :cover, null: false, default: ""
       t.string :cached_location_list
+      t.integer :state, index: true, default: 0, null: false
       t.datetime :start_time, null: false, default: DateTime.now
       t.datetime :end_time, null: false, default: DateTime.now
       t.boolean :guest_invites, default: false

@@ -10,8 +10,8 @@ class CreateImpressions < ActiveRecord::Migration
       t.string :referrer
       t.timestamps null: false
     end
-    add_index :impressions, :impressionable_type, algorithm: :concurrently
-    add_index :impressions, :impressionable_id, algorithm: :concurrently
+    add_index :impressions, [:impressionable_type, :impressionable_id], algorithm: :concurrently
+    add_index :impressions, [:impressionable_id, :impressionable_type, :user_id], unique: true, name: 'unique_impressions', algorithm: :concurrently
     add_index :impressions, :ip_address, algorithm: :concurrently
     add_index :impressions, :user_id, algorithm: :concurrently
   end

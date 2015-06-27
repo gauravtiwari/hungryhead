@@ -1,7 +1,7 @@
 <div class="profile-nav overflow-hidden p-l-15">
 	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
 		<li class="inline b-r b-grey b-dashed p-r-15">
-			<div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
+			<div class="thumbnail-wrapper absolute m-r-5 d32 circular b-white">
 			<% if @school.logo.present? %>
 			  <%= image_tag(@school.logo.url(:avatar), :"data-src" => "#{@school.logo.url(:avatar)}", :"data-src-retina" => "#{@school.logo.url(:square)}", width: "55", height: "55") %><% else %>
 			  <span class="placeholder bold text-white" width="32px" height="32px"><%= @school.name_badge %>

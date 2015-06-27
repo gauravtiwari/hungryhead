@@ -16,5 +16,25 @@
 </div>
 
 <div class="container">
-
+  <div class="events-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= pluralize(@events.count, 'Result',) %> </th>
+            <th>Register</th>
+            <th class="text-center">Event Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @events.each do |event| %>
+            <%= render partial: 'events/event', locals: {event: event} %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
+        <%= will_paginate(@events, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    </div>
+  </div>
 </div>

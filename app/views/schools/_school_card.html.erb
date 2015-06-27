@@ -1,7 +1,7 @@
 <div class="sidebar auto-height box-shadow bg-white">
   <div class="user-sidebar">
     <div class="container-xs-height">
-      <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
+      <div class="widget-11-2 panel panel-transparent no-border">
         <div class="panel-heading bg-light-blue-lightest">
           <div class="panel-title text-master b-b b-grey p-b-5">
             About
@@ -23,8 +23,8 @@
         </div>
       </div>
       <% if @school.email.present? %>
-      <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-        <div class="panel-heading no-padding p-l-15 p-t-15">
+      <div class="widget-11-2 panel panel-transparent no-border">
+        <div class="panel-heading no-padding p-l-15">
           <div class="panel-title text-master b-b b-grey p-b-5">
             Contact Email
           </div>
@@ -37,8 +37,8 @@
       </div>
       <% end %>
       <% if @school.phone.present? %>
-      <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-        <div class="panel-heading no-padding p-l-15 p-t-15">
+      <div class="widget-11-2 panel panel-transparent no-border">
+        <div class="panel-heading no-padding p-l-15 p-r-15">
           <div class="panel-title text-master b-b b-grey p-b-5">
             Contact Phone
           </div>
@@ -51,8 +51,8 @@
       </div>
       <% end %>
       <% if @school.cached_location_list.present? %>
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-15 p-t-15">
+        <div class="widget-11-2 panel panel-transparent no-border">
+          <div class="panel-heading no-padding p-l-15 p-r-15">
             <div class="panel-title text-master b-b b-grey p-b-5">
               Location
             </div>
@@ -66,8 +66,8 @@
       <% end %>
 
       <% if @school.website_url.present? %>
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-15 p-t-15">
+        <div class="widget-11-2 panel panel-transparent no-border">
+          <div class="panel-heading no-padding p-l-15 p-r-15">
             <div class="panel-title text-master b-b b-grey p-b-5">
               Social
             </div>
