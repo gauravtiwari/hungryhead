@@ -9,26 +9,28 @@
 
 <div class="container p-t-40 p-b-80">
   <div class="people-list">
-  <div class="col-md-12">
-    <table class="table">
-      <thead>
-        <tr>
-          <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
-          <th>Connect</th>
-          <th class="text-center">Stats</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <%= render partial: 'user', locals: {user: user} %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<div class="paging-container p-r-15">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
+            <th>Connect</th>
+            <th class="text-center">Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <% cache([user, "followed", user.followed_by?(current_user)]) do %>
+              <%= render partial: 'user', locals: {user: user} %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
     <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
 
