@@ -51,10 +51,12 @@ var CardContent = React.createClass({
                           </li>;
     }
 
-    if(this.props.profile.location_name) {
-      var location = <a className="text-white" href={this.props.profile.location_url}>
-                          <i className="fa fa-map-marker"></i> {this.props.profile.location_name}
+    if(this.props.profile.locations && this.props.profile.locations.length > 0 ) {
+      var location = this.props.profile.locations.map(function(location){
+        return <a className="text-white" href={location.url}>
+                          <i className="fa fa-map-marker"></i> {location.tag}
                          </a>;
+      });
     }
 
     if(this.props.profile.school_url) {

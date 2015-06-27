@@ -317,21 +317,37 @@ var CardForm = React.createClass({
 
   render: function() {
     var cx = React.addons.classSet;
-    var markets = this.props.profile.markets.map(function(market){
-      return market.tag
-    });
+      if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
+      var markets = this.props.profile.markets.map(function(market){
+        return market.tag
+      });
+    } else {
+      var markets = "";
+    }
 
-    var hobbies = this.props.profile.hobbies.map(function(hobby){
-      return hobby.tag
-    });
+    if(this.props.profile.hobbies && this.props.profile.hobbies.length > 0 ) {
+      var hobbies = this.props.profile.hobbies.map(function(hobby){
+        return hobby.tag
+      });
+    } else {
+      var hobbies = "";
+    }
 
-    var skills = this.props.profile.skills.map(function(skill){
-      return skill.tag
-    });
+    if(this.props.profile.skills && this.props.profile.skills.length > 0 ) {
+      var skills = this.props.profile.skills.map(function(skill){
+        return skill.tag
+      });
+    } else {
+      var skills = "";
+    }
 
-    var subjects = this.props.profile.subjects.map(function(subject){
-      return subject.tag
-    });
+    if(this.props.profile.subjects && this.props.profile.subjects.length > 0 ) {
+      var subjects = this.props.profile.subjects.map(function(subject){
+        return subject.tag
+      });
+    } else {
+      var subjects = "";
+    }
 
     var loadingClass = cx({
       'fa fa-spinner fa-spin': this.state.loading

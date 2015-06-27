@@ -6,7 +6,7 @@ var Card = React.createClass({
     return {
       profile: data.user.profile,
       id: data.user.id,
-      form: data.user.about_me.form,
+      form: data.user.form,
       is_owner: data.user.is_owner,
       disabled: false
     }

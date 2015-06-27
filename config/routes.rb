@@ -77,8 +77,8 @@ Rails.application.routes.draw do
   post 'check_email', to: 'users#check_email', as: 'check_email'
 
   match '/vote',  to: 'votes#vote', via: :put, as: 'vote'
-  get '/:tag/tagged_people',  to: 'tags#people', as: 'tag_people'
-  get '/:tag/tagged_ideas',  to: 'tags#show', as: 'tag'
+  get '/people_tagged_with/:tag',  to: 'tags#people', as: 'tag_people'
+  get '/ideas_tagged_with/:tag',  to: 'tags#show', as: 'tag'
   match '/voters', to: 'votes#voters', via: :get, as: 'voters'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
