@@ -222,13 +222,13 @@ CREATE TABLE events (
     title character varying DEFAULT ''::character varying NOT NULL,
     eventable_id integer NOT NULL,
     eventable_type character varying DEFAULT ''::character varying NOT NULL,
-    description character varying DEFAULT ''::character varying NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
     cover character varying DEFAULT ''::character varying NOT NULL,
-    cached_location_list character varying,
-    address character varying,
+    slug character varying DEFAULT ''::character varying NOT NULL,
+    address text,
     state integer DEFAULT 0 NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-27 11:18:10.416175'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 11:18:10.416236'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 12:59:30.004545'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 12:59:30.004585'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     latitude double precision DEFAULT 0.0 NOT NULL,
@@ -2313,6 +2313,13 @@ CREATE INDEX index_events_on_latitude_and_longitude ON events USING btree (latit
 --
 
 CREATE INDEX index_events_on_private ON events USING btree (private);
+
+
+--
+-- Name: index_events_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_slug ON events USING btree (slug);
 
 
 --

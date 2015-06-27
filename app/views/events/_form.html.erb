@@ -1,0 +1,50 @@
+<div class="new-event-form">
+  <%= simple_form_for(@event, remote: true) do |f| %>
+
+    <div class="form-group">
+      <%= label_tag 'event[title]', 'Title' %>
+      <%= f.input_field :title, class: "form-control", :required => true, :placeholder => "Event title" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'event[description]', 'Description' %>
+      <%= f.input_field :description, class: "form-control", :required => true, :placeholder => "Event description" %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'event[address]', 'Address' %>
+      <%= f.input_field :address, class: "form-control", :required => true, :placeholder => "Where ?" %>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[start_time]', 'Start' %>
+          <div class="input-prepend input-group">
+            <span class="add-on input-group-addon">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            </span>
+            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control" value="08/01/2013 1:30 PM">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[end_time]', 'End' %>
+          <div class="input-prepend input-group">
+            <span class="add-on input-group-addon">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            </span>
+            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" value="08/01/2013 1:30 PM">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= button_tag 'Send', class: 'btn btn-primary' %>
+
+  <% end %>
+
+</div>
+

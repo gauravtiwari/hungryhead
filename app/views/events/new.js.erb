@@ -1,0 +1,10 @@
+
+var $el = $('body');
+$el.append("<%= j render partial: 'popup' %>");
+$('#newEventPopupModal').modal('show');
+$('#startdatepicker').datetimepicker({sideBySide: true});
+$('#enddatepicker').datetimepicker({sideBySide: true});
+$('body').on('focus', 'textarea', function(event) {
+  event.preventDefault();
+  $(this).autosize();
+});
