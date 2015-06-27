@@ -30,14 +30,9 @@
                 <i class="fa fa-graduation-cap"></i> Latest People
               </a>
             </li>
-            <li class="">
+            <li>
               <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
                 <i class="fa fa-lightbulb-o"></i> Latest Ideas
-              <% end %>
-            </li>
-            <li class="">
-              <%= link_to("#tab_events", data: {toggle: 'tab', url: profile_events_path(@school)}, id: 'load_school_events') do %>
-                <i class="fa fa-calendar"></i> Latest Events
               <% end %>
             </li>
         </ul>
@@ -48,9 +43,6 @@
           </div>
 
           <div class="tab-pane" id="tab_ideas">
-          </div>
-
-          <div class="tab-pane" id="tab_events">
           </div>
 
         </div>

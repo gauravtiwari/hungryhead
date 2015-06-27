@@ -230,14 +230,14 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:index, :show]
 
-  resources :events
+  #resources :events
 
   #Vanity urls for users
   get '/:slug', to: SlugRouter.to(:show), as: :profile
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update
   delete '/:slug', to: SlugRouter.to(:destroy), as: :profile_destroy
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
-  get '/:slug/events', to: SlugRouter.to(:events), as: :profile_events
+  #get '/:slug/events', to: SlugRouter.to(:events), as: :profile_events
   get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity

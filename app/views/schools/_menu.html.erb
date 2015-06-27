@@ -16,9 +16,6 @@
 		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
 			<%= link_to('Ideas', profile_ideas_path(@school), class: "bold fs-13 #{current_class?(profile_ideas_path(@school))} ") %>
 		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
-			<%= link_to('Events', profile_events_path(@school), class: "bold fs-13 #{current_class?(profile_events_path(@school))} ") %>
-		</li>
 	</ul>
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
@@ -26,9 +23,6 @@
 	     <div>
 				  <%= link_to('Edit', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
 	  		</div>
-		     <div>
-					  <%= link_to('Create an Event', "javascript: void(0)", data: {eventable_id: "#{@school.id}", eventable_type: "#{@school.class.to_s}"}, class: "btn btn-complete fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", id: "new_event") %>
-		  	 </div>
 	  	<% else %>
 	  		<%= react_component('Follow', {followed: followed?(@school)}) %>
 	    <% end %>
