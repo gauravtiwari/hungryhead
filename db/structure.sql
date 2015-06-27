@@ -117,8 +117,8 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 CREATE TABLE attendees (
     id integer NOT NULL,
     attendee_id integer NOT NULL,
-    event_id integer,
-    status integer,
+    event_id integer NOT NULL,
+    status integer DEFAULT 1 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
-    start_time timestamp without time zone DEFAULT '2015-06-27 16:56:49.882609'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 16:56:49.882631'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 17:01:18.262556'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 17:01:18.262583'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2286,6 +2286,27 @@ CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
 
 
 --
+-- Name: index_attendees_on_attendee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attendees_on_attendee_id ON attendees USING btree (attendee_id);
+
+
+--
+-- Name: index_attendees_on_attendee_id_and_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_attendees_on_attendee_id_and_event_id ON attendees USING btree (attendee_id, event_id);
+
+
+--
+-- Name: index_attendees_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attendees_on_event_id ON attendees USING btree (event_id);
+
+
+--
 -- Name: index_badges_sashes_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3102,6 +3123,22 @@ CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionabl
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: attendees_attendee_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY attendees
+    ADD CONSTRAINT attendees_attendee_id_fk FOREIGN KEY (attendee_id) REFERENCES attendees(id);
+
+
+--
+-- Name: attendees_event_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY attendees
+    ADD CONSTRAINT attendees_event_id_fk FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
