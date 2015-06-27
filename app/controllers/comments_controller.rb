@@ -50,14 +50,15 @@ class CommentsController < ApplicationController
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
 
-    if ["Idea", "Feedback", "Investment"].include? commentable_type
+    if ["Idea", "Feedback", "Investment", "School"].include? commentable_type
       @commentable = commentable_type.safe_constantize.find_by_uuid(commentable_id)
       @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
     else
       respond_to do |format|
-       format.json { render json: {
-        error: 'Sorry, unable to comment on this entity'
-        }, status: :unprocessable_entity }
+        flash[:error] = "Sorry, unable to comment on this entity"
+        format.json { render json: {
+          error: 'Sorry, unable to comment on this entity'
+          }, status: :unprocessable_entity }
       end
     end
   end

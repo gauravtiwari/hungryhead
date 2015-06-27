@@ -18,7 +18,7 @@ class CreateSchools < ActiveRecord::Migration
       t.string :logo
       t.string :cover
 
-      t.integer :admin_id, null: false, default: 1
+      t.references :user, foreign_key: true, null: false, default: 1
 
       t.string :slug, :null => false, unique: true
 
@@ -40,7 +40,7 @@ class CreateSchools < ActiveRecord::Migration
 
     end
 
-    add_index :schools, :admin_id, algorithm: :concurrently
+    add_index :schools, :user_id, algorithm: :concurrently
     add_index :schools, :name, unique: true, algorithm: :concurrently
     add_index :schools, :slug, unique: true, algorithm: :concurrently
     add_index :schools, :email, unique: true, algorithm: :concurrently

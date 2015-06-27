@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   include Activist
   include Impressionable
   include Impressioner
-  include Eventable
+  #include Eventable
 
   attr_accessor :login
   attr_reader :raw_invitation_token
@@ -158,10 +158,6 @@ class User < ActiveRecord::Base
 
   def can_score?
     true
-  end
-
-  def school_owner?
-    school_admin?
   end
 
   def after_password_reset; end

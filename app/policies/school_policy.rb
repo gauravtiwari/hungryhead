@@ -5,7 +5,7 @@ class SchoolPolicy < ApplicationPolicy
   end
 
   def update?
-    record.admin == current_user
+    record.user == current_user
   end
 
   def unfollow?

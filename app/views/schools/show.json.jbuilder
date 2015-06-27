@@ -21,7 +21,7 @@ json.school do
 		json.website_url url_with_protocol(@school.website_url)
 		json.twitter_url url_with_protocol(@school.twitter_url)
 		json.facebook_url url_with_protocol(@school.facebook_url)
-		json.is_owner current_user == @school.fetch_admin
+		json.is_owner current_user == @school.fetch_user
 		json.form action: school_path(@school), method: "PUT"
 	end
 end

@@ -22,7 +22,7 @@
 	</ul>
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
-			<% if current_user == @school.fetch_admin %>
+			<% if current_user == @school.fetch_user %>
 	     <div>
 				  <%= link_to('Edit', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
 	  		</div>
