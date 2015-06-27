@@ -231,7 +231,9 @@ CREATE TABLE events (
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    latitude double precision,
+    longitude double precision
 );
 
 
@@ -3195,4 +3197,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
+
+INSERT INTO schema_migrations (version) VALUES ('20150627111002');
 

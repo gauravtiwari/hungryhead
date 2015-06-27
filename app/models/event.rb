@@ -2,7 +2,8 @@ class Event < ActiveRecord::Base
 
   #included modules
   include Redis::Objects
-
+  geocoded_by :address
+  after_validation :geocode
   extend FriendlyId
   friendly_id :slug_candidates
 
