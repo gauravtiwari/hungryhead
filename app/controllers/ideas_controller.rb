@@ -62,13 +62,14 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     publish_idea_service.on :idea_published do |idea|
+      @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
       render :publish
       CreateActivityJob.perform_later(idea.id, idea.class.to_s)
     end
     publish_idea_service.on :error do |idea|
-      render :unpublish
+      @msg = "Something went wrong #{idea.errors}"
+      render :publish
     end
-
     publish_idea_service.publish_idea
   end
 
