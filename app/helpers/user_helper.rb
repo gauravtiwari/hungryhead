@@ -12,10 +12,16 @@ module UserHelper
 		current_user == user
 	end
 
+  def cache_key_for_users
+    count = User.published.count
+    max_updated_at = User.published.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "users/all-#{count}-#{max_updated_at}"
+  end
+
   def cache_key_for_school_users(school)
     count = school.fetch_users.select{|u| u.state = "published"}.count
     max_updated_at = school.fetch_users.select{|u| u.state = "published"}.map(&:updated_at).max.try(:utc).try(:to_s, :number)
-    "users/all-#{count}-#{max_updated_at}"
+    "users/school-#{count}-#{max_updated_at}"
   end
 
   def cache_key_for_user(user)

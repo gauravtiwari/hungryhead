@@ -1,36 +1,38 @@
-<div class="wrapper-small people-bg-gradient">
-  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-    <div class="hero-text inner">
-      <h2 class="text-white">Browse People</h2>
-      <h5 class="text-white">Find friends and like-minded people</h5>
+<% cache(cache_key_for_users) do %>
+  <div class="wrapper-small people-bg-gradient">
+    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <div class="hero-text inner">
+        <h2 class="text-white">Browse People</h2>
+        <h5 class="text-white">Find friends and like-minded people</h5>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container p-t-40 p-b-80">
-  <div class="people-list">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
-            <th>Connect</th>
-            <th class="text-center">Stats</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <% cache([user, "followed", user.followed_by?(current_user)]) do %>
-              <%= render partial: 'user', locals: {user: user} %>
+  <div class="container p-t-40 p-b-80">
+    <div class="people-list">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" class="no-padding"><%= @users.count %> Results</th>
+              <th>Connect</th>
+              <th class="text-center">Stats</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <% cache([user, "followed", user.followed_by?(current_user)]) do %>
+                <%= render partial: 'user', locals: {user: user} %>
+              <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="paging-container p-r-15">
-    <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+          </tbody>
+        </table>
+      </div>
+      <div class="paging-container p-r-15">
+      <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+      </div>
     </div>
   </div>
-</div>
+<% end %>
 
 

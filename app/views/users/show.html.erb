@@ -1,5 +1,6 @@
 <div class="container p-b-60">
     <% data = render(template: 'users/show.json.jbuilder') %>
+
     <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
         <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
@@ -9,7 +10,7 @@
     <div class="col-md-8 col-sm-8">
         <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="cover">
-                <%= render partial: 'cover' %>
+                <%= render partial: 'cover', locals: {data: data} %>
             </div>
         <% end %>
 
@@ -37,7 +38,7 @@
             </div>
             <div class="col-md-6 no-padding">
                 <%= render partial: 'stats' %>
-                <% cache(["user_ideas", @user, @user == current_user ? "owner" : "guest"]) do %>
+                <% cache(["user_ideas", @user, @user.ideas_counter.value, @user == current_user ? "owner" : "guest"]) do %>
                     <%= render partial: 'ideas' %>
                 <% end %>
             </div>
