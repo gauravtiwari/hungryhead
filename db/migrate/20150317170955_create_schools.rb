@@ -18,7 +18,7 @@ class CreateSchools < ActiveRecord::Migration
       t.string :logo
       t.string :cover
 
-      t.references :user, foreign_key: true, null: false, default: 1
+      t.references :user, null: false, default: 1
 
       t.string :slug, :null => false, unique: true
 
