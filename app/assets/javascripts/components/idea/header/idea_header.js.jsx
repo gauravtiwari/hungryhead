@@ -57,7 +57,7 @@ var IdeaHeader = React.createClass({
       <div className="idea-header bg-solid">
         {cover}
         <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
-        <IdeaPitch idea={this.state.idea} />
+        <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
       </div>
     );
   }

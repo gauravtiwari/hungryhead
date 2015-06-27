@@ -7,7 +7,7 @@ class TagsController < ApplicationController
 	def people
 		if params[:tag].present?
 		  @tag = ActsAsTaggableOn::Tag.find_by_slug(params[:tag])
-		  @users = User.tagged_with(@tag.name)
+		  @users = User.published.tagged_with(@tag.name)
 		  .paginate(:page => params[:page], :per_page => 10)
 		end
 		render 'tags/people'
@@ -16,7 +16,7 @@ class TagsController < ApplicationController
 	def show
 		if params[:tag].present?
 		  @tag = ActsAsTaggableOn::Tag.find_by_slug(params[:tag])
-		  @ideas = Idea.tagged_with(@tag.name)
+		  @ideas = Idea.published.tagged_with(@tag.name)
 		  .paginate(:page => params[:page], :per_page => 10)
 		end
 		render 'tags/index'

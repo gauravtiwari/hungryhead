@@ -69,7 +69,8 @@
                               <td>
                               <p class="m-b-10 inline">
                                 <%= link_to(badge_path(badge.name), class: "badge text-white font-helvetica") do %>
-                                    <span class="badge-type <%= badge.level %>"></span><%= badge.custom_fields[:name] %>
+                                    <span class="fa fa-<%= badge.custom_fields[:icon] %> badge-type <%= badge.level %>">
+                                    </span><%= badge.custom_fields[:name] %>
                                 <% end %>
                                 </p>
                             </td>

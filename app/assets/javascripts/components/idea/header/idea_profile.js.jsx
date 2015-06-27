@@ -16,18 +16,18 @@ var IdeaProfile = React.createClass({
 
     return (
       <div className="col-md-6">
-          <div className="idea-meta m-l-15 inline p-t-20 p-b-10">
-        <h3 className="no-margin bold text-white">
+        <div className="idea-meta m-l-15 inline p-t-20 p-b-10">
+        <h4 className="no-margin bold text-white">
           {this.props.idea.name}
-          <a onClick={this.props.openForm} className="m-l-20 inline fs-12 pointer text-white">{this.props.text}</a>
-        </h3>
-        <h4 className="no-margin text-white p-b-10">
-         {this.props.idea.high_concept_pitch}
+          <a onClick={this.props.openForm} className="m-l-20 inline fs-12 b-b b-white pointer text-white">{this.props.text}</a>
         </h4>
+        <p className="no-margin text-white p-b-10 fs-16 p-t-10">
+         {this.props.idea.high_concept_pitch}
+        </p>
         <span className="text-white">
           {market_list}
         </span>
-        <span className="text-white clearfix">
+        <span className="text-white clearfix m-t-10">
          <i className="fa fa-map-marker"></i> {location_list}
         </span>
       </div>

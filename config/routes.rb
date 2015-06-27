@@ -160,7 +160,7 @@ Rails.application.routes.draw do
   resources :badges, only: :show
 
   #Users routes
-  resources :users, except: [:show] do
+  resources :users, path: 'people', except: [:show] do
     get :autocomplete_user_name, :on => :collection
     collection do
       get :latest

@@ -36,18 +36,7 @@
     </div>
     <div class="card-description">
 	    <div class="activity-content">
-	     <% if activity.trackable.description.length > 450 %>
-		    <%= truncate(markdownify(activity.trackable.description), escape: false, length: 450) %>
-		    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
-		    <script type="text/javascript">
-		      $('.read-more-<%= activity.trackable.id %>').on('click', function(e) {
-		        e.preventDefault()
-		        $(this).closest(".card-description").find(".activity-content").html('<%= escape_javascript markdownify(activity.trackable.description) %>')
-		      })
-		    </script>
-		  <% else %>
-		    <%= markdownify(activity.trackable.description) %>
-		  <% end %>
+		    <h3><%= activity.trackable.elevator_pitch %></h3>
 	    </div>
     </div>
 

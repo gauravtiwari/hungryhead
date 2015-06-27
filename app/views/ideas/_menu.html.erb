@@ -29,9 +29,6 @@
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested? }) %>
       <% else %>
-      <div>
-        <a class="btn btn-danger btn-sm fs-13 padding-5 p-l-10 p-r-10 pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
-      </div>
        <%= react_component('PublishIdeaButton', {published: @idea.published?, id: @idea.slug, profile_complete: @idea.profile_complete?, is_team: @idea.team?, idea: @idea, current_privacy: @idea.privacy.capitalize, is_public:@idea.everyone?})%>
       <% end %>
     </div>
