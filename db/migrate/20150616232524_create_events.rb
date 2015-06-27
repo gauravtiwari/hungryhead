@@ -9,7 +9,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :slug, null: false, default: ""
       t.text :address
       t.integer :status, index: true, default: 1, null: false
-      t.boolean :guest_invites, default: false
       t.boolean :private, default: true
       t.datetime :start_time, null: false, default: DateTime.now
       t.datetime :end_time, null: false, default: DateTime.now
