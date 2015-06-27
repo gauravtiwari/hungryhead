@@ -28,7 +28,8 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        flash[:notice] = "Event was successfully, created"
+        format.js
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -69,6 +70,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:status, :title, :description, :address, :start_time, :end_time)
+      params.require(:event).permit(:status, :title, :description, :address, :start_time, :end_time, :eventable_id, :eventable_type)
     end
 end

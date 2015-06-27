@@ -8,11 +8,11 @@ class CreateEvents < ActiveRecord::Migration
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address
-      t.integer :state, index: true, default: 0, null: false
-      t.datetime :start_time, null: false, default: DateTime.now
-      t.datetime :end_time, null: false, default: DateTime.now
+      t.integer :status, index: true, default: 1, null: false
       t.boolean :guest_invites, default: false
       t.boolean :private, default: true
+      t.datetime :start_time, null: false, default: DateTime.now
+      t.datetime :end_time, null: false, default: DateTime.now
       t.float  :latitude, null: false, default: 0.0
       t.float  :longitude, null: false, default: 0.0
       t.timestamps null: false

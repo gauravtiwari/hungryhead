@@ -42,6 +42,10 @@
       </div>
     </div>
 
+    <%= f.hidden_field :eventable_id, value: "#{@eventable.id}" %>
+    <%= f.hidden_field :eventable_type, value: "#{@eventable.class.to_s}" %>
+
+
     <%= button_tag 'Send', class: 'btn btn-primary' %>
 
   <% end %>

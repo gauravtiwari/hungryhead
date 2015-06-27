@@ -50,7 +50,7 @@ class SchoolsController < ApplicationController
   end
 
   def events
-    @events = @school.fetch_events.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
+    @events = @school.fetch_events.select{|u| u.status == "open"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js
