@@ -14,7 +14,7 @@ class School < ActiveRecord::Base
 	has_many :students, -> { where role: 1 }, class_name: 'User'
 	has_many :ideas
 	has_many :faculties, -> { where role: 4 }, class_name: 'User'
-	belongs_to :user, class_name: 'User', foreign_key: "admin_id"
+	belongs_to :user
 
 	cache_has_many :students, embed: true
 	cache_has_many :faculties, embed: true
