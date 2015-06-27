@@ -45,6 +45,9 @@ class School < ActiveRecord::Base
 	mount_uploader :logo, LogoUploader
 	mount_uploader :cover, CoverUploader
 
+	#Messaging system
+	acts_as_messageable
+
 	validates :name, :presence => true,
 	:on => :create
 
