@@ -46,7 +46,6 @@ class User < ActiveRecord::Base
   belongs_to :school
 
   #has_many relationships
-  has_many :authentications, :dependent => :destroy
   has_many :activities, :dependent => :destroy
   has_many :notifications, :dependent => :destroy
   has_many :ideas, dependent: :destroy, autosave: true

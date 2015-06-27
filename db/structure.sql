@@ -111,42 +111,6 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE authentications (
-    id integer NOT NULL,
-    user_id integer NOT NULL,
-    provider character varying,
-    uid character varying,
-    access_token character varying,
-    token_secret character varying,
-    parameters jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE authentications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
-
-
---
 -- Name: badges_sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -261,8 +225,9 @@ CREATE TABLE events (
     description character varying DEFAULT ''::character varying NOT NULL,
     cover character varying DEFAULT ''::character varying NOT NULL,
     cached_location_list character varying,
-    start_time timestamp without time zone DEFAULT '2015-06-26 23:46:47.824072'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-26 23:46:47.824393'::timestamp without time zone NOT NULL,
+    state integer DEFAULT 0 NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 11:01:40.162311'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 11:01:40.162336'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
     created_at timestamp without time zone NOT NULL,
@@ -1208,7 +1173,6 @@ CREATE TABLE schools (
     facebook_url character varying DEFAULT ''::character varying NOT NULL,
     twitter_url character varying DEFAULT ''::character varying NOT NULL,
     media jsonb DEFAULT '{}'::jsonb,
-    data jsonb DEFAULT '{}'::jsonb,
     cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
@@ -1632,13 +1596,6 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY badges_sashes ALTER COLUMN id SET DEFAULT nextval('badges_sashes_id_seq'::regclass);
 
 
@@ -1921,14 +1878,6 @@ ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regcl
 
 ALTER TABLE ONLY activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
-
-
---
--- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY authentications
-    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
 
 
 --
@@ -2287,41 +2236,6 @@ CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
 
 
 --
--- Name: index_authentications_on_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_access_token ON authentications USING btree (access_token);
-
-
---
--- Name: index_authentications_on_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_provider ON authentications USING btree (provider);
-
-
---
--- Name: index_authentications_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_uid ON authentications USING btree (uid);
-
-
---
--- Name: index_authentications_on_uid_and_provider_and_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_authentications_on_uid_and_provider_and_access_token ON authentications USING btree (uid, provider, access_token);
-
-
---
--- Name: index_authentications_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_user_id ON authentications USING btree (user_id);
-
-
---
 -- Name: index_badges_sashes_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2396,6 +2310,13 @@ CREATE INDEX index_events_on_private ON events USING btree (private);
 --
 
 CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
+
+
+--
+-- Name: index_events_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_state ON events USING btree (state);
 
 
 --
@@ -2581,17 +2502,10 @@ CREATE INDEX index_ideas_on_user_id ON ideas USING btree (user_id);
 
 
 --
--- Name: index_impressions_on_impressionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_impressions_on_impressionable_type_and_impressionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_impressions_on_impressionable_id ON impressions USING btree (impressionable_id);
-
-
---
--- Name: index_impressions_on_impressionable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_impressions_on_impressionable_type ON impressions USING btree (impressionable_type);
+CREATE INDEX index_impressions_on_impressionable_type_and_impressionable_id ON impressions USING btree (impressionable_type, impressionable_id);
 
 
 --
@@ -3106,6 +3020,20 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 
 
 --
+-- Name: unique_follows_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_follows_index ON follows USING btree (followable_id, followable_type, follower_id);
+
+
+--
+-- Name: unique_impressions; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionable_id, impressionable_type, user_id);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3161,8 +3089,6 @@ SET search_path TO "$user",public;
 INSERT INTO schema_migrations (version) VALUES ('20140805183219');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805183225');
-
-INSERT INTO schema_migrations (version) VALUES ('20140805184102');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184420');
 
