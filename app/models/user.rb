@@ -224,13 +224,6 @@ class User < ActiveRecord::Base
     ticker.members.length > 0
   end
 
-  def email_required?
-    super && authentications.blank?
-  end
-  def password_required?
-    super && authentications.blank?
-  end
-
   #Override Devise's update with password to allow registration edits without password entry
   def update_with_password(params={})
     params.delete(:current_password)
