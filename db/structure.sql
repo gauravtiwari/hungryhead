@@ -263,8 +263,8 @@ CREATE TABLE events (
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-27 17:37:41.089182'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 17:37:41.089207'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 18:02:26.976593'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 18:02:26.976624'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1204,7 +1204,7 @@ CREATE TABLE schools (
     description text,
     logo character varying,
     cover character varying,
-    admin_id integer DEFAULT 1 NOT NULL,
+    user_id integer DEFAULT 1 NOT NULL,
     slug character varying NOT NULL,
     phone character varying DEFAULT ''::character varying NOT NULL,
     website_url character varying DEFAULT ''::character varying NOT NULL,
@@ -2814,13 +2814,6 @@ CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON re
 
 
 --
--- Name: index_schools_on_admin_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_schools_on_admin_id ON schools USING btree (admin_id);
-
-
---
 -- Name: index_schools_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2839,6 +2832,13 @@ CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
 --
 
 CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
+
+
+--
+-- Name: index_schools_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_schools_on_user_id ON schools USING btree (user_id);
 
 
 --
@@ -3174,6 +3174,14 @@ ALTER TABLE ONLY mailboxer_notifications
 
 ALTER TABLE ONLY mailboxer_receipts
     ADD CONSTRAINT receipts_on_notification_id FOREIGN KEY (notification_id) REFERENCES mailboxer_notifications(id);
+
+
+--
+-- Name: schools_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY schools
+    ADD CONSTRAINT schools_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
