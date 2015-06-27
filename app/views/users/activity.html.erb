@@ -1,18 +1,21 @@
 <div class="container p-b-60">
   <% data = render(template: 'users/show.json.jbuilder') %>
-
-  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
-      <%= render partial: 'sidebar', locals: {data: data} %>
-  </div>
+  <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
+    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
+        <%= render partial: 'sidebar', locals: {data: data} %>
+    </div>
+  <% end %>
 
   <div class="col-md-8 col-sm-8">
-      <div class="profile-nav box-shadow bg-white">
-          <%= render partial: 'menu' %>
-      </div>
+    <div class="profile-nav box-shadow bg-white">
+        <%= render partial: 'menu' %>
+    </div>
 
-  <div class="activity-feed auto-height m-t-20">
-     <%= render_activity(@activity) %>
-  </div>
+    <div class="activity-feed auto-height m-t-20">
+      <% cache(["beta", current_user, @activity]) do %>
+       <%= render_activity(@activity) %>
+      <% end %>
+    </div>
   </div>
 </div>
 

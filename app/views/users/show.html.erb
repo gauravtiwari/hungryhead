@@ -1,6 +1,6 @@
 <div class="container p-b-60">
-    <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]]) %>
-        <% data = render(template: 'users/show.json.jbuilder') %>
+    <% data = render(template: 'users/show.json.jbuilder') %>
+    <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
         <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
         </div>
@@ -17,7 +17,7 @@
             <%= render partial: 'menu' %>
         </div>
 
-        <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]]) %>
+        <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="summary white-bg box-shadow m-t-15 m-b-15">
                 <%= react_component("TextWidget", {data: data}) %>
             </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-6 no-padding">
                 <%= render partial: 'stats' %>
-                <% cache(["user_ideas", @user, @user == current_user ? "owner" : "guest"]]) %>
+                <% cache(["user_ideas", @user, @user == current_user ? "owner" : "guest"]) do %>
                     <%= render partial: 'ideas' %>
                 <% end %>
             </div>

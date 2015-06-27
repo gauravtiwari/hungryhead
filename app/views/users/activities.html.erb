@@ -1,9 +1,10 @@
 <div class="container p-b-60">
   <% data = render(template: 'users/show.json.jbuilder') %>
-
-  <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
-      <%= render partial: 'sidebar', locals: {data: data} %>
-  </div>
+  <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
+    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
+        <%= render partial: 'sidebar', locals: {data: data} %>
+    </div>
+  <% end %>
 
   <div class="col-md-8 col-sm-8" id="profile_content">
     <div class="profile-nav box-shadow bg-white">
@@ -11,7 +12,7 @@
     </div>
 
     <div class="profile-activity-feed auto-height m-t-20">
-      <%= render partial: 'activities' %>
+      <%= render_activities(@activities) %>
       <% if @activities.next_page %>
         <div class="pagination-box text-center">
           <%=  link_to 'Load More Activities', profile_activities_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
