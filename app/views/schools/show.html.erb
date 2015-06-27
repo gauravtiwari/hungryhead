@@ -1,6 +1,6 @@
 <div class="container">
   <div class="social-wrapper container">
-    <div class="social" data-pages="social">
+    <div class="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
           <%=  render partial: 'school_data' %>
           <% cache(["cover", @school]) do %>
@@ -10,18 +10,18 @@
     </div>
 
     <div class="box-shadow bg-white">
-      <% cache(["school_menu", @school]) do %>
-        <%= render partial: 'menu' %>
-      <% end %>
+      <%= render partial: 'menu' %>
     </div>
 
     <div class="content p-t-20 overflow-hidden">
+
       <div class="col-md-3 no-padding p-r-15">
         <% cache(["school_card", @school]) do %>
           <%= render partial: 'school_card' %>
         <% end %>
         <%= render partial: 'faculties' %>
       </div>
+
       <div class="col-md-9 no-padding">
       <div class="panel box-shadow no-border">
         <ul class="nav nav-tabs nav-tabs-simple bg-light-blue-lightest">
