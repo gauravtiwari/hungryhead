@@ -162,25 +162,10 @@ Rails.application.routes.draw do
   #Users routes
   resources :users, except: [:show] do
     get :autocomplete_user_name, :on => :collection
-
     collection do
       get :latest
       get :popular
       get :trending
-    end
-
-    member do
-      get :activities
-      put :publish
-      put :unpublish
-      get :investments
-      get :feedbacks
-      get :followers
-      post :user_invite
-      get :followings
-      delete :delete_cover
-      get :badges
-      put :about_me
     end
   end
 
@@ -203,7 +188,6 @@ Rails.application.routes.draw do
     #Member routes
     member do
       put :publish
-      put :unpublish
       get :likers
       get :card
       get :join_team
@@ -228,8 +212,10 @@ Rails.application.routes.draw do
 
   end
 
+  #Activities routes
   resources :activities, only: [:index, :show]
 
+  #Events routes
   #resources :events
 
   #Vanity urls for users
@@ -250,12 +236,9 @@ Rails.application.routes.draw do
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks
   get '/:slug/investments', to: SlugRouter.to(:investments), as: :profile_investments
   get '/:slug/badges', to: SlugRouter.to(:badges), as: :profile_badges
-  put '/:slug/publish', to: SlugRouter.to(:publish), as: :profile_publish
-  put '/:slug/unpublish', to: SlugRouter.to(:publish), as: :profile_unpublish
   post '/:slug/user_invite', to: SlugRouter.to(:user_invite), as: :profile_user_invite
   get '/:slug/followings', to: SlugRouter.to(:followings), as: :profile_followings
   get '/:slug/comments', to: SlugRouter.to(:comments), as: :profile_comments
   delete '/:slug/delete_cover', to: SlugRouter.to(:delete_cover), as: :profile_delete_cover
-
 
 end

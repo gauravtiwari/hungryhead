@@ -72,15 +72,6 @@ class IdeasController < ApplicationController
     publish_idea_service.publish_idea
   end
 
-  # PUT /ideas/1/unpublish
-  def unpublish
-    publish_idea_service.on :idea_unpublished do |idea|
-      UnpublishIdeaJob.perform_later(idea)
-      render :unpublish
-    end
-    publish_idea_service.unpublish_idea
-  end
-
   # GET /ideas/1/updates
   def updates
     @versions = @idea.versions.reorder(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
@@ -171,7 +162,7 @@ class IdeasController < ApplicationController
   end
 
   def publish_idea_service
-    @publish_idea_service ||= PublishIdeaService.new(@idea, current_user)
+    @publish_idea_service ||= PublishIdeaService.new(@idea, current_user, params[:privacy])
   end
 
   def set_idea

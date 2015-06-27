@@ -1,6 +1,6 @@
 <div class="box-shadow bg-white">
-  <div class="profile-nav p-l-10 overflow-hidden">
-    <div class="col-md-6 no-padding">
+  <div class="profile-nav p-l-10 row">
+    <div class="col-md-6 no-padding p-l-15">
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
           <li class="inline b-r b-grey b-dashed p-r-15">
             <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
@@ -23,7 +23,7 @@
           </li>
         </ul>
     </div>
-    <div class="profile-action-buttons pull-right p-t-10 p-b-10">
+    <div class="profile-action-buttons pull-right p-t-10 p-b-10 p-r-15">
       <% if !policy(@idea).collaborator? %>
         <%= react_component('Follow',{:followed => followed?(@idea)}) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
@@ -32,8 +32,7 @@
       <div>
         <a class="btn btn-danger btn-sm fs-13 padding-5 p-l-10 p-r-10 pull-right m-r-10" href="#message-popup"><span class="ion-edit"></span> Edit Idea</a>
       </div>
-       <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
-        <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.team?, idea: @idea, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>
+       <%= react_component('PublishIdeaButton', {published: @idea.published?, id: @idea.slug, profile_complete: @idea.profile_complete?, is_team: @idea.team?, idea: @idea, current_privacy: @idea.privacy.capitalize, is_public:@idea.everyone?})%>
       <% end %>
     </div>
   </div>

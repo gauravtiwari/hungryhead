@@ -2,25 +2,20 @@ class PublishIdeaService
 
   include Wisper::Publisher
 
-  def initialize(idea, user)
+  def initialize(idea, user, privacy)
     @idea = idea
     @user = user
+    @privacy = privacy
   end
 
   def publish_idea
     if @idea.profile_complete?
-      @idea.published!
-      @idea.everyone!
+      @idea.update_attributes(privacy: @privacy)
+      @idea.published! unless @idea.published?
       publish :idea_published, @idea
     else
       publish :error, @idea
     end
-  end
-
-  def unpublish_idea
-    @idea.draft!
-    @idea.team!
-    publish :idea_unpublished, @idea
   end
 
 end

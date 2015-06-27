@@ -60,7 +60,7 @@ class Idea < ActiveRecord::Base
 
   #Enumerators for handling states
   enum status: { draft:0, published:1, reviewed:2 }
-  enum privacy: { team: 0, school: 1, everyone: 2 }
+  enum privacy: { team: 0, school: 1, friends: 2, everyone: 3 }
 
   #Scopes
   scope :published, -> { where(status: 1) }
