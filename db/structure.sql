@@ -111,6 +111,39 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
+-- Name: attendees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE attendees (
+    id integer NOT NULL,
+    attendee_id integer NOT NULL,
+    event_id integer,
+    status integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: attendees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE attendees_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: attendees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE attendees_id_seq OWNED BY attendees.id;
+
+
+--
 -- Name: badges_sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -227,10 +260,9 @@ CREATE TABLE events (
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
     status integer DEFAULT 1 NOT NULL,
-    guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
-    start_time timestamp without time zone DEFAULT '2015-06-27 16:35:13.581699'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 16:35:13.581724'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 16:56:49.882609'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 16:56:49.882631'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1599,6 +1631,13 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY attendees ALTER COLUMN id SET DEFAULT nextval('attendees_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY badges_sashes ALTER COLUMN id SET DEFAULT nextval('badges_sashes_id_seq'::regclass);
 
 
@@ -1881,6 +1920,14 @@ ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regcl
 
 ALTER TABLE ONLY activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: attendees_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY attendees
+    ADD CONSTRAINT attendees_pkey PRIMARY KEY (id);
 
 
 --
@@ -3212,4 +3259,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
+
+INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 

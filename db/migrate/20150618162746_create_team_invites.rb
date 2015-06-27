@@ -1,4 +1,5 @@
 class CreateTeamInvites < ActiveRecord::Migration
+  disable_ddl_transaction!
   def change
     create_table :team_invites do |t|
       t.belongs_to :inviter, index: true, class_name: 'User'
@@ -10,7 +11,7 @@ class CreateTeamInvites < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :team_invites, [:inviter_id, :invited_id, :idea_id], unique: true
-    add_index :team_invites, :token
+    add_index :team_invites, [:inviter_id, :invited_id, :idea_id], unique: true, algorithm: :concurrently
+    add_index :team_invites, :token, algorithm: :concurrently
   end
 end
