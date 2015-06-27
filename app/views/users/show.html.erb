@@ -1,31 +1,45 @@
 <div class="container p-b-60">
-    <% data = render(template: 'users/show.json.jbuilder') %>
-    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
-        <%= render partial: 'sidebar', locals: {data: data} %>
-    </div>
+    <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]]) %>
+        <% data = render(template: 'users/show.json.jbuilder') %>
+        <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
+            <%= render partial: 'sidebar', locals: {data: data} %>
+        </div>
+    <% end %>
 
     <div class="col-md-8 col-sm-8">
-        <div class="cover">
-            <%= render partial: 'cover' %>
-        </div>
+        <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="cover">
+                <%= render partial: 'cover' %>
+            </div>
+        <% end %>
 
         <div class="box-shadow bg-white">
             <%= render partial: 'menu' %>
         </div>
 
-        <div class="summary white-bg box-shadow m-t-15 m-b-15">
-            <%= react_component("TextWidget", {data: data}) %>
-        </div>
+        <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]]) %>
+            <div class="summary white-bg box-shadow m-t-15 m-b-15">
+                <%= react_component("TextWidget", {data: data}) %>
+            </div>
+        <% end %>
 
         <div class="badges-box m-t-20 clearfix" id="profile_content">
             <div class="col-md-6 no-padding p-r-15">
-                <%= render partial: 'badges' %>
-                <%= render partial: 'followers' %>
-                <%= render partial: 'followings' %>
+                <% cache(["user_badges", @user.badges.length]) do %>
+                    <%= render partial: 'badges' %>
+                <% end %>
+                <% cache(["user_followers", @user.followers_counter.value]) do %>
+                    <%= render partial: 'followers' %>
+                <% end %>
+                <% cache(["user_followings", @user.followings_counter.value]) do %>
+                    <%= render partial: 'followings' %>
+                <% end %>
             </div>
             <div class="col-md-6 no-padding">
                 <%= render partial: 'stats' %>
-                <%= render partial: 'ideas' %>
+                <% cache(["user_ideas", @user, @user == current_user ? "owner" : "guest"]]) %>
+                    <%= render partial: 'ideas' %>
+                <% end %>
             </div>
         </div>
     </div>
