@@ -92,6 +92,7 @@ GEM
       activerecord (>= 4.0.0, < 5)
     awesome_print (1.6.1)
     bcrypt (3.1.10)
+    benchmark-ips (2.2.0)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -149,6 +150,14 @@ GEM
       activesupport (~> 4.0)
     dalli (2.7.4)
     debug_inspector (0.0.2)
+    derailed (0.1.0)
+      derailed_benchmarks
+    derailed_benchmarks (1.0.1)
+      benchmark-ips (~> 2)
+      get_process_mem (~> 0)
+      memory_profiler (~> 0)
+      rack (~> 1)
+      rake (~> 10)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -299,6 +308,7 @@ GEM
       rails (>= 3.2.0)
     gemoji (2.1.0)
     geocoder (1.2.9)
+    get_process_mem (0.2.0)
     github-markdown (0.6.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -375,6 +385,7 @@ GEM
       mime-types (>= 1.16, < 3)
     mandrill-rails (1.2.0)
       activesupport (>= 3.0.3)
+    memory_profiler (0.9.4)
     merit (2.3.2)
       ambry (~> 0.3.0)
     meta_request (0.3.4)
@@ -615,6 +626,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    stackprof (0.2.7)
     temple (0.7.6)
     terminal-table (1.5.0)
     therubyracer (0.12.2)
@@ -675,6 +687,7 @@ DEPENDENCIES
   connection_pool
   crono
   dalli
+  derailed
   devise
   devise_invitable
   devise_uid
@@ -779,6 +792,7 @@ DEPENDENCIES
   soulmate
   spring
   sprockets
+  stackprof
   therubyracer
   uglifier
   unf
