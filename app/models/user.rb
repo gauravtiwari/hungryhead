@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   end
 
   #Tagging System
-  acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
+  acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects, :groups
   acts_as_tagger
 
   #Sorted set to store followers, followings ids and latest activities
@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, faculty: 4 }
+  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, faculty: 4, alumni: 5 }
 
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url

@@ -9,13 +9,12 @@ class School < ActiveRecord::Base
 	include Followable
 	include Sluggable
 	#include Eventable
-	include Commentable
 
 	#Relationship
 	has_many :students, -> { where role: 1 }, class_name: 'User'
 	has_many :ideas
 	has_many :faculties, -> { where role: 4 }, class_name: 'User'
-	belongs_to :user
+	belongs_to :user, class_name: 'User', foreign_key: "admin_id"
 
 	cache_has_many :students, embed: true
 	cache_has_many :faculties, embed: true
@@ -34,14 +33,12 @@ class School < ActiveRecord::Base
 	set :followers_ids
 
 	#Latest caches
-	list :commenters_ids
 	list :latest_people, maxlength: 20, marshal: true
 	list :latest_ideas, maxlength: 20, marshal: true
 
 	#Counters
 	counter :followers_counter
 	counter :people_counter
-	counter :comments_counter
 	counter :ideas_counter
 
 	#Mount carrierwave
