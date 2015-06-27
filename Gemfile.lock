@@ -296,9 +296,11 @@ GEM
     gaffe (1.0.2)
       rails (>= 3.2.0)
     gemoji (2.1.0)
+    geocoder (1.2.9)
     github-markdown (0.6.8)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gmaps4rails (2.1.2)
     goldiloader (0.0.9)
       activerecord (>= 3.2, < 4.3)
       activesupport (>= 3.2, < 4.3)
@@ -681,7 +683,9 @@ DEPENDENCIES
   friendly_id
   gaffe
   gemoji
+  geocoder
   github-markdown
+  gmaps4rails
   goldiloader
   groupdate
   guard-livereload

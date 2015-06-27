@@ -155,6 +155,10 @@ gem 'mandrill-rails'
 #Eager load associations
 gem 'goldiloader'
 
+#Event maps - Google maps
+gem 'geocoder'
+gem 'gmaps4rails'
+
 #Parser
 gem 'nokogiri'
 
