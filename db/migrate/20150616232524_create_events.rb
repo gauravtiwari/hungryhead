@@ -4,10 +4,10 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :title, null: false, default: ""
       t.belongs_to :eventable, null: false, default: "", polymorphic: true
-      t.string :description, null: false, default: ""
+      t.text :description, null: false, default: ""
       t.string :cover, null: false, default: ""
-      t.string :cached_location_list
-      t.string :address
+      t.string :slug, null: false, default: ""
+      t.text :address
       t.integer :state, index: true, default: 0, null: false
       t.datetime :start_time, null: false, default: DateTime.now
       t.datetime :end_time, null: false, default: DateTime.now
@@ -20,6 +20,7 @@ class CreateEvents < ActiveRecord::Migration
 
     add_index :events, [:eventable_id, :eventable_type], algorithm: :concurrently
     add_index :events, :start_time, algorithm: :concurrently
+    add_index :events, :slug, algorithm: :concurrently
     add_index :events, [:latitude, :longitude], algorithm: :concurrently
     add_index :events, :private, algorithm: :concurrently
     add_index :events, :end_time, algorithm: :concurrently

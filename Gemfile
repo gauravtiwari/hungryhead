@@ -83,6 +83,9 @@ gem 'gaffe'
 #Flash messages from rails
 gem 'unobtrusive_flash', '>=3'
 
+#datetime picker
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+
 #Pub-sub
 gem 'wisper'
 

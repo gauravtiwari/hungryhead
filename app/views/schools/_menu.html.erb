@@ -22,11 +22,15 @@
 	</ul>
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
-		<%= react_component('Follow', {followed: followed?(@school)}) %>
-	    <% if current_user == @school.fetch_admin %>
+			<% if current_user == @school.fetch_admin %>
 	     <div>
-				  <%= link_to('Update Profile', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
+				  <%= link_to('Edit', profile_dashboard_path(@school), class: "btn btn-danger fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", remote: true) %>
 	  		</div>
+		     <div>
+					  <%= link_to('Create an Event', "javascript: void(0)", data: {eventable_id: "#{@school.id}", eventable_type: "#{@school.class.to_s}"}, class: "btn btn-complete fs-13 btn-sm no-padding padding-5 p-l-10 p-r-10 m-r-10", id: "new_event") %>
+		  	 </div>
+	  	<% else %>
+	  		<%= react_component('Follow', {followed: followed?(@school)}) %>
 	    <% end %>
 	</div>
 </div>

@@ -31,7 +31,7 @@
         </div>
         <div class="p-l-15 p-r-15">
           <p class="no-margin text-master fs-13">
-            <%= @school.email %>
+            <%= mail_to(@school.email) %>
           </p>
         </div>
       </div>
@@ -76,7 +76,7 @@
            <ul class="social-list text-white p-t-5 small no-style">
             <% if @school.website_url.present? %>
              <li class="inline">
-               <%= link_to(@school.website_url, class: "text-brand p-r-10", target: "_blank") do %>
+               <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank") do %>
                <i class="fa fa-rss fs-14"></i></a>
                <% end %>
              </li>

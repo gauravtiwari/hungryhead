@@ -230,6 +230,8 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:index, :show]
 
+  resources :events
+
   #Vanity urls for users
   get '/:slug', to: SlugRouter.to(:show), as: :profile
   put '/:slug', to: SlugRouter.to(:update), as: :profile_update

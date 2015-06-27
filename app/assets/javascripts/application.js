@@ -37,6 +37,7 @@
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require momentjs
+//= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
 //= require jquery.validate
