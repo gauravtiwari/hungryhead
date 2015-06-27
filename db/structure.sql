@@ -225,15 +225,16 @@ CREATE TABLE events (
     description character varying DEFAULT ''::character varying NOT NULL,
     cover character varying DEFAULT ''::character varying NOT NULL,
     cached_location_list character varying,
+    address character varying,
     state integer DEFAULT 0 NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-27 11:06:39.017199'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 11:06:39.017227'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-27 11:18:10.416175'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 11:18:10.416236'::timestamp without time zone NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
+    latitude double precision DEFAULT 0.0 NOT NULL,
+    longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    latitude double precision,
-    longitude double precision
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -2301,6 +2302,13 @@ CREATE INDEX index_events_on_eventable_id_and_eventable_type ON events USING btr
 
 
 --
+-- Name: index_events_on_latitude_and_longitude; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_latitude_and_longitude ON events USING btree (latitude, longitude);
+
+
+--
 -- Name: index_events_on_private; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3197,6 +3205,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150615210512');
 INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
-
-INSERT INTO schema_migrations (version) VALUES ('20150627111002');
 

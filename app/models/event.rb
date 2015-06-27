@@ -2,10 +2,13 @@ class Event < ActiveRecord::Base
 
   #included modules
   include Redis::Objects
-  geocoded_by :address
-  after_validation :geocode
+  #Slug
   extend FriendlyId
   friendly_id :slug_candidates
+
+  #Geocode
+  geocoded_by :address
+  after_validation :geocode, if: ->(event){ event.address.present? and event.address_changed? }
 
   include Sluggable
   include Commentable
