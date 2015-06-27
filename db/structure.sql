@@ -226,11 +226,11 @@ CREATE TABLE events (
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
-    state integer DEFAULT 0 NOT NULL,
-    start_time timestamp without time zone DEFAULT '2015-06-27 12:59:30.004545'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-27 12:59:30.004585'::timestamp without time zone NOT NULL,
+    status integer DEFAULT 1 NOT NULL,
     guest_invites boolean DEFAULT false,
     private boolean DEFAULT true,
+    start_time timestamp without time zone DEFAULT '2015-06-27 16:35:13.581699'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-27 16:35:13.581724'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2330,10 +2330,10 @@ CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
 
 
 --
--- Name: index_events_on_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_events_on_state ON events USING btree (state);
+CREATE INDEX index_events_on_status ON events USING btree (status);
 
 
 --
