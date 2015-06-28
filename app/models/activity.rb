@@ -5,6 +5,7 @@ class Activity < ActiveRecord::Base
   include Feedable
 
   after_commit :delete_older_notifications, on: :create
+  cache_belongs_to :user
 
   def cache_key
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"

@@ -73,14 +73,6 @@ class IdeasController < ApplicationController
     publish_idea_service.publish_idea
   end
 
-  # GET /ideas/1/updates
-  def updates
-    @versions = @idea.versions.reorder(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
-    if request.xhr?
-      render :partial=>"ideas/_sub_pages/updates"
-    end
-  end
-
   # GET /ideas/1/comments
   def comments
     @comments = @idea.root_comments.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)

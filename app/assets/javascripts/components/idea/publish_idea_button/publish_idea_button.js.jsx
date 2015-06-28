@@ -43,8 +43,8 @@ var PublishIdeaButton = React.createClass({
   },
 
   render: function() {
-    var text = this.state.published ? this.state.privacy : 'Private';
-    var title = this.state.published ? 'Click to change privacy of your idea: ' : "Click to publish your idea";
+    var text = this.state.published ? this.state.privacy : 'Publish';
+    var title = this.state.published ? 'Click to change privacy of your idea: ' : "Click to publish";
 
     var cx = React.addons.classSet;
     var classes = cx({
@@ -55,8 +55,8 @@ var PublishIdeaButton = React.createClass({
 
     var icon_class = cx({
       "fa fa-lock": !this.state.published,
-      "fa fa-globe": this.state.is_public,
-      "fa fa-users": this.state.is_team,
+      "fa fa-globe": this.state.is_public && this.state.published,
+      "fa fa-users": this.state.is_team && this.state.published,
       "fa fa-unlock-alt": this.state.published && !this.state.is_team && !this.state.is_public
     });
 

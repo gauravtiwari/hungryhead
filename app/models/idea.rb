@@ -32,13 +32,13 @@ class Idea < ActiveRecord::Base
 
   acts_as_taggable_on :markets, :locations, :technologies
 
-  #Cache ids of followers, voters, sharers, feedbackers, investors and activities
+  #Cache ids of followers, voters, feedbackers, investors and activities
   set :followers_ids
   list :voters_ids
-  list :sharers_ids
   list :feedbackers_ids
   list :investors_ids
   list :commenters_ids
+  list :viewers_ids
   set :impressioners_ids
 
   #Set to store trending
@@ -54,7 +54,6 @@ class Idea < ActiveRecord::Base
   counter :feedbackers_counter
   counter :views_counter
   counter :votes_counter
-  counter :shares_counter
   counter :comments_counter
   counter :idea_messages_counter
 
@@ -117,6 +116,10 @@ class Idea < ActiveRecord::Base
 
   def can_score?
     true
+  end
+
+  def can_view?(current_user)
+    viewers_ids.values.include?(current_user.id.to_s)
   end
 
   def founder?(current_user)

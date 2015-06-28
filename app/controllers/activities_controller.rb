@@ -6,14 +6,10 @@ class ActivitiesController < ApplicationController
   layout "home"
 
   def index
-    max_updated_at = Activity.maximum(:updated_at).try(:utc).try(:to_s, :number)
-    cache_key = "activities/all-#{max_updated_at}"
-    @activities = Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-     Activity.where(published: true)
-        .includes([:trackable, :user])
+    @activities = Activity.where(published: true)
+        .includes([:trackable, :user, :recipient])
         .order(id: :desc)
         .paginate(:page => params[:page], :per_page => 20)
-    end
   end
 
   def show

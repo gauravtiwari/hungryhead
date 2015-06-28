@@ -13,7 +13,7 @@ json.comments comments.each do |comment|
     json.votes_count comment.votes_counter.value
     json.user_url  profile_card_path(comment.user)
     json.name comment.user.name
-    json.user_name_badge comment.user.first_name.first + comment.user.last_name.first
+    json.user_name_badge comment.user.user_name_badge
     json.avatar comment.user.avatar.url(:avatar)
   end
 end

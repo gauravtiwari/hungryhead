@@ -22,7 +22,7 @@ class Feedback < ActiveRecord::Base
   include Votable
 
   #Associations
-  belongs_to :idea
+  belongs_to :idea, touch: true
   belongs_to :user
 
   #Tags for feedback

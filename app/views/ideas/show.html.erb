@@ -1,48 +1,45 @@
 <div class="container p-b-60">
   <div class="col-md-9 col-lg-8 col-sm-8 no-padding p-l-15">
-    <% cache(["idea_header", @idea, current_user]) do %>
+    <% cache(["idea_header", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
       <div class="auto-height box-shadow ">
         <%= render partial: 'header' %>
       </div>
     <% end %>
 
-    <% cache(["idea_menu", @idea, current_user]) do %>
-      <%= render partial: 'menu' %>
-    <% end %>
+    <%= render partial: 'menu' %>
 
     <div class="m-t-20">
       <div class="idea-content">
         <div class="clearfix">
-          <% cache(["idea_main_content", @idea, current_user]) do %>
+          <% cache(["idea_main_content", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
             <% sections = render(template: 'ideas/show.json.jbuilder') %>
             <%= react_component('MainContent', {data: sections}) %>
           <% end %>
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="col-md-3 col-lg-4 col-sm-4">
     <div class="idea-sidebar auto-height bg-white box-shadow">
+
       <%= render partial: 'card_stats' %>
 
-      <% cache(["badges", @idea.badges.length]) do %>
+      <% cache(["idea_badges", @idea, @idea.badges.length]) do %>
         <%= render partial: 'badges' %>
       <% end %>
 
-      <% cache(["idea_team", @idea, current_user]) do %>
+      <% cache(["idea_team", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
         <%= render partial: 'team'%>
       <% end %>
 
-      <% cache(["followers", @idea.followers_counter.value]) do %>
+      <% cache(["idea_followers", @idea, @idea.followers_counter.value]) do %>
         <%= render partial: 'followers' if @idea.followers_counter.value > 0 %>
       <% end %>
 
-      <% cache(["investors", @idea.investors_counter.value]) do %>
+      <% cache(["idea_investors", @idea, @idea.investors_counter.value]) do %>
         <%= render partial: 'investors' if @idea.investors_counter.value > 0 %>
       <% end %>
-
     </div>
   </div>
 </div>

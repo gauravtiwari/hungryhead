@@ -13,7 +13,9 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def show?
-    record.in_team?(current_user) || record.published? && record.everyone?
+    record.in_team?(current_user) ||
+    record.published? && record.everyone? ||
+    record.published? && record.can_view?(current_user)
   end
 
   def card?

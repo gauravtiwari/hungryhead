@@ -25,7 +25,7 @@ module IdeasHelper
     followers = idea.followers_counter.value
     feedbackers = idea.feedbackers_counter.value
     followed = idea.followed_by?(current_user)
-    "idea-#{user.id}-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/followers-#{followers}/feedbackers-#{feedbackers}/followed-#{followed}"
+    "idea-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/followers-#{followers}/feedbackers-#{feedbackers}/followed-#{followed}"
   end
 
 end

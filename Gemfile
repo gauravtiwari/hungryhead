@@ -1,4 +1,6 @@
+
 ruby '2.2.2'
+
 source 'https://rubygems.org'
 
 source 'https://rails-assets.org' do
@@ -88,9 +90,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 
 #Pub-sub
 gem 'wisper'
-
-#Generating auto content for social media channels
-gem 'searchkick'
 
 #For formatting texts
 gem 'html-pipeline'
@@ -204,7 +203,6 @@ gem 'asset_sync'
 
 #Background Job processing
 gem 'sidekiq'
-gem 'sidekiq-status'
 
 # Image Processing
 gem "mini_magick"
@@ -248,31 +246,13 @@ gem 'uuidtools'
 #Skylight
 #gem "skylight"
 
-gem "bugsnag"
-
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
+  gem 'bugsnag'
 end
 
 group :development, :test do
   gem 'better_errors'
   gem 'forgery'
-  #gem 'rack-mini-profiler', require: false
-  gem 'hirb'
-  gem 'rails_best_practices'
-  gem 'brakeman'
-  gem 'pry'
-  gem 'awesome_print'
-  gem 'rubocop', require: false
-  gem "lol_dba"
-  gem 'binding_of_caller'
-  gem 'meta_request'
-  gem 'htmlbeautifier'
-  gem 'rbeautify'
-  gem "ruby-beautify"
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
-  gem 'rack-livereload'
-  gem 'guard-livereload', require: false
-  gem 'bullet'
 end
 

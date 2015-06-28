@@ -1,5 +1,0 @@
-<% @activities.each do |activity| %>
-  <% cache(["beta", current_user, activity]) do %>
-    <%= render_activity(activity) %>
-  <% end %>
-<% end %>

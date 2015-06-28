@@ -196,7 +196,6 @@ Rails.application.routes.draw do
       get :investors
       get :team
       get :comments
-      get :updates
       get :followers
     end
 

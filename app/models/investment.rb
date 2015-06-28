@@ -9,7 +9,7 @@ class Investment < ActiveRecord::Base
 
   #Associations
   belongs_to :user, touch: true
-  belongs_to :idea, touch: true
+  belongs_to :idea
 
   #Includes concerns
   include Commentable
