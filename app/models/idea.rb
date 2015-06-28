@@ -28,7 +28,6 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_commit :create_activity, on: :create
   after_save :load_into_soulmate
 
   acts_as_taggable_on :markets, :locations, :technologies
@@ -201,10 +200,6 @@ class Idea < ActiveRecord::Base
 
   def slug_candidates
     [:name]
-  end
-
-  def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s)
   end
 
   def decrement_counters

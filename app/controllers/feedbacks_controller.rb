@@ -38,17 +38,15 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    # If feedback created publish via pusher
     @feedback = CreateFeedbackService.new(feedback_params, @idea, current_user)
-      authorize @feedback
-      if @feedback.save
-        respond_to do |format|
-          format.json { render :show, status: :created}
-        end
-      else
-        respond_to do |format|
-          format.json { render json: @feedback.errors,  status: :unprocessable_entity }
-        end
+    authorize @feedback
+    if @feedback.save
+      respond_to do |format|
+        format.json { render :show, status: :created}
+      end
+    else
+      respond_to do |format|
+        format.json { render json: @feedback.errors,  status: :unprocessable_entity }
       end
     end
   end
