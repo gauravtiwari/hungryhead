@@ -32,9 +32,11 @@ class School < ActiveRecord::Base
 
 	#Redis Cache counters and ids
 	set :followers_ids
+
 	#Latest caches
-	sorted_set :people
-	sorted_set :ideas
+	sorted_set :published_people
+	sorted_set :published_ideas
+
 	#Counters
 	counter :followers_counter
 	counter :people_counter

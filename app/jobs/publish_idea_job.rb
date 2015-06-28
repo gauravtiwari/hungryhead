@@ -12,9 +12,11 @@ class PublishIdeaJob < ActiveJob::Base
       #Increment counters for school and user
       @idea.school.ideas_counter.increment
       @user.ideas_counter.increment
-      #Cache latest ideas into a list for user and school, max: 20
+
+      #Cache  ideas into a list/sorted_Set for user and school
       @user.latest_ideas <<  @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
-      @idea.school.latest_ideas << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
+      @idea.school.published_ideas.add(@idea.id, @idea.created_at + @idea.id)
+
       #Insert into cache list
       Idea.latest << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
       Idea.trending.add(@idea.id, 1)

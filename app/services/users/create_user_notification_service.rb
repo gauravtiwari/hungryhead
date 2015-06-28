@@ -26,7 +26,8 @@ class CreateUserNotificationService
     #Increment counters
     @user.school.people_counter.increment if @user.school_id.present?
     #Cache lists for school
-    @user.school.latest_people << @user.id if @user.school_id.present?
+    @user.school.published_people.add(@user.id, @user.created_at + @user.id) if @user.school_id.present?
+
     #Cache sorted set for global leaderboard
     User.latest << @user.id
 

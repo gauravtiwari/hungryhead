@@ -206,9 +206,11 @@ class Idea < ActiveRecord::Base
     #Decrement counters for user and school
     school.ideas_counter.decrement
     user.ideas_counter.decrement
-    #Remove self from cached list
+
+    #Remove self from cached list/sorted_set
     user.latest_ideas.delete(id)
-    school.latest_ideas.delete(id)
+    school.published_ideas.delete(id)
+
     #Remove self from sorted set
     Idea.latest.delete(id)
     Idea.trending.delete(id)

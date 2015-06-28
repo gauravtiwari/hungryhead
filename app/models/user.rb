@@ -299,8 +299,10 @@ class User < ActiveRecord::Base
   def decrement_counters
     #Decrement counters
     school.people_counter.decrement if school_id.present? && school.people_counter.value > 0
-    #delete cached lists for school
-    school.latest_people.delete(id) if school_id.present?
+
+    #delete cached sorted_set for school
+    school.published_people.delete(id) if school_id.present?
+
     #delete cached sorted set for global leaderboard
     User.latest.delete(id)
 
