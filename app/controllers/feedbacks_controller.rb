@@ -38,7 +38,7 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    @feedback = CreateFeedbackService.new(feedback_params, @idea, current_user)
+    @feedback = CreateFeedbackService.new(feedback_params, @idea, current_user).call
     authorize @feedback
     if @feedback.save
       respond_to do |format|

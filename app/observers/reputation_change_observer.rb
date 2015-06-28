@@ -15,8 +15,8 @@ class ReputationChangeObserver
       user = resource
     elsif resource.class.to_s == "Idea"
       user = resource.user
-      resource.update_attribute(investable: true) if resource.class.leaderboard[resource.id] > 1000
-      resource.update_attribute(validated: true) if resource.class.leaderboard[resource.id] > 10000
+      resource.update_attributes(investable: true) if resource.class.leaderboard[resource.id] > 999
+      resource.update_attributes(validated: true) if resource.class.leaderboard[resource.id] > 9999
     else
       user = resource.user
     end

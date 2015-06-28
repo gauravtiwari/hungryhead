@@ -14,11 +14,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = CreateCommentService.new(comment_params, @commentable, current_user)
+    @comment = CreateCommentService.new(comment_params, @commentable, current_user).call
     if @comment.save
-      Pusher.trigger_async("#{comment.commentable_type}-#{comment.commentable.uuid}-comments",
+      Pusher.trigger_async("#{@comment.commentable_type}-#{@comment.commentable.uuid}-comments",
         "new_comment",
-        { data: render(:show, locals: {comment: comment} )}
+        { data: render(:show, locals: {comment: @comment} )}
       )
     else
       flash[:error] = "Something went wrong. #{@comment.errors}"

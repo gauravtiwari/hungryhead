@@ -17,7 +17,7 @@
 
 		<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
 	   	<h6 class="no-margin p-t-5">
-	   		<% if activity.fetch_user.cache_location_list.present? %>
+	   		<% if activity.fetch_user.cached_location_list.present? %>
 		        <span class="location semi-bold m-r-10">
 		            <i class="fa fa-map-marker"></i>
 		            <%= activity.fetch_user.location_list.first %>
