@@ -2,7 +2,7 @@
 class CommentsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :check_commentables, only: [:create_comment_service]
+  before_action :set_commentable, only: [:create]
 
   #Add pundit authorization to delete comment
   after_action :verify_authorized, :only => [:destroy]
@@ -14,26 +14,15 @@ class CommentsController < ApplicationController
   end
 
   def create
-    # If comment created publish via pusher
-    create_comment_service.on :comment_created do |comment|
-      @comment = comment
+    @comment = CreateCommentService.new(comment_params, @commentable, current_user)
+    if @comment.save
       Pusher.trigger_async("#{comment.commentable_type}-#{comment.commentable.uuid}-comments",
         "new_comment",
         { data: render(:show, locals: {comment: comment} )}
       )
-      # Enque activity creation
-      CreateActivityJob.perform_later(comment.id, comment.class.to_s)
+    else
+      flash[:error] = "Something went wrong. #{@comment.errors}"
     end
-
-    #If error render errors
-    create_comment_service.on :comment_error do |comment|
-      respond_to do |format|
-        format.json { render json: comment.errors,  status: :unprocessable_entity }
-      end
-    end
-
-    #Call the comment creation service
-    create_comment_service.call
   end
 
   def destroy
@@ -46,13 +35,11 @@ class CommentsController < ApplicationController
 
   private
 
-  def create_comment_service
+  def set_commentable
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
-
     if ["Idea", "Feedback", "Investment", "School"].include? commentable_type
       @commentable = commentable_type.safe_constantize.find_by_uuid(commentable_id)
-      @create_comment_service ||= CreateCommentService.new(comment_params, @commentable, current_user)
     else
       respond_to do |format|
         flash[:error] = "Sorry, unable to comment on this entity"

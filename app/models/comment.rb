@@ -15,7 +15,7 @@ class Comment < ActiveRecord::Base
   include Mentioner
 
   #Callback hooks
-  after_create :increment_counters
+  after_commit :increment_counters, :create_activity, on: :create
   before_destroy :decrement_counters, :delete_notification
 
   #Model Associations
@@ -74,6 +74,10 @@ class Comment < ActiveRecord::Base
   end
 
   private
+
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s)
+  end
 
   def increment_counters
     #Increment counters for commentable

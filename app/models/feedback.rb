@@ -36,7 +36,7 @@ class Feedback < ActiveRecord::Base
 
   #Hooks
   before_destroy :decrement_counters, :delete_activity
-  after_create :increment_counters
+  after_commit :increment_counters, on: :create
 
   public
 
@@ -59,6 +59,8 @@ class Feedback < ActiveRecord::Base
 
     #Add to leaderboard
     Feedback.leaderboard.add(id, points)
+    # Enque activity creation
+    CreateActivityJob.perform_later(self.id, self.feedback.class.to_s)
   end
 
   def decrement_counters

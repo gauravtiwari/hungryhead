@@ -61,16 +61,18 @@ class IdeasController < ApplicationController
 
   # PUT /ideas/1/publish
   def publish
-    publish_idea_service.on :idea_published do |idea|
-      @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
+    if @idea.profile_complete?
+      @idea = PublishIdeaService.new(@idea, current_user, params[:privacy])
+      if @idea.published?
+        @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
+      else
+        @msg = "Something went wrong, please try again"
+      end
       render :publish
-      CreateActivityJob.perform_later(idea.id, idea.class.to_s)
-    end
-    publish_idea_service.on :error do |idea|
-      @msg = "Something went wrong #{idea.errors}"
+    else
+      @msg = "Your idea profile isn't complete. Please complete profile and try again."
       render :publish
     end
-    publish_idea_service.publish_idea
   end
 
   # GET /ideas/1/comments
@@ -152,10 +154,6 @@ class IdeasController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
-  end
-
-  def publish_idea_service
-    @publish_idea_service ||= PublishIdeaService.new(@idea, current_user, params[:privacy])
   end
 
   def set_idea
