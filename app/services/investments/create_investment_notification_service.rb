@@ -7,14 +7,18 @@ class CreateInvestmentNotificationService
   end
 
   def create
-    @activity = @user.activities.create!(
-      trackable: @investment,
-      verb: 'invested',
-      recipient: @idea,
-      key: 'investment.create',
-      unread: true
-    )
-    cache(@activity)
+    if @user.activities.where(trackable: @investment).empty?
+      @activity = @user.activities.create!(
+        trackable: @investment,
+        verb: 'invested',
+        recipient: @idea,
+        key: 'investment.create',
+        unread: true
+      )
+      cache(@activity)
+    else
+      return
+    end
   end
 
   def cache(activity)

@@ -1,28 +1,34 @@
 class CreateMentionService
 
   def initialize(mentioner)
-		@mentioner_content = mentioner.body
-		@user = mentioner.user
+    @mentioner_content = mentioner.body
+    @user = mentioner.user
     @mentioner = mentioner
-	end
+  end
 
-	def mention
-	  @mentioner_content.scan(/@\w+/).each do |username|
+  def mention
+    @mentioner_content.scan(/@\w+/).each do |username|
       mentionable = User.friendly.find_by_username(username.gsub('@', ''))
       if mentionable.present?
         @mention = mentionable.mentions.create!(user: @user, mentioner: @mentioner)
-        @activity = @user.notifications.create!(
-          trackable: @mention,
-          verb: 'mentioned',
-          parent_id: find_parent_activity,
-          recipient: mentionable,
-          key: 'mention.create',
-          unread: true
-        )
-        cache(@activity)
+        if @user.notifications.where(trackable: @mention).empty?
+          @activity = @user.notifications.create!(
+            trackable: @mention,
+            verb: 'mentioned',
+            parent_id: find_parent_activity,
+            recipient: mentionable,
+            key: 'mention.create',
+            unread: true
+          )
+          cache(@activity)
+        else
+          return
+        end
+      else
+        return
       end
     end
-	end
+  end
 
   def find_parent_activity
     if @mentioner.class.to_s == "Comment"

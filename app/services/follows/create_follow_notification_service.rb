@@ -7,14 +7,18 @@ class CreateFollowNotificationService
 	end
 
   def create
-    @activity = @user.notifications.create!(
-      trackable: @follow,
-      verb: 'followed',
-      recipient: @followable,
-      key: 'follow.create',
-      unread: true
-    )
-    cache(@activity)
+    if @user.notifications.where(trackable: @follow).empty?
+      @activity = @user.notifications.create!(
+        trackable: @follow,
+        verb: 'followed',
+        recipient: @followable,
+        key: 'follow.create',
+        unread: true
+      )
+      cache(@activity)
+    else
+      return
+    end
   end
 
   def cache(activity)

@@ -7,14 +7,18 @@ class CreateUserNotificationService
   end
 
   def create
-    @user.activities.create!(
-      trackable: @user,
-      verb: 'joined',
-      recipient: @user,
-      key: 'user.create'
-    )
-    publish_user #publish user
-    increment_counters
+    if @user.activities.where(trackable: @user).empty?
+      @user.activities.create!(
+        trackable: @user,
+        verb: 'joined',
+        recipient: @user,
+        key: 'user.create'
+      )
+      publish_user #publish user
+      increment_counters
+    else
+      return
+    end
   end
 
   def publish_user
