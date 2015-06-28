@@ -263,8 +263,8 @@ CREATE TABLE events (
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-28 20:46:30.530761'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-28 20:46:30.530799'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-28 22:40:30.466389'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-28 22:40:30.466433'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2275,13 +2275,6 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 
 
 --
--- Name: index_activities_on_trackable_id_and_trackable_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_activities_on_trackable_id_and_trackable_type_and_key ON activities USING btree (trackable_id, trackable_type, key);
-
-
---
 -- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2765,13 +2758,6 @@ CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notificat
 
 
 --
--- Name: index_notifications_on_trackable_id_and_trackable_type_and_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_notifications_on_trackable_id_and_trackable_type_and_key ON notifications USING btree (trackable_id, trackable_type, key);
-
-
---
 -- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3108,6 +3094,13 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 
 
 --
+-- Name: unique_activity_per_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_activity_per_user ON activities USING btree (user_id, trackable_id, trackable_type, key);
+
+
+--
 -- Name: unique_follows_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3119,6 +3112,13 @@ CREATE UNIQUE INDEX unique_follows_index ON follows USING btree (followable_id, 
 --
 
 CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionable_id, impressionable_type, user_id);
+
+
+--
+-- Name: unique_notification_per_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_notification_per_user ON notifications USING btree (user_id, trackable_id, trackable_type, key);
 
 
 --
