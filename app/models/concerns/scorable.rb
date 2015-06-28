@@ -8,55 +8,20 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def popular_20
-      max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
-      cache_key = "#{self}/popular-#{max_updated_at}"
-
-      list = self.leaderboard.empty?
-      if list
-        self.published.find_each{ |record| self.leaderboard.add(record.id, record.points) }
-      end
-
-      Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.published.where(id: self.leaderboard.revrange(0, 20))
-        .order_as_specified(id: self.leaderboard.revrange(0, 20))
-        .map{|object| send("#{self.to_s.downcase}_json", object)}
-      end
+      User.fetch_multi(self.leaderboard.revrange(0, 20))
+      .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 
     # load top 20 users/ideas/feedbacks
     def trending_20
-      max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
-      cache_key = "#{self}/trending-#{max_updated_at}"
-
-      list = self.trending.empty?
-      if list
-        self.published.find_each{ |record| self.trending.add(record.id, 1) }
-      end
-
-      Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.published.where(id: self.trending.revrange(0, 20))
-        .order_as_specified(id: self.trending.revrange(0, 20))
-        .map{|object| send("#{self.to_s.downcase}_json", object)}
-      end
-
+      User.fetch_multi(self.trending.revrange(0, 20))
+      .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 
     # load top 20 users/ideas/feedbacks
     def latest_listing
-      max_updated_at = self.maximum(:updated_at).try(:utc).try(:to_s, :number)
-      cache_key = "#{self}/latest-#{max_updated_at}"
-
-      list = self.latest.empty?
-
-      if list
-        self.published.find_each{ |record| self.latest << record.id }
-      end
-
-      Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-        self.published.where(id: self.latest.values.reverse)
-        .order_as_specified(id: self.latest.values.reverse)
-        .map{|object| send("#{self.to_s.downcase}_json", object)}
-      end
+      User.fetch_multi(self.latest.values.reverse)
+      .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 
     #User JSON

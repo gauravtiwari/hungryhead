@@ -323,8 +323,6 @@ GEM
     nokogumbo (1.4.1)
       nokogiri
     oj (2.12.9)
-    order_as_specified (0.1.0)
-      activerecord (~> 4.0)
     orm_adapter (0.5.0)
     paper_trail (4.0.0.rc1)
       activerecord (>= 3.0, < 6.0)
@@ -576,7 +574,6 @@ DEPENDENCIES
   mini_magick
   nokogiri
   oj
-  order_as_specified
   paper_trail (~> 4.0.0.rc1)
   pg
   postgres-copy
