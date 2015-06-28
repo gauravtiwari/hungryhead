@@ -26,7 +26,7 @@ class CreateActivities < ActiveRecord::Migration
     end
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
-    add_index :activities, [:published], algorithm: :concurrently
+    add_index :activities, :published, where: "published IS TRUE", algorithm: :concurrently
     add_index :activities, [:user_id, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_user'
     add_index :activities, :uuid, algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type], algorithm: :concurrently

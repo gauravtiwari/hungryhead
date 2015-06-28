@@ -11,6 +11,7 @@ class CreateAttendees < ActiveRecord::Migration
 
     add_index :attendees, :attendee_id, algorithm: :concurrently
     add_index :attendees, :event_id, algorithm: :concurrently
+    add_index :attendees, :status, algorithm: :concurrently
     add_index :attendees, [:attendee_id, :event_id], unique: true, algorithm: :concurrently
   end
 end

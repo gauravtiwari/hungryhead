@@ -1,13 +1,9 @@
 class Idea < ActiveRecord::Base
 
   include IdentityCache
-
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
-  #return objects in same order as specificied
-  extend OrderAsSpecified
-
   #Gamification
   has_merit
 

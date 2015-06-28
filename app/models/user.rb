@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
 
   #redis objects
   include Redis::Objects
-  #order objects in same order as given
-  extend OrderAsSpecified
 
   #Scopes for searching
   scope :students, -> { where(role: 1) }

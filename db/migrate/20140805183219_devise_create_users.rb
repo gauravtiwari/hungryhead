@@ -78,5 +78,17 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently
     add_index :users, :confirmation_token,   :unique => true, algorithm: :concurrently
     # add_index :users, :unlock_token,         :unique => true
+
+    # Add partial where indexes for postgresql
+    add_index :users, :role, name: "index_user_role_student", where: "role == '1'", algorithm: :concurrently
+    add_index :users, :role, name: "index_user_role_entrepreneur", where: "role == '2'", algorithm: :concurrently
+    add_index :users, :role, name: "index_user_role_mentor", where: "role == '3'", algorithm: :concurrently
+    add_index :users, :role, name: "index_user_role_faculty", where: "role == '4'", algorithm: :concurrently
+    add_index :users, :role, name: "index_user_role_alumni", where: "role == '5'", algorithm: :concurrently
+
+    add_index :users, :state, name: "index_user_published", where: "state == 'published'", algorithm: :concurrently
+    add_index :users, :admin, name: "index_user_admin", where: "admin IS TRUE", algorithm: :concurrently
+    add_index :users, :verified, name: "index_user_verified", where: "verified IS TRUE", algorithm: :concurrently
+
   end
 end
