@@ -62,11 +62,12 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     if @idea.profile_complete?
-      @idea = PublishIdeaService.new(@idea, current_user, params[:privacy])
+      @idea.update_attributes(privacy: params[:privacy])
+      @idea.published! unless @idea.published?
       if @idea.published?
         @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
       else
-        @msg = "Something went wrong, please try again"
+        @msg = "Something went wrong, please try again."
       end
       render :publish
     else
