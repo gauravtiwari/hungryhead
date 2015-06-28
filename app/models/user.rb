@@ -73,10 +73,8 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_save do |user|
-    RecordSavedJob.set(wait: 1.minute).perform_later(user.id, "User") if rebuild_search?
-    RebuildNotificationsCacheJob.set(wait: 1.minute).perform_later(id) if rebuild_cache? && published?
-  end
+  after_save :soulmate_loader, if: :rebuild_search?
+  after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
@@ -210,23 +208,17 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_search?
-    published?
+    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && published?
   end
 
   def rebuild_cache?
     #check if basic info changed and user is not new
-    name_changed? || avatar_changed? || username_changed? && !id_changed?
+    name_changed? || avatar_changed? || username_changed? && published?
   end
 
   def has_notifications?
     #check if user has notifications
     ticker.members.length > 0
-  end
-
-  #Override Devise's update with password to allow registration edits without password entry
-  def update_with_password(params={})
-    params.delete(:current_password)
-    self.update_without_password(params)
   end
 
   private
@@ -289,6 +281,25 @@ class User < ActiveRecord::Base
   def slug_candidates
     [:username]
   end
+
+  def rebuild_notification_cache
+    RebuildNotificationsCacheJob.set(wait: 1.minute).perform_later(id)
+  end
+
+  def soulmate_loader
+    #instantiate soulmate loader to re-generate search index
+    loader = Soulmate::Loader.new('people')
+    loader.add(
+      "term" => @user.name,
+      "image" => @user.avatar.url(:avatar),
+      "description" => @user.mini_bio,
+      "id" => @user.id,
+      "data" => {
+        "link" => profile_path(@user)
+      }
+    )
+  end
+
 
   def remove_from_soulmate
     #Remove search index if :record destroyed
