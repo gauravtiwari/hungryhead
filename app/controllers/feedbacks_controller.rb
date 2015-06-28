@@ -40,12 +40,10 @@ class FeedbacksController < ApplicationController
   def create
     @feedback = CreateFeedbackService.new(feedback_params, @idea, current_user).call
     authorize @feedback
-    if @feedback.save
-      respond_to do |format|
+    respond_to do |format|
+      if @feedback.save
         format.json { render :show, status: :created}
-      end
-    else
-      respond_to do |format|
+      else
         format.json { render json: @feedback.errors,  status: :unprocessable_entity }
       end
     end

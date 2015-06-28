@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
         { data: render(:show, locals: {comment: @comment} )}
       )
     else
-      flash[:error] = "Something went wrong. #{@comment.errors}"
+      render json: @comment.errors, notice: "Something went wrong. #{@comment.errors}"
     end
   end
 
