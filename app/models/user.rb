@@ -91,6 +91,7 @@ class User < ActiveRecord::Base
 
   #Latest ideas
   list :latest_ideas, maxlength: 5, marshal: true
+
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 

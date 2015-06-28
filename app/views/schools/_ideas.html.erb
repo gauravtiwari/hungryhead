@@ -2,7 +2,7 @@
   <table class="table no-margin">
     <tbody>
       <% if @ideas.length > 0 %>
-        <% @ideas.each do |idea| %>
+        <% @ideas.first(5).each do |idea| %>
           <%= render partial: 'ideas/idea', locals: {idea: idea} %>
         <% end %>
       <% else %>

@@ -38,7 +38,6 @@ class Idea < ActiveRecord::Base
   list :feedbackers_ids
   list :investors_ids
   list :commenters_ids
-  list :viewers_ids
   set :impressioners_ids
 
   #Set to store trending
@@ -64,7 +63,7 @@ class Idea < ActiveRecord::Base
   #Scopes
   scope :published, -> { where(status: 1) }
   scope :school, -> { where(privacy: 1) }
-  scope :public_ideas, -> { where(privacy: 2) }
+  scope :public_ideas, -> { where(privacy: 3) }
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
@@ -119,7 +118,7 @@ class Idea < ActiveRecord::Base
   end
 
   def can_view?(current_user)
-    viewers_ids.values.include?(current_user.id.to_s)
+    true #TODOS
   end
 
   def founder?(current_user)

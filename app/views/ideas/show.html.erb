@@ -1,6 +1,6 @@
 <div class="container p-b-60">
   <div class="col-md-9 col-lg-8 col-sm-8 no-padding p-l-15">
-    <% cache(["idea_header", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
+    <% cache(["idea_header", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
       <div class="auto-height box-shadow ">
         <%= render partial: 'header' %>
       </div>
@@ -11,7 +11,7 @@
     <div class="m-t-20">
       <div class="idea-content">
         <div class="clearfix">
-          <% cache(["idea_main_content", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
+          <% cache(["idea_main_content", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
             <% sections = render(template: 'ideas/show.json.jbuilder') %>
             <%= react_component('MainContent', {data: sections}) %>
           <% end %>
@@ -29,7 +29,7 @@
         <%= render partial: 'badges' %>
       <% end %>
 
-      <% cache(["idea_team", @idea, current_user == @idea.user ? "owner" : "guest"]) do %>
+      <% cache(["idea_team", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
         <%= render partial: 'team'%>
       <% end %>
 

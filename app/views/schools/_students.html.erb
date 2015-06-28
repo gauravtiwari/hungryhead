@@ -2,7 +2,7 @@
   <table class="table no-margin">
     <tbody>
       <% if @students.length > 0 %>
-        <% @students.each do |user| %>
+        <% @students.first(5).each do |user| %>
           <%= render partial: 'users/user', locals: {user: user} %>
         <% end %>
       <% else %>

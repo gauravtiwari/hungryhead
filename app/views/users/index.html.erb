@@ -1,4 +1,4 @@
-<% cache(cache_key_for_users) do %>
+<% cache([cache_key_for_users, params[:page]]) do %>
   <div class="wrapper-small people-bg-gradient">
     <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
       <div class="hero-text inner">

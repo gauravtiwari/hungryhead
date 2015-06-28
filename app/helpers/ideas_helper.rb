@@ -16,6 +16,12 @@ module IdeasHelper
       }
   end
 
+  def cache_key_for_ideas
+    count = Idea.published.count
+    max_updated_at = Idea.published.maximum(:updated_at).try(:utc).try(:to_s, :number)
+    "ideas/all-#{count}-#{max_updated_at}"
+  end
+
   def idea_collaboration?
     params[:controller] == "ideas" && params[:action] != "index" && user_signed_in?
   end

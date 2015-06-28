@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   layout "home"
 
-  autocomplete :user, :name, :full => true
+  autocomplete :user, :name, :full => true, extra_data: [:username]
 
   def index
     @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)

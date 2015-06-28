@@ -1,34 +1,38 @@
-<div class="wrapper-small idea-bg-gradient">
-  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-    <div class="hero-text inner">
-      <h2 class="text-white">Browse ideas</h2>
-      <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+<% cache([cache_key_for_ideas, params[:page]])  do %>
+  <div class="wrapper-small idea-bg-gradient">
+    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <div class="hero-text inner">
+        <h2 class="text-white">Browse ideas</h2>
+        <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:rules), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container p-t-40 p-b-80">
-  <div class="idea-list">
-  <div class="col-md-12">
-    <table class="table">
-      <thead>
-        <tr>
-          <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
-          <th>Follow to get updates</th>
-          <th class="text-center">Idea Stats</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @ideas.each do |idea| %>
-          <%= render partial: 'idea', locals: {idea: idea} %>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="paging-container p-r-15">
+  <div class="container p-t-40 p-b-80">
+    <div class="idea-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
+            <th>Follow to get updates</th>
+            <th class="text-center">Idea Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ideas.each do |idea| %>
+            <% cache([idea, "followed", idea.followed_by?(current_user), idea.in_team?(current_user)]) do %>
+              <%= render partial: 'idea', locals: {idea: idea} %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
       <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    </div>
   </div>
-</div>
-</div>
+  </div>
+<% end %>
 
 

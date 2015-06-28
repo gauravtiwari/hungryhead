@@ -1,6 +1,7 @@
 json.idea do
-  json.cache! ["main_body", @idea, current_user], expires_in: 2.hours do
+  json.cache! ["idea_show_json", @idea, @idea.in_team?(current_user) ? "team" : "guest"], expires_in: 2.hours do
     json.(@idea, :uuid, :name, :slug, :description, :high_concept_pitch, :profile, :elevator_pitch, :sections, :video_html, :video)
+
     json.logo do
       json.url @idea.logo.url(:avatar) if @idea.logo
     end

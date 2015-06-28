@@ -23,7 +23,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }.first(10)
+    @students = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
   end
 
   # GET /schools/1/dashboard
@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
   end
 
   def latest_ideas
-    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }.first(10)
+    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }
     respond_to do |format|
       format.js
     end

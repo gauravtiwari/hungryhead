@@ -1,5 +1,6 @@
 <div class="container p-b-60">
   <% data = render(template: 'users/show.json.jbuilder') %>
+
   <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
     <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
         <%= render partial: 'sidebar', locals: {data: data} %>

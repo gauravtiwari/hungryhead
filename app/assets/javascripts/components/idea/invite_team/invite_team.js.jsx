@@ -66,16 +66,17 @@ var InviteTeam = React.createClass({
 	          },
 	          results: function(data) {
 	            return {
-	              results: $.map(data, function(item) {
-	                return {
-	                  text: item.label,
-	                  value: item.value,
-	                  id: item.id
-	                };
-	              })
+	              results: data
 	            };
 	          }
 	        },
+	        formatResult: function(user) {
+          	return "<div class='select2-user-result'>" +  user.value + " <span class='small text-danger'> (" + user.username +  ")</span></div>";
+          },
+
+          formatSelection: function(user) {
+          	return user.value;
+          },
 	        id: function(object) {
 	          return object.id;
 	        }

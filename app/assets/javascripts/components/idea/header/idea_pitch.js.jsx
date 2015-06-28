@@ -9,8 +9,7 @@ var IdeaPitch= React.createClass({
 
     return (
       <div className="col-md-6">
-        <div className="text-white p-t-40 fs-16" dangerouslySetInnerHTML={{__html: html}}></div>
-        <a onClick={this.props.openForm} className="pull-right fs-12 b-b b-white pointer text-white">{this.props.text}</a>
+        <div className="text-white p-t-20 p-b-20 fs-16" dangerouslySetInnerHTML={{__html: html}}></div>
       </div>
     );
   }
