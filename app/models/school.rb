@@ -14,6 +14,7 @@ class School < ActiveRecord::Base
 	has_many :students, -> { where role: 1 }, class_name: 'User'
 	has_many :ideas
 	has_many :faculties, -> { where role: 4 }, class_name: 'User'
+
 	belongs_to :user
 
 	cache_has_many :students, embed: true

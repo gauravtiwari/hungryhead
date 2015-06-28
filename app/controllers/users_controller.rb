@@ -157,10 +157,10 @@ class UsersController < ApplicationController
 
   def activities
     authorize @user
-    @activities = Activity
-    .where(user_id: @user.id)
-    .order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 10)
+    @activities = @user.fetch_activities
+    .select{|a| a.published == true}
+    .sort { |x,y| y.created_at <=> x.created_at }
+    .paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.js
       format.html
