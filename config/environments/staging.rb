@@ -15,8 +15,12 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :mem_cache_store
-  config.identity_cache_store = :mem_cache_store
+  config.cache_store = :dalli_store, ENV["MEMCACHE_SERVER"].split(','),
+                    {:username => ENV["MEMCACHE_USERNAME"],
+                     :password => ENV["MEMCACHE_PASSWORD"]}
+  config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"].split(','),
+                    {:username => ENV["MEMCACHE_USERNAME"],
+                     :password => ENV["MEMCACHE_PASSWORD"]}
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

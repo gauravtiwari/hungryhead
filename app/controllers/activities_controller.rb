@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = Activity.where(published: true)
-        .includes([:trackable, :user, :recipient])
+        .includes([:trackable, :user])
         .order(id: :desc)
         .paginate(:page => params[:page], :per_page => 20)
   end
