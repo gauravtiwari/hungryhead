@@ -64,9 +64,6 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, :privacy, name: "index_idea_privacy_friends", where: "privacy = 2", algorithm: :concurrently
     add_index :ideas, :privacy, name: "index_idea_privacy_everyone", where: "privacy = 3", algorithm: :concurrently
 
-    add_index :ideas, :status, algorithm: :concurrently
-    add_index :ideas, :privacy, algorithm: :concurrently
     add_index :ideas, :slug, algorithm: :concurrently
-    add_index :ideas, :looking_for_team, algorithm: :concurrently
   end
 end

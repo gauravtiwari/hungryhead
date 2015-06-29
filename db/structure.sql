@@ -263,8 +263,8 @@ CREATE TABLE events (
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-29 00:03:15.683473'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-29 00:03:15.683525'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-29 00:05:05.200617'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-29 00:05:05.200656'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2590,20 +2590,6 @@ CREATE INDEX index_ideas_on_level ON ideas USING btree (level);
 
 
 --
--- Name: index_ideas_on_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_looking_for_team ON ideas USING btree (looking_for_team);
-
-
---
--- Name: index_ideas_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_privacy ON ideas USING btree (privacy);
-
-
---
 -- Name: index_ideas_on_rules_accepted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2629,13 +2615,6 @@ CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
 --
 
 CREATE INDEX index_ideas_on_slug ON ideas USING btree (slug);
-
-
---
--- Name: index_ideas_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
 
 
 --
