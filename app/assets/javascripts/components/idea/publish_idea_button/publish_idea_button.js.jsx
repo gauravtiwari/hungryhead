@@ -44,7 +44,7 @@ var PublishIdeaButton = React.createClass({
 
   render: function() {
     var text = this.state.is_public && this.state.published ? 'Published' : 'Private';
-    var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible to you and team members';
+    var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible to you and team members. Click to publish.';
 
     var cx = React.addons.classSet;
     var classes = cx({
@@ -59,7 +59,9 @@ var PublishIdeaButton = React.createClass({
     });
 
     return (
-        <a data-toggle="tooltip" data-placement="top" data-original-title={title} onClick={this.handleClick} className={classes} ><i className={icon_class}></i> {text}</a>
+        <a data-toggle="tooltip" data-placement="top" data-original-title={title} onClick={this.handleClick} className={classes} >
+          <i className={icon_class}></i> {text}
+        </a>
     )
   },
 

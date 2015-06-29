@@ -4,3 +4,4 @@ json.current_privacy @idea.privacy.capitalize
 json.published @idea.published?
 json.is_public @idea.everyone?
 json.is_team @idea.team?
+json.url @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea)
