@@ -19,6 +19,9 @@ class CreateInvestments < ActiveRecord::Migration
 
     end
 
+    add_index :investments, :amount, name: "index_investment_angel",  where: "amount < 500 AND amount > 200"
+    add_index :investments, :amount, name: "index_investment_vc",  where: "amount < 900 AND amount > 500"
+
   end
 
 end

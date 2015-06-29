@@ -11,7 +11,7 @@ module Votable
   end
 
   def find_voters
-    User.where(id: voters_ids.values)
+    User.fetch_multi(voters_ids.values)
   end
 
 end

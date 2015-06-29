@@ -13,18 +13,12 @@ module Follower
 
   # users that follow self
   def get_followings
-    cache_key = "#{self.class.to_s}/followings-#{followings_ids.members.count}"
-    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-      User.find(followings_ids.members)
-    end
+    User.fetch_multi(followings_ids.members)
   end
 
   # users who follow and are being followed by self
   def friends
-    cache_key = "#{self.class.to_s}/friends-#{followers_ids.intersection(followings_ids).count}"
-    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-      User.where(:id => followers_ids.intersection(followings_ids))
-    end
+    User.fetch_multi(followers_ids.intersection(followings_ids))
   end
 
   def is_friend?(user)

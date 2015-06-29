@@ -7,10 +7,7 @@ module Followable
 
   #users that self follows
   def get_followers
-    cache_key = "#{self.class.to_s}/followers-#{followers_ids.members.count}"
-    Rails.cache.fetch(cache_key, expires_in: 2.hours) do
-      User.find(followers_ids.members)
-    end
+    User.fetch_multi(followers_ids.members)
   end
 
   # does the user follow self

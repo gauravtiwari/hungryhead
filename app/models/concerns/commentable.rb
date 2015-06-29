@@ -14,15 +14,11 @@ module Commentable
   end
 
   def get_commenters
-    User.where(id: commenters_ids)
+    User.fetch_multi(commenters_ids)
   end
 
   def commenter
-    commentable.user.id
-  end
-
-  def comments_score
-    comments.inject(0){|sum, comment| sum + comment.comment_votes_counter.value * 5}
+    commentable.user_id
   end
 
 end

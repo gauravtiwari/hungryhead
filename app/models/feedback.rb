@@ -32,8 +32,6 @@ class Feedback < ActiveRecord::Base
   enum status: { posted: 0, badged: 1, flagged: 2 }
   enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
 
-  store_accessor :parameters, :tags
-
   #Hooks
   before_destroy :decrement_counters, :delete_activity
   after_commit :increment_counters, :create_activity, on: :create

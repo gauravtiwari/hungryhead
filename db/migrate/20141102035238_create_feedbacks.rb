@@ -18,23 +18,21 @@ class CreateFeedbacks < ActiveRecord::Migration
 
       t.integer :badge, default: 0, null: false
 
-      t.jsonb :parameters, default: "{}"
-
       t.timestamps null: false
     end
 
     add_index :feedbacks, :user_id, algorithm: :concurrently
+    # Add partial where indexes for postgresql
+    add_index :feedbacks, :status, name: "index_feedback_status", where: "status = 1", algorithm: :concurrently
 
-    add_index :feedbacks, :status, algorithm: :concurrently
-    add_index :feedbacks, :badge, algorithm: :concurrently
+    add_index :feedbacks, :badge, name: "index_feedback_helpful", where: "badge = 1", algorithm: :concurrently
+    add_index :feedbacks, :badge, name: "index_feedback_unhelpful", where: "badge = 2", algorithm: :concurrently
+    add_index :feedbacks, :badge, name: "index_feedback_irrelevant", where: "badge = 3", algorithm: :concurrently
 
     add_index :feedbacks, [:user_id, :idea_id], unique: true, algorithm: :concurrently
 
     add_index :feedbacks, :uuid, algorithm: :concurrently
-
-    add_index :feedbacks, :parameters, using: :gin
     add_index :feedbacks, :idea_id, algorithm: :concurrently
-
   end
 
 end

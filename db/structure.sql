@@ -263,8 +263,8 @@ CREATE TABLE events (
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-29 00:05:05.200617'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-29 00:05:05.200656'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-29 00:15:53.556685'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-29 00:15:53.556725'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -304,7 +304,6 @@ CREATE TABLE feedbacks (
     cached_tag_list character varying,
     status integer DEFAULT 0 NOT NULL,
     badge integer DEFAULT 0 NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
@@ -2408,10 +2407,31 @@ CREATE INDEX index_events_on_status ON events USING btree (status);
 
 
 --
--- Name: index_feedbacks_on_badge; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_feedback_helpful; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_feedbacks_on_badge ON feedbacks USING btree (badge);
+CREATE INDEX index_feedback_helpful ON feedbacks USING btree (badge) WHERE (badge = 1);
+
+
+--
+-- Name: index_feedback_irrelevant; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_irrelevant ON feedbacks USING btree (badge) WHERE (badge = 3);
+
+
+--
+-- Name: index_feedback_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_status ON feedbacks USING btree (status) WHERE (status = 1);
+
+
+--
+-- Name: index_feedback_unhelpful; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_unhelpful ON feedbacks USING btree (badge) WHERE (badge = 2);
 
 
 --
@@ -2429,24 +2449,10 @@ CREATE INDEX index_feedbacks_on_level ON feedbacks USING btree (level);
 
 
 --
--- Name: index_feedbacks_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
-
-
---
 -- Name: index_feedbacks_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
-
-
---
--- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
 
 
 --
@@ -2643,6 +2649,20 @@ CREATE INDEX index_impressions_on_ip_address ON impressions USING btree (ip_addr
 --
 
 CREATE INDEX index_impressions_on_user_id ON impressions USING btree (user_id);
+
+
+--
+-- Name: index_investment_angel; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investment_angel ON investments USING btree (amount) WHERE ((amount < 500) AND (amount > 200));
+
+
+--
+-- Name: index_investment_vc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investment_vc ON investments USING btree (amount) WHERE ((amount < 900) AND (amount > 500));
 
 
 --
