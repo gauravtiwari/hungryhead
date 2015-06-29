@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   has_many :idea_messages, dependent: :destroy, autosave: true
 
   cache_has_many :ideas, embed: true
+  cache_has_many :impressions, embed: true
   cache_has_many :feedbacks, embed: true
   cache_has_many :investments, embed: true
   cache_has_many :votes, inverse_name: :voter,  embed: true

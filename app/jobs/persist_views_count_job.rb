@@ -7,7 +7,8 @@ class PersistViewsCountJob < ActiveJob::Base
       if @user.impressions.where(impressionable: @record).empty?
         record_type.constantize.trending.increment(@user.id)
         @record.views_counter.increment
-        @user.impressions.create!(
+
+        @user.fetch_impressions.create!(
           impressionable_id: record_id,
           impressionable_type: record_type,
           referrer: referrer,
@@ -15,6 +16,7 @@ class PersistViewsCountJob < ActiveJob::Base
           controller_name: record_type.pluralize,
           action_name: 'show'
         )
+
       else
         return false
       end

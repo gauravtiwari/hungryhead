@@ -52,6 +52,9 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, :school_id, algorithm: :concurrently
     add_index :ideas, :user_id, algorithm: :concurrently
 
+    #Index team ids
+    add_index :ideas, :team_ids, using: :gin, algorithm: :concurrently
+
     #Add partial indexes for idea
     add_index :ideas, :investable, name: "index_idea_investable", where: "investable IS TRUE", algorithm: :concurrently
     add_index :ideas, :validated, name: "index_idea_validated", where: "validated IS TRUE", algorithm: :concurrently

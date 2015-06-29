@@ -74,6 +74,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
     add_index :users, :school_id, algorithm: :concurrently
     add_index :users, :email,                :unique => true, algorithm: :concurrently
+    add_index :users, :username,                :unique => true, algorithm: :concurrently
     add_index :users, :slug,                :unique => true, algorithm: :concurrently
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently
     add_index :users, :confirmation_token,   :unique => true, algorithm: :concurrently
