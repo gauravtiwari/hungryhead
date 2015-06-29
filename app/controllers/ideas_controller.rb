@@ -62,8 +62,8 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     if @idea.profile_complete?
-      @idea.update_attributes(privacy: params[:privacy])
-      @idea.published! unless @idea.published?
+      @idea.published!
+      @idea.everyone!
       if @idea.published?
         CreateActivityJob.perform_later(@idea.id, @idea.class.to_s) if Activity.where(trackable: @idea, key: 'idea.create').empty?
         @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
@@ -75,6 +75,17 @@ class IdeasController < ApplicationController
       @msg = "Your idea profile isn't complete. Please complete profile and try again."
       render :publish
     end
+  end
+
+  # PUT /ideas/1/unpublish
+  def unpublish
+    @idea.draft!
+    @idea.team!
+    if @idea.draft?
+      UnpublishIdeaJob.perform_later(idea)
+    end
+    @msg = "We are unpublishing your idea profile. Once unpublished it will only visible to your team."
+    render :publish
   end
 
   # GET /ideas/1/comments

@@ -29,7 +29,8 @@
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested? }) %>
       <% else %>
-       <%= react_component('PublishIdeaButton', {published: @idea.published?, id: @idea.slug, profile_complete: @idea.profile_complete?, is_team: @idea.team?, idea: @idea, current_privacy: @idea.privacy.capitalize, is_public: @idea.everyone?, is_school: @idea.school?, is_friends: @idea.friends?, name: @idea.name})%>
+        <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
+        <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.team?, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>
       <% end %>
     </div>
   </div>

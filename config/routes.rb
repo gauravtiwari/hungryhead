@@ -188,6 +188,7 @@ Rails.application.routes.draw do
     #Member routes
     member do
       put :publish
+      put :unpublish
       get :likers
       get :card
       get :join_team

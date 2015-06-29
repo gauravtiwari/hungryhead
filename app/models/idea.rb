@@ -112,14 +112,6 @@ class Idea < ActiveRecord::Base
     true
   end
 
-  def can_view?(current_user)
-    if school?
-      school.published_people.member?(current_user.id)
-    elsif friends?
-      user.followings_ids.member?(current_user.id)
-    end
-  end
-
   def founder?(current_user)
     user == current_user
   end
