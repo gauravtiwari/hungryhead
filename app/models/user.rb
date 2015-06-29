@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_save :soulmate_loader, if: :rebuild_search?
+  after_commit :soulmate_loader, on: [:update, :create], if: :rebuild_search?
   after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
@@ -292,10 +292,10 @@ class User < ActiveRecord::Base
     #instantiate soulmate loader to re-generate search index
     loader = Soulmate::Loader.new('people')
     loader.add(
-      "term" => @user.name,
-      "image" => @user.avatar.url(:avatar),
-      "description" => @user.mini_bio,
-      "id" => @user.id,
+      "term" => name,
+      "image" => avatar.url(:avatar),
+      "description" => mini_bio,
+      "id" => id,
       "data" => {
         "link" => profile_path(@user)
       }
