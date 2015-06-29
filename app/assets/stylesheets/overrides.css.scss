@@ -15,6 +15,9 @@ body, p {
 body.show-collaboration {
   overflow: hidden;
 }
+.trending-list li:first-child {
+  padding-top: 10px;
+}
 p {
   margin: 0px 0px 10px 0px;
 }

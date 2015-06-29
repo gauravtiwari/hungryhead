@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_commit :soulmate_loader, on: [:update, :create], if: :rebuild_search?
+  after_save :soulmate_loader
   after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
@@ -210,13 +210,8 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
-  def rebuild_search?
-    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && published?
-  end
-
   def rebuild_cache?
-    #check if basic info changed and user is not new
-    name_changed? || avatar_changed? || username_changed? && published?
+    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && published?
   end
 
   def has_notifications?
@@ -290,19 +285,8 @@ class User < ActiveRecord::Base
   end
 
   def soulmate_loader
-    #instantiate soulmate loader to re-generate search index
-    loader = Soulmate::Loader.new('people')
-    loader.add(
-      "term" => name,
-      "image" => avatar.url(:avatar),
-      "description" => mini_bio,
-      "id" => id,
-      "data" => {
-        "link" => profile_path(@user)
-      }
-    )
+    RecordSavedJob.set(wait: 1.minute).perform_later(id, self.class.to_s)
   end
-
 
   def remove_from_soulmate
     #Remove search index if :record destroyed
@@ -313,13 +297,10 @@ class User < ActiveRecord::Base
   def decrement_counters
     #Decrement counters
     school.people_counter.decrement if school_id.present? && school.people_counter.value > 0
-
     #delete cached sorted_set for school
     school.published_people.delete(id) if school_id.present?
-
     #delete cached sorted set for global leaderboard
     User.latest.delete(id)
-
     #delete leaderboard for this user
     User.leaderboard.delete(id)
     User.trending.delete(id)

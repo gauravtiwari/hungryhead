@@ -8,19 +8,19 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def popular_20
-      User.fetch_multi(self.leaderboard.revrange(0, 20))
+      self.fetch_multi(self.leaderboard.revrange(0, 20))
       .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 
     # load top 20 users/ideas/feedbacks
     def trending_20
-      User.fetch_multi(self.trending.revrange(0, 20))
+      self.fetch_multi(self.trending.revrange(0, 20))
       .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 
     # load top 20 users/ideas/feedbacks
     def latest_listing
-      User.fetch_multi(self.latest.values.reverse)
+      self.fetch_multi(self.latest.values.reverse)
       .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 

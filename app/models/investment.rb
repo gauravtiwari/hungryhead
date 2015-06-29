@@ -17,7 +17,7 @@ class Investment < ActiveRecord::Base
 
   #Model Callbacks
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_commit  :update_balance, :increment_counters, :create_activity, on: :create
+  after_create  :update_balance, :increment_counters, :create_activity
 
   public
 

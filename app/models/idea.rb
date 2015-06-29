@@ -102,7 +102,6 @@ class Idea < ActiveRecord::Base
   end
 
   #Validations
-
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false }
   validates :high_concept_pitch, :presence => true, length: {within: 20..50}
   validates :elevator_pitch, :presence => true, length: {within: 100..140}
@@ -114,7 +113,11 @@ class Idea < ActiveRecord::Base
   end
 
   def can_view?(current_user)
-    true #TODOS
+    if school?
+      school.published_people.member?(current_user.id)
+    elsif friends?
+      user.followings_ids.member?(current_user.id)
+    end
   end
 
   def founder?(current_user)

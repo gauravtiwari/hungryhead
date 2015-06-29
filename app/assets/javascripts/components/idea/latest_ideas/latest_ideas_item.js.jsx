@@ -5,7 +5,7 @@ var LatestIdeasItem = React.createClass({
 
     return (
       <li id={html_id}>
-        <div className="widget-16-header">
+        <div className="widget-16-header p-b-10">
 
         <p className="no-margin">
           <a className="bold fs-13 no-margin text-black" href={this.props.item.url}>{this.props.item.name}</a>

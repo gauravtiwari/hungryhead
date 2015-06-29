@@ -55,7 +55,7 @@ class School < ActiveRecord::Base
 	end
 
 	#Callbacks hooks
-	after_save :load_into_soulmate
+	after_commit :load_into_soulmate
   before_destroy :remove_from_soulmate
 
   def can_score?
