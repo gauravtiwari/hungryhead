@@ -49,9 +49,14 @@ class School < ActiveRecord::Base
 	validates :name, :presence => true,
 	:on => :create
 
+	public
 	#Slug candidates for school
 	def slug_candidates
 	 [:name]
+	end
+
+	def get_faculties
+		fetch_faculties.select{|f| f.state == "published"}
 	end
 
 	#Callbacks hooks

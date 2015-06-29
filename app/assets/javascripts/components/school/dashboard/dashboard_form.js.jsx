@@ -98,6 +98,10 @@ var DashboardForm = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
+    var locations = this.state.school.locations.map(function(location){
+      return location;
+    });
+
     return(
       <div className="modal fade stick-up" id="editSchoolFormPopup" tabIndex="-1" role="dialog" aria-labelledby="editSchoolFormPopupLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
@@ -135,7 +139,7 @@ var DashboardForm = React.createClass({
                             <div className="col-md-6">
                               <div className="form-group">
                                 <label>Location</label>
-                                <input defaultValue={this.state.school.location_name} className="form-control string optional location_list full-width" data-placeholder="Lancaster" type="text" name="school[location_list]" id="locations_select" />
+                                <input defaultValue={this.state.school.locations} className="form-control string optional location_list full-width" data-placeholder="Lancaster" type="text" name="school[location_list]" id="locations_select" />
                               </div>
                               <div className="form-group">
                                   <label>Website url</label>

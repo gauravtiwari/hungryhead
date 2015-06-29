@@ -16,6 +16,17 @@ json.school do
 		json.email @school.email
 		json.phone @school.phone
 
+		json.location_name @school.location_list.first
+
+		json.locations do
+			if @school.cached_location_list.present?
+				json.array! @school.location_list.each do |location|
+					json.tag location
+					json.url tag_people_path(location.parameterize)
+				end
+			end
+		end
+
 		json.description @school.description
 
 		json.website_url url_with_protocol(@school.website_url)

@@ -1,3 +1,4 @@
+<% if @school.get_faculties.length > 0 %>
 <div class="sidebar auto-height box-shadow bg-white m-t-10">
   <div class="user-sidebar">
     <div class="container-xs-height">
@@ -18,7 +19,7 @@
           </div>
           <div class="p-l-15 p-r-15">
             <ul class="no-style m-t-10">
-              <% @school.fetch_faculties.each do |user| %>
+              <% @school.get_faculties.each do |user| %>
                 <li class="p-t-10 p-b-10">
                   <div class="inline m-r-10">
                     <div class="thumbnail-wrapper text-master d32 circular auto-margin m-r-5 m-b-5">
@@ -45,3 +46,4 @@
     </div>
   </div>
 </div>
+<% end %>
