@@ -118,7 +118,6 @@ CREATE TABLE attendees (
     id integer NOT NULL,
     attendee_id integer NOT NULL,
     event_id integer NOT NULL,
-    status integer DEFAULT 1 NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -260,11 +259,10 @@ CREATE TABLE events (
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
-    status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-29 00:15:53.556685'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-29 00:15:53.556725'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-29 00:40:59.370628'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-29 00:40:59.370666'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -604,7 +602,6 @@ CREATE TABLE investments (
     message character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2302,13 +2299,6 @@ CREATE INDEX index_attendees_on_event_id ON attendees USING btree (event_id);
 
 
 --
--- Name: index_attendees_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attendees_on_status ON attendees USING btree (status);
-
-
---
 -- Name: index_badges_sashes_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2397,13 +2387,6 @@ CREATE INDEX index_events_on_slug ON events USING btree (slug);
 --
 
 CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
-
-
---
--- Name: index_events_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_on_status ON events USING btree (status);
 
 
 --
@@ -2859,6 +2842,20 @@ CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (sl
 --
 
 CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
+
+
+--
+-- Name: index_parent_not_null; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_parent_not_null ON comments USING btree (parent_id) WHERE (parent_id IS NOT NULL);
+
+
+--
+-- Name: index_parent_null; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_parent_null ON comments USING btree (parent_id) WHERE (parent_id IS NULL);
 
 
 --
@@ -3364,8 +3361,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141102050735');
 INSERT INTO schema_migrations (version) VALUES ('20141102050834');
 
 INSERT INTO schema_migrations (version) VALUES ('20141122174311');
-
-INSERT INTO schema_migrations (version) VALUES ('20141126200705');
 
 INSERT INTO schema_migrations (version) VALUES ('20141207174436');
 

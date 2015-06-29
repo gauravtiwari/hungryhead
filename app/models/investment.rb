@@ -19,9 +19,6 @@ class Investment < ActiveRecord::Base
   before_destroy :cancel_investment, :decrement_counters, :delete_activity
   after_commit  :update_balance, :increment_counters, :create_activity, on: :create
 
-  #Store accessor methods
-  store_accessor :parameters, :point_earned, :views_count
-
   public
 
   def can_score?

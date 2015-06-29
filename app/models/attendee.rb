@@ -2,7 +2,6 @@ class Attendee < ActiveRecord::Base
 
   belongs_to :event
   belongs_to :attendee, class_name: 'User', foreign_key: 'attendee_id'
-
   after_commit :increment_event_counter, on: :create
   after_commit :decrement_event_counter, on: :destroy
 

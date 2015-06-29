@@ -16,8 +16,8 @@ class CreateComments < ActiveRecord::Migration
 
     add_index :comments, :user_id, algorithm: :concurrently
     add_index :comments, :parent_id, algorithm: :concurrently
-    add_index :investments, :parent_id, name: "index_parent_null",  where: "parent_id IS NULL"
-    add_index :investments, :parent_id, name: "index_parent_not_null",  where: "parent_id IS NOT NULL"
+    add_index :comments, :parent_id, name: "index_parent_null",  where: "parent_id IS NULL"
+    add_index :comments, :parent_id, name: "index_parent_not_null",  where: "parent_id IS NOT NULL"
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
 
   end

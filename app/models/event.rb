@@ -17,8 +17,6 @@ class Event < ActiveRecord::Base
   list :attendees_ids
   counter :attendees_counter
 
-  enum status: { closed:0, open:1 }
-
   belongs_to :eventable, polymorphic: true
   has_many :attendees
 
