@@ -1,3 +1,2 @@
-location = "redis://#{ENV['$REDIS_ADDRESS']}:6379/0/cache" || 'redis://127.0.0.1:6379/0/cache'
-uri = URI.parse(location)
-$redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+location = ENV['$REDIS_ADDRESS'] || "localhost"
+$redis = ConnectionPool.new(size: 5, timeout: 5) { Redis.new( url: "redis://#{location}:6379/0", namespace: "redis_main") }
