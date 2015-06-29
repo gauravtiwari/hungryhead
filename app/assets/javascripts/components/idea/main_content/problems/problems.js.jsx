@@ -72,7 +72,7 @@ var Problems = React.createClass({
     if(this.props.idea.sections && this.props.idea.sections.problems) {
       var html = converter.makeHtml(this.props.idea.sections.problems);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the problems identified. <span>How others are solving, if any? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe the problems you have identified. <span>How others are solving, if any? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {

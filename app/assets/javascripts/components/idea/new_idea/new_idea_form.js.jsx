@@ -108,12 +108,12 @@ var NewIdeaForm = React.createClass({
           <div className="col-md-6 no-padding p-l-15">
             <div className="form-group">
               <label>High concept pitch</label>
-              <span className="help"> "eg: facebook for charity"</span>
+              <span className="help"> "eg: Commonly, We are X for Y"</span>
               <input label="false" className="string required form-control empty" placeholder="ex: Facebook for business" type="text" name="idea[high_concept_pitch]" id="idea_high_concept_pitch" />
             </div>
             <div className="form-group">
               <label>Elevator Pitch</label>
-              <span className="help"> "max: 140 characters"</span>
+              <span className="help"> "max: 140 characters (twitter style)"</span>
               <textarea label="false" className="text required form-control empty" placeholder="ex: A social network for everyone, everywhere to connect and share content." name="idea[elevator_pitch]" id="idea_elevator_pitch"></textarea>
             </div>
 

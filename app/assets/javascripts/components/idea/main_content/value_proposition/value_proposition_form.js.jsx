@@ -24,7 +24,7 @@ var ValuePropositionForm = React.createClass({
     return (
       <div className={classes}>
          <form id="plan-edit-form" ref="value_form" className="plan-edit-form" onSubmit={this._onKeyDown}>
-             <label>Describe your value proposition. <span>What is it that is most attractive? etc.</span></label>
+             <label className="m-b-20">Describe your value proposition. <span>What is most lucrative about your idea? etc.</span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {value_proposition} name="idea[value_proposition]" placeholder='Write are your values? Why your solution is better?' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

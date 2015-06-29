@@ -17,7 +17,7 @@ var PlanForm = React.createClass({
     return (
       <div className={classes}>
          <form id="plan-edit-form" ref="plan_form" className="plan-edit-form" onSubmit={this._onKeyDown}>
-             <label className="m-b-10">Describe your idea. <span>What is it? Story?</span></label>
+             <label className="m-b-20">Describe your idea. <span>What are you looking to build? Story?</span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {this.props.idea.description} name="idea[description]" placeholder='Your Story content' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

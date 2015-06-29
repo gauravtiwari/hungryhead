@@ -24,7 +24,7 @@ var MarketForm = React.createClass({
     return (
       <div className={classes}>
          <form id="market-edit-form" ref="market_form" className="market-edit-form" onSubmit={this._onKeyDown}>
-             <label className="m-b-10">Describe the market for your idea. <span>People you are targeting? Estimated numbers? </span> <small>You can link images.</small> </label>
+             <label className="m-b-20">Describe the market for your idea. <span>People you are targeting? Estimated numbers? </span> <small className="clearfix">You can link images using markdown(Click help).</small> </label>
              <textarea ref="description" className="form-control empty" defaultValue={market} name="idea[market]" placeholder='Describe your market' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

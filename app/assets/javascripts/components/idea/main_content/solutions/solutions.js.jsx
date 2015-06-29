@@ -72,7 +72,7 @@ var Solutions = React.createClass({
     if(this.props.idea.sections && this.props.idea.sections.solutions) {
       var html = converter.makeHtml(this.props.idea.sections.solutions);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the solutions identified. <span>What's different or unique? </span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe/List your solution. <span>What is different or unique? </span> </div>";
     }
 
     if(this.props.meta.is_owner) {

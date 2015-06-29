@@ -23,7 +23,7 @@ var ProblemsForm = React.createClass({
     return (
       <div className={classes}>
          <form id="problems-edit-form" ref="problems_form" className="problems-edit-form" onSubmit={this._onKeyDown}>
-             <label>Describe the problems identified. <span>How others are solving, if any? etc.</span></label>
+             <label className="m-b-20">Describe the problems identified. <span>How others are solving, if any? etc.</span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {problems} name="idea[problems]" placeholder='List the problems you have identified?' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

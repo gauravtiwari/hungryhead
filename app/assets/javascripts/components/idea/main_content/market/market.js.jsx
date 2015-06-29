@@ -71,7 +71,7 @@ var Market = React.createClass({
       var html = converter.makeHtml(this.props.idea.sections.market);
       var market_classes = "section-content market";
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? Any metrices? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";
       var market_classes = "section-content canvas-placeholder sales-marketing market";
     }
 

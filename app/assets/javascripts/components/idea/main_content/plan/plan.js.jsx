@@ -65,7 +65,7 @@ var Plan = React.createClass({
     if(this.props.idea.description) {
       var html = converter.makeHtml(this.props.idea.description);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Summarize your idea. <span>What is it? story?</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Summarize your idea. <span>What is it you are building?</span> </div>";
     }
 
 

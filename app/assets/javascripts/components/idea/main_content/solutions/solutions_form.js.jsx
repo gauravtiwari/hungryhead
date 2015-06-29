@@ -23,7 +23,7 @@ var SolutionsForm = React.createClass({
     return (
       <div className={classes}>
          <form id="solutions-edit-form" ref="solutions_form" className="solutions-edit-form" onSubmit={this._onKeyDown}>
-             <label>Describe the solutions identified. <span>What is different or unique? </span></label>
+             <label className="m-b-20">Describe your solution. <span>What is different or unique? </span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {solutions} name="idea[solutions]" placeholder='List your solutions' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

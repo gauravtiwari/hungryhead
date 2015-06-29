@@ -18,6 +18,14 @@ body.show-collaboration {
 .trending-list li:first-child {
   padding-top: 10px;
 }
+.dropdown-menu.privacy {
+  width: 200px;
+  max-width: 250px;
+  background: #fff;
+}
+.dropdown-menu.privacy li:hover {
+  background-color: #f6f7f8 !important;
+}
 p {
   margin: 0px 0px 10px 0px;
 }

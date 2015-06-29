@@ -72,7 +72,7 @@ var ValueProposition = React.createClass({
     if(this.props.idea.sections && this.props.idea.sections.value_proposition) {
       var html = converter.makeHtml(this.props.idea.sections.value_proposition);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe your values. <span>What is it that you are offering that others are not? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-16 light'>Describe your value offerings. <span>What are you are offering that others are not? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {
