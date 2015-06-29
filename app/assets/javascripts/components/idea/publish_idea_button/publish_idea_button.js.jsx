@@ -66,7 +66,7 @@ var PublishIdeaButton = React.createClass({
     });
 
     return (
-        <div className="dropdown" data-toggle="tooltip" data-placement="top" data-original-title={title}>
+        <div className="dropdown" data-toggle="tooltip" title={title}>
          <button className={classes} type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span><i className={icon_class}></i> {text} <span className="caret"></span></span>
          </button>

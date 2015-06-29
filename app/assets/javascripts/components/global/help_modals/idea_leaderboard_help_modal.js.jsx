@@ -41,7 +41,7 @@ var IdeaLeaderboardHelpModal = React.createClass({
                              <span className="bold">Idea score</span> is total score of an idea calculated from total
                              feedbacks, votes, investments and comments made on an idea.
 
-                             <p>A total score of 10K is needed to make an idea qualify as a <span className="bold">validated idea</span></p>
+                             <p>A total score of 10K is needed to make an idea qualify for <span className="bold">validation</span></p>
                            </p>
                          </div>
                          <div>
@@ -53,10 +53,10 @@ var IdeaLeaderboardHelpModal = React.createClass({
                          <div>
                            <h3 className="m-t-30">Point rules </h3>
                            <ul className="no-style">
-                            <li className="m-b-10"><span className="bold">Feedback: </span> For every feedback, an idea earns 15 points</li>
+                            <li className="m-b-10"><span className="bold">Feedback: </span> For every feedback, an idea earns 25 points</li>
                             <li className="m-b-10"><span className="bold">Investment: </span> For every investment, an idea earns 25 points</li>
                             <li className="m-b-10"><span className="bold">Vote: </span> For every vote, an idea earns 5 points</li>
-                            <li className="m-b-10"><span className="bold">Comment: </span> For every comment, an idea earns 2 points</li>
+                            <li className="m-b-10"><span className="bold">Comment: </span> For every comment, an idea earns 5 points</li>
                            </ul>
                          </div>
                        </div>

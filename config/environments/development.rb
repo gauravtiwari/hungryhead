@@ -10,7 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local       = false
   config.action_controller.perform_caching = false
   config.cache_store = :dalli_store, ENV["MEMCACHE_SERVER"], { :namespace => "development" }
   config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"], { :namespace => "identity_cache_development" }
