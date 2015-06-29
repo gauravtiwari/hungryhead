@@ -21,7 +21,6 @@ class CreateEvents < ActiveRecord::Migration
 
     add_index :events, [:eventable_id, :eventable_type], algorithm: :concurrently
     add_index :events, :start_time, algorithm: :concurrently
-    add_index :events, :status, algorithm: :concurrently
     add_index :events, :slug, algorithm: :concurrently
     add_index :events, [:latitude, :longitude], algorithm: :concurrently
     add_index :events, :private, algorithm: :concurrently

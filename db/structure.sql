@@ -263,8 +263,8 @@ CREATE TABLE events (
     status integer DEFAULT 1 NOT NULL,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-28 23:34:43.280433'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-28 23:34:43.280478'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-29 00:03:15.683473'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-29 00:03:15.683525'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2257,7 +2257,7 @@ ALTER TABLE ONLY votes
 -- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_published ON activities USING btree (published);
+CREATE INDEX index_activities_on_published ON activities USING btree (published) WHERE (published IS TRUE);
 
 
 --
@@ -2300,6 +2300,13 @@ CREATE UNIQUE INDEX index_attendees_on_attendee_id_and_event_id ON attendees USI
 --
 
 CREATE INDEX index_attendees_on_event_id ON attendees USING btree (event_id);
+
+
+--
+-- Name: index_attendees_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attendees_on_status ON attendees USING btree (status);
 
 
 --
@@ -2506,6 +2513,20 @@ CREATE UNIQUE INDEX index_hobbies_on_slug ON hobbies USING btree (slug);
 
 
 --
+-- Name: index_idea_investable; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_investable ON ideas USING btree (investable) WHERE (investable IS TRUE);
+
+
+--
+-- Name: index_idea_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_looking_for_team ON ideas USING btree (looking_for_team) WHERE (looking_for_team IS TRUE);
+
+
+--
 -- Name: index_idea_messages_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2517,6 +2538,48 @@ CREATE INDEX index_idea_messages_on_idea_id ON idea_messages USING btree (idea_i
 --
 
 CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_id);
+
+
+--
+-- Name: index_idea_privacy_everyone; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_privacy_everyone ON ideas USING btree (privacy) WHERE (privacy = 3);
+
+
+--
+-- Name: index_idea_privacy_friends; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_privacy_friends ON ideas USING btree (privacy) WHERE (privacy = 2);
+
+
+--
+-- Name: index_idea_privacy_school; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_privacy_school ON ideas USING btree (privacy) WHERE (privacy = 1);
+
+
+--
+-- Name: index_idea_privacy_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_privacy_team ON ideas USING btree (privacy) WHERE (privacy = 0);
+
+
+--
+-- Name: index_idea_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_published ON ideas USING btree (status) WHERE (status = 1);
+
+
+--
+-- Name: index_idea_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_validated ON ideas USING btree (validated) WHERE (validated IS TRUE);
 
 
 --
@@ -2744,6 +2807,13 @@ CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
 
 
 --
+-- Name: index_notifications_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_published ON notifications USING btree (published) WHERE (published IS TRUE);
+
+
+--
 -- Name: index_notifications_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2937,6 +3007,62 @@ CREATE UNIQUE INDEX index_team_invites_on_inviter_id_and_invited_id_and_idea_id 
 --
 
 CREATE INDEX index_team_invites_on_token ON team_invites USING btree (token);
+
+
+--
+-- Name: index_user_admin; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_admin ON users USING btree (admin) WHERE (admin IS TRUE);
+
+
+--
+-- Name: index_user_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published ON users USING btree (state) WHERE (state = 1);
+
+
+--
+-- Name: index_user_role_alumni; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_role_alumni ON users USING btree (role) WHERE (role = 5);
+
+
+--
+-- Name: index_user_role_entrepreneur; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_role_entrepreneur ON users USING btree (role) WHERE (role = 2);
+
+
+--
+-- Name: index_user_role_faculty; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_role_faculty ON users USING btree (role) WHERE (role = 4);
+
+
+--
+-- Name: index_user_role_mentor; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_role_mentor ON users USING btree (role) WHERE (role = 3);
+
+
+--
+-- Name: index_user_role_student; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_role_student ON users USING btree (role) WHERE (role = 1);
+
+
+--
+-- Name: index_user_verified; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_verified ON users USING btree (verified) WHERE (verified IS TRUE);
 
 
 --

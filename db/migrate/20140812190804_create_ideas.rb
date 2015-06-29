@@ -53,16 +53,16 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, :user_id, algorithm: :concurrently
 
     #Add partial indexes for idea
-    add_index :users, :investable, name: "index_idea_investable", where: "investable IS TRUE", algorithm: :concurrently
-    add_index :users, :validated, name: "index_idea_validated", where: "validated IS TRUE", algorithm: :concurrently
-    add_index :users, :looking_for_team, name: "index_idea_looking_for_team", where: "looking_for_team IS TRUE", algorithm: :concurrently
-    add_index :users, :status, name: "index_idea_published", where: "status == '1'", algorithm: :concurrently
+    add_index :ideas, :investable, name: "index_idea_investable", where: "investable IS TRUE", algorithm: :concurrently
+    add_index :ideas, :validated, name: "index_idea_validated", where: "validated IS TRUE", algorithm: :concurrently
+    add_index :ideas, :looking_for_team, name: "index_idea_looking_for_team", where: "looking_for_team IS TRUE", algorithm: :concurrently
+    add_index :ideas, :status, name: "index_idea_published", where: "status = 1", algorithm: :concurrently
 
     #Idea privacy
-    add_index :users, :privacy, name: "index_idea_privacy_team", where: "privacy == '0'", algorithm: :concurrently
-    add_index :users, :privacy, name: "index_idea_privacy_school", where: "privacy == '1'", algorithm: :concurrently
-    add_index :users, :privacy, name: "index_idea_privacy_friends", where: "privacy == '2'", algorithm: :concurrently
-    add_index :users, :privacy, name: "index_idea_privacy_everyone", where: "privacy == '3'", algorithm: :concurrently
+    add_index :ideas, :privacy, name: "index_idea_privacy_team", where: "privacy = 0", algorithm: :concurrently
+    add_index :ideas, :privacy, name: "index_idea_privacy_school", where: "privacy = 1", algorithm: :concurrently
+    add_index :ideas, :privacy, name: "index_idea_privacy_friends", where: "privacy = 2", algorithm: :concurrently
+    add_index :ideas, :privacy, name: "index_idea_privacy_everyone", where: "privacy = 3", algorithm: :concurrently
 
     add_index :ideas, :status, algorithm: :concurrently
     add_index :ideas, :privacy, algorithm: :concurrently
