@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-29 00:45:17.467145'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-29 00:45:17.46717'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-29 00:58:26.502459'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-29 00:58:26.502482'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2607,6 +2607,13 @@ CREATE INDEX index_ideas_on_slug ON ideas USING btree (slug);
 
 
 --
+-- Name: index_ideas_on_team_ids; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_team_ids ON ideas USING gin (team_ids);
+
+
+--
 -- Name: index_ideas_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3157,6 +3164,13 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 --
 
 CREATE UNIQUE INDEX index_users_on_uid ON users USING btree (uid);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
 
 
 --
