@@ -43,7 +43,6 @@ class CreateUserNotificationService
       "new_user",
       {data: user_json(@user)}.to_json
     )
-
   end
 
   #User JSON
