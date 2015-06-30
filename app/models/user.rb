@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
   include Redis::Objects
 
   #Scopes for searching
-  scope :students, -> { where(role: 1) }
-  scope :entrepreneurs, -> { where(role: 2) }
-  scope :mentors, -> { where(role: 3) }
-  scope :faculties, -> { where(role: 4) }
-  scope :users, -> { where(role: 0) }
+  scope :students, -> { where(state: 1, role: 1) }
+  scope :entrepreneurs, -> { where(state: 1, role: 2) }
+  scope :mentors, -> { where(state: 1, role: 3) }
+  scope :faculties, -> { where(state: 1, role: 4) }
+  scope :users, -> { where(state: 1, role: 0) }
   scope :published, -> { where(state: 1) }
 
   #Gamification
@@ -44,9 +44,10 @@ class User < ActiveRecord::Base
   belongs_to :school
 
   #has_many relationships
-  has_many :activities, :dependent => :destroy
+  has_many :activities, -> {where(published: true)}, :dependent => :destroy
   has_many :attendences, class_name: 'Attendee', :dependent => :destroy
-  has_many :notifications, :dependent => :destroy
+  has_many :notifications, -> {where(published: true)}, :dependent => :destroy
+
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
 
@@ -74,7 +75,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_save :soulmate_loader
+  after_save :soulmate_loader, :truncate_cached_notifications
   after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
@@ -293,9 +294,15 @@ class User < ActiveRecord::Base
     loader.remove("id" => id)
   end
 
+  def truncate_cached_notifications
+    TruncateCachedNotificationsJob.set(wait: 1.minute).perform_later(id)
+  end
+
   def decrement_counters
     #Decrement counters
-    school.people_counter.decrement if school_id.present? && school.people_counter.value > 0
+    school.people_counter.reset
+    school.people_counter.incr(school.fetch_users.count) if school_id.present?
+
     #delete cached sorted_set for school
     school.published_people.delete(id) if school_id.present?
     #delete cached sorted set for global leaderboard

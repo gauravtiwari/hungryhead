@@ -32,17 +32,18 @@ class CreateUserNotificationService
     #Cache lists for school
     @user.school.published_people.add(@user.id, @user.created_at.to_i + @user.id) if @user.school_id.present?
 
-    #Cache sorted set for global leaderboard
+    #Cache latest user & sorted set for global leaderboard
     User.latest << @user.id
-
     #Add leaderboard score
     User.leaderboard.add(@user.id, @user.points)
     User.trending.add(@user.id, 1)
 
+    #Send notification to listing
     Pusher.trigger_async("users-channel",
       "new_user",
       {data: user_json(@user)}.to_json
     )
+
   end
 
   #User JSON

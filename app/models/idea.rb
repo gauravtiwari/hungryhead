@@ -54,12 +54,12 @@ class Idea < ActiveRecord::Base
 
   #Enumerators for handling states
   enum status: { draft:0, published:1 }
-  enum privacy: { team: 0, everyone: 3 }
+  enum privacy: { team: 0, everyone: 1 }
 
   #Scopes
   scope :published, -> { where(status: 1) }
   scope :school, -> { where(privacy: 1) }
-  scope :public_ideas, -> { where(privacy: 3) }
+  scope :public_ideas, -> { where(privacy: 1) }
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
