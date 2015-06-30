@@ -1,3 +1,4 @@
 #!/bin/bash -i
 bundle install
+Soulmate.redis{|r| puts r.flushall}
 foreman start -f Procfile_development
