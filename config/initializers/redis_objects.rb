@@ -1,1 +1,1 @@
-Redis::Objects.redis = ConnectionPool.new(size: 5, timeout: 5) { ReadCache.redis }
+Redis::Objects.redis = ConnectionPool.new(size: 25, timeout: 25) { ReadCache.redis }
