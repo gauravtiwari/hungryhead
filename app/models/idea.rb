@@ -198,8 +198,7 @@ class Idea < ActiveRecord::Base
     school.ideas_counter.decrement
     user.ideas_counter.decrement
 
-    #Remove self from cached list/sorted_set
-    user.latest_ideas.delete(id)
+    #Add to school
     school.published_ideas.delete(id)
 
     #Remove self from sorted set

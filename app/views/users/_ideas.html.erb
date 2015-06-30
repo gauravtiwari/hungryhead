@@ -4,20 +4,26 @@
             <i class="fa fa-lightbulb-o text-white"></i> Ideas
         </div>
     </div>
-    <% if @user.fetch_ideas.length > 0 %>
-    <% @user.fetch_ideas.each do |idea| %>
-        <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
-            <div class="pull-left">
-                <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
-                    <%= link_to(idea.name, idea_path(idea), class: "text-white") %>
-                </h5>
-                <p class="small no-margin clearfix text-white">
-                    <%= idea.elevator_pitch %>
-                </p>
+    <% if @user == current_user %>
+        <% if  @user.published_ideas.length > 0 %>
+            <% @user.published_ideas.each do |idea| %>
+                <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
+                    <div class="pull-left">
+                        <h5 class="all-caps bold small pull-left no-margin text-white p-b-5 relative">
+                            <%= link_to(idea.name, idea_path(idea), class: "text-white") %>
+                        </h5>
+                        <p class="small no-margin clearfix text-white">
+                            <%= idea.elevator_pitch %>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            <% end %>
+        <% else %>
+            <div class="text-center fs-22 p-b-20 text-white">
+                <%= link_to('Click', new_idea_path(:getting_started), class: 'text-white b-b b-white p-b-5') %> to publish a new idea
             </div>
-            <div class="clearfix"></div>
-        </div>
-    <% end %>
+        <% end %>
     <% else %>
         <div class="text-center fs-22 p-b-20 hint-text text-white">
             0 Ideas Published

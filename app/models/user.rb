@@ -90,9 +90,6 @@ class User < ActiveRecord::Base
   set :school_followings_ids
   set :impressioners_ids
 
-  #Latest ideas
-  list :latest_ideas, maxlength: 5, marshal: true
-
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
@@ -164,6 +161,10 @@ class User < ActiveRecord::Base
   end
 
   def after_password_reset; end
+
+  def published_ideas
+    fetch_ideas.select{|idea| idea.status == "published"}
+  end
 
   def joined_within_a_year?
     (DateTime.now.to_date - self.created_at.to_date).to_i <= 365

@@ -71,9 +71,9 @@ var TextWidget = React.createClass({
       var html = converter.makeHtml(this.state.content);
     } else {
       if(this.state.user.is_owner) {
-        var html = "<div class='text-master text-center auto-margin col-md-8 fs-16 light'>Write about yourself. <span>What are you studying? Your interests? Why are you here? etc.</span> </div>";
+        var html = "<div class='no-content'>Write about yourself. <span>What are you studying? Your interests? Why are you here? etc.</span> </div>";
       } else {
-        var html = "<div class='text-master text-center auto-margin col-md-8 fs-16'>" + this.state.user.name + " has not published about himself</div>";
+        var html = "<div class='no-content p-t-20 p-b-10'>" + this.state.user.name + " has not completed about me</div>";
       }
     }
 

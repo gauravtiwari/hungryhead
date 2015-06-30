@@ -14,7 +14,6 @@ class PublishIdeaJob < ActiveJob::Base
       @user.ideas_counter.increment
 
       #Cache  ideas into a list/sorted_Set for user and school
-      @user.latest_ideas <<  @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
       @idea.school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
 
       #Insert into cache list
