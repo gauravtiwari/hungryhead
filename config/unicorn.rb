@@ -1,6 +1,6 @@
 # config/unicorn.rb
 if ENV["RAILS_ENV"] == "development"
-  worker_processes 1
+  worker_processes 3
 else
   worker_processes 5
   working_directory "#{ENV['STACK_PATH']}"
