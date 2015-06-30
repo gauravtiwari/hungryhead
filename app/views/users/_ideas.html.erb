@@ -5,7 +5,7 @@
         </div>
     </div>
     <% if @user == current_user %>
-        <% if @user.fetch_ideas.count > 0 %>
+        <% if @user.fetch_ideas.length > 0 %>
             <% @user.fetch_ideas.each do |idea| %>
                 <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
                     <div class="pull-left">

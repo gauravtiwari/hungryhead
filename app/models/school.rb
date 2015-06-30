@@ -59,6 +59,10 @@ class School < ActiveRecord::Base
 		fetch_faculties.select{|f| f.state == "published"}
 	end
 
+	def get_published_ideas
+		fetch_ideas.select{|f| f.state == "published"}
+	end
+
 	#Callbacks hooks
 	after_commit :load_into_soulmate
   before_destroy :remove_from_soulmate

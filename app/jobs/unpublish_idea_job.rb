@@ -19,11 +19,11 @@ class UnpublishIdeaJob < ActiveJob::Base
 
         #Rebuild counters for school
         @school.ideas_counter.reset
-        @school.ideas_counter.incr(@school.fetch_ideas.length)
+        @school.ideas_counter.incr(@school.get_published_ideas.length)
 
         #Rebuild counters for user
         @user.ideas_counter.reset
-        @user.ideas_counter.incr(@user.fetch_ideas.length)
+        @user.ideas_counter.incr(@user.published_ideas.length)
 
         #Remove from user latest activities
         @user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)

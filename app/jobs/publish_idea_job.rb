@@ -13,11 +13,11 @@ class PublishIdeaJob < ActiveJob::Base
 
       #Rebuild counters for school
       @school.ideas_counter.reset
-      @school.ideas_counter.incr(@school.fetch_ideas.length)
+      @school.ideas_counter.incr(@school.get_published_ideas.length)
 
       #Rebuild counters for user
       @user.ideas_counter.reset
-      @user.ideas_counter.incr(@user.fetch_ideas.length)
+      @user.ideas_counter.incr(@user.published_ideas.length)
 
       #Cache  ideas into a list/sorted_Set for user and school
       @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
