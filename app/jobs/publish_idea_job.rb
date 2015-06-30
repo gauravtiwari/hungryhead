@@ -23,19 +23,22 @@ class PublishIdeaJob < ActiveJob::Base
       @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
 
       #Insert into cache list
-      Idea.latest << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
+      Idea.latest << @idea.id unless Idea.latest.values.include?(@idea.id.to_s)
       Idea.trending.add(@idea.id, @idea.fetch_impressions.length)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
+      #Pusher notification for new idea
       Pusher.trigger_async("ideas-channel",
         "new_idea",
         {data: idea_json(@idea)}.to_json
       )
 
-      @user.followings.create!(followable: @idea) if @user.followings.where(followable: @idea).empty?
+      #Fetch followings from cache
+      @user.fetch_followings.create!(followable: @idea) if @user.fetch_followings.select{|follow| follow.followable_type == "Idea" && follow.followable_id == @idea.id}.empty?
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
+        #Send notifications to followers
         Pusher.trigger_async("private-user-#{f.uid}",
           "new_ticker_item",
           {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
