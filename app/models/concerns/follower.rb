@@ -2,7 +2,7 @@ module Follower
   extend ActiveSupport::Concern
 
   included do
-    has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
+    has_many :followings, as: :follower, class_name: 'Follow', foreign_key: 'follower_id', :dependent => :destroy
   end
 
   def people_you_may_know

@@ -1,23 +1,40 @@
 class Follow < ActiveRecord::Base
 
-  belongs_to :follower, polymorphic: true
-  belongs_to :followable, polymorphic: true, touch: true
+  belongs_to :follower, class_name: 'User', foreign_key: 'follower_id'
+  belongs_to :followable, polymorphic: true
 
   # Validations
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_create :update_redis_cache
-  after_destroy :delete_notification
+  after_create :increment_counters
+  after_destroy :decrement_counters, :delete_notification
 
   private
 
-  #Update Redis Counters/Followers cache
-  def update_redis_cache
-    CacheFollowToRedisJob.perform_later(follower_id, followable_id, followable_type)
+  #Redis Counters
+  def increment_counters
+   #Increment counters
+   follower.followings_counter.increment
+   followable.followers_counter.increment
+   #Add ids to follower and followable cache
+   follower.followings_ids << followable_id if followable_type == "User"
+   follower.idea_followings_ids << followable_id if followable_type == "Idea"
+   follower.school_followings_ids << followable_id if followable_type == "School"
+   followable.followers_ids << follower_id
   end
 
-  #Delete notification activity for follow
+  def decrement_counters
+   #Decrement counters
+   follower.followings_counter.decrement
+   followable.followers_counter.decrement
+   #Delete cached ids
+   follower.followings_ids.delete(followable_id) if followable_type == "User"
+   follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
+   follower.school_followings_ids.delete(followable_id) if followable_type == "School"
+   followable.followers_ids.delete(follower_id)
+  end
+
   def delete_notification
     DeleteUserNotificationJob.perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
