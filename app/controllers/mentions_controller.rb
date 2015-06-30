@@ -2,9 +2,9 @@ class MentionsController < ApplicationController
   before_filter :authenticate_user!
 
   def mentionables
-    @mentionable = params[:mentionable_type].constantize.find_by_uuid(params[:id])
+    @mentionable = params[:mentionable_type].constantize.fetch_by_uuid(params[:id])
 
-    mentionable_user = @mentionable.user
+    mentionable_user = @mentionable.fetch_user
 
     commenters = @mentionable.commenters_ids.values
 

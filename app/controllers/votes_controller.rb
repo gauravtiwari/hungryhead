@@ -23,7 +23,7 @@ class VotesController < ApplicationController
   end
 
   def voters
-    @voters = User.find(@votable.voters_ids.values).paginate(:page => params[:page], :per_page => 10)
+    @voters = User.fetch_multi(@votable.voters_ids.values).paginate(:page => params[:page], :per_page => 10)
     render 'voters/index'
   end
 
@@ -33,9 +33,9 @@ class VotesController < ApplicationController
     @votables = ["Idea", "Feedback", "Investment", "Comment"]
     if @votables.include? params[:votable_type]
       if params[:votable_type] == "Comment"
-        @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
+        @votable = params[:votable_type].safe_constantize.fetch(params[:votable_id])
       else
-        @votable = params[:votable_type].safe_constantize.find_by_uuid(params[:votable_id])
+        @votable = params[:votable_type].safe_constantize.fetch_by_uuid(params[:votable_id])
       end
     else
       respond_to do |format|

@@ -169,7 +169,7 @@ class UsersController < ApplicationController
 
   def activity
     authorize @user
-    @activity = @user.activities.find(params[:id])
+    @activity = @user.fetch_activities.fetch(params[:id])
     respond_to do |format|
       format.js
       format.html

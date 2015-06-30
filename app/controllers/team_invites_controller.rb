@@ -1,6 +1,7 @@
 class TeamInvitesController < ApplicationController
 
   before_action :set_team_invite, only: [:destroy, :update, :show]
+  before_action :set_props, only: [:create, :update, :show]
   before_action :authenticate_user!
 
   #Pundit authorization
@@ -8,10 +9,9 @@ class TeamInvitesController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def create
-    @idea = Idea.friendly.find(params[:idea_id])
     invited = []
     params[:team_invite][:invitees].split(",").each do |user_id|
-      user = User.find(user_id)
+      user = User.fetch(user_id)
       if @idea.in_team?(user) || @idea.invited?(user)
         skip_authorization
       else
@@ -45,7 +45,6 @@ class TeamInvitesController < ApplicationController
   end
 
   def show
-    @idea = Idea.friendly.find(params[:idea_id])
     authorize @team_invite
     if current_user == @team_invite.invited && @team_invite.pending?
       @team_invite = UpdateTeamInviteService.new(@team_invite).join_team_invite
@@ -69,7 +68,6 @@ class TeamInvitesController < ApplicationController
   end
 
   def update
-    @idea = Idea.friendly.find(params[:idea_id])
     authorize @team_invite
     @team_invite = UpdateTeamInviteService.new(@team_invite).update_team_invite
     if @team_invite.save
@@ -90,6 +88,10 @@ class TeamInvitesController < ApplicationController
 
   def set_team_invite
     @team_invite = TeamInvite.find(params[:id])
+  end
+
+  def set_props
+    @idea = Idea.fetch_by_slug(params[:idea_id])
   end
 
   def user_not_authorized
