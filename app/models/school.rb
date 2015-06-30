@@ -76,10 +76,6 @@ class School < ActiveRecord::Base
   	words.map{|w| w.first }.join
   end
 
-  def rebuild_cache
-    UpdateSchoolCacheJob.perform_later(id)
-  end
-
 	private
 
 	def should_generate_new_friendly_id?

@@ -311,7 +311,7 @@ class User < ActiveRecord::Base
 
   #Deletes all dependent activities for this user
   def delete_activity
-    DeleteUserFeedJob.perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
   protected

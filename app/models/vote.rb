@@ -19,11 +19,6 @@ class Vote < ActiveRecord::Base
 
   private
 
-  def rebuild_cache
-    #rebuild counters and cached_ids for votable
-    UpdateVoteCacheJob.perform_later(votable_id, votable_type)
-  end
-
   def increment_counter
     #Increment votes counter
     votable.votes_counter.increment
