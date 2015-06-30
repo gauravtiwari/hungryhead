@@ -45,7 +45,7 @@ class Suggester
     results
   end
 
-private
+  private
 
   # Generates a candidate with "candidate<number>" which is not included in unavailable_set
   def find_extended_candidate(candidate, candidates_to_exclude)
