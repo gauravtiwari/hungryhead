@@ -1,1 +1,1 @@
-Redis::Objects.redis = $redis
+Redis::Objects.redis = ReadCache.redis

@@ -1,3 +1,7 @@
-location = "redis://#{ENV['$REDIS_ADDRESS']}:6379/0/"
-uri = URI.parse(location)
-$redis = Redis::Namespace.new("hungryhead", :redis => Redis.new(:host => uri.host, :port => uri.port, :password => uri.password))
+module ReadCache
+  class << self
+    def redis
+      @redis ||=  Redis::Namespace.new("hungryhead", :redis => Redis.new(:url => (ENV["REDIS_URL"] || 'redis://127.0.0.1:6379')))
+    end
+  end
+end

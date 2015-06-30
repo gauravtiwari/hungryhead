@@ -1,1 +1,1 @@
-Soulmate.redis = $redis
+Soulmate.redis = ReadCache.redis
