@@ -1,5 +1,6 @@
 class Feedback < ActiveRecord::Base
 
+  include IdentityCache
   include Redis::Objects
   has_merit
 

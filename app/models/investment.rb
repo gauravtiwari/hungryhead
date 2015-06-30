@@ -1,6 +1,8 @@
 class Investment < ActiveRecord::Base
 
+  include IdentityCache
   include Redis::Objects
+
   #Counters for redis
   counter :votes_counter
   list :voters_ids
