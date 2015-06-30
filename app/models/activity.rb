@@ -8,7 +8,7 @@ class Activity < ActiveRecord::Base
   cache_belongs_to :user
 
   def cache_key
-    "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+    "activities/activity-#{id}/user-#{user_id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
 
   def trackable_timestamp
@@ -16,7 +16,7 @@ class Activity < ActiveRecord::Base
   end
 
   def user_timestamp
-    user.updated_at.try(:utc).try(:to_s, :number)
+    fetch_user.updated_at.try(:utc).try(:to_s, :number)
   end
 
   private
