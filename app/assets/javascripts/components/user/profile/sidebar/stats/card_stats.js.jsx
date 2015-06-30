@@ -47,7 +47,7 @@ var CardStats = React.createClass({
           </a>
         </div>
         <div className="p-l-25 p-r-45">
-          <h3 className="no-margin p-b-25 no-padding text-master text-center">Score: {this.state.score}</h3>
+          <h3 className="no-margin p-b-25 no-padding text-center">Score: {this.state.score}</h3>
 
             <div className="row">
 
