@@ -3,18 +3,24 @@ class PublishIdeaJob < ActiveJob::Base
   include Rails.application.routes.url_helpers
 
   def perform(idea_id, user_id, activity_id)
+
     ActiveRecord::Base.connection_pool.with_connection do
       #Fetch records
-      @user = User.find(user_id)
-      @idea = Idea.find(idea_id)
-      @activity = Activity.find(activity_id)
+      @user = User.fetch(user_id)
+      @idea = Idea.fetch(idea_id)
+      @activity = Activity.fetch(activity_id)
+      @school = School.fetch(@idea.school_id)
 
-      #Increment counters for school and user
-      @idea.school.ideas_counter.increment
-      @user.ideas_counter.increment
+      #Rebuild counters for school
+      @school.ideas_counter.reset
+      @school.ideas_counter.incr(@school.fetch_ideas.length)
+
+      #Rebuild counters for user
+      @user.ideas_counter.reset
+      @user.ideas_counter.incr(@user.fetch_ideas.length)
 
       #Cache  ideas into a list/sorted_Set for user and school
-      @idea.school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
+      @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
 
       #Insert into cache list
       Idea.latest << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
@@ -26,7 +32,7 @@ class PublishIdeaJob < ActiveJob::Base
         {data: idea_json(@idea)}.to_json
       )
 
-      @user.followings.create!(followable: @idea)
+      @user.followings.create!(followable: @idea) if @user.followings.where(followable: @idea).empty?
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|

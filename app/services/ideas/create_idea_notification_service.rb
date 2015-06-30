@@ -43,8 +43,8 @@ class CreateIdeaNotificationService
       if activity && !activity.published?
         activity.published = true
         activity.save
-        cache(activity)
-        PublishIdeaJob.perform_later(@idea.id, @user.id, activity.id)
+        cache(activity) unless @user.latest_activities.rangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id).length > 0
+        PublishIdeaJob.perform_later(@idea.id, @user.id, activity.id) unless Idea.trending.member?(@idea.id)
       end
     end
   end

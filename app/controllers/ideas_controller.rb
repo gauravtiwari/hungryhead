@@ -82,7 +82,7 @@ class IdeasController < ApplicationController
     @idea.draft!
     @idea.team!
     if @idea.draft?
-      UnpublishIdeaJob.perform_later(@idea)
+      UnpublishIdeaJob.perform_later(@idea.id)
     end
     @msg = "We are unpublishing your idea profile. Once unpublished it will only visible to your team."
     render :publish

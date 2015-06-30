@@ -1,33 +1,51 @@
 class UnpublishIdeaJob < ActiveJob::Base
 
-  def perform(idea)
+  def perform(idea_id)
    ActiveRecord::Base.connection_pool.with_connection do
-  	Activity.where(trackable_id: idea.id, trackable_type: "Idea").find_each do |activity|
+
+    #Fetch everything fresh
+    @idea = Idea.fetch(idea_id)
+    @user = User.fetch(@idea.user_id)
+    @school = School.fetch(@idea.school_id)
+
+  	Activity.where(trackable_id: @idea).find_each do |activity|
        if activity && activity.published?
+
         activity.published = false
 
-        Idea.latest.delete(idea.id)
-        Idea.leaderboard.delete(idea.id)
-        Idea.trending.delete(idea.id)
+        # Update ideas redis caching
+        Idea.latest.delete(@idea.id)
+        Idea.leaderboard.delete(@idea.id)
+        Idea.trending.delete(@idea.id)
 
-        idea.school.ideas_counter.decrement if Idea.leaderboard.member?(idea.id)
-        idea.user.ideas_counter.decrement if Idea.leaderboard.member?(idea.id)
+        #Rebuild counters for school
+        @school.ideas_counter.reset
+        @school.ideas_counter.incr(@school.fetch_ideas.length)
+
+        #Rebuild counters for user
+        @user.ideas_counter.reset
+        @user.ideas_counter.incr(@user.fetch_ideas.length)
 
         #Remove from user latest activities
-        activity.user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        @user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
 
         #Remove activity from follower and recipient
         find_followers(activity).each do |f|
           f.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
-        idea.school.published_ideas.delete(idea.id)
+        #Delete published ideas for school
+        @school.published_ideas.delete(@idea.id)
+
+        #Save the activity in DB
         activity.save!
 
-        true
        end
+
     end
+
    end
+
   end
 
   #Get all followers followed by actor
