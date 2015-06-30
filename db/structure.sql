@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-30 13:28:55.430968'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-30 13:28:55.431047'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-30 14:19:15.086158'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-30 14:19:15.086194'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2600,10 +2600,38 @@ CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
 
 
 --
+-- Name: index_ideas_on_school_id_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_school_id_and_privacy ON ideas USING btree (school_id, privacy);
+
+
+--
+-- Name: index_ideas_on_school_id_and_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_school_id_and_status ON ideas USING btree (school_id, status);
+
+
+--
+-- Name: index_ideas_on_school_id_and_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_school_id_and_validated ON ideas USING btree (school_id, validated);
+
+
+--
 -- Name: index_ideas_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_ideas_on_slug ON ideas USING btree (slug);
+
+
+--
+-- Name: index_ideas_on_status_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_status_and_privacy ON ideas USING btree (status, privacy);
 
 
 --
@@ -2618,6 +2646,13 @@ CREATE INDEX index_ideas_on_team_ids ON ideas USING gin (team_ids);
 --
 
 CREATE INDEX index_ideas_on_user_id ON ideas USING btree (user_id);
+
+
+--
+-- Name: index_ideas_on_user_id_and_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_user_id_and_validated ON ideas USING btree (user_id, validated);
 
 
 --
@@ -3027,6 +3062,41 @@ CREATE INDEX index_user_published ON users USING btree (state) WHERE (state = 1)
 
 
 --
+-- Name: index_user_published_and_role_alumni; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published_and_role_alumni ON users USING btree (state) WHERE ((state = 1) AND (role = 5));
+
+
+--
+-- Name: index_user_published_and_role_entrepreneur; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published_and_role_entrepreneur ON users USING btree (state) WHERE ((state = 1) AND (role = 2));
+
+
+--
+-- Name: index_user_published_and_role_faculty; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published_and_role_faculty ON users USING btree (state) WHERE ((state = 1) AND (role = 4));
+
+
+--
+-- Name: index_user_published_and_role_mentor; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published_and_role_mentor ON users USING btree (state) WHERE ((state = 1) AND (role = 3));
+
+
+--
+-- Name: index_user_published_and_role_student; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published_and_role_student ON users USING btree (state) WHERE ((state = 1) AND (role = 1));
+
+
+--
 -- Name: index_user_role_alumni; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3143,6 +3213,20 @@ CREATE INDEX index_users_on_sash_id ON users USING btree (sash_id);
 --
 
 CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
+
+
+--
+-- Name: index_users_on_school_id_and_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_school_id_and_role ON users USING btree (school_id, role);
+
+
+--
+-- Name: index_users_on_school_id_and_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_school_id_and_state ON users USING btree (school_id, state);
 
 
 --

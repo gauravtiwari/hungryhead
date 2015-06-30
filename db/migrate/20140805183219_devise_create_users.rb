@@ -80,9 +80,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true, algorithm: :concurrently
     add_index :users, :confirmation_token,   :unique => true, algorithm: :concurrently
 
-    add_index :schools, [:school_id, :role], algorithm: :concurrently
-    add_index :schools, [:school_id, :state], algorithm: :concurrently
-
+    add_index :users, [:school_id, :role], algorithm: :concurrently
+    add_index :users, [:school_id, :state], algorithm: :concurrently
     # add_index :users, :unlock_token,         :unique => true
 
     # Add partial where indexes for postgresql
@@ -92,8 +91,20 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :role, name: "index_user_role_faculty", where: "role = 4", algorithm: :concurrently
     add_index :users, :role, name: "index_user_role_alumni", where: "role = 5", algorithm: :concurrently
 
+    #Combined where clause for both state and role
+    add_index :users, :state, name: "index_user_published_and_role_student", where: "state = 1 AND role = 1", algorithm: :concurrently
+    add_index :users, :state, name: "index_user_published_and_role_entrepreneur", where: "state = 1 AND role = 2", algorithm: :concurrently
+    add_index :users, :state, name: "index_user_published_and_role_mentor", where: "state = 1 AND role = 3", algorithm: :concurrently
+    add_index :users, :state, name: "index_user_published_and_role_faculty", where: "state = 1 AND role = 4", algorithm: :concurrently
+    add_index :users, :state, name: "index_user_published_and_role_alumni", where: "state = 1 AND role = 5", algorithm: :concurrently
+
+    #Check if published
     add_index :users, :state, name: "index_user_published", where: "state = 1", algorithm: :concurrently
+
+    #Check if admin where
     add_index :users, :admin, name: "index_user_admin", where: "admin IS TRUE", algorithm: :concurrently
+
+    #Check if verified where
     add_index :users, :verified, name: "index_user_verified", where: "verified IS TRUE", algorithm: :concurrently
 
   end

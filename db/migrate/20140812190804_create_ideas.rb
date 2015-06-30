@@ -53,11 +53,12 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, :user_id, algorithm: :concurrently
 
     #Add index for school with status and privacy
-    add_index :schools, [:school_id, :status], algorithm: :concurrently
-    add_index :schools, [:school_id, :privacy], algorithm: :concurrently
-    add_index :schools, [:school_id, :validated], algorithm: :concurrently
+    add_index :ideas, [:school_id, :status], algorithm: :concurrently
+    add_index :ideas, [:school_id, :privacy], algorithm: :concurrently
+    add_index :ideas, [:school_id, :validated], algorithm: :concurrently
+    add_index :ideas, [:status, :privacy], algorithm: :concurrently
 
-    add_index :schools, [:user_id, :validated], algorithm: :concurrently
+    add_index :ideas, [:user_id, :validated], algorithm: :concurrently
 
     #Index team ids
     add_index :ideas, :team_ids, using: :gin, algorithm: :concurrently
