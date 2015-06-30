@@ -24,7 +24,7 @@ class PublishIdeaJob < ActiveJob::Base
 
       #Insert into cache list
       Idea.latest << @idea.id if !Idea.latest.values.include?(@idea.id.to_s)
-      Idea.trending.add(@idea.id, 1)
+      Idea.trending.add(@idea.id, @idea.fetch_impressions.length)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
       Pusher.trigger_async("ideas-channel",
@@ -43,7 +43,6 @@ class PublishIdeaJob < ActiveJob::Base
         #send mail to users if subscribed
         IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
       end
-
     end
   end
 

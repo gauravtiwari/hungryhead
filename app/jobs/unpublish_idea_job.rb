@@ -2,7 +2,6 @@ class UnpublishIdeaJob < ActiveJob::Base
 
   def perform(idea_id)
    ActiveRecord::Base.connection_pool.with_connection do
-
     #Fetch everything fresh
     @idea = Idea.fetch(idea_id)
     @user = User.fetch(@idea.user_id)

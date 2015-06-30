@@ -71,6 +71,7 @@ class Idea < ActiveRecord::Base
   cache_belongs_to :user
   cache_index :slug, :unique => true
   cache_index :status, :privacy, :uuid, :school_id
+  cache_has_many :impressions, inverse_name: :impressionable, embed: true
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,
