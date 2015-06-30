@@ -15,10 +15,12 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :dalli_store,  ENV["MEMCACHE_SERVER"].split(','),
                     {:username => ENV["MEMCACHE_USERNAME"],
-                     :password => ENV["MEMCACHE_PASSWORD"]}
+                     :password => ENV["MEMCACHE_PASSWORD"]},
+                     { :namespace => "hh_production", compress: true, :pool_size => 25  }
   config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"].split(','),
                     {:username => ENV["MEMCACHE_USERNAME"],
-                     :password => ENV["MEMCACHE_PASSWORD"]}
+                     :password => ENV["MEMCACHE_PASSWORD"]},
+                     { :namespace => "hh_production", compress: true, :pool_size => 25  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
