@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_save :soulmate_loader, :truncate_cached_notifications
+  after_save :soulmate_loader
   after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
@@ -281,17 +281,13 @@ class User < ActiveRecord::Base
   end
 
   def soulmate_loader
-    RecordSavedJob.set(wait: 1.minute).perform_later(id, self.class.to_s)
+    UserSavedService.new(self).call
   end
 
   def remove_from_soulmate
     #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
-  end
-
-  def truncate_cached_notifications
-    TruncateCachedNotificationsJob.set(wait: 1.minute).perform_later(id)
   end
 
   def decrement_counters
