@@ -22,7 +22,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
   #fetch all followers followed by actor
   def find_followers(notification)
     followers_ids = notification.user.followers_ids.members
-    User.find(followers_ids)
+    User.fetch(followers_ids)
   end
 
   #get recipient idea // user

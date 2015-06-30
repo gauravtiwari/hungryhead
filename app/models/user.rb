@@ -54,7 +54,8 @@ class User < ActiveRecord::Base
   cache_has_many :impressions, embed: true
   cache_has_many :feedbacks, embed: true
   cache_has_many :investments, embed: true
-  cache_has_many :followings, inverse_name: :follower,  embed: true
+  cache_has_many :followings, inverse_name: :follower, embed: true
+  cache_has_many :followers, inverse_name: :followable, embed: true
   cache_has_many :votes, inverse_name: :voter,  embed: true
 
   cache_has_many :activities, embed: true

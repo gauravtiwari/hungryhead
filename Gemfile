@@ -247,6 +247,8 @@ end
 
 group :development, :test do
   gem 'better_errors'
+  gem 'rb-fsevent', '>= 0.9.1'
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
   gem 'forgery'
 end
 

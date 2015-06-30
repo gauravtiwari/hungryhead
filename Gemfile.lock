@@ -7,6 +7,13 @@ GIT
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
 
+GIT
+  remote: git://github.com/thedarkone/rails-dev-boost.git
+  revision: 5e63d51f29426f06c96d7ff074beda56cf5f2369
+  specs:
+    rails-dev-boost (0.3.0)
+      railties (>= 3.0)
+
 PATH
   remote: vendor/engines/help
   specs:
@@ -329,7 +336,7 @@ GEM
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1.0)
     pg (0.18.2)
-    postgres-copy (0.9.2)
+    postgres-copy (0.9.3)
       activerecord (>= 4.0)
       pg (>= 0.17)
       rails (>= 4.0)
@@ -360,7 +367,7 @@ GEM
       railties (= 4.2.3)
       sprockets-rails
     rails-assets-animate.css (3.3.0)
-    rails-assets-autosize (3.0.6)
+    rails-assets-autosize (3.0.7)
     rails-assets-bootstrap (3.1.1)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-tagsinput (0.5.0)
@@ -419,6 +426,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.14.0)
     rake (10.4.2)
+    rb-fsevent (0.9.5)
     react-rails (1.0.0)
       coffee-script-source (~> 1.8)
       connection_pool
@@ -608,7 +616,9 @@ DEPENDENCIES
   rails-assets-slimScroll!
   rails-assets-sweetalert!
   rails-assets-underscore!
+  rails-dev-boost!
   rails4-autocomplete
+  rb-fsevent (>= 0.9.1)
   react-rails (~> 1.0)
   redis
   redis-namespace
