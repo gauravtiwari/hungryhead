@@ -7,7 +7,7 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :delete_notification, :update_redis_cache, on: [:create, :destroy]
+  after_create :update_redis_cache
   after_destroy :delete_notification
 
   private

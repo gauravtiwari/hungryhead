@@ -111,7 +111,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/followers
   def followers
-    @followers = @idea.fetch_followers.paginate(:page => params[:page], :per_page => 10)
+    @followers = @idea.followers.paginate(:page => params[:page], :per_page => 10)
     render 'followers/index'
   end
 

@@ -8,8 +8,8 @@ class Vote < ActiveRecord::Base
   validates_presence_of :voter_id
 
   #Callbacks for storing cache in redis
-  before_destroy :delete_notification
-  after_commit :update_redis_cache, on: [:create, :destroy]
+  after_destroy :delete_notification
+  after_create :update_redis_cache
 
   public
 

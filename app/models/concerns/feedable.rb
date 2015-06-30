@@ -1,4 +1,5 @@
 module Feedable
+
   extend ActiveSupport::Concern
   included do
     # Define polymorphic association to the parent
