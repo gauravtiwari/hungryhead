@@ -1,16 +1,16 @@
 <div class="card share post_<%= activity.id %>" data-social="item">
     <div class="card-header clearfix">
 	    <div class="user-pic">
-		    <% if activity.fetch_user.avatar.present? %>
-			    <%= image_tag(activity.fetch_user.avatar.url(:avatar), :"data-src" => "#{activity.fetch_user.avatar.url(:avatar)}", :"data-src-retina" => "#{activity.fetch_user.avatar.url(:square)}", width: "33", height: "33") %>
+		    <% if activity.user.avatar.present? %>
+			    <%= image_tag(activity.user.avatar.url(:avatar), :"data-src" => "#{activity.user.avatar.url(:avatar)}", :"data-src-retina" => "#{activity.user.avatar.url(:square)}", width: "33", height: "33") %>
 			    <% else %>
-			        <span class="placeholder bold text-white"><%= activity.fetch_user.first_name.first + activity.fetch_user.last_name.first %>
+			        <span class="placeholder bold text-white"><%= activity.user.first_name.first + activity.user.last_name.first %>
 			        </span>
 		    <% end %>
 	    </div>
 
 	    <div class="text-master overflow-hidden">
-	    	<%= link_to(your_name(activity.fetch_user, false), profile_path(activity.fetch_user), :"data-popover-href" => "#{profile_card_path(activity.fetch_user)}", class: 'load-card bold') %> left a <i class="fa fa-comment"></i> <%= link_to('feedback', idea_feedback_path(activity.recipient, activity.trackable.uuid)) %> for
+	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> left a <i class="fa fa-comment"></i> <%= link_to('feedback', idea_feedback_path(activity.recipient, activity.trackable.uuid)) %> for
 
 			<% if activity.recipient.team_ids.include?(current_user.id.to_s) %>
 				your idea
@@ -18,16 +18,16 @@
 
 			<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
 		   	<h6 class="no-margin p-t-5">
-		   		<% if activity.fetch_user.cached_location_list.present? %>
+		   		<% if activity.user.cached_location_list.present? %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>
-			            <%= activity.fetch_user.location_list.first %>
+			            <%= activity.user.location_list.first %>
 			        </span>
 		        <% end %>
-		       <% if activity.fetch_user.cached_market_list.present? %>
+		       <% if activity.user.cached_market_list.present? %>
 			        <span class="location semi-bold m-r-10">
 			            <i class="fa fa-map-marker"></i>
-			            <%= activity.fetch_user.market_list.first %>
+			            <%= activity.user.market_list.first %>
 			        </span>
 		        <% end %>
 		        <span class="time semi-bold">

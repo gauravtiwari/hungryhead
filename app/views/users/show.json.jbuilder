@@ -20,9 +20,9 @@ json.user do
 			json.name @user.name
 			json.username @user.username
 			json.email @user.email
-			json.school_id @user.fetch_school.id if @user.fetch_school
-			json.school_name @user.fetch_school.name if @user.fetch_school
-			json.school_url profile_path(@user.fetch_school) if @user.fetch_school
+			json.school_id @user.school.id if @user.school
+			json.school_name @user.school.name if @user.school
+			json.school_url profile_path(@user.school) if @user.school
 			json.mini_bio @user.mini_bio
 			json.website_url url_with_protocol(@user.website_url)
 			json.facebook_url url_with_protocol(@user.facebook_url)
