@@ -65,7 +65,7 @@ class IdeasController < ApplicationController
       @idea.published!
       @idea.everyone!
       if @idea.published?
-        CreateActivityJob.perform_later(@idea.id, @idea.class.to_s) if Activity.where(trackable: @idea, key: 'idea.create').empty?
+        CreateActivityJob.perform_later(@idea.id, @idea.class.to_s)
         @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
       else
         @msg = "Something went wrong, please try again."
