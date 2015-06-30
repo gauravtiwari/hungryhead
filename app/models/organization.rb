@@ -1,5 +1,6 @@
 class Organization < ActiveRecord::Base
 
+  include IdentityCache
   #redis data types
   include Redis::Objects
 

@@ -2,7 +2,7 @@ class TruncateCachedNotificationsJob < ActiveJob::Base
 
   def perform(user_id)
     ActiveRecord::Base.connection_pool.with_connection do
-      @user = User.fetch(id)
+      @user = User.fetch(user_id)
 
       #Truncate user feeds in redis sorted set
       @user.ticker.remrangebyrank(100, @user.ticker.members.length)
