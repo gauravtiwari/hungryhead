@@ -10,7 +10,15 @@ class UnpublishIdeaJob < ActiveJob::Base
         Idea.trending.delete(idea.id)
         idea.school.ideas_counter.decrement
         idea.user.ideas_counter.decrement
+
+        #Remove from user latest activities
         activity.user.latest_activitities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+
+        #Remove activity from follower and recipient
+        find_followers(activity).each do |f|
+          f.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+        end
+
         idea.school.published_ideas.delete(idea.id)
         activity.save!
         true
@@ -18,4 +26,11 @@ class UnpublishIdeaJob < ActiveJob::Base
     end
    end
   end
+
+  #Get all followers followed by actor
+  def find_followers(activity)
+    followers_ids = activity.user.followers_ids.members
+    User.fetch_multi(followers_ids)
+  end
+
 end

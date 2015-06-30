@@ -37,6 +37,7 @@ class PublishIdeaJob < ActiveJob::Base
         #send mail to users if subscribed
         IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
       end
+
     end
   end
 

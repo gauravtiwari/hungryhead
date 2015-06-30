@@ -43,6 +43,8 @@ class CreateIdeaNotificationService
       if activity && !activity.published?
         activity.published = true
         activity.save
+        cache(@activity)
+        PublishIdeaJob.perform_later(@idea.id, @user.id, @activity.id)
       end
     end
   end
