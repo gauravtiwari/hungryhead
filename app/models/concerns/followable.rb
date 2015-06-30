@@ -3,7 +3,7 @@ module Followable
   extend ActiveSupport::Concern
 
   included do
-    has_many :followers, as: :followable, class_name: 'Follow', foreign_key: 'followable_id', dependent: :destroy
+    has_many :followers, as: :followable, class_name: 'Follow', dependent: :destroy
   end
 
   #users that self follows
