@@ -23,6 +23,7 @@ class CacheFollowToRedisJob < ActiveJob::Base
 
       #Cache followers for followable
       followable.followers_ids << followable.fetch_followers.pluck(:id)
+
     end
 
   end

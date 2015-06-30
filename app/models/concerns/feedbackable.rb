@@ -4,6 +4,7 @@ module Feedbackable
 
   included do
     has_many :feedbacks, dependent: :destroy
+    cache_has_many :feedbacks, embed: true
   end
 
   def feedbacked?(user)

@@ -3,6 +3,7 @@ module Follower
 
   included do
     has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
+    cache_has_many :followings, inverse_name: :follower, embed: true
   end
 
   def people_you_may_know

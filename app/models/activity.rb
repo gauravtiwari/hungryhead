@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
   include Renderable
   include Feedable
 
-  after_commit :delete_older_notifications, on: :create
+  after_commit :truncate_cached_notifications, on: :create
   cache_belongs_to :user
 
   def cache_key
@@ -21,22 +21,8 @@ class Activity < ActiveRecord::Base
 
   private
 
-  def delete_older_notifications
-    refresh_friends_notifications
-    refresh_ticker
-    profile_latest_activities
-  end
-
-  def refresh_ticker
-    user.ticker.remrangebyrank(100, user.ticker.members.length)
-  end
-
-  def refresh_friends_notifications
-    user.friends_notifications.remrangebyrank(50, user.friends_notifications.members.length)
-  end
-
-  def profile_latest_activities
-    user.latest_activities.remrangebyrank(5, user.latest_activities.members.length)
+  def truncate_cached_notifications
+    TruncateCachedNotificationsJob.perform_later(user_id)
   end
 
 end

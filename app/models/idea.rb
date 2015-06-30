@@ -68,10 +68,15 @@ class Idea < ActiveRecord::Base
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 
+  #Model caching
+  cache_has_many :idea_messages, embed: true
+  cache_has_many :team_invites, embed: true
   cache_belongs_to :user
+
+  #Cache indexes
   cache_index :slug, :unique => true
   cache_index :status, :privacy, :uuid, :school_id
-  cache_has_many :impressions, inverse_name: :impressionable, embed: true
+
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,

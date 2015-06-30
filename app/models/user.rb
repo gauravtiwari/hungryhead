@@ -51,12 +51,8 @@ class User < ActiveRecord::Base
   has_many :idea_messages, dependent: :destroy, autosave: true
 
   cache_has_many :ideas, embed: true
-  cache_has_many :impressions, embed: true
   cache_has_many :feedbacks, embed: true
   cache_has_many :investments, embed: true
-  cache_has_many :followings, inverse_name: :follower, embed: true
-  cache_has_many :followers, inverse_name: :followable, embed: true
-  cache_has_many :votes, inverse_name: :voter,  embed: true
 
   cache_has_many :activities, embed: true
   cache_belongs_to :school

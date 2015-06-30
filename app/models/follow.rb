@@ -1,7 +1,5 @@
 class Follow < ActiveRecord::Base
 
-  include IdentityCache
-
   belongs_to :follower, polymorphic: true
   belongs_to :followable, polymorphic: true, touch: true
 
@@ -10,7 +8,7 @@ class Follow < ActiveRecord::Base
   validates :follower, presence: true
 
   after_commit :delete_notification, :update_redis_cache, on: [:create, :destroy]
-  before_destroy :delete_notification
+  after_destroy :delete_notification
 
   private
 

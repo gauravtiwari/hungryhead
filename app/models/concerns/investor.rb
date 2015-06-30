@@ -4,6 +4,7 @@ module Investor
 
   included do
     has_many :investments, dependent: :destroy
+    cache_has_many :investments, embed: true
   end
 
   def can_invest?(idea)

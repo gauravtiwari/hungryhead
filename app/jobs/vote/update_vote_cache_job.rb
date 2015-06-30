@@ -1,13 +1,14 @@
-class UpdateVoteCacheJob < ActiveJob::Base
+class CacheVoteToRedisJob < ActiveJob::Base
 
-  #JOB to rebuild cache for votables
   def perform(votable_id, votable_type)
-    @votable = votable_type.safe_constantize.find(votable_id)
+    @votable = votable_type.constantize.fetch(votable_id)
+    #Reset counter and voters_ids
     @votable.votes_counter.reset
     @votable.voters_ids.clear
-    @votable.votes_counter.incr(@votable.votes.size)
-    @votable.votes.find_each do |vote|
-      vote.votable.voters_ids.add(vote.voter.id)
-    end
+    #Increment count by votes
+    @votable.votes_counter.incr(@votable.fetch_votes.count)
+    #Cache voters into redis
+    @votable.voters_ids << @votable.fetch_votes.pluck(:voter_id)
   end
+
 end
