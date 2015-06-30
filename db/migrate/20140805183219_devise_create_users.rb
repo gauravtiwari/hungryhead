@@ -82,23 +82,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
     add_index :users, [:school_id, :role], algorithm: :concurrently
     add_index :users, [:school_id, :state], algorithm: :concurrently
+
+    #Fetch by role and state
+    add_index :users, [:state, :role], algorithm: :concurrently
     # add_index :users, :unlock_token,         :unique => true
 
-    # Add partial where indexes for postgresql
-    add_index :users, :role, name: "index_user_role_student", where: "role = 1", algorithm: :concurrently
-    add_index :users, :role, name: "index_user_role_entrepreneur", where: "role = 2", algorithm: :concurrently
-    add_index :users, :role, name: "index_user_role_mentor", where: "role = 3", algorithm: :concurrently
-    add_index :users, :role, name: "index_user_role_faculty", where: "role = 4", algorithm: :concurrently
-    add_index :users, :role, name: "index_user_role_alumni", where: "role = 5", algorithm: :concurrently
-
-    #Combined where clause for both state and role
-    add_index :users, :state, name: "index_user_published_and_role_student", where: "state = 1 AND role = 1", algorithm: :concurrently
-    add_index :users, :state, name: "index_user_published_and_role_entrepreneur", where: "state = 1 AND role = 2", algorithm: :concurrently
-    add_index :users, :state, name: "index_user_published_and_role_mentor", where: "state = 1 AND role = 3", algorithm: :concurrently
-    add_index :users, :state, name: "index_user_published_and_role_faculty", where: "state = 1 AND role = 4", algorithm: :concurrently
-    add_index :users, :state, name: "index_user_published_and_role_alumni", where: "state = 1 AND role = 5", algorithm: :concurrently
-
-    #Check if published
+    #Fetch published
     add_index :users, :state, name: "index_user_published", where: "state = 1", algorithm: :concurrently
 
     #Check if admin where

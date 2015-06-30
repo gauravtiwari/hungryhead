@@ -1,5 +1,6 @@
 class CreateComments < ActiveRecord::Migration
   disable_ddl_transaction!
+
   def self.up
     create_table :comments, :force => true do |t|
 
@@ -16,10 +17,8 @@ class CreateComments < ActiveRecord::Migration
 
     add_index :comments, :user_id, algorithm: :concurrently
     add_index :comments, :parent_id, algorithm: :concurrently
-    add_index :comments, :parent_id, name: "index_parent_null",  where: "parent_id IS NULL"
-    add_index :comments, :parent_id, name: "index_parent_not_null",  where: "parent_id IS NOT NULL"
     add_index :comments, [:commentable_id, :commentable_type], algorithm: :concurrently
-
+    add_index :comments, [:user_id, :commentable_id, :commentable_type], name: 'user_commentable_comments', algorithm: :concurrently
   end
 
   def self.down

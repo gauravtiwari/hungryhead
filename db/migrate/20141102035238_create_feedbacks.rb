@@ -25,6 +25,8 @@ class CreateFeedbacks < ActiveRecord::Migration
     # Add partial where indexes for postgresql
     add_index :feedbacks, :status, name: "index_feedback_status", where: "status = 1", algorithm: :concurrently
 
+    add_index :feedbacks, [:status, :badge], algorithm: :concurrently
+
     add_index :feedbacks, :badge, name: "index_feedback_helpful", where: "badge = 1", algorithm: :concurrently
     add_index :feedbacks, :badge, name: "index_feedback_unhelpful", where: "badge = 2", algorithm: :concurrently
     add_index :feedbacks, :badge, name: "index_feedback_irrelevant", where: "badge = 3", algorithm: :concurrently

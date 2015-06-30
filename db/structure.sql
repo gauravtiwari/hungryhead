@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-30 14:19:15.086158'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-30 14:19:15.086194'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-06-30 17:48:56.51739'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-06-30 17:48:56.517435'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2439,6 +2439,13 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 
 
 --
+-- Name: index_feedbacks_on_status_and_badge; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedbacks_on_status_and_badge ON feedbacks USING btree (status, badge);
+
+
+--
 -- Name: index_feedbacks_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2527,34 +2534,6 @@ CREATE INDEX index_idea_messages_on_idea_id ON idea_messages USING btree (idea_i
 --
 
 CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_id);
-
-
---
--- Name: index_idea_privacy_everyone; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_privacy_everyone ON ideas USING btree (privacy) WHERE (privacy = 3);
-
-
---
--- Name: index_idea_privacy_friends; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_privacy_friends ON ideas USING btree (privacy) WHERE (privacy = 2);
-
-
---
--- Name: index_idea_privacy_school; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_privacy_school ON ideas USING btree (privacy) WHERE (privacy = 1);
-
-
---
--- Name: index_idea_privacy_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_privacy_team ON ideas USING btree (privacy) WHERE (privacy = 0);
 
 
 --
@@ -2887,20 +2866,6 @@ CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
 
 
 --
--- Name: index_parent_not_null; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_parent_not_null ON comments USING btree (parent_id) WHERE (parent_id IS NOT NULL);
-
-
---
--- Name: index_parent_null; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_parent_null ON comments USING btree (parent_id) WHERE (parent_id IS NULL);
-
-
---
 -- Name: index_read_marks_on_user_id_and_readable_type_and_readable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3062,76 +3027,6 @@ CREATE INDEX index_user_published ON users USING btree (state) WHERE (state = 1)
 
 
 --
--- Name: index_user_published_and_role_alumni; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_published_and_role_alumni ON users USING btree (state) WHERE ((state = 1) AND (role = 5));
-
-
---
--- Name: index_user_published_and_role_entrepreneur; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_published_and_role_entrepreneur ON users USING btree (state) WHERE ((state = 1) AND (role = 2));
-
-
---
--- Name: index_user_published_and_role_faculty; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_published_and_role_faculty ON users USING btree (state) WHERE ((state = 1) AND (role = 4));
-
-
---
--- Name: index_user_published_and_role_mentor; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_published_and_role_mentor ON users USING btree (state) WHERE ((state = 1) AND (role = 3));
-
-
---
--- Name: index_user_published_and_role_student; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_published_and_role_student ON users USING btree (state) WHERE ((state = 1) AND (role = 1));
-
-
---
--- Name: index_user_role_alumni; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_role_alumni ON users USING btree (role) WHERE (role = 5);
-
-
---
--- Name: index_user_role_entrepreneur; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_role_entrepreneur ON users USING btree (role) WHERE (role = 2);
-
-
---
--- Name: index_user_role_faculty; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_role_faculty ON users USING btree (role) WHERE (role = 4);
-
-
---
--- Name: index_user_role_mentor; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_role_mentor ON users USING btree (role) WHERE (role = 3);
-
-
---
--- Name: index_user_role_student; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_role_student ON users USING btree (role) WHERE (role = 1);
-
-
---
 -- Name: index_user_verified; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3244,6 +3139,13 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 
 
 --
+-- Name: index_users_on_state_and_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_state_and_role ON users USING btree (state, role);
+
+
+--
 -- Name: index_users_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3346,6 +3248,13 @@ CREATE UNIQUE INDEX unique_notification_per_user ON notifications USING btree (u
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: user_commentable_comments; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX user_commentable_comments ON comments USING btree (user_id, commentable_id, commentable_type);
 
 
 --
