@@ -3,6 +3,7 @@ module Commenter
 
   included do
     has_many :comments, :dependent => :destroy
+    cache_has_many :comments, embed: true
   end
 
   def comments_score

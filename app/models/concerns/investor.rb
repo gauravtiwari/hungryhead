@@ -16,11 +16,11 @@ module Investor
   end
 
   def angel_investor?
-    fetch_investments.where("amount < ? AND amount > ?", 100, 300).count == 60
+    fetch_investments.select{|i| i.amount > 200 && i.amount < 500}.length >= 60
   end
 
   def vc?
-    fetch_investments.where("amount < ? AND amount > ?", 900, 500).count == 150
+    fetch_investments.select{|i| i.amount < 900 && i.amount > 500}.length >= 150
   end
 
 end

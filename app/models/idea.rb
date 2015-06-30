@@ -58,7 +58,6 @@ class Idea < ActiveRecord::Base
 
   #Scopes
   scope :published, -> { where(status: 1) }
-  scope :school, -> { where(privacy: 1) }
   scope :public_ideas, -> { where(privacy: 1) }
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 

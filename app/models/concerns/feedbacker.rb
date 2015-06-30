@@ -4,6 +4,7 @@ module Feedbacker
 
   included do
     has_many :feedbacks, dependent: :destroy
+    cache_has_many :feedbacks, embed: true
   end
 
   def feedbacked?(idea)
@@ -11,15 +12,15 @@ module Feedbacker
   end
 
   def irrelevant_feedbacks_counter
-    fetch_feedbacks.select{|f| f.badge == "irrelevant"}.count
+    fetch_feedbacks.select{|f| f.badge == "irrelevant"}.length
   end
 
   def helpful_feedbacks_counter
-    fetch_feedbacks.select{|f| f.badge == "helpful"}.count
+    fetch_feedbacks.select{|f| f.badge == "helpful"}.length
   end
 
   def not_helpful_feedbacks_counter
-    fetch_feedbacks.select{|f| f.badge == "unhelpful"}.count
+    fetch_feedbacks.select{|f| f.badge == "unhelpful"}.length
   end
 
 end

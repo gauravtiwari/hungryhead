@@ -16,7 +16,7 @@ module Investable
   end
 
   def find_investors
-    Idea.fetch_multi(investors_ids.values)
+    User.fetch_multi(investors_ids.values)
   end
 
 end

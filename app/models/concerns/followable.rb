@@ -1,4 +1,5 @@
 module Followable
+
   extend ActiveSupport::Concern
 
   included do

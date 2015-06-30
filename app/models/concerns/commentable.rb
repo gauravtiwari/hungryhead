@@ -7,11 +7,11 @@ module Commentable
   end
 
   def root_comments
-    self.comments.where(:parent_id => nil)
+    self.fetch_comments.select{|c| c.parent_id == nil }
   end
 
   def comment_threads
-    self.comments
+    self.fetch_comments
   end
 
   def get_commenters
