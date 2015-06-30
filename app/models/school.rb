@@ -60,11 +60,11 @@ class School < ActiveRecord::Base
 	end
 
 	def get_published_ideas
-		fetch_ideas.select{|f| f.state == "published"}
+		fetch_ideas.select{|idea| idea.status == "published"}
 	end
 
 	#Callbacks hooks
-	after_commit :load_into_soulmate
+	after_save :load_into_soulmate
   before_destroy :remove_from_soulmate
 
   def can_score?

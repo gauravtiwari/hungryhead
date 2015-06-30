@@ -62,13 +62,15 @@ class IdeasController < ApplicationController
   # PUT /ideas/1/publish
   def publish
     if @idea.profile_complete?
-      @idea.published!
-      @idea.everyone!
-      if @idea.published?
-        CreateActivityJob.perform_later(@idea.id, @idea.class.to_s)
-        @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
-      else
-        @msg = "Something went wrong, please try again."
+      @idea.with_lock do
+        @idea.published!
+        @idea.everyone!
+        if @idea.published?
+          CreateActivityJob.perform_later(@idea.id, @idea.class.to_s)
+          @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
+        else
+          @msg = "Something went wrong, please try again."
+        end
       end
       render :publish
     else
@@ -79,10 +81,12 @@ class IdeasController < ApplicationController
 
   # PUT /ideas/1/unpublish
   def unpublish
-    @idea.draft!
-    @idea.team!
-    if @idea.draft?
-      UnpublishIdeaJob.perform_later(@idea.id)
+    @idea.with_lock do
+      @idea.draft!
+      @idea.team!
+      if @idea.draft?
+        UnpublishIdeaJob.perform_later(@idea.id)
+      end
     end
     @msg = "We are unpublishing your idea profile. Once unpublished it will only visible to your team."
     render :publish
