@@ -2,6 +2,8 @@ class Feedback < ActiveRecord::Base
 
   include IdentityCache
   include Redis::Objects
+
+  #Gamification for feedback
   has_merit
 
   #redis counters
@@ -24,7 +26,9 @@ class Feedback < ActiveRecord::Base
 
   #Associations
   belongs_to :idea, touch: true
+  cache_belongs_to :idea
   belongs_to :user
+  cache_belongs_to :user
 
   #Tags for feedback
   acts_as_taggable_on :tags

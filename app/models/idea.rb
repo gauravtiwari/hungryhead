@@ -116,6 +116,18 @@ class Idea < ActiveRecord::Base
     true
   end
 
+  def get_published_feedbacks
+    fetch_feedbacks.select{|u| u.status == "posted"}.sort { |x,y| y.created_at <=> x.created_at }
+  end
+
+  def get_investments
+    fetch_investments.sort { |x,y| y.created_at <=> x.created_at }
+  end
+
+  def get_idea_messages
+    fetch_idea_messages.sort { |x,y| y.created_at <=> x.created_at }
+  end
+
   def founder?(current_user)
     user == current_user
   end
@@ -146,7 +158,7 @@ class Idea < ActiveRecord::Base
 
   def fetch_team
     ids = team_ids.push(user_id.to_s)
-    User.find(ids)
+    User.fetch_multi(ids)
   end
 
   def add_fund

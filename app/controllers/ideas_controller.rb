@@ -90,7 +90,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/comments
   def comments
-    @comments = @idea.root_comments.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    @comments = @idea.root_comments.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.js
@@ -111,20 +111,19 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/followers
   def followers
-    @followers = @idea.followers(User).paginate(:page => params[:page], :per_page => 10)
+    @followers = @idea.fetch_followers.paginate(:page => params[:page], :per_page => 10)
     render 'followers/index'
   end
 
   # GET /ideas/1/team
   def team
-    @team = @idea.find_team
+    @team = @idea.fetch_team
     render partial: 'ideas/_partials/team'
   end
 
   # POST /ideas
   # POST /ideas.json
   def create
-
     @idea = Idea.new(idea_params)
     @idea.update_attributes(user_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
@@ -134,7 +133,6 @@ class IdeasController < ApplicationController
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
-
   end
 
   # PATCH/PUT /ideas/1

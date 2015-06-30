@@ -52,7 +52,7 @@ class FollowsController < ApplicationController
   private
 
   def load_followable
-    @follwables = ["Idea", "Student", "School", "Mentor", "Teacher", "User"]
+    @follwables = ["Idea", "School", "User"]
     if @follwables.include? params[:followable_type]
       followable_type = params[:followable_type]
       unless followable_type.safe_constantize.find(params[:followable_id]).blank?

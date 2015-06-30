@@ -55,12 +55,20 @@ class School < ActiveRecord::Base
 	 [:name]
 	end
 
-	def get_faculties
-		fetch_faculties.select{|f| f.state == "published"}
+	def get_published_faculties
+		fetch_faculties.select{|f| f.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	def get_published_ideas
-		fetch_ideas.select{|idea| idea.status == "published"}
+		fetch_ideas.select{|idea| idea.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+	end
+
+	def get_published_students
+		fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+	end
+
+	def get_published_events
+		fetch_events.select{|u| u.status == "open"}.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	#Callbacks hooks

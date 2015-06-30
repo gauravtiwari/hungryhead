@@ -14,25 +14,24 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @team = User.find(@idea.team_ids)
-    @idea = Idea.friendly.find(params[:idea_id])
+    @team = User.fetch_multi(@idea.team_ids)
+    @idea = Idea.fetch_by_slug(params[:idea_id])
     authorize @idea
-    @feedbacks = @idea.feedbacks
-    .order(id: :desc)
-    .paginate(:page => params[:page], :per_page => 20)
+
+    @feedbacks = @idea.get_published_feedbacks.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.js
       format.html
     end
+
   end
 
   # GET /feedbacks/1
   # GET /feedbacks/1.json
   def show
-    @team = User.find(@idea.team_ids)
-    authorize @feedback.idea
-    @feedbacks = @feedback.comment_threads
-    .paginate(:page => params[:page], :per_page => 20)
+    @team = User.fetch_multi(@idea.team_ids)
+    authorize @feedback.fetch_idea
+    @feedbacks = @feedback.comment_threads.paginate(:page => params[:page], :per_page => 20)
   end
 
   # POST /feedbacks
@@ -70,6 +69,7 @@ class FeedbacksController < ApplicationController
     authorize @feedback
     @feedback.idea.feedbackers.delete(@feedback.user.id.to_s)
     @feedback.idea.save!
+
     DestroyRecordJob.perform_later(@feedback)
     render json: {message: "Feedback deleted", deleted: true}
   end
@@ -77,11 +77,11 @@ class FeedbacksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
-      @feedback = Feedback.find_by_uuid(params[:id])
+      @feedback = Feedback.fetch_by_uuid(params[:id])
     end
 
     def set_props
-      @idea = Idea.friendly.find(params[:idea_id])
+      @idea = Idea.fetch_by_slug(params[:idea_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

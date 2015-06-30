@@ -8,11 +8,11 @@ module Commentable
   end
 
   def root_comments
-    self.fetch_comments.select{|c| c.parent_id == nil }
+    self.fetch_comments.select{|c| c.parent_id == nil }.sort { |x,y| y.created_at <=> x.created_at }
   end
 
   def comment_threads
-    self.fetch_comments
+    self.fetch_comments.sort { |x,y| y.created_at <=> x.created_at }
   end
 
   def get_commenters

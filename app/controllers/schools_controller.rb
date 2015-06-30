@@ -23,7 +23,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+    @students = @school.get_published_students
   end
 
   # GET /schools/1/dashboard
@@ -31,7 +31,7 @@ class SchoolsController < ApplicationController
   end
 
   def latest_ideas
-    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+    @ideas = @school.get_published_ideas
     respond_to do |format|
       format.js
     end
@@ -42,7 +42,7 @@ class SchoolsController < ApplicationController
   end
 
   def people
-    @users = @school.fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
+    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js
@@ -50,7 +50,7 @@ class SchoolsController < ApplicationController
   end
 
   def events
-    @events = @school.fetch_events.select{|u| u.status == "open"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
+    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js
@@ -58,18 +58,9 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = @school.fetch_ideas.select{|u| u.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }.paginate(:page => params[:page], :per_page => 20)
+    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 20)
     if request.xhr?
       render :partial=>"schools/ideas"
-    end
-  end
-
-  # GET /school/1/comments
-  def comments
-    @comments = @school.root_comments.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 

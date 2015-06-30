@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @commentable = params[:commentable_type].safe_constantize.find_by_uuid(params[:id])
+    @commentable = params[:commentable_type].safe_constantize.fetch_by_uuid(params[:id])
     @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -26,8 +26,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.fetch(params[:id])
     authorize @comment
+    #destory record and dependencies
     DestroyRecordJob.perform_later(@comment)
     render json: {message: "Comment deleted", deleted: true}
   end
@@ -38,8 +39,9 @@ class CommentsController < ApplicationController
   def set_commentable
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
-    if ["Idea", "Feedback", "Investment", "School"].include? commentable_type
-      @commentable = commentable_type.safe_constantize.find_by_uuid(commentable_id)
+
+    if ["Idea", "Feedback", "Investment"].include? commentable_type
+      @commentable = commentable_type.safe_constantize.fetch_by_uuid(commentable_id)
     else
       respond_to do |format|
         flash[:error] = "Sorry, unable to comment on this entity"
