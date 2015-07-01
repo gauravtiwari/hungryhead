@@ -17,8 +17,8 @@ class Comment < ActiveRecord::Base
   include Mentioner
 
   #Callback hooks
-  after_create :increment_counters, :create_activity
-  before_destroy :decrement_counters, :delete_notification
+  after_commit :increment_counters, :create_activity,  on: :create
+  after_destroy :decrement_counters, :delete_notification
 
   #Model Associations
   belongs_to :user

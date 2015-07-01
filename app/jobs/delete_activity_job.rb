@@ -2,7 +2,12 @@ class DeleteActivityJob < ActiveJob::Base
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
       Activity.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |activity|
+
+        #Delete from user ticker
         activity.user.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
+
+        #Delete from user latest activities
+        activity.user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
 
         #Remove activity from follower and recipient
         find_followers(activity).each do |f|
@@ -20,6 +25,7 @@ class DeleteActivityJob < ActiveJob::Base
 
         #finally destroy the activity
         activity.destroy if activity.present?
+
       end
     end
   end

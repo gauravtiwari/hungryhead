@@ -21,8 +21,8 @@ class Investment < ActiveRecord::Base
   include Votable
 
   #Model Callbacks
-  before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_create  :update_balance, :increment_counters, :create_activity
+  after_destroy :cancel_investment, :decrement_counters, :delete_activity
+  after_commit  :update_balance, :increment_counters, :create_activity, on: :destroy
 
   public
 

@@ -13,24 +13,12 @@
 	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %>
 	    	pitched <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
 		   	<h6 class="no-margin p-t-5">
-		   		<% if activity.user.cached_location_list.present? %>
-			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-map-marker"></i>
-			            <%= activity.user.location_list.first %>
-			        </span>
-		        <% end %>
-		       <% if activity.user.cached_market_list.present? %>
-			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-map-marker"></i>
-			            <%= activity.user.market_list.first %>
-			        </span>
-		        <% end %>
-		        <span class="date semi-bold">
-		            <i class="fa fa-clock"></i>
-			        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
-						<%= local_time_ago(activity.created_at) %>
-					<% end %>
-		        </span>
+	        <span class="date semi-bold">
+	          <i class="fa fa-clock"></i>
+		        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
+							<%= local_time_ago(activity.created_at) %>
+						<% end %>
+	        </span>
 		    </h6>
 	    </div>
     </div>

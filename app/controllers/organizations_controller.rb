@@ -1,9 +1,8 @@
 class OrganizationsController < ApplicationController
+
   before_filter :authenticate_user!
   before_filter :check_terms
   before_action :set_organization, only: [:notifications, :show, :activities, :edit, :students, :ideas, :update, :destroy]
-  respond_to :html, :json
-  autocomplete :organization, :name, :full => true
 
   # GET /organizations
   # GET /organizations.json

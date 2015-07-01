@@ -6,19 +6,18 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-    <% User.find(current_user.people_you_may_know).take(5).each do |user| %>
+    <% User.find_multi(current_user.people_you_may_know).take(5).each do |user| %>
         <li class="m-r-10">
-        <%= link_to(profile_path(user)) do %>
+            <%= link_to(profile_path(user)) do %>
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-                    <% if user.avatar.present? %>
-                    <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
+                <% if user.avatar.present? %>
+                <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
 
-                    <% else %>
-                    <span class="placeholder bold fs-12 text-white">
-                        <%= user.user_name_badge %>
-                    </span>
-                    <% end %>
-
+                <% else %>
+                <span class="placeholder bold fs-12 text-white">
+                    <%= user.user_name_badge %>
+                </span>
+                <% end %>
             </div>
             <% end %>
         </li>

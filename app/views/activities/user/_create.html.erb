@@ -13,24 +13,12 @@
 	    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> <i class="fa fa-users"></i> joined Hungryhead</span>
 
 		   	<h6 class="no-margin p-t-5">
-		   		<% if activity.user.cached_location_list.present? %>
-			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-map-marker"></i>
-			            <%= activity.user.location_list.first %>
-			        </span>
-		        <% end %>
-		       <% if activity.user.cached_market_list.present? %>
-			        <span class="location semi-bold m-r-10">
-			            <i class="fa fa-shopping-cart"></i>
-			            <%= activity.user.market_list.first %>
-			        </span>
-		        <% end %>
-		        <span class="date semi-bold">
-			        <%= link_to(profile_path(activity.user), class: "text-master") do %>
-							<i class="fa fa-clock-o"></i>
-							<%= local_time_ago(activity.created_at) %>
-							<% end %>
-		        </span>
+	        <span class="date semi-bold">
+		        <%= link_to(profile_path(activity.user), class: "text-master") do %>
+						<i class="fa fa-clock-o"></i>
+						<%= local_time_ago(activity.created_at) %>
+						<% end %>
+	        </span>
 		    </h6>
 	    </div>
     </div>

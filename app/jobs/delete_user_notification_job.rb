@@ -3,7 +3,12 @@ class DeleteUserNotificationJob < ActiveJob::Base
 
     ActiveRecord::Base.connection_pool.with_connection do
       Notification.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |notification|
+
+        #Delete from user ticker
         notification.user.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
+
+        #delete from user latest activities profile
+        notification.user.latest_activities.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
 
         #Find followers for this notification and remove notification from it's feed
         find_followers(notification).each do |f|
@@ -16,6 +21,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
 
         #finally destroy the notification from DB
         notification.destroy if notification.present?
+
       end
     end
   end

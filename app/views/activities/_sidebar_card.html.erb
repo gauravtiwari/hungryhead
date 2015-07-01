@@ -2,26 +2,26 @@
   <div class="container-xs-height">
     <div class="row text-center">
       <div class="social-user-profile auto-margin">
-          <div class="thumbnail-wrapper d48 circular bordered b-white">
-              <% if current_user.avatar.present? %>
-                  <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "55", height: "55") %>
-              <% else %>
-                  <span class="placeholder bold text-white" width="32px" height="32px">
-                      <%= current_user.user_name_badge %>
-                  </span>
-              <% end %>
-          </div>
-
-          </div>
-          <div class="p-l-10 p-r-10">
-              <h3 class="no-margin text-white">
-                  <%= current_user.name %>
-              </h3>
-              <p class="small text-white text-center"><%= current_user.mini_bio %></p>
-              <%= link_to(profile_path(current_user), class: 'text-white') do %>
-                  <i class="fa fa-pencil"></i> Edit profile
-              <% end %>
-          </div>
+        <div class="thumbnail-wrapper d48 circular bordered b-white">
+            <% if current_user.avatar.present? %>
+                <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "55", height: "55") %>
+            <% else %>
+                <span class="placeholder bold text-white" width="32px" height="32px">
+                    <%= current_user.user_name_badge %>
+                </span>
+            <% end %>
+        </div>
       </div>
+
+      <div class="p-l-10 p-r-10">
+          <h3 class="no-margin text-white">
+              <%= current_user.name %>
+          </h3>
+          <p class="small text-white text-center"><%= current_user.mini_bio %></p>
+          <%= link_to(profile_path(current_user), class: 'text-white') do %>
+              <i class="fa fa-pencil"></i> Edit profile
+          <% end %>
+      </div>
+    </div>
   </div>
 </div>

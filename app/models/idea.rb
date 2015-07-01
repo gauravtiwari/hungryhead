@@ -22,7 +22,7 @@ class Idea < ActiveRecord::Base
   include Impressionable
 
   #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
+  after_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_save :load_into_soulmate
 
