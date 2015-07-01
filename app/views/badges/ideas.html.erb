@@ -1,0 +1,45 @@
+<% cache([cache_key_for_ideas, params[:page]])  do %>
+  <div class="wrapper-small idea-bg-gradient">
+    <div class="col-md-6 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <div class="hero-text inner">
+        <h2 class="text-white">
+           People who earned
+           <span class="bold b-b b-white p-b-5"><%= params[:id].capitalize %></span>
+           badge
+         </h2>
+         <p class="m-b-10 inline text-white">
+           <%= link_to(badge_path(@badge.name), class: "badge text-white font-helvetica") do %>
+               <span class="fa fa-<%= @badge.custom_fields[:icon] %> badge-type <%= @badge.level %>"></span><%= @badge.custom_fields[:name] %>
+           <% end %>
+           : <%= @badge.description %>
+         </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container p-t-40 p-b-80">
+    <div class="idea-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
+            <th>Follow to get updates</th>
+            <th class="text-center">Idea Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ideas.each do |idea| %>
+            <% cache([idea, "followed", idea.followed_by?(current_user), idea.in_team?(current_user)]) do %>
+              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
+      <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    </div>
+  </div>
+  </div>
+<% end %>
