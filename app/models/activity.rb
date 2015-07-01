@@ -4,6 +4,8 @@ class Activity < ActiveRecord::Base
   include Renderable
   include Feedable
 
+  cache_index :uuid
+
   after_commit :delete_older_notifications, on: :create
 
   def cache_key

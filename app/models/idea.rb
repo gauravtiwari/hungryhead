@@ -72,7 +72,10 @@ class Idea < ActiveRecord::Base
 
   #Cache indexes
   cache_index :slug, :unique => true
-  cache_index :status, :privacy, :uuid, :school_id
+  cache_index :status
+  cache_index :privacy
+  cache_index :uuid, :unique => true
+  cache_index :school_id
 
   #Includes modules
   has_paper_trail :only => [:name, :description, :elevator_pitch,

@@ -12,7 +12,7 @@ class MentionsController < ApplicationController
 
     ids.delete(current_user.id.to_s)
 
-    User.fetch_multi(ids.uniq).map { |user|
+    @mentionables = User.fetch_multi(ids.uniq).map { |user|
       {
         id: user.uid,
         name: user.name,

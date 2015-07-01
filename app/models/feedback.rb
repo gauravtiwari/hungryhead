@@ -26,9 +26,8 @@ class Feedback < ActiveRecord::Base
 
   #Associations
   belongs_to :idea, touch: true
-  cache_belongs_to :idea
   belongs_to :user
-  cache_belongs_to :user
+  cache_index :uuid
 
   #Tags for feedback
   acts_as_taggable_on :tags
