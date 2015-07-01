@@ -1,7 +1,7 @@
 class Vote < ActiveRecord::Base
 
   #Model Associations
-  belongs_to :voter
+  belongs_to :voter, class_name: 'User', foreign_key: 'voter_id'
   belongs_to :votable, :polymorphic => true, touch: true
 
   validates_presence_of :votable_id

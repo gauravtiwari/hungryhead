@@ -1,10 +1,7 @@
-redis_conn = proc{
-  ReadCache.redis
-}
 Sidekiq.configure_server do |config|
-  config.redis = ConnectionPool.new(size: 250, &redis_conn)
+  config.redis = { url: ENV["REDIS_URL"] || 'redis://127.0.0.1:6379' }
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = ConnectionPool.new(size: 250, &redis_conn)
+  config.redis = { url: ENV["REDIS_URL"] || 'redis://127.0.0.1:6379' }
 end

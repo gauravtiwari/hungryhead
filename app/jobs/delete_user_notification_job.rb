@@ -1,5 +1,6 @@
 class DeleteUserNotificationJob < ActiveJob::Base
   def perform(trackable_id, trackable_type)
+
     ActiveRecord::Base.connection_pool.with_connection do
       Notification.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |notification|
         notification.user.ticker.remrangebyscore(notification.created_at.to_i + notification.id, notification.created_at.to_i + notification.id)
@@ -22,7 +23,8 @@ class DeleteUserNotificationJob < ActiveJob::Base
   #fetch all followers followed by actor
   def find_followers(notification)
     followers_ids = notification.user.followers_ids.members
-    User.fetch(followers_ids)
+    @followers = User.fetch(followers_ids) unless followers_ids.empty?
+    @followers || []
   end
 
   #get recipient idea // user

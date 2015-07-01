@@ -1,14 +1,14 @@
 class Follow < ActiveRecord::Base
 
   belongs_to :follower, class_name: 'User', foreign_key: 'follower_id'
-  belongs_to :followable, polymorphic: true
+  belongs_to :followable, polymorphic: true, touch: true
 
   # Validations
   validates :followable, presence: true
   validates :follower, presence: true
 
   after_create :increment_counters
-  after_destroy :decrement_counters, :delete_notification
+  before_destroy :decrement_counters, :delete_notification
 
   private
 
