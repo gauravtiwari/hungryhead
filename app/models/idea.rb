@@ -118,7 +118,7 @@ class Idea < ActiveRecord::Base
   end
 
   def get_published_feedbacks
-    fetch_feedbacks.select{|u| u.status == "posted"}.sort { |x,y| y.created_at <=> x.created_at }
+    fetch_feedbacks.sort { |x,y| y.created_at <=> x.created_at }
   end
 
   def get_investments

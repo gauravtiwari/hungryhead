@@ -6,13 +6,13 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-      <% User.find(@idea.followers_ids.members).take(16).each do |follower| %>
+      <% @idea.get_followers.take(16).each do |follower| %>
         <li class="m-r-10">
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
             <% if follower.avatar.present? %>
               <%= image_tag(follower.avatar.url(:avatar), :"data-src" => "#{follower.avatar.url(:avatar)}", :"data-src-retina" => "#{follower.avatar.url(:square)}", width: "35", height: "35") %>
             <% else %>
-                <span class="placeholder bold text-white"><%= follower.first_name.first + follower.last_name.first %>
+                <span class="placeholder bold text-white"><%= follower.user_name_badge %>
                 </span>
             <% end %>
             </div>

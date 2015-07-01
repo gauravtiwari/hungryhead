@@ -1,31 +1,31 @@
 <div class="card share post_<%= feedback.id %>" data-social="item">
     <div class="card-header clearfix">
       <div class="user-pic">
-        <% if feedback.user.avatar.present? %>
-          <%= image_tag(feedback.user.avatar.url(:avatar), :"data-src" => "#{feedback.user.avatar.url(:avatar)}", :"data-src-retina" => "#{feedback.user.avatar.url(:square)}", width: "33", height: "33") %>
+        <% if feedback.fetch_user.avatar.present? %>
+          <%= image_tag(feedback.fetch_user.avatar.url(:avatar), :"data-src" => "#{feedback.fetch_user.avatar.url(:avatar)}", :"data-src-retina" => "#{feedback.fetch_user.avatar.url(:square)}", width: "33", height: "33") %>
           <% else %>
-              <span class="placeholder bold text-white"><%= feedback.user.first_name.first + feedback.user.last_name.first %>
+              <span class="placeholder bold text-white"><%= feedback.fetch_user.user_name_badge %>
               </span>
         <% end %>
       </div>
 
       <div class="text-master-dark overflow-hidden">
-        <%= link_to(your_name(feedback.user, false), profile_path(feedback.user), :"data-popover-href" => "#{profile_card_path(feedback.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
-        <% if feedback.idea.team_ids.include?(current_user.id.to_s) %>
+        <%= link_to(your_name(feedback.fetch_user, false), profile_path(feedback.fetch_user), :"data-popover-href" => "#{profile_card_path(feedback.fetch_user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
+        <% if @idea.team_ids.include?(current_user.id.to_s) %>
           your idea
         <% end %>
-      <%= link_to(feedback.idea.name, idea_path(feedback.idea), :"data-popover-href" => "#{card_idea_path(feedback.idea)}", class: 'load-card bold') %>
+      <%= link_to(@idea.name, idea_path(@idea), :"data-popover-href" => "#{card_idea_path(@idea)}", class: 'load-card bold') %>
         <h6>
-          <% if feedback.user.locations %>
+          <% if feedback.fetch_user.cached_location_list.present? %>
               <span class="location semi-bold m-r-10">
                   <i class="fa fa-map-marker"></i>
-                  <%= feedback.user.locations.first %>
+                  <%= feedback.fetch_user.location_list.first %>
               </span>
             <% end %>
-           <% if feedback.user.markets %>
+           <% if feedback.fetch_user.cached_market_list.present? %>
               <span class="location semi-bold m-r-10">
                   <i class="fa fa-map-marker"></i>
-                  <%= feedback.user.markets.first %>
+                  <%= feedback.fetch_user.market_list.first %>
               </span>
             <% end %>
             <span class="time semi-bold">
@@ -37,7 +37,7 @@
         </h6>
       </div>
     </div>
-    <div class="card-description">
+    <div class="card-description p-l-60 p-r-60">
       <div class="feedback-content">
        <% if feedback.body.length > 450 %>
         <%= truncate(markdownify(feedback.body), escape: false, length: 450) %>
@@ -53,10 +53,10 @@
       <% end %>
       </div>
     </div>
-    <div class="card-footer clearfix bold">
-      <% if feedback.idea.user_id == current_user.id %>
+    <div class="card-footer clearfix bold p-l-60 p-r-60">
+      <% if @idea.user_id == current_user.id %>
       <% rated = feedback.badged? %>
-      <%= react_component('Rate', {rate: {record: feedback.id, user_name: feedback.idea.user.name, badge_name: feedback.badge, rated: rated, rate_url: rate_idea_feedback_path(feedback.idea.slug, feedback.id)}}) %>
+      <%= react_component('Rate', {rate: {record: feedback.id, user_name: @idea.user.name, badge_name: feedback.badge, rated: rated, rate_url: rate_idea_feedback_path(@idea.slug, feedback.id)}}) %>
       <% else %>
         <% if feedback.badged? %>
           <div class="review-badge pull-right">
@@ -71,7 +71,7 @@
         <% end %>
         <ul class="reactions pull-left">
           <% voted = feedback.voted?(current_user) %>
-          <%= react_component('Upvote', {record: feedback.id, voted: voted, vote_url: vote_path(votable_type: feedback.class.to_s, votable_id: feedback.id), votes_count: feedback.votes_counter.value, voters_path: voters_path(votable_type: feedback.class.to_s, votable_id: feedback.id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+          <%= react_component('Upvote', {record: feedback.id, voted: voted, vote_url: vote_path(votable_type: feedback.class.to_s, votable_id: feedback.uuid), votes_count: feedback.votes_counter.value, voters_path: voters_path(votable_type: feedback.class.to_s, votable_id: feedback.id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
         </ul>
       <% end %>
       <div class="clearfix"></div>

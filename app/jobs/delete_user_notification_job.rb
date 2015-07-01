@@ -23,7 +23,7 @@ class DeleteUserNotificationJob < ActiveJob::Base
   #fetch all followers followed by actor
   def find_followers(notification)
     followers_ids = notification.user.followers_ids.members
-    @followers = User.fetch(followers_ids) unless followers_ids.empty?
+    @followers = User.fetch_multi(followers_ids) unless followers_ids.empty?
     @followers || []
   end
 

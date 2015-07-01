@@ -62,7 +62,7 @@
     	<% else %>
 	    	<% if activity.trackable.badged? %>
 		    	<div class="review-badge pull-right">
-		    	 	<%= link_to(activity.recipient.user.name, profile_path(activity.recipient.user)) %> found this feedback <%= activity.trackable.badge %>
+		    	 	<%= link_to(activity.recipient.name, profile_path(activity.recipient.user)) %> found this feedback <span class="b-b b-grey p-b-5 text-green"><%= activity.trackable.badge %></span>
 		    	</div>
 	    	<% end %>
 	    <% end %>

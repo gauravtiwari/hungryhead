@@ -1,7 +1,11 @@
 <div class="wrapper-small idea-bg-gradient">
   <div class="col-md-6 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
     <div class="hero-text inner">
-      <h2 class="text-white"><%= pluralize(@ideas.size, 'Idea') %> <span class="text-white">tagged with</span> <strong><%= params[:tag].capitalize.strip.gsub('-', ' ') %></strong></h2>
+      <h2 class="text-white">
+        <%= pluralize(@ideas.size, 'Idea') %>
+        <span class="text-white">tagged with</span>
+        <strong class="b-b b-white p-b-5"><%= params[:tag].capitalize.strip.gsub('-', ' ') %></strong>
+      </h2>
     </div>
   </div>
 </div>

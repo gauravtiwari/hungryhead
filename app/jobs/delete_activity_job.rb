@@ -27,7 +27,7 @@ class DeleteActivityJob < ActiveJob::Base
   #Get all followers followed by actor
   def find_followers(activity)
     followers_ids = activity.user.followers_ids.members
-    @followers = User.find(followers_ids) unless followers_ids.empty?
+    @followers = User.fetch_multi(followers_ids) unless followers_ids.empty?
     @followers || []
   end
 

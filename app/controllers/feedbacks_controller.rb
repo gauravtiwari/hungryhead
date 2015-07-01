@@ -30,8 +30,8 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks/1.json
   def show
     @team = User.fetch_multi(@idea.team_ids)
-    authorize @feedback.idea
-    @feedbacks = @feedback.comment_threads.paginate(:page => params[:page], :per_page => 20)
+    authorize @feedback.fetch_idea
+    @feedbacks = @feedback.root_comments.paginate(:page => params[:page], :per_page => 20)
   end
 
   # POST /feedbacks
@@ -76,16 +76,16 @@ class FeedbacksController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_feedback
-      @feedback = Feedback.fetch_by_uuid(params[:id])
-    end
+  def set_feedback
+    @feedback = Feedback.fetch_by_uuid(params[:id])
+  end
 
-    def set_props
-      @idea = Idea.fetch_by_slug(params[:idea_id])
-    end
+  def set_props
+    @idea = Idea.fetch_by_slug(params[:idea_id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feedback_params
-      params.require(:feedback).permit(:body, :tag_list)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feedback_params
+    params.require(:feedback).permit(:body, :tag_list)
+  end
 end

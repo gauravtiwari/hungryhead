@@ -33,9 +33,9 @@ class VotesController < ApplicationController
     @votables = ["Idea", "Feedback", "Investment", "Comment"]
     if @votables.include? params[:votable_type]
       if params[:votable_type] == "Comment"
-        @votable = params[:votable_type].safe_constantize.find(params[:votable_id])
+        @votable = params[:votable_type].constantize.find(params[:votable_id])
       else
-        @votable = params[:votable_type].safe_constantize.find_by_uuid(params[:votable_id])
+        @votable = params[:votable_type].constantize.find_by_uuid(params[:votable_id])
       end
     else
       respond_to do |format|

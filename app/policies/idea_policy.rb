@@ -8,10 +8,6 @@ class IdeaPolicy < ApplicationPolicy
   	show?
   end
 
-  def follow?
-    current_user != record.user
-  end
-
   def show?
     record.in_team?(current_user) ||
     record.published? && record.everyone?
