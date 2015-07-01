@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache
-  after_save :soulmate_loader
+  after_save :soulmate_loader, if: :rebuild_cache?
   after_save :rebuild_notification_cache, if: :rebuild_cache?
 
   #Tagging System
@@ -207,8 +207,12 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
+  def cacheable_changed?
+    name_changed? || avatar_changed? || username_changed? || mini_bio_changed?
+  end
+
   def rebuild_cache?
-    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && published?
+     cacheable_changed? && published?
   end
 
   def has_notifications?
@@ -282,7 +286,7 @@ class User < ActiveRecord::Base
   end
 
   def soulmate_loader
-    UserSavedService.new(self).call
+    RecordSavedJob.set(wait: 1.minute).perform_later(id, self.class.to_s)
   end
 
   def remove_from_soulmate

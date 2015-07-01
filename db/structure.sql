@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-06-30 23:46:14.989383'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-06-30 23:46:14.989408'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-07-01 00:45:22.717338'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-07-01 00:45:22.717383'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -337,7 +337,6 @@ CREATE TABLE follows (
     followable_id integer NOT NULL,
     followable_type character varying NOT NULL,
     follower_id integer NOT NULL,
-    follower_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1594,7 +1593,6 @@ CREATE TABLE votes (
     votable_id integer NOT NULL,
     votable_type character varying NOT NULL,
     voter_id integer NOT NULL,
-    voter_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2271,6 +2269,13 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 
 
 --
+-- Name: index_activities_on_user_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_user_id_and_published ON activities USING btree (user_id, published);
+
+
+--
 -- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2474,10 +2479,10 @@ CREATE INDEX index_follows_on_followable_id_and_followable_type ON follows USING
 
 
 --
--- Name: index_follows_on_follower_id_and_follower_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_follows_on_follower_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_follows_on_follower_id_and_follower_type ON follows USING btree (follower_id, follower_type);
+CREATE INDEX index_follows_on_follower_id ON follows USING btree (follower_id);
 
 
 --
@@ -3202,10 +3207,10 @@ CREATE UNIQUE INDEX index_votes_on_votable_id_and_votable_type_and_voter_id ON v
 
 
 --
--- Name: index_votes_on_voter_id_and_voter_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_voter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_id, voter_type);
+CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
 
 
 --
