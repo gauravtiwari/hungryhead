@@ -30,7 +30,7 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks/1.json
   def show
     @team = User.fetch_multi(@idea.team_ids)
-    authorize @feedback.fetch_idea
+    authorize @feedback.idea
     @feedbacks = @feedback.comment_threads.paginate(:page => params[:page], :per_page => 20)
   end
 

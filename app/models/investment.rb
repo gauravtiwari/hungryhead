@@ -12,7 +12,7 @@ class Investment < ActiveRecord::Base
   #Associations
   belongs_to :user, touch: true
   belongs_to :idea, touch: true
-  cache_index :uuid
+  cache_index :uuid, unique: true
 
   #Includes concerns
   include Commentable
