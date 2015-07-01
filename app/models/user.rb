@@ -96,6 +96,7 @@ class User < ActiveRecord::Base
   sorted_set :friends_notifications, marshal: true
 
   #Sorted set to store trending ideas
+  sorted_set :latest, global: true
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 

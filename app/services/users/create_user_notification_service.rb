@@ -8,13 +8,14 @@ class CreateUserNotificationService
 
   def create
     if @user.activities.where(trackable: @user).empty?
-      @user.activities.create!(
+      @activity = @user.activities.create!(
         trackable: @user,
         verb: 'joined',
         recipient: @user,
         key: 'user.create'
       )
       publish_user #publish user
+      cache(@activity)
       increment_counters
     else
       return
@@ -26,6 +27,10 @@ class CreateUserNotificationService
     @user.save
   end
 
+  def cache(activity)
+    CreateNotificationCacheService.new(activity).create
+  end
+
   def increment_counters
     #Increment counters
     @user.school.people_counter.increment if @user.school_id.present?
@@ -33,10 +38,12 @@ class CreateUserNotificationService
     @user.school.published_people.add(@user.id, @user.created_at.to_i + @user.id) if @user.school_id.present?
 
     #Cache latest user & sorted set for global leaderboard
-    User.latest << @user.id
+    User.latest.add(@user.id, @user.created_at.to_i + @user.id)
     #Add leaderboard score
     User.leaderboard.add(@user.id, @user.points)
     User.trending.add(@user.id, 1)
+
+    User.latest.remrangebyrank(20, User.latest.members.length)
 
     #Send notification to listing
     Pusher.trigger_async("users-channel",

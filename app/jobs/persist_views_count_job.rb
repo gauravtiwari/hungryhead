@@ -8,7 +8,7 @@ class PersistViewsCountJob < ActiveJob::Base
         record_type.constantize.trending.increment(@user.id)
         @record.views_counter.increment
 
-        @user.fetch_impressions.create!(
+        @user.impressions.create!(
           impressionable_id: record_id,
           impressionable_type: record_type,
           referrer: referrer,

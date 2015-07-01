@@ -20,7 +20,7 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def latest_listing
-      self.fetch_multi(self.latest.values.reverse)
+      self.fetch_multi(self.latest.revrange(0, 20))
       .map{|object| send("#{self.to_s.downcase}_json", object)}
     end
 

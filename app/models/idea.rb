@@ -36,10 +36,8 @@ class Idea < ActiveRecord::Base
   list :commenters_ids
   set :impressioners_ids
 
-  #Set to store trending
-  list :latest, maxlength: 20, marshal: true, global: true
-
   #Leaderboard ideas
+  sorted_set :latest, global: true
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 

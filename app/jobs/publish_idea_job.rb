@@ -6,10 +6,10 @@ class PublishIdeaJob < ActiveJob::Base
 
     ActiveRecord::Base.connection_pool.with_connection do
       #Fetch records
-      @user = User.fetch(user_id)
-      @idea = Idea.fetch(idea_id)
-      @activity = Activity.fetch(activity_id)
-      @school = School.fetch(@idea.school_id)
+      @user = User.find(user_id)
+      @idea = Idea.find(idea_id)
+      @activity = Activity.find(activity_id)
+      @school = School.find(@idea.school_id)
 
       #Rebuild counters for school
       @school.ideas_counter.reset
@@ -23,8 +23,8 @@ class PublishIdeaJob < ActiveJob::Base
       @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
 
       #Insert into cache list
-      Idea.latest << @idea.id unless Idea.latest.values.include?(@idea.id.to_s)
-      Idea.trending.add(@idea.id, @idea.fetch_impressions.length)
+      Idea.latest.add(@idea.id, @idea.created_at.to_i + @idea.id)
+      Idea.trending.add(@idea.id, @idea.impressions.length)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
       #Pusher notification for new idea
@@ -34,7 +34,7 @@ class PublishIdeaJob < ActiveJob::Base
       )
 
       #Fetch followings from cache
-      @user.fetch_followings.create!(followable: @idea) if @user.fetch_followings.select{|follow| follow.followable_type == "Idea" && follow.followable_id == @idea.id}.empty?
+      @user.followings.create!(followable: @idea) if @user.followings.select{|follow| follow.followable_type == "Idea" && follow.followable_id == @idea.id}.empty?
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
