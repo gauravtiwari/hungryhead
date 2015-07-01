@@ -12,7 +12,7 @@
   <div class="col-md-3 col-sm-3 no-padding p-r-15">
     <div class="sidebar auto-height sticky white-bg box-shadow">
       <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
-      <% if User.latest.values.length > 0 %>
+      <% if User.latest.members.length > 0 %>
         <%= react_component('LatestUsers', {path: latest_users_path}) %>
       <% end %>
     </div>
