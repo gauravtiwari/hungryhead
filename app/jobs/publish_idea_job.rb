@@ -33,6 +33,8 @@ class PublishIdeaJob < ActiveJob::Base
         {data: idea_json(@idea)}.to_json
       )
 
+      Idea.trending.remrangebyrank(20, Idea.trending.members.length)
+
       #Fetch followings from cache
       @user.followings.create!(followable: @idea) if @user.followings.select{|follow| follow.followable_type == "Idea" && follow.followable_id == @idea.id}.empty?
 
