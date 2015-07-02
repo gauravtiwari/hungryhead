@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/mailboxer/mailboxer.git
-  revision: 242229ff361938181ae2a98008d43cdbfd568892
+  revision: 416ed09ab7280d9836d42529eb71c9a2a20ccc18
   specs:
-    mailboxer (0.12.5)
+    mailboxer (0.13.0)
       carrierwave (>= 0.5.8)
       foreigner (>= 0.9.1)
       rails (>= 3.2.0)
@@ -302,7 +302,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    libv8 (3.16.14.9)
+    libv8 (3.16.14.11)
     local_time (1.0.2)
       coffee-rails
     loofah (2.0.2)
