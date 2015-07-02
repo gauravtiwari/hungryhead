@@ -21,26 +21,4 @@
     </div>
   </div>
 
-  <div class="container p-t-40 p-b-80">
-    <div class="idea-list">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2" class="no-padding"><%= pluralize(@ideas.count, 'Result',) %> </th>
-            <th>Follow to get updates</th>
-            <th class="text-center">Idea Stats</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @ideas.each do |idea| %>
-            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="paging-container p-r-15">
-        <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-    </div>
-  </div>
-  </div>
+  <%= render partial: 'ideas/ideas', resource: @ideas %>

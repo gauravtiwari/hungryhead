@@ -5,18 +5,27 @@
         <div class="tab-pane padding-20 active slide-left" id="tab1">
               <div class="row row-same-height">
                   <div class="rule-accept p-t-20">
-                    <div class="col-md-8 auto-margin">
-                    <div class="quick_buttons text-center m-t-20">
+                    <div class="col-md-3 auto-margin">
+                    <div class="quick_buttons m-t-20 p-b-40">
                       <div class="clearfix">
-                      <%= link_to(new_idea_path(:rules), class: 'btn btn-lg btn-info') do %>
-                        <span><i class="fa fa-lightbulb-o"></i> Pitch new Idea</span>
+                        <%= link_to(profile_path(@user), class: 'btn btn-lg main-button fs-16') do %>
+                          <span><i class="fa fa-edit"></i> Complete profile</span>
+                        <% end %>
+                      </div>
+                      <div class="clearfix m-t-20">
+                        <%= link_to(new_idea_path(:rules), class: 'btn btn-lg main-button fs-16') do %>
+                          <span><i class="fa fa-lightbulb-o"></i> Pitch a new Idea</span>
+                        <% end %>
+                      </div>
+                      <div class="clearfix m-t-20">
+                        <%= link_to(friends_invite_path, remote: true, class: 'btn btn-lg main-button fs-16') do %>
+                          <i class="fa fa-paper-plane"></i> Invite friends
+                        <% end %>
+                      </div>
+                      <div class="clearfix m-t-20">
+                      <%= link_to(root_path, class: 'btn btn-lg main-button fs-16') do %>
+                        <span><i class="fa fa-home"></i> Go to homepage</span>
                       <% end %>
-                      </div>
-                      <div class="clearfix m-t-20">
-                      <%= link_to("Complete Profile", profile_path(@user), class: 'btn btn-lg btn-info') %>
-                      </div>
-                      <div class="clearfix m-t-20">
-                      <%= link_to("Browse People", root_path, class: 'btn btn-lg btn-info') %>
                       </div>
                     </div>
                   </div>

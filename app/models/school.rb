@@ -81,7 +81,7 @@ class School < ActiveRecord::Base
 
   def name_badge
   	words = name.split(' ')
-  	words.map{|w| w.first }.join
+  	words.map{|w| w.first }.join.upcase
   end
 
 	private
