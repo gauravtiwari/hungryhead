@@ -1,0 +1,69 @@
+<div class="container-fluid col-md-8 auto-margin p-b-60">
+    <div class="m-t-50" id="rootwizard">
+    <%= render partial: 'tab_nav' %>
+    <div class="tab-content">
+        <div class="tab-pane padding-20 active slide-left" id="tab1">
+              <div class="row row-same-height">
+                  <div class="rule-accept p-t-20">
+                    <div class="col-md-8 auto-margin">
+                    <div class="quick_buttons text-center m-t-20">
+                      <div class="clearfix">
+                      <%= link_to(new_idea_path(:rules), class: 'btn btn-lg btn-info') do %>
+                        <span><i class="fa fa-lightbulb-o"></i> Pitch new Idea</span>
+                      <% end %>
+                      </div>
+                      <div class="clearfix m-t-20">
+                      <%= link_to("Complete Profile", profile_path(@user), class: 'btn btn-lg btn-info') %>
+                      </div>
+                      <div class="clearfix m-t-20">
+                      <%= link_to("Browse People", root_path, class: 'btn btn-lg btn-info') %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade fill-in" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="text-left p-b-5 text-green"><span class="bold">Community Guidelines:</span></h1>
+          <div class="divider b-b text-green b-grey b-md b-small"></div>
+          <h5 class="p-t-10 text-left">A few rules to help make sure hungryhead is a great place for everyone.</h5>
+        </div>
+        <div class="modal-body clearfix">
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't SPAM </h3>
+            <p class="fs-16">
+              We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+            </p>
+          </div>
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Respect</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't Steal</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Share</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
