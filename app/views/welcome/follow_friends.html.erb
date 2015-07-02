@@ -1,19 +1,6 @@
-<div class="container-fluid col-md-8 auto-margin">
+<div class="container-fluid col-md-8 auto-margin p-b-60">
     <div class="m-t-50" id="rootwizard">
-        <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-	    		<li>
-	          <%= link_to(wizard_path(:hello)) do %>
-	            <i class="fa fa-list-ul tab-icon"></i>
-	            <span>Guidelines</span>
-	         <% end %>
-	        </li>
-	        <li class="active">
-	      		<%= link_to(wizard_path(:follow_friends)) do %>
-	            <i class="fa fa-users tab-icon"></i>
-	            <span>Follow Friends</span>
-	        	<% end %>
-	        </li>
-        </ul>
+        <%= render partial: 'tab_nav' %>
         <div class="tab-content">
         		<div class="tab-pane slide-left active padding-20" id="tab2">
         		    <div class="row row-same-height">

@@ -81,12 +81,17 @@ var LatestIdeas = React.createClass({
         });
 
     if(this.state.loading) {
-      var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>
+      var content = <div className="no-content light p-t-40">
+        <i className="fa fa-spinner fa-pulse"></i>
+        </div>;
     } else {
       if(this.state.list.length > 0) {
         var content = ideas
       } else {
-        var content = <div className="no-content light p-t-40">0 ideas published</div>
+        var content = <div className="text-center fs-22 font-opensans text-master light p-t-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No ideas published.</span>
+        </div>;
       }
     }
 

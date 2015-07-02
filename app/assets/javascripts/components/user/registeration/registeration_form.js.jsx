@@ -143,6 +143,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12 col-md-12">
             <div className="form-group">
               <label>Select your University/College</label>
+              <span className="help">eg: 'only UK universities for now'</span>
               <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
               <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
             </div>

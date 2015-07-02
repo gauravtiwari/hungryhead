@@ -30,7 +30,10 @@ var ListingWidget = React.createClass({
     if(this.state.listing.length > 0) {
       var content = items;
     } else {
-      var content = <div className="text-center hint-text fs-22">{this.state.count} {this.props.type}</div>;
+      var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">{this.state.count} {this.props.type}</span>
+        </div>;
     }
 
     if(this.state.count > 7) {

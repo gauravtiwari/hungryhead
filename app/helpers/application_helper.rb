@@ -1,11 +1,20 @@
 module ApplicationHelper
 
   def notifications_count
-    current_user.mailbox.notifications(read: false).length
+    current_user.mailbox.notifications(read: false).length if current_user
+  end
+
+  def is_beta
+    true
   end
 
   def current_class?(test_path)
     return 'text-success p-b-5 b-b b-grey' if request.path == test_path
+    ''
+  end
+
+  def active_class?(test_path)
+    return 'active' if request.path == test_path
     ''
   end
 

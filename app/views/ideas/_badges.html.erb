@@ -23,7 +23,6 @@
                 </div>
             <% end %>
             <% if @idea.badges.length > 5 %>
-
                 <div class="thumbnail-wrapper d32 circular b-white">
                     <div class="bg-master text-center text-white">
                         <span>+<%= @idea.badges.length - 5 %></span>
@@ -31,8 +30,12 @@
                 </div>
             <% end %>
         <% else %>
-        <div class="no-content hint-text"> No Badges received</div>
-
+          <div class="text-center light font-opensans fs-22">
+              <span class="fa fa-trophy fs-22"></span>
+              <span class="clearfix">
+                No Badges
+              </span>
+          </div>
         <% end %>
         </div>
     </div>

@@ -4,11 +4,18 @@
      <%= render partial: 'feedback', locals: {feedback: feedback} %>
    <% end %>
   <% end %>
-  <% else %>
-  <div class="widget-box">
-    <div class="no-content">
-      No feedbacks received.
+
+  <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
+<% else %>
+  <div class="panel panel-default p-t-40 p-b-40 box-shadow">
+    <div class="text-center light font-opensans fs-22">
+      <span class="fa fa-bullhorn fs-22"></span>
+      <span class="clearfix">
+        No Feedbacks
+      </span>
+      <% if !policy(@idea).collaborator? %>
+        <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
+      <% end %>
     </div>
   </div>
- <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
 <% end %>

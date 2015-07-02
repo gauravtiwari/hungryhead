@@ -1,12 +1,24 @@
 <div class="row column-seperation">
   <table class="table no-margin">
     <tbody>
-      <% if @students.length > 0 %>
+      <% if is_beta %>
+        <tr>
+          <td colspan="4"class="no-border">
+            <div class="no-content">
+                <span class="fa fa-smile-o fs-50"></span>
+                <h1>
+                  Thank you for signing up to our beta. Once we have a few people onboard you will be able to browse and connect them here.
+                </h1>
+            </div>
+            <p class="text-center">In meantime, if you have a startup idea,
+              <%= link_to("Click", new_idea_path(:getting_started), class: 'p-b-5 b-b b-grey text-green') %> to pitch
+            </p>
+          </td>
+        </tr>
+      <% else %>
         <% @students.first(5).each do |user| %>
           <%= render partial: 'users/user', locals: {user: user} %>
         <% end %>
-      <% else %>
-        <div class="no-content">No Students</div>
       <% end %>
     </tbody>
   </table>

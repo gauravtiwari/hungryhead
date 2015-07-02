@@ -109,8 +109,8 @@ var FriendsNotifications = React.createClass({
     if(this.state.loading) {
       var content = <div className="no-content hint-text">Loading <i className="fa fa-spinner fa-spin"></i></div>;
     } else {
-
-        var content  = <Infinite elementHeight={65}
+        if(this.state.feed.length > 0) {
+          var content  = <Infinite elementHeight={65}
                    containerHeight={$(window).height() - 40}
                    infiniteLoadBeginBottomOffset={200}
                    onInfiniteLoad={this.handleInfiniteLoad}
@@ -119,7 +119,14 @@ var FriendsNotifications = React.createClass({
                    >
                     {this.state.feed}
                    </Infinite>;
+        } else {
+          var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No friends notifications</span>
+        </div>;
+        }
     }
+
     return(
 
       <div id="notificationsPanel" className="quickview-wrapper p-b-20" data-pages="quickview">

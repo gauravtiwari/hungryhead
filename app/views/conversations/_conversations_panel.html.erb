@@ -18,7 +18,6 @@
               <%= link_to(new_message_path, remote: true, class: "inline action p-l-10 link text-master") do %>
                 <i class="pg-plus"></i> New
               <% end %>
-              </a>
               <div class="view-heading">
                 Conversations
               </div>
@@ -29,7 +28,15 @@
           </div>
 
           <% if @conversations.empty? %>
-            <div class="no-content hint-text">No conversations</div>
+            <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+              <i class="fa fa-list"></i>
+              <span class="clearfix">No Conversation</span>
+            </div>
+            <div class="text-center">
+              <%= link_to(new_message_path, remote: true) do %>
+                <i class="pg-plus"></i> Send new message
+              <% end %>
+            </div>
           <% else %>
             <div class="list-view boreded no-top-border">
               <% @conversations.each do |conversation| %>
@@ -40,7 +47,7 @@
                       <span class="col-xs-height col-middle">
                         <% if conversation.last_message.sender.avatar.present? %>
                           <span class="thumbnail-wrapper d32 circular bg-success">
-                              <%= image_tag(conversation.last_message.sender.avatar.url(:avatar), data: {src: {retina: conversation.last_message.sender.avatar.url(:avatar)}, src: conversation.last_message.sender.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+                              <%= image_tag(conversation.last_message.sender.avatar.url(:avatar), data: {src: {retina: conversation.last_message.sender.avatar.url(:avatar)}},  class: "col-top", width: "34", height: "34") %>
                           </span>
                         <% else %>
                           <div class="thumbnail-wrapper d32 inline circular">

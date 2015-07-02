@@ -119,14 +119,17 @@ var LatestFeed = React.createClass({
                  {this.state.feed}
                 </Infinite>;
     } else {
-      var content = <div className="no-content hint-text p-b-40 p-t-40">No latest updates</div>
+      var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No latest activities.</span>
+        </div>;
     }
 
     return(
       <div className="widget-11-2 panel b-b b-light-grey no-margin">
           <div className="panel-heading bg-light-blue-lightest">
-           <div className="panel-title">
-            Latest activities
+            <div className="panel-title">
+              Latest Feed
             </div>
           </div>
           <div className="panel-body full-border-light no-margin auto-overflow no-padding">

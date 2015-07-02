@@ -32,7 +32,7 @@ var Avatar = React.createClass({
         'fa fa-spinner text-white fa-spin': this.state.loading
       });
 
-      if(this.state.avatar.url) {
+      if(this.state.avatar && this.state.avatar.url) {
         var image = <img className="user-image" id="userpic_preview" width="110" height="110" src={this.state.avatar.url} />;
       } else {
         var image = <span className="placeholder bold text-white fs-22">{this.state.badge}</span>;
@@ -41,7 +41,7 @@ var Avatar = React.createClass({
       if(this.state.is_owner) {
       return (
         <div id="profile_image">
-          <form ref="avatarForm" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
+          <form ref="avatarForm" role="form" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
             <input type="hidden" name="_method" value={this.state.form.method} />
             <input type="file" ref="avatar" style={{"display" : "none"}} direct = "true" name="user[avatar]" id="user_avatar" />
           </form>
@@ -60,7 +60,6 @@ var Avatar = React.createClass({
         </div>
       )
     } else {
-
       return (
         <div id="profile_image">
           <div id="userpic">
@@ -91,6 +90,8 @@ var Avatar = React.createClass({
        },
        complete: function(XMLHttpRequest, textStatus) {
          var response = JSON.parse(XMLHttpRequest.responseText);
+         $('#user_pic_mini').attr('src', response.user.avatar.url);
+         $('#user_pic_menu').attr('src', response.user.avatar.url);
          self.setState({
            avatar: response.user.avatar,
            form: response.user.form,
