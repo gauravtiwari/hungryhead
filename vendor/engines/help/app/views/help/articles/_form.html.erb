@@ -6,31 +6,34 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                 <i class="pg-close fs-14"></i>
                 </button>
-                <h5>Create <span class="semi-bold b-b b-grey p-b-5"> new category</span></h5>
+                <h5>Create <span class="semi-bold b-b b-grey p-b-5"> new article</span></h5>
             </div>
-            <div class="modal-body">
-                <div class="new-category-form">
+            <div class="modal-body overflow-hidden">
+                <div class="new-article-form m-t-20">
                   <%= simple_form_for(@article, remote: true) do |f| %>
                     <div class="form-group">
-                      <%= f.input_field :title, name: 'article[title]', class: "form-control", :required => true, :placeholder => "Enter article title..." %>
+                    <label for="article_title">Title</label>
+                    <%= f.input_field :title, name: 'article[title]', class: "form-control", :required => true, :placeholder => "Enter article title..." %>
                     </div>
                     <div class="form-group">
+                        <label for="article_body">Body</label>
                       <%= f.input_field :body, name: 'article[body]', class: "form-control", :required => true, :placeholder => "Enter body..." %>
                     </div>
                     <div class="form-group">
-                        <%= f.association :category %>
+                        <label for="article_category">Select category</label>
+                        <%= f.association :category, label: false, class: 'form-control' %>
                     </div>
                     <div class="row m-t-10">
                       <div class="col-md-6 col-md-6">
                         <div class="form-group">
                             <div class="checkbox check-success">
-                              <input type="checkbox" name="article[published]" value="1" id="article_published" />
+                              <input type="checkbox" name="article[published]" value="1" id="article_published" checked />
                               <label for="article_published">Published</label>
                             </div>
                         </div>
                         </div>
                     </div>
-                    <%= button_tag 'Send', class: 'btn btn-primary' %>
+                    <%= button_tag 'Send', class: 'btn btn-primary pull-right' %>
                   <% end %>
                 </div>
             </div>

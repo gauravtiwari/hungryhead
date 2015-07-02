@@ -2,40 +2,111 @@
 <div class="header bg-info-dark b-b b-grey box-shadow" style="background-color: #3e4f6d!important;">
 <div class="container">
   <div class=" pull-left sm-table">
-    <div class="header-inner">
+    <div class="header-inner p-t-10">
       <div class="brand inline">
-      <%= link_to(main_app.root_path) do %>
-        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+        <%= link_to(main_app.root_path) do %>
+          <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+        <% end %>
+        </div>
+      <% if user_signed_in? %>
+        <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
+          <li class="inline p-r-15 p-l-15 fs-14 bold">
+            <%= link_to(main_app.root_path, class: "fs-22 #{request.path == main_app.root_path ? current_class?(main_app.root_path) : 'text-white'}") do %>
+              <i class="fa fa-home"></i>
+            <% end %>
+          </li>
+          <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
+            <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? current_class?(main_app.users_path) : 'text-white'}") do %>
+               <i class="fa fa-users"></i>
+             <% end %>
+          </li>
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
+            <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? current_class?(main_app.ideas_path) : 'text-white'}") do %>
+               <i class="fa fa-lightbulb-o"></i>
+             <% end %>
+          </li>
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+           <%= link_to(main_app.schools_path, class: "fs-22 #{request.path == main_app.schools_path ? current_class?(main_app.schools_path) : 'text-white'}") do %>
+              <i class="fa fa-university"></i>
+            <% end %>
+          </li>
+        </ul>
+      <% else %>
+       <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+          <li class="p-r-15 fs-16 inline">
+            <%= link_to(main_app.story_path) do %>
+              <span class="text-white">Story</span>
+            <% end %>
+          </li>
+          <li class="p-r-15 fs-16 inline">
+            <%= link_to(main_app.how_it_works_path) do %>
+              <span class="text-white">How it works </span>
+            <% end %>
+          </li>
+          <li class="fs-16 inline">
+            <%= link_to("Questions?".html_safe, help.root_path, class: 'text-white') %>
+          </li>
+       </ul>
       <% end %>
-      </div>
-     <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-      <li class="p-r-15 fs-16 inline">
-        <%= link_to(main_app.story_path) do %>
-          <span class="text-white">Story</span>
-        <% end %>
-      </li>
-      <li class="p-r-15 fs-16 inline">
-        <%= link_to(main_app.how_it_works_path) do %>
-          <span class="text-white">How it works </span>
-        <% end %>
-      </li>
-      <li class="fs-16 inline">
-        <%= link_to("Questions?".html_safe, help.root_path, class: 'text-white') %>
-      </li>
-     </ul>
     </div>
   </div>
 
   <div class="pull-right">
+    <% if user_signed_in? %>
     <div class="visible-lg visible-md m-t-10">
-      <div class="pull-right p-t-10 fs-16 font-heading">
+      <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+        <%= link_to(main_app.profile_path(current_user)) do %>
+          <span class="fs-14 bold <%= request.path == main_app.profile_path(current_user) ? current_class?(main_app.profile_path(current_user)) : 'text-white' %>"><%= current_user.first_name %></span>
+        <% end %>
+      </div>
+      <div class="dropdown pull-right">
+        <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="thumbnail-wrapper d32 circular inline m-t-5">
+          <% if current_user.avatar.present? %>
+            <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "32", height: "32", id: 'user_pic_mini') %>
+          <% else %>
+            <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.user_name_badge %></span>
+          <% end %>
+          </span>
+        </button>
+        <ul class="dropdown-menu profile-dropdown" role="menu">
+          <%= content_tag(:li) do %>
+            <%= link_to(main_app.new_idea_path(:rules)) do %>
+              <i class="fa fa-lightbulb-o"></i> Post Idea
+            <% end %>
+          <% end %>
+
+          <%= content_tag(:li) do %>
+            <%= link_to(main_app.friends_invite_path, remote: true) do %>
+              <i class="fa fa-paper-plane"></i>Invite friends
+            <% end %>
+          <% end %>
+
+          <%= content_tag(:li) do %>
+            <%= link_to(main_app.edit_user_registration_path(current_user)) do %>
+              <i class="pg-settings_small"></i>Settings
+            <% end %>
+          <% end %>
+
+          <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+          </li>
+          <li class="bg-master-lighter">
+            <%= link_to(main_app.destroy_user_session_path, class: "clearfix") do %>
+              <span class="pull-left">Logout</span>
+              <span class="pull-right"><i class="pg-power"></i></span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <% else %>
+      <div class="pull-right p-t-20 fs-16 font-heading">
         <div class="dropdown pull-right">
           <%= link_to(main_app.get_started_path, title: "Click to Register", class: "inline") do %>
             <span class="text-white fs-16">Get Started</span>
           <% end %>
         </div>
       </div>
+    <% end %>
     </div>
-  </div>
   </div>
 </div>

@@ -36,13 +36,16 @@
           <a class="bold fs-14 font-opensans" href="#share_skills">4. Share skills</a>
         </li>
         <li class="inline p-l-15 p-r-15">
-          <a class="bold fs-14 font-opensans" href="#pitch_idea">5. Pitch your idea</a>
+          <a class="bold fs-14 font-opensans" href="#pitch_idea">5. Pitch</a>
         </li>
         <li class="inline p-l-15 p-r-15">
           <a class="bold fs-14 font-opensans" href="#collaboration">6. Collaborate</a>
         </li>
         <li class="inline p-l-15 p-r-15">
-          <a class="bold fs-14 font-opensans" href="#measure">7. Measure and Validate</a>
+          <a class="bold fs-14 font-opensans" href="#measure">7. Validate</a>
+        </li>
+        <li class="inline p-l-15 p-r-15">
+          <a class="bold fs-14 font-opensans" href="#gamification">8. Gamification</a>
         </li>
       </ul>
     </div>
@@ -53,7 +56,7 @@
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
-            <h1 class="m-t-5 m-b-20">Create an account.</h1>
+            <h1 class="m-t-5 m-b-20">Create an account</h1>
             <p class="m-b-20">
               If you are an university or college student you can <%= link_to('get started', new_user_registration_path, class: 'b-b b-grey p-b-5') %> by creating an account.
               <span class="small hint-text">You will need your university or college email address.</span>
@@ -82,7 +85,7 @@
             </div>
           </div>
           <div class="col-sm-6 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
-            <h1 class="m-t-5 m-b-20">Complete your profile.</h1>
+            <h1 class="m-t-5 m-b-20">Complete your profile</h1>
             <p class="m-b-20">
               Complete your profile and get discovered quickly - enter markets you are interested in, locations you are based, skills you have and subjects studied.
             </p>
@@ -146,7 +149,7 @@
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-6">
-            <h1 class="m-t-5 m-b-20">Pitch Your Idea.</h1>
+            <h1 class="m-t-5 m-b-20">Pitch Your Idea</h1>
             <p class="m-b-20">
               If you have an startup idea you can get started by creating your idea profile. Your idea won't be published until you do so.
             </p>
@@ -180,11 +183,11 @@
             </div>
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
-            <h1 class="m-t-5 m-b-20">Collaborate with peers.</h1>
+            <h1 class="m-t-5 m-b-20">Collaborate with peers</h1>
             <p class="m-b-20">
               Hop into a conversation and introduce yourself. If you have an idea share it with others and encourage them to leave a feedback. If you have any feedbacks or questions for other ideas, visit their profile and collaborate.
             </p>
-            <h5 class="hint-text font-arial small-text col-md-8 no-padding">
+            <h5 class="col-md-8 no-padding">
               All communication happens in realtime.
             </h5>
           </div>
@@ -198,16 +201,41 @@
     <div class="container">
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
-            <h1 class="m-t-5 m-b-20">Measure metrices and validate.</h1>
+            <h1 class="m-t-5 m-b-20">Measure metrices and validate</h1>
             <p class="m-b-20">
               Analyse how your idea is performing, understand areas your idea needs improvements and validate your idea, practically.
             </p>
+            <h5>
+              We have built an integrated dashboard.
+            </h5>
           </div>
         <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
           <div class="content-mask-md">
             <%= image_tag('product/leaderboard.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+  <!-- END CONTENT SECTION -->
+  <!-- BEGIN CONTENT SECTION -->
+  <section class="wrapper-small no-overflow" id="gamification">
+    <div class="container">
+      <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+          <div class="col-sm-5">
+            <div class="content-mask-md m-t-30">
+              <%= image_tag('product/idea_badges.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+            </div>
+          </div>
+          <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <h1 class="m-t-5 m-b-20">Gamification</h1>
+            <p class="m-b-20">
+              Every concept on our platform is supported by Game techniques to make the journey fun and rewarding for everyone. Most of the game concepts are taken from the startup world like <em>- investing into an idea, making return on investment, giving feedbacks, asking questions and voting ideas</em>.
+            </p>
+            <h5>
+              We have integrated these concepts to let you explore the real world of startups, all in one place.
+            </h5>
+          </div>
       </div>
     </div>
   </section>

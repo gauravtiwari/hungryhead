@@ -9,7 +9,7 @@
                 <h5>Create <span class="semi-bold b-b b-grey p-b-5"> new category</span></h5>
             </div>
             <div class="modal-body">
-                <div class="new-category-form">
+                <div class="new-category-form m-t-20">
                   <%= simple_form_for(@category, remote: true) do |f| %>
                     <div class="form-group">
                       <%= label_tag 'category[name]', 'Name' %>

@@ -32,10 +32,10 @@
                       </div>
 
                       <div class="form-group">
-                        <div class="checkbox check-success">
-                          <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted' %>
+                        <div class="checkbox check-success ">
+                          <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted', class: 'required', required: true %>
                           <label for="rules_accepted">
-                            I understand <a href="" data-toggle="modal" data-target="#rulesModal">the rules</a>
+                            I understand <a data-toggle="modal" data-target="#rulesModal">the community guidelines</a>
                           </label>
                         </div>
                       </div>

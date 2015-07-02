@@ -1,8 +1,9 @@
 class WelcomeController < ApplicationController
 
-  include Wicked::Wizard
+  before_action :check_terms, only: [:quick_links, :follow_friends]
+  before_action :authenticate_user!, :set_user
 
-  before_filter :authenticate_user!, :set_user
+  include Wicked::Wizard
   steps :hello, :complete_profile, :follow_friends, :quick_links
 
   layout "home"
@@ -36,6 +37,7 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :complete_profile
+      flash[:notice] = "Please accept guidelines to complete registeration."
       @user.update_attributes(user_params)
       CreateActivityJob.perform_later(@user.id, "User") if Activity.where(trackable: @user).empty?
     end

@@ -1,4 +1,5 @@
 class NewIdeaController < ApplicationController
+
   layout "new_idea"
 
   include Wicked::Wizard
