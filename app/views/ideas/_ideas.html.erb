@@ -1,0 +1,43 @@
+<% cache([cache_key_for_ideas, params[:page]])  do %>
+<div class="container p-t-40 p-b-80">
+  <div class="idea-list">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2" class="no-padding"><%= is_beta ? 0 : pluralize(@ideas.count, 'Result') %> Results</th>
+          <th>Follow to get updates</th>
+          <th class="text-center">Idea Stats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if is_beta %>
+          <tr>
+            <td colspan="4">
+              <div class="no-content">
+                  <span class="fa fa-smile-o fs-50"></span>
+                  <h1>
+                    Thank you for signing up to our beta. Once we have a few ideas published you will be able to see them here.
+                  </h1>
+              </div>
+              <p class="text-center">In meantime, if you have a startup idea,
+                <%= link_to("Click", new_idea_path(:getting_started), class: 'p-b-5 b-b b-grey text-green') %> to pitch
+              </p>
+            </td>
+          </tr>
+        <% else %>
+          <% @ideas.each do |idea| %>
+            <% cache([idea, "followed", idea.followed_by?(current_user), idea.in_team?(current_user)]) do %>
+              <%= render partial: 'idea', locals: {idea: idea} %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="paging-container p-r-15">
+    <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+  </div>
+</div>
+</div>
+<% end %>
