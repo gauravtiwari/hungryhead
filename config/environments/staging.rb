@@ -15,11 +15,11 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :dalli_store, ENV["MEMCACHE_SERVER"].split(','),
+  config.cache_store = :dalli_store, ENV["MEMCACHE_SERVER"],
                     {:username => ENV["MEMCACHE_USERNAME"],
                      :password => ENV["MEMCACHE_PASSWORD"]},
                      { :namespace => "hh_staging", compress: true, :pool_size => 25  }
-  config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"].split(','),
+  config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"],
                     {:username => ENV["MEMCACHE_USERNAME"],
                      :password => ENV["MEMCACHE_PASSWORD"]},
                      { :namespace => "hh_staging", compress: true, :pool_size => 25  }
