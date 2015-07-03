@@ -8,8 +8,8 @@ class Vote < ActiveRecord::Base
   validates_presence_of :voter_id
 
   #Callbacks for storing cache in redis
-  before_destroy :decrement_counter, :delete_notification
-  after_commit :increment_counter, on: :create
+  after_destroy :update_counters, :delete_cached_voters_ids, :delete_notification
+  after_commit :update_counters, :cache_voters_ids, on: :create
 
   public
 
@@ -24,16 +24,19 @@ class Vote < ActiveRecord::Base
     UpdateVoteCacheJob.perform_later(votable_id, votable_type)
   end
 
-  def increment_counter
+  def update_counters
     #Increment votes counter
+    votable.votes_counter.reset
     votable.votes_counter.incr(votable.votes.size)
+  end
+
+  def cache_voters_ids
+    #Cache voters ids in redis
     votable.voters_ids << voter_id unless votable.voted?(voter)
   end
 
-  #Rollback counters for votable
-  def decrement_counter
-    #Decrement score for votable and decrement votes counter
-    votable.votes_counter.incr(votable.votes.size)
+  def delete_cached_voters_ids
+    #Delete cached voters ids in redis
     votable.voters_ids.delete(voter_id) if votable.voted?(voter)
   end
 

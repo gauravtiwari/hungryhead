@@ -24,7 +24,7 @@ class PublishIdeaJob < ActiveJob::Base
 
       #Insert into cache list
       Idea.latest.add(@idea.id, @idea.created_at.to_i + @idea.id)
-      Idea.trending.add(@idea.id, @idea.impressions.length)
+      Idea.trending.add(@idea.id, @idea.impressions.size)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
       #Pusher notification for new idea
@@ -36,7 +36,7 @@ class PublishIdeaJob < ActiveJob::Base
       Idea.trending.remrangebyrank(20, Idea.trending.members.length)
 
       #Fetch followings from cache
-      @user.followings.create!(followable: @idea) if @user.followings.select{|follow| follow.followable_type == "Idea" && follow.followable_id == @idea.id}.empty?
+      @user.followings.create!(followable: @idea) if Follow.followings_for(@user, @idea).empty?
 
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
@@ -46,7 +46,7 @@ class PublishIdeaJob < ActiveJob::Base
           {data: @activity.user.ticker.rangebyscore(@activity.created_at.to_i + @activity.id, @activity.created_at.to_i + @activity.id)}.to_json
         )
         #send mail to users if subscribed
-        IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
+        #IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
       end
     end
   end

@@ -21,8 +21,8 @@ class Investment < ActiveRecord::Base
   include Votable
 
   #Model Callbacks
-  after_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_commit  :update_balance, :increment_counters, :create_activity, on: :destroy
+  after_destroy :cancel_investment, :update_counters, :delete_cached_investor_ids, :delete_activity
+  after_commit  :update_balance, :update_counters, :cache_investor_ids, :create_activity, on: :create
 
   public
 
@@ -42,24 +42,26 @@ class Investment < ActiveRecord::Base
     UpdateInvestmentBalanceJob.perform_later(id)
   end
 
-  def increment_counters
+  def update_counters
     #Increment counters
+    user.investments_counter.reset
     user.investments_counter.incr(user.investments.size)
+    idea.investors_counter.reset
     idea.investors_counter.incr(idea.investments.size)
+  end
+
+  def cache_investor_ids
     #Cache investor id into idea
     idea.investors_ids << user_id unless idea.invested?(user)
   end
 
-  def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
-  end
-
-  def decrement_counters
-    #decrement counters
-    user.investments_counter.incr(user.investments.size)
-    idea.investors_counter.incr(idea.investments.size)
+  def delete_cached_investor_ids
     #Remove investor_id from idea cache
     idea.investors_ids.delete(user_id) if idea.invested?(user)
+  end
+
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def delete_activity

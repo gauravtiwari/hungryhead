@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 
   #Scopes for searching
   scope :students, -> { where(state: 1, role: 1) }
+  scope :from_school, ->(school_id) { where(state: 1, :school_id => school_id)}
   scope :entrepreneurs, -> { where(state: 1, role: 2) }
   scope :mentors, -> { where(state: 1, role: 3) }
   scope :faculties, -> { where(state: 1, role: 4) }

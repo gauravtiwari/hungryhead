@@ -7,32 +7,44 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :increment_counters, on: :create
-  before_destroy :decrement_counters, :delete_notification
+  after_commit :increment_counters, :cache_follow_ids, on: :create
+  after_destroy :update_counters, :delete_cache_follow_ids, :delete_notification
+
+  #Scopes for fetching records
+  scope :followings_for, ->(follower, followable) {
+    where(
+      follower_id: follower.id,
+      followable_id: followable.id,
+      followable_type: followable.class.to_s
+    )
+  }
 
   private
 
   #Redis Counters
-  def increment_counters
+  def update_counters
    #Increment counters
+   follower.followings_counter.reset
    follower.followings_counter.incr(follower.followings.size)
+   followable.followers_counter.reset
    followable.followers_counter.incr(followable.followers.size)
-   #Add ids to follower and followable cache
-   follower.followings_ids << followable_id if followable_type == "User"
-   follower.idea_followings_ids << followable_id if followable_type == "Idea"
-   follower.school_followings_ids << followable_id if followable_type == "School"
-   followable.followers_ids << follower_id unless followable.followers_ids.include?(follower_id.to_s)
+
   end
 
-  def decrement_counters
-   #Decrement counters
-   follower.followings_counter.incr(follower.followings.size)
-   followable.followers_counter.incr(followable.followers.size)
-   #Delete cached ids
-   follower.followings_ids.delete(followable_id) if followable_type == "User"
-   follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
-   follower.school_followings_ids.delete(followable_id) if followable_type == "School"
-   followable.followers_ids.delete(follower_id)
+  def cache_follow_ids
+    #Add ids to follower and followable cache
+    follower.followings_ids << followable_id if followable_type == "User"
+    follower.idea_followings_ids << followable_id if followable_type == "Idea"
+    follower.school_followings_ids << followable_id if followable_type == "School"
+    followable.followers_ids << follower_id unless followable.followers_ids.include?(follower_id.to_s)
+  end
+
+  def delete_cache_follow_ids
+    #Delete cached ids
+    follower.followings_ids.delete(followable_id) if followable_type == "User"
+    follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
+    follower.school_followings_ids.delete(followable_id) if followable_type == "School"
+    followable.followers_ids.delete(follower_id)
   end
 
   def delete_notification

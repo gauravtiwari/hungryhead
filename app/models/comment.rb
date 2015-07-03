@@ -17,8 +17,8 @@ class Comment < ActiveRecord::Base
   include Mentioner
 
   #Callback hooks
-  after_commit :increment_counters, :create_activity,  on: :create
-  after_destroy :decrement_counters, :delete_notification
+  after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
+  after_destroy :update_counters, :deleted_cached_commenters_ids, :delete_notification
 
   #Model Associations
   belongs_to :user
@@ -83,18 +83,20 @@ class Comment < ActiveRecord::Base
     CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
   end
 
-  def increment_counters
-    #Increment counters for commentable
+  def update_counters
+    #Update comments counter for commentable
+    commentable.comments_counter.reset
     commentable.comments_counter.incr(commentable.comments.size)
+    user.comments_counter.reset
     user.comments_counter.incr(user.comments.size)
+  end
+
+  def cache_commenters_ids
     #cache commenters ids
     commentable.commenters_ids << user_id unless commentable.commented?(user)
   end
 
-  def decrement_counters
-    #Decrement comments counter
-    commentable.comments_counter.incr(commentable.comments.size)
-    user.comments_counter.incr(user.comments.size)
+  def deleted_cached_commenters_ids
     #cache commenters ids
     commentable.commenters_ids.delete(user_id) if commentable.commented?(user)
   end

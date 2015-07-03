@@ -2,7 +2,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table(:users) do |t|
-
       ## Database authenticatable
       t.string :email, :null => false
 

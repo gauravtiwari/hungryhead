@@ -39,8 +39,8 @@ class Feedback < ActiveRecord::Base
   enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
 
   #Hooks
-  after_destroy :decrement_counters, :delete_activity
-  after_commit :increment_counters, :create_activity, on: :create
+  after_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
+  after_commit :cache_feedbacker_ids, :create_activity, on: :create
 
   public
 
@@ -54,29 +54,31 @@ class Feedback < ActiveRecord::Base
 
   private
 
-  def increment_counters
-    #Increment feedbacks counter for idea and user
+  def update_counters
+    #Update feedbacks counter for idea and user
+    user.feedbacks_counter.reset
     user.feedbacks_counter.incr(user.feedbacks.size)
+    idea.feedbackers_counter.reset
     idea.feedbackers_counter.incr(idea.feedbacks.size)
+  end
+
+  def cache_feedbacker_ids
     #Cache feedbacker id
     idea.feedbackers_ids << user_id unless idea.feedbacked?(user)
     #Add to leaderboard
     Feedback.leaderboard.add(id, points)
   end
 
+  def delete_feedbacker_ids
+    #Cache feedbacker id
+    idea.feedbackers_ids.delete(user_id) if idea.feedbacked?(user)
+    #Add to leaderboard
+    Feedback.leaderboard.delete(id)
+  end
+
   def create_activity
     # Enque activity creation
     CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
-  end
-
-  def decrement_counters
-    #Decrement feedbacks counter for idea and user
-    user.feedbacks_counter.incr(user.feedbacks.size)
-    idea.feedbackers_counter.incr(idea.feedbacks.size)
-    #Remove cached feedbacker id
-    idea.feedbackers_ids.delete(user_id) if idea.feedbacked?(user)
-    #Remove from leaderboard
-    Feedback.leaderboard.delete(id)
   end
 
   def delete_activity

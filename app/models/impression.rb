@@ -3,8 +3,8 @@ class Impression < ActiveRecord::Base
   belongs_to :user
   belongs_to :impressionable, polymorphic: true
 
-  after_create :cache_impression
-  before_destroy :delete_cached_impression
+  after_commit :cache_impression, on: :create
+  after_destroy :delete_cached_impression
 
   private
 
