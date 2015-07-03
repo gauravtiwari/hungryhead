@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
     @activities = Activity.where(published: true)
         .includes([:trackable, :user])
         .order(id: :desc)
-        .paginate(:page => params[:page], :per_page => 20)
+        .paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

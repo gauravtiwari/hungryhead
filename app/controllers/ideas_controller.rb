@@ -14,7 +14,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.published.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /ideas/1

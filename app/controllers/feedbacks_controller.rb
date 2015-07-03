@@ -18,7 +18,7 @@ class FeedbacksController < ApplicationController
     @idea = Idea.fetch_by_slug(params[:idea_id])
     authorize @idea
 
-    @feedbacks = @idea.get_published_feedbacks.paginate(:page => params[:page], :per_page => 20)
+    @feedbacks = @idea.get_published_feedbacks.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.js
       format.html
@@ -31,7 +31,7 @@ class FeedbacksController < ApplicationController
   def show
     @team = User.fetch_multi(@idea.team_ids)
     authorize @feedback.fetch_idea
-    @feedbacks = @feedback.root_comments.paginate(:page => params[:page], :per_page => 20)
+    @feedbacks = @feedback.root_comments.paginate(:page => params[:page], :per_page => 10)
   end
 
   # POST /feedbacks

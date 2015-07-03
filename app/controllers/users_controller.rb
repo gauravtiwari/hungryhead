@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   autocomplete :user, :name, :full => true, extra_data: [:username]
 
   def index
-    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.json

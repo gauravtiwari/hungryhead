@@ -16,7 +16,7 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @schools = School.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /schools/1
@@ -42,7 +42,7 @@ class SchoolsController < ApplicationController
   end
 
   def people
-    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 20)
+    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.js
@@ -50,7 +50,7 @@ class SchoolsController < ApplicationController
   end
 
   def events
-    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 20)
+    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.js
@@ -58,7 +58,7 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 20)
+    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 10)
     if request.xhr?
       render :partial=>"schools/ideas"
     end
