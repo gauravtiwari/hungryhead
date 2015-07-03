@@ -119,7 +119,7 @@ var LatestFeed = React.createClass({
     } else {
       var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
           <i className="fa fa-list"></i>
-          <span className="clearfix">No latest activities.</span>
+          <span className="clearfix">No latest activities</span>
         </div>;
     }
 

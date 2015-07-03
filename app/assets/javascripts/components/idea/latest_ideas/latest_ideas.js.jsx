@@ -90,7 +90,7 @@ var LatestIdeas = React.createClass({
       } else {
         var content = <div className="text-center fs-22 font-opensans text-master light p-t-40">
           <i className="fa fa-list"></i>
-          <span className="clearfix">No ideas published.</span>
+          <span className="clearfix">No ideas published</span>
         </div>;
       }
     }
@@ -123,7 +123,7 @@ var LatestIdeas = React.createClass({
                       </div>
                     </li>
                     <li>
-                      <a data-toggle="refresh" className="portlet-refresh text-black pointer" onClick={this.resetList}>
+                      <a data-toggle="tooltip" title="Refresh" className="text-black pointer" onClick={this.resetList}>
                           <i className="portlet-icon portlet-icon-refresh"></i>
                       </a>
                     </li>

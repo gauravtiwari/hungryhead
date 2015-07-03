@@ -118,7 +118,7 @@ var LatestUsers = React.createClass({
                       </div>
                     </li>
                     <li>
-                      <a data-toggle="refresh" className="portlet-refresh text-black pointer" onClick={this.resetList}>
+                      <a data-toggle="tooltip" title="Refresh" className="text-black pointer" onClick={this.resetList}>
                           <i className="portlet-icon portlet-icon-refresh"></i>
                       </a>
                     </li>

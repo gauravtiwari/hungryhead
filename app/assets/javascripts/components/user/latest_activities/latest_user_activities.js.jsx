@@ -51,7 +51,10 @@ var LatestUserActivities = React.createClass({
     if(activities.length > 0) {
       var content  = activities;
     } else {
-      var content = <div className="no-content hint-text">No latest activities</div>;
+      var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No latest activities</span>
+        </div>;
     }
 
     return(

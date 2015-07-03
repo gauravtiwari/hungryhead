@@ -39,6 +39,7 @@ class WelcomeController < ApplicationController
     when :complete_profile
       flash[:notice] = "Please accept guidelines to complete registeration."
       @user.update_attributes(user_params)
+      CreateActivityJob.perform_later(@user.id, "User") unless @user.published?
     end
     sign_in(@user, bypass: true)
     render_wizard @user
