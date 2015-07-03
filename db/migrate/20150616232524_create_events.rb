@@ -11,8 +11,8 @@ class CreateEvents < ActiveRecord::Migration
       t.text :address
       t.boolean :private, default: true
       t.integer :space, default: 0
-      t.datetime :start_time, null: false, default: DateTime.now
-      t.datetime :end_time, null: false, default: DateTime.now
+      t.datetime :start_time
+      t.datetime :end_time
       t.float  :latitude, null: false, default: 0.0
       t.float  :longitude, null: false, default: 0.0
       t.timestamps null: false
