@@ -44,22 +44,22 @@ class Investment < ActiveRecord::Base
 
   def increment_counters
     #Increment counters
-    user.investments_counter.increment
-    idea.investors_counter.increment
+    user.investments_counter.incr(user.investments.count)
+    idea.investors_counter.incr(idea.investments.count)
     #Cache investor id into idea
-    idea.investors_ids << user_id
+    idea.investors_ids << user_id unless  idea.investors_ids.include?(user_id.to_s)
   end
 
   def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s)
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def decrement_counters
     #decrement counters
-    user.investments_counter.decrement if user.investments_counter.value > 0
-    idea.investors_counter.decrement if idea.investors_counter.value > 0
+    user.investments_counter.incr(user.investments.count)
+    idea.investors_counter.incr(idea.investments.count)
     #Remove investor_id from idea cache
-    idea.investors_ids.delete(user_id)
+    idea.investors_ids.delete(user_id) if idea.investors_ids.include?(user_id.to_s)
   end
 
   def delete_activity

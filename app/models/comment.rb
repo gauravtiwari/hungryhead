@@ -80,23 +80,23 @@ class Comment < ActiveRecord::Base
   private
 
   def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s)
+    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
   end
 
   def increment_counters
     #Increment counters for commentable
-    commentable.comments_counter.increment
-    user.comments_counter.increment
+    commentable.comments_counter.incr(commentable.comments.count)
+    user.comments_counter.incr(user.comments.count)
     #cache commenters ids
-    commentable.commenters_ids << user_id
+    commentable.commenters_ids << user_id unless commentable.commenters_ids.include?(user_id.to_s)
   end
 
   def decrement_counters
     #Decrement comments counter
-    commentable.comments_counter.decrement if commentable.comments_counter.value > 0
-    user.comments_counter.decrement if user.comments_counter.value > 0
+    commentable.comments_counter.incr(commentable.comments.count)
+    user.comments_counter.incr(user.comments.count)
     #cache commenters ids
-    commentable.commenters_ids.delete(user_id)
+    commentable.commenters_ids.delete(user_id) if commentable.commenters_ids.include?(user_id.to_s)
   end
 
   def delete_notification

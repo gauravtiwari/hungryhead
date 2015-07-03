@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 
   #Callbacks for storing cache in redis
   before_destroy :decrement_counter, :delete_notification
-  after_create :increment_counter
+  after_commit :increment_counter, on: :create
 
   public
 
@@ -26,15 +26,15 @@ class Vote < ActiveRecord::Base
 
   def increment_counter
     #Increment votes counter
-    votable.votes_counter.increment
-    votable.voters_ids << voter_id
+    votable.votes_counter.incr(votable.votes.count)
+    votable.voters_ids << voter_id unless votable.voters_ids.include?(voter_id.to_s)
   end
 
   #Rollback counters for votable
   def decrement_counter
     #Decrement score for votable and decrement votes counter
-    votable.votes_counter.decrement if votable.votes_counter.value > 0
-    votable.voters_ids.delete(voter_id)
+    votable.votes_counter.incr(votable.votes.count)
+    votable.voters_ids.delete(voter_id) if votable.voters_ids.include?(voter_id.to_s)
   end
 
   #Delete notification before destroying vote

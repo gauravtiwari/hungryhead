@@ -56,26 +56,25 @@ class Feedback < ActiveRecord::Base
 
   def increment_counters
     #Increment feedbacks counter for idea and user
-    user.feedbacks_counter.increment
-    idea.feedbackers_counter.increment
+    user.feedbacks_counter.incr(user.feedbacks.count)
+    idea.feedbackers_counter.incr(idea.feedbacks.count)
     #Cache feedbacker id
-    idea.feedbackers_ids << user_id
+    idea.feedbackers_ids << user_id unless idea.feedbackers_ids.members.include?(user_id.to_s)
     #Add to leaderboard
     Feedback.leaderboard.add(id, points)
   end
 
   def create_activity
     # Enque activity creation
-    CreateActivityJob.perform_later(id, self.class.to_s)
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def decrement_counters
     #Decrement feedbacks counter for idea and user
-    user.feedbacks_counter.decrement if user.feedbacks_counter.value > 0
-    idea.feedbackers_counter.decrement if idea.feedbackers_counter.value > 0
+    user.feedbacks_counter.incr(user.feedbacks.count)
+    idea.feedbackers_counter.incr(idea.feedbacks.count)
     #Remove cached feedbacker id
-    idea.feedbackers_ids.delete(user_id)
-
+    idea.feedbackers_ids.delete(user_id) if idea.feedbackers_ids.members.include?(user_id.to_s)
     #Remove from leaderboard
     Feedback.leaderboard.delete(id)
   end
