@@ -56,10 +56,10 @@ class Feedback < ActiveRecord::Base
 
   def increment_counters
     #Increment feedbacks counter for idea and user
-    user.feedbacks_counter.incr(user.feedbacks.count)
-    idea.feedbackers_counter.incr(idea.feedbacks.count)
+    user.feedbacks_counter.incr(user.feedbacks.size)
+    idea.feedbackers_counter.incr(idea.feedbacks.size)
     #Cache feedbacker id
-    idea.feedbackers_ids << user_id unless idea.feedbackers_ids.members.include?(user_id.to_s)
+    idea.feedbackers_ids << user_id unless idea.feedbacked?(user)
     #Add to leaderboard
     Feedback.leaderboard.add(id, points)
   end
@@ -71,10 +71,10 @@ class Feedback < ActiveRecord::Base
 
   def decrement_counters
     #Decrement feedbacks counter for idea and user
-    user.feedbacks_counter.incr(user.feedbacks.count)
-    idea.feedbackers_counter.incr(idea.feedbacks.count)
+    user.feedbacks_counter.incr(user.feedbacks.size)
+    idea.feedbackers_counter.incr(idea.feedbacks.size)
     #Remove cached feedbacker id
-    idea.feedbackers_ids.delete(user_id) if idea.feedbackers_ids.members.include?(user_id.to_s)
+    idea.feedbackers_ids.delete(user_id) if idea.feedbacked?(user)
     #Remove from leaderboard
     Feedback.leaderboard.delete(id)
   end

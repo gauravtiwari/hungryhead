@@ -44,10 +44,10 @@ class Investment < ActiveRecord::Base
 
   def increment_counters
     #Increment counters
-    user.investments_counter.incr(user.investments.count)
-    idea.investors_counter.incr(idea.investments.count)
+    user.investments_counter.incr(user.investments.size)
+    idea.investors_counter.incr(idea.investments.size)
     #Cache investor id into idea
-    idea.investors_ids << user_id unless  idea.investors_ids.include?(user_id.to_s)
+    idea.investors_ids << user_id unless idea.invested?(user)
   end
 
   def create_activity
@@ -56,10 +56,10 @@ class Investment < ActiveRecord::Base
 
   def decrement_counters
     #decrement counters
-    user.investments_counter.incr(user.investments.count)
-    idea.investors_counter.incr(idea.investments.count)
+    user.investments_counter.incr(user.investments.size)
+    idea.investors_counter.incr(idea.investments.size)
     #Remove investor_id from idea cache
-    idea.investors_ids.delete(user_id) if idea.investors_ids.include?(user_id.to_s)
+    idea.investors_ids.delete(user_id) if idea.invested?(user)
   end
 
   def delete_activity

@@ -26,15 +26,15 @@ class Vote < ActiveRecord::Base
 
   def increment_counter
     #Increment votes counter
-    votable.votes_counter.incr(votable.votes.count)
-    votable.voters_ids << voter_id unless votable.voters_ids.include?(voter_id.to_s)
+    votable.votes_counter.incr(votable.votes.size)
+    votable.voters_ids << voter_id unless votable.voted?(voter)
   end
 
   #Rollback counters for votable
   def decrement_counter
     #Decrement score for votable and decrement votes counter
-    votable.votes_counter.incr(votable.votes.count)
-    votable.voters_ids.delete(voter_id) if votable.voters_ids.include?(voter_id.to_s)
+    votable.votes_counter.incr(votable.votes.size)
+    votable.voters_ids.delete(voter_id) if votable.voted?(voter)
   end
 
   #Delete notification before destroying vote

@@ -85,18 +85,18 @@ class Comment < ActiveRecord::Base
 
   def increment_counters
     #Increment counters for commentable
-    commentable.comments_counter.incr(commentable.comments.count)
-    user.comments_counter.incr(user.comments.count)
+    commentable.comments_counter.incr(commentable.comments.size)
+    user.comments_counter.incr(user.comments.size)
     #cache commenters ids
-    commentable.commenters_ids << user_id unless commentable.commenters_ids.include?(user_id.to_s)
+    commentable.commenters_ids << user_id unless commentable.commented?(user)
   end
 
   def decrement_counters
     #Decrement comments counter
-    commentable.comments_counter.incr(commentable.comments.count)
-    user.comments_counter.incr(user.comments.count)
+    commentable.comments_counter.incr(commentable.comments.size)
+    user.comments_counter.incr(user.comments.size)
     #cache commenters ids
-    commentable.commenters_ids.delete(user_id) if commentable.commenters_ids.include?(user_id.to_s)
+    commentable.commenters_ids.delete(user_id) if commentable.commented?(user)
   end
 
   def delete_notification

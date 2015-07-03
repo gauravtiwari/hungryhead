@@ -15,23 +15,23 @@ class Follow < ActiveRecord::Base
   #Redis Counters
   def increment_counters
    #Increment counters
-   follower.followings_counter.incr(follower.followings.count)
-   followable.followers_counter.incr(followable.followers.count)
+   follower.followings_counter.incr(follower.followings.size)
+   followable.followers_counter.incr(followable.followers.size)
    #Add ids to follower and followable cache
-   follower.followings_ids << followable_id if followable_type == "User" && !follower.followings_ids.include?(followable_id.to_s)
-   follower.idea_followings_ids << followable_id if followable_type == "Idea" && !follower.idea_followings_ids.include?(followable_id.to_s)
-   follower.school_followings_ids << followable_id if followable_type == "School" && !follower.school_followings_ids.include?(followable_id.to_s)
+   follower.followings_ids << followable_id if followable_type == "User"
+   follower.idea_followings_ids << followable_id if followable_type == "Idea"
+   follower.school_followings_ids << followable_id if followable_type == "School"
    followable.followers_ids << follower_id unless followable.followers_ids.include?(follower_id.to_s)
   end
 
   def decrement_counters
    #Decrement counters
-   follower.followings_counter.incr(follower.followings.count)
-   followable.followers_counter.incr(followable.followers.count)
+   follower.followings_counter.incr(follower.followings.size)
+   followable.followers_counter.incr(followable.followers.size)
    #Delete cached ids
-   follower.followings_ids.delete(followable_id) if followable_type == "User" && follower.followings_ids.include?(followable_id.to_s)
-   follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea" && follower.idea_followings_ids.include?(followable_id.to_s)
-   follower.school_followings_ids.delete(followable_id) if followable_type == "School" && follower.school_followings_ids.include?(followable_id.to_s)
+   follower.followings_ids.delete(followable_id) if followable_type == "User"
+   follower.idea_followings_ids.delete(followable_id) if followable_type == "Idea"
+   follower.school_followings_ids.delete(followable_id) if followable_type == "School"
    followable.followers_ids.delete(follower_id)
   end
 

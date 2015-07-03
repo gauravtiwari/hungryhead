@@ -15,6 +15,10 @@ module Commentable
     fetch_comments.sort{ |x,y| y.created_at <=> x.created_at }
   end
 
+  def commented?(user)
+    commenters_ids.include?(user.id.to_s)
+  end
+
   def get_commenters
     User.fetch_multi(commenters_ids)
   end
