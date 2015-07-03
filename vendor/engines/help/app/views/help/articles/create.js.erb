@@ -1,1 +1,5 @@
 $('#articlePopupModal').modal('hide');
+$('#articlePopupModal').on('hidden.bs.modal', function(){
+  $('#new_article_modal').remove();
+});
+$('.help-content').append("<%= j render partial: 'help/categories/article', locals: {article: @article} %>");

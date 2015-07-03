@@ -22,6 +22,12 @@ class PagesController < ApplicationController
   def privacy
   end
 
+  def support
+  end
+
+  def cookies
+  end
+
   def request_invite
   end
 

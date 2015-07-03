@@ -22,6 +22,19 @@ module Help
       authorize @category
     end
 
+    def edit
+      @category = Category.friendly.find(params[:id])
+      authorize @category
+    end
+
+    def update
+      @category = Category.friendly.find(params[:id])
+      authorize @category
+      if @category.update(category_params)
+        render :show
+      end
+    end
+
     def create
       @category = Category.new(category_params)
       authorize @category
@@ -34,7 +47,7 @@ module Help
 
     # GET /categories/1
     def show
-      @categories = Category.all
+      @categories = Category.order(id: :asc)
     end
 
     private

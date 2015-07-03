@@ -4,6 +4,10 @@ module Help
       current_user && current_user.admin?
     end
 
+    def edit?
+      current_user && current_user.admin?
+    end
+
     def update?
       current_user && current_user.admin?
     end
@@ -11,5 +15,6 @@ module Help
     def create?
       current_user && current_user.admin?
     end
+
   end
 end

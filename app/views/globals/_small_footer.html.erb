@@ -4,10 +4,18 @@
       <div class="top-footer clearfix">
         <article class="section-list">
           <ul>
-            <li><a href="#">Our rules</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-            <li><a href="#">Privacy Policy</a></li>
+            <li>
+              <%= link_to('Our rules', rules_path) %>
+            </li>
+            <li>
+              <%= link_to('Support', support_path) %>
+            </li>
+            <li>
+              <%= link_to('Cookies Policy', cookies_path) %>
+            </li>
+            <li>
+              <%= link_to('Privacy Policy', privacy_path) %>
+            </li>
           </ul>
         </article>
       <p class="copyright-text text-white">© 2015 hungryhead.co</p>

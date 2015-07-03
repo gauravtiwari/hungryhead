@@ -11,6 +11,20 @@ module Help
       authorize @article
     end
 
+    def edit
+      @article = Article.friendly.find(params[:id])
+      authorize @article
+      render :edit
+    end
+
+    def update
+      @article = Article.friendly.find(params[:id])
+      authorize @article
+      if @article.update(article_params)
+        render :show
+      end
+    end
+
     def create
       @article = Article.new(article_params)
       authorize @article
@@ -20,6 +34,7 @@ module Help
         flash[:notice] = "Something with wrong #{@article.errors}"
       end
     end
+
     private
 
     def article_params

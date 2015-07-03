@@ -1,3 +1,6 @@
 .container {
   width: 980px;
 }
+.help-content ul li {
+  margin-bottom: 1em;
+}

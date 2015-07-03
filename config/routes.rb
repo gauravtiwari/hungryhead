@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   get '/learn', to: 'pages#learn', as: :learn
   get '/hello', to: 'pages#hello', as: :hello
   get '/rules', to: 'pages#rules', as: :rules
+  get '/support', to: 'pages#support', as: :support
 
-  get '/privacy', to: 'pages#privacy', as: :privacy
+  get '/privacy-policy', to: 'pages#privacy', as: :privacy
+  get '/cookies-policy', to: 'pages#cookies', as: :cookies
   get '/get-started', to: 'pages#get_started', as: :get_started
   get '/product', to: 'pages#product', as: :product
   get '/terms-of-use', to: 'pages#terms', as: :terms

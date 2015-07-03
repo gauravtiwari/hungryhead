@@ -18,16 +18,15 @@
       <div class="articles-list p-b-20" id="help_articles">
       <% @category.articles.published.each do |article| %>
         <h6>
-          <%= link_to(article.title, "##{article.title.parameterize}") %>
+          <%= link_to(article.title, "#help_article_#{article.id}") %>
         </h6>
       <% end %>
       </div>
       <hr>
       <div class="help-content">
         <% @category.articles.each do |article| %>
-          <section id="<%= article.title.parameterize %>" class="p-b-40">
-            <h4 class="bold"><%= article.title %></h4>
-            <p><%= simple_format article.body %></p>
+          <section id="help_article_<%= article.id %>" class="p-b-40 p-r-60">
+            <%= render partial: 'article', locals: {article: article} %>
           </section>
         <% end %>
       </div>
@@ -39,9 +38,7 @@
           <h4 class="b-b b-grey p-b-5">Categories</h4>
           <li>
             <% @categories.each do |category| %>
-              <%= content_tag(:h6) do %>
-                <%= link_to(category.name, help_category_path(category)) %>
-              <% end %>
+             <%= render partial: 'category', locals: {category: category} %>
             <% end %>
           </li>
           <% if current_user && current_user.admin? %>

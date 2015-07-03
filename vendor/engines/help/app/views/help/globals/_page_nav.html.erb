@@ -52,8 +52,9 @@
   </div>
 
   <div class="pull-right">
-    <% if user_signed_in? %>
+
     <div class="visible-lg visible-md m-t-10">
+    <% if user_signed_in? %>
       <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
         <%= link_to(main_app.profile_path(current_user)) do %>
           <span class="fs-14 bold <%= request.path == main_app.profile_path(current_user) ? current_class?(main_app.profile_path(current_user)) : 'text-white' %>"><%= current_user.first_name %></span>
@@ -99,7 +100,7 @@
         </ul>
       </div>
       <% else %>
-      <div class="pull-right p-t-20 fs-16 font-heading">
+      <div class="pull-right p-t-10 fs-16 font-heading">
         <div class="dropdown pull-right">
           <%= link_to(main_app.get_started_path, title: "Click to Register", class: "inline") do %>
             <span class="text-white fs-16">Get Started</span>
@@ -108,5 +109,7 @@
       </div>
     <% end %>
     </div>
+
+  </div>
   </div>
 </div>
