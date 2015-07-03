@@ -1,6 +1,6 @@
 <div class="activity-feed auto-height m-t-20">
   <div class="activity-feed-box live">
-    <% if @activities.length > 0 %>
+    <% if @activities.size > 0 %>
       <% @activities.each do |activity| %>
         <% cache(["beta", current_user, activity]) do %>
           <%= render_activity(activity) %>

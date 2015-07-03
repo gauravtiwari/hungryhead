@@ -1,4 +1,4 @@
-<% if @feedbacks.length > 0 %>
+<% if @feedbacks.size > 0 %>
   <% @feedbacks.each do |feedback| %>
    <% cache(feedback) do %>
      <%= render partial: 'feedback', locals: {feedback: feedback} %>

@@ -11,7 +11,7 @@ json.conversations @conversations.includes(:messages).each do |conversation|
 	json.conversation_path conversation_path(conversation, box: @box)
 end
 
-if @conversations.length > 0
+if @conversations.size > 0
 	json.meta do
 		json.current_page @conversations.current_page
 		json.next_page @conversations.next_page

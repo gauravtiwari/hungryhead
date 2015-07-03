@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-    <% User.find_multi(current_user.people_you_may_know).take(5).each do |user| %>
+    <% User.fetch_multi(current_user.people_you_may_know).take(5).each do |user| %>
         <li class="m-r-10">
             <%= link_to(profile_path(user)) do %>
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
@@ -23,13 +23,13 @@
         </li>
     <% end %>
     <% if current_user.people_you_may_know.length > 16 %>
-    <li>
-        <div class="thumbnail-wrapper d32 circular b-white">
-            <div class="bg-master text-center text-white">
-                <span>+34</span>
+        <li>
+            <div class="thumbnail-wrapper d32 circular b-white">
+                <div class="bg-master text-center text-white">
+                    <span>+34</span>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
     <% end %>
 
     </ul>

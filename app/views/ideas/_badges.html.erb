@@ -10,7 +10,7 @@
 
     <div class="panel-body">
         <div class="user-badges">
-        <% if @idea.badges.length > 0 %>
+        <% if @idea.badges.size > 0 %>
             <%  @badges.each do |id, badge| %>
                 <div class="m-t-10">
                     <% badge.take(6).each do |b| %>
@@ -22,10 +22,10 @@
                     <% end %>
                 </div>
             <% end %>
-            <% if @idea.badges.length > 5 %>
+            <% if @idea.badges.size > 5 %>
                 <div class="thumbnail-wrapper d32 circular b-white">
                     <div class="bg-master text-center text-white">
-                        <span>+<%= @idea.badges.length - 5 %></span>
+                        <span>+<%= @idea.badges.size - 5 %></span>
                     </div>
                 </div>
             <% end %>

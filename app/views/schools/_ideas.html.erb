@@ -23,7 +23,7 @@
     </tbody>
   </table>
 </div>
-<% if @ideas.length > 10 %>
+<% if @ideas.size > 10 %>
   <div class="text-center m-t-20">
     <%= link_to("Browse all from #{@school.name}", profile_ideas_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
   </div>
