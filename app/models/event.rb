@@ -21,4 +21,9 @@ class Event < ActiveRecord::Base
   belongs_to :eventable, polymorphic: true
   has_many :attendees
 
+  def attending?(user)
+    attendees_ids.include?(user.id.to_s)
+  end
+
+
 end

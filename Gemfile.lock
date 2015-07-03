@@ -21,6 +21,7 @@ PATH
       browser
       devise
       friendly_id
+      postgres-copy
       pundit
       rails
       simple_form

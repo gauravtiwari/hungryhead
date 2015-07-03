@@ -14,3 +14,5 @@
 # Crono.perform(TestJob).every 2.days, at: '15:30'
 
 Crono.perform(CheckUnprocessedMeritActionsJob).every 5.seconds
+
+
