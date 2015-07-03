@@ -14,12 +14,8 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   config.cache_store = :dalli_store,  ENV["MEMCACHE_SERVER"],
-                    {:username => ENV["MEMCACHE_USERNAME"],
-                     :password => ENV["MEMCACHE_PASSWORD"]},
                      { :namespace => "hh_production", compress: true, :pool_size => 25  }
   config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"],
-                    {:username => ENV["MEMCACHE_USERNAME"],
-                     :password => ENV["MEMCACHE_PASSWORD"]},
                      { :namespace => "hh_production", compress: true, :pool_size => 25  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -68,7 +64,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Set to :debug to see everything in the log.
   config.log_level = :info

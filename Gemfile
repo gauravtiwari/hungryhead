@@ -244,11 +244,11 @@ group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
 end
+gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
   gem 'rb-fsevent', '>= 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
-  gem 'forgery'
 end
 
