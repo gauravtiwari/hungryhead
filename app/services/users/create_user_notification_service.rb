@@ -7,28 +7,13 @@ class CreateUserNotificationService
   end
 
   def create
-    if @user.activities.where(trackable: @user).empty?
-      @activity = @user.activities.create!(
-        trackable: @user,
-        verb: 'joined',
-        recipient: @user,
-        key: 'user.create'
-      )
-      publish_user #publish user
-      cache(@activity)
-      increment_counters
-    else
-      return
-    end
+    publish_user #publish user
+    increment_counters #update counters
   end
 
   def publish_user
     @user.published!
     @user.save
-  end
-
-  def cache(activity)
-    CreateNotificationCacheService.new(activity).create
   end
 
   def increment_counters
