@@ -261,8 +261,8 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
-    start_time timestamp without time zone DEFAULT '2015-07-02 10:53:40.099976'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-07-02 10:53:40.100019'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-07-03 19:53:45.260622'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-07-03 19:53:45.260663'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -3263,19 +3263,35 @@ CREATE INDEX user_commentable_comments ON comments USING btree (user_id, comment
 
 
 --
--- Name: attendees_attendee_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_15f20ac5cc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY team_invites
+    ADD CONSTRAINT fk_rails_15f20ac5cc FOREIGN KEY (idea_id) REFERENCES ideas(id);
+
+
+--
+-- Name: fk_rails_1b711e94aa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mentions
+    ADD CONSTRAINT fk_rails_1b711e94aa FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_4037bda9d5; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY attendees
-    ADD CONSTRAINT attendees_attendee_id_fk FOREIGN KEY (attendee_id) REFERENCES attendees(id);
+    ADD CONSTRAINT fk_rails_4037bda9d5 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
--- Name: attendees_event_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_90332237fe; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY attendees
-    ADD CONSTRAINT attendees_event_id_fk FOREIGN KEY (event_id) REFERENCES events(id);
+    ADD CONSTRAINT fk_rails_90332237fe FOREIGN KEY (attendee_id) REFERENCES attendees(id);
 
 
 --
@@ -3284,14 +3300,6 @@ ALTER TABLE ONLY attendees
 
 ALTER TABLE ONLY mailboxer_conversation_opt_outs
     ADD CONSTRAINT mb_opt_outs_on_conversations_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
-
-
---
--- Name: mentions_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mentions
-    ADD CONSTRAINT mentions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -3308,14 +3316,6 @@ ALTER TABLE ONLY mailboxer_notifications
 
 ALTER TABLE ONLY mailboxer_receipts
     ADD CONSTRAINT receipts_on_notification_id FOREIGN KEY (notification_id) REFERENCES mailboxer_notifications(id);
-
-
---
--- Name: team_invites_idea_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY team_invites
-    ADD CONSTRAINT team_invites_idea_id_fk FOREIGN KEY (idea_id) REFERENCES ideas(id);
 
 
 --
