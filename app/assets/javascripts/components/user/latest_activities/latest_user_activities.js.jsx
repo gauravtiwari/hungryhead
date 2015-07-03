@@ -42,8 +42,6 @@ var LatestUserActivities = React.createClass({
       } else if(item.verb === "commented"){
         return <LatestUserActivityCommentItem key={Math.random()} item={item} />;
       } else if(item.verb === "voted"){
-        return <LatestUserActivityVoteItem key={Math.random()} item={item} />;
-      } else if(item.verb === "joined"){
           return <LatestUserActivityJoinItem key={Math.random()} item={item} />;
       } else if(item.verb === "mentioned"){
         return <LatestUserActivityMentionItem key={Math.random()} item={item} />;

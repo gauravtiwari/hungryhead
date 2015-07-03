@@ -52,8 +52,6 @@ var LatestFeed = React.createClass({
           elements.push(<LatestFeedFeedbackItem key={Math.random()} item={item} />)
         } else if(item.verb === "pitched"){
           elements.push(<LatestFeedIdeaItem key={Math.random()} item={item} />)
-        } else if(item.verb === "joined"){
-          elements.push(<LatestFeedJoinItem key={Math.random()} item={item} />)
         } else if(item.verb === "commented"){
           elements.push(<LatestFeedCommentItem key={Math.random()} item={item} />)
         } else if(item.verb === "voted"){
