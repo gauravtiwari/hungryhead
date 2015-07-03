@@ -33,6 +33,7 @@ class CreateUserNotificationService
 
   def increment_counters
     #Increment counters
+    @user.school.people_counter.reset
     @user.school.people_counter.incr(User.from_school(@user.school_id).size) if @user.school_id.present?
     #Cache lists for school
     @user.school.published_people.add(@user.id, @user.created_at.to_i + @user.id) if @user.school_id.present?

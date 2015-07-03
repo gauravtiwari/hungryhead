@@ -7,7 +7,7 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :increment_counters, :cache_follow_ids, on: :create
+  after_commit :update_counters, :cache_follow_ids, on: :create
   after_destroy :update_counters, :delete_cache_follow_ids, :delete_notification
 
   #Scopes for fetching records

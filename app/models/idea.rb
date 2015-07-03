@@ -56,6 +56,7 @@ class Idea < ActiveRecord::Base
 
   #Scopes
   scope :published, -> { where(status: 1) }
+  scope :from_school, ->(school_id) { where(status: 1, :school_id => school_id)}
   scope :public_ideas, -> { where(privacy: 1) }
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
@@ -212,8 +213,10 @@ class Idea < ActiveRecord::Base
 
   def decrement_counters
     #Decrement counters for user and school
-    school.ideas_counter.decrement
-    user.ideas_counter.decrement
+    school.ideas_counter.reset
+    school.ideas_counter.(Idea.from_school(school_id).size)
+    user.ideas_counter.reset
+    user.ideas_counter.(user.ideas.size)
 
     #Add to school
     school.published_ideas.delete(id)

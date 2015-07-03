@@ -300,7 +300,7 @@ class User < ActiveRecord::Base
   def decrement_counters
     #Decrement counters
     school.people_counter.reset
-    school.people_counter.incr(school.fetch_users.count) if school_id.present?
+    school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
 
     #delete cached sorted_set for school
     school.published_people.delete(id) if school_id.present?
