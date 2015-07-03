@@ -3,7 +3,7 @@ class CreateNotificationCacheService
   include Rails.application.routes.url_helpers
 
   def initialize(activity)
-    @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
+    @activity = activity.class.to_s.constantize.fetch(activity.id) #already persist in Postgres
     @actor = activity.user
     @object = activity.trackable
     @target = activity.recipient
@@ -51,7 +51,7 @@ class CreateNotificationCacheService
   #Get followers
   def followers
     followers_ids = @actor.followers_ids.members - [recipient_user.id.to_s]
-    User.find(followers_ids)
+    User.fetch_multi(followers_ids)
   end
 
   #Add activity to different tickers
@@ -86,7 +86,7 @@ class CreateNotificationCacheService
 
   def add_activity_to_commenters(activity_item)
     @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
-    User.find(@ids).each do |commenter|
+    User.fetch_multi(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter, activity_item)
       SendNotificationService.new(commenter, activity).user_notification
     end
