@@ -123,7 +123,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'unicorn'
+gem 'passenger'
 
 #Browser gem
 gem 'browser'
