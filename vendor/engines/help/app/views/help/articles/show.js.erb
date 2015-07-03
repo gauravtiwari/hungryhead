@@ -1,0 +1,8 @@
+$('#articlePopupModal').modal('hide');
+
+var $el = $('#help_article_<%= @article.id %>');
+$el.html("<%= j render partial: 'help/categories/article', locals: {article: @article} %>");
+
+$('#articlePopupModal').on('hidden.bs.modal', function(){
+  $('#edit_article_modal').remove();
+});

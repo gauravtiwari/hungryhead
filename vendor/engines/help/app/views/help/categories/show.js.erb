@@ -1,0 +1,8 @@
+$('#categoryPopupModal').modal('hide');
+
+var $el = $('#category_<%= @category.id %>');
+$el.html("<%= j render partial: 'category', locals: {category: @category} %>");
+
+$('#categoryPopupModal').on('hidden.bs.modal', function(){
+  $('#edit_category_modal').remove();
+});

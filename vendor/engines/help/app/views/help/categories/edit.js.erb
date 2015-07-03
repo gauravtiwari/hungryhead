@@ -1,0 +1,8 @@
+
+var $el = $('body');
+
+$el.append($('<div>', {class: 'edit_category_modal', id: 'edit_category_modal'}));
+
+$('#edit_category_modal').append("<%= j render partial: 'form', locals: {category: @category} %>");
+
+$('#categoryPopupModal').modal('show');
