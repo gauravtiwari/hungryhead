@@ -70,9 +70,9 @@ var IdeaCardStats = React.createClass({
             <div className="row">
 
             <div style={{width: '50%'}} className="text-center auto-margin">
-                <div className="progress-text text-center text-success fs-16 p-b-10 bold">Score: {this.state.score}/10K</div>
+                <div className="progress-text text-center text-complete fs-16 p-b-10 bold">Score: {this.state.score}/10K</div>
                 <div className="progress">
-                    <div className="progress-bar progress-bar-success" style={{width: this.state.width + '%'}}></div>
+                    <div className="progress-bar progress-bar-complete" style={{width: this.state.width + '%'}}></div>
                 </div>
             </div>
 
