@@ -117,11 +117,11 @@ class IdeasController < ApplicationController
     render 'feedbackers/index'
   end
 
-  # GET /ideas/1/followers
-  def followers
-    @followable = @idea
-    @followers = @idea.get_followers.paginate(:page => params[:page], :per_page => 10)
-    render 'follows/followers'
+  # GET /ideas/1/voters
+  def voters
+    @votable = @idea
+    @followers = @idea.get_voters.paginate(:page => params[:page], :per_page => 10)
+    render 'voters/voters'
   end
 
   # GET /ideas/1/team
