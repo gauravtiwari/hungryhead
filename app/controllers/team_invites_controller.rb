@@ -58,7 +58,7 @@ class TeamInvitesController < ApplicationController
         @idea.team_invites_ids.delete(@team_invite.invited_id.to_s)
 
         #Follow idea
-        current_user.followings.create!(followable: @idea) if Follow.followings_for(current_user, @idea).empty?
+        current_user.votes.create!(votable: @idea) if Vote.votes_for(current_user, @idea).empty?
 
         #Save @idea and redirect
         @idea.save!
