@@ -1,5 +1,5 @@
 <% cache([cache_key_for_users, params[:page]]) do %>
-  <div class="container p-t-40 p-b-80">
+  <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
     <div class="people-list">
       <div class="col-md-12">
         <table class="table">
@@ -36,7 +36,7 @@
         </table>
       </div>
       <div class="paging-container p-r-15">
-      <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+        <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
       </div>
     </div>
   </div>

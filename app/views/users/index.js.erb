@@ -1,0 +1,6 @@
+var $el = $('#<%= controller_name %>_listing');
+$el.html("<%=j render partial: 'users' %>");
+ReactRailsUJS.mountComponents();
+
+$('html, body').animate({scrollTop : 0},200);
+$('body .pagination').find('a').attr('data-remote', true);

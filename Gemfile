@@ -72,6 +72,9 @@ gem 'activerecord-import'
 gem 'spring',        group: :development
 gem 'sprockets'
 #API
+#
+#Nprogress
+gem 'nprogress-rails'
 
 #Deal with JSON data
 gem  'hashie'

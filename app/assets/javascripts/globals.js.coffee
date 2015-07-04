@@ -22,6 +22,11 @@ jQuery(document).ready ->
 		$('#formPassword').rules 'add', minlength: 6
 	catch e
 
+	NProgress.configure
+	  showSpinner: false
+	  ease: 'ease'
+	  speed: 500
+
 	$('#form-login').validate();
 	$('#new_invite_request').validate();
 	$('#information-form').validate();

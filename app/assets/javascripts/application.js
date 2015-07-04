@@ -44,6 +44,7 @@
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
 //= require showdown
+//= require nprogress
 //= require autocomplete-rails
 //= require pnotify
 //= require unobtrusive_flash
