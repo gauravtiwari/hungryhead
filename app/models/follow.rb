@@ -23,7 +23,6 @@ class Follow < ActiveRecord::Base
 
   #Redis Counters
   def update_counters
-   #Increment counters
    follower.followings_counter.reset
    follower.followings_counter.incr(follower.followings.size)
    followable.followers_counter.reset
@@ -31,12 +30,12 @@ class Follow < ActiveRecord::Base
 
   end
 
+  #Add ids to follower and followable cache
   def cache_follow_ids
-    #Add ids to follower and followable cache
     follower.followings_ids << followable_id if followable_type == "User"
     follower.idea_followings_ids << followable_id if followable_type == "Idea"
     follower.school_followings_ids << followable_id if followable_type == "School"
-    followable.followers_ids << follower_id unless followable.followers_ids.include?(follower_id.to_s)
+    followable.followers_ids << follower_id
   end
 
   def delete_cache_follow_ids

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :except => [:autocomplete_user_name, :check_username, :check_email, :index, :popular, :trending, :latest]
+  after_action :verify_authorized, :except => [:autocomplete_user_name, :check_username, :check_email, :followings, :followers, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
@@ -21,25 +21,33 @@ class UsersController < ApplicationController
   end
 
   def latest
-    render json: Oj.dump({
-      list: User.latest_listing,
-      type: 'Latest People'
-    }, mode: :compat)
+    respond_to do |format|
+      format.html
+      format.json {render json: Oj.dump({
+          list: User.latest_listing.map{|object| send("user_json", object)},
+          type: 'Latest People'
+        }, mode: :compat)}
+    end
   end
 
   def popular
-    render json: Oj.dump({
-      list: User.popular_20,
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: User.popular_20.map{|object| send("user_json", object)},
       type: 'Popular People'
-      }, mode: :compat)
+      }, mode: :compat) }
+    end
   end
 
   def trending
-    @users = User.trending_20
-    render json: Oj.dump({
-      list: User.trending_20,
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: User.trending_20.map{|object| send("user_json", object)},
       type: 'Trending People'
-      }, mode: :compat)
+      }, mode: :compat) }
+    end
   end
 
   def edit
@@ -185,6 +193,18 @@ class UsersController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  #User JSON
+  def user_json(user)
+    {
+      id: user.uid,
+      name: user.name,
+      name_badge: user.user_name_badge,
+      avatar: user.avatar.url(:avatar),
+      url: profile_path(user),
+      description: user.mini_bio
+    }
   end
 
   # Use callbacks to share common setup or constraints between actions.

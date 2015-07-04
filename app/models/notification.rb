@@ -17,15 +17,15 @@ class Notification < ActiveRecord::Base
   end
 
   def refresh_ticker
-    user.ticker.remrangebyrank(100, user.ticker.members.length)
+    user.ticker.remrangebyrank(0, -100)
   end
 
   def refresh_friends_notifications
-    user.friends_notifications.remrangebyrank(50, user.friends_notifications.members.length)
+    user.friends_notifications.remrangebyrank(0, -50)
   end
 
   def profile_latest_activities
-    user.latest_activities.remrangebyrank(5, user.latest_activities.members.length)
+    user.latest_activities.remrangebyrank(0, -5)
   end
 
 end

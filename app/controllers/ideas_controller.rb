@@ -34,29 +34,37 @@ class IdeasController < ApplicationController
   #Get latest ideas
   #GET /ideas/latest
   def latest
-    render json: Oj.dump({
-      list: Idea.latest_listing,
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: Idea.latest_listing.map{|object| send("idea_json", object)},
       type: 'Latest Ideas'
-    }, mode: :compat)
+    }, mode: :compat) }
+    end
   end
 
   #GET popular ideas
   #GET /ideas/popular
   def popular
-    render json: Oj.dump({
-      list: Idea.popular_20,
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: Idea.popular_20.map{|object| send("idea_json", object)},
       type: 'Popular Ideas',
-    }, mode: :compat)
+    }, mode: :compat) }
+    end
   end
 
   #GET trending ideas
   #GET /ideas/trending
   def trending
-    @ideas = Idea.trending_20
-    render json: Oj.dump({
-      list: Idea.trending_20,
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: Idea.trending_20.map{|object| send("idea_json", object)},
       type: 'Trending Ideas'
-    }, mode: :compat)
+    }, mode: :compat) }
+    end
   end
 
   # PUT /ideas/1/publish
@@ -171,6 +179,17 @@ class IdeasController < ApplicationController
     @idea = Idea.fetch_by_slug(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
+  end
+
+  #Idea JSON
+  def idea_json(idea)
+    {
+      id: idea.uuid,
+      name: idea.name,
+      name_badge: idea.name_badge,
+      url: idea_path(idea),
+      description: idea.high_concept_pitch
+    }
   end
 
   # WhiteListed Params

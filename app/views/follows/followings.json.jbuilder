@@ -20,7 +20,7 @@ json.payload do
   end
 
   json.meta do
-    json.cache! [ "followings", @followable.followings_counter.value ], expires_in: 2.hours do
+    json.cache! [ "followings", @followings.size ], expires_in: 2.hours do
         json.current_page @followings.current_page
         json.next_page @followings.next_page
         json.prev_page @followings.previous_page

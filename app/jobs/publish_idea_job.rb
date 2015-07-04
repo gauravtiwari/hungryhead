@@ -33,7 +33,7 @@ class PublishIdeaJob < ActiveJob::Base
         {data: idea_json(@idea)}.to_json
       )
 
-      Idea.trending.remrangebyrank(20, Idea.trending.members.length)
+      Idea.trending.remrangebyrank(0, -20)
 
       #Fetch followings from cache
       @user.followings.create!(followable: @idea) if Follow.followings_for(@user, @idea).empty?

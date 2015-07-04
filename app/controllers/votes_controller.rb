@@ -7,7 +7,6 @@ class VotesController < ApplicationController
     authorize @votable
     if @votable.voted?(current_user)
       CreateVoteService.new(current_user, @votable).unvote
-      expire_fragment("activities/activity-#{@vote.votable_type}-#{@vote.votable_id}-user-#{current_user.id}")
     else
       @vote = CreateVoteService.new(current_user, @votable).vote
       if @vote.save

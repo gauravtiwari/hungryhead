@@ -29,7 +29,7 @@ class CreateUserNotificationService
     User.leaderboard.add(@user.id, @user.points)
     User.trending.add(@user.id, 1)
 
-    User.latest.remrangebyrank(20, User.latest.members.length)
+    User.latest.remrangebyrank(0, -20)
 
     #Send notification to listing
     Pusher.trigger_async("users-channel",

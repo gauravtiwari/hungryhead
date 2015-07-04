@@ -5,9 +5,7 @@ class PersistViewsCountJob < ActiveJob::Base
       @user = User.find(user_id)
       @record = record_type.constantize.find(record_id)
       if @user.impressions.where(impressionable: @record).empty?
-        record_type.constantize.trending.increment(@user.id)
-        @record.views_counter.reset
-        @record.views_counter.incr(@record.impressions.size)
+        record_type.constantize.trending.increment(@record.id)
 
         @user.impressions.create!(
           impressionable_id: record_id,
@@ -17,6 +15,9 @@ class PersistViewsCountJob < ActiveJob::Base
           controller_name: record_type.pluralize,
           action_name: 'show'
         )
+
+        @record.views_counter.reset
+        @record.views_counter.incr(Impression.where(impressionable: @record).size)
 
       else
         return false

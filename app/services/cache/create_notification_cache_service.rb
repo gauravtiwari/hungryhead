@@ -3,7 +3,7 @@ class CreateNotificationCacheService
   include Rails.application.routes.url_helpers
 
   def initialize(activity)
-    @activity = activity.class.to_s.constantize.fetch(activity.id) #already persist in Postgres
+    @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
     @actor = activity.user
     @object = activity.trackable
     @target = activity.recipient

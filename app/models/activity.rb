@@ -6,8 +6,6 @@ class Activity < ActiveRecord::Base
 
   cache_index :uuid
 
-  after_commit :delete_older_notifications, on: :create
-
   def cache_key
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
@@ -29,15 +27,15 @@ class Activity < ActiveRecord::Base
   end
 
   def refresh_ticker
-    user.ticker.remrangebyrank(100, user.ticker.members.length)
+    user.ticker.remrangebyrank(0, -100)
   end
 
   def refresh_friends_notifications
-    user.friends_notifications.remrangebyrank(50, user.friends_notifications.members.length)
+    user.friends_notifications.remrangebyrank(0, -50)
   end
 
   def profile_latest_activities
-    user.latest_activities.remrangebyrank(5, user.latest_activities.members.length)
+    user.latest_activities.remrangebyrank(0, -5)
   end
 
 end

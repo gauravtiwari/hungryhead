@@ -32,7 +32,7 @@ jQuery(document).ready ->
 	catch e
 
 	NProgress.configure
-	  showSpinner: false
+	  showSpinner: true
 	  ease: 'ease'
 	  speed: 500
 

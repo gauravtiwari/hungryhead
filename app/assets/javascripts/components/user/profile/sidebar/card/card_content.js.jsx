@@ -53,7 +53,7 @@ var CardContent = React.createClass({
 
     if(this.props.profile.locations && this.props.profile.locations.length > 0 ) {
       var location = this.props.profile.locations.map(function(location){
-        return <a className="text-white" href={location.url}>
+        return <a  key={Math.random()} className="text-white" href={location.url}>
                           <i className="fa fa-map-marker"></i> {location.tag}
                          </a>;
       });
