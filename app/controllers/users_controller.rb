@@ -168,9 +168,10 @@ class UsersController < ApplicationController
     @activities = @user.fetch_activities
     .select{|a| a.published == true}
     .sort { |x,y| y.created_at <=> x.created_at }
-    .paginate(:page => params[:page], :per_page => 20)
+    .paginate(:page => params[:page], :per_page => 1)
+    @next_page_url = profile_activities_path(page: @activities.next_page)
     respond_to do |format|
-      format.js
+      format.js {render 'activities/index'}
       format.html
     end
   end

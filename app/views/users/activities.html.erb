@@ -13,7 +13,13 @@
 
     <div class="profile-activity-feed auto-height m-t-20">
       <%= render partial: 'activities/activities', resource: @activities %>
+      <% if @activities.next_page %>
+        <div class="pagination-box text-center">
+          <%=  link_to 'Load More Activities', profile_activities_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+        </div>
+      <% end %>
     </div>
+
   </div>
 </div>
 

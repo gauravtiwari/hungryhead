@@ -1,4 +1,4 @@
-var $new_content = $("<%= j render partial: 'activities' %>");
+var $new_content = $("<%= j render partial: 'activities/activities' %>");
 window.activityListView.append($new_content);
 ReactRailsUJS.mountComponents();
 
@@ -6,7 +6,7 @@ $('body textarea').on('focus', function(){
   $(this).autosize();
 });
 
-$('a.load-more-posts').attr('href', "<%= root_path(page: @activities.next_page) %>");
+$('a.load-more-posts').attr('href', "<%= @next_page_url %>");
 
 <% unless @activities.next_page %>
   $('.pagination-box').remove();
