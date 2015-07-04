@@ -1,5 +1,5 @@
 var $el = $('#<%= controller_name %>_listing');
-$el.html("<%= escape_javascript render partial: 'schools' %>");
+$el.html("<%= escape_javascript render partial: 'schools/schools' %>");
 ReactRailsUJS.mountComponents();
 
 $('html, body').animate({scrollTop : 200},200);

@@ -16,18 +16,6 @@
         <% end %>
       <%= link_to(@idea.name, idea_path(@idea), :"data-popover-href" => "#{card_idea_path(@idea)}", class: 'load-card bold') %>
         <h6>
-          <% if feedback.fetch_user.cached_location_list.present? %>
-              <span class="location semi-bold m-r-10">
-                  <i class="fa fa-map-marker"></i>
-                  <%= feedback.fetch_user.location_list.first %>
-              </span>
-            <% end %>
-           <% if feedback.fetch_user.cached_market_list.present? %>
-              <span class="location semi-bold m-r-10">
-                  <i class="fa fa-map-marker"></i>
-                  <%= feedback.fetch_user.market_list.first %>
-              </span>
-            <% end %>
             <span class="time semi-bold">
               <i class="fa fa-clock-o"></i>
                 <%= link_to(idea_path(feedback), class: "text-master") do %>
@@ -38,7 +26,7 @@
       </div>
     </div>
     <div class="card-description p-l-60 p-r-60">
-      <div class="feedback-content">
+      <div class="feedback-content m-t-10">
        <% if feedback.body.length > 450 %>
         <%= truncate(markdownify(feedback.body), escape: false, length: 450) %>
         <%= link_to 'See more', '', class: "read-more-link read-more-#{feedback.id} clearfix" %>
