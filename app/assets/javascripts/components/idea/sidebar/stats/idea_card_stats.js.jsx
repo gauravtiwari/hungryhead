@@ -35,9 +35,7 @@ var IdeaCardStats = React.createClass({
     }.bind(this));
 
     $.pubsub('subscribe', 'update_vote_stats', function(msg, data){
-      current_votes = this.state.votes_count
-      total = current_votes + 1
-      this.setState({votes_count:  total});
+      this.setState({votes_count:  data});
     }.bind(this));
 
     $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
