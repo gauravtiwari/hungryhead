@@ -28,7 +28,7 @@ module Merit
       score 25, :on => 'feedbacks#create', category: 'feedback', to: :idea
 
       #Rate feedback
-      score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      score 25, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.helpful?
       end
 
