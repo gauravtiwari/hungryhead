@@ -48,7 +48,7 @@ class CreateNotificationCacheService
     end
   end
 
-  #Get followers
+  #Get followers for users and ideas
   def followers
     if @activity.recipient_type == "Idea"
       ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
@@ -66,6 +66,10 @@ class CreateNotificationCacheService
     #Send notification to recipient
     add_notification_for_recipient(activity_item) unless @activity.user == recipient_user
 
+    #Add activity to idea ticker if recipient or trackable is idea
+    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
+    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
 
@@ -81,6 +85,12 @@ class CreateNotificationCacheService
     recipient_user.ticker.add(activity_item, score_key)
     SendNotificationService.new(recipient_user, activity).user_notification if recipient_user != @activity.user
     SendNotificationService.new(recipient_user, activity).friend_notification if recipient_user != @activity.user
+  end
+
+  #Add activity to idea ticker if recipient or trackable is idea
+  def add_activity_to_idea(idea, activity_item)
+    idea.ticker.add(activity_item, score_key)
+    SendNotificationService.new(idea, activity).idea_notification
   end
 
   #This is for user profile page to show latest personal activities

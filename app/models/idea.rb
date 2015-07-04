@@ -36,6 +36,9 @@ class Idea < ActiveRecord::Base
   list :commenters_ids
   set :impressioners_ids
 
+  #Store latest idea notifications
+  sorted_set :ticker, marshal: true
+
   #Leaderboard ideas
   sorted_set :latest, global: true
   sorted_set :leaderboard, global: true

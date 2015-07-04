@@ -25,7 +25,8 @@
     </div>
     <div class="profile-action-buttons pull-right p-t-10 p-b-10 p-r-15">
       <% if !policy(@idea).collaborator? %>
-        <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+        <% voted = @idea.voted?(current_user) %>
+        <%= react_component('Upvote', {record: @idea.uuid, voted: voted, vote_url: vote_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), votes_count: @idea.votes_counter.value, voters_path: voters_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested? }) %>
       <% else %>

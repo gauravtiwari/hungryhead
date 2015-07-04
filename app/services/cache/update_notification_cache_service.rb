@@ -64,10 +64,21 @@ class UpdateNotificationCacheService
     add_activity_to_user_profile(user, activity_item)
     #push notification into friends notifications
     add_notification_for_recipient(activity_item) unless @activity.user == recipient_user
+
+    #Add activity to idea ticker if recipient or trackable is idea
+    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
+    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+
     #add notification to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
     #Add notification to commenters
     add_activity_to_commenters(activity_item) if @activity.trackable_type == "Comment"
+  end
+
+  #Add activity to idea ticker if recipient or trackable is idea
+  def add_activity_to_idea(idea, activity_item)
+    idea.ticker.remrangebyscore(score_key, score_key)
+    idea.ticker.add(activity_item, score_key)
   end
 
   #Add notification to recipients

@@ -1,16 +1,10 @@
 
 var ShowAllLink = React.createClass({
 
-	getInitialState: function() {
-		return {
-			path: this.props.path
-		};
-	},
-
 	loadAll: function() {
 	  this.setState({loading: true});
-	  var path = this.state.path;
-      $('body').append($('<div>', {class: 'listing_modal', id: 'listing_modal'}));
+	  var path = this.props.path;
+    $('body').append($('<div>', {class: 'listing_modal', id: 'listing_modal'}));
       React.render(
 		  <ModalListing path={path} key={Math.random()} />,
 		  document.getElementById('listing_modal')
@@ -22,7 +16,9 @@ var ShowAllLink = React.createClass({
 
 	render: function() {
 		return (
-				<a className="see-all" href="javascript:void(0)" onClick={this.loadAll}><i className="ion-more"></i></a>
+				<a className="see-all" data-toggle="tooltip" data-container="body" title="See all" href="javascript:void(0)" onClick={this.loadAll}>
+          <i className="fa fa-ellipsis-h"></i>
+        </a>
 			);
 	}
 });

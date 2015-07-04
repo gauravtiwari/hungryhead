@@ -8,6 +8,8 @@ var IdeaCardStats = React.createClass({
       feedbacks_count: data.feedbacks_count,
       followers_count: data.followers_count,
       raised: data.raised,
+      name: data.name,
+      id: data.id,
       views_count: data.views_count,
       comments_count: data.comments_count,
       votes_count: data.votes_count,
@@ -60,7 +62,7 @@ var IdeaCardStats = React.createClass({
       <div className={classes}>
         <div className="panel-heading bg-light-blue-lightest m-b-20">
           <div className="panel-title b-b b-grey p-b-5">
-            <i className="fa fa-star text-danger"></i> Reputation
+            <i className="fa fa-star text-danger"></i> Stats
           </div>
           <a className="know-more" onClick={this.openLeaderboardHelpModal}>
             <i className="fa fa-question-circle pull-right fs-16 text-black"></i>

@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
   before_filter :authenticate_user!, except: [:check_username, :check_email, :join]
   before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
-  before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
+  before_action :set_user, except: [:latest, :popular, :people_you_may_know, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :except => [:autocomplete_user_name, :check_username, :check_email, :followings, :followers, :index, :popular, :trending, :latest]
+  after_action :verify_authorized, :except => [:autocomplete_user_name, :people_you_may_know, :check_username, :check_email, :followings, :followers, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
@@ -156,6 +156,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render :show, status: :ok }
+    end
+  end
+
+  def people_you_may_know
+    @users = User.fetch_multi(current_user.people_you_may_know).paginate(:page => params[:page], :per_page => 9)
+    respond_to do |format|
+      format.json {render :index}
     end
   end
 

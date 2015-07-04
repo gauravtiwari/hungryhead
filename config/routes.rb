@@ -88,6 +88,9 @@ Rails.application.routes.draw do
   resources :new_idea
 
   resources :notifications, only: [:index, :update] do
+    member do
+      get :ideas
+    end
     collection do
       post :mark_as_read
       post :mark_all_as_read
@@ -166,6 +169,7 @@ Rails.application.routes.draw do
     get :autocomplete_user_name, :on => :collection
     collection do
       get :latest
+      get :people_you_may_know
       get :popular
       get :trending
     end

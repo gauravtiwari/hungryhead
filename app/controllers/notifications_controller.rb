@@ -9,6 +9,13 @@ class NotificationsController < ApplicationController
     render json: @notifications, status: :ok
   end
 
+  def ideas
+    @idea = Idea.find(params[:id])
+    @notifications = @idea.ticker.revrange(0, 100)
+    .paginate(:page => params[:page], :per_page => 10)
+    render json: @notifications
+  end
+
   def friends
     @notifications = @user.friends_notifications.revrange(0, 100)
     .paginate(:page => params[:page], :per_page => 20)
