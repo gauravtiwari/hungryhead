@@ -4,7 +4,6 @@
             <i class="fa fa-lightbulb-o text-danger"></i> Ideas
         </div>
     </div>
-    <% if @user == current_user %>
         <% if @user.fetch_ideas.size > 0 %>
             <% @user.fetch_ideas.take(3).each do |idea| %>
                 <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
@@ -23,13 +22,15 @@
                 </div>
             <% end %>
         <% else %>
+        <% if @user == current_user %>
             <div class="text-center fs-22 p-b-20 p-t-10">
                 <%= link_to('Click', new_idea_path(:intro), class: ' b-b text-master b-grey p-b-5') %> to publish a new idea
             </div>
-        <% end %>
-    <% else %>
-        <div class="text-center fs-22 p-b-20 hint-text ">
-            0 Ideas Published
-        </div>
+       <% else %>
+           <div class="text-center fs-22 p-b-20 hint-text ">
+               0 Ideas Published
+           </div>
+       <% end %>
     <% end %>
+
 </div>
