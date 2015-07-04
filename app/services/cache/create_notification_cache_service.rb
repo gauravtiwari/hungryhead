@@ -67,8 +67,8 @@ class CreateNotificationCacheService
     add_notification_for_recipient(activity_item) unless @activity.user == recipient_user
 
     #Add activity to idea ticker if recipient or trackable is idea
-    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
-    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea"
+    add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"
+    add_activity_to_idea(@target, activity_item) if @activity.recipient_type == "Idea" && @activity.trackable_type != "idea.create"
 
     #Add activity to followers ticker
     add_activity_to_followers(activity_item) if followers.any?
