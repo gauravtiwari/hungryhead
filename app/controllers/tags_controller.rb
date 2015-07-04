@@ -20,7 +20,7 @@ class TagsController < ApplicationController
 		if params[:tag].present?
 		  @tag = ActsAsTaggableOn::Tag.find_by_slug(params[:tag])
 		  @ideas = Idea.published.tagged_with(@tag.name)
-		  .paginate(:page => params[:page], :per_page => 10)
+		  .paginate(:page => params[:page], :per_page => 2)
 		end
 		respond_to do |format|
 			format.html

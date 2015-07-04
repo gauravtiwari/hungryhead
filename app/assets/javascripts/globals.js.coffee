@@ -31,6 +31,10 @@ jQuery(document).ready ->
 		$('#formPassword').rules 'add', minlength: 6
 	catch e
 
+	#Create infinite list view for activities container
+	$activity_box_el = $('#main_activity_box')
+	window.activityListView = new infinity.ListView($activity_box_el)
+
 	NProgress.configure
 	  showSpinner: true
 	  ease: 'ease'

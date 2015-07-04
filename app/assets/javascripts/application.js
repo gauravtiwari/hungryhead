@@ -22,6 +22,7 @@
 //= require jquery.scrollbar
 //= require hammerjs
 //= require jquery-ujs
+//= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher

@@ -1,6 +1,5 @@
-var $el = $('.activity-feed-box');
-$el.append("<%= j render partial: 'activities' %>");
-
+var $new_content = $("<%= j render partial: 'activities' %>");
+window.activityListView.append($new_content);
 ReactRailsUJS.mountComponents();
 
 $('body textarea').on('focus', function(){
