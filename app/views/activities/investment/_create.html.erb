@@ -18,7 +18,7 @@
 		<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
 	   	<h6 class="no-margin p-t-5">
 	      <span class="date semi-bold">
-	        <i class="fa fa-clock"></i>
+	        <i class="fa fa-clock-o"></i>
 	        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
 						<%= local_time_ago(activity.created_at) %>
 					<% end %>

@@ -18,8 +18,8 @@
         <h6>
             <span class="time semi-bold">
               <i class="fa fa-clock-o"></i>
-                <%= link_to(idea_path(feedback), class: "text-master") do %>
-                <%= time_ago_in_words(feedback.created_at) %>
+              <%= link_to(idea_path(feedback), class: "text-master") do %>
+              <%= time_ago_in_words(feedback.created_at) %>
               <% end %>
             </span>
         </h6>

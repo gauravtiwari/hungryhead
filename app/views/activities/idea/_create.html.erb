@@ -14,7 +14,7 @@
 	    	pitched <i class="fa fa-lightbulb-o"></i> <%= link_to(activity.trackable.name, idea_path(activity.trackable.slug), :"data-popover-href" => "#{card_idea_path(activity.trackable)}", class: 'load-card bold') %> - <span class="high_concept_pitch"><%= activity.trackable.high_concept_pitch %></span>
 		   	<h6 class="no-margin p-t-5">
 	        <span class="date semi-bold">
-	          <i class="fa fa-clock"></i>
+	          <i class="fa fa-clock-o"></i>
 		        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
 							<%= local_time_ago(activity.created_at) %>
 						<% end %>
