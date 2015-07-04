@@ -13,6 +13,7 @@ var LatestUserActivityCommentItem = React.createClass({
             <span className="verb">
               <i className="fa fa-comment m-r-5"></i>
               {this.props.item.verb} on a <a onClick={this.loadActivity}>{this.props.item.recipient.recipient_type}</a>
+              <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
             </span>
           </span>
         </li>

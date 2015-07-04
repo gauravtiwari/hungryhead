@@ -10,7 +10,10 @@ class TagsController < ApplicationController
 		  @users = User.published.tagged_with(@tag.name)
 		  .paginate(:page => params[:page], :per_page => 10)
 		end
-		render 'tags/people'
+		respond_to do |format|
+			format.html
+			format.js {render 'users/index'}
+		end
 	end
 
 	def show
@@ -19,7 +22,10 @@ class TagsController < ApplicationController
 		  @ideas = Idea.published.tagged_with(@tag.name)
 		  .paginate(:page => params[:page], :per_page => 10)
 		end
-		render 'tags/index'
+		respond_to do |format|
+			format.html
+			format.js {render 'ideas/index'}
+		end
 	end
 
 end

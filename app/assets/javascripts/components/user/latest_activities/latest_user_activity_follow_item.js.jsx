@@ -15,6 +15,7 @@ var LatestUserActivityFollowItem = React.createClass({
             <span className="verb">
               <i className="fa fa-user-plus"></i> {this.props.item.verb}
                <a href={this.props.item.recipient.recipient_url}> {recipient}</a>
+               <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
             </span>
           </span>
         </li>

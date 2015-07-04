@@ -20,6 +20,7 @@ var LatestUserActivityMentionItem = React.createClass({
             <span className="recipient p-l-5 inline">
               in a <a onClick={this.loadActivity}>comment</a>
             </span>
+            <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
           </span>
         </li>
       );

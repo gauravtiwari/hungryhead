@@ -14,6 +14,7 @@ var LatestUserActivityInvestmentItem = React.createClass({
             <span className="verb">
               <i className="fa fa-dollar bold"></i> {this.props.item.verb}
                in <a href={this.props.item.recipient.recipient_url}> {this.props.item.recipient.recipient_name}</a>
+               <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
             </span>
           </span>
         </li>

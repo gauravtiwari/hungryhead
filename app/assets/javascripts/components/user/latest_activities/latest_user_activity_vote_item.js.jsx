@@ -17,6 +17,7 @@ var LatestUserActivityVoteItem = React.createClass({
             <span className="recipient p-l-5">
               on a <a onClick={this.loadActivity}>{this.props.item.recipient.recipient_type}</a>
             </span>
+            <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
           </span>
         </li>
       );

@@ -14,6 +14,7 @@ var LatestUserActivityFeedbackItem = React.createClass({
             <span className="verb">
              <i className="fa fa-comment"></i> left a <a onClick={this.loadActivity}>feedback</a> for
              <a href={this.props.item.recipient.recipient_url}> {this.props.item.recipient.recipient_name}</a>
+             <small className="m-l-10">{moment(this.props.item.created_at).fromNow()}</small>
             </span>
           </span>
         </li>
