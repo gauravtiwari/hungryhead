@@ -1,5 +1,5 @@
 <% cache([cache_key_for_ideas, params[:page]])  do %>
-<div class="container p-t-40 p-b-80">
+<div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
   <div class="idea-list">
   <div class="col-md-12">
     <table class="table">
@@ -28,7 +28,7 @@
         <% else %>
           <% @ideas.each do |idea| %>
             <% cache([idea, "followed", idea.followed_by?(current_user), idea.in_team?(current_user)]) do %>
-              <%= render partial: 'idea', locals: {idea: idea} %>
+              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
             <% end %>
           <% end %>
         <% end %>

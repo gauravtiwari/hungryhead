@@ -45,6 +45,7 @@
 //= require jquery.autosize
 //= require showdown
 //= require nprogress
+//= require nprogress-ajax
 //= require autocomplete-rails
 //= require pnotify
 //= require unobtrusive_flash

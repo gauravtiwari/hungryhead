@@ -1,4 +1,3 @@
-
 <div class="wrapper-small school-bg-gradient">
   <div class="col-md-6 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
     <div class="hero-text inner">
@@ -8,84 +7,7 @@
   </div>
 </div>
 
-<div class="container p-t-40 p-b-80">
-  <div class="school-list">
-  <div class="col-md-12">
-    <table class="table">
-      <thead>
-        <tr>
-          <th colspan="2" class="no-padding"><%= @schools.count %> Results</th>
-          <th>Receive updates</th>
-          <th class="text-center">Stats</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @schools.each do |school| %>
-        <tr class="full-border-light-bottom">
-          <td class="no-padding p-t-25 p-b-20 no-border">
-            <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
-             <% if school.logo.present? %>
-               <%= image_tag(school.logo.url(:avatar), width: "50px") %>
-             <% else %>
-               <span class="placeholder bold text-white">
-                 <%= school.name_badge.upcase %>
-               </span>
-             <% end %>
-             </div>
-          </td>
-          <td style="max-width: 350px;" class="school-info font-opensans no-border">
-            <h5 class="no-margin fs-16 bold"><%= link_to(school.name, profile_path(school)) %>
-            </h5>
-            <p class="fs-14 m-t-5">
-              <%= school.description %>
-              <span>
-                Based in:
-                <% school.location_list.each do |tag| %>
-                  <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-                <% end %>
-              </span>
-            </p>
-          </td>
-          <td style="display:table-cell; vertical-align:middle;" class="no-border text-center">
-          <div class="card-follow-button">
-            <%= react_component('Follow',{:followed => followed?(school)}) %>
-          </div>
-          <script type="text/javascript">
-             ReactRailsUJS.mountComponents();
-          </script>
-          </td>
-          <td style="display:table-cell; vertical-align:middle;" class="no-border">
-            <ul class="stastics-list">
-              <li class="clearfix">
-                Followers
-                <span class="text-master">
-                  <%= number_to_human(school.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-                </span>
-              </li>
-              <li class="clearfix pull-reset">
-                Students
-                <span class="text-master">
-                  <%= number_to_human(school.people_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-                </span>
-              </li>
-              <li class="clearfix pull-reset">
-                Ideas
-                <span class="text-master">
-                  <%= number_to_human(school.ideas_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-                </span>
-              </li>
-            </ul>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <div class="paging-container p-r-15">
-      <%= will_paginate(@schools, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-  </div>
-</div>
-</div>
+<%= render partial: 'schools' %>
 
 
 

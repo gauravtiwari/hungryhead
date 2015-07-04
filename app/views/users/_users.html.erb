@@ -28,7 +28,7 @@
           <% else %>
             <% @users.each do |user| %>
               <% cache([user, "followed", user.followed_by?(current_user)]) do %>
-                <%= render partial: 'user', locals: {user: user} %>
+                <%= render partial: 'users/user', locals: {user: user} %>
               <% end %>
             <% end %>
           <% end %>

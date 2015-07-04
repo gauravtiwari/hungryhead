@@ -16,7 +16,7 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.order(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    @schools = School.order(id: :desc).paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /schools/1
@@ -45,7 +45,7 @@ class SchoolsController < ApplicationController
     @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
-      format.js
+      format.js {render :index}
     end
   end
 
@@ -59,8 +59,9 @@ class SchoolsController < ApplicationController
 
   def ideas
     @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 10)
-    if request.xhr?
-      render :partial=>"schools/ideas"
+    respond_to do |format|
+      format.html
+      format.js {render :index}
     end
   end
 

@@ -6,6 +6,15 @@ jQuery(document).ready ->
 	$('body textarea').focus ->
 		$(this).autosize()
 
+	$.ajaxSetup cache: false
+
+	$(document).on 'click', '.pagination a[data-remote=true]', (e) ->
+	  history.pushState {}, '', $(this).attr('href')
+	  return
+	$(window).on 'popstate', ->
+	  $.getScript document.location.href
+	  return
+
 	$.validator.addMethod 'lettersonly', ((value, element) ->
 	  @optional(element) or /^[a-z@-_-]+$/i.test(value)
 	), 'Letters only please'
