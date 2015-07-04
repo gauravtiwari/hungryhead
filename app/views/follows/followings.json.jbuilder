@@ -20,14 +20,14 @@ json.payload do
   end
 
   json.meta do
-    json.cache! [ "followings", @followings.size ], expires_in: 2.hours do
+    json.cache! [ "followings", @followings.size, @followings.next_page ], expires_in: 2.hours do
         json.current_page @followings.current_page
         json.next_page @followings.next_page
         json.prev_page @followings.previous_page
         json.per_page @followings.per_page
         json.total_pages @followings.total_pages
-        json.count @user.followings_counter.value
-        json.label "People who are followed by #{@user.name}"
+        json.count @followable.followings_counter.value
+        json.label "People who are followed by #{@followable.name}"
     end
   end
 

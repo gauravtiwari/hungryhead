@@ -11,8 +11,8 @@ json.payload do
             json.tag tag
             json.url tag_people_path(tag.parameterize)
         end
-        json.about_me follower.mini_bio
-        json.user_name_badge follower.user_name_badge
+        json.about_me feedbacker.mini_bio
+        json.user_name_badge feedbacker.user_name_badge
         json.is_following feedbacker.followed_by?(current_user)
         json.followed followed?(feedbacker)
         json.not_current_user feedbacker != current_user
@@ -26,7 +26,7 @@ json.payload do
         json.prev_page @feedbackers.previous_page
         json.per_page @feedbackers.per_page
         json.total_pages @feedbackers.total_pages
-        json.count @idea.feedbackers_counter.length
+        json.count @idea.feedbackers_counter.value
         json.label "People who gave feedback to #{@idea.name}"
     end
   end

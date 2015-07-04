@@ -26,8 +26,8 @@ json.payload do
         json.prev_page @followers.previous_page
         json.per_page @followers.per_page
         json.total_pages @followers.total_pages
-        json.count @user.followers_counter.value
-        json.label "People who followed #{@user.name}"
+        json.count @followable.followers_counter.value
+        json.label "People who followed #{@followable.name}"
     end
   end
 

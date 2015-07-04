@@ -50,8 +50,12 @@ class CreateNotificationCacheService
 
   #Get followers
   def followers
-    followers_ids = @actor.followers_ids.members - [recipient_user.id.to_s]
-    User.fetch_multi(followers_ids)
+    if @activity.recipient_type == "Idea"
+      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
+    else
+      ids = @actor.followers_ids.members - [recipient_user.id.to_s]
+    end
+    User.fetch_multi(ids)
   end
 
   #Add activity to different tickers

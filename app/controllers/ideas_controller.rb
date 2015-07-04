@@ -119,13 +119,18 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/followers
   def followers
-    @followers = @idea.followers.paginate(:page => params[:page], :per_page => 10)
-    render 'followers/index'
+    @followable = @idea
+    @followers = @idea.get_followers.paginate(:page => params[:page], :per_page => 10)
+    render 'follows/followers'
   end
 
   # GET /ideas/1/team
   def team
-    @team = @idea.fetch_team
+    @team = @idea.fetch_team.paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # POST /ideas

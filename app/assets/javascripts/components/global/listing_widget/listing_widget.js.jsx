@@ -40,7 +40,7 @@ var ListingWidget = React.createClass({
       var count =  <li onClick={this.loadAll} className="pointer">
             <div className="thumbnail-wrapper d32 circular b-white">
                 <div className="bg-master text-center text-white">
-                    <span>+{this.state.count - 7}</span>
+                    <span>+{this.state.count - 16}</span>
                 </div>
             </div>
          </li>;

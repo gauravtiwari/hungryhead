@@ -145,6 +145,7 @@ class UsersController < ApplicationController
   end
 
   def followers
+    @followable = @user
     @followers = @user.get_followers.paginate(:page => params[:page], :per_page => 9)
     render 'follows/followers'
   end
@@ -159,6 +160,7 @@ class UsersController < ApplicationController
   end
 
   def followings
+    @followable = @user
     @followings = @user.get_followings.paginate(:page => params[:page], :per_page => 9)
     render 'follows/followings'
   end
