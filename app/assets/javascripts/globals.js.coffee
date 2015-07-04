@@ -54,7 +54,7 @@ jQuery(document).ready ->
 		$('#idea_elevator_pitch').rules 'add', minlength: 100, maxlength: 140
 	catch e
 
-	$("[data-toggle='tooltip']").tooltip();
+	$("[data-toggle='tooltip']").tooltip()
 
 	#Initialize Pages modules
 

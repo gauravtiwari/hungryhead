@@ -13,29 +13,9 @@
         </div>
       <% end %>
   </div>
-<div class="panel-body">
-    <ul class="list-unstyled">
-      <% @idea.fetch_team.each do |member| %>
-        <li class="m-r-10">
-            <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-            <% if member.avatar.present? %>
-              <%= image_tag(member.avatar.url(:avatar), :"data-src" => "#{member.avatar.url(:avatar)}", :"data-src-retina" => "#{member.avatar.url(:square)}", width: "35", height: "35") %>
-            <% else %>
-                <span class="placeholder bold text-white"><%= member.first_name.first + member.last_name.first %>
-                </span>
-            <% end %>
-            </div>
-        </li>
-      <% end %>
-      <% if @idea.followers_counter.value > 16 %>
-        <li>
-            <div class="thumbnail-wrapper d32 circular b-white">
-                <div class="bg-master text-center text-white">
-                    <span>+34</span>
-                </div>
-            </div>
-        </li>
-      <% end %>
-    </ul>
-    </div>
+  <div class="panel-body relative">
+      <ul class="list-unstyled">
+        <%= react_component('ListingWidget', {listing: @idea.fetch_team.take(16).map{|u| {name: u.name, name_badge: u.user_name_badge,  avatar: u.avatar.url(:avatar),  url: profile_path(u)}}, count: @idea.followers_counter.value, path: team_idea_path(@idea), type: "team" }.to_json) %>
+      </ul>
+  </div>
 </div>

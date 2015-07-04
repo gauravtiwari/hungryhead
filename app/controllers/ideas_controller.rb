@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    if !@idea.impressioners_ids.member?(current_user.id) && @user != current_user
+    if !@idea.impressioners_ids.member?(current_user.id)
       PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
     end
   end
@@ -126,7 +126,6 @@ class IdeasController < ApplicationController
   # GET /ideas/1/team
   def team
     @team = @idea.fetch_team
-    render partial: 'ideas/_partials/team'
   end
 
   # POST /ideas

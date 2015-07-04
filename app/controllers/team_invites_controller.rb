@@ -33,7 +33,7 @@ class TeamInvitesController < ApplicationController
 
     @idea.save!
 
-    if @team_invite.errors.empty?
+    if @invited.present?
       render json: {success: "Successfully invited #{invited.to_sentence}"}, status: :created
     else
       render json: {

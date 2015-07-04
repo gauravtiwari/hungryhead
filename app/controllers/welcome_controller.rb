@@ -48,7 +48,7 @@ class WelcomeController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:rules_accepted)
+    params.require(:user).permit(:rules_accepted, :location_list, :market_list)
   end
 
   def finish_wizard_path

@@ -16,13 +16,13 @@
                           Where are you based?
                         </label>
                         <span class="help">eg: 'Lancaster, London'</span>
-                        <%= f.input_field :location_list, data: { url: autocomplete_location_name_locations_path, placeholder: "Where are you based? eg: 'London', 'Lancaster'", init: @user.location_list}, class: 'auto-select form-control' %>
+                        <%= f.input_field :location_list, data: { url: autocomplete_location_name_locations_path, placeholder: "Where are you based? eg: 'London', 'Lancaster'", init: @user.location_list, tag_limit: 1}, class: 'auto-select form-control' %>
                       </div>
 
                       <div class="form-group">
                         <label for="select2-init">Markets interested</label>
                         <span class="help">eg: 'Ecommerce, Mobile'</span>
-                        <%= f.input_field :market_list, data: { url: autocomplete_market_name_markets_path, placeholder: "Which markets are you interested in? eg: 'Education', 'Art'", init: @user.market_list}, class: 'auto-select form-control' %>
+                        <%= f.input_field :market_list, data: { url: autocomplete_market_name_markets_path, placeholder: "Which markets are you interested in? eg: 'Education', 'Art'", init: @user.market_list, tag_limit: 3}, class: 'auto-select form-control' %>
                       </div>
 
                       <div class="form-group clearfix">

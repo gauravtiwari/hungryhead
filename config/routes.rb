@@ -195,6 +195,7 @@ Rails.application.routes.draw do
       get :card
       get :join_team
       get :comments
+      get :followers
       get :feedbackers
       get :investors
       get :team

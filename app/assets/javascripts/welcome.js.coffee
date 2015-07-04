@@ -3,11 +3,12 @@ $(document).ready ->
     $('.auto-select').each ->
       select = $(this)
       init_data = select.data('init')
+      tag_limit = select.data('tag-limit')
       $(select).select2
         minimumInputLength: 2
         placeholder: select.data('placeholder')
         tags: true
-        maximumSelectionSize: 3
+        maximumSelectionSize: tag_limit
         ajax:
           url: select.data('url')
           dataType: 'json'

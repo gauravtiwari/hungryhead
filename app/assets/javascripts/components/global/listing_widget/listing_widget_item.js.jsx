@@ -1,5 +1,8 @@
 var ListingWidgetItem = React.createClass({
 
+  componentDidMount: function() {
+    $("[data-toggle='tooltip']").tooltip();
+  },
   render: function() {
     if(this.props.item.avatar) {
       var placeholder =  <div className="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
@@ -10,7 +13,7 @@ var ListingWidgetItem = React.createClass({
     } else {
       var placeholder = <div className="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
             <a href={this.props.item.url}>
-              <span className="placeholder bold text-white" data-toggle="tooltip" data-container="body" data-title={this.props.item.name}>
+              <span className="placeholder bold text-white" data-toggle="tooltip" data-title={this.props.item.name}>
                 {this.props.item.name_badge}
               </span>
             </a>
