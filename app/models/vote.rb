@@ -11,6 +11,15 @@ class Vote < ActiveRecord::Base
   after_destroy :update_counters, :delete_cached_voters_ids, :delete_notification
   after_commit :update_counters, :cache_voters_ids, on: :create
 
+  #Scopes for fetching records
+  scope :votes_for, ->(voter, votable) {
+    where(
+      voter_id: voter.id,
+      votable_id: votable.id,
+      votable_type: votable.class.to_s
+    )
+  }
+
   public
 
   def votable_user

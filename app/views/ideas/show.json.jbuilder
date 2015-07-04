@@ -26,7 +26,7 @@ json.idea do
 end
 
 json.stats do
-  json.followers_counter @idea.followers_counter.value
+  json.views_counter @idea.views_counter.value
   json.feedbacks_counter @idea.feedbackers_counter.value
   json.investments_counter @idea.investors_counter.value
   json.votes_counter @idea.votes_counter.value

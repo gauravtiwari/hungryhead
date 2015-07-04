@@ -28,10 +28,10 @@ module IdeasHelper
 
   def cache_key_for_idea(idea)
     investors = idea.investors_counter.value
-    followers = idea.followers_counter.value
+    votes = idea.votes_counter.value
     feedbackers = idea.feedbackers_counter.value
-    followed = idea.followed_by?(current_user)
-    "idea-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/followers-#{followers}/feedbackers-#{feedbackers}/followed-#{followed}"
+    voted = idea.voted?(current_user)
+    "idea-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/votes-#{votes}/feedbackers-#{feedbackers}/voted-#{voted}"
   end
 
 end

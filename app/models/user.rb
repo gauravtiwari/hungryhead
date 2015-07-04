@@ -83,7 +83,6 @@ class User < ActiveRecord::Base
   #Sorted set to store followers, followings ids and latest activities
   set :followers_ids
   set :followings_ids
-  set :idea_followings_ids
   set :school_followings_ids
   set :impressioners_ids
 

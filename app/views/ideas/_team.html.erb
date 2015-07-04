@@ -15,7 +15,7 @@
   </div>
   <div class="panel-body relative">
       <ul class="list-unstyled">
-        <%= react_component('ListingWidget', {listing: @idea.fetch_team.take(16).map{|u| {name: u.name, name_badge: u.user_name_badge,  avatar: u.avatar.url(:avatar),  url: profile_path(u)}}, count: @idea.followers_counter.value, path: team_idea_path(@idea), type: "team" }.to_json) %>
+        <%= react_component('ListingWidget', {listing: @idea.fetch_team.take(16).map{|u| {name: u.name, name_badge: u.user_name_badge,  avatar: u.avatar.url(:avatar),  url: profile_path(u)}}, count: @idea.team_ids.length, path: team_idea_path(@idea), type: "team" }.to_json) %>
       </ul>
   </div>
 </div>

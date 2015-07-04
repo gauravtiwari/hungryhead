@@ -6,7 +6,7 @@ var IdeaCardStats = React.createClass({
     var data = JSON.parse(this.props.data);
     return {
       feedbacks_count: data.feedbacks_count,
-      followers_count: data.followers_count,
+      investments_count: data.investments_count,
       raised: data.raised,
       name: data.name,
       id: data.id,
@@ -26,8 +26,8 @@ var IdeaCardStats = React.createClass({
   componentDidMount: function() {
     var self = this;
     this.calculateScore();
-    $.pubsub('subscribe', 'update_followers_stats', function(msg, data){
-      self.setState({followers_count: data});
+    $.pubsub('subscribe', 'update_investors_stats', function(msg, data){
+      self.setState({investments_count: data});
     });
     $.pubsub('subscribe', 'update_investment_stats', function(msg, data){
       var sum = +data + +(this.state.raised);
@@ -35,7 +35,9 @@ var IdeaCardStats = React.createClass({
     }.bind(this));
 
     $.pubsub('subscribe', 'update_vote_stats', function(msg, data){
-      this.setState({votes_count: this.state.votes_count + 1});
+      current_votes = this.state.votes_count
+      total = current_votes + 1
+      this.setState({votes_count:  total});
     }.bind(this));
 
     $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
@@ -95,7 +97,7 @@ var IdeaCardStats = React.createClass({
           <div className="row p-t-15 p-b-15">
             <div className="col-md-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin ">Followers</p>
-              <p className="all-caps font-montserrat no-margin text-success ">{this.state.followers_count}</p>
+              <p className="all-caps font-montserrat no-margin text-success ">{this.state.investments_count}</p>
               </div>
 
 

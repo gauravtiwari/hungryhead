@@ -28,8 +28,7 @@ class Idea < ActiveRecord::Base
 
   acts_as_taggable_on :markets, :locations, :technologies
 
-  #Cache ids of followers, voters, feedbackers, investors and activities
-  set :followers_ids
+  #Cache ids of voters, feedbackers, investors and activities
   list :voters_ids
   list :feedbackers_ids
   list :investors_ids
@@ -45,7 +44,6 @@ class Idea < ActiveRecord::Base
   sorted_set :trending, global: true
 
   #Redis Cache counters
-  counter :followers_counter
   counter :investors_counter
   counter :feedbackers_counter
   counter :views_counter

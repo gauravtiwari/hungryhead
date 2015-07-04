@@ -39,10 +39,7 @@ module Follower
     followings_ids.member?(user.id)
   end
 
-  def idea_following?(idea)
-    idea_followings_ids.member?(idea.id)
-  end
-
+  #school following
   def school_following?(school)
     school_followings_ids.member?(school.id)
   end

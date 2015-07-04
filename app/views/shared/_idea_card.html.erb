@@ -15,7 +15,8 @@
   			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
         <% if !@idea.in_team?(current_user) %>
           <div class="card-follow-button">
-            <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+            <% voted = @idea.voted?(current_user) %>
+            <%= react_component('Upvote', {record: @idea.uuid, voted: voted, vote_url: vote_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), votes_count: @idea.votes_counter.value, voters_path: voters_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
           </div>
           <script type="text/javascript">
              ReactRailsUJS.mountComponents();
@@ -26,8 +27,8 @@
         <div class="popover-card-stats">
         <ul class="stastics-list">
           <li>
-            Followers
-            <span><i class="fa fa-users"></i> <%= @idea.followers_counter.value %></span>
+            Votes
+            <span><i class="fa fa-users"></i> <%= @idea.votes_counter.value %></span>
           </li>
           <li>
             Raised

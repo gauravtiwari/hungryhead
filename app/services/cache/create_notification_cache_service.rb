@@ -51,7 +51,7 @@ class CreateNotificationCacheService
   #Get followers for users and ideas
   def followers
     if @activity.recipient_type == "Idea"
-      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
+      ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [recipient_user.id.to_s]
     else
       ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end

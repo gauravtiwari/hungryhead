@@ -48,10 +48,10 @@ class UpdateNotificationCacheService
     end
   end
 
-  #Get user and idea followers to send notifications
+  #Get user and idea votes to send notifications
   def followers
     if @activity.recipient_type == "Idea"
-      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
+      ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [recipient_user.id.to_s]
     else
       ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end

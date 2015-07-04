@@ -21,22 +21,6 @@
             <%= react_component('MainContent', {data: sections}) %>
           <% end %>
         </div>
-        <% if !policy(@idea).collaborator? %>
-        <div class="idea-action-links m-t-20">
-          <div class="panel box-shadow">
-            <div class="panel-heading text-center">
-              <div class="panel-title">
-                To receive updates from <%= @idea.name %>, please consider following:
-              </div>
-            </div>
-            <div class="panel-body">
-              <div class="col-md-2 auto-margin">
-                <%= react_component('Follow',{:followed => followed?(@idea)}) %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
       </div>
     </div>
   </div>

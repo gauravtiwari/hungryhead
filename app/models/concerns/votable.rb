@@ -10,7 +10,7 @@ module Votable
     voters_ids.values.include?(user.id.to_s)
   end
 
-  def find_voters
+  def get_voters
     User.fetch_multi(voters_ids.values)
   end
 
