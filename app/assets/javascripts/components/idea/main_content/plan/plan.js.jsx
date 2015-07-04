@@ -73,7 +73,7 @@ var Plan = React.createClass({
       return (
         <div className="panel box-shadow no-border">
           {error}
-          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
             <div className="panel-title b-b b-grey p-b-5 text-master">Summarize your idea</div>
             <div className="panel-controls p-r-60">
             <ul>

@@ -52,15 +52,12 @@ var Rate = React.createClass({
     } else {
       return (
         <div className="inline m-b-10 pull-right">
-          <span>Is this feedback?</span> <a onClick={this.handleClick.bind(this, "helpful")}>
+          <span>Was this feedback?</span> <a onClick={this.handleClick.bind(this, "helpful")}>
             <span className="b-b b-grey p-b-5 text-green">Helpful</span>
-
           </a> or <a  onClick={this.handleClick.bind(this, "unhelpful")}>
            <span className="b-b b-grey p-b-5 text-warning-dark"> Not helpful</span>
-
          </a>  or <a onClick={this.handleClick.bind(this, "irrelevant")}>
            <span className="b-b b-grey p-b-5 text-danger">Irrelevant</span>
-
          </a>
         </div>
       );
