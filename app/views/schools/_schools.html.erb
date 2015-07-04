@@ -1,0 +1,25 @@
+<% cache(cache_key_for_schools) do %>
+  <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
+    <div class="school-list">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" class="no-padding"><%= @schools.count %> Results</th>
+              <th>Receive updates</th>
+              <th class="text-center">Stats</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @schools.each do |school| %>
+              <%= render partial: 'schools/school', locals: {school: school} %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="paging-container p-r-15">
+          <%= will_paginate(@schools, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+      </div>
+    </div>
+  </div>
+<% end %>
