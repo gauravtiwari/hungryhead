@@ -17,10 +17,7 @@ class PublishIdeaJob < ActiveJob::Base
 
       #Rebuild counters for user
       @user.ideas_counter.reset
-      @user.ideas_counter.incr(Idea.for_user(@user).size)
-
-      #Cache idea id into redis
-      @user.ideas_ids.add(@idea.id)
+      @user.ideas_counter.incr(@user.get_published_ideas.length)
 
       #Cache  ideas into a list/sorted_Set for user and school
       @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)

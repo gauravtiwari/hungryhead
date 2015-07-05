@@ -25,6 +25,7 @@ class Idea < ActiveRecord::Base
   after_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_save :load_into_soulmate, if: :visible?
+  after_commit :cache_id_to_redis, on: :create
 
   acts_as_taggable_on :markets, :locations, :technologies
 
@@ -192,6 +193,11 @@ class Idea < ActiveRecord::Base
 
   private
 
+  def cache_id_to_redis
+    #Cache idea id into redis
+    user.ideas_ids.add(id)
+  end
+
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
   end
@@ -225,6 +231,9 @@ class Idea < ActiveRecord::Base
 
     #Add to school
     school.published_ideas.delete(id)
+
+    #delete cached id from redis
+    user.ideas_ids.delete(id)
 
     #Remove self from sorted set
     Idea.latest.delete(id)

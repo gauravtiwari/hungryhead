@@ -161,8 +161,8 @@ class User < ActiveRecord::Base
 
   def after_password_reset; end
 
-  def published_ideas
-    fetch_ideas.select{|idea| idea.status == "published"}
+  def get_published_ideas
+    get_user_ideas.select{|idea| idea.status == "published"}
   end
 
   def get_user_ideas

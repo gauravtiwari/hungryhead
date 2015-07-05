@@ -1,7 +1,7 @@
 class TeamInvitesController < ApplicationController
 
   before_action :set_team_invite, only: [:destroy, :update, :show]
-  before_action :set_props, only: [:create, :update, :show]
+  before_action :set_props, only: [:create, :update, :show, :destroy]
   before_action :authenticate_user!
 
   #Pundit authorization
@@ -89,11 +89,29 @@ class TeamInvitesController < ApplicationController
   end
 
   def destroy
+    #delete cached ids
+    @idea.team_ids.delete(@team_invite.invited_id.to_s)
+    @idea.team_invites_ids.delete(@team_invite.invited_id.to_s)
+
+    #Save idea
+    @idea.save
+
+    #UnVote idea
+    @team_invite.invited.votes.destroy!(votable: @team_invite.idea)
+
+    #Decrement idea counter
+    @team_invite.invited.idea_counter.reset
+    @team_invite.invited.idea_counter.incr(Idea.for_user(@team_invite.invited).size)
+
+    #cache idea id into redis set
+    @team_invite.invited.ideas_ids.delete(@idea.id)
+
     @team_invite.destroy
     respond_to do |format|
       format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
   private
