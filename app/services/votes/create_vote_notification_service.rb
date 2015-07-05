@@ -17,10 +17,6 @@ class CreateVoteNotificationService
         unread: true
       )
       cache(@activity)
-
-      #Increment parent score
-      Activity.popular.increment(find_parent_activity)
-
     else
       return
     end
@@ -32,10 +28,14 @@ class CreateVoteNotificationService
 
   def find_parent_activity
     if @vote.votable_type == "Comment"
-      Activity.where(trackable: @votable.commentable).first.uuid
+      @activity = Activity.where(trackable: @votable.commentable).first
     else
-      Activity.where(trackable: @votable).first.uuid
+      @activity = Activity.where(trackable: @votable).first
     end
+    #Increment parent score
+    Activity.popular.increment(@activity.id)
+    #return uuid
+    @activity.uuid
   end
 
 end

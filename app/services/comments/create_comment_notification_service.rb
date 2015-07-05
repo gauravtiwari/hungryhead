@@ -20,9 +20,6 @@ class CreateCommentNotificationService
       #Cache notification to user/followers feed
       CreateNotificationCacheService.new(@activity).create
 
-      #Increment parent score
-      Activity.popular.increment(find_parent_activity)
-
       #Call mention service if any mentionable object is present?
       if @comment.body.scan(/@\w+/).present?
         CreateMentionService.new(@comment).mention
@@ -34,7 +31,11 @@ class CreateCommentNotificationService
 	end
 
   def find_parent_activity
-    Activity.where(trackable: @commentable).first.uuid
+    #Find parent activity
+    @activity = Activity.where(trackable: @commentable).first
+    #Increment parent score
+    Activity.popular.increment(@activity.id)
+    @activity.uuid
   end
 
 end

@@ -1446,6 +1446,8 @@ CREATE TABLE users (
     name character varying DEFAULT ''::character varying NOT NULL,
     username character varying DEFAULT ''::character varying NOT NULL,
     avatar character varying DEFAULT ''::character varying,
+    feed_preferences integer DEFAULT 1,
+    "integer" integer DEFAULT 1,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
     mini_bio character varying DEFAULT ''::character varying,
@@ -1491,8 +1493,7 @@ CREATE TABLE users (
     invitations_count integer DEFAULT 0,
     sash_id integer,
     level integer DEFAULT 0,
-    uid character varying,
-    feed_preferences integer
+    uid character varying
 );
 
 
@@ -3054,13 +3055,6 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_feed_preferences; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_feed_preferences ON users USING btree (feed_preferences);
-
-
---
 -- Name: index_users_on_invitation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3441,6 +3435,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 
 INSERT INTO schema_migrations (version) VALUES ('20150627164750');
-
-INSERT INTO schema_migrations (version) VALUES ('20150705142057');
 
