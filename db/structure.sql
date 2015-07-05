@@ -1491,7 +1491,8 @@ CREATE TABLE users (
     invitations_count integer DEFAULT 0,
     sash_id integer,
     level integer DEFAULT 0,
-    uid character varying
+    uid character varying,
+    feed_preferences integer
 );
 
 
@@ -3053,6 +3054,13 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_feed_preferences; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_feed_preferences ON users USING btree (feed_preferences);
+
+
+--
 -- Name: index_users_on_invitation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3433,4 +3441,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 
 INSERT INTO schema_migrations (version) VALUES ('20150627164750');
+
+INSERT INTO schema_migrations (version) VALUES ('20150705142057');
 

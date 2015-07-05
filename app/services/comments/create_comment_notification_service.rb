@@ -20,6 +20,9 @@ class CreateCommentNotificationService
       #Cache notification to user/followers feed
       CreateNotificationCacheService.new(@activity).create
 
+      #Increment parent score
+      Activity.popular.increment(find_parent_activity)
+
       #Call mention service if any mentionable object is present?
       if @comment.body.scan(/@\w+/).present?
         CreateMentionService.new(@comment).mention

@@ -5,10 +5,7 @@ class ActivitiesController < ApplicationController
   layout "home"
 
   def index
-    @activities = Activity.where(published: true)
-        .includes([:trackable, :user])
-        .order(id: :desc)
-        .paginate(:page => params[:page], :per_page => 10)
+    @activities = Activity.send(current_user.feed_preferences).paginate(:page => params[:page], :per_page => 10)
     @next_page_url = root_path(page: @activities.next_page)
   end
 

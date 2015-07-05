@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
-  after_save :rebuild_notification_cache, if: :rebuild_cache?
+  after_save :rebuild_notification_cache, if: :cacheable_changed?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
@@ -117,6 +117,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
+  enum feed_preferences: { latest_feed: 0, popular_feed: 1 }
   enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, faculty: 4, alumni: 5 }
 
   #Accessor methods for JSONB datatypes

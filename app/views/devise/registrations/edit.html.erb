@@ -20,7 +20,7 @@
                         <h3 class="semi-bold m-b-20  b-b b-grey inline">
                             Change Password
                         </h3>
-                       <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource),  method: :patch) do |f| %>
+                       <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource),  method: :patch, remote: true) do |f| %>
                          <%= f.error_notification %>
 
                          <div class="form-group">
@@ -49,7 +49,7 @@
                   Notification Preferences
                 </h3>
 
-                <%= simple_form_for(resource, as: :user, url: user_path(resource),  method: :patch) do |f| %>
+                <%= simple_form_for(resource, as: :user, url: user_path(resource),  method: :patch, remote: true) do |f| %>
 
                  <div class="checkbox check-success">
                    <%= f.input_field :idea_notifications, as: :boolean, id: 'idea_notifications' %>
@@ -75,6 +75,13 @@
                    <%= f.input_field :weekly_mail, as: :boolean, id: 'weekly_mail' %>
                    <label for="weekly_mail">Weekly newsletter</label>
                  </div>
+                <div class="form-group">
+                  <label for="feed">Home Page feed preferences</label>
+                  <select class="cs-select cs-skin-slide" name="user[feed_preferences]" data-init-plugin="cs-select">
+                      <option value="latest_feed">Latest feed</option>
+                      <option value="popular_feed">Popular feed</option>
+                  </select>
+                </div>
 
                   <div class="form-actions p-t-20">
                     <%= link_to "Back", :back, class: 'b-b b-danger text-master p-b-5' %>

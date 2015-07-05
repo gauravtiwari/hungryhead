@@ -17,6 +17,10 @@ class CreateVoteNotificationService
         unread: true
       )
       cache(@activity)
+
+      #Increment parent score
+      Activity.popular.increment(find_parent_activity)
+
     else
       return
     end

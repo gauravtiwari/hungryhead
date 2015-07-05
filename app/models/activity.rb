@@ -1,13 +1,28 @@
 class Activity < ActiveRecord::Base
 
   include IdentityCache
+  #redis objects
+  include Redis::Objects
+
   include Renderable
   include Feedable
-  after_commit :delete_older_notifications, on: :create
+
+  after_commit :cache_activity_to_redis, :delete_older_notifications, on: :create
   cache_index :uuid
+
+  #Redis cache ids
+  sorted_set :popular, global: true
 
   def cache_key
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+  end
+
+  def self.latest_feed
+    where(published: true).includes([:trackable, :user]).order(id: :desc)
+  end
+
+  def self.popular_feed
+    where(published: true).fetch_multi(Activity.popular.revrange(0, -1))
   end
 
   def trackable_timestamp
@@ -19,6 +34,14 @@ class Activity < ActiveRecord::Base
   end
 
   private
+
+  def cache_activity_to_redis
+    Activity.popular.add(id, score_key)
+  end
+
+  def score_key
+    created_at.to_i + id
+  end
 
   def delete_older_notifications
     refresh_friends_notifications
