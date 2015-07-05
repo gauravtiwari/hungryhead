@@ -48,6 +48,7 @@ class TeamInvitesController < ApplicationController
     authorize @team_invite
     if current_user == @team_invite.invited && @team_invite.pending?
       @team_invite = UpdateTeamInviteService.new(@team_invite).join_team_invite
+
       if @team_invite.save
         @team_invite.pending = false
         @team_invite.save
@@ -59,6 +60,13 @@ class TeamInvitesController < ApplicationController
 
         #Follow idea
         current_user.votes.create!(votable: @idea) if Vote.votes_for(current_user, @idea).empty?
+
+        #Increment idea counter
+        current_user.idea_counter.reset
+        current_user.idea_counter.incr(Idea.for_user(current_user).size)
+
+        #cache idea id into redis set
+        current_user.ideas_ids.add(@idea.id)
 
         #Save @idea and redirect
         @idea.save!

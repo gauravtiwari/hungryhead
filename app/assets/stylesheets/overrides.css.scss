@@ -201,10 +201,13 @@ table tr:last-child {
 .cup-bg {
   background: #fff image-url('can4.png') center center no-repeat;
 }
-.badge {
-  padding: 7px;
+.game_badge {
+  padding: 5px;
   text-decoration: none;
   white-space: nowrap;
+  text-shadow: none;
+  font-family: wf_segoe-ui_light, wf_segoe-ui_normal, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
   font-size: 12px;
   background-color: #333;
   border: 1px solid #333;
@@ -212,17 +215,17 @@ table tr:last-child {
   border-radius: 4px;
   margin-right: 5px;
 }
-.badge .badge-type {
+.game_badge .badge-type {
   margin-right: 5px;
 }
-.badge .badge-type.bronze {
+.game_badge .badge-type.bronze {
   color: #cd7f32;
 }
-.badge .badge-type.silver {
+.game_badge .badge-type.silver {
   color: #C0C0C0;
 }
 
-.badge .badge-type.gold {
+.game_badge .badge-type.gold {
   color: #FFD700;
 }
 

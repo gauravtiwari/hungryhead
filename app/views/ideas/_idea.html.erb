@@ -20,6 +20,17 @@
            <%= idea.user.first_name %>
       <% end %>
     </span>
+    <% if idea.founder?(current_user) %>
+      <span class="badge badge-green">
+        founder
+      </span>
+    <% end %>
+
+    <% if idea.team_member?(current_user) %>
+      <span class="badge badge-inverse">
+        team
+      </span>
+    <% end %>
 
     <p class="fs-14 m-t-5">
     <% if idea.cached_location_list.present? %>

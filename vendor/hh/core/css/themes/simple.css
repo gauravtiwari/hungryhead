@@ -3359,6 +3359,10 @@ Misc buttons
   background-color: #47b5ab;
   color: #ffffff;
 }
+.badge-green {
+  background-color: #00b27f;
+  color: #ffffff;
+}
 .badge-warning {
   background-color: #f9dc6b;
   color: #ffffff;

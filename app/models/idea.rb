@@ -155,6 +155,10 @@ class Idea < ActiveRecord::Base
     founder?(user) || team_ids.include?(user.id.to_s)
   end
 
+  def team_member?(user)
+    team_ids.include?(user.id.to_s)
+  end
+
   def invited?(user)
     team_invites_ids.include?(user.id.to_s)
   end

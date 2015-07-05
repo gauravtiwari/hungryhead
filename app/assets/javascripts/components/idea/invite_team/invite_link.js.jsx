@@ -10,9 +10,13 @@ var InviteLink = React.createClass({
 	loadInvitePopup: function() {
       $('body').append($('<div>', {class: 'invite_form_modal', id: 'invite_form_modal'}));
       React.render(
-		  <InviteTeam key={Math.random()} path={this.state.path} />,
+		    <InviteTeam key={Math.random()} path={this.state.path} />,
 		  document.getElementById('invite_form_modal')
-		);
+		  );
+      $('body').on('focus', 'textarea', function(event) {
+        event.preventDefault();
+        $(this).autosize();
+      });
       this.setState({loading: false});
       $('#inviteTeamPopup').modal('show');
       ReactRailsUJS.mountComponents();
