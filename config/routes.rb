@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   #Pages routes
   get '/learn', to: 'pages#learn', as: :learn
+  get '/why', to: 'pages#why', as: :why
   get '/hello', to: 'pages#hello', as: :hello
   get '/rules', to: 'pages#rules', as: :rules
   get '/support', to: 'pages#support', as: :support

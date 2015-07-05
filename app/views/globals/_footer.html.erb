@@ -8,6 +8,11 @@
         <span class="hint-text">All rights reserved.</span>
       </p>
       <span class="sm-block pull-right sm-pull-reset">
+        <li class="p-r-15 fs-14 inline font-heading">
+          <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
+            <span >Story</span>
+          <% end %>
+        </li>
         <a href="#" class="m-l-10 m-r-10">Terms of use</a> |
         <a href="#" class="m-l-10">Privacy Policy</a> |
         <a href="#" class="m-l-10">Rules</a>

@@ -18,6 +18,10 @@ class PagesController < ApplicationController
   def terms
   end
 
+  #Why page
+  def why
+  end
+
   #Privacy policy page
   def privacy
   end

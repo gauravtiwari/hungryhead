@@ -5,16 +5,21 @@
         <article class="section-list">
           <ul>
             <li>
-              <%= link_to('Our rules', rules_path) %>
+              <%= link_to('Our rules', rules_path, class: "#{current_class?(story_path)}") %>
             </li>
             <li>
-              <%= link_to('Support', support_path) %>
+              <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
+                <span>Story</span>
+              <% end %>
             </li>
             <li>
-              <%= link_to('Cookies Policy', cookies_path) %>
+              <%= link_to('Support', support_path, class: "#{current_class?(story_path)}") %>
             </li>
             <li>
-              <%= link_to('Privacy Policy', privacy_path) %>
+              <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(story_path)}") %>
+            </li>
+            <li>
+              <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(story_path)}") %>
             </li>
           </ul>
         </article>
