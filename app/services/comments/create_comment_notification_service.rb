@@ -35,7 +35,7 @@ class CreateCommentNotificationService
     #Find parent activity
     @activity = Activity.where(trackable: @commentable).first
     #Increment parent score
-    Activity.popular.increment(@activity.id)
+    Activity.popular.incr(@activity.id, 5)
     @activity.uuid
   end
 

@@ -52,24 +52,26 @@ class TeamInvitesController < ApplicationController
       if @team_invite.save
         @team_invite.pending = false
         @team_invite.save
-        #Send mails to recipients
-        InviteMailer.joined_team(@team_invite).deliver_later
         #Update cached ids
-        @idea.team_ids << @team_invite.invited_id
+        @idea.team_ids << @team_invite.invited_id unless @idea.in_team?(current_user)
         @idea.team_invites_ids.delete(@team_invite.invited_id.to_s)
 
         #Follow idea
         current_user.votes.create!(votable: @idea) if Vote.votes_for(current_user, @idea).empty?
 
         #Increment idea counter
-        current_user.idea_counter.reset
-        current_user.idea_counter.incr(Idea.for_user(current_user).size)
+        current_user.ideas_counter.reset
+        current_user.ideas_counter.incr(Idea.for_user(current_user).size)
 
         #cache idea id into redis set
         current_user.ideas_ids.add(@idea.id)
 
         #Save @idea and redirect
         @idea.save!
+
+        #Send mails to recipients
+        InviteMailer.joined_team(@team_invite).deliver_later
+
         redirect_to idea_path(@idea), notice: "You have successfully joined #{@idea.name} team"
       end
     else
@@ -84,7 +86,7 @@ class TeamInvitesController < ApplicationController
     @team_invite = UpdateTeamInviteService.new(@team_invite).update_team_invite
     if @team_invite.save
       InviteMailer.invite_team(@team_invite).deliver_later
-      render json: {success: "Successfully invited #{@team_invite.invited.name}"}, status: :created
+      render json: {success: "Successfully reinvited #{@team_invite.invited.name}"}, status: :created
     end
   end
 
@@ -100,8 +102,8 @@ class TeamInvitesController < ApplicationController
     @team_invite.invited.votes.destroy!(votable: @team_invite.idea)
 
     #Decrement idea counter
-    @team_invite.invited.idea_counter.reset
-    @team_invite.invited.idea_counter.incr(Idea.for_user(@team_invite.invited).size)
+    @team_invite.invited.ideas_counter.reset
+    @team_invite.invited.ideas_counter.incr(Idea.for_user(@team_invite.invited).size)
 
     #cache idea id into redis set
     @team_invite.invited.ideas_ids.delete(@idea.id)

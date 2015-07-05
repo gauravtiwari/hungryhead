@@ -22,7 +22,7 @@ class Activity < ActiveRecord::Base
   end
 
   def self.popular_stories
-    where(published: true).fetch_multi(Activity.popular.revrange(0, -1))
+    includes([:trackable, :user]).fetch_multi(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp
@@ -36,11 +36,7 @@ class Activity < ActiveRecord::Base
   private
 
   def cache_activity_to_redis
-    Activity.popular.add(id, score_key)
-  end
-
-  def score_key
-    created_at.to_i + id
+    Activity.popular.add(id, id)
   end
 
   def delete_older_notifications

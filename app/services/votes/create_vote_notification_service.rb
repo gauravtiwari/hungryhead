@@ -33,7 +33,7 @@ class CreateVoteNotificationService
       @activity = Activity.where(trackable: @votable).first
     end
     #Increment parent score
-    Activity.popular.increment(@activity.id)
+    Activity.popular.incr(@activity.id, 5)
     #return uuid
     @activity.uuid
   end

@@ -80,7 +80,7 @@ var ValueProposition = React.createClass({
         <div className="panel box-shadow no-border">
           {error}
           <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
-            <div className="panel-title b-b b-grey p-b-5 text-master">List your values</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  List your values</div>
             <div className="panel-controls p-r-60">
             <ul>
               <li>
@@ -102,7 +102,7 @@ var ValueProposition = React.createClass({
        return (
      <div className="panel bg-white box-shadow no-border">
         <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
-          <div className="panel-title b-b b-grey p-b-5 text-master">Values</div>
+          <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  Values</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
