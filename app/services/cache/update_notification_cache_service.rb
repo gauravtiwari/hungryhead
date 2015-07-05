@@ -52,6 +52,8 @@ class UpdateNotificationCacheService
   def followers
     if @activity.recipient_type == "Idea"
       ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [recipient_user.id.to_s]
+    elsif @activity.recipient_type == "School"
+      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
     else
       ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end
@@ -159,6 +161,11 @@ class UpdateNotificationCacheService
       recipient_user_name =   target.name
       recipient_name = target.name
       recipient_url = profile_path(target)
+    elsif @activity.recipient_type == "School"
+      recipient_user_id = target.user.id
+      recipient_url = profile_path(target)
+      recipient_user_name =   target.user.name
+      recipient_name = target.name
     else
       recipient_user_id =  target.user.id
       recipient_user_name = target.user.name
