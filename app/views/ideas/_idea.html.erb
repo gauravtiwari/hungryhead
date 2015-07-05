@@ -11,9 +11,16 @@
      </div>
   </td>
   <td style="max-width: 350px;" class="idea-info font-opensans no-border">
-    <h5 class="no-margin fs-16 bold">
+    <h5 class="no-margin fs-16 bold inline">
       <%= link_to(idea.name, idea_path(idea)) %>
     </h5>
+    <span class="inline small-text m-l-10 semi-bold">
+      Pitched by :
+      <%= link_to(profile_path(idea.user)) do %>
+           <%= idea.user.first_name %>
+      <% end %>
+    </span>
+
     <p class="fs-14 m-t-5">
     <% if idea.cached_location_list.present? %>
       <span>

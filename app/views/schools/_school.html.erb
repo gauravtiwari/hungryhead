@@ -34,14 +34,8 @@
   </td>
   <td style="display:table-cell; vertical-align:middle;" class="no-border">
     <ul class="stastics-list">
-      <li class="clearfix">
-        Followers
-        <span class="text-master">
-          <%= number_to_human(school.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-        </span>
-      </li>
       <li class="clearfix pull-reset">
-        Students
+        People
         <span class="text-master">
           <%= number_to_human(school.people_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
         </span>

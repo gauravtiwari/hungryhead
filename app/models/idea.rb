@@ -24,7 +24,7 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   after_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_save :load_into_soulmate
+  after_save :load_into_soulmate, if: :visible?
 
   acts_as_taggable_on :markets, :locations, :technologies
 

@@ -6,7 +6,7 @@
     </div>
         <% if @user.fetch_ideas.size > 0 %>
             <% @user.fetch_ideas.take(3).each do |idea| %>
-                <div class="widget-16-header p-t-10 p-l-20 p-r-20 p-b-20">
+                <div class="widget-16-header p-l-20 p-r-20 p-b-20">
                     <div class="pull-left">
                         <h5 class="all-caps bold small pull-left no-margin  p-b-5 relative">
                             <%= link_to(idea.name, idea_path(idea), class: "text-black") %>
@@ -23,7 +23,7 @@
             <% end %>
         <% else %>
         <% if @user == current_user %>
-            <div class="text-center fs-16 p-b-20 p-t-10">
+            <div class="text-center fs-16 p-b-40 p-t-20">
                 <%= link_to('Click', new_idea_path(:intro), class: ' b-b text-master b-grey p-b-5') %> to publish a new idea
             </div>
        <% else %>

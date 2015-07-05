@@ -65,7 +65,7 @@ var LatestUserActivities = React.createClass({
             </div>
           </div>
           <div className="panel-body no-margin no-padding p-b-15">
-             <ul className="p-l-20 p-r-20 no-style no-padding no-margin">
+             <ul className="feed-list p-l-20 p-r-20 no-style no-padding no-margin">
                {content}
              </ul>
           </div>

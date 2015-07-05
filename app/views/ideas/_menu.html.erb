@@ -4,7 +4,7 @@
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
           <li class="inline b-r b-grey b-dashed p-r-15">
             <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
-            <%= link_to(profile_path(@idea.fetch_user), :"data-popover-href" => "#{profile_card_path(@idea.fetch_user)}", class: 'load-card') do %>
+            <%= link_to(profile_path(@idea.fetch_user), :"data-popover-href" => "#{profile_card_path(@idea.fetch_user)}", class: 'load-card inline') do %>
             <% if @idea.fetch_user.avatar.present? %>
               <%= image_tag(@idea.fetch_user.avatar.url(:avatar), :"data-src" => "#{@idea.fetch_user.avatar.url(:avatar)}", :"data-src-retina" => "#{@idea.fetch_user.avatar.url(:square)}", width: "32", height: "32") %>
               <% else %>

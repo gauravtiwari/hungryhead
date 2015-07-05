@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_cache?
-     cacheable_changed? && published?
+     published?
   end
 
   def has_notifications?

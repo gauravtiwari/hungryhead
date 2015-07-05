@@ -12,11 +12,17 @@
      </div>
   </td>
   <td style="max-width: 350px;" class="people-info font-opensans no-border">
-    <h5 class="no-margin fs-16 bold"><%= link_to(user.name, profile_path(user)) %>
-    <% if user.school.logo.present? %>
-     <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
-    <% end %>
+    <h5 class="no-margin fs-16 bold inline">
+      <%= link_to(user.name, profile_path(user)) %>
     </h5>
+    <% if user.school.logo.present? %>
+     <%= link_to(profile_path(user.school)) do %>
+      <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10 inline') %>
+     <% end %>
+    <% end %>
+    <span class="inline small-text m-l-10">
+      <%= user.role %>
+    </span>
     <p class="fs-14 m-t-5">
       <%= user.mini_bio %>
       <% if user.cached_location_list.present? %>
