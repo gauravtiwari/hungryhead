@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum feed_preferences: { latest_feed: 0, popular_feed: 1 }
+  enum feed_preferences: { latest_stories: 0, popular_stories: 1 }
   enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, faculty: 4, alumni: 5 }
 
   #Accessor methods for JSONB datatypes

@@ -17,11 +17,11 @@ class Activity < ActiveRecord::Base
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
 
-  def self.latest_feed
+  def self.latest_stories
     where(published: true).includes([:trackable, :user]).order(id: :desc)
   end
 
-  def self.popular_feed
+  def self.popular_stories
     where(published: true).fetch_multi(Activity.popular.revrange(0, -1))
   end
 

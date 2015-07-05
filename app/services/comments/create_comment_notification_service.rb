@@ -24,6 +24,7 @@ class CreateCommentNotificationService
       if @comment.body.scan(/@\w+/).present?
         CreateMentionService.new(@comment).mention
       end
+
     else
       return
     end
