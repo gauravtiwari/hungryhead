@@ -134,7 +134,7 @@ var CommentBox = React.createClass({
       'fa fa-spinner fa-spin': this.state.comment_loading
     });
     if(this.state.comments_path && !this.state.show_comment_bar) {
-    var pagination =  <div className="pagination-box text-center show padding-5">
+    var pagination =  <div className="pagination-box text-center show padding-10 bg-complete-lighter">
               <a onClick={this.loadMoreComments} className="pointer"><i className="ion-refresh"></i> {this.state.text}</a>
             </div>;
     } else {

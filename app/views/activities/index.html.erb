@@ -8,7 +8,7 @@
       <%= render partial: 'activities/activities' %>
     <% end %>
     <% if @activities.next_page %>
-      <div class="pagination-box text-center">
+      <div class="pagination-box text-center padding-10 bg-complete-lighter m-t-20 clearfix box-shadow">
         <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
       </div>
     <% end %>
