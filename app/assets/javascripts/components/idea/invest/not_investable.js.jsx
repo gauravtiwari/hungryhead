@@ -3,7 +3,7 @@
 var NotInvestable = React.createClass({
 
   calculateScore: function() {
-    var remaining = this.props.idea.score/10000
+    var remaining = this.props.idea.score/1000
     return remaining * 100
   },
 
