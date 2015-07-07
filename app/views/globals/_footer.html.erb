@@ -1,23 +1,31 @@
 <% cache(["footer_menu"]) do %>
   <!-- START FOOTER -->
-  <div class="footer clearfix bg-white bg-shadow">
-    <div class="copyright container sm-text-center text-center no-border">
-      <p class="small no-margin pull-left sm-pull-reset">
-        <span class="hint-text">Copyright © 2015</span>
-        <span class="font-montserrat">HUNGRYHEAD</span>.
-        <span class="hint-text">All rights reserved.</span>
-      </p>
-      <span class="sm-block pull-right sm-pull-reset">
-        <li class="p-r-15 fs-14 inline font-heading">
-          <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
-            <span >Story</span>
-          <% end %>
-        </li>
-        <a href="#" class="m-l-10 m-r-10">Terms of use</a> |
-        <a href="#" class="m-l-10">Privacy Policy</a> |
-        <a href="#" class="m-l-10">Rules</a>
-      </span>
-    </div>
+  <div class="small-footer p-t-20 bg-light-grey">
+  <div class="container">
+    <div class="top-footer clearfix">
+      <article class="page-list">
+        <ul class="no-margin no-padding">
+          <li>
+            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)}") %>
+          </li>
+          <li>
+            <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
+              <span>Story</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to('Support', support_path, class: "#{current_class?(support_path)}") %>
+          </li>
+          <li>
+            <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)}") %>
+          </li>
+          <li>
+            <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)}") %>
+          </li>
+        </ul>
+      </article>
+    <p class="copyright-text text-master fs-13">© 2015 hungryhead.co</p>
+  </div>
   </div>
   <!-- END FOOTER -->
 <% end %>

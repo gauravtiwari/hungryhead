@@ -1,6 +1,6 @@
 <%= cache(['beta', 'learn_more', 'v1']) do %>
-<div class="learn-wrapper bg-white">
-  <div class="learn" data-pages="social">
+<div class="learn-wrapper bg-white p-b-60">
+  <div class="learn">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
       <div class="learn-photo">
         <div class="container vmiddle">
@@ -9,7 +9,7 @@
                   <div class="hero-section inner text-center">
                       <h1 class="text-white">Learn about the platform</h1>
                       <p class="text-white fs-16">
-                        What is hungryhead and what makes it.
+                        Things to know about hungryhead
                       </p>
                       <div class="btn-box m-t-20">
                         <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
@@ -24,91 +24,65 @@
 
   <div class="what-section bg-white">
     <div class="wrapper-small">
-      <div class="col-md-7 auto-margin">
-        <div class="p-b-30">
-          <h2 class="normal">What is Hungryhead? </h2>
-          <div class="divider b-b b-grey b-md b-small"></div>
-        </div>
+      <div class="col-md-6 auto-margin">
         <div>
-          <h3 class="m-t-30 semi-bold">1. Hungryhead is a new way to start entrepreneurship. </h3>
-            <p class="fs-16">
-             We realised that there can be a completely different approach towards entrepreneurship, approach where both learning and building happens together.
+          <h3 class="semi-bold">Hungryhead is a new way to start entrepreneurship. </h3>
+            <p class="fs-16 text-master">
+             We discovered that there can be a completely different approach towards entrepreneurship, approach where learning about the idea, validation and building happens together.
             </p>
-            <p class="fs-16">
-             The solution we have created is an engaging platform that simulates the real world of idea building into an online virtual environment. We bring together like-minded people for collaboration and validation. The simulation occurs at a number of levels,
+            <p class="fs-16 text-master">
+             Hungryhead a collaborative platform that simulates the real world of idea building into an online virtual environment.
             </p>
+            <h5 class="bold no-margin">The simulation occurs at a number of levels :</h5>
+            <div class="divider b-b b-green b-small m-t-10 m-b-20"></div>
             <ul class="fs-16">
-              <li class="m-b-10"> Ideas can receive feedbacks and votes</li>
-              <li class="m-b-10"> Ideas can raise virtual investments</li>
-              <li class="m-b-10"> Team building</li>
-              <li class="m-b-10">Validate and build your idea</li>
+              <li class="m-b-10 text-master"> Ideas can receive feedbacks, votes and virtual investments</li>
+              <li class="m-b-10 text-master"> Team building</li>
+              <li class="m-b-10 text-master">Validate and build your idea</li>
+              <li class="m-b-10 text-master">Supported by Gamification</li>
             </ul>
         </div>
 
         <div>
-          <h3 class="m-t-30 semi-bold">2. Exclusive student driven community</h3>
-          <p class="fs-16">
+          <h3 class="m-t-30 semi-bold">Exclusive student driven community</h3>
+          <p class="fs-16 text-master">
             Hungryhead is open for students studying in colleges and universities.
           </p>
-          <p class="fs-16">If you are an alumni or someone interested in contributing your expertise, you can join hungryhead by requesting an invite, please, <%= link_to("click here", request_invite_path) %>.</p>
+          <p class="fs-16 text-master">If you are an alumni or someone interested in contributing your expertise, you can join hungryhead by requesting an invite, please, <%= link_to("click here", request_invite_path) %>.</p>
         </div>
 
         <div>
-          <h3 class="m-t-30 semi-bold">3. Baked collaboration.</h3>
-          <p class="fs-16">
+          <h3 class="m-t-30 semi-bold">Baked collaboration.</h3>
+          <p class="fs-16 text-master">
             Collaboration is an important aspect of entrepreneurship therefore, we have created a platform where collaboration takes the first seat so that everyone can clearly communicate their ideas.
           </p>
         </div>
 
         <div>
-          <h3 class="m-t-30 semi-bold">4. You own 100% of your idea.</h3>
-          <p class="fs-16">
+          <h3 class="m-t-30 semi-bold">You own 100% of your idea.</h3>
+          <p class="fs-16 text-master">
             We don't take any ownership in your idea.
           </p>
         </div>
 
         <div>
-          <h3 class="m-t-30 semi-bold">5. Idea privacy and sharing.</h3>
-          <p class="fs-16">
+          <h3 class="m-t-30 semi-bold">Idea privacy and sharing.</h3>
+          <p class="fs-16 text-master">
             You can keep your idea private, public or share with people you know. It's totally upto you however, we recommend sharing as much as possible if you really care to make your idea useful.
           </p>
         </div>
         <div>
-          <h3 class="m-t-30 semi-bold">6. Find people who can help you build your idea.</h3>
-          <p class="fs-16">
+          <h3 class="m-t-30 semi-bold">Find people who can help you build your idea.</h3>
+          <p class="fs-16 text-master">
             We have integrated tools and recommendation engine to find people who could help you take your idea to the next level.
           </p>
         </div>
-
+      <div class="divider b-b b-green b-small m-t-20 m-b-20"></div>
       </div>
     </div>
   </div>
 
 </div>
-
-<section id="mission" class="mission">
-    <div class="bg-overlay">
-        <div class="container">
-            <div class="wrapper-small">
-                <div class="row p-b-60">
-                    <div class="col-md-8 col-md-offset-2 text-center">
-                        <h3 class="global">
-                          <%= image_tag("badges/scholar.png", width: "100px", height: "100px") %>
-                        </h3>
-                        <h1 class="text-white bold">
-                          Our mission is to make entrepreneurship accessible and practical, globally.
-                        </h1>
-                        <div class="social_icons m-t-30">
-                          <i class="fa fa-twitter inline fs-40 text-white"></i>
-                          <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <div class="clearfix"></div>
 <%= render partial: 'globals/footer' %>
 <% end %>

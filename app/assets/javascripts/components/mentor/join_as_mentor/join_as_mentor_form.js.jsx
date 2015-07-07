@@ -51,7 +51,7 @@ var JoinAsMentorForm = React.createClass({
     } else {
       var content =  <form ref="form" noValidate="novalidate" className="new_invite_request sm-p-b-50 p-b-20" id="new_invite_request" acceptCharset="UTF-8" onSubmit={this.submitInviteRequest}>
         <div className="col-md-4 col-sm-6 auto-margin">
-           <h3 className="text-master m-b-20 p-b-5 b-b b-grey pull-left">Lets get started</h3>
+           <h3 className="text-black semi-bold m-b-20 p-b-5 b-b b-grey pull-left">Lets get started</h3>
        </div>
        <div className="join-mentor-form clearfix">
         <div className="col-sm-6 col-md-4 auto-margin">

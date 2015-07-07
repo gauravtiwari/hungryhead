@@ -21,34 +21,18 @@
 
   <section class="join-as-mentor-content">
     <%= cache(['beta', 'join_as_mentor_content', 'v1']) do %>
-      <div class="col-md-6 auto-margin p-t-40 p-b-40">
-        <h2 class="normal">Things to know about Hungryhead:</h2>
-        <div class="divider b-b b-grey b-md b-small"></div>
-
+      <div class="col-md-6 auto-margin wrapper-small">
+        <div class="divider b-b b-green b-md b-small"></div>
         <div>
-          <h3 class="m-t-30">1. Hungryhead is a new way to learn entrepreneurship. </h3>
-          <p>
+          <h3 class="m-t-30">Hungryhead is a new way to learn entrepreneurship. </h3>
+          <p class="text-master">
             We want to fundamentally change the way entrepreneurship has been persued.
-          </p>
-        </div>
-
-        <div>
-          <h3 class="m-t-30">2. Collaboration</h3>
-          <p>
-            Collaboration has great potential and it can solve many great problems however, it seems that we never fully utitlise this tool due to our particular approach to life. The world is most orderly collaboration, without this collaboration we would cease to exist.
-          </p>
-        </div>
-
-        <div>
-          <h3>3. It is a practical.</h3>
-          <p>
-            Without going into impractical
           </p>
         </div>
       </div>
     <% end %>
 
-    <div class="join-as-mentor-form p-t-40 bg-master-lighter m-t-20">
+    <div class="join-as-mentor-form wrapper-small bg-master-lightest">
       <div class="container">
           <%= react_component('JoinAsMentorForm') %>
       </div>

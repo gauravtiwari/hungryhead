@@ -28,26 +28,8 @@
   margin-top: 10px;
   background: image-url('title-contin.png');
 }
-.story-content-photo {
-  background-image: image-url('dream-big.jpg');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  width: 100%;
-  height: 40vh;
-  z-index: 2;
-  overflow: hidden;
-  -webkit-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
-}
 .join-photo:before,
-.learn-photo:before,
-.product-photo:before,
 .story-photo:before,
-.rules-photo:before,
-.cookies-photo:before,
-.story-content-photo:before,
-.brand-photo:before,
 .join-mentor-photo:before {
   background: rgba(51, 51, 51, 0.5);
   position: absolute;
@@ -55,12 +37,6 @@
   height: 100%;
   content: '';
   z-index: 1;
-}
-.story-content-photo:before {
-  background: rgba(51, 51, 51, 0.2);
-}
-.learn-photo:before {
-  background: rgba(51, 51, 51, 0.2);
 }
 .join-photo:before {
   background: rgba(51, 51, 51, 0.2);
@@ -90,7 +66,6 @@
   overflow: hidden;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
-  background-color: #10cfbd;
 }
 
 .learn-wrapper .learn .story-photo,
@@ -102,57 +77,30 @@
 }
 
 .rules-photo {
-  background: -webkit-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #5f2c82 10%, #49a09d 90%); /* W3C */
+  background: #5b98e0;
 }
 .brand-photo {
   background: #5b98e0;
 }
-.brand-photo:before {
-  background: rgba(51, 51, 51, 0.0);
-}
 .cookies-photo {
-  background: -webkit-linear-gradient(90deg, #83a4d4 10%, #b6fbff 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #83a4d4 10%, #b6fbff 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #83a4d4 10%, #b6fbff 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #83a4d4 10%, #b6fbff 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #83a4d4 10%, #b6fbff 90%); /* W3C */
+  background: #5b98e0;
 }
 .learn-photo {
-  background: -webkit-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* W3C */
+  background: #5b98e0;
 }
 .story-photo {
   background: image-url("find-your_way.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
   background-size: cover;
 }
-.product-photo:before {
-  background: rgba(51, 51, 51, 0.2);
-}
-.how-photo:before {
-  background: rgba(51, 51, 51, 0.2);
-}
 .how-photo {
-  background: -webkit-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #134E5E 10%, #71B280 90%); /* W3C */
+  background: rgba(91, 152, 224, 1);
 }
 .product-photo {
-  background: -webkit-linear-gradient(90deg, #70e1f5 10%, #ffd194 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #70e1f5 10%, #ffd194 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #70e1f5 10%, #ffd194 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #70e1f5 10%, #ffd194 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #70e1f5 10%, #ffd194 90%); /* W3C */
+  background: #5b98e0;
 }
 .join-mentor-photo {
   background: image-url("patterns/syudJMa.png");
@@ -174,11 +122,7 @@
   transform: translateY(-50%);
 }
 .cta {
-  background: -webkit-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #649173 10%, #DBD5A4 90%); /* W3C */
+  background: image-url('bg_pattern_3.jpg');
 }
 
 .mission {

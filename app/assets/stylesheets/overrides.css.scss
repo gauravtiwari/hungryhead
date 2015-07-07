@@ -18,6 +18,21 @@ body.show-collaboration {
 .trending-list li:first-child {
   padding-top: 10px;
 }
+.login-wrapper {
+  background: transparent;
+  height: 100%;
+}
+.login-wrapper > * {
+  height: 100%;
+}
+.login-wrapper .login-container {
+  width: 496px;
+  display: block;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  float: none;
+}
 .dropdown-menu.privacy {
   width: 200px;
   max-width: 250px;
@@ -324,6 +339,9 @@ input.error:-webkit-autofill {
 .text-green {
 	color: #00b27f!important;
 }
+.b-green {
+  border-color: #00b27f!important;
+}
 .main-button.invested {
   background: #ff9933;
   border: 1px solid #ff9933;
@@ -360,6 +378,10 @@ input.error:-webkit-autofill {
 }
 .b-solid {
   border-color: #4d86c9!important;
+}
+.b-sm {
+  width: 5%;
+  border: 2px solid;
 }
 .no-float {
   float: none!important;
@@ -444,6 +466,12 @@ input.error:-webkit-autofill {
 }
 .text-brand {
   color: #5b98e0!important;
+}
+.b-brand {
+  border-color: #5b98e0!important;
+}
+.bg-light-grey {
+  background: #e7e7e7;
 }
 .lighter-text {
   opacity: 0.8;

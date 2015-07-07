@@ -14,7 +14,12 @@
             <%= link_to(why_path, class: "#{current_class?(why_path)}") do %>
               <span class="text-white">Why</span>
             <% end %>
-          </li>
+         </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(learn_path, class: "#{current_class?(learn_path)}") do %>
+              <span class="text-white">What</span>
+            <% end %>
+         </li>
          <li class="p-r-15 fs-14 inline font-heading">
            <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
              <span class="text-white">The Product</span>
