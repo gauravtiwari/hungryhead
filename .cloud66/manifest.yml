@@ -3,7 +3,7 @@ production:
   postgresql:
     configuration:
       postgis: true
-      version: "9.4.3"
+      version: "9.4.4"
   rails:
     configuration:
       extra_packages:
