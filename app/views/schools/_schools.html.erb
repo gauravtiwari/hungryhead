@@ -1,4 +1,4 @@
-<% cache(cache_key_for_schools) do %>
+<% cache([cache_key_for_schools, params[:page]]) do %>
   <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
     <div class="school-list">
       <div class="col-md-12">
