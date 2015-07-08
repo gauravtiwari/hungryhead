@@ -5,29 +5,30 @@
     <div class=" pull-left sm-table">
       <div class="header-inner">
         <div class="brand inline">
-        <%= link_to(root_path) do %>
+        <%= link_to(root_path, class: 'inline m-t-15 text-white') do %>
           <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+          <span>beta</span>
         <% end %>
         </div>
         <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
           <li class="p-r-15 fs-14 inline font-heading">
             <%= link_to(why_path, class: "#{current_class?(why_path)}") do %>
-              <span class="text-white">Why</span>
+              <span class="text-white bold">Why</span>
             <% end %>
          </li>
           <li class="p-r-15 fs-14 inline font-heading">
             <%= link_to(learn_path, class: "#{current_class?(learn_path)}") do %>
-              <span class="text-white">What</span>
+              <span class="text-white bold">What</span>
             <% end %>
          </li>
          <li class="p-r-15 fs-14 inline font-heading">
            <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
-             <span class="text-white">The Product</span>
+             <span class="text-white bold">The Product</span>
            <% end %>
          </li>
          <li class="p-r-15 fs-14 inline font-heading">
            <%= link_to(how_it_works_path, class: "#{current_class?(how_it_works_path)}") do %>
-             <span class="text-white">How it works </span>
+             <span class="text-white bold">How it works </span>
            <% end %>
          </li>
         </ul>
@@ -37,10 +38,10 @@
     <div class=" pull-right">
       <div class="visible-lg visible-md m-t-10">
         <div class="pull-left p-t-10  p-r-20 font-heading">
-          <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-white') %>
+          <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-white bold') %>
         </div>
         <div class="pull-left p-t-5 font-heading">
-          <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-ghost') %>
+          <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-ghost bold') %>
         </div>
       </div>
     </div>

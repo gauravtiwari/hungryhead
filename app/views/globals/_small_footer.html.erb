@@ -5,25 +5,25 @@
         <article class="section-list">
           <ul>
             <li>
-              <%= link_to('Our rules', rules_path, class: "#{current_class?(story_path)}") %>
+              <%= link_to('Our rules', rules_path, class: "#{current_class?(story_path)} bold") %>
             </li>
             <li>
-              <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
+              <%= link_to(story_path, class: "#{current_class?(story_path)} bold") do %>
                 <span>Story</span>
               <% end %>
             </li>
             <li>
-              <%= link_to('Support', support_path, class: "#{current_class?(story_path)}") %>
+              <%= link_to('Support', support_path, class: "#{current_class?(story_path)} bold") %>
             </li>
             <li>
-              <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(story_path)}") %>
+              <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(story_path)} bold") %>
             </li>
             <li>
-              <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(story_path)}") %>
+              <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(story_path)} bold") %>
             </li>
           </ul>
         </article>
-      <p class="copyright-text text-white">© 2015 hungryhead.co</p>
+      <p class="copyright-text text-white bold">© 2015 hungryhead.co</p>
     </div>
   </div>
 </div>
