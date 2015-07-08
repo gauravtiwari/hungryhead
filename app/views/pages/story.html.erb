@@ -1,5 +1,5 @@
 <%= cache(['beta', 'story', 'v1']) do %>
-<div class="learn-wrapper bg-white p-b-60">
+<div class="learn-wrapper bg-white">
   <div class="learn">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
         <div class="story-photo inner">
@@ -43,9 +43,8 @@
       </div>
     </div>
   </section>
+  <div class="clearfix"></div>
+  <%= render partial: 'globals/footer' %>
 </div>
-
-<div class="clearfix"></div>
-<%= render partial: 'globals/footer' %>
 <% end %>
 

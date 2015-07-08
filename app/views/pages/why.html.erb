@@ -1,8 +1,8 @@
 <%= cache(['beta', 'why', 'v1']) do %>
-<div class="learn-wrapper bg-white p-b-60">
+<div class="learn-wrapper bg-white">
   <div class="learn">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
-      <div class="learn-photo">
+      <div class="why-photo">
         <div class="container vmiddle">
         <div class="row p-t-40">
               <div class="col-md-8 auto-margin">
@@ -26,32 +26,29 @@
     <div class="wrapper-small">
       <div class="col-md-6 auto-margin">
         <h3 class="semi-bold">Culmination of our quest to start a company</h3>
-        <div class="divider b-b b-green b-md b-small"></div>
         <div class="m-t-20">
           <p class="fs-16 text-master">
-            Most of the entrepreneurs when they start out don't pay much attention to the problem they are solving, even when they do, it's partial. That's why most of them end up building unnecessary products - wasting resources and time.
+            Most of the entrepreneurs when they start out don't pay much attention to the problem they are solving, even when they do, it's partial. That's why most of them end up building unnecessary products - wasting resources, energy and time. The fundamental problem we discovered was lack of initial collaboration with right people and idea validation.
           </p>
 
-          <p class="fs-16 text-master">
-            The solutions currently available to this problem are either impractical or only available to a few "elites". We believe we must have a completely different approach towards entrepreneurship, approach where there is collaboration, not bounded by time or location or your school. Approach where everyone work together to dissect the idea and solve real problems.
+          <p class="fs-16 text-master m-t-20">
+            We found the solutions currently available in the market are either impractical or only available to a few <em>"elites"</em>. We set out to solve this problem from <strong>"Ground Up"</strong> and that's when we found hungryhead. We believe we must have a completely different approach towards entrepreneurship, approach where there is collaboration, not bounded by time or location or qualifications. Approach where everyone work together to dissect the idea, solve real problems and achieve shared gloals.
           </p>
 
-          <p class="fs-16 text-master">
-            We started out to solve this problem from "Ground Up". That's when we figured out hungryhead. We realised entrepreneurship is a process and processes are best understood when they take place. They can't be taught because they are bounded by conditions therefore, aren't fixed. We built something that we believe could transform mindsets of people on a global scale.
+          <p class="fs-16 text-master m-t-20">
+            Hungryhead is available for students and alumni from schools, colleges and universities.
           </p>
-
-          <p class="fs-16 text-master">
-            Hungryhead is available for students studying in schools, colleges and universities because from there people of tomorrow come out.
-          </p>
+          <h5 class="bold m-t-20">
+            We have built something that we believe could help change the way entrepreneurship has been pursued worldwide.
+          </h5>
+          <div class="divider b-b b-green b-md b-small"></div>
 
         </div>
 
       </div>
     </div>
   </div>
-
+  <div class="clearfix"></div>
+  <%= render partial: 'globals/footer' %>
 </div>
-
-<div class="clearfix"></div>
-<%= render partial: 'globals/footer' %>
 <% end %>

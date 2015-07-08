@@ -1,7 +1,7 @@
 <div class="join-wrapper bg-white">
   <%= cache(['beta', 'join_as_mentor_jumbotron', 'v1']) do %>
-    <div class="join" data-pages="social">
-      <div class="jumbotron" data-pages="parallax" data-social="cover">
+    <div class="join">
+      <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
           <div class="join-mentor-photo">
           <div class="container vmiddle">
           <div class="row inner">
@@ -20,27 +20,23 @@
   <% end %>
 
   <section class="join-as-mentor-content">
-    <%= cache(['beta', 'join_as_mentor_content', 'v1']) do %>
-      <div class="col-md-6 auto-margin wrapper-small">
-        <div class="divider b-b b-green b-md b-small"></div>
-        <div>
-          <h3 class="m-t-30">Hungryhead is a new way to learn entrepreneurship. </h3>
-          <p class="text-master">
-            We want to fundamentally change the way entrepreneurship has been persued.
-          </p>
+    <div class="join-as-mentor-form wrapper-small">
+      <div class="container">
+        <div class="row m-b-20">
+        <div class="col-md-5 auto-margin">
+          <div>
+            <h3>Hungryhead is a new way to start entrepreneurship</h3>
+            <p class="text-master">
+              We want to fundamentally change the way entrepreneurship has been persued worldwide. Please join our revolution to help students with their startup ideas.
+            </p>
+          </div>
         </div>
       </div>
-    <% end %>
-
-    <div class="join-as-mentor-form wrapper-small bg-master-lightest">
-      <div class="container">
-          <%= react_component('JoinAsMentorForm') %>
+        <%= react_component('JoinAsMentorForm') %>
       </div>
     </div>
-
   </section>
 
+  <%= render partial: 'globals/footer' %>
 </div>
-
-<%= render partial: 'globals/footer' %>
 

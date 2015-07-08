@@ -11,45 +11,45 @@
       <% if user_signed_in? %>
         <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
           <li class="inline p-r-15 p-l-15 fs-14 bold">
-            <%= link_to(main_app.root_path, class: "fs-22 #{request.path == main_app.root_path ? current_class?(main_app.root_path) : 'text-white'}") do %>
+            <%= link_to(main_app.root_path, class: "fs-22 #{request.path == main_app.root_path ? active_class?(main_app.root_path) : 'text-white'}") do %>
               <i class="fa fa-home"></i>
             <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
-            <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? current_class?(main_app.users_path) : 'text-white'}") do %>
+            <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? active_class?(main_app.users_path) : 'text-white'}") do %>
                <i class="fa fa-users"></i>
              <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
-            <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? current_class?(main_app.ideas_path) : 'text-white'}") do %>
+            <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? active_class?(main_app.ideas_path) : 'text-white'}") do %>
                <i class="fa fa-lightbulb-o"></i>
              <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-           <%= link_to(main_app.schools_path, class: "fs-22 #{request.path == main_app.schools_path ? current_class?(main_app.schools_path) : 'text-white'}") do %>
+           <%= link_to(main_app.schools_path, class: "fs-22 #{request.path == main_app.schools_path ? active_class?(main_app.schools_path) : 'text-white'}") do %>
               <i class="fa fa-university"></i>
             <% end %>
           </li>
         </ul>
       <% else %>
-       <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-          <li class="p-r-15 fs-16 text-white inline">
-            <%= link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}") do %>
+       <ul class="pages-links inline no-margin no-style m-l-20 p-l-30 p-r-20">
+          <li class="p-r-15 fs-14 text-white inline">
+            <%= link_to(main_app.why_path, class: "#{active_class?(main_app.why_path)} text-white") do %>
               <span >Why</span>
             <% end %>
           </li>
-          <li class="p-r-15 fs-16 text-white inline">
-            <%= link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}") do %>
+          <li class="p-r-15 fs-14 text-white inline">
+            <%= link_to(main_app.product_path, class: "#{active_class?(main_app.product_path)} text-white") do %>
               <span >The Product</span>
             <% end %>
           </li>
-          <li class="p-r-15 fs-16 inline">
-            <%= link_to(main_app.how_it_works_path) do %>
+          <li class="p-r-15 fs-14 inline">
+            <%= link_to(main_app.how_it_works_path, class: "#{active_class?(main_app.how_it_works_path)} text-white") do %>
               <span class="text-white">How it works </span>
             <% end %>
           </li>
-          <li class="fs-16 inline">
-            <%= link_to("Questions?".html_safe, help.root_path, class: 'text-white') %>
+          <li class="fs-14 inline">
+            <%= link_to("Questions?".html_safe, help.root_path, class: "#{active_class?(help.root_path)} text-white") %>
           </li>
        </ul>
       <% end %>
@@ -62,7 +62,7 @@
     <% if user_signed_in? %>
       <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
         <%= link_to(main_app.profile_path(current_user)) do %>
-          <span class="fs-14 bold <%= request.path == main_app.profile_path(current_user) ? current_class?(main_app.profile_path(current_user)) : 'text-white' %>"><%= current_user.first_name %></span>
+          <span class="fs-14 bold <%= request.path == main_app.profile_path(current_user) ? active_class?(main_app.profile_path(current_user)) : 'text-white' %>"><%= current_user.first_name %></span>
         <% end %>
       </div>
       <div class="dropdown pull-right">
@@ -105,10 +105,10 @@
         </ul>
       </div>
       <% else %>
-      <div class="pull-right p-t-10 fs-16 font-heading">
+      <div class="pull-right p-t-10 font-heading">
         <div class="dropdown pull-right">
-          <%= link_to(main_app.get_started_path, title: "Click to Register", class: "inline") do %>
-            <span class="text-white fs-16">Get Started</span>
+          <%= link_to(main_app.get_started_path, title: "Click to Register", class: "active_class?(main_app.get_started_path) text-white") do %>
+            <span class="text-white">Get Started</span>
           <% end %>
         </div>
       </div>

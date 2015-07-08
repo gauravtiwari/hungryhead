@@ -1,5 +1,5 @@
 <%= cache(['beta', 'learn_more', 'v1']) do %>
-<div class="learn-wrapper bg-white p-b-60">
+<div class="learn-wrapper bg-white">
   <div class="learn">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
       <div class="learn-photo">
@@ -36,9 +36,9 @@
             <h5 class="bold no-margin">The simulation occurs at a number of levels :</h5>
             <div class="divider b-b b-green b-small m-t-10 m-b-20"></div>
             <ul class="fs-16">
-              <li class="m-b-10 text-master"> Ideas can receive feedbacks, votes and virtual investments</li>
-              <li class="m-b-10 text-master"> Team building</li>
-              <li class="m-b-10 text-master">Validate and build your idea</li>
+              <li class="m-b-10 text-master">Ideas can receive feedbacks, votes and virtual investments</li>
+              <li class="m-b-10 text-master">Team building by connecting with right people</li>
+              <li class="m-b-10 text-master">Develop and validate your idea</li>
               <li class="m-b-10 text-master">Supported by Gamification</li>
             </ul>
         </div>
@@ -46,7 +46,7 @@
         <div>
           <h3 class="m-t-30 semi-bold">Exclusive student driven community</h3>
           <p class="fs-16 text-master">
-            Hungryhead is open for students studying in colleges and universities.
+            Hungryhead is for students studying in schools, colleges and universities to collaborate and work on a startup idea.
           </p>
           <p class="fs-16 text-master">If you are an alumni or someone interested in contributing your expertise, you can join hungryhead by requesting an invite, please, <%= link_to("click here", request_invite_path) %>.</p>
         </div>
@@ -81,8 +81,8 @@
       </div>
     </div>
   </div>
-
+  <div class="clearfix"></div>
+  <%= render partial: 'globals/footer' %>
 </div>
-<div class="clearfix"></div>
-<%= render partial: 'globals/footer' %>
+
 <% end %>

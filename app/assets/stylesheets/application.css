@@ -37,6 +37,7 @@
  *= require search
  *= require users
  *= require comments
+ *= require coin
  *= require events
  *= require help
  *= require footer
