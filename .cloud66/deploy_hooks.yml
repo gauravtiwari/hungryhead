@@ -2,7 +2,7 @@
 production:
   after_rails:
     -
-      apply_during: all
+      apply_during: build_only
       destination: /tmp/rake_task.sh
       execute: true
       run_on: all_servers
@@ -11,7 +11,7 @@ production:
       target: rails
   after_rails:
     -
-      apply_during: all
+      apply_during: build_only
       destination: /tmp/dbseed.sh
       execute: true
       run_on: single_server
