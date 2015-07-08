@@ -5,7 +5,7 @@ module SchoolsHelper
     followers = school.followers_counter.value
     ideas = school.ideas_counter.value
     followed = school.followed_by?(current_user)
-    "school-#{school.updated_at.to_i}/people-#{people}/followers-#{followers}/ideas-#{ideas}/followed-#{followed}"
+    "school-#{school.id}-#{school.updated_at.to_i}/people-#{people}/followers-#{followers}/ideas-#{ideas}/followed-#{followed}"
   end
 
   def cache_key_for_schools

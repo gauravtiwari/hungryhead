@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :hello
-
+      flash[:notice] = "Please accept guidelines to complete registeration."
     when :follow_friends
       if @user.school_id.present?
         ids = User.published.where(school_id: @user.school_id).where.not(id: current_user.id).pluck(:id)
@@ -37,7 +37,6 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :complete_profile
-      flash[:notice] = "Please accept guidelines to complete registeration."
       @user.update_attributes(user_params)
       CreateActivityJob.perform_later(@user.id, "User") unless @user.published?
     end

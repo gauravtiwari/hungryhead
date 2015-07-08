@@ -31,7 +31,7 @@ module IdeasHelper
     votes = idea.votes_counter.value
     feedbackers = idea.feedbackers_counter.value
     voted = idea.voted?(current_user)
-    "idea-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/votes-#{votes}/feedbackers-#{feedbackers}/voted-#{voted}"
+    "idea-#{idea.id}-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/votes-#{votes}/feedbackers-#{feedbackers}/voted-#{voted}"
   end
 
 end
