@@ -1,4 +1,4 @@
-web: bundle exec passenger start
+web: bundle exec passenger start -e development
 #web: bundle exec unicorn_rails -p 3000 -c ./config/unicorn.rb
 redis: redis-server
 #database: postgres -D /usr/local/var/postgres

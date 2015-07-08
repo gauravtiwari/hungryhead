@@ -12,6 +12,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'
   gem 'rails-assets-jquery.scrollbar'
+  gem 'rails-assets-eventemitter'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-pusher'
