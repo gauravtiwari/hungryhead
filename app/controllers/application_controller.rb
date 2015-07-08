@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   after_filter :prepare_unobtrusive_flash
 
   #Temporary basic auth
-  #before_filter :authenticate_basic
+  before_filter :authenticate_basic
 
   #Device specific templates
   before_action :set_device_type
