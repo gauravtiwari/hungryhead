@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   end
 
   #Community rules
-  def rules
+  def community_guidelines
   end
 
   #Terms and conditions
