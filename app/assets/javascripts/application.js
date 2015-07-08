@@ -15,7 +15,6 @@
 //= require jquery-unveil
 //= require jquery-bez
 //= require plugins/jquery-ios-list/jquery.ioslist.min
-//= require eventemitter
 //= require imagesloaded
 //= require jquery.actual
 //= require plugins/jquery-menuclipper/jquery.menuclipper

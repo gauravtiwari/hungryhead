@@ -386,7 +386,6 @@ GEM
       rails-assets-jquery (~> 2.1.0)
     rails-assets-classie (1.0.1)
     rails-assets-eventEmitter (4.2.11)
-    rails-assets-eventemitter (1.0.0)
     rails-assets-eventie (1.0.6)
     rails-assets-fastclick (1.0.6)
     rails-assets-font-awesome (4.3.0)
@@ -602,7 +601,6 @@ DEPENDENCIES
   rails-assets-bootstrap-tagsinput!
   rails-assets-bootstrap-tokenfield!
   rails-assets-classie!
-  rails-assets-eventemitter!
   rails-assets-fastclick!
   rails-assets-font-awesome!
   rails-assets-hammerjs!
