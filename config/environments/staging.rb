@@ -39,7 +39,7 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  config.react.addons = true
+  config.react.variant = :production
 
   config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
   config.assets.enabled = true
