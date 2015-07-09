@@ -417,9 +417,6 @@ GEM
     rails-assets-momentjs (2.10.3)
     rails-assets-pnotify (2.0.1)
     rails-assets-pusher (2.2.4)
-    rails-assets-react (0.13.3)
-    rails-assets-react-infinite (0.4.0)
-      rails-assets-react (>= 0.12.2)
     rails-assets-slimScroll (1.3.6)
       rails-assets-jquery (>= 1.7)
     rails-assets-sweetalert (1.0.1)
@@ -627,7 +624,6 @@ DEPENDENCIES
   rails-assets-momentjs!
   rails-assets-pnotify!
   rails-assets-pusher!
-  rails-assets-react-infinite!
   rails-assets-slimScroll!
   rails-assets-sweetalert!
   rails-assets-underscore!

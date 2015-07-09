@@ -18,7 +18,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-pusher'
   gem 'rails-assets-sweetalert'
   gem 'rails-assets-slimScroll'
-  gem 'rails-assets-react-infinite', require: false
   gem 'rails-assets-bootstrap-tagsinput'
   gem 'rails-assets-pnotify'
   gem 'rails-assets-modernizr'
