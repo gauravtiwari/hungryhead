@@ -17,7 +17,6 @@
  *= require bootstrap-datetimepicker
  *= require plugins/switchery/css/switchery.min
  *= require font-awesome
- *= require bootstrap-markdown-editor
  *= require pnotify
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
