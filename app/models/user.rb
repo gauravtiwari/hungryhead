@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   include Redis::Objects
 
   #Scopes
-  calculated :ideas_count, -> { "select count(*) from ideas where ideas.status = 1 AND ideas.privacy = 1 AND ideas.user_id = users.id" }
+  calculated :published_ideas_count, -> { "select count(*) from ideas where ideas.status = 1 AND ideas.privacy = 1 AND ideas.user_id = users.id" }
+  calculated :ideas_count, -> { "select count(*) from ideas where ideas.user_id = users.id" }
 
   #Scopes for searching
   scope :students, -> { where(state: 1, role: 1) }
@@ -86,7 +87,6 @@ class User < ActiveRecord::Base
   #Sorted set to store followers, followings ids and latest activities
   set :followers_ids
   set :followings_ids
-  set :ideas_ids
   set :school_followings_ids
   set :impressioners_ids
 
@@ -165,11 +165,11 @@ class User < ActiveRecord::Base
   def after_password_reset; end
 
   def get_published_ideas
-    get_user_ideas.select{|idea| idea.status == "published"}
+    calculated(:published_ideas_count)
   end
 
   def get_user_ideas
-    Idea.fetch_multi(ideas_ids.members)
+    calculated(:ideas_count)
   end
 
   def joined_within_a_year?

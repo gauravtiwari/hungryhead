@@ -1446,8 +1446,8 @@ CREATE TABLE users (
     name character varying DEFAULT ''::character varying NOT NULL,
     username character varying DEFAULT ''::character varying NOT NULL,
     avatar character varying DEFAULT ''::character varying,
-    feed_preferences integer DEFAULT 1,
-    "integer" integer DEFAULT 1,
+    feed_preferences integer DEFAULT 0,
+    "integer" integer DEFAULT 0,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
     mini_bio character varying DEFAULT ''::character varying,
@@ -2544,13 +2544,6 @@ CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_i
 
 
 --
--- Name: index_idea_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_published ON ideas USING btree (status) WHERE (status = 1);
-
-
---
 -- Name: index_idea_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2586,20 +2579,6 @@ CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
 
 
 --
--- Name: index_ideas_on_school_id_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_school_id_and_privacy ON ideas USING btree (school_id, privacy);
-
-
---
--- Name: index_ideas_on_school_id_and_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_school_id_and_status ON ideas USING btree (school_id, status);
-
-
---
 -- Name: index_ideas_on_school_id_and_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2618,6 +2597,20 @@ CREATE INDEX index_ideas_on_slug ON ideas USING btree (slug);
 --
 
 CREATE INDEX index_ideas_on_status_and_privacy ON ideas USING btree (status, privacy);
+
+
+--
+-- Name: index_ideas_on_status_and_privacy_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_status_and_privacy_and_school_id ON ideas USING btree (status, privacy, school_id);
+
+
+--
+-- Name: index_ideas_on_status_and_privacy_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_status_and_privacy_and_user_id ON ideas USING btree (status, privacy, user_id);
 
 
 --
@@ -3150,6 +3143,13 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 --
 
 CREATE INDEX index_users_on_state_and_role ON users USING btree (state, role);
+
+
+--
+-- Name: index_users_on_state_and_role_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_state_and_role_and_school_id ON users USING btree (state, role, school_id);
 
 
 --
