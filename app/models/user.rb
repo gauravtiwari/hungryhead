@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   #redis objects
   include Redis::Objects
 
+  #Scopes
+  calculated :ideas_count, -> { "select count(*) from ideas where ideas.status = 1 AND ideas.privacy = 1 AND ideas.user_id = users.id" }
+
   #Scopes for searching
   scope :students, -> { where(state: 1, role: 1) }
   scope :from_school, ->(school_id) { where(state: 1, :school_id => school_id)}
