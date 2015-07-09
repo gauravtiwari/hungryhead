@@ -23,7 +23,7 @@ class UnpublishIdeaJob < ActiveJob::Base
 
         #Rebuild counters for user
         @user.ideas_counter.reset
-        @user.ideas_counter.incr(@user.get_published_ideas.length)
+        @user.ideas_counter.incr(@user.get_published_ideas.ideas_count)
 
         #Remove from user latest activities
         @user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)

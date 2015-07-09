@@ -61,10 +61,7 @@ class TeamInvitesController < ApplicationController
 
         #Increment idea counter
         current_user.ideas_counter.reset
-        current_user.ideas_counter.incr(Idea.for_user(current_user).size)
-
-        #cache idea id into redis set
-        current_user.ideas_ids.add(@idea.id)
+        current_user.ideas_counter.incr(current_user.get_published_ideas.ideas_count)
 
         #Save @idea and redirect
         @idea.save!
@@ -103,10 +100,7 @@ class TeamInvitesController < ApplicationController
 
     #Decrement idea counter
     @team_invite.invited.ideas_counter.reset
-    @team_invite.invited.ideas_counter.incr(Idea.for_user(@team_invite.invited).size)
-
-    #cache idea id into redis set
-    @team_invite.invited.ideas_ids.delete(@idea.id)
+    @team_invite.invited.ideas_counter.incr(@team_invite.invited.get_published_ideas.ideas_count)
 
     @team_invite.destroy
     respond_to do |format|
