@@ -19,9 +19,6 @@ class PublishIdeaJob < ActiveJob::Base
       @user.ideas_counter.reset
       @user.ideas_counter.incr(@user.get_published_ideas.length)
 
-      #Cache  ideas into a list/sorted_Set for user and school
-      @school.published_ideas.add(@idea.id, @idea.created_at.to_i + @idea.id)
-
       #Insert into cache list
       Idea.latest.add(@idea.id, @idea.created_at.to_i + @idea.id)
       Idea.trending.add(@idea.id, @idea.impressions.size)

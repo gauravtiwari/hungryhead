@@ -60,6 +60,7 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, [:status, :privacy, :school_id], algorithm: :concurrently
 
     add_index :ideas, [:user_id, :validated], algorithm: :concurrently
+    add_index :ideas, [:user_id, :status], algorithm: :concurrently
 
     #Index team ids
     add_index :ideas, :team_ids, using: :gin, algorithm: :concurrently
@@ -68,9 +69,6 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, :investable, name: "index_idea_investable", where: "investable IS TRUE", algorithm: :concurrently
     add_index :ideas, :validated, name: "index_idea_validated", where: "validated IS TRUE", algorithm: :concurrently
     add_index :ideas, :looking_for_team, name: "index_idea_looking_for_team", where: "looking_for_team IS TRUE", algorithm: :concurrently
-
-    #Published index
-    add_index :ideas, :status, name: "index_idea_published", where: "status = 1", algorithm: :concurrently
 
     add_index :ideas, :slug, algorithm: :concurrently
   end

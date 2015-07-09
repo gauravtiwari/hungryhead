@@ -47,6 +47,7 @@
 //= require showdown
 //= require nprogress
 //= require nprogress-ajax
+//= require bootstrap-markdown-editor
 //= require autocomplete-rails
 //= require pnotify
 //= require unobtrusive_flash

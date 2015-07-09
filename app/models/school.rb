@@ -11,11 +11,11 @@ class School < ActiveRecord::Base
 	#include Eventable
 
 	#Relationship
-	has_many :students, -> { where(state: 1, role: 1, school_id: id)}, class_name: 'User'
-	has_many :ideas, -> { where(status: 1, privacy: 1, school_id: id) }, class_name: 'Idea'
-	has_many :faculties, -> { where(state: 1, role: 4, school_id: id) }, class_name: 'User'
+	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
+	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
+	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
 
-	belongs_to :user
+	belongs_to :user, class_name: 'User'
 
 	cache_has_many :students, embed: true
 	cache_has_many :faculties, embed: true
@@ -32,11 +32,6 @@ class School < ActiveRecord::Base
 
 	#Redis Cache counters and ids
 	set :followers_ids
-
-	#Latest caches
-	sorted_set :published_people
-	sorted_set :published_ideas
-
 	#Counters
 	counter :followers_counter
 	counter :people_counter
@@ -56,19 +51,15 @@ class School < ActiveRecord::Base
 	end
 
 	def get_published_faculties
-		fetch_faculties.select{|f| f.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+		fetch_faculties.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	def get_published_ideas
-		fetch_ideas.select{|idea| idea.status == "published"}.sort { |x,y| y.created_at <=> x.created_at }
+		fetch_ideas.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	def get_published_students
-		fetch_students.select{|u| u.state == "published"}.sort { |x,y| y.created_at <=> x.created_at }
-	end
-
-	def get_published_events
-		fetch_events.select{|u| u.status == "open"}.sort { |x,y| y.created_at <=> x.created_at }
+		fetch_students.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	#Callbacks hooks

@@ -33,9 +33,6 @@ class UnpublishIdeaJob < ActiveJob::Base
           f.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
         end
 
-        #Delete published ideas for school
-        @school.published_ideas.delete(@idea.id)
-
         #Save the activity in DB
         activity.save!
 

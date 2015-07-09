@@ -229,9 +229,6 @@ class Idea < ActiveRecord::Base
     user.ideas_counter.reset
     user.ideas_counter.(user.ideas.size)
 
-    #Add to school
-    school.published_ideas.delete(id)
-
     #delete cached id from redis
     user.ideas_ids.delete(id)
 
