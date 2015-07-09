@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var converter = new Showdown.converter();
 
 var Solutions = React.createClass({

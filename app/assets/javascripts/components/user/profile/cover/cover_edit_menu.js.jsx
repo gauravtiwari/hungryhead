@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var CoverEditMenu =  React.createClass({
 
 	render: function() {

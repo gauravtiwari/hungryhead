@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var MainContent = React.createClass({
 
   getInitialState: function() {

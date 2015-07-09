@@ -1,6 +1,3 @@
-
-/** @jsx React.DOM */
-
 var IdeaEditForm = React.createClass({
 
   getInitialState: function() {

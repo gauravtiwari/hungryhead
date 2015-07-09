@@ -1,12 +1,8 @@
-/**
- * @jsx React.DOM
- */
-
 var Trash = React.createClass({
 
   getInitialState: function() {
     return {
-      loading: false, 
+      loading: false,
       sure: false
     }
   },
@@ -55,7 +51,7 @@ var Trash = React.createClass({
     } else {
       var confirm_delete = <a className="text-danger" onClick={this.checkDelete}><i className="fa fa-trash-o"></i> {text}</a>;
     }
- 
+
     return (
       <div className="text-master">
         {confirm_delete}

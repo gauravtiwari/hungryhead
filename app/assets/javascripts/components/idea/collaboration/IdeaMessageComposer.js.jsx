@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ENTER_KEY_CODE = 13;
 
 var IdeaMessageComposer = React.createClass({

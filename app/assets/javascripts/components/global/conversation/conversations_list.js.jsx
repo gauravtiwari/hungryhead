@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationList = React.createClass({
 
   componentDidMount: function(){

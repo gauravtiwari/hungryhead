@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var CardContent = React.createClass({
 
   render: function() {

@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationHeader = React.createClass({
 
   render: function() {

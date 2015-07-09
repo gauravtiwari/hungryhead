@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var Like = React.createClass({
@@ -54,7 +51,7 @@ var Like = React.createClass({
       {text} ({this.state.votes_count})
       <span className="count"></span>
       </a>
-     
+
     );
   }
 

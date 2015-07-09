@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var SolutionsForm = React.createClass({
 
   render: function() {

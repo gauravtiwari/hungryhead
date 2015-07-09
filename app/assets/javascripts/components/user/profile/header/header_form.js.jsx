@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var UserProfileHeaderForm = React.createClass ({
 
   getInitialState: function() {

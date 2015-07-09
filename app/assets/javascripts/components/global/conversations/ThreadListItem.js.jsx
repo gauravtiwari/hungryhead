@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ThreadListItem = React.createClass({
   getInitialState: function() {
     return {

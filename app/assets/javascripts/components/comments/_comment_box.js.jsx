@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var ComponentIsMountedMixin = {
     componentWillMount: function() {
         this.componentIsMounted = false;

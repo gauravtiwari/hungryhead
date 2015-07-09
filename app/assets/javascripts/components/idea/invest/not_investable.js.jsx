@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var NotInvestable = React.createClass({
 
   calculateScore: function() {

@@ -1,7 +1,5 @@
-/** @jsx React.DOM */
-
 var PlanVideo = React.createClass({
-   
+
     render: function() {
         return (
             <div className={this.props.video_classes}>

@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var CollaborationBox = React.createClass({
   getInitialState: function () {
      return {

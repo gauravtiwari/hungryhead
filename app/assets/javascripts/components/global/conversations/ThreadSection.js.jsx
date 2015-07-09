@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ThreadSection = React.createClass({
   getInitialState: function() {
     return {

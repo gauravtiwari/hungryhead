@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var InvestForm = React.createClass({
 
   getInitialState: function() {

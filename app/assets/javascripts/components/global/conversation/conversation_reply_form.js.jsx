@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationReplyForm = React.createClass({
 
   handleMessageSubmit: function ( event ) {

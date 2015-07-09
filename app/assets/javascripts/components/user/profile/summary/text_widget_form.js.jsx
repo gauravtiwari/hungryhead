@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var TextWidgetForm = React.createClass({
 
   getInitialState: function() {

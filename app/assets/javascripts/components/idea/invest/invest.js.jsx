@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Invest = React.createClass({
 
   getInitialState: function() {

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var SchoolLogo = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);

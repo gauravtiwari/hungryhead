@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var PlanForm = React.createClass({
 
   render: function() {

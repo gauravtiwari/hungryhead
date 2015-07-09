@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var OpenConversationsThread = React.createClass({
 
   getInitialState: function () {

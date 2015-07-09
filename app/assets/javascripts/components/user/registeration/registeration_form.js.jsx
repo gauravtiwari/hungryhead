@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var RegisterationForm = React.createClass({
 
   getInitialState: function(){

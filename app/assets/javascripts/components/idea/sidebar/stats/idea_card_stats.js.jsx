@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var IdeaCardStats = React.createClass({
 
   getInitialState: function() {

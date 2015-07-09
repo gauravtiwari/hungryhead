@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationMeta = React.createClass({
 
   getInitialState: function(){

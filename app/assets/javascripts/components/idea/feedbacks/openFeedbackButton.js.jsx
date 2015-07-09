@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var OpenFeedbackButton = React.createClass({
 
   getInitialState: function () {

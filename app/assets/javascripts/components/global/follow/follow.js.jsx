@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Follow = React.createClass({
   getInitialState: function() {
     return {

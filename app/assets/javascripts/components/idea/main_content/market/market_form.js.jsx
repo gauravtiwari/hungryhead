@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var MarketForm = React.createClass({
 
   render: function() {

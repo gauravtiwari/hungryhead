@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var OpenNotificationsThread = React.createClass({
 
   getInitialState: function () {

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var NoBalance = React.createClass({
 
   render: function() {

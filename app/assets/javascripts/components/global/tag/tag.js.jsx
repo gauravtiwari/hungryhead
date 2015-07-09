@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var TagList = React.createClass({
 
 	getInitialState: function() {

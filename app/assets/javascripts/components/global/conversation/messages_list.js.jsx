@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationMessagesList = React.createClass({
 
   componentDidMount: function() {

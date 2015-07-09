@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var PublishIdeaButton = React.createClass({
   getInitialState: function() {
     return {

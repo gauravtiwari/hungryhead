@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
-*/
-
 var MarkDownHelpModal = React.createClass({
 
     componentDidMount: function() {

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 
 var LoginForm = React.createClass({
 render: function() {

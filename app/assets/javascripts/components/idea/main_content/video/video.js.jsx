@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Video = React.createClass({
 
   getInitialState: function() {

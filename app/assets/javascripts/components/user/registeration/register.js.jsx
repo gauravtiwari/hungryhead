@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Register = React.createClass({
   getInitialState: function() {
     return {

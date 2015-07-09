@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var ValuePropositionForm = React.createClass({
 
   render: function() {

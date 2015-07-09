@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var VideoForm = React.createClass({
 
   render: function() {

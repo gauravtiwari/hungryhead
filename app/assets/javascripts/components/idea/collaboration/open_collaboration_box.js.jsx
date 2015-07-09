@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var OpenCollaborationBox = React.createClass({
 
   OpenCollaboration: function() {

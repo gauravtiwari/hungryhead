@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Card = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);

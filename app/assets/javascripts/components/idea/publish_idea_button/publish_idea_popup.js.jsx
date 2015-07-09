@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var PublishIdeaPopup = React.createClass({
 
   componentDidMount: function() {

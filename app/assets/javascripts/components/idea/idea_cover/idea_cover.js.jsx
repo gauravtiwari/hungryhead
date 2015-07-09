@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var IdeaCover = React.createClass({
   getInitialState: function() {
     var data = this.props.data;

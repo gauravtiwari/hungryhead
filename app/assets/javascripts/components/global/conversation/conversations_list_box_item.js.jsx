@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var ConversationListBoxItem = React.createClass({
   getInitialState: function(){
     return {

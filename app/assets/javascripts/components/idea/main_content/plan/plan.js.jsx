@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var converter = new Showdown.converter();
 
 var Plan = React.createClass({

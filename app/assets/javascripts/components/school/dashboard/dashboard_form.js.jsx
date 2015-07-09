@@ -1,6 +1,3 @@
-
-/** @jsx React.DOM */
-
 var DashboardForm = React.createClass({
 
   getInitialState: function() {

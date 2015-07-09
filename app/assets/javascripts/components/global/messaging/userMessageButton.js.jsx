@@ -1,8 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
-
 var UserMessageButton = React.createClass({
 
   getInitialState: function () {

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var CommentForm = React.createClass({
   getInitialState: function() {
     return {

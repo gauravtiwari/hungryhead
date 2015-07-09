@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var SetIntervalMixin = {
     componentWillMount: function() {
         this.intervals = [];

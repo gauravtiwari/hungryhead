@@ -1,6 +1,4 @@
 
-/** @jsx React.DOM */
-
 var CardForm = React.createClass({
 
   getInitialState: function() {

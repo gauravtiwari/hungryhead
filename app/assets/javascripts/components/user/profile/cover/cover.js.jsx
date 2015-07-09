@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Cover = React.createClass({
 
   getInitialState: function() {

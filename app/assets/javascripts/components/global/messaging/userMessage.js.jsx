@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var UserMessage = React.createClass({
