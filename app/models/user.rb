@@ -164,14 +164,6 @@ class User < ActiveRecord::Base
 
   def after_password_reset; end
 
-  def get_published_ideas
-    calculated(:published_ideas_count)
-  end
-
-  def get_user_ideas
-    calculated(:ideas_count)
-  end
-
   def joined_within_a_year?
     (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
   end
