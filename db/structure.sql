@@ -2908,13 +2908,6 @@ CREATE INDEX index_slugs_on_slug ON slugs USING btree (slug);
 
 
 --
--- Name: index_slugs_on_sluggable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_slugs_on_sluggable_id ON slugs USING btree (sluggable_id);
-
-
---
 -- Name: index_slugs_on_sluggable_id_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2982,6 +2975,13 @@ CREATE INDEX index_team_invites_on_idea_id ON team_invites USING btree (idea_id)
 --
 
 CREATE INDEX index_team_invites_on_invited_id ON team_invites USING btree (invited_id);
+
+
+--
+-- Name: index_team_invites_on_invited_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_invited_id_and_idea_id ON team_invites USING btree (invited_id, idea_id);
 
 
 --
