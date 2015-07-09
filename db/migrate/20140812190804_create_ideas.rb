@@ -57,6 +57,7 @@ class CreateIdeas < ActiveRecord::Migration
     add_index :ideas, [:school_id, :privacy], algorithm: :concurrently
     add_index :ideas, [:school_id, :validated], algorithm: :concurrently
     add_index :ideas, [:status, :privacy], algorithm: :concurrently
+    add_index :ideas, [:status, :privacy, :school_id], algorithm: :concurrently
 
     add_index :ideas, [:user_id, :validated], algorithm: :concurrently
 

@@ -86,6 +86,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
     #Fetch by role and state
     add_index :users, [:state, :role], algorithm: :concurrently
+    add_index :users, [:state, :role, :school_id], algorithm: :concurrently
     # add_index :users, :unlock_token,         :unique => true
 
     #Fetch published

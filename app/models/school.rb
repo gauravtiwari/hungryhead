@@ -11,9 +11,9 @@ class School < ActiveRecord::Base
 	#include Eventable
 
 	#Relationship
-	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
-	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
-	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
+	has_many :students, -> { where(state: 1, role: 1, school_id: id)}, class_name: 'User'
+	has_many :ideas, -> { where(status: 1, privacy: 1, school_id: id) }, class_name: 'Idea'
+	has_many :faculties, -> { where(state: 1, role: 4, school_id: id) }, class_name: 'User'
 
 	belongs_to :user
 
