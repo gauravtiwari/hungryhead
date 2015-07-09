@@ -282,6 +282,7 @@ GEM
     groupdate (2.4.0)
       activesupport (>= 3)
     hashie (3.4.2)
+    high_voltage (2.3.0)
     hitimes (1.2.2)
     html-pipeline (1.11.0)
       activesupport (>= 2)
@@ -489,6 +490,8 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    sitemap_generator (5.0.5)
+      builder
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -575,6 +578,7 @@ DEPENDENCIES
   groupdate
   hashie
   help!
+  high_voltage
   html-pipeline
   htmlcompressor
   identity_cache
@@ -644,6 +648,7 @@ DEPENDENCIES
   sidekiq
   simple_form
   sinatra (>= 1.3.0)
+  sitemap_generator
   slim (>= 1.1.0)
   soulmate
   spring
