@@ -17,7 +17,7 @@ class PublishIdeaJob < ActiveJob::Base
 
       #Rebuild counters for user
       @user.ideas_counter.reset
-      @user.ideas_counter.incr(@user.calculated(:published_ideas_count).ideas_count)
+      @user.ideas_counter.incr(@user.ideas.ideas_count)
 
       #Insert into cache list
       Idea.latest.add(@idea.id, @idea.created_at.to_i + @idea.id)

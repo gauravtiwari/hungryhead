@@ -105,9 +105,6 @@ gem 'pundit'
 
 gem 'responders'
 
-#Raw SQL queries
-gem 'calculated_attributes'
-
 #Local time
 gem 'local_time'
 
