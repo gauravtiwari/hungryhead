@@ -2250,20 +2250,6 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_published ON activities USING btree (published) WHERE (published IS TRUE);
-
-
---
--- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities USING btree (recipient_id, recipient_type);
-
-
---
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2831,6 +2817,13 @@ CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notificat
 
 
 --
+-- Name: index_notifications_on_user_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_user_id_and_published ON notifications USING btree (user_id, published);
+
+
+--
 -- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3213,6 +3206,13 @@ CREATE UNIQUE INDEX index_votes_on_votable_id_and_votable_type_and_voter_id ON v
 --
 
 CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
+
+
+--
+-- Name: recipient_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX recipient_published_activities ON activities USING btree (recipient_id, recipient_type, published);
 
 
 --
