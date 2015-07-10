@@ -1,8 +1,7 @@
 class PagesController < ApplicationController
 
   caches_action :home, :story, :community_guidelines, :terms, :why, :privacy,
-  :support, :cookies, :request_invite, :how_it_works, :product, :get_started,
-  :join, :upgrade_browser, :learn
+  :cookies, :how_it_works, :product, :get_started, :upgrade_browser, :learn
 
   layout "home"
 
