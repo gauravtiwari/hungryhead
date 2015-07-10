@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   list :attendees_ids
   counter :attendees_counter
 
-  belongs_to :eventable, polymorphic: true
+  belongs_to :eventable, polymorphic: true, touch: true
   has_many :attendees
 
   def attending?(user)

@@ -62,8 +62,8 @@ class Idea < ActiveRecord::Base
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
-  belongs_to :user
-  belongs_to :school
+  belongs_to :user, touch: true
+  belongs_to :school, touch: true
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 
@@ -71,6 +71,7 @@ class Idea < ActiveRecord::Base
   cache_has_many :idea_messages, embed: true
   cache_has_many :team_invites, embed: true
   cache_belongs_to :user
+  cache_belongs_to :school
 
   #Cache indexes
   cache_index :slug, :unique => true

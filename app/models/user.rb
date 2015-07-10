@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   attr_reader :raw_invitation_token
 
   #Model Relationships
-  belongs_to :school
+  belongs_to :school, touch: true
 
   #has_many relationships
   has_many :activities, -> {where(published: true)}, :dependent => :destroy

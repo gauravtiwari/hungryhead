@@ -1,6 +1,6 @@
 class Attendee < ActiveRecord::Base
 
-  belongs_to :event
+  belongs_to :event, touch: true
   belongs_to :attendee, class_name: 'User', foreign_key: 'attendee_id'
 
   after_commit :update_counters, :cache_attendees_ids, on: :create
