@@ -1,5 +1,5 @@
 # Set the host name for URL creation
-SitemapGenerator::Sitemap.default_host = "http://www.example.com"
+SitemapGenerator::Sitemap.default_host = "https://hungryhead.co"
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
@@ -24,4 +24,26 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
+
+  add '/learn-more-about-hungryhead'
+  add '/why-hungryhead'
+  add '/request-invite'
+  add '/community-guidelines'
+  add '/get-support'
+
+  add '/privacy-policy'
+  add '/cookies-policy'
+  add '/get-started'
+  add '/product-tour'
+  add '/terms-of-use'
+  add '/our-story'
+  add '/how-it-works'
+  add '/join'
+  add '/login'
+  add '/help'
+
+  Help::Category.find_each do |category|
+    add Help::Engine.routes.url_helpers.help_category_path(category), :lastmod => category.updated_at
+  end
+
 end

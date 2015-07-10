@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   #Pages routes
-  get '/learn-about-the-platform', to: 'pages#learn', as: :learn
+  get '/learn-about-hungryhead', to: 'pages#learn', as: :learn
   get '/why-hungryhead', to: 'pages#why', as: :why
-  get '/hello', to: 'pages#hello', as: :hello
   get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
   get '/get-support', to: 'pages#support', as: :support
 
