@@ -257,7 +257,6 @@ gem 'forgery'
 group :development, :test do
   gem 'better_errors'
   gem 'bullet'
-  gem 'peek'
   gem 'binding_of_caller'
   gem 'rb-fsevent', '>= 0.9.1'
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
