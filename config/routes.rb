@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   #Sidekiq
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
+  mount Peek::Railtie => '/peek'
 
   #Pusher authentication route
   post "pusher/auth"
