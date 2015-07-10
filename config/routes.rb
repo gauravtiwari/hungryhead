@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/why-hungryhead', to: 'pages#why', as: :why
   get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
   get '/get-support', to: 'pages#support', as: :support
-  get '/work-with-us', to: 'pages#support_us', as: :support_us
 
   get '/privacy-policy', to: 'pages#privacy', as: :privacy
   get '/cookies-policy', to: 'pages#cookies', as: :cookies
