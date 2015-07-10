@@ -1,0 +1,65 @@
+<div class="learn-wrapper bg-white">
+  <div class="learn">
+    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+        <div class="support-us-photo inner">
+        <div class="container vmiddle">
+        <div class="row">
+              <div class="col-md-8 auto-margin text-center">
+                  <div class="hero-section m-t-20 z-index-10">
+                      <h1 class="text-white">
+                        Collaborate with us
+                      </h1>
+                      <p class="text-white no-margin fs-16">Help build hungryhead better</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="support-us bg-white m-b-50">
+    <div class="wrapper-small">
+      <div class="col-md-5 auto-margin">
+        <h3 class="normal">We need your ideas, suggestions and feedbacks</h3>
+        <div class="divider b-b b-green b-md b-small m-t-20"></div>
+        <div id="support_form">
+          <p class="m-t-20 fs-16 text-master">
+            We have built something that we believe could help change the way entrepreneurship has been pursued worldwide but, we need more ideas to make the platform better and more useful for masses.
+          </p>
+          <h5 class="bold">
+            Please collaborate with us to build a global platform for students who have potential to change the world.
+          </h5>
+          <%= simple_form_for(@feedback, role: 'form', remote: true) do |f| %>
+            <% if current_user %>
+              <div class="form-group">
+                <%= f.input_field :name, as: :hidden, value: "#{current_user.name}", class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.input_field :email, as: :hidden, value: "#{current_user.email}", class: 'form-control' %>
+              </div>
+            <% else %>
+              <div class="form-group">
+                <label for="feedback_name">Your name</label>
+                <%= f.input_field :name, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <label for="feedback_email">Your email</label>
+                <%= f.input_field :email, class: 'form-control' %>
+              </div>
+            <% end %>
+            <div class="form-group m-t-20">
+              <label for="feedback_body">Your message</label>
+              <%= f.input_field :body, class: 'form-control m-t-10' %>
+            </div>
+            <div class="form-buttons">
+              <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="clearfix"></div>
+  <%= render partial: 'globals/footer' %>
+</div>
