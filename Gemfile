@@ -198,7 +198,7 @@ gem "fog-google"
 gem 'asset_sync'
 
 #Static pages
-gem 'high_voltage'
+gem 'high_voltage', github: 'thoughtbot/high_voltage'
 #Sitemap for rails
 gem 'sitemap_generator'
 

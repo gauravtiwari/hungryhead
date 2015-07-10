@@ -10,22 +10,22 @@
         </div>
        <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
         <li class="p-r-15 fs-14 inline font-heading">
-          <%= link_to(why_path, class: "#{current_class?(why_path)}") do %>
+          <%= link_to(page_path('why'), class: "#{current_class?(page_path('why'))}") do %>
             <span >Why</span>
           <% end %>
         </li>
          <li class="p-r-15 fs-14 inline font-heading">
-           <%= link_to(learn_path, class: "#{current_class?(learn_path)}") do %>
+           <%= link_to(page_path('learn'), class: "#{current_class?(page_path('learn'))}") do %>
              <span>What</span>
            <% end %>
         </li>
         <li class="p-r-15 fs-14 inline font-heading">
-          <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
+          <%= link_to(page_path('product'), class: "#{current_class?(page_path('product'))}") do %>
             <span >The Product</span>
           <% end %>
         </li>
         <li class="p-r-15 fs-14 inline font-heading">
-          <%= link_to(how_it_works_path, class: "#{current_class?(how_it_works_path)}") do %>
+          <%= link_to(page_path('how_it_works'), class: "#{current_class?(page_path('how_it_works'))}") do %>
             <span >How it works </span>
           <% end %>
         </li>
@@ -39,7 +39,7 @@
           <%= link_to('Questions?', help_path, title: "Get Started", class: 'text-master #{current_class?(help_path)}') %>
         </div>
         <div class="pull-left p-t-5 font-heading">
-          <%= link_to('Get Started', get_started_path, title: "Get Started", class: 'btn btn-master text-master bg-transparent inline') %>
+          <%= link_to('Get Started', page_path('get_started'), title: "Get Started", class: 'btn btn-master text-master bg-transparent inline') %>
         </div>
       </div>
     </div>
