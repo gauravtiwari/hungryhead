@@ -34,17 +34,17 @@
       <% else %>
        <ul class="pages-links inline no-margin no-style m-l-20 p-l-30 p-r-20">
           <li class="p-r-15 fs-14 text-white inline">
-            <%= link_to(main_app.page_path('why'), class: "#{active_class?(main_app.page_path('why'))} text-white") do %>
+            <%= link_to(main_app.why_path, class: "#{active_class?(main_app.why_path)} text-white") do %>
               <span >Why</span>
             <% end %>
           </li>
           <li class="p-r-15 fs-14 text-white inline">
-            <%= link_to(main_app.page_path('product'), class: "#{active_class?(main_app.page_path('product'))} text-white") do %>
+            <%= link_to(main_app.product_path, class: "#{active_class?(main_app.product_path)} text-white") do %>
               <span >The Product</span>
             <% end %>
           </li>
           <li class="p-r-15 fs-14 inline">
-            <%= link_to(main_app.page_path('how_it_works'), class: "#{active_class?(main_app.page_path('how_it_works'))} text-white") do %>
+            <%= link_to(main_app.how_it_works_path, class: "#{active_class?(main_app.how_it_works_path)} text-white") do %>
               <span class="text-white">How it works </span>
             <% end %>
           </li>
@@ -107,7 +107,7 @@
       <% else %>
       <div class="pull-right p-t-10 font-heading">
         <div class="dropdown pull-right">
-          <%= link_to(main_app.page_path('get_started'), title: "Click to Register", class: "active_class?(main_app.page_path('get_started')) text-white") do %>
+          <%= link_to(main_app.get_started_path, title: "Click to Register", class: "active_class?(main_app.get_started_path) text-white") do %>
             <span class="text-white">Get Started</span>
           <% end %>
         </div>

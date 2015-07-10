@@ -10,17 +10,17 @@
         </div>
         <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
           <li class="p-r-15 fs-14 inline font-heading">
-            <%= link_to(page_path('why'), class: "#{current_class?(page_path('why'))}") do %>
+            <%= link_to(why_path, class: "#{current_class?(why_path)}") do %>
               <span >Why</span>
             <% end %>
           </li>
          <li class="p-r-15 fs-14 inline font-heading">
-           <%= link_to(page_path('product'), class: "#{current_class?(page_path('product'))}") do %>
+           <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
              <span class="text-master">The Product</span>
            <% end %>
          </li>
          <li class="p-r-15 fs-14 inline font-heading">
-           <%= link_to(page_path('how_it_works'), class: "#{current_class?(page_path('how_it_works'))}") do %>
+           <%= link_to(how_it_works_path, class: "#{current_class?(how_it_works_path)}") do %>
              <span class="text-master">How it works </span>
            <% end %>
          </li>

@@ -5,23 +5,23 @@
     <div class="top-footer clearfix">
       <article class="page-list">
         <ul class="no-margin no-padding">
-         <li>
-           <%= link_to('Our rules', page_path('rules'), class: "#{current_class?(page_path('rules'))} bold") %>
-         </li>
-         <li>
-           <%= link_to(page_path('story'), class: "#{current_class?(page_path('story'))} bold") do %>
-             <span>Story</span>
-           <% end %>
-         </li>
-         <li>
-           <%= link_to('Support', page_path('support'), class: "#{current_class?(page_path('support'))} bold") %>
-         </li>
-         <li>
-           <%= link_to('Cookies Policy', page_path('cookies'), class: "#{current_class?(page_path('cookies'))} bold") %>
-         </li>
-         <li>
-           <%= link_to('Privacy Policy', page_path('privacy'), class: "#{current_class?(page_path('privacy'))} bold") %>
-         </li>
+          <li>
+            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)}") %>
+          </li>
+          <li>
+            <%= link_to(story_path, class: "#{current_class?(story_path)}") do %>
+              <span>Story</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to('Support', support_path, class: "#{current_class?(support_path)}") %>
+          </li>
+          <li>
+            <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)}") %>
+          </li>
+          <li>
+            <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)}") %>
+          </li>
         </ul>
       </article>
     <p class="copyright-text text-master fs-13">© 2015 hungryhead.co</p>
