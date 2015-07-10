@@ -12,10 +12,6 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <% cache_if(user_signed_in?, current_user) do %>
-      <%= render partial: 'shared/current_user' if user_signed_in? %>
-    <% end %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -36,7 +32,7 @@
 
   </head>
 
-  <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'no-header menu-behind' %>">
+  <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'menu-behind' %>">
 
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
 

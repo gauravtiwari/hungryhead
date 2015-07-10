@@ -181,6 +181,7 @@ gem 'paper_trail', '~> 4.0.0.rc1'
 
 #Simple form
 gem 'simple_form'
+gem 'honeypot-captcha'
 
 # SEO
 gem 'friendly_id'

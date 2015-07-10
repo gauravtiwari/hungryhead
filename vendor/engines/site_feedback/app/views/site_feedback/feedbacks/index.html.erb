@@ -5,7 +5,7 @@
         <div class="container vmiddle">
         <div class="row">
               <div class="col-md-8 auto-margin text-center">
-                  <div class="hero-section m-t-20 z-index-10">
+                  <div class="hero-section z-index-10">
                       <h1 class="text-white">
                         Collaborate with us
                       </h1>
@@ -27,10 +27,11 @@
           <p class="m-t-20 fs-16 text-master">
             We have built something that we believe could help change the way entrepreneurship has been pursued worldwide but, we need more ideas to make the platform better and more useful for masses.
           </p>
-          <h5 class="bold">
+          <h5 class="bold m-b-20">
             Please collaborate with us to build a global platform for students who have potential to change the world.
           </h5>
-          <%= simple_form_for(@feedback, role: 'form', remote: true) do |f| %>
+          <h5 class="m-b-20 b-b b-grey p-b-5 inline"><i class="fa fa-bullhorn"></i> Submit the form</h5>
+          <%= simple_form_for(@feedback, :html => { :honeypot => true }, role: 'form', remote: true, class: 'clearfix') do |f| %>
             <% if current_user %>
               <div class="form-group">
                 <%= f.input_field :name, as: :hidden, value: "#{current_user.name}", class: 'form-control' %>
@@ -49,7 +50,7 @@
               </div>
             <% end %>
             <div class="form-group m-t-20">
-              <label for="feedback_body">Your message</label>
+              <label for="feedback_body">Your ideas, suggestions and feedbacks</label>
               <%= f.input_field :body, class: 'form-control m-t-10' %>
             </div>
             <div class="form-buttons">

@@ -36,7 +36,7 @@
 
   </head>
 
-  <body class="fixed-header menu-behind">
+  <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
     <div class="page-container">
       <%= render partial: 'globals/nav', locals: {bg: 'bg-white'} %>
       <div class="page-content-wrapper">

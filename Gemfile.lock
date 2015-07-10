@@ -296,6 +296,7 @@ GEM
       activesupport (>= 3)
     hashie (3.4.2)
     hitimes (1.2.2)
+    honeypot-captcha (0.0.3)
     html-pipeline (1.11.0)
       activesupport (>= 2)
       nokogiri (~> 1.4)
@@ -591,6 +592,7 @@ DEPENDENCIES
   groupdate
   hashie
   help!
+  honeypot-captcha
   html-pipeline
   htmlcompressor
   identity_cache

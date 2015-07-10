@@ -16,6 +16,7 @@
     <% cache_if(user_signed_in?, current_user) do %>
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -32,6 +33,7 @@
     </script>
     <%= csrf_meta_tags %>
     <%= yield :head %>
+
   </head>
 
   <body class="fixed-header menu-behind">
