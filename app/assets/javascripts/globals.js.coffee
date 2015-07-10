@@ -41,6 +41,7 @@ jQuery(document).ready ->
 	  speed: 500
 
 	$('#form-login').validate();
+	$('.site-feedback-form').validate();
 	$('#new_invite_request').validate();
 	$('#information-form').validate();
 	$('#feedback_form').validate();
