@@ -71,7 +71,6 @@ class Idea < ActiveRecord::Base
   cache_has_many :idea_messages, embed: true
   cache_has_many :team_invites, embed: true
   cache_belongs_to :user
-  cache_belongs_to :school
 
   #Cache indexes
   cache_index :slug, :unique => true

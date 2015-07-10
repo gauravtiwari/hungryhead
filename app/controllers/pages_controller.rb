@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
 
+  caches_action :home, :story, :community_guidelines, :terms, :why, :privacy,
+  :support, :cookies, :request_invite, :how_it_works, :product, :get_started,
+  :join, :upgrade_browser, :learn
+
   layout "home"
 
   #Index page to handle home and after login route
@@ -42,10 +46,6 @@ class PagesController < ApplicationController
   end
 
   def get_started
-  end
-
-  def join
-
   end
 
   def upgrade_browser
