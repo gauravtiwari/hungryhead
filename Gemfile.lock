@@ -14,12 +14,6 @@ GIT
     rails-dev-boost (0.3.0)
       railties (>= 3.0)
 
-GIT
-  remote: git://github.com/thoughtbot/high_voltage.git
-  revision: 1eba606b5cbf23ffe87f84d21460d5f33e26c281
-  specs:
-    high_voltage (2.3.0)
-
 PATH
   remote: vendor/engines/help
   specs:
@@ -583,7 +577,6 @@ DEPENDENCIES
   groupdate
   hashie
   help!
-  high_voltage!
   html-pipeline
   htmlcompressor
   identity_cache

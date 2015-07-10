@@ -4,6 +4,24 @@ Rails.application.routes.draw do
     root :to => 'activities#index', as: :authenticated
   end
 
+  root 'pages#index'
+
+  #Pages routes
+  get '/learn-about-the-platform', to: 'pages#learn', as: :learn
+  get '/why-hungryhead', to: 'pages#why', as: :why
+  get '/hello', to: 'pages#hello', as: :hello
+  get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
+  get '/get-support', to: 'pages#support', as: :support
+
+  get '/privacy-policy', to: 'pages#privacy', as: :privacy
+  get '/cookies-policy', to: 'pages#cookies', as: :cookies
+  get '/get-started', to: 'pages#get_started', as: :get_started
+  get '/product-tour', to: 'pages#product', as: :product
+  get '/terms-of-use', to: 'pages#terms', as: :terms
+  get '/request-invite', to: 'pages#request_invite', as: :request_invite
+  get '/our-story', to: 'pages#story', as: :story
+  get '/how-it-works', to: 'pages#how_it_works', as: :how_it_works
+
   #Soulmate search engine
   mount Soulmate::Server, :at => "/search"
 

@@ -24,7 +24,4 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
-  HighVoltage.page_ids.each do |page|
-    add page, changefreq: 'weekly'
-  end
 end

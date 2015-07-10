@@ -197,9 +197,7 @@ gem 'carrierwave-mimetype-fu'
 gem "fog-google"
 gem 'asset_sync'
 
-#Static pages
-gem 'high_voltage', github: 'thoughtbot/high_voltage'
-#Sitemap for rails
+#Sitemap
 gem 'sitemap_generator'
 
 #Background Job processing
