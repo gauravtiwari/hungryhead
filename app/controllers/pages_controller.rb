@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   layout "home"
 
   #Index page to handle home and after login route
-  def index
+  def home
   end
 
   #Our Story and how we got started

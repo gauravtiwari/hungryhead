@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root :to => 'activities#index', as: :authenticated
   end
 
-  root 'pages#index'
+  root 'pages#home'
 
   #Pages routes
   get '/learn-about-the-platform', to: 'pages#learn', as: :learn

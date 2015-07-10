@@ -41,7 +41,7 @@
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
-      <% elsif params[:action] == "index" %>
+      <% elsif params[:action] == "home" %>
        <%= render partial: 'globals/guest_nav' %>
       <% else %>
         <%= render partial: 'globals/page_nav' %>
