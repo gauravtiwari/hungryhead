@@ -17,6 +17,10 @@ class PagesController < ApplicationController
   def community_guidelines
   end
 
+  #support us
+  def support_us
+  end
+
   #Terms and conditions
   def terms
   end
