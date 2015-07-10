@@ -57,6 +57,8 @@ gem 'merit'
 
 #Mountanable engines
 gem 'help', path: "vendor/engines/help"
+gem 'site_feedback', path: "vendor/engines/site_feedback"
+
 
 #Cron jobs
 gem 'crono'

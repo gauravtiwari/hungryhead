@@ -1233,6 +1233,40 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 
 --
+-- Name: site_feedback_feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE site_feedback_feedbacks (
+    id integer NOT NULL,
+    user_id integer,
+    email character varying,
+    name character varying,
+    body text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: site_feedback_feedbacks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE site_feedback_feedbacks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: site_feedback_feedbacks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE site_feedback_feedbacks_id_seq OWNED BY site_feedback_feedbacks.id;
+
+
+--
 -- Name: skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1847,6 +1881,13 @@ ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY site_feedback_feedbacks ALTER COLUMN id SET DEFAULT nextval('site_feedback_feedbacks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY skills ALTER COLUMN id SET DEFAULT nextval('skills_id_seq'::regclass);
 
 
@@ -2167,6 +2208,14 @@ ALTER TABLE ONLY sashes
 
 ALTER TABLE ONLY schools
     ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: site_feedback_feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY site_feedback_feedbacks
+    ADD CONSTRAINT site_feedback_feedbacks_pkey PRIMARY KEY (id);
 
 
 --
@@ -2894,6 +2943,20 @@ CREATE INDEX index_schools_on_user_id ON schools USING btree (user_id);
 
 
 --
+-- Name: index_site_feedback_feedbacks_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_site_feedback_feedbacks_on_email ON site_feedback_feedbacks USING btree (email);
+
+
+--
+-- Name: index_site_feedback_feedbacks_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_site_feedback_feedbacks_on_user_id ON site_feedback_feedbacks USING btree (user_id);
+
+
+--
 -- Name: index_skills_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3435,4 +3498,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150616232524');
 INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 
 INSERT INTO schema_migrations (version) VALUES ('20150627164750');
+
+INSERT INTO schema_migrations (version) VALUES ('20150710183814');
 

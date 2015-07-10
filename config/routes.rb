@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post "pusher/auth"
 
   mount Help::Engine => "/help"
+  mount SiteFeedback::Engine => "/collaborate-with-us"
 
   # Upgrade path for old browsers
 
