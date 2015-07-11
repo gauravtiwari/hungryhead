@@ -1239,9 +1239,11 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 CREATE TABLE site_feedback_feedbacks (
     id integer NOT NULL,
     user_id integer,
-    email character varying,
-    name character varying,
-    body text,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    attachment character varying,
+    body text DEFAULT ''::text NOT NULL,
+    status integer DEFAULT 0,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2946,7 +2948,14 @@ CREATE INDEX index_schools_on_user_id ON schools USING btree (user_id);
 -- Name: index_site_feedback_feedbacks_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_site_feedback_feedbacks_on_email ON site_feedback_feedbacks USING btree (email);
+CREATE UNIQUE INDEX index_site_feedback_feedbacks_on_email ON site_feedback_feedbacks USING btree (email);
+
+
+--
+-- Name: index_site_feedback_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_site_feedback_feedbacks_on_status ON site_feedback_feedbacks USING btree (status);
 
 
 --
@@ -3499,5 +3508,5 @@ INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 
 INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 
-INSERT INTO schema_migrations (version) VALUES ('20150710183814');
+INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 

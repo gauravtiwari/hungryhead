@@ -3,11 +3,11 @@ class CreateSiteFeedbackFeedbacks < ActiveRecord::Migration
   def change
     create_table :site_feedback_feedbacks do |t|
       t.integer :user_id
-      t.string :email
-      t.string :name
+      t.string :email, null: false, default: ""
+      t.string :name, null: false, default: ""
       t.string :attachment
-      t.text :body
-      t.integer :status
+      t.text :body, null: false, default: ""
+      t.integer :status, default: 0
 
       t.timestamps null: false
     end

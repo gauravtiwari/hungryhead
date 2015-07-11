@@ -40,7 +40,7 @@ module SiteFeedback
 
       # Only allow a trusted parameter "white list" through.
       def feedback_params
-        params.require(:feedback).permit(:name, :email, :body)
+        params.require(:feedback).permit(:name, :email, :body, :attachment)
       end
   end
 end
