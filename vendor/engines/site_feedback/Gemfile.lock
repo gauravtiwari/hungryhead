@@ -3,6 +3,7 @@ PATH
   specs:
     site_feedback (0.0.1)
       browser
+      carrierwave
       devise
       mail_form
       pundit
@@ -52,6 +53,11 @@ GEM
     bcrypt (3.1.10)
     browser (0.8.0)
     builder (3.2.2)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
