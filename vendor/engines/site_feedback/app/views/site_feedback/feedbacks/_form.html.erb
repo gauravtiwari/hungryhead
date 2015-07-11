@@ -1,17 +1,38 @@
-<%= form_for(@feedback) do |f| %>
-  <% if @feedback.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+<%= simple_form_for(@feedback, :html => { :honeypot => true, class: 'site-feedback-form' }, role: 'form', remote: true, class: 'clearfix') do |f| %>
 
-      <ul>
-      <% @feedback.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <h2><%= pluralize(@feedback.errors.count, "error") %> found. Please review and submit again.</h2>
+  <ul class="no-style">
+    <% @feedback.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+
+  <% if current_user %>
+    <div class="form-group">
+      <%= f.input_field :name, as: :hidden, value: "#{current_user.name}", class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.input_field :email, as: :hidden, value: "#{current_user.email}", class: 'form-control', required: true  %>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <label for="feedback_name">Your name</label>
+      <%= f.input_field :name, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <label for="feedback_email">Your email</label>
+      <%= f.input_field :email, class: 'form-control', required: true %>
+    </div>
+    <div class="form-group">
+      <label for="feedback_attachment">Attachment</label>
+      <%= f.input_field :attachment, class: 'form-control', required: true %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group m-t-20">
+    <label for="feedback_body">Your ideas, suggestions and feedbacks</label>
+    <%= f.input_field :body, class: 'form-control m-t-10', required: true %>
+  </div>
+  <div class="form-buttons">
+    <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20' %>
   </div>
 <% end %>

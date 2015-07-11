@@ -32,7 +32,9 @@ PATH
   specs:
     site_feedback (0.0.1)
       browser
+      carrierwave
       devise
+      mail_form
       pundit
       rails
       simple_form

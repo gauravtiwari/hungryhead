@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency "pundit"
   s.add_dependency "unobtrusive_flash"
   s.add_dependency "mail_form"
+  s.add_dependency "carrierwave"
 
   s.add_development_dependency "sqlite3"
 end

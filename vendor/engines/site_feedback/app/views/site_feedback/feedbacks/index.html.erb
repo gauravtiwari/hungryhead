@@ -31,32 +31,7 @@
             Please collaborate with us to build a global platform for students who have potential to change the world.
           </h5>
           <h5 class="m-b-20 b-b b-grey p-b-5 inline"><i class="fa fa-bullhorn"></i> Submit the form</h5>
-          <%= simple_form_for(@feedback, :html => { :honeypot => true, class: 'site-feedback-form' }, role: 'form', remote: true, class: 'clearfix') do |f| %>
-            <% if current_user %>
-              <div class="form-group">
-                <%= f.input_field :name, as: :hidden, value: "#{current_user.name}", class: 'form-control', required: true %>
-              </div>
-              <div class="form-group">
-                <%= f.input_field :email, as: :hidden, value: "#{current_user.email}", class: 'form-control', required: true  %>
-              </div>
-            <% else %>
-              <div class="form-group">
-                <label for="feedback_name">Your name</label>
-                <%= f.input_field :name, class: 'form-control', required: true %>
-              </div>
-              <div class="form-group">
-                <label for="feedback_email">Your email</label>
-                <%= f.input_field :email, class: 'form-control', required: true %>
-              </div>
-            <% end %>
-            <div class="form-group m-t-20">
-              <label for="feedback_body">Your ideas, suggestions and feedbacks</label>
-              <%= f.input_field :body, class: 'form-control m-t-10', required: true %>
-            </div>
-            <div class="form-buttons">
-              <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20' %>
-            </div>
-          <% end %>
+          <%= render partial: 'form' %>
         </div>
       </div>
     </div>
