@@ -19,7 +19,7 @@
   </div>
 
   <section class="story bg-master-lightest">
-    <div class="wrapper-small">
+    <div class="wrapper-lg">
       <div class="col-md-6 auto-margin">
         <h2 class="normal">Stumble and fall</h2>
         <div>
@@ -43,22 +43,22 @@
     </div>
   </section>
   <section class="values bg-white">
-    <div class="wrapper-small overflow-hidden">
+    <div class="wrapper-lg overflow-hidden">
       <div class="col-md-6 auto-margin">
         <p class="fs-16">
-          Hungryhead was founded in late 2012 and since then we have been collaborating and building our platform. It took us a while to get here because we really wanted to learn about the problem in depth and produce a solution that works from the <strong>"ground-up"</strong>. We believe that we now have something that has potential to change the way entrepreneurship has been pursued worldwide.
+          Hungryhead was founded in late 2012, and since then we have been collaborating and developing our idea and platform. It took us a while to get here because, we really wanted to learn about the problem in depth and produce a solution that works from the <strong>"ground-up"</strong>. We believe that we now have something that has potential to change the way entrepreneurship has been pursued worldwide.
         </p>
         <div class="divider b-b b-green b-md b-small m-t-20 m-b-20"></div>
-        <div class="values m-t-40">
+        <div class="values m-t-40 clearfix">
           <h2 class="normal">Our values</h2>
           <h5>
-            We founded our platform on certain values, values that are integral for our platform.
+            We founded our platform on certain values, values that are integral to our platform.
           </h5>
           <div>
             <div class="col-md-6 no-padding p-r-15">
               <h4 class="bold">Collaboration</h4>
               <p class="fs-16 text-master">
-                Collaboration is crucial for everything, to build something useful, something that really solves problem.
+                Collaboration is crucial to build something useful, something that really solves the problem.
               </p>
             </div>
             <div class="col-md-6 no-padding p-l-15">
@@ -70,41 +70,45 @@
             <div class="col-md-6 no-padding p-r-15">
               <h4 class="bold">Trust and Respect</h4>
               <p class="fs-16 text-master">
-                For a successful collaboration it's crucial to have trust and respect for each other ideas and thoughts.
+                For a successful collaboration it's crucial to have trust and respect for each other ideas.
               </p>
             </div>
             <div class="col-md-6 no-padding p-l-15">
               <h4 class="bold">Sharing</h4>
               <p class="fs-16 text-master">
-               Sharing of ideas implies it's growth because they get bigger and clearer when shared.
+               Sharing of ideas implies growth because they get bigger and clearer when shared.
               </p>
             </div>
           </div>
         </div>
+        <h5 class="m-t-20">
+          Hungryhead was founded by <%= link_to('Gaurav Tiwari', 'https://uk.linkedin.com/pub/gaurav-tiwari/16/b02/b88') %> - a graduate computer science student from Lancaster university.
+        </h5>
       </div>
     </div>
   </section>
 
   <div class="page-wrapper horz-section relative">
      <section id="cta" class="cta">
-           <div class="cta-overlay">
-               <div class="container">
-                   <div class="wrapper-small p-b-100">
-                       <div class="row">
-                           <div class="col-md-8 col-md-offset-2 text-center">
-                               <h1 class="text-white bold m-t-20">Lets connect and share ideas</h1>
-                               <p class="fs-16 text-white">Find us on</p>
-                               <div class="social_icons">
-                                 <i class="fa fa-twitter inline fs-40 text-white"></i>
-                                 <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
-                               </div>
+       <div class="cta-overlay">
+           <div class="container">
+               <div class="wrapper-small p-b-100">
+                   <div class="row">
+                       <div class="col-md-8 col-md-offset-2 text-center">
+                           <h1 class="text-white bold m-t-20">
+                            Collaborate with us
+                           </h1>
+                           <p class="fs-16 text-white">Share your ideas and feedbacks here </p>
+                           <div class="social_icons m-t-20">
+                             <%= link_to('Collaborate with us', help.root_path, class: 'btn btn-ghost') %>
                            </div>
                        </div>
-
                    </div>
+
                </div>
            </div>
-       </section>
+       </div>
+      </section>
    </div>
   <div class="clearfix"></div>
   <%= render partial: 'globals/footer' %>

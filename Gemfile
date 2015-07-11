@@ -77,6 +77,9 @@ gem 'sprockets'
 #Nprogress
 gem 'nprogress-rails'
 
+#Mail form
+gem 'mail_form'
+
 #Deal with JSON data
 gem  'hashie'
 
