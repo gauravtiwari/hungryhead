@@ -4,6 +4,7 @@ PATH
     site_feedback (0.0.1)
       browser
       devise
+      mail_form
       pundit
       rails
       simple_form
@@ -47,7 +48,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.0)
+    arel (6.0.2)
     bcrypt (3.1.10)
     browser (0.8.0)
     builder (3.2.2)
@@ -67,6 +68,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mail_form (1.5.1)
+      actionmailer (>= 3.2, < 5)
+      activemodel (>= 3.2, < 5)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
