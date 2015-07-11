@@ -88,7 +88,7 @@ GEM
     ambry (0.3.1)
     ar_transaction_changes (1.0.1)
       activerecord (>= 3.0, < 5.0)
-    arel (6.0.0)
+    arel (6.0.2)
     asset_sync (1.1.0)
       activemodel
       fog (>= 1.8.0)
@@ -204,7 +204,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.2)
+    fog-aws (0.7.3)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -468,7 +468,7 @@ GEM
     redis-session-store (0.8.0)
       actionpack (>= 3, < 5)
       redis
-    ref (1.0.5)
+    ref (2.0.0)
     request_store (1.1.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -477,7 +477,7 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.4.1)
-    sass (3.4.15)
+    sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
