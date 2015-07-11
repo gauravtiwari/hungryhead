@@ -1,11 +1,4 @@
-<%= simple_form_for(@feedback, :html => { :honeypot => true, class: 'site-feedback-form' }, role: 'form', remote: true, class: 'clearfix') do |f| %>
-
-  <h2><%= pluralize(@feedback.errors.count, "error") %> found. Please review and submit again.</h2>
-  <ul class="no-style">
-    <% @feedback.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
+<%= simple_form_for(@feedback, :html => { :honeypot => true, class: 'site-feedback-form', multipart: true }, role: 'form', remote: true, class: 'clearfix') do |f| %>
 
   <% if current_user %>
     <div class="form-group">

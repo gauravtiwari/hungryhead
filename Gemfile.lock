@@ -33,7 +33,9 @@ PATH
     site_feedback (0.0.1)
       browser
       carrierwave
+      carrierwave-mimetype-fu
       devise
+      fog-google
       mail_form
       pundit
       rails

@@ -23,12 +23,14 @@ module SiteFeedback
       @feedback = SiteFeedback::Feedback.new(feedback_params)
       @feedback.request = request
       @feedback.user = current_user if current_user
-      if @feedback.save
-        respond_to do |format|
+      respond_to do |format|
+        if @feedback.save
+          format.html { redirect_to @feedback, notice: 'Thank you so much for your time. We have recieved your feedback.'}
           format.js {render :show, notice: 'Thank you so much for your time. We have recieved your feedback.'}
+        else
+          flash[:notice] = "Something went wrong #{@feedback.errors}"
+          format.json {render json: @feedback.errors}
         end
-      else
-        format.js {render :new, error: 'Something went wrong'}
       end
     end
 
