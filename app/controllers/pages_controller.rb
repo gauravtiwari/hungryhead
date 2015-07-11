@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   end
 
   #support us
-  def support_us
+  def about
   end
 
   #Terms and conditions

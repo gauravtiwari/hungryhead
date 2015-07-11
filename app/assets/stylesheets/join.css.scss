@@ -31,6 +31,7 @@
 .join-photo:before,
 .story-photo:before,
 .support-us-photo:before,
+.about-photo:before,
 .join-mentor-photo:before {
   background: rgba(51, 51, 51, 0.5);
   position: absolute;
@@ -56,6 +57,7 @@
 .learn-photo,
 .join-mentor-photo,
 .how-photo,
+.about-photo,
 .rules-photo,
 .story-photo,
 .support-us-photo,
@@ -104,6 +106,15 @@
   -khtml-background-size: cover;
   background-size: cover;
 }
+.about-photo {
+  background: image-url("explore_path.jpg");
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
 .support-us-photo {
   background: image-url("building-ecosystem.png");
   -webkit-background-size: cover;
@@ -144,6 +155,9 @@
   background: rgba(51, 51, 51, 0.3);
 }
 .support-us-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.about-photo:before {
   background: rgba(51, 51, 51, 0.2);
 }
 .vmiddle {

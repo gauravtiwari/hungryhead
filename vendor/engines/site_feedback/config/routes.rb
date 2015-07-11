@@ -1,4 +1,4 @@
 SiteFeedback::Engine.routes.draw do
   root to: 'feedbacks#index'
-  resources :feedbacks
+  resources :feedbacks, only: [:create]
 end
