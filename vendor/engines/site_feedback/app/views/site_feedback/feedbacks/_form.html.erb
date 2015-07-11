@@ -33,6 +33,6 @@
     <%= f.input_field :body, class: 'form-control m-t-10', required: true %>
   </div>
   <div class="form-buttons">
-    <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20' %>
+    <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20', data: { disable_with: "Submitting. Please wait..." } %>
   </div>
 <% end %>
