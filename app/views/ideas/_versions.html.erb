@@ -1,0 +1,29 @@
+<div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
+  <div class="idea-list">
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2" class="no-padding"><%= is_beta ? 0 : pluralize(@versions.count, 'Result') %> Results</th>
+          <th>Vote to get updates</th>
+          <th class="text-center">Idea Stats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @versions.any? %>
+          <% @versions.each do |version| %>
+            <% cache([version, "version"]) do %>
+              <%= render partial: 'version', locals: {version: version} %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <div class="no-content">No versions yet</div>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="paging-container p-r-15">
+    <%= will_paginate(@versions, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+  </div>
+</div>
+</div>
