@@ -3,7 +3,7 @@
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
         <div class="how-photo">
         <div class="container vmiddle">
-        <div class="col-md-4 auto-margin no-padding <%= browser.mobile? ? 'p-b-40' : ''  %>">
+        <div class="col-md-4 auto-margin no-padding <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
           <div class="hero-section inner text-center">
               <h1 class="text-white">
                 How it works
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="profile-nav displayblock overflow-hidden p-l-15">
+  <div class="profile-nav <%=  browser.mobile? ? 'hidden' : 'displayblock' %> overflow-hidden p-l-15">
     <div class="container text-center">
       <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
         <li class="inline p-l-15 p-r-15">
@@ -66,7 +66,7 @@
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md text-center">
-              <%= image_tag('product/join.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+              <%= image_tag('product/join.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow #{browser.mobile? ? 'hidden' : ''}") %>
             </div>
           </div>
       </div>
@@ -80,7 +80,7 @@
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
             <div class="content-mask-md text-center">
-              <%= image_tag('product/connect-community.png', class: "image-responsive-height auto-width lazy b-lightgrey b-a box-shadow") %>
+              <%= image_tag('product/connect-community.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy b-lightgrey b-a box-shadow") %>
             </div>
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
@@ -112,7 +112,7 @@
           </div>
           <div class="col-sm-5 col-md-offset-2 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
-              <%= image_tag('product/community_connect.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow") %>
+              <%= image_tag('product/community_connect.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow #{browser.mobile? ? 'hidden' : ''}") %>
             </div>
           </div>
       </div>
@@ -129,7 +129,7 @@
               <i class="fa fa-search fs-50"></i>
             </div>
             <div class="content-mask-md m-t-20">
-              <%= image_tag('product/tag.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+              <%= image_tag('product/tag.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : ''} box-shadow lazy b-lightgrey b-a") %>
             </div>
           </div>
           <div class="col-sm-5 col-sm-offset-2">
@@ -158,10 +158,10 @@
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
-              <div class="device_morph pull-center-inner" id="iphone01" data-pages="float" data-max-top-translate="40" data-max-bottom-translate="300" data-speed="-0.1" data-delay="1000" data-curve="ease">
+              <div class="device_morph pull-center-inner">
                 <div class="screen">
                   <div class="iphone-border">
-                    <%= image_tag('product/pitch_idea.png', class: "image-responsive-height auto-width lazy") %>
+                    <%= image_tag('product/pitch_idea.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy") %>
                   </div>
                 </div>
               </div>
@@ -178,7 +178,7 @@
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
             <div class="content-mask-md text-center">
-              <%= image_tag('product/collaboration.png', class: "image-responsive-height auto-width lazy") %>
+              <%= image_tag('product/collaboration.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy") %>
             </div>
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
@@ -210,7 +210,7 @@
           </div>
         <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
           <div class="content-mask-md">
-            <%= image_tag('product/leaderboard.png', class: "image-responsive-height box-shadow lazy b-lightgrey b-a") %>
+            <%= image_tag('product/leaderboard.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : ''} box-shadow lazy b-lightgrey b-a") %>
           </div>
         </div>
       </div>
@@ -223,8 +223,8 @@
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
             <div class="content-mask-md m-t-20 text-center">
-              <%= image_tag('gamification.png', class: "image-responsive-height lazy w110") %>
-              <%= image_tag('product/idea_badges.png', class: "image-responsive-height") %>
+              <%= image_tag('gamification.png', class: "image-responsive-height lazy w110 #{browser.mobile? ? 'hidden' : ''}") %>
+              <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'}") %>
             </div>
           </div>
           <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
