@@ -200,7 +200,7 @@ Rails.application.routes.draw do
       get :card
       get :join_team
       get :comments
-      get :changelogs
+      get :changes
       get :feedbackers
       get :investors
       get :team

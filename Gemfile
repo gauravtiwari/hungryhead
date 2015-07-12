@@ -173,6 +173,8 @@ gem 'react-rails'
 #Parse JSON
 gem 'json'
 
+gem 'diffy'
+
 #JS routes
 gem 'js-routes'
 

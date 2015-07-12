@@ -1,3 +1,4 @@
+<% data = render(template: 'ideas/show.json.jbuilder') %>
 <div class="container p-b-60">
   <div class="col-md-4 col-lg-4 col-sm-4  no-padding p-l-15">
     <%= render partial: 'ideas/sidebar' %>
@@ -6,7 +7,7 @@
   <div class="col-md-8 col-lg-8 col-sm-8">
     <% cache(@idea) do %>
       <div class="auto-height box-shadow ">
-        <%= render partial: 'ideas/header' %>
+        <%= render partial: 'ideas/header', locals: {data: data}  %>
       </div>
     <% end %>
 

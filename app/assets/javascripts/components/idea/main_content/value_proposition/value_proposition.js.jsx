@@ -71,7 +71,7 @@ var ValueProposition = React.createClass({
     if(this.props.idea && this.props.idea.value_proposition) {
       var html = converter.makeHtml(this.props.idea.value_proposition);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe your value offerings. <span>What are you are offering that others are not? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe your value offerings. <span>What are you are offering that others are not? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {
@@ -79,7 +79,7 @@ var ValueProposition = React.createClass({
         <div className="panel box-shadow no-border">
           {error}
           <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
-            <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  List your values</div>
+            <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  List your value propositions</div>
             <div className="panel-controls p-r-60">
             <ul>
               <li>
@@ -100,8 +100,8 @@ var ValueProposition = React.createClass({
     } else {
        return (
      <div className="panel bg-white box-shadow no-border">
-        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
-          <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  Values</div>
+        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
+          <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-heart text-danger"></i>  Value Propositions</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">
           <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>

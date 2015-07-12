@@ -16,7 +16,6 @@ var OpenCollaborationBox = React.createClass({
     return(
     <button className="collaboration-button" id="open-collaboration" onClick={this.OpenCollaboration}>
 			<i className="fa fa-fw fa-users"></i>
-			<span className="notifications-count">5</span>
 			<span>Chat</span>
 		</button>
       )

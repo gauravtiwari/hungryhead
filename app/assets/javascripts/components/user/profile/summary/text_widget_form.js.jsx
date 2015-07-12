@@ -20,7 +20,7 @@ var TextWidgetForm = React.createClass({
 
 
     var save_button_class = cx({
-      "btn btn-success m-r-10": true,
+      "main-button bold m-r-10": true,
       "disabled": this.state.text.length > 1500 || this.state.text.length < 500
     });
 

@@ -65,12 +65,11 @@ var Market = React.createClass({
     }
 
     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit market</span>;
-
     if(this.props.idea && this.props.idea.market) {
       var html = converter.makeHtml(this.props.idea.market);
       var market_classes = "section-content market";
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";
       var market_classes = "section-content canvas-placeholder sales-marketing market";
     }
 
@@ -100,7 +99,7 @@ var Market = React.createClass({
     } else {
        return (
       <div className="panel bg-white box-shadow no-border">
-        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
           <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-globe text-danger"></i> Market</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">

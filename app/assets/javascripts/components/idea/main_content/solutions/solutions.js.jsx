@@ -71,7 +71,7 @@ var Solutions = React.createClass({
     if(this.props.idea && this.props.idea.solutions) {
       var html = converter.makeHtml(this.props.idea.solutions);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe/List your solution. <span>What is different or unique? </span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe/List your solution. <span>What is different or unique? </span> </div>";
     }
 
     if(this.props.meta.is_owner) {
@@ -100,7 +100,7 @@ var Solutions = React.createClass({
     } else {
        return (
        <div className="panel bg-white box-shadow no-border">
-        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
           <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-smile-o text-danger"></i>  Solution</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">

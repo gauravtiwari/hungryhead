@@ -37,7 +37,7 @@ var BusinessModelForm = React.createClass({
   _onKeyDown: function(event) {
       event.preventDefault();
       var formData = $( this.refs.business_model_form.getDOMNode() ).serialize();
-      this.props.handleMarketSubmit(formData, {text: this.refs.description.getDOMNode().value});
+      this.props.handleBusinessModelSubmit(formData, {text: this.refs.description.getDOMNode().value});
   }
 
 });

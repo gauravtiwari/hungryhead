@@ -166,6 +166,7 @@ GEM
     devise_uid (0.1.1)
       devise (>= 3.0.0)
       railties (>= 3.0)
+    diffy (3.0.7)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -583,6 +584,7 @@ DEPENDENCIES
   devise
   devise_invitable
   devise_uid
+  diffy
   em-http-request
   execjs
   figaro

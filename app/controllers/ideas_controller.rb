@@ -134,7 +134,7 @@ class IdeasController < ApplicationController
   end
 
   # GET /ideas/1/changelog
-  def changelogs
+  def changes
     @versions = @idea.versions.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html

@@ -17,7 +17,11 @@ class IdeaPolicy < ApplicationPolicy
     show?
   end
 
-  def changelogs?
+  def changes?
+    update?
+  end
+
+  def activities?
     show?
   end
 

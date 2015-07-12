@@ -75,7 +75,7 @@ var IdeaEditForm = React.createClass({
             return object.text;
           },
           initSelection: function (element, callback) {
-            var markets = self.props.idea.market.map(function(market){
+            var markets = self.props.idea.markets.map(function(market){
               return {id: Math.random(), text: market.name}
             });
             callback(markets);
@@ -138,11 +138,11 @@ var IdeaEditForm = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
 
-    var markets = this.props.idea.market.map(function(market){
+    var markets = this.props.idea.markets.map(function(market){
       return market.name
     });
 
-    var locations = this.props.idea.location.map(function(location){
+    var locations = this.props.idea.locations.map(function(location){
       return location.name;
     });
 

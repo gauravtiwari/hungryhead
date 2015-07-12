@@ -70,7 +70,7 @@ var BusinessModel = React.createClass({
       var html = converter.makeHtml(this.props.idea.business_model);
       var business_model_classes = "section-content business model";
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the business model for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe the business model for your idea. <span>How will you make revenue from your idea? etc.</span> </div>";
       var business_model_classes = "section-content canvas-placeholder sales-business business-model";
     }
 
@@ -100,7 +100,7 @@ var BusinessModel = React.createClass({
     } else {
        return (
       <div className="panel bg-white box-shadow no-border">
-        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+        <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
           <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-globe text-danger"></i> BusinessModel</div>
         </div>
         <div className="panel-body p-l-60 p-r-60 text-master">

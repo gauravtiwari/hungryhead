@@ -70,7 +70,7 @@ var Problems = React.createClass({
     if(this.props.idea && this.props.idea.problems) {
       var html = converter.makeHtml(this.props.idea.problems);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the problems you have identified. <span>How others are solving, if any? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe the problems you have identified. <span>How others are solving, if any? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {
@@ -99,7 +99,7 @@ var Problems = React.createClass({
     } else {
        return (
         <div className="panel bg-white box-shadow no-border">
-          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
             <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-frown-o text-danger"></i>  Problem</div>
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">

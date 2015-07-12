@@ -3,7 +3,7 @@
     <div class="col-md-6 no-padding p-l-15">
         <ul class="profile-name inline no-style no-margin p-t-15 p-b-15">
           <li class="inline b-r b-grey b-dashed p-r-15">
-            <div class="thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white">
+            <div class="thumbnail-wrapper absolute m-r-5 d32 circular">
             <%= link_to(profile_path(@idea.fetch_user), :"data-popover-href" => "#{profile_card_path(@idea.fetch_user)}", class: 'load-card inline') do %>
             <% if @idea.fetch_user.avatar.present? %>
               <%= image_tag(@idea.fetch_user.avatar.url(:avatar), :"data-src" => "#{@idea.fetch_user.avatar.url(:avatar)}", :"data-src-retina" => "#{@idea.fetch_user.avatar.url(:square)}", width: "32", height: "32") %>
@@ -30,6 +30,9 @@
         <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
         <%= react_component('InvestButton',{ :invested => @idea.invested?(current_user), idea: invested? }) %>
       <% else %>
+        <%= link_to(changes_idea_path(@idea), class: 'main-button bold pull-right fs-13 m-r-10') do %>
+        <span class="fa fa-list"></span> Changes
+        <% end %>
         <% publish_path = @idea.published? ? unpublish_idea_path(@idea) : publish_idea_path(@idea) %>
         <%= react_component('PublishIdeaButton', {published: @idea.published?, url: publish_path, profile_complete: @idea.profile_complete?, is_team: @idea.team?, current_privacy: @idea.privacy, is_public:@idea.everyone?})%>
       <% end %>

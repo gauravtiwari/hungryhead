@@ -15,6 +15,25 @@ body, p {
 body.show-collaboration {
   overflow: hidden;
 }
+.diff ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+.diff ins,
+.diff del {
+  text-decoration: none;
+  font-size: 14px;
+}
+.diff li {
+  margin-bottom: 10px;
+}
+.diff .symbol {
+  margin-right: 10px;
+  color: #00b27f;
+  font-weight: bold;
+}
 .trending-list li:first-child {
   padding-top: 10px;
 }
@@ -372,7 +391,7 @@ input.error:-webkit-autofill {
   background: #33cc66;
   border: 1px solid #33cc66;
   color: #fff;
-  padding: 4px 8px;
+  padding: 5px 8px;
   text-align: center;
 }
 .bg-green {

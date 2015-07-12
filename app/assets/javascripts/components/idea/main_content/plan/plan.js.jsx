@@ -49,7 +49,7 @@ var Plan = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'idea-plan fs-16': true,
+      'idea-plan': true,
       'hidden': this.state.editable,
       'show': !this.state.editable
     });
@@ -63,7 +63,7 @@ var Plan = React.createClass({
     if(this.props.idea.description) {
       var html = converter.makeHtml(this.props.idea.description);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Summarize your idea. <span>What is it you are building?</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Summarize your idea. <span>What is it you are building?</span> </div>";
     }
 
 
@@ -93,7 +93,7 @@ var Plan = React.createClass({
     } else {
        return (
       <div className="panel bg-white box-shadow no-border">
-          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-10">
+          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
             <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Idea</div>
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">

@@ -46,9 +46,9 @@ var PublishIdeaButton = React.createClass({
 
     var cx = React.addons.classSet;
     var classes = cx({
-      'btn btn-sm fs-13 padding-5 p-l-10 p-r-10 m-r-10 pull-right': true,
-      'privacy-team btn-info': !this.state.is_public,
-      'privacy-public btn-success': this.state.is_public
+      'main-button pointer fs-13 m-r-10 bold pull-right': true,
+      'privacy-team': !this.state.is_public,
+      'privacy-public bg-green text-white': this.state.is_public
     });
 
     var icon_class = cx({

@@ -1,5 +1,4 @@
-<% data = Oj.dump(render(template: 'ideas/show.json.jbuilder'), mode: :compat) %>
-
+<% data = render(template: 'ideas/show.json.jbuilder') %>
 <div class="container p-b-60">
   <div class="col-md-4 col-lg-4 col-sm-4 no-padding p-l-15">
     <%= render partial: 'ideas/sidebar' %>
