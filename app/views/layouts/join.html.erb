@@ -32,7 +32,7 @@
 
   </head>
 
-  <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
+  <body class="fixed-header menu-behind no-header <%= controller_name %> <%= action_name %>">
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>

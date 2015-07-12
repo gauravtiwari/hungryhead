@@ -70,6 +70,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:status, :title, :description, :address, :start_time, :end_time, :eventable_id, :eventable_type)
+      params.require(:event).permit(:status, :title, :description, :address,
+      :start_time, :end_time, :eventable_id, :eventable_type)
     end
 end
