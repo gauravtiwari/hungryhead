@@ -24,7 +24,7 @@
     <div class="container">
       <div class="md-p-l-20 xs-no-padding clearfix">
         <div class="col-sm-4 no-padding">
-          <div class="p-r-40 md-pr-30 text-center">
+          <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
             <%= image_tag('badges/welcome.png', class: "m-b-20") %>
             <h6 class="block-title p-b-5">Community <i class="pg-arrow_right m-l-10"></i></h6>
               <p class="m-b-30 font-opensans">
@@ -34,7 +34,7 @@
           <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
         </div>
         <div class="col-sm-4 no-padding">
-          <div class="p-r-40 md-pr-30 text-center">
+          <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
             <%= image_tag('badges/top_comments.png', class: "m-b-20") %>
             <h6 class="block-title p-b-5">Collaboration <i class="pg-arrow_right m-l-10"></i></h6>
               <p class="m-b-30 font-opensans">
@@ -44,7 +44,7 @@
           <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
         </div>
         <div class="col-sm-4 no-padding">
-          <div class="p-r-40 md-pr-30 text-center">
+          <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
             <%= image_tag('badges/cup.png', class: "m-b-20") %>
             <h6 class="block-title p-b-5">Gamification <i class="pg-arrow_right m-l-10"></i></h6>
             <p class="m-b-30 font-opensans">
@@ -71,8 +71,8 @@
             </h5>
           </div>
           <div class="col-sm-6 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
-            <div class="content-mask-md text-center  auto-width">
-              <%= image_tag('cross-pollination-world.png', class: "image-responsive-height auto-width lazy") %>
+            <div class="content-mask-md text-center">
+              <%= image_tag('cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy") %>
             </div>
           </div>
       </div>
@@ -86,7 +86,7 @@
       <div class="md-p-l-20 md-p-r-20 xs-no-padding">
           <div class="col-sm-5">
             <div class="content-mask-md text-center">
-              <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy auto-width") %>
+              <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy #{browser.mobile? ? 'hidden' : 'auto-width'}") %>
             </div>
           </div>
           <div class="col-sm-6 col-md-offset-1 xs-p-l-15 xs-p-r-15">
@@ -119,8 +119,8 @@
           </div>
           <div class="col-sm-6 col-md-offset-1 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md text-center m-t-20">
-              <%= image_tag('gamification.png', class: "image-responsive-height auto-width lazy w110") %>
-              <%= image_tag('product/idea_badges.png', class: "image-responsive-height auto-width lazy") %>
+              <%= image_tag('gamification.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy w110") %>
+              <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy") %>
             </div>
           </div>
       </div>
