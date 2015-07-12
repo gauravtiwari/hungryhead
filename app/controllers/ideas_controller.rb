@@ -133,6 +133,15 @@ class IdeasController < ApplicationController
     end
   end
 
+  # GET /ideas/1/changelog
+  def changelogs
+    @versions = @idea.versions.paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # POST /ideas
   # POST /ideas.json
   def create

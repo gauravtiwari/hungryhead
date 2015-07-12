@@ -80,7 +80,7 @@ class Idea < ActiveRecord::Base
   cache_index :school_id
 
   #Includes modules
-  has_paper_trail :only => [:name, :description, :elevator_pitch,
+  has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch,
     :high_concept_pitch, :sections]
 
   #Store accessor for JSON columns

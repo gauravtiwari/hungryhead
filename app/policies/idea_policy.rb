@@ -17,6 +17,10 @@ class IdeaPolicy < ApplicationPolicy
     show?
   end
 
+  def changelogs?
+    show?
+  end
+
   def publish?
   	show?
   end

@@ -63,11 +63,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert:  "You are already logged in" unless !user_signed_in?
   end
 
+  def user_for_paper_trail
+    user_signed_in? ? current_user.try(:id) : 'Unknown user'
+  end
 
   def info_for_paper_trail
     {
       user_name: current_user.name,
       user_avatar: current_user.avatar.url(:avatar),
+      name_badge: current_user.user_name_badge,
       owner_url: profile_path(current_user)
     } if current_user
   end
