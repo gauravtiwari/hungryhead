@@ -10,6 +10,7 @@ class CreateVersions < ActiveRecord::Migration
       t.string   :whodunnit
       t.string :user_name
       t.string :user_avatar
+      t.string :name_badge
       t.string :owner_url
       t.json :object_changes
       t.json     :object

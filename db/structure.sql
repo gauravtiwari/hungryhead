@@ -1595,6 +1595,7 @@ CREATE TABLE versions (
     whodunnit character varying,
     user_name character varying,
     user_avatar character varying,
+    name_badge character varying,
     owner_url character varying,
     object_changes json,
     object json,
