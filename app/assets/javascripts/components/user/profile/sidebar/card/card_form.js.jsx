@@ -439,8 +439,8 @@ var CardForm = React.createClass({
                               </div>
 
                               <div className="m-t-20 pull-right">
-                                <button name="commit" className="btn btn-success btn-sm fs-13"><i className={loadingClass}></i> Save</button>
-                                <a onClick={this.props.closeForm} id="cancel-edit-profile" className="btn btn-danger btn-sm fs-13 m-l-10">Cancel</a>
+                                <button name="commit" className="main-button bold fs-13"><i className={loadingClass}></i> <i className="fa fa-check-circle"></i> Save</button>
+                                <a onClick={this.props.closeForm} id="cancel-edit-profile" className="main-button bold fs-13 m-l-10"> <i className="fa fa-remove"></i> Cancel</a>
                               </div>
                             </div>
                           </form>

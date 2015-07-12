@@ -54,7 +54,7 @@ var CommentForm = React.createClass({
         <textarea className="form-control empty" onFocus={this.loadMentionables} ref="body" name="comment[body]" placeholder="Write your comment..." autofocus />
         <input ref="commentable_id" type="hidden" value= { this.props.form.commentable_id } name= "comment[commentable_id]"/>
         <input ref="commentable_type" type="hidden" value= { this.props.form.commentable_type } name= "comment[commentable_type]" />
-        <button type="submit" id="post_comment" className="main-button m-t-10 pull-right"><i className={this.props.loading}></i> Post</button>
+        <button type="submit" id="post_comment" className="main-button bold m-t-10 pull-right"><i className={this.props.loading}></i> <i className="fa fa-comment"></i> Post</button>
       </form>
       </div>
     </article>

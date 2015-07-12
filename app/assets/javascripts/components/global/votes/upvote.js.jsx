@@ -56,10 +56,10 @@ var Upvote = React.createClass({
     });
 
     var button_classes = cx({
-      'btn btn-sm fs-13 p-l-10 p-r-10 padding-5 pull-right text-white m-r-10': true,
+      'main-button fs-13 bold pull-right text-white m-r-10': true,
       'disabled': this.state.disabled,
-      'btn-info': !this.state.voted,
-      'btn-green semi-bold': this.state.voted
+      'text-brand': !this.state.voted,
+      'voted text-white': this.state.voted
     });
 
     var text = this.state.voted ? 'You voted this' : 'Click to vote';

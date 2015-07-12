@@ -15,10 +15,18 @@ class PagesController < ApplicationController
 
   #Community rules
   def community_guidelines
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   #Terms and conditions
   def terms
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   #Why page
@@ -27,6 +35,10 @@ class PagesController < ApplicationController
 
   #Privacy policy page
   def privacy
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def support

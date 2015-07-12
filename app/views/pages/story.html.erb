@@ -1,4 +1,5 @@
 <div class="learn-wrapper bg-white">
+
   <div class="learn">
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
         <div class="story-photo inner">
@@ -19,71 +20,16 @@
   </div>
 
   <section class="story bg-master-lightest">
-    <div class="wrapper-lg">
+    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
       <div class="col-md-6 auto-margin">
-        <h2 class="normal">Stumble and fall</h2>
-        <div>
-          <p class="m-t-20 fs-16 text-master">
-            Every entrepreneur starts with an idea - that needs validation and collaboration with the right people to bring it alive.  We can all recall ideas that haven't taken off or consumed time, money and resources because we weren’t able to validate and collaborate early on. On the flip side there are many of us who have a passion and urge to be more entrepreneurial - but don't have the idea, yet have loads to offer.
-          </p>
-          <p class="m-t-20 fs-16 text-master">
-            <strong>In early 2011,</strong> while studying at university something similar happened with us. We were in first year of our computer science course, practically had no startup experience. We learned our first startup idea and just jumped into building it - overdrew 1.8K from the bank, optimistically thinking that we will get some funding from the university and spent next 4 months building this idea. Later, we were refused funding and consequently, financially broke, so we decided to drop the idea and move on.
-          </p>
-          <p class="m-t-20 fs-16 text-master">
-            Couple of months later, after reflecting on what went wrong, we thought the problem was funding so, we started building a crowdfunding platform (Fundded) to solve the funding problem for students but, this time we collaborated from the start and shared the idea with as many people as possible and got many feedbacks. <strong>In the process,</strong> we discovered it was not the funding that was the problem but the lack of collaboration and validation - the initial but, the most important step before getting started.
-          </p>
-          <p class="bold m-t-20 fs-16">And, hungryhead was born!</p>
-
-          <h5 class="m-t-20 bold">
-            We built hunrgyhead to bridge the gap - something we did not had access to when we were starting out as student entrepreneurs.
-          </h5>
-        </div>
-        <div class="divider b-b b-green b-md b-small m-t-20"></div>
+        <%= render partial: 'pages/content/story' %>
       </div>
     </div>
   </section>
   <section class="values bg-white">
-    <div class="wrapper-lg overflow-hidden">
+    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %> overflow-hidden">
       <div class="col-md-6 auto-margin">
-        <p class="fs-16">
-          Hungryhead was founded in late 2012, and since then we have been collaborating and developing our idea and platform. It took us a while to get here because, we really wanted to learn about the problem in depth and produce a solution that works from the <strong>"ground-up"</strong>. We believe that we now have something that has potential to change the way entrepreneurship has been pursued worldwide.
-        </p>
-        <div class="divider b-b b-green b-md b-small m-t-20 m-b-20"></div>
-        <div class="values m-t-40 clearfix">
-          <h2 class="normal">Our values</h2>
-          <h5>
-            We founded our platform on certain values, values that are integral to our platform.
-          </h5>
-          <div>
-            <div class="col-md-6 no-padding p-r-15">
-              <h4 class="bold">Collaboration</h4>
-              <p class="fs-16 text-master">
-                Collaboration is crucial to build something useful, something that really solves the problem.
-              </p>
-            </div>
-            <div class="col-md-6 no-padding p-l-15">
-              <h4 class="bold">Global diversity</h4>
-              <p class="fs-16 text-master">
-                The world is built from whole, not the part. We co-exist together and together we can solve real problems.
-              </p>
-            </div>
-            <div class="col-md-6 no-padding p-r-15">
-              <h4 class="bold">Trust and Respect</h4>
-              <p class="fs-16 text-master">
-                For a successful collaboration it's crucial to have trust and respect for each other ideas.
-              </p>
-            </div>
-            <div class="col-md-6 no-padding p-l-15">
-              <h4 class="bold">Sharing</h4>
-              <p class="fs-16 text-master">
-               Sharing of ideas implies growth because they get bigger and clearer when shared.
-              </p>
-            </div>
-          </div>
-        </div>
-        <h5 class="m-t-20">
-          Hungryhead was founded by <%= link_to('Gaurav Tiwari', 'https://uk.linkedin.com/pub/gaurav-tiwari/16/b02/b88') %> - a graduate computer science student from Lancaster university.
-        </h5>
+        <%= render partial: 'pages/content/values' %>
       </div>
     </div>
   </section>
@@ -110,7 +56,9 @@
        </div>
       </section>
    </div>
+
   <div class="clearfix"></div>
   <%= render partial: 'globals/footer' %>
+
 </div>
 

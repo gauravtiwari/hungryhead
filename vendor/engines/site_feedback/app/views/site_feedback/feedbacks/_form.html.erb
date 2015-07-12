@@ -16,17 +16,17 @@
       <label for="feedback_email">Your email</label>
       <%= f.input_field :email, class: 'form-control', required: true %>
     </div>
-    <div class="form-group">
-      <label for="feedback_attachment">Attachment</label>
-      <span class="help">optional</span>
-      <%= f.input_field :attachment, as: :file, class: 'form-control' %>
-    </div>
   <% end %>
   <div class="form-group m-t-20">
     <label for="feedback_body">Your ideas, suggestions and feedbacks</label>
     <%= f.input_field :body, class: 'form-control m-t-10', required: true %>
   </div>
+  <div class="form-group">
+    <label for="feedback_attachment">Attachment</label>
+    <span class="help">optional</span>
+    <%= f.input_field :attachment, as: :file, class: 'form-control' %>
+  </div>
   <div class="form-buttons">
-    <%= f.button :submit, value: 'Submit', class: 'btn btn-green text-white pull-right btn-sm fs-13 m-t-20', data: { disable_with: "Submitting. Please wait..." } %>
+    <%= f.button :submit, value: 'Submit', class: 'main-button pull-right bold fs-13 m-t-20', data: { disable_with: "Submitting. Please wait..." } %>
   </div>
 <% end %>

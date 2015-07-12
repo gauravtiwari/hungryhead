@@ -44,10 +44,10 @@ var Follow = React.createClass({
       });
     } else {
       var classes = cx({
-        'btn btn-sm fs-13 p-l-10 p-r-10 padding-5 pull-right text-white m-r-10': true,
+        'main-button fs-13 bold pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
-        'btn-info': !this.state.follow,
-        'btn-green semi-bold': this.state.follow
+        'text-brand': !this.state.follow,
+        'followed text-white semi-bold': this.state.follow
       });
     }
 

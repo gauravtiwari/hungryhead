@@ -24,7 +24,9 @@
   </table>
 </div>
 <% if @students.size > 10 %>
-  <div class="text-center m-t-20">
-    <%= link_to("Browse all from #{@school.name}", profile_people_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
+  <div class="text-center m-t-20 p-b-50">
+    <%= link_to(profile_people_path(@school), class: "main-button bold fs-13 pull-right") do %>
+      Browse all <span class="fa fa-chevron-circle-right"></span>
+    <% end %>
   </div>
 <% end %>

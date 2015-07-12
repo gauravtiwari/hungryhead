@@ -84,6 +84,16 @@ var RegisterationForm = React.createClass({
     }
   },
 
+  loadTerms: function(e) {
+    e.preventDefault();
+    $.getScript(Routes.terms_path());
+  },
+
+  loadPrivacy: function(e){
+    e.preventDefault();
+    $.getScript(Routes.privacy_path());
+  },
+
   onEmailChange: function(e) {
    data = {
       email: e.target.value
@@ -141,7 +151,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12 col-md-12">
             <div className="form-group">
               <label>Select your University/College</label>
-              <span className="help">eg: 'only UK universities for now'</span>
+              <span className="help"> eg: 'only UK universities for now'</span>
               <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
               <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
             </div>
@@ -184,7 +194,7 @@ var RegisterationForm = React.createClass({
           <div className="col-md-6 col-md-6">
             <div className="checkbox check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
-              <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
+              <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a>.</label>
             </div>
           </div>
          <div className="pull-right">

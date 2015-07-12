@@ -34,43 +34,10 @@
 
   </head>
 
-  <body class="fixed-header">
-    <div class="page-sidebar" data-pages="sidebar">
-      <div id="appMenu" class="sidebar-overlay-slide from-top">
-      </div>
-      <!-- BEGIN SIDEBAR HEADER -->
-      <div class="sidebar-header text-center bg-solid-dark">
-        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="22">
-      </div>
-      <!-- END SIDEBAR HEADER -->
-      <!-- BEGIN SIDEBAR MENU -->
-      <div class="sidebar-menu">
-        <ul class="menu-items">
-          <li class="m-t-30">
-            <a href="#" class="detailed">
-              <span class="title">Story</span>
-            </a>
-          </li>
-          <li class="">
-            <a href="#">
-              <span class="title">Get Started</span>
-            </a>
-          </li>
-
-          <li class="">
-            <a href="#">
-              <span class="title">Questions</span>
-            </a>
-          </li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-      <!-- END SIDEBAR MENU -->
-    </div>
-    <!-- END SIDEBAR -->
+  <body class="fixed-header menu-behind <%= 'no-header' if params[:action] == 'home' %> <%= controller_name %> <%= action_name %>">
     <div class="page-container">
       <% if params[:action] == "home" %>
-       <%= render partial: 'globals/guest_nav_tablet' %>
+       <%= render partial: 'globals/guest_nav' %>
       <% else %>
         <%= render partial: 'globals/page_nav_tablet' %>
       <% end %>

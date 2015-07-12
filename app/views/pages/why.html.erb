@@ -22,29 +22,9 @@
   </div>
 
   <div class="what-section bg-white p-b-100">
-    <div class="wrapper-lg">
+    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
       <div class="col-md-6 auto-margin">
-        <h3 class="semi-bold">Culmination of our quest to start a company</h3>
-        <div class="m-t-20">
-          <p class="fs-16 text-master">
-            Most of the entrepreneurs when they start out don't pay much attention to the problem they are solving, even when they do, it's partial. That's why most of them end up building unnecessary products - wasting resources, energy and time. The fundamental problem we discovered was -
-            <strong>lack of initial collaboration with right people and idea validation.</strong>
-          </p>
-
-          <p class="fs-16 text-master m-t-20">
-            We found the solutions currently available in the market are - either <em>impractical</em> or only available to a few <em>"elites"</em>. We set out to solve this problem from <strong>"Ground Up"</strong> and that's when we found hungryhead. We believe to solve this problem we must have a completely different approach towards entrepreneurship, approach where there is collaboration, not bounded by time or location or qualifications. Approach where everyone work together to dissect the idea, solve real problems and achieve shared gloals.
-          </p>
-
-          <p class="fs-16 text-master m-t-20">
-            Hungryhead brings together serious entrepreneurial students from schools, colleges and universities worldwide to share, collaborate and validate startup ideas by creating a culture of cross-pollination.
-          </p>
-          <h5 class="bold m-t-20">
-            We have built something that we believe could change the way entrepreneurship has been pursued worldwide.
-          </h5>
-          <div class="divider b-b b-green b-md b-small m-t-20"></div>
-
-        </div>
-
+        <%= render partial: 'pages/content/why' %>
       </div>
     </div>
   </div>

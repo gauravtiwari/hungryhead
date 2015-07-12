@@ -387,6 +387,7 @@ input.error:-webkit-autofill {
 }
 .main-button.followed,
 .main-button.published,
+.main-button.voted,
 .main-button.privacy-public {
   background: #33cc66;
   border: 1px solid #33cc66;
@@ -646,7 +647,6 @@ ul.reactions > div {
   font-weight: normal;
 }
 .popover-card-logo span {
-  color: #999;
   font-size: 12px;
 }
 .popover-card-stats {
@@ -700,11 +700,8 @@ ul.reactions > div {
 .card-follow-button {
   margin-top: 10px;
 }
-.card-follow-button .btn {
+.card-follow-button button {
   float: none!important;
-}
-.card-follow-button .btn span {
-  color: #fff;
 }
 .stastics-list {
   display: flex;

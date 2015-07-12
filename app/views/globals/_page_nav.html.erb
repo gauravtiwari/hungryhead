@@ -128,7 +128,10 @@
                 <% end %>
               <% end %>
 
-              <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
+              <li>
+                <%= link_to(site_feedback.root_path) do %>
+                  <i class="pg-outdent"></i> Report a problem
+                <% end %>
               </li>
               <li class="bg-master-lighter">
                 <%= link_to(main_app.destroy_user_session_path, class: "clearfix") do %>

@@ -69,19 +69,23 @@
 }
 
 @media (max-width: 768px) {
+  body.no-header.pages.home .header {
+    background: transparent!important;
+  }
   .slider-caption {
     padding-top: 30%;
   }
   .splash-wrapper {
-    background: image-url('banner_1.jpg') no-repeat;
+    background: image-url('home_banner.jpg') no-repeat;
     height: 100%;
   }
 }
 
 @media (max-width: 568px) {
   .splash-wrapper {
-    background: image-url('banner_1.jpg') no-repeat;
+    background: image-url('home_banner.jpg') no-repeat;
     height: 170vh;
+    background-position: 60% 60%;
   }
   .slider-caption {
     padding-bottom: 60px;
@@ -102,8 +106,9 @@
     padding-top: 10%;
   }
   .splash-wrapper {
-    background: image-url('banner_1.jpg') no-repeat;
+    background: image-url('home_banner.jpg') no-repeat;
     height: 110vh;
+    background-position: 60% 60%;
   }
   .jumbotron h1 {
     font-size: 35px;
