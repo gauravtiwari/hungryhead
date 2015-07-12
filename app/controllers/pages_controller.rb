@@ -1,8 +1,5 @@
 class PagesController < ApplicationController
 
-  caches_action :home, :story, :community_guidelines, :terms, :why, :privacy,
-  :cookies, :how_it_works, :product, :get_started, :upgrade_browser, :learn
-
   layout "home"
 
   #Index page to handle home and after login route

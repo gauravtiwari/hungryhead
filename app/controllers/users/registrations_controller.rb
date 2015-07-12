@@ -2,8 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
   respond_to :json
 
-  caches_action :new
-
   layout 'join'
 
   def new

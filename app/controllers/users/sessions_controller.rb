@@ -1,8 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
 	respond_to :json
 
-	caches_action :new
-
 	layout 'join'
 
 	def new

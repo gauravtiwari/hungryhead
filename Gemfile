@@ -208,9 +208,6 @@ gem 'asset_sync'
 #Sitemap
 gem 'sitemap_generator'
 
-#Action caching
-gem 'actionpack-action_caching'
-
 #Background Job processing
 gem 'sidekiq'
 
