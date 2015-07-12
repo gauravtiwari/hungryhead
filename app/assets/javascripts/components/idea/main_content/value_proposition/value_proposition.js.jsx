@@ -68,8 +68,8 @@ var ValueProposition = React.createClass({
 
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit values</span>;
 
-    if(this.props.idea.sections && this.props.idea.sections.value_proposition) {
-      var html = converter.makeHtml(this.props.idea.sections.value_proposition);
+    if(this.props.idea && this.props.idea.value_proposition) {
+      var html = converter.makeHtml(this.props.idea.value_proposition);
     } else {
       var html = "<div class='no-content text-center fs-16 light'>Describe your value offerings. <span>What are you are offering that others are not? etc.</span> </div>";
     }

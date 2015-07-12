@@ -16,7 +16,14 @@ class CreateIdeas < ActiveRecord::Migration
       t.text :elevator_pitch, default: "", null: false
 
       t.text :description, default: ""
-
+      t.string :video
+      t.text :video_html
+      t.text :market
+      t.text :problems
+      t.text :solutions
+      t.text :vision
+      t.text :value_proposition
+      t.text :business_model
       t.string :logo
       t.string :cover
 
@@ -39,7 +46,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.jsonb :settings, default: "{}"
       t.jsonb  :media, :default => "{}"
       t.jsonb :profile, default: "{}"
-      t.jsonb :sections, default: "{}"
+
       t.jsonb :fund, default: "{}"
 
       t.string :cached_location_list

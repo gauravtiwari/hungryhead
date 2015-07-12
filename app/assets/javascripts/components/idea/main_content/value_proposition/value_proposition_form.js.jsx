@@ -12,8 +12,8 @@ var ValuePropositionForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    if(this.props.idea.sections && this.props.idea.sections.value_proposition) {
-      var value_proposition = this.props.idea.sections.value_proposition;
+    if(this.props.idea && this.props.idea.value_proposition) {
+      var value_proposition = this.props.idea.value_proposition;
     } else {
       var value_proposition = "";
     }

@@ -1,11 +1,11 @@
 <tr class="full-border-light-bottom">
   <td class="p-t-25 no-border">
     <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
-     <% if version.user_avatar.present? %>
+     <% if version.last.user_avatar.present? %>
        <%= image_tag(version.user_avatar) %>
      <% else %>
        <span class="placeholder bold text-white">
-         <%= version.name_badge.upcase %>
+         <%= version.last.name_badge.upcase %>
        </span>
      <% end %>
      </div>
@@ -16,15 +16,15 @@
     </h5>
     <span class="inline small-text m-l-10 semi-bold">
       made by :
-      <%= link_to(profile_path(version.owner_url)) do %>
-           <%= version.user_name %>
+      <%= link_to(profile_path(version.last.owner_url)) do %>
+           <%= version.last.user_name %>
       <% end %>
     </span>
     <p class="fs-14 m-t-5">
-      <%= version.changeset %>
+      <%= version.map{|v| v.object_changes.keys} %>
     </p>
   </td>
   <td style="display:table-cell; vertical-align:middle;  min-width: 200px;" class="no-border text-center no-padding p-l-20">
-    <%= local_time_ago(version.created_at) %>
+    <%= local_time_ago(version.last.created_at) %>
   </td>
 </tr>

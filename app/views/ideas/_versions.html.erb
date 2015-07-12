@@ -1,5 +1,5 @@
-<div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
-  <div class="idea-list">
+<div class="p-t-40 p-b-80" id="<%= controller_name %>_listing">
+  <div class="versions-list">
   <div class="col-md-12">
     <table class="table">
       <thead>
@@ -11,9 +11,9 @@
       </thead>
       <tbody>
         <% if @versions.any? %>
-          <% @versions.each do |version| %>
+          <% @versions.group_by(&:whodunnit).each do |user, version| %>
             <% cache([version, "version"]) do %>
-              <%= render partial: 'version', locals: {version: version} %>
+              <%= render partial: 'version', locals: {version: version, user: user} %>
             <% end %>
           <% end %>
         <% else %>

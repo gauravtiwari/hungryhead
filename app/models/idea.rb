@@ -81,7 +81,8 @@ class Idea < ActiveRecord::Base
 
   #Includes modules
   has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch,
-    :high_concept_pitch, :sections]
+    :high_concept_pitch, :video, :video_html, :market, :problems,
+  :solutions, :vision, :value_proposition, :business_model]
 
   #Store accessor for JSON columns
   store_accessor :fund, :balance
@@ -92,9 +93,7 @@ class Idea < ActiveRecord::Base
   :website
 
   store_accessor :media, :logo_position, :cover_position,
-  :cover_left, :cover_prcessing, :logo_processing, :logo_tmp, :cover_tmp
-
-  store_accessor :sections, :video, :video_html, :market, :problems, :solutions, :vision, :value_proposition
+  :cover_left, :cover_processing, :logo_processing, :logo_tmp, :cover_tmp
 
   #Upload logos and covers
   mount_uploader :logo, LogoUploader

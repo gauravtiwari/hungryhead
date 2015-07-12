@@ -12,8 +12,8 @@ var SolutionsForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    if(this.props.idea.sections && this.props.idea.sections.solutions) {
-      var solutions = this.props.idea.sections.solutions;
+    if(this.props.idea && this.props.idea.solutions) {
+      var solutions = this.props.idea.solutions;
     } else {
       var solutions = "";
     }

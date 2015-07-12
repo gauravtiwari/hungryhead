@@ -66,8 +66,8 @@ var Market = React.createClass({
 
     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit market</span>;
 
-    if(this.props.idea.sections && this.props.idea.sections.market) {
-      var html = converter.makeHtml(this.props.idea.sections.market);
+    if(this.props.idea && this.props.idea.market) {
+      var html = converter.makeHtml(this.props.idea.market);
       var market_classes = "section-content market";
     } else {
       var html = "<div class='no-content text-center fs-16 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";

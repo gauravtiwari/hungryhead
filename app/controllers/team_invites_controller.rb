@@ -61,7 +61,7 @@ class TeamInvitesController < ApplicationController
 
         #Increment idea counter
         current_user.ideas_counter.reset
-        current_user.ideas_counter.incr(current_user.ideas.ideas_count)
+        current_user.ideas_counter.incr(current_user.ideas.size)
 
         #Save @idea and redirect
         @idea.save!
@@ -100,7 +100,7 @@ class TeamInvitesController < ApplicationController
 
     #Decrement idea counter
     @team_invite.invited.ideas_counter.reset
-    @team_invite.invited.ideas_counter.incr(@team_invite.invited.ideas.ideas_count)
+    @team_invite.invited.ideas_counter.incr(@team_invite.invited.ideas.size)
 
     @team_invite.destroy
     respond_to do |format|

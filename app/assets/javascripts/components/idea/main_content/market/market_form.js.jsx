@@ -13,8 +13,8 @@ var MarketForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-     if(this.props.idea.sections && this.props.idea.sections.market) {
-      var market = this.props.idea.sections.market;
+     if(this.props.idea && this.props.idea.market) {
+      var market = this.props.idea.market;
      } else {
       var market = "";
      }
