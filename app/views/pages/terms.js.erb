@@ -1,0 +1,17 @@
+var $el = $('body');
+
+//Append a div in body
+$el.append($('<div>', {class: 'pages_content_modal', id: 'pages_content_modal'}));
+$container = $('#pages_content_modal');
+$container.html("<%= j render partial: 'pages/content/popup' %>");
+
+//find modal in container
+$popup = $container.find('#pagesContentModal');
+$popup.find('.popup-title').html('<span class="bold">Terms of use</span>');
+$popup.find('.col-md-12').html("<%= j render partial: 'pages/content/terms' %>");
+$('#pagesContentModal').modal('show');
+
+//finally delete div from body on modal hide
+$popup.on('hidden.bs.modal', function(){
+  $container.remove();
+});
