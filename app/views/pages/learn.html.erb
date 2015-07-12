@@ -3,7 +3,7 @@
     <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
       <div class="learn-photo">
         <div class="container vmiddle">
-        <div class="row">
+        <div class="row <%= browser.mobile? ? 'p-b-40' : ''  %>">
               <div class="col-md-8 auto-margin">
                   <div class="hero-section inner text-center">
                       <h1 class="text-white">Learn about hungryhead</h1>
@@ -22,7 +22,7 @@
   </div>
 
   <div class="what-section bg-white p-b-100">
-    <div class="wrapper-lg">
+    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
       <div class="col-md-6 auto-margin">
         <div>
           <h3 class="semi-bold">Hungryhead is a new way to start entrepreneurship</h3>

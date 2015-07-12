@@ -35,35 +35,7 @@
   </head>
 
   <body class="fixed-header">
-    <div class="page-sidebar" data-pages="sidebar">
-      <div id="appMenu" class="sidebar-overlay-slide from-top">
-      </div>
-      <!-- BEGIN SIDEBAR HEADER -->
-      <div class="sidebar-header text-center bg-solid-dark">
-        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="22">
-      </div>
-      <div class="sidebar-menu">
-        <ul class="menu-items">
-          <li class="m-t-30">
-            <%= link_to(story_path, class: "detailed") do %>
-              <span class="title">Story</span>
-            <% end %>
-          </li>
-          <li class="">
-            <%= link_to(get_started_path, class: "detailed") do %>
-               <span class="title">Get Started</span>
-            <% end %>
-          </li>
-
-          <li class="">
-            <%= link_to(help_path, class: "detailed") do %>
-               <span class="title">Questions?</span>
-            <% end %>
-          </li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-    </div>
+    <%= render partial: 'globals/app_sidebar' %>
     <div class="page-container">
       <% if params[:action] == "index" %>
        <%= render partial: 'globals/guest_nav_mobile' %>
