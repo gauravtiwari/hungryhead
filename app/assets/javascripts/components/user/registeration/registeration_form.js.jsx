@@ -131,14 +131,14 @@ var RegisterationForm = React.createClass({
     return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
         <div className="row">
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>First Name</label>
               <input type="text" ref="first_name" id="first_name" autoComplete="off" name="user[first_name]" placeholder="John" className="form-control" required aria-required="true" />
             </div>
           </div>
 
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Last Name</label>
               <input type="text" ref="last_name" id="last_name" autoComplete="off" name="user[last_name]" placeholder="Smith" className="form-control" required aria-required="true" />
@@ -172,7 +172,7 @@ var RegisterationForm = React.createClass({
 
         <div className="row">
 
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
               <input type="text" name="user[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
@@ -180,7 +180,7 @@ var RegisterationForm = React.createClass({
             </div>
           </div>
 
-          <div className="col-sm-6 col-md-6">
+          <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
               <input type="password" name="user[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
@@ -190,7 +190,7 @@ var RegisterationForm = React.createClass({
         </div>
 
         <div className="row m-t-10">
-          <div className="col-md-6 col-md-6">
+          <div className="col-sm-6">
             <div className="checkbox check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
               <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a>.</label>
@@ -203,8 +203,10 @@ var RegisterationForm = React.createClass({
            </div>
          </div>
         </div>
-        <button className="btn btn-complete btn-sm fs-13 m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
-        <a className="btn btn-primary btn-sm fs-13 m-l-10 m-t-10" href="/">Back</a>
+        <div className="sm-m-t-30 m-t-10">
+          <button className="btn btn-complete btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
+          <a className="btn btn-primary btn-sm fs-13 m-l-10" href="/">Back</a>
+        </div>
       </form>
     )
   },
