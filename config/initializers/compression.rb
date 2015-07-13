@@ -15,8 +15,9 @@ Rails.application.configure do
   config.middleware.use Rack::Deflater
 
   config.middleware.use HtmlCompressor::Rack,
+    compress_javascript: true,
     enabled: true,
-    preserve_line_breaks: false,
+    javascript_compressor: uglifier,
     remove_comments: true,
     remove_form_attributes: false,
     remove_http_protocol: false,
