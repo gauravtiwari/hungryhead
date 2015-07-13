@@ -1,30 +1,28 @@
-<% cache("small_footer") do %>
-  <div class="small-footer pull-bottom">
-    <div class="container">
-      <div class="top-footer clearfix">
-        <article class="section-list inline">
-          <ul>
-            <li>
-              <%= link_to(story_path, class: "#{current_class?(story_path)} bold") do %>
-                <span>Our story</span>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
-            </li>
-            <li>
-              <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold") %>
-            </li>
-            <li>
-              <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold") %>
-            </li>
-            <li>
-              <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)} bold") %>
-            </li>
-          </ul>
-        </article>
-      <p class="copyright-text text-white bold pull-right">© 2015 hungryhead.co</p>
-    </div>
+<div class="small-footer pull-bottom">
+  <div class="container">
+    <div class="top-footer clearfix">
+      <article class="section-list inline">
+        <ul>
+          <li>
+            <%= link_to(story_path, class: "#{current_class?(story_path)} bold") do %>
+              <span>Our story</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)} bold") %>
+          </li>
+        </ul>
+      </article>
+    <p class="copyright-text text-white bold pull-right">© 2015 hungryhead.co</p>
   </div>
 </div>
-<% end %>
+</div>

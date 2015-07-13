@@ -1,31 +1,29 @@
-<% cache(["footer_menu"]) do %>
-  <!-- START FOOTER -->
-  <div class="small-footer p-t-20 bg-light-grey">
-  <div class="container">
-    <div class="top-footer clearfix">
-      <article class="page-list">
-        <ul class="no-margin no-padding">
-          <li>
-            <%= link_to(main_app.story_path, class: "#{current_class?(main_app.story_path)}") do %>
-              <span>Our story</span>
-            <% end %>
-          </li>
-          <li>
-            <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}") %>
-          </li>
-          <li>
-            <%= link_to('Community guidelines', main_app.rules_path, class: "#{current_class?(main_app.rules_path)}") %>
-          </li>
-          <li>
-            <%= link_to('Cookies Policy', main_app.cookies_path, class: "#{current_class?(main_app.cookies_path)}") %>
-          </li>
-          <li>
-            <%= link_to('Privacy Policy', main_app.privacy_path, class: "#{current_class?(main_app.privacy_path)}") %>
-          </li>
-        </ul>
-      </article>
-    <p class="copyright-text text-master fs-13">© 2015 hungryhead.co</p>
-  </div>
-  </div>
-  <!-- END FOOTER -->
-<% end %>
+<!-- START FOOTER -->
+<div class="small-footer p-t-20 bg-light-grey">
+<div class="container">
+  <div class="top-footer clearfix">
+    <article class="page-list">
+      <ul class="no-margin no-padding">
+        <li>
+          <%= link_to(main_app.story_path, class: "#{current_class?(main_app.story_path)}") do %>
+            <span>Our story</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}") %>
+        </li>
+        <li>
+          <%= link_to('Community guidelines', main_app.rules_path, class: "#{current_class?(main_app.rules_path)}") %>
+        </li>
+        <li>
+          <%= link_to('Cookies Policy', main_app.cookies_path, class: "#{current_class?(main_app.cookies_path)}") %>
+        </li>
+        <li>
+          <%= link_to('Privacy Policy', main_app.privacy_path, class: "#{current_class?(main_app.privacy_path)}") %>
+        </li>
+      </ul>
+    </article>
+  <p class="copyright-text text-master fs-13">© 2015 hungryhead.co</p>
+</div>
+</div>
+<!-- END FOOTER -->
