@@ -1,11 +1,12 @@
 <% cache(["beta", "devise_confirmation", resource]) do %>
-	<div class="register-container full-height sm-p-t-30">
+	<div class="register-container full-height sm-p-t-100 sm-p-b-100">
 		<div class="container-sm-height full-height">
 		<div class="row row-sm-height">
 		  <div class="col-sm-12 col-sm-height col-middle">
-		   	<h1 class="bold">Resend confirmation instructions</h1>
+		   	<h3 class="bold text-master">Resend confirmation instructions</h3>
 		    <small>Email confirmations takes a few seconds to a minute to arrive. If you haven't recieved it yet, please enter your email to resend it again.</small>
-		    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :class => "form p-t-10 p-b-10", role: 'form' }) do |f| %>
+
+		    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, :class => "form p-t-20 p-b-10", role: 'form' }) do |f| %>
 						  <%= devise_error_messages! %>
 						  <%= f.full_error :confirmation_token %>
 
@@ -14,7 +15,7 @@
 						    <%= f.input_field :login, required: true, autofocus: true,label: false, id: "email", class: "form-control empty", placeholder:"johndoe@example.com"  %>
 						  </div>
 
-						  <div class="login-form-buttons">
+						  <div class="login-form-buttons sm-m-t-20 m-t-10">
 						    <%= f.button :button, "Resend", :class => "btn btn-success btn-sm fs-13 p-l-10 p-r-10 pull-right", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Submitting..."} %>
 						    <%= link_to('Go back', root_path, :class => "btn btn-danger btn-sm fs-13 p-l-10 p-r-10 pull-left") %>
 						  </div>
