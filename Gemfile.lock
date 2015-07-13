@@ -39,6 +39,7 @@ PATH
       mail_form
       pundit
       rails
+      sass
       simple_form
       unobtrusive_flash
 
