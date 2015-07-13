@@ -191,6 +191,9 @@ gem 'honeypot-captcha'
 # SEO
 gem 'friendly_id'
 
+#Compress HTML output in production
+gem 'htmlcompressor'
+
 #Select 2
 gem "select2-rails"
 
