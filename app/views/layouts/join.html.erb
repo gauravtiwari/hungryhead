@@ -37,7 +37,11 @@
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
-        <%= render partial: 'globals/join_nav' %>
+        <% if browser.mobile? %>
+          <%= render partial: 'globals/page_nav_mobile' %>
+        <% else %>
+          <%= render partial: 'globals/join_nav' %>
+        <% end %>
       <% end %>
 
       <% if user_signed_in? %>
