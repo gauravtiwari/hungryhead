@@ -103,7 +103,7 @@ GEM
       json
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
-    babel-source (5.6.16)
+    babel-source (5.6.17)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
@@ -175,7 +175,7 @@ GEM
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
     eventmachine (1.0.7)
-    excon (0.45.3)
+    excon (0.45.4)
     execjs (2.5.2)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -361,7 +361,7 @@ GEM
     nokogumbo (1.4.1)
       nokogiri
     nprogress-rails (0.1.6.7)
-    oj (2.12.9)
+    oj (2.12.10)
     orm_adapter (0.5.0)
     paper_trail (4.0.0.rc1)
       activerecord (>= 3.0, < 6.0)

@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="profile-nav <%=  browser.mobile? ? 'hidden' : 'displayblock' %> overflow-hidden p-l-15">
+    <div class="profile-nav <%=  browser.mobile? || browser.tablet? ? 'hidden' : 'displayblock' %> overflow-hidden p-l-15">
       <div class="container text-center">
         <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin">
           <li class="inline p-l-15 p-r-15">
@@ -81,10 +81,10 @@
         <div class="md-p-l-20 md-p-r-20 xs-no-padding">
             <div class="col-sm-5">
               <div class="content-mask-md text-center">
-                <%= image_tag('product/connect-community.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy b-lightgrey b-a box-shadow") %>
+                <%= image_tag('product/connect-community.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : ''} lazy b-lightgrey b-a box-shadow") %>
               </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <div class="col-sm-6 col-md-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
               <h1 class="m-t-5 m-b-20">Complete your profile</h1>
               <p class="m-b-20">
                 Complete your profile and get discovered quickly - enter markets you are interested in, locations you are based, skills you have and subjects studied.
@@ -111,7 +111,7 @@
                 Follow and meet like minded students from around the world.
               </h5>
             </div>
-            <div class="col-sm-5 col-md-offset-2 xs-p-l-15 xs-p-r-15">
+            <div class="col-sm-6 col-md-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md">
                 <%= image_tag('product/community_connect.png', class: "image-responsive-height lazy b-lightgrey b-a box-shadow #{browser.mobile? ? 'hidden' : ''}") %>
               </div>
@@ -182,7 +182,7 @@
                 <%= image_tag('product/collaboration.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'} lazy") %>
               </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <div class="col-sm-6 col-md-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
               <h1 class="m-t-5 m-b-20">Collaborate with peers</h1>
               <p class="m-b-20">
                 Hop into a conversation and introduce yourself. If you have an idea share it with others and encourage them to leave a feedback. If you have any feedbacks or questions for other ideas, visit their profile and collaborate.
@@ -209,7 +209,7 @@
                 We have built an integrated dashboard.
               </h5>
             </div>
-          <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+          <div class="col-sm-6 col-md-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
             <div class="content-mask-md">
               <%= image_tag('product/leaderboard.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : ''} box-shadow lazy b-lightgrey b-a") %>
             </div>
@@ -225,10 +225,10 @@
             <div class="col-sm-5">
               <div class="content-mask-md m-t-20 text-center">
                 <%= image_tag('gamification.png', class: "image-responsive-height lazy w110 #{browser.mobile? ? 'hidden' : ''}") %>
-                <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : 'auto-width'}") %>
+                <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? ? 'hidden' : ''}") %>
               </div>
             </div>
-            <div class="col-sm-5 col-sm-offset-2 xs-p-l-15 xs-p-r-15">
+            <div class="col-sm-6 col-md-5 col-sm-offset-1 xs-p-l-15 xs-p-r-15">
               <h1 class="m-t-5 m-b-20">Gamification</h1>
               <p class="m-b-20">
                 Every concept on our platform is supported by Game techniques to make the journey fun and rewarding for everyone. Most of the game concepts are taken from the startup world like <em>- investing into an idea, making return on investment, giving feedbacks, asking questions and voting ideas</em>.
