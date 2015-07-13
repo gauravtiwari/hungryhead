@@ -161,7 +161,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-12 col-md-12">
             <div className="form-group form-group-default input-group">
               <label>Uni/College Email</label>
-              <input type="email" name="user[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <input type="email" name="user[email]" autoCorrect="off" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
               <span className="input-group-addon bg-solid-dark text-white" id="school_domain">
                 {this.state.school_domain}
               </span>
@@ -175,7 +175,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="user[username]" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
