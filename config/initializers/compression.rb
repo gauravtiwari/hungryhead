@@ -18,7 +18,7 @@ Rails.application.configure do
   config.middleware.use HtmlCompressor::Rack,
     compress_css: true,
     compress_javascript: true,
-    css_compressor: Sass,
+    css_compressor: yui,
     enabled: true,
     javascript_compressor: uglifier,
     preserve_line_breaks: false,
