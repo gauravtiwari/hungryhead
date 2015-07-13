@@ -1,4 +1,6 @@
 <div class="splash-wrapper">
-  <%= render partial: 'pages/content/home' %>
+  <% cache(['beta', 'home_page_tablet', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+    <%= render partial: 'pages/content/home' %>
+  <% end %>
   <%= render partial: 'globals/small_footer' %>
 </div>

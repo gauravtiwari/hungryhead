@@ -1,65 +1,65 @@
-<div class="learn-wrapper bg-white">
-  <div class="learn">
-    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
-        <div class="support-us-photo inner">
-        <div class="container vmiddle">
-        <div class="row">
-              <div class="col-md-8 auto-margin text-center">
-                  <div class="hero-section z-index-10">
-                      <h1 class="text-white">
-                        Collaborate with us
-                      </h1>
-                      <p class="text-white no-margin fs-16">Help build hungryhead better</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="support-us bg-white m-b-50">
-    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
-      <div class="col-md-5 auto-margin">
-        <h3 class="normal">We need your ideas, suggestions and feedbacks</h3>
-        <div class="divider b-b b-green b-md b-small m-t-20"></div>
-        <div id="support_form">
-          <p class="m-t-20 fs-16 text-master">
-            We have built something that we believe could change the way entrepreneurship has been pursued worldwide, but we need more ideas to make the platform better and more useful for masses.
-          </p>
-          <h5 class="bold m-b-20">
-            Please collaborate with us to build a global platform for students who have potential to change the world.
-          </h5>
-          <h5 class="m-b-20 b-b b-grey p-b-5 inline"><i class="fa fa-bullhorn"></i> Submit the form</h5>
-          <%= render partial: 'form' %>
+<% cache(['beta', 'collaborate_with_us', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+  <div class="learn-wrapper bg-white">
+    <div class="learn">
+      <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+          <div class="support-us-photo inner">
+          <div class="container vmiddle">
+          <div class="row">
+                <div class="col-md-8 auto-margin text-center">
+                    <div class="hero-section z-index-10">
+                        <h1 class="text-white">
+                          Collaborate with us
+                        </h1>
+                        <p class="text-white no-margin fs-16">Help build hungryhead better</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <div class="page-wrapper horz-section relative">
-     <section id="cta" class="cta">
-          <div class="cta-overlay">
-             <div class="container">
-                 <div class="wrapper-small p-b-100">
-                     <div class="row">
-                         <div class="col-md-8 col-md-offset-2 text-center">
-                             <h1 class="text-white bold m-t-20">
-                              You also connect with us on
-                             </h1>
-                             <div class="social_icons">
-                               <i class="fa fa-twitter inline fs-40 text-white"></i>
-                               <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
-                             </div>
-                         </div>
-                     </div>
+    <section class="support-us bg-white m-b-50">
+      <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+        <div class="col-md-5 auto-margin">
+          <h3 class="normal">We need your ideas, suggestions and feedbacks</h3>
+          <div class="divider b-b b-green b-md b-small m-t-20"></div>
+          <div id="support_form">
+            <p class="m-t-20 fs-16 text-master">
+              We have built something that we believe could change the way entrepreneurship has been pursued worldwide, but we need more ideas to make the platform better and more useful for masses.
+            </p>
+            <h5 class="bold m-b-20">
+              Please collaborate with us to build a global platform for students who have potential to change the world.
+            </h5>
+            <h5 class="m-b-20 b-b b-grey p-b-5 inline"><i class="fa fa-bullhorn"></i> Submit the form</h5>
+            <%= render partial: 'form' %>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                 </div>
-             </div>
-         </div>
-      </section>
-   </div>
+    <div class="page-wrapper horz-section relative">
+       <section id="cta" class="cta">
+            <div class="cta-overlay">
+               <div class="container">
+                   <div class="wrapper-small p-b-100">
+                       <div class="row">
+                           <div class="col-md-8 col-md-offset-2 text-center">
+                               <h1 class="text-white bold m-t-20">
+                                You also connect with us on
+                               </h1>
+                               <div class="social_icons">
+                                 <i class="fa fa-twitter inline fs-40 text-white"></i>
+                                 <i class="fa fa-facebook inline fs-40 text-white  m-l-15"></i>
+                               </div>
+                           </div>
+                       </div>
 
-  <div class="clearfix"></div>
-  <%= render partial: 'globals/footer' %>
-</div>
+                   </div>
+               </div>
+           </div>
+        </section>
+     </div>
+  </div>
+<% end %>
+<%= render partial: 'globals/footer' %>
