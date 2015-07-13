@@ -21,13 +21,13 @@ render: function() {
       <div className="form-group form-group-default">
         <label>Login</label>
         <div className="controls">
-          <input type="text" name="user[login]" autoComplete="off" placeholder="User Name" className="form-control" required="true" aria-required="true" />
+          <input type="text" name="user[login]" autoComplete="off" autoCapitalize="off" placeholder="User Name" className="form-control" required="true" aria-required="true" />
         </div>
       </div>
       <div className="form-group form-group-default">
         <label>Password</label>
         <div className="controls">
-          <input type="password" autoComplete="off" className="form-control" name="user[password]" placeholder="Credentials" required="true" aria-required="true" />
+          <input type="password" autoComplete="off" autoCapitalize="off" className="form-control" name="user[password]" placeholder="Credentials" required="true" aria-required="true" />
         </div>
       </div>
       <div className="row">

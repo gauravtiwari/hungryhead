@@ -175,7 +175,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="user[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="user[username]" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
@@ -183,7 +183,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="user[password]" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
+              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
 
