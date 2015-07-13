@@ -11,7 +11,7 @@ Rails.application.configure do
   config.assets.debug = false
 
   config.assets.js_compressor = uglifier
-  config.assets.css_compressor = :sass
+  config.assets.css_compressor = :yui
 
   config.middleware.use Rack::Deflater
 
