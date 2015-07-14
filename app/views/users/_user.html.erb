@@ -59,7 +59,7 @@
       <% end %>
     </p>
   </td>
-  <td style="display:table-cell; vertical-align:middle;" class="no-border text-center">
+  <td style="display:table-cell;  min-width: 150px; vertical-align:middle;" class="no-border text-center">
   <% if current_user != user %>
     <div class="card-follow-button inline">
       <%= react_component('Follow',{:followed => followed?(user)}) %>
