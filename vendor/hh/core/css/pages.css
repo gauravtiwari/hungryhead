@@ -4411,6 +4411,12 @@ body > .pgn-wrapper {
   .modal.slide-up .modal-dialog {
     width: calc(100% - 20px);
   }
+  .sm-no-padding {
+    padding: 0px!important;
+  }
+  .sm-p-r-0 {
+    padding-right: 0px!important;
+  }
 }
 @media (min-width: 768px) {
   .modal.stick-up .modal-dialog {
@@ -12799,6 +12805,9 @@ section.last:before {
   }
   .sm-pull-reset {
     float: none !important;
+  }
+  .sm-no-padding {
+    padding: 0px!important;
   }
   .sm-block {
     display: block;

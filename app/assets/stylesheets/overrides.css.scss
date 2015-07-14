@@ -805,3 +805,9 @@ ul.reactions > div {
     background: image-url('title-contin.png');
     z-index: -1;
 }
+
+@media (min-width: 992px) {
+  .md-p-r-15 {
+    padding-right: 15px!important;
+  }
+}
