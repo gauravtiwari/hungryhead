@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <div class="col-md-6 col-sm-8 no-padding">
+  <div class="col-md-6 col-sm-8 sm-no-padding">
     <%= cache(["beta", current_user, @activities]) do %>
       <%= render partial: 'activities/activities' %>
     <% end %>
