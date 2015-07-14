@@ -2,6 +2,7 @@
   <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
     <div class="people-list">
       <div class="col-md-12">
+      <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
@@ -34,6 +35,7 @@
           <% end %>
           </tbody>
         </table>
+      </div>
       </div>
       <div class="paging-container p-r-15">
         <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
