@@ -7,7 +7,7 @@
         </div>
     <% end %>
 
-    <div class="col-md-8 col-sm-12">
+    <div class="col-md-8 col-sm-12 sm-no-padding">
         <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="cover">
                 <%= render partial: 'cover', locals: {data: data} %>
@@ -21,12 +21,12 @@
         <div class="badges-box m-t-20 clearfix">
 
         <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest", @user.latest_activities.members.length]) do %>
-            <div class="col-sm-6 no-padding visible-sm p-r-15" id="profile_sidebar">
+            <div class="col-sm-6 no-padding visible-sm visible-xs md-p-r-15 sm-no-padding">
                 <%= render partial: 'sidebar', locals: {data: data} %>
             </div>
         <% end %>
 
-        <div class="col-md-12 col-sm-6 no-padding">
+        <div class="col-md-12 col-sm-6 no-padding sm-m-t-15">
             <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]) do %>
                 <div class="summary white-bg box-shadow m-b-15">
                     <%= react_component("TextWidget", {data: data}) %>
