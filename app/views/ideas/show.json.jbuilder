@@ -1,7 +1,7 @@
 json.idea do
   json.cache! ["idea_show_json", @idea, @idea.in_team?(current_user) ? "team" : "guest"], expires_in: 2.hours do
     json.(@idea, :uuid, :name, :slug, :looking_for_team, :description,
-      :high_concept_pitch, :profile, :elevator_pitch,
+      :high_concept_pitch, :profile, :elevator_pitch, :video, :video_html,
       :market, :problems, :solutions, :vision, :value_proposition,
       :business_model)
 
