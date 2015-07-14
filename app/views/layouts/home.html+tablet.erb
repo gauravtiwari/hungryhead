@@ -12,6 +12,10 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
+    <% cache_if(user_signed_in?, current_user) do %>
+      <%= render partial: 'shared/current_user' if user_signed_in? %>
+    <% end %>
+
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -36,7 +40,9 @@
 
   <body class="fixed-header menu-behind <%= 'no-header' if params[:action] == 'home' %> <%= controller_name %> <%= action_name %>">
     <div class="page-container">
-      <% if params[:action] == "home" %>
+      <% if user_signed_in? %>
+        <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
+      <% elsif params[:action] == "home" %>
        <%= render partial: 'globals/guest_nav' %>
       <% else %>
         <%= render partial: 'globals/page_nav_tablet' %>
