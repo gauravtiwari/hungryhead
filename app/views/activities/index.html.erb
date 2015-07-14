@@ -1,9 +1,11 @@
 <div class="container p-b-60">
-  <div class="col-md-3 col-sm-3 no-padding p-l-15 col-lg-3 col-xlg-3">
-    <%= render partial: 'sidebar' %>
-  </div>
+  <% unless browser.mobile? %>
+    <div class="col-md-3 col-sm-3 no-padding p-l-15 col-lg-3 col-xlg-3">
+      <%= render partial: 'sidebar' %>
+    </div>
+  <% end %>
 
-  <div class="col-md-6">
+  <div class="col-md-6 col-sm-6">
     <%= cache(["beta", current_user, @activities]) do %>
       <%= render partial: 'activities/activities' %>
     <% end %>
@@ -14,14 +16,16 @@
     <% end %>
   </div>
 
-  <div class="col-md-3 col-sm-3 no-padding p-r-15">
-    <div class="sidebar auto-height sticky white-bg box-shadow">
-      <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
-      <% if User.latest.members.length > 0 %>
-        <%= react_component('LatestUsers', {path: latest_users_path}) %>
-      <% end %>
+  <% unless browser.mobile? %>
+    <div class="col-md-3 col-sm-3 no-padding p-r-15">
+      <div class="sidebar auto-height sticky white-bg box-shadow">
+        <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
+        <% if User.latest.members.length > 0 %>
+          <%= react_component('LatestUsers', {path: latest_users_path}) %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>
 
