@@ -64,13 +64,13 @@ var CardStats = React.createClass({
             </div>
           </div>
           <div className="row p-t-15 p-b-15">
-            <div className="col-md-4 col-sm-4  text-center m-t-10">
+            <div className="col-md-4 col-sm-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin ">Followers</p>
               <p className="all-caps font-montserrat no-margin text-success ">{this.state.followers_count}</p>
               </div>
 
 
-            <div className="col-md-4 col-sm-4  text-center m-t-10">
+            <div className="col-md-4 col-sm-4 text-center m-t-10">
               <p className="hint-text all-caps font-montserrat small no-margin">Ideas</p>
               <p className="all-caps font-montserrat no-margin text-success">{this.state.ideas_count}</p>
             </div>

@@ -1,0 +1,57 @@
+<div class="container p-b-60">
+
+    <% data = render(template: 'users/show.json.jbuilder') %>
+
+    <div class="col-md-8 col-sm-12">
+        <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="cover">
+                <%= render partial: 'cover', locals: {data: data} %>
+            </div>
+        <% end %>
+
+        <div class="box-shadow bg-white">
+            <%= render partial: 'menu' %>
+        </div>
+        <div class="badges-box m-t-20 clearfix" id="profile_content">
+        <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest", @user.latest_activities.members.length]) do %>
+            <div class="col-md-4 col-sm-6 no-padding" id="profile_sidebar">
+                <%= render partial: 'card', locals: {data: data} %>
+            </div>
+        <% end %>
+        <div class="col-sm-6 no-padding p-l-15">
+            <%= render partial: 'latest_activities' %>
+        </div>
+
+        <div class="col-sm-6">
+        <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="summary white-bg box-shadow m-t-15 m-b-15">
+                <%= react_component("TextWidget", {data: data}) %>
+            </div>
+        <% end %>
+        </div>
+
+        <div class="col-md-6 col-sm-6 no-padding p-r-15">
+            <% cache(["user_badges", @user.badges.length]) do %>
+                <%= render partial: 'badges' %>
+            <% end %>
+            <% cache(["user_ideas", @user, @user.ideas_counter.value, @user == current_user ? "owner" : "guest"]) do %>
+                <%= render partial: 'ideas' %>
+            <% end %>
+            <% cache(["user_followers", @user.followers_counter.value]) do %>
+                <%= render partial: 'followers' %>
+            <% end %>
+        </div>
+        <div class="col-md-6 col-sm-6 no-padding">
+            <%= render partial: 'stats' %>
+            <% cache(["user_followings", @user.followings_counter.value]) do %>
+                <%= render partial: 'followings' %>
+            <% end %>
+        </div>
+    </div>
+ </div>
+</div>
+
+<% if current_user.is_friend?(@user) %>
+    <%= render partial: 'send_message' %>
+<% end %>
+
