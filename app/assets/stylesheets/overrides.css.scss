@@ -808,16 +808,16 @@ ul.reactions > div {
 
 @media (min-width: 992px) {
   .md-p-r-15 {
-    padding-right: 15px;
+    padding-right: 15px!important;
   }
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
   .sm-no-padding {
-    padding: 0px;
+    padding: 0px!important;
   }
   .sm-p-r-15 {
-    padding-right: 15px;
+    padding-right: 15px!important;
   }
 }
 @media (max-width: 480px) {

@@ -7,7 +7,7 @@
         </div>
     <% end %>
 
-    <div class="col-md-8 col-sm-12 sm-no-padding">
+    <div class="col-md-8 col-sm-12 xs-no-padding">
         <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="cover">
                 <%= render partial: 'cover', locals: {data: data} %>
