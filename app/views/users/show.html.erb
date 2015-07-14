@@ -3,12 +3,12 @@
     <% data = render(template: 'users/show.json.jbuilder') %>
 
     <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest", @user.latest_activities.members.length]) do %>
-        <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
+        <div class="col-md-4 col-sm-5 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
         </div>
     <% end %>
 
-    <div class="col-md-8 col-sm-8">
+    <div class="col-md-8 col-sm-7">
         <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="cover">
                 <%= render partial: 'cover', locals: {data: data} %>
@@ -26,7 +26,7 @@
         <% end %>
 
         <div class="badges-box m-t-20 clearfix" id="profile_content">
-            <div class="col-md-6 no-padding p-r-15">
+            <div class="col-md-6 no-padding">
                 <% cache(["user_badges", @user.badges.length]) do %>
                     <%= render partial: 'badges' %>
                 <% end %>
