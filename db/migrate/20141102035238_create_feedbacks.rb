@@ -12,7 +12,7 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.references :idea, :null => false
       t.references :user, :null => false
 
-      t.string :cached_tag_list
+      t.string :cached_category_list
 
       t.integer :status, default: 0, null: false
 

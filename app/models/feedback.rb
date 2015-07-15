@@ -32,7 +32,7 @@ class Feedback < ActiveRecord::Base
   cache_index :uuid, unique: true
 
   #Tags for feedback
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :categories
 
   #Enums and states
   enum status: { posted: 0, badged: 1, flagged: 2 }

@@ -21,6 +21,9 @@ class Event < ActiveRecord::Base
   counter :attendees_counter
   counter :invites_counter
 
+  #Tags for feedback
+  acts_as_taggable_on :categories
+
   belongs_to :owner, polymorphic: true, touch: true
   has_many :event_attendees
   has_many :event_invites

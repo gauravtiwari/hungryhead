@@ -9,15 +9,14 @@ class Share < ActiveRecord::Base
   list :commenters_ids
 
   #Associations
-  belongs_to :shareable, polymorphic: true, touch: true
   belongs_to :owner, polymorphic: true
 
   #Includes concerns
   include Commentable
   include Votable
 
-  before_destroy :decrement_counters, :delete_activity
-  after_create :increment_counters, :create_activity
+  before_destroy :delete_activity
+  after_create :create_activity
 
   public
 
@@ -25,29 +24,15 @@ class Share < ActiveRecord::Base
     false
   end
 
-  #Get shareable user - idea(student) || user
+  #Get shareable user - school(user) || user
   def shareable_user
-    shareable_type == "Idea" ? shareable.student : shareable.user
+    owner_type == "School" ? owner.user : owner
   end
 
   private
 
   def create_activity
     CreateActivityJob.set(wait: 2.seconds).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
-  end
-
-  def increment_counters
-    #Increment counters
-    shareable.shares_counter.incr(shareable.shares.size)
-    #Add sharer_id to shareable cache
-    shareable.sharers_ids << user_id
-  end
-
-  def decrement_counters
-    #Decrement counters
-    shareable.shares_counter.incr(shareable.shares.size)
-    #Delete sharer_id from shareable cache
-    shareable.sharers_ids.delete(user_id)
   end
 
 

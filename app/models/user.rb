@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
+  include Sharings
   include Activist
   include Impressionable
   include Impressioner
@@ -50,7 +51,6 @@ class User < ActiveRecord::Base
   has_many :notifications, -> {where(published: true)}, :dependent => :destroy
 
   has_many :ideas, dependent: :destroy, autosave: true
-  has_many :shares, as: :owner, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
 
   cache_has_many :ideas, embed: true

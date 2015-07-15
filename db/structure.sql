@@ -292,6 +292,7 @@ CREATE TABLE events (
     description text DEFAULT ''::text NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
     featured boolean,
+    cached_category_list character varying,
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
@@ -335,7 +336,7 @@ CREATE TABLE feedbacks (
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
-    cached_tag_list character varying,
+    cached_category_list character varying,
     status integer DEFAULT 0 NOT NULL,
     badge integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1276,6 +1277,41 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 
 
 --
+-- Name: shares; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE shares (
+    id integer NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
+    link text DEFAULT ''::text NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    owner_id integer NOT NULL,
+    owner_type character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: shares_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE shares_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: shares_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE shares_id_seq OWNED BY shares.id;
+
+
+--
 -- Name: site_feedback_feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1934,6 +1970,13 @@ ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY shares ALTER COLUMN id SET DEFAULT nextval('shares_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY site_feedback_feedbacks ALTER COLUMN id SET DEFAULT nextval('site_feedback_feedbacks_id_seq'::regclass);
 
 
@@ -2269,6 +2312,14 @@ ALTER TABLE ONLY sashes
 
 ALTER TABLE ONLY schools
     ADD CONSTRAINT schools_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: shares_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY shares
+    ADD CONSTRAINT shares_pkey PRIMARY KEY (id);
 
 
 --
@@ -3039,6 +3090,13 @@ CREATE INDEX index_schools_on_user_id ON schools USING btree (user_id);
 
 
 --
+-- Name: index_shares_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_shares_on_owner_id ON shares USING btree (owner_id);
+
+
+--
 -- Name: index_site_feedback_feedbacks_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3576,6 +3634,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150312183545');
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317220155');
+
+INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 

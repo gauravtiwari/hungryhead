@@ -8,6 +8,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description, null: false, default: ""
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
       t.boolean :featured, index: true
+      t.string :cached_category_list
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address, index: true
