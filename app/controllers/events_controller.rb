@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @eventable = params[:eventable_type].constantize.find(params[:eventable_id])
+    @owner = params[owner].constantize.fetch(owner_id)
   end
 
   # GET /events/1/edit
@@ -25,7 +25,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @owner = params[owner].constantize.fetch(owner_id)
+    @event = CreateEventService.new(event_params, owner).create
     respond_to do |format|
       if @event.save
         flash[:notice] = "Event was successfully, created"
@@ -63,14 +64,15 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:status, :title, :description, :address,
-      :start_time, :end_time, :eventable_id, :eventable_type)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:status, :title, :description, :address, :private,
+    :start_time, :end_time, :eventable_id, :space, :cover, :excerpt, :category_list)
+  end
 end
