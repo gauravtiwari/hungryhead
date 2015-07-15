@@ -111,38 +111,6 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: attendees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE attendees (
-    id integer NOT NULL,
-    attendee_id integer NOT NULL,
-    event_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: attendees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE attendees_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: attendees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE attendees_id_seq OWNED BY attendees.id;
-
-
---
 -- Name: badges_sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -246,16 +214,84 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 
 --
+-- Name: event_attendees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE event_attendees (
+    id integer NOT NULL,
+    attendee_id integer NOT NULL,
+    event_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: event_attendees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE event_attendees_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_attendees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE event_attendees_id_seq OWNED BY event_attendees.id;
+
+
+--
+-- Name: event_invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE event_invites (
+    id integer NOT NULL,
+    invited_id integer,
+    inviter_id integer,
+    inviter_type character varying,
+    event_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: event_invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE event_invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE event_invites_id_seq OWNED BY event_invites.id;
+
+
+--
 -- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE events (
     id integer NOT NULL,
-    eventable_id integer NOT NULL,
-    eventable_type character varying DEFAULT ''::character varying NOT NULL,
+    owner_id integer NOT NULL,
+    owner_type character varying DEFAULT ''::character varying NOT NULL,
     title character varying DEFAULT ''::character varying NOT NULL,
+    small_description text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
+    featured boolean,
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
@@ -1674,13 +1710,6 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY attendees ALTER COLUMN id SET DEFAULT nextval('attendees_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY badges_sashes ALTER COLUMN id SET DEFAULT nextval('badges_sashes_id_seq'::regclass);
 
 
@@ -1696,6 +1725,20 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 --
 
 ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_attendees ALTER COLUMN id SET DEFAULT nextval('event_attendees_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_invites ALTER COLUMN id SET DEFAULT nextval('event_invites_id_seq'::regclass);
 
 
 --
@@ -1973,14 +2016,6 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: attendees_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY attendees
-    ADD CONSTRAINT attendees_pkey PRIMARY KEY (id);
-
-
---
 -- Name: badges_sashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2002,6 +2037,22 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY crono_jobs
     ADD CONSTRAINT crono_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_attendees_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY event_attendees
+    ADD CONSTRAINT event_attendees_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY event_invites
+    ADD CONSTRAINT event_invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -2330,27 +2381,6 @@ CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
 
 
 --
--- Name: index_attendees_on_attendee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attendees_on_attendee_id ON attendees USING btree (attendee_id);
-
-
---
--- Name: index_attendees_on_attendee_id_and_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_attendees_on_attendee_id_and_event_id ON attendees USING btree (attendee_id, event_id);
-
-
---
--- Name: index_attendees_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_attendees_on_event_id ON attendees USING btree (event_id);
-
-
---
 -- Name: index_badges_sashes_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2400,6 +2430,48 @@ CREATE UNIQUE INDEX index_crono_jobs_on_job_id ON crono_jobs USING btree (job_id
 
 
 --
+-- Name: index_event_attendees_on_attendee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_attendees_on_attendee_id ON event_attendees USING btree (attendee_id);
+
+
+--
+-- Name: index_event_attendees_on_attendee_id_and_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_event_attendees_on_attendee_id_and_event_id ON event_attendees USING btree (attendee_id, event_id);
+
+
+--
+-- Name: index_event_attendees_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_attendees_on_event_id ON event_attendees USING btree (event_id);
+
+
+--
+-- Name: index_event_invites_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_event_id ON event_invites USING btree (event_id);
+
+
+--
+-- Name: index_event_invites_on_invited_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_invited_id ON event_invites USING btree (invited_id);
+
+
+--
+-- Name: index_event_invites_on_inviter_type_and_inviter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_inviter_type_and_inviter_id ON event_invites USING btree (inviter_type, inviter_id);
+
+
+--
 -- Name: index_events_on_end_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2407,10 +2479,10 @@ CREATE INDEX index_events_on_end_time ON events USING btree (end_time);
 
 
 --
--- Name: index_events_on_eventable_id_and_eventable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_featured; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_events_on_eventable_id_and_eventable_type ON events USING btree (eventable_id, eventable_type);
+CREATE INDEX index_events_on_featured ON events USING btree (featured);
 
 
 --
@@ -2418,6 +2490,13 @@ CREATE INDEX index_events_on_eventable_id_and_eventable_type ON events USING btr
 --
 
 CREATE INDEX index_events_on_latitude_and_longitude ON events USING btree (latitude, longitude);
+
+
+--
+-- Name: index_events_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_owner_id_and_owner_type ON events USING btree (owner_id, owner_type);
 
 
 --
@@ -3310,6 +3389,13 @@ CREATE UNIQUE INDEX unique_activity_per_user ON activities USING btree (user_id,
 
 
 --
+-- Name: unique_event_invites; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_event_invites ON event_invites USING btree (inviter_id, inviter_type, invited_id, event_id);
+
+
+--
 -- Name: unique_follows_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3361,19 +3447,19 @@ ALTER TABLE ONLY mentions
 
 
 --
--- Name: fk_rails_4037bda9d5; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_c93dfeb29b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY attendees
-    ADD CONSTRAINT fk_rails_4037bda9d5 FOREIGN KEY (event_id) REFERENCES events(id);
+ALTER TABLE ONLY event_attendees
+    ADD CONSTRAINT fk_rails_c93dfeb29b FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
--- Name: fk_rails_90332237fe; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_dd5ebcb656; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY attendees
-    ADD CONSTRAINT fk_rails_90332237fe FOREIGN KEY (attendee_id) REFERENCES attendees(id);
+ALTER TABLE ONLY event_invites
+    ADD CONSTRAINT fk_rails_dd5ebcb656 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -3517,4 +3603,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150618162746');
 INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
+
+INSERT INTO schema_migrations (version) VALUES ('20150715172544');
 
