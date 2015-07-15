@@ -131,7 +131,7 @@ class User < ActiveRecord::Base
   #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-    :registerable, :authentication_keys => [:login]
+    :authentication_keys => [:login]
 
 
   #Media Uploaders - carrierwave

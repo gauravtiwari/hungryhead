@@ -12,6 +12,11 @@ class School < ActiveRecord::Base
 	include Sluggable
 	include Eventable
 
+	#Devise for authentication
+	devise :invitable, :uid, :database_authenticatable,
+	  :recoverable, :rememberable, :trackable, :validatable,
+	  :authentication_keys => [:login]
+
 	#Relationship
 	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
 	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
@@ -55,9 +60,19 @@ class School < ActiveRecord::Base
 	:on => :create
 
 	public
+
 	#Slug candidates for school
 	def slug_candidates
 	 [:name]
+	end
+
+	#Login using both email and username
+	def login=(login)
+	  @login = login
+	end
+
+	def login
+	  @login || self.username || self.email
 	end
 
 	def get_published_faculties

@@ -7,11 +7,11 @@ class CreateSchools < ActiveRecord::Migration
 
       t.string :email, :null => false, default: ""
 
-      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
-
       t.string :domain, :null => false, default: ""
 
       t.string :name, :null => false, unique: true
+
+      t.string :username, :null => false, unique: true
 
       t.text :description
 
@@ -41,6 +41,7 @@ class CreateSchools < ActiveRecord::Migration
     add_index :schools, :name, unique: true, algorithm: :concurrently
     add_index :schools, :slug, unique: true, algorithm: :concurrently
     add_index :schools, :email, unique: true, algorithm: :concurrently
+    add_index :schools, :username, unique: true, algorithm: :concurrently
 
   end
 
