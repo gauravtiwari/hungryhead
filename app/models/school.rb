@@ -15,13 +15,6 @@ class School < ActiveRecord::Base
 	#Model Validations
 	validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
 	validates :name, :presence => true
-	validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /^(\w|)+$/, message: "should not contain empty spaces or symbols" }
-	validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
-
-	#Devise for authentication
-	devise :invitable, :uid, :database_authenticatable,
-	  :recoverable, :rememberable, :lockable, :trackable, :validatable,
-	  :authentication_keys => [:login]
 
 	#Relationship
 	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
@@ -46,13 +39,6 @@ class School < ActiveRecord::Base
 	#Redis Cache counters and ids
 	set :followers_ids
 
-	#List to store last 5 activities
-	sorted_set :latest_activities, marshal: true
-
-	#Store latest school notifications
-	sorted_set :ticker, marshal: true
-	sorted_set :friends_notifications, marshal: true
-
 	#Counters
 	counter :followers_counter
 	counter :people_counter
@@ -70,15 +56,6 @@ class School < ActiveRecord::Base
 	#Slug candidates for school
 	def slug_candidates
 	 [:name]
-	end
-
-	#Login using both email and username
-	def login=(login)
-	  @login = login
-	end
-
-	def login
-	  @login || self.username || self.email
 	end
 
 	def get_published_faculties
