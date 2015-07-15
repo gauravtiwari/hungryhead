@@ -38,7 +38,6 @@ class CreateSchools < ActiveRecord::Migration
 
     end
 
-    add_index :schools, :user_id, algorithm: :concurrently
     add_index :schools, :name, unique: true, algorithm: :concurrently
     add_index :schools, :slug, unique: true, algorithm: :concurrently
     add_index :schools, :email, unique: true, algorithm: :concurrently

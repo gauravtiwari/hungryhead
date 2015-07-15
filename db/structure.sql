@@ -1233,6 +1233,39 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: school_admins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE school_admins (
+    id integer NOT NULL,
+    user_id integer,
+    school_id integer,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: school_admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE school_admins_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: school_admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE school_admins_id_seq OWNED BY school_admins.id;
+
+
+--
 -- Name: schools; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1245,7 +1278,6 @@ CREATE TABLE schools (
     description text,
     logo character varying,
     cover character varying,
-    user_id integer DEFAULT 1 NOT NULL,
     slug character varying NOT NULL,
     phone character varying DEFAULT ''::character varying NOT NULL,
     website_url character varying DEFAULT ''::character varying NOT NULL,
@@ -1965,6 +1997,13 @@ ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY school_admins ALTER COLUMN id SET DEFAULT nextval('school_admins_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::regclass);
 
 
@@ -2306,6 +2345,14 @@ ALTER TABLE ONLY read_marks
 
 ALTER TABLE ONLY sashes
     ADD CONSTRAINT sashes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT school_admins_pkey PRIMARY KEY (id);
 
 
 --
@@ -3064,6 +3111,34 @@ CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON re
 
 
 --
+-- Name: index_school_admins_on_active; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_school_admins_on_active ON school_admins USING btree (active);
+
+
+--
+-- Name: index_school_admins_on_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_school_admins_on_school_id ON school_admins USING btree (school_id);
+
+
+--
+-- Name: index_school_admins_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_school_admins_on_user_id ON school_admins USING btree (user_id);
+
+
+--
+-- Name: index_school_admins_on_user_id_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_school_admins_on_user_id_and_school_id ON school_admins USING btree (user_id, school_id);
+
+
+--
 -- Name: index_schools_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3082,13 +3157,6 @@ CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
 --
 
 CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
-
-
---
--- Name: index_schools_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_schools_on_user_id ON schools USING btree (user_id);
 
 
 --
@@ -3514,6 +3582,22 @@ ALTER TABLE ONLY mentions
 
 
 --
+-- Name: fk_rails_4a2a343dbc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT fk_rails_4a2a343dbc FOREIGN KEY (school_id) REFERENCES schools(id);
+
+
+--
+-- Name: fk_rails_ad83b2aa73; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT fk_rails_ad83b2aa73 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
 -- Name: fk_rails_c93dfeb29b; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3674,4 +3758,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715172544');
+
+INSERT INTO schema_migrations (version) VALUES ('20150715185616');
 

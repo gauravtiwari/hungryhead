@@ -17,13 +17,13 @@ class School < ActiveRecord::Base
 	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
 	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
 
-	belongs_to :user, class_name: 'User'
+	has_many :school_admins
 
 	cache_has_many :students, embed: true
 	cache_has_many :faculties, embed: true
 	#cache_has_many :events, :inverse_name => :eventable, embed: true
 	cache_has_many :ideas, embed: true
-	cache_belongs_to :user
+	cache_has_many :school_admins
 
 	cache_index :slug, :unique => true
 
