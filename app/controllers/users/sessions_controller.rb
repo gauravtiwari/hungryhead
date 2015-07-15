@@ -31,7 +31,7 @@ class Users::SessionsController < Devise::SessionsController
 		sign_in_url = new_user_session_url
 		if request.referer == sign_in_url && resource.sign_in_count != 1
 			super
-		elsif resource.sign_in_count == 1
+		elsif resource.sign_in_count == 1 && resource.class.to_s != "School"
 			welcome_path(:hello)
 		else
 			stored_location_for(resource) || request.referer || root_path

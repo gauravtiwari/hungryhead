@@ -1272,9 +1272,9 @@ ALTER SEQUENCE school_admins_id_seq OWNED BY school_admins.id;
 CREATE TABLE schools (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
-    uuid uuid DEFAULT uuid_generate_v4(),
     domain character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
+    username character varying NOT NULL,
     description text,
     logo character varying,
     cover character varying,
@@ -1287,7 +1287,8 @@ CREATE TABLE schools (
     cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    uid character varying
 );
 
 
@@ -3160,6 +3161,20 @@ CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
 
 
 --
+-- Name: index_schools_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_uid ON schools USING btree (uid);
+
+
+--
+-- Name: index_schools_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_username ON schools USING btree (username);
+
+
+--
 -- Name: index_shares_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3740,6 +3755,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
+
+INSERT INTO schema_migrations (version) VALUES ('20150528181325');
 
 INSERT INTO schema_migrations (version) VALUES ('20150605120916');
 
