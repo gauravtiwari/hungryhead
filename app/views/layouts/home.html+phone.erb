@@ -38,7 +38,7 @@
 
   </head>
 
-  <body class="fixed-header">
+  <body class="fixed-header <%= controller_name %> <%= action_name %>">
     <%= render partial: 'globals/app_sidebar' %>
     <div class="page-container">
       <% if params[:action] == "index" %>

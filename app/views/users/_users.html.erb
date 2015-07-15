@@ -1,20 +1,20 @@
 <% cache([cache_key_for_users, params[:page]]) do %>
   <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
     <div class="people-list">
-      <div class="col-md-12 col-sm-12">
-       <div class="view bg-white" id="<%= controller_name %>-list-view">
+      <div class="col-md-12 col-sm-12 sm-no-padding">
+       <div class="view" id="<%= controller_name %>-list-view">
          <% if @users.empty? %>
            <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
              <i class="fa fa-list"></i>
              <span class="clearfix">No people</span>
            </div>
          <% else %>
-           <div class="list-view boreded  no-top-border">
+           <div class="list-view boreded no-top-border">
              <% @users.each do |user| %>
              <div class="list-view-group-container font-opensans no-padding">
                <ul>
                  <li class="user-list clearfix p-t-15 p-b-15">
-                     <span class="col-xs-height col-middle">
+                     <span class="col-xs-height">
                        <% if user.avatar.present? %>
                          <span class="thumbnail-wrapper d48 circular bg-success">
                              <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), src: {retina: user.avatar.url(:avatar)}},  class: "col-top", width: "34", height: "34") %>
@@ -38,10 +38,11 @@
                          <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10 inline') %>
                         <% end %>
                        <% end %>
-                       <span class="inline people-info small-text m-l-10">
+                       <span class="people-info small-text m-l-10">
                          <%= user.role.titlecase %>
                        </span>
                        <p class="fs-14 m-t-5 block people-info text-master">
+
                          <span class="text-master"><%= user.mini_bio %></span>
                          <% if user.cached_location_list.present? %>
                          <span>
@@ -52,7 +53,7 @@
                          </span>
                          <% end %>
                          <% if user.cached_subject_list.present? %>
-                         <span>
+                         <span class="hidden-xs">
                            Studying:
                            <% user.subject_list.each do |tag| %>
                              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
@@ -60,7 +61,7 @@
                          </span>
                          <% end %>
                          <% if user.cached_market_list.present? %>
-                         <span>
+                         <span class="hidden-xs">
                            Interested in:
                            <% user.market_list.each do |tag| %>
                              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
@@ -68,7 +69,7 @@
                          </span>
                          <% end %>
                          <% if user.cached_skill_list.present? %>
-                         <span>
+                         <span class="hidden-xs">
                            Knows about:
                            <% user.skill_list.each do |tag| %>
                              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
