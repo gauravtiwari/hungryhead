@@ -15,7 +15,7 @@ class School < ActiveRecord::Base
 	#Model Validations
 	validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
 	validates :name, :presence => true
-	validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /\A[a-zA-Z0-9-_]+\Z/, message: "should not contain empty spaces or symbols" }
+	validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /^(\w|)+$/, message: "should not contain empty spaces or symbols" }
 	validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
 	#Devise for authentication
