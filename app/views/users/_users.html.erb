@@ -1,41 +1,113 @@
 <% cache([cache_key_for_users, params[:page]]) do %>
   <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
     <div class="people-list">
-      <div class="col-md-12">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th colspan="2" class="no-padding"><%= is_beta ? 0 : pluralize(@users.count, 'Result')  %> Results</th>
-              <th style="min-width: 150px;">Connect</th>
-              <th class="text-center">Stats</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% if is_beta %>
-            <tr>
-              <td colspan="4">
-                <div class="no-content">
-                    <span class="fa fa-smile-o fs-50"></span>
-                    <h1>
-                      Thank you for signing up to our beta. Once we have a few people onboard, you will be able to browse them here.
-                    </h1>
-                </div>
-                <p class="text-center">In meantime, if you have a startup idea,
-                  <%= link_to("Click", new_idea_path(:intro), class: 'p-b-5 b-b b-grey text-green') %> to pitch
-                </p>
-              </td>
-            </tr>
-          <% else %>
-            <% @users.each do |user| %>
-              <% cache([user, "followed", user.followed_by?(current_user)]) do %>
-                <%= render partial: 'users/user', locals: {user: user} %>
-              <% end %>
-            <% end %>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
+      <div class="col-md-12 col-sm-12">
+       <div class="view bg-white" id="<%= controller_name %>-list-view">
+         <% if @users.empty? %>
+           <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+             <i class="fa fa-list"></i>
+             <span class="clearfix">No people</span>
+           </div>
+         <% else %>
+           <div class="list-view boreded  no-top-border">
+             <% @users.each do |user| %>
+             <div class="list-view-group-container font-opensans no-padding">
+               <ul>
+                 <li class="user-list clearfix p-t-15 p-b-15">
+                     <span class="col-xs-height col-middle">
+                       <% if user.avatar.present? %>
+                         <span class="thumbnail-wrapper d48 circular bg-success">
+                             <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), src: {retina: user.avatar.url(:avatar)}},  class: "col-top", width: "34", height: "34") %>
+                         </span>
+                       <% else %>
+                         <div class="thumbnail-wrapper d48 inline circular">
+                           <span class="placeholder bold text-white">
+                             <%= user.user_name_badge %>
+                           </span>
+                         </div>
+                       <% end %>
+                     </span>
+                     <div class="p-l-10 col-xs-height col-middle col-xs-10 col-sm-5 col-md-5">
+                      <h5 class="text-master no-margin font-opensans bold inline fs-14">
+                        <a href="<%= profile_path(user) %>" class="inline">
+                          <%= user.name %>
+                        </a>
+                      </h5>
+                       <% if user.school.logo.present? %>
+                        <%= link_to(profile_path(user.school)) do %>
+                         <%= image_tag(user.school.logo.url(:avatar), width: "20px", class: 'm-l-10 inline') %>
+                        <% end %>
+                       <% end %>
+                       <span class="inline people-info small-text m-l-10">
+                         <%= user.role.titlecase %>
+                       </span>
+                       <p class="fs-14 m-t-5 block people-info text-master">
+                         <span class="text-master"><%= user.mini_bio %></span>
+                         <% if user.cached_location_list.present? %>
+                         <span>
+                           Live in:
+                             <% user.location_list.each do |tag| %>
+                               <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                             <% end %>
+                         </span>
+                         <% end %>
+                         <% if user.cached_subject_list.present? %>
+                         <span>
+                           Studying:
+                           <% user.subject_list.each do |tag| %>
+                             <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                           <% end %>
+                         </span>
+                         <% end %>
+                         <% if user.cached_market_list.present? %>
+                         <span>
+                           Interested in:
+                           <% user.market_list.each do |tag| %>
+                             <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                           <% end %>
+                         </span>
+                         <% end %>
+                         <% if user.cached_skill_list.present? %>
+                         <span>
+                           Knows about:
+                           <% user.skill_list.each do |tag| %>
+                             <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+                           <% end %>
+                         </span>
+                         <% end %>
+                       </p>
+                     </div>
+                    <div class="p-l-10 col-xs-height col-middle col-md-5 hidden-xs">
+                      <div class="user-stats-list no-border">
+                        <div class="col-sm-4 text-center">
+                          Followers
+                          <span class="text-master displayblock text-center">
+                            <%= number_to_human(user.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+                          </span>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                          Score
+                          <span class="text-master displayblock text-center">
+                            <%= number_to_human(User.leaderboard.score(user.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                     <% if current_user != user %>
+                       <div class="card-follow-button p-l-10 col-xs-height col-middle col-xs-2 col-sm-2 col-md-2">
+                         <%= react_component('Follow',{:followed => followed?(user)}) %>
+                       </div>
+                       <script type="text/javascript">
+                          ReactRailsUJS.mountComponents();
+                       </script>
+                     <% end %>
+                 </li>
+               </ul>
+             </div>
+             <% end %>
+           </div>
+         <% end %>
+       </div>
       </div>
       <div class="paging-container p-r-15">
         <%= will_paginate(@users, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>

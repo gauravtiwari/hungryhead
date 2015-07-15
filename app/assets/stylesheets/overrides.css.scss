@@ -717,6 +717,19 @@ ul.reactions > div {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #999;
 }
+.user-stats-list div {
+  font-size: 14px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #999;
+}
+.stastics-list li span,
+.user-stats-list div span {
+  color: #4e5052;
+  font-size: 12px;
+  display: block;
+  font-weight: bold;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 .search-follow-idea {
   float: right;
   display: block;
