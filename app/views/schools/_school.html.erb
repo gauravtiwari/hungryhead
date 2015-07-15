@@ -1,6 +1,6 @@
 <% cache(cache_key_for_school(school)) do %>
 <div class="list-view-group-container font-opensans no-padding">
-  <ul>
+  <ul class="no-style">
     <li class="school-list clearfix p-t-15 p-b-15">
         <span class="col-xs-height">
           <% if school.logo.present? %>
@@ -35,7 +35,7 @@
            </span>
          </p>
         </div>
-       <div class="p-l-10 col-xs-height col-middle col-md-5 col-sm-5 hidden-xs">
+       <div class="p-l-10 col-xs-height col-middle col-md-5 col-sm-4 hidden-xs">
          <div class="user-stats-list no-border">
            <div class="col-sm-4 text-center">
              People
@@ -51,7 +51,7 @@
            </div>
          </div>
        </div>
-      <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-2 col-md-2">
+      <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-2">
         <%= react_component('Follow',{:followed => followed?(school)}) %>
       </div>
       <script type="text/javascript">

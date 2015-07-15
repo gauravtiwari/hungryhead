@@ -1,8 +1,8 @@
 <% cache(cache_key_for_user(user)) do %>
 <div class="list-view-group-container font-opensans no-padding">
-  <ul>
-    <li class="user-list clearfix p-t-15 p-b-15">
-        <span class="col-xs-height col-middle">
+  <ul class="no-style">
+    <li class="user-list p-t-15 p-b-15">
+        <span class="col-xs-height">
           <% if user.avatar.present? %>
             <span class="thumbnail-wrapper d48 circular bg-success">
                 <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), :"src-retina" => user.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
@@ -66,7 +66,7 @@
             <% end %>
           </p>
         </div>
-       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-5 col-sm-5' : 'col-md-6 col-sm-6' %> hidden-xs">
+       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-5 col-sm-4' : 'col-md-6 col-sm-6' %> hidden-xs">
          <div class="user-stats-list no-border">
            <div class="col-sm-4 text-center">
              Followers
@@ -83,7 +83,7 @@
          </div>
        </div>
         <% if current_user != user %>
-          <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-2 col-md-2">
+          <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-2">
             <%= react_component('Follow',{:followed => followed?(user)}) %>
           </div>
           <script type="text/javascript">

@@ -51,9 +51,15 @@ var Follow = React.createClass({
       });
     }
 
+    if(this.state.follow) {
+      var icon = <span><i className="fa fa-user"></i> <i className="fa fa-check-circle"></i></span>;
+    } else {
+      var icon = <i className="fa fa-user-plus"></i>;
+    }
+
     return (
         <button data-toggle="tooltip" data-container="body" title={title_text} onClick={this.handleClick} className={classes}>
-          <i className="fa fa-user-plus"></i> <span className="hidden-xs">{text}</span>
+          {icon} <span className="hidden-xs">{text}</span>
         </button>
     );
   }
