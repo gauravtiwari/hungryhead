@@ -34,6 +34,14 @@ class School < ActiveRecord::Base
 
 	#Redis Cache counters and ids
 	set :followers_ids
+
+	#List to store last 5 activities
+	sorted_set :latest_activities, marshal: true
+
+	#Store latest school notifications
+	sorted_set :ticker, marshal: true
+	sorted_set :friends_notifications, marshal: true
+
 	#Counters
 	counter :followers_counter
 	counter :people_counter

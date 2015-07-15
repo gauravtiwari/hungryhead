@@ -4,7 +4,7 @@ class CreateNotificationCacheService
 
   def initialize(activity)
     @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
-    @actor = activity.user
+    @actor = activity.owner
     @object = activity.trackable
     @target = activity.recipient
   end
@@ -43,6 +43,8 @@ class CreateNotificationCacheService
       @activity.recipient
     elsif @activity.recipient_type == "Idea"
       @activity.recipient.user
+    elsif @activity.recipient_type == "Share"
+      @activity.recipient.owner
     else
       @activity.recipient.user
     end
