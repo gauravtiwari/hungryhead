@@ -15,7 +15,7 @@
             </div>
           <% end %>
         </span>
-        <div class="p-l-10 col-xs-height col-middle col-xs-12 col-sm-5 col-md-5">
+        <div class="p-l-10 col-xs-height col-middle col-xs-12 <%= current_user != user ? 'col-md-5 col-sm-5' : 'col-md-6 col-sm-6' %>">
          <h5 class="text-master no-margin font-opensans bold inline fs-14">
            <a href="<%= profile_path(user) %>" class="inline">
              <%= user.name %>
@@ -66,7 +66,7 @@
             <% end %>
           </p>
         </div>
-       <div class="p-l-10 col-xs-height col-middle col-md-5 hidden-xs">
+       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-5 col-sm-5' : 'col-md-6 col-sm-6' %> hidden-xs">
          <div class="user-stats-list no-border">
            <div class="col-sm-4 text-center">
              Followers
