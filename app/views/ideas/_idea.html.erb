@@ -38,8 +38,10 @@
               team
             </span>
           <% end %>
-          <p class="fs-14 m-t-5 block people-info text-master">
-            <span class="text-master"><%= idea.elevator_pitch %></span>
+          <p class="fs-14 p-t-5 block people-info text-master">
+            <span class="text-master">
+              <%= idea.elevator_pitch %>
+            </span>
             <% if idea.cached_location_list.present? %>
             <span>
               Based in:
