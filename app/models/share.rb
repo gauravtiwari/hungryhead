@@ -1,5 +1,7 @@
 class Share < ActiveRecord::Base
 
+  include IdentityCache
+  #redis objects
   include Redis::Objects
   #redis caching
   counter :votes_counter
@@ -10,6 +12,7 @@ class Share < ActiveRecord::Base
 
   #Associations
   belongs_to :owner, polymorphic: true
+  cache_index :uuid
 
   #Includes concerns
   include Commentable
