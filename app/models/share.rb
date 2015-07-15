@@ -30,7 +30,7 @@ class Share < ActiveRecord::Base
 
   #Get shareable user - school(user) || user
   def shareable_user
-    owner_type == "School" ? owner.user : owner
+    owner
   end
 
   private

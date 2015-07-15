@@ -9,7 +9,7 @@ class CreateShareNotificationService
     @activity = @owner.activities.create!(
       trackable: @share,
       verb: 'shared',
-      recipient: @shareable,
+      recipient: @share,
       key: 'share.create',
       unread: true
     )
