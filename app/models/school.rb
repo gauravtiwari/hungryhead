@@ -12,25 +12,23 @@ class School < ActiveRecord::Base
 	include Sluggable
 	include Eventable
 
-	#Model Validations
-	validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
-	validates :name, :presence => true
-
 	#Relationship
 	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
 	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
 	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
-
 	has_many :school_admins
 
+	#Cache into memcache
 	cache_has_many :students, embed: true
 	cache_has_many :faculties, embed: true
-	#cache_has_many :events, :inverse_name => :eventable, embed: true
 	cache_has_many :ideas, embed: true
 	cache_has_many :school_admins
 
+	#Cache index for fetching school
 	cache_index :slug, :unique => true
+	cache_index :uuid, :unique => true
 
+	#Tagging for locations
 	acts_as_taggable_on :locations
 
 	store_accessor :media, :logo_position, :logo_tmp, :cover_tmp,
@@ -52,7 +50,6 @@ class School < ActiveRecord::Base
 	:on => :create
 
 	public
-
 	#Slug candidates for school
 	def slug_candidates
 	 [:name]
