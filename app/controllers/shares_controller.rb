@@ -5,6 +5,17 @@ class SharesController < ApplicationController
   after_action :verify_authorized, :only => [:destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  # GET /shares/new
+  def new
+    @share = Share.new
+    @owner = params[owner].constantize.fetch(owner_id)
+  end
+
+  # GET /shares/1/edit
+  def edit
+    @owner = params[owner].constantize.fetch(owner_id)
+  end
+
   def create
     @owner = params[owner].constantize.fetch(owner_id)
     @share = CreateShareService.new(share_params, owner).create
