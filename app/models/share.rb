@@ -28,11 +28,6 @@ class Share < ActiveRecord::Base
     false
   end
 
-  #Get shareable user - school(user) || user
-  def shareable_user
-    owner
-  end
-
   private
 
   def create_activity
