@@ -41,7 +41,7 @@ var Avatar = React.createClass({
         <div id="profile_image">
           <form ref="avatarForm" role="form" method="PUT" action={this.state.form.action} id="avatar-upload" className="avatar-form" onChange={this._onChange} encType="multipart/form-data">
             <input type="hidden" name="_method" value={this.state.form.method} />
-            <input type="file" ref="avatar" accept="image/*" style={{"display" : "none"}} direct = "true" name="user[avatar]" id="user_avatar" />
+            <input type="file" ref="avatar" style={{"display" : "none"}} direct = "true" name="user[avatar]" id="user_avatar" />
           </form>
           <div id="userpic">
           <div className="avatar">

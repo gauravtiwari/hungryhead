@@ -148,7 +148,7 @@ var SchoolCover = React.createClass({
           <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap-school">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />
-                <input type="file" accept="image/*", ref="cover" style={{"display" : "none"}} name="school[cover]" id="school_cover" />
+                <input type="file" ref="cover" style={{"display" : "none"}} name="school[cover]" id="school_cover" />
                 <input type="hidden" ref="position" name="school[cover_position]" value={top} />
                 <input type="hidden" ref="position" name="school[cover_left]" value={left} />
               </form>

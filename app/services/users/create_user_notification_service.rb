@@ -18,7 +18,7 @@ class CreateUserNotificationService
   end
 
   def follow_school
-    @follow = @user.follows.new(followable: @user.school)
+    @follow = @user.followings.new(followable: @user.school)
     @follow.save!
   end
 

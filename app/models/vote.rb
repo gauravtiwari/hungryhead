@@ -9,7 +9,7 @@ class Vote < ActiveRecord::Base
 
   #Callbacks for storing cache in redis
   after_destroy :update_counters, :delete_cached_voters_ids, :delete_notification
-  after_commit :update_counters, :cache_voters_ids, on: :create
+  after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create
 
   #Scopes for fetching records
   scope :votes_for, ->(voter, votable) {
@@ -28,9 +28,9 @@ class Vote < ActiveRecord::Base
 
   private
 
-  def rebuild_cache
-    #rebuild counters and cached_ids for votable
-    UpdateVoteCacheJob.perform_later(votable_id, votable_type)
+  #Create activity
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
   end
 
   def update_counters

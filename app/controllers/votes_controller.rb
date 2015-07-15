@@ -14,7 +14,6 @@ class VotesController < ApplicationController
           voted: @votable.voted?(current_user),
           votes_count: @votable.votes_counter.value
         }
-        CreateActivityJob.perform_later(@vote.id, @vote.class.to_s)
       else
         render json: @vote.errors, status: :unprocessable_entity
       end

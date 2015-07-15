@@ -26,7 +26,6 @@ class FollowsController < ApplicationController
         format.json {render json: @follow.errors, status: unprocessable_entity}
       end
     end
-    CreateActivityJob.perform_later(@follow.id, @follow.class.to_s)
   end
 
   def unfollow

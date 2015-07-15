@@ -7,7 +7,7 @@ class Follow < ActiveRecord::Base
   validates :followable, presence: true
   validates :follower, presence: true
 
-  after_commit :update_counters, :cache_follow_ids, on: :create
+  after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
   after_destroy :update_counters, :delete_cache_follow_ids, :delete_notification
 
   #Scopes for fetching records
@@ -28,6 +28,11 @@ class Follow < ActiveRecord::Base
    followable.followers_counter.reset
    followable.followers_counter.incr(followable.followers.size)
 
+  end
+
+  #Create activity
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
   end
 
   #Add ids to follower and followable cache
