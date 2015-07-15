@@ -288,7 +288,7 @@ CREATE TABLE events (
     owner_id integer NOT NULL,
     owner_type character varying DEFAULT ''::character varying NOT NULL,
     title character varying DEFAULT ''::character varying NOT NULL,
-    small_description text DEFAULT ''::text NOT NULL,
+    excerpt text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
     featured boolean,
@@ -2469,6 +2469,13 @@ CREATE INDEX index_event_invites_on_invited_id ON event_invites USING btree (inv
 --
 
 CREATE INDEX index_event_invites_on_inviter_type_and_inviter_id ON event_invites USING btree (inviter_type, inviter_id);
+
+
+--
+-- Name: index_events_on_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_address ON events USING btree (address);
 
 
 --

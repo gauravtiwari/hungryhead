@@ -4,13 +4,13 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.belongs_to :owner, null: false, default: "", polymorphic: true
       t.string :title, null: false, default: ""
-      t.text :small_description, null: false, default: ""
+      t.text :excerpt, null: false, default: ""
       t.text :description, null: false, default: ""
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
       t.boolean :featured, index: true
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
-      t.text :address
+      t.text :address, index: true
       t.boolean :private, default: true
       t.integer :space, default: 0
       t.datetime :start_time
