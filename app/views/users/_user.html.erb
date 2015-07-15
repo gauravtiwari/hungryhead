@@ -2,7 +2,7 @@
 <div class="list-view-group-container font-opensans no-padding">
   <ul>
     <li class="user-list clearfix p-t-15 p-b-15">
-        <span class="col-xs-height">
+        <span class="col-xs-height col-middle">
           <% if user.avatar.present? %>
             <span class="thumbnail-wrapper d48 circular bg-success">
                 <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), src: {retina: user.avatar.url(:avatar)}},  class: "col-top", width: "34", height: "34") %>
