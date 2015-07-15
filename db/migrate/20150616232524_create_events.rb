@@ -2,10 +2,12 @@ class CreateEvents < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table :events do |t|
-      t.belongs_to :eventable, null: false, default: "", polymorphic: true
+      t.belongs_to :owner, null: false, default: "", polymorphic: true
       t.string :title, null: false, default: ""
+      t.text :small_description, null: false, default: ""
       t.text :description, null: false, default: ""
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
+      t.boolean :featured, index: true
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address
@@ -18,7 +20,7 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :events, [:eventable_id, :eventable_type], algorithm: :concurrently
+    add_index :events, [:owner_id, :owner_type], algorithm: :concurrently
     add_index :events, :start_time, algorithm: :concurrently
     add_index :events, :slug, algorithm: :concurrently
     add_index :events, [:latitude, :longitude], algorithm: :concurrently
