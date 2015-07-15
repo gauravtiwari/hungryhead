@@ -33,7 +33,6 @@ var Follow = React.createClass({
     });
   },
   render: function() {
-    var text = this.state.follow ? 'Following' : 'Follow';
     var cx = React.addons.classSet;
     var title_text =  this.state.follow ? 'Following' : 'Follow to receive updates';
 
@@ -53,7 +52,7 @@ var Follow = React.createClass({
 
     return (
         <button data-toggle="tooltip" data-container="body" title={title_text} onClick={this.handleClick} className={classes}>
-          <i className="fa fa-user-plus"></i> {text}
+          <i className="fa fa-user-plus"></i>
         </button>
     );
   }

@@ -23,7 +23,7 @@
             <div class="list-view-group-container no-padding">
               <ul>
                 <li class="user-list clearfix padding-10">
-                  <a href="<%= profile_path(user) %>">
+                  <a href="<%= profile_path(user) %>" class="inline">
                     <span class="col-xs-height col-middle">
                       <% if user.avatar.present? %>
                         <span class="thumbnail-wrapper d32 circular bg-success">
@@ -37,10 +37,18 @@
                         </div>
                       <% end %>
                     </span>
-                    <p class="p-l-10 col-xs-height col-middle col-xs-12">
+                    <p class="p-l-10 col-xs-height col-middle col-xs-10">
                       <span class="text-master"><%= user.name %></span>
                       <span class="block text-master hint-text fs-12"><%= truncate(user.mini_bio, length: 50) %></span>
                     </p>
+                    <% if current_user != user %>
+                      <div class="card-follow-button p-l-10 col-xs-height col-middle col-xs-2">
+                        <%= react_component('Follow',{:followed => followed?(user)}) %>
+                      </div>
+                      <script type="text/javascript">
+                         ReactRailsUJS.mountComponents();
+                      </script>
+                    <% end %>
                   </a>
                 </li>
               </ul>
