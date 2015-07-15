@@ -1,52 +1,63 @@
 <% cache(cache_key_for_school(school)) do %>
-<tr class="full-border-light-bottom">
-  <td class="no-padding p-t-25 p-b-20 no-border">
-    <div class="thumbnail-wrapper d48 circular auto-margin m-r-5 m-b-5">
-     <% if school.logo.present? %>
-       <%= image_tag(school.logo.url(:avatar), width: "50px") %>
-     <% else %>
-       <span class="placeholder bold text-white">
-         <%= school.name_badge.upcase %>
-       </span>
-     <% end %>
-     </div>
-  </td>
-  <td style="max-width: 350px;" class="school-info font-opensans no-border">
-    <h5 class="no-margin fs-16 bold"><%= link_to(school.name, profile_path(school)) %>
-    </h5>
-    <p class="fs-14 m-t-5">
-      <%= school.description %>
-      <span>
-        Based in:
-        <% school.location_list.each do |tag| %>
-          <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-        <% end %>
-      </span>
-    </p>
-  </td>
-  <td style="display:table-cell; min-width: 150px; vertical-align:middle;" class="no-border text-center">
-    <div class="card-follow-button inline">
-      <%= react_component('Follow',{:followed => followed?(school)}) %>
-    </div>
-    <script type="text/javascript">
-       ReactRailsUJS.mountComponents();
-    </script>
-  </td>
-  <td style="display:table-cell; vertical-align:middle;" class="no-border">
-    <ul class="stastics-list">
-      <li class="clearfix pull-reset">
-        People
-        <span class="text-master">
-          <%= number_to_human(school.people_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+<div class="list-view-group-container font-opensans no-padding">
+  <ul>
+    <li class="school-list clearfix p-t-15 p-b-15">
+        <span class="col-xs-height">
+          <% if school.logo.present? %>
+            <span class="thumbnail-wrapper d48 circular">
+                <%= image_tag(school.logo.url(:avatar), data: {src:  school.logo.url(:avatar), :"src-retina" => school.logo.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+            </span>
+          <% else %>
+            <div class="thumbnail-wrapper d48 inline circular">
+              <span class="placeholder bold text-white">
+                <%= school.name_badge %>
+              </span>
+            </div>
+          <% end %>
         </span>
-      </li>
-      <li class="clearfix pull-reset">
-        Ideas
-        <span class="text-master">
-          <%= number_to_human(school.ideas_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-        </span>
-      </li>
-    </ul>
-  </td>
-</tr>
+        <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-5 col-sm-5">
+         <h5 class="text-master no-margin font-opensans bold inline fs-14">
+           <a href="<%= profile_path(school) %>" class="inline">
+             <%= school.name %>
+           </a>
+         </h5>
+         <% if school.cached_location_list.present? %>
+         <p class="clearfix fs-14">
+           Located in:
+             <% school.location_list.each do |tag| %>
+               <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+             <% end %>
+         </p>
+         <% end %>
+         <p class="fs-14 m-t-10 block people-info text-master">
+           <span class="text-master">
+             <%= truncate(school.description, length: 100) %>
+           </span>
+         </p>
+        </div>
+       <div class="p-l-10 col-xs-height col-middle col-md-5 col-sm-5 hidden-xs">
+         <div class="user-stats-list no-border">
+           <div class="col-sm-4 text-center">
+             People
+             <span class="text-master">
+               <%= number_to_human(school.people_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+             </span>
+           </div>
+           <div class="col-sm-4 text-center">
+             Ideas
+            <span class="text-master">
+              <%= number_to_human(school.ideas_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+            </span>
+           </div>
+         </div>
+       </div>
+      <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-2 col-md-2">
+        <%= react_component('Follow',{:followed => followed?(school)}) %>
+      </div>
+      <script type="text/javascript">
+         ReactRailsUJS.mountComponents();
+      </script>
+    </li>
+  </ul>
+</div>
 <% end %>

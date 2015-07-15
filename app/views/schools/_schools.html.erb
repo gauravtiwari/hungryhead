@@ -1,24 +1,24 @@
 <% cache([cache_key_for_schools, params[:page]]) do %>
-  <div class="container p-t-40 p-b-80" id="<%= controller_name %>_listing">
-    <div class="school-list">
-      <div class="col-md-12">
-        <table class="table">
-          <thead>
-            <tr>
-              <th colspan="2" class="no-padding"><%= @schools.count %> Results</th>
-              <th style="min-width: 150px;">Receive updates</th>
-              <th class="text-center">Stats</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @schools.each do |school| %>
+  <div class="container p-t-40 p-b-80 sm-no-padding xs-no-padding" id="<%= controller_name %>_listing">
+    <div class="people-list">
+      <div class="col-md-12 col-sm-12 sm-no-padding">
+       <div class="view" id="<%= controller_name %>-list-view">
+         <% if @schools.empty? %>
+           <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+             <i class="fa fa-list"></i>
+             <span class="clearfix">No Schools</span>
+           </div>
+         <% else %>
+           <div class="list-view boreded no-top-border">
+             <% @schools.each do |school| %>
               <%= render partial: 'schools/school', locals: {school: school} %>
-            <% end %>
-          </tbody>
-        </table>
+             <% end %>
+           </div>
+         <% end %>
+       </div>
       </div>
       <div class="paging-container p-r-15">
-          <%= will_paginate(@schools, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+        <%= will_paginate(@schools, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
       </div>
     </div>
   </div>
