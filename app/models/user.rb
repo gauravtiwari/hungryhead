@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   include Sluggable
   include Followable
   include Follower
+  include Feeder
   include Mentionable
   include Suggestions
   include Scorable
@@ -46,15 +47,14 @@ class User < ActiveRecord::Base
   belongs_to :school, touch: true
 
   #has_many relationships
-  has_many :activities, -> {where(published: true)}, :dependent => :destroy
-  has_many :attendences, class_name: 'Attendee', :dependent => :destroy
-  has_many :notifications, -> {where(published: true)}, :dependent => :destroy
+  has_many :attendences, class_name: 'EventAttendee', foreign_key: 'attendee_id', :dependent => :destroy
+  has_many :team_invites, class_name: 'TeamInvite', foreign_key: 'invited_id', :dependent => :destroy
+  has_many :event_invites, class_name: 'EventInvite', foreign_key: 'invited_id', :dependent => :destroy
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
 
   cache_has_many :ideas, embed: true
-  cache_has_many :activities, embed: true
   cache_belongs_to :school
 
   cache_index :slug, :unique => true
@@ -114,7 +114,6 @@ class User < ActiveRecord::Base
   counter :votes_counter
   counter :ideas_counter
   counter :views_counter
-  counter :activities_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}

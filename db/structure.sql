@@ -79,7 +79,8 @@ CREATE TABLE activities (
     id integer NOT NULL,
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
-    user_id integer NOT NULL,
+    owner_id integer NOT NULL,
+    owner_type character varying NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     uuid uuid DEFAULT uuid_generate_v4(),
@@ -1087,7 +1088,8 @@ CREATE TABLE notifications (
     id integer NOT NULL,
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
-    user_id integer NOT NULL,
+    owner_id integer NOT NULL,
+    owner_type character varying NOT NULL,
     parent_id uuid,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
@@ -2411,17 +2413,17 @@ ALTER TABLE ONLY votes
 
 
 --
+-- Name: index_activities_on_owner_id_and_owner_type_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_owner_id_and_owner_type_and_published ON activities USING btree (owner_id, owner_type, published);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities USING btree (trackable_id, trackable_type);
-
-
---
--- Name: index_activities_on_user_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_user_id_and_published ON activities USING btree (user_id, published);
 
 
 --
@@ -2992,6 +2994,13 @@ CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
 
 
 --
+-- Name: index_notifications_on_owner_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_owner_id_and_published ON notifications USING btree (owner_id, published);
+
+
+--
 -- Name: index_notifications_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3010,13 +3019,6 @@ CREATE INDEX index_notifications_on_recipient_id_and_recipient_type ON notificat
 --
 
 CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
-
-
---
--- Name: index_notifications_on_user_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_user_id_and_published ON notifications USING btree (user_id, published);
 
 
 --
@@ -3447,10 +3449,10 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 
 
 --
--- Name: unique_activity_per_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_activity_per_owner; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX unique_activity_per_user ON activities USING btree (user_id, trackable_id, trackable_type, key);
+CREATE UNIQUE INDEX unique_activity_per_owner ON activities USING btree (owner_id, owner_type, trackable_id, trackable_type, key);
 
 
 --
@@ -3475,10 +3477,10 @@ CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionabl
 
 
 --
--- Name: unique_notification_per_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_notification_per_owner; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX unique_notification_per_user ON notifications USING btree (user_id, trackable_id, trackable_type, key);
+CREATE UNIQUE INDEX unique_notification_per_owner ON notifications USING btree (owner_id, owner_type, trackable_id, trackable_type, key);
 
 
 --

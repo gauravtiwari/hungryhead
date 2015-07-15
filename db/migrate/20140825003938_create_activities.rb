@@ -1,16 +1,15 @@
 # Migration responsible for creating a table with activities
 class CreateActivities < ActiveRecord::Migration
+
   disable_ddl_transaction!
-
   # Create table
-
   def self.up
 
     create_table :activities do |t|
 
       t.belongs_to :trackable, :polymorphic => true , null: false
 
-      t.belongs_to :user, null: false
+      t.belongs_to :owner, polymorphic: true, null: false
 
       t.string  :key , null: false, default: ""
 
@@ -26,8 +25,8 @@ class CreateActivities < ActiveRecord::Migration
     end
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
-    add_index :activities, [:user_id, :published], algorithm: :concurrently
-    add_index :activities, [:user_id, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_user'
+    add_index :activities, [:owner_id, :owner_type, :published], algorithm: :concurrently
+    add_index :activities, [:owner_id, :owner_type, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_owner'
     add_index :activities, :uuid, algorithm: :concurrently
     add_index :activities, [:recipient_id, :recipient_type, :published], name: 'recipient_published_activities', algorithm: :concurrently
   end

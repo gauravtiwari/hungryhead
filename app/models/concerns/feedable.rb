@@ -5,7 +5,7 @@ module Feedable
     # Define polymorphic association to the parent
     belongs_to :trackable, :polymorphic => true, touch: true
     # Define ownership to a resource responsible for this activity
-    belongs_to :user, touch: true
+    belongs_to :owner, polymorphic: true, touch: true
     # Define ownership to a resource targeted by this activity
     belongs_to :recipient, :polymorphic => true, touch: true
     #Serialize JSON

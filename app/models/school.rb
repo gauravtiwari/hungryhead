@@ -8,6 +8,7 @@ class School < ActiveRecord::Base
 	#Included concerns
 	include Followable
 	include Sharings
+	include Feeder
 	include Sluggable
 	include Eventable
 

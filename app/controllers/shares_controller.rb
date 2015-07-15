@@ -6,7 +6,8 @@ class SharesController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def create
-    @share = CreateShareService.new(share_params, current_user).create
+    @owner = params[owner].constantize.fetch(owner_id)
+    @share = CreateShareService.new(share_params, owner).create
     if @share.save
       render :show, status: :created
     else
