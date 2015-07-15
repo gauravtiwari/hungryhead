@@ -18,8 +18,6 @@ class CreateSchools < ActiveRecord::Migration
       t.string :logo
       t.string :cover
 
-      t.references :user, null: false, default: 1
-
       t.string :slug, :null => false, unique: true
 
       t.string :phone, :null => false, default: ""

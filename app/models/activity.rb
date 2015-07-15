@@ -14,23 +14,23 @@ class Activity < ActiveRecord::Base
   sorted_set :popular, global: true
 
   def cache_key
-    "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+    "activities/activity-#{id}/owner-#{owner.id}-#{owner_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
 
   def self.latest_stories
-    where(published: true).includes([:trackable, :user]).order(id: :desc)
+    where(published: true).includes([:trackable, :owner]).order(id: :desc)
   end
 
   def self.popular_stories
-    includes([:trackable, :user]).fetch_multi(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
+    includes([:trackable, :owner]).fetch_multi(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp
     trackable.updated_at.try(:utc).try(:to_s, :number)
   end
 
-  def user_timestamp
-    user.updated_at.try(:utc).try(:to_s, :number)
+  def owner_timestamp
+    owner.updated_at.try(:utc).try(:to_s, :number)
   end
 
   private
@@ -40,21 +40,23 @@ class Activity < ActiveRecord::Base
   end
 
   def delete_older_notifications
-    refresh_friends_notifications
-    refresh_ticker
-    profile_latest_activities
+    unless owner_type == "School"
+      refresh_friends_notifications
+      refresh_ticker
+      profile_latest_activities
+    end
   end
 
   def refresh_ticker
-    user.ticker.remrangebyrank(0, -100)
+    owner.ticker.remrangebyrank(0, -100)
   end
 
   def refresh_friends_notifications
-    user.friends_notifications.remrangebyrank(0, -50)
+    owner.friends_notifications.remrangebyrank(0, -50)
   end
 
   def profile_latest_activities
-    user.latest_activities.remrangebyrank(0, -5)
+    owner.latest_activities.remrangebyrank(0, -5)
   end
 
 end

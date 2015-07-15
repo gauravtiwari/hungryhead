@@ -6,7 +6,8 @@ class Share < ActiveRecord::Base
   #redis caching
   counter :votes_counter
   counter :comments_counter
-  #cached ids
+
+  #cached ids to redis
   list :voters_ids
   list :commenters_ids
 
