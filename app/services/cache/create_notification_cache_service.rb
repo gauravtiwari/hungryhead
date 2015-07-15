@@ -27,11 +27,13 @@ class CreateNotificationCacheService
   def recipient_user
     if @activity.recipient_type == "User"
       @activity.recipient
-    elsif @activity.recipient_type == "Idea"
-      @activity.recipient.user
-    elsif @activity.recipient_type == "Share"
+    elsif @activity.recipient_type == "Share" && is_school?
+      @activity.recipient.owner.user
+    elsif @activity.recipient_type == "Event" && is_school?
+      @activity.recipient.owner.user
+    elsif @activity.recipient_type == "Share" && !is_school?
       @activity.recipient.owner
-    elsif @activity.recipient_type == "Event"
+    elsif @activity.recipient_type == "Event" && !is_school?
       @activity.recipient.owner
     else
       @activity.recipient.user
@@ -42,10 +44,12 @@ class CreateNotificationCacheService
   def followers
     if @activity.recipient_type == "Idea"
       ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [recipient_user.id.to_s]
+    elsif @activity.recipient_type == "School"
+      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
     else
-      ids = @actor.followers_ids.members
+      ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end
-    @actor.class.to_s.constantize.fetch_multi(ids)
+    User.fetch_multi(ids)
   end
 
   #Add activity to different tickers
