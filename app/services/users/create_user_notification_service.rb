@@ -9,6 +9,7 @@ class CreateUserNotificationService
   def create
     publish_user #publish user
     increment_counters #update counters
+    follow_school if @user.school_id.present?
   end
 
   def publish_user
@@ -16,9 +17,14 @@ class CreateUserNotificationService
     @user.save
   end
 
+  def follow_school
+    @follow = @user.follows.new(followable: @user.school)
+    @follow.save!
+  end
+
   def increment_counters
     #Increment counters
-    @user.school.people_counter.reset
+    @user.school.people_counter.reset if @user.school_id.present?
     @user.school.people_counter.incr(User.from_school(@user.school_id).size) if @user.school_id.present?
 
     #Cache latest user & sorted set for global leaderboard
@@ -32,7 +38,7 @@ class CreateUserNotificationService
     #Send notification to listing
     Pusher.trigger_async("users-channel",
       "new_user",
-      {data: user_json(@user)}.to_json
+      { data: user_json(@user) }.to_json
     )
 
   end
