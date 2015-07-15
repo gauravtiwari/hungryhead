@@ -1286,6 +1286,18 @@ CREATE TABLE schools (
     media jsonb DEFAULT '{}'::jsonb,
     cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying,
+    last_sign_in_ip character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     uid character varying
@@ -1631,6 +1643,9 @@ CREATE TABLE users (
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
     unconfirmed_email character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     invitation_token character varying,
@@ -3154,6 +3169,13 @@ CREATE UNIQUE INDEX index_schools_on_name ON schools USING btree (name);
 
 
 --
+-- Name: index_schools_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_reset_password_token ON schools USING btree (reset_password_token);
+
+
+--
 -- Name: index_schools_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3165,6 +3187,13 @@ CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
 --
 
 CREATE UNIQUE INDEX index_schools_on_uid ON schools USING btree (uid);
+
+
+--
+-- Name: index_schools_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_schools_on_unlock_token ON schools USING btree (unlock_token);
 
 
 --

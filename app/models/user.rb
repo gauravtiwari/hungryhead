@@ -130,7 +130,7 @@ class User < ActiveRecord::Base
 
   #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :confirmable,
+    :recoverable, :rememberable, :lockable, :trackable, :validatable, :confirmable,
     :authentication_keys => [:login]
 
 
