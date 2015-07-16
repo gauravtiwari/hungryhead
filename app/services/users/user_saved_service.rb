@@ -17,7 +17,7 @@ class UserSavedService
     loader = Soulmate::Loader.new('people')
     loader.add(
       "term" => @user.name,
-      "image" => @user.avatar.url(:avatar),
+      "image" => @user.get_avatar,
       "description" => @user.mini_bio,
       "id" => @user.id,
       "data" => {

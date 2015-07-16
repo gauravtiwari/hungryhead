@@ -12,8 +12,8 @@
   </td>
   <td style="max-width: 350px;" class="people-info font-opensans no-border">
     <h5 class="no-margin fs-16 bold"><%= link_to(event.name, profile_path(user)) %>
-    <% if event.fetch_eventable.logo.present? %>
-     <%= image_tag(event.fetch_eventable.logo.url(:avatar), width: "20px", class: 'm-l-10') %>
+    <% if event.fetch_eventable.avatar_present? %>
+     <%= image_tag(event.fetch_eventable.get_avatar, width: "20px", class: 'm-l-10') %>
     <% end %>
     </h5>
     <p class="fs-14 m-t-5">

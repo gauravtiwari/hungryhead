@@ -2,7 +2,7 @@ module MessagesHelper
 	def recipients_options
 		s = ''
 		User.find(current_user.followers_ids.members).each do |user|
-		  s << "<option value='#{user.id}' data-img-src='#{user.avatar.url(:avatar)}'>#{user.name}</option>"
+		  s << "<option value='#{user.id}' data-img-src='#{user.get_avatar}'>#{user.name}</option>"
 		end
 		s.html_safe
 	end

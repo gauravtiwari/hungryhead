@@ -138,7 +138,7 @@ class Idea < ActiveRecord::Base
     logo.url(:avatar)
   end
 
-  def avatar.present?
+  def avatar_present?
     logo.url(:avatar).present?
   end
 
