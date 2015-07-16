@@ -1,0 +1,18 @@
+//find body
+var $el = $('#profile_card_<%= @user.uid %>');
+//update profile card
+<% data = render(template: 'users/show.json.jbuilder') %>
+
+$el.html("<%= j render partial: 'card', locals: {data: data} %>");
+
+ReactRailsUJS.mountComponents();
+//Find modal and hide
+var $container = $('#edit_user_<%= @user.uid %>');
+var $modal = $container.find('#editProfileFormPopup');
+//Hide modal
+$modal.modal('hide');
+
+//Cleanup dom
+$modal.on('hidden.bs.modal', function(){
+  $container.remove();
+});

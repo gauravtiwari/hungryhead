@@ -1,0 +1,13 @@
+<div class="container p-b-60">
+
+    <div class="col-md-12 col-sm-12 xs-no-padding">
+        <div class="bg-white p-t-40 p-b-80">
+            <%= render partial: 'form' %>
+        </div>
+    </div>
+</div>
+
+<% if current_user.is_friend?(@user) %>
+    <%= render partial: 'send_message' %>
+<% end %>
+

@@ -1,0 +1,83 @@
+<div class="editProfile">
+  <div class="panel panel-default no-border">
+    <div class="panel-body no-padding no-border">
+      <%= simple_form_for(@user, html: {class: "edit_user", id: "edit_user", role: 'form'}, method: :patch, remote: true) do |u| %>
+        <div class="col-md-6">
+          <div class="form-group">
+              <label>Your name</label>
+              <span class="help"> e.g. "John Doe" <span class="text-danger">required</span></span>
+              <%= u.input_field :name, placeholder: "John Doe", class: 'string required form-control', required: "required", :"aria-required" => true %>
+          </div>
+          <div class="form-group">
+              <label>Email</label>
+              <span class="help"> e.g. "johndoe@example.com" <span class="text-danger">required</span></span>
+              <%= u.input_field :email, placeholder: "johndoe@example.com", class: 'string required form-control', required: "required", :"aria-required" => true %>
+          </div>
+          <div class="form-group">
+              <label>Mini Bio</label>
+              <span class="help"> e.g. "Student, interested in startups"</span>
+              <%= u.input_field :mini_bio, placeholder: "I am founder or student of ...", class: 'string required form-control', required: "required", :"aria-required" => true %>
+          </div>
+          <div class="form-group">
+            <label>Location you are based</label>
+            <span class="help"> e.g. "Lancaster"</span>
+            <%= u.input_field :location_list, value: "#{@user.location_list}", data: { url: autocomplete_location_name_locations_path, placeholder: "Where are you based? eg: 'London', 'Lancaster'", init: @user.location_list, tag_limit: 1}, class: 'auto-select form-control full-width' %>
+          </div>
+          <div class="form-group">
+            <label>Select your University/College</label>
+            <%= u.input_field :school_id, data: { url: autocomplete_school_name_schools_path, placeholder: "Which university you are studying or studied? eg: 'UCL', 'Lancaster'", init: @user.school.name}, class: 'auto-select-id form-control full-width' %>
+            <small class="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" class="pointer">Click here</a></small>
+          </div>
+          <div class="form-group clearfix">
+            <label>Markets interested</label>
+            <span class="help"> e.g. "Ecommerce, SASS"</span>
+            <%= u.input_field :market_list, value: "#{@user.market_list}", data: { url: autocomplete_market_name_markets_path, placeholder: "Which markets are you interested in? eg: 'Education', 'Art'", init: @user.market_list, tag_limit: 3}, class: 'auto-select form-control full-width' %>
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <span class="help"> e.g. "Programming, Marketing"</span>
+            <%= u.input_field :skill_list, value: "#{@user.skill_list}", data: { url: autocomplete_skill_name_skills_path, placeholder: "Which skills you have? eg: 'Programming', 'Design'", init: @user.skill_list, tag_limit: 3}, class: 'auto-select form-control full-width' %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Education/Subjects Studied</label>
+            <span class="help"> e.g. "Computer Science, Marketing"</span>
+            <%= u.input_field :subject_list, value: "#{@user.subject_list}", data: { url: autocomplete_subject_name_subjects_path, placeholder: "Which subjects you have studied or studying? eg: 'Computer', 'Arts'", init: @user.subject_list, tag_limit: 3}, class: 'auto-select form-control full-width' %>
+          </div>
+
+          <div class="form-group">
+              <label>Website url</label>
+              <span class="help"> e.g. "www.example.com"</span>
+              <%= u.input_field :website_url, placeholder: 'Your website url', class: 'string required form-control' %>
+          </div>
+          <div class="form-group">
+              <label>Linkedin url</label>
+              <span class="help"> e.g. "www.linkedin.com/john"</span>
+              <%= u.input_field :linkedin_url, placeholder: 'Your linkedin url', class: 'string required form-control' %>
+          </div>
+          <div class="form-group">
+              <label>Facebook url</label>
+              <span class="help"> e.g. "www.facebook.com/john"</span>
+              <%= u.input_field :facebook_url, placeholder: 'Your facebook url', class: 'string required form-control' %>
+          </div>
+          <div class="form-group">
+              <label>Twitter url</label>
+              <span class="help"> e.g. "www.twitter.com/john"</span>
+              <%= u.input_field :twitter_url, placeholder: 'Your twitter url', class: 'string required form-control' %>
+          </div>
+
+          <div class="form-group">
+            <label>Interests/Hobbies</label>
+            <span class="help"> e.g. "Games, Football"</span>
+            <%= u.input_field :hobby_list, value: "#{@user.hobby_list}", data: { url: autocomplete_hobby_name_hobbies_path, placeholder: "Which hobbies you have? eg: 'Games', 'Football'", init: @user.hobby_list, tag_limit: 3}, class: 'auto-select full-width form-control' %>
+          </div>
+
+          <div class="m-t-20 pull-right">
+            <%= u.button :submit, value: 'Save', class: 'main-button inline m-r-10', data: { disable_with: "Saving wait..." } %>
+            <%= link_to('Cancel', 'javascript:void(0);', class: 'inline main-button', id: 'close_form') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>
