@@ -1,4 +1,6 @@
-class BuildActivityCacheBlob
+class BuildActivityCacheBlobService
+
+  include Rails.application.routes.url_helpers
 
   def initialize(activity)
     @activity = activity
@@ -8,7 +10,7 @@ class BuildActivityCacheBlob
   end
 
   def call
-    activity
+    generate_activity_blob
   end
 
   def find_activity_id
@@ -19,7 +21,7 @@ class BuildActivityCacheBlob
     end
   end
 
-  def activity
+  def generate_activity_blob
     {
       id: @activity.id,
       verb: @activity.verb,

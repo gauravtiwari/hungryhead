@@ -1,7 +1,5 @@
 class UpdateNotificationCacheService
 
-  include Rails.application.routes.url_helpers
-
   def initialize(activity)
     @activity = activity #already persist in Postgres
     @actor = activity.user

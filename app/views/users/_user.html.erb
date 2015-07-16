@@ -66,7 +66,7 @@
             <% end %>
           </p>
         </div>
-       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-5 col-sm-4' : 'col-md-6 col-sm-6' %> hidden-xs">
+       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-4 col-sm-4' : 'col-md-6 col-sm-6' %> hidden-xs">
          <div class="user-stats-list no-border">
            <div class="col-sm-4 text-center">
              Followers
@@ -83,7 +83,7 @@
          </div>
        </div>
         <% if current_user != user %>
-          <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-2">
+          <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
             <%= react_component('Follow',{:followed => followed?(user)}) %>
           </div>
           <script type="text/javascript">
