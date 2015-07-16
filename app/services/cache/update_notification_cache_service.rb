@@ -2,7 +2,7 @@ class UpdateNotificationCacheService
 
   def initialize(activity)
     @activity = activity #already persist in Postgres
-    @actor = activity.user
+    @actor = activity.owner
     @object = activity.trackable
     @target = activity.recipient
   end
@@ -63,7 +63,7 @@ class UpdateNotificationCacheService
     #add activity to user personal profile
     add_activity_to_user_profile(user, activity_item) unless is_school?
     #push notification into friends notifications
-    add_notification_for_recipient(activity_item) unless @activity.user == recipient_user && is_school?
+    add_notification_for_recipient(activity_item) unless @activity.owner == recipient_user && is_school?
 
     #Add activity to idea ticker if recipient or trackable is idea
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea"
@@ -92,7 +92,7 @@ class UpdateNotificationCacheService
   end
 
   def add_activity_to_commenters(activity_item)
-    @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
+    @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
     User.fetch_multi(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter, activity_item)
     end
