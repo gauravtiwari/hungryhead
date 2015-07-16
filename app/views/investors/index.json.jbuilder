@@ -3,7 +3,7 @@ json.payload do
   json.listings @investors.each do |investor|
     json.cache! [ "investors", investor ], expires_in: 2.hours do
         json.name investor.name
-        json.avatar investor.avatar.url(:avatar)
+        json.avatar investor.get_avatar
         json.uuid investor.uid
         json.role investor.role
         json.path profile_path(investor)
@@ -12,7 +12,7 @@ json.payload do
             json.url tag_people_path(tag.parameterize)
         end
         json.about_me investor.mini_bio
-        json.user_name_badge investor.user_name_badge
+        json.user_name_badge investor.name_badge
         json.is_following investor.followed_by?(current_user)
         json.followed followed?(investor)
         json.not_current_user investor != current_user

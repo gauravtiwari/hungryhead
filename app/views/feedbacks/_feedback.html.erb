@@ -1,16 +1,16 @@
 <div class="card share post_<%= feedback.id %>" data-social="item">
     <div class="card-header clearfix">
       <div class="user-pic">
-        <% if feedback.fetch_user.avatar.present? %>
-          <%= image_tag(feedback.fetch_user.avatar.url(:avatar), :"data-src" => "#{feedback.fetch_user.avatar.url(:avatar)}", :"data-src-retina" => "#{feedback.fetch_user.avatar.url(:square)}", width: "33", height: "33") %>
+        <% if feedback.user.avatar_present? %>
+          <%= image_tag(feedback.user.get_avatar, :"data-src" => "#{feedback.user.get_avatar}", :"data-src-retina" => "#{feedback.user.get_avatar}", width: "33", height: "33") %>
           <% else %>
-              <span class="placeholder bold text-white"><%= feedback.fetch_user.user_name_badge %>
+              <span class="placeholder bold text-white"><%= feedback.user.name_badge %>
               </span>
         <% end %>
       </div>
 
       <div class="text-master-dark overflow-hidden">
-        <%= link_to(your_name(feedback.fetch_user, false), profile_path(feedback.fetch_user), :"data-popover-href" => "#{profile_card_path(feedback.fetch_user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
+        <%= link_to(your_name(feedback.user, false), profile_path(feedback.user), :"data-popover-href" => "#{profile_card_path(feedback.user)}", class: 'load-card bold') %> left a feedback <i class="fa fa-comment"></i> for
         <% if @idea.team_ids.include?(current_user.id.to_s) %>
           your idea
         <% end %>

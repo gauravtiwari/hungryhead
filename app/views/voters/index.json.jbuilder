@@ -2,7 +2,7 @@ json.payload do
 
   json.listings @voters.each do |voter|
     json.name your_name(voter, false)
-    json.avatar voter.avatar.url(:avatar)
+    json.avatar voter.get_avatar
     json.uuid voter.uid
     json.path profile_path(voter)
     json.locations voter.location_list.each do |tag|
@@ -11,7 +11,7 @@ json.payload do
     end
     json.about_me voter.mini_bio
     json.is_following voter.followed_by?(current_user)
-    json.user_name_badge voter.first_name.first + voter.last_name.first
+    json.user_name_badge voter.name_badge
     json.followed followed?(voter)
     json.not_current_user voter != current_user
   end

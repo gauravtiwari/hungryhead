@@ -3,9 +3,9 @@
   <ul class="no-style">
     <li class="school-list clearfix p-t-15 p-b-15">
         <span class="col-xs-height">
-          <% if school.logo.present? %>
+          <% if school.avatar_present? %>
             <span class="thumbnail-wrapper d48 circular">
-                <%= image_tag(school.logo.url(:avatar), data: {src:  school.logo.url(:avatar), :"src-retina" => school.logo.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+                <%= image_tag(school.get_avatar, data: {src:  school.get_avatar, :"src-retina" => school.get_avatar},  class: "col-top", width: "34", height: "34") %>
             </span>
           <% else %>
             <div class="thumbnail-wrapper d48 inline circular">

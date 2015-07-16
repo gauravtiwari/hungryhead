@@ -68,6 +68,14 @@ class School < ActiveRecord::Base
 		fetch_users.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
+	def get_avatar
+	  logo.url(:avatar)
+	end
+
+	def avatar_present?
+	  logo.url(:avatar).present?
+	end
+
 	def get_published_ideas
 		fetch_ideas.sort { |x,y| y.created_at <=> x.created_at }
 	end

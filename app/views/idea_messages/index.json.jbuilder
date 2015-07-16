@@ -4,10 +4,10 @@ if @idea_messages
 			json.(idea_message, :id, :status, :created_at)
 			json.user_name idea_message.user.name
 			json.body linkify idea_message.body
-			json.user_badge idea_message.user.user_name_badge
+			json.user_badge idea_message.user.name_badge
 			json.uuid SecureRandom.hex(10)
 			json.user_id idea_message.user.uid
-			json.user_avatar idea_message.user.avatar.url(:avatar)
+			json.user_avatar idea_message.user.get_avatar
 			json.user_path profile_path(idea_message.user)
 		end
 	end

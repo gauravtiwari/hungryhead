@@ -5,7 +5,7 @@
         <span class="col-xs-height">
           <% if idea.logo.present? %>
             <span class="thumbnail-wrapper d48 circular bg-success">
-                <%= image_tag(idea.logo.url(:avatar), data: {src:  idea.logo.url(:avatar), :"src-retina" => idea.logo.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+                <%= image_tag(idea.get_avatar, data: {src:  idea.get_avatar, :"src-retina" => idea.get_avatar},  class: "col-top", width: "34", height: "34") %>
             </span>
           <% else %>
             <div class="thumbnail-wrapper d48 inline circular">

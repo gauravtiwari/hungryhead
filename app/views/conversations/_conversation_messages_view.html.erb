@@ -5,14 +5,14 @@
     </a>
     <div class="view-heading">
       <% @conversation.participants.select{ |p| p != current_user }.each do |participant| %>
-       <% if participant.avatar.present? %>
+       <% if participant.avatar_present? %>
          <span class="thumbnail-wrapper auto-margin d32 circular bg-success">
-             <%= image_tag(participant.avatar.url(:avatar), data: {src: {retina: participant.avatar.url(:avatar)}, src: participant.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+             <%= image_tag(participant.get_avatar, data: {src: {retina: participant.get_avatar}, src: participant.get_avatar},  class: "col-top", width: "34", height: "34") %>
          </span>
        <% else %>
          <div class="thumbnail-wrapper d32 auto-margin inline circular">
            <span class="placeholder bold text-white">
-             <%= participant.user_name_badge %>
+             <%= participant.name_badge %>
            </span>
          </div>
        <% end %>
@@ -35,14 +35,14 @@
       </div>
     <% else %>
     <div class="message clearfix">
-     <% if receipt.message.sender.avatar.present? %>
+     <% if receipt.message.sender.avatar_present? %>
        <div class="profile-img-wrapper m-t-5 inline">
-           <%= image_tag(receipt.message.sender.avatar.url(:avatar), data: {src: {retina: receipt.message.sender.avatar.url(:avatar)}, src: receipt.message.sender.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+           <%= image_tag(receipt.message.get_avatar, data: {src: {retina: receipt.message.sender.get_avatar}, src: receipt.message.get_avatar},  class: "col-top", width: "34", height: "34") %>
         </div>
      <% else %>
        <div class="thumbnail-wrapper d32 inline circular">
          <span class="placeholder bold text-white">
-           <%= receipt.message.sender.user_name_badge %>
+           <%= receipt.message.sender.name_badge %>
          </span>
        </div>
      <% end %>

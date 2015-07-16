@@ -184,11 +184,19 @@ class User < ActiveRecord::Base
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
 
+  def get_avatar
+    avatar.url(:avatar)
+  end
+
+  def avatar_present?
+    avatar.url(:avatar).present?
+  end
+
   def school_name
     school_id.present? ? school.name : ""
   end
 
-  def user_name_badge
+  def name_badge
     first_name.present? ? first_name.first + last_name.first : add_fullname
   end
 

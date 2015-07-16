@@ -23,11 +23,11 @@
                 <li class="p-t-10 p-b-10">
                   <div class="inline m-r-10">
                     <div class="thumbnail-wrapper text-master d32 circular auto-margin m-r-5 m-b-5">
-                       <% if user.avatar.present? %>
-                         <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
+                       <% if user.avatar_present? %>
+                         <%= image_tag(user.get_avatar, width: "50px") %>
                        <% else %>
                          <span class="placeholder bold text-white">
-                           <%= user.user_name_badge.upcase %>
+                           <%= user.name_badge.upcase %>
                          </span>
                        <% end %>
                      </div>

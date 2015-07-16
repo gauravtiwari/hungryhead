@@ -3,8 +3,8 @@ json.conversations @conversations.includes(:messages).each do |conversation|
 	json.(conversation, :id, :subject, :created_at)
 	json.uuid SecureRandom.hex(6)
 	json.messages_count conversation.messages.length
-	json.sender_avatar conversation.last_message.sender.avatar.url(:avatar)
-	json.sender_name_badge conversation.last_message.sender.user_name_badge
+	json.sender_avatar conversation.last_message.sender.get_avatar
+	json.sender_name_badge conversation.last_message.sender.name_badge
 	json.last_message_body truncate(markdownify(conversation.last_message.body), length: 50, escape: false)
 	json.last_message_created_at conversation.last_message.created_at
 	json.is_unread conversation.is_unread?(current_user)

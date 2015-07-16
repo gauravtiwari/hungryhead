@@ -1,7 +1,7 @@
 json.school do
 	json.cache! ["school_json_response", @school, current_user], expires_in: 2.hours do
 		json.logo do
-			json.url @school.logo.url(:avatar)  if @school.logo
+			json.url @school.get_avatar  if @school.logo
 		end
 
 		json.cover do

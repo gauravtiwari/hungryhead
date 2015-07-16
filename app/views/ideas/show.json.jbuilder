@@ -6,7 +6,7 @@ json.idea do
       :business_model)
 
     json.logo do
-      json.url @idea.logo.url(:avatar) if @idea.logo
+      json.url @idea.get_avatar if @idea.logo
     end
 
     json.cover do

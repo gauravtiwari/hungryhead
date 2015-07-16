@@ -3,7 +3,7 @@ json.payload do
   json.listings @followers.each do |follower|
     json.cache! [ follower], expires_in: 2.hours do
         json.name follower.name
-        json.avatar follower.avatar.url(:avatar)
+        json.avatar follower.get_avatar
         json.uuid SecureRandom.hex(10)
         json.role follower.role
         json.path profile_path(follower)
@@ -12,7 +12,7 @@ json.payload do
             json.url tag_people_path(tag.parameterize)
         end
         json.about_me follower.mini_bio
-        json.user_name_badge follower.user_name_badge
+        json.user_name_badge follower.name_badge
         json.is_following follower.followed_by?(current_user)
         json.followed followed?(follower)
         json.not_current_user follower != current_user

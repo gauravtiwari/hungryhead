@@ -15,22 +15,21 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-        <% User.fetch_multi(current_user.people_you_may_know).take(5).each do |user| %>
-            <li class="inline">
-            <%= link_to(profile_path(user), data: {toggle: "tooltip", container: "body"}, title: "#{user.name}", class: 'inline') do %>
-                <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
-                    <% if user.avatar.present? %>
-                    <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
-
-                    <% else %>
-                    <span class="placeholder bold fs-12 text-white">
-                        <%= user.user_name_badge %>
-                    </span>
-                    <% end %>
-                </div>
+    <% User.fetch_multi(current_user.people_you_may_know).take(5).each do |user| %>
+        <li class="inline">
+        <%= link_to(profile_path(user), data: {toggle: "tooltip", container: "body"}, title: "#{user.name}", class: 'inline') do %>
+            <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
+                <% if user.avatar.present? %>
+                    <%= image_tag(user.get_avatar, :"data-src" => "#{user.get_avatar}", :"data-src-retina" => "#{user.get_avatar)}", width: "35", height: "35") %>
+                <% else %>
+                <span class="placeholder bold fs-12 text-white">
+                    <%= user.name_badge %>
+                </span>
                 <% end %>
-            </li>
-        <% end %>
+            </div>
+            <% end %>
+        </li>
+    <% end %>
     </ul>
     </div>
 </div>

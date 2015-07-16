@@ -68,10 +68,10 @@
         <div class="dropdown pull-right">
           <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="thumbnail-wrapper d32 circular inline m-t-5">
-            <% if current_user.avatar.present? %>
-              <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "32", height: "32", id: 'user_pic_mini') %>
+            <% if current_user.avatar_present? %>
+              <%= image_tag(current_user.get_avatar, :"data-src" => "#{current_user.get_avatar}", :"data-src-retina" => "#{current_user.get_avatar}", width: "32", height: "32", id: 'user_pic_mini') %>
             <% else %>
-              <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.user_name_badge %></span>
+              <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.name_badge %></span>
             <% end %>
             </span>
           </button>

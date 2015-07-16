@@ -134,6 +134,14 @@ class Idea < ActiveRecord::Base
     user == current_user
   end
 
+  def get_avatar
+    logo.url(:avatar)
+  end
+
+  def avatar.present?
+    logo.url(:avatar).present?
+  end
+
   def name_badge
     (name_split.first + name_split.second).upcase
   end

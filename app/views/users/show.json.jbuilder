@@ -1,7 +1,7 @@
 json.user do
 	json.cache! [@user, current_user, @user == current_user ? "owner" : "guest"], expires: 2.hours do
 		json.avatar do
-			json.url @user.avatar.url(:avatar) if @user.avatar
+			json.url @user.get_avatar if @user.avatar_present?
 		end
 
 		json.cover do
@@ -81,6 +81,6 @@ json.user do
 		json.is_owner @user == current_user
 		json.form delete_action: profile_delete_cover_path(@user), action: user_path(@user), method: "PUT"
 		json.name @user.name
-		json.badge @user.user_name_badge
+		json.badge @user.name_badge
 	end
 end

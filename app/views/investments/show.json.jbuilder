@@ -5,7 +5,7 @@ json.idea do
     json.can_invest @idea.can_invest?(current_user)
     json.investable @idea.investable?
     json.idea_fund @idea.balance
-    json.user_avatar current_user.avatar.url(:avatar)
+    json.user_avatar current_user.get_avatar
     json.amount @investment.amount
     json.investments_count @investment.idea.investors_counter.value
     json.raised @investment.idea.balance

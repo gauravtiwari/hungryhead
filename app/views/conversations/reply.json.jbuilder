@@ -1,5 +1,5 @@
-json.sender_avatar @reply.message.sender.avatar.url(:avatar)
-json.sender_name_badge @reply.message.sender.user_name_badge
+json.sender_avatar @reply.message.sender.get_avatar
+json.sender_name_badge @reply.message.sender.name_badge
 json.body markdownify(@reply.message.body)
 json.uuid SecureRandom.hex(5)
 json.mailbox_type  @reply.mailbox_type.titlecase

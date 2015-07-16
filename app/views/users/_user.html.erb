@@ -3,14 +3,14 @@
   <ul class="no-style">
     <li class="user-list p-t-15 p-b-15">
         <span class="col-xs-height">
-          <% if user.avatar.present? %>
+          <% if user.avatar_present? %>
             <span class="thumbnail-wrapper d48 circular bg-success">
-                <%= image_tag(user.avatar.url(:avatar), data: {src:  user.avatar.url(:avatar), :"src-retina" => user.avatar.url(:avatar)},  class: "col-top", width: "34", height: "34") %>
+                <%= image_tag(user.get_avatar, data: {src:  user.get_avatar, :"src-retina" => user.get_avatar},  class: "col-top", width: "34", height: "34") %>
             </span>
           <% else %>
             <div class="thumbnail-wrapper d48 inline circular">
               <span class="placeholder bold text-white">
-                <%= user.user_name_badge %>
+                <%= user.name_badge %>
               </span>
             </div>
           <% end %>
@@ -21,9 +21,9 @@
              <%= user.name %>
            </a>
          </h5>
-          <% if user.school.logo.present? %>
+          <% if user.school.avatar_present? %>
            <%= link_to(profile_path(user.school)) do %>
-            <%= image_tag(user.school.logo.url(:avatar), data: {src: user.school.logo.url(:avatar), :"src-retina" => user.school.logo.url(:avatar)}, width: "20px", class: 'm-l-10 inline') %>
+            <%= image_tag(user.school.get_avatar, data: {src: user.school.get_avatar, :"src-retina" => user.school.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
            <% end %>
           <% end %>
           <span class="people-info small-text m-l-10">

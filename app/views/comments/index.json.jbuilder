@@ -8,10 +8,10 @@ json.comments @comments.each do |comment|
     json.is_owner current_user == comment.user
     json.voted comment.voted?(current_user)
     json.votes_count comment.votes_counter.value
-    json.user_url  profile_card_path(comment.fetch_user)
+    json.user_url  profile_card_path(comment.user)
     json.name comment.user.name
-    json.avatar comment.user.avatar.url(:avatar)
-    json.user_name_badge comment.user.user_name_badge
+    json.avatar comment.user.get_avatar
+    json.user_name_badge comment.user.name_badge
   end
 end
 
