@@ -1,7 +1,7 @@
 class UpdateNotificationCacheService
 
   def initialize(activity)
-    @activity = activity #already persist in Postgres
+    @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
     @actor = activity.owner
     @object = activity.trackable
     @target = activity.recipient
@@ -14,7 +14,9 @@ class UpdateNotificationCacheService
   protected
 
   def activity
-    BuildActivityCacheBlobService.new(@activity).call
+    activity_blob = BuildActivityCacheBlobService.new(@activity).call
+    activity_blob.merge!(unread: false)
+    activity_blob
   end
 
   def find_activity_id

@@ -13,6 +13,8 @@ class BuildActivityCacheBlobService
     generate_activity_blob
   end
 
+  private
+
   def find_activity_id
     if @activity.class.to_s == "Notification"
       return @activity.parent_id
@@ -30,7 +32,6 @@ class BuildActivityCacheBlobService
       actor: options_for_actor(@actor),
       event: options_for_object(@object),
       recipient: options_for_target(@target),
-      unread: true,
       created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
     }
   end

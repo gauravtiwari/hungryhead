@@ -14,7 +14,9 @@ class CreateNotificationCacheService
   protected
 
   def activity
-    BuildActivityCacheBlobService.new(@activity).call
+    activity_blob = BuildActivityCacheBlobService.new(@activity).call
+    activity_blob.merge!(unread: true)
+    activity_blob
   end
 
   def is_school?

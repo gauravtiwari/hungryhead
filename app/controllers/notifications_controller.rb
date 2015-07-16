@@ -26,6 +26,7 @@ class NotificationsController < ApplicationController
     types = ["Activity", "Notification"]
     if types.include?(params[:type])
       @notification = params[:type].constantize.find(params[:id])
+      @notification.mark_as_read!
       UpdateNotificationCacheService.new(@notification).update
       @notifications = @user.ticker.revrange(0, 100)
       .paginate(:page => params[:page], :per_page => 20)
