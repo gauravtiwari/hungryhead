@@ -3,7 +3,6 @@ class Notification < ActiveRecord::Base
   after_commit :delete_older_notifications, on: :create
 
   include Feedable
-  include NotificationRenderable
 
   public
 

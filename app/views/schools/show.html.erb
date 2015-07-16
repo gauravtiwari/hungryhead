@@ -39,7 +39,11 @@
 
         <div class="tab-content schools-tabs">
           <div class="tab-pane active" id="tab_people">
-            <%= render partial: 'students' %>
+            <div class="view">
+              <div class="list-view boreded no-top-border">
+                <%= render partial: 'students' %>
+              </div>
+            </div>
           </div>
 
           <div class="tab-pane" id="tab_ideas">

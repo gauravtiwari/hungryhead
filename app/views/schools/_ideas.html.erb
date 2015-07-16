@@ -23,7 +23,9 @@
           </div>
         <% else %>
           <% @ideas.first(5).each do |idea| %>
-            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+            <ul class="no-style no-padding no-margin">
+              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+            </ul>
           <% end %>
         <% end %>
       <% end %>

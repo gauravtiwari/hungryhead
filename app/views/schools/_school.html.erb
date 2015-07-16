@@ -1,5 +1,5 @@
 <% cache(cache_key_for_school(school)) do %>
-<li class="school-list clearfix font-opensans p-t-15 p-b-15">
+<li class="school-list clearfix p-t-15 p-b-15">
     <span class="col-xs-height">
       <% if school.avatar_present? %>
         <span class="thumbnail-wrapper d48 circular">
@@ -14,7 +14,7 @@
       <% end %>
     </span>
     <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
-     <h5 class="text-master no-margin font-opensans bold inline fs-14">
+     <h5 class="text-master no-margin bold inline fs-14">
        <a href="<%= profile_path(school) %>" class="inline">
          <%= school.name %>
        </a>
