@@ -1,4 +1,5 @@
 module NotificationsHelper
+
   def render_notification notifications, options = {}
     if notifications.is_a? Activity
       notifications.render self, options

@@ -13,7 +13,12 @@ class UsersController < ApplicationController
   autocomplete :user, :name, :full => true, extra_data: [:username]
 
   def index
-    @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    types = ["student", "alumni", "faculty"]
+    if params[:type].present? && types.include?(params[:type])
+      @users = User.send(params[:type]).published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    else
+      @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    end
     respond_to do |format|
       format.html
       format.js
@@ -52,6 +57,10 @@ class UsersController < ApplicationController
 
   def edit
     authorize @user
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -107,6 +116,7 @@ class UsersController < ApplicationController
           redirect_to profile_path(@user)
         else
           format.html { redirect_to profile_path(@user), notice: 'Profile was succesfully updated.' }
+          format.js {render :show, flash: {notice: 'Your profile was succesfully updated.'} }
           format.json { render :show, status: :ok }
         end
       else
@@ -227,7 +237,7 @@ class UsersController < ApplicationController
   # White-listed attributes.
   def user_params
     params.require(:user).permit(:name, :mini_bio, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
-      :email, :terms_accepted, :first_name, :last_name, :feed_preferences,  :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
+      :email, :terms_accepted, :first_name, :last_name, :school_id, :feed_preferences,  :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
       :name, :avatar, :cover, :about_me, :website_url, :facebook_url, :role,
       :twitter_url, :linkedin_url, :location_list, :hobby_list, :subject_list, :skill_list, :market_list, :idea_notifications,
       :investment_notifications, :feedback_notifications, :follow_notifications, :weekly_mail)

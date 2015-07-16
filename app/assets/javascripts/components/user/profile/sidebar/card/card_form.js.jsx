@@ -347,6 +347,14 @@ var CardForm = React.createClass({
       var subjects = "";
     }
 
+    if(this.props.profile.years && this.props.profile.years.length > 0 ) {
+      var years = this.props.profile.years.map(function(subject){
+        return subject.tag
+      });
+    } else {
+      var subjects = "";
+    }
+
     var loadingClass = cx({
       'fa fa-spinner fa-spin': this.state.loading
     });
@@ -409,6 +417,12 @@ var CardForm = React.createClass({
                                 <label>Education/Subjects Studied</label>
                                 <span className="help"> e.g. "Computer Science, Marketing"</span>
                                 <input defaultValue={subjects} className="form-control string optional location_list full-width" data-placeholder="Subjects you have studied?" type="text" name="user[subject_list]" id="subjects_select" />
+                              </div>
+
+                              <div className="form-group">
+                                <label>Graduation year </label>
+                                <span className="help"> e.g. "2000, 2001"</span>
+                                <input defaultValue={years} className="form-control string optional year_list full-width" data-placeholder="What year you graduated in?" type="text" name="user[year_list]" id="years_select" />
                               </div>
 
                               <div className="form-group">

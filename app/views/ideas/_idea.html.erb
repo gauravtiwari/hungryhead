@@ -1,89 +1,85 @@
 <% cache(cache_key_for_idea(idea)) do %>
-<div class="list-view-group-container font-opensans no-padding">
-  <ul class="no-style">
-    <li class="user-list clearfix p-t-15 p-b-15">
-        <span class="col-xs-height">
-          <% if idea.avatar_present? %>
-            <span class="thumbnail-wrapper d48 circular bg-success">
-                <%= image_tag(idea.get_avatar, data: {src:  idea.get_avatar, :"src-retina" => idea.get_avatar},  class: "col-top", width: "34", height: "34") %>
-            </span>
-          <% else %>
-            <div class="thumbnail-wrapper d48 inline circular">
-              <span class="placeholder bold text-white">
-                <%= idea.name_badge.upcase %>
-              </span>
-            </div>
+<li class="user-list clearfix font-opensans p-t-15 p-b-15">
+    <span class="col-xs-height">
+      <% if idea.avatar_present? %>
+        <span class="thumbnail-wrapper d48 circular bg-success">
+            <%= image_tag(idea.get_avatar, data: {src:  idea.get_avatar, :"src-retina" => idea.get_avatar},  class: "col-top", width: "34", height: "34") %>
+        </span>
+      <% else %>
+        <div class="thumbnail-wrapper d48 inline circular">
+          <span class="placeholder bold text-white">
+            <%= idea.name_badge.upcase %>
+          </span>
+        </div>
+      <% end %>
+    </span>
+    <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
+     <h5 class="text-master no-margin font-opensans bold inline fs-14">
+       <a href="<%= idea_path(idea) %>" class="inline">
+         <%= idea.name %>
+       </a>
+     </h5>
+      <span class="inline small-text m-l-10 semi-bold">
+        Pitched by :
+        <%= link_to(profile_path(idea.user)) do %>
+             <%= idea.user.first_name %>
+        <% end %>
+      </span>
+      <% if idea.founder?(current_user) %>
+        <span class="badge badge-green">
+          founder
+        </span>
+      <% end %>
+
+      <% if idea.team_member?(current_user) %>
+        <span class="badge badge-inverse">
+          team
+        </span>
+      <% end %>
+      <p class="fs-14 p-t-5 block people-info text-master">
+        <span class="text-master">
+          <%= idea.elevator_pitch %>
+        </span>
+        <% if idea.cached_location_list.present? %>
+        <span>
+          Based in:
+            <% idea.location_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
+            <% end %>
+        </span>
+        <% end %>
+        <% if idea.cached_market_list.present? %>
+        <span class="hidden-xs">
+          Market:
+          <% idea.market_list.each do |tag| %>
+            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
           <% end %>
         </span>
-        <div class="p-l-10 col-xs-height col-middle col-xs-12 <%= current_user != idea.user ? 'col-md-5 col-sm-5' : 'col-md-6 col-sm-6' %>">
-         <h5 class="text-master no-margin font-opensans bold inline fs-14">
-           <a href="<%= idea_path(idea) %>" class="inline">
-             <%= idea.name %>
-           </a>
-         </h5>
-          <span class="inline small-text m-l-10 semi-bold">
-            Pitched by :
-            <%= link_to(profile_path(idea.user)) do %>
-                 <%= idea.user.first_name %>
-            <% end %>
-          </span>
-          <% if idea.founder?(current_user) %>
-            <span class="badge badge-green">
-              founder
-            </span>
-          <% end %>
-
-          <% if idea.team_member?(current_user) %>
-            <span class="badge badge-inverse">
-              team
-            </span>
-          <% end %>
-          <p class="fs-14 p-t-5 block people-info text-master">
-            <span class="text-master">
-              <%= idea.elevator_pitch %>
-            </span>
-            <% if idea.cached_location_list.present? %>
-            <span>
-              Based in:
-                <% idea.location_list.each do |tag| %>
-                  <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-                <% end %>
-            </span>
-            <% end %>
-            <% if idea.cached_market_list.present? %>
-            <span class="hidden-xs">
-              Market:
-              <% idea.market_list.each do |tag| %>
-                <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-              <% end %>
-            </span>
-            <% end %>
-          </p>
-        </div>
-       <div class="p-l-10 col-xs-height col-middle <%= current_user != idea.user ? 'col-md-5 col-sm-4' : 'col-md-6 col-sm-6' %> hidden-xs">
-         <div class="user-stats-list no-border">
-           <div class="col-sm-4 text-center">
-             Feedbacks
-             <span class="text-master">
-             <%= number_to_human(idea.feedbackers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-             </span>
-           </div>
-           <div class="col-sm-4 text-center">
-             Score
-             <span class="text-master displayblock text-center">
-               <%= number_to_human(User.leaderboard.score(idea.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-             </span>
-           </div>
-         </div>
+        <% end %>
+      </p>
+    </div>
+   <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
+     <div class="user-stats-list no-border">
+       <div class="col-sm-6 text-center">
+         Feedbacks
+         <span class="text-master">
+         <%= number_to_human(idea.feedbackers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+         </span>
        </div>
-      <div class="card-vote-button  p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-2">
-        <% voted = idea.voted?(current_user) %>
-        <%= react_component('Upvote', {record: idea.uuid, voted: voted, vote_url: vote_path(votable_type: idea.class.to_s, votable_id: idea.uuid), votes_count: idea.votes_counter.value, voters_path: voters_path(votable_type: idea.class.to_s, votable_id: idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
-      </div>
-      <script type="text/javascript">
-         ReactRailsUJS.mountComponents();
-      </script>
-    </li>
-  </ul>
-</div>
+       <div class="col-sm-6 text-center">
+         Score
+         <span class="text-master displayblock text-center">
+           <%= number_to_human(User.leaderboard.score(idea.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+         </span>
+       </div>
+     </div>
+   </div>
+  <div class="card-vote-button text-center pull-reset p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
+    <% voted = idea.voted?(current_user) %>
+    <%= react_component('Upvote', {record: idea.uuid, voted: voted, vote_url: vote_path(votable_type: idea.class.to_s, votable_id: idea.uuid), votes_count: idea.votes_counter.value, voters_path: voters_path(votable_type: idea.class.to_s, votable_id: idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
+    <script type="text/javascript">
+       ReactRailsUJS.mountComponents();
+    </script>
+  </div>
+</li>
 <% end %>

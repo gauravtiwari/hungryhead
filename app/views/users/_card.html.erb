@@ -1,1 +1,104 @@
-<%= react_component('Card', {data: data}) %>
+<div class="profile-card-sidebar" id="profile_card_<%= @user.uid %>">
+   <div class="profile-card padding-20  p-t-40 box-shadow bg-solid">
+       <div class="container-xs-height">
+           <div class="row text-center">
+            <%= link_to(profile_edit_path(@user), class: 'pull-right pointer p-r-20 displayblock text-white', remote: true) do %>
+            <span class="fa fa-pencil"></span> Edit
+            <% end %>
+             <div class="user-profile auto-margin">
+               <div class="thumbnail-wrapper d100 circular bordered b-white">
+                   <div class="profile-avatar">
+                     <%= react_component('Avatar', {data: data}) %>
+                   </div>
+               </div>
+             </div>
+             <div class="clearfix p-l-10 p-r-10 p-t-10  font-opensans">
+                  <h3 class="no-margin bold text-white">
+                      <%= @user.name %>
+                  </h3>
+                  <p class="no-margin text-white fs-13 p-t-10">
+                   <%= @user.mini_bio %>
+                   <p class="no-margin text-white fs-12 p-t-5">
+                    <% if @user.cached_location_list.present? %>
+                      <% @user.location_list.each do |location| %>
+                        <%= link_to(tag_people_path(location.parameterize), class: "text-white") do %>
+                          <i class="fa fa-map-marker"></i> <%= location %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% if @user.school_id.present? %>
+                      <%= link_to(profile_path(@user.school), class: "text-white p-l-10") do %>
+                        <i class="fa fa-university"></i> <%= @user.school.name %>
+                      <% end %>
+                    <% end %>
+                   </p>
+                  </p>
+                  <p class="text-white about-list fs-14">
+                    <% if @user.cached_market_list.present? %>
+                      <span>Markets interested in: </span>
+                      <% @user.market_list.each do |market| %>
+                        <%= link_to(tag_people_path(market.parameterize), class: "text-white fs-13 m-l-5 lighter-text") do %>
+                          @<%= market.parameterize %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% if @user.cached_skill_list.present? %>
+                      <span>Knows: </span>
+                      <% @user.skill_list.each do |skill| %>
+                        <%= link_to(tag_people_path(skill.parameterize), class: "text-white fs-13 m-l-5 lighter-text") do %>
+                          @<%= skill.parameterize %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% if @user.cached_subject_list.present? %>
+                      <span>Studied: </span>
+                      <% @user.subject_list.each do |subject| %>
+                        <%= link_to(tag_people_path(subject.parameterize), class: "text-white fs-13 m-l-5 lighter-text") do %>
+                          @<%= subject.parameterize %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                    <% if @user.cached_hobby_list.present? %>
+                      <span>Likes: </span>
+                      <% @user.hobby_list.each do |hobby| %>
+                        <%= link_to(tag_people_path(hobby.parameterize), class: "text-white fs-13 m-l-5 lighter-text") do %>
+                          @<%= hobby.parameterize %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </p>
+                  <ul class="social-list text-white p-t-5 small no-style">
+                  <% if @user.website_url.present? %>
+                    <li class="inline">
+                        <%= link_to(url_with_protocol(@user.website_url), class: "text-white p-r-10", target: '_blank') do %>
+                          <i class="fa fa-rss fs-14"></i>
+                        <% end %>
+                    </li>
+                    <% end %>
+                    <% if @user.linkedin_url.present? %>
+                    <li class="inline">
+                        <%= link_to(url_with_protocol(@user.linkedin_url), class: "text-white p-r-10", target: '_blank') do %>
+                          <i class="fa fa-linkedin fs-14"></i>
+                        <% end %>
+                    </li>
+                    <% end %>
+                    <% if @user.facebook_url.present? %>
+                      <li class="inline">
+                          <%= link_to(url_with_protocol(@user.facebook_url), class: "text-white p-r-10", target: '_blank') do %>
+                            <i class="fa fa-facebook fs-14"></i>
+                          <% end %>
+                      </li>
+                    <% end %>
+                    <% if @user.twitter_url.present? %>
+                      <li class="inline">
+                          <%= link_to(url_with_protocol(@user.twitter_url), class: "text-white p-r-10", target: '_blank') do %>
+                            <i class="fa fa-twitter fs-14"></i>
+                          <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+              </div>
+           </div>
+       </div>
+   </div>
+ </div>

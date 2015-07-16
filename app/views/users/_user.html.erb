@@ -1,96 +1,93 @@
 <% cache(cache_key_for_user(user)) do %>
-<div class="list-view-group-container font-opensans no-padding">
-  <ul class="no-style">
-    <li class="user-list p-t-15 p-b-15">
-        <span class="col-xs-height">
-          <% if user.avatar_present? %>
-            <span class="thumbnail-wrapper d48 circular bg-success">
-                <%= image_tag(user.get_avatar, data: {src:  user.get_avatar, :"src-retina" => user.get_avatar},  class: "col-top", width: "34", height: "34") %>
-            </span>
-          <% else %>
-            <div class="thumbnail-wrapper d48 inline circular">
-              <span class="placeholder bold text-white">
-                <%= user.name_badge %>
-              </span>
-            </div>
-          <% end %>
-        </span>
-        <div class="p-l-10 col-xs-height col-middle col-xs-12 <%= current_user != user ? 'col-md-5 col-sm-5' : 'col-md-6 col-sm-6' %>">
-         <h5 class="text-master no-margin font-opensans bold inline fs-14">
-           <a href="<%= profile_path(user) %>" class="inline">
-             <%= user.name %>
-           </a>
-         </h5>
-          <% if user.school.avatar_present? %>
-           <%= link_to(profile_path(user.school)) do %>
-            <%= image_tag(user.school.get_avatar, data: {src: user.school.get_avatar, :"src-retina" => user.school.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
-           <% end %>
-          <% end %>
-          <span class="people-info small-text m-l-10">
-            <%= user.role.titlecase %>
+  <li class="user-list p-t-15 p-b-15 font-opensans">
+      <span class="col-xs-height">
+        <% if user.avatar_present? %>
+          <span class="thumbnail-wrapper d48 circular bg-success">
+              <%= image_tag(user.get_avatar, data: {src:  user.get_avatar, :"src-retina" => user.get_avatar},  class: "col-top", width: "34", height: "34") %>
           </span>
-          <p class="fs-14 p-t-5 block people-info text-master">
-
-            <span class="text-master"><%= user.mini_bio %></span>
-            <% if user.cached_location_list.present? %>
-            <span>
-              Live in:
-                <% user.location_list.each do |tag| %>
-                  <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-                <% end %>
+        <% else %>
+          <div class="thumbnail-wrapper d48 inline circular">
+            <span class="placeholder bold text-white">
+              <%= user.name_badge %>
             </span>
+          </div>
+        <% end %>
+      </span>
+      <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
+       <h5 class="text-master no-margin font-opensans bold inline fs-14">
+         <a href="<%= profile_path(user) %>" class="inline">
+           <%= user.name %>
+         </a>
+       </h5>
+        <% if user.school.avatar_present? %>
+         <%= link_to(profile_path(user.school)) do %>
+          <%= image_tag(user.school.get_avatar, data: {src: user.school.get_avatar, :"src-retina" => user.school.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
+         <% end %>
+        <% end %>
+        <span class="people-info label small-text m-l-10">
+          <%= link_to(user.role.titlecase, users_path(type: user.role), class: 'text-master') %>
+        </span>
+        <% if user.cached_location_list.present? %>
+        <p class="people-info no-margin">
+          <span class="fa fa-map-marker text-green"></span>
+          <% user.location_list.each do |tag| %>
+            <%= link_to("#{tag}", tag_people_path(tag.parameterize), class: "text-master") %>
+          <% end %>
+        </p>
+        <% end %>
+        <p class="text-master no-margin">
+          <%= user.mini_bio %>
+        </p>
+        <p class="fs-14 p-t-5 block people-info text-master">
+          <% if user.cached_subject_list.present? %>
+          <span class="hidden-xs text-master">
+            <span class="bold">Studying:</span>
+            <% user.subject_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-brand") %>
             <% end %>
-            <% if user.cached_subject_list.present? %>
-            <span class="hidden-xs">
-              Studying:
-              <% user.subject_list.each do |tag| %>
-                <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-              <% end %>
-            </span>
+          </span>
+          <% end %>
+          <% if user.cached_market_list.present? %>
+          <span class="hidden-xs text-master">
+            <span class="bold">Markets interested in:</span>
+            <% user.market_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-brand") %>
             <% end %>
-            <% if user.cached_market_list.present? %>
-            <span class="hidden-xs">
-              Interested in:
-              <% user.market_list.each do |tag| %>
-                <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-              <% end %>
-            </span>
+          </span>
+          <% end %>
+          <% if user.cached_skill_list.present? %>
+          <span class="hidden-xs text-master">
+            <span class="bold">Knows about:</span>
+            <% user.skill_list.each do |tag| %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-brand") %>
             <% end %>
-            <% if user.cached_skill_list.present? %>
-            <span class="hidden-xs">
-              Knows about:
-              <% user.skill_list.each do |tag| %>
-                <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-              <% end %>
-            </span>
-            <% end %>
-          </p>
-        </div>
-       <div class="p-l-10 col-xs-height col-middle <%= current_user != user ? 'col-md-4 col-sm-4' : 'col-md-6 col-sm-6' %> hidden-xs">
-         <div class="user-stats-list no-border">
-           <div class="col-sm-4 text-center">
-             Followers
-             <span class="text-master displayblock text-center">
-               <%= number_to_human(user.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-             </span>
-           </div>
-           <div class="col-sm-4 text-center">
-             Score
-             <span class="text-master displayblock text-center">
-               <%= number_to_human(User.leaderboard.score(user.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-             </span>
-           </div>
+          </span>
+          <% end %>
+        </p>
+      </div>
+     <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
+       <div class="user-stats-list no-border">
+         <div class="col-sm-6 text-center">
+           Followers
+           <span class="text-master displayblock text-center">
+             <%= number_to_human(user.followers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+           </span>
+         </div>
+         <div class="col-sm-6 text-center">
+           Score
+           <span class="text-master displayblock text-center">
+             <%= number_to_human(User.leaderboard.score(user.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+           </span>
          </div>
        </div>
-        <% if current_user != user %>
-          <div class="card-follow-button p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
-            <%= react_component('Follow',{:followed => followed?(user)}) %>
-          </div>
-          <script type="text/javascript">
-             ReactRailsUJS.mountComponents();
-          </script>
-        <% end %>
-    </li>
-  </ul>
-</div>
+     </div>
+    <div class="card-follow-button text-center p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
+      <% if current_user != user %>
+        <%= react_component('Follow',{:followed => followed?(user)}) %>
+        <script type="text/javascript">
+           ReactRailsUJS.mountComponents();
+        </script>
+      <% end %>
+    </div>
+  </li>
 <% end %>

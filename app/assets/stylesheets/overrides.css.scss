@@ -307,6 +307,12 @@ table tr:last-child {
   color: #fff;
   opacity: 1;
 }
+.listing-filters .active{
+  font-weight: bold;
+  border-bottom-color: #e9eaed !important;
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
+}
 .w110 {
   width: 110px;
 }

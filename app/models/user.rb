@@ -120,7 +120,8 @@ class User < ActiveRecord::Base
   enum role: { user: 0, student: 1, entrepreneur: 2, alumni: 3, faculty: 4 }
 
   #Accessor methods for JSONB datatypes
-  store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
+  store_accessor :profile, :facebook_url,
+  :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
   :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
   store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,

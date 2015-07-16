@@ -10,8 +10,21 @@
            </div>
          <% else %>
            <div class="list-view boreded no-top-border">
+            <li class="list-header clearfix font-opensans p-t-15 p-b-15 b-b b-grey p-b-5">
+              <div class="text-left">
+                <h5><%= pluralize(@users.count, 'Result') %></h5>
+              </div>
+              <div class="p-l-10 col-xs-height col-middle col-xs-3 col-md-3 col-sm-3">
+                <h5>Stats</h5>
+              </div>
+              <div class="p-l-10 col-xs-height col-middle col-xs-3 col-md-3 col-sm-3">
+                <h5>Connect</h5>
+              </div>
+            </li>
              <% @users.each do |user| %>
-              <%= render partial: 'users/user', locals: {user: user} %>
+              <ul class="no-style no-padding no-margin">
+                <%= render partial: 'users/user', locals: {user: user} %>
+              </ul>
              <% end %>
            </div>
          <% end %>

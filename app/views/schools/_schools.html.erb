@@ -10,9 +10,22 @@
            </div>
          <% else %>
            <div class="list-view boreded no-top-border">
-             <% @schools.each do |school| %>
-              <%= render partial: 'schools/school', locals: {school: school} %>
-             <% end %>
+            <li class="list-header clearfix font-opensans p-t-15 p-b-15 b-b b-grey p-b-5">
+              <div class="text-left">
+                <h5><%= pluralize(@schools.count, 'Result') %></h5>
+              </div>
+              <div class="p-l-10 col-xs-height text-center col-middle col-xs-3 col-md-3 col-sm-3">
+                <h5>Stats</h5>
+              </div>
+              <div class="p-l-10 col-xs-height text-center col-middle col-xs-3 col-md-3 col-sm-3">
+                <h5>Vote</h5>
+              </div>
+            </li>
+            <% @schools.each do |school| %>
+              <ul class="no-style no-padding no-margin">
+                <%= render partial: 'schools/school', locals: {school: school} %>
+              </ul>
+            <% end %>
            </div>
          <% end %>
        </div>

@@ -2,10 +2,29 @@
   <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
     <div class="hero-text inner">
       <i class="fa fa-users text-white fs-22"></i>
-      <h2 class="text-white no-margin">Browse People</h2>
-      <h5 class="text-white">Find friends and like-minded people</h5>
+      <% if params[:type] %>
+        <h2 class="text-white no-margin">All <%= params[:type].pluralize %></h2>
+      <% else %>
+        <h2 class="text-white no-margin">All people</h2>
+      <% end %>
+      <h5 class="text-white">Browse and connect with like-minded people</h5>
     </div>
   </div>
 </div>
-
+<div class="container hidden-xs">
+  <div class="listing-filters p-t-40 p-b-10">
+    <ul class="list-inline text-right">
+      <li class="hint-text">Sort by: </li>
+      <li>
+        <%= link_to('Students', users_path(type: 'student'), class: "#{active_class?(users_path(type: 'student'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Alumni', users_path(type: 'alumni'), class: "#{active_class?(users_path(type: 'alumni'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Faculties', users_path(type: 'faculty'), class: "#{active_class?(users_path(type: 'faculty'))} text-master p-r-5 p-l-5") %>
+      </li>
+    </ul>
+  </div>
+</div>
 <%= render partial: 'users/users' %>
