@@ -32,7 +32,7 @@
 .story-photo:before,
 .support-us-photo:before,
 .about-photo:before,
-.join-mentor-photo:before {
+.join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.5);
   position: absolute;
   width: 100%;
@@ -43,7 +43,7 @@
 .join-photo:before {
   background: rgba(51, 51, 51, 0.2);
 }
-.join-mentor-photo:before {
+.join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.2);
 }
 .is-scrolling {
@@ -55,7 +55,7 @@
 }
 .join-photo,
 .learn-photo,
-.join-mentor-photo,
+.join-alumni-photo,
 .how-photo,
 .about-photo,
 .rules-photo,
@@ -145,7 +145,7 @@
   background:      -o-linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* Opera 11.10+ */
   background:         linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* W3C */
 }
-.join-mentor-photo {
+.join-alumni-photo {
   background: image-url("patterns/syudJMa.png");
 }
 .join-wrapper .join .cover-photo .pull-bottom {

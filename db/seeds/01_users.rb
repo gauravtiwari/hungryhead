@@ -99,7 +99,7 @@ ActiveRecord::Base.transaction do
       mini_bio: Forgery::LoremIpsum.words(5),
       school_id: [*1..10].sample,
       location_list: Forgery::Address.city,
-      email: "mentor#{i}@hungryhead.org",
+      email: "alumni#{i}@hungryhead.org",
       fund: {balance: 1000},
       role: 3,
       market_list: Forgery::Name.industry,

@@ -237,6 +237,8 @@ Rails.application.routes.draw do
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending
   get '/:slug/people', to: "schools#people", as: :profile_people
+  get '/:slug/students', to: "schools#students", as: :profile_students
+  get '/:slug/faculties', to: "schools#faculties", as: :profile_faculties
   get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/latest_ideas', to: SlugRouter.to(:latest_ideas), as: :profile_latest_ideas
   get '/:slug/dashboard', to: SlugRouter.to(:dashboard), as: :profile_dashboard

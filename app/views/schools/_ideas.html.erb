@@ -16,8 +16,15 @@
           </td>
         </tr>
       <% else %>
-        <% @ideas.first(5).each do |idea| %>
-          <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+        <% if @ideas.empty? %>
+          <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+            <i class="fa fa-list"></i>
+            <span class="clearfix">No Ideas</span>
+          </div>
+        <% else %>
+          <% @ideas.first(5).each do |idea| %>
+            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>

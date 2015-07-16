@@ -17,11 +17,13 @@ class School < ActiveRecord::Base
 	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
 	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
 	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
+	has_many :users, -> { where(state: 1) }, class_name: 'User'
 	has_many :school_admins
 	belongs_to :user, class_name: 'User'
 
 	#Cache into memcache
 	cache_has_many :students, embed: true
+	cache_has_many :users, embed: true
 	cache_has_many :faculties, embed: true
 	cache_has_many :ideas, embed: true
 	cache_has_many :school_admins
@@ -60,6 +62,10 @@ class School < ActiveRecord::Base
 
 	def get_published_faculties
 		fetch_faculties.sort { |x,y| y.created_at <=> x.created_at }
+	end
+
+	def get_published_users
+		fetch_users.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
 	def get_published_ideas

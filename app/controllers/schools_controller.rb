@@ -23,7 +23,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
 
   def show
-    @students = @school.get_published_students
+    @students = @school.get_published_users
   end
 
   # GET /schools/1/dashboard
@@ -42,7 +42,15 @@ class SchoolsController < ApplicationController
   end
 
   def people
-    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 10)
+    @users = @school.get_published_users.paginate(:page => params[:page], :per_page => 20)
+    respond_to do |format|
+      format.html
+      format.js {render :index}
+    end
+  end
+
+  def students
+    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js {render :index}
@@ -50,7 +58,7 @@ class SchoolsController < ApplicationController
   end
 
   def events
-    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 10)
+    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js
@@ -58,7 +66,7 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 10)
+    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html
       format.js {render :index}

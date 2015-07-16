@@ -1543,7 +1543,7 @@
     var Parallax = function(element, options) {
         this.$element = $(element);
         this.options = $.extend(true, {}, $.fn.parallax.defaults, options);
-        this.$coverPhoto = this.$element.find('.cover-photo') || this.$element.find('.join-photo') || this.$element.find('.story-photo') || this.$element.find('.join-mentor-photo') || this.$element.find('.how-photo') || this.$element.find('.learn-photo');
+        this.$coverPhoto = this.$element.find('.cover-photo') || this.$element.find('.join-photo') || this.$element.find('.story-photo') || this.$element.find('.join-alumni-photo') || this.$element.find('.how-photo') || this.$element.find('.learn-photo');
         // TODO: rename .inner to .page-cover-content
         this.$content = this.$element.find('.inner');
 
