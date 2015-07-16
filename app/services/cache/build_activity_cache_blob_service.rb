@@ -95,13 +95,8 @@ class BuildActivityCacheBlobService
   end
 
   def options_for_actor(target)
-    if @activity.owner_type == "School"
-      avatar = @activity.owner.logo.url(:avatar) if @activity.owner.logo.present?
-      actor_name_badge = @activity.owner.name_badge
-    else
-      avatar = @activity.owner.avatar.url(:avatar) if @activity.owner.avatar.present?
-      actor_name_badge = @activity.owner.user_name_badge
-    end
+    avatar = @activity.owner.get_avatar if @activity.owner.avatar_present?
+    actor_name_badge = @activity.owner.name_badge
 
     {
       id: target.id,

@@ -48,8 +48,8 @@ class CreateUserNotificationService
     {
       id: user.uid,
       name: user.name,
-      name_badge: user.user_name_badge,
-      avatar: user.avatar.url(:avatar),
+      name_badge: user.name_badge,
+      avatar: user.get_avatar,
       url: profile_card_path(user),
       description: user.mini_bio
     }

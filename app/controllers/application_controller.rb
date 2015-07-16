@@ -70,8 +70,8 @@ class ApplicationController < ActionController::Base
   def info_for_paper_trail
     {
       user_name: current_user.name,
-      user_avatar: current_user.avatar.url(:avatar),
-      name_badge: current_user.user_name_badge,
+      user_avatar: current_user.get_avatar,
+      name_badge: current_user.name_badge,
       owner_url: profile_path(current_user)
     } if current_user
   end
