@@ -52,7 +52,7 @@ var Follow = React.createClass({
     }
 
     if(this.state.follow) {
-      var icon = <span><i className="fa fa-user"></i> <i className="fa fa-check-circle"></i></span>;
+      var icon = <span><i className="fa fa-check-circle"></i></span>;
     } else {
       var icon = <i className="fa fa-user-plus"></i>;
     }
