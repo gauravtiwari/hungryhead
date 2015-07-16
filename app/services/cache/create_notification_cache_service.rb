@@ -58,7 +58,7 @@ class CreateNotificationCacheService
     add_activity_to_user_profile(user, activity_item) unless is_school?
 
     #Send notification to recipient
-    add_notification_for_recipient(activity_item) unless @activity.owner == recipient_user && is_school?
+    add_notification_for_recipient(activity_item) unless @activity.owner == recipient_user
 
     #Add activity to idea ticker if recipient or trackable is idea
     add_activity_to_idea(@object, activity_item) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"

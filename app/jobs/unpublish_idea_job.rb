@@ -46,7 +46,7 @@ class UnpublishIdeaJob < ActiveJob::Base
 
   #Get all followers followed by actor
   def find_followers(activity)
-    followers_ids = activity.user.followers_ids.members
+    followers_ids = activity.owner.followers_ids.members
     User.fetch_multi(followers_ids)
   end
 
