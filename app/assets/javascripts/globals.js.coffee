@@ -8,6 +8,8 @@ jQuery(document).ready ->
 
 	$.ajaxSetup cache: false
 
+	$.HHSelect2.init()
+
 	$(document).on 'click', '.pagination a[data-remote=true]', (e) ->
 	  history.pushState {}, '', $(this).attr('href')
 	  return

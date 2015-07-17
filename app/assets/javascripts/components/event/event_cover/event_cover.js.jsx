@@ -1,7 +1,6 @@
 var EventCover = React.createClass({
   getInitialState: function() {
-    var data = this.props.data;
-
+    var data = JSON.parse(this.props.data);
     if(data.event.cover) {
       var top = data.event.cover.top;
       var left = data.event.cover.left;

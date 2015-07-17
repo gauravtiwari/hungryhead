@@ -80,6 +80,10 @@ class School < ActiveRecord::Base
 		fetch_ideas.sort { |x,y| y.created_at <=> x.created_at }
 	end
 
+	def get_published_events
+		fetch_events.sort { |x,y| y.created_at <=> x.created_at }
+	end
+
 	def get_published_students
 		fetch_students.sort { |x,y| y.created_at <=> x.created_at }
 	end

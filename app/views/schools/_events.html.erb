@@ -6,7 +6,10 @@
           <%= render partial: 'events/event', locals: {event: event} %>
         <% end %>
       <% else %>
-        <div class="no-content">No events</div>
+        <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i class="fa fa-list"></i>
+          <div class="no-content">No events</div>
+        </div>
       <% end %>
     </tbody>
   </table>
