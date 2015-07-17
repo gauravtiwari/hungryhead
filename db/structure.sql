@@ -299,6 +299,7 @@ CREATE TABLE events (
     address text,
     private boolean DEFAULT true,
     space integer DEFAULT 0,
+    media jsonb DEFAULT '{}'::jsonb,
     start_time timestamp without time zone,
     end_time timestamp without time zone,
     latitude double precision DEFAULT 0.0 NOT NULL,
