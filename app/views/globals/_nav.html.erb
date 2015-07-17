@@ -31,6 +31,12 @@
               <i class="fa fa-university"></i>
             <% end %>
           </li>
+
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+           <%= link_to(events_path, class: "fs-22 #{request.path == events_path ? current_class?(events_path) : 'text-brand'}") do %>
+              <i class="fa fa-calendar"></i>
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>

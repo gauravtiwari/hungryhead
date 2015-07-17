@@ -3,10 +3,10 @@ class Event < ActiveRecord::Base
   include IdentityCache
   #included modules
   include Redis::Objects
+
   #Slug
   extend FriendlyId
   friendly_id :slug_candidates
-
   #Geocode
   geocoded_by :address
   after_validation :geocode, if: ->(event){ event.address.present? and event.address_changed? }
@@ -15,6 +15,9 @@ class Event < ActiveRecord::Base
   include Commentable
   include Votable
   include Impressionable
+
+  store_accessor :media, :cover_position, :cover_left,
+  :cover_processing, :cover_tmp
 
   list :attendees_ids
   list :invites_ids
@@ -39,6 +42,16 @@ class Event < ActiveRecord::Base
 
   def invited?(user)
     invites_ids.include?(user.id.to_s)
+  end
+
+  def slug_candidates
+   [:title]
+  end
+
+  private
+
+  def should_generate_new_friendly_id?
+    slug.blank? || name_changed?
   end
 
 end

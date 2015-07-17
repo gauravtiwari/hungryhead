@@ -19,7 +19,6 @@
         <% cache(["school_card", @school]) do %>
           <%= render partial: 'school_card' %>
         <% end %>
-        <%= render partial: 'faculties' %>
       </div>
 
       <div class="col-md-9 no-padding">
@@ -35,9 +34,15 @@
                 <i class="fa fa-lightbulb-o"></i> Latest Ideas
               <% end %>
             </li>
+            <li>
+              <%= link_to("#tab_events", data: {toggle: 'tab', url: profile_events_path(@school)}, id: 'load_school_events') do %>
+                <i class="fa fa-calendar"></i> Latest Events
+              <% end %>
+            </li>
         </ul>
 
         <div class="tab-content schools-tabs">
+
           <div class="tab-pane active" id="tab_people">
             <div class="view">
               <div class="list-view boreded no-top-border">
@@ -47,6 +52,9 @@
           </div>
 
           <div class="tab-pane" id="tab_ideas">
+          </div>
+
+          <div class="tab-pane" id="tab_events">
           </div>
 
         </div>

@@ -15,7 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @owner = params[owner].constantize.fetch(owner_id)
+    @owner = params[:owner].constantize.fetch_by_slug(params[:owner_id])
   end
 
   # GET /events/1/edit
@@ -25,8 +25,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @owner = params[owner].constantize.fetch(owner_id)
-    @event = CreateEventService.new(event_params, owner).create
+    @event = CreateEventService.new(event_params).create
     respond_to do |format|
       if @event.save
         flash[:notice] = "Event was successfully, created"
@@ -72,7 +71,7 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:status, :title, :description, :address, :private,
+    params.require(:event).permit(:status, :title, :description, :owner_id, :owner_type, :address, :private,
     :start_time, :end_time, :eventable_id, :space, :cover, :excerpt, :category_list)
   end
 end

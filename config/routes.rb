@@ -234,6 +234,7 @@ Rails.application.routes.draw do
   get '/:slug/card', to: SlugRouter.to(:card), as: :profile_card
   get '/:slug/edit', to: SlugRouter.to(:edit), as: :profile_edit
   get '/:slug/supports', to: SlugRouter.to(:supports), as: :profile_supports
+  get '/:slug/events', to: SlugRouter.to(:events), as: :profile_events
   get '/:slug/activities', to: SlugRouter.to(:activities), as: :profile_activities
   get '/:slug/activities/:id', to: SlugRouter.to(:activity), as: :profile_activities_activity
   get '/:slug/trending', to: SlugRouter.to(:trending), as: :profile_trending

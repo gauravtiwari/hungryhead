@@ -14,6 +14,7 @@ class CreateEvents < ActiveRecord::Migration
       t.text :address, index: true
       t.boolean :private, default: true
       t.integer :space, default: 0
+      t.jsonb  :media, :default => "{}"
       t.datetime :start_time
       t.datetime :end_time
       t.float  :latitude, null: false, default: 0.0
