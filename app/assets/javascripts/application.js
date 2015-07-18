@@ -51,6 +51,8 @@
 //= require pnotify
 //= require unobtrusive_flash
 //= require flashes
+//= require simplepeer.min
+//= require hark
 //= require react
 //= require react-infinite
 //= require react_ujs

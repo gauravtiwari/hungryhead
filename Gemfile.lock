@@ -417,6 +417,7 @@ GEM
     rails-assets-fastclick (1.0.6)
     rails-assets-font-awesome (4.3.0)
     rails-assets-hammerjs (2.0.4)
+    rails-assets-hark (1.1.1)
     rails-assets-imagesloaded (3.1.8)
       rails-assets-eventEmitter (~> 4.0)
       rails-assets-eventie (>= 1.0.4, < 2)
@@ -638,6 +639,7 @@ DEPENDENCIES
   rails-assets-fastclick!
   rails-assets-font-awesome!
   rails-assets-hammerjs!
+  rails-assets-hark!
   rails-assets-imagesloaded!
   rails-assets-jquery!
   rails-assets-jquery-bez!
