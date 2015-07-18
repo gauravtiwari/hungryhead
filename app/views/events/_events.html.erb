@@ -1,0 +1,37 @@
+
+  <div class="container p-t-40 p-b-80 xs-no-padding" id="<%= controller_name %>_listing">
+    <div class="event-list">
+      <div class="col-md-12 col-sm-12 sm-no-padding">
+       <div class="view" id="<%= controller_name %>-list-view">
+         <% if @events.empty? %>
+           <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+             <i class="fa fa-list"></i>
+             <span class="clearfix">No events</span>
+           </div>
+         <% else %>
+           <div class="list-view boreded no-top-border">
+            <li class="list-header clearfix font-opensans p-t-15 p-b-15 b-b b-grey p-b-5">
+              <div class="text-left">
+                <h5><%= pluralize(@events.count, 'Result') %></h5>
+              </div>
+              <div class="p-l-10 col-xs-height col-middle  text-center col-xs-3 col-md-3 col-sm-3">
+                <h5>Stats</h5>
+              </div>
+              <div class="p-l-10 col-xs-height col-middle  text-center col-xs-3 col-md-3 col-sm-3">
+                <h5>Connect</h5>
+              </div>
+            </li>
+             <% @events.each do |event| %>
+              <ul class="no-style no-padding no-margin">
+                <%= render partial: 'events/event', locals: {event: event} %>
+              </ul>
+             <% end %>
+           </div>
+         <% end %>
+       </div>
+      </div>
+      <div class="paging-container p-r-15">
+        <%= will_paginate(@events, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
+      </div>
+    </div>
+  </div>

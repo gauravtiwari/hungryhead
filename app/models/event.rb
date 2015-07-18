@@ -40,6 +40,10 @@ class Event < ActiveRecord::Base
     attendees_ids.include?(user.id.to_s)
   end
 
+  def name_badge
+    (title.split('').first + title.split('').second).upcase
+  end
+
   def invited?(user)
     invites_ids.include?(user.id.to_s)
   end

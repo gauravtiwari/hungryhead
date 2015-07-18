@@ -7,3 +7,16 @@
   background:         linear-gradient(90deg, #FFA17F 10%, #00223E 90%); /* W3C */
 
 }
+
+.event-details.bg-white.padding-20 {
+  min-height: 496px;
+  margin-bottom: 30px;
+}
+
+body.events.index {
+  background: #fff;
+}
+
+body.events.index .container {
+  max-width: 980px;
+}

@@ -143,7 +143,7 @@ class Idea < ActiveRecord::Base
   end
 
   def name_badge
-    (name_split.first + name_split.second).upcase
+    (name.split('').first + name.split('').second).upcase
   end
 
   def user_name
