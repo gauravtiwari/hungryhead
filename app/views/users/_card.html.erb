@@ -10,7 +10,7 @@
                    <div class="profile-avatar">
                    <% if @user == current_user %>
                     <div id="profile_image">
-                      <%= simple_form_for(@user, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true }) do |f| %>
+                      <%= simple_form_for(@user, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
                         <%= f.file_field :avatar, style: "display: none", id: 'profile_photo' %>
                       <% end %>
                       <div id="userpic">
@@ -23,13 +23,13 @@
                           </a>
                         </div>
                       </div>
-                        <%= image_tag(@user.get_avatar, data: {src: @user.get_avatar, :"src-retina" => @user.get_avatar}, id: "userpic_preview", width: "110", height: "110", class: "user-image")%>
+                        <%= image_tag(@user.get_avatar, data: {src: @user.get_avatar, :"src-retina" => @user.get_avatar}, id: "profile_photo_preview", width: "110", height: "110", class: "user-image")%>
                       </div>
                     </div>
                   <% else %>
                     <div id="profile_image">
                       <div id="userpic">
-                       <%= image_tag(@user.get_avatar, data: {src: @user.get_avatar, :"src-retina" => @user.get_avatar}, id: "userpic_preview", width: "110", height: "110", class: "user-image")%>
+                       <%= image_tag(@user.get_avatar, data: {src: @user.get_avatar, :"src-retina" => @user.get_avatar}, width: "110", height: "110", class: "user-image")%>
                       </div>
                     </div>
                   <% end %>

@@ -16,3 +16,9 @@ $modal.modal('hide');
 $modal.on('hidden.bs.modal', function(){
   $container.remove();
 });
+
+<% if @user.avatar_present? && @user.avatar_changed? %>
+  $('#profile_photo_preview').attr('src', <%= @user.get_avatar %>)
+  $('#user_pic_mini').attr('src', <%= @user.get_avatar %>)
+  $('#user_pic_menu').attr('src', <%= @user.get_avatar %>)
+<% end %>
