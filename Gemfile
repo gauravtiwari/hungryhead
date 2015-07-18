@@ -8,6 +8,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
   gem 'rails-assets-hark'
+  gem 'rails-assets-simple-peer'
   gem 'rails-assets-jquery-unveil'
   gem 'rails-assets-jquery-bez'
   gem 'rails-assets-imagesloaded'
