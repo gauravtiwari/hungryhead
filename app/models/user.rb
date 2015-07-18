@@ -214,11 +214,11 @@ class User < ActiveRecord::Base
   end
 
   def cacheable_changed?
-    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? || id_changed?
+    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && has_notifications?
   end
 
   def rebuild_cache?
-     published? || cacheable_changed?
+     published? || id_changed? || name_changed? || avatar_changed? || mini_bio_changed?
   end
 
   def has_notifications?

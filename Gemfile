@@ -73,7 +73,10 @@ gem 'activerecord-import'
 gem 'spring',        group: :development
 gem 'sprockets'
 #API
-#
+
+#Remote file upload
+gem 'remotipart'
+
 #Nprogress
 gem 'nprogress-rails'
 
