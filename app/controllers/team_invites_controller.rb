@@ -56,9 +56,6 @@ class TeamInvitesController < ApplicationController
         @idea.team_ids << @team_invite.invited_id unless @idea.in_team?(current_user)
         @idea.team_invites_ids.delete(@team_invite.invited_id.to_s)
 
-        #Follow idea
-        current_user.votes.create!(votable: @idea) if Vote.votes_for(current_user, @idea).empty?
-
         #Increment idea counter
         current_user.ideas_counter.reset
         current_user.ideas_counter.incr(current_user.ideas.size)
@@ -94,9 +91,6 @@ class TeamInvitesController < ApplicationController
 
     #Save idea
     @idea.save
-
-    #UnVote idea
-    @team_invite.invited.votes.destroy!(votable: @team_invite.idea)
 
     #Decrement idea counter
     @team_invite.invited.ideas_counter.reset
