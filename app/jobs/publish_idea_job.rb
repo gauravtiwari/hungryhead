@@ -32,9 +32,6 @@ class PublishIdeaJob < ActiveJob::Base
 
       Idea.trending.remrangebyrank(0, -20)
 
-      #Fetch votes from cache
-      @user.votes.create!(votable: @idea) if Vote.votes_for(@user, @idea).empty?
-
       # Send notifications to followers
       User.find(@user.followers_ids.members).each do |f|
         #Send notifications to followers
