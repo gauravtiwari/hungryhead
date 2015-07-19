@@ -11,9 +11,6 @@
                         <p class="text-white fs-16">
                           Things to know about hungryhead
                         </p>
-                        <div class="btn-box m-t-20">
-                          <%= link_to('Get Started', get_started_path, class: "btn btn-ghost") %>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -87,6 +84,15 @@
         </div>
       </div>
     </div>
+    <section class="bg-master-lightest full-border-light text-center wrapper-lg full-border-light-bottom no-overflow" id="intro">
+      <div class="col-sm-8 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          Hungryhead help students share, collaborate and validate startup ideas online with peers.
+        </h1>
+        <p>To know more about our product</p>
+        <%= link_to('Click here', product_path, class: 'main-button m-t-10 fs-13 bold') %>
+      </div>
+    </section>
   </div>
 <% end %>
 <%= render partial: 'globals/footer' %>
