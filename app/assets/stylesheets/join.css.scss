@@ -32,6 +32,9 @@
 .story-photo:before,
 .support-us-photo:before,
 .about-photo:before,
+.how-photo:before,
+.learn-photo:before,
+.product-photo:before,
 .join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.5);
   position: absolute;
@@ -41,6 +44,15 @@
   z-index: 1;
 }
 .join-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.learn-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.how-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.product-photo:before {
   background: rgba(51, 51, 51, 0.2);
 }
 .join-alumni-photo:before {
@@ -92,11 +104,13 @@
   background: #5b98e0;
 }
 .learn-photo {
-  background: -webkit-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* W3C */
+  background: image-url('home_banner.jpg');
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 .story-photo {
   background: image-url("find-your_way.jpg");
@@ -124,26 +138,30 @@
   background-size: cover;
 }
 .how-photo {
-  background: -webkit-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* W3C */
+  background: image-url("how_it_works.jpeg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 .product-photo {
-  background: -webkit-linear-gradient(90deg, #085078 10%, #85D8CE 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #085078 10%, #85D8CE 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #085078 10%, #85D8CE 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #085078 10%, #85D8CE 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #085078 10%, #85D8CE 90%); /* W3C */
+  background: image-url("product.jpg");
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 
 .why-photo {
-  background: -webkit-linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* Chrome 10+, Saf5.1+ */
-  background:    -moz-linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* FF3.6+ */
-  background:     -ms-linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* IE10 */
-  background:      -o-linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* Opera 11.10+ */
-  background:         linear-gradient(90deg, #3D7EAA 10%, #FFE47A 90%); /* W3C */
+  background: image-url("why-photo.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 .join-alumni-photo {
   background: image-url("patterns/syudJMa.png");
@@ -162,7 +180,7 @@
 }
 .vmiddle {
   position: relative;
-  top: 50%;
+  top: 40%;
   z-index: 10;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
