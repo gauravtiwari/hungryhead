@@ -1,0 +1,40 @@
+<div class="school-data text-center text-white col-md-5">
+    <% data = render(template: 'events/show.json.jbuilder') %>
+
+    <div class="user-profile auto-margin">
+        <div class="thumbnail-wrapper d100">
+            <div class="profile-logo">
+              <div id="profile_image">
+                <div id="profilepic">
+                <% if @event.owner.avatar_present? %>
+                 <%= image_tag(@event.owner.get_avatar, data: {src: @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar}, width: "110", height: "110", class: "user-image")%>
+                 <% else %>
+                     <span class="placeholder bold text-white fs-22">
+                         <%= @event.owner.name_badge %>
+                     </span>
+                 <% end %>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="bold clearfix p-t-20 displayblock text-white">
+        <%= @event.title %>
+    </h3>
+
+    <div class="row m-t-20 font-opensans">
+        <div class="col-md-4 text-center b-r b-white b-dashed">
+            <h1 class="all-caps bold small fs-16">Spaces</h1>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= @event.space %></p>
+        </div>
+        <div class="col-md-4 text-center b-r b-white b-dashed">
+            <h1 class="all-caps bold small fs-16">Attending</h1>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= @event.attendees_counter.value %></p>
+        </div>
+        <div class="col-md-4 text-center">
+            <h1 class="all-caps bold small fs-16">Starts</h1>
+            <p class="all-caps bold  no-margin fs-16 text-white"><%= local_time(@event.start_time) %></p>
+        </div>
+    </div>
+</div>

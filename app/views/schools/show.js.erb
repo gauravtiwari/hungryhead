@@ -1,0 +1,5 @@
+
+
+<% if @school.avatar_present? && @school.logo_changed? %>
+  $('#profile_photo_preview').attr('src', <%= @school.get_avatar %>)
+<% end %>
