@@ -1,28 +1,40 @@
 <div class="container p-b-60">
 <div class="row">
-<div class="container">
-    <div class="col-md-8 col-sm-8 no-padding p-l-15">
-        <img src="/assets/Hungryhead_header.jpg" alt="" class="image-responsive-height">
-    </div>
-    <div class="col-md-4 no-padding p-r-15">
+  <div class="social-wrapper container">
+      <div class="col-md-12 col-sm-12 social">
+        <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
+          <%=  render partial: 'event_data' %>
+          <%= render partial: 'cover' %>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="container m-t-20">
+    <div class="col-md-4 no-padding">
         <div class="event-details bg-white padding-20">
             <div class="text-center full-width">
               <span class="thumbnail-wrapper d48 auto-margin">
-                  <%= image_tag('assets/lancaster-logo.png', data: {src:  '/assets/lancaster-logo.png', :"src-retina" => '/assets/lancaster-logo.png'},  class: "col-top", width: "34", height: "34") %>
+                <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
               </span>
             </div>
             <h2 class="clearfix bold"><%= @event.title %></h2>
-            <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro saepe qui modi cumque necessitatibus veniam itaque quia, quasi, rem illo, error, officiis adipisci excepturi voluptatibus non ullam natus pariatur consectetur.</p>
-            <p class="light m-t-20"><span class="fa fa-university"></span> <%= @event.owner.name %></p>
+            <p class="small-text">
+              <%= @event.excerpt %>
+            </p>
+            <p class="light m-t-20"><span class="fa fa-university"></span>
+              <%= @event.owner.name %>
+            </p>
             <address class="hint-text m-b-20">
-                <span class="fa fa-map-marker"></span> Lancaster, LA1 1AU
+                <span class="fa fa-map-marker"></span>
+                <%= @event.address%>
             </address>
+
             <div class="auto-margin no-padding col-md-12 text-center overflow-hidden p-t-20">
                 <div class="user-stats-list no-border">
                  <div class="col-sm-4 text-center">
                    Spaces left
                    <span class="text-master displayblock text-center">
-                     100
+                     0
                    </span>
                  </div>
                  <div class="col-sm-4 text-center">
@@ -34,45 +46,20 @@
                  <div class="col-sm-4 text-center">
                    Attending
                    <span class="text-master displayblock text-center">
-                     5K
+                     0K
                    </span>
                  </div>
                 </div>
             </div>
-        <div class="join text-center m-t-30">
-            <a href="" class="main-button bold"> <span class="fa fa-users"></span> Click to join</a>
+        <div class="text-center">
+          <div class="join m-t-30 inline m-r-10">
+              <a href="" class="main-button bold"> <span class="fa fa-users"></span> Click to join</a>
+          </div>
+          <div class="join m-t-30 inline">
+              <a href="" class="main-button bold"> <span class="fa fa-check-circle"></span> Publish</a>
+          </div>
         </div>
     </div>
-    </div>
-</div>
-</div>
-<div class="container">
-    <div class="col-md-4 bg-white overflow-hidden">
-        <div class="pabel">
-        <div class="panel-heading">
-            <div class="panel-title b-b b-grey p-b-5">Event Stats</div>
-        </div>
-        <div class="user-stats-list no-border m-t-20 overflow-hidden p-b-60">
-         <div class="col-sm-12 fs-16 text-center">
-           Invited
-           <span class="text-master displayblock text-center">
-             10k
-           </span>
-         </div>
-         <div class="col-sm-12 text-center p-t-20">
-           Ends in
-           <span class="text-master displayblock text-center">
-             5 days
-           </span>
-         </div>
-         <div class="col-sm-12 text-center p-t-20">
-           Attending
-           <span class="text-master displayblock text-center">
-             5K
-           </span>
-         </div>
-        </div>
-        </div>
     </div>
     <div class="col-md-8 p-r-30">
     <div class="panel box-shadow no-border">

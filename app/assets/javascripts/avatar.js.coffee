@@ -1,15 +1,13 @@
 jQuery(document).ready ->
   $('#trigger-file-upload').on 'click', (e) ->
     e.preventDefault()
-    $('input[id=profile_photo]').click()
+    $('input[id=profile_photo]')[0].click()
     $('input[id=profile_photo]').on 'change', (e) ->
       e.preventDefault()
       reader = new FileReader
       file = e.target.files[0]
       reader.onload = ((upload) ->
         $('#profile_photo_preview').attr 'src', upload.target.result
-        $('#user_pic_mini').attr 'src', upload.target.result
-        $('#user_pic_menu').attr 'src', upload.target.result
         return
       ).bind(this)
       reader.readAsDataURL file

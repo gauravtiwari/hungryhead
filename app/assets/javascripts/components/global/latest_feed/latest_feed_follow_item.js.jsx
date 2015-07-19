@@ -13,7 +13,7 @@ var LatestFeedFollowItem = React.createClass({
     if(window.currentUser.name === this.props.item.recipient.recipient_name) {
       var recipient = "you"
     } else {
-      var recipient = this.props.item.recipient.recipient_name.split(' ')[0];
+      var recipient = this.props.item.recipient.recipient_name;
     }
 
     if(this.props.item.actor.actor_avatar) {

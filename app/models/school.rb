@@ -69,7 +69,7 @@ class School < ActiveRecord::Base
 	end
 
 	def get_avatar
-	  logo.url(:avatar)
+	  logo.url
 	end
 
 	def avatar_present?

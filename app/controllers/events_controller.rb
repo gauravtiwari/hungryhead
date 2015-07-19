@@ -29,8 +29,8 @@ class EventsController < ApplicationController
     @event = CreateEventService.new(event_params).create
     respond_to do |format|
       if @event.save
-        flash[:notice] = "Event was successfully, created"
-        format.js
+        flash[:notice] = "Event was successfully created, redirecting..."
+        format.js {render :show}
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }

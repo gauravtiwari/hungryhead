@@ -24,6 +24,9 @@ class Event < ActiveRecord::Base
   counter :attendees_counter
   counter :invites_counter
 
+  #Mount carrierwave
+  mount_uploader :cover, CoverUploader
+
   #Tags for feedback
   acts_as_taggable_on :categories
 
@@ -55,7 +58,7 @@ class Event < ActiveRecord::Base
   private
 
   def should_generate_new_friendly_id?
-    slug.blank? || name_changed?
+    slug.blank? || title_changed?
   end
 
 end
