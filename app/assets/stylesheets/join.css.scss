@@ -188,6 +188,18 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+@media (max-width: 768px){
+  .vmiddle {
+    position: relative;
+    top: 50%;
+    z-index: 10;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
 .cta {
   background: image-url('bg_pattern_3.jpg');
   background-position: 60% 100%;
