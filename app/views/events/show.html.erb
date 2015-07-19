@@ -1,69 +1,118 @@
 <div class="container p-b-60">
 <div class="row">
   <div class="social-wrapper container">
-      <div class="col-md-12 col-sm-12 social">
-        <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-          <%=  render partial: 'event_data' %>
-          <%= render partial: 'cover' %>
+      <div class="col-md-8 col-sm-8 no-padding p-l-15">
+        <div class="social">
+          <div class="jumbotron full-border-light-left" data-pages="parallax" data-social="cover">
+            <div class="event-start inline hint-text m-r-10">
+              <span class="fa fa-calendar m-l-15"></span>
+              <%= local_time(@event.start_time, '%b %e') %>
+              <p class="pull-right text-white fs-16 m-t-10 m-r-15"><span class="fa fa-university"></span>
+                Hosted by <%= link_to(@event.owner.name, profile_path(@event.owner), class: 'text-white b-b b-white p-b-5') %>
+              </p>
+            </div>
+            <%= render partial: 'cover' %>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4 no-padding p-r-15">
+        <div class="social">
+          <div class="event-details full-border-light-right bg-white padding-20">
+              <div class="text-center full-width">
+                <span class="thumbnail-wrapper d48 auto-margin">
+                  <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
+                </span>
+              </div>
+              <h2 class="clearfix bold"><%= @event.title %></h2>
+              <p class="small-text">
+                <%= @event.excerpt %>
+              </p>
+              <div class="text-center m-t-20 p-t-10 p-b-10 full-border-light-bottom full-border-light clearfix">
+                  <div class="user-stats-list no-border">
+                   <div class="col-sm-4 all-caps text-center">
+                     Spots
+                     <span class="text-brand displayblock text-center">
+                       0
+                     </span>
+                   </div>
+                   <div class="col-sm-4 all-caps text-center">
+                     Invited
+                     <span class="text-brand displayblock text-center">
+                       5K
+                     </span>
+                   </div>
+                   <div class="col-sm-4 all-caps text-center">
+                     Attending
+                     <span class="text-brand displayblock text-center">
+                       0K
+                     </span>
+                   </div>
+                  </div>
+              </div>
+      </div>
+      </div>
       </div>
   </div>
 </div>
-<div class="container m-t-20">
-    <div class="col-md-4 no-padding">
-        <div class="event-details bg-white padding-20">
-            <div class="text-center full-width">
-              <span class="thumbnail-wrapper d48 auto-margin">
-                <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
-              </span>
-            </div>
-            <h2 class="clearfix bold"><%= @event.title %></h2>
-            <p class="small-text">
-              <%= @event.excerpt %>
-            </p>
-            <p class="light m-t-20"><span class="fa fa-university"></span>
-              <%= @event.owner.name %>
-            </p>
-            <address class="hint-text m-b-20">
-                <span class="fa fa-map-marker"></span>
-                <%= @event.address%>
-            </address>
 
-            <div class="auto-margin no-padding col-md-12 text-center overflow-hidden p-t-20">
-                <div class="user-stats-list no-border">
-                 <div class="col-sm-4 text-center">
-                   Spaces left
-                   <span class="text-master displayblock text-center">
-                     0
-                   </span>
-                 </div>
-                 <div class="col-sm-4 text-center">
-                   Ends in
-                   <span class="text-master displayblock text-center">
-                     5 days
-                   </span>
-                 </div>
-                 <div class="col-sm-4 text-center">
-                   Attending
-                   <span class="text-master displayblock text-center">
-                     0K
-                   </span>
-                 </div>
-                </div>
-            </div>
-        <div class="text-center">
-          <div class="join m-t-30 inline m-r-10">
-              <a href="" class="main-button bold"> <span class="fa fa-users"></span> Click to join</a>
-          </div>
-          <div class="join m-t-30 inline">
-              <a href="" class="main-button bold"> <span class="fa fa-check-circle"></span> Publish</a>
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class=" box-shadow bg-master-lightest">
+        <%= render partial: 'menu' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container m-t-40">
+    <div class="col-md-4 no-padding p-r-15">
+    <div class="bg-white overflow-hidden padding-10 box-shadow">
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height" />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <div class="more-placeholder">
+          <div class="thumbnail-wrapper d58">
+            <span class="placeholder bold text-white fs-22">+22</span>
           </div>
         </div>
+      </div>
     </div>
     </div>
     <div class="col-md-8 p-r-30">
     <div class="panel box-shadow no-border">
-      <ul class="nav nav-tabs nav-tabs-simple bg-light-blue-lightest">
+      <ul class="nav nav-tabs nav-tabs-simple bg-white">
           <li class="active">
             <a data-toggle="tab" href="#tab_people">
               <i class="fa fa-graduation-cap"></i> Event Info

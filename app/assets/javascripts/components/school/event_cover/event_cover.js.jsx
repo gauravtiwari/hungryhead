@@ -106,7 +106,7 @@ var EventCover = React.createClass({
       });
 
       var drag_class = cx({
-        'social': true,
+        'jumbotron': true,
         'normal': !this.state.draggable,
         'drag': this.state.draggable
       });

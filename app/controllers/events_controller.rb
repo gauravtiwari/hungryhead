@@ -21,6 +21,10 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @owner = @event.owner
+    respond_to do |format|
+      format.js {render :new}
+    end
   end
 
   # POST /events
