@@ -69,6 +69,7 @@
              If you are an alumni or someone who want to contribute your technical expertise. Please submit the below form to request an invite.
            </h5>
            <%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request p-b-20", id: "new_invite_request"}, remote: true) do |f| %>
+            <%= f.hidden_field :type, value: 1 %>
             <div class="col-md-8 col-sm-8 auto-margin">
               <h3 class="text-black semi-bold m-b-20 p-b-5 b-b b-grey pull-left">Lets get started</h3>
             </div>
@@ -119,6 +120,43 @@
           <p class="fs-16 text-master bold">
             To learn more and request access to manage your institution profile. <%= link_to('Click here', 'Email us') %> to get in touch.
           </p>
+          <%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request p-b-20", id: "new_invite_request"}, remote: true) do |f| %>
+           <%= f.hidden_field :type, value: 0 %>
+           <div class="col-md-8 col-sm-8 auto-margin">
+             <h3 class="text-black semi-bold m-b-20 p-b-5 b-b b-grey pull-left">Lets get started</h3>
+           </div>
+           <div class="join-alumni-form clearfix">
+            <div class="col-sm-8 col-md-8 auto-margin">
+              <div class="form-group form-group-default">
+                <label>Your Name</label>
+                <%= f.input_field :name, class: "string required form-control", placeholder: "John Smith" %>
+              </div>
+            </div>
+
+            <div class="col-sm-8 col-md-8 auto-margin">
+              <div class="form-group form-group-default input-group">
+                <span class="input-group-addon bg-master text-master">
+                  http://
+                </span>
+                <label>Reference website</label>
+                <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "linkedin, about me url..." %>
+              </div>
+            </div>
+
+            <div class="col-sm-8 col-md-8 auto-margin">
+              <div class="form-group form-group-default input-group input-group-attached col-xs-12">
+              <label>Email Address</label>
+              <%= f.input_field :email, class: "string required form-control", placeholder: "johndoe@example.com" %>
+              </div>
+              <span class="input-group-btn">
+                 <%= f.button :submit, value: 'Request invite', class: 'btn main-button pull-right m-t-20 clearfix' %>
+              </span>
+              <p class="fs-12 pull-right text-right m-t-20 text-master">
+                We will be in touch within next 24 hours.
+              </p>
+            </div>
+          </div>
+          <% end %>
         </div>
         </div>
       </div>
