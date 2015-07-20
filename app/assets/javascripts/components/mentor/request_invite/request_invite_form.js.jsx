@@ -50,18 +50,18 @@ var RequestInviteForm = React.createClass({
 
     } else {
       var content =  <form ref="form" noValidate="novalidate" className="new_invite_request p-b-20" id="new_invite_request" acceptCharset="UTF-8" onSubmit={this.submitInviteRequest}>
-        <div className="col-md-5 col-sm-5 auto-margin">
+        <div className="col-md-8 col-sm-8 auto-margin">
            <h3 className="text-black semi-bold m-b-20 p-b-5 b-b b-grey pull-left">Lets get started</h3>
        </div>
        <div className="join-alumni-form clearfix">
-        <div className="col-sm-5 col-md-5 auto-margin">
+        <div className="col-sm-8 col-md-8 auto-margin">
           <div className="form-group form-group-default">
             <label>Your Name</label>
             <input className="string required form-control" placeholder="John Smith" type="text" name="invite_request[name]" id="invite_request_name" />
           </div>
         </div>
 
-        <div className="col-sm-5 col-md-5 auto-margin">
+        <div className="col-sm-8 col-md-8 auto-margin">
           <div className="form-group form-group-default input-group">
             <span className="input-group-addon bg-master text-master">
               http://
@@ -71,7 +71,7 @@ var RequestInviteForm = React.createClass({
           </div>
         </div>
 
-        <div className="col-sm-5 col-md-5 auto-margin">
+        <div className="col-sm-8 col-md-8 auto-margin">
           <div className="form-group form-group-default input-group input-group-attached col-xs-12">
           <label>Email Address</label>
           <input className="string email required form-control" placeholder="johndoe@example.com" type="email" name="invite_request[email]" id="invite_request_email" />
