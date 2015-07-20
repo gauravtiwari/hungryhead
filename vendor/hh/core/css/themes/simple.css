@@ -832,9 +832,6 @@ body.dashboard .page-container {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-.fixed-header .page-container .page-content-wrapper .content {
-  padding-top: 60px;
-}
 .page-container .page-content-wrapper .content.full-width {
   width: 100%;
 }

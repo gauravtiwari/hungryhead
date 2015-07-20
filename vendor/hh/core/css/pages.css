@@ -857,9 +857,6 @@ body.dashboard .page-container {
   -webkit-transition: left 0.3s ease;
   transition: left 0.3s ease;
 }
-.fixed-header .page-container .page-content-wrapper .content {
-  padding-top: 60px;
-}
 .page-container .page-content-wrapper .footer.fixed {
   position: fixed;
 }
@@ -12393,6 +12390,9 @@ section.last:before {
 @media (min-width: 992px) {
   .row-same-height {
     overflow: hidden;
+  }
+  .fixed-header .page-container .page-content-wrapper .content {
+    padding-top: 60px;
   }
   .row-same-height > [class*="col-md"] {
     margin-bottom: -99999px;
