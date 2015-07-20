@@ -7,7 +7,7 @@
         <div class="row">
               <div class="col-md-8 auto-margin text-center">
                   <div class="hero-section z-index-10">
-                      <h1 class="text-white">
+                      <h1 class="text-white bold">
                         Cookies and personal data
                       </h1>
                       <p class="text-white no-margin fs-16">
@@ -21,21 +21,21 @@
     </div>
   </div>
 
-  <section class="story p-b-100">
+  <section class="cookies">
     <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
       <div class="col-md-6 col-sm-10 auto-margin">
-         <div>
-            <h3 class="semi-bold">Cookies</h3>
-            <p class="fs-16 text-master">
-             Cookies are small data files that are issued to your device when you visit a website and that store information about your use of a service. Pixel tags (which are also called clear GIFs, web beacons, or pixels) are little snippets of code or tiny images embedded on websites and in email that help us learn how you interact with our site and emails.
-            </p>
+        <div>
+          <h3 class="semi-bold">Cookies</h3>
+          <p class="fs-16 text-master">
+           Cookies are small data files that are issued to your device when you visit a website and that store information about your use of a service. Pixel tags (which are also called clear GIFs, web beacons, or pixels) are little snippets of code or tiny images embedded on websites and in email that help us learn how you interact with our site and emails.
+          </p>
         </div>
 
          <div>
-            <h3 class="m-t-30 semi-bold">Usage</h3>
-            <p class="fs-16 text-master">
-              Hungryhead uses cookies and these other technologies to help recognize you as a repeat visitor, to improve the quality of our Services, and to make your browsing experience more meaningful.
-            </p>
+          <h3 class="m-t-30 semi-bold">Usage</h3>
+          <p class="fs-16 text-master">
+            Hungryhead uses cookies and these other technologies to help recognize you as a repeat visitor, to improve the quality of our Services, and to make your browsing experience more meaningful.
+          </p>
         </div>
 
          <div>
@@ -80,6 +80,14 @@
         </div>
 
       </div>
+    </div>
+  </section>
+  <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow" id="intro">
+    <div class="col-sm-8 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        Read our community guidelines
+      </h1>
+      <%= link_to('Click here', rules_path, class: 'main-button m-t-10 fs-13 bold') %>
     </div>
   </section>
 </div>

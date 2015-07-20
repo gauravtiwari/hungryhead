@@ -6,7 +6,7 @@
           <div class="container vmiddle">
           <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
             <div class="hero-section inner text-center">
-                <h1 class="text-white">
+                <h1 class="text-white bold">
                   Our Product
                 </h1>
                 <p class="text-white fs-16">Understand the core building blocks</p>
@@ -70,7 +70,7 @@
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md m-t-40 text-center">
-                <%= image_tag('product/cross-pollination-world.png', data: {src: "#{image_url('product/cross-pollination-world_2x.png')}", src_retina: "#{image_url('product/cross-pollination-world_2x.png')}"}, class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
+                <%= image_tag('product/cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
               </div>
             </div>
         </div>
@@ -84,7 +84,7 @@
         <div class="md-p-l-20 md-p-r-20 xs-no-padding">
             <div class="col-md-5 col-sm-4">
               <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
-                <%= image_tag('product/collaboration.png', data: {src: "#{image_url('product/collaboration_2x.png')}", src_retina: "#{image_url('product/collaboration_2x.png')}"}, class: "image-responsive-height lazy #{browser.mobile? || browser.tablet? ? '' : 'auto-width'}") %>
+                <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy auto-width") %>
               </div>
             </div>
             <div class="col-md-5 col-sm-8 col-md-offset-1 xs-p-l-15 xs-p-r-15">
@@ -112,13 +112,13 @@
                 Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
               </p>
               <p class="m-b-20 fs-16">
-                You can collaborate, invest in useful ideas using our virtual coins, make return on your investments, validate ideas and earn friendly badges.
+                You can collaborate, invest in useful ideas using our virtual coins, make return on your investments, validate ideas, and earn friendly badges.
               </p>
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md text-center m-t-20">
-                <%= image_tag('gamification.png',  data: {src: "#{image_url('product/gamification_2x.png')}", src_retina: "#{image_url('product/gamification_2x.png')}"},class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/idea_badges.png', data: {src: "#{image_url('product/idea_badges_2x.png')}", src_retina: "#{image_url('product/idea_badges_2x.png')}"}, class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : ''} lazy") %>
+                <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : ''} lazy") %>
               </div>
             </div>
         </div>

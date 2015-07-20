@@ -7,7 +7,7 @@
         <div class="row">
               <div class="col-md-8 auto-margin text-center">
                   <div class="hero-section z-index-10">
-                      <h1 class="text-white">
+                      <h1 class="text-white bold">
                         Community guidelines
                       </h1>
                       <p class="text-white no-margin fs-16">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <section class="story p-b-100">
+  <section class="story">
     <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
       <div class="col-md-6 col-sm-10 auto-margin">
         <p class="fs-16 semi-bold">
@@ -55,7 +55,16 @@
               The idea is a product of our thought and therefore, the more it's shared the bigger it becomes. If you see an idea that you feel would be interesting to your friends, please vote and share with your friends. The community is place where nothing gets unnoticed, if you contribute it will return back to you.
             </p>
         </div>
+        <div class="divider b-b b-green b-md b-small m-t-20"></div>
       </div>
+    </div>
+  </section>
+  <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+    <div class="col-sm-8 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        To get started
+      </h1>
+      <%= link_to('Click here', get_started_path, class: 'main-button m-t-10 fs-13 bold') %>
     </div>
   </section>
 </div>

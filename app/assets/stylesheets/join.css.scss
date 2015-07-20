@@ -11,7 +11,8 @@
   height: 40vh;
 }
 .join-photo {
- background-image: image-url('patterns/giftly.png');
+ background-image: image-url('patterns/syudJMa.png');
+ background-position: 100% 55%;
 }
 .or-seperator span {
   background-color: #eef0f0;
@@ -44,7 +45,7 @@
   z-index: 1;
 }
 .join-photo:before {
-  background: rgba(51, 51, 51, 0.2);
+  background: rgba(51, 51, 51, 0.4);
 }
 .learn-photo:before {
   background: rgba(51, 51, 51, 0.2);
@@ -56,7 +57,7 @@
   background: rgba(51, 51, 51, 0.2);
 }
 .join-alumni-photo:before {
-  background: rgba(51, 51, 51, 0.2);
+  background: rgba(51, 51, 51, 0.4);
 }
 .is-scrolling {
   background: #323a45;
@@ -164,7 +165,13 @@
   background-size: cover;
 }
 .join-alumni-photo {
-  background: image-url("patterns/syudJMa.png");
+  background: image-url("alumni.jpg")  no-repeat;
+  background-position: 100% 25%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 .join-wrapper .join .cover-photo .pull-bottom {
   z-index: 2;

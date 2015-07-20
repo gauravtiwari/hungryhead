@@ -7,9 +7,9 @@
       <div class="row">
             <div class="col-md-8 auto-margin">
                 <div class="hero-section inner text-center">
-                    <h1 class="text-white">Join us</h1>
+                    <h1 class="text-white bold">Join us</h1>
                     <p class="text-white fs-16 semi-bold">
-                      Understand how you can join
+                      Achieve shared goals together
                     </p>
                 </div>
             </div>
@@ -19,64 +19,77 @@
   </div>
   </div>
 
-  <div class="container horz-section  wrapper-small">
+  <section class="bg-master-lightest text-center wrapper-small full-border-light-bottom no-overflow" id="intro">
+    <div class="col-sm-12 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        Platform for students, mentors and institutions
+      </h1>
+      <p class="col-sm-10 col-md-10 auto-margin m-b-20 fs-16 text-master">
+        Scroll down to get started.
+      </p>
+    </div>
+  </section>
+
+  <div class="container horz-section wrapper-small p-b-100">
     <div class="panel panel-transparent">
-      <ul class="nav nav-tabs nav-tabs-simple nav-tabs-left p-t-20" id="tab-3">
+      <ul class="nav nav-tabs nav-tabs-simple nav-tabs-left p-t-20">
         <li class="active">
           <a data-toggle="tab" href="#forStudents">For Students</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#forMentors">For Mentors</a>
+          <a data-toggle="tab" href="#forMentors">For Alumni</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#forSchools">For Schools</a>
+          <a data-toggle="tab" href="#forSchools">For Institutions</a>
         </li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="forStudents">
-            <div class="col-md-8 col-sm-10 auto-margin">
-              <h2 class="normal">For Students:</h2>
-              <div class="divider b-b b-grey b-md b-small"></div>
-            <div>
-            <p class="text-master m-t-30">
-             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+          <div class="col-md-8 col-sm-10 col-xs-12 auto-margin">
+            <div class="content-mask-md m-b-20 text-center">
+              <%= image_tag('badges/entrepreneur.png', class: "image-responsive-height auto-width lazy") %>
+            </div>
+            <h1 class="m-t-5 text-center m-b-20">For students</h1>
+            <p class="fs-16 text-master">
+               Whether you are student with your next big idea or want to collaborate with your peers, we have got you covered. We took almost all concepts that are related to idea building and baked it into our gamification engine to make the platform fun and rewarding.
             </p>
-
-            </div>
-            <a href="/join" class="clearfix pull-right m-t-20 btn btn-lg fs-15 bold btn-green text-white">Join</a>
-            </div>
+            <h5 class="fs-16 bold">
+               Hungryhead is currently in beta. <%= link_to('Click here', new_user_registration_path) %> to create an account.
+            </h5>
+          </div>
         </div>
         <div class="tab-pane" id="forMentors">
-          <div class="col-md-8 col-sm-10 auto-margin">
-            <h2 class="normal">For Mentors:</h2>
-            <div class="divider b-b b-grey b-md b-small"></div>
-          <div>
-          <h3 class="m-t-30">1. Hungryhead is a new way to discover entrepreneurship</h3>
-          <p class="text-master">
-          We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-          </p>
-          </div>
-          <a href="/join" class="clearfix pull-right m-t-20 btn btn-lg fs-15 bold btn-green text-white">Join</a>
-
-          </div>
+         <div class="col-md-8 col-sm-10 col-xs-12 auto-margin">
+           <div class="content-mask-md m-b-20 text-center">
+             <%= image_tag('badges/scholar.png', class: "image-responsive-height auto-width lazy") %>
+           </div>
+           <h1 class="m-t-5 text-center">For alumni and mentors</h1>
+           <h5 class="bold">
+             If you are an alumni or someone who want to contribute your technical expertise. Please send us an  <%= link_to('Invite Request', request_invite_path) %> to get access.
+           </h5>
+         </div>
         </div>
+
         <div class="tab-pane" id="forSchools">
-           <div class="col-md-8 col-sm-10 auto-margin">
-             <h2 class="normal">For Schools:</h2>
-             <div class="divider b-b b-grey b-md b-small"></div>
-           <div>
-           <h3 class="m-t-30">1. Hungryhead is a new way to discover entrepreneurship</h3>
-           <p class="text-master">
-           We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-           </p>
-           </div>
-           <a href="/contact-us" class="clearfix pull-right m-t-20 btn btn-green fs-15 bold btn-lg text-white">Join</a>
-           </div>
+        <div class="col-md-8 col-sm-10 col-xs-12 auto-margin">
+          <div class="content-mask-md m-b-20 text-center">
+            <span class="fa fa-university fs-50"></span>
+          </div>
+          <h1 class="m-t-5 text-center">For institutions</h1>
+          <p class="fs-16 text-master m-t-20">
+            We built hungryhead for institutions to make the student startup support process practical and streamlined. We have integrated tools for institutions to collaborate with entrepreneurial students easily and provide support directly.
+          </p>
+          <p class="fs-16 text-master bold">
+            To learn more and request access to manage your institution profile. <%= link_to('Click here', 'Email us') %> to get in touch.
+          </p>
+        </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="p-t-100 clearfix"></div>
+
 </div>
 <% end %>
 <%= render partial: 'globals/footer' %>

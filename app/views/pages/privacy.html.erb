@@ -7,7 +7,7 @@
           <div class="row">
                 <div class="col-md-8 col-sm-10 auto-margin text-center">
                     <div class="hero-section z-index-10">
-                        <h1 class="text-white">
+                        <h1 class="text-white bold">
                           Privacy Policy
                         </h1>
                         <p class="text-white no-margin fs-16">
@@ -26,6 +26,15 @@
         <div class="col-md-6 col-sm-10 auto-margin">
           <%= render partial: 'pages/content/privacy' %>
         </div>
+      </div>
+    </section>
+
+    <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow" id="intro">
+      <div class="col-sm-8 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          Read our cookies policy
+        </h1>
+        <%= link_to('Click here', cookies_path, class: 'main-button m-t-10 fs-13 bold') %>
       </div>
     </section>
   </div>
