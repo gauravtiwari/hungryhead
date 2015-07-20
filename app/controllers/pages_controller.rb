@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   layout "home"
-  before_action :set_cache, except: [:home, :request_invite]
+  before_action :set_cache, except: [:home, :get_started]
 
   #Index page to handle home and after login route
   def home
@@ -43,9 +43,6 @@ class PagesController < ApplicationController
   end
 
   def cookies
-  end
-
-  def request_invite
   end
 
   def how_it_works

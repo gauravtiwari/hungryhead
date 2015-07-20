@@ -680,7 +680,7 @@ CREATE TABLE invite_requests (
     name character varying DEFAULT ''::character varying NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     url character varying DEFAULT ''::character varying NOT NULL,
-    type character varying DEFAULT 'Mentor'::character varying,
+    type integer DEFAULT 1,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

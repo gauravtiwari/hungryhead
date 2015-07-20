@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get '/get-started', to: 'pages#get_started', as: :get_started
   get '/product-tour', to: 'pages#product', as: :product
   get '/terms-of-service', to: 'pages#terms', as: :terms
-  get '/request-invite', to: 'pages#request_invite', as: :request_invite
   get '/our-story', to: 'pages#story', as: :story
   get '/how-it-works', to: 'pages#how_it_works', as: :how_it_works
 
