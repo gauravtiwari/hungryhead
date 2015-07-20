@@ -1,7 +1,7 @@
 <!-- START HEADER -->
   <div class="header bg-white b-b b-grey box-shadow">
   <div class="container">
-    <div class=" pull-left sm-table">
+    <div class="pull-left">
       <% if user_signed_in? %>
         <div class="header-inner p-t-10">
           <div class="brand inline">
@@ -70,7 +70,7 @@
 
     <% if user_signed_in? %>
       <div class="pull-right">
-        <div class="visible-lg visible-md m-t-10">
+        <div class="visible-lg visible-md visible-sm m-t-10">
           <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-15 p-r-10">
             <li class="p-r-10 inline drop conversation-threads">
               <%= react_component('OpenConversationsThread', {path: main_app.recent_conversations_path(box: 'inbox'), unread_messages_count: current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
@@ -145,7 +145,7 @@
       </div>
     <% else %>
       <div class="pull-right">
-        <div class="visible-lg visible-md m-t-10">
+        <div class="visible-lg visible-md visible-sm m-t-10">
           <div class="pull-left p-t-10  p-r-20 font-heading">
             <%= link_to('Questions?', main_app.help_path, title: "Get Started", class: 'text-master #{current_class?(help_path)}') %>
           </div>

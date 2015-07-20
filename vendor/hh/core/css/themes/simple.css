@@ -12843,17 +12843,11 @@ Main components
 .theme .page-sidebar .sidebar-header {
   background-color: #47b5ab;
 }
-.theme .page-container .header {
-  background: transparent;
-}
 .theme .social-wrapper .social .feed > .day > .item {
   border: 0;
 }
 .page-sidebar .sidebar-header {
   background-color: #47b5ab;
-}
-.page-container .header {
-  background: transparent;
 }
 .social-wrapper .social .feed > .day > .item {
   border: 0;

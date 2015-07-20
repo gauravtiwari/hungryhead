@@ -9329,6 +9329,17 @@ Responsive Util
     float: left;
     clear: both;
   }
+  .fixed-header .page-container .page-content-wrapper .content {
+    padding-top: 0px;
+  }
+  .vmiddle {
+    position: relative;
+    top: 60%;
+    z-index: 10;
+    -webkit-transform: translateY(-60%);
+    -ms-transform: translateY(-60%);
+    transform: translateY(-60%);
+  }
   .lock-screen-wrapper .credentials > div {
     text-align: center;
   }

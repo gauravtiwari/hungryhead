@@ -32,15 +32,15 @@
 
   </head>
 
-  <body class="fixed-header menu-behind no-header <%= controller_name %> <%= action_name %>">
+  <body class="fixed-header menu-behind <%= user_signed_in? ? '' : 'no-header' %> <%= controller_name %> <%= action_name %>">
     <% if browser.mobile? %>
       <%= render partial: 'globals/app_sidebar' %>
     <% end %>
-    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
-      <% if user_signed_in? %>
+    <div class="page-container">
+      <% if user_signed_in? && !browser.mobile? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
-        <% if browser.mobile? %>
+        <% if user_signed_in? && browser.mobile? %>
           <%= render partial: 'globals/page_nav_mobile' %>
         <% else %>
           <%= render partial: 'globals/join_nav' %>

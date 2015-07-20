@@ -70,7 +70,7 @@
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md m-t-40 text-center">
-                <%= image_tag('cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
+                <%= image_tag('product/cross-pollination-world.png', data: {src: "#{image_url('product/cross-pollination-world_2x.png')}", src_retina: "#{image_url('product/cross-pollination-world_2x.png')}"}, class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
               </div>
             </div>
         </div>
@@ -84,20 +84,17 @@
         <div class="md-p-l-20 md-p-r-20 xs-no-padding">
             <div class="col-md-5 col-sm-4">
               <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
-                <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy #{browser.mobile? ? '' : 'auto-width'}") %>
+                <%= image_tag('product/collaboration.png', data: {src: "#{image_url('product/collaboration_2x.png')}", src_retina: "#{image_url('product/collaboration_2x.png')}"}, class: "image-responsive-height lazy #{browser.mobile? || browser.tablet? ? '' : 'auto-width'}") %>
               </div>
             </div>
             <div class="col-md-5 col-sm-8 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <h1 class="m-t-5 m-b-20">The world is a collaboration</h1>
               <h5>Collaboration takes place when there is a relationship.</h5>
               <p class="m-b-20 fs-16 text-master">
-                We have built our platform around a startup idea because, that's where relationships can be formed. People relate and connect with the problem someone else is experiencing.
+                We have built our platform around a startup idea because, that's where relationships can be formed. People relate and connect with the problem someone else is experiencing. If you feel like being part of an idea or want to contribute your skills - just hop into a conversation and introduce yourself.
               </p>
               <p class="m-b-20 fs-16 text-master">
                 You can also find nearby events happening within school, college or university and meet like-minded people.
-              </p>
-              <p class="m-b-20 fs-16">
-                If you feel like being part of an idea or want to contribute your skills - just hop into a conversation and introduce yourself.
               </p>
             </div>
         </div>
@@ -120,8 +117,8 @@
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md text-center m-t-20">
-                <%= image_tag('gamification.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/idea_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
+                <%= image_tag('gamification.png',  data: {src: "#{image_url('product/gamification_2x.png')}", src_retina: "#{image_url('product/gamification_2x.png')}"},class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/idea_badges.png', data: {src: "#{image_url('product/idea_badges_2x.png')}", src_retina: "#{image_url('product/idea_badges_2x.png')}"}, class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : ''} lazy") %>
               </div>
             </div>
         </div>

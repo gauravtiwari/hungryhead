@@ -3,6 +3,12 @@ body.menu-behind .header .brand {
   width: 55px;
   padding-left: 25px;
 }
+body.no-header .header {
+  background: transparent;
+}
+body {
+  background-color: #eef0f0;
+}
 body, p {
   line-height: 1.6;
   font-size: 14px;
@@ -850,5 +856,13 @@ ul.reactions > div {
 @media (max-width: 480px) {
   .xs-no-padding {
     padding: 0px!important;
+  }
+  .vmiddle {
+    position: relative;
+    top: 60%;
+    z-index: 10;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
