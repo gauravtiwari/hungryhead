@@ -7,7 +7,7 @@ class CreateInviteRequests < ActiveRecord::Migration
       t.integer :user_type, default: 1
       t.timestamps null: false
     end
-    add_index :invite_requests, :type
+    add_index :invite_requests, :user_type
     add_index :invite_requests, :email, unique: true
   end
 end

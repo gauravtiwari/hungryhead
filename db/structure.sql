@@ -680,7 +680,7 @@ CREATE TABLE invite_requests (
     name character varying DEFAULT ''::character varying NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
     url character varying DEFAULT ''::character varying NOT NULL,
-    type integer DEFAULT 1,
+    user_type integer DEFAULT 1,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2941,10 +2941,10 @@ CREATE UNIQUE INDEX index_invite_requests_on_email ON invite_requests USING btre
 
 
 --
--- Name: index_invite_requests_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_invite_requests_on_user_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_invite_requests_on_type ON invite_requests USING btree (type);
+CREATE INDEX index_invite_requests_on_user_type ON invite_requests USING btree (user_type);
 
 
 --
