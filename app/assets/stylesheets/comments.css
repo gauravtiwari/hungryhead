@@ -47,7 +47,6 @@
 }
 ul > li, ol > li {
   padding-left: 0px;
-  line-height: 18px;
 }
 .post-actions {
   display: none;
