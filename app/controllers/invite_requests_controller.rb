@@ -7,16 +7,12 @@ class InviteRequestsController < ApplicationController
   # POST /invite_requests.json
   def create
     @invite_request = InviteRequest.new(invite_request_params)
-
-    if @invite_request.save
-     flash[:success] = "Thank you #{@invite_request.name} for submitting your request. We will be in touch."
-     render json: {
-      created: true,
-      name: @invite_request.name,
-      status: :created
-    }
-    else
-     render json: @invite_request.errors, status: :unprocessable_entity, created: false
+    respond_to do |format|
+      if @invite_request.save
+        format.js {render :show}
+      else
+       format.js {render :show}
+      end
     end
 
   end
@@ -24,7 +20,7 @@ class InviteRequestsController < ApplicationController
   private
 
   def invite_request_params
-    params.require(:invite_request).permit(:name, :email, :url)
+    params.require(:invite_request).permit(:name, :email, :url, :type)
   end
 
 end

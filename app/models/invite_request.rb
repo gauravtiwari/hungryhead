@@ -8,7 +8,7 @@ class InviteRequest < ActiveRecord::Base
     message: "You have alread submitted your invite request"
   }
 
-  enum type: {institution: 0, mentor: 1}
+  enum invite_form: {institution: 0, mentor: 1}
 
   validates :name, :presence => true
   validates :url, :presence => true
