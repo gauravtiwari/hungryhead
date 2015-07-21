@@ -1,5 +1,5 @@
 <%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request m-t-40", id: "new_invite_request"}, remote: true) do |f| %>
- <%= f.hidden_field :type, value: 1 %>
+ <%= f.hidden_field :user_type, value: 1 %>
  <div class="join-alumni-form clearfix">
   <div class="col-sm-8 col-md-8 auto-margin">
     <div class="form-group form-group-default">
@@ -14,7 +14,7 @@
         http://
       </span>
       <label>Reference website</label>
-      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "linkedin, about me url..." %>
+      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "http://website.com, you linkedin, about me url..." %>
     </div>
   </div>
 

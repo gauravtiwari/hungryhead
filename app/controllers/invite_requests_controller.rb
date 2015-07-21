@@ -1,6 +1,6 @@
 class InviteRequestsController < ApplicationController
 
-  respond_to :json, :html
+  respond_to :js
   layout "home"
 
   # POST /invite_requests
@@ -11,7 +11,8 @@ class InviteRequestsController < ApplicationController
       if @invite_request.save
         format.js {render :show}
       else
-       format.js {render :show}
+       flash[:error] = "Looks like we already have your details on our system."
+       format.js {render :new}
       end
     end
 
@@ -20,7 +21,7 @@ class InviteRequestsController < ApplicationController
   private
 
   def invite_request_params
-    params.require(:invite_request).permit(:name, :email, :url, :type)
+    params.require(:invite_request).permit(:name, :email, :url, :user_type)
   end
 
 end

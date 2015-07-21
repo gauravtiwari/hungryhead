@@ -1,10 +1,10 @@
 <%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request m-t-40", id: "new_invite_request"}, remote: true) do |f| %>
- <%= f.hidden_field :type, value: 0 %>
+ <%= f.hidden_field :user_type, value: 0 %>
  <div class="join-alumni-form clearfix">
   <div class="col-sm-8 col-md-8 auto-margin">
     <div class="form-group form-group-default">
       <label>Institution Name</label>
-      <%= f.input_field :name, class: "string required form-control", placeholder: "John Smith" %>
+      <%= f.input_field :name, class: "string required form-control", placeholder: "Oxford University" %>
     </div>
   </div>
 
@@ -14,14 +14,14 @@
         http://
       </span>
       <label>Website</label>
-      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "Institution website url..." %>
+      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "https://www.oxford.ac.uk" %>
     </div>
   </div>
 
   <div class="col-sm-8 col-md-8 auto-margin">
     <div class="form-group form-group-default input-group input-group-attached col-xs-12">
     <label>Your email eddress</label>
-    <%= f.input_field :email, class: "string required form-control", placeholder: "johndoe@example.com" %>
+    <%= f.input_field :email, class: "string required form-control", placeholder: "john@oxford.ac.uk" %>
     </div>
     <span class="input-group-btn">
        <%= f.button :submit, value: 'Submit', class: 'btn main-button pull-right m-t-20 clearfix' %>

@@ -44,15 +44,14 @@ jQuery(document).ready ->
 	  ease: 'ease'
 	  speed: 500
 
-	$('#form-login').validate();
-	$('.site-feedback-form').validate();
-	$('#new_invite_request').validate();
-	$('#information-form').validate();
-	$('#feedback_form').validate();
-	$('#edit-profile').validate();
-	$('#pitch_idea_form').validate();
-	$('#editProfileFormPopup').validate();
-	$('#valid-form').validate();
+	$('#form-login').validate()
+	$('.site-feedback-form').validate()
+	$('#information-form').validate()
+	$('#feedback_form').validate()
+	$('#edit-profile').validate()
+	$('#pitch_idea_form').validate()
+	$('#editProfileFormPopup').validate()
+	$('#valid-form').validate()
 
 	try
 		$('#idea_high_concept_pitch').rules 'add', minlength: 20, maxlength: 50
@@ -61,6 +60,11 @@ jQuery(document).ready ->
 
 	$("[data-toggle='tooltip']").tooltip()
 
+	try
+		$('form#new_invite_request').each ->
+			$(@).validate()
+			return
+	catch e
 	#Initialize Pages modules
 
 	$.Pages.init()
