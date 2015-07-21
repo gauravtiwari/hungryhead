@@ -1,0 +1,11 @@
+//find form
+var $el = $('#invite_form_<%= @invite_request.user_type %>');
+
+//Append message
+<% if @invite_request.user_type == 1 %>
+  $el.html("<%= j render partial: 'new_alumni' %>");
+<% else %>
+  $el.html("<%= j render partial: 'new_institution' %>");
+<% end %>
+
+$('form#new_invite_request').validate();
