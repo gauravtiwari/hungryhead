@@ -1,0 +1,34 @@
+<%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request m-t-40", id: "new_invite_request"}, remote: true) do |f| %>
+ <%= f.hidden_field :type, value: 1 %>
+ <div class="join-alumni-form clearfix">
+  <div class="col-sm-8 col-md-8 auto-margin">
+    <div class="form-group form-group-default">
+      <label>Your Name</label>
+      <%= f.input_field :name, class: "string required form-control", placeholder: "John Smith" %>
+    </div>
+  </div>
+
+  <div class="col-sm-8 col-md-8 auto-margin">
+    <div class="form-group form-group-default input-group">
+      <span class="input-group-addon bg-master text-master">
+        http://
+      </span>
+      <label>Reference website</label>
+      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "linkedin, about me url..." %>
+    </div>
+  </div>
+
+  <div class="col-sm-8 col-md-8 auto-margin">
+    <div class="form-group form-group-default input-group input-group-attached col-xs-12">
+    <label>Email Address</label>
+    <%= f.input_field :email, class: "string required form-control", placeholder: "johndoe@example.com" %>
+    </div>
+    <span class="input-group-btn">
+       <%= f.button :submit, value: 'Request invite', class: 'btn main-button pull-right m-t-20 clearfix' %>
+    </span>
+    <p class="fs-12 pull-right text-right m-t-20 text-master">
+      We will be in touch within next 24 hours.
+    </p>
+  </div>
+</div>
+<% end %>
