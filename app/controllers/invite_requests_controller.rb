@@ -11,7 +11,7 @@ class InviteRequestsController < ApplicationController
       if @invite_request.save
         format.js {render :show}
       else
-       flash[:error] = "Looks like we already have your details on our system."
+       flash[:error] = "Looks like we already have your details on our system. We will get in touch soon."
        format.js {render :new}
       end
     end
