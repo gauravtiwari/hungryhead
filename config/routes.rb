@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get '/learn-about-hungryhead', to: 'pages#learn', as: :learn
   get '/why-hungryhead', to: 'pages#why', as: :why
   get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
+  get '/product-tour/gamification', to: 'pages#gamification', as: :gamification
+  get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
+  get '/product-tour/community', to: 'pages#community', as: :community
 
   get '/privacy-policy', to: 'pages#privacy', as: :privacy
   get '/cookies-policy', to: 'pages#cookies', as: :cookies

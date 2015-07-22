@@ -224,3 +224,19 @@ Merit::Badge.create!(
   custom_fields: { name: "Exit", type: "user", icon: 'star' }
 )
 
+Merit::Badge.create!(
+  id: 26,
+  name: "Scalable",
+  level: "gold",
+  description: "Scalable Business Model: Idea with 100 scalabale points",
+  custom_fields: { name: "Scalable", type: "idea", icon: 'cup' }
+)
+
+Merit::Badge.create!(
+  id: 27,
+  name: "MVP",
+  level: "silver",
+  description: "Minimum viable product: Idea has uploaded product screenshots",
+  custom_fields: { name: "MVP", type: "idea", icon: 'star' }
+)
+

@@ -24,27 +24,40 @@
           <div class="col-sm-4 no-padding">
             <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/welcome.png', class: "m-b-20") %>
-              <h6 class="block-title p-b-5">Community <i class="pg-arrow_right m-l-10"></i></h6>
-                <p class="m-b-30 font-opensans">
-                  Connect with peers from around the world.
-                </p>
+              <%= link_to(community_path) do %>
+              <h6 class="block-title p-b-5">Community
+                <i class="pg-arrow_right m-l-10"></i>
+              </h6>
+              <% end %>
+              <p class="m-b-30 font-opensans">
+                Connect with peers from around the world.
+              </p>
             </div>
             <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
           </div>
           <div class="col-sm-4 no-padding">
             <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/top_comments.png', class: "m-b-20") %>
-              <h6 class="block-title p-b-5">Collaboration <i class="pg-arrow_right m-l-10"></i></h6>
-                <p class="m-b-30 font-opensans">
-                  Make ideas useful and achieve shared goals.
-                </p>
+              <%= link_to(collaboration_path) do %>
+              <h6 class="block-title p-b-5">
+                Collaboration
+                <i class="pg-arrow_right m-l-10"></i>
+              </h6>
+              <% end %>
+              <p class="m-b-30 font-opensans">
+                Make ideas useful and achieve shared goals.
+              </p>
             </div>
             <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
           </div>
           <div class="col-sm-4 no-padding">
             <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/cup.png', class: "m-b-20") %>
-              <h6 class="block-title p-b-5">Gamification <i class="pg-arrow_right m-l-10"></i></h6>
+              <%= link_to(gamification_path) do %>
+                <h6 class="block-title p-b-5">
+                  Gamification <i class="pg-arrow_right m-l-10"></i>
+                </h6>
+              <% end %>
               <p class="m-b-30 font-opensans">
                 Because hard stuffs in life should be fun.
               </p>
@@ -67,6 +80,7 @@
               <p class="m-b-20 fs-16">
                 <%= link_to('Register today', new_user_registration_path, class: 'bold') %> to connect with an exclusive community of students who are serious about entrepreneurship.
               </p>
+              <%= link_to('Learn more', community_path, class: 'main-button fs-13 bold') %>
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md m-t-40 text-center">
@@ -96,6 +110,7 @@
               <p class="m-b-20 fs-16 text-master">
                 You can also find nearby events happening within school, college or university and meet like-minded people.
               </p>
+              <%= link_to('Learn more', collaboration_path, class: 'main-button fs-13 bold') %>
             </div>
         </div>
       </div>
@@ -114,6 +129,7 @@
               <p class="m-b-20 fs-16">
                 You can collaborate, invest in useful ideas using our virtual coins, make return on your investments, validate ideas, and earn friendly badges.
               </p>
+              <%= link_to('Learn more', gamification_path, class: 'main-button fs-13 bold') %>
             </div>
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md text-center m-t-20">

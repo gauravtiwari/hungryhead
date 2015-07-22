@@ -27,6 +27,18 @@ class PagesController < ApplicationController
     end
   end
 
+  #Gamification
+  def gamification
+  end
+
+  #Collaboration
+  def collaboration
+  end
+
+  #Community
+  def community
+  end
+
   #Why page
   def why
   end
