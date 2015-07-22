@@ -31,6 +31,10 @@ class PagesController < ApplicationController
   def gamification
   end
 
+  #pricing
+  def pricing
+  end
+
   #Collaboration
   def collaboration
   end

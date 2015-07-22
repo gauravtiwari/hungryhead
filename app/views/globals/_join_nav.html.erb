@@ -15,6 +15,11 @@
               <span class="text-master">Why</span>
             <% end %>
           </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+             <%= link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}") do %>
+               <span>What</span>
+             <% end %>
+          </li>
          <li class="p-r-15 fs-14 inline font-heading">
            <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
              <span class="text-master">The Product</span>

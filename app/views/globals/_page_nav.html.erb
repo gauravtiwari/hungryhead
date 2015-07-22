@@ -63,6 +63,11 @@
               <span >How it works </span>
             <% end %>
           </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(main_app.pricing_path, class: "#{current_class?(main_app.pricing_path)}") do %>
+              <span > Pricing </span>
+            <% end %>
+          </li>
          </ul>
         </div>
       <% end %>
@@ -150,7 +155,7 @@
             <%= link_to('Questions?', main_app.help_path, title: "Get Help", class: 'text-master #{current_class?(help_path)}') %>
           </div>
           <div class="pull-left p-t-5 font-heading">
-            <%= link_to('Beta registeration', main_app.get_started_path, title: "Beta registeration", class: 'btn btn-complete text-white inline') %>
+            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-complete text-white inline') %>
           </div>
         </div>
       </div>
