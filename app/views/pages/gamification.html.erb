@@ -1,0 +1,112 @@
+<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+  <div class="product-wrapper bg-white">
+    <div class="product">
+      <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+          <div class="gamification-photo">
+          <div class="container vmiddle">
+          <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
+            <div class="hero-section inner text-center">
+              <h1 class="text-white bold">
+                Gamification
+              </h1>
+              <p class="text-white fs-16">
+                Making entrepreneurship practical and fun
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="bg-master-lightest text-center wrapper-small full-border-light-bottom no-overflow" id="intro">
+      <div class="col-sm-12 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          We built hungryhead for everyone who is interested in entrepreneurship and business in general.
+        </h1>
+        <p class="col-sm-10 col-md-10 auto-margin m-b-20 fs-16 text-master">
+          Learn more about how and where we use these gamification concepts.
+        </p>
+      </div>
+    </section>
+
+    <section class="wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-12">
+              <h1 class="m-t-5 m-b-20">Investing into ideas</h1>
+              <p class="m-b-20 fs-16 text-master">
+                We took early stage idea investment concept and integrated into our gamification engine. We have integrated virtual coins to allow people to invest into ideas that are investable and make return on investments.
+              </p>
+              <p class="m-b-20 fs-16">
+                Based on your succesful investments you can earn friendly badges and build your leaderboard.
+              </p>
+            </div>
+            <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+              <div class="content-mask-md m-t-40 text-center">
+                <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/investment_badges.png', class: "image-responsive-height auto-width #{browser.mobile? ? '' : ''} lazy") %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-master-lightest wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-4">
+              <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
+                <%= image_tag('product/idea_gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/idea_badges_detail.png', class: "image-responsive-height lazy auto-width") %>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-8 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+              <h1 class="m-t-5 m-b-20">Collaborating on ideas</h1>
+              <h5>Collaboration takes place when there is a relationship.</h5>
+              <p class="m-b-20 fs-16 text-master">
+                We believe meaningful conversation is crucial for building an idea and therefore we have integrated practical idea building concepts into our gamification engine to make the idea building process practical and fun.
+              </p>
+              <p class="m-b-20 fs-16 text-master">
+
+              </p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-12">
+              <h1 class="m-t-5 m-b-20">Community</h1>
+              <p class="m-b-20 fs-16 text-master">
+                Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
+              </p>
+              <p class="m-b-20 fs-16">
+                You can collaborate, invest in useful ideas using our virtual coins, make return on your investments, validate ideas, and earn friendly badges.
+              </p>
+            </div>
+            <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+              <div class="content-mask-md text-center m-t-40">
+                <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : ''} lazy") %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+      <div class="col-sm-8 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          Learn about collaboration on hungryhead
+        </h1>
+        <%= link_to('Click here', collaboration_path, class: 'main-button fs-13 bold') %>
+      </div>
+    </section>
+
+  </div>
+<% end %>
+<%= render partial: 'globals/footer' %>
+
