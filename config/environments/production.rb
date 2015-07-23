@@ -13,8 +13,10 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :dalli_store,  ENV["MEMCACHE_SERVER"],
-                     { :namespace => "hh_production", compress: true, :pool_size => 25  }
+  config.cache_store = :readthis_store, ENV.fetch('REDIS_URL'), {
+    compress: true,
+    compression_threshold: 2.kilobytes
+  }
   config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"],
                      { :namespace => "hh_production", compress: true, :pool_size => 25  }
 

@@ -239,6 +239,7 @@ gem 'figaro'
 
 #caching system
 gem  'dalli'
+gem 'readthis'
 
 #Realtime
 gem 'pusher'
