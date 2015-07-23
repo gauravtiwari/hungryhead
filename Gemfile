@@ -137,10 +137,6 @@ gem 'passenger'
 #Browser gem
 gem 'browser'
 
-#Adding identity cache for model caching
-gem 'identity_cache'
-gem 'cityhash'        # optional, for faster hashing (C-Ruby only)
-
 #Autocomplete  + Redis
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
@@ -238,7 +234,6 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 
 #caching system
-gem  'dalli'
 gem 'readthis'
 
 #Realtime

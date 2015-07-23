@@ -88,8 +88,6 @@ GEM
       activerecord (>= 3.2, < 5)
     addressable (2.3.8)
     ambry (0.3.1)
-    ar_transaction_changes (1.0.2)
-      activerecord (>= 3.0, < 5.0)
     arel (6.0.2)
     asset_sync (1.1.0)
       activemodel
@@ -133,7 +131,6 @@ GEM
       mimetype-fu
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    cityhash (0.8.1)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -149,7 +146,6 @@ GEM
     crono (0.9.0)
       activerecord (~> 4.0)
       activesupport (~> 4.0)
-    dalli (2.7.4)
     debug_inspector (0.0.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
@@ -308,9 +304,6 @@ GEM
     http_parser.rb (0.6.0)
     httpclient (2.6.0.1)
     i18n (0.7.0)
-    identity_cache (0.2.5)
-      activerecord (>= 3.2)
-      ar_transaction_changes (~> 1.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.3.1)
@@ -582,11 +575,9 @@ DEPENDENCIES
   bullet
   carrierwave
   carrierwave-mimetype-fu
-  cityhash
   coffee-rails
   connection_pool
   crono
-  dalli
   devise
   devise_invitable
   devise_uid
@@ -610,7 +601,6 @@ DEPENDENCIES
   honeypot-captcha
   html-pipeline
   htmlcompressor
-  identity_cache
   jbuilder
   jquery-atwho-rails
   jquery-ui-rails
