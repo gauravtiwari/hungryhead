@@ -1,10 +1,25 @@
+require 'render_anywhere'
+
 class CreateNotificationCacheService
+
+  include RenderAnywhere
 
   def initialize(activity)
     @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
     @actor = activity.owner
     @object = activity.trackable
     @target = activity.recipient
+  end
+
+  def activity
+    {
+      id: @activity.id,
+      verb: @activity.verb,
+      activity_id: find_activity_id,
+      type: @activity.class.to_s.downcase,
+      html: build_html,
+      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
+    }
   end
 
   def create
@@ -26,6 +41,21 @@ class CreateNotificationCacheService
   end
 
   protected
+
+  def build_html
+    root ||= "#{@activity.class.to_s.downcase.pluralize}"
+    path ||= @activity.key.to_s.gsub('.', '/')
+    partial_path =  select_path path, root
+    render :partial => partial_path, locals: {activity: @activity}
+  end
+
+  def find_activity_id
+    if @activity.class.to_s == "Notification"
+      return @activity.parent_id
+    else
+      return @activity.uuid
+    end
+  end
 
   def is_school?
     @activity.owner_type == "School"
@@ -68,14 +98,14 @@ class CreateNotificationCacheService
     recipient_user.ticker.add(@activity.id, score_key)
     #Increment counter
     recipient_user.notifications_counter.increment
-    SendNotificationService.new(recipient_user, @activity).user_notification if recipient_user != @activity.owner
-    SendNotificationService.new(recipient_user, @activity).friend_notification if recipient_user != @activity.owner
+    SendNotificationService.new(recipient_user, build_html).user_notification if recipient_user != @activity.owner
+    SendNotificationService.new(recipient_user, build_html).friend_notification if recipient_user != @activity.owner
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
   def add_activity_to_idea(idea)
     idea.ticker.add(@activity.id, score_key)
-    SendNotificationService.new(idea, @activity).idea_notification
+    SendNotificationService.new(idea, build_html).idea_notification
   end
 
   #This is for user profile page to show latest personal activities
@@ -87,7 +117,7 @@ class CreateNotificationCacheService
     @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter)
-      SendNotificationService.new(commenter, @activity).user_notification
+      SendNotificationService.new(commenter, build_html).user_notification
     end
   end
 
@@ -102,8 +132,13 @@ class CreateNotificationCacheService
   def add_activity_to_followers
     followers.each do |follower|
       add_activity_to_friends_ticker(follower)
-      SendNotificationService.new(follower, @activity).user_notification
+      SendNotificationService.new(follower, build_html).user_notification
     end
+  end
+
+  #Get path for notifications or activities
+  def select_path path, root
+    [root, path].map(&:to_s).join('/')
   end
 
   #generate redis key
