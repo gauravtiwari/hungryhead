@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render json: Oj.dump({
-          list: User.latest_listing.map{|object| send("user_json", object)},
+          list: User.latest_listing,
           type: 'Latest People'
         }, mode: :compat)}
     end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: User.popular_20.map{|object| send("user_json", object)},
+      list: User.popular_20,
       type: 'Popular People'
       }, mode: :compat) }
     end
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: User.trending_20.map{|object| send("user_json", object)},
+      list: User.trending_20,
       type: 'Trending People'
       }, mode: :compat) }
     end
@@ -213,18 +213,6 @@ class UsersController < ApplicationController
     else
       raise ActionController::RoutingError.new('Not Found')
     end
-  end
-
-  #User JSON
-  def user_json(user)
-    {
-      id: user.uid,
-      name: user.name,
-      name_badge: user.name_badge,
-      avatar: user.get_avatar,
-      url: profile_path(user),
-      description: user.mini_bio
-    }
   end
 
   # Use callbacks to share common setup or constraints between actions.

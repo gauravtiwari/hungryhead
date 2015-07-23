@@ -109,6 +109,16 @@ class Idea < ActiveRecord::Base
     feedbacks.order(created_at: :desc)
   end
 
+  def card_json
+    {
+      id: idea.uuid,
+      name: idea.name,
+      name_badge: idea.name_badge,
+      url: idea_path(idea),
+      description: idea.high_concept_pitch
+    }
+  end
+
   def get_investments
     investments.order(created_at: :desc)
   end

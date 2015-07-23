@@ -9,17 +9,11 @@ class CreateUserNotificationService
   def create
     publish_user #publish user
     increment_counters #update counters
-    follow_school if @user.school_id.present?
   end
 
   def publish_user
     @user.published!
     @user.save
-  end
-
-  def follow_school
-    @follow = @user.followings.new(followable: @user.school)
-    @follow.save!
   end
 
   def increment_counters
@@ -38,21 +32,9 @@ class CreateUserNotificationService
     #Send notification to listing
     Pusher.trigger_async("users-channel",
       "new_user",
-      { data: user_json(@user) }.to_json
+      { data: @user.card_json }.to_json
     )
 
-  end
-
-  #User JSON
-  def user_json(user)
-    {
-      id: user.uid,
-      name: user.name,
-      name_badge: user.name_badge,
-      avatar: user.get_avatar,
-      url: profile_card_path(user),
-      description: user.mini_bio
-    }
   end
 
 end

@@ -27,7 +27,7 @@ class PublishIdeaJob < ActiveJob::Base
       #Pusher notification for new idea
       Pusher.trigger_async("ideas-channel",
         "new_idea",
-        {data: idea_json(@idea)}.to_json
+        {data: @idea.card_json }.to_json
       )
 
       Idea.trending.remrangebyrank(0, -20)
@@ -43,17 +43,6 @@ class PublishIdeaJob < ActiveJob::Base
         #IdeaMailer.new_idea(@idea, @user, f).deliver_later if f.idea_notifications && f.idea_notifications == true
       end
     end
-  end
-
-  #Idea JSON
-  def idea_json(idea)
-    {
-      id: idea.id,
-      name: idea.name,
-      name_badge: idea.name_badge,
-      url: idea_path(idea),
-      description: idea.high_concept_pitch
-    }
   end
 
 end

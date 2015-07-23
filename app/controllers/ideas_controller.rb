@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: Idea.latest_listing.map{|object| send("idea_json", object)},
+      list: Idea.latest_listing,
       type: 'Latest Ideas'
     }, mode: :compat) }
     end
@@ -49,7 +49,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: Idea.popular_20.map{|object| send("idea_json", object)},
+      list: Idea.popular_20,
       type: 'Popular Ideas',
     }, mode: :compat) }
     end
@@ -61,7 +61,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: Idea.trending_20.map{|object| send("idea_json", object)},
+      list: Idea.trending_20,
       type: 'Trending Ideas'
     }, mode: :compat) }
     end
@@ -192,17 +192,6 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
-  end
-
-  #Idea JSON
-  def idea_json(idea)
-    {
-      id: idea.uuid,
-      name: idea.name,
-      name_badge: idea.name_badge,
-      url: idea_path(idea),
-      description: idea.high_concept_pitch
-    }
   end
 
   # WhiteListed Params
