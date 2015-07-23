@@ -14,11 +14,9 @@ class CreateNotificationCacheService
   def activity
     {
       id: @activity.id,
-      verb: @activity.verb,
+      actor: options_for_actor(@actor),
       activity_id: find_activity_id,
-      type: @activity.class.to_s.downcase,
-      html: build_html,
-      created_at: "#{@activity.created_at.to_formatted_s(:iso8601)}"
+      html: build_html
     }
   end
 
@@ -134,6 +132,18 @@ class CreateNotificationCacheService
       add_activity_to_friends_ticker(follower)
       SendNotificationService.new(follower, build_html).user_notification
     end
+  end
+
+  def options_for_actor(target)
+    avatar = @activity.owner.get_avatar if @activity.owner.avatar_present?
+    actor_name_badge = @activity.owner.name_badge
+    {
+      url: profile_path(target),
+      actor_name_badge: actor_name_badge,
+      actor_avatar: avatar,
+      actor_name: target.name
+    }
+
   end
 
   #Get path for notifications or activities
