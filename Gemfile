@@ -234,7 +234,7 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 
 #caching system
-gem 'readthis'
+gem  'dalli'
 
 #Realtime
 gem 'pusher'

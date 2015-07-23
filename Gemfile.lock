@@ -146,6 +146,7 @@ GEM
     crono (0.9.0)
       activerecord (~> 4.0)
       activesupport (~> 4.0)
+    dalli (2.7.4)
     debug_inspector (0.0.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
@@ -294,7 +295,6 @@ GEM
     groupdate (2.4.0)
       activesupport (>= 3)
     hashie (3.4.2)
-    hiredis (0.6.0)
     hitimes (1.2.2)
     honeypot-captcha (0.0.3)
     html-pipeline (2.0)
@@ -459,10 +459,6 @@ GEM
       execjs
       rails (>= 3.2)
       tilt
-    readthis (0.6.2)
-      connection_pool (~> 2.1)
-      hiredis (~> 0.5)
-      redis (~> 3.0)
     redcarpet (3.3.2)
     redis (3.2.1)
     redis-namespace (1.5.2)
@@ -578,6 +574,7 @@ DEPENDENCIES
   coffee-rails
   connection_pool
   crono
+  dalli
   devise
   devise_invitable
   devise_uid
@@ -655,7 +652,6 @@ DEPENDENCIES
   rails4-autocomplete
   rb-fsevent (>= 0.9.1)
   react-rails
-  readthis
   redis
   redis-namespace
   redis-objects
