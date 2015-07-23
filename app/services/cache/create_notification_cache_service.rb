@@ -41,7 +41,7 @@ class CreateNotificationCacheService
   protected
 
   def build_html
-    root ||= "#{@activity.class.to_s.downcase.pluralize}"
+    root ||= "notifications"
     path ||= @activity.key.to_s.gsub('.', '/')
     partial_path =  select_path path, root
     render :partial => partial_path, locals: {activity: @activity}

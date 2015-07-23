@@ -26,7 +26,6 @@ var LatestFeedCommentItem = React.createClass({
             <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
               {placeholder}
             </div>
-            <strong className="inline p-r-5 text-black">{actor}</strong>
             <div className="inline" dangerouslySetInnerHTML={{__html: this.props.item.html}}>
             </div>
           </span>
