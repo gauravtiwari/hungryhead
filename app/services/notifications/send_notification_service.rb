@@ -5,11 +5,18 @@ class SendNotificationService
     @activity = activity
   end
 
+  def build_html
+    root ||= "#{@activity.class.to_s.pluralize}"
+    path ||= @activity.key.to_s.gsub('.', '/')
+    partial_path =  select_path path, root
+    render :partial => partial_path, locals: {activity: @activity}
+  end
+
   def user_notification
     Pusher.trigger_async("private-user-#{@recipient.uid}",
       "new_ticker_item",
       {
-        data:   @activity
+        data:   build_html
       }.to_json
     )
     #Send counters updates
@@ -45,6 +52,12 @@ class SendNotificationService
         data:   @recipient.unread_notifications
       }.to_json
     )
+  end
+
+  private
+
+  def select_path path, root
+    [root, path].map(&:to_s).join('/')
   end
 
 end

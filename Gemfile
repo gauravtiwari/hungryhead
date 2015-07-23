@@ -73,6 +73,8 @@ gem 'activerecord-import'
 gem 'spring',        group: :development
 gem 'sprockets'
 #API
+#Render anywhere
+gem 'render_anywhere', :require => false
 
 #Nprogress
 gem 'nprogress-rails'

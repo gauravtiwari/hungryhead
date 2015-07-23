@@ -475,6 +475,8 @@ GEM
       actionpack (>= 3, < 5)
       redis
     ref (2.0.0)
+    render_anywhere (0.0.11)
+      rails (>= 3.0.7)
     request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
@@ -662,6 +664,7 @@ DEPENDENCIES
   redis-namespace
   redis-objects
   redis-session-store
+  render_anywhere
   responders
   sanitize
   sass
