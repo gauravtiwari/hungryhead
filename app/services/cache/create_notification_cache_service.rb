@@ -8,7 +8,21 @@ class CreateNotificationCacheService
   end
 
   def create
-    add_activity(@actor)
+    #Add activity to user profile
+    add_activity_to_user_profile(@actor) unless is_school?
+
+    #Send notification to recipient
+    add_notification_for_recipient unless @activity.owner == recipient_user
+
+    #Add activity to idea ticker if recipient or trackable is idea
+    add_activity_to_idea(@object) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"
+    add_activity_to_idea(@target) if @activity.recipient_type == "Idea" && @activity.trackable_type != "idea.create"
+
+    #Add activity to followers ticker
+    add_activity_to_followers if followers.any?
+
+    #Add notification to commenters
+    add_activity_to_commenters if @activity.trackable_type == "Comment"
   end
 
   protected
@@ -44,25 +58,6 @@ class CreateNotificationCacheService
       ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end
     User.find(ids)
-  end
-
-  #Add activity to different tickers
-  def add_activity(user)
-    #Add activity to user profile
-    add_activity_to_user_profile(user) unless is_school?
-
-    #Send notification to recipient
-    add_notification_for_recipient unless @activity.owner == recipient_user
-
-    #Add activity to idea ticker if recipient or trackable is idea
-    add_activity_to_idea(@object) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"
-    add_activity_to_idea(@target) if @activity.recipient_type == "Idea" && @activity.trackable_type != "idea.create"
-
-    #Add activity to followers ticker
-    add_activity_to_followers if followers.any?
-
-    #Add notification to commenters
-    add_activity_to_commenters if @activity.trackable_type == "Comment"
   end
 
   #add activity to recipient notifications
