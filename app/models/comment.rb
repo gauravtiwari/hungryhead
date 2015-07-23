@@ -22,8 +22,6 @@ class Comment < ActiveRecord::Base
   #Model Associations
   belongs_to :user
   belongs_to :commentable, :polymorphic => true, touch: true
-  cache_belongs_to :user
-  cache_belongs_to :commentable
 
   #Model Scopes
   default_scope -> { order('created_at DESC') }

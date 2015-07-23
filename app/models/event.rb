@@ -33,11 +33,6 @@ class Event < ActiveRecord::Base
   has_many :event_attendees
   has_many :event_invites
 
-  cache_has_many :event_attendees, embed: true
-  cache_has_many :event_invites, embed: true
-  cache_index :slug
-  cache_index :owner_id, :owner_type
-
   def attending?(user)
     attendees_ids.include?(user.id.to_s)
   end

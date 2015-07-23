@@ -7,7 +7,6 @@ class Activity < ActiveRecord::Base
   include Feedable
 
   after_commit :cache_activity_to_redis, :delete_older_notifications, on: :create
-  cache_index :uuid
 
   #Redis cache ids
   sorted_set :popular, global: true
