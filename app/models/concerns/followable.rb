@@ -8,7 +8,7 @@ module Followable
 
   #users that self follows
   def get_followers
-    User.fetch_multi(followers_ids.members)
+    User.find(followers_ids.members)
   end
 
   # does the user follow self

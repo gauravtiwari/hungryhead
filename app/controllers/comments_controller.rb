@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def index
-    @commentable = params[:commentable_type].constantize.fetch_by_uuid(params[:id])
+    @commentable = params[:commentable_type].constantize.find_by_uuid(params[:id])
     @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.fetch(params[:id])
+    @comment = Comment.find(params[:id])
     authorize @comment
     #destory record and dependencies
     DestroyRecordJob.perform_later(@comment)

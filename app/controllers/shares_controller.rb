@@ -8,16 +8,16 @@ class SharesController < ApplicationController
   # GET /shares/new
   def new
     @share = Share.new
-    @owner = params[owner].constantize.fetch(owner_id)
+    @owner = params[owner].constantize.find(owner_id)
   end
 
   # GET /shares/1/edit
   def edit
-    @owner = params[owner].constantize.fetch(owner_id)
+    @owner = params[owner].constantize.find(owner_id)
   end
 
   def create
-    @owner = params[owner].constantize.fetch(owner_id)
+    @owner = params[owner].constantize.find(owner_id)
     @share = CreateShareService.new(share_params, owner).create
     if @share.save
       render :show, status: :created

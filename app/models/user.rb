@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-  include IdentityCache
   acts_as_copy_target
 
   #External modules
@@ -52,19 +51,6 @@ class User < ActiveRecord::Base
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
-
-  cache_has_many :ideas, embed: true
-  cache_belongs_to :school
-
-  cache_index :slug, :unique => true
-  cache_index :state, :school_id
-  cache_index :role, :school_id
-  cache_index :email, :school_id
-  cache_index :state
-  cache_index :role
-  cache_index :email
-  cache_index :uid
-  cache_index :school_id
 
   #Callbacks
   before_create :add_fullname, if: :name_not_present?

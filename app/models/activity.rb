@@ -1,6 +1,5 @@
 class Activity < ActiveRecord::Base
 
-  include IdentityCache
   #redis objects
   include Redis::Objects
 
@@ -22,7 +21,7 @@ class Activity < ActiveRecord::Base
   end
 
   def self.popular_stories
-    includes([:trackable, :owner]).fetch_multi(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
+    includes([:trackable, :owner]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp

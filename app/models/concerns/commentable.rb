@@ -4,15 +4,14 @@ module Commentable
 
   included do
     has_many :comments, as: :commentable, :dependent => :destroy
-    cache_has_many :comments, inverse_name: :commentable, embed: true
   end
 
   def root_comments
-    fetch_comments.select{|c| c.parent_id == nil }.sort { |x,y| y.created_at <=> x.created_at }
+    comments.where(parent_id: nil).order(created_at: :desc)
   end
 
   def comment_threads
-    fetch_comments.sort{ |x,y| y.created_at <=> x.created_at }
+    comments.order(created_at: :desc)
   end
 
   def commented?(user)
@@ -20,7 +19,7 @@ module Commentable
   end
 
   def get_commenters
-    User.fetch_multi(commenters_ids)
+    User.find(commenters_ids)
   end
 
   def commenter

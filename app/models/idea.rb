@@ -1,6 +1,5 @@
 class Idea < ActiveRecord::Base
 
-  include IdentityCache
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
@@ -67,18 +66,6 @@ class Idea < ActiveRecord::Base
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 
-  #Model caching
-  cache_has_many :idea_messages, embed: true
-  cache_has_many :team_invites, embed: true
-  cache_belongs_to :user
-
-  #Cache indexes
-  cache_index :slug, :unique => true
-  cache_index :status
-  cache_index :privacy
-  cache_index :uuid, :unique => true
-  cache_index :school_id
-
   #Includes modules
   has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch,
     :high_concept_pitch, :video, :video_html, :market, :problems,
@@ -119,15 +106,15 @@ class Idea < ActiveRecord::Base
   end
 
   def get_published_feedbacks
-    fetch_feedbacks.sort { |x,y| y.created_at <=> x.created_at }
+    feedbacks.order(created_at: :desc)
   end
 
   def get_investments
-    fetch_investments.sort { |x,y| y.created_at <=> x.created_at }
+    investments.order(created_at: :desc)
   end
 
   def get_idea_messages
-    fetch_idea_messages.sort { |x,y| y.created_at <=> x.created_at }
+    idea_messages.order(created_at: :desc)
   end
 
   def founder?(current_user)
@@ -170,9 +157,9 @@ class Idea < ActiveRecord::Base
     team_invites_ids.include?(user.id.to_s)
   end
 
-  def fetch_team
+  def get_team
     ids = team_ids.push(user_id.to_s)
-    User.fetch_multi(ids)
+    User.find(ids)
   end
 
   def add_fund

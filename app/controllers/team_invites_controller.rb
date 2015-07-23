@@ -11,7 +11,7 @@ class TeamInvitesController < ApplicationController
   def create
     invited = []
     params[:team_invite][:invitees].split(",").each do |user_id|
-      user = User.fetch(user_id)
+      user = User.find(user_id)
       if @idea.in_team?(user) || @idea.invited?(user)
         skip_authorization
       else
@@ -111,7 +111,7 @@ class TeamInvitesController < ApplicationController
   end
 
   def set_props
-    @idea = Idea.fetch_by_slug(params[:idea_id])
+    @idea = Idea.find(params[:idea_id])
   end
 
   def user_not_authorized

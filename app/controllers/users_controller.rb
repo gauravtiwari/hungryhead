@@ -170,7 +170,7 @@ class UsersController < ApplicationController
   end
 
   def people_you_may_know
-    @users = User.fetch_multi(current_user.people_you_may_know).paginate(:page => params[:page], :per_page => 9)
+    @users = User.find(current_user.people_you_may_know).paginate(:page => params[:page], :per_page => 9)
     respond_to do |format|
       format.json {render :index}
     end
@@ -184,9 +184,9 @@ class UsersController < ApplicationController
 
   def activities
     authorize @user
-    @activities = @user.fetch_activities
-    .select{|a| a.published == true}
-    .sort { |x,y| y.created_at <=> x.created_at }
+    @activities = @user.activities
+    .where(published: true)
+    .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 1)
     @next_page_url = profile_activities_path(page: @activities.next_page)
     respond_to do |format|
@@ -197,7 +197,7 @@ class UsersController < ApplicationController
 
   def activity
     authorize @user
-    @activity = @user.fetch_activities.fetch(params[:id])
+    @activity = @user.activities.find(params[:id])
     respond_to do |format|
       format.js
       format.html
@@ -230,7 +230,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.fetch_by_slug(id)
+    @user = User.find(id)
     @badges = @user.badges.group_by(&:level)
   end
 

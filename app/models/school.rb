@@ -1,8 +1,5 @@
 class School < ActiveRecord::Base
 
-	#Model caching
-	include IdentityCache
-
 	#redis objects
 	include Redis::Objects
 
@@ -20,18 +17,6 @@ class School < ActiveRecord::Base
 	has_many :users, -> { where(state: 1) }, class_name: 'User'
 	has_many :school_admins
 	belongs_to :user, class_name: 'User'
-
-	#Cache into memcache
-	cache_has_many :students, embed: true
-	cache_has_many :users, embed: true
-	cache_has_many :faculties, embed: true
-	cache_has_many :ideas, embed: true
-	cache_has_many :school_admins
-	cache_belongs_to :user
-
-	#Cache index for fetching school
-	cache_index :slug, :unique => true
-	cache_index :uuid, :unique => true
 
 	#Tagging for locations
 	acts_as_taggable_on :locations
@@ -61,11 +46,11 @@ class School < ActiveRecord::Base
 	end
 
 	def get_published_faculties
-		fetch_faculties.sort { |x,y| y.created_at <=> x.created_at }
+		faculties.order(created_at: :desc)
 	end
 
 	def get_published_users
-		fetch_users.sort { |x,y| y.created_at <=> x.created_at }
+		users.order(created_at: :desc)
 	end
 
 	def get_avatar
@@ -77,15 +62,15 @@ class School < ActiveRecord::Base
 	end
 
 	def get_published_ideas
-		fetch_ideas.sort { |x,y| y.created_at <=> x.created_at }
+		ideas.order(created_at: :desc)
 	end
 
 	def get_published_events
-		fetch_events.sort { |x,y| y.created_at <=> x.created_at }
+		events.order(created_at: :desc)
 	end
 
 	def get_published_students
-		fetch_students.sort { |x,y| y.created_at <=> x.created_at }
+		students.order(created_at: :desc)
 	end
 
 	#Callbacks hooks

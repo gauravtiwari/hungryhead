@@ -11,7 +11,7 @@ module Votable
   end
 
   def get_voters
-    User.fetch_multi(voters_ids.values)
+    User.find(voters_ids.values)
   end
 
 end

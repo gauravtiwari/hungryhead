@@ -15,7 +15,7 @@
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
-    <% User.fetch_multi(current_user.people_you_may_know).take(5).each do |user| %>
+    <% User.find(current_user.people_you_may_know).take(5).each do |user| %>
         <li class="inline">
         <%= link_to(profile_path(user), data: {toggle: "tooltip", container: "body"}, title: "#{user.name}", class: 'inline') do %>
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">

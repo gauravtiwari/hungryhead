@@ -1,6 +1,5 @@
 class Share < ActiveRecord::Base
 
-  include IdentityCache
   #redis objects
   include Redis::Objects
   #redis caching

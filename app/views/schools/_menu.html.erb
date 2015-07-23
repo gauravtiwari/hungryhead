@@ -15,7 +15,7 @@
 	</ul>
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
-			<% if current_user == @school.fetch_user %>
+			<% if current_user == @school.user %>
 	     <div>
 			  <%= link_to(profile_dashboard_path(@school), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
 			  	<span class="fa fa-pencil"></span> Edit profile

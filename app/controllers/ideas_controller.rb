@@ -126,7 +126,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/team
   def team
-    @team = @idea.fetch_team.paginate(:page => params[:page], :per_page => 10)
+    @team = @idea.get_team.paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.json
@@ -189,7 +189,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.fetch_by_slug(params[:id])
+    @idea = Idea.find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end

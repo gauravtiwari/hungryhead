@@ -1,6 +1,5 @@
 class Investment < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   #Counters for redis
@@ -12,9 +11,6 @@ class Investment < ActiveRecord::Base
   #Associations
   belongs_to :user, touch: true
   belongs_to :idea, touch: true
-  cache_belongs_to :user
-  cache_belongs_to :idea
-  cache_index :uuid, unique: true
 
   #Includes concerns
   include Commentable

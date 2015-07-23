@@ -1,6 +1,5 @@
 class Comment < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   #Redis counters and ids cache

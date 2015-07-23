@@ -49,7 +49,7 @@ class CreateNotificationCacheService
     else
       ids = @actor.followers_ids.members - [recipient_user.id.to_s]
     end
-    User.fetch_multi(ids)
+    User.find(ids)
   end
 
   #Add activity to different tickers
@@ -94,7 +94,7 @@ class CreateNotificationCacheService
 
   def add_activity_to_commenters(activity_item)
     @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
-    User.fetch_multi(@ids).each do |commenter|
+    User.find(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter, activity_item)
       SendNotificationService.new(commenter, activity).user_notification
     end

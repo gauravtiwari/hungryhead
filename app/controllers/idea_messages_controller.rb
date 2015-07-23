@@ -44,7 +44,7 @@ class IdeaMessagesController < ApplicationController
 
   #Set common parameters between actions
   def set_idea
-    @idea = Idea.fetch_by_slug(params[:idea_id])
+    @idea = Idea.find(params[:idea_id])
   end
 
   #White-listed attributes

@@ -1,6 +1,5 @@
 class Event < ActiveRecord::Base
 
-  include IdentityCache
   #included modules
   include Redis::Objects
 

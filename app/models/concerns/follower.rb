@@ -13,12 +13,12 @@ module Follower
 
   # users that follow self
   def get_followings
-    User.fetch_multi(followings_ids.members)
+    User.find(followings_ids.members)
   end
 
   # users who follow and are being followed by self
   def friends
-    User.fetch_multi(followers_ids.intersection(followings_ids))
+    User.find(followers_ids.intersection(followings_ids))
   end
 
   def is_friend?(user)

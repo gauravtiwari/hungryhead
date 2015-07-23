@@ -1,6 +1,5 @@
 class Feedback < ActiveRecord::Base
 
-  include IdentityCache
   include Redis::Objects
 
   #Gamification for feedback

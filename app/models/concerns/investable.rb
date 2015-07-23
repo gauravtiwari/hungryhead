@@ -15,7 +15,7 @@ module Investable
   end
 
   def find_investors
-    User.fetch_multi(investors_ids.values)
+    User.find(investors_ids.values)
   end
 
 end

@@ -12,7 +12,7 @@ class InvestmentsController < ApplicationController
   # GET /investments
   # GET /investments.json
   def index
-    @team  = User.fetch_multi(@idea.team)
+    @team  = User.find(@idea.team)
     current_user = current_user
     authorize @idea
     @investments = @idea.get_investments.paginate(:page => params[:page], :per_page => 10)
@@ -21,7 +21,7 @@ class InvestmentsController < ApplicationController
   # GET /investments/1
   # GET /investments/1.json
   def show
-    @team  = User.fetch_multi(@idea.team)
+    @team  = User.find(@idea.team)
     authorize @idea
   end
 
@@ -48,12 +48,12 @@ class InvestmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_investment
-      @idea = Idea.fetch_by_slug(params[:idea_id])
-      @investment = Investment.fetch(params[:id])
+      @idea = Idea.find(params[:idea_id])
+      @investment = Investment.find(params[:id])
     end
 
     def set_props
-      @idea = Idea.fetch_by_slug(params[:idea_id])
+      @idea = Idea.find(params[:idea_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

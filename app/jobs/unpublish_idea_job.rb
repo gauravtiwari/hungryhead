@@ -3,9 +3,9 @@ class UnpublishIdeaJob < ActiveJob::Base
   def perform(idea_id)
    ActiveRecord::Base.connection_pool.with_connection do
     #Fetch everything fresh
-    @idea = Idea.fetch(idea_id)
-    @user = User.fetch(@idea.user_id)
-    @school = School.fetch(@idea.school_id)
+    @idea = Idea.find(idea_id)
+    @user = User.find(@idea.user_id)
+    @school = School.find(@idea.school_id)
 
   	Activity.where(trackable_id: @idea).find_each do |activity|
        if activity && activity.published?
@@ -47,7 +47,7 @@ class UnpublishIdeaJob < ActiveJob::Base
   #Get all followers followed by actor
   def find_followers(activity)
     followers_ids = activity.owner.followers_ids.members
-    User.fetch_multi(followers_ids)
+    User.find(followers_ids)
   end
 
 end

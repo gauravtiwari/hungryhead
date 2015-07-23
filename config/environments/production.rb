@@ -17,8 +17,6 @@ Rails.application.configure do
     compress: true,
     compression_threshold: 2.kilobytes
   }
-  config.identity_cache_store = :dalli_store, ENV["MEMCACHE_SERVER"],
-                     { :namespace => "hh_production", compress: true, :pool_size => 25  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.

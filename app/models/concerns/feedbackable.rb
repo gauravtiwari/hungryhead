@@ -4,7 +4,6 @@ module Feedbackable
 
   included do
     has_many :feedbacks, dependent: :destroy
-    cache_has_many :feedbacks, embed: true
   end
 
   def feedbacked?(user)
@@ -12,7 +11,7 @@ module Feedbackable
   end
 
   def find_feedbackers
-    User.fetch_multi(feedbackers_ids.values)
+    User.find(feedbackers_ids.values)
   end
 
 end
