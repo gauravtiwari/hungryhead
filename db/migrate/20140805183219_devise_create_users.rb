@@ -35,17 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cached_subject_list
       t.string :cached_hobby_list
 
-      #Cache counters
-      t.integer :ideas_count
-      t.integer :feedbacks_count
-      t.integer :followers_count
-      t.integer :followings_count
-      t.integer :comments_count
-      t.integer :investments_count
-      t.integer :votes_count
-      t.integer :impressions_count
-
-      #Boolean fields
       t.boolean :verified, default: false
       t.boolean :admin, default: false
 

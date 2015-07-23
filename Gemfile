@@ -95,9 +95,6 @@ gem 'sanitize'
 gem 'gemoji'
 gem 'auto_html'
 
-#Counter Cache
-gem 'counter_culture'
-
 #Deployment
 gem 'foreman'
 

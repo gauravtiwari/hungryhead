@@ -19,11 +19,6 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :end_time
       t.float  :latitude, null: false, default: 0.0
       t.float  :longitude, null: false, default: 0.0
-
-      #Counters
-      t.integer :event_attendees_count
-      t.integer :event_invites_count
-
       t.timestamps null: false
     end
 

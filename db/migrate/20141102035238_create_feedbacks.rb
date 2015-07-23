@@ -12,11 +12,6 @@ class CreateFeedbacks < ActiveRecord::Migration
       t.references :idea, :null => false
       t.references :user, :null => false
 
-      #Counters
-      t.integer :votes_count
-      t.integer :comments_count
-      t.integer :shares_count
-
       t.string :cached_category_list
 
       t.integer :status, default: 0, null: false

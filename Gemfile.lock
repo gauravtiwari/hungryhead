@@ -87,9 +87,6 @@ GEM
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     addressable (2.3.8)
-    after_commit_action (1.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
     ambry (0.3.1)
     arel (6.0.2)
     asset_sync (1.1.0)
@@ -145,10 +142,6 @@ GEM
     commonjs (0.2.7)
     connection_pool (2.2.0)
     cookiejar (0.3.2)
-    counter_culture (0.1.33)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      after_commit_action (~> 1.0.0)
     crass (1.0.2)
     crono (0.9.0)
       activerecord (~> 4.0)
@@ -582,7 +575,6 @@ DEPENDENCIES
   carrierwave-mimetype-fu
   coffee-rails
   connection_pool
-  counter_culture
   crono
   devise
   devise_invitable

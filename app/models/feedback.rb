@@ -8,6 +8,7 @@ class Feedback < ActiveRecord::Base
   #redis counters
   counter :votes_counter
   counter :comments_counter
+  counter :views_counter
   counter :shares_counter
 
   #redis list
