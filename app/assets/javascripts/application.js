@@ -44,7 +44,6 @@
 //= require jquery.validate
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
-//= require eventsource-polyfill/dist/eventsource
 //= require showdown
 //= require nprogress
 //= require nprogress-ajax

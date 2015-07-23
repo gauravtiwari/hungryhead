@@ -8,7 +8,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
-  gem 'rails-assets-eventsource-polyfill'
   gem 'rails-assets-jquery-bez'
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'

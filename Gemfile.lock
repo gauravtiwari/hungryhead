@@ -414,7 +414,6 @@ GEM
     rails-assets-classie (1.0.1)
     rails-assets-eventEmitter (4.2.11)
     rails-assets-eventie (1.0.6)
-    rails-assets-eventsource-polyfill (0.9.7)
     rails-assets-fastclick (1.0.6)
     rails-assets-font-awesome (4.3.0)
     rails-assets-hammerjs (2.0.4)
@@ -636,7 +635,6 @@ DEPENDENCIES
   rails-assets-bootstrap-tokenfield!
   rails-assets-classie!
   rails-assets-eventEmitter!
-  rails-assets-eventsource-polyfill!
   rails-assets-fastclick!
   rails-assets-font-awesome!
   rails-assets-hammerjs!
