@@ -501,6 +501,42 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 
 --
+-- Name: idea_components; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE idea_components (
+    id integer NOT NULL,
+    title character varying,
+    help_text character varying,
+    body text,
+    idea_id integer,
+    privacy integer,
+    "position" integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: idea_components_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE idea_components_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: idea_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE idea_components_id_seq OWNED BY idea_components.id;
+
+
+--
 -- Name: idea_messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1865,6 +1901,13 @@ ALTER TABLE ONLY hobbies ALTER COLUMN id SET DEFAULT nextval('hobbies_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY idea_components ALTER COLUMN id SET DEFAULT nextval('idea_components_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY idea_messages ALTER COLUMN id SET DEFAULT nextval('idea_messages_id_seq'::regclass);
 
 
@@ -2193,6 +2236,14 @@ ALTER TABLE ONLY help_categories
 
 ALTER TABLE ONLY hobbies
     ADD CONSTRAINT hobbies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idea_components_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY idea_components
+    ADD CONSTRAINT idea_components_pkey PRIMARY KEY (id);
 
 
 --
@@ -2752,6 +2803,34 @@ CREATE UNIQUE INDEX index_help_categories_on_slug ON help_categories USING btree
 --
 
 CREATE UNIQUE INDEX index_hobbies_on_slug ON hobbies USING btree (slug);
+
+
+--
+-- Name: index_idea_components_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_idea_id ON idea_components USING btree (idea_id);
+
+
+--
+-- Name: index_idea_components_on_idea_id_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_idea_id_and_privacy ON idea_components USING btree (idea_id, privacy);
+
+
+--
+-- Name: index_idea_components_on_position; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_position ON idea_components USING btree ("position");
+
+
+--
+-- Name: index_idea_components_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_privacy ON idea_components USING btree (privacy);
 
 
 --
@@ -3665,6 +3744,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140805183225');
 INSERT INTO schema_migrations (version) VALUES ('20140805184420');
 
 INSERT INTO schema_migrations (version) VALUES ('20140812190804');
+
+INSERT INTO schema_migrations (version) VALUES ('20140812190810');
 
 INSERT INTO schema_migrations (version) VALUES ('20140814084456');
 

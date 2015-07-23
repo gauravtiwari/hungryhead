@@ -46,8 +46,6 @@ gem 'uglifier'
 
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
-#Group date
-gem 'groupdate'
 
 #Showdown
 gem 'showdown-rails'
@@ -59,15 +57,11 @@ gem 'merit'
 gem 'help', path: "vendor/engines/help"
 gem 'site_feedback', path: "vendor/engines/site_feedback"
 
-
 #Cron jobs
 gem 'crono'
 
 #Cache for jbuilder
 gem 'jbuilder'
-
-#Bulk import
-gem 'activerecord-import'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
@@ -171,6 +165,7 @@ gem 'react-rails'
 #Parse JSON
 gem 'json'
 
+#Show diffs
 gem 'diffy'
 
 #JS routes
@@ -256,10 +251,12 @@ group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
 end
+
 gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'activerecord-colored_log_subscriber'
   gem 'bullet'
   gem 'binding_of_caller'
   gem 'rb-fsevent', '>= 0.9.1'
