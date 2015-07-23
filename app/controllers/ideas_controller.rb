@@ -37,7 +37,7 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: Oj.dump({
-      list: Idea.latest_listing,
+      list: Idea.latest_20,
       type: 'Latest Ideas'
     }, mode: :compat) }
     end

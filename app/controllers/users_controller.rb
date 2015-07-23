@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.json {render json: Oj.dump({
-          list: User.latest_listing,
+          list: User.latest_20,
           type: 'Latest People'
         }, mode: :compat)}
     end

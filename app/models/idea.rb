@@ -111,11 +111,11 @@ class Idea < ActiveRecord::Base
 
   def card_json
     {
-      id: idea.uuid,
-      name: idea.name,
-      name_badge: idea.name_badge,
-      url: idea_path(idea),
-      description: idea.high_concept_pitch
+      id: uuid,
+      name: name,
+      name_badge: name_badge,
+      url: idea_path(self),
+      description: high_concept_pitch
     }
   end
 

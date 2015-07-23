@@ -214,12 +214,12 @@ class User < ActiveRecord::Base
 
   def card_json
     {
-      id: user.uid,
-      name: user.name,
-      name_badge: user.name_badge,
-      avatar: user.get_avatar,
-      url: profile_card_path(user),
-      description: user.mini_bio
+      id: uid,
+      name: name,
+      name_badge: name_badge,
+      avatar: get_avatar,
+      url: profile_card_path(self),
+      description: mini_bio
     }
   end
 

@@ -22,7 +22,7 @@ var LatestUsersItem = React.createClass({
       </div>
     }
 
-    var html_id = "idea_" + this.props.item.id;
+    var html_id = "people_" + this.props.item.id;
 
     return (
       <li id={html_id}>
