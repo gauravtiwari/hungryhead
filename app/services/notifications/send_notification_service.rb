@@ -27,7 +27,7 @@ class SendNotificationService
     Pusher.trigger_async("private-user-#{@recipient.uid}",
       "new_notifications_count",
       {
-        data:   @recipient.unread_notifications
+        data:   @recipient.notifications_counter.value
       }.to_json
     )
   end
@@ -53,7 +53,7 @@ class SendNotificationService
     Pusher.trigger_async("private-user-#{@recipient.uid}",
       "new_notifications_count",
       {
-        data:   @recipient.unread_notifications
+        data:   @recipient.notifications_counter.value
       }.to_json
     )
   end

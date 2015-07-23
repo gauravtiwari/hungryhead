@@ -45,21 +45,7 @@ var LatestFeed = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        if(item.verb === "invested") {
-          elements.push(<LatestFeedInvestmentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "followed") {
-          elements.push(<LatestFeedFollowItem key={Math.random()} item={item} />)
-        } else if(item.verb === "feedbacked") {
-          elements.push(<LatestFeedFeedbackItem key={Math.random()} item={item} />)
-        } else if(item.verb === "pitched"){
-          elements.push(<LatestFeedIdeaItem key={Math.random()} item={item} />)
-        } else if(item.verb === "commented"){
-          elements.push(<LatestFeedCommentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "voted"){
-          elements.push(<LatestFeedVoteItem key={Math.random()} item={item} />)
-        } else if(item.verb === "mentioned"){
-          elements.push(<LatestFeedMentionItem key={Math.random()} item={item} />)
-        }
+        elements.push(<LatestFeedItem key={Math.random()} item={item} />)
       });
       return elements;
   },
