@@ -1,4 +1,8 @@
+require 'render_anywhere'
+
 class SendNotificationService
+
+  include RenderAnywhere
 
   def initialize(recipient, activity)
     @recipient = recipient
@@ -6,7 +10,7 @@ class SendNotificationService
   end
 
   def build_html
-    root ||= "#{@activity.class.to_s.pluralize}"
+    root ||= "#{@activity.class.to_s.downcase.pluralize}"
     path ||= @activity.key.to_s.gsub('.', '/')
     partial_path =  select_path path, root
     render :partial => partial_path, locals: {activity: @activity}
@@ -32,7 +36,7 @@ class SendNotificationService
     Pusher.trigger_async("idea-feed-#{@recipient.uuid}",
       "new_ticker_item",
       {
-        data:   @activity
+        data:   build_html
       }.to_json
     )
   end
@@ -41,7 +45,7 @@ class SendNotificationService
     Pusher.trigger_async("private-user-#{@recipient.uid}",
       "new_friend_notification_item",
       {
-        data:   @activity
+        data:   build_html
       }.to_json
     )
 

@@ -60,7 +60,6 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
-  after_save :rebuild_notification_cache, if: :cacheable_changed?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
@@ -99,6 +98,9 @@ class User < ActiveRecord::Base
   counter :votes_counter
   counter :ideas_counter
   counter :views_counter
+
+  #Count user notifications
+  counter :notifications_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
@@ -185,10 +187,6 @@ class User < ActiveRecord::Base
 
   def name_badge
     first_name.present? ? first_name.first + last_name.first : add_fullname
-  end
-
-  def unread_notifications
-    friends_notifications.members.select{|m| m[:unread] == true}.count
   end
 
   def firstname
@@ -283,10 +281,6 @@ class User < ActiveRecord::Base
   #Slug attributes for friendly id
   def slug_candidates
     [:username]
-  end
-
-  def rebuild_notification_cache
-    RebuildNotificationsCacheJob.set(wait: 1.minute).perform_later(id)
   end
 
   def soulmate_loader

@@ -203,7 +203,6 @@ gem 'sitemap_generator'
 
 #Background Job processing
 gem 'sidekiq'
-gem 'sidekiq-unique-jobs'
 
 # Image Processing
 gem "mini_magick"

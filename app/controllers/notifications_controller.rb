@@ -22,24 +22,9 @@ class NotificationsController < ApplicationController
     render json: @notifications, status: :ok
   end
 
-  def mark_as_read
-    types = ["Activity", "Notification"]
-    if types.include?(params[:type])
-      @notification = params[:type].constantize.find(params[:id])
-      @notification.mark_as_read!
-      UpdateNotificationCacheService.new(@notification).update
-      @notifications = @user.ticker.revrange(0, 100)
-      .paginate(:page => params[:page], :per_page => 20)
-      render json: {count: 0, status: :ok}
-    else
-      render json: {error: "Entity not recognized", status: :unprocessable_entity}
-    end
-  end
-
   def mark_all_as_read
     UpdateAllActivityJob.perform_later(@user)
-    @notifications = @user.ticker.revrange(0, 100)
-    .paginate(:page => params[:page], :per_page => 20)
+    current_user.notifications_counter.clear
     render json: {count: 0, status: :ok}
   end
 

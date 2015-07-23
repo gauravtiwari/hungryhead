@@ -8,14 +8,14 @@ class UserSavedService
 
   def call
     soulmate_loader
-    flush_cache
+    expire_home_listing if User.latest.revrange(0, 20).include?(@user.id.to_s)
   end
 
   private
 
-  def flush_cache
+  def expire_home_listing
     total = User.latest.revrange(0, 20).inject{|sum,x| sum.to_i + x.to_i }
-    keys = ["#{self.to_s.downcase.pluralize}:trending:#{total}", "#{self.to_s.downcase.pluralize}:popular:#{total}", "#{self.to_s.downcase.pluralize}:latest:#{total}"]
+    keys = ["#{User.to_s.downcase.pluralize}:trending:#{total}", "#{User.to_s.downcase.pluralize}:popular:#{total}", "#{User.to_s.downcase.pluralize}:latest:#{total}"]
     keys.each do |key|
       Rails.cache.delete(key)
     end
