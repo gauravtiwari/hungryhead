@@ -98,9 +98,6 @@ var Plan = React.createClass({
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
-            <div className="m-t-20 idea-review-box">
-              <p className="no-margin">Do you find this problem realistic? <a href="#">Yes</a> | <a href="#">No</a></p>
-            </div>
           </div>
         </div>
     );
