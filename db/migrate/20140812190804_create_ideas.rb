@@ -30,6 +30,15 @@ class CreateIdeas < ActiveRecord::Migration
       t.string :team_ids, array: true, default: "{}"
       t.string :team_invites_ids, array: true, default: "{}"
 
+      #Counters
+      t.integer :investments_count
+      t.integer :feedbacks_count
+      t.integer :followers_count
+      t.integer :impressions_count
+      t.integer :votes_count
+      t.integer :comments_count
+      t.integer :idea_messages_count
+
       t.boolean :looking_for_team, default: false
 
       t.references :school

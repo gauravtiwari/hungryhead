@@ -156,6 +156,7 @@ CREATE TABLE comments (
     parent_id integer,
     lft integer,
     rgt integer,
+    votes_count integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -304,6 +305,8 @@ CREATE TABLE events (
     end_time timestamp without time zone,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
+    event_attendees_count integer,
+    event_invites_count integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -338,6 +341,9 @@ CREATE TABLE feedbacks (
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
+    votes_count integer,
+    comments_count integer,
+    shares_count integer,
     cached_category_list character varying,
     status integer DEFAULT 0 NOT NULL,
     badge integer DEFAULT 0 NOT NULL,
@@ -595,6 +601,13 @@ CREATE TABLE ideas (
     cover character varying,
     team_ids character varying[] DEFAULT '{}'::character varying[],
     team_invites_ids character varying[] DEFAULT '{}'::character varying[],
+    investments_count integer,
+    feedbacks_count integer,
+    followers_count integer,
+    impressions_count integer,
+    votes_count integer,
+    comments_count integer,
+    idea_messages_count integer,
     looking_for_team boolean DEFAULT false,
     school_id integer,
     status integer DEFAULT 0,
@@ -683,6 +696,8 @@ CREATE TABLE investments (
     message character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
+    votes_count integer,
+    comments_count integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1158,79 +1173,6 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE organizations (
-    id integer NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    name character varying NOT NULL,
-    slug character varying NOT NULL,
-    description text,
-    logo character varying,
-    type character varying,
-    cover character varying,
-    media jsonb DEFAULT '{}'::jsonb,
-    data jsonb DEFAULT '{}'::jsonb,
-    cached_location_list character varying,
-    customizations jsonb DEFAULT '{}'::jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE organizations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
-
-
---
--- Name: read_marks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE read_marks (
-    id integer NOT NULL,
-    readable_id integer,
-    readable_type character varying NOT NULL,
-    user_id integer NOT NULL,
-    "timestamp" timestamp without time zone
-);
-
-
---
--- Name: read_marks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE read_marks_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: read_marks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE read_marks_id_seq OWNED BY read_marks.id;
-
-
---
 -- Name: sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1323,6 +1265,9 @@ CREATE TABLE schools (
     twitter_url character varying DEFAULT ''::character varying NOT NULL,
     media jsonb DEFAULT '{}'::jsonb,
     cached_location_list character varying,
+    followers_count integer,
+    users_count integer,
+    ideas_count integer,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1649,6 +1594,14 @@ CREATE TABLE users (
     cached_skill_list character varying,
     cached_subject_list character varying,
     cached_hobby_list character varying,
+    ideas_count integer,
+    feedbacks_count integer,
+    followers_count integer,
+    followings_count integer,
+    comments_count integer,
+    investments_count integer,
+    votes_count integer,
+    impressions_count integer,
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
@@ -2027,20 +1980,6 @@ ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notification
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::regclass);
 
 
@@ -2380,22 +2319,6 @@ ALTER TABLE ONLY merit_scores
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
-
-
---
--- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY organizations
-    ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
-
-
---
--- Name: read_marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY read_marks
-    ADD CONSTRAINT read_marks_pkey PRIMARY KEY (id);
 
 
 --
@@ -3156,48 +3079,6 @@ CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notificat
 
 
 --
--- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_organizations_on_data ON organizations USING gin (data);
-
-
---
--- Name: index_organizations_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_organizations_on_email ON organizations USING btree (email);
-
-
---
--- Name: index_organizations_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (name);
-
-
---
--- Name: index_organizations_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (slug);
-
-
---
--- Name: index_organizations_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
-
-
---
--- Name: index_read_marks_on_user_id_and_readable_type_and_readable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON read_marks USING btree (user_id, readable_type, readable_id);
-
-
---
 -- Name: index_school_admins_on_active; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3789,8 +3670,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141102050834');
 
 INSERT INTO schema_migrations (version) VALUES ('20141122174311');
 
-INSERT INTO schema_migrations (version) VALUES ('20141207174436');
-
 INSERT INTO schema_migrations (version) VALUES ('20141209231249');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122230500');
@@ -3822,8 +3701,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150321215014');
 INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150425121536');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 

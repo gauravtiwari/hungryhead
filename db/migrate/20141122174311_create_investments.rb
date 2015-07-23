@@ -13,6 +13,10 @@ class CreateInvestments < ActiveRecord::Migration
       t.references :user, :null => false
       t.references :idea, :null => false
 
+      #Counters
+      t.integer :votes_count
+      t.integer :comments_count
+
       t.timestamps null: false
 
     end

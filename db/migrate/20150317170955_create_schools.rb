@@ -34,6 +34,11 @@ class CreateSchools < ActiveRecord::Migration
 
       t.string :cached_location_list
 
+      #Counters
+      t.integer :followers_count
+      t.integer :users_count
+      t.integer :ideas_count
+
       t.jsonb :customizations, default: "{}"
 
       t.timestamps null: false

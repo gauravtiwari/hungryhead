@@ -11,6 +11,9 @@ class CreateComments < ActiveRecord::Migration
       t.references :user, :null => false
       t.integer :parent_id, :lft, :rgt
 
+      #Counters
+      t.integer :votes_count
+
       t.timestamps
 
     end
