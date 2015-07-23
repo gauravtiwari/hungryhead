@@ -76,8 +76,8 @@ GEM
       activemodel (= 4.2.3)
       activesupport (= 4.2.3)
       arel (~> 6.0)
-    activerecord-import (0.10.0)
-      activerecord (>= 3.0)
+    activerecord-colored_log_subscriber (0.1.0)
+      activerecord (>= 3.2, < 5.0)
     activesupport (4.2.3)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -291,8 +291,6 @@ GEM
     goldiloader (0.0.9)
       activerecord (>= 3.2, < 4.3)
       activesupport (>= 3.2, < 4.3)
-    groupdate (2.4.0)
-      activesupport (>= 3)
     hashie (3.4.2)
     hiredis (0.6.0)
     hitimes (1.2.2)
@@ -423,7 +421,7 @@ GEM
     rails-assets-jquery-unveil (1.3.0)
     rails-assets-jquery.actual (1.0.16)
       rails-assets-jquery (>= 1.2.3)
-    rails-assets-jquery.scrollbar (0.2.7)
+    rails-assets-jquery.scrollbar (0.2.8)
       rails-assets-jquery (>= 1.7)
     rails-assets-jquery.validate (1.13.0)
       rails-assets-jquery (>= 1.6.4)
@@ -561,7 +559,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-import
+  activerecord-colored_log_subscriber
   acts-as-taggable-on
   asset_sync
   auto_html
@@ -595,7 +593,6 @@ DEPENDENCIES
   github-markdown
   gmaps4rails
   goldiloader
-  groupdate
   hashie
   help!
   honeypot-captcha
