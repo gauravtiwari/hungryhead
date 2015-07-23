@@ -4,6 +4,9 @@ class CreateVotes < ActiveRecord::Migration
     create_table :votes do |t|
       t.references :votable, :polymorphic => true, null: false
       t.integer :voter_id, class_name: 'User', foreign_key: true, null: false
+      t.boolean :vote_flag, default: true
+      t.string :vote_scope
+      t.integer :vote_weight
       t.timestamps null: false
     end
 
