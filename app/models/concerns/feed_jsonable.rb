@@ -38,9 +38,16 @@ module FeedJsonable
 
 
   class RenderingController < RenderAnywhere::RenderingController
-    # include custom modules here, define accessors, etc. For example:
     attr_accessor :current_user
     helper_method :current_user
+
+    def current_user
+      User.current
+    end
+  end
+
+  def rendering_controller
+    @rendering_controller ||= self.class.const_get("RenderingController").new
   end
 
 end

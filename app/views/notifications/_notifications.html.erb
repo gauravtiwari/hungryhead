@@ -1,3 +1,0 @@
-<%= cache(["beta", current_user, @notifications]) do %>
-  <%= react_component('LatestFeed', {user_id: current_user.uid, notifications: @notifications.map{|n| n.json_blob }, next_page: @notifications.next_page, channel_event: "new_ticker_item"}.to_json) %>
-<% end %>

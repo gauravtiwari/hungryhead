@@ -19,8 +19,13 @@
   <% unless browser.mobile? %>
     <div class="col-md-3 col-sm-4 no-padding p-r-15">
       <div class="sidebar auto-height sticky white-bg box-shadow">
-        <%= render partial: 'notifications/notifications', collection: @notifications %>
-        <%= react_component('LatestUsers', {path: latest_users_path}) %>
+        <%= cache(["beta", current_user, @notifications]) do %>
+          <%= react_component('LatestFeed', {user_id: current_user.uid, notifications: @notifications.map{|n| n.json_blob }, next_page: @notifications.next_page, channel_event: "new_ticker_item"}.to_json) %>
+        <% end %>
+        <%= react_component('LatestUsers', {users: Oj.dump({
+          list: User.latest_20,
+          type: 'Latest People'
+        }, mode: :compat)} ) %>
       </div>
     </div>
   <% end %>

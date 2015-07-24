@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   acts_as_copy_target
+  extend OrderAsSpecified
 
   #External modules
   include ActiveModel::Validations
@@ -144,6 +145,14 @@ class User < ActiveRecord::Base
 
   def can_score?
     true
+  end
+
+  def self.current
+    Thread.current[:user]
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
   end
 
   def after_password_reset; end

@@ -73,6 +73,9 @@ gem 'render_anywhere', :require => false
 #Nprogress
 gem 'nprogress-rails'
 
+#Fetch records in order
+gem 'order_as_specified'
+
 #Mail form
 gem 'mail_form'
 

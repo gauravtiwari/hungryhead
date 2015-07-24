@@ -2,32 +2,32 @@
 var LatestUsers = React.createClass({
 
   getInitialState: function() {
+    var data = JSON.parse(this.props.users)
     return {
-      list: [],
-      type: null,
-      current_path: this.props.path,
-      loading: true,
+      list: data.list,
+      type: data.type,
+      current_path: undefined,
+      loading: false,
       done: false
     }
   },
 
   componentDidMount: function() {
     if(this.isMounted()) {
-      this.fetchList();
-        var users_channel = pusher.subscribe("users-channel");
-        if(users_channel) {
-          users_channel.bind('new_user', function(data){
-            var new_item = [data.data]
-            var newState = React.addons.update(this.state, {
-                list : {
-                  $unshift : new_item
-                }
-            });
-            this.setState(newState);
-            $("#user_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
-            $("#user_"+data.data.id).addClass('animated fadeInDown');
-          }.bind(this));
-        }
+      var users_channel = pusher.subscribe("users-channel");
+      if(users_channel) {
+        users_channel.bind('new_user', function(data){
+          var new_item = [data.data]
+          var newState = React.addons.update(this.state, {
+              list : {
+                $unshift : new_item
+              }
+          });
+          this.setState(newState);
+          $("#user_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          $("#user_"+data.data.id).addClass('animated fadeInDown');
+        }.bind(this));
+      }
     }
   },
 

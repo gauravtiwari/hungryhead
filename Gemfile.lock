@@ -354,6 +354,8 @@ GEM
       nokogiri
     nprogress-rails (0.1.6.7)
     oj (2.12.10)
+    order_as_specified (0.1.0)
+      activerecord (~> 4.0)
     orm_adapter (0.5.0)
     paper_trail (4.0.0.rc2)
       activerecord (>= 3.0, < 6.0)
@@ -612,6 +614,7 @@ DEPENDENCIES
   nokogiri
   nprogress-rails
   oj
+  order_as_specified
   paper_trail (~> 4.0.0.rc1)
   passenger
   pg

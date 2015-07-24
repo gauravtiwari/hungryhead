@@ -19,7 +19,13 @@ class ApplicationController < ActionController::Base
   #Device specific templates
   before_action :set_device_type
 
+  before_filter :set_current_user, if: :user_signed_in?
+
   protected
+
+  def set_current_user
+    User.current = current_user
+  end
 
   def authenticate_basic
     if Rails.env.production?
