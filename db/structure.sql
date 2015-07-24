@@ -85,6 +85,7 @@ CREATE TABLE activities (
     parameters jsonb DEFAULT '{}'::jsonb,
     uuid uuid DEFAULT uuid_generate_v4(),
     published boolean DEFAULT true,
+    is_notification boolean DEFAULT false,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1118,46 +1119,6 @@ ALTER SEQUENCE merit_scores_id_seq OWNED BY merit_scores.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE notifications (
-    id integer NOT NULL,
-    trackable_id integer NOT NULL,
-    trackable_type character varying NOT NULL,
-    owner_id integer NOT NULL,
-    owner_type character varying NOT NULL,
-    parent_id uuid,
-    key character varying DEFAULT ''::character varying NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
-    published boolean DEFAULT true,
-    recipient_id integer NOT NULL,
-    recipient_type character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE notifications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
-
-
---
 -- Name: sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1947,13 +1908,6 @@ ALTER TABLE ONLY merit_scores ALTER COLUMN id SET DEFAULT nextval('merit_scores_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::regclass);
 
 
@@ -2288,14 +2242,6 @@ ALTER TABLE ONLY merit_scores
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY notifications
-    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
-
-
---
 -- Name: sashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2413,13 +2359,6 @@ ALTER TABLE ONLY versions
 
 ALTER TABLE ONLY votes
     ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_activities_on_owner_id_and_owner_type_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_owner_id_and_owner_type_and_published ON activities USING btree (owner_id, owner_type, published);
 
 
 --
@@ -3018,41 +2957,6 @@ CREATE INDEX index_mentions_on_user_id ON mentions USING btree (user_id);
 
 
 --
--- Name: index_notifications_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
-
-
---
--- Name: index_notifications_on_owner_id_and_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_owner_id_and_published ON notifications USING btree (owner_id, published);
-
-
---
--- Name: index_notifications_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_published ON notifications USING btree (published) WHERE (published IS TRUE);
-
-
---
--- Name: index_notifications_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_recipient_id_and_recipient_type ON notifications USING btree (recipient_id, recipient_type);
-
-
---
--- Name: index_notifications_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
-
-
---
 -- Name: index_school_admins_on_active; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3452,10 +3356,17 @@ CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
 
 
 --
+-- Name: owner_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX owner_published_activities ON activities USING btree (owner_id, owner_type, published, is_notification);
+
+
+--
 -- Name: recipient_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX recipient_published_activities ON activities USING btree (recipient_id, recipient_type, published);
+CREATE INDEX recipient_published_activities ON activities USING btree (recipient_id, recipient_type, published, is_notification);
 
 
 --
@@ -3491,13 +3402,6 @@ CREATE UNIQUE INDEX unique_follows_index ON follows USING btree (followable_id, 
 --
 
 CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionable_id, impressionable_type, user_id);
-
-
---
--- Name: unique_notification_per_owner; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX unique_notification_per_owner ON notifications USING btree (owner_id, owner_type, trackable_id, trackable_type, key);
 
 
 --
@@ -3613,8 +3517,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140817173661');
 INSERT INTO schema_migrations (version) VALUES ('20140817173662');
 
 INSERT INTO schema_migrations (version) VALUES ('20140825003938');
-
-INSERT INTO schema_migrations (version) VALUES ('20140825003939');
 
 INSERT INTO schema_migrations (version) VALUES ('20140830232833');
 
