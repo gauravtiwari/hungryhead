@@ -17,7 +17,7 @@ class Activity < ActiveRecord::Base
   end
 
   def self.latest_stories
-    where(published: true).includes([:trackable, :owner]).order(id: :desc)
+    where(published: true, is_notification: false).includes([:trackable, :owner]).order(id: :desc)
   end
 
   def self.popular_stories

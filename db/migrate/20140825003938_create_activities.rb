@@ -19,16 +19,18 @@ class CreateActivities < ActiveRecord::Migration
 
       t.boolean :published, default: true
 
+      t.boolean :is_notification, default: false
+
       t.belongs_to :recipient, :polymorphic => true, null: false
 
       t.timestamps null: false
     end
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
-    add_index :activities, [:owner_id, :owner_type, :published], algorithm: :concurrently
+    add_index :activities, [:owner_id, :owner_type, :published, :is_notification], algorithm: :concurrently
     add_index :activities, [:owner_id, :owner_type, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_owner'
     add_index :activities, :uuid, algorithm: :concurrently
-    add_index :activities, [:recipient_id, :recipient_type, :published], name: 'recipient_published_activities', algorithm: :concurrently
+    add_index :activities, [:recipient_id, :recipient_type, :published, :is_notification], name: 'recipient_published_activities', algorithm: :concurrently
   end
 
   # Drop table

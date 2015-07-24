@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_action :set_user
 
   def index
-    @notifications = @user.ticker.revrange(0, 100)
+    @notifications = Activity.find(@user.ticker.revrange(0, 100)).map{|activity| activity.json_blob }
     .paginate(:page => params[:page], :per_page => 20)
     render json: @notifications, status: :ok
   end
