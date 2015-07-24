@@ -19,7 +19,7 @@
   <% unless browser.mobile? %>
     <div class="col-md-3 col-sm-4 no-padding p-r-15">
       <div class="sidebar auto-height sticky white-bg box-shadow">
-        <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
+        <%= render partial: 'notifications/notifications', collection: @notifications %>
         <%= react_component('LatestUsers', {path: latest_users_path}) %>
       </div>
     </div>

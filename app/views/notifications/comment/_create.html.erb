@@ -1,13 +1,13 @@
-<span className="inline">
-  <div className="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
+<span class="inline">
+  <div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
     <% if activity.owner.avatar_present? %>
       <%= activity.owner.get_avatar %>
     <% else %>
-    <span className="placeholder no-padding bold text-white">
+    <span class="placeholder no-padding bold text-white">
       <%= activity.owner.name_badge %>
     </span>
     <% end %>
   </div>
-  <strong className="inline p-r-5 text-black"><%= activity.owner.name %></strong>
+  <strong class="inline p-r-5 text-black"><%= activity.owner.name %></strong>
   posted a comment on <%= activity.recipient_type == 'Idea' ? 'an' + activity.recipient.name : 'a' + activity.recipient_type %>
 </span>

@@ -11,19 +11,19 @@ var SetIntervalMixin = {
     }
 };
 var LatestFeed = React.createClass({
+  var data = this.props.notifications
   getInitialState: function(){
     return {
-      feed: [],
-      next_page: null,
+      feed: this.buildElements(data),
+      next_page: this.props.next_page,
       closed: true,
-      loading: true,
+      loading: false,
       count: null
     };
   },
 
   componentDidMount: function() {
     if(this.isMounted()){
-      this.fetchNotifications();
       if(channel) {
         channel.bind(this.props.channel_event, function(data){
           console.log(data);
@@ -76,17 +76,6 @@ var LatestFeed = React.createClass({
 
   elementInfiniteLoad: function() {
     return;
-  },
-
-
-  fetchNotifications: function(){
-    $.getJSON(this.props.path, function(json, textStatus) {
-      this.setState({
-        feed: this.buildElements(json.items),
-        next_page: json.next_page,
-        loading: false
-    });
-    }.bind(this));
   },
 
   render: function(){
