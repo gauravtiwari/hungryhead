@@ -3,7 +3,10 @@
         <%= render partial: 'sidebar_card' %>
     <% end %>
 
-    <%= react_component('LatestIdeas', {path: latest_ideas_path}) %>
+    <%= react_component('LatestIdeas', {ideas: Oj.dump({
+          list: Idea.latest_20,
+          type: 'Latest Ideas'
+        }, mode: :compat)} ) %>
 
     <% cache(["beta", "people_you_may_know_sidebar", current_user.followings_ids.members.length]) do %>
       <% if current_user.people_you_may_know.length > 3 %>

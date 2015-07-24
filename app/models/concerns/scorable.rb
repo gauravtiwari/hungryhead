@@ -6,17 +6,17 @@ module Scorable
 
     # load top 20 users/ideas/feedbacks
     def popular_20
-      self.find(self.leaderboard.revrange(0, 20)).order_as_specified(id: self.leaderboard.revrange(0, 20)).map{|object| object.card_json }
+      self.where(id: self.leaderboard.revrange(0, 20)).order_as_specified(id: self.leaderboard.revrange(0, 20)).map{|object| object.card_json }
     end
 
     # load trending 20 users/ideas/feedbacks
     def trending_20
-      self.find(self.trending.revrange(0, 20)).order_as_specified(id: self.trending.revrange(0, 20)).map{|object| object.card_json }
+      self.where(id: self.trending.revrange(0, 20)).order_as_specified(id: self.trending.revrange(0, 20)).map{|object| object.card_json }
     end
 
     # load latest 20 users/ideas/feedbacks
     def latest_20
-      self.find(self.latest.revrange(0, 20)).order_as_specified(id: self.latest.revrange(0, 20)).map{|object| object.card_json }
+      self.where(id: self.latest.revrange(0, 20)).order_as_specified(id: self.latest.revrange(0, 20)).map{|object| object.card_json }
     end
 
   end

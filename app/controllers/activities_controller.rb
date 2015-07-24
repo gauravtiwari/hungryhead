@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
       @user.update_attributes(feed_preferences: params[:type])
     end
     @activities = Activity.send(@user.feed_preferences).paginate(:page => params[:page], :per_page => 10)
-    @notifications = Activity.find(@user.ticker.revrange(0, 100)).order_as_specified(id: @user.ticker.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
+    @notifications = Activity.where(id: @user.ticker.revrange(0, 100)).order_as_specified(id: @user.ticker.revrange(0, 100)).paginate(:page => params[:page], :per_page => 20)
     @next_page_url = root_path(page: @activities.next_page)
   end
 

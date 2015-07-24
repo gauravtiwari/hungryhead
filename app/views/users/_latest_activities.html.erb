@@ -1,3 +1,3 @@
 <div class="box-shadow">
-  <%= react_component('LatestUserActivities', {user_id: @user.uid, activities: @user.latest_activities.revrange(0, 4)}.to_json) %>
+  <%= react_component('LatestUserActivities', {user_id: @user.uid, activities: Activity.where(id: @user.latest_activities.revrange(0, 4)).order_as_specified(id: @user.latest_activities.revrange(0, 4)).map{|a| a.json_blob} }.to_json) %>
 </div>

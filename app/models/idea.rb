@@ -1,5 +1,7 @@
 class Idea < ActiveRecord::Base
 
+  extend OrderAsSpecified
+
   include Rails.application.routes.url_helpers
   #included modules
   include Redis::Objects
@@ -75,6 +77,8 @@ class Idea < ActiveRecord::Base
   store_accessor :fund, :balance
 
   store_accessor :settings, :visible_everyone
+
+  store_accessor :components, {}
 
   store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
   :website

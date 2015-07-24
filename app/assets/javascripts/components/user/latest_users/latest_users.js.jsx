@@ -2,7 +2,7 @@
 var LatestUsers = React.createClass({
 
   getInitialState: function() {
-    var data = JSON.parse(this.props.users)
+    var data = JSON.parse(this.props.users);
     return {
       list: data.list,
       type: data.type,
@@ -63,16 +63,6 @@ var LatestUsers = React.createClass({
         type: json.type,
         loading: false
       });
-    }.bind(this));
-  },
-
-  fetchList: function(){
-    $.getJSON(this.state.current_path, function(json, textStatus) {
-      this.setState({
-        list: json.list,
-        type: json.type,
-        loading: false
-    });
     }.bind(this));
   },
 

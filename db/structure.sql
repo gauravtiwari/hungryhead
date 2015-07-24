@@ -606,6 +606,7 @@ CREATE TABLE ideas (
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
     profile jsonb DEFAULT '{}'::jsonb,
+    components jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
     cached_location_list character varying,
     cached_market_list character varying,

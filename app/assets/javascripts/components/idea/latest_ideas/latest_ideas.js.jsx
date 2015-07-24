@@ -2,17 +2,17 @@
 var LatestIdeas = React.createClass({
 
   getInitialState: function() {
+    var data = JSON.parse(this.props.ideas)
     return {
-      list: [],
-      type: null,
-      current_path: this.props.path,
+      list: data.list,
+      type: data.type,
+      current_path: undefined,
       done: false
     }
   },
 
   componentDidMount: function() {
     if(this.isMounted()) {
-      this.fetchList();
       var ideas_channel = pusher.subscribe("ideas-channel");
       if(ideas_channel) {
         ideas_channel.bind('new_idea', function(data){
@@ -60,17 +60,6 @@ var LatestIdeas = React.createClass({
         type: json.type,
         loading: false
       });
-    }.bind(this));
-  },
-
-  fetchList: function(){
-    this.setState({loading: true});
-    $.getJSON(this.state.current_path, function(json, textStatus) {
-      this.setState({
-        list: json.list,
-        type: json.type,
-        loading: false
-    });
     }.bind(this));
   },
 

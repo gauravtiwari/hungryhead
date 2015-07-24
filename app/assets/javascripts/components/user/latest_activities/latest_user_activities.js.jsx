@@ -31,21 +31,7 @@ var LatestUserActivities = React.createClass({
   render: function(){
 
     var activities = _.map(this.state.activities, function(item){
-      if(item.verb === "invested") {
-        return <LatestUserActivityInvestmentItem key={Math.random()} item={item} />;
-      } else if(item.verb === "followed") {
-        return <LatestUserActivityFollowItem key={Math.random()} item={item} />;
-      } else if(item.verb === "feedbacked") {
-        return <LatestUserActivityFeedbackItem key={Math.random()} item={item} />;
-      } else if(item.verb === "pitched"){
-        return <LatestUserActivityIdeaItem key={Math.random()} item={item} />;
-      } else if(item.verb === "commented"){
-        return <LatestUserActivityCommentItem key={Math.random()} item={item} />;
-      } else if(item.verb === "voted"){
-          return <LatestUserActivityVoteItem key={Math.random()} item={item} />;
-      } else if(item.verb === "mentioned"){
-        return <LatestUserActivityMentionItem key={Math.random()} item={item} />;
-      }
+        return <LatestUserActivityItem key={Math.random()} item={item} />;
     });
 
     if(activities.length > 0) {

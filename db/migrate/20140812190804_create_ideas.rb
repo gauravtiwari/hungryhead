@@ -46,6 +46,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.jsonb :settings, default: "{}"
       t.jsonb  :media, :default => "{}"
       t.jsonb :profile, default: "{}"
+      t.jsonb :components, default: "{}"
 
       t.jsonb :fund, default: "{}"
 
