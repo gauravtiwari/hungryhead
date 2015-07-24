@@ -8,6 +8,6 @@
     </span>
     <% end %>
   </div>
-  <strong class="inline p-r-5 text-black"><%= activity.owner.name %></strong>
-  posted a comment on <%= activity.recipient_type == 'Idea' ? 'an' + activity.recipient.name : 'a' + activity.recipient_type %>
+  <strong class="inline text-black"><%= activity.owner.name %></strong>
+  posted a comment on <%= activity.recipient_type == 'Idea' ? activity.recipient.name : 'a' + activity.recipient_type %>
 </span>

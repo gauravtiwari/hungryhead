@@ -1,3 +1,13 @@
-<strong class="inline p-r-5 text-black">
-<%= activity.owner.name %></strong>
+<div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
+  <% if activity.owner.avatar_present? %>
+    <%= activity.owner.get_avatar %>
+  <% else %>
+  <span class="placeholder no-padding bold text-white">
+    <%= activity.owner.name_badge %>
+  </span>
+  <% end %>
+</div>
+<strong class="inline text-black">
+  <%= activity.owner.name %>
+</strong>
 pitched <%= activity.recipient.name %>

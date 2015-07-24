@@ -36,4 +36,11 @@ module FeedJsonable
     [root, path].map(&:to_s).join('/')
   end
 
+
+  class RenderingController < RenderAnywhere::RenderingController
+    # include custom modules here, define accessors, etc. For example:
+    attr_accessor :current_user
+    helper_method :current_user
+  end
+
 end
