@@ -1,4 +1,3 @@
-var converter = new Showdown.converter();
 var TextWidget = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
@@ -67,7 +66,7 @@ var TextWidget = React.createClass({
     }
 
     if(this.state.content) {
-      var html = converter.makeHtml(this.state.content);
+      var html = marked(this.state.content);
     } else {
       if(this.state.user.is_owner) {
         var html = "<div class='no-content'>Write about yourself. <span>What are you studying? Your interests? Why are you here? etc.</span> </div>";

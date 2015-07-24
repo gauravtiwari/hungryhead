@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var Solutions = React.createClass({
 
   getInitialState: function() {
@@ -69,7 +67,7 @@ var Solutions = React.createClass({
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit solutions</span>;
 
     if(this.props.idea && this.props.idea.solutions) {
-      var html = converter.makeHtml(this.props.idea.solutions);
+      var html = marked(this.props.idea.solutions);
     } else {
       var html = "<div class='no-content text-center fs-22 light'>Describe/List your solution. <span>What is different or unique? </span> </div>";
     }

@@ -1,4 +1,3 @@
-var converter = new Showdown.converter();
 var Market = React.createClass({
 
   getInitialState: function() {
@@ -66,7 +65,7 @@ var Market = React.createClass({
 
     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit market</span>;
     if(this.props.idea && this.props.idea.market) {
-      var html = converter.makeHtml(this.props.idea.market);
+      var html = marked(this.props.idea.market);
       var market_classes = "section-content market";
     } else {
       var html = "<div class='no-content text-center fs-22 light'>Describe the market for your idea. <span>People you are targeting? Estimated numbers? etc.</span> </div>";

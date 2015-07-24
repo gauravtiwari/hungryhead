@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var SetIntervalMixin = {
     componentWillMount: function() {
         this.intervals = [];
@@ -129,7 +127,7 @@ var Comment = React.createClass({
               </span>;
     }
 
-    var html = converter.makeHtml(this.state.comment.comment);
+    var html = marked(this.state.comment.comment);
 
     return (
        <li key={this.props.key} className="comment padding-15 fs-12 p-b-10" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>

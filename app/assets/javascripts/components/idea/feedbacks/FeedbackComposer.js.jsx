@@ -1,6 +1,4 @@
 var ENTER_KEY_CODE = 13;
-var converter = new Showdown.converter();
-
 var FeedbackComposer = React.createClass({
 
   getInitialState: function() {

@@ -44,7 +44,7 @@
 //= require jquery.validate
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
-//= require showdown
+//= require marked
 //= require nprogress
 //= require nprogress-ajax
 //= require autocomplete-rails

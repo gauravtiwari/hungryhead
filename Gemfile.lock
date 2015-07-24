@@ -427,6 +427,7 @@ GEM
       rails-assets-jquery (>= 1.7)
     rails-assets-jquery.validate (1.13.0)
       rails-assets-jquery (>= 1.6.4)
+    rails-assets-marked (0.3.3)
     rails-assets-modernizr (2.8.3)
     rails-assets-momentjs (2.10.3)
     rails-assets-pnotify (2.0.1)
@@ -642,6 +643,7 @@ DEPENDENCIES
   rails-assets-jquery.actual!
   rails-assets-jquery.scrollbar!
   rails-assets-jquery.validate!
+  rails-assets-marked!
   rails-assets-modernizr!
   rails-assets-momentjs!
   rails-assets-pnotify!

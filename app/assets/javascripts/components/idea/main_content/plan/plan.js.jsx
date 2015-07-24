@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var Plan = React.createClass({
 
   getInitialState: function() {
@@ -61,7 +59,7 @@ var Plan = React.createClass({
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit summary</span>;
 
     if(this.props.idea.description) {
-      var html = converter.makeHtml(this.props.idea.description);
+      var html = marked(this.props.idea.description);
     } else {
       var html = "<div class='no-content text-center fs-22 light'>Summarize your idea. <span>What is it you are building?</span> </div>";
     }

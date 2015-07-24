@@ -1,4 +1,3 @@
-var converter = new Showdown.converter();
 var BusinessModel = React.createClass({
 
   getInitialState: function() {
@@ -67,7 +66,7 @@ var BusinessModel = React.createClass({
     var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit business model</span>;
 
     if(this.props.idea && this.props.idea.business_model) {
-      var html = converter.makeHtml(this.props.idea.business_model);
+      var html = marked(this.props.idea.business_model);
       var business_model_classes = "section-content business model";
     } else {
       var html = "<div class='no-content text-center fs-22 light'>Describe the business model for your idea. <span>How will you make revenue from your idea? etc.</span> </div>";

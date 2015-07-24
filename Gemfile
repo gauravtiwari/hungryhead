@@ -13,6 +13,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery.actual'
   gem 'rails-assets-jquery.scrollbar'
   gem 'rails-assets-eventEmitter'
+  gem 'rails-assets-marked'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-pusher'
@@ -46,9 +47,6 @@ gem 'uglifier'
 
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
-
-#Showdown
-gem 'showdown-rails'
 
 #Gamification system
 gem 'merit'
