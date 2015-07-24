@@ -127,8 +127,6 @@ var Comment = React.createClass({
               </span>;
     }
 
-    var html = marked(this.state.comment.comment);
-
     return (
        <li key={this.props.key} className="comment padding-15 fs-12 p-b-10" id={html_id} onMouseEnter={this.showPostActions} onMouseLeave={this.hidePostActions}>
          <div className="box-generic">
@@ -140,7 +138,7 @@ var Comment = React.createClass({
           <div className="timeline-top-info" id={html_id}>
             <div className="comment-body">
                 <span>
-                <span dangerouslySetInnerHTML={{__html: html}}></span></span>
+                <span dangerouslySetInnerHTML={{__html: this.state.comment.comment}}></span></span>
                 <div className="timeline-bottom">
                   <ul className="social-actions no-style no-padding m-t-5">
                     <li><Like vote_button={false} css_class="like-link pull-left p-r-10 b-r b-grey b-dashed" voted= {this.state.comment.voted}  vote_url = {this.state.comment.vote_url} votes_count= {this.state.comment.votes_count} /></li>

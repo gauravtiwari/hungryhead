@@ -17,6 +17,16 @@ jQuery(document).ready ->
 	  $.getScript document.location.href
 	  return
 
+	marked.setOptions
+	  renderer: new (marked.Renderer)
+	  gfm: true
+	  tables: true
+	  breaks: false
+	  pedantic: false
+	  sanitize: true
+	  smartLists: true
+	  smartypants: false
+
 	$.validator.addMethod 'lettersonly', ((value, element) ->
 	  @optional(element) or /^[a-z@-_-]+$/i.test(value)
 	), 'Letters only please'

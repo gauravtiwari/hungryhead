@@ -4351,7 +4351,7 @@ body > .pgn-wrapper {
   border-bottom: 0px;
 }
 .modal.fade.fill-in.in {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: transparent;
 }
 .modal.fade.fill-in.in .modal-dialog {
   opacity: 1;
@@ -7976,11 +7976,9 @@ input.list-view-search {
   float: left;
   position: relative;
   border-radius: 4px;
-  border-bottom-right-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border: 1px solid #e1e8ed;
   margin-bottom: 20px;
   width: 300px;
-  border: 1px solid #e6e6e6;
 }
 .card .circle {
   position: absolute;
@@ -8046,16 +8044,6 @@ input.list-view-search {
 }
 .card.share .card-header {
   padding: 15px 15px 12px;
-  border-bottom: 1px solid #daeffd;
-}
-.card.share .card-header:hover {
-  background: #daeffd;
-  cursor: pointer;
-  border-top-right-radius: 2px;
-  border-top-left-radius: 2px;
-}
-.card.share .card-header:hover h6 {
-  opacity: .6;
 }
 .card.share .card-header .user-pic {
   float: left;
