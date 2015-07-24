@@ -12,7 +12,7 @@ class CreateNotificationCacheService
     add_activity_to_user_profile(@actor) unless is_school?
 
     #Send notification to recipient
-    add_notification_for_recipient unless @activity.owner == recipient_user
+    add_notification_for_recipient unless @activity.owner == @activity.recipient_user
 
     #Add activity to idea ticker if recipient or trackable is idea
     add_activity_to_idea(@object) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"
@@ -31,31 +31,14 @@ class CreateNotificationCacheService
     @activity.owner_type == "School"
   end
 
-  #Find recipient user
-  def recipient_user
-    if @activity.recipient_type == "User"
-      @activity.recipient
-    elsif @activity.recipient_type == "Share" && is_school?
-      @activity.recipient.owner.user
-    elsif @activity.recipient_type == "Event" && is_school?
-      @activity.recipient.owner.user
-    elsif @activity.recipient_type == "Share" && !is_school?
-      @activity.recipient.owner
-    elsif @activity.recipient_type == "Event" && !is_school?
-      @activity.recipient.owner
-    else
-      @activity.recipient.user
-    end
-  end
-
   #Get followers for users and ideas
   def followers
     if @activity.recipient_type == "Idea"
-      ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [recipient_user.id.to_s]
+      ids = @actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s]
     elsif @activity.recipient_type == "School"
-      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [recipient_user.id.to_s]
+      ids = @actor.followers_ids.union(@activity.recipient.followers_ids) - [@activity.recipient_user.id.to_s]
     else
-      ids = @actor.followers_ids.members - [recipient_user.id.to_s]
+      ids = @actor.followers_ids.members - [@activity.recipient_user.id.to_s]
     end
     User.find(ids)
   end
@@ -63,13 +46,13 @@ class CreateNotificationCacheService
   #add activity to recipient notifications
   def add_notification_for_recipient
     #add to notifications
-    recipient_user.friends_notifications.add(@activity.id, score_key)
+    @activity.recipient_user.friends_notifications.add(@activity.id, score_key)
     #add to ticker
-    recipient_user.ticker.add(@activity.id, score_key)
+    @activity.recipient_user.ticker.add(@activity.id, score_key)
     #Increment counter
-    recipient_user.notifications_counter.increment
-    SendNotificationService.new(recipient_user, @activity.json_blob).user_notification if recipient_user != @activity.owner
-    SendNotificationService.new(recipient_user, @activity.json_blob).friend_notification if recipient_user != @activity.owner
+    @activity.recipient_user.notifications_counter.increment
+    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.owner
+    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification if @activity.recipient_user != @activity.owner
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
@@ -84,7 +67,7 @@ class CreateNotificationCacheService
   end
 
   def add_activity_to_commenters
-    @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
+    @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter)
       SendNotificationService.new(commenter, @activity.json_blob).user_notification

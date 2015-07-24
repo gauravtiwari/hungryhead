@@ -32,6 +32,19 @@ class Activity < ActiveRecord::Base
     owner.updated_at.try(:utc).try(:to_s, :number)
   end
 
+  #Find recipient user
+  def recipient_user
+    if recipient_type == "User"
+      recipient
+    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type != "School"
+      recipient.owner
+    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type == "School"
+      recipient.owner.user
+    else
+      recipient.user
+    end
+  end
+
   private
 
   def cache_activity_to_redis
