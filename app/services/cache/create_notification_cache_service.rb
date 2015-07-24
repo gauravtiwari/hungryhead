@@ -1,8 +1,4 @@
-require 'render_anywhere'
-
 class CreateNotificationCacheService
-
-  include RenderAnywhere
 
   def initialize(activity)
     @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres

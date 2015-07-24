@@ -7,14 +7,13 @@ class CreateVoteNotificationService
   end
 
   def create
-    if @user.notifications.where(trackable: @vote).empty?
-      @activity = @user.notifications.create!(
+    if @user.activities.where(trackable: @vote).empty?
+      @activity = @user.activities.create!(
         trackable: @vote,
         recipient: @votable,
         parent_id: find_parent_activity,
         verb: 'voted',
-        key: 'vote.create',
-        unread: true
+        key: 'vote.create'
       )
       cache(@activity)
     else

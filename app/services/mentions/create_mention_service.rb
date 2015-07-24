@@ -11,14 +11,13 @@ class CreateMentionService
       mentionable = User.friendly.find_by_username(username.gsub('@', ''))
       if mentionable.present?
         @mention = mentionable.mentions.create!(user: @user, mentioner: @mentioner)
-        if @user.notifications.where(trackable: @mention).empty?
-          @activity = @user.notifications.create!(
+        if @user.activities.where(trackable: @mention).empty?
+          @activity = @user.activities.create!(
             trackable: @mention,
             verb: 'mentioned',
             parent_id: find_parent_activity,
             recipient: mentionable,
-            key: 'mention.create',
-            unread: true
+            key: 'mention.create'
           )
           cache(@activity)
         else

@@ -35,7 +35,7 @@ class Share < ActiveRecord::Base
 
   def delete_activity
     #Delete user feed
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

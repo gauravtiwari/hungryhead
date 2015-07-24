@@ -30,7 +30,7 @@ class Vote < ActiveRecord::Base
 
   #Create activity
   def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def update_counters
@@ -52,7 +52,7 @@ class Vote < ActiveRecord::Base
   #Delete notification before destroying vote
   def delete_notification
     #delete notification if record is destroyed
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
 end

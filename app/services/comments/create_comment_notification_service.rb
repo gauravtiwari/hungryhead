@@ -7,14 +7,13 @@ class CreateCommentNotificationService
 	end
 
 	def create
-    if @user.notifications.where(trackable: @comment).empty?
-      @activity = @user.notifications.create!(
+    if @user.activities.where(trackable: @comment).empty?
+      @activity = @user.activities.create!(
         trackable: @comment,
         recipient: @commentable,
         parent_id: find_parent_activity,
         verb: 'commented',
-        key: 'comment.create',
-        unread: true
+        key: 'comment.create'
       )
 
       #Cache notification to user/followers feed

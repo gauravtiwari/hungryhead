@@ -32,7 +32,7 @@ class Follow < ActiveRecord::Base
 
   #Create activity
   def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   #Add ids to follower and followable cache
@@ -50,7 +50,7 @@ class Follow < ActiveRecord::Base
   end
 
   def delete_notification
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s) unless followable_type == "School"
+    DeleteActivityJob.perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
 
 end

@@ -1,5 +1,8 @@
+require 'render_anywhere'
+
 module FeedJsonable
 
+  include RenderAnywhere
   extend ActiveSupport::Concern
 
   def json_blob

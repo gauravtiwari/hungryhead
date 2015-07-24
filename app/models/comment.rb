@@ -77,7 +77,7 @@ class Comment < ActiveRecord::Base
   private
 
   def create_activity
-    CreateActivityJob.perform_later(id, self.class.to_s) if Notification.where(trackable: self).empty?
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def update_counters
@@ -100,7 +100,7 @@ class Comment < ActiveRecord::Base
 
   def delete_notification
     #Delete activity item from feed
-    DeleteUserNotificationJob.perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
 end
