@@ -103,7 +103,7 @@ var LatestFeed = React.createClass({
       <div className="widget-11-2 panel b-b b-light-grey no-margin">
           <div className="panel-heading bg-light-blue-lightest">
             <div className="panel-title">
-              Latest Feed
+              Latest Activities
             </div>
           </div>
           <div className="panel-body full-border-light no-margin auto-overflow no-padding">

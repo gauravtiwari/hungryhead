@@ -20,7 +20,7 @@
         <%= link_to(profile_path(user), data: {toggle: "tooltip", container: "body"}, title: "#{user.name}", class: 'inline') do %>
             <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
                 <% if user.avatar_present? %>
-                    <%= image_tag(user.get_avatar, :"data-src" => "#{user.get_avatar}", :"data-src-retina" => "#{user.get_avatar)}", width: "35", height: "35") %>
+                <%= image_tag(user.get_avatar, :"data-src" => "#{user.get_avatar}", :"data-src-retina" => "#{user.get_avatar}", width: "35", height: "35") %>
                 <% else %>
                 <span class="placeholder bold fs-12 text-white">
                     <%= user.name_badge %>

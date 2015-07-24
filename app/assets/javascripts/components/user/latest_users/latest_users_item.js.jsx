@@ -26,7 +26,7 @@ var LatestUsersItem = React.createClass({
 
     return (
       <li id={html_id}>
-        <div className="widget-16-header p-b-10">
+        <div className="widget-16-header">
           <span>
             {image}
             <a className="bold small no-margin text-black" href={this.props.item.url}>{this.props.item.name}</a>

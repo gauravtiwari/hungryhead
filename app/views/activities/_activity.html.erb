@@ -3,9 +3,9 @@
   <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-body no-border no-padding bg-white">
-            <% cache(["beta", current_user, @activity]) do %>
-             <%= render_activity(@activity) %>
-            <% end %>
+          <% cache(["beta", current_user, @activity]) do %>
+           <%= render_activity(@activity) %>
+          <% end %>
       </div>
     </div>
 <!-- /.modal-dialog -->

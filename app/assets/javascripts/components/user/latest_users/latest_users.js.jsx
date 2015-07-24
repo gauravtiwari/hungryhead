@@ -79,9 +79,16 @@ var LatestUsers = React.createClass({
       var content = users
     }
 
-    var styles = {
-      maxHeight: '250px',
-      height: '250px'
+    if(this.state.list.length > 4) {
+      var styles = {
+        maxHeight: '250px',
+        height: '250px'
+      }
+    } else {
+      var styles = {
+        maxHeight: '150px',
+        height: '150px'
+      }
     }
 
     return (

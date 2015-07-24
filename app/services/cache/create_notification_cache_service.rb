@@ -77,8 +77,6 @@ class CreateNotificationCacheService
   #add activity to friends ticker
   def add_activity_to_friends_ticker(user)
     user.ticker.add(@activity.id, score_key)
-    #increment notification counter
-    user.notifications_counter.increment
   end
 
   #Add activity to followers ticker

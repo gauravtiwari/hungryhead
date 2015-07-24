@@ -44,23 +44,7 @@ var FriendsNotifications = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        if(item.verb === "invested") {
-          elements.push(<FriendsNotificationInvestmentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "followed") {
-          elements.push(<FriendsNotificationFollowItem key={Math.random()} item={item} />)
-        } else if(item.verb === "feedbacked") {
-          elements.push(<FriendsNotificationFeedbackItem key={Math.random()} item={item} />)
-        } else if(item.verb === "pitched"){
-          elements.push(<FriendsNotificationIdeaItem key={Math.random()} item={item} />)
-        } else if(item.verb === "joined"){
-          elements.push(<FriendsNotificationJoinItem key={Math.random()} item={item} />)
-        } else if(item.verb === "commented"){
-          elements.push(<FriendsNotificationCommentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "voted"){
-          elements.push(<FriendsNotificationVoteItem key={Math.random()} item={item} />)
-        } else if(item.verb === "mentioned"){
-          elements.push(<FriendsNotificationMentionItem key={Math.random()} item={item} />)
-        }
+        elements.push(<FriendsNotificationItem key={Math.random()} item={item} />)
       });
       return elements;
   },

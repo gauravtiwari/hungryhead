@@ -3,8 +3,6 @@ class Activity < ActiveRecord::Base
   extend OrderAsSpecified
   #redis objects
   include Redis::Objects
-
-  include Renderable
   include Feedable
   include FeedJsonable
 
@@ -22,7 +20,7 @@ class Activity < ActiveRecord::Base
   end
 
   def self.popular_stories
-    includes([:trackable, :owner]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
+    where(published: true, is_notification: false).includes([:trackable, :owner]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp

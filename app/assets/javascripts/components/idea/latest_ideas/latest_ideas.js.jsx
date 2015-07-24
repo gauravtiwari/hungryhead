@@ -84,10 +84,17 @@ var LatestIdeas = React.createClass({
       }
     }
 
-    var styles = {
-      maxHeight: '250px',
-      height: '250px'
-    }
+   if(this.state.list.length > 4) {
+     var styles = {
+       maxHeight: '250px',
+       height: '250px'
+     }
+   } else {
+     var styles = {
+       maxHeight: '150px',
+       height: '150px'
+     }
+   }
 
     return (
       <div className="widget-11-2 p-b-10 panel no-border no-margin">

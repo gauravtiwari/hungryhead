@@ -7,8 +7,8 @@ module FeedJsonable
 
   def json_blob
     {
-      id: id,
-      type: self.class.to_s,
+      id: uuid,
+      type: get_type,
       activity_id: find_activity_id,
       html: build_html
     }
@@ -22,6 +22,10 @@ module FeedJsonable
   end
 
   private
+
+  def get_type
+    is_notification? ? 'Notification' : 'Activity'
+  end
 
   def find_activity_id
     if self.class.to_s == "Notification"

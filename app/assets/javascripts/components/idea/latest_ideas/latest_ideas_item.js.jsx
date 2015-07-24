@@ -5,7 +5,7 @@ var LatestIdeasItem = React.createClass({
 
     return (
       <li id={html_id}>
-        <div className="widget-16-header p-b-10">
+        <div className="widget-16-header">
         <div className="thumbnail-wrapper d32 inline circular b-white m-r-5 m-b-5 b-a b-white">
           <span className="placeholder inline bold fs-12 text-white">
             {this.props.item.name_badge}
