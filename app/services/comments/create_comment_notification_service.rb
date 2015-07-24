@@ -13,7 +13,8 @@ class CreateCommentNotificationService
         recipient: @commentable,
         parent_id: find_parent_activity,
         verb: 'commented',
-        key: 'comment.create'
+        key: 'comment.create',
+        is_notification: true
       )
 
       #Cache notification to user/followers feed

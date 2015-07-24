@@ -13,7 +13,8 @@ class CreateVoteNotificationService
         recipient: @votable,
         parent_id: find_parent_activity,
         verb: 'voted',
-        key: 'vote.create'
+        key: 'vote.create',
+        is_notification: true
       )
       cache(@activity)
     else

@@ -12,7 +12,8 @@ class CreateFollowNotificationService
         trackable: @follow,
         verb: 'followed',
         recipient: @followable,
-        key: 'follow.create'
+        key: 'follow.create',
+        is_notification: true
       )
       cache(@activity)
     else

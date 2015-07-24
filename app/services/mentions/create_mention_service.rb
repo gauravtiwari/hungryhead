@@ -17,7 +17,8 @@ class CreateMentionService
             verb: 'mentioned',
             parent_id: find_parent_activity,
             recipient: mentionable,
-            key: 'mention.create'
+            key: 'mention.create',
+            is_notification: true
           )
           cache(@activity)
         else
