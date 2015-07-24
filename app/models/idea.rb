@@ -78,8 +78,6 @@ class Idea < ActiveRecord::Base
 
   store_accessor :settings, :visible_everyone
 
-  store_accessor :components, {}
-
   store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
   :website
 
