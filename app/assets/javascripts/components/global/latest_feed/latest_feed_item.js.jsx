@@ -1,5 +1,5 @@
 
-var LatestFeedCommentItem = React.createClass({
+var LatestFeedItem = React.createClass({
 
   loadActivity: function() {
     $.getScript(Routes.activity_path(this.props.item.activity_id));

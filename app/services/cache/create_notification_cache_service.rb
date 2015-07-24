@@ -11,15 +11,6 @@ class CreateNotificationCacheService
     @target = activity.recipient
   end
 
-  def activity
-    {
-      id: @activity.id,
-      actor: options_for_actor(@actor),
-      activity_id: find_activity_id,
-      html: build_html
-    }
-  end
-
   def create
     #Add activity to user profile
     add_activity_to_user_profile(@actor) unless is_school?
@@ -39,21 +30,6 @@ class CreateNotificationCacheService
   end
 
   protected
-
-  def build_html
-    root ||= "notifications"
-    path ||= @activity.key.to_s.gsub('.', '/')
-    partial_path =  select_path path, root
-    render :partial => partial_path, locals: {activity: @activity}
-  end
-
-  def find_activity_id
-    if @activity.class.to_s == "Notification"
-      return @activity.parent_id
-    else
-      return @activity.uuid
-    end
-  end
 
   def is_school?
     @activity.owner_type == "School"
@@ -91,37 +67,37 @@ class CreateNotificationCacheService
   #add activity to recipient notifications
   def add_notification_for_recipient
     #add to notifications
-    recipient_user.friends_notifications.add(@activity.id, score_key)
+    recipient_user.friends_notifications.add(activity, score_key)
     #add to ticker
-    recipient_user.ticker.add(@activity.id, score_key)
+    recipient_user.ticker.add(activity, score_key)
     #Increment counter
     recipient_user.notifications_counter.increment
-    SendNotificationService.new(recipient_user, build_html).user_notification if recipient_user != @activity.owner
-    SendNotificationService.new(recipient_user, build_html).friend_notification if recipient_user != @activity.owner
+    SendNotificationService.new(recipient_user, @activity.json_blob).user_notification if recipient_user != @activity.owner
+    SendNotificationService.new(recipient_user, @activity.json_blob).friend_notification if recipient_user != @activity.owner
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
   def add_activity_to_idea(idea)
-    idea.ticker.add(@activity.id, score_key)
-    SendNotificationService.new(idea, build_html).idea_notification
+    idea.ticker.add(activity, score_key)
+    SendNotificationService.new(idea, @activity.json_blob).idea_notification
   end
 
   #This is for user profile page to show latest personal activities
   def add_activity_to_user_profile(user)
-    user.latest_activities.add(@activity.id, score_key)
+    user.latest_activities.add(activity, score_key)
   end
 
   def add_activity_to_commenters
     @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter)
-      SendNotificationService.new(commenter, build_html).user_notification
+      SendNotificationService.new(commenter, @activity.json_blob).user_notification
     end
   end
 
   #add activity to friends ticker
   def add_activity_to_friends_ticker(user)
-    user.ticker.add(@activity.id, score_key)
+    user.ticker.add(activity, score_key)
     #increment notification counter
     user.notifications_counter.increment
   end
@@ -130,25 +106,8 @@ class CreateNotificationCacheService
   def add_activity_to_followers
     followers.each do |follower|
       add_activity_to_friends_ticker(follower)
-      SendNotificationService.new(follower, build_html).user_notification
+      SendNotificationService.new(follower, @activity.json_blob).user_notification
     end
-  end
-
-  def options_for_actor(target)
-    avatar = @activity.owner.get_avatar if @activity.owner.avatar_present?
-    actor_name_badge = @activity.owner.name_badge
-    {
-      url: profile_path(target),
-      actor_name_badge: actor_name_badge,
-      actor_avatar: avatar,
-      actor_name: target.name
-    }
-
-  end
-
-  #Get path for notifications or activities
-  def select_path path, root
-    [root, path].map(&:to_s).join('/')
   end
 
   #generate redis key

@@ -5,6 +5,7 @@ class Activity < ActiveRecord::Base
 
   include Renderable
   include Feedable
+  include FeedJsonable
 
   after_commit :cache_activity_to_redis, :delete_older_notifications, on: :create
 
