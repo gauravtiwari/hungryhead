@@ -86,6 +86,7 @@ CREATE TABLE activities (
     uuid uuid DEFAULT uuid_generate_v4(),
     published boolean DEFAULT true,
     is_notification boolean DEFAULT false,
+    parent_id integer,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2360,6 +2361,13 @@ ALTER TABLE ONLY versions
 
 ALTER TABLE ONLY votes
     ADD CONSTRAINT votes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_activities_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_parent_id ON activities USING btree (parent_id);
 
 
 --

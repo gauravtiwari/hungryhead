@@ -33,7 +33,7 @@ class CreateVoteNotificationService
       @activity = Activity.where(trackable: @votable).first
     end
     #Increment parent score
-    Activity.popular.incr(@activity.id, 5) unless @activity.empty?
+    Activity.popular.incr(@activity.id, 5) unless @activity.blank?
     #return uuid
     @activity.uuid
   end

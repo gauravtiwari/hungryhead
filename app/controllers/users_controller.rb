@@ -187,7 +187,7 @@ class UsersController < ApplicationController
     @activities = @user.activities
     .where(published: true)
     .order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 1)
+    .paginate(:page => params[:page], :per_page => 10)
     @next_page_url = profile_activities_path(page: @activities.next_page)
     respond_to do |format|
       format.js {render 'activities/index'}
