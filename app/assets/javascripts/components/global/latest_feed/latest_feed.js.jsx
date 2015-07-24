@@ -11,15 +11,15 @@ var SetIntervalMixin = {
     }
 };
 var LatestFeed = React.createClass({
-  var data = this.props.notifications
   getInitialState: function(){
+    var data = this.props.notifications
     return {
       feed: this.buildElements(data),
       next_page: this.props.next_page,
       closed: true,
       loading: false,
       count: null
-    };
+    }
   },
 
   componentDidMount: function() {
