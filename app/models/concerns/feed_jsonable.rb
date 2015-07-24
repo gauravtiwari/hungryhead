@@ -28,7 +28,7 @@ module FeedJsonable
   end
 
   def find_activity_id
-    if self.class.to_s == "Notification"
+    if is_notification?
       return parent_id
     else
       return uuid

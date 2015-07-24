@@ -86,7 +86,7 @@ CREATE TABLE activities (
     uuid uuid DEFAULT uuid_generate_v4(),
     published boolean DEFAULT true,
     is_notification boolean DEFAULT false,
-    parent_id integer,
+    parent_id uuid,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,

@@ -21,7 +21,7 @@ class CreateActivities < ActiveRecord::Migration
 
       t.boolean :is_notification, default: false
 
-      t.integer :parent_id
+      t.uuid :parent_id
 
       t.belongs_to :recipient, :polymorphic => true, null: false
 
