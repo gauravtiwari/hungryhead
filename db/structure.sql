@@ -615,7 +615,8 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    reviews jsonb DEFAULT '{}'::jsonb
 );
 
 
@@ -3618,4 +3619,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 INSERT INTO schema_migrations (version) VALUES ('20150715172544');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
+
+INSERT INTO schema_migrations (version) VALUES ('20150724215503');
 

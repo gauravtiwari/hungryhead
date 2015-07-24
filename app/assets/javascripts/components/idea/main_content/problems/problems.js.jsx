@@ -90,6 +90,9 @@ var Problems = React.createClass({
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
+            <div className="problem-reviews m-t-30 b-t b-grey p-t-10">
+              Do you find this problem realistic? <a href="" className="label label-info m-r-10 m-l-10">Yes </a> <a href="" className="label label-danger">No </a>
+            </div>
             <ProblemsForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handleProblemsSubmit= {this.handleProblemsSubmit} form={this.props.idea} />
           </div>
         </div>
