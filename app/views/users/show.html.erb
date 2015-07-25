@@ -12,12 +12,6 @@
             <%= render partial: 'menu' %>
         </div>
 
-        <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
-            <div class="cover">
-                <%= render partial: 'cover', locals: {data: data} %>
-            </div>
-        <% end %>
-
         <div class="badges-box clearfix">
 
         <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>

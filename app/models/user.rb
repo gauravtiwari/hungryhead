@@ -108,8 +108,7 @@ class User < ActiveRecord::Base
   #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url,
   :twitter_url, :linkedin_url, :website_url
-  store_accessor :media, :avatar_position, :cover_position, :cover_left,
-  :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
+  store_accessor :media, :avatar_position, :avatar_processing, :avatar_tmp
   store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
@@ -122,7 +121,6 @@ class User < ActiveRecord::Base
 
   #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
-  mount_uploader :cover, CoverUploader
 
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}

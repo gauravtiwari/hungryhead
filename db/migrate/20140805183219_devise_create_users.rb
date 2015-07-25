@@ -15,8 +15,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       t.integer :feed_preferences, :integer, default: 0
 
-      t.string :cover, :default => ""
-
       t.string :slug
 
       t.string :mini_bio, default: ""

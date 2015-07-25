@@ -4,13 +4,6 @@ json.user do
 			json.url @user.get_avatar if @user.avatar_present?
 		end
 
-		json.cover do
-		  json.url  @user.cover.present? ? @user.cover.url(:cover) : "#{root_url}assets/building-ecosystem.png"
-		  json.top @user.cover_position if @user.cover
-		  json.left @user.cover_left if @user.cover
-		  json.has_cover @user.cover.present?
-		end
-
 		json.about_me do
 		  json.content @user.about_me
 		  json.form action: user_path(@user), method: "PUT"
