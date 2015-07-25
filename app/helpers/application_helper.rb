@@ -34,6 +34,49 @@ module ApplicationHelper
     end
   end
 
+  def markdownify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url,
+    :gfm => false
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::MarkdownFilter,
+    HTML::Pipeline::SanitizationFilter,
+    HTML::Pipeline::EmojiFilter,
+    HTML::Pipeline::MentionFilter
+    ], context
+    pipeline.call(content)[:output].to_s.html_safe
+  end
+
+  def linkify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url,
+    :gfm => true
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::MarkdownFilter,
+    HTML::Pipeline::SanitizationFilter,
+    HTML::Pipeline::EmojiFilter,
+    HTML::Pipeline::MentionFilter
+    ], context
+
+    pipeline.call(content)[:output].to_s.html_safe
+  end
+
+  def sanitizify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::SanitizationFilter
+    ], context
+
+    pipeline.call(content)[:output].to_s.html_safe
+  end
+
   def your_name(user, type)
     if user == current_user && type
       "your"

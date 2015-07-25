@@ -134,9 +134,6 @@ class User < ActiveRecord::Base
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname
 
-  #Messaging system
-  acts_as_messageable
-
   #Public methods
   public
 
@@ -160,10 +157,6 @@ class User < ActiveRecord::Base
 
   def joined_within_a_year?
     (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
-  end
-
-  def mailboxer_email(object)
-    email
   end
 
   def balance_available?(amount)

@@ -151,21 +151,6 @@ Rails.application.routes.draw do
   post 'new_school_registeration', to: 'schools#create', as: :school_registeration
 
 
-  #Messaging system
-  resources :conversations, only: [:index, :show, :destroy] do
-    member do
-      post :reply
-      post :restore
-      post :mark_as_read
-    end
-    collection do
-      delete :empty_trash
-      get :recent
-    end
-  end
-
-  resources :messages, only: [:new, :create, :destroy]
-
   resources :badges, only: :show
 
   #Users routes
