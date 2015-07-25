@@ -13,7 +13,7 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :readthis_store, ENV.fetch('REDIS_URL'), {
+  config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
     expires_in: 2.weeks.to_i,
     namespace: 'cache'
   }

@@ -13,7 +13,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
-  config.cache_store = :readthis_store, ENV.fetch('REDIS_URL'), {
+  config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
     expires_in: 2.weeks.to_i,
     namespace: 'cache'
   }
