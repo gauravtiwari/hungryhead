@@ -15,22 +15,23 @@
                     <%= render partial: 'cover', locals: {data: data} %>
                 </div>
                 <div class="badges-box clearfix m-t-10 widgets">
-                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item md-p-r-15">
+                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
                         <%= render partial: 'ideas' %>
                     </div>
+                    <div class="gutter-sizer"></div>
                     <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
                         <%= render partial: 'ideas_contributed' %>
                     </div>
-                    <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
+                    <div class="col-sm-6 no-padding widget-item xs-no-padding visible-sm visible-xs">
                         <%= render partial: 'sidebar', locals: {data: data} %>
                     </div>
-                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item md-p-r-15">
+                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
                         <%= render partial: 'badges' %>
                     </div>
                     <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
                         <%= render partial: 'followers' %>
                     </div>
-                    <div class="col-md-6 col-sm-6 no-padding widget-item md-p-r-15">
+                    <div class="col-md-6 col-sm-6 no-padding widget-item">
                         <%= render partial: 'followings' %>
                     </div>
                 </div>

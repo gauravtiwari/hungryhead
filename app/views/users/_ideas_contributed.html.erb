@@ -36,13 +36,14 @@
             <% end %>
         <% else %>
         <% if @user == current_user %>
-            <div class="text-center fs-16 p-b-40 p-t-15">
-                <%= link_to('Browse', ideas_path, class: ' b-b text-master b-grey p-b-5') %> to contribute into ideas.
+            <div class="text-center fs-22 p-b-40 p-t-15 font-opensans hint-text">
+                <i class="fa fa-search full-width"></i>
+                <%= link_to('Browse', ideas_path, class: ' b-b text-master b-grey p-b-5') %> to contribute
             </div>
        <% else %>
-           <div class="text-center font-opensans  fs-22 p-b-40 p-t-15 hint-text ">
+           <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
             <i class="fa fa-list"></i>
-            <span class="clearfix">0 Ideas Contributed</span>
+            <span class="clearfix">No ideas contributions</span>
            </div>
        <% end %>
     <% end %>

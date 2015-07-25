@@ -109,7 +109,7 @@ class UsersController < ApplicationController
   end
 
   def about_me
-
+    authorize @user
   end
 
   def update

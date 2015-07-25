@@ -16,9 +16,13 @@ jQuery(document).ready ->
 	$(window).on 'popstate', ->
 	  $.getScript document.location.href
 	  return
-
-	$('.widgets').masonry
-	  itemSelector: '.widget-item'
+	if Modernizr.mq('(min-width: 767px)')
+		$('.widgets').masonry
+		  itemSelector: '.widget-item'
+		  columnWidth: '.widget-item',
+		  itemSelector: '.widget-item',
+		  gutter: 15,
+		  percentPosition: true
 
 	marked.setOptions
 	  renderer: new (marked.Renderer)

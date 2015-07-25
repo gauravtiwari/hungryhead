@@ -2,8 +2,10 @@
    <div class="profile-card padding-20  p-t-40 box-shadow bg-solid">
        <div class="container-xs-height">
            <div class="row text-center">
-            <%= link_to(profile_edit_path(@user), class: 'pull-right pointer p-r-20 displayblock text-white', remote: true) do %>
-            <span class="fa fa-pencil"></span> Edit
+            <% if @user == current_user %>
+              <%= link_to(profile_edit_path(@user), class: 'pull-right pointer p-r-20 displayblock text-white', remote: true) do %>
+              <span class="fa fa-pencil"></span> Edit
+              <% end %>
             <% end %>
              <div class="user-profile auto-margin">
                <div class="thumbnail-wrapper d100 circular bordered b-white">

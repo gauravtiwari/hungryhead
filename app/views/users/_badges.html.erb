@@ -1,38 +1,43 @@
-<% if @user.badges.size > 0 %>
 <div class="widget-16 panel no-border box-shadow">
-    <div class="panel-heading m-b-10">
-        <div class="panel-title b-b b-grey p-b-5">
-          <i class="fa fa-shield text-danger"></i> Latest badges
-        </div>
-        <a class="know-more" data-toggle="modal" data-target="#peopleBadgesHelpModal">
-          <i class="fa fa-question-circle pull-right fs-16 text-black"></i>
-        </a>
-    </div>
+  <div class="panel-heading m-b-10">
+      <div class="panel-title b-b b-grey p-b-5">
+        <i class="fa fa-shield text-danger"></i> Latest badges
+      </div>
+      <a class="know-more" data-toggle="modal" data-target="#peopleBadgesHelpModal">
+        <i class="fa fa-question-circle pull-right fs-16 text-black"></i>
+      </a>
+  </div>
 
-    <div class="panel-body">
-        <div class="user-badges">
-            <%  @badges.take(5).each do |id, badge| %>
-                <div class="m-t-10">
-                    <% badge.each do |b| %>
-                        <p class="m-b-10 inline">
-                        <%= link_to(badge_path(b.name), class: "game_badge text-white", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
-                            <i class="fa fa-<%= b.custom_fields[:icon] %> badge-type <%= id %>"></i><%= b.custom_fields[:name] %>
-                        <% end %>
-                        </p>
-                    <% end %>
-                </div>
-            <% end %>
-            <% if @user.badges.size > 5 %>
-                <li>
-                    <div class="thumbnail-wrapper d32 circular b-white">
-                        <div class="bg-master text-center text-white">
-                            <span>+<%= @badges.length - 5 %></span>
-                        </div>
-                    </div>
-                </li>
-            <% end %>
-        </div>
-    </div>
+  <div class="panel-body">
+      <% if @user.badges.size > 0 %>
+      <div class="user-badges">
+          <%  @badges.take(5).each do |id, badge| %>
+              <div class="m-t-10">
+                  <% badge.each do |b| %>
+                      <p class="m-b-10 inline">
+                      <%= link_to(badge_path(b.name), class: "game_badge text-white", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
+                          <i class="fa fa-<%= b.custom_fields[:icon] %> badge-type <%= id %>"></i><%= b.custom_fields[:name] %>
+                      <% end %>
+                      </p>
+                  <% end %>
+              </div>
+          <% end %>
+          <% if @user.badges.size > 5 %>
+              <li>
+                  <div class="thumbnail-wrapper d32 circular b-white">
+                      <div class="bg-master text-center text-white">
+                          <span>+<%= @badges.length - 5 %></span>
+                      </div>
+                  </div>
+              </li>
+          <% end %>
+      </div>
+    <% else %>
+      <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+       <i class="fa fa-list"></i>
+       <span class="clearfix">No badges earned</span>
+      </div>
+  </div>
 </div>
 <% end %>
 

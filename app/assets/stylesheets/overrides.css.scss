@@ -548,6 +548,7 @@ input.error:-webkit-autofill {
   color: #fff;
   padding: 0px 5px;
 }
+.gutter-sizer { width: 1%; }
 .h300 {
   height: 200px;
   max-height: 200px;
@@ -862,6 +863,16 @@ ul.reactions > div {
   }
   .sm-p-r-15 {
     padding-right: 15px!important;
+  }
+}
+@media (max-width: 1800px) and (min-width: 1200px) {
+  .badges-box.widgets .widget-item {
+    width: 49%;
+  }
+}
+@media (max-width: 1200px) and (min-width: 600px) {
+  .badges-box.widgets .widget-item {
+    width: 48.8%;
   }
 }
 @media (max-width: 480px) {

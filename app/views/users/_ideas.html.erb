@@ -4,47 +4,46 @@
             <i class="fa fa-lightbulb-o text-danger"></i> Ideas
         </div>
     </div>
-        <% if @user.ideas.any? %>
-            <% @user.ideas.take(3).each do |idea| %>
-                <% if idea.visible? || idea.user == current_user %>
-                    <div class="widget-16-header p-l-20 p-r-20 p-b-20">
-                        <div class="pull-left">
-                            <h5 class="all-caps bold small inline pull-left no-margin  p-b-5 relative">
-                                <%= link_to(idea.name, idea_path(idea), class: "text-black") %>
-                                <% if !idea.published? %>
-                                    <span class="fa fa-lock inline" data-toggle="tooltip" data-container="body" title="Private Idea"></span>
-                                <% end %>
-                                <% if idea.founder?(@user) %>
-                                  <span class="badge badge-green m-l-10">
-                                    founder
-                                  </span>
-                                <% end %>
+    <% if @user.ideas.any? %>
+        <% @user.ideas.take(3).each do |idea| %>
+            <% if idea.visible? || idea.user == current_user %>
+                <div class="widget-16-header p-l-20 p-r-20 p-b-20">
+                    <div class="pull-left">
+                        <h5 class="all-caps bold small inline pull-left no-margin  p-b-5 relative">
+                            <%= link_to(idea.name, idea_path(idea), class: "text-black") %>
+                            <% if !idea.published? %>
+                                <span class="fa fa-lock inline" data-toggle="tooltip" data-container="body" title="Private Idea"></span>
+                            <% end %>
+                            <% if idea.founder?(@user) %>
+                              <span class="badge badge-green m-l-10">
+                                founder
+                              </span>
+                            <% end %>
 
-                                <% if idea.team_member?(@user) %>
-                                  <span class="badge badge-inverse m-l-10">
-                                    team
-                                  </span>
-                                <% end %>
-                            </h5>
-                            <p class="small no-margin clearfix ">
-                                <%= idea.elevator_pitch %>
-                            </p>
-                        </div>
-                        <div class="clearfix"></div>
+                            <% if idea.team_member?(@user) %>
+                              <span class="badge badge-inverse m-l-10">
+                                team
+                              </span>
+                            <% end %>
+                        </h5>
+                        <p class="small no-margin clearfix ">
+                            <%= idea.elevator_pitch %>
+                        </p>
                     </div>
-                <% end %>
-            <% end %>
-        <% else %>
-        <% if @user == current_user %>
-            <div class="text-center fs-16 p-b-40 p-t-15">
-                <%= link_to('Click', new_idea_path(:intro), class: ' b-b text-master b-grey p-b-5') %> to publish a new idea
-            </div>
-       <% else %>
-           <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text ">
-            <i class="fa fa-list"></i>
-            <span class="clearfix">0 Ideas Published</span>
-           </div>
-       <% end %>
+                    <div class="clearfix"></div>
+                </div>
+            <% else %>
+            <% if @user == current_user %>
+                <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+                    <%= link_to('Click', new_idea_path(:intro), class: 'light b-b text-master b-grey p-b-5') %> to publish a new idea
+                </div>
+           <% else %>
+               <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+                <i class="fa fa-list"></i>
+                <span class="clearfix">No ideas published</span>
+               </div>
+           <% end %>
+         <% end %>
+        <% end %>
     <% end %>
-
 </div>

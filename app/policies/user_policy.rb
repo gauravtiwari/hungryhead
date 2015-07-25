@@ -15,6 +15,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def about_me?
+    show?
+  end
+
   def follow?
     current_user != record
   end
