@@ -1,25 +1,31 @@
 <div class="container p-b-60">
+
   <% data = render(template: 'users/show.json.jbuilder') %>
 
-  <% cache(["user_sidebar", @user, @user == current_user ? "owner" : "guest"]) do %>
-    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4">
-        <%= render partial: 'sidebar', locals: {data: data} %>
+  <% cache(["user_sidebar_desktop_widget", @user, @user == current_user ? "owner" : "guest"]) do %>
+    <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15" id="profile_sidebar">
+      <%= render partial: 'sidebar', locals: {data: data} %>
     </div>
   <% end %>
 
   <div class="col-md-8 col-sm-8">
+
     <div class="profile-nav box-shadow bg-white">
         <%= render partial: 'menu' %>
     </div>
 
-    <div class="activity-feed auto-height m-t-20">
-      <% cache(["beta", current_user, @activity]) do %>
-       <%= render_activity(@activity) %>
-      <% end %>
-    </div>
-  </div>
-</div>
+    <% cache(["user_sidebar_mobile_widget", @user, @user == current_user ? "owner" : "guest"]) do %>
+      <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
+          <%= render partial: 'sidebar', locals: {data: data} %>
+      </div>
+    <% end %>
 
-<% if current_user.is_friend?(@user) %>
-    <%= render partial: 'send_message' %>
-<% end %>
+    <% cache(["user_profile_activity", @user, @activity]) do %>
+      <div class="activity-feed auto-height m-t-20">
+        <%= render_activity(@activity) %>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>

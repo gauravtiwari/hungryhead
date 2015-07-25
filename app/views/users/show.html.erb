@@ -1,56 +1,51 @@
 <div class="container p-b-60">
     <% data = render(template: 'users/show.json.jbuilder') %>
-    <% cache(["user_sidebar_desktop", @user, @user == current_user ? "owner" : "guest"]) do %>
-        <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
+
+    <% cache(["user_sidebar_desktop_widget", @user, @user == current_user ? "owner" : "guest"]) do %>
+        <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
         </div>
     <% end %>
 
     <div class="col-md-8 col-sm-12 xs-no-padding">
+
         <div class="box-shadow bg-light-blue ">
             <%= render partial: 'menu' %>
         </div>
 
-        <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
-            <div class="cover box-shadow">
-                <%= render partial: 'cover', locals: {data: data} %>
+        <% cache(["user_profile", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="profile">
+                <div class="cover box-shadow">
+                    <%= render partial: 'cover', locals: {data: data} %>
+                </div>
+
+                <div class="badges-box clearfix m-t-10 widgets">
+                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item md-p-r-15">
+                        <%= render partial: 'ideas' %>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                        <%= render partial: 'ideas_contributed' %>
+                    </div>
+
+                    <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
+                        <%= render partial: 'sidebar', locals: {data: data} %>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item md-p-r-15">
+                        <%= render partial: 'badges' %>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+                        <%= render partial: 'followers' %>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 no-padding widget-item md-p-r-15">
+                        <%= render partial: 'followings' %>
+                    </div>
+                </div>
             </div>
         <% end %>
-
-        <div class="badges-box clearfix m-t-10 widgets">
-
-            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item md-p-r-15">
-                <%= render partial: 'ideas' %>
-            </div>
-
-            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
-                <%= render partial: 'ideas_contributed' %>
-            </div>
-
-            <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
-                <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
-                    <%= render partial: 'sidebar', locals: {data: data} %>
-                </div>
-            <% end %>
-
-            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item md-p-r-15">
-                <% cache(["user_badges", @user.badges.length]) do %>
-                    <%= render partial: 'badges' %>
-                <% end %>
-            </div>
-
-            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
-                <% cache(["user_followers", @user.followers_counter.value]) do %>
-                    <%= render partial: 'followers' %>
-                <% end %>
-            </div>
-
-            <div class="col-md-6 col-sm-6 no-padding widget-item md-p-r-15">
-                <% cache(["user_followings", @user.followings_counter.value]) do %>
-                    <%= render partial: 'followings' %>
-                <% end %>
-            </div>
-        </div>
     </div>
 </div>
 
