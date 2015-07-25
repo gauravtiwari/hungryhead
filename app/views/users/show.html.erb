@@ -6,14 +6,18 @@
         </div>
     <% end %>
     <div class="col-md-8 col-sm-12 xs-no-padding">
+        <% cache(["user_profile_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="cover box-shadow">
+                <%= render partial: 'cover', locals: {data: data} %>
+            </div>
+        <% end %>
+
         <div class="box-shadow bg-light-blue ">
             <%= render partial: 'menu' %>
         </div>
+
         <% cache(["user_profile", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="profile">
-                <div class="cover box-shadow">
-                    <%= render partial: 'cover', locals: {data: data} %>
-                </div>
                 <div class="badges-box clearfix m-t-10 widgets">
                     <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
                         <%= render partial: 'ideas' %>

@@ -1,16 +1,18 @@
 <% cache(cache_key_for_idea(idea)) do %>
 <li class="user-list clearfix p-t-15 p-b-15">
     <span class="col-xs-height">
-      <% if idea.user.avatar_present? %>
-        <span class="thumbnail-wrapper d48 circular bg-success">
+      <%= link_to(profile_path(idea.user)) do %>
+        <% if idea.user.avatar_present? %>
+          <span class="thumbnail-wrapper d48 circular bg-success">
             <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "34", height: "34") %>
-        </span>
-      <% else %>
-        <div class="thumbnail-wrapper d48 inline circular">
-          <span class="placeholder bold text-white">
-            <%= idea.user.name_badge.upcase %>
           </span>
-        </div>
+        <% else %>
+          <div class="thumbnail-wrapper d48 inline circular">
+            <span class="placeholder bold text-white">
+              <%= idea.user.name_badge.upcase %>
+            </span>
+          </div>
+        <% end %>
       <% end %>
     </span>
     <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
@@ -19,14 +21,19 @@
          <%= idea.name %>
        </a>
      </h5>
-      <span class="inline small-text m-l-10 semi-bold">
-        Pitched by :
-        <%= link_to(profile_path(idea.user)) do %>
-             <%= idea.user.first_name %>
+
+      <p class="fs-14 p-t-5 inline block people-info text-master no-margin">
+        <% if idea.cached_market_list.present? %>
+        <span class="small-text">
+          <% idea.market_list.each do |tag| %>
+            <%= link_to("@#{tag.parameterize}", tag_people_path(tag.parameterize)) %>
+          <% end %>
+        </span>
         <% end %>
-      </span>
+      </p>
+
       <% if idea.founder?(current_user) %>
-        <span class="badge badge-green">
+        <span class="badge m-l-10 badge-green">
           founder
         </span>
       <% end %>
@@ -36,15 +43,6 @@
           team
         </span>
       <% end %>
-      <p class="fs-14 p-t-5 block people-info text-master no-margin">
-        <% if idea.cached_market_list.present? %>
-        <span class="hidden-xs">
-          <% idea.market_list.each do |tag| %>
-            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-          <% end %>
-        </span>
-        <% end %>
-      </p>
       <p class="text-master p-t-5">
         <%= idea.elevator_pitch %>
       </p>

@@ -31,7 +31,6 @@ var IdeaEditForm = React.createClass({
         $(this).autosize();
       });
       this.selectMarkets();
-      this.selectLocations();
     }
   },
 
@@ -85,65 +84,11 @@ var IdeaEditForm = React.createClass({
     })(this));
   },
 
-  selectLocations: function(e){
-    var $locationsSelect = $('#locations_select');
-    var self = this;
-    $locationsSelect.each((function(_this) {
-      return function(i, e) {
-        var select;
-        select = $(e);
-        return $(select).select2({
-          minimumInputLength: 2,
-          placeholder: select.data('placeholder'),
-          tags: true,
-          maximumSelectionSize: 1,
-          ajax: {
-            url: Routes.autocomplete_location_name_locations_path(),
-            dataType: 'json',
-            type: 'GET',
-            cache: true,
-            quietMillis: 50,
-            data: function(term) {
-              return {
-                term: term
-              };
-            },
-            results: function(data) {
-              return {
-                results: $.map(data, function(item) {
-                  return {
-                    text: item.label,
-                    value: item.value,
-                    id: item.id
-                  };
-                })
-              };
-            }
-          },
-          id: function(object) {
-            return object.text;
-          },
-          initSelection: function (element, callback) {
-            var locations = self.props.idea.location.map(function(location){
-              return {id: Math.random(), text: location.name}
-            });
-            callback(locations);
-          }
-        });
-      };
-    })(this));
-  },
-
-
   render: function() {
     var cx = React.addons.classSet;
 
     var markets = this.props.idea.markets.map(function(market){
       return market.name
-    });
-
-    var locations = this.props.idea.locations.map(function(location){
-      return location.name;
     });
 
     var loadingClass = cx({
@@ -176,12 +121,6 @@ var IdeaEditForm = React.createClass({
                                   <label>High concept pitch</label>
                                   <span className="help"> e.g. "Linkedin for musicians"  <span className="text-danger">required</span></span>
                                   <input className="string required form-control" required="required" aria-required="true" type="text" placeholder="Linkedin for musicians" defaultValue={this.props.idea.high_concept_pitch}  name="idea[high_concept_pitch]" id="idea_high_concept_pitch" />
-                              </div>
-
-                              <div className="form-group">
-                                  <label>Location</label>
-                                  <span className="help"> e.g. "London, Manchester"</span>
-                                  <input className="string required form-control" required="required" aria-required="true" type="text" defaultValue={locations} name="idea[location_list]" id="locations_select" />
                               </div>
 
                             </div>

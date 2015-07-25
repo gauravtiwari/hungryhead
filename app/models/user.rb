@@ -219,7 +219,7 @@ class User < ActiveRecord::Base
       name: name,
       name_badge: name_badge,
       avatar: get_avatar,
-      url: profile_card_path(self),
+      url: profile_path(self),
       description: mini_bio
     }
   end
