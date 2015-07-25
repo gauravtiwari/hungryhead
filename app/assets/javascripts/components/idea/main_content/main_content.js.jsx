@@ -29,11 +29,6 @@ var MainContent = React.createClass({
       return (
         <div>
           <Plan idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Problems idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Solutions idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <ValueProposition idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Market idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <BusinessModel idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
         </div>
     )
   }
