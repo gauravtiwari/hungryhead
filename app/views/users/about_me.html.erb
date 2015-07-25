@@ -1,0 +1,36 @@
+<div class="container p-b-60">
+
+    <% data = render(template: 'users/show.json.jbuilder') %>
+    <% cache(["user_sidebar_desktop", @user, @user == current_user ? "owner" : "guest"]) do %>
+        <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
+            <%= render partial: 'sidebar', locals: {data: data} %>
+        </div>
+    <% end %>
+
+    <div class="col-md-8 col-sm-12 xs-no-padding">
+        <div class="box-shadow bg-light-blue">
+            <%= render partial: 'menu' %>
+        </div>
+
+        <div class="badges-box clearfix m-t-10">
+            <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
+                <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
+                    <%= render partial: 'sidebar', locals: {data: data} %>
+                </div>
+            <% end %>
+
+            <div class="col-md-12 col-sm-6 no-padding sm-m-t-15">
+                <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]) do %>
+                    <div class="summary bg-white box-shadow">
+                        <%= react_component("TextWidget", {data: data}) %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if current_user.is_friend?(@user) %>
+    <%= render partial: 'send_message' %>
+<% end %>
+
