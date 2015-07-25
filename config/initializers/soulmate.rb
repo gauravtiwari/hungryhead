@@ -1,1 +1,1 @@
-Soulmate.redis = ReadCache.redis
+Soulmate.redis = Redis::Namespace.new("search_data", :redis => Redis.new(:url => (ENV["SOULMATE_REDIS_URL"])))
