@@ -1,4 +1,4 @@
-class CreateShareNotificationService
+class CreateEventNotificationService
 
   def initialize(event)
     @event = event

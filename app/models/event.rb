@@ -22,6 +22,7 @@ class Event < ActiveRecord::Base
   list :invites_ids
   counter :attendees_counter
   counter :invites_counter
+  counter :comments_counter
 
   #Mount carrierwave
   mount_uploader :cover, CoverUploader
@@ -32,6 +33,9 @@ class Event < ActiveRecord::Base
   belongs_to :owner, polymorphic: true, touch: true
   has_many :event_attendees
   has_many :event_invites
+
+  after_destroy  :delete_activity
+  after_commit :create_activity, on: :create
 
   def attending?(user)
     attendees_ids.include?(user.id.to_s)
@@ -53,6 +57,16 @@ class Event < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
+  end
+
+  def create_activity
+    # Enque activity creation
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+  end
+
+  def delete_activity
+    #Delete activity item from feed
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
 end
