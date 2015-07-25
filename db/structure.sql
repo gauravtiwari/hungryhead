@@ -1515,6 +1515,7 @@ CREATE TABLE users (
     avatar character varying DEFAULT ''::character varying,
     feed_preferences integer DEFAULT 0,
     "integer" integer DEFAULT 0,
+    cover character varying DEFAULT ''::character varying,
     slug character varying,
     mini_bio character varying DEFAULT ''::character varying,
     about_me text DEFAULT ''::text,
