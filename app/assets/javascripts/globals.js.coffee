@@ -17,6 +17,9 @@ jQuery(document).ready ->
 	  $.getScript document.location.href
 	  return
 
+	$('.grid').masonry
+	  itemSelector: '.grid-item'
+
 	marked.setOptions
 	  renderer: new (marked.Renderer)
 	  gfm: true

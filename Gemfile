@@ -9,6 +9,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
   gem 'rails-assets-jquery-bez'
+  gem 'rails-assets-masonry'
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'
   gem 'rails-assets-jquery.scrollbar'

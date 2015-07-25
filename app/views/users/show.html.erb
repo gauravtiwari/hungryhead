@@ -8,40 +8,44 @@
     <% end %>
 
     <div class="col-md-8 col-sm-12 xs-no-padding">
-        <div class="box-shadow bg-light-blue">
+
+        <div class="box-shadow bg-light-blue ">
             <%= render partial: 'menu' %>
         </div>
 
-        <div class="badges-box clearfix m-t-10">
+        <div class="badges-box clearfix m-t-10 widgets">
 
-        <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 p-r-15">
-            <%= render partial: 'ideas' %>
-        </div>
-
-        <div class="col-md-6 col-sm-6 no-padding sm-m-t-15">
-            <%= render partial: 'ideas_contributed' %>
-        </div>
-
-        <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
-            <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
-                <%= render partial: 'sidebar', locals: {data: data} %>
+            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                <%= render partial: 'ideas' %>
             </div>
-        <% end %>
 
-        <div class="col-md-6 col-sm-6 no-padding sm-no-padding md-p-r-15 ">
-            <% cache(["user_badges", @user.badges.length]) do %>
-                <%= render partial: 'badges' %>
-            <% end %>
-            <% cache(["user_followers", @user.followers_counter.value]) do %>
-                <%= render partial: 'followers' %>
-            <% end %>
-        </div>
+            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                <%= render partial: 'ideas_contributed' %>
+            </div>
 
-        <div class="col-md-6 col-sm-6 no-padding">
-            <% cache(["user_followings", @user.followings_counter.value]) do %>
-                <%= render partial: 'followings' %>
+            <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
+                <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
+                    <%= render partial: 'sidebar', locals: {data: data} %>
+                </div>
             <% end %>
-        </div>
+
+            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+                <% cache(["user_badges", @user.badges.length]) do %>
+                    <%= render partial: 'badges' %>
+                <% end %>
+            </div>
+
+            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+                <% cache(["user_followers", @user.followers_counter.value]) do %>
+                    <%= render partial: 'followers' %>
+                <% end %>
+            </div>
+
+            <div class="col-md-6 col-sm-6 no-padding widget-item">
+                <% cache(["user_followings", @user.followings_counter.value]) do %>
+                    <%= render partial: 'followings' %>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>
