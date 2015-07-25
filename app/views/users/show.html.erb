@@ -8,14 +8,19 @@
     <% end %>
 
     <div class="col-md-8 col-sm-12 xs-no-padding">
-
         <div class="box-shadow bg-light-blue ">
             <%= render partial: 'menu' %>
         </div>
 
+        <% cache(["user_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="cover box-shadow">
+                <%= render partial: 'cover', locals: {data: data} %>
+            </div>
+        <% end %>
+
         <div class="badges-box clearfix m-t-10 widgets">
 
-            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+            <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item md-p-r-15">
                 <%= render partial: 'ideas' %>
             </div>
 
@@ -29,7 +34,7 @@
                 </div>
             <% end %>
 
-            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+            <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item md-p-r-15">
                 <% cache(["user_badges", @user.badges.length]) do %>
                     <%= render partial: 'badges' %>
                 <% end %>
@@ -41,7 +46,7 @@
                 <% end %>
             </div>
 
-            <div class="col-md-6 col-sm-6 no-padding widget-item">
+            <div class="col-md-6 col-sm-6 no-padding widget-item md-p-r-15">
                 <% cache(["user_followings", @user.followings_counter.value]) do %>
                     <%= render partial: 'followings' %>
                 <% end %>

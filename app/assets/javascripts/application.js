@@ -45,7 +45,7 @@
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
 //= require marked
-//= require masonry
+//= require masonry/dist/masonry.pkgd
 //= require nprogress
 //= require nprogress-ajax
 //= require autocomplete-rails

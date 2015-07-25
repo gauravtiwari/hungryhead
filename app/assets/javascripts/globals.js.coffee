@@ -17,8 +17,8 @@ jQuery(document).ready ->
 	  $.getScript document.location.href
 	  return
 
-	$('.grid').masonry
-	  itemSelector: '.grid-item'
+	$('.widgets').masonry
+	  itemSelector: '.widget-item'
 
 	marked.setOptions
 	  renderer: new (marked.Renderer)
