@@ -16,8 +16,8 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :privacy, default: 0
       t.integer :space, default: 0
       t.jsonb  :media, :default => "{}"
-      t.datetime :start_time
-      t.datetime :end_time
+      t.datetime :start_time, null: false, default: DateTime.now
+      t.datetime :end_time, null: false, default: DateTime.now
       t.float  :latitude, null: false, default: 0.0
       t.float  :longitude, null: false, default: 0.0
       t.timestamps null: false

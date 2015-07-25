@@ -16,6 +16,7 @@ class Event < ActiveRecord::Base
   validates :start_time, :end_time, :presence => true
   validates :excerpt, :presence => true, length: {within: 100..300}
   validates :description, :presence => true, length: {within: 300..2000}
+  validates :address, :presence => true
 
   #Includes concerns
   include Sluggable
@@ -65,6 +66,15 @@ class Event < ActiveRecord::Base
 
   def invited?(user)
     invites_ids.include?(user.id.to_s)
+  end
+
+  def profile_complete?
+    if [self.title, self.description, self.cover,
+      self.excerpt, self.space, self.address].any?{|f| f.blank? }
+      return false
+    else
+      return true
+    end
   end
 
   private

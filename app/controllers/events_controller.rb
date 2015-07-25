@@ -50,14 +50,30 @@ class EventsController < ApplicationController
       @event.everyone!
       if @event.published?
         CreateActivityJob.perform_later(@event.id, @event.class.to_s)
-        @msg = "Your event profile was successfully published to: #{@event.privacy.capitalize}"
+        flash[:notice] = "Your event profile was successfully published to: #{@event.privacy.capitalize}"
       else
-        @msg = "Something went wrong, please try again."
+        flash[:notice] = "Something went wrong, please try again."
       end
-      render :publish
     else
-      @msg = "Your event profile isn't complete. Please complete your profile and try publishing again."
-      render :publish
+      flash[:notice] = "Your event profile isn't complete. Please complete your profile and try publishing again."
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # PUT /events/1/unpublish
+  def publish
+    @event.published!
+    @event.everyone!
+    if @event.published?
+      DeleteActivityJob.perform_later(@event.id, @event.class.to_s)
+      flash[:notice] = "Your event profile was successfully unpublished"
+    else
+      flash[:notice] = "Something went wrong, please try again."
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
