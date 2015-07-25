@@ -3,6 +3,25 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
+  def index
+    @notifications = Activity
+    .where(id: @user.ticker.revrange(0, 100))
+    .order_as_specified(id: @user.ticker.revrange(0, 100))
+    .map{|notification| notification.json_blob }
+    .paginate(:page => params[:page], :per_page => 20)
+    render json: @notifications
+  end
+
+  def ideas
+    @idea = Idea.find(params[:id])
+    @notifications = Activity
+    .where(id: @idea.ticker.revrange(0, 100))
+    .order_as_specified(id: @idea.ticker.revrange(0, 100))
+    .map{|notification| notification.json_blob }
+    .paginate(:page => params[:page], :per_page => 20)
+    render json: @notifications
+  end
+
   def friends
     @notifications = Activity
     .where(id: @user.friends_notifications.revrange(0, 100))

@@ -14,19 +14,19 @@ var LatestFeed = React.createClass({
   getInitialState: function(){
     var data = this.props.notifications
     return {
-      feed: this.buildElements(data),
-      next_page: this.props.next_page,
+      feed: [],
+      next_page: undefined,
       closed: true,
-      loading: false,
+      loading: true,
       count: null
     }
   },
 
   componentDidMount: function() {
     if(this.isMounted()){
+      this.fetchNotifications();
       if(channel) {
         channel.bind(this.props.channel_event, function(data){
-          console.log(data);
           var new_item = this.buildElements([data.data])
           var newState = React.addons.update(this.state, {
               feed : {
@@ -78,6 +78,16 @@ var LatestFeed = React.createClass({
     return;
   },
 
+  fetchNotifications: function(){
+    $.getJSON(this.props.path, function(json, textStatus) {
+      this.setState({
+        feed: this.buildElements(json.items),
+        next_page: json.next_page,
+        loading: false
+      });
+    }.bind(this));
+  },
+
   render: function(){
 
     if(this.state.loading) {
@@ -103,7 +113,7 @@ var LatestFeed = React.createClass({
       <div className="widget-11-2 panel b-b b-light-grey no-margin">
           <div className="panel-heading bg-light-blue-lightest">
             <div className="panel-title">
-              Latest Activities
+              <span className="fa fa-list text-danger"></span> Latest Activities
             </div>
           </div>
           <div className="panel-body full-border-light no-margin auto-overflow no-padding">
