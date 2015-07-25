@@ -198,7 +198,7 @@ class IdeasController < ApplicationController
   def idea_params
     params.require(:idea).permit(:looking_for_team, :rules_accepted, :video, :logo, :name, :high_concept_pitch,
       :elevator_pitch, :website, :location_list, :description, :cover, :cover_position, :cover_left, :market_list,
-       :market, :problems, :business_model, :technology_list, :solutions, :vision, :value_proposition)
+      :technology_list)
   end
 
 end

@@ -585,14 +585,6 @@ CREATE TABLE ideas (
     high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
     elevator_pitch text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text,
-    video character varying,
-    video_html text,
-    market text,
-    problems text,
-    solutions text,
-    vision text,
-    value_proposition text,
-    business_model text,
     logo character varying,
     cover character varying,
     team_ids character varying[] DEFAULT '{}'::character varying[],
@@ -607,7 +599,6 @@ CREATE TABLE ideas (
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
     profile jsonb DEFAULT '{}'::jsonb,
-    components jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
     cached_location_list character varying,
     cached_market_list character varying,
@@ -615,8 +606,7 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    reviews jsonb DEFAULT '{}'::jsonb
+    level integer DEFAULT 0
 );
 
 
@@ -3619,6 +3609,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 INSERT INTO schema_migrations (version) VALUES ('20150715172544');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150724215503');
 

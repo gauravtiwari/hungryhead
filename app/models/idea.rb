@@ -69,9 +69,7 @@ class Idea < ActiveRecord::Base
   has_many :team_invites, dependent: :destroy
 
   #Includes modules
-  has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch,
-    :high_concept_pitch, :video, :video_html, :market, :problems,
-  :solutions, :vision, :value_proposition, :business_model]
+  has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch, :high_concept_pitch]
 
   #Store accessor for JSON columns
   store_accessor :fund, :balance
