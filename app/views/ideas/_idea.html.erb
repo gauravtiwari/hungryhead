@@ -1,14 +1,14 @@
 <% cache(cache_key_for_idea(idea)) do %>
 <li class="user-list clearfix p-t-15 p-b-15">
     <span class="col-xs-height">
-      <% if idea.avatar_present? %>
+      <% if idea.user.avatar_present? %>
         <span class="thumbnail-wrapper d48 circular bg-success">
-            <%= image_tag(idea.get_avatar, data: {src:  idea.get_avatar, :"src-retina" => idea.get_avatar},  class: "col-top", width: "34", height: "34") %>
+            <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "34", height: "34") %>
         </span>
       <% else %>
         <div class="thumbnail-wrapper d48 inline circular">
           <span class="placeholder bold text-white">
-            <%= idea.name_badge.upcase %>
+            <%= idea.user.name_badge.upcase %>
           </span>
         </div>
       <% end %>
@@ -36,14 +36,7 @@
           team
         </span>
       <% end %>
-      <p class="fs-14 p-t-5 block people-info text-master">
-        <% if idea.cached_location_list.present? %>
-        <span>
-          <% idea.location_list.each do |tag| %>
-            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-          <% end %>
-        </span>
-        <% end %>
+      <p class="fs-14 p-t-5 block people-info text-master no-margin">
         <% if idea.cached_market_list.present? %>
         <span class="hidden-xs">
           <% idea.market_list.each do |tag| %>

@@ -12,7 +12,15 @@
             <%= render partial: 'menu' %>
         </div>
 
-        <div class="badges-box clearfix">
+        <div class="badges-box clearfix m-t-10">
+
+        <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 p-r-15">
+            <%= render partial: 'ideas' %>
+        </div>
+
+        <div class="col-md-6 col-sm-6 no-padding sm-m-t-15">
+            <%= render partial: 'ideas_contributed' %>
+        </div>
 
         <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
@@ -20,22 +28,20 @@
             </div>
         <% end %>
 
-        <% cache(["user_about_me", @user, @user == current_user ? "owner" : "guest"]) do %>
-            <div class="summary bg-white box-shadow">
-                <%= react_component("TextWidget", {data: data}) %>
-            </div>
-        <% end %>
+        <div class="col-md-6 col-sm-6 no-padding sm-no-padding md-p-r-15 ">
+            <% cache(["user_badges", @user.badges.length]) do %>
+                <%= render partial: 'badges' %>
+            <% end %>
+            <% cache(["user_followers", @user.followers_counter.value]) do %>
+                <%= render partial: 'followers' %>
+            <% end %>
+        </div>
 
-        <% cache(["user_badges", @user.badges.length]) do %>
-            <%= render partial: 'badges' %>
-        <% end %>
-        <% cache(["user_followers", @user.followers_counter.value]) do %>
-            <%= render partial: 'followers' %>
-        <% end %>
-        <%= render partial: 'stats' %>
-        <% cache(["user_followings", @user.followings_counter.value]) do %>
-            <%= render partial: 'followings' %>
-        <% end %>
+        <div class="col-md-6 col-sm-6 no-padding">
+            <% cache(["user_followings", @user.followings_counter.value]) do %>
+                <%= render partial: 'followings' %>
+            <% end %>
+        </div>
         </div>
     </div>
 </div>

@@ -146,6 +146,10 @@ class User < ActiveRecord::Base
     Thread.current[:user]
   end
 
+  def get_contributions
+    Idea.find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
+  end
+
   def self.current=(user)
     Thread.current[:user] = user
   end

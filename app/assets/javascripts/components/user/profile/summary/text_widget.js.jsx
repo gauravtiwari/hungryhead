@@ -79,7 +79,7 @@ var TextWidget = React.createClass({
       var preview = <PreviewContent content={html} />
     }
     return (
-        <div className="widget-16 about-me text-master panel panel-transparent no-border no-margin">
+        <div className="widget-16 about-me text-master panel panel-transparent no-border box-shadow">
             <div className="no-margin">
                 <TextWidgetHeader text={text} openForm={this.openForm} />
                 <TextWidgetContent mode={this.state.mode} content={html} />

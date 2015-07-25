@@ -109,6 +109,10 @@ class Idea < ActiveRecord::Base
     feedbacks.order(created_at: :desc)
   end
 
+  def contributers
+    (feedbackers_ids.values + commenters_ids.values + voters_ids.values).uniq
+  end
+
   def card_json
     {
       id: uuid,

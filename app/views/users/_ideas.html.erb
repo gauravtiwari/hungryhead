@@ -1,5 +1,5 @@
 <div class="widget-16 no-border panel bg-white box-shadow">
-    <div class="panel-heading bg-light-blue-lightest m-b-20">
+    <div class="panel-heading m-b-20">
         <div class="panel-title b-b b-great p-b-5">
             <i class="fa fa-lightbulb-o text-danger"></i> Ideas
         </div>
@@ -36,11 +36,11 @@
             <% end %>
         <% else %>
         <% if @user == current_user %>
-            <div class="text-center fs-16 p-b-40 p-t-20">
+            <div class="text-center fs-16 p-b-40 p-t-15">
                 <%= link_to('Click', new_idea_path(:intro), class: ' b-b text-master b-grey p-b-5') %> to publish a new idea
             </div>
        <% else %>
-           <div class="text-center font-opensans  fs-22 p-b-40 p-t-20 hint-text ">
+           <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text ">
             <i class="fa fa-list"></i>
             <span class="clearfix">0 Ideas Published</span>
            </div>

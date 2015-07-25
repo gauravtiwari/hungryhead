@@ -108,6 +108,10 @@ class UsersController < ApplicationController
 
   end
 
+  def about_me
+
+  end
+
   def update
     authorize @user
     respond_to do |format|
