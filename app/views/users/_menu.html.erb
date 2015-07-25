@@ -1,9 +1,9 @@
 <div class="profile-nav displayblock overflow-hidden p-l-15">
 	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
-		<li class="inline b-r b-grey b-dashed p-r-15">
+		<li class="inline p-r-15">
 			<%= link_to('Profile', profile_path(@user), class: "bold #{current_class?(profile_path(@user))} p-b-5 fs-13") %>
 		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+		<li class="inline">
 			<%= link_to('Activities', profile_activities_path(@user), class: "bold fs-13 #{current_class?(profile_activities_path(@user))} ") %>
 		</li>
 	</ul>

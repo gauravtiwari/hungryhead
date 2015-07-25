@@ -3,7 +3,7 @@ var TextWidgetHeader = React.createClass({
   render: function() {
 
     return(
-	        <div className="panel-heading bg-light-blue-lightest">
+	        <div className="panel-heading">
 	            <div className="panel-title b-b b-grey p-b-5">
 	                <i className="fa fa-user text-danger"></i> About me
 	            </div>

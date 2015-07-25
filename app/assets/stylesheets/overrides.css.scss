@@ -526,19 +526,27 @@ input.error:-webkit-autofill {
   opacity: 0.8;
 }
 .header .bubble {
-  border-radius: 100%;
-  height: 20px;
-  width: 20px;
+  border-radius: 2px;
+  height: auto;
+  position: absolute;
+  right: -1px;
+  top: -11px;
+  line-height: 17px;
+  width: auto;
   background-color: rgba(255, 81, 70, 0.8);
   color: #ffffff;
-  position: relative;
-  top: -6px;
-  float: right;
   right: 5px;
   font-size: 11px;
   text-align: center;
   padding: 0;
-  padding-top: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
+  -o-box-shadow: 0 1px 1px rgba(0, 0, 0, .7);
+  color: #fff;
+  padding: 0px 5px;
 }
 .white-bg {
 	background: #fff;

@@ -31,12 +31,12 @@ var CardStats = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'widget-16 panel no-border cup-bg profile-cards box-shadow': true
+      'widget-16 panel no-border cup-bg profile-cards no-margin': true
     });
 
     return(
       <div className={classes}>
-        <div className="panel-heading bg-light-blue-lightest m-b-10">
+        <div className="panel-heading m-b-10">
           <div className="panel-title b-b b-grey p-b-5">
             <i className="fa fa-star text-danger"></i> Reputation
           </div>
