@@ -16,7 +16,7 @@
 		<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
 		<% if current_user.is_friend?(@user) %>
 			<%= content_tag(:div) do %>
-				<%= link_to('#', onClick: "return false;", class: 'main-button bold m-r-10 pull-right', id: 'send-message-button') do %>
+				<%= mail_to(@user.email, subject: "hungryhead: #{current_user.name}", class: 'main-button bold m-r-10 pull-right', id: 'send-message-button') do %>
 						<i class="fa fa-envelope"></i> Send Message
 				<% end %>
 			<% end %>
