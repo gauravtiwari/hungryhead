@@ -7,7 +7,9 @@
   </span>
   <% end %>
 </div>
-<strong class="inline text-black">
-  <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
-</strong>
-published an event - <%= activity.trackable.title %>
+<div class="overflow-hidden">
+  <strong class="inline text-black">
+    <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
+  </strong>
+  published an event - <%= activity.trackable.title %>
+</div>

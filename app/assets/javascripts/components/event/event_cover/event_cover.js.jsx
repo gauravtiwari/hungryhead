@@ -11,7 +11,7 @@ var EventCover = React.createClass({
       top: top,
       left: left,
       draggable: false,
-      is_owner: data.meta.is_owner,
+      is_owner: data.event.is_owner,
       visible: false,
       loading: false
     }
@@ -133,17 +133,15 @@ var EventCover = React.createClass({
         var image = <img className="cover-photo" id="ideacover_preview" src={this.state.cover.url} />;
       } else {
         if(this.state.is_owner) {
-          var handle = <h2 className="text-master m-t-90 fs-50"><i className="fa fa-upload fs-50"></i> Click to upload demo cover</h2>;
+          var handle = <h2 className="text-master m-t-90 fs-50"><i className="fa fa-upload fs-50"></i> Click to upload event cover</h2>;
           var image = <div className="no-content bold z-index-10" onClick={this.triggerOpen}>{handle}</div>;
         } else {
           var image = "";
         }
       }
 
-
       if(this.state.is_owner) {
         return (
-
           <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />

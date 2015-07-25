@@ -18,10 +18,18 @@
       <div class="col-md-4 no-padding p-r-15">
         <div class="social">
           <div class="event-details full-border-light-right bg-white padding-20">
-              <div class="text-center full-width">
+              <div class="text-center">
+                <% if @event.owner.avatar_present? %>
+                  <span class="thumbnail-wrapper d48 auto-margin">
+                    <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
+                  </span>
+                <% else %>
                 <span class="thumbnail-wrapper d48 auto-margin">
-                  <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
+                  <span class="placeholder bold text-white fs-22">
+                      <%= @event.owner.name_badge %>
+                  </span>
                 </span>
+                <% end %>
               </div>
               <h2 class="clearfix bold"><%= @event.title %></h2>
               <p class="small-text">

@@ -9,7 +9,7 @@ class CreateEventNotificationService
     @activity = @owner.activities.create!(
       trackable: @event,
       verb: 'shared',
-      recipient: @event,
+      recipient: @owner,
       key: 'event.create',
       unread: true
     )
