@@ -25,9 +25,6 @@ class UnpublishIdeaJob < ActiveJob::Base
         @user.ideas_counter.reset
         @user.ideas_counter.incr(@user.ideas.size)
 
-        #Remove from user latest activities
-        @user.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
-
         #Remove activity from follower and recipient
         find_followers(activity).each do |f|
           f.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)

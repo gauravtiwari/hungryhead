@@ -75,9 +75,6 @@ class User < ActiveRecord::Base
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
-  #List to store last 5 activities
-  sorted_set :latest_activities, marshal: true
-
   #Store latest user notifications
   sorted_set :ticker, marshal: true
   sorted_set :friends_notifications, marshal: true

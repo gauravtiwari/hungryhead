@@ -1,7 +1,7 @@
 <div class="container p-b-60">
 
     <% data = render(template: 'users/show.json.jbuilder') %>
-    <% cache(["user_sidebar_desktop", @user, @user == current_user ? "owner" : "guest", @user.latest_activities.members.length]) do %>
+    <% cache(["user_sidebar_desktop", @user, @user == current_user ? "owner" : "guest"]) do %>
         <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
         </div>
@@ -20,7 +20,7 @@
 
         <div class="badges-box m-t-20 clearfix">
 
-        <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest", @user.latest_activities.members.length]) do %>
+        <% cache(["user_sidebar_mobile", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="col-sm-6 no-padding sm-no-padding xs-no-padding visible-sm visible-xs sm-p-r-15 md-p-r-15">
                 <%= render partial: 'sidebar', locals: {data: data} %>
             </div>

@@ -54,7 +54,6 @@ class Activity < ActiveRecord::Base
     unless owner_type == "School"
       refresh_friends_notifications
       refresh_ticker
-      profile_latest_activities
     end
   end
 
@@ -64,10 +63,6 @@ class Activity < ActiveRecord::Base
 
   def refresh_friends_notifications
     owner.friends_notifications.remrangebyrank(0, -50)
-  end
-
-  def profile_latest_activities
-    owner.latest_activities.remrangebyrank(0, -5)
   end
 
 end

@@ -3,14 +3,6 @@ class DeleteActivityJob < ActiveJob::Base
     ActiveRecord::Base.connection_pool.with_connection do
       Activity.where(trackable_id: trackable_id, trackable_type: trackable_type).find_each do |activity|
 
-        unless activity.owner_type == "School"
-          #Delete from user ticker
-          activity.owner.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
-
-          #Delete from user latest activities
-          activity.owner.latest_activities.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)
-        end
-
         #Remove activity from follower and recipient
         find_followers(activity).each do |f|
           f.ticker.remrangebyscore(activity.created_at.to_i + activity.id, activity.created_at.to_i + activity.id)

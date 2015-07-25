@@ -8,9 +8,6 @@ class CreateNotificationCacheService
   end
 
   def create
-    #Add activity to user profile
-    add_activity_to_user_profile(@actor) unless is_school?
-
     #Send notification to recipient
     add_notification_for_recipient unless @activity.owner == @activity.recipient_user
 
@@ -59,11 +56,6 @@ class CreateNotificationCacheService
   def add_activity_to_idea(idea)
     idea.ticker.add(@activity.id, score_key)
     SendNotificationService.new(idea, @activity.json_blob).idea_notification
-  end
-
-  #This is for user profile page to show latest personal activities
-  def add_activity_to_user_profile(user)
-    user.latest_activities.add(@activity.id, score_key)
   end
 
   def add_activity_to_commenters
