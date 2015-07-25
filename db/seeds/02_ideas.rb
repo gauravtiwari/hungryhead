@@ -7,7 +7,6 @@ ActiveRecord::Base.transaction do
       high_concept_pitch:  Forgery::LoremIpsum.words(5),
       elevator_pitch: Forgery::LoremIpsum.words(15),
       description: Forgery::LoremIpsum.words(100),
-      location_list: Forgery::Address.city,
       fund: {balance: 0},
       school_id: [*1..10].sample,
       user_id: [*2..90].sample,
