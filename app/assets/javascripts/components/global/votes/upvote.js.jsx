@@ -56,9 +56,8 @@ var Upvote = React.createClass({
     });
 
     var button_classes = cx({
-      'main-button fs-13 bold text-white m-r-10': true,
+      'main-button fs-13 bold m-r-10': true,
       'disabled': this.state.disabled,
-      'text-brand': !this.state.voted,
       'voted text-white': this.state.voted
     });
 
@@ -74,9 +73,9 @@ var Upvote = React.createClass({
 
     if(this.props.button_style) {
       return (
-        <button onClick={this.handleClick} className={button_classes}>
+        <a onClick={this.handleClick} className={button_classes}>
           <i className="fa fa-thumbs-up"></i> {button_text}
-        </button>
+        </a>
         )
     } else {
       return (<li className="inline text-black m-r-10 fs-14 bold pointer">

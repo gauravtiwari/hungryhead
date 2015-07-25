@@ -44,14 +44,14 @@ class DeleteActivityJob < ActiveJob::Base
       activity.recipient
     elsif activity.recipient_type == "Idea"
       activity.recipient.user
-    elsif @activity.recipient_type == "Share" && is_school?(activity)
-      @activity.recipient.owner.user
-    elsif @activity.recipient_type == "Event" && is_school?(activity)
-      @activity.recipient.owner.user
-    elsif @activity.recipient_type == "Share" && !is_school?(activity)
-      @activity.recipient.owner
-    elsif @activity.recipient_type == "Event" && !is_school?(activity)
-      @activity.recipient.owner
+    elsif activity.recipient_type == "Share" && is_school?(activity)
+      activity.recipient.owner.user
+    elsif activity.recipient_type == "Event" && is_school?(activity)
+      activity.recipient.owner.user
+    elsif activity.recipient_type == "Share" && !is_school?(activity)
+      activity.recipient.owner
+    elsif activity.recipient_type == "Event" && !is_school?(activity)
+      activity.recipient.owner
     else
       activity.recipient.user
     end

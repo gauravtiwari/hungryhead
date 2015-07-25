@@ -42,7 +42,6 @@ class CreateIdeas < ActiveRecord::Migration
 
       t.jsonb :fund, default: "{}"
 
-      t.string :cached_location_list
       t.string :cached_market_list
       t.string :cached_technology_list
 

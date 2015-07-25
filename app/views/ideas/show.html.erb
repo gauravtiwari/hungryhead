@@ -5,19 +5,21 @@
   </div>
 
   <div class="col-md-8 col-lg-8 col-sm-8">
+    <%= render partial: 'menu' %>
+
     <% cache(["idea_header", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
       <div class="auto-height box-shadow ">
         <%= render partial: 'header', locals: {data: data} %>
       </div>
     <% end %>
 
-    <%= render partial: 'menu' %>
-
-    <div class="m-t-20">
+    <div class="clearfix">
       <div class="idea-content">
         <div class="clearfix">
           <% cache(["idea_main_content", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
             <%= react_component('MainContent', {data: data}) %>
+            <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: @idea, paginate: false} )%>
+            <%= react_component('CommentBox', {data: data, comment_channel: "#{@idea.class.to_s}-#{@idea.uuid}-comments", count: @idea.comments_counter.value, comments_path: comments_path(commentable_type: @idea.class.to_s, id: @idea.uuid)}) %>
           <% end %>
         </div>
       </div>

@@ -3,16 +3,6 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
-  def index
-  end
-
-  def ideas
-    @idea = Idea.find(params[:id])
-    @notifications = @idea.ticker.revrange(0, 100)
-    .paginate(:page => params[:page], :per_page => 10)
-    render json: @notifications
-  end
-
   def friends
     @notifications = Activity
     .where(id: @user.friends_notifications.revrange(0, 100))

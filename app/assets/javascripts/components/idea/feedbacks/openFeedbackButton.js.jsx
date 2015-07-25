@@ -41,9 +41,9 @@ var OpenFeedbackButton = React.createClass({
     });
 
     if(this.state.feedbacked) {
-      var feedbackButtonText = <a className="btn btn-sm fs-13 padding-5  p-l-10 p-r-10 new-feedback-button btn-green semi-bold text-white pull-right m-r-10" onClick={this.openFeedbackedBox}><i className={classes}></i> Feedbacked</a>;
+      var feedbackButtonText = <a className="main-button pointer bold fs-13 feedbacked m-r-10" onClick={this.openFeedbackedBox}><i className={classes}></i> Feedbacked</a>;
     } else {
-      var feedbackButtonText = <a className="btn btn-sm fs-13 padding-5  p-l-10 p-r-10 btn-info  new-feedback-button pull-right m-r-10" onClick={this.openFeedbackBox}><i className={classes}></i> Feedback</a>;
+      var feedbackButtonText = <a className="main-button pointer bold fs-13 new-feedback-button m-r-10" onClick={this.openFeedbackBox}><i className={classes}></i> Feedback</a>;
     }
 
     return(

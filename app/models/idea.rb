@@ -27,7 +27,7 @@ class Idea < ActiveRecord::Base
   before_create :add_fund
   after_save :load_into_soulmate, if: :visible?
 
-  acts_as_taggable_on :markets, :locations, :technologies
+  acts_as_taggable_on :markets, :technologies
 
   #Cache ids of voters, feedbackers, investors and activities
   list :voters_ids
@@ -76,7 +76,7 @@ class Idea < ActiveRecord::Base
 
   store_accessor :settings, :visible_everyone
 
-  store_accessor :profile, :locations, :markets, :facebook_url, :twitter_url,
+  store_accessor :profile, :markets, :facebook_url, :twitter_url,
   :website
 
   store_accessor :media, :logo_position, :cover_position,
@@ -178,8 +178,7 @@ class Idea < ActiveRecord::Base
 
   def profile_complete?
     if [self.name, self.high_concept_pitch, self.elevator_pitch,
-      self.description, self.market, self.solutions, self.problems,
-      self.value_proposition].any?{|f| f.blank? }
+      self.description].any?{|f| f.blank? }
       return false
     else
       return true

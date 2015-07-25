@@ -39,10 +39,10 @@ var InvestButton = React.createClass({
     });
 
     var invested_classes = cx({
-      'btn btn-sm fs-13 padding-5  p-l-10 p-r-10 pull-right m-r-10': true,
-      'btn-info': !this.state.invested && this.state.investable,
-      'btn-info light': !this.state.investable,
-      'btn-green text-white semi-bold': this.state.invested
+      'fs-13 padding-5 bold p-l-10 p-r-10 pull-right m-r-10': true,
+      'main-button pointer': !this.state.invested && this.state.investable,
+      'main-button light': !this.state.investable,
+      'invested': this.state.invested
     });
 
     if(this.state.invested) {

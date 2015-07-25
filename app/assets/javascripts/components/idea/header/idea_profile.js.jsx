@@ -8,12 +8,6 @@ var IdeaProfile = React.createClass({
           </a>;
     });
 
-    var location_list = _.map(this.props.idea.locations, function(tag){
-      return  <a key={Math.random()}  className="text-white bold fs-12 inline" href={tag.url}>
-            {tag.name}
-          </a>;
-    });
-
     return (
       <div className="col-md-6">
         <div className="idea-meta m-l-15 inline p-t-20 p-b-20">
@@ -28,9 +22,6 @@ var IdeaProfile = React.createClass({
         </p>
         <span className="text-white">
           {market_list}
-        </span>
-        <span className="text-white clearfix m-t-10">
-         <i className="fa fa-map-marker"></i> {location_list}
         </span>
       </div>
       </div>

@@ -9,7 +9,11 @@
       </span>
       <% end %>
     </div>
-    <strong class="inline text-black"><%= activity.owner.name %></strong>
+    <strong class="inline text-black">
+      <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
+    </strong>
   <% end %>
-  posted a comment on <%= activity.recipient_type == 'Idea' ? activity.recipient.name : 'a' + activity.recipient_type %>
+  posted a comment on
+  <%= activity.recipient.user == current_user ? "your" : "" %>
+  <%= activity.recipient_type == 'Idea' ? activity.recipient_type.downcase + ' ' + activity.recipient.name : 'a' + activity.recipient_type.downcase %>
 </span>

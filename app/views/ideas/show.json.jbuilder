@@ -14,10 +14,6 @@ json.idea do
       json.has_cover @idea.cover.present?
     end
 
-    json.locations @idea.location_list.each do |location|
-      json.name location
-      json.url tag_path(location.parameterize)
-    end
     json.markets @idea.market_list.each do |market|
       json.name market
       json.url tag_path(market.parameterize)

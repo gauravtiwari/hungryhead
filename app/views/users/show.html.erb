@@ -38,9 +38,6 @@
             <% cache(["user_badges", @user.badges.length]) do %>
                 <%= render partial: 'badges' %>
             <% end %>
-            <% cache(["user_ideas", @user, @user.ideas_counter.value, @user == current_user ? "owner" : "guest"]) do %>
-                <%= render partial: 'ideas' %>
-            <% end %>
             <% cache(["user_followers", @user.followers_counter.value]) do %>
                 <%= render partial: 'followers' %>
             <% end %>

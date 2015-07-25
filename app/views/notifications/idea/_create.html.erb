@@ -8,6 +8,6 @@
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.owner.name %>
+  <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
 </strong>
 pitched <%= activity.recipient.name %>

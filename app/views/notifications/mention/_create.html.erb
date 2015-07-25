@@ -8,7 +8,9 @@
     </span>
     <% end %>
   </div>
-  <strong class="inline text-black"><%= activity.owner.name %></strong>
+  <strong class="inline text-black">
+    <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
+  </strong>
   mentioned <%= activity.recipient == current_user ? 'You' : activity.recipient.name %>
   in a <%= activity.trackable.mentioner_type.downcase %>
 </span>

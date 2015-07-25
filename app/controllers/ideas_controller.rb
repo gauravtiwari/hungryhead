@@ -190,6 +190,10 @@ class IdeasController < ApplicationController
 
   def set_idea
     @idea = Idea.find(params[:id])
+    @notifications = Activity
+    .where(id: @idea.ticker.revrange(0, 100))
+    .order_as_specified(id: @idea.ticker.revrange(0, 100))
+    .paginate(:page => params[:page], :per_page => 20)
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end

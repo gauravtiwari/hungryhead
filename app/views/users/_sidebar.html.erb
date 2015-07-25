@@ -1,4 +1,6 @@
 <div class="profile-sidebar">
     <%= render partial: 'card', locals: {data: data} %>
-    <%= render partial: 'latest_activities' %>
+    <% cache(["user_ideas", @user, @user.ideas_counter.value, @user == current_user ? "owner" : "guest"]) do %>
+      <%= render partial: 'ideas' %>
+    <% end %>
 </div>

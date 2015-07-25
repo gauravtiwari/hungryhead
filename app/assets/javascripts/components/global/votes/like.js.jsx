@@ -38,17 +38,22 @@ var Like = React.createClass({
     var css_classes = this.state.css_class;
 
     if(this.state.voted) {
-      var button_classes = css_classes + ' delete-vote'
+      var button_classes = css_classes + ' delete-vote' + ' pointer'
     } else {
-      var button_classes = css_classes
+      var button_classes = css_classes + ' pointer'
     }
 
-    var text = this.state.voted ? 'Unlike' : 'Like';
+    var text = this.state.voted ? 'Likes' : 'Like';
 
+    if(this.state.votes_count == 0) {
+      var votes_count = "";
+    } else {
+      var votes_count = '(' + this.state.votes_count + ')';
+    }
 
     return (
       <a className={button_classes} onClick={this.handleClick}>
-      {text} ({this.state.votes_count})
+      {text}  {votes_count}
       <span className="count"></span>
       </a>
 

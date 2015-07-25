@@ -5,14 +5,14 @@
   </div>
 
   <div class="col-md-8 col-lg-8 col-sm-8">
+    <% cache([@idea, @idea.user]) do %>
+      <%= render partial: 'ideas/menu' %>
+    <% end %>
+
     <% cache(@idea) do %>
       <div class="auto-height box-shadow ">
         <%= render partial: 'ideas/header', locals: {data: data}  %>
       </div>
-    <% end %>
-
-    <% cache([@idea, @idea.user]) do %>
-      <%= render partial: 'ideas/menu' %>
     <% end %>
 
     <div class="m-t-20">

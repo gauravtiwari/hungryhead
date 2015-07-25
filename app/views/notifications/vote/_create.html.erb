@@ -8,7 +8,7 @@
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.owner.name %>
+  <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
 </strong>
 voted on <%= activity.recipient.user == current_user ? "your" : "" %>
 <%= activity.recipient_type == "Idea" ? "#{activity.recipient_type.downcase} #{activity.recipient.name}" : "#{activity.recipient_type.downcase}" %>

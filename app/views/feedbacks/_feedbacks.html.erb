@@ -13,9 +13,14 @@
       <span class="clearfix">
         No Feedbacks
       </span>
-      <% if !policy(@idea).collaborator? %>
-        <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
-      <% end %>
+      <div class="m-t-20 clearfix">
+        <span class="clearfix p-b-20">
+          Click to write your feedback
+        </span>
+        <% if !policy(@idea).collaborator? %>
+          <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
+        <% end %>
+      </div>
     </div>
   </div>
 <% end %>
