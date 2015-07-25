@@ -1,0 +1,9 @@
+<% if @event.published? %>
+  <%= link_to(unpublish_event_path(@event), class: "main-button bold published") do %>
+    <span class="fa fa-check-circle"></span> Published
+  <% end %>
+<% else %>
+  <%= link_to(publish_event_path(@event), class: "main-button bold") do %>
+    <span class="fa fa-lock"></span> Publish
+  <% end %>
+<% end %>
