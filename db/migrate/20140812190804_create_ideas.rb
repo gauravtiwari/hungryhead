@@ -16,14 +16,7 @@ class CreateIdeas < ActiveRecord::Migration
       t.text :elevator_pitch, default: "", null: false
 
       t.text :description, default: ""
-      t.string :video
-      t.text :video_html
-      t.text :market
-      t.text :problems
-      t.text :solutions
-      t.text :vision
-      t.text :value_proposition
-      t.text :business_model
+
       t.string :logo
       t.string :cover
 
