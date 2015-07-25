@@ -77,9 +77,6 @@
       <div class="pull-right">
         <div class="visible-lg visible-md visible-sm m-t-10">
           <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-15 p-r-10">
-            <li class="p-r-10 inline drop conversation-threads">
-              <%= react_component('OpenConversationsThread', {path: main_app.recent_conversations_path(box: 'inbox'), unread_messages_count: current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
-            </li>
             <li class="p-r-10 inline">
               <div class="dropdown notification-dropdown">
               <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.notifications_counter.value, path: main_app.friends_notifications_path, channel_event: "new_friend_notification_item"}) %>
