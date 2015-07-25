@@ -28,7 +28,7 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="card-description">
+	<div class="card-description no-padding p-l-60 p-r-60">
 		<div class="activity-content m-t-10">
 			 <% if activity.trackable.message.length > 450 %>
 			  <%= truncate(markdownify(activity.trackable.message), escape: false, length: 450) %>

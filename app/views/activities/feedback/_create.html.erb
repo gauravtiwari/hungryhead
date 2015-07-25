@@ -27,8 +27,8 @@
 		    </h6>
 	    </div>
     </div>
-    <div class="card-description">
-	    <div class="activity-content m-t-10">
+    <div class="card-description no-padding p-l-60 p-r-60">
+	    <div class="activity-content">
 	     <% if activity.trackable.body.length > 450 %>
 		    <%= truncate(markdownify(activity.trackable.body), escape: false, length: 450) %>
 		    <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
