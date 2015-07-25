@@ -12,7 +12,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address, index: true
-      t.boolean :private, default: true
+      t.integer :status, default: 0
+      t.integer :privacy, default: 0
       t.integer :space, default: 0
       t.jsonb  :media, :default => "{}"
       t.datetime :start_time
@@ -26,7 +27,7 @@ class CreateEvents < ActiveRecord::Migration
     add_index :events, :start_time, algorithm: :concurrently
     add_index :events, :slug, algorithm: :concurrently
     add_index :events, [:latitude, :longitude], algorithm: :concurrently
-    add_index :events, :private, algorithm: :concurrently
+    add_index :events, :privacy, algorithm: :concurrently
     add_index :events, :end_time, algorithm: :concurrently
   end
 end

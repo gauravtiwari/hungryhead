@@ -212,7 +212,14 @@ Rails.application.routes.draw do
   resources :activities, only: [:index, :show]
 
   #Events routes
-  resources :events
+  resources :events do
+    member do
+      put :publish
+      get :attendees
+      get :comments
+    end
+  end
+
   resources :shares
 
   #Vanity urls for users

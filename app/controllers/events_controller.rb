@@ -43,6 +43,24 @@ class EventsController < ApplicationController
     end
   end
 
+  # PUT /events/1/publish
+  def publish
+    if @event.profile_complete?
+      @event.published!
+      @event.everyone!
+      if @event.published?
+        CreateActivityJob.perform_later(@event.id, @event.class.to_s)
+        @msg = "Your event profile was successfully published to: #{@event.privacy.capitalize}"
+      else
+        @msg = "Something went wrong, please try again."
+      end
+      render :publish
+    else
+      @msg = "Your event profile isn't complete. Please complete your profile and try publishing again."
+      render :publish
+    end
+  end
+
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
