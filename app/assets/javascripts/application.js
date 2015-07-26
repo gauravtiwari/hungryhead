@@ -4,7 +4,7 @@
 //
 //= require jquery
 //= require jquery-form
-//= require plugins/boostrapv3/js/bootstrap.min
+//= require bootstrap
 //= require plugins/jquery/jquery-easy
 //= require modernizr
 //= require jquery-ui/core
@@ -14,11 +14,9 @@
 //= require jquery-ui/effect.all
 //= require jquery-unveil
 //= require jquery-bez
-//= require plugins/jquery-ios-list/jquery.ioslist.min
 //= require eventEmitter
 //= require imagesloaded
 //= require jquery.actual
-//= require plugins/jquery-menuclipper/jquery.menuclipper
 //= require jquery.scrollbar
 //= require hammerjs
 //= require jquery-ujs

@@ -272,22 +272,6 @@
         });
     }
 
-    Pages.prototype.initListView = function() {
-        $.fn.ioslist && $('[data-init-list-view="ioslist"]').ioslist();
-        $.fn.scrollbar && $('.list-view-wrapper').scrollbar({
-            ignoreOverlay: false
-        });
-    }
-
-    Pages.prototype.initSwitcheryPlugin = function() {
-        // Switchery - ios7 switch
-        window.Switchery && $('[data-init-plugin="switchery"]').each(function() {
-            new Switchery($(this).get(0), {
-                color: $.Pages.getColor('success')
-            });
-        });
-    }
-
     Pages.prototype.initSelectFxPlugin = function() {
         window.SelectFx && $('select[data-init-plugin="cs-select"]').each(function() {
             var el = $(this).get(0);
@@ -374,12 +358,10 @@
         this.initTooltipPlugin();
         this.initSelect2Plugin();
         this.initScrollBarPlugin();
-        this.initSwitcheryPlugin();
         this.initSelectFxPlugin();
         this.initUnveilPlugin();
         this.initValidatorPlugin();
         this.initView();
-        this.initListView();
         this.initInputFile();
     }
 

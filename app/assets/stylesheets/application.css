@@ -6,16 +6,14 @@
  *= require jquery.atwho
  *= require jquery-ui/autocomplete
  *= require select2-bootstrap
- *= require plugins/boostrapv3/css/bootstrap.min
+ *= require bootstrap
  *= require sweetalert
  *= require bootstrap-tagsinput
  *= require jquery.scrollbar
  *= require nprogress
  *= require nprogress-bootstrap
- *= require plugins/jquery-menuclipper/jquery.menuclipper
- *= require plugins/bootstrap-select2/select2
+ *= require select2-bootstrap-css
  *= require bootstrap-datetimepicker
- *= require plugins/switchery/css/switchery.min
  *= require font-awesome
  *= require pnotify
 
