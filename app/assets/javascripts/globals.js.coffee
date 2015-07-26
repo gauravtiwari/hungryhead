@@ -3,8 +3,10 @@ jQuery(document).ready ->
 
 	#Initialize AutoGrow plugin
 
-	$('body textarea').focus ->
-		$(this).autosize()
+	$(document).on 'focus', 'textarea', (event) ->
+	  event.preventDefault()
+	  $(this).autosize()
+	  return
 
 	$.ajaxSetup cache: false
 

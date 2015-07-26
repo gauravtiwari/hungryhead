@@ -106,6 +106,9 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.10)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -590,6 +593,7 @@ DEPENDENCIES
   auto_html
   autoprefixer-rails
   awesome_nested_set
+  best_in_place
   better_errors
   binding_of_caller
   bootstrap3-datetimepicker-rails (~> 4.14.30)

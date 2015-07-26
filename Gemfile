@@ -81,6 +81,9 @@ gem 'mail_form'
 #Deal with JSON data
 gem  'hashie'
 
+#Best in place edit
+gem 'best_in_place'
+
 #404 page customize
 gem 'gaffe'
 
