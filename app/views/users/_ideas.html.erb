@@ -32,18 +32,19 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            <% else %>
-            <% if @user == current_user %>
-                <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
-                    <%= link_to('Click', new_idea_path(:intro), class: 'light b-b text-master b-grey p-b-5') %> to publish a new idea
-                </div>
-           <% else %>
-               <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
-                <i class="fa fa-list"></i>
-                <span class="clearfix">No ideas published</span>
-               </div>
-           <% end %>
          <% end %>
         <% end %>
+    <% else %>
+     <% if @user == current_user %>
+         <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+            <i class="fa fa-lightbulb-o full-width"></i>
+            <%= link_to('Click', new_idea_path(:intro), class: 'light b-b text-master b-grey p-b-5') %> to publish a new idea
+         </div>
+    <% else %>
+        <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+         <i class="fa fa-list"></i>
+         <span class="clearfix">No ideas published</span>
+        </div>
+    <% end %>
     <% end %>
 </div>
