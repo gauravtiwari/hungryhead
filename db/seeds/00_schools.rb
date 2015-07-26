@@ -65,7 +65,7 @@ ActiveRecord::Base.transaction do
   )
 
   School.create!(
-    name: 'Manchester metropolitan university',
+    name: 'Manchester Metropolitan University',
     location_list: 'Manchester',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mmu.ac.uk',
@@ -85,7 +85,7 @@ ActiveRecord::Base.transaction do
   )
 
   School.create!(
-    name: 'University college london',
+    name: 'University College London',
     location_list: 'London',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@ucl.ac.uk',
