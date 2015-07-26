@@ -1,18 +1,48 @@
-<div class="new-event-form">
-  <%= simple_form_for(@event, remote: true) do |f| %>
-    <div class="form-group">
-      <%= label_tag 'event[title]', 'Title' %>
-      <%= f.input_field :title, class: "form-control", :required => true, :placeholder => "eg: Entrepreneurship Workshop" %>
+<div class="event-form m-t-20">
+  <%= simple_form_for(@event, html: {id: 'new_event_form'}) do |f| %>
+    <% @event.errors.full_messages.each do |message| %>
+      <li class="alert alert-error"><%= message %></li>
+    <% end %>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[title]', 'Title' %>
+          <%= f.input_field :title, class: "form-control", :required => true, :placeholder => "eg: Entrepreneurship Workshop" %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[address]', 'Address' %>
+          <%= f.input_field :address, class: "form-control", :required => true, :placeholder => "eg: Lancaster, Fylde College" %>
+        </div>
+      </div>
     </div>
+
     <div class="form-group">
       <%= label_tag 'event[excerpt]', 'Short Description' %>
       <%= f.input_field :excerpt, class: "form-control", :required => true, :placeholder => "eg: An intro about the event..." %>
     </div>
 
-    <div class="form-group">
-      <%= label_tag 'event[address]', 'Address' %>
-      <%= f.input_field :address, class: "form-control", :required => true, :placeholder => "eg: Lancaster, Fylde College" %>
-    </div>
+    <% if @event.present? %>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= label_tag 'event[space]', 'Space' %>
+            <%= f.input_field :space, class: "form-control", :required => true, :placeholder => "eg: 500" %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <div class="checkbox check-success p-t-20">
+              <%= f.input_field :featured, as: :boolean, id: 'event_featured', class: 'form-control' %>
+              <label for="event_featured">Check if featured event?</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
@@ -21,7 +51,7 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control" value="08/01/2013 1:30 PM">
+            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control"  placeholder="Start date time" />
           </div>
         </div>
       </div>
@@ -33,19 +63,18 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" value="08/01/2013 1:30 PM">
+            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" placeholder="Start date time" />
           </div>
         </div>
       </div>
     </div>
+
     <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
     <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
 
     <div class="button-tags m-t-20">
-      <%= button_tag 'Send', class: 'btn btn-primary' %>
-      <small class="m-l-20 hint-text">Event won't be published until you do so from profile page.</small>
+      <%= button_tag 'Submit', class: 'main-button fs-13 bold' %>
+      <small class="m-l-20 hint-text">Event won't be published until you do so using publish button.</small>
     </div>
   <% end %>
-
 </div>
-

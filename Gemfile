@@ -30,9 +30,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
   gem 'rails-assets-jquery.easing'
   gem 'rails-assets-font-awesome'
-  gem 'rails-assets-momentjs'
   gem 'rails-assets-jquery.validate'
-  gem 'rails-assets-jquery-autosize'
   gem 'rails-assets-sly'
   gem 'rails-assets-animate.css'
   gem 'rails-assets-jquery.cookie'
@@ -90,7 +88,8 @@ gem 'gaffe'
 gem 'unobtrusive_flash', '>=3'
 
 #datetime picker
-gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 #For formatting texts
 gem 'html-pipeline'

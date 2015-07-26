@@ -3,8 +3,10 @@ jQuery(document).ready ->
 
 	#Initialize AutoGrow plugin
 
-	$('body textarea').focus ->
-		$(this).autosize()
+	$(document).on 'focus', 'textarea', (event) ->
+	  event.preventDefault()
+	  $(this).autosize()
+	  return
 
 	$.ajaxSetup cache: false
 
@@ -64,21 +66,37 @@ jQuery(document).ready ->
 	$('#pitch_idea_form').validate()
 	$('#editProfileFormPopup').validate()
 	$('#valid-form').validate()
+	$('form#new_event_form').validate()
 
 	try
 		$('#idea_high_concept_pitch').rules 'add', minlength: 20, maxlength: 50
 		$('#idea_elevator_pitch').rules 'add', minlength: 100, maxlength: 140
 	catch e
 
-	$("[data-toggle='tooltip']").tooltip()
+	try
+		$("[data-toggle='tooltip']").tooltip()
+	catch e
+
+	try
+		$('#startdatepicker').datetimepicker({sideBySide: true});
+		$('#enddatepicker').datetimepicker({sideBySide: true});
+	catch e
+
+	try
+		#Add client side rules
+		$('#event_excerpt').rules 'add', minlength: 100, maxlength: 300
+		$('#event_title').rules 'add', minlength: 10, maxlength: 50
+		$('#event_description').rules 'add', minlength: 300, maxlength: 2000
+		$('#event_description_textarea').rules 'add', minlength: 300, maxlength: 2000
+	catch e
 
 	try
 		$('form#new_invite_request').each ->
 			$(@).validate()
 			return
 	catch e
-	#Initialize Pages modules
 
+	#Initialize Pages modules
 	$.Pages.init()
 
 	$('.single-tag').tagsinput maxTags: 1

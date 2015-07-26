@@ -54,6 +54,27 @@
 
 <div class="container m-t-40">
     <div class="col-md-4 no-padding p-r-15">
+
+    <div class="panel bg-white overflow-hidden padding-15 box-shadow m-b-10 p-b-10">
+      <div class="event-date">
+        <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
+          <p class="inline text-master semi-bold overflow-hidden no-margin">
+            <%= local_time(@event.start_time) %>
+            <span class="small-text clearfix hint-text">
+              <%= local_time(@event.start_time) %> to <%= local_time(@event.end_time) %>
+            </span>
+          </p>
+      </div>
+      <div class="event-address full-border-light p-t-10">
+        <span class="fa fa-map-marker fs-16 text-master bold pull-left p-r-10"></span>
+        <p class="text-master semi-bold overflow-hidden no-margin">
+          <%= @event.address %>
+          <span class="small-text clearfix hint-text">
+            <%= @event.reverse_geocode %>
+          </span>
+        </p>
+      </div>
+    </div>
     <div class="bg-white overflow-hidden padding-10 box-shadow">
       <div class="col-md-2 no-padding">
         <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height" />
@@ -117,14 +138,10 @@
           </li>
       </ul>
 
-      <div class="tab-content schools-tabs">
+      <div class="tab-content event-tabs">
 
-        <div class="tab-pane active" id="tab_people">
-          <div class="view">
-            <div class="list-view boreded no-top-border p-l-40 p-r-40">
-              <%= @event.description %>
-            </div>
-          </div>
+        <div class="tab-pane active" id="tab_event_info">
+          <%= render partial: 'description' %>
         </div>
 
         <div class="tab-pane" id="tab_ideas">

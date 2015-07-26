@@ -8,10 +8,10 @@
               <div class="col-md-8 col-sm-10 auto-margin text-center">
                   <div class="hero-section z-index-10">
                       <h1 class="text-white">
-                        Privacy Policy
+                        User Agreement
                       </h1>
                       <p class="text-white no-margin fs-16">
-                        How we protect and use your private data
+                        Lets clarify and establish some terms
                       </p>
                   </div>
               </div>
@@ -21,13 +21,9 @@
     </div>
   </div>
 
-  <section class="story p-b-100">
-    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
-      <div class="col-md-6 col-sm-10 auto-margin">
-        <%= render partial: 'content/partials/terms' %>
-      </div>
-    </div>
-  </section>
+
+  <%= render partial: 'pages/content/terms' %>
+
 
 </div>
 <% end %>

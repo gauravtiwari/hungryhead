@@ -19,15 +19,15 @@
         <% cache(["user_profile", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="profile">
                 <div class="badges-box clearfix m-t-10 widgets">
-                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                    <div class="col-md-6 col-sm-6 no-padding widget-item">
                         <%= render partial: 'ideas' %>
                     </div>
-                    <div class="gutter-sizer"></div>
-                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
-                        <%= render partial: 'ideas_contributed' %>
-                    </div>
-                    <div class="col-sm-6 no-padding widget-item xs-no-padding visible-sm visible-xs">
+                    <div class="col-sm-6 no-padding xs-no-padding visible-sm visible-xs widget-item">
                         <%= render partial: 'sidebar', locals: {data: data} %>
+                    </div>
+                    <div class="gutter-sizer"></div>
+                    <div class="col-md-6 col-sm-6 no-padding widget-item">
+                        <%= render partial: 'ideas_contributed' %>
                     </div>
                     <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
                         <%= render partial: 'badges' %>

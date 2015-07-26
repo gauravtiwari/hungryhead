@@ -10,7 +10,7 @@
             <% end %>
           </div>
           <%= form_tag('/search/search', class: 'inline b-l b-grey b-dashed m-l-15')  do %>
-            <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link no-border overlay-search bg-transparent", autofocus: true %>
+            <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link no-border overlay-search bg-transparent" %>
           <% end %>
           <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
             <li class="inline p-r-15 p-l-15 fs-14 bold">
@@ -152,7 +152,7 @@
             <%= link_to('Questions?', main_app.help_path, title: "Get Help", class: 'text-master #{current_class?(help_path)}') %>
           </div>
           <div class="pull-left p-t-5 font-heading">
-            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-complete text-white inline') %>
+            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-green text-white inline') %>
           </div>
         </div>
       </div>

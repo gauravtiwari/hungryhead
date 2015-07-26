@@ -300,10 +300,14 @@ table tr:last-child {
   border-bottom: 1px solid;
 }
 .quickview-wrapper .nav-tabs {
-  background-color: #5b98e0;
+  background-color: #4285f4;
 }
 .quickview-wrapper .nav-tabs > li > a {
   color: #fff;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.8;
 }
 .quickview-wrapper .nav-tabs > li > a:hover {
   color: #fff;
@@ -506,18 +510,18 @@ input.error:-webkit-autofill {
   padding-top: 8px;
 }
 .jumbotron .cover-photo {
-  background-color: #5b98e0;
+  background-color: #4285f4;
 }
 .bg-solid {
   background: none;
-  background-color: #5b98e0!important;
+  background-color: #4285f4!important;
   overflow: hidden;
 }
 .text-brand {
-  color: #5b98e0!important;
+  color: #4285f4!important;
 }
 .b-brand {
-  border-color: #5b98e0!important;
+  border-color: #4285f4!important;
 }
 .bg-light-grey {
   background: #e7e7e7;

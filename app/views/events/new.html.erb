@@ -1,0 +1,17 @@
+<% cache(["new_event_form", current_user]) do %>
+  <div class="container-fluid col-md-8 auto-margin p-b-60">
+    <div class="m-t-50" id="rootwizard">
+      <div class="tab-content">
+        <div class="tab-pane bg-white box-shadow padding-20 active slide-left" id="tab2">
+          <div class="row">
+            <div class="col-md-12 auto-margin">
+              <h1>Create an event</h1>
+              <h5 class="hint-text">Please fill in basic details to create an event profile.</h5>
+              <%= render 'form' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

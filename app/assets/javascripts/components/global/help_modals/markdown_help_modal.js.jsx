@@ -5,7 +5,7 @@ var MarkDownHelpModal = React.createClass({
     },
     render: function() {
         return (
-            <div className="modal fade slide-right" id="markdownPopup" tabindex="-1" role="dialog" aria-labelledby="markdownPopupLabel" aria-hidden="true">
+            <div className="modal fade slide-right" id="markdownPopup" tabIndex="-1" role="dialog" aria-labelledby="markdownPopupLabel" aria-hidden="true">
             <div className="modal-dialog ">
             <div className="modal-content-wrapper">
                 <div className="modal-content table-block scrollable">

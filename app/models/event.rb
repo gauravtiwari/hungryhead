@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
   #included modules
   include Redis::Objects
+  include ActiveModel::Validations
 
   #Slug
   extend FriendlyId
@@ -9,13 +10,14 @@ class Event < ActiveRecord::Base
 
   #Geocode
   geocoded_by :address
-  after_validation :geocode, if: ->(event){ event.address.present? and event.address_changed? }
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode, :save_full_address, if: ->(event){ event.address.present? and event.address_changed? }
 
   #Validation
   validates :title, :presence => true, length: {within: 10..50}
   validates :start_time, :end_time, :presence => true
   validates :excerpt, :presence => true, length: {within: 100..300}
-  validates :description, :presence => true, length: {within: 300..2000}
+  validates :description, :presence => true, length: {within: 300..2000}, on: :update
   validates :address, :presence => true
 
   #Includes concerns
@@ -52,7 +54,6 @@ class Event < ActiveRecord::Base
 
   #Callbacks
   after_destroy  :delete_activity
-  after_commit :create_activity, on: :create
 
   public
 
@@ -79,17 +80,16 @@ class Event < ActiveRecord::Base
 
   private
 
+  def save_full_address
+    self.full_address = reverse_geocode
+  end
+
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?
   end
 
   def slug_candidates
    [:title]
-  end
-
-  def create_activity
-    # Enque activity creation
-    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def delete_activity

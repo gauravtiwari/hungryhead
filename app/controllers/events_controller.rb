@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def edit
     @owner = @event.owner
     respond_to do |format|
-      format.js {render :edit}
+      format.js {render :new}
     end
   end
 
@@ -31,10 +31,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = CreateEventService.new(event_params).create
+    @owner = @event.owner
     respond_to do |format|
       if @event.save
-        flash[:notice] = "Event was successfully created, redirecting..."
-        format.js {render :show}
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -63,17 +63,17 @@ class EventsController < ApplicationController
   end
 
   # PUT /events/1/unpublish
-  def publish
-    @event.published!
-    @event.everyone!
-    if @event.published?
+  def unpublish
+    @event.draft!
+    @event.me!
+    if @event.draft?
       DeleteActivityJob.perform_later(@event.id, @event.class.to_s)
       flash[:notice] = "Your event profile was successfully unpublished"
     else
       flash[:notice] = "Something went wrong, please try again."
     end
     respond_to do |format|
-      format.js
+      format.js {render :publish}
     end
   end
 

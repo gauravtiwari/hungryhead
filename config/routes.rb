@@ -215,6 +215,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       put :publish
+      put :unpublish
       get :attendees
       get :comments
     end
