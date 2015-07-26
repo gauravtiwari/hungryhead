@@ -305,6 +305,10 @@ table tr:last-child {
 .quickview-wrapper .nav-tabs > li > a {
   color: #fff;
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.8;
+}
 .quickview-wrapper .nav-tabs > li > a:hover {
   color: #fff;
   opacity: 1;

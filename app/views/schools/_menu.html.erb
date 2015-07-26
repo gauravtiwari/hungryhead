@@ -22,7 +22,7 @@
 			  <% end %>
 	  	</div>
 	     <div>
-			  <%= link_to(new_event_path(owner: @school.class.to_s, owner_id: @school), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
+			  <%= link_to(new_event_path(owner: @school.class.to_s, owner_id: @school), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10") do %>
 			  	<span class="fa fa-calendar"></span> Create event
 			  <% end %>
 	  	</div>

@@ -66,21 +66,25 @@ jQuery(document).ready ->
 	$('#pitch_idea_form').validate()
 	$('#editProfileFormPopup').validate()
 	$('#valid-form').validate()
+	$('form#event_form').validate()
 
 	try
 		$('#idea_high_concept_pitch').rules 'add', minlength: 20, maxlength: 50
 		$('#idea_elevator_pitch').rules 'add', minlength: 100, maxlength: 140
+		$("[data-toggle='tooltip']").tooltip()
+		#Add client side rules
+		$('form#event_excerpt').rules 'add', minlength: 100, maxlength: 300
+		$('form#event_title').rules 'add', minlength: 10, maxlength: 50
+		$('form#event_description_textarea').rules 'add', minlength: 300, maxlength: 2000
 	catch e
-
-	$("[data-toggle='tooltip']").tooltip()
 
 	try
 		$('form#new_invite_request').each ->
 			$(@).validate()
 			return
 	catch e
-	#Initialize Pages modules
 
+	#Initialize Pages modules
 	$.Pages.init()
 
 	$('.single-tag').tagsinput maxTags: 1

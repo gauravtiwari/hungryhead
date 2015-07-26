@@ -35,11 +35,9 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         flash[:notice] = "Event was successfully created, redirecting..."
-        format.js {render :show}
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
-        format.js {render :new}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -65,17 +63,17 @@ class EventsController < ApplicationController
   end
 
   # PUT /events/1/unpublish
-  def publish
-    @event.published!
-    @event.everyone!
-    if @event.published?
+  def unpublish
+    @event.draft!
+    @event.me!
+    if @event.draft?
       DeleteActivityJob.perform_later(@event.id, @event.class.to_s)
       flash[:notice] = "Your event profile was successfully unpublished"
     else
       flash[:notice] = "Something went wrong, please try again."
     end
     respond_to do |format|
-      format.js
+      format.js {render :publish}
     end
   end
 
