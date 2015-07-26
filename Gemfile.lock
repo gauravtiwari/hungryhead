@@ -397,7 +397,6 @@ GEM
       railties (= 4.2.3)
       sprockets-rails
     rails-assets-animate.css (3.3.0)
-    rails-assets-autosize (3.0.8)
     rails-assets-bootstrap (3.1.1)
       rails-assets-jquery (>= 1.9.0)
     rails-assets-bootstrap-tagsinput (0.5.0)
@@ -423,6 +422,7 @@ GEM
       rails-assets-eventEmitter (~> 4.0)
       rails-assets-eventie (>= 1.0.4, < 2)
     rails-assets-jquery (2.1.4)
+    rails-assets-jquery-autosize (3.0.8)
     rails-assets-jquery-bez (1.0.11)
     rails-assets-jquery-form (3.46.0)
       rails-assets-jquery (>= 1.5)
@@ -433,6 +433,8 @@ GEM
       rails-assets-jquery (>= 1.2.3)
     rails-assets-jquery.cookie (1.4.1)
       rails-assets-jquery (>= 1.2)
+    rails-assets-jquery.easing (1.3.1)
+      rails-assets-jquery (>= 1.2.1)
     rails-assets-jquery.scrollbar (0.2.8)
       rails-assets-jquery (>= 1.7)
     rails-assets-jquery.validate (1.13.0)
@@ -461,6 +463,7 @@ GEM
       rails-assets-select2 (>= 3.3.2, < 4)
     rails-assets-slimScroll (1.3.6)
       rails-assets-jquery (>= 1.7)
+    rails-assets-sly (1.6.0)
     rails-assets-sweetalert (1.0.1)
     rails-assets-underscore (1.8.3)
     rails-deprecated_sanitizer (1.0.3)
@@ -650,7 +653,6 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.3)
   rails-assets-animate.css!
-  rails-assets-autosize!
   rails-assets-bootstrap!
   rails-assets-bootstrap-tagsinput!
   rails-assets-bootstrap-tokenfield!
@@ -661,12 +663,14 @@ DEPENDENCIES
   rails-assets-hammerjs!
   rails-assets-imagesloaded!
   rails-assets-jquery!
+  rails-assets-jquery-autosize!
   rails-assets-jquery-bez!
   rails-assets-jquery-form!
   rails-assets-jquery-ujs!
   rails-assets-jquery-unveil!
   rails-assets-jquery.actual!
   rails-assets-jquery.cookie!
+  rails-assets-jquery.easing!
   rails-assets-jquery.scrollbar!
   rails-assets-jquery.validate!
   rails-assets-marked!
@@ -677,6 +681,7 @@ DEPENDENCIES
   rails-assets-pusher!
   rails-assets-select2-bootstrap-css!
   rails-assets-slimScroll!
+  rails-assets-sly!
   rails-assets-sweetalert!
   rails-assets-underscore!
   rails-dev-boost!

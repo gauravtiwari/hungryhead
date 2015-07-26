@@ -5,7 +5,7 @@
 //= require jquery
 //= require jquery-form
 //= require bootstrap
-//= require plugins/jquery/jquery-easy
+//= require jquery.easing
 //= require modernizr
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
@@ -35,12 +35,13 @@
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require momentjs
+//= require sly
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
 //= require jquery.validate
 //= require jquery.validate/additional-methods
-//= require jquery.autosize
+//= require jquery-autosize
 //= require marked
 //= require masonry/dist/masonry.pkgd
 //= require nprogress

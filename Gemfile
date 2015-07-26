@@ -28,10 +28,12 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-fastclick'
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-underscore'
+  gem 'rails-assets-jquery.easing'
   gem 'rails-assets-font-awesome'
   gem 'rails-assets-momentjs'
   gem 'rails-assets-jquery.validate'
-  gem 'rails-assets-autosize'
+  gem 'rails-assets-jquery-autosize'
+  gem 'rails-assets-sly'
   gem 'rails-assets-animate.css'
   gem 'rails-assets-jquery.cookie'
 end
