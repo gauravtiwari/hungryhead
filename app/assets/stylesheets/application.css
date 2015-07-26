@@ -6,16 +6,14 @@
  *= require jquery.atwho
  *= require jquery-ui/autocomplete
  *= require select2-bootstrap
- *= require plugins/boostrapv3/css/bootstrap.min
- *= require font-awesome
+ *= require bootstrap
  *= require sweetalert
- *= require chosen
- *= require ImageSelect
  *= require bootstrap-tagsinput
- *= require plugins/jquery-scrollbar/jquery.scrollbar
- *= require plugins/jquery-menuclipper/jquery.menuclipper
- *= require plugins/bootstrap-select2/select2
- *= require plugins/switchery/css/switchery.min
+ *= require jquery.scrollbar
+ *= require select2-bootstrap-css
+ *= require bootstrap-datetimepicker
+ *= require font-awesome
+ *= require pnotify
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
  *= require core/css/pages-icons
@@ -35,6 +33,9 @@
  *= require search
  *= require users
  *= require comments
+ *= require coin
+ *= require events
+ *= require help
  *= require footer
  *= require idea_profile
  *= require join

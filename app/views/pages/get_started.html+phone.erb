@@ -1,0 +1,90 @@
+<% cache(['beta', 'get_started', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<div class="join-wrapper bg-white">
+  <div class="join">
+    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+        <div class="join-photo">
+        <div class="container vmiddle">
+        <div class="row">
+              <div class="col-md-8 auto-margin">
+                  <div class="hero-section inner">
+                    <div class="hero-section inner text-center">
+                         <h1 class="text-white bold">
+                            Join us
+                          </h1>
+                         <p class="text-white fs-16 semi-bold">
+                           Understand how you can join
+                         </p>
+                     </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container horz-section  wrapper-small">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="panel  p-l-15 p-r-15 panel-group panel-transparent" data-toggle="collapse" id=
+    "accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="collapsed" data-parent="#accordion" data-toggle=
+            "collapse" href="#forStudent">For Students</a>
+          </h4>
+        </div>
+        <div class="panel-collapse collapse in" id="forStudent">
+          <div class="panel-body">
+            <h4>With ideas: </h4>
+            <p>
+             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+            </p>
+
+            <h4>Without ideas: </h4>
+            <p>
+             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="" data-parent="#accordion" data-toggle="collapse" href=
+            "#forMentors">For mentors and investors</a>
+          </h4>
+        </div>
+        <div class="panel-collapse collapse" id="forMentors">
+          <div class="panel-body">
+            <h4>Try Something neat</h4>
+            <p>
+             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+             </p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="collapsed" data-parent="#accordion" data-toggle=
+            "collapse" href="#forSchools">For Colleges and Universities</a>
+          </h4>
+        </div>
+        <div class="panel-collapse collapse" id="forSchools">
+          <div class="panel-body">
+            <p>
+             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+
+  </div>
+<% end %>
+<%= render partial: 'globals/footer' %>

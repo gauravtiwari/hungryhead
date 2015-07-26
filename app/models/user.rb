@@ -1,16 +1,22 @@
 class User < ActiveRecord::Base
 
+  acts_as_copy_target
+  extend OrderAsSpecified
+
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
+
   #redis objects
   include Redis::Objects
-  #order objects in same order as given
-  extend OrderAsSpecified
 
   #Scopes for searching
-  scope :entrepreneurs, -> { where(role: 1) }
-  scope :users, -> { where(role: 0) }
+  scope :students, -> { where(state: 1, role: 1) }
+  scope :from_school, ->(school_id) { where(state: 1, :school_id => school_id)}
+  scope :entrepreneurs, -> { where(state: 1, role: 2) }
+  scope :faculties, -> { where(state: 1, role: 4) }
+  scope :users, -> { where(state: 1, role: 0) }
+  scope :published, -> { where(state: 1) }
 
   #Gamification
   has_merit
@@ -19,6 +25,7 @@ class User < ActiveRecord::Base
   include Sluggable
   include Followable
   include Follower
+  include Feeder
   include Mentionable
   include Suggestions
   include Scorable
@@ -26,37 +33,45 @@ class User < ActiveRecord::Base
   include Investor
   include Commenter
   include Voter
+  include Sharings
+  include Activist
+  include Impressionable
+  include Impressioner
+  include Eventable
 
   attr_accessor :login
+  attr_reader :raw_invitation_token
 
   #Model Relationships
-  belongs_to :school
+  belongs_to :school, touch: true
 
-  has_many :authentications, :dependent => :destroy
-  has_many :activities, :dependent => :destroy
-  has_many :notifications, :dependent => :destroy
-  has_many :posts, dependent: :destroy
+  #has_many relationships
+  has_many :attendences, class_name: 'EventAttendee', foreign_key: 'attendee_id', :dependent => :destroy
+  has_many :team_invites, class_name: 'TeamInvite', foreign_key: 'invited_id', :dependent => :destroy
+  has_many :event_invites, class_name: 'EventInvite', foreign_key: 'invited_id', :dependent => :destroy
+
+  has_many :ideas, dependent: :destroy, autosave: true
+  has_many :idea_messages, dependent: :destroy, autosave: true
 
   #Callbacks
-  before_save :add_fullname, if: :name_not_present?
-  before_save :add_username, if: :username_absent?
-  before_destroy :remove_from_soulmate, :decrement_counters, :delete_activity, unless: :is_admin
-  before_save :seed_fund, :seed_settings, unless: :is_admin
-  after_create :increment_counters
-  after_save :load_into_soulmate, :delete_latest_cache, :rebuild_notifications, unless: :is_admin
+  before_create :add_fullname, if: :name_not_present?
+  before_create :add_username, if: :username_absent?
+  after_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
+  before_create :seed_fund, :seed_settings, unless: :is_admin
+
+  #Call Service to update cache
+  after_save :soulmate_loader, if: :rebuild_cache?
 
   #Tagging System
-  acts_as_taggable_on :hobbies, :locations, :subjects, :markets
+  acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
   acts_as_tagger
 
   #Sorted set to store followers, followings ids and latest activities
   set :followers_ids
   set :followings_ids
-  set :idea_followings_ids
   set :school_followings_ids
+  set :impressioners_ids
 
-  #Latest ideas
-  list :latest_ideas, maxlength: 5, marshal: true
   #List to store latest users
   list :latest, maxlength: 20, marshal: true, global: true
 
@@ -64,10 +79,8 @@ class User < ActiveRecord::Base
   sorted_set :ticker, marshal: true
   sorted_set :friends_notifications, marshal: true
 
-  #List to store last 5 activities
-  list :latest_activities, maxlength: 5, marshal: true
-
   #Sorted set to store trending ideas
+  sorted_set :latest, global: true
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
@@ -82,27 +95,29 @@ class User < ActiveRecord::Base
   counter :comments_counter
   counter :votes_counter
   counter :ideas_counter
-  counter :posts_counter
   counter :views_counter
-  counter :activities_counter
-  counter :shares_counter
+
+  #Count user notifications
+  counter :notifications_counter
 
   #Enumerators to handle states
   enum state: { inactive: 0, published: 1}
-  enum role: { user: 0, student: 1, entrepreneur: 2, mentor: 3, teacher: 4 }
+  enum feed_preferences: { latest_stories: 0, popular_stories: 1 }
+  enum role: { user: 0, student: 1, entrepreneur: 2, alumni: 3, faculty: 4 }
 
   #Accessor methods for JSONB datatypes
-  store_accessor :profile, :facebook_url, :twitter_url, :linkedin_url, :website_url
+  store_accessor :profile, :facebook_url,
+  :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
-  :cover_processing, :avatar_processing
-  store_accessor :settings, :theme, :idea_notifications, :post_notifications, :feedback_notifications,
+  :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
+  store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   #Devise for authentication
-  devise :uid, :invitable, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable, :confirmable,
-    :registerable, :authentication_keys => [:login]
+  devise :invitable, :uid, :database_authenticatable, :registerable,
+    :recoverable, :rememberable, :lockable, :trackable, :validatable, :confirmable,
+    :authentication_keys => [:login]
 
 
   #Media Uploaders - carrierwave
@@ -112,15 +127,12 @@ class User < ActiveRecord::Base
   #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
-  validates :username, :presence => true, :uniqueness => true, format: { with: /\A[a-zA-Z0-9-]+\Z/, message: "should not contain empty spaces or symbols" }
+  validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /\A[a-zA-Z0-9](\w|\.)*[a-zA-Z0-9]$\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
 
   #Get username suggestions
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname
-
-  #Messaging system
-  acts_as_messageable
 
   #Public methods
   public
@@ -129,12 +141,22 @@ class User < ActiveRecord::Base
     true
   end
 
-  def joined_within_a_year?
-    (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
+  def self.current
+    Thread.current[:user]
   end
 
-  def mailboxer_email(object)
-    email
+  def self.current=(user)
+    Thread.current[:user] = user
+  end
+
+  def get_contributions
+    Idea.find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
+  end
+
+  def after_password_reset; end
+
+  def joined_within_a_year?
+    (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
   end
 
   def balance_available?(amount)
@@ -154,16 +176,20 @@ class User < ActiveRecord::Base
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end
 
+  def get_avatar
+    avatar.url(:avatar)
+  end
+
+  def avatar_present?
+    avatar.url(:avatar).present?
+  end
+
   def school_name
     school_id.present? ? school.name : ""
   end
 
-  def user_name_badge
+  def name_badge
     first_name.present? ? first_name.first + last_name.first : add_fullname
-  end
-
-  def unread_notifications
-    friends_notifications.members.select{|m| m[:unread] == true}.count
   end
 
   def firstname
@@ -174,20 +200,40 @@ class User < ActiveRecord::Base
     self.name.split(' ').second
   end
 
-  def rebuild_notifications
-    if rebuild_cache? && has_notifications?
-      unless admin?
-        #rebuild user feed every time name and avatar update.
-        RebuildNotificationsCacheJob.set(wait: 5.seconds).perform_later(id)
-      end
-    end
+  def cacheable_changed?
+    name_changed? || avatar_changed? || username_changed? || mini_bio_changed? && has_notifications?
   end
+
+  def rebuild_cache?
+     published? || id_changed? || name_changed? || avatar_changed? || mini_bio_changed?
+  end
+
+  def has_notifications?
+    #check if user has notifications
+    ticker.members.length > 0
+  end
+
+  def card_json
+    {
+      id: uid,
+      name: name,
+      name_badge: name_badge,
+      avatar: get_avatar,
+      url: profile_path(self),
+      description: mini_bio
+    }
+  end
+
 
   private
 
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || username_changed?
   end
 
   def name_not_present?
@@ -204,7 +250,7 @@ class User < ActiveRecord::Base
       email_username = email_username
     else
       num = 1
-      while(User.find_by_username(email_username).present?)
+      while(User.find_by_username(email_username).blank?)
         email_username = "#{name.parameterize}#{num}"
         num += 1
       end
@@ -226,12 +272,11 @@ class User < ActiveRecord::Base
   #Seeds settings into database on: :create
   def seed_settings
     self.settings = {
-      theme: 'solid',
+      theme: "#{role.downcase}",
       idea_notifications: true,
       feedback_notifications: true,
       investment_notifications: true,
       follow_notifications: true,
-      post_notifications: true,
       weekly_mail: true
     }
   end
@@ -241,89 +286,28 @@ class User < ActiveRecord::Base
     [:username]
   end
 
-  def rebuild_cache?
-    #check if basic info changed and user is not new
-    name_changed? || avatar_changed? || username_changed? && !id_changed?
-  end
-
-  def has_notifications?
-    #check if user has notifications
-    ticker.members.length > 0
-  end
-
-  def delete_latest_cache
-    if rebuild_cache? || mini_bio_changed?
-      $redis.del("popular_20_user")
-      $redis.del("trending_20_user")
-      $redis.del("latest_listing_user")
-    end
-  end
-
-  #Load data to redis using soulmate after_save
-  def load_into_soulmate
-    #Seperate index for each user type
-    unless admin?
-      if type == "Student"
-        soulmate_loader("students")
-      elsif type == "Mentor"
-        soulmate_loader("mentors")
-      elsif type == "Teacher"
-        soulmate_loader("teachers")
-      end
-    end
-  end
-
-  def soulmate_loader(type)
-    #instantiate soulmate loader to re-generate search index
-    loader = Soulmate::Loader.new(type)
-    loader.add(
-      "term" => name,
-      "image" => avatar.url(:avatar),
-      "description" => mini_bio,
-      "id" => id,
-      "data" => {
-        "link" => profile_path(self)
-      }
-    )
+  def soulmate_loader
+    RecordSavedJob.set(wait: 1.minute).perform_later(id, self.class.to_s)
   end
 
   def remove_from_soulmate
     #Remove search index if :record destroyed
-    loader = Soulmate::Loader.new("students")
+    loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
-  end
-
-  def increment_counters
-    #Increment counters
-    school.students_counter.increment if school_id.present? && self.type == "Student"
-    #Cache lists for school
-    school.latest_students << id if school_id.present? && self.type == "Student"
-    school.latest_faculties << id if school_id.present? && self.type == "Teacher"
-    #Cache sorted set for global leaderboard
-    User.latest << id unless type == "User"
-
-    #Add leaderboard score
-    User.leaderboard.add(id, points)
-    User.trending.add(id, 1)
   end
 
   def decrement_counters
     #Decrement counters
-    school.students_counter.decrement if school_id.present? && school.students_counter.value > 0 && self.type == "Student"
-    #delete cached lists for school
-    school.latest_students.delete(id) if school_id.present? && self.type == "Student"
-    school.latest_faculties.delete(id) if school_id.present? && self.type == "Teacher"
-    #delete cached sorted set for global leaderboard
-    User.latest.delete(id) unless type == "User"
+    school.people_counter.reset
+    school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
 
+    #delete cached sorted_set for school
+    school.published_people.delete(id) if school_id.present?
+    #delete cached sorted set for global leaderboard
+    User.latest.delete(id)
     #delete leaderboard for this user
     User.leaderboard.delete(id)
     User.trending.delete(id)
-  end
-
-  #Deletes all dependent activities for this user
-  def delete_activity
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
   end
 
   protected

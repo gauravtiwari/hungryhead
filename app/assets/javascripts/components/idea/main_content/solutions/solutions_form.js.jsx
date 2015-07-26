@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var SolutionsForm = React.createClass({
 
   render: function() {
@@ -14,8 +12,8 @@ var SolutionsForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    if(this.props.idea.sections && this.props.idea.sections.solutions) {
-      var solutions = this.props.idea.sections.solutions;
+    if(this.props.idea && this.props.idea.solutions) {
+      var solutions = this.props.idea.solutions;
     } else {
       var solutions = "";
     }
@@ -23,8 +21,7 @@ var SolutionsForm = React.createClass({
     return (
       <div className={classes}>
          <form id="solutions-edit-form" ref="solutions_form" className="solutions-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-             <label>Describe the solutions identified. <span>What is different or unique? </span></label>
+             <label className="m-b-20">Describe your solution. <span>What is different or unique? </span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {solutions} name="idea[solutions]" placeholder='List your solutions' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

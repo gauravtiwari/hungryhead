@@ -1,4 +1,6 @@
-<div class="col-lg-8 auto-margin">
+<% cache(["beta", "devise_registerations", "edit", resource]) do %>
+<div class="container">
+<div class="col-lg-8 col-sm-12 col-xs-12 auto-margin">
     <div class="panel panel-transparent">
         <ul class="nav nav-tabs nav-tabs-simple nav-tabs-left bg-white"
         id="tab-3">
@@ -15,11 +17,11 @@
         <div class="tab-content bg-white">
             <div class="tab-pane active" id="password">
                 <div class="row column-seperation">
-                    <div class="col-md-12">
+                    <div class="col-md-12 col-xs-12">
                         <h3 class="semi-bold m-b-20  b-b b-grey inline">
                             Change Password
                         </h3>
-                       <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource),  method: :patch) do |f| %>
+                       <%= simple_form_for(resource, as: resource_name, url: update_user_registeration_path(resource),  method: :patch, remote: true) do |f| %>
                          <%= f.error_notification %>
 
                          <div class="form-group">
@@ -48,7 +50,7 @@
                   Notification Preferences
                 </h3>
 
-                <%= simple_form_for(resource, as: :user, url: user_path(resource),  method: :patch) do |f| %>
+                <%= simple_form_for(resource, as: :user, url: user_path(resource),  method: :patch, remote: true) do |f| %>
 
                  <div class="checkbox check-success">
                    <%= f.input_field :idea_notifications, as: :boolean, id: 'idea_notifications' %>
@@ -74,6 +76,13 @@
                    <%= f.input_field :weekly_mail, as: :boolean, id: 'weekly_mail' %>
                    <label for="weekly_mail">Weekly newsletter</label>
                  </div>
+                <div class="form-group">
+                  <label for="feed">Home Page feed preferences</label>
+                  <select class="cs-select cs-skin-slide" name="user[feed_preferences]" data-init-plugin="cs-select">
+                      <option value="latest_stories">Latest Stories</option>
+                      <option value="popular_stories">Popular Stories</option>
+                  </select>
+                </div>
 
                   <div class="form-actions p-t-20">
                     <%= link_to "Back", :back, class: 'b-b b-danger text-master p-b-5' %>
@@ -89,4 +98,6 @@
         </div>
     </div>
 </div>
+</div>
+<% end %>
 

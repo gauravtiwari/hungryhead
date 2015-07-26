@@ -3,32 +3,61 @@ var IdeaHeader = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
     return {
-      idea: data.idea,
-      raised: data.stats.raised,
-      feedbacks_count: data.stats.feedbacks_counter,
-      votes_count: data.stats.votes_counter
+      data: data,
+      idea: data.idea
     }
   },
 
-  componentDidMount: function() {
-    $.pubsub('subscribe', 'update_investment_stats', function(msg, data){
-      this.setState({raised: data + this.state.raised});
-    }.bind(this));
+  saveIdeaForm:function(formData, action) {
+    $.pubsub('publish', 'idea_edit_form_saving', true);
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      data: formData,
+      url: action,
+      type: "PUT",
+      dataType: "json",
+      success: function ( data ) {
+        this.setState({idea: data.idea});
+        $('#editIdeaFormPopup').modal('hide');
+        $('body').pgNotification({style: "simple", message: "Idea Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
+        $.pubsub('publish', 'idea_edit_form_saving', false);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
 
-    $.pubsub('subscribe', 'update_vote_stats', function(msg, data){
-      this.setState({votes_count: this.state.votes_count + 1});
-    }.bind(this));
+  openForm: function() {
+    $('body').append($('<div>', {class: 'edit_idea_form_modal', id: 'edit_idea_form_modal'}));
+    React.render(<IdeaEditForm key={this.state.idea.uuid} closeForm={this.closeForm} openForm={this.openForm} idea={this.state.idea} form={this.state.idea.form} saveIdeaForm={this.saveIdeaForm} />,
+      document.getElementById('edit_idea_form_modal')
+    );
+    $('#editIdeaFormPopup').modal('show');
+  },
 
-    $.pubsub('subscribe', 'update_feedback_stats', function(msg, data){
-      this.setState({feedbacks_count: data});
-    }.bind(this));
+  closeForm: function() {
+    $('#editIdeaFormPopup').modal('hide');
   },
 
   render: function() {
+    if(this.state.idea.cover.has_cover || this.state.data.meta.is_owner) {
+      var cover = <IdeaCover data= {this.state.data} />
+    } else {
+      var cover = ""
+    }
+
+    if(this.state.data.meta.is_owner) {
+
+        var text = <span className="fa fa-pencil"> Edit</span>;
+    } else {
+      var text = "";
+    }
     return (
       <div className="idea-header bg-solid">
-        <IdeaProfile idea={this.state.idea} />
-        <IdeaStats raised={this.state.raised} feedbacks_count={this.state.feedbacks_count} votes_count={this.state.votes_count} />
+        {cover}
+        <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
+        <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
       </div>
     );
   }

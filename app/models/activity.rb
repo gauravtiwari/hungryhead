@@ -1,17 +1,68 @@
 class Activity < ActiveRecord::Base
-  include Renderable
+
+  extend OrderAsSpecified
+  #redis objects
+  include Redis::Objects
   include Feedable
+  include FeedJsonable
+
+  after_commit :cache_activity_to_redis, :delete_older_notifications, on: :create
+
+  #Redis cache ids
+  sorted_set :popular, global: true
 
   def cache_key
-    "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+    "activities/activity-#{id}/owner-#{owner.id}-#{owner_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+  end
+
+  def self.latest_stories
+    where(published: true, is_notification: false).includes([:trackable, :owner]).order(id: :desc)
+  end
+
+  def self.popular_stories
+    where(published: true, is_notification: false).includes([:trackable, :owner]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp
     trackable.updated_at.try(:utc).try(:to_s, :number)
   end
 
-  def user_timestamp
-    user.updated_at.try(:utc).try(:to_s, :number)
+  def owner_timestamp
+    owner.updated_at.try(:utc).try(:to_s, :number)
+  end
+
+  #Find recipient user
+  def recipient_user
+    if recipient_type == "User"
+      recipient
+    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type != "School"
+      recipient.owner
+    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type == "School"
+      recipient.owner.user
+    else
+      recipient.user
+    end
+  end
+
+  private
+
+  def cache_activity_to_redis
+    Activity.popular.add(id, id)
+  end
+
+  def delete_older_notifications
+    unless owner_type == "School"
+      refresh_friends_notifications
+      refresh_ticker
+    end
+  end
+
+  def refresh_ticker
+    owner.ticker.remrangebyrank(0, -100)
+  end
+
+  def refresh_friends_notifications
+    owner.friends_notifications.remrangebyrank(0, -50)
   end
 
 end

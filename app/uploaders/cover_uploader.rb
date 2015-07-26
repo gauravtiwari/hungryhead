@@ -5,8 +5,8 @@ class CoverUploader < CarrierWave::Uploader::Base
   #include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::MimeTypes
   include CarrierWave::MimetypeFu
-  process :set_content_type
 
+  process :set_content_type
   storage :fog
 
   def process_uri(uri)

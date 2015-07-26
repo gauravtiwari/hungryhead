@@ -1,3 +1,4 @@
+
 var SetIntervalMixin = {
     componentWillMount: function() {
         this.intervals = [];
@@ -11,12 +12,14 @@ var SetIntervalMixin = {
 };
 var LatestFeed = React.createClass({
   getInitialState: function(){
+    var data = this.props.notifications
     return {
       feed: [],
-      next_page: null,
+      next_page: undefined,
       closed: true,
+      loading: true,
       count: null
-    };
+    }
   },
 
   componentDidMount: function() {
@@ -42,27 +45,7 @@ var LatestFeed = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        if(item.verb === "invested") {
-          elements.push(<LatestFeedInvestmentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "followed") {
-          elements.push(<LatestFeedFollowItem key={Math.random()} item={item} />)
-        } else if(item.verb === "feedbacked") {
-          elements.push(<LatestFeedFeedbackItem key={Math.random()} item={item} />)
-        } else if(item.verb === "pitched"){
-          elements.push(<LatestFeedIdeaItem key={Math.random()} item={item} />)
-        } else if(item.verb === "joined"){
-          elements.push(<LatestFeedJoinItem key={Math.random()} item={item} />)
-        } else if(item.verb === "commented"){
-          elements.push(<LatestFeedCommentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "voted"){
-          elements.push(<LatestFeedVoteItem key={Math.random()} item={item} />)
-        } else if(item.verb === "mentioned"){
-          elements.push(<LatestFeedMentionItem key={Math.random()} item={item} />)
-        } else if(item.verb === "posted"){
-          elements.push(<LatestFeedPostItem key={Math.random()} item={item} />)
-        } else if(item.verb === "shared"){
-          elements.push(<LatestFeedShareItem key={Math.random()} item={item} />)
-        }
+        elements.push(<LatestFeedItem key={Math.random()} item={item} />)
       });
       return elements;
   },
@@ -95,29 +78,22 @@ var LatestFeed = React.createClass({
     return;
   },
 
-
   fetchNotifications: function(){
     $.getJSON(this.props.path, function(json, textStatus) {
       this.setState({
         feed: this.buildElements(json.items),
-        next_page: json.next_page
-    });
+        next_page: json.next_page,
+        loading: false
+      });
     }.bind(this));
   },
 
   render: function(){
 
-    return(
-      <div className="widget-11-2 panel p-b-10 b-b b-light-grey no-margin">
-          <div className="panel-heading">
-           <div className="panel-title">
-            Latest activities
-            </div>
-          </div>
-          <div className="panel-body full-border-light no-margin auto-overflow no-padding">
-           <div>
-             <ul className="latest-activities no-style no-padding no-margin">
-               <Infinite elementHeight={60}
+    if(this.state.loading) {
+      var content = <div className="no-content hint-text"><i className="fa fa-spinner fa-spin"></i></div>;
+    } else if(this.state.feed.length > 0) {
+      var content =  <Infinite elementHeight={60}
                 containerHeight={250}
                 infiniteLoadBeginBottomOffset={200}
                 onInfiniteLoad={this.handleInfiniteLoad}
@@ -125,7 +101,25 @@ var LatestFeed = React.createClass({
                 isInfiniteLoading={this.state.isInfiniteLoading}
                 >
                  {this.state.feed}
-                </Infinite>
+                </Infinite>;
+    } else {
+      var content = <div className="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No latest activities</span>
+        </div>;
+    }
+
+    return(
+      <div className="widget-11-2 panel b-b b-light-grey no-margin">
+          <div className="panel-heading bg-light-blue-lightest">
+            <div className="panel-title">
+              <span className="fa fa-list text-danger"></span> Latest Activities
+            </div>
+          </div>
+          <div className="panel-body full-border-light no-margin auto-overflow no-padding">
+           <div>
+             <ul className="latest-activities scrollable no-style no-padding no-margin">
+              {content}
              </ul>
             </div>
           </div>

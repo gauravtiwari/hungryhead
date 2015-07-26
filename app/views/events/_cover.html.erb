@@ -1,0 +1,3 @@
+<% if @event.cover !=  nil %>
+  <%= react_component('EventCover', {data: render(template: 'events/show.json.jbuilder')} ) %>
+<% end %>

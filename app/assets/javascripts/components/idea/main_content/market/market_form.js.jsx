@@ -1,9 +1,7 @@
-/** @jsx React.DOM */
-
 var MarketForm = React.createClass({
 
   render: function() {
-    
+
     var cx = React.addons.classSet;
     var classes = cx({
       'market-edit-form': true,
@@ -15,8 +13,8 @@ var MarketForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-     if(this.props.idea.sections && this.props.idea.sections.market) {
-      var market = this.props.idea.sections.market;
+     if(this.props.idea && this.props.idea.market) {
+      var market = this.props.idea.market;
      } else {
       var market = "";
      }
@@ -24,8 +22,7 @@ var MarketForm = React.createClass({
     return (
       <div className={classes}>
          <form id="market-edit-form" ref="market_form" className="market-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-             <label className="m-b-10">Describe the market for your idea. <span>People you are targeting? Estimated numbers? </span> <small>You can link images.</small> </label>
+             <label className="m-b-20">Describe the market for your idea. <span>People you are targeting? Estimated numbers? </span> <small className="clearfix">You can link images using markdown(Click help).</small> </label>
              <textarea ref="description" className="form-control empty" defaultValue={market} name="idea[market]" placeholder='Describe your market' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

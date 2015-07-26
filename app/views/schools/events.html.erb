@@ -1,0 +1,46 @@
+<div class="wrapper-small events-bg-gradient">
+  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <% data = render(template: 'schools/show.json.jbuilder') %>
+    <div class="user-profile auto-margin">
+        <div class="thumbnail-wrapper d100">
+            <div class="profile-logo">
+              <%= react_component('SchoolLogo', {data: data}) %>
+            </div>
+        </div>
+    </div>
+    <div class="hero-text inner clearfix">
+      <h2 class="text-white">Browse events</h2>
+      <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
+    </div>
+  </div>
+</div>
+
+<div class="box-shadow bg-white">
+  <div class="container">
+    <%= render partial: 'menu' %>
+  </div>
+</div>
+
+<div class="container p-t-40 p-b-80">
+  <div class="events-list">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2" class="no-padding"><%= pluralize(@events.count, 'Result',) %> </th>
+            <th>Register</th>
+            <th class="text-center">Event Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @events.each do |event| %>
+            <%= render partial: 'events/event', locals: {event: event} %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="paging-container p-r-15">
+        <%= will_paginate(@events, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
+    </div>
+  </div>
+</div>

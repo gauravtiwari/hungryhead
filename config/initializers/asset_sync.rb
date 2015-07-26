@@ -21,15 +21,6 @@ AssetSync.configure do |config|
   # Use the Rails generated 'manifest.yml' file to produce the list of files to
   # upload instead of searching the assets directory.
   config.manifest = true
-
-  config.custom_headers = {
-    ".*\.(ttf|otf|eot|woff|svg|swf)$" => {
-      access_control_allow_origin: "*",
-      access_control_max_age: 1728000,
-      access_control_request_method: "*",
-      access_control_allow_methods: "*"
-    }
-  }
   #
   # Fail silently.  Useful for environments such as Heroku
   # config.fail_silently = true

@@ -3,16 +3,20 @@ var InviteLink = React.createClass({
 
 	getInitialState: function() {
 		return {
-			form: this.props.form
+			path: this.props.path
 		};
 	},
 
 	loadInvitePopup: function() {
       $('body').append($('<div>', {class: 'invite_form_modal', id: 'invite_form_modal'}));
       React.render(
-		  <InviteTeam key={Math.random()} form={this.state.form} />,
+		    <InviteTeam key={Math.random()} path={this.state.path} />,
 		  document.getElementById('invite_form_modal')
-		);
+		  );
+      $('body').on('focus', 'textarea', function(event) {
+        event.preventDefault();
+        $(this).autosize();
+      });
       this.setState({loading: false});
       $('#inviteTeamPopup').modal('show');
       ReactRailsUJS.mountComponents();
@@ -20,7 +24,9 @@ var InviteLink = React.createClass({
 
 	render: function() {
 		return (
-				<a className="see-all" href="javascript:void(0)" onClick={this.loadInvitePopup}><i className="ion-plus"></i></a>
+        <a className="portlet-maximize" data-toggle="tooltip" title="Click to invite team members" data-container="body" href="javascript:void(0)" onClick={this.loadInvitePopup}>
+          <i className="fa fa-plus"></i>
+        </a>
 			);
 	}
 });

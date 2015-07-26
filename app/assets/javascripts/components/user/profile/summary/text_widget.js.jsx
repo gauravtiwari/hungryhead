@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-var converter = new Showdown.converter();
 var TextWidget = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
@@ -66,14 +64,14 @@ var TextWidget = React.createClass({
         var text = <span className="fa fa-pencil"> Edit</span>;
       }
     }
-  
+
     if(this.state.content) {
-      var html = converter.makeHtml(this.state.content);
+      var html = marked(this.state.content);
     } else {
       if(this.state.user.is_owner) {
-        var html = "<div class='text-master text-center auto-margin col-md-8 fs-16 light'>Write about yourself. <span>What are you studying? Your interests? Why are you here? etc.</span> </div>";
+        var html = "<div class='no-content'>Write about yourself. <span>What are you studying? Your interests? Why are you here? etc.</span> </div>";
       } else {
-        var html = "<div class='text-master text-center auto-margin col-md-8 fs-16'>" + this.state.user.name + " has not published about himself</div>";
+        var html = "<div class='no-content p-t-20 p-b-10'>" + this.state.user.name + " has not completed about me</div>";
       }
     }
 
@@ -81,8 +79,8 @@ var TextWidget = React.createClass({
       var preview = <PreviewContent content={html} />
     }
     return (
-        <div className="widget-16 about-me text-master panel panel-transparent no-margin">
-            <div className="panel no-margin">
+        <div className="widget-16 about-me text-master panel panel-transparent no-border box-shadow">
+            <div className="no-margin">
                 <TextWidgetHeader text={text} openForm={this.openForm} />
                 <TextWidgetContent mode={this.state.mode} content={html} />
                 {preview}

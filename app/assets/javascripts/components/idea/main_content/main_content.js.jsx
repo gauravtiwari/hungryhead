@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var MainContent = React.createClass({
 
   getInitialState: function() {
@@ -14,13 +12,12 @@ var MainContent = React.createClass({
   componentDidMount: function() {
     if(this.isMounted() && this.state.meta.is_owner) {
       this.updateContent();
-      var id = this.state.idea.id;
     }
   },
 
   updateContent: function() {
     var self = this;
-    var id = this.state.idea.id;
+    var id = this.state.idea.slug;
     idea_collaboration_channel.bind('idea_update_'+id, function(data) {
       var response = JSON.parse(data.data);
       $.pubsub('publish', 'closeSectionForm', false);
@@ -31,12 +28,7 @@ var MainContent = React.createClass({
   render: function() {
       return (
         <div>
-          <ElevatorPitch idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
           <Plan idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Problems idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Solutions idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <ValueProposition idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
-          <Market idea= {this.state.idea} form= {this.state.form} meta= {this.state.meta} />
         </div>
     )
   }

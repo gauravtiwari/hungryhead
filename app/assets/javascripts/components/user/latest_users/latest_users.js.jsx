@@ -2,18 +2,32 @@
 var LatestUsers = React.createClass({
 
   getInitialState: function() {
+    var data = JSON.parse(this.props.users);
     return {
-      list: [],
-      type: null,
-      current_path: this.props.path,
-      loading: true,
+      list: data.list,
+      type: data.type,
+      current_path: undefined,
+      loading: false,
       done: false
     }
   },
 
   componentDidMount: function() {
     if(this.isMounted()) {
-      this.fetchList();
+      var users_channel = pusher.subscribe("users-channel");
+      if(users_channel) {
+        users_channel.bind('new_user', function(data){
+          var new_item = [data.data]
+          var newState = React.addons.update(this.state, {
+              list : {
+                $unshift : new_item
+              }
+          });
+          this.setState(newState);
+          $("#user_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          $("#user_"+data.data.id).addClass('animated fadeInDown');
+        }.bind(this));
+      }
     }
   },
 
@@ -52,16 +66,6 @@ var LatestUsers = React.createClass({
     }.bind(this));
   },
 
-  fetchList: function(){
-    $.getJSON(this.state.current_path, function(json, textStatus) {
-      this.setState({
-        list: json.list,
-        type: json.type,
-        loading: false
-    });
-    }.bind(this));
-  },
-
   render: function() {
 
     var type = this.state.type;
@@ -75,12 +79,23 @@ var LatestUsers = React.createClass({
       var content = users
     }
 
+    if(this.state.list.length > 4) {
+      var styles = {
+        maxHeight: '250px',
+        height: '250px'
+      }
+    } else {
+      var styles = {
+        maxHeight: '150px',
+        height: '150px'
+      }
+    }
 
     return (
-      <div className="widget-11-2 panel no-border p-b-10 no-margin bg-white">
-          <div className="panel-heading">
+      <div className="widget-11-2 panel no-border b-t b-grey p-b-10 no-margin bg-white">
+          <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
-            {this.state.type}
+            <span className="fa fa-users text-danger"></span> {this.state.type}
             </div>
             <div className="panel-controls">
                 <ul>
@@ -100,15 +115,15 @@ var LatestUsers = React.createClass({
                       </div>
                     </li>
                     <li>
-                      <a data-toggle="refresh" className="portlet-refresh text-black pointer" onClick={this.resetList}>
+                      <a data-toggle="tooltip" title="Refresh" className="text-black pointer" onClick={this.resetList}>
                           <i className="portlet-icon portlet-icon-refresh"></i>
                       </a>
                     </li>
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light full-border-light-bottom no-padding">
-            <ul className="trending-list latest-scrollable p-t-10 no-padding no-style no-margin" ref="trendingList">
+          <div className="panel-body full-border-light scrollable no-padding no-margin"  style={styles}>
+            <ul className="trending-list no-padding no-style no-margin" ref="trendingList" style={styles}>
               {content}
             </ul>
           </div>

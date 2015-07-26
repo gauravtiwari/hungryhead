@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var OpenNotificationsThread = React.createClass({
 
   getInitialState: function () {
@@ -12,24 +8,32 @@ var OpenNotificationsThread = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    if(this.isMounted()){
+      if(channel) {
+        channel.bind('new_notifications_count', function(data){
+          this.setState({unread_notifications_count: data.data});
+        }.bind(this));
+      }
+    }
+
+  },
+
   openNotifications: function() {
     this.setState({loading: true});
-    $.Pages.init();
-    this.setState({active: !this.state.active});
-    var parentdrop = $('.notification-list').find('.notification-dropdown');
     if(!this.state.active) {
-        React.render(<LatestFeed key={Math.random()} path={this.props.path} channel_event={this.props.channel_event} />,
-             document.getElementById('render_notifications'));
+        $('body').append($('<div>', {class: 'notifications_panel', id: 'notifications_panel'}));
+        React.render(<FriendsNotifications key={Math.random()} path={this.props.path} channel_event={this.props.channel_event} />,
+             document.getElementById('notifications_panel'));
        ReactRailsUJS.mountComponents();
-       parentdrop.removeClass('open');
-       parentdrop.addClass('open');
+       $('#notificationsPanel').addClass('open');
+       $('body').toggleClass('show-collaboration');
        if(this.state.unread_notifications_count > 0 ) {
         this.clearCounter();
        }
-       $('body').addClass('stop-scrolling');
     } else {
-        parentdrop.removeClass('open');
-        $('body').removeClass('stop-scrolling');
+        $('#notificationsPanel').removeClass('open');
+        $('body').toggleClass('show-collaboration');
     }
   },
 

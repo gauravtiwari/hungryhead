@@ -1,0 +1,73 @@
+<% cache(['beta', 'community_guidelines', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<div class="learn-wrapper bg-white">
+  <div class="learn">
+    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+        <div class="rules-photo inner">
+        <div class="container vmiddle">
+        <div class="row">
+              <div class="col-md-8 auto-margin text-center">
+                  <div class="hero-section z-index-10">
+                      <h1 class="text-white bold">
+                        Community guidelines
+                      </h1>
+                      <p class="text-white no-margin fs-16">
+                        Make the most out of hungryhead
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="story">
+    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+      <div class="col-md-6 col-sm-10 auto-margin">
+        <p class="fs-16 semi-bold">
+          <strong>Hungryhead is a community</strong> to bring new student ideas to life. We founded hungryhead on a few core values –– <strong>trust, respect and integrity</strong>. It’s all up to us  to ensure hungryhead is safe and open platform to share and build new ideas.
+        </p>
+        <h5 class="bold">
+          We are pointing out a few guidelines that we hope you would keep in mind along the way!
+        </h5>
+        <div class="divider b-b b-green b-md b-small m-t-20"></div>
+        <div>
+          <h3 class="semi-bold m-t-30">
+            <i class="fa fa-times text-danger"></i> Don't SPAM
+          </h3>
+          <p class="fs-16 text-master">
+            Hungryhead is all about effective collaboration therefore, we have integrated tools to help you communicate your ideas easily and effectively. The comment, feedback and messaging system are there so, that everyone can easily communicate, ask questions and provide feedbacks. Please don't use it for SPAMMING others. This includes link-bombing, colluding on a idea, promoting third-party services, and posting irrelevant content.
+          </p>
+        </div>
+        <div>
+            <h3 class="semi-bold m-t-30">
+              <i class="fa fa-check text-green"></i> Trust and Respect
+            </h3>
+            <p class="fs-16 text-master">
+              Respect is one of the fundamental building block to have a trustworty relationship. We built hungryhead on these core values so that everyone can have honest and open conversations. Conversations are really important for our community and therefore, to have meaningful conversations its integral to have have respect for each others ideas. If you don't like someone else idea please, try to communicate your thoughts respectfully.
+            </p>
+        </div>
+        <div>
+            <h3 class="semi-bold m-t-30">
+              <i class="fa fa-check text-green"></i> Share
+            </h3>
+            <p class="fs-16 text-master">
+              The idea is a product of our thought and therefore, the more it's shared the bigger it becomes. If you see an idea that you feel would be interesting to your friends, please vote and share with your friends. The community is place where nothing gets unnoticed, if you contribute it will return back to you.
+            </p>
+        </div>
+        <div class="divider b-b b-green b-md b-small m-t-20"></div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+    <div class="col-sm-8 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        To get started
+      </h1>
+      <%= link_to('Click here', get_started_path, class: 'main-button m-t-10 fs-13 bold') %>
+    </div>
+  </section>
+</div>
+<% end %>
+<%= render partial: 'globals/footer' %>
+

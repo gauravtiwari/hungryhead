@@ -1,41 +1,44 @@
-<%= content_tag(:div, class: 'popover-card') do %>
-	<%= content_tag(:div, class: 'popover-header  text-center') do %>
-		<%= content_tag(:div, class: 'popover-card-logo') do %>
-		  <div class="thumbnail-wrapper d48 auto-margin circular b-white m-r-5 m-b-5">
-      <% if @idea.logo.present? %>
-        <%= image_tag(@idea.logo.url(:avatar), width: "50px") %>
-      <% else %>
-        <span class="placeholder bold text-white">
-          <%= @idea.name_badge.upcase %>
-        </span>
-      <% end %>
-      </div>
-			<h2><%= @idea.name %></h2>
-			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
-      <% if @idea.student != current_user %>
-        <div class="card-follow-button">
-          <%= react_component('Follow',{:followed => followed?(@idea)}) %>
+<% cache(cache_key_for_idea(@idea)) do %>
+  <%= content_tag(:div, class: 'popover-card') do %>
+  	<%= content_tag(:div, class: 'popover-header  text-center') do %>
+  		<%= content_tag(:div, class: 'popover-card-logo') do %>
+  		  <div class="thumbnail-wrapper d48 auto-margin circular b-white m-r-5 m-b-5">
+        <% if @idea.avatar_present? %>
+          <%= image_tag(@idea.get_avatar, width: "50px") %>
+        <% else %>
+          <span class="placeholder bold text-white">
+            <%= @idea.name_badge.upcase %>
+          </span>
+        <% end %>
         </div>
-        <script type="text/javascript">
-           ReactRailsUJS.mountComponents();
-        </script>
-      <% end %>
-		<% end %>
-	<% end %>
-      <div class="popover-card-stats">
-      <ul class="stastics-list">
-        <li>
-          Followers
-          <span><i class="fa fa-users"></i> <%= @idea.followers_counter.value %></span>
-        </li>
-        <li>
-          Raised
-          <span><i class="fa fa-dollar"></i> <%= @idea.balance %></span>
-        </li>
-        <li>
-          Feedbacks
-          <span><i class="fa fa-comment"></i> <%= @idea.feedbackers_counter.value %></span>
-        </li>
-      </ul>
-    </div>
+  			<h2><%= @idea.name %></h2>
+  			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
+        <% if !@idea.in_team?(current_user) %>
+          <div class="card-follow-button">
+            <% voted = @idea.voted?(current_user) %>
+            <%= react_component('Upvote', {record: @idea.uuid, voted: voted, vote_url: vote_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), votes_count: @idea.votes_counter.value, voters_path: voters_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
+          </div>
+          <script type="text/javascript">
+             ReactRailsUJS.mountComponents();
+          </script>
+        <% end %>
+  		<% end %>
+  	<% end %>
+        <div class="popover-card-stats">
+        <ul class="stastics-list">
+          <li>
+            Votes
+            <span><i class="fa fa-users"></i> <%= @idea.votes_counter.value %></span>
+          </li>
+          <li>
+            Raised
+            <span><i class="fa fa-dollar"></i> <%= @idea.balance %></span>
+          </li>
+          <li>
+            Feedbacks
+            <span><i class="fa fa-comment"></i> <%= @idea.feedbackers_counter.value %></span>
+          </li>
+        </ul>
+      </div>
+  <% end %>
 <% end %>

@@ -1,4 +1,5 @@
 class UserPolicy < ApplicationPolicy
+
   def index?
   	current_user == record
   end
@@ -14,6 +15,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def about_me?
+    show?
+  end
+
   def follow?
     current_user != record
   end
@@ -22,11 +27,24 @@ class UserPolicy < ApplicationPolicy
     current_user == record
   end
 
+  def autocomplete_user_name
+    true
+  end
+
+  def card?
+    show?
+  end
+
+  def activities?
+    show?
+  end
+
   def publish?
   	current_user == record
   end
-  def show?   ;  end
+  def show?   ; record.published? || record == current_user  end
   def create? ; current_user == record; end
   def destroy?; current_user == record; end
+
 end
 

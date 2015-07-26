@@ -1,4 +1,5 @@
-<div class="register-container full-height sm-p-t-30">
+<% cache(["beta", "devise_invitations", "new", current_user]) do %>
+<div class="register-container full-height sm-p-t-100 sm-p-b-100">
   <div class="container-sm-height full-height">
   <div class="row row-sm-height">
     <div class="col-sm-12 col-sm-height col-middle">
@@ -6,8 +7,9 @@
       <small>
         We want students to practically see and understand the path of entrepreneurship. Please help us expand our mentor network to help more students worldwide.
       </small>
-      <%= react_component('InviteFriends', {form: 'globals/form.json.jbuilder', path: profile_user_invite_path(current_user)}) %>
+      <%= react_component('InviteFriends', {path: profile_user_invite_path(current_user)}) %>
     </div>
   </div>
   </div>
 </div>
+<% end %>

@@ -1,6 +1,6 @@
 [
     {
-      "origin": ["http://hungryhead.co"],
+      "origin": ["https://hungryhead.co", "http://localhost:3000"],
       "responseHeader": ["Content-Type"],
       "Access-Control-Request-Method": "*",
       "Access-Control-Allow-Origin": "*",

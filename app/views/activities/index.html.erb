@@ -1,23 +1,34 @@
-<div class="container">
+<div class="container p-b-60">
+  <% unless browser.mobile? %>
+    <div class="col-md-3 col-sm-3 visible-md visible-lg no-padding p-l-15 col-lg-3 col-xlg-3">
+      <%= render partial: 'sidebar' %>
+    </div>
+  <% end %>
 
-  <div class="col-md-3 col-sm-3 no-padding p-l-15 col-lg-3 col-xlg-3">
-    <%= render partial: 'sidebar' %>
-  </div>
-
-  <div class="col-md-6">
+  <div class="col-md-6 col-sm-8 sm-no-padding">
     <%= cache(["beta", current_user, @activities]) do %>
-      <%= render partial: 'activities' %>
+      <%= render partial: 'activities/activities' %>
+    <% end %>
+    <% if @activities.next_page %>
+      <div class="pagination-box text-center padding-10 bg-complete-lighter m-t-20 clearfix box-shadow">
+        <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
+      </div>
     <% end %>
   </div>
 
-  <div class="col-md-3 col-sm-3 no-padding p-r-15">
-    <div class="sidebar auto-height sticky white-bg box-shadow">
-      <%= react_component('LatestFeed', {user_id: current_user.id, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
-      <% if Idea.latest.values.length > 0 %>
-        <%= react_component('LatestIdeas', {path: latest_ideas_path}) %>
-      <% end %>
+  <% unless browser.mobile? %>
+    <div class="col-md-3 col-sm-4 no-padding p-r-15">
+      <div class="sidebar auto-height sticky white-bg box-shadow">
+        <%= cache(["beta", current_user, @notifications]) do %>
+          <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, next_page: @notifications.next_page, channel_event: "new_ticker_item"}.to_json) %>
+        <% end %>
+        <%= react_component('LatestUsers', {users: Oj.dump({
+          list: User.latest_20,
+          type: 'Latest People'
+        }, mode: :compat)} ) %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>
 

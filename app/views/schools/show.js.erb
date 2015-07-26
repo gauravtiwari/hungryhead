@@ -1,10 +1,5 @@
-var $el = $('.activity-feed-box');
-$el.append("<%= j render partial: 'schools/content/activities' %>");
-ReactRailsUJS.mountComponents();
-$('body textarea').on('focus', function(){
-	$(this).autosize();
-});	
-$('a.load-more-posts').attr('href', "<%= school_path(page: @activities.next_page) %>");
-<% unless @activities.next_page %>
-	$('.pagination-box').remove();
+
+
+<% if @school.avatar_present? && @school.logo_changed? %>
+  $('#profile_photo_preview').attr('src', <%= @school.get_avatar %>)
 <% end %>

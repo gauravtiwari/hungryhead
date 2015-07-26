@@ -1,37 +1,28 @@
 var IdeaProfile = React.createClass({
+
   render: function() {
 
-    var market_list = _.map(this.props.idea.market, function(tag){
-      return  <a key={Math.random()} className="text-white fs-11 p-r-10" href={tag.url}>
-            {tag.name}
-          </a>;
-    });
-
-    var location_list = _.map(this.props.idea.location, function(tag){
-      return  <a key={Math.random()}  className="text-white fs-11" href={tag.url}>
+    var market_list = _.map(this.props.idea.markets, function(tag){
+      return  <a key={Math.random()} className="text-white bold fs-12 p-r-15 inline" href={tag.url}>
             {tag.name}
           </a>;
     });
 
     return (
       <div className="col-md-6">
-          <div className="idea-meta m-l-15 inline p-t-20 p-b-10">
-        <h3 className="no-margin text-white">
+        <div className="idea-meta m-l-15 inline p-t-20 p-b-20">
+        <h4 className="no-margin bold text-white">
           {this.props.idea.name}
-          <i className="fa fa-check-circle text-white fs-16 m-l-10"></i>
-        </h3>
-        <p className="no-margin text-white fs-16">
+          <a onClick={this.props.openForm} data-toggle="tooltip" title="Click to edit" className="m-l-20 inline fs-12 b-b b-white pointer text-white">
+            {this.props.text}
+          </a>
+        </h4>
+        <p className="no-margin text-white p-b-10 fs-16">
          {this.props.idea.high_concept_pitch}
         </p>
         <span className="text-white">
           {market_list}
         </span>
-        <span className="text-white">
-         {location_list}
-        </span>
-        <a href={this.props.idea.school_url}>
-          <p className="text-white m-t-5 small">{this.props.idea.school_name}</p>
-        </a>
       </div>
       </div>
     );

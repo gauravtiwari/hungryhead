@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var Rate = React.createClass({
@@ -41,51 +38,24 @@ var Rate = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
-    var title = this.state.rate.user_name + ' found this feedback ' + this.state.rate.badge_name;
-    var badge_classes = 'activity-badges-list panel panel-default no-style no-margin inline no-border auto-overflow show-badges-list-'+this.props.record;
-
     if(this.state.rate.rated) {
       return (
-        <p className="inline m-b-10 pull-right">
-         <a className="badge text-white font-helvetica" data-container="body" data-toggle="tooltip" data-placement="top" title={title}>
-           <span className="badge-type bronze"></span>
-            {this.state.rate.badge_name}
-         </a>
-        </p>
+        <div className="inline m-b-10 pull-right">
+          <span>You found this feedback  - <span className="b-b b-grey p-b-5 text-green">
+          {this.state.rate.badge_name}</span>
+          </span>
+        </div>
         );
     } else {
       return (
-      <div className="badges-list">
-        <div className={badge_classes}>
-          <ul className="no-style">
-            <li className="m-r-10 pull-left no-padding text-center">
-              <p className="inline m-b-10">
-                <a className="badge text-white font-helvetica" onClick={this.handleClick.bind(this, "helpful")}>
-                  <span className="badge-type bronze"></span>
-                   Helpful
-                </a>
-              </p>
-            </li>
-
-            <li className="m-r-10 pull-left no-padding text-center">
-              <p className="inline m-b-10">
-                 <a className="badge text-white font-helvetica" onClick={this.handleClick.bind(this, "unhelpful")}>
-                   <span className="badge-type bronze"></span>
-                    Not helpful
-                 </a>
-               </p>
-            </li>
-
-            <li className="m-r-10 pull-left no-padding text-center">
-              <p className="inline m-b-10">
-               <a className="badge text-white font-helvetica" onClick={this.handleClick.bind(this, "irrelevant")}>
-                 <span className="badge-type bronze"></span>
-                  Irrelevant
-               </a>
-             </p>
-            </li>
-          </ul>
-        </div>
+        <div className="inline m-b-10 pull-right">
+          <span>Was this feedback?</span> <a onClick={this.handleClick.bind(this, "helpful")}>
+            <span className="b-b b-grey p-b-5 text-green">Helpful</span>
+          </a> or <a  onClick={this.handleClick.bind(this, "unhelpful")}>
+           <span className="b-b b-grey p-b-5 text-warning-dark"> Not helpful</span>
+         </a>  or <a onClick={this.handleClick.bind(this, "irrelevant")}>
+           <span className="b-b b-grey p-b-5 text-danger">Irrelevant</span>
+         </a>
         </div>
       );
     }

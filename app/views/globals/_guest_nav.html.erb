@@ -1,46 +1,55 @@
-<!-- START HEADER -->
-<div class="header">
-<div class="container">
-  <div class=" pull-left sm-table">
-    <div class="header-inner">
-      <div class="brand inline">
-      <%= link_to(root_path) do %>
-        <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
-      <% end %>
+<% cache(["guest_menu", "home", "v1"]) do %>
+  <!-- START HEADER -->
+  <div class="header">
+  <div class="container">
+    <div class=" pull-left">
+      <div class="header-inner">
+        <div class="brand inline">
+        <%= link_to(root_path, class: 'inline m-t-15 text-white') do %>
+          <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+          <span>beta</span>
+        <% end %>
+        </div>
+        <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(why_path, class: "#{current_class?(why_path)}") do %>
+              <span class="text-white bold">Why</span>
+            <% end %>
+         </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(learn_path, class: "#{current_class?(learn_path)}") do %>
+              <span class="text-white bold">What</span>
+            <% end %>
+         </li>
+         <li class="p-r-15 fs-14 inline font-heading">
+           <%= link_to(product_path, class: "#{current_class?(product_path)}") do %>
+             <span class="text-white bold">The Product</span>
+           <% end %>
+         </li>
+         <li class="p-r-15 fs-14 inline font-heading">
+           <%= link_to(how_it_works_path, class: "#{current_class?(how_it_works_path)}") do %>
+             <span class="text-white bold">How it works </span>
+           <% end %>
+         </li>
+         <li class="p-r-15 fs-14 inline font-heading">
+           <%= link_to(pricing_path, class: "#{current_class?(pricing_path)}") do %>
+             <span class="text-white bold">Pricing </span>
+           <% end %>
+         </li>
+        </ul>
       </div>
-      <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-       <li class="p-r-15 fs-16 inline">
-         <%= link_to(learn_path) do %>
-           <span class="text-white">Learn</span>
-         <% end %>
-       </li>
-       <li class="p-r-15 fs-16 inline">
-         <%= link_to(story_path) do %>
-           <span class="text-white">Story</span>
-         <% end %>
-       </li>
-       <li class="fs-16 inline">
-         <%= link_to(help_path) do %>
-           <span class="text-white">Help</span>
-         <% end %>
-       </li>
-      </ul>
     </div>
-  </div>
 
-  <div class=" pull-right">
-    <div class="visible-lg visible-md m-t-10">
-      <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
-        <div class="dropdown pull-right">
-          <%= link_to(get_started_path, title: "Click to Register") do %>
-            <span class="text-white fs-16">Get Started</span>
-          <% end %>
+    <div class="inline pull-right">
+      <div class="visible-lg visible-md visible-sm m-t-10">
+        <div class="pull-left p-t-10  p-r-20 font-heading">
+          <%= link_to('Questions?', help_path, title: "Get help", class: 'text-white bold') %>
+        </div>
+        <div class="pull-left p-t-5 font-heading">
+          <%= link_to('Beta Registeration', get_started_path, title: "Beta Registeration", class: 'btn btn-ghost bold') %>
         </div>
       </div>
-      <%= link_to(new_user_session_path, class: "pull-left p-t-10 fs-16 font-heading") do %>
-        <span class="text-white">Login</span>
-      <% end %>
+    </div>
     </div>
   </div>
-  </div>
-</div>
+<% end %>

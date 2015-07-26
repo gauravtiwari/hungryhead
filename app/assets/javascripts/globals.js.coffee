@@ -6,25 +6,80 @@ jQuery(document).ready ->
 	$('body textarea').focus ->
 		$(this).autosize()
 
-	$('#form-register').validate();
-	$('#form-login').validate();
-	$('#information-form').validate();
-	$('#feedback_form').validate();
-	$('#edit-profile').validate();
-	$('#pitch_idea_form').validate();
-	$('#valid-form').validate();
-	$("[data-toggle='tooltip']").tooltip();
+	$.ajaxSetup cache: false
 
-	$.each flashMessages, (key, value) ->
-	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'warning', timeout: 5000}
-	  	.show();
+	$.HHSelect2.init()
 
-	$('.scrollable').slimScroll maxHeight: '300px'
+	$(document).on 'click', '.pagination a[data-remote=true]', (e) ->
+	  history.pushState {}, '', $(this).attr('href')
+	  return
+	$(window).on 'popstate', ->
+	  $.getScript document.location.href
+	  return
+	if Modernizr.mq('(min-width: 767px)')
+		$('.widgets').masonry
+		  itemSelector: '.widget-item'
+		  columnWidth: '.widget-item',
+		  itemSelector: '.widget-item',
+		  gutter: 15,
+		  percentPosition: true
 
-	$('.follow-scrollable').slimScroll maxHeight: '350px'
-	$('.latest-scrollable').slimScroll maxHeight: '200px'
+	marked.setOptions
+	  renderer: new (marked.Renderer)
+	  gfm: true
+	  tables: true
+	  breaks: false
+	  pedantic: false
+	  sanitize: true
+	  smartLists: true
+	  smartypants: false
 
-	$('.messages-scrollable').slimScroll height: $(window).height() - 250
+	$.validator.addMethod 'lettersonly', ((value, element) ->
+	  @optional(element) or /^[a-z@-_-]+$/i.test(value)
+	), 'Letters only please'
+
+	$.validator.addMethod 'phoneUK', ((phone_number, element) ->
+	  @optional(element) or phone_number.length > 9 and phone_number.match(/^(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}$/)
+	), 'Please specify a valid phone number'
+
+	$('#form-register').validate()
+
+	try
+		$('#formUsername').rules 'add', minlength: 3
+		$('#formUsername').rules 'add', lettersonly: true
+		$('#formPassword').rules 'add', minlength: 6
+	catch e
+
+	FastClick.attach(document.body);
+
+	#Create infinite list view for activities container
+	$activity_box_el = $('#main_activity_box')
+	window.activityListView = new infinity.ListView($activity_box_el)
+
+	$('#form-login').validate()
+	$('.site-feedback-form').validate()
+	$('#information-form').validate()
+	$('#feedback_form').validate()
+	$('#edit-profile').validate()
+	$('#pitch_idea_form').validate()
+	$('#editProfileFormPopup').validate()
+	$('#valid-form').validate()
+
+	try
+		$('#idea_high_concept_pitch').rules 'add', minlength: 20, maxlength: 50
+		$('#idea_elevator_pitch').rules 'add', minlength: 100, maxlength: 140
+	catch e
+
+	$("[data-toggle='tooltip']").tooltip()
+
+	try
+		$('form#new_invite_request').each ->
+			$(@).validate()
+			return
+	catch e
+	#Initialize Pages modules
+
+	$.Pages.init()
 
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
@@ -39,8 +94,6 @@ jQuery(document).ready ->
 		$('.profile-card').show()
 		$(@).closest('.edit-profile').hide()
 
-	#$('.chat-inner').slimScroll height: $(window).height() - 103
-
 	$(window).scroll ->
 		if Modernizr.mq 'only screen and (min-width: 991px)'
 			$('.sticky').css(position: "fixed", width: "16.90rem", height: "auto")
@@ -53,8 +106,6 @@ jQuery(document).ready ->
 	if Modernizr.mq 'only screen and (max-width: 991px)'
 		$('.col-md-3').each ->
 			$(@).removeClass 'no-padding'
-
-	$('.list-view-wrapper').scrollbar()
 
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()

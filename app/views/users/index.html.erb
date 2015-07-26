@@ -1,65 +1,30 @@
-
-<div class="wrapper-small bg-solid text-center panel panel-default">
-  <h2 class="text-white">Find and <span class="semi-bold b-b b-white p-b-5">connect</span> with people on hungryhead</h2>
-</div>
-
-<div class="container">
-  <% @users.each do |user| %>
-  <div class="col-md-3 no-padding p-r-15">
-  <%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
-  <%= content_tag(:div, class: 'listing-header  text-center') do %>
-    <%= content_tag(:div, class: 'listing-card-logo') do %>
-    <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
-     <% if user.avatar.present? %>
-       <%= image_tag(user.avatar.url(:avatar), width: "50px") %>
-     <% else %>
-       <span class="placeholder bold text-white">
-         <%= user.user_name_badge.upcase %>
-       </span>
-     <% end %>
-     </div>
-      <h5 class="no-margin fs-14 bold"><%= link_to(user.name, profile_path(user)) %></h5>
-      <h5 class="no-margin text-master"><i class="fa fa-map-marker"></i> <%= user.location_list %></h5>
-      <p class="fs-12"><%= truncate(user.mini_bio, length: 30) %></p>
-      <% if current_user != user %>
-        <div class="card-follow-button">
-          <%= react_component('Follow',{:followed => followed?(user)}) %>
-        </div>
-        <script type="text/javascript">
-           ReactRailsUJS.mountComponents();
-        </script>
+<div class="wrapper-small people-bg-gradient">
+  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <div class="hero-text inner">
+      <i class="fa fa-users text-white fs-22"></i>
+      <% if params[:type] %>
+        <h2 class="text-white no-margin">All <%= params[:type].pluralize %></h2>
       <% else %>
-        <%= link_to(profile_path(user), class: 'btn btn-danger btn-sm text-white') do %>
-        <span class="text-white"><i class="fa fa-share"></i> View profile</span>
-        <% end %>
+        <h2 class="text-white no-margin">All people</h2>
       <% end %>
-    <% end %>
-      <% end %>
-      <div class="listing-card-stats">
-      <ul class="stastics-list">
-        <li>
-          Students
-          <span class="text-master"><i class="fa fa-users"></i> <%= user.followers_counter.value %></span>
-        </li>
-        <li>
-          Followers
-          <span class="text-master"><i class="fa fa-comment"></i> <%= user.feedbacks_counter.value %></span>
-        </li>
-        <li>
-          Ideas
-          <span class="text-master"><i class="fa fa-dollar"></i> <%= user.investments_counter.value %></span>
-        </li>
-      </ul>
+      <h5 class="text-white">Browse and connect with like-minded people</h5>
     </div>
   </div>
-  <% end %>
-<% end %>
-<div class="paging-container p-r-15">
-    <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
 </div>
-
+<div class="container hidden-xs">
+  <div class="listing-filters p-t-40 p-b-10">
+    <ul class="list-inline text-right">
+      <li class="hint-text">Sort by: </li>
+      <li>
+        <%= link_to('Students', users_path(type: 'student'), class: "#{active_class?(users_path(type: 'student'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Alumni', users_path(type: 'alumni'), class: "#{active_class?(users_path(type: 'alumni'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Faculties', users_path(type: 'faculty'), class: "#{active_class?(users_path(type: 'faculty'))} text-master p-r-5 p-l-5") %>
+      </li>
+    </ul>
+  </div>
 </div>
-
-
-
-
+<%= render partial: 'users/users' %>

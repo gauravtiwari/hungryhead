@@ -11,6 +11,7 @@ var InviteFriends = React.createClass({
   handleInvite: function(formData) {
     $.post(this.props.path, formData, function(data, textStatus, xhr) {
       if(data.invited){
+        $('#inviteFriendsPopup').modal('hide');
         $('body').pgNotification({style: "simple", message: data.msg, position: "top-right", type: "success",timeout: 5000}).show();
       }
     });
@@ -19,7 +20,6 @@ var InviteFriends = React.createClass({
   render: function() {
     return (
       <form ref="form" className="bg-white panel panel-transparent no-margin m-t-20" noValidate="novalidate" id="valid-form" cceptCharset="UTF-8" onSubmit={this._onKeyDown}>
-        <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <input name="utf8" type="hidden" value="✓" />
         <div className="panel-heading no-padding m-b-10 m-t-10">
           <div className="panel-title b-b b-grey p-b-5">Enter multiple emails <span>(maximum 10 emails)</span></div>

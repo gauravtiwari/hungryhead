@@ -1,0 +1,31 @@
+<div class="profile-nav overflow-hidden p-l-15">
+  <ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
+    <address class="hint-text inline fs-13">
+        <span class="fa fa-map-marker text-brand"></span>
+        <%= @event.address%>
+        <%= link_to('Get directions', "http://maps.google.com/maps?z=12&t=m&q=loc:#{@event.latitude}+#{@event.longitude}", target: "_blank", class: 'text-brand b-b b-grey p-b-5 m-l-10 fs-12 bold')%>
+    </address>
+  </ul>
+
+  <div class="pull-right profile-action-buttons p-t-10 p-b-10">
+      <% if @event.owner.user == current_user %>
+       <div>
+        <%= link_to(edit_event_path(@event), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
+          <span class="fa fa-pencil"></span> Edit profile
+        <% end %>
+      </div>
+      <div class="join inline m-r-10" id="publish_event_button">
+        <%= render partial: 'publish_button' %>
+      </div>
+      <div class="join inline m-r-15">
+        <a href="" class="main-button bold"> <span class="fa fa-check-circle"></span> Invite</a>
+      </div>
+      <% else %>
+        <div class="text-center m-t-20">
+          <div class="join inline m-r-10">
+              <a href="" class="main-button bold"> <span class="fa fa-users"></span> Click to join</a>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+  <div class="wrapper-small idea-bg-gradient">
+    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+      <% data = render(template: 'schools/show.json.jbuilder') %>
+      <div class="user-profile auto-margin">
+          <div class="thumbnail-wrapper d100">
+              <div class="profile-logo">
+                <%= react_component('SchoolLogo', {data: data}) %>
+              </div>
+          </div>
+      </div>
+      <div class="hero-text inner clearfix">
+        <h2 class="text-white">Browse ideas</h2>
+        <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:intro), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="box-shadow bg-white">
+    <div class="container">
+      <%= render partial: 'menu' %>
+    </div>
+  </div>
+
+  <%= render partial: 'ideas/ideas', resource: @ideas %>

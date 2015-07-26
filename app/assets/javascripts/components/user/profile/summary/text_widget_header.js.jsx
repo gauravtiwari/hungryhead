@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var TextWidgetHeader = React.createClass({
 
   render: function() {

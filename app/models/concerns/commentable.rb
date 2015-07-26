@@ -1,4 +1,5 @@
 module Commentable
+
   extend ActiveSupport::Concern
 
   included do
@@ -6,23 +7,23 @@ module Commentable
   end
 
   def root_comments
-    self.comments.where(:parent_id => nil)
+    comments.where(parent_id: nil).order(created_at: :desc)
   end
 
   def comment_threads
-    self.comments
+    comments.order(created_at: :desc)
+  end
+
+  def commented?(user)
+    commenters_ids.include?(user.id.to_s)
   end
 
   def get_commenters
-    User.where(id: commenters_ids)
+    User.find(commenters_ids)
   end
 
   def commenter
-    commentable_type == "Idea" ? commentable.student.id : commentable.user.id
-  end
-
-  def comments_score
-    comments.inject(0){|sum, comment| sum + comment.comment_votes_counter.value * 5}
+    commentable.user_id
   end
 
 end

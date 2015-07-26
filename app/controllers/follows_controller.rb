@@ -26,7 +26,6 @@ class FollowsController < ApplicationController
         format.json {render json: @follow.errors, status: unprocessable_entity}
       end
     end
-    CreateActivityJob.set(wait: 2.seconds).perform_later(@follow.id, @follow.class.to_s) unless @follow.followable_type == "School"
   end
 
   def unfollow
@@ -52,7 +51,7 @@ class FollowsController < ApplicationController
   private
 
   def load_followable
-    @follwables = ["Idea", "Student", "School", "Mentor", "Teacher", "User"]
+    @follwables = ["Idea", "School", "User"]
     if @follwables.include? params[:followable_type]
       followable_type = params[:followable_type]
       unless followable_type.safe_constantize.find(params[:followable_id]).blank?

@@ -7,15 +7,19 @@ class CreateVoteNotificationService
   end
 
   def create
-    @activity = @user.notifications.create!(
-      trackable: @vote,
-      recipient: @votable,
-      parent_id: find_parent_activity,
-      verb: 'voted',
-      key: 'vote.create',
-      unread: true
-    )
-    cache(@activity)
+    if @user.activities.where(trackable: @vote).empty?
+      @activity = @user.activities.create!(
+        trackable: @vote,
+        recipient: @votable,
+        parent_id: find_parent_activity,
+        verb: 'voted',
+        key: 'vote.create',
+        is_notification: true
+      )
+      cache(@activity)
+    else
+      return
+    end
   end
 
   def cache(activity)
@@ -25,11 +29,13 @@ class CreateVoteNotificationService
   def find_parent_activity
     if @vote.votable_type == "Comment"
       @activity = Activity.where(trackable: @votable.commentable).first
-      return @activity.id
     else
       @activity = Activity.where(trackable: @votable).first
-      return @activity.id
     end
+    #Increment parent score
+    Activity.popular.incr(@activity.id, 5) unless @activity.blank?
+    #return uuid
+    @activity.uuid
   end
 
 end

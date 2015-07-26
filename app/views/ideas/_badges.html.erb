@@ -1,33 +1,92 @@
-<% if @idea.badges.length > 0 %>
-<div class="widget-16 panel box-shadow">
-    <div class="panel-heading">
+<div class="widget-16 panel box-shadow no-border no-margin">
+    <div class="panel-heading bg-light-blue-lightest m-b-20">
         <div class="panel-title b-b b-grey p-b-5">
-          <i class="fa fa-shield text-danger"></i> Latest badges
+          <i class="fa fa-shield text-danger"></i> Badges
         </div>
+        <a class="know-more" data-toggle="modal" data-target="#badgesHelpModal">
+          <i class="fa fa-question-circle pull-right fs-16 text-black"></i>
+        </a>
     </div>
 
     <div class="panel-body">
         <div class="user-badges">
+        <% if @idea.badges.size > 0 %>
             <%  @badges.each do |id, badge| %>
                 <div class="m-t-10">
                     <% badge.take(6).each do |b| %>
                         <p class="m-b-10 inline">
-                        <%= link_to(badge_path(b.name), class: "badge text-white font-helvetica", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
-                            <span class="badge-type <%= id %>"></span><%= b.custom_fields[:name] %>
+                        <%= link_to(badge_path(b.name), class: "game_badge text-white font-helvetica", data: { toggle: "tooltip", container: "body"}, title: "#{b.description}") do %>
+                            <span class="fa fa-<%= b.custom_fields[:icon] %> badge-type <%= id %>"></span><%= b.custom_fields[:name] %>
                         <% end %>
                         </p>
                     <% end %>
                 </div>
             <% end %>
-            <% if @idea.badges.length > 5 %>
-
+            <% if @idea.badges.size > 5 %>
                 <div class="thumbnail-wrapper d32 circular b-white">
                     <div class="bg-master text-center text-white">
-                        <span>+<%= @idea.badges.length - 5 %></span>
+                        <span>+<%= @idea.badges.size - 5 %></span>
                     </div>
                 </div>
             <% end %>
+        <% else %>
+          <div class="text-center light font-opensans fs-22">
+              <span class="fa fa-trophy fs-22"></span>
+              <span class="clearfix">
+                No Badges
+              </span>
+          </div>
+        <% end %>
         </div>
     </div>
 </div>
-<% end %>
+
+<div class="modal fade slide-right" id="badgesHelpModal" tabIndex="-1" role="dialog" aria-labelledby="newIdeaHelpModalLabel" aria-hidden="true">
+ <div class="modal-dialog full-height">
+ <div class="modal-content-wrapper">
+     <div class="modal-content table-block scrollable">
+         <button type="button" class="close m-t-10 m-r-10" data-dismiss="modal" aria-hidden="true">
+             <i class="pg-close"></i>
+         </button>
+         <div class="modal-header">
+             <h5 class="text-left p-b-5 b-b b-grey pull-left"><span class="semi-bold">Idea Badges</span></h5>
+         </div>
+         <div class="modal-body clearfix" id="badges_help_modal">
+             <div class="row m-t-20">
+                 <div class="col-md-12">
+                  <div class="table-content">
+                    <p>
+                        An idea receives a badge after it has successfully completed a milestone, <em>for eg: 'investment ready, most number of views etc.'</em>.
+                    </p>
+                    <h5>Below is a list of badges that will be awarded to an idea:</h5>
+                  </div>
+                  <table class="table table-striped badges-help-table m-t-40">
+                      <thead>
+                          <tr>
+                              <th>Badge Name</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <% Merit::Badge.select {|badge| badge.custom_fields[:type] ==  "idea"}.each do |badge| %>
+                          <tr>
+                              <td>
+                              <p class="m-b-10 inline">
+                                <%= link_to(badge_path(badge.name), class: "game_badge text-white font-helvetica") do %>
+                                    <span class="fa fa-<%= badge.custom_fields[:icon] %> badge-type <%= badge.level %>">
+                                    </span><%= badge.custom_fields[:name] %>
+                                <% end %>
+                                </p>
+                            </td>
+                              <td><%= badge.description %> </td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                  </table>
+                </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ </div>
+ </div>

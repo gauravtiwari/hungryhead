@@ -1,12 +1,13 @@
 class NewIdeaController < ApplicationController
+
   layout "new_idea"
 
   include Wicked::Wizard
-  steps :rules, :pitch
+  steps :intro, :pitch
 
   def show
     case step
-    when :rules
+    when :intro
       @idea = Idea.new
       session[:idea] = nil
     else

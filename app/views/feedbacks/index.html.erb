@@ -1,28 +1,35 @@
-<div class="col-md-8 col-lg-8 col-sm-8 no-padding p-l-15">
-  <div class="auto-height box-shadow ">
-    <%= render partial: 'ideas/header' %>
+<% data = render(template: 'ideas/show.json.jbuilder') %>
+<div class="container p-b-60">
+  <div class="col-md-4 col-lg-4 col-sm-4  no-padding p-l-15">
+    <%= render partial: 'ideas/sidebar' %>
   </div>
-  <%= render partial: 'ideas/menu' %>
-  <div class="m-t-20">
-    <div class="idea-content">
-     <%= render partial: "feedbacks" %>
+
+  <div class="col-md-8 col-lg-8 col-sm-8">
+    <% cache([@idea, @idea.user]) do %>
+      <%= render partial: 'ideas/menu' %>
+    <% end %>
+
+    <% cache(@idea) do %>
+      <div class="auto-height box-shadow ">
+        <%= render partial: 'ideas/header', locals: {data: data}  %>
+      </div>
+    <% end %>
+
+    <div class="m-t-20">
+      <div class="idea-content">
+        <% cache([@idea, @feedbacks]) do %>
+         <%= render partial: "feedbacks" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="col-md-4 col-lg-4 col-sm-4">
-  <div class="idea-sidebar auto-height sticky bg-white box-shadow">
-    <%= render partial: 'ideas/latest_activities' %>
-    <%= render partial: 'ideas/followers' if @idea.followers_counter.value > 0 %>
-    <%= render partial: 'ideas/investors' if @idea.investors_counter.value > 0 %>
-  </div>
-</div>
-
 <% if user_signed_in? && policy(@idea).collaborator? %>
   <div class="idea-collaboration-floating-panel">
     <%= render 'ideas/collaboration' %>
   </div>
 <% end %>
+
 
 
 

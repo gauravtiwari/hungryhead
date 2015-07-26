@@ -1,0 +1,21 @@
+<div class="row column-seperation">
+  <table class="table no-margin">
+    <tbody>
+      <% if @events.size > 0 %>
+        <% @events.each do |event| %>
+          <%= render partial: 'events/event', locals: {event: event} %>
+        <% end %>
+      <% else %>
+        <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+          <i class="fa fa-list"></i>
+          <div class="no-content">No events</div>
+        </div>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% if @events.size > 10 %>
+  <div class="text-center m-t-20">
+    <%= link_to("Browse all from #{@school.name}", profile_events_path(@school), class: "btn btn-danger fs-13 btn-sm") %>
+  </div>
+<% end %>

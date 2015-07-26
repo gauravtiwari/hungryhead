@@ -1,5 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
+
 	respond_to :json
+
 	layout 'join'
 
 	def new
@@ -26,11 +28,14 @@ class Users::SessionsController < Devise::SessionsController
 	private
 
 	def after_sign_in_path_for(resource)
-    if resource.sign_in_count == 1
-    	profile_path(resource)
-    else
-      signed_in_root_path(resource)
-    end
+		sign_in_url = new_user_session_url
+		if request.referer == sign_in_url && resource.sign_in_count != 1
+			super
+		elsif resource.sign_in_count == 1 && resource.class.to_s != "School"
+			welcome_path(:hello)
+		else
+			stored_location_for(resource) || request.referer || root_path
+		end
 	end
 
 end

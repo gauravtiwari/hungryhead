@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var ComponentIsMountedMixin = {
     componentWillMount: function() {
         this.componentIsMounted = false;
@@ -41,18 +39,20 @@ var CommentBox = React.createClass({
       if(this.state.standalone) {
         this.loadComments();
       }
-      $('.comments-scollable').slimScroll({height: $(window).height() - 170});
       var comment_channel = pusher.subscribe(this.props.comment_channel);
       if(comment_channel) {
         comment_channel.bind('new_comment', function(data){
           var response = JSON.parse(data.data);
           var comment = response.comment;
-          var newState = React.addons.update(this.state, {
-              comments : {
-                $unshift : [comment]
-              }
-          });
-          this.setState(newState);
+          if(presence_channel.members.me.id != comment.user_id) {
+            var newState = React.addons.update(this.state, {
+                comments : {
+                  $unshift : [comment]
+                }
+            });
+            this.setState(newState);
+            $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          }
           this.setState({count: this.state.count+1 });
         }.bind(this));
       }
@@ -68,9 +68,16 @@ var CommentBox = React.createClass({
       type: "POST",
       dataType: "json",
       success: function ( data ) {
+        var comment = data.comment;
+        var newState = React.addons.update(this.state, {
+            comments : {
+              $unshift : [comment]
+            }
+        });
+        this.setState(newState);
+        $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
         $('body textarea').trigger('autosize.destroy');
         this.setState({visible: false});
-        $("#comment_"+data.comment.id).effect('highlight', {color: '#f7f7f7'} , 3000);
         this.setState({button_loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -125,7 +132,7 @@ var CommentBox = React.createClass({
       'fa fa-spinner fa-spin': this.state.comment_loading
     });
     if(this.state.comments_path && !this.state.show_comment_bar) {
-    var pagination =  <div className="pagination-box text-center show padding-5">
+    var pagination =  <div className="pagination-box text-center show padding-10 bg-complete-lighter">
               <a onClick={this.loadMoreComments} className="pointer"><i className="ion-refresh"></i> {this.state.text}</a>
             </div>;
     } else {
@@ -141,10 +148,17 @@ var CommentBox = React.createClass({
           </div>;
     }
 
+    if(this.props.standalone) {
+      var heading = <h4 className="p-l-20 p-r-20"><i className="fa fa-comment-o"></i> Ask questions</h4>
+    } else {
+      var heading = "";
+    }
+
     return (
       <div className={comments_box}>
+        {heading}
         <CommentForm white={this.props.white || false}  loading = {classes} form={ this.state.form } imgSrc = {this.state.current_user.avatar} onCommentSubmit={ this.handleCommentSubmit } />
-        <CommentList scrollable={this.props.scrollable || false} form={ this.state.form } onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
+        <CommentList form={ this.state.form } standalone={this.props.standalone || false} onReplyCommentSubmit={ this.handleCommentSubmit } collapsed={this.state.collapsed} status={this.props.status} current_user = {this.state.current_user} comments={ this.state.comments } form={ this.state.form } removeComment = {this.removeComment} />
         {show_comment_bar}
         {pagination}
         {no_comments}

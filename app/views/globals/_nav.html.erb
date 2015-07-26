@@ -1,128 +1,116 @@
-<div class="header <%= bg if bg %> b-b b-grey box-shadow">
-<div class="container">
-  <div class=" pull-left sm-table">
-    <div class="header-inner  p-t-10">
-      <div class="brand inline">
-        <%= link_to(root_path) do %>
-        <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
+<div class="header bg-white b-b b-grey box-shadow">
+  <div class="container">
+    <div class="pull-left">
+      <div class="header-inner p-t-10">
+        <div class="brand inline">
+          <%= link_to(root_path) do %>
+          <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
+          <% end %>
+        </div>
+        <%= form_tag('/search/search', class: 'inline b-l b-grey b-dashed m-l-15')  do %>
+          <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link visible-sm visible-md visible-lg no-border overlay-search bg-transparent", autofocus: true %>
         <% end %>
-      </div>
-      <%= form_tag('/search/search', class: 'inline b-l b-grey b-dashed m-l-15')  do %>
-        <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link no-border overlay-search bg-transparent", autofocus: true %>
-      <% end %>
-      <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
-        <li class="inline p-r-15 p-l-15 fs-14 bold">
-          <%= link_to(root_path, class: "text-brand fs-22") do %>
-            <i class="fa fa-home"></i>
-          <% end %>
-        </li>
-        <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
-          <%= link_to(users_path, class: "text-brand fs-22") do %>
-             <i class="fa fa-users"></i>
-           <% end %>
-        </li>
-        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-          <%= link_to(ideas_path, class: "text-brand fs-22") do %>
-             <i class="fa fa-lightbulb-o"></i>
-           <% end %>
-        </li>
-        <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
-         <%= link_to(schools_path, class: "text-brand fs-22") do %>
-            <i class="fa fa-university"></i>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="pull-right">
-    <div class="visible-lg visible-md m-t-10">
-      <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
-      <li class="p-r-10 inline drop conversation-threads">
-          <div class="dropdown conversation-dropdown">
-          <%= react_component('OpenConversationsThread', {path: recent_conversations_path(box: 'inbox'), unread_messages_count:current_user.mailbox.inbox(:unread => true).count(:id, :distinct => true).to_s }) %>
-            <div class="dropdown-menu notification-toggle right-zero">
-              <div class="notification-panel">
-                <div class="notification-body" id="threads-section">
-
-                </div>
-                <div class="notification-footer text-center">
-                  <a href="#" class="">Read all notifications</a>
-                  <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
-                    <i class="pg-refresh_new"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="p-r-10 inline">
-         <%= react_component('SharePost', {form: render(template: 'globals/form.json.jbuilder')}) %>
-        </li>
-        <li class="p-r-10 inline">
-          <div class="dropdown notification-dropdown">
-          <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.unread_notifications, path: friends_notifications_path, channel_event: "new_friend_notification_item"}) %>
-            <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
-              <div class="notification-panel">
-                <div class="notification-body scrollable" id="render_notifications">
-
-                </div>
-                <div class="notification-footer text-center">
-                  <a href="#" class="">Read all notifications</a>
-                  <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
-                    <i class="pg-refresh_new"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
-        <%= link_to(profile_path(current_user)) do %>
-          <span class="fs-14 bold text-brand"><%= current_user.first_name %></span>
-        <% end %>
-      </div>
-      <div class="dropdown pull-right">
-        <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="thumbnail-wrapper d32 circular inline m-t-5">
-          <% if current_user.avatar.present? %>
-            <%= image_tag(current_user.avatar.url(:avatar), :"data-src" => "#{current_user.avatar.url(:avatar)}", :"data-src-retina" => "#{current_user.avatar.url(:square)}", width: "32", height: "32") %>
-          <% else %>
-            <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.first_name.first + current_user.last_name.first %></span>
-          <% end %>
-          </span>
-        </button>
-        <ul class="dropdown-menu profile-dropdown" role="menu">
-          <%= content_tag(:li) do %>
-            <%= link_to(new_idea_path(:rules)) do %>
-              <i class="fa fa-lightbulb-o"></i> Post Idea
+        <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
+          <li class="inline p-r-15 p-l-15 fs-14 bold">
+            <%= link_to(root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : 'text-brand'}") do %>
+              <i class="fa fa-home"></i>
             <% end %>
-          <% end %>
-
-          <%= content_tag(:li) do %>
-            <%= link_to(friends_invite_path, remote: true) do %>
-              <i class="fa fa-paper-plane"></i>Invite friends
-            <% end %>
-          <% end %>
-
-          <%= content_tag(:li) do %>
-            <%= link_to(edit_user_registration_path(current_user)) do %>
-              <i class="pg-settings_small"></i>Settings
-            <% end %>
-          <% end %>
-
-          <li><a href="#"><i class="pg-outdent"></i> Feedback</a>
           </li>
-          <li class="bg-master-lighter">
-            <%= link_to(destroy_user_session_path, class: "clearfix") do %>
-              <span class="pull-left">Logout</span>
-              <span class="pull-right"><i class="pg-power"></i></span>
+          <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
+            <%= link_to(users_path, class: "fs-22 #{request.path == users_path ? current_class?(users_path) : 'text-brand'}") do %>
+               <i class="fa fa-users"></i>
+             <% end %>
+          </li>
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
+            <%= link_to(ideas_path, class: "fs-22 #{request.path == ideas_path ? current_class?(ideas_path) : 'text-brand'}") do %>
+               <i class="fa fa-lightbulb-o"></i>
+             <% end %>
+          </li>
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+           <%= link_to(schools_path, class: "fs-22 #{request.path == schools_path ? current_class?(schools_path) : 'text-brand'}") do %>
+              <i class="fa fa-university"></i>
+            <% end %>
+          </li>
+
+          <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+           <%= link_to(events_path, class: "fs-22 #{request.path == events_path ? current_class?(events_path) : 'text-brand'}") do %>
+              <i class="fa fa-calendar"></i>
             <% end %>
           </li>
         </ul>
       </div>
     </div>
+
+    <div class="pull-right inline">
+      <div class="visible-lg visible-md visible-sm m-t-10">
+        <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
+          <li class="p-r-10 inline">
+            <div class="dropdown notification-dropdown">
+            <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.notifications_counter.value, path: friends_notifications_path, channel_event: "new_friend_notification_item"}) %>
+              <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
+                <div class="notification-panel">
+                  <div class="notification-body scrollable" id="render_notifications">
+
+                  </div>
+                  <div class="notification-footer text-center">
+                    <a href="#" class="">Read all notifications</a>
+                    <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
+                      <i class="pg-refresh_new"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+          <%= link_to(profile_path(current_user)) do %>
+            <span class="fs-14 bold <%= request.path == profile_path(current_user) ? current_class?(profile_path(current_user)) : 'text-brand' %>"><%= current_user.first_name %></span>
+          <% end %>
+        </div>
+        <div class="dropdown pull-right">
+          <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="thumbnail-wrapper d32 circular inline m-t-5">
+            <% if current_user.avatar_present? %>
+              <%= image_tag(current_user.get_avatar, :"data-src" => "#{current_user.get_avatar}", :"data-src-retina" => "#{current_user.get_avatar}", width: "32", height: "32", id: 'user_pic_mini') %>
+            <% else %>
+              <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.name_badge %></span>
+            <% end %>
+            </span>
+          </button>
+          <ul class="dropdown-menu profile-dropdown" role="menu">
+            <%= content_tag(:li) do %>
+              <%= link_to(new_idea_path(:intro)) do %>
+                <i class="fa fa-lightbulb-o"></i> Post Idea
+              <% end %>
+            <% end %>
+
+            <%= content_tag(:li) do %>
+              <%= link_to(friends_invite_path, remote: true) do %>
+                <i class="fa fa-paper-plane"></i>Invite friends
+              <% end %>
+            <% end %>
+
+            <%= content_tag(:li) do %>
+              <%= link_to(edit_user_registration_path(current_user)) do %>
+                <i class="pg-settings_small"></i>Settings
+              <% end %>
+            <% end %>
+
+            <li>
+              <%= link_to(site_feedback.root_path) do %>
+                <i class="pg-outdent"></i> Report a problem
+              <% end %>
+            </li>
+            <li class="bg-master-lighter">
+              <%= link_to(destroy_user_session_path, class: "clearfix") do %>
+                <span class="pull-left">Logout</span>
+                <span class="pull-right"><i class="pg-power"></i></span>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </div>

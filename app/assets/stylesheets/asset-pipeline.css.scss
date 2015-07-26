@@ -1,0 +1,216 @@
+[class^="pg-"], [class*=" pg-"]{
+  line-height: inherit;
+}
+
+.page-sidebar .sidebar-menu .menu-items > li > a{
+  line-height:47px;
+}
+
+.fa {
+  line-height: inherit;
+}
+
+/* core/css/pages-icons */
+@font-face {
+  font-family: 'pages-icon';
+  src:asset-url('core/fonts/pages-icon/Pages-icon.eot?-u69vo5');
+  src:asset-url('core/fonts/pages-icon/Pages-icon.eot?#iefix-u69vo5') format('embedded-opentype'),
+  asset-url('core/fonts/pages-icon/Pages-icon.woff?-u69vo5') format('woff'),
+  asset-url('core/fonts/pages-icon/Pages-icon.ttf?-u69vo5') format('truetype'),
+  asset-url('core/fonts/pages-icon/Pages-icon.svg?-u69vo5#Pages-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* core/css/pages */
+.pace .pace-activity {
+  background: asset-url('core/img/progress/progress-circle-success.svg') no-repeat top left;
+}
+.quickview-wrapper .nav-tabs ~ .tab-content .quickview-notes .note {
+  background-image: asset-url('core/img/notes_lines.png');
+}
+.icon-set {
+  background: asset-url('core/img/icons/top_tray.png') no-repeat;
+}
+.portlet-icon-refresh-lg-master {
+  background-image: asset-url('core/img/progress/progress-circle-lg-master-static.svg');
+}
+.portlet-icon-refresh-lg-white {
+  background-image: asset-url('core/img/progress/progress-circle-lg-white-static.svg');
+}
+.portlet-icon-refresh-lg-master-animated {
+  background-image: asset-url('core/img/progress/progress-circle-lg-master.svg');
+}
+.portlet-icon-refresh-lg-white-animated {
+  background-image: asset-url('core/img/progress/progress-circle-lg-white.svg');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat-Regular'), url(//fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYAzyDMXhdD8sAj6OAJTFsBI.woff2) format('woff2'), url(//fonts.gstatic.com/s/montserrat/v5/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff'), asset-url('core/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat-Bold'), url(//fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcmaVI6zN22yiurzcBKxPjFE.woff2) format('woff2'), url(//fonts.gstatic.com/s/montserrat/v5/IQHow_FEYlDC4Gzy_m8fcnbFhgvWbfSbdVg11QabG8w.woff) format('woff'), asset-url('core/fonts/montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+
+/* Open Sans @font-face kit */
+/* BEGIN Light */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/Light/OpenSans-Light.eot');
+  src: asset-url('core/fonts/opensans/Light/OpenSans-Light.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/Light/OpenSans-Light.woff') format('woff'), asset-url('core/fonts/opensans/Light/OpenSans-Light.ttf') format('truetype'), asset-url('core/fonts/opensans/Light/OpenSans-Light.svg#OpenSansLight') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+/* END Light */
+/* BEGIN Light Italic */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/LightItalic/OpenSans-LightItalic.eot');
+  src: asset-url('core/fonts/opensans/LightItalic/OpenSans-LightItalic.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/LightItalic/OpenSans-LightItalic.woff') format('woff'), asset-url('core/fonts/opensans/LightItalic/OpenSans-LightItalic.ttf') format('truetype'), asset-url('core/fonts/opensans/LightItalic/OpenSans-LightItalic.svg#OpenSansLightItalic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+/* END Light Italic */
+/* BEGIN Regular */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/Regular/OpenSans-Regular.eot');
+  src: asset-url('core/fonts/opensans/Regular/OpenSans-Regular.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/Regular/OpenSans-Regular.woff') format('woff'), asset-url('core/fonts/opensans/Regular/OpenSans-Regular.ttf') format('truetype'), asset-url('core/fonts/opensans/Regular/OpenSans-Regular.svg#OpenSansRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* END Regular */
+/* BEGIN Italic */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/Italic/OpenSans-Italic.eot');
+  src: asset-url('core/fonts/opensans/Italic/OpenSans-Italic.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/Italic/OpenSans-Italic.woff') format('woff'), asset-url('core/fonts/opensans/Italic/OpenSans-Italic.ttf') format('truetype'), asset-url('core/fonts/opensans/Italic/OpenSans-Italic.svg#OpenSansItalic') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
+/* END Italic */
+/* BEGIN Semibold */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/Semibold/OpenSans-Semibold.eot');
+  src: asset-url('core/fonts/opensans/Semibold/OpenSans-Semibold.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/Semibold/OpenSans-Semibold.woff') format('woff'), asset-url('core/fonts/opensans/Semibold/OpenSans-Semibold.ttf') format('truetype'), asset-url('core/fonts/opensans/Semibold/OpenSans-Semibold.svg#OpenSansSemibold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+/* END Semibold */
+/* BEGIN Semibold Italic */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/SemiboldItalic/OpenSans-SemiboldItalic.eot');
+  src: asset-url('core/fonts/opensans/SemiboldItalic/OpenSans-SemiboldItalic.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/SemiboldItalic/OpenSans-SemiboldItalic.woff') format('woff'), asset-url('core/fonts/opensans/SemiboldItalic/OpenSans-SemiboldItalic.ttf') format('truetype'), asset-url('core/fonts/opensans/SemiboldItalic/OpenSans-SemiboldItalic.svg#OpenSansSemiboldItalic') format('svg');
+  font-weight: 600;
+  font-style: italic;
+}
+/* END Semibold Italic */
+/* BEGIN Bold */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/Bold/OpenSans-Bold.eot');
+  src: asset-url('core/fonts/opensans/Bold/OpenSans-Bold.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/Bold/OpenSans-Bold.woff') format('woff'), asset-url('core/fonts/opensans/Bold/OpenSans-Bold.ttf') format('truetype'), asset-url('core/fonts/opensans/Bold/OpenSans-Bold.svg#OpenSansBold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+/* END Bold */
+/* BEGIN Bold Italic */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/BoldItalic/OpenSans-BoldItalic.eot');
+  src: asset-url('core/fonts/opensans/BoldItalic/OpenSans-BoldItalic.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/BoldItalic/OpenSans-BoldItalic.woff') format('woff'), asset-url('core/fonts/opensans/BoldItalic/OpenSans-BoldItalic.ttf') format('truetype'), asset-url('core/fonts/opensans/BoldItalic/OpenSans-BoldItalic.svg#OpenSansBoldItalic') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+/* END Bold Italic */
+/* BEGIN Extrabold */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/ExtraBold/OpenSans-ExtraBold.eot');
+  src: asset-url('core/fonts/opensans/ExtraBold/OpenSans-ExtraBold.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/ExtraBold/OpenSans-ExtraBold.woff') format('woff'), asset-url('core/fonts/opensans/ExtraBold/OpenSans-ExtraBold.ttf') format('truetype'), asset-url('core/fonts/opensans/ExtraBold/OpenSans-ExtraBold.svg#OpenSansExtrabold') format('svg');
+  font-weight: 800;
+  font-style: normal;
+}
+/* END Extrabold */
+/* BEGIN Extrabold Italic */
+@font-face {
+  font-family: 'Open Sans';
+  src: asset-url('core/fonts/opensans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.eot');
+  src: asset-url('core/fonts/opensans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'), asset-url('core/fonts/opensans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.woff') format('woff'), asset-url('core/fonts/opensans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.ttf') format('truetype'), asset-url('core/fonts/opensans/ExtraBoldItalic/OpenSans-ExtraBoldItalic.svg#OpenSansExtraboldItalic') format('svg');
+  font-weight: 800;
+  font-style: italic;
+}
+
+.alert .close {
+  background: asset-url('core/img/icons/noti-cross.png') no-repeat scroll 0 0 transparent;
+  background-position: -9px -10px;
+}
+.progress-bar-indeterminate {
+  background: asset-url('core/img/progress/progress-bar-master.svg') no-repeat top left;
+}
+.progress-bar-indeterminate.progress-bar-primary {
+  background-image: asset-url('core/img/progress/progress-bar-primary.svg');
+}
+.progress-bar-indeterminate.progress-bar-complete {
+  background-image: asset-url('core/img/progress/progress-bar-complete.svg');
+}
+.progress-bar-indeterminate.progress-bar-success {
+  background-image: asset-url('core/img/progress/progress-bar-success.svg');
+}
+.progress-bar-indeterminate.progress-bar-warning {
+  background-image: asset-url('core/img/progress/progress-bar-warning.svg');
+}
+.progress-bar-indeterminate.progress-bar-danger {
+  background-image: asset-url('core/img/progress/progress-bar-danger.svg');
+}
+.progress-bar-indeterminate.progress-bar-master {
+  background-image: asset-url('core/img/progress/progress-bar-master.svg');
+}
+.progress-circle-indeterminate {
+  background: asset-url('core/img/progress/progress-circle-master.svg') no-repeat top left;
+}
+.progress-circle-indeterminate.progress-circle-warning {
+  background-image: asset-url('core/img/progress/progress-circle-warning.svg');
+}
+.progress-circle-indeterminate.progress-circle-danger {
+  background-image: asset-url('core/img/progress/progress-circle-danger.svg');
+}
+.progress-circle-indeterminate.progress-circle-primary {
+  background-image: asset-url('core/img/progress/progress-circle-primary.svg');
+}
+.progress-circle-indeterminate.progress-circle-success {
+  background-image: asset-url('core/img/progress/progress-circle-success.svg');
+}
+.progress-circle-indeterminate.progress-circle-complete {
+  background-image: asset-url('core/img/progress/progress-circle-complete.svg');
+}
+.editor-icon {
+  background-image: asset-url('core/img/editor_tray.png');
+}
+.social-wrapper .social .cover-photo:before {
+  background-image: asset-url('core/img/linear_gradient.png');
+}
+
+.widget-1:before {
+  background-image: asset-url('core/img/linear_gradient.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 200/100), only screen and (min-device-pixel-ratio: 2) {
+  .icon-set {
+    background: asset-url('core/img/icons/top_tray_2x.png');
+  }
+  .editor-icon {
+    background-image: asset-url('core/img/editor_tray_2x.png');
+  }
+  .alert .close {
+    background: asset-url('core/img/icons/noti-cross-2x.png') no-repeat scroll 0 0 transparent;
+    background-position: -9px -10px;
+  }
+}

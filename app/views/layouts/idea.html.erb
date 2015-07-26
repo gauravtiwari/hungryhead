@@ -3,60 +3,55 @@
   <head>
     <title>Hungryhead - An idea simulation platform</title>
     <%= favicon_link_tag 'favicon.ico' %>
+
     <meta content="An idea simulation platform" name="description" />
     <meta content="hungryhead" name="author" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" href="<%= image_path('ico/60.png') %>">
-    <link rel="apple-touch-icon" sizes="76x76" href="<%= image_path('ico/76.png') %>">
-    <link rel="apple-touch-icon" sizes="120x120" href="<%= image_path('ico/120.png') %>">
-    <link rel="apple-touch-icon" sizes="152x152" href="<%= image_path('ico/152.png') %>">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, 'data-turbolinks-eval' => false %>
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+
+    <% cache_if(user_signed_in?, current_user) do %>
+      <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
 
+    <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
+      <% if idea_collaboration? %>
+        <script type="text/javascript">
+          idea = {
+            name: "<%= @idea.name %>",
+            slug: "<%= @idea.slug %>",
+            id: "<%= @idea.uuid %>"
+          }
+          window.idea = idea;
+        </script>
+      <% end %>
+    <% end %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
     <!--[if lte IE 9]>
-    <link href="/pages/css/ie9.css?v=pages-v1.0.0" rel="stylesheet" type="text/css" />
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
     <![endif]-->
-    <script type="text/javascript">
+
+    <script type="text/javascript" data-turbolinks-eval=false>
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-          document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="/pages/css/windows.chrome.fix.css?v=pages-v1.0.0" />'
+          document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
       }
     </script>
 
-    <% if user_signed_in? %>
-      <%= javascript_tag do %>
-          var pusher = new Pusher("<%= ENV['PUSHER_APP_KEY'] %>");
-          var channel = pusher.subscribe("private-user-<%= current_user.id %>");
-          var public_channel = pusher.subscribe("public-notifications");
-          if(channel) {
-          channel.bind('new_badge', function(data) {
-           channel.bind('new_badge', function(data) {
-              $('body').pgNotification({style: "simple", message: data.message, position: "top-right", type: "success",timeout: 5000}).show();
-            });
-          });
-          channel.bind('new_notification', function(data){
-
-            $('body').pgNotification({style: "simple", message: data.data.msg, position: "top-right", type: "success",timeout: 5000}).show();
-          });
-        }
-      <% end %>
-    <% end %>
     <%= csrf_meta_tags %>
-    <% if user_signed_in? %>
-      <%= render partial: 'shared/current_user' %>
-    <% end %>
     <%= yield :head %>
+
   </head>
 
-  <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'no-header menu-behind' %>">
-    <div class="<%= user_signed_in? ? 'container' : 'page-container' %>">
+  <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
+
+    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
@@ -69,5 +64,6 @@
         </div>
       </div>
     </div>
+
   </body>
 </html>

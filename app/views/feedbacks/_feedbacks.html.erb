@@ -1,22 +1,26 @@
-<div class="modal fade fill-in no-border" id="modalSlideFeedbacks" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
-  <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-body no-border no-padding bg-white">
-         <% if @feedbacks.length > 0 %>
-           <% @feedbacks.each do |feedback| %>
-             <%= render partial: 'feedback', locals: {feedback: feedback} %>
-           <% end %>
-           <% else %>
-           <div class="widget-box">
-             <div class="no-content">
-               No feedbacks received.
-             </div>
-           </div>
-          <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
-         <% end %>
+<% if @feedbacks.size > 0 %>
+  <% @feedbacks.each do |feedback| %>
+   <% cache(feedback) do %>
+     <%= render partial: 'feedback', locals: {feedback: feedback} %>
+   <% end %>
+  <% end %>
+
+  <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
+<% else %>
+  <div class="panel panel-default p-t-40 p-b-40 box-shadow">
+    <div class="text-center light font-opensans fs-22">
+      <span class="fa fa-bullhorn fs-22"></span>
+      <span class="clearfix">
+        No Feedbacks
+      </span>
+      <div class="m-t-20 clearfix">
+        <span class="clearfix p-b-20">
+          Click to write your feedback
+        </span>
+        <% if !policy(@idea).collaborator? %>
+          <%= react_component('OpenFeedbackButton', { :feedbacked => @idea.feedbacked?(current_user), form: {idea_slug: @idea.slug, idea_name: @idea.name} }.to_json) %>
+        <% end %>
       </div>
     </div>
-
-<!-- /.modal-dialog -->
-</div>
+  </div>
+<% end %>

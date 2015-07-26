@@ -1,3 +1,0 @@
-<div class="box-shadow">
-  <%= react_component('LatestUserActivities', {user_id: @user.id, channel_name: "private-user-#{@user.id}", activities: @user.latest_activities.values.reverse}.to_json) %>
-</div>

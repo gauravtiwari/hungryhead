@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var SchoolCover = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
@@ -47,10 +45,10 @@ var SchoolCover = React.createClass({
   handleCoverDrag: function(){
    var self = this;
    $("#coverpic").draggable({
-    containment: "cover-wrap",
+    containment: "cover-wrap-school",
     cursor: "crosshair",
     drag:function(event, ui) {
-      var wrapper = $("#cover-wrap").offset();
+      var wrapper = $("#cover-wrap-school").offset();
       ui.position.left = Math.min( 100, ui.position.left );
       ui.position.top = Math.min( 100, ui.position.top );
       self.setState({top:  ui.position.top, left: ui.position.left});
@@ -124,7 +122,7 @@ var SchoolCover = React.createClass({
         $('.inner-profile-content').show();
       }
 
-      if(this.state.cover.url !== null){
+      if(this.state.cover.has_cover){
         var top = this.state.top || "auto";
         var left = this.state.left || "auto";
         var imageStyle = {
@@ -135,21 +133,24 @@ var SchoolCover = React.createClass({
         };
         var image = <img className="cover-photo" id="schoolcover_preview" src={this.state.cover.url} />;
       } else {
-        var image = "";
-        var handle = <h2 className="drag-handle text-white show" onClick={this.triggerOpen}><i className="fa fa-upload"></i> Upload cover</h2>;
+        if(this.state.is_owner) {
+        var handle = <h2 className="text-white pull-right fs-50"><i className="fa fa-upload fs-50"></i> Click to upload cover</h2>;
+        var image = <div className="no-content cover-handle bold z-index-10" onClick={this.triggerOpen}>{handle}</div>;
+      } else {
+        var image = <img className="cover-photo" src={this.state.cover.url} />;
       }
+    }
 
 
       if(this.state.is_owner) {
         return (
 
-          <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap">
+          <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap-school">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />
                 <input type="file" ref="cover" style={{"display" : "none"}} name="school[cover]" id="school_cover" />
                 <input type="hidden" ref="position" name="school[cover_position]" value={top} />
                 <input type="hidden" ref="position" name="school[cover_left]" value={left} />
-                <input type="hidden" name={ this.state.form.csrf_param } value={ this.state.form.csrf_token } />
               </form>
               <div id="coverpic" style={imageStyle}>
                 {image}
@@ -159,7 +160,7 @@ var SchoolCover = React.createClass({
         )
      } else {
        return (
-      <div className={drag_class} data-social="cover" id="cover-wrap" id="cover-wrap">
+      <div className={drag_class} data-social="cover" id="cover-wrap-school" id="cover-wrap-school">
            <div id="coverpic" style={imageStyle}>
             {image}
            </div>

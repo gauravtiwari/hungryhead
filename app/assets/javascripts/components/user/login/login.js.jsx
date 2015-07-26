@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Login = React.createClass({
   getInitialState: function() {
     return {
@@ -9,7 +7,7 @@ var Login = React.createClass({
       disabled: false
     };
   },
-  
+
   handleLoginSubmit: function ( data ) {
     var self = this;
     this.setState({disabled: true})

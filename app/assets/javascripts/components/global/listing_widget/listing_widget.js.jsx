@@ -27,11 +27,20 @@ var ListingWidget = React.createClass({
       return <ListingWidgetItem item={item} key={Math.random()} />
     });
 
-    if(this.state.count > 7) {
+    if(this.state.listing.length > 0) {
+      var content = items;
+    } else {
+      var content = <div className="text-center fs-22 font-opensans text-master light p-t-20 p-b-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">{this.state.count} {this.props.type}</span>
+        </div>;
+    }
+
+    if(this.state.count > 15) {
       var count =  <li onClick={this.loadAll} className="pointer">
             <div className="thumbnail-wrapper d32 circular b-white">
                 <div className="bg-master text-center text-white">
-                    <span>+{this.state.count - 7}</span>
+                    <span>+{this.state.count - 15}</span>
                 </div>
             </div>
          </li>;
@@ -41,7 +50,7 @@ var ListingWidget = React.createClass({
 
     return (
       <ul className="list-unstyled">
-        {items}
+        {content}
         {count}
       </ul>
     );

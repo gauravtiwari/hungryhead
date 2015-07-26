@@ -1,5 +1,7 @@
 class CreateVersions < ActiveRecord::Migration
+
   disable_ddl_transaction!
+
   def change
     create_table :versions do |t|
       t.string   :item_type, :null => false
@@ -8,11 +10,15 @@ class CreateVersions < ActiveRecord::Migration
       t.string   :whodunnit
       t.string :user_name
       t.string :user_avatar
+      t.string :name_badge
       t.string :owner_url
       t.json :object_changes
       t.json     :object
       t.datetime :created_at
     end
+
     add_index :versions, [:item_type, :item_id], algorithm: :concurrently
+
   end
+
 end

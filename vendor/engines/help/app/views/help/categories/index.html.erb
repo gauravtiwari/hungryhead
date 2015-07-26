@@ -1,0 +1,30 @@
+<% cache(["beta", current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
+  <div class="page-container p-b-60 bg-white overflow-hidden">
+  <div class="help-header bg-solid p-t-20 p-b-20 box-shadow">
+    <div class="container">
+    <small class="hint-text text-white fs-16 v-middle p-l-15">
+      Help <i class="fa fa-chevron-right fs-12"></i>
+    </small>
+    </div>
+  </div>
+  <div class="container">
+  <div class="container-inner p-l-15 p-r-15">
+    <div class="help-main-content m-t-50">
+      <div class="col-md-12 col-sm-8 no-padding p-r-15">
+        <div class="help-content">
+          <div class="no-content">
+            <i class="fa fa-frown-o"></i> uhho.. No Help Articles Found
+          </div>
+          <div class="text-center">
+            <% if current_user && current_user.admin? %>
+              <%= link_to('Add category', new_category_path, remote: true) %>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+<% end %>

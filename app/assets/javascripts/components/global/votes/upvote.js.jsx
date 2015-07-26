@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var PureRenderMixin = React.addons.PureRenderMixin;
 
 var Upvote = React.createClass({
@@ -11,6 +8,7 @@ var Upvote = React.createClass({
       css_class: this.props.css_class,
       voted: this.props.voted,
       vote_url: this.props.vote_url,
+      style: this.props.style,
       votes_count: this.props.votes_count,
       voters_path: this.props.voters_path
     };
@@ -56,7 +54,15 @@ var Upvote = React.createClass({
     var classes = cx({
       'fa fa-spinner fa-spin': this.state.loading
     });
+
+    var button_classes = cx({
+      'main-button fs-13 bold m-r-10': true,
+      'disabled': this.state.disabled,
+      'voted text-white': this.state.voted
+    });
+
     var text = this.state.voted ? 'You voted this' : 'Click to vote';
+    var button_text = this.state.voted ? 'Voted' : 'Vote';
     var heart = this.state.voted ? <i className="fa fa-thumbs-up text-danger"></i> : <i className="fa fa-thumbs-o-up"></i>;
 
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
@@ -65,14 +71,22 @@ var Upvote = React.createClass({
       var voters =<a onClick={this.loadVoters} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
     }
 
-    return (<li className="inline m-r-10 fs-14 bold">
-              <a data-toggle="tooltip" data-container="body" title={text} onClick={this.handleClick}>
-                {heart}
-              </a>
-              {voters}
-            </li>
+    if(this.props.button_style) {
+      return (
+        <a onClick={this.handleClick} className={button_classes}>
+          <i className="fa fa-thumbs-up"></i> {button_text}
+        </a>
+        )
+    } else {
+      return (<li className="inline text-black m-r-10 fs-14 bold pointer">
+                <a data-toggle="tooltip" data-container="body" title={text} onClick={this.handleClick}>
+                  {heart}
+                </a>
+                {voters}
+              </li>
 
-    );
+      );
+    }
   }
 
 });

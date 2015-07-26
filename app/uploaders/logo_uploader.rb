@@ -8,8 +8,6 @@ class LogoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimetypeFu
   process :set_content_type
 
-  # Choose what kind of storage to use for this uploader:
-  #storage :file
   storage :fog
 
 

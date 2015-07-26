@@ -1,0 +1,18 @@
+//Find body
+var $el = $('body');
+$el.append("<%= j render partial: 'popup' %>");
+
+// Fund popup and append with form
+var $popup = $('#eventPopupModal')
+$popup.find('#event_popup_body').html("<%= j render partial: 'form' %>");
+$popup.modal('show');
+
+//Init date picker plugin
+$('#startdatepicker').datetimepicker({sideBySide: true});
+$('#enddatepicker').datetimepicker({sideBySide: true});
+
+//Init autosize
+$('body').on('focus', 'textarea', function(event) {
+  event.preventDefault();
+  $(this).autosize();
+});

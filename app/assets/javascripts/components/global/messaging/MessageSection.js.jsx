@@ -1,13 +1,10 @@
-/**
- * @jsx React.DOM
- */
 var MessageSection = React.createClass({
 
   render: function() {
     if(this.props.messages) {
       var messages = this.props.messages;
       var messageListItems = this.props.messages.map(function(message){
-      return <MessageListItem message= {message} key={message.uuid} />
+        return <MessageListItem message= {message} key={message.uuid} />
       });
     }
 
@@ -23,13 +20,13 @@ var MessageSection = React.createClass({
 
   sizeContent: function() {
       var newHeight = $("html").height() - 103 + "px";
-      $(".chat-inner").css("height", newHeight,toString());
+      $(".chat-inner").css("height", newHeight.toString());
   },
 
   componentDidMount: function() {
     $(window).resize(this.sizeContent);
     this._scrollToBottom();
-    $('a[data-toggle="quickview"], .content').on('click', function(){
+    $('a[data-toggle="quickview"]').on('click', function(){
       $('body').removeClass('show-collaboration');
       $('.quickview-wrapper').removeClass('open');
     });

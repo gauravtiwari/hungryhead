@@ -1,76 +1,115 @@
 class UsersController < ApplicationController
+
   before_filter :authenticate_user!, except: [:check_username, :check_email, :join]
   before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
-  before_action :set_user, except: [:latest, :popular, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
+  before_action :set_user, except: [:latest, :popular, :people_you_may_know, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :only => [:update, :edit]
+  after_action :verify_authorized, :except => [:autocomplete_user_name, :people_you_may_know, :check_username, :check_email, :followings, :followers, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
-  autocomplete :user, :name, :full => true
+
+  autocomplete :user, :name, :full => true, extra_data: [:username]
 
   def index
-    @users = User.order(id: :desc).paginate(:page => params[:page], :per_page => 12)
+    types = ["student", "alumni", "faculty"]
+    if params[:type].present? && types.include?(params[:type])
+      @users = User.send(params[:type]).published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    else
+      @users = User.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def latest
+    respond_to do |format|
+      format.html
+      format.json {render json: Oj.dump({
+          list: User.latest_20,
+          type: 'Latest People'
+        }, mode: :compat)}
+    end
+  end
+
+  def popular
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: User.popular_20,
+      type: 'Popular People'
+      }, mode: :compat) }
+    end
+  end
+
+  def trending
+    respond_to do |format|
+      format.html
+      format.json { render json: Oj.dump({
+      list: User.trending_20,
+      type: 'Trending People'
+      }, mode: :compat) }
+    end
+  end
+
+  def edit
+    authorize @user
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def show
+    authorize @user
+    if !@user.impressioners_ids.member?(current_user.id) && @user != current_user
+      PersistViewsCountJob.perform_later(current_user.id, @user.id, @user.class.to_s, request.referrer, request.remote_ip)
+    end
     respond_to do |format|
       format.html
       format.json
     end
   end
 
-  def latest
-    render json: Oj.dump({
-      list: User.latest_listing,
-      type: 'Latest People'
-    }, mode: :compat)
-  end
-
-  def popular
-    render json: Oj.dump({
-      list: User.popular_20,
-      type: 'Popular People'
-      }, mode: :compat)
-  end
-
-  def trending
-    @users = User.trending_20
-    render json: Oj.dump({
-      list: User.trending_20,
-      type: 'Trending People'
-      }, mode: :compat)
-  end
-
-  def edit
-    authorize @user
-  end
-
-  def show
-    User.trending.increment(@user.id) if @user != current_user
-    @user.views_counter.increment if @user != current_user
-    respond_to do |format|
-      format.html {render :show} if @user.type == "User"
-      format.html {render :show} if @user.type == "Student"
-      format.html {render :mentor} if @user.type == "Mentor"
-      format.html {render :teacher} if @user.type == "Teacher"
-    end
-  end
-
   def card
+    authorize @user
     render partial: 'shared/user_card'
   end
 
   def user_invite
     users = params[:user][:name].zip(params[:user][:email])
     invited = []
+    users.delete(["", ""])
     users.each do |u|
-      @user = Mentor.invite!({name: u[0], email: u[1]}, current_user) do |u|
+      @user = User.invite!({name: u[0], email: u[1]}, current_user) do |u|
         u.skip_invitation = true
       end
-      InviteMailer.invite_friends(@user, current_user).deliver
       @user.invitation_sent_at = Time.now.utc
+      InviteMailer.invite_friends(@user, current_user).deliver  if @user.errors.empty?
       invited << u[0] if u[0].present?
     end
-    render json: {invited: true, msg: "You have succesfully invited #{invited.to_sentence}", status: :created}
+
+    if @user.errors.empty?
+      render json: {
+        invited: true,
+        msg: "You have succesfully invited #{invited.to_sentence}",
+        status: :created
+      }
+    else
+      render json: {
+        invited: false,
+        msg: "Something went wrong, please try again",
+        status: :created
+      }
+    end
+
+  end
+
+  def about_me
+    authorize @user
   end
 
   def update
@@ -80,10 +119,10 @@ class UsersController < ApplicationController
         if @user.username_changed?
           redirect_to profile_path(@user)
         else
-          format.html { redirect_to profile_path(@user), notice: 'Preferences was succesfully updated.' }
+          format.html { redirect_to profile_path(@user), notice: 'Profile was succesfully updated.' }
+          format.js {render :show, flash: {notice: 'Your profile was succesfully updated.'} }
           format.json { render :show, status: :ok }
         end
-        @user.rebuild_notifications
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -98,6 +137,7 @@ class UsersController < ApplicationController
       render :json =>  {
         error: "This Username is already taken. Please try followings \n",
         suggestions: @user.username_suggestions.to_sentence,
+        suggested: @user.username_suggestions.first,
         available: false
       }
     else
@@ -110,7 +150,7 @@ class UsersController < ApplicationController
     if user.present?
       render :json =>  {
         name: user.name.split(' ').first,
-        error: "This Email is already taken. Please login",
+        error: "You email is already registered. Please login",
         available: false
       }
     else
@@ -119,15 +159,9 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @followers =@user.get_followers.paginate(:page => params[:page], :per_page => 9)
+    @followable = @user
+    @followers = @user.get_followers.paginate(:page => params[:page], :per_page => 9)
     render 'follows/followers'
-  end
-
-  def about
-    respond_to do |format|
-      format.js
-      format.html
-    end
   end
 
   def delete_cover
@@ -139,44 +173,35 @@ class UsersController < ApplicationController
     end
   end
 
+  def people_you_may_know
+    @users = User.find(current_user.people_you_may_know).paginate(:page => params[:page], :per_page => 9)
+    respond_to do |format|
+      format.json {render :index}
+    end
+  end
+
   def followings
+    @followable = @user
     @followings = @user.get_followings.paginate(:page => params[:page], :per_page => 9)
     render 'follows/followings'
   end
 
   def activities
-    @activities = Activity
-    .where(user_id: @user.id)
+    authorize @user
+    @activities = @user.activities
+    .where(published: true)
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
+    @next_page_url = profile_activities_path(page: @activities.next_page)
     respond_to do |format|
-      format.js
+      format.js {render 'activities/index'}
       format.html
     end
   end
 
   def activity
+    authorize @user
     @activity = @user.activities.find(params[:id])
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-
-  def posts
-    @posts = @user
-    .posts
-    .order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 10)
-
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-
-  def post
-    @post = Post.find(params[:id])
     respond_to do |format|
       format.js
       format.html
@@ -187,8 +212,11 @@ class UsersController < ApplicationController
 
   #Error message if user not authorised
   def user_not_authorized
-    flash[:error] = "You are not authorized to perform this action."
-    render json: {error: "You are not authorized to perform this action"}
+    if request.xhr?
+      render json: {error: "Not found"}, :status => 404
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -201,9 +229,9 @@ class UsersController < ApplicationController
   # White-listed attributes.
   def user_params
     params.require(:user).permit(:name, :mini_bio, :password, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
-      :email, :terms_accepted, :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
-      :name, :avatar, :subject_list, :cover, :about_me, :website_url, :facebook_url,
-      :twitter_url, :linkedin_url, :location_list, :hobby_list, :market_list, :idea_notifications,
+      :email, :terms_accepted, :first_name, :last_name, :school_id, :feed_preferences,  :cover_position, :cover_left, :username, :reset_password_token, :password_confirmation,
+      :name, :avatar, :cover, :about_me, :website_url, :facebook_url, :role,
+      :twitter_url, :linkedin_url, :location_list, :hobby_list, :subject_list, :skill_list, :market_list, :idea_notifications,
       :investment_notifications, :feedback_notifications, :follow_notifications, :weekly_mail)
   end
 

@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
 
   include Redis::Objects
+
   #Redis counters and ids cache
   counter :votes_counter
   list :voters_ids
@@ -15,8 +16,8 @@ class Comment < ActiveRecord::Base
   include Mentioner
 
   #Callback hooks
-  after_create :increment_counters
-  before_destroy :decrement_counters, :delete_notification
+  after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
+  after_destroy :update_counters, :deleted_cached_commenters_ids, :delete_notification
 
   #Model Associations
   belongs_to :user
@@ -68,32 +69,38 @@ class Comment < ActiveRecord::Base
     true
   end
 
-  #Get commentable user - idea(student) || user
+  #Get commentable user
   def commentable_user
-    commentable_type == "Idea" ? commentable.student : commentable.user
+    commentable.user
   end
 
   private
 
-  def increment_counters
-    #Increment counters for commentable
-    commentable.comments_counter.increment
-    user.comments_counter.increment
-    #cache commenters ids
-    commentable.commenters_ids << user_id
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
-  def decrement_counters
-    #Decrement comments counter
-    commentable.comments_counter.decrement if commentable.comments_counter.value > 0
-    user.comments_counter.decrement if user.comments_counter.value > 0
+  def update_counters
+    #Update comments counter for commentable
+    commentable.comments_counter.reset
+    commentable.comments_counter.incr(commentable.comments.size)
+    user.comments_counter.reset
+    user.comments_counter.incr(user.comments.size)
+  end
+
+  def cache_commenters_ids
     #cache commenters ids
-    commentable.commenters_ids.delete(user_id)
+    commentable.commenters_ids << user_id unless commentable.commented?(user)
+  end
+
+  def deleted_cached_commenters_ids
+    #cache commenters ids
+    commentable.commenters_ids.delete(user_id) if commentable.commented?(user)
   end
 
   def delete_notification
     #Delete activity item from feed
-    DeleteUserNotificationJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
 end

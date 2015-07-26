@@ -1,7 +1,5 @@
 class CreateCommentService
 
-  include Wisper::Publisher
-
   def initialize(params, commentable, user)
     @params = params
     @user = user
@@ -11,13 +9,7 @@ class CreateCommentService
   def call
     comment = @user.comments.new @params
     comment.commentable = @commentable
-
-    if comment.save
-      publish :comment_created, comment
-    else
-      publish :comment_error, comment
-    end
-
+    comment
   end
 
 end

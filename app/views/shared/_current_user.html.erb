@@ -1,20 +1,18 @@
-
 <script type="text/javascript">
 	var u = {
-		id: "<%= current_user.id %>",
+		id: "<%= current_user.uid %>",
 		name: "<%= current_user.name %>",
-		user_name_badge: "<%= current_user.first_name.first + current_user.last_name.first %>",
+		user_name_badge: "<%= current_user.name_badge %>",
 		balance: "<%= current_user.fund['balance'] %>",
-		id: "<%= current_user.id %>",
 		email: "<%= current_user.email %>",
-		ideas: "<%= current_user.ideas_counter.value if current_user.type == "Student" %>",
+		ideas: "<%= current_user.ideas_counter.value %>",
 		feedbacks: "<%= current_user.feedbacks_counter.value %>",
 		investments: "<%= current_user.investments_counter.value %>",
-		avatar: "<%= current_user.avatar.url(:avatar) %>",
+		avatar: "<%= current_user.get_avatar %>",
 		role: "<%= current_user.role %>",
-		user_url:  "<%= user_url(current_user) %>",
-		csrf_param: "<%= request_forgery_protection_token %>",
-		csrf_token: "<%= form_authenticity_token %>"
+		user_url:  "<%= profile_url(current_user) %>",
+		authenticated: "<%= user_signed_in? %>"
 	}
 	window.currentUser = u;
+	window.PUSHER_APP_KEY = "<%= ENV['PUSHER_APP_KEY'] %>";
 </script>

@@ -1,0 +1,32 @@
+<div class="profile-nav overflow-hidden p-l-15">
+	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
+		<li class="inline b-r b-grey b-dashed p-r-15">
+			<%= link_to('Profile', profile_path(@school), class: "bold #{current_class?(profile_path(@school))} p-b-5 fs-13") %>
+		</li>
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+			<%= link_to('People', profile_people_path(@school), class: "bold fs-13 #{current_class?(profile_people_path(@school))} ") %>
+		</li>
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+			<%= link_to('Ideas', profile_ideas_path(@school), class: "bold fs-13 #{current_class?(profile_ideas_path(@school))} ") %>
+		</li>
+		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+			<%= link_to('Events', profile_events_path(@school), class: "bold fs-13 #{current_class?(profile_events_path(@school))} ") %>
+		</li>
+	</ul>
+
+	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
+			<% if current_user == @school.user %>
+	     <div>
+			  <%= link_to(profile_dashboard_path(@school), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
+			  	<span class="fa fa-pencil"></span> Edit profile
+			  <% end %>
+	  	</div>
+	     <div>
+			  <%= link_to(new_event_path(owner: @school.class.to_s, owner_id: @school), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
+			  	<span class="fa fa-calendar"></span> Create event
+			  <% end %>
+	  	</div>
+	    <% end %>
+	    <%= react_component('Follow', {followed: followed?(@school)}) %>
+	</div>
+</div>

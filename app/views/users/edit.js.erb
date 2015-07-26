@@ -1,0 +1,25 @@
+//find body
+var $el = $('body');
+$el.append($('<div>', {class: 'edit_user_<%= @user.uid %>', id: 'edit_user_<%= @user.uid %>'}));
+
+var $container = $('#edit_user_<%= @user.uid %>');
+//add form to html
+$container.html("<%= j render partial: 'popup' %>");
+
+var $modal = $container.find('#editProfileFormPopup');
+
+$.HHSelect2.init();
+
+$modal.modal('show');
+
+var $close_link = $modal.find('#close_form');
+
+//Close modal on cancel
+$close_link.on('click', function(event) {
+  $modal.modal('hide');
+});
+
+//Cleanup dom
+$modal.on('hidden.bs.modal', function(){
+  $container.remove();
+});

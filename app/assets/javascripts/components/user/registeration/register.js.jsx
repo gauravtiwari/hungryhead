@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Register = React.createClass({
   getInitialState: function() {
     return {
@@ -16,17 +14,18 @@ var Register = React.createClass({
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
-      url: Routes.student_registration_path(),
+      url: Routes.user_registration_path(),
       type: "POST",
       dataType: "json",
       success: function ( data ) {
         if(data.name) {
-          $('body').pgNotification({style: "simple", message: "Registeration Successful. Please confirm your email.", position: "top-right", type: "success",timeout: 5000}).show();
+          $('body').pgNotification({style: "simple", message: "Registeration Successful. You will receive an email shortly on " + data.email + ". Redirecting...", position: "top-right", type: "success",timeout: 5000}).show();
           setTimeout(function(){
             window.location.href = Routes.root_path;
           }, 3000);
         }
-      this.setState({loading: false});
+
+        this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({loading: false});

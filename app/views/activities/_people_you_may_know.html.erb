@@ -1,38 +1,35 @@
-<div class="widget-16 panel no-margin widget-loader-circle">
+<div class="widget-16 panel no-margin">
 <div class="panel-heading">
     <div class="panel-title b-grey b-b p-b-5">
       People you may know
     </div>
+    <% if current_user.people_you_may_know.length > 4 %>
+        <div class="panel-controls">
+            <ul>
+                <li>
+                  <%= react_component('ShowAllLink', {path: people_you_may_know_users_path}) %>
+                </li>
+            </ul>
+        </div>
+    <% end%>
 </div>
 <div class="panel-body">
     <ul class="list-unstyled">
     <% User.find(current_user.people_you_may_know).take(5).each do |user| %>
-        <li class="m-r-10">
-        <%= link_to(profile_path(user)) do %>
-            <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5 b-a b-white">
-                    <% if user.avatar.present? %>
-                    <%= image_tag(user.avatar.url(:avatar), :"data-src" => "#{user.avatar.url(:avatar)}", :"data-src-retina" => "#{user.avatar.url(:square)}", width: "35", height: "35") %>
-
-                    <% else %>
-                    <span class="placeholder bold fs-12 text-white">
-                        <%= user.user_name_badge %>
-                    </span>
-                    <% end %>
-
+        <li class="inline">
+        <%= link_to(profile_path(user), data: {toggle: "tooltip", container: "body"}, title: "#{user.name}", class: 'inline') do %>
+            <div class="thumbnail-wrapper d32 circular b-white m-r-5 m-b-5">
+                <% if user.avatar_present? %>
+                <%= image_tag(user.get_avatar, :"data-src" => "#{user.get_avatar}", :"data-src-retina" => "#{user.get_avatar}", width: "35", height: "35") %>
+                <% else %>
+                <span class="placeholder bold fs-12 text-white">
+                    <%= user.name_badge %>
+                </span>
+                <% end %>
             </div>
             <% end %>
         </li>
     <% end %>
-    <% if current_user.people_you_may_know.length > 16 %>
-    <li>
-        <div class="thumbnail-wrapper d32 circular b-white">
-            <div class="bg-master text-center text-white">
-                <span>+34</span>
-            </div>
-        </div>
-    </li>
-    <% end %>
-
     </ul>
     </div>
 </div>

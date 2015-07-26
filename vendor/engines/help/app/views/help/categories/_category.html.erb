@@ -1,0 +1,8 @@
+<div>
+  <%= content_tag(:h6, class: 'inline no-margin') do %>
+    <%= link_to(category.name, help_category_path(category), class: 'text-master') %>
+  <% end %>
+  <% if current_user && current_user.admin? %>
+    <%= link_to('Edit', edit_category_path(category), remote: true, class: 'small-text inline m-l-10') %>
+  <% end %>
+</div>

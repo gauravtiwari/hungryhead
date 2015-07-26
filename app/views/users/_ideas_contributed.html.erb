@@ -1,0 +1,51 @@
+<div class="widget-16 no-border panel bg-white box-shadow">
+    <div class="panel-heading m-b-20">
+        <div class="panel-title b-b b-great p-b-5">
+            <i class="fa fa-lightbulb-o text-danger"></i> Ideas contributed
+        </div>
+    </div>
+        <% if @user.get_contributions.any? %>
+            <% @user.get_contributions.take(3).each do |idea| %>
+                <% if idea.visible? || idea.user == current_user %>
+                    <div class="widget-16-header p-l-20 p-r-20 p-b-20">
+                        <div class="pull-left">
+                            <h5 class="all-caps bold small inline pull-left no-margin  p-b-5 relative">
+                                <%= link_to(idea.name, idea_path(idea), class: "text-black") %>
+                                <% if !idea.published? %>
+                                    <span class="fa fa-lock inline" data-toggle="tooltip" data-container="body" title="Private Idea"></span>
+                                <% end %>
+                                <% if idea.founder?(@user) %>
+                                  <span class="badge badge-green m-l-10">
+                                    founder
+                                  </span>
+                                <% end %>
+
+                                <% if idea.team_member?(@user) %>
+                                  <span class="badge badge-inverse m-l-10">
+                                    team
+                                  </span>
+                                <% end %>
+                            </h5>
+                            <p class="small no-margin clearfix ">
+                                <%= idea.elevator_pitch %>
+                            </p>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                <% end %>
+            <% end %>
+        <% else %>
+        <% if @user == current_user %>
+            <div class="text-center fs-22 p-b-40 p-t-15 font-opensans hint-text">
+                <i class="fa fa-search full-width"></i>
+                <%= link_to('Browse', ideas_path, class: ' b-b text-master b-grey p-b-5') %> to contribute
+            </div>
+       <% else %>
+           <div class="text-center font-opensans fs-22 p-b-40 p-t-15 hint-text">
+            <i class="fa fa-list"></i>
+            <span class="clearfix">No ideas contributions</span>
+           </div>
+       <% end %>
+    <% end %>
+
+</div>

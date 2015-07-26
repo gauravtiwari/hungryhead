@@ -4,6 +4,49 @@
 	z-index: 10;
 	top:20%;
 	left:30%;
+  z-index: 10;
+}
+.cover-handle {
+  position: absolute;
+  right: 0;
+  z-index: 11;
+}
+.school-bg-gradient {
+  background: -webkit-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* FF3.6+ */
+  background:     -ms-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* IE10 */
+  background:      -o-linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* Opera 11.10+ */
+  background:         linear-gradient(90deg, #003973 10%, #E5E5BE 90%); /* W3C */
+}
+body.schools.index,
+body.schools.people,
+body.schools.events,
+body.schools.ideas,
+body.badges,
+body.tags  {
+  background-color: #fff;
+}
+body.schools.dashboard {
+  background: #f5f5f5;
+}
+body.schools.index .container ,
+body.schools.people .container,
+body.schools.events .container,
+body.schools.ideas .container,
+body.badges .container,
+body.tags .container  {
+  max-width: 980px;
+}
+.tab-content.schools-tabs li {
+  padding: 15px;
+}
+.school-list .school-info {
+  word-wrap: break-word;
+}
+.school-list .school-info a:hover {
+  border-bottom: 1px solid #5b98e0;
+  color: #5b98e0!important;
+  opacity: 1;
 }
 
 .school.label-description {
@@ -15,4 +58,17 @@
 	right: 20px;
 	bottom: 20px;
 	z-index: 10;
+}
+.profile-logo {
+  height: 110px;
+  width: 110px;
+}
+
+#cover-wrap-school:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }

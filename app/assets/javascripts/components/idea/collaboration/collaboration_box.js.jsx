@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var CollaborationBox = React.createClass({
   getInitialState: function () {
      return {
@@ -74,7 +70,7 @@ var CollaborationBox = React.createClass({
   showTyping: function(member) {
   if(member.id != idea_collaboration_channel.members.me.id) {
      var user = $("#typing_status")
-      var typing = $("<div>", {
+      var typing = $("<span>", {
         "class": "typing",
         text: member.info.name+' is typing...'
       })
@@ -119,7 +115,7 @@ var CollaborationBox = React.createClass({
         "class": "thumbnail-wrapper absolute m-r-5 d32 circular bordered b-white"
       })
       content = placeholder.append($("<span>", {
-        text: member.info.name.split(' ')[0].split('')[0] + member.info.name.split(' ')[1].split('')[0],
+        text: member.info.name_badge,
         "class": "placeholder bold text-white"
       }))
     }
@@ -145,32 +141,40 @@ var CollaborationBox = React.createClass({
       if(!$('body').hasClass('show-collaboration')) {
         self.speak(response)
       }
-      var messages = self.state.messages.reverse();
-      var newMessages = [response].concat(messages);
-      self.setState({messages: newMessages.reverse()});
-      $("#message-"+response.uuid).effect('highlight', {color: '#f2f2f2'} , 3000);
+      if(idea_collaboration_channel.members.me.id != response.user_id) {
+        var messages = self.state.messages.reverse();
+        var newMessages = [response].concat(messages);
+        self.setState({messages: newMessages.reverse()});
+        $("#message-"+response.uuid).effect('highlight', {color: '#f2f2f2'} , 3000);
+      }
     });
   },
 
   speak: function(message) {
 
-    var bubble = $("<li>", {
+    var bubble = $("<div>", {
       "class": "bubble"
     })
 
-    var bubble_image = bubble.prepend($("<img>", {
-      "class": "bubble-image",
-      src: message.user_avatar,
-      valign: "left"
-    }))
-
-    var content = bubble_image.append($("<p>", {
+    var content = bubble.append($("<p>", {
       "class": "bubble-content",
-      text: message.body
+      text: message.user_name + ' wrote: ' + message.body
     }));
+
+    $('body').pgNotification({style: "simple", message: content, position: "bottom-left", type: "info",timeout: 10000}).show();
   },
 
   handleMessageSubmit: function ( formData, action, body ) {
+    message = {
+      body: body,
+      uuid: Math.random(),
+      user_id: window.currentUser.id,
+      user_name: window.currentUser.name,
+      user_avatar: window.currentUser.avatar,
+      user_name_badge: window.currentUser.user_name_badge
+    }
+    var new_message = this.state.messages.concat(message);
+    this.setState({messages: new_message});
     this.setState({loading: true});
     $.ajaxSetup({ cache: false });
     $.ajax({

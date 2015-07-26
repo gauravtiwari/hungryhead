@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var VideoForm = React.createClass({
 
   render: function() {
@@ -17,7 +15,6 @@ var VideoForm = React.createClass({
     return (
       <div className={classes}>
          <form id="plan-edit-form" ref="video_form" className="video-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
              <label className="margin-bottom">Add a 3 minute video pitch. <span>Introduce your idea and team.</span></label>
              <input ref="video" className="form-control empty" defaultValue= {this.props.idea.video} name="idea[video]" placeholder='Enter youtube or vimeo url' />
              <div className="form-buttons send-button">

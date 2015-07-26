@@ -11,7 +11,7 @@ module Feedbackable
   end
 
   def find_feedbackers
-    User.where(id: feedbackers_ids.values)
+    User.find(feedbackers_ids.values)
   end
 
 end

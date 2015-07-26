@@ -2,12 +2,12 @@ module Follower
   extend ActiveSupport::Concern
 
   included do
-    has_many :followings, as: :follower, class_name: 'Follow', :dependent => :destroy
+    has_many :followings, class_name: 'Follow', foreign_key: 'follower_id', :dependent => :destroy
   end
 
   def people_you_may_know
     followings_sets = []
-    User.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
+    User.published.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
     followings_sets.map{|f| f.difference(followings_ids) }.flatten - ["#{id}"]
   end
 
@@ -18,7 +18,7 @@ module Follower
 
   # users who follow and are being followed by self
   def friends
-    User.where(:id => followers_ids.intersection(followings_ids))
+    User.find(followers_ids.intersection(followings_ids))
   end
 
   def is_friend?(user)
@@ -37,6 +37,11 @@ module Follower
   # does self follow user
   def following?(user)
     followings_ids.member?(user.id)
+  end
+
+  #school following
+  def school_following?(school)
+    school_followings_ids.member?(school.id)
   end
 
 end

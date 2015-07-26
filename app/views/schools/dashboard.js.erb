@@ -1,0 +1,9 @@
+$('body').append($('<div>', {class: 'edit_profile_form_modal', id: 'edit_profile_form_modal'}));
+var $el = $('#edit_profile_form_modal');
+$el.html("<%= j render partial: 'dashboard_form' %>");
+ReactRailsUJS.mountComponents();
+$('#editSchoolFormPopup').modal('show');
+$('body').on('focus', 'textarea', function(event) {
+  event.preventDefault();
+  $(this).autosize();
+});

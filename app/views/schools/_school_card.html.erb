@@ -1,52 +1,103 @@
-<div class="sidebar auto-height box-shadow bg-solid">
-  <div class="user-sidebar padding-20">
+<div class="sidebar auto-height box-shadow bg-white">
+  <div class="user-sidebar">
     <div class="container-xs-height">
-      <div class="row">
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-10">
-            <div class="panel-title text-white b-b b-white p-b-5">
-              About
-            </div>
+      <div class="widget-11-2 panel panel-transparent no-border">
+        <div class="panel-heading bg-light-blue-lightest">
+          <div class="panel-title text-master b-b b-grey p-b-5">
+            About
           </div>
-          <div class="p-l-10 p-r-10">
-            <p class="no-margin text-white fs-13">
-            <%= @school.description %>
-            </p>
+          <div class="panel-controls">
+            <ul>
+              <li>
+                <a href="#" class="portlet-collapse m-r-15 fs-12 b-b b-grey p-b-5" data-toggle="collapse">
+                  Edit
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
+        <div class="p-l-15 p-r-15 p-t-15">
+          <p class="no-margin text-master fs-13">
+          <%= @school.description %>
+          </p>
+        </div>
       </div>
-
-      <% if @school.website.present? %>
-      <div class="row">
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-10 p-t-20">
-            <div class="panel-title text-white b-b b-white p-b-5">
-              Website
-            </div>
+      <% if @school.email.present? %>
+      <div class="widget-11-2 panel panel-transparent no-border">
+        <div class="panel-heading no-padding p-l-15">
+          <div class="panel-title text-master b-b b-grey p-b-5">
+            Contact Email
           </div>
-          <div class="p-l-10 p-r-10">
-            <p class="no-margin text-white fs-13">
-              <%= @school.website %>
-            </p>
-          </div>
+        </div>
+        <div class="p-l-15 p-r-15">
+          <p class="no-margin text-master fs-13">
+            <%= mail_to(@school.email) %>
+          </p>
         </div>
       </div>
       <% end %>
-      <% if @school.location_list.present? %>
-      <div class="row">
-        <div class="widget-11-2 panel panel-transparent no-border no-margin no-padding">
-          <div class="panel-heading no-padding p-l-10 p-t-20">
-            <div class="panel-title text-white b-b b-white p-b-5">
+      <% if @school.phone.present? %>
+      <div class="widget-11-2 panel panel-transparent no-border">
+        <div class="panel-heading no-padding p-l-15 p-r-15">
+          <div class="panel-title text-master b-b b-grey p-b-5">
+            Contact Phone
+          </div>
+        </div>
+        <div class="p-l-15 p-r-15">
+          <p class="no-margin text-master fs-13">
+            <%= @school.phone %>
+          </p>
+        </div>
+      </div>
+      <% end %>
+      <% if @school.cached_location_list.present? %>
+        <div class="widget-11-2 panel panel-transparent no-border">
+          <div class="panel-heading no-padding p-l-15 p-r-15">
+            <div class="panel-title text-master b-b b-grey p-b-5">
               Location
             </div>
           </div>
-          <div class="p-l-10 p-r-10">
-            <p class="no-margin text-white fs-13">
+          <div class="p-l-15 p-r-15">
+            <p class="no-margin text-master fs-13">
               <%= @school.location_list %>
             </p>
           </div>
         </div>
-      </div>
+      <% end %>
+
+      <% if @school.website_url.present? %>
+        <div class="widget-11-2 panel panel-transparent no-border">
+          <div class="panel-heading no-padding p-l-15 p-r-15">
+            <div class="panel-title text-master b-b b-grey p-b-5">
+              Social
+            </div>
+          </div>
+          <div class="p-l-15 p-r-15">
+           <ul class="social-list text-white p-t-5 small no-style">
+            <% if @school.website_url.present? %>
+             <li class="inline">
+               <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank") do %>
+               <i class="fa fa-rss fs-14"></i></a>
+               <% end %>
+             </li>
+             <% end %>
+             <% if @school.facebook_url.present? %>
+              <li class="inline">
+                <%= link_to(@school.facebook_url, class: "text-brand p-r-10", target: "_blank") do %>
+                <i class="fa fa-facebook fs-14"></i></a>
+                <% end %>
+              </li>
+              <% end %>
+              <% if @school.twitter_url.present? %>
+               <li class="inline">
+                 <%= link_to(@school.twitter_url, class: "text-brand p-r-10", target: "_blank") do %>
+                 <i class="fa fa-twitter fs-14"></i></a>
+                 <% end %>
+               </li>
+               <% end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>

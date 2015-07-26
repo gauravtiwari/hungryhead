@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var PreviewContent = React.createClass({
 	render:function() {
 		return (

@@ -1,44 +1,161 @@
 <!-- START HEADER -->
-<div class="header bg-white b-b b-grey box-shadow">
-<div class="container">
-  <div class=" pull-left sm-table">
-    <div class="header-inner">
-      <div class="brand inline">
-      <%= link_to(root_path) do %>
-        <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
+  <div class="header bg-white b-b b-grey box-shadow">
+  <div class="container">
+    <div class="pull-left">
+      <% if user_signed_in? %>
+        <div class="header-inner p-t-10">
+          <div class="brand inline">
+            <%= link_to(root_path) do %>
+            <img src="<%= image_path('hungryhead_2x.png') %>" alt="logo" data-src="<%= image_path('hungryhead_2x.png') %>" data-src-retina="<%= image_path('hungryhead_2x.png') %>" width="30">
+            <% end %>
+          </div>
+          <%= form_tag('/search/search', class: 'inline b-l b-grey b-dashed m-l-15')  do %>
+            <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link no-border overlay-search bg-transparent", autofocus: true %>
+          <% end %>
+          <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
+            <li class="inline p-r-15 p-l-15 fs-14 bold">
+              <%= link_to(root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : 'text-brand'}") do %>
+                <i class="fa fa-home"></i>
+              <% end %>
+            </li>
+            <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
+              <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? current_class?(main_app.users_path) : 'text-brand'}") do %>
+                 <i class="fa fa-users"></i>
+               <% end %>
+            </li>
+            <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
+              <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? current_class?(main_app.ideas_path) : 'text-brand'}") do %>
+                 <i class="fa fa-lightbulb-o"></i>
+               <% end %>
+            </li>
+            <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+             <%= link_to(main_app.schools_path, class: "fs-22 #{request.path == main_app.schools_path ? current_class?(main_app.schools_path) : 'text-brand'}") do %>
+                <i class="fa fa-university"></i>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="header-inner">
+          <div class="brand inline">
+          <%= link_to(main_app.root_path) do %>
+            <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
+          <% end %>
+          </div>
+         <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}") do %>
+              <span >Why</span>
+            <% end %>
+          </li>
+           <li class="p-r-15 fs-14 inline font-heading">
+             <%= link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}") do %>
+               <span>What</span>
+             <% end %>
+          </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}") do %>
+              <span >The Product</span>
+            <% end %>
+          </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(main_app.how_it_works_path, class: "#{current_class?(main_app.how_it_works_path)}") do %>
+              <span >How it works </span>
+            <% end %>
+          </li>
+          <li class="p-r-15 fs-14 inline font-heading">
+            <%= link_to(main_app.pricing_path, class: "#{current_class?(main_app.pricing_path)}") do %>
+              <span > Pricing </span>
+            <% end %>
+          </li>
+         </ul>
+        </div>
       <% end %>
-      </div>
-      <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
-        <li class="p-r-15 fs-16 inline">
-          <%= link_to(learn_path) do %>
-            <span class="text-master">Learn</span>
-          <% end %>
-        </li>
-        <li class="p-r-15 fs-16 inline">
-          <%= link_to(get_started_path) do %>
-            <span class="text-master">Story</span>
-          <% end %>
-        </li>
-        <li class="fs-16 inline">
-          <%= link_to(help_path) do %>
-            <span class="text-master">Help</span>
-          <% end %>
-        </li>
-      </ul>
     </div>
-  </div>
 
-  <div class="pull-right">
-    <div class="visible-lg visible-md m-t-10">
-      <div class="pull-left p-r-20 p-t-10 fs-16 font-heading">
-        <div class="dropdown pull-right">
-          <%= link_to(get_started_path, title: "Click to Register", class: "inline") do %>
-            <span class="text-master fs-16">Get Started</span>
-          <% end %>
+    <% if user_signed_in? %>
+      <div class="pull-right">
+        <div class="visible-lg visible-md visible-sm m-t-10">
+          <ul class="pull-left notification-list no-margin hidden-sm hidden-xs no-style p-l-10 p-t-10 p-r-10">
+            <li class="p-r-10 inline">
+              <div class="dropdown notification-dropdown">
+              <%= react_component('OpenNotificationsThread', {unread_notifications_count: current_user.notifications_counter.value, path: main_app.friends_notifications_path, channel_event: "new_friend_notification_item"}) %>
+                <div class="dropdown-menu notification-toggle right-zero" role="menu" aria-labelledby="notification-center">
+                  <div class="notification-panel">
+                    <div class="notification-body scrollable" id="render_notifications">
+
+                    </div>
+                    <div class="notification-footer text-center">
+                      <a href="#" class="">Read all notifications</a>
+                      <a data-toggle="refresh" class="portlet-refresh text-black pull-right" href="#">
+                        <i class="pg-refresh_new"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
+            <%= link_to(main_app.profile_path(current_user)) do %>
+              <span class="fs-14 bold <%= request.path == main_app.profile_path(current_user) ? current_class?(main_app.profile_path(current_user)) : 'text-brand' %>"><%= current_user.first_name %></span>
+            <% end %>
+          </div>
+          <div class="dropdown pull-right">
+            <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="thumbnail-wrapper d32 circular inline m-t-5">
+              <% if current_user.avatar_present? %>
+                <%= image_tag(current_user.get_avatar, :"data-src" => "#{current_user.get_avatar}", :"data-src-retina" => "#{current_user.get_avatar}", width: "32", height: "32", id: 'user_pic_mini') %>
+              <% else %>
+                <span class="placeholder bold text-white" width="32px" height="32px"><%= current_user.name_badge %></span>
+              <% end %>
+              </span>
+            </button>
+            <ul class="dropdown-menu profile-dropdown" role="menu">
+              <%= content_tag(:li) do %>
+                <%= link_to(main_app.new_idea_path(:intro)) do %>
+                  <i class="fa fa-lightbulb-o"></i> Post Idea
+                <% end %>
+              <% end %>
+
+              <%= content_tag(:li) do %>
+                <%= link_to(main_app.friends_invite_path, remote: true) do %>
+                  <i class="fa fa-paper-plane"></i>Invite friends
+                <% end %>
+              <% end %>
+
+              <%= content_tag(:li) do %>
+                <%= link_to(main_app.edit_user_registration_path(current_user)) do %>
+                  <i class="pg-settings_small"></i>Settings
+                <% end %>
+              <% end %>
+
+              <li>
+                <%= link_to(site_feedback.root_path) do %>
+                  <i class="pg-outdent"></i> Report a problem
+                <% end %>
+              </li>
+              <li class="bg-master-lighter">
+                <%= link_to(main_app.destroy_user_session_path, class: "clearfix") do %>
+                  <span class="pull-left">Logout</span>
+                  <span class="pull-right"><i class="pg-power"></i></span>
+                <% end %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <a href="" title="" class="pull-left p-t-10 fs-16 font-heading"><span class="text-master">Login</span></a>
+    <% else %>
+      <div class="pull-right">
+        <div class="visible-lg visible-md visible-sm m-t-10">
+          <div class="pull-left p-t-10  p-r-20 font-heading">
+            <%= link_to('Questions?', main_app.help_path, title: "Get Help", class: 'text-master #{current_class?(help_path)}') %>
+          </div>
+          <div class="pull-left p-t-5 font-heading">
+            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-complete text-white inline') %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     </div>
-  </div>
-  </div>
 </div>

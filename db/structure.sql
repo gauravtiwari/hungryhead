@@ -51,6 +51,20 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -65,10 +79,14 @@ CREATE TABLE activities (
     id integer NOT NULL,
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
-    user_id integer NOT NULL,
+    owner_id integer NOT NULL,
+    owner_type character varying NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
+    uuid uuid DEFAULT uuid_generate_v4(),
     published boolean DEFAULT true,
+    is_notification boolean DEFAULT false,
+    parent_id uuid,
     recipient_id integer NOT NULL,
     recipient_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -93,42 +111,6 @@ CREATE SEQUENCE activities_id_seq
 --
 
 ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
-
-
---
--- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE authentications (
-    id integer NOT NULL,
-    user_id integer NOT NULL,
-    provider character varying,
-    uid character varying,
-    access_token character varying,
-    token_secret character varying,
-    parameters jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE authentications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
 
 
 --
@@ -174,8 +156,10 @@ CREATE TABLE comments (
     body text DEFAULT ''::text NOT NULL,
     user_id integer NOT NULL,
     parent_id integer,
-    lft integer,
-    rgt integer,
+    lft integer NOT NULL,
+    rgt integer NOT NULL,
+    depth integer DEFAULT 0 NOT NULL,
+    children_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -235,18 +219,133 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 
 --
+-- Name: event_attendees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE event_attendees (
+    id integer NOT NULL,
+    attendee_id integer NOT NULL,
+    event_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: event_attendees_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE event_attendees_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_attendees_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE event_attendees_id_seq OWNED BY event_attendees.id;
+
+
+--
+-- Name: event_invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE event_invites (
+    id integer NOT NULL,
+    invited_id integer,
+    inviter_id integer,
+    inviter_type character varying,
+    event_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: event_invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE event_invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: event_invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE event_invites_id_seq OWNED BY event_invites.id;
+
+
+--
+-- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE events (
+    id integer NOT NULL,
+    owner_id integer NOT NULL,
+    owner_type character varying DEFAULT ''::character varying NOT NULL,
+    title character varying DEFAULT ''::character varying NOT NULL,
+    excerpt text DEFAULT ''::text NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    featured boolean,
+    cached_category_list character varying,
+    cover character varying DEFAULT ''::character varying NOT NULL,
+    slug character varying DEFAULT ''::character varying NOT NULL,
+    address text,
+    status integer DEFAULT 0,
+    privacy integer DEFAULT 0,
+    space integer DEFAULT 0,
+    media jsonb DEFAULT '{}'::jsonb,
+    start_time timestamp without time zone DEFAULT '2015-07-26 10:50:43.243613'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-07-26 10:50:43.24364'::timestamp without time zone NOT NULL,
+    latitude double precision DEFAULT 0.0 NOT NULL,
+    longitude double precision DEFAULT 0.0 NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE events_id_seq OWNED BY events.id;
+
+
+--
 -- Name: feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE feedbacks (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     body text DEFAULT ''::text NOT NULL,
     idea_id integer NOT NULL,
     user_id integer NOT NULL,
-    cached_tag_list character varying,
+    cached_category_list character varying,
     status integer DEFAULT 0 NOT NULL,
     badge integer DEFAULT 0 NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
@@ -282,7 +381,6 @@ CREATE TABLE follows (
     followable_id integer NOT NULL,
     followable_type character varying NOT NULL,
     follower_id integer NOT NULL,
-    follower_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -305,6 +403,73 @@ CREATE SEQUENCE follows_id_seq
 --
 
 ALTER SEQUENCE follows_id_seq OWNED BY follows.id;
+
+
+--
+-- Name: help_articles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE help_articles (
+    id integer NOT NULL,
+    title character varying,
+    body text,
+    slug character varying NOT NULL,
+    published boolean DEFAULT true,
+    category_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: help_articles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE help_articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: help_articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE help_articles_id_seq OWNED BY help_articles.id;
+
+
+--
+-- Name: help_categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE help_categories (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    slug character varying NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: help_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE help_categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: help_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE help_categories_id_seq OWNED BY help_categories.id;
 
 
 --
@@ -341,12 +506,48 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 
 --
+-- Name: idea_components; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE idea_components (
+    id integer NOT NULL,
+    title character varying,
+    help_text character varying,
+    body text,
+    idea_id integer,
+    privacy integer,
+    "position" integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: idea_components_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE idea_components_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: idea_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE idea_components_id_seq OWNED BY idea_components.id;
+
+
+--
 -- Name: idea_messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE idea_messages (
     id integer NOT NULL,
-    student_id integer NOT NULL,
+    user_id integer NOT NULL,
     idea_id integer NOT NULL,
     body text NOT NULL,
     status integer,
@@ -380,7 +581,8 @@ ALTER SEQUENCE idea_messages_id_seq OWNED BY idea_messages.id;
 
 CREATE TABLE ideas (
     id integer NOT NULL,
-    student_id integer NOT NULL,
+    user_id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     name character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
@@ -394,13 +596,13 @@ CREATE TABLE ideas (
     school_id integer,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
+    investable boolean DEFAULT false,
+    validated boolean DEFAULT false NOT NULL,
     rules_accepted boolean DEFAULT false,
     settings jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
     profile jsonb DEFAULT '{}'::jsonb,
-    sections jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
-    cached_location_list character varying,
     cached_market_list character varying,
     cached_technology_list character varying,
     created_at timestamp without time zone NOT NULL,
@@ -430,16 +632,53 @@ ALTER SEQUENCE ideas_id_seq OWNED BY ideas.id;
 
 
 --
+-- Name: impressions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE impressions (
+    id integer NOT NULL,
+    impressionable_id integer NOT NULL,
+    impressionable_type character varying NOT NULL,
+    ip_address character varying NOT NULL,
+    user_id integer NOT NULL,
+    controller_name character varying,
+    action_name character varying,
+    referrer character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: impressions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE impressions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: impressions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE impressions_id_seq OWNED BY impressions.id;
+
+
+--
 -- Name: investments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE investments (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
     amount integer NOT NULL,
     message character varying,
     user_id integer NOT NULL,
     idea_id integer NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -462,6 +701,40 @@ CREATE SEQUENCE investments_id_seq
 --
 
 ALTER SEQUENCE investments_id_seq OWNED BY investments.id;
+
+
+--
+-- Name: invite_requests; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invite_requests (
+    id integer NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    url character varying DEFAULT ''::character varying NOT NULL,
+    user_type integer DEFAULT 1,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: invite_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE invite_requests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invite_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE invite_requests_id_seq OWNED BY invite_requests.id;
 
 
 --
@@ -841,188 +1114,6 @@ ALTER SEQUENCE merit_scores_id_seq OWNED BY merit_scores.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE notifications (
-    id integer NOT NULL,
-    trackable_id integer NOT NULL,
-    trackable_type character varying NOT NULL,
-    user_id integer NOT NULL,
-    parent_id integer,
-    key character varying DEFAULT ''::character varying NOT NULL,
-    parameters jsonb DEFAULT '{}'::jsonb,
-    published boolean DEFAULT true,
-    recipient_id integer NOT NULL,
-    recipient_type character varying NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE notifications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: notifications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
-
-
---
--- Name: organizations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE organizations (
-    id integer NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    name character varying NOT NULL,
-    slug character varying NOT NULL,
-    description text,
-    logo character varying,
-    type character varying,
-    cover character varying,
-    media jsonb DEFAULT '{}'::jsonb,
-    data jsonb DEFAULT '{}'::jsonb,
-    customizations jsonb DEFAULT '{}'::jsonb,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: organizations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE organizations_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: organizations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE organizations_id_seq OWNED BY organizations.id;
-
-
---
--- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE posts (
-    id integer NOT NULL,
-    title character varying DEFAULT ''::character varying NOT NULL,
-    body text DEFAULT ''::text NOT NULL,
-    slug character varying DEFAULT ''::character varying NOT NULL,
-    status integer,
-    user_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    sash_id integer,
-    level integer DEFAULT 0
-);
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE posts_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
-
-
---
--- Name: punches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE punches (
-    id integer NOT NULL,
-    punchable_id integer NOT NULL,
-    punchable_type character varying(20) NOT NULL,
-    starts_at timestamp without time zone NOT NULL,
-    ends_at timestamp without time zone NOT NULL,
-    average_time timestamp without time zone NOT NULL,
-    hits integer DEFAULT 1 NOT NULL
-);
-
-
---
--- Name: punches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE punches_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: punches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE punches_id_seq OWNED BY punches.id;
-
-
---
--- Name: read_marks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE read_marks (
-    id integer NOT NULL,
-    readable_id integer,
-    readable_type character varying NOT NULL,
-    user_id integer NOT NULL,
-    "timestamp" timestamp without time zone
-);
-
-
---
--- Name: read_marks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE read_marks_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: read_marks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE read_marks_id_seq OWNED BY read_marks.id;
-
-
---
 -- Name: sashes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1062,19 +1153,59 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: school_admins; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE school_admins (
+    id integer NOT NULL,
+    user_id integer,
+    school_id integer,
+    active boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: school_admins_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE school_admins_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: school_admins_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE school_admins_id_seq OWNED BY school_admins.id;
+
+
+--
 -- Name: schools; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schools (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    domain character varying DEFAULT ''::character varying NOT NULL,
     name character varying NOT NULL,
-    slug character varying NOT NULL,
     description text,
     logo character varying,
     cover character varying,
+    user_id integer DEFAULT 1 NOT NULL,
+    slug character varying NOT NULL,
+    phone character varying DEFAULT ''::character varying NOT NULL,
+    website_url character varying DEFAULT ''::character varying NOT NULL,
+    facebook_url character varying DEFAULT ''::character varying NOT NULL,
+    twitter_url character varying DEFAULT ''::character varying NOT NULL,
     media jsonb DEFAULT '{}'::jsonb,
-    data jsonb DEFAULT '{}'::jsonb,
+    cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -1107,12 +1238,10 @@ ALTER SEQUENCE schools_id_seq OWNED BY schools.id;
 CREATE TABLE shares (
     id integer NOT NULL,
     body text DEFAULT ''::text NOT NULL,
-    status integer,
-    privacy integer,
-    shareable_id integer NOT NULL,
-    shareable_type character varying NOT NULL,
-    user_id integer NOT NULL,
-    parameters jsonb,
+    link text DEFAULT ''::text NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4(),
+    owner_id integer NOT NULL,
+    owner_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1135,6 +1264,75 @@ CREATE SEQUENCE shares_id_seq
 --
 
 ALTER SEQUENCE shares_id_seq OWNED BY shares.id;
+
+
+--
+-- Name: site_feedback_feedbacks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE site_feedback_feedbacks (
+    id integer NOT NULL,
+    user_id integer,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    name character varying DEFAULT ''::character varying NOT NULL,
+    attachment character varying,
+    body text DEFAULT ''::text NOT NULL,
+    status integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: site_feedback_feedbacks_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE site_feedback_feedbacks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: site_feedback_feedbacks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE site_feedback_feedbacks_id_seq OWNED BY site_feedback_feedbacks.id;
+
+
+--
+-- Name: skills; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE skills (
+    id integer NOT NULL,
+    name character varying,
+    slug character varying,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE skills_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: skills_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE skills_id_seq OWNED BY skills.id;
 
 
 --
@@ -1271,6 +1469,42 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
+-- Name: team_invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE team_invites (
+    id integer NOT NULL,
+    inviter_id integer,
+    invited_id integer,
+    idea_id integer,
+    msg text,
+    pending boolean DEFAULT true NOT NULL,
+    token character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: team_invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE team_invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: team_invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE team_invites_id_seq OWNED BY team_invites.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1282,13 +1516,13 @@ CREATE TABLE users (
     name character varying DEFAULT ''::character varying NOT NULL,
     username character varying DEFAULT ''::character varying NOT NULL,
     avatar character varying DEFAULT ''::character varying,
-    type character varying DEFAULT 'User'::character varying,
+    feed_preferences integer DEFAULT 0,
+    "integer" integer DEFAULT 0,
     cover character varying DEFAULT ''::character varying,
     slug character varying,
     mini_bio character varying DEFAULT ''::character varying,
     about_me text DEFAULT ''::text,
     profile jsonb DEFAULT '{}'::jsonb,
-    interests jsonb DEFAULT '{}'::jsonb,
     media jsonb DEFAULT '{}'::jsonb,
     settings jsonb DEFAULT '{}'::jsonb,
     fund jsonb DEFAULT '{}'::jsonb,
@@ -1297,8 +1531,7 @@ CREATE TABLE users (
     cached_market_list character varying,
     cached_skill_list character varying,
     cached_subject_list character varying,
-    cached_technology_list character varying,
-    cached_service_list character varying,
+    cached_hobby_list character varying,
     verified boolean DEFAULT false,
     admin boolean DEFAULT false,
     terms_accepted boolean DEFAULT false,
@@ -1318,6 +1551,9 @@ CREATE TABLE users (
     confirmed_at timestamp without time zone,
     confirmation_sent_at timestamp without time zone,
     unconfirmed_email character varying,
+    failed_attempts integer DEFAULT 0 NOT NULL,
+    unlock_token character varying,
+    locked_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     invitation_token character varying,
@@ -1396,6 +1632,7 @@ CREATE TABLE versions (
     whodunnit character varying,
     user_name character varying,
     user_avatar character varying,
+    name_badge character varying,
     owner_url character varying,
     object_changes json,
     object json,
@@ -1432,7 +1669,9 @@ CREATE TABLE votes (
     votable_id integer NOT NULL,
     votable_type character varying NOT NULL,
     voter_id integer NOT NULL,
-    voter_type character varying NOT NULL,
+    vote_flag boolean DEFAULT true,
+    vote_scope character varying,
+    vote_weight integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -1468,13 +1707,6 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY badges_sashes ALTER COLUMN id SET DEFAULT nextval('badges_sashes_id_seq'::regclass);
 
 
@@ -1496,6 +1728,27 @@ ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY event_attendees ALTER COLUMN id SET DEFAULT nextval('event_attendees_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_invites ALTER COLUMN id SET DEFAULT nextval('event_invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY events ALTER COLUMN id SET DEFAULT nextval('events_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY feedbacks ALTER COLUMN id SET DEFAULT nextval('feedbacks_id_seq'::regclass);
 
 
@@ -1510,7 +1763,28 @@ ALTER TABLE ONLY follows ALTER COLUMN id SET DEFAULT nextval('follows_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY help_articles ALTER COLUMN id SET DEFAULT nextval('help_articles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY help_categories ALTER COLUMN id SET DEFAULT nextval('help_categories_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY hobbies ALTER COLUMN id SET DEFAULT nextval('hobbies_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY idea_components ALTER COLUMN id SET DEFAULT nextval('idea_components_id_seq'::regclass);
 
 
 --
@@ -1531,7 +1805,21 @@ ALTER TABLE ONLY ideas ALTER COLUMN id SET DEFAULT nextval('ideas_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY impressions ALTER COLUMN id SET DEFAULT nextval('impressions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY investments ALTER COLUMN id SET DEFAULT nextval('investments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY invite_requests ALTER COLUMN id SET DEFAULT nextval('invite_requests_id_seq'::regclass);
 
 
 --
@@ -1615,42 +1903,14 @@ ALTER TABLE ONLY merit_scores ALTER COLUMN id SET DEFAULT nextval('merit_scores_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY organizations ALTER COLUMN id SET DEFAULT nextval('organizations_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY punches ALTER COLUMN id SET DEFAULT nextval('punches_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY read_marks ALTER COLUMN id SET DEFAULT nextval('read_marks_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY sashes ALTER COLUMN id SET DEFAULT nextval('sashes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY school_admins ALTER COLUMN id SET DEFAULT nextval('school_admins_id_seq'::regclass);
 
 
 --
@@ -1665,6 +1925,20 @@ ALTER TABLE ONLY schools ALTER COLUMN id SET DEFAULT nextval('schools_id_seq'::r
 --
 
 ALTER TABLE ONLY shares ALTER COLUMN id SET DEFAULT nextval('shares_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY site_feedback_feedbacks ALTER COLUMN id SET DEFAULT nextval('site_feedback_feedbacks_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY skills ALTER COLUMN id SET DEFAULT nextval('skills_id_seq'::regclass);
 
 
 --
@@ -1693,6 +1967,13 @@ ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq':
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY team_invites ALTER COLUMN id SET DEFAULT nextval('team_invites_id_seq'::regclass);
 
 
 --
@@ -1732,14 +2013,6 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY authentications
-    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
-
-
---
 -- Name: badges_sashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1764,6 +2037,30 @@ ALTER TABLE ONLY crono_jobs
 
 
 --
+-- Name: event_attendees_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY event_attendees
+    ADD CONSTRAINT event_attendees_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: event_invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY event_invites
+    ADD CONSTRAINT event_invites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1780,11 +2077,35 @@ ALTER TABLE ONLY follows
 
 
 --
+-- Name: help_articles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY help_articles
+    ADD CONSTRAINT help_articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: help_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY help_categories
+    ADD CONSTRAINT help_categories_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: hobbies_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY hobbies
     ADD CONSTRAINT hobbies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: idea_components_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY idea_components
+    ADD CONSTRAINT idea_components_pkey PRIMARY KEY (id);
 
 
 --
@@ -1804,11 +2125,27 @@ ALTER TABLE ONLY ideas
 
 
 --
+-- Name: impressions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY impressions
+    ADD CONSTRAINT impressions_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: investments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY investments
     ADD CONSTRAINT investments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invite_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invite_requests
+    ADD CONSTRAINT invite_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -1900,51 +2237,19 @@ ALTER TABLE ONLY merit_scores
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY notifications
-    ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
-
-
---
--- Name: organizations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY organizations
-    ADD CONSTRAINT organizations_pkey PRIMARY KEY (id);
-
-
---
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
-
-
---
--- Name: punches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY punches
-    ADD CONSTRAINT punches_pkey PRIMARY KEY (id);
-
-
---
--- Name: read_marks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY read_marks
-    ADD CONSTRAINT read_marks_pkey PRIMARY KEY (id);
-
-
---
 -- Name: sashes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY sashes
     ADD CONSTRAINT sashes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: school_admins_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT school_admins_pkey PRIMARY KEY (id);
 
 
 --
@@ -1961,6 +2266,22 @@ ALTER TABLE ONLY schools
 
 ALTER TABLE ONLY shares
     ADD CONSTRAINT shares_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: site_feedback_feedbacks_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY site_feedback_feedbacks
+    ADD CONSTRAINT site_feedback_feedbacks_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: skills_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY skills
+    ADD CONSTRAINT skills_pkey PRIMARY KEY (id);
 
 
 --
@@ -1996,6 +2317,14 @@ ALTER TABLE ONLY tags
 
 
 --
+-- Name: team_invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY team_invites
+    ADD CONSTRAINT team_invites_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2028,17 +2357,17 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_activities_on_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_published ON activities USING btree (published);
+CREATE INDEX index_activities_on_parent_id ON activities USING btree (parent_id);
 
 
 --
--- Name: index_activities_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_published_and_is_notification; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_activities_on_recipient_id_and_recipient_type ON activities USING btree (recipient_id, recipient_type);
+CREATE INDEX index_activities_on_published_and_is_notification ON activities USING btree (published, is_notification);
 
 
 --
@@ -2049,31 +2378,10 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 
 
 --
--- Name: index_authentications_on_access_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_authentications_on_access_token ON authentications USING btree (access_token);
-
-
---
--- Name: index_authentications_on_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_provider ON authentications USING btree (provider);
-
-
---
--- Name: index_authentications_on_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_uid ON authentications USING btree (uid);
-
-
---
--- Name: index_authentications_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_user_id ON authentications USING btree (user_id);
+CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
 
 
 --
@@ -2105,10 +2413,24 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 
 
 --
+-- Name: index_comments_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_lft ON comments USING btree (lft);
+
+
+--
 -- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
+
+
+--
+-- Name: index_comments_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_rgt ON comments USING btree (rgt);
 
 
 --
@@ -2126,10 +2448,129 @@ CREATE UNIQUE INDEX index_crono_jobs_on_job_id ON crono_jobs USING btree (job_id
 
 
 --
--- Name: index_feedbacks_on_badge; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_event_attendees_on_attendee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_feedbacks_on_badge ON feedbacks USING btree (badge);
+CREATE INDEX index_event_attendees_on_attendee_id ON event_attendees USING btree (attendee_id);
+
+
+--
+-- Name: index_event_attendees_on_attendee_id_and_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_event_attendees_on_attendee_id_and_event_id ON event_attendees USING btree (attendee_id, event_id);
+
+
+--
+-- Name: index_event_attendees_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_attendees_on_event_id ON event_attendees USING btree (event_id);
+
+
+--
+-- Name: index_event_invites_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_event_id ON event_invites USING btree (event_id);
+
+
+--
+-- Name: index_event_invites_on_invited_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_invited_id ON event_invites USING btree (invited_id);
+
+
+--
+-- Name: index_event_invites_on_inviter_type_and_inviter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_event_invites_on_inviter_type_and_inviter_id ON event_invites USING btree (inviter_type, inviter_id);
+
+
+--
+-- Name: index_events_on_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_address ON events USING btree (address);
+
+
+--
+-- Name: index_events_on_end_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_end_time ON events USING btree (end_time);
+
+
+--
+-- Name: index_events_on_featured; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_featured ON events USING btree (featured);
+
+
+--
+-- Name: index_events_on_latitude_and_longitude; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_latitude_and_longitude ON events USING btree (latitude, longitude);
+
+
+--
+-- Name: index_events_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_owner_id_and_owner_type ON events USING btree (owner_id, owner_type);
+
+
+--
+-- Name: index_events_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_privacy ON events USING btree (privacy);
+
+
+--
+-- Name: index_events_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_slug ON events USING btree (slug);
+
+
+--
+-- Name: index_events_on_start_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
+
+
+--
+-- Name: index_feedback_helpful; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_helpful ON feedbacks USING btree (badge) WHERE (badge = 1);
+
+
+--
+-- Name: index_feedback_irrelevant; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_irrelevant ON feedbacks USING btree (badge) WHERE (badge = 3);
+
+
+--
+-- Name: index_feedback_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_status ON feedbacks USING btree (status) WHERE (status = 1);
+
+
+--
+-- Name: index_feedback_unhelpful; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_feedback_unhelpful ON feedbacks USING btree (badge) WHERE (badge = 2);
 
 
 --
@@ -2147,13 +2588,6 @@ CREATE INDEX index_feedbacks_on_level ON feedbacks USING btree (level);
 
 
 --
--- Name: index_feedbacks_on_parameters; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_feedbacks_on_parameters ON feedbacks USING gin (parameters);
-
-
---
 -- Name: index_feedbacks_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2161,10 +2595,10 @@ CREATE INDEX index_feedbacks_on_sash_id ON feedbacks USING btree (sash_id);
 
 
 --
--- Name: index_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_feedbacks_on_status_and_badge; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_feedbacks_on_status ON feedbacks USING btree (status);
+CREATE INDEX index_feedbacks_on_status_and_badge ON feedbacks USING btree (status, badge);
 
 
 --
@@ -2175,17 +2609,17 @@ CREATE INDEX index_feedbacks_on_user_id ON feedbacks USING btree (user_id);
 
 
 --
--- Name: index_followables; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_feedbacks_on_user_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_followables ON follows USING btree (followable_id, followable_type);
+CREATE UNIQUE INDEX index_feedbacks_on_user_id_and_idea_id ON feedbacks USING btree (user_id, idea_id);
 
 
 --
--- Name: index_followers; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_feedbacks_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_followers ON follows USING btree (follower_id, follower_type);
+CREATE INDEX index_feedbacks_on_uuid ON feedbacks USING btree (uuid);
 
 
 --
@@ -2196,10 +2630,31 @@ CREATE INDEX index_follows_on_followable_id_and_followable_type ON follows USING
 
 
 --
--- Name: index_follows_on_follower_id_and_follower_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_follows_on_follower_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_follows_on_follower_id_and_follower_type ON follows USING btree (follower_id, follower_type);
+CREATE INDEX index_follows_on_follower_id ON follows USING btree (follower_id);
+
+
+--
+-- Name: index_help_articles_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_help_articles_on_category_id ON help_articles USING btree (category_id);
+
+
+--
+-- Name: index_help_articles_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_help_articles_on_slug ON help_articles USING btree (slug);
+
+
+--
+-- Name: index_help_categories_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_help_categories_on_slug ON help_categories USING btree (slug);
 
 
 --
@@ -2210,6 +2665,48 @@ CREATE UNIQUE INDEX index_hobbies_on_slug ON hobbies USING btree (slug);
 
 
 --
+-- Name: index_idea_components_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_idea_id ON idea_components USING btree (idea_id);
+
+
+--
+-- Name: index_idea_components_on_idea_id_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_idea_id_and_privacy ON idea_components USING btree (idea_id, privacy);
+
+
+--
+-- Name: index_idea_components_on_position; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_position ON idea_components USING btree ("position");
+
+
+--
+-- Name: index_idea_components_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_components_on_privacy ON idea_components USING btree (privacy);
+
+
+--
+-- Name: index_idea_investable; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_investable ON ideas USING btree (investable) WHERE (investable IS TRUE);
+
+
+--
+-- Name: index_idea_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_looking_for_team ON ideas USING btree (looking_for_team) WHERE (looking_for_team IS TRUE);
+
+
+--
 -- Name: index_idea_messages_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2217,10 +2714,17 @@ CREATE INDEX index_idea_messages_on_idea_id ON idea_messages USING btree (idea_i
 
 
 --
--- Name: index_idea_messages_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_idea_messages_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (student_id);
+CREATE INDEX index_idea_messages_on_user_id ON idea_messages USING btree (user_id);
+
+
+--
+-- Name: index_idea_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_idea_validated ON ideas USING btree (validated) WHERE (validated IS TRUE);
 
 
 --
@@ -2228,20 +2732,6 @@ CREATE INDEX index_idea_messages_on_student_id ON idea_messages USING btree (stu
 --
 
 CREATE INDEX index_ideas_on_level ON ideas USING btree (level);
-
-
---
--- Name: index_ideas_on_looking_for_team; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_looking_for_team ON ideas USING btree (looking_for_team);
-
-
---
--- Name: index_ideas_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_ideas_on_privacy ON ideas USING btree (privacy);
 
 
 --
@@ -2266,6 +2756,13 @@ CREATE INDEX index_ideas_on_school_id ON ideas USING btree (school_id);
 
 
 --
+-- Name: index_ideas_on_school_id_and_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_school_id_and_validated ON ideas USING btree (school_id, validated);
+
+
+--
 -- Name: index_ideas_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2273,17 +2770,80 @@ CREATE INDEX index_ideas_on_slug ON ideas USING btree (slug);
 
 
 --
--- Name: index_ideas_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_ideas_on_status_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_ideas_on_status ON ideas USING btree (status);
+CREATE INDEX index_ideas_on_status_and_privacy ON ideas USING btree (status, privacy);
 
 
 --
--- Name: index_ideas_on_student_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_ideas_on_status_and_privacy_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_ideas_on_student_id ON ideas USING btree (student_id);
+CREATE INDEX index_ideas_on_status_and_privacy_and_school_id ON ideas USING btree (status, privacy, school_id);
+
+
+--
+-- Name: index_ideas_on_status_and_privacy_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_status_and_privacy_and_user_id ON ideas USING btree (status, privacy, user_id);
+
+
+--
+-- Name: index_ideas_on_team_ids; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_team_ids ON ideas USING gin (team_ids);
+
+
+--
+-- Name: index_ideas_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_user_id ON ideas USING btree (user_id);
+
+
+--
+-- Name: index_ideas_on_user_id_and_validated; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_user_id_and_validated ON ideas USING btree (user_id, validated);
+
+
+--
+-- Name: index_impressions_on_impressionable_type_and_impressionable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_impressionable_type_and_impressionable_id ON impressions USING btree (impressionable_type, impressionable_id);
+
+
+--
+-- Name: index_impressions_on_ip_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_ip_address ON impressions USING btree (ip_address);
+
+
+--
+-- Name: index_impressions_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_impressions_on_user_id ON impressions USING btree (user_id);
+
+
+--
+-- Name: index_investment_angel; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investment_angel ON investments USING btree (amount) WHERE ((amount < 500) AND (amount > 200));
+
+
+--
+-- Name: index_investment_vc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investment_vc ON investments USING btree (amount) WHERE ((amount < 900) AND (amount > 500));
 
 
 --
@@ -2294,10 +2854,38 @@ CREATE INDEX index_investments_on_idea_id ON investments USING btree (idea_id);
 
 
 --
+-- Name: index_investments_on_idea_id_and_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_investments_on_idea_id_and_user_id ON investments USING btree (idea_id, user_id);
+
+
+--
 -- Name: index_investments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_investments_on_user_id ON investments USING btree (user_id);
+
+
+--
+-- Name: index_investments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_investments_on_uuid ON investments USING btree (uuid);
+
+
+--
+-- Name: index_invite_requests_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_invite_requests_on_email ON invite_requests USING btree (email);
+
+
+--
+-- Name: index_invite_requests_on_user_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_invite_requests_on_user_type ON invite_requests USING btree (user_type);
 
 
 --
@@ -2392,108 +2980,31 @@ CREATE INDEX index_mentions_on_user_id ON mentions USING btree (user_id);
 
 
 --
--- Name: index_notifications_on_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_school_admins_on_active; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_notifications_on_key ON notifications USING btree (key);
-
-
---
--- Name: index_notifications_on_recipient_id_and_recipient_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_notifications_on_recipient_id_and_recipient_type ON notifications USING btree (recipient_id, recipient_type);
+CREATE INDEX index_school_admins_on_active ON school_admins USING btree (active);
 
 
 --
--- Name: index_notifications_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_school_admins_on_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_notifications_on_trackable_id_and_trackable_type ON notifications USING btree (trackable_id, trackable_type);
-
-
---
--- Name: index_organizations_on_data; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_organizations_on_data ON organizations USING gin (data);
+CREATE INDEX index_school_admins_on_school_id ON school_admins USING btree (school_id);
 
 
 --
--- Name: index_organizations_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_school_admins_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_organizations_on_email ON organizations USING btree (email);
-
-
---
--- Name: index_organizations_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_organizations_on_name ON organizations USING btree (name);
+CREATE INDEX index_school_admins_on_user_id ON school_admins USING btree (user_id);
 
 
 --
--- Name: index_organizations_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_school_admins_on_user_id_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_organizations_on_slug ON organizations USING btree (slug);
-
-
---
--- Name: index_organizations_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_organizations_on_type ON organizations USING btree (type);
-
-
---
--- Name: index_posts_on_level; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_level ON posts USING btree (level);
-
-
---
--- Name: index_posts_on_sash_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_sash_id ON posts USING btree (sash_id);
-
-
---
--- Name: index_posts_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_posts_on_slug ON posts USING btree (slug);
-
-
---
--- Name: index_posts_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_status ON posts USING btree (status);
-
-
---
--- Name: index_posts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_posts_on_user_id ON posts USING btree (user_id);
-
-
---
--- Name: index_punches_on_average_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_punches_on_average_time ON punches USING btree (average_time);
-
-
---
--- Name: index_read_marks_on_user_id_and_readable_type_and_readable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_read_marks_on_user_id_and_readable_type_and_readable_id ON read_marks USING btree (user_id, readable_type, readable_id);
+CREATE UNIQUE INDEX index_school_admins_on_user_id_and_school_id ON school_admins USING btree (user_id, school_id);
 
 
 --
@@ -2518,17 +3029,45 @@ CREATE UNIQUE INDEX index_schools_on_slug ON schools USING btree (slug);
 
 
 --
--- Name: index_shares_on_shareable_id_and_shareable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_schools_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_shares_on_shareable_id_and_shareable_type ON shares USING btree (shareable_id, shareable_type);
+CREATE INDEX index_schools_on_uuid ON schools USING btree (uuid);
 
 
 --
--- Name: index_shares_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_shares_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_shares_on_user_id ON shares USING btree (user_id);
+CREATE INDEX index_shares_on_owner_id ON shares USING btree (owner_id);
+
+
+--
+-- Name: index_site_feedback_feedbacks_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_site_feedback_feedbacks_on_email ON site_feedback_feedbacks USING btree (email);
+
+
+--
+-- Name: index_site_feedback_feedbacks_on_status; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_site_feedback_feedbacks_on_status ON site_feedback_feedbacks USING btree (status);
+
+
+--
+-- Name: index_site_feedback_feedbacks_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_site_feedback_feedbacks_on_user_id ON site_feedback_feedbacks USING btree (user_id);
+
+
+--
+-- Name: index_skills_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_skills_on_slug ON skills USING btree (slug);
 
 
 --
@@ -2539,17 +3078,17 @@ CREATE INDEX index_slugs_on_slug ON slugs USING btree (slug);
 
 
 --
--- Name: index_slugs_on_sluggable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_slugs_on_sluggable_id ON slugs USING btree (sluggable_id);
-
-
---
 -- Name: index_slugs_on_sluggable_id_and_sluggable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_slugs_on_sluggable_id_and_sluggable_type ON slugs USING btree (sluggable_id, sluggable_type);
+
+
+--
+-- Name: index_slugs_on_sluggable_id_and_sluggable_type_and_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_slugs_on_sluggable_id_and_sluggable_type_and_slug ON slugs USING btree (sluggable_id, sluggable_type, slug);
 
 
 --
@@ -2592,6 +3131,69 @@ CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 --
 
 CREATE INDEX index_tags_on_slug ON tags USING btree (slug);
+
+
+--
+-- Name: index_team_invites_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_idea_id ON team_invites USING btree (idea_id);
+
+
+--
+-- Name: index_team_invites_on_invited_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_invited_id ON team_invites USING btree (invited_id);
+
+
+--
+-- Name: index_team_invites_on_invited_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_invited_id_and_idea_id ON team_invites USING btree (invited_id, idea_id);
+
+
+--
+-- Name: index_team_invites_on_inviter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_inviter_id ON team_invites USING btree (inviter_id);
+
+
+--
+-- Name: index_team_invites_on_inviter_id_and_invited_id_and_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_team_invites_on_inviter_id_and_invited_id_and_idea_id ON team_invites USING btree (inviter_id, invited_id, idea_id);
+
+
+--
+-- Name: index_team_invites_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_team_invites_on_token ON team_invites USING btree (token);
+
+
+--
+-- Name: index_user_admin; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_admin ON users USING btree (admin) WHERE (admin IS TRUE);
+
+
+--
+-- Name: index_user_published; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_published ON users USING btree (state) WHERE (state = 1);
+
+
+--
+-- Name: index_user_verified; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_verified ON users USING btree (verified) WHERE (verified IS TRUE);
 
 
 --
@@ -2672,6 +3274,20 @@ CREATE INDEX index_users_on_school_id ON users USING btree (school_id);
 
 
 --
+-- Name: index_users_on_school_id_and_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_school_id_and_role ON users USING btree (school_id, role);
+
+
+--
+-- Name: index_users_on_school_id_and_state; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_school_id_and_state ON users USING btree (school_id, state);
+
+
+--
 -- Name: index_users_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2686,10 +3302,17 @@ CREATE INDEX index_users_on_state ON users USING btree (state);
 
 
 --
--- Name: index_users_on_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_state_and_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_users_on_type ON users USING btree (type);
+CREATE INDEX index_users_on_state_and_role ON users USING btree (state, role);
+
+
+--
+-- Name: index_users_on_state_and_role_and_school_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_state_and_role_and_school_id ON users USING btree (state, role, school_id);
 
 
 --
@@ -2697,6 +3320,13 @@ CREATE INDEX index_users_on_type ON users USING btree (type);
 --
 
 CREATE UNIQUE INDEX index_users_on_uid ON users USING btree (uid);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_username ON users USING btree (username);
 
 
 --
@@ -2735,24 +3365,31 @@ CREATE INDEX index_votes_on_votable_id ON votes USING btree (votable_id);
 
 
 --
--- Name: index_votes_on_votable_id_and_votable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_votable_id_and_votable_type_and_voter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_votes_on_votable_id_and_votable_type ON votes USING btree (votable_id, votable_type);
-
-
---
--- Name: index_votes_on_voter_id_and_voter_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_votes_on_voter_id_and_voter_type ON votes USING btree (voter_id, voter_type);
+CREATE UNIQUE INDEX index_votes_on_votable_id_and_votable_type_and_voter_id ON votes USING btree (votable_id, votable_type, voter_id);
 
 
 --
--- Name: punchable_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_voter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX punchable_index ON punches USING btree (punchable_type, punchable_id);
+CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
+
+
+--
+-- Name: owner_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX owner_published_activities ON activities USING btree (owner_id, owner_type, published, is_notification);
+
+
+--
+-- Name: recipient_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX recipient_published_activities ON activities USING btree (recipient_id, recipient_type, published, is_notification);
 
 
 --
@@ -2763,10 +3400,93 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 
 
 --
+-- Name: unique_activity_per_owner; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_activity_per_owner ON activities USING btree (owner_id, owner_type, trackable_id, trackable_type, key);
+
+
+--
+-- Name: unique_event_invites; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_event_invites ON event_invites USING btree (inviter_id, inviter_type, invited_id, event_id);
+
+
+--
+-- Name: unique_follows_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_follows_index ON follows USING btree (followable_id, followable_type, follower_id);
+
+
+--
+-- Name: unique_impressions; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_impressions ON impressions USING btree (impressionable_id, impressionable_type, user_id);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: user_commentable_comments; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX user_commentable_comments ON comments USING btree (user_id, commentable_id, commentable_type);
+
+
+--
+-- Name: fk_rails_15f20ac5cc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY team_invites
+    ADD CONSTRAINT fk_rails_15f20ac5cc FOREIGN KEY (idea_id) REFERENCES ideas(id);
+
+
+--
+-- Name: fk_rails_1b711e94aa; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mentions
+    ADD CONSTRAINT fk_rails_1b711e94aa FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_4a2a343dbc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT fk_rails_4a2a343dbc FOREIGN KEY (school_id) REFERENCES schools(id);
+
+
+--
+-- Name: fk_rails_ad83b2aa73; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY school_admins
+    ADD CONSTRAINT fk_rails_ad83b2aa73 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_c93dfeb29b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_attendees
+    ADD CONSTRAINT fk_rails_c93dfeb29b FOREIGN KEY (event_id) REFERENCES events(id);
+
+
+--
+-- Name: fk_rails_dd5ebcb656; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY event_invites
+    ADD CONSTRAINT fk_rails_dd5ebcb656 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -2778,27 +3498,11 @@ ALTER TABLE ONLY mailboxer_conversation_opt_outs
 
 
 --
--- Name: mentions_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mentions
-    ADD CONSTRAINT mentions_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
 -- Name: notifications_on_conversation_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mailboxer_notifications
     ADD CONSTRAINT notifications_on_conversation_id FOREIGN KEY (conversation_id) REFERENCES mailboxer_conversations(id);
-
-
---
--- Name: posts_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY posts
-    ADD CONSTRAINT posts_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -2810,14 +3514,6 @@ ALTER TABLE ONLY mailboxer_receipts
 
 
 --
--- Name: shares_user_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY shares
-    ADD CONSTRAINT shares_user_id_fk FOREIGN KEY (user_id) REFERENCES users(id);
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -2825,11 +3521,13 @@ SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20140805183219');
 
-INSERT INTO schema_migrations (version) VALUES ('20140805184102');
+INSERT INTO schema_migrations (version) VALUES ('20140805183225');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805184420');
 
 INSERT INTO schema_migrations (version) VALUES ('20140812190804');
+
+INSERT INTO schema_migrations (version) VALUES ('20140812190810');
 
 INSERT INTO schema_migrations (version) VALUES ('20140814084456');
 
@@ -2842,8 +3540,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140817173661');
 INSERT INTO schema_migrations (version) VALUES ('20140817173662');
 
 INSERT INTO schema_migrations (version) VALUES ('20140825003938');
-
-INSERT INTO schema_migrations (version) VALUES ('20140825003939');
 
 INSERT INTO schema_migrations (version) VALUES ('20140830232833');
 
@@ -2873,10 +3569,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141102050834');
 
 INSERT INTO schema_migrations (version) VALUES ('20141122174311');
 
-INSERT INTO schema_migrations (version) VALUES ('20141126200705');
-
-INSERT INTO schema_migrations (version) VALUES ('20141207174436');
-
 INSERT INTO schema_migrations (version) VALUES ('20141209231249');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122230500');
@@ -2895,6 +3587,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150312183534');
 
 INSERT INTO schema_migrations (version) VALUES ('20150312183535');
 
+INSERT INTO schema_migrations (version) VALUES ('20150312183540');
+
 INSERT INTO schema_migrations (version) VALUES ('20150312183545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150317170955');
@@ -2907,23 +3601,35 @@ INSERT INTO schema_migrations (version) VALUES ('20150323234103');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420113616');
 
-INSERT INTO schema_migrations (version) VALUES ('20150421231158');
-
-INSERT INTO schema_migrations (version) VALUES ('20150425114736');
-
-INSERT INTO schema_migrations (version) VALUES ('20150425121536');
-
 INSERT INTO schema_migrations (version) VALUES ('20150425124545');
 
 INSERT INTO schema_migrations (version) VALUES ('20150425140518');
 
 INSERT INTO schema_migrations (version) VALUES ('20150512113344');
 
-INSERT INTO schema_migrations (version) VALUES ('20150514213100');
-
 INSERT INTO schema_migrations (version) VALUES ('20150517032505');
 
 INSERT INTO schema_migrations (version) VALUES ('20150517032506');
 
 INSERT INTO schema_migrations (version) VALUES ('20150528181322');
+
+INSERT INTO schema_migrations (version) VALUES ('20150605120916');
+
+INSERT INTO schema_migrations (version) VALUES ('20150610172254');
+
+INSERT INTO schema_migrations (version) VALUES ('20150610172255');
+
+INSERT INTO schema_migrations (version) VALUES ('20150615210512');
+
+INSERT INTO schema_migrations (version) VALUES ('20150616232524');
+
+INSERT INTO schema_migrations (version) VALUES ('20150618162746');
+
+INSERT INTO schema_migrations (version) VALUES ('20150627164750');
+
+INSERT INTO schema_migrations (version) VALUES ('20150711185427');
+
+INSERT INTO schema_migrations (version) VALUES ('20150715172544');
+
+INSERT INTO schema_migrations (version) VALUES ('20150715185616');
 

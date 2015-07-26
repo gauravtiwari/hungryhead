@@ -19,11 +19,17 @@
   right: -90%;
   padding: 0;
 }
+.conversations-user-list.unread {
+  background-color: #fafafa;
+}
 .message-list, .thread-list {
   font-size: 14px;
   margin: 0;
   overflow-y: auto;
   padding: 0;
+}
+.message-badge {
+  line-height: 1.2;
 }
 .conversation-body a span {
   font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
@@ -430,7 +436,7 @@ html,body{height:100%;}
 }
 
 .conversation.active {
-  background: #4285f4;
+  background: #5b98e0;
 }
 .conversation.active a,
 .conversation.active p,

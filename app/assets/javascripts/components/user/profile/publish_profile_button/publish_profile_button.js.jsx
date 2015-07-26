@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var PublishProfileButton = React.createClass({
   getInitialState: function() {
     return {
@@ -33,7 +31,7 @@ var PublishProfileButton = React.createClass({
     });
   },
 
- 
+
   render: function() {
     var text = this.state.published ? 'Published' : 'Publish Profile';
     var cx = React.addons.classSet;

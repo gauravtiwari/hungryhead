@@ -3,18 +3,11 @@ class CreateShares < ActiveRecord::Migration
   def change
     create_table :shares do |t|
       t.text :body, null: false, default: ""
-
-      t.integer :status
-      t.integer :privacy
-
-      t.references :shareable, polymorphic: true, null: false
-      t.references :user, foreign_key: true, null: false
-
-      t.jsonb :parameters
+      t.text :link, null: false, default: ""
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
+      t.references :owner, polymorphic: true, null: false
       t.timestamps null: false
-
     end
-    add_index :shares, [:shareable_id, :shareable_type], algorithm: :concurrently
-    add_index :shares, [:user_id], algorithm: :concurrently
+    add_index :shares, :owner_id, algorithm: :concurrently
   end
 end

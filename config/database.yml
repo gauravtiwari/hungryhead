@@ -1,32 +1,25 @@
---- 
-cucumber: 
-  adapter: postgresql
-  database: hungryhead_school_app_test
+---
+default:
+  adapter: 'postgresql'
   encoding: unicode
-  pool: 5
-default: 
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-development: 
-  adapter: postgresql
+  pool: <%= ENV["DB_POOL"] || 5 %>
+
+development:
+  adapter: 'postgresql'
   username: gaurav
   host: localhost
   database: hungryhead_school_app_development
   encoding: unicode
-  pool: 5
-production: 
-  adapter: postgresql
+  pool: <%= ENV["DB_POOL"] || 5 %>
+
+production:
+  adapter: 'postgresql'
   database: hungryhead_school_app_production
   encoding: unicode
-  pool: 5
-staging: 
-  adapter: postgresql
+  pool: <%= ENV["DB_POOL"] || 50 %>
+
+staging:
+  adapter: 'postgresql'
   database: hungryhead_school_app_staging
   encoding: unicode
-  pool: 5
-test: 
-  adapter: postgresql
-  database: hungryhead_school_app_test
-  encoding: unicode
-  pool: 5
+  pool: <%= ENV["DB_POOL"] || 50 %>

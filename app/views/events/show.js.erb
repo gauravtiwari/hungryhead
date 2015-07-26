@@ -1,0 +1,4 @@
+$('#eventPopupModal').modal('hide');
+<% if @event.id_changed? %>
+  window.location.href = "<%= event_url(@event) %>"
+<% end %>

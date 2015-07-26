@@ -9,7 +9,7 @@
 /.idea
 /.metadata
 .DS_Store
-
+hungryhead_environment.txt
 node_modules/
 
 Guardfile
@@ -27,3 +27,4 @@ public/assets/
 .elasticbeanstalk/
 config/skylight.yml
 config/application.yml
+

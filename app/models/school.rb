@@ -5,29 +5,31 @@ class School < ActiveRecord::Base
 
 	#Included concerns
 	include Followable
+	include Sharings
+	include Feeder
 	include Sluggable
+	include Eventable
 
 	#Relationship
-	has_many :users
-	has_many :ideas
+	has_many :students, -> { where(state: 1, role: 1)}, class_name: 'User'
+	has_many :ideas, -> { where(status: 1, privacy: 1) }, class_name: 'Idea'
+	has_many :faculties, -> { where(state: 1, role: 4) }, class_name: 'User'
+	has_many :users, -> { where(state: 1) }, class_name: 'User'
+	has_many :school_admins
+	belongs_to :user, class_name: 'User'
 
+	#Tagging for locations
 	acts_as_taggable_on :locations
 
-	store_accessor :data, :established, :locations, :website
-	store_accessor :media, :logo_position,
+	store_accessor :media, :logo_position, :logo_tmp, :cover_tmp,
 	:cover_position, :cover_left, :cover_prcessing, :logo_processing
 
 	#Redis Cache counters and ids
 	set :followers_ids
 
-	#Latest caches
-	list :latest_students, maxlength: 20, marshal: true
-	list :latest_faculties, maxlength: 20, marshal: true
-	list :latest_ideas, maxlength: 20, marshal: true
-
 	#Counters
 	counter :followers_counter
-	counter :students_counter
+	counter :people_counter
 	counter :ideas_counter
 
 	#Mount carrierwave
@@ -37,9 +39,38 @@ class School < ActiveRecord::Base
 	validates :name, :presence => true,
 	:on => :create
 
+	public
 	#Slug candidates for school
 	def slug_candidates
 	 [:name]
+	end
+
+	def get_published_faculties
+		faculties.order(created_at: :desc)
+	end
+
+	def get_published_users
+		users.order(created_at: :desc)
+	end
+
+	def get_avatar
+	  logo.url
+	end
+
+	def avatar_present?
+	  logo.url(:avatar).present?
+	end
+
+	def get_published_ideas
+		ideas.order(created_at: :desc)
+	end
+
+	def get_published_events
+		events.order(created_at: :desc)
+	end
+
+	def get_published_students
+		students.order(created_at: :desc)
 	end
 
 	#Callbacks hooks
@@ -52,14 +83,14 @@ class School < ActiveRecord::Base
 
   def name_badge
   	words = name.split(' ')
-  	words.map{|w| w.first }.join
-  end
-
-  def rebuild_cache
-    UpdateSchoolCacheJob.perform_later(id)
+  	words.first(3).map{|w| w.first }.join.upcase
   end
 
 	private
+
+	def should_generate_new_friendly_id?
+	  slug.blank? || name_changed?
+	end
 
 	def load_into_soulmate
 		loader = Soulmate::Loader.new("schools")

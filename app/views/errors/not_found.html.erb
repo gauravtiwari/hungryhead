@@ -1,0 +1,24 @@
+<% cache(["beta", "errors", "not_found"]) do %>
+  <div class="container-xs-height full-height">
+    <div class="row-xs-height">
+      <div class="col-xs-height col-middle">
+        <div class="error-container text-center">
+          <h1 class="error-number">404</h1>
+          <h2 class="semi-bold"><i class="fa fa-frown-o"></i> Sorry but we couldnt find this page</h2>
+          <p>
+            <strong>This could happen because:</strong>
+            <ul class="text-left">
+              <li><strong>Record Not Found:</strong> Page is deleted and no longer exist in DB or </li>
+              <li><strong>No Permission:</strong> You do not have permission to view this page. </li>
+            </ul>
+          </p>
+          <div class="error-container-innner text-center">
+            <ul class="no-style no-padding">
+              <li class="inline p-r-10 bold">Go back to <%= link_to('Homepage', root_path, class: 'b-b b-grey p-b-5') %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

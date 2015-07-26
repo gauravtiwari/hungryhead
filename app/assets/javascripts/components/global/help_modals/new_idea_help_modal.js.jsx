@@ -20,7 +20,6 @@ var NewIdeaHelpModal = React.createClass({
   },
 
   render: function(){
-    console.log(this.state.bodyHeight);
     return (
         <div className="modal fade slide-right" id="newIdeaHelpModal" tabIndex="-1" role="dialog" aria-labelledby="newIdeaHelpModalLabel" aria-hidden="true">
         <div className="modal-dialog full-height">

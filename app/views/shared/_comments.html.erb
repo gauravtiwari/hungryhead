@@ -1,3 +1,0 @@
-<% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: @comments, record: @commentable, paginate: false} )%>
-
-<%= react_component('CommentBox', {data: data, paginated: comments_path(commentable_type: @commentable.class.to_s, id: @commentable.id)}) %>

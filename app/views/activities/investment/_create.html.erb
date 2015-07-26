@@ -1,47 +1,35 @@
 <div class="card share full-width post_<%= activity.id %>">
 	<div class="card-header clearfix">
-    <div class="user-pic pull-left">
-	    <% if activity.user.avatar.present? %>
-		    <%= image_tag(activity.user.avatar.url(:avatar), :"data-src" => "#{activity.user.avatar.url(:avatar)}", :"data-src-retina" => "#{activity.user.avatar.url(:square)}", width: "33", height: "33") %>
-		    <% else %>
-		        <span class="placeholder bold text-white"><%= activity.user.first_name.first + activity.user.last_name.first %>
-		        </span>
-	    <% end %>
+    <div class="user-pic">
+      <% if activity.owner.avatar_present? %>
+        <%= image_tag(activity.owner.get_avatar, :"data-src" => "#{activity.owner.get_avatar}", :"data-src-retina" => "#{activity.owner.get_avatar}", width: "33", height: "33") %>
+        <% else %>
+            <span class="placeholder bold text-white"><%= activity.owner.name_badge %>
+            </span>
+      <% end %>
     </div>
 
-    <div class="text-master-dark">
-    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> invested <i class="fa fa-fw fa-dollar"></i><%= activity.trackable.amount %> in
+    <div class="text-master overflow-hidden">
+    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> invested <span class="hh-coin fs-14"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></span><%= activity.trackable.amount %> in
 		<% if activity.recipient.in_team?(current_user) %>
 			your idea
 		<% end %>
 
 		<%= link_to(activity.recipient.name, idea_path(activity.recipient), :"data-popover-href" => "#{card_idea_path(activity.recipient)}", class: 'load-card bold') %>
-	   	<h6>
-	   		<% if activity.user.locations %>
-		        <span class="location semi-bold m-r-10">
-		            <i class="fa fa-map-marker"></i>
-		            <%= activity.user.locations.first %>
-		        </span>
-	        <% end %>
-	       <% if activity.user.markets %>
-		        <span class="location semi-bold m-r-10">
-		            <i class="fa fa-map-marker"></i>
-		            <%= activity.user.markets.first %>
-		        </span>
-	        <% end %>
-	        <span class="date semi-bold">
-	            <i class="fa fa-clock"></i>
-		        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
-					<%= local_time_ago(activity.created_at) %>
-				<% end %>
-	        </span>
+	   	<h6 class="no-margin p-t-5">
+	      <span class="date semi-bold">
+	        <i class="fa fa-clock-o"></i>
+	        <%= link_to(idea_path(activity.trackable), class: "text-master") do %>
+						<%= local_time_ago(activity.created_at) %>
+					<% end %>
+	      </span>
 	    </h6>
     </div>
 		<div class="clearfix"></div>
 	</div>
 
-	<div class="card-description">
-		<div class="activity-content">
+	<div class="card-description no-padding p-l-60 p-r-60">
+		<div class="activity-content m-t-10">
 			 <% if activity.trackable.message.length > 450 %>
 			  <%= truncate(markdownify(activity.trackable.message), escape: false, length: 450) %>
 			  <%= link_to 'See more', '', class: "read-more-link read-more-#{activity.trackable.id} clearfix" %>
@@ -59,7 +47,7 @@
 	  <div class="card-footer clearfix bold">
     <ul class="reactions pull-left">
 		<% voted = activity.trackable.voted?(current_user) %>
-		<%= react_component('Upvote', {record: activity.trackable_id, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable_id), css_class: 'vote-button add_vote pull-left'}.to_json) %>
+		<%= react_component('Upvote', {record: activity.trackable.uuid, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left', button_style: false}.to_json) %>
     </ul>
         <div class="clearfix"></div>
     </div>
@@ -67,5 +55,5 @@
 
   <% data = render(template: 'comments/comments.json.jbuilder', locals: {comments: [], record: commentable, paginate: false} )%>
 
-  <%= react_component('CommentBox', {data: data, comment_channel: "#{activity.trackable_type}-#{activity.trackable_id}-comments", count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable_id)}) %>
+  <%= react_component('CommentBox', {data: data, comment_channel: "#{activity.trackable_type}-#{activity.trackable.uuid}-comments", count: activity.trackable.comments_counter.value, comments_path: comments_path(commentable_type: activity.trackable_type, id: activity.trackable.uuid)}) %>
 </div>

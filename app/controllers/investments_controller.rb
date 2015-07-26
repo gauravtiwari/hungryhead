@@ -15,10 +15,7 @@ class InvestmentsController < ApplicationController
     @team  = User.find(@idea.team)
     current_user = current_user
     authorize @idea
-    @investments = @idea
-    .investments
-    .order(id: :desc)
-    .paginate(:page => params[:page], :per_page => 10)
+    @investments = @idea.get_investments.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /investments/1
@@ -36,7 +33,6 @@ class InvestmentsController < ApplicationController
       authorize @investment
       respond_to do |format|
         if @investment.save
-          UpdateInvestmentBalanceJob.perform_later(@investment.id)
           format.json { render :show, status: :created }
         else
           format.json { render json: @investment.errors, status: :unprocessable_entity }
@@ -47,18 +43,17 @@ class InvestmentsController < ApplicationController
         format.json { render json: {error: "Insufficient Balance #{current_user.fund['balance']}"}, status: :unprocessable_entity }
       end
     end
-    CreateActivityJob.set(wait: 2.seconds).perform_later(@investment.id, @investment.class.to_s)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_investment
-      @idea = Idea.friendly.find(params[:idea_id])
+      @idea = Idea.find(params[:idea_id])
       @investment = Investment.find(params[:id])
     end
 
     def set_props
-      @idea = Idea.friendly.find(params[:idea_id])
+      @idea = Idea.find(params[:idea_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

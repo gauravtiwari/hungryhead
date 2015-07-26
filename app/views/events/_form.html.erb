@@ -1,0 +1,51 @@
+<div class="new-event-form">
+  <%= simple_form_for(@event, remote: true) do |f| %>
+    <div class="form-group">
+      <%= label_tag 'event[title]', 'Title' %>
+      <%= f.input_field :title, class: "form-control", :required => true, :placeholder => "eg: Entrepreneurship Workshop" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'event[excerpt]', 'Short Description' %>
+      <%= f.input_field :excerpt, class: "form-control", :required => true, :placeholder => "eg: An intro about the event..." %>
+    </div>
+
+    <div class="form-group">
+      <%= label_tag 'event[address]', 'Address' %>
+      <%= f.input_field :address, class: "form-control", :required => true, :placeholder => "eg: Lancaster, Fylde College" %>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[start_time]', 'Start' %>
+          <div class="input-prepend input-group">
+            <span class="add-on input-group-addon">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            </span>
+            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control" value="08/01/2013 1:30 PM">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group">
+          <%= label_tag 'event[end_time]', 'End' %>
+          <div class="input-prepend input-group">
+            <span class="add-on input-group-addon">
+              <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+            </span>
+            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" value="08/01/2013 1:30 PM">
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
+    <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
+
+    <div class="button-tags m-t-20">
+      <%= button_tag 'Send', class: 'btn btn-primary' %>
+      <small class="m-l-20 hint-text">Event won't be published until you do so from profile page.</small>
+    </div>
+  <% end %>
+
+</div>
+

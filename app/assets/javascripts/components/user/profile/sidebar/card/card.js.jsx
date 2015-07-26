@@ -1,18 +1,17 @@
-/** @jsx React.DOM */
-
 var Card = React.createClass({
   getInitialState: function() {
     var data = JSON.parse(this.props.data);
     return {
       profile: data.user.profile,
       id: data.user.id,
-      form: data.user.about_me.form,
+      form: data.user.form,
       is_owner: data.user.is_owner,
       disabled: false
     }
   },
 
   saveSidebarWidget:function(formData, action) {
+    $.pubsub('publish', 'sidebar_widget_saving', true);
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
@@ -23,6 +22,7 @@ var Card = React.createClass({
         this.setState({profile: data.user.profile});
         $('#editProfileFormPopup').modal('hide');
         $('body').pgNotification({style: "simple", message: "Profile Updated", position: "bottom-left", type: "success",timeout: 5000}).show();
+        $.pubsub('publish', 'sidebar_widget_saving', false);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());

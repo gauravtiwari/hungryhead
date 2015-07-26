@@ -10,6 +10,7 @@ production:
   :concurrency: 20
 :queues:
   - default
-  - [mailers]
+  - carrierwave
+  - [mailers, 1]
   - [high_priority, 2]
   - [low_priority, 2]

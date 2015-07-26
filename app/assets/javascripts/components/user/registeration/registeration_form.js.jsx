@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var RegisterationForm = React.createClass({
 
   getInitialState: function(){
@@ -9,14 +7,15 @@ var RegisterationForm = React.createClass({
       email: "",
       username: "",
       school_id: "",
-      name: "",
-      school_domain: ".edu"
+      school_domain: '.ac.uk',
+      name: ""
     };
   },
 
   componentDidMount: function(){
     var self = this;
     var $schoolSelect = $('#school_select');
+    var self = this;
     $schoolSelect.each((function(_this) {
       return function(i, e) {
         var select;
@@ -41,7 +40,6 @@ var RegisterationForm = React.createClass({
                   return {
                     text: item.label,
                     value: item.value,
-                    logo: item.logo.logo.mini.url,
                     id: item.id
                   };
                 })
@@ -51,40 +49,49 @@ var RegisterationForm = React.createClass({
         });
       };
     })(this));
-
-    $schoolSelect.on("select2:select", function (e) {
-      log("select2:select", e);
-    });
   },
 
   onUsernameChange: function(e) {
-    console.log(this.refs.name.getDOMNode().value.trim());
     data = {
       username: e.target.value,
       name: this.refs.name.getDOMNode().value.trim()
     }
-    $.ajax({
-        data: data,
-        url: Routes.check_username_path(),
-        type: "POST",
-        dataType: "json",
-        success: function ( data ) {
-        if(data.available) {
-          $('#invalid-username').remove();
-        } else {
-          $('body').pgNotification({style: "simple", message: data.error + " \n <strong>" + data.suggestions + "</strong>", position: "top-right", type: "error",timeout: 10000}).show();
-        }
-        }.bind(this),
-        error: function(xhr, status, err) {
-          console.error(err.toString());
-        }.bind(this)
-    });
+    var target = e.target;
+    if($(this.refs.name.getDOMNode().length) != 0) {
+      $.ajax({
+          data: data,
+          url: Routes.check_username_path(),
+          type: "POST",
+          dataType: "json",
+          success: function ( data ) {
+          if(data.available) {
+            $('#invalid-username').remove();
+          } else {
+            $('body').pgNotification({
+              style: "simple",
+              message: data.error + " \n <strong>" + data.suggestions + "</strong>." + " We have selected one for you.",
+              position: "top-right", type: "error",
+              timeout: 10000
+            }).show();
+            $(target).val(data.suggested);
+            $(target).focus();
+          }
+          }.bind(this),
+          error: function(xhr, status, err) {
+            console.error(err.toString());
+          }.bind(this)
+      });
+    }
   },
 
-  fillName: function(e){
-    var fname = $(this.refs.fname.getDOMNode()).val();
-    var lname = $(this.refs.lname.getDOMNode()).val();
-    $(this.refs.fullname.getDOMNode()).val(fname +" " + lname)
+  loadTerms: function(e) {
+    e.preventDefault();
+    $.getScript(Routes.terms_path());
+  },
+
+  loadPrivacy: function(e){
+    e.preventDefault();
+    $.getScript(Routes.privacy_path());
   },
 
   onEmailChange: function(e) {
@@ -123,72 +130,90 @@ var RegisterationForm = React.createClass({
 
     return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <input type="hidden" name={this.props.form.csrf_param} value={this.props.form.csrf_token} />
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group form-group-default">
-              <label>Your full name</label>
-              <input type="text" ref="name" id="name" autoComplete="off" name="student[name]" placeholder="John Smith" className="form-control" required aria-required="true" />
+              <label>First Name</label>
+              <input type="text" ref="first_name" id="first_name" autoComplete="off" name="user[first_name]" placeholder="John" className="form-control" required aria-required="true" />
             </div>
           </div>
+
+          <div className="col-sm-6">
+            <div className="form-group form-group-default">
+              <label>Last Name</label>
+              <input type="text" ref="last_name" id="last_name" autoComplete="off" name="user[last_name]" placeholder="Smith" className="form-control" required aria-required="true" />
+              <input type="hidden" ref="name" id="name" autoComplete="off" name="user[name]" />
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-sm-12 col-md-12">
+            <div className="form-group">
+              <label>Select your uni/col/school</label>
+              <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
+              <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-sm-12 col-md-12">
+            <div className="form-group form-group-default input-group">
+              <label>Uni/College Email</label>
+              <input type="email" name="user[email]" autoCorrect="off" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
+              <span className="input-group-addon bg-solid-dark text-white" id="school_domain">
+                {this.state.school_domain}
+              </span>
+              <span id="invalid-email"></span>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
 
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Username</label>
-              <input type="text" name="student[username]" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
-            </div>
-          </div>
-
-        </div>
-
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="form-group">
-              <label>Select your school <small className="fs-8 text-danger">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup">Click here</a></small></label>
-              <input type="text" name="student[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="form-group form-group-default input-group">
-              <label>Email</label>
-              <input type="email" name="student[email]" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
-              <span className="input-group-addon" id="school_domain">
-                {this.state.school_domain}
-              </span>
-              <span id="invalid-email"></span>
             </div>
           </div>
 
           <div className="col-sm-6">
             <div className="form-group form-group-default">
               <label>Password</label>
-              <input type="password" name="student[password]" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required="true" aria-required="true" />
+              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
+
         </div>
 
         <div className="row m-t-10">
-          <div className="col-md-6">
+          <div className="col-sm-6">
             <div className="checkbox check-success">
-              <input type="checkbox" name="student[terms_accepted]" value="1" id="checkbox1" defaultChecked />
-              <label htmlFor="checkbox1">I agree to the <a href="#" className="text-info small">Pages Terms</a> and <a href="#" className="text-info small">Privacy</a>.</label>
+              <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
+              <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a>.</label>
             </div>
           </div>
-          <div className="col-md-6 text-right">
-            <span className="fs-12">Already registered?<a className="fs-13" href="/login" className="text-primary bold"> Login</a></span>
-          </div>
+         <div className="pull-right sm-pull-reset col-sm-6">
+           <div className="checkbox check-complete">
+            <input type="checkbox" name="user[role]" value="faculty" id="checkbox2" />
+            <label htmlFor="checkbox2">Are you a Faculty member?</label>
+           </div>
+         </div>
         </div>
-        <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Submit</button>
-        <a className="btn btn-primary btn-cons m-t-10" href="/">Back</a>
+        <div className="sm-m-t-30 m-t-10">
+          <button className="btn btn-complete btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
+          <a className="btn btn-primary btn-sm fs-13 m-l-10" href="/">Back</a>
+        </div>
       </form>
     )
   },
 
   _onKeyDown: function(event) {
       event.preventDefault();
+      $(this.refs.name.getDOMNode()).val($(this.refs.first_name.getDOMNode()).val() + ' ' + $(this.refs.last_name.getDOMNode()).val());
       if($(this.refs.form.getDOMNode()).valid()) {
         var formData = $(this.refs.form.getDOMNode()).serialize();
         this.props.handleRegisterationSubmit(formData);

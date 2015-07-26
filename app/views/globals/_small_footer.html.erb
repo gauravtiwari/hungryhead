@@ -1,17 +1,28 @@
-<div class="small-footer">
+<div class="small-footer pull-bottom">
   <div class="container">
     <div class="top-footer clearfix">
-      <article class="section-list">
+      <article class="section-list inline">
         <ul>
-          <li><a href="#">Our rules</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Trust and Safety</a></li>
-          <li><a href="#">Terms of service</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Privacy Policy</a></li>
+          <li>
+            <%= link_to(story_path, class: "#{current_class?(story_path)} bold") do %>
+              <span>Our story</span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)} bold", remote: false) %>
+          </li>
         </ul>
       </article>
-    <p class="copyright-text text-white">© 2015 hungryhead, Org.</p>
+    <p class="copyright-text text-white bold pull-right">© <%= Time.now.year %> hungryhead.co</p>
   </div>
+</div>
 </div>

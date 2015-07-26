@@ -1,0 +1,10 @@
+<% cache(['beta', 'home_page', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<div class="splash-wrapper">
+    <%= render partial: 'pages/content/home' %>
+    <div class="container relative">
+      <div class="small_footer text-center relative z-index-10">
+        <p class="text-white">© hungryhead 2015. <br/>Starting entrepreneurship, together ®</p>
+      </div>
+    </div>
+</div>
+<% end %>

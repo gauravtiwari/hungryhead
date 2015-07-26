@@ -2,22 +2,22 @@ class CreateIdeaNotificationService
 
   def initialize(idea)
     @idea = idea
-    @user = idea.student
+    @user = idea.user
   end
 
   def create
-    if activity_exists?
-      publish_activity
-    else
+    if activity_empty?
       create_activity
+    else
+      publish_activity
     end
   end
 
   private
 
   #Check if activity exists for idea?
-  def activity_exists?
-    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').exists?
+  def activity_empty?
+    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').empty?
   end
 
   #Create activity if new idea
@@ -30,7 +30,7 @@ class CreateIdeaNotificationService
       unread: true
     )
     cache(@activity)
-    PublishIdeaJob.set(wait: 15.seconds).perform_later(@idea.id, @user.id, @activity.id)
+    PublishIdeaJob.perform_later(@idea.id, @user.id, @activity.id)
   end
 
   def cache(activity)
@@ -43,6 +43,8 @@ class CreateIdeaNotificationService
       if activity && !activity.published?
         activity.published = true
         activity.save
+        cache(activity)
+        PublishIdeaJob.perform_later(@idea.id, @user.id, activity.id) unless Idea.trending.member?(@idea.id)
       end
     end
   end

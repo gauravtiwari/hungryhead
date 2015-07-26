@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Follow = React.createClass({
   getInitialState: function() {
     return {
@@ -37,6 +35,8 @@ var Follow = React.createClass({
   render: function() {
     var text = this.state.follow ? 'Following' : 'Follow';
     var cx = React.addons.classSet;
+    var title_text =  this.state.follow ? 'Following' : 'Follow to receive updates';
+
     if(this.props.no_button){
        var classes = cx({
         'disabled': this.state.disabled,
@@ -44,16 +44,22 @@ var Follow = React.createClass({
       });
     } else {
       var classes = cx({
-        'btn btn-sm fs-13 p-l-10 p-r-10 padding-5 pull-right text-white m-r-10': true,
+        'main-button fs-13 bold pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
-        'btn-info': !this.state.follow,
-        'btn-green semi-bold': this.state.follow
+        'text-brand': !this.state.follow,
+        'followed text-white semi-bold': this.state.follow
       });
     }
 
+    if(this.state.follow) {
+      var icon = <span><i className="fa fa-check-circle"></i></span>;
+    } else {
+      var icon = <i className="fa fa-user-plus"></i>;
+    }
+
     return (
-        <button onClick={this.handleClick} className={classes} title="Follow">
-          <i className="fa fa-user-plus"></i> {text}
+        <button data-toggle="tooltip" data-container="body" title={title_text} onClick={this.handleClick} className={classes}>
+          {icon} <span className="hidden-xs">{text}</span>
         </button>
     );
   }

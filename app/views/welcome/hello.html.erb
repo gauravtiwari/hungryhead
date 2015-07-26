@@ -1,64 +1,43 @@
-<div class="container-fluid col-md-8 auto-margin">
+<div class="container-fluid col-md-8 auto-margin p-b-60">
     <div class="m-t-50" id="rootwizard">
-       <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-	    		<li class="active">
-	          <%= link_to(wizard_path(:hello)) do %>
-	            <i class="fa fa-list-ul tab-icon"></i>
-	            <span>Guidelines</span>
-	         <% end %>
-	        </li>
-	        <li>
-	      		<%= link_to(wizard_path(:follow_friends)) do %>
-	            <i class="fa fa-users tab-icon"></i>
-	            <span>Follow Friends</span>
-	        	<% end %>
-	        </li>
-       </ul>
+        <%= render partial: 'tab_nav' %>
         <div class="tab-content">
         		<div class="tab-pane padding-20 active slide-left" id="tab1">
         		      <div class="row row-same-height">
      								<div class="col-md-10 auto-margin">
-     								    <h2 class="normal text-green">Community Guidelines:</h2>
+     								    <h2 class="normal text-green">Hello <%= @user.first_name %>:</h2>
      								    <div class="divider b-b text-green b-grey b-md b-small"></div>
-     								    <h5 class="p-t-10">A few rules to help make sure hungryhead is a great place for everyone.</h5>
+     								    <h5 class="p-t-20 text-brand bold"><i class="fa fa-smile-o"></i> Welcome to the community</h5>
      								  <div>
-	     								  <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't SPAM </h3>
-	     								  <p>
-	     								 		We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-	     								  </p>
+	     								  <p class="fs-16 m-t-20">
+                          Thank you for accepting our invite and signing up! We are very glad to have you on-board.
+                        </p>
+                        <p class="fs-16">
+                          As you may know, we have just started out and our platform is new therefore, your may find some parts of the website empty until a few people have joined. Please invite your friends to help us get more people.
+                        </p>
+                        <p class="fs-16">
+                          To help us achieve market-fit with our product we have opened our platform to only a few universities and colleges but we will be adding more universities and colleges soon.
+                        </p>
+                        <h5 class="bold">Here are some features that you can start using today:</h5>
+                        <ul class="fs-16">
+                          <li class="m-b-10">Pitch, Share and Build startup ideas with peers.</li>
+                          <li class="m-b-10">Receive feedbacks, questions and validate your idea.</li>
+                          <li class="m-b-10">If don't have an idea, collaborate on other people's idea.</li>
+                          <li class="m-b-10">Find and connect with people from around the world.</li>
+                          <li class="m-b-10">Collaborate and Work with your team, privately</li>
+                          <li class="m-b-10">Learn what it takes to be an entrepreneur, practically.</li>
+                          <span>... and lastly earn badges, points and develop your skills.</span>
+                        </ul>
+                        <p class="fs-16">
+                          The above are some fundamental features we have added to launch our platform however, we have some great list of features already in queue so, more features coming soon..
+                        </p>
+                        <h5 class="bold">
+                          Please, work with us to make hungryhead a useful product for you. Please leave feedbacks if you find any bugs or in general.
+                        </h5>
      								  </div>
-     								  <div>
-	     								  <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Respect</h3>
-	     								  <p>
-	     								  	The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
-	     								  </p>
-     								  </div>
-
-     								  <div>
-	     								  <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't Steal</h3>
-	     								  <p>
-	     								  	The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
-	     								  </p>
-     								  </div>
-
-     								  <div>
-	     								  <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Share</h3>
-	     								  <p>
-	     								  	The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
-	     								  </p>
-     								  </div>
-
-       								<div class="rule-accept p-t-20">
-  	   									<%= simple_form_for(@user, url: wizard_path, as: :user, class: 'clearfix', method: :patch) do |f| %>
-  												<div class="checkbox check-success">
-  												  <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted' %>
-  												  <label for="rules_accepted">I understand</label>
-  												</div>
-  												<div class="pager wizard m-t-20 clearfix">
-  													<%= f.button :submit, "Follow friends", class: 'text-white btn-sm btn btn fs-13 btn-green pull-right' %>
-  												</div>
-  	   									<% end %>
-     									</div>
+                      <div class="pager wizard m-t-30 clearfix">
+                        <%= link_to("<i class='fa fa-check'></i> Next".html_safe, next_wizard_path, class: 'text-white btn fs-13 btn-sm btn-green pull-right') %>
+                      </div>
      								</div>
         		      </div>
         		  </div>

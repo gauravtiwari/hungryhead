@@ -1,0 +1,21 @@
+<div class="widget-16 panel no-margin no-border">
+  <div class="panel-heading bg-light-blue-lightest m-b-20">
+      <div class="panel-title b-b b-grey p-b-5">
+        <i class="fa fa-users text-danger"></i> Team Members
+      </div>
+      <% if @idea.founder?(current_user) %>
+        <div class="panel-controls">
+            <ul>
+                <li>
+                  <%= react_component('InviteLink', {path: idea_team_invites_path(@idea.slug)}) %>
+                </li>
+            </ul>
+        </div>
+      <% end %>
+  </div>
+  <div class="panel-body relative">
+      <ul class="list-unstyled">
+        <%= react_component('ListingWidget', {listing: @idea.get_team.take(16).map{|u| {name: u.name, name_badge: u.name_badge,  avatar: u.get_avatar,  url: profile_path(u)}}, count: @idea.team_ids.length, path: team_idea_path(@idea), type: "team" }.to_json) %>
+      </ul>
+  </div>
+</div>

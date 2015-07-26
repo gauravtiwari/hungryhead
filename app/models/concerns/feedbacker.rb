@@ -10,20 +10,16 @@ module Feedbacker
     idea.feedbackers_ids.values.include?(id.to_s)
   end
 
-  def find_feedbacks
-    Feedback.where(id: id)
-  end
-
   def irrelevant_feedbacks_counter
-    feedbacks.where(badge: 3).count
+    feedbacks.where(badge: 'irrelevant').size
   end
 
   def helpful_feedbacks_counter
-    feedbacks.where(badge: 1).count
+    feedbacks.where(badge: 'helpful').size
   end
 
   def not_helpful_feedbacks_counter
-    feedbacks.where(badge: 2).count
+    feedbacks.where(badge: 'unhelpful').size
   end
 
 end

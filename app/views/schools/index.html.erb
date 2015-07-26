@@ -1,55 +1,14 @@
-
-<div class="wrapper-small bg-solid text-center panel panel-default">
-  <h2 class="text-white">Find people you would like to connect</h2>
-</div>
-<div class="container">
-<% @schools.each do |school| %>
-<div class="col-md-3 no-padding p-r-15">
-<%= content_tag(:div, class: 'listing-card bg-white box-shadow') do %>
-<%= content_tag(:div, class: 'listing-header  text-center') do %>
-  <%= content_tag(:div, class: 'listing-card-logo') do %>
-  <div class="thumbnail-wrapper d48 auto-margin m-r-5 m-b-5">
-   <% if school.logo.present? %>
-     <%= image_tag(school.logo.url(:avatar), width: "50px") %>
-   <% else %>
-     <span class="placeholder bold text-white">
-       <%= school.name_badge.upcase %>
-     </span>
-   <% end %>
-   </div>
-    <h5 class="no-margin fs-14 bold"><%= link_to(school.name, profile_path(school)) %></h5>
-    <h5 class="no-margin"><%= school.location_list %></h5>
-    <div class="card-follow-button">
-      <%= react_component('Follow',{:followed => followed?(school)}) %>
+<div class="wrapper-small school-bg-gradient">
+  <div class="col-md-6 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <div class="hero-text inner">
+      <i class="fa fa-university text-white fs-22"></i>
+      <h2 class="text-white no-margin">Universities and Colleges</h2>
+      <h5 class="text-white">Find peers from colleges and universities</h5>
     </div>
-    <script type="text/javascript">
-       ReactRailsUJS.mountComponents();
-    </script>
-  <% end %>
-<% end %>
-    <div class="listing-card-stats">
-    <ul class="stastics-list">
-      <li>
-        Students
-        <span class="text-master"><i class="fa fa-graduation-cap"></i> <%= school.students_counter.value %></span>
-      </li>
-      <li>
-        Followers
-        <span class="text-master"><i class="fa fa-users"></i> <%= school.followers_counter.value %></span>
-      </li>
-      <li>
-        Ideas
-        <span class="text-master"><i class="fa fa-lightbulb-o"></i> <%= school.ideas_counter.value %></span>
-      </li>
-    </ul>
   </div>
 </div>
-<% end %>
-<% end %>
-<div class="paging-container p-r-15">
-    <%= will_paginate(@users, class: 'dataTables_paginate bg-white displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-</div>
-</div>
+
+<%= render partial: 'schools' %>
 
 
 

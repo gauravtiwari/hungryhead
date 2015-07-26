@@ -1,33 +1,46 @@
-<div class="container">
+<div class="container p-b-60">
     <% data = render(template: 'users/show.json.jbuilder') %>
-
-    <div class="col-md-4 col-sm-4 no-padding p-l-15 col-lg-4 col-xlg-4" id="profile_sidebar" data-turbolinks-permanent>
-        <%= render partial: 'sidebar', locals: {data: data} %>
-    </div>
-
-    <div class="col-md-8 col-sm-8">
-        <div class="cover">
-            <%= render partial: 'cover' %>
+    <% cache(["user_sidebar_desktop_widget", @user, @user == current_user ? "owner" : "guest"]) do %>
+        <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15" id="profile_sidebar">
+            <%= render partial: 'sidebar', locals: {data: data} %>
         </div>
+    <% end %>
+    <div class="col-md-8 col-sm-12 xs-no-padding">
+        <% cache(["user_profile_cover", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="cover box-shadow">
+                <%= render partial: 'cover', locals: {data: data} %>
+            </div>
+        <% end %>
 
-        <div class="box-shadow bg-white">
+        <div class="box-shadow bg-light-blue ">
             <%= render partial: 'menu' %>
         </div>
 
-        <div class="badges-box m-t-20 clearfix" id="profile_content" data-turbolinks-temporary>
-            <div class="col-md-6 no-padding p-r-15">
-                <%= render partial: 'badges' %>
-                <%= render partial: 'followers' %>
-                <%= render partial: 'followings' %>
-                <%= render partial: 'profile_posts' %>
+        <% cache(["user_profile", @user, @user == current_user ? "owner" : "guest"]) do %>
+            <div class="profile">
+                <div class="badges-box clearfix m-t-10 widgets">
+                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                        <%= render partial: 'ideas' %>
+                    </div>
+                    <div class="gutter-sizer"></div>
+                    <div class="col-md-6 col-sm-6 no-padding sm-m-t-15 widget-item">
+                        <%= render partial: 'ideas_contributed' %>
+                    </div>
+                    <div class="col-sm-6 no-padding widget-item xs-no-padding visible-sm visible-xs">
+                        <%= render partial: 'sidebar', locals: {data: data} %>
+                    </div>
+                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+                        <%= render partial: 'badges' %>
+                    </div>
+                    <div class="col-md-6 col-sm-6 no-padding sm-no-padding widget-item">
+                        <%= render partial: 'followers' %>
+                    </div>
+                    <div class="col-md-6 col-sm-6 no-padding widget-item">
+                        <%= render partial: 'followings' %>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 no-padding">
-                <%= render partial: 'stats' %>
-                <%= render partial: 'ideas' %>
-            </div>
-        </div>
+        <% end %>
     </div>
 </div>
-
-<%= render partial: 'send_message' %>
 

@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 	  $('#search').soulmate({
 	    url: '/search/search',
-	    types: ['ideas','students', 'schools', 'mentors', 'teachers'],
+	    types: ['ideas','people', 'schools'],
 	    renderCallback : render,
 	    selectCallback : select,
 	    minQueryLength : 2,

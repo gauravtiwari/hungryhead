@@ -1,17 +1,19 @@
-<div class="modal stick-up fade" tabIndex="-1" role="dialog" id="inviteFriendsPopup" aria-labelledby="inviteFriendsPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-<div class="modal-dialog modal-md">
-<div class="modal-content">
-  <div class="modal-header clearfix text-left">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-    <i class="pg-close fs-14"></i>
-    </button>
-   <h5>Invite your <span class="semi-bold b-b b-grey p-b-5">entrepreneur friends</span></h5>
-  <small>We want students to practically see and understand the path of entrepreneurship. Please help us expand our mentor network to help more students worldwide.</small>
-  </div>
-    <div class="modal-body white-background">
-      <%= react_component('InviteFriends', {form: 'globals/form.json.jbuilder', path: profile_user_invite_path(current_user)}) %>
+<% cache(["beta", "devise_invitations", "new", current_user]) do %>
+  <div class="modal stick-up fade" tabIndex="-1" role="dialog" id="inviteFriendsPopup" aria-labelledby="inviteFriendsPopupLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-md">
+  <div class="modal-content">
+    <div class="modal-header clearfix text-left">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      <i class="pg-close fs-14"></i>
+      </button>
+     <h5>Invite your <span class="semi-bold b-b b-grey p-b-5">entrepreneur friends</span></h5>
+    <small>We want students to practically see and understand the path of entrepreneurship. Please help us expand our mentor network to help more students worldwide.</small>
     </div>
+      <div class="modal-body white-background">
+        <%= react_component('InviteFriends', {path: profile_user_invite_path(current_user)}) %>
+      </div>
+    </div>
+   </div>
   </div>
- </div>
- </div>
+<% end %>
 

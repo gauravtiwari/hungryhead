@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 var SetIntervalMixin = {
     componentWillMount: function() {
         this.intervals = [];
@@ -14,6 +11,7 @@ var SetIntervalMixin = {
 };
 
 var MessageListItem = React.createClass({
+
   mixins: [SetIntervalMixin],
   componentDidMount: function() {
     var interval = this.props.message.created_at || 60000;
@@ -38,7 +36,7 @@ var MessageListItem = React.createClass({
     } else {
       var avatar = <div className="thumbnail-wrapper d32 circular bordered b-white">
               <span className="placeholder bold text-white">
-                {message.user_name.split(' ')[0].split('')[0]}{message.user_name.split(' ')[1].split('')[0]}
+                {message.user_badge}
               </span>
             </div>;
     }
@@ -54,7 +52,7 @@ var MessageListItem = React.createClass({
     }
     return (
       <div className="message clearfix">
-      {message}
+        {message}
       </div>
     );
   }

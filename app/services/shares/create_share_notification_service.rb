@@ -2,15 +2,14 @@ class CreateShareNotificationService
 
   def initialize(share)
     @share = share
-    @shareable = share.shareable
-    @user = share.user
+    @owner = share.owner
   end
 
   def create
-    @activity = @user.activities.create!(
+    @activity = @owner.activities.create!(
       trackable: @share,
       verb: 'shared',
-      recipient: @shareable,
+      recipient: @share,
       key: 'share.create',
       unread: true
     )

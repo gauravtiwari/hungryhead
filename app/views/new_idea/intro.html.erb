@@ -1,0 +1,12 @@
+<% cache("new_idea_rules") do %>
+  <div class="container-fluid col-md-8 auto-margin p-b-60">
+      <div class="m-t-50" id="rootwizard">
+         	<%= render 'tab_nav' %>
+          <div class="tab-content">
+          		<div class="tab-pane padding-20 active slide-left" id="tab1">
+        				<%= render 'rules' %>
+          		</div>
+          </div>
+      </div>
+  </div>
+<% end %>

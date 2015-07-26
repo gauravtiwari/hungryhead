@@ -1,66 +1,41 @@
 class Share < ActiveRecord::Base
 
-	include Redis::Objects
-	#redis caching
-	counter :votes_counter
-	counter :comments_counter
-	#cached ids
-	list :voters_ids
-	list :commenters_ids
+  #redis objects
+  include Redis::Objects
+  #redis caching
+  counter :votes_counter
+  counter :comments_counter
 
-	#Associations
-	belongs_to :shareable, polymorphic: true
-	belongs_to :user
+  #cached ids to redis
+  list :voters_ids
+  list :commenters_ids
 
-	#Includes concerns
-	include Commentable
-	include Votable
+  #Associations
+  belongs_to :owner, polymorphic: true
 
-	before_destroy :decrement_counters, :delete_activity
-	after_create :increment_counters
+  #Includes concerns
+  include Commentable
+  include Votable
 
-	#Store accessor methods
-	store_accessor :parameters, :shareable_name
+  before_destroy :delete_activity
+  after_create :create_activity
 
-	#Enumerators to handle status
-	enum status: {shared: 0}
+  public
 
-	public
+  def can_score?
+    false
+  end
 
-	def can_score?
-		false
-	end
+  private
 
-	#Get shareable user - idea(student) || user
-	def shareable_user
-	  shareable_type == "Idea" ? shareable.student : shareable.user
-	end
-
-	private
-
-	def rebuild_cache
-		#rebuild shareable cache counters and sharers ids
-	  UpdateShareCacheJob.perform_later(shareable_id, shareable_type)
-	end
-
-	def increment_counters
-		#Increment counters
-		shareable.shares_counter.increment
-	  #Add sharer_id to shareable cache
-	  shareable.sharers_ids << user_id
-	end
-
-	def decrement_counters
-		#Decrement counters
-		shareable.shares_counter.decrement
-		#Delete sharer_id from shareable cache
-	  shareable.sharers_ids.delete(user_id)
-	end
+  def create_activity
+    CreateActivityJob.set(wait: 2.seconds).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+  end
 
 
-	def delete_activity
-		#Delete user feed
-	  DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
-	end
+  def delete_activity
+    #Delete user feed
+    DeleteActivityJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+  end
 
 end

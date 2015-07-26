@@ -1,6 +1,4 @@
-<div class="profile-sidebar sticky auto-height">
-    <%= render partial: 'card', locals: {data: data} %>
-    <% if @user.latest_activities.values.length > 0 %>
-      <%= render partial: 'latest_activities' %>
-    <% end %>
+<div class="profile-sidebar">
+  <%= render partial: 'card', locals: {data: data} %>
+  <%= render partial: 'stats' %>
 </div>

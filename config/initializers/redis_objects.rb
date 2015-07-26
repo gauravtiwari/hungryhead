@@ -1,1 +1,1 @@
-Redis::Objects.redis = $redis
+Redis::Objects.redis = Redis::Namespace.new("graph_data", :redis => Redis.new(:url => (ENV["GRAPH_REDIS_URL"])))

@@ -1,0 +1,14 @@
+<div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
+  <% if activity.owner.avatar_present? %>
+    <%= activity.owner.get_avatar %>
+  <% else %>
+  <span class="placeholder no-padding bold text-white">
+    <%= activity.owner.name_badge %>
+  </span>
+  <% end %>
+</div>
+<strong class="inline text-black">
+  <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
+</strong>
+voted on <%= activity.recipient.user == current_user ? "your" : "" %>
+<%= activity.recipient_type == "Idea" ? "#{activity.recipient_type.downcase} #{activity.recipient.name}" : "#{activity.recipient_type.downcase}" %>

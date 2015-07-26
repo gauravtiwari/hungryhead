@@ -1,0 +1,95 @@
+<div class="container-fluid col-md-8 auto-margin p-b-60">
+    <div class="m-t-50" id="rootwizard">
+    <%= render partial: 'tab_nav' %>
+    <div class="tab-content">
+        <div class="tab-pane padding-20 active slide-left" id="tab1">
+              <div class="row row-same-height">
+                  <div class="rule-accept clearfix">
+                    <div class="col-md-7 col-sm-8 auto-margin">
+                    <h3>Complete Basics</h3>
+                    <div class="divider b-b text-green b-grey b-md b-small"></div>
+                    <h5 class="p-t-10 text-left">Help us find people you may know</h5>
+                    <%= simple_form_for(@user, url: wizard_path, as: :user, class: 'clearfix', method: :patch) do |f| %>
+                    <div class="complete_profile m-t-20">
+                      <div class="form-group clearfix">
+                        <label for="select2-init">
+                          Where are you based?
+                        </label>
+                        <span class="help">eg: 'Lancaster, London'</span>
+                        <%= f.input_field :location_list, value: "#{@user.location_list}", data: { url: autocomplete_location_name_locations_path, placeholder: "Where are you based? eg: 'London', 'Lancaster'", init: @user.location_list, tag_limit: 1}, class: 'auto-select form-control' %>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="select2-init">Markets interested</label>
+                        <span class="help">eg: 'Ecommerce, Mobile'</span>
+                        <%= f.input_field :market_list, value: "#{@user.market_list}", data: { url: autocomplete_market_name_markets_path, placeholder: "Which markets are you interested in? eg: 'Education', 'Art'", init: @user.market_list, tag_limit: 3}, class: 'auto-select form-control' %>
+                      </div>
+
+                      <div class="form-group clearfix">
+                        <label for="select2-init">Your university or college</label>
+                        <span class="help">eg: 'only UK universities for now'</span>
+                        <%= f.input_field :school_id, data: { url: autocomplete_school_name_schools_path, placeholder: "Which university you are studying or studied? eg: 'UCL', 'Lancaster'", init: @user.school.name}, class: 'auto-select-id form-control' %>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="checkbox check-success ">
+                          <%= f.input_field :rules_accepted, as: :boolean, id: 'rules_accepted', class: 'required', required: true %>
+                          <label for="rules_accepted">
+                            I understand <a data-toggle="modal" data-target="#rulesModal">the community guidelines</a>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="pager wizard m-t-20 clearfix">
+                        <%= f.button :submit, "Next", class: 'text-white btn-sm btn btn fs-13 btn-green pull-right' %>
+                      </div>
+                    <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade fill-in" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i></button>
+  <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="text-left p-b-5 text-green"><span class="bold">Community Guidelines:</span></h1>
+          <div class="divider b-b text-green b-grey b-md b-small"></div>
+          <h5 class="p-t-10 text-left">A few rules to help make sure hungryhead is a great place for everyone.</h5>
+        </div>
+        <div class="modal-body clearfix">
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't SPAM </h3>
+            <p class="fs-16">
+              We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
+            </p>
+          </div>
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Respect</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-times text-danger"></i> Don't Steal</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="m-t-30"><i class="fa fa-check text-green"></i> Share</h3>
+            <p class="fs-16">
+              The filmmakers, musicians, artists, and designers you see on Kickstarter have complete control over and responsibility for their projects. Kickstarter is a platform and a resource; we’re not involved in the development of the projects themselves. Anyone can launch a project on Kickstarter as long as it follows our rules.
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

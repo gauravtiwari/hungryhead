@@ -1,16 +1,25 @@
 module ApplicationHelper
 
   def notifications_count
-    current_user.mailbox.notifications(read: false).length
+    current_user.mailbox.notifications(read: false).length if current_user
+  end
+
+  def is_beta
+    false
   end
 
   def current_class?(test_path)
-    return 'text-success p-b-5 b-b b-grey' if request.path == test_path
+    return 'text-brand bold p-b-5 b-b b-grey' if request.path == test_path
+    ''
+  end
+
+  def active_class?(test_path)
+    return 'active' if request.fullpath == test_path
     ''
   end
 
   def followed?(object)
-    if current_user && object.followers_ids.members.include?(current_user.id.to_s)
+    if current_user && object.followers_ids.member?(current_user.id)
       followed =  {
         follow: true,
         followable_type: object.class.name,
@@ -23,6 +32,49 @@ module ApplicationHelper
         followable_id: object.id
       }
     end
+  end
+
+  def markdownify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url,
+    :gfm => false
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::MarkdownFilter,
+    HTML::Pipeline::SanitizationFilter,
+    HTML::Pipeline::EmojiFilter,
+    HTML::Pipeline::MentionFilter
+    ], context
+    pipeline.call(content)[:output].to_s.html_safe
+  end
+
+  def linkify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url,
+    :gfm => true
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::MarkdownFilter,
+    HTML::Pipeline::SanitizationFilter,
+    HTML::Pipeline::EmojiFilter,
+    HTML::Pipeline::MentionFilter
+    ], context
+
+    pipeline.call(content)[:output].to_s.html_safe
+  end
+
+  def sanitizify(content)
+    context = {
+    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
+    :base_url   => root_url
+    }
+    pipeline = HTML::Pipeline.new [
+    HTML::Pipeline::SanitizationFilter
+    ], context
+
+    pipeline.call(content)[:output].to_s.html_safe
   end
 
   def your_name(user, type)

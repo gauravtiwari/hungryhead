@@ -1,0 +1,9 @@
+<% cache(["user_profile_edit_form", @user, @user == current_user ? "owner" : "guest"]) do %>
+  <div class="container p-b-60">
+      <div class="col-md-12 col-sm-12 xs-no-padding">
+          <div class="bg-white p-t-40 p-b-80">
+              <%= render partial: 'form' %>
+          </div>
+      </div>
+  </div>
+<% end %>

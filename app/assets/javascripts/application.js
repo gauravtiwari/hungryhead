@@ -1,25 +1,29 @@
 //All application JS assets - checkout vendor assets directory
 
 // BEGIN VENDOR JS FOR PAGES
-
-//= require jquery2
-//  require jquery.turbolinks
+//
+//= require jquery
 //= require jquery-form
-//= require plugins/boostrapv3/js/bootstrap.min
-//= require plugins/jquery/jquery-easy
+//= require bootstrap
+//= require jquery.easing
 //= require modernizr
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
 //= require jquery-ui/position
 //= require jquery-ui/draggable
 //= require jquery-ui/effect.all
-//= require jquery_ujs
+//= require jquery-unveil
+//= require jquery-bez
+//= require eventEmitter
+//= require imagesloaded
+//= require jquery.actual
+//= require jquery.scrollbar
+//= require hammerjs
+//= require jquery-ujs
+//= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
-//= require chosen-jquery
-//= require ImageSelect.jquery
-//= require jquery.truncate
 //= require jquery.soulmate
 //= require underscore
 //= require js-routes
@@ -30,31 +34,26 @@
 //= require typer
 //= require sweetalert
 //= require bootstrap-tagsinput
-//= require moment
+//= require momentjs
+//= require sly
+//= require bootstrap-datetimepicker
 //= require classie
+//= require fastclick
 //= require jquery.validate
-//= require jquery.validate.additional-methods
-//= require jquery.autosize
-//= require showdown
+//= require jquery.validate/additional-methods
+//= require jquery-autosize
+//= require marked
+//= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
-//= require plugins/jquery-unveil/jquery.unveil.min
-//= require plugins/jquery-bez/jquery.bez.min
-//= require plugins/jquery-ios-list/jquery.ioslist.min
-//= require plugins/imagesloaded/imagesloaded.pkgd.min
-//= require plugins/jquery-actual/jquery.actual.min
-//= require plugins/jquery-menuclipper/jquery.menuclipper
-//= require plugins/jquery-scrollbar/jquery.scrollbar.min
+//= require pnotify
+//= require unobtrusive_flash
+//= require flashes
 //= require react
 //= require react-infinite
 //= require react_ujs
 
 
-// Core Javascripts
+// Custom Javascripts
 //= require core/js/pages
-//= require core/js/pages.email
-
-// Turbolinks and plugins
+//= require pusher_init
 //= require_tree .
-// require turbolinks
-
-//Turbolinks.enableTransitionCache();

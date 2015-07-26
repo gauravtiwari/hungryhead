@@ -1,4 +1,5 @@
 module Followable
+
   extend ActiveSupport::Concern
 
   included do
@@ -7,7 +8,7 @@ module Followable
 
   #users that self follows
   def get_followers
-   User.find(followers_ids.members)
+    User.find(followers_ids.members)
   end
 
   # does the user follow self

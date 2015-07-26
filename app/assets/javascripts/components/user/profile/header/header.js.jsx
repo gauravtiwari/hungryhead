@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var UserProfileHeader = React.createClass({
 
   getInitialState: function() {
@@ -38,7 +36,7 @@ var UserProfileHeader = React.createClass({
     if(this.state.profile.institution_url) {
       var institution = <li> <a  href={this.state.profile.institution_url}><i className="fa fa-fw fa-institution"></i> {this.state.profile.institution}</a></li>;
     }
-    
+
     if(this.state.profile.website_url) {
       var website_url = <li><a className="icon-rss" target="_blank" href={this.state.profile.website_url}></a></li>;
     }

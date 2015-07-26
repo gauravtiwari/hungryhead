@@ -1,0 +1,13 @@
+
+var $el = $('body');
+
+$el.append($('<div>', {class: 'edit_article_modal', id: 'edit_article_modal'}));
+
+$('#edit_article_modal').append("<%= j render partial: 'form', locals: {article: @article} %>");
+
+$('#articlePopupModal').modal('show');
+
+$('body').on('focus', 'textarea', function(event) {
+  event.preventDefault();
+  $(this).autosize();
+});

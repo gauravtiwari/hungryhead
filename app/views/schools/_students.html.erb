@@ -1,0 +1,24 @@
+<div class="row column-seperation people-list">
+
+  <% if is_beta %>
+  <div class="no-content">
+      <span class="fa fa-smile-o fs-50"></span>
+      <h1>
+        Thank you for signing up to our beta. Once we have a few people onboard you will be able to browse and connect them here.
+      </h1>
+  </div>
+  <% else %>
+    <% @students.first(5).each do |user| %>
+      <ul class="no-style no-padding no-margin">
+        <%= render partial: 'users/user', locals: {user: user} %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+<% if @students.size > 10 %>
+  <div class="text-center m-t-20 p-b-50">
+    <%= link_to(profile_people_path(@school), class: "main-button bold fs-13 pull-right") do %>
+      Browse all <span class="fa fa-chevron-circle-right"></span>
+    <% end %>
+  </div>
+<% end %>

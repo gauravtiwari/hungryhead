@@ -66,7 +66,7 @@ var LatestListings = React.createClass({
 
     return (
       <div className="widget-11-2 panel no-border p-b-10 no-margin bg-white">
-          <div className="panel-heading">
+          <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
             {this.state.type}
             </div>
@@ -80,8 +80,8 @@ var LatestListings = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light no-padding">
-            <ul className="trending-list p-t-10 no-style no-margin" ref="trendingList">
+          <div className="panel-body full-border-light scrollable no-padding">
+            <ul className="trending-list p-t-10 no-style no-margin">
               <Infinite elementHeight={50}
               containerHeight={200}
               infiniteLoadBeginBottomOffset={150}

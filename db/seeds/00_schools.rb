@@ -9,7 +9,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Lancaster',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@lancs.ac.uk',
-    website: 'lancs.ac.uk'
+    domain: 'lancs.ac.uk',
+    user_id: 2,
+    website_url: 'lancs.ac.uk'
   )
 
   School.create!(
@@ -17,7 +19,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Manchester',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mancs.ac.uk',
-    website: 'mancs.ac.uk'
+    domain: 'mancs.ac.uk',
+    user_id: 2,
+    website_url: 'mancs.ac.uk'
   )
 
   School.create!(
@@ -25,7 +29,9 @@ ActiveRecord::Base.transaction do
     location_list: 'London',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@icl.ac.uk',
-    website: 'icl.ac.uk'
+    domain: 'icl.ac.uk',
+    user_id: 2,
+    website_url: 'icl.ac.uk'
   )
 
   School.create!(
@@ -33,7 +39,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Cambridge',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@cam.ac.uk',
-    website: 'cam.ac.uk'
+    domain: 'cam.ac.uk',
+    user_id: 3,
+    website_url: 'cam.ac.uk'
   )
 
   School.create!(
@@ -41,7 +49,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Salford',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@salford.ac.uk',
-    website: 'salford.ac.uk'
+    domain: 'salford.ac.uk',
+    user_id: 4,
+    website_url: 'salford.ac.uk'
   )
 
   School.create!(
@@ -49,7 +59,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Preston',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@uclan.ac.uk',
-    website: 'uclan.ac.uk'
+    domain: 'uclan.ac.uk',
+    user_id: 2,
+    website_url: 'uclan.ac.uk'
   )
 
   School.create!(
@@ -57,7 +69,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Manchester',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@mmu.ac.uk',
-    website: 'mmu.ac.uk'
+    domain: 'mmu.ac.uk',
+    user_id: 2,
+    website_url: 'mmu.ac.uk'
   )
 
   School.create!(
@@ -65,7 +79,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Oxford',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@oxford.ac.uk',
-    website: 'oxford.ac.uk'
+    domain: 'oxford.ac.uk',
+    user_id: 2,
+    website_url: 'oxford.ac.uk'
   )
 
   School.create!(
@@ -73,7 +89,9 @@ ActiveRecord::Base.transaction do
     location_list: 'London',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@ucl.ac.uk',
-    website: 'ucl.ac.uk'
+    domain: 'ucl.ac.uk',
+    user_id: 2,
+    website_url: 'ucl.ac.uk'
   )
 
   School.create!(
@@ -81,7 +99,9 @@ ActiveRecord::Base.transaction do
     location_list: 'Bristol',
     description: Forgery::LoremIpsum.words(20),
     email: 'admin@bristol.ac.uk',
-    website: 'bristol.ac.uk'
+    domain: 'bristol.ac.uk',
+    user_id: 2,
+    website_url: 'bristol.ac.uk'
   )
 
 end

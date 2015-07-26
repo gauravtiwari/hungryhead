@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hungryhead - An idea simulation platform</title>
+    <%= favicon_link_tag 'favicon.ico' %>
+
+    <meta content="An idea simulation platform" name="description" />
+    <meta content="hungryhead" name="author" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <!--[if lte IE 9]>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
+    <![endif]-->
+
+    <script type="text/javascript" data-turbolinks-eval=false>
+      window.onload = function() {
+        // fix for windows 8
+        if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+          document.head.innerHTML += '<%= stylesheet_link_tag 'core/css/windows.chrome.fix' %>'
+      }
+    </script>
+
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+
+  </head>
+
+  <body class="fixed-header <%= user_signed_in? ? 'menu-behind' : 'menu-behind' %>">
+
+    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
+
+      <%= render partial: 'globals/page_nav' %>
+
+      <div class="page-content-wrapper">
+        <div class="content" data-no-turbolink>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

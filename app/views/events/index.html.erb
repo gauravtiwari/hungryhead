@@ -1,0 +1,32 @@
+<div class="wrapper-small events-bg-gradient">
+  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+    <div class="hero-text inner">
+      <i class="fa fa-users text-white fs-22"></i>
+      <% if params[:type] %>
+        <h2 class="text-white no-margin">All <%= params[:type].pluralize %></h2>
+      <% else %>
+        <h2 class="text-white no-margin">All events</h2>
+      <% end %>
+      <h5 class="text-white">Find nearby events</h5>
+    </div>
+  </div>
+</div>
+
+<div class="container hidden-xs">
+  <div class="listing-filters p-t-40 p-b-10">
+    <ul class="list-inline text-right">
+      <li class="hint-text">Sort by: </li>
+      <li>
+        <%= link_to('Week', events_path(type: 'week'), class: "#{active_class?(events_path(type: 'week'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Month', events_path(type: 'month'), class: "#{active_class?(events_path(type: 'month'))} text-master p-r-5 p-l-5") %>
+      </li>
+      <li>
+        <%= link_to('Year', events_path(type: 'year'), class: "#{active_class?(events_path(type: 'year'))} text-master p-r-5 p-l-5") %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<%= render partial: 'events/events' %>

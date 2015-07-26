@@ -1,6 +1,7 @@
 class Investment < ActiveRecord::Base
 
   include Redis::Objects
+
   #Counters for redis
   counter :votes_counter
   list :voters_ids
@@ -8,19 +9,16 @@ class Investment < ActiveRecord::Base
   counter :comments_counter
 
   #Associations
-  belongs_to :user
-  belongs_to :idea
+  belongs_to :user, touch: true
+  belongs_to :idea, touch: true
 
   #Includes concerns
   include Commentable
   include Votable
 
   #Model Callbacks
-  before_destroy :cancel_investment, :decrement_counters, :delete_activity
-  after_create  :increment_counters
-
-  #Store accessor methods
-  store_accessor :parameters, :point_earned, :views_count
+  after_destroy :cancel_investment, :update_counters, :delete_cached_investor_ids, :delete_activity
+  after_commit  :update_balance, :update_counters, :cache_investor_ids, :create_activity, on: :create
 
   public
 
@@ -36,25 +34,35 @@ class Investment < ActiveRecord::Base
     user.update_attributes!(fund: {"balance" => user.balance + amount })
   end
 
-  def increment_counters
-    #Increment counters
-    user.investments_counter.increment
-    idea.investors_counter.increment
-    #Cache investor id into idea
-    idea.investors_ids << user_id
+  def update_balance
+    UpdateInvestmentBalanceJob.perform_later(id)
   end
 
-  def decrement_counters
-    #decrement counters
-    user.investments_counter.decrement if user.investments_counter.value > 0
-    idea.investors_counter.decrement if idea.investors_counter.value > 0
+  def update_counters
+    #Increment counters
+    user.investments_counter.reset
+    user.investments_counter.incr(user.investments.size)
+    idea.investors_counter.reset
+    idea.investors_counter.incr(idea.investments.size)
+  end
+
+  def cache_investor_ids
+    #Cache investor id into idea
+    idea.investors_ids << user_id unless idea.invested?(user)
+  end
+
+  def delete_cached_investor_ids
     #Remove investor_id from idea cache
-    idea.investors_ids.delete(user_id)
+    idea.investors_ids.delete(user_id) if idea.invested?(user)
+  end
+
+  def create_activity
+    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def delete_activity
     #remove activity from database and cache
-    DeleteUserFeedJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.perform_later(self.id, self.class.to_s)
   end
 
 end

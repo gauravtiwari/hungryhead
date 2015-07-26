@@ -2,15 +2,23 @@ class MentionsController < ApplicationController
   before_filter :authenticate_user!
 
   def mentionables
-    @mentionable = params[:mentionable_type].constantize.find(params[:id])
-    if @mentionable.class.to_s == "Idea"
-      mentionable = @mentionable.student
-    else
-      mentionable = @mentionable.user
-    end
-    @mentionables = Array.new
-    @mentionables.push(name: mentionable.name, path: profile_path(mentionable), username: mentionable.username) if mentionable != current_user
-    @mentionable.comment_threads.includes(:user).map { |c| @mentionables.push({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) unless @mentionables.include?({id: c.user.id, name: c.user.name, username: c.user.username, path: profile_url(c.user)}) && c.user == current_user }
+    @mentionable = params[:mentionable_type].constantize.find_by_uuid(params[:id])
+
+    mentionable_user = @mentionable.user
+
+    commenters = @mentionable.commenters_ids.values
+
+    ids = (commenters + [mentionable_user.id.to_s])
+
+    ids.delete(current_user.id.to_s)
+
+    @mentionables = User.find(ids.uniq).map { |user|
+      {
+        id: user.uid,
+        name: user.name,
+        username: user.username
+      }
+    }
     render json: @mentionables
   end
 

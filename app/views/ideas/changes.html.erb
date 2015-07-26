@@ -1,0 +1,36 @@
+<% data = render(template: 'ideas/show.json.jbuilder') %>
+<div class="container p-b-60">
+
+  <div class="col-md-4 col-lg-4 col-sm-4 no-padding p-l-15">
+    <%= render partial: 'ideas/sidebar' %>
+  </div>
+
+  <div class="col-md-8 col-lg-8 col-sm-8">
+    <% cache(["idea_header", @idea, @idea.in_team?(current_user) ? "team" : "guest"]) do %>
+      <div class="auto-height box-shadow ">
+        <%= render partial: 'header', locals: {data: data} %>
+      </div>
+    <% end %>
+
+    <%= render partial: 'menu' %>
+
+    <div class="m-t-20">
+      <div class="idea-content">
+        <div class="clearfix">
+          <% cache(["idea_changelogs", @idea, @versions.maximum(:created_at).try(:utc).try(:to_s, :number)]) do %>
+            <%= render partial: 'changes' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% if user_signed_in? && policy(@idea).collaborator? %>
+  <div class="idea-collaboration-floating-panel">
+    <%= render 'collaboration' %>
+  </div>
+<% end %>
+
+

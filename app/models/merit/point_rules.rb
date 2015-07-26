@@ -15,37 +15,39 @@ module Merit
     def initialize
 
       #Users related scoring
-      score 2, :on => 'users#update', category: 'autobiographer' do |user|
+      score 5, :on => 'users#update', category: 'autobiographer' do |user|
         user.about_me.present? && user.points(category: 'autobiographer') == 0
       end
 
       #Comments related
-      score 2, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
+      score 5, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
         comment.commentable_user != comment.user
       end
 
       #Feedbacks related
-      score 5, :on => 'feedbacks#create', category: 'feedback', to: :idea
+      score 25, :on => 'feedbacks#create', category: 'feedback', to: :idea
 
-      score 15, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      #Rate feedback
+      score 25, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.helpful?
       end
 
-      score 2, :on => 'feedbacks#rate', to: :idea_owner, category: 'user' do |feedback|
+      amount = -5
+      score amount, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+        feedback.badged? && feedback.irrelevant?
+      end
+
+      #Feedback rate
+      score 5, :on => 'feedbacks#rate', to: :idea_owner, category: 'user' do |feedback|
         feedback.badged?
       end
 
       #Investment related
-      score 5, :on => 'investments#create', to: :user, category: 'investment'
+      score 25, :on => 'investments#create', to: [:user, :idea], category: 'investment'
 
       #Ideas
-      score 5, :on => 'ideas#publish', to: :student, category: 'idea_publish' do |idea|
-        idea.student.points(category: 'idea_publish') == 0
-      end
-
-      #Share
-      score 10, :on => 'shares#create', to: [:shareable, :shareable_user], category: 'share' do |share|
-        share.user != share.shareable_user
+      score 5, :on => 'ideas#publish', to: :user, category: 'idea_publish' do |idea|
+        idea.user.points(category: 'idea_publish') == 0 && idea.published?
       end
 
       #Votes

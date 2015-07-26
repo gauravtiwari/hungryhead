@@ -1,0 +1,23 @@
+<% cache(["guest_menu_mobile"]) do %>
+  <!-- START HEADER -->
+  <div class="header">
+    <div class="pull-left full-height visible-sm visible-xs">
+      <div class="sm-action-bar">
+        <a href="javascript;" class="btn-link toggle-sidebar" class="needsclick" data-toggle="sidebar">
+          <span class="fa fa-bars"></span>
+        </a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="sm-table">
+        <div class="header-inner">
+          <div class="brand inline">
+          <%= link_to(root_path) do %>
+            <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

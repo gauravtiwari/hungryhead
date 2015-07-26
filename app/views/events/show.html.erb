@@ -1,0 +1,142 @@
+<div class="container p-b-60">
+<div class="row">
+  <div class="social-wrapper container">
+      <div class="col-md-8 col-sm-8 no-padding p-l-15">
+        <div class="social">
+          <div class="jumbotron full-border-light-left" data-pages="parallax" data-social="cover">
+            <div class="event-start inline hint-text m-r-10">
+              <span class="fa fa-calendar m-l-15"></span>
+              <%= local_time(@event.start_time, '%b %e') %>
+              <p class="pull-right text-white fs-16 m-t-10 m-r-15"><span class="fa fa-university"></span>
+                Hosted by <%= link_to(@event.owner.name, profile_path(@event.owner), class: 'text-white b-b b-white p-b-5') %>
+              </p>
+            </div>
+            <%= render partial: 'cover' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 no-padding p-r-15">
+        <div class="social">
+          <div class="event-details full-border-light-right bg-white padding-20">
+              <div class="text-center">
+                <% if @event.owner.avatar_present? %>
+                  <span class="thumbnail-wrapper d48 auto-margin">
+                    <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
+                  </span>
+                <% else %>
+                <span class="thumbnail-wrapper d48 auto-margin">
+                  <span class="placeholder bold text-white fs-22">
+                      <%= @event.owner.name_badge %>
+                  </span>
+                </span>
+                <% end %>
+              </div>
+              <h2 class="clearfix bold"><%= @event.title %></h2>
+              <p class="small-text">
+                <%= @event.excerpt %>
+              </p>
+              <%= render partial: 'event_stats' %>
+      </div>
+      </div>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class=" box-shadow bg-master-lightest">
+        <%= render partial: 'menu' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container m-t-40">
+    <div class="col-md-4 no-padding p-r-15">
+    <div class="bg-white overflow-hidden padding-10 box-shadow">
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height" />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2 no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+      </div>
+      <div class="col-md-2  no-padding">
+        <div class="more-placeholder">
+          <div class="thumbnail-wrapper d58">
+            <span class="placeholder bold text-white fs-22">+22</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-md-8 p-r-30">
+    <div class="panel box-shadow no-border">
+      <ul class="nav nav-tabs nav-tabs-simple bg-white">
+          <li class="active">
+            <a data-toggle="tab" href="#tab_people">
+              <i class="fa fa-graduation-cap"></i> Event Info
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-lightbulb-o"></i> Questions
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-lightbulb-o"></i> Attending
+            </a>
+          </li>
+      </ul>
+
+      <div class="tab-content schools-tabs">
+
+        <div class="tab-pane active" id="tab_people">
+          <div class="view">
+            <div class="list-view boreded no-top-border p-l-40 p-r-40">
+              <%= @event.description %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="tab_ideas">
+        </div>
+
+        <div class="tab-pane" id="tab_events">
+        </div>
+
+      </div>
+    </div>
+    </div>
+    </div>
+
+</div>
+

@@ -15,7 +15,10 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :mem_cache_store
+  config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
+    expires_in: 2.weeks.to_i,
+    namespace: 'cache'
+  }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -36,18 +39,9 @@ Rails.application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'assets', 'img')
-  config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'fonts')
-  config.assets.paths << Rails.root.join('vendor', 'hh', 'img', 'icons')
+  config.react.variant = :production
 
-  config.assets.precompile += %w( .svg .eot .woff .ttf)
-
-
-  config.react.addons = true
-
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
   config.assets.enabled = true
 
   config.action_mailer.perform_deliveries = true
@@ -87,11 +81,11 @@ Rails.application.configure do
   config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+  config.action_controller.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
 
   config.middleware.insert_before 0, "Rack::Cors" do
     allow do
-      origins "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}"
+      origins "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
       resource '*', :headers => :any, :methods => [:get, :options]
     end
   end

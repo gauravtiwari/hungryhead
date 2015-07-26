@@ -1,78 +1,96 @@
+
 ruby '2.2.2'
+
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
-# Use postgresql as the database for Active Record
-gem 'pg'
-
-group :production do
-  gem 'rails_12factor'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery'
+  gem 'rails-assets-bootstrap-tokenfield'
+  gem 'rails-assets-classie'
+  gem 'rails-assets-jquery-unveil'
+  gem 'rails-assets-jquery-bez'
+  gem 'rails-assets-masonry'
+  gem 'rails-assets-imagesloaded'
+  gem 'rails-assets-jquery.actual'
+  gem 'rails-assets-jquery.scrollbar'
+  gem 'rails-assets-eventEmitter'
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-select2-bootstrap-css'
+  gem 'rails-assets-marked'
+  gem 'rails-assets-jquery-ujs'
+  gem 'rails-assets-jquery-form'
+  gem 'rails-assets-pusher'
+  gem 'rails-assets-sweetalert'
+  gem 'rails-assets-slimScroll'
+  gem 'rails-assets-bootstrap-tagsinput'
+  gem 'rails-assets-pnotify'
+  gem 'rails-assets-modernizr'
+  gem 'rails-assets-fastclick'
+  gem 'rails-assets-hammerjs'
+  gem 'rails-assets-underscore'
+  gem 'rails-assets-jquery.easing'
+  gem 'rails-assets-font-awesome'
+  gem 'rails-assets-momentjs'
+  gem 'rails-assets-jquery.validate'
+  gem 'rails-assets-jquery-autosize'
+  gem 'rails-assets-sly'
+  gem 'rails-assets-animate.css'
+  gem 'rails-assets-jquery.cookie'
 end
 
-gem 'chosen-rails'
-
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.2.3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 #gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
-gem 'pg_search'
-
 gem 'coffee-rails'
 gem 'sass'
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
 gem 'uglifier'
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', github: 'rails/turbolinks'
-gem 'nprogress-rails'
-
-#Group date
-gem 'groupdate'
+#Distrubuted query
+#gem 'makara', github: 'taskrabbit/makara'
 
 #Gamification system
-
 gem 'merit'
 
-#Cron jobs
+#Mountanable engines
+gem 'help', path: "vendor/engines/help"
+gem 'site_feedback', path: "vendor/engines/site_feedback"
 
+#Cron jobs
 gem 'crono'
 
 #Cache for jbuilder
-gem 'bulk_cache_fetcher'
 gem 'jbuilder'
-
-#Build fake data
-gem 'forgery'
-
-#Bulk import
-gem 'activerecord-import'
-
-#order array of records in same order as ids
-gem 'order_as_specified'
-
-#Inline SVG
-gem 'inline_svg'
-
-#Font awesome
-gem "font-awesome-rails"
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 gem 'sprockets'
 #API
+#Render anywhere
+gem 'render_anywhere', :require => false
+
+#Fetch records in order
+gem 'order_as_specified'
+
+#Mail form
+gem 'mail_form'
 
 #Deal with JSON data
 gem  'hashie'
 
-#Pub-sub
+#404 page customize
+gem 'gaffe'
 
-gem 'wisper'
+#Flash messages from rails
+gem 'unobtrusive_flash', '>=3'
 
-#Generating auto content for social media channels
-gem 'searchkick'
+#datetime picker
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 
 #For formatting texts
 gem 'html-pipeline'
@@ -84,19 +102,12 @@ gem 'auto_html'
 #Deployment
 gem 'foreman'
 
-#Adds turbolinks
-gem 'jquery-turbolinks'
-
 #Authentication Authorization and Social Signup
 gem 'devise'
 gem 'devise_invitable'
 gem 'devise_uid'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-linkedin-oauth2'
 gem 'pundit'
-#gem 'devise-async'
+
 gem 'responders'
 
 #Local time
@@ -105,36 +116,34 @@ gem 'local_time'
 #Step by step wizard
 gem 'wicked'
 
-#encrypt
-gem 'ezcrypto'
-gem 'underscore-rails'
-
+#Tagging
 gem 'acts-as-taggable-on'
 
 #Ruby Races
 gem 'less-rails'
 gem 'autoprefixer-rails'
 
+#Autocomplete rails
 gem 'rails4-autocomplete'
 
+#JSON generator
 gem 'oj'
 
 # Server
-gem 'unicorn'
+gem 'passenger'
 
-#State machines
-gem 'aasm'
-
-#ShowDown
-
-gem 'showdown-rails'
+#Browser gem
+gem 'browser'
 
 #Autocomplete  + Redis
-
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 gem 'redis-session-store'
+gem 'redis-namespace'
+
+#Connection pool
+gem 'connection_pool'
 
 #Redis objects
 gem 'redis-objects'
@@ -145,57 +154,59 @@ gem 'mandrill-rails'
 #Eager load associations
 gem 'goldiloader'
 
+#Event maps - Google maps
+gem 'geocoder'
+gem 'gmaps4rails'
+
+#Parser
 gem 'nokogiri'
 
 #React JS
+gem 'execjs'
 gem 'therubyracer', platforms: :ruby
-gem 'react-rails', '~> 1.0'
+gem 'react-rails'
 
+#Parse JSON
 gem 'json'
 
-gem 'momentjs-rails'
+#Show diffs
+gem 'diffy'
+
+#JS routes
 gem 'js-routes'
 
-gem 'bower-rails'
+#Mailboxer
 gem 'mailboxer', :github => 'mailboxer/mailboxer'
-gem 'jquery-validation-rails'
-gem 'modernizr-rails'
-
-#Social Share
-gem 'shareable'
 
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc1'
 
-gem 'simple_form', github: 'plataformatec/simple_form'
-gem 'country_select'
+#Simple form
+gem 'simple_form'
+gem 'honeypot-captcha'
 
 # SEO
 gem 'friendly_id'
 
-#JQuery AutoSize
+#Compress HTML output in production
+gem 'htmlcompressor'
 
-gem 'autosize-rails'
+#Select 2
 gem "select2-rails"
 
-# Animate.css
-gem 'animate-rails'
-
 #Image upload and manipulations
-gem 'carrierwave', '~> 0.10.0'
-gem 'carrierwave_direct', '~> 0.0.14'
+gem 'carrierwave'
 gem 'carrierwave-mimetype-fu'
-gem 'carrierwave-imageoptimizer'
-gem 'carrierwave_backgrounder'
-
 
 #Sync assets with cloudfront
 gem "fog-google"
 gem 'asset_sync'
 
+#Sitemap
+gem 'sitemap_generator'
+
 #Background Job processing
 gem 'sidekiq'
-gem 'sucker_punch'
 
 # Image Processing
 gem "mini_magick"
@@ -205,8 +216,7 @@ gem 'unf'
 gem 'slim', '>= 1.1.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 
-
-#Voting
+#Voting and commenting
 gem 'awesome_nested_set'
 
 #Intercom
@@ -222,7 +232,7 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 
 #caching system
-gem  'dalli'
+gem 'readthis'
 
 #Realtime
 gem 'pusher'
@@ -238,32 +248,21 @@ gem 'metamagic'
 gem 'uuidtools'
 
 #Skylight
-gem "skylight"
-
-gem "bugsnag"
+#gem "skylight"
 
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
+  gem 'bugsnag'
 end
+
+gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
-  #gem 'rack-mini-profiler', require: false
-  gem 'hirb'
-  gem 'rails_best_practices'
-  gem 'brakeman'
-  gem 'pry'
-  gem 'awesome_print'
-  gem 'rubocop', require: false
-  gem "lol_dba"
-  gem 'binding_of_caller'
-  gem 'meta_request'
-  gem 'htmlbeautifier'
-  gem 'rbeautify'
-  gem "ruby-beautify"
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
-  gem 'rack-livereload'
-  gem 'guard-livereload', require: false
+  gem 'activerecord-colored_log_subscriber'
   gem 'bullet'
+  gem 'binding_of_caller'
+  gem 'rb-fsevent', '>= 0.9.1'
+  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
 end
 

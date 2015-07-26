@@ -12,7 +12,11 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-  #config.cache_store = :mem_cache_store
+
+  config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
+    expires_in: 2.weeks.to_i,
+    namespace: 'cache'
+  }
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -23,10 +27,8 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-  config.assets.precompile += %w( .svg .eot .woff .ttf)
-
-  config.react.addons = true
+  #Load react development variant
+  config.react.variant = :development
 
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(
@@ -48,17 +50,17 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   config.action_mailer.perform_deliveries = true
+
+  config.action_controller.asset_host = 'http://localhost:3000/'
+  config.action_mailer.asset_host = 'http://localhost:3000/'
+
   config.action_mailer.default_url_options = { host: 'localhost:3000', port: '3000' }
   Rails.application.routes.default_url_options = { host: 'localhost:3000', port: '3000' }
-
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
   config.after_initialize do
     Bullet.enable = false
     Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    Bullet.add_footer = true
+    Bullet.rails_logger = true
   end
-
-  # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
 end

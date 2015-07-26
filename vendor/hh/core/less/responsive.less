@@ -225,6 +225,13 @@
 /*** Desktops & Laptops ***/
 @media only screen and (min-width: 980px) {
     body{
+        &.ie9.menu-pin{
+            .page-sidebar{
+                 transform: none !important;
+                -webkit-transform: none !important;
+                -ms-transform: none !important;          
+            }
+        }
         &.menu-pin{
             overflow-x: hidden;
             .header .brand{
@@ -271,6 +278,31 @@
                 padding-left: 20px;
             }
         }
+        &.box-layout{
+            & > .container{
+            height: 100%;
+            padding: 0;
+            }
+            .header{
+            background-color:transparent;
+            border: 0;
+            padding: 0;
+                & > .container {
+                background-color: #fff;
+                border-bottom: 1px solid rgba(230, 230, 230, 0.7);
+                padding: 0 20px 0 0;
+              }
+            }
+            .page-sidebar{
+                left: auto;
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
+            .page-container .page-content-wrapper .footer{
+                  width: auto;
+            }
+
+        }
     }
 
 
@@ -299,11 +331,13 @@
     }
 
 }
+/*** General Small Screen Desktops ***/
+
 
 /*** General tablets and phones ***/
 @media (max-width: 991px) {
 
-    .page-sidebar ~ .page-container{
+    .page-container{
         padding-left: 0; 
     }
 
@@ -313,6 +347,20 @@
                 .translate3d(250px,0,0);
                 overflow: hidden;
                 position: fixed;
+            }
+        }
+        &.box-layout{
+            & > .container{
+            padding: 0;
+            height: 100%;
+            }
+            .header{
+                & > .container {
+                    padding: 0;
+                    .pull-right .sm-action-bar{
+                        right: 0;
+                    }
+              }
             }
         }
     }
@@ -384,7 +432,8 @@
         padding-left: 0;
         z-index: 100;
         position: relative;
-        .transition(all .25s ease);
+        transition: transform .25s ease;
+        -webkit-transition: -webkit-transform .25s ease;
         .page-content-wrapper .content{
             overflow-x: hidden;
             height: auto; // minimizes address bar on scroll
@@ -445,7 +494,11 @@
         display: table;
         width: 100%;
     }
-
+    .user-profile-wrapper{
+        position: absolute;
+        right: 50px;
+        top: -9px;
+    }
 }
 
 /* Landscape view of all tablet devices */
@@ -462,7 +515,9 @@
             }
         }
     }
-
+    body.box-layout > .container{
+        width: 100%;
+    }
     .error-page{
         .error-container{
             width: auto;

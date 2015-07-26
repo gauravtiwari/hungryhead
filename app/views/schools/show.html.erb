@@ -1,33 +1,65 @@
 <div class="container">
-<div class="social-wrapper container">
-<div class="social" data-pages="social">
-    <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-      <%=  render partial: 'school_data' %>
-      <%= render partial: 'cover' %>
-     <div class="school-action-buttons col-md-5">
-			<%= react_component('Follow', {followed: followed?(@school)}) %>
-      <% if current_user.admin? %>
-			  <%= link_to('Edit Profile', edit_school_path(@school), class: "btn btn-danger btn-sm pull-right no-padding padding-5 p-l-10 p-r-10 m-r-10") %>
-      <% end %>
-		</div>
+  <div class="social-wrapper container">
+    <div class="social">
+        <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
+          <%=  render partial: 'school_data' %>
+          <% cache(["cover", @school]) do %>
+            <%= render partial: 'cover' %>
+          <% end %>
+        </div>
     </div>
-</div>
-<div class="content p-t-20">
-<div class="col-md-3 col-sm-4 no-padding col-lg-3 col-xlg-3">
-    <%= render partial: 'school_card' %>
-    <%= render partial: 'school_faculties' %>
-</div>
-<div class="col-md-6">
-<div class="activity-feed auto-height">
-  <%= render_activities(@activities) %>
-</div>
-</div>
-<div class="col-md-3 col-sm-4 no-padding">
-<div class="sidebar auto-height white-bg box-shadow">
-  <%= react_component('LatestListings', {path: latest_ideas_school_path(@school)}) %>
-  <%= react_component('LatestListings', {path: latest_students_school_path(@school)}) %>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+    <div class="box-shadow bg-white">
+      <%= render partial: 'menu' %>
+    </div>
+
+    <div class="content p-t-20 overflow-hidden">
+
+      <div class="col-md-3 no-padding p-r-15">
+        <% cache(["school_card", @school]) do %>
+          <%= render partial: 'school_card' %>
+        <% end %>
+      </div>
+
+      <div class="col-md-9 no-padding">
+      <div class="panel box-shadow no-border">
+        <ul class="nav nav-tabs nav-tabs-simple bg-light-blue-lightest">
+            <li class="active">
+              <a data-toggle="tab" href="#tab_people">
+                <i class="fa fa-graduation-cap"></i> Latest People
+              </a>
+            </li>
+            <li>
+              <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
+                <i class="fa fa-lightbulb-o"></i> Latest Ideas
+              <% end %>
+            </li>
+            <li>
+              <%= link_to("#tab_events", data: {toggle: 'tab', url: profile_events_path(@school)}, id: 'load_school_events') do %>
+                <i class="fa fa-calendar"></i> Latest Events
+              <% end %>
+            </li>
+        </ul>
+
+        <div class="tab-content schools-tabs">
+
+          <div class="tab-pane active" id="tab_people">
+            <div class="view">
+              <div class="list-view boreded no-top-border">
+                <%= render partial: 'students' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane" id="tab_ideas">
+          </div>
+
+          <div class="tab-pane" id="tab_events">
+          </div>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>

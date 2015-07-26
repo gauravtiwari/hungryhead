@@ -1,11 +1,11 @@
 class IdeaMessagePolicy < ApplicationPolicy
 
   def update?
-  	current_user == record.student
+  	current_user == record.user
   end
 
   def show?
-  	current_user == record.student
+  	current_user == record.user
   end
 
   def create?
@@ -13,7 +13,7 @@ class IdeaMessagePolicy < ApplicationPolicy
   end
 
   def destroy?
-   current_user == record.student
+   current_user == record.user
   end
 end
 

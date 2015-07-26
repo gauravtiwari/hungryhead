@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Invest = React.createClass({
 
   getInitialState: function() {
@@ -48,9 +46,15 @@ var Invest = React.createClass({
 
   render: function() {
     if(this.state.idea.can_invest) {
-      var content =   <div className="modal-body">
-      <InvestForm loading= {this.state.loading} form={this.state.idea.form} sendInvestment= {this.sendInvestment} idea={this.state.idea} />
-      </div>;
+      if(this.state.idea.investable) {
+        var content =   <div className="modal-body">
+                          <InvestForm loading= {this.state.loading} form={this.state.idea.form} sendInvestment= {this.sendInvestment} idea={this.state.idea} />
+                        </div>;
+      } else {
+        var content = <div className="modal-body">
+                        <NotInvestable idea={this.state.idea} />
+                      </div>
+      }
     } else {
       var content = <NoBalance />;
     }

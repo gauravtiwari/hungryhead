@@ -2,17 +2,31 @@
 var LatestIdeas = React.createClass({
 
   getInitialState: function() {
+    var data = JSON.parse(this.props.ideas)
     return {
-      list: [],
-      type: null,
-      current_path: this.props.path,
+      list: data.list,
+      type: data.type,
+      current_path: undefined,
       done: false
     }
   },
 
   componentDidMount: function() {
     if(this.isMounted()) {
-      this.fetchList();
+      var ideas_channel = pusher.subscribe("ideas-channel");
+      if(ideas_channel) {
+        ideas_channel.bind('new_idea', function(data){
+          var new_item = [data.data]
+          var newState = React.addons.update(this.state, {
+              list : {
+                $unshift : new_item
+              }
+          });
+          this.setState(newState);
+          $("#idea_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+          $("#idea_"+data.data.id).addClass('animated fadeInDown');
+        }.bind(this));
+      }
     }
   },
 
@@ -49,17 +63,6 @@ var LatestIdeas = React.createClass({
     }.bind(this));
   },
 
-  fetchList: function(){
-    this.setState({loading: true});
-    $.getJSON(this.state.current_path, function(json, textStatus) {
-      this.setState({
-        list: json.list,
-        type: json.type,
-        loading: false
-    });
-    }.bind(this));
-  },
-
   render: function() {
 
     var ideas =  _.map(this.state.list, function(item){
@@ -67,16 +70,37 @@ var LatestIdeas = React.createClass({
         });
 
     if(this.state.loading) {
-      var content = <div className="no-content light p-t-40"><i className="fa fa-spinner fa-pulse"></i></div>
+      var content = <div className="no-content light p-t-40">
+        <i className="fa fa-spinner fa-pulse"></i>
+        </div>;
     } else {
-      var content = ideas
+      if(this.state.list.length > 0) {
+        var content = ideas
+      } else {
+        var content = <div className="text-center fs-22 font-opensans text-master light p-t-40">
+          <i className="fa fa-list"></i>
+          <span className="clearfix">No ideas published</span>
+        </div>;
+      }
     }
+
+   if(this.state.list.length > 4) {
+     var styles = {
+       maxHeight: '250px',
+       height: '250px'
+     }
+   } else {
+     var styles = {
+       maxHeight: '150px',
+       height: '150px'
+     }
+   }
 
     return (
       <div className="widget-11-2 p-b-10 panel no-border no-margin">
-          <div className="panel-heading">
+          <div className="panel-heading bg-light-blue-lightest">
            <div className="panel-title">
-            {this.state.type}
+              <span className="fa fa-lightbulb-o text-danger"></span> {this.state.type}
             </div>
             <div className="panel-controls">
                 <ul>
@@ -96,15 +120,15 @@ var LatestIdeas = React.createClass({
                       </div>
                     </li>
                     <li>
-                      <a data-toggle="refresh" className="portlet-refresh text-black pointer" onClick={this.resetList}>
+                      <a data-toggle="tooltip" title="Refresh" className="text-black pointer" onClick={this.resetList}>
                           <i className="portlet-icon portlet-icon-refresh"></i>
                       </a>
                     </li>
                 </ul>
             </div>
           </div>
-          <div className="panel-body no-padding full-border-light">
-            <ul className="trending-list latest-scrollable p-t-10 no-style" ref="trendingList">
+          <div className="panel-body no-padding no-margin full-border-light scrollable" style={styles}>
+            <ul className="trending-list no-padding no-style" ref="trendingList" style={styles}>
              {content}
             </ul>
           </div>

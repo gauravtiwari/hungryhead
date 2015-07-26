@@ -1,11 +1,8 @@
 
 var $el = $('body');
+
 $el.append("<%= j render partial: 'popup' %>");
-$('.chosen-select').chosen({
-    allow_single_deselect: true,
-    no_results_text: 'No results matched',
-    width: '100%'
-  });
+
 $('#messagePopupModal').modal('show');
 
 $('body').on('focus', 'textarea', function(event) {

@@ -8,15 +8,20 @@ class IdeaPolicy < ApplicationPolicy
   	show?
   end
 
-  def follow?
-    current_user != record.student
-  end
-
   def show?
-    record.in_team?(current_user) || record.published? && record.everyone?
+    record.in_team?(current_user) ||
+    record.published? && record.everyone?
   end
 
   def card?
+    show?
+  end
+
+  def changes?
+    update?
+  end
+
+  def activities?
     show?
   end
 

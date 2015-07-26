@@ -1,39 +1,64 @@
 .join-wrapper .join .jumbotron {
-  height: 70vh;
+  height: 40vh;
+}
+.product-wrapper .product .jumbotron {
+  height: 40vh;
+}
+.how-wrapper .how .jumbotron {
+  height: 40vh;
 }
 .learn-wrapper .learn .jumbotron {
   height: 40vh;
 }
-.join-wrapper .join .cover-photo,
-.learn-wrapper .learn .cover-photo {
-  position: relative;
-  margin: 0 auto;
-  overflow-x: hidden;
-}
-
 .join-photo {
- background-image: image-url('Hungryhead_header.jpg');
+ background-image: image-url('patterns/syudJMa.png');
+ background-position: 100% 55%;
 }
-
-.join-wrapper .join .cover-photo:before {
-  background-image: image-url("linear_gradient.png");
-  background-repeat: repeat-x;
-  bottom: 0;
-  content: " ";
-  height: 270px;
-  left: 0;
+.or-seperator span {
+  background-color: #eef0f0;
+  display:inline-block;
+  position: relative;
+  z-index: 10;
+}
+.or-seperator:before {
   position: absolute;
-  right: 0;
-  z-index: 1;
+  content: '';
+  width: 100%;
+  height: 3px;
+  left:0;
+  margin-top: 10px;
+  background: image-url('title-contin.png');
 }
 .join-photo:before,
-.learn-photo:before {
+.story-photo:before,
+.support-us-photo:before,
+.about-photo:before,
+.how-photo:before,
+.gamification-photo:before,
+.learn-photo:before,
+.product-photo:before,
+.join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.5);
   position: absolute;
   width: 100%;
   height: 100%;
   content: '';
   z-index: 1;
+}
+.join-photo:before {
+  background: rgba(51, 51, 51, 0.4);
+}
+.learn-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.how-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.product-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.join-alumni-photo:before {
+  background: rgba(51, 51, 51, 0.4);
 }
 .is-scrolling {
   background: #323a45;
@@ -44,26 +69,138 @@
 }
 .join-photo,
 .learn-photo,
-.story-photo {
+.join-alumni-photo,
+.how-photo,
+.about-photo,
+.rules-photo,
+.story-photo,
+.gamification-photo,
+.support-us-photo,
+.why-photo,
+.brand-photo,
+.cookies-photo,
+.product-photo {
   width: 100%;
   height: inherit;
-  background-position: 60%;
   z-index: 2;
   overflow: hidden;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
-  background-size: cover;
-  background-color: #10cfbd;
+}
+
+.learn-wrapper .learn .story-photo,
+.learn-wrapper .learn .how-photo,
+.learn-wrapper .learn .why-photo,
+.learn-wrapper .learn .product-photo  {
+  position: relative;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.rules-photo {
+  background: #5b98e0;
+}
+.brand-photo {
+  background: #5b98e0;
+}
+.cookies-photo {
+  background: #5b98e0;
 }
 .learn-photo {
-  background-position: 20% 40%;
+  background: image-url('home_banner.jpg');
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.gamification-photo {
+  background: image-url('reward-banner.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.gamification-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.story-photo {
+  background: image-url("find-your_way.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.about-photo {
+  background: image-url("explore_path.jpg");
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.support-us-photo {
+  background: image-url("building-ecosystem.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.how-photo {
+  background: image-url("how_it_works.jpeg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.product-photo {
+  background: image-url("product.jpg");
+  background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+
+.why-photo {
+  background: image-url("why-photo.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.join-alumni-photo {
+  background: image-url("alumni.jpg")  no-repeat;
+  background-position: 100% 25%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
 }
 .join-wrapper .join .cover-photo .pull-bottom {
   z-index: 2;
 }
+.story-photo:before {
+  background: rgba(51, 51, 51, 0.3);
+}
+.support-us-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
+.about-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
 .vmiddle {
   position: relative;
-  top: 50%;
+  top: 40%;
   z-index: 10;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -71,8 +208,25 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+@media (max-width: 768px){
+  .vmiddle {
+    position: relative;
+    top: 50%;
+    z-index: 10;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}
 .cta {
-  background: image-url("cta.jpg") no-repeat center center;
+  background: image-url('bg_pattern_3.jpg');
+  background-position: 60% 100%;
+}
+
+.mission {
+  background: image-url("building-ecosystem.png") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -84,12 +238,19 @@
   zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#80000000', endColorstr='#80000000');
   background: transparent;
-  background: rgba(51, 51, 51, 0.6);
 }
 .cta-overlay {
-  background: rgba(51, 51, 51, 0.6);
+  background: rgba(51, 51, 51, 0.4);
+}
+.bg-overlay {
+  background: rgba(51, 51, 51, 0.2);
 }
 .b-small {
   width: 10%;
   border: 2px solid;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx) {
+  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
+    background: transparent!important;
+  }
 }

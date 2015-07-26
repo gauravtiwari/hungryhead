@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var ProblemsForm = React.createClass({
 
   render: function() {
@@ -14,8 +12,8 @@ var ProblemsForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    if(this.props.idea.sections  && this.props.idea.sections.problems) {
-      var problems = this.props.idea.sections.problems;
+    if(this.props.idea  && this.props.idea.problems) {
+      var problems = this.props.idea.problems;
     } else {
       var problems = "";
     }
@@ -23,8 +21,7 @@ var ProblemsForm = React.createClass({
     return (
       <div className={classes}>
          <form id="problems-edit-form" ref="problems_form" className="problems-edit-form" onSubmit={this._onKeyDown}>
-             <input type="hidden" name={ this.props.form.csrf_param } value={ this.props.form.csrf_token } />
-             <label>Describe the problems identified. <span>How others are solving, if any? etc.</span></label>
+             <label className="m-b-20">Describe the problems identified. <span>How others are solving, if any? etc.</span> <small className="clearfix">You can link images using markdown(Click help)</small></label>
              <textarea ref="description" className="form-control empty" defaultValue= {problems} name="idea[problems]" placeholder='List the problems you have identified?' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>

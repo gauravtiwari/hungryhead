@@ -1,14 +1,31 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  # Pundit Authorization
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  protect_from_forgery with: :exception
-  helper_method :xeditable?
-  helper_method :search_content
+  #Devise Permitted paramaters
   before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  #Flash messages from rails
+  after_filter :prepare_unobtrusive_flash
+
+  #Temporary basic auth
   before_filter :authenticate_basic
+
+  #Device specific templates
+  before_action :set_device_type
+
+  before_filter :set_current_user, if: :user_signed_in?
+
+  protected
+
+  def set_current_user
+    User.current = current_user
+  end
 
   def authenticate_basic
     if Rails.env.production?
@@ -17,8 +34,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
-  protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :first_name, :last_name, :name, :school_id, :terms_accepted, :remember_me, :name) }
@@ -54,30 +69,39 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert:  "You are already logged in" unless !user_signed_in?
   end
 
+  def user_for_paper_trail
+    user_signed_in? ? current_user.try(:id) : 'Unknown user'
+  end
 
   def info_for_paper_trail
     {
       user_name: current_user.name,
-      user_avatar: current_user.avatar.url(:avatar),
+      user_avatar: current_user.get_avatar,
+      name_badge: current_user.name_badge,
       owner_url: profile_path(current_user)
     } if current_user
   end
 
   def check_terms
-    if user_signed_in? && !current_user.rules_accepted? && !current_user.admin?
-      redirect_to(welcome_path(:hello), notice: "Please accept rules to get started")
+    if user_signed_in?  && !current_user.rules_accepted? && !current_user.admin?
+      redirect_to(welcome_path(:complete_profile), notice: 'Welcome! Please accept terms to complete your registeration.')
     end
   end
 
   private
 
+  #Error message if user not authorised
   def user_not_authorized
     if request.xhr?
-      render json: {error: {message: "You are not authorized to perform this action"}}
+      render json: {error: "Not found"}, :status => 404
     else
-      redirect_to root_path
-      flash[:notice] = "You are not authorized to perform this action"
+      raise ActionController::RoutingError.new('Not Found')
     end
+  end
+
+  def set_device_type
+    request.variant = :phone if browser.mobile?
+    request.variant = :tablet if browser.tablet?
   end
 
 end

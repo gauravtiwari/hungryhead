@@ -1,7 +1,3 @@
-/** @jsx React.DOM */
-
-var converter = new Showdown.converter();
-
 var Problems = React.createClass({
 
   getInitialState: function() {
@@ -35,7 +31,7 @@ var Problems = React.createClass({
     $.ajaxSetup({ cache: false });
     $.ajax({
       data: formData,
-      url: Routes.idea_path(this.props.idea.id),
+      url: this.props.meta.idea_path,
       type: "PUT",
       dataType: "json",
       success: function ( data ) {
@@ -69,25 +65,25 @@ var Problems = React.createClass({
     }
      var text = this.state.editable ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span><i className="fa fa-pencil"></i> Edit problems</span>;
 
-    if(this.props.idea.sections && this.props.idea.sections.problems) {
-      var html = converter.makeHtml(this.props.idea.sections.problems);
+    if(this.props.idea && this.props.idea.problems) {
+      var html = marked(this.props.idea.problems);
     } else {
-      var html = "<div class='no-content text-center fs-16 light'>Describe the problems identified. <span>How others are solving, if any? etc.</span> </div>";
+      var html = "<div class='no-content text-center fs-22 light'>Describe the problems you have identified. <span>How others are solving, if any? etc.</span> </div>";
     }
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel bg-white box-shadow">
+        <div className="panel bg-white box-shadow no-border">
           {error}
-          <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-master">List problems</div>
+          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
+            <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-frown-o text-danger"></i>  List problems</div>
             <div className="panel-controls p-r-60">
             <ul>
               <li>
-                <a className="portlet-maximize text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
+                <a className="portlet-maximize pointer text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Help <i className="fa fa-question-circle"></i></a>
               </li>
               <li>
-                <a className="portlet-close text-master fs-12" onClick={this.openProblemsForm}>{text}</a>
+                <a className="portlet-close pointer text-master fs-12" onClick={this.openProblemsForm}>{text}</a>
               </li>
             </ul>
             </div>
@@ -100,9 +96,9 @@ var Problems = React.createClass({
       )
     } else {
        return (
-        <div className="panel bg-white box-shadow">
-          <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title b-b b-grey p-b-5 text-master">Problem</div>
+        <div className="panel bg-white box-shadow no-border">
+          <div className="panel-heading p-l-60 p-b-10 bg-light-blue-lightest m-b-20">
+            <div className="panel-title b-b b-grey p-b-5 text-master"><i className="fa fa-frown-o text-danger"></i>  Problem</div>
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
