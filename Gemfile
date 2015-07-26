@@ -247,7 +247,7 @@ gem 'metamagic'
 gem 'uuidtools'
 
 #Skylight
-#gem "skylight"
+gem "skylight"
 
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
