@@ -11,14 +11,6 @@
       <%= f.input_field :excerpt, class: "form-control", :required => true, :placeholder => "eg: An intro about the event..." %>
     </div>
 
-    <% if @event.present? %>
-      <div class="form-group">
-        <%= label_tag 'event[description]', 'Long Description' %>
-        <span class="help">You can use markdown to style the description. Click Markdownhelp</span>
-        <%= f.input_field :description, class: "form-control", :required => true, :placeholder => "eg: Detail about the event..." %>
-      </div>
-    <% end %>
-
     <div class="form-group">
       <%= label_tag 'event[address]', 'Address' %>
       <%= f.input_field :address, class: "form-control", :required => true, :placeholder => "eg: Lancaster, Fylde College" %>
@@ -51,7 +43,7 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control" value="08/01/2013 1:30 PM">
+            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control"  placeholder="Start date time" />
           </div>
         </div>
       </div>
@@ -63,7 +55,7 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" value="08/01/2013 1:30 PM">
+            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" placeholder="Start date time" />
           </div>
         </div>
       </div>
