@@ -21,6 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       if @user.persisted?
         RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
+        meta_events_tracker.event!(:user, :signed_up, { :name => @user.name, :email => @user.email })
         respond_with @user, location: after_sign_up_path_for(@user)
       else
         respond_with @user

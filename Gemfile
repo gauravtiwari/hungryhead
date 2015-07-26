@@ -218,9 +218,6 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 #Voting and commenting
 gem 'awesome_nested_set'
 
-#Intercom
-#gem "intercom-rails"
-
 #At.js
 gem 'jquery-atwho-rails'
 
@@ -246,15 +243,13 @@ gem 'metamagic'
 #UUID generation
 gem 'uuidtools'
 
-#Skylight
-gem "skylight"
-
-#Tracking users
-gem 'rack-tracker'
-
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
+  gem 'mixpanel-ruby'
+  gem 'meta_events'
+  gem 'rack-tracker'
+  gem "skylight"
 end
 
 gem 'forgery'

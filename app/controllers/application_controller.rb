@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     User.current = current_user
   end
 
+  def meta_events_tracker
+    @meta_events_tracker ||= MetaEvents::Tracker.new(current_user.try(:id), request.remote_ip)
+  end
+
   def authenticate_basic
     if Rails.env.production?
       authenticate_or_request_with_http_basic do |username, password|
