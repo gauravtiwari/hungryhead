@@ -352,7 +352,6 @@ GEM
       mini_portile (~> 0.6.0)
     nokogumbo (1.4.1)
       nokogiri
-    nprogress-rails (0.1.6.7)
     oj (2.12.10)
     order_as_specified (0.1.0)
       activerecord (~> 4.0)
@@ -640,7 +639,6 @@ DEPENDENCIES
   metamagic
   mini_magick
   nokogiri
-  nprogress-rails
   oj
   order_as_specified
   paper_trail (~> 4.0.0.rc1)

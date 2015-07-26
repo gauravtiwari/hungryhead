@@ -74,9 +74,6 @@ gem 'sprockets'
 #Render anywhere
 gem 'render_anywhere', :require => false
 
-#Nprogress
-gem 'nprogress-rails'
-
 #Fetch records in order
 gem 'order_as_specified'
 
