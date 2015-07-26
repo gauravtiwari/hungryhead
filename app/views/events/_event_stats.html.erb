@@ -1,0 +1,22 @@
+<div class="text-center m-t-20 p-t-10 p-b-10 full-border-light-bottom full-border-light clearfix">
+    <div class="user-stats-list no-border">
+     <div class="col-sm-4 all-caps text-center">
+       Spots
+       <span class="text-brand displayblock text-center">
+         <%= number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+       </span>
+     </div>
+     <div class="col-sm-4 all-caps text-center">
+       Invited
+       <span class="text-brand displayblock text-center">
+         <%= number_to_human(@event.event_invites.size, :format => '%n%u', :units => { :thousand => 'K' }) %>
+       </span>
+     </div>
+     <div class="col-sm-4 all-caps text-center">
+       Attending
+       <span class="text-brand displayblock text-center">
+        <%= number_to_human(@event.event_attendees.size, :format => '%n%u', :units => { :thousand => 'K' }) %>
+       </span>
+     </div>
+    </div>
+</div>
