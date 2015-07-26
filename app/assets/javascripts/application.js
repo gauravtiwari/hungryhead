@@ -26,7 +26,6 @@
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
-//= require jquery.truncate
 //= require jquery.soulmate
 //= require underscore
 //= require js-routes

@@ -27,7 +27,7 @@ var ModalListItem = React.createClass({
 			  <div className="pull-left">
 			      <p className="all-caps bold  small no-margin overflow-ellipsis ">{this.props.item.name}</p>
 			      <p className="no-margin fs-13 bold">{location_list}</p>
-			      <p className="about-me small" dangerouslySetInnerHTML={{__html: jQuery.truncate(this.props.item.about_me, {length: 100})}}></p>
+			      <p className="about-me small" dangerouslySetInnerHTML={{__html: this.props.item.about_me}}></p>
 			  </div>
 			  <div className="pull-right">
 			  	{follow_button}

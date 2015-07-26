@@ -31,6 +31,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery.validate'
   gem 'rails-assets-autosize'
   gem 'rails-assets-animate.css'
+  gem 'rails-assets-jquery.cookie'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

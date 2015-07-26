@@ -431,6 +431,8 @@ GEM
     rails-assets-jquery-unveil (1.3.0)
     rails-assets-jquery.actual (1.0.16)
       rails-assets-jquery (>= 1.2.3)
+    rails-assets-jquery.cookie (1.4.1)
+      rails-assets-jquery (>= 1.2)
     rails-assets-jquery.scrollbar (0.2.8)
       rails-assets-jquery (>= 1.7)
     rails-assets-jquery.validate (1.13.0)
@@ -659,6 +661,7 @@ DEPENDENCIES
   rails-assets-jquery-ujs!
   rails-assets-jquery-unveil!
   rails-assets-jquery.actual!
+  rails-assets-jquery.cookie!
   rails-assets-jquery.scrollbar!
   rails-assets-jquery.validate!
   rails-assets-marked!
