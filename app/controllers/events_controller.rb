@@ -31,6 +31,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = CreateEventService.new(event_params).create
+    @owner = @event.owner
     respond_to do |format|
       if @event.save
         flash[:notice] = "Event was successfully created, redirecting..."
@@ -38,6 +39,7 @@ class EventsController < ApplicationController
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
+        format.js {render :new}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end

@@ -7,6 +7,25 @@ var $popup = $('#eventPopupModal')
 $popup.find('#event_popup_body').html("<%= j render partial: 'edit_form' %>");
 $popup.modal('show');
 
+//Add client side validation
+$('#new_event').validate();
+
+//Add client side rules
+$('#event_excerpt').rules('add', {
+  minlength: 100,
+  maxlength: 300
+});
+
+$('#event_title').rules('add', {
+  minlength: 10,
+  maxlength: 50
+});
+
+$('#event_description').rules('add', {
+  minlength: 300,
+  maxlength: 2000
+});
+
 //Init date picker plugin
 $('#startdatepicker').datetimepicker({sideBySide: true});
 $('#enddatepicker').datetimepicker({sideBySide: true});

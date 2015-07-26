@@ -95,9 +95,7 @@ var NewIdeaForm = React.createClass({
               <span className="help"> "eg: social, education"</span>
               <input label="false" className="string optional form-control empty market_list" autofocus="autofocus" placeholder="Add market, maximum 3 markets" type="text" value="" name="idea[market_list]" id="markets_select" />
             </div>
-            <div className="input hidden idea_location_list">
-              <input className="hidden" autofocus="autofocus" placeholder="Add your location" type="hidden" defaultValue={this.props.meta.location} name="idea[location_list]" id="idea_location_list" />
-            </div>
+
             <div className="form-group m-t-20">
                 <div className="checkbox check-success checkbox-circle">
                 <input type="checkbox" name="idea[looking_for_team]" defaultValue="1" id="looking_for_team" />

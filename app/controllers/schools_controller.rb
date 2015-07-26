@@ -2,7 +2,7 @@ class SchoolsController < ApplicationController
 
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
-  before_action :set_schools, except: [:new, :create, :autocomplete_school_name]
+  before_action :set_schools, except: [:new, :create, :index, :autocomplete_school_name]
 
   #Autocomplete school
   autocomplete :school, :name, :full => true, :extra_data => [:domain]

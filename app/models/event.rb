@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
   #included modules
   include Redis::Objects
+  include ActiveModel::Validations
 
   #Slug
   extend FriendlyId
@@ -13,9 +14,8 @@ class Event < ActiveRecord::Base
 
   #Validation
   validates :title, :presence => true, length: {within: 10..50}
-  validates :start_time, :end_time, :presence => true
   validates :excerpt, :presence => true, length: {within: 100..300}
-  validates :description, :presence => true, length: {within: 300..2000}
+  validates :description, :presence => true, length: {within: 300..2000}, on: :update
   validates :address, :presence => true
 
   #Includes concerns

@@ -34,14 +34,14 @@
 //= require typer
 //= require sweetalert
 //= require bootstrap-tagsinput
-//= require momentjs
-//= require sly
+//= require moment
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
+//= require sly
 //= require jquery.validate
 //= require jquery.validate/additional-methods
-//= require jquery-autosize
+//= require jquery.autosize
 //= require marked
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
