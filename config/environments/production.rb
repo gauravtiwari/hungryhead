@@ -18,6 +18,11 @@ Rails.application.configure do
     namespace: 'cache'
   }
 
+  config.middleware.use(Rack::Tracker) do
+    handler :google_analytics, { tracker: 'UA-65632243-1' }
+    handler :go_squared, { tracker: 'GSN-565777-F' }
+  end
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like nginx, varnish or squid.

@@ -249,6 +249,9 @@ gem 'uuidtools'
 #Skylight
 gem "skylight"
 
+#Tracking users
+gem 'rack-tracker'
+
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
