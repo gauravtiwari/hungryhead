@@ -156,8 +156,10 @@ CREATE TABLE comments (
     body text DEFAULT ''::text NOT NULL,
     user_id integer NOT NULL,
     parent_id integer,
-    lft integer,
-    rgt integer,
+    lft integer NOT NULL,
+    rgt integer NOT NULL,
+    depth integer DEFAULT 0 NOT NULL,
+    children_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -299,11 +301,12 @@ CREATE TABLE events (
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
-    private boolean DEFAULT true,
+    status integer DEFAULT 0,
+    privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone,
-    end_time timestamp without time zone,
+    start_time timestamp without time zone DEFAULT '2015-07-26 10:50:43.243613'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-07-26 10:50:43.24364'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2361,6 +2364,13 @@ CREATE INDEX index_activities_on_parent_id ON activities USING btree (parent_id)
 
 
 --
+-- Name: index_activities_on_published_and_is_notification; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_published_and_is_notification ON activities USING btree (published, is_notification);
+
+
+--
 -- Name: index_activities_on_trackable_id_and_trackable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2403,10 +2413,24 @@ CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments U
 
 
 --
+-- Name: index_comments_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_lft ON comments USING btree (lft);
+
+
+--
 -- Name: index_comments_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_comments_on_parent_id ON comments USING btree (parent_id);
+
+
+--
+-- Name: index_comments_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_rgt ON comments USING btree (rgt);
 
 
 --
@@ -2501,10 +2525,10 @@ CREATE INDEX index_events_on_owner_id_and_owner_type ON events USING btree (owne
 
 
 --
--- Name: index_events_on_private; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_events_on_private ON events USING btree (private);
+CREATE INDEX index_events_on_privacy ON events USING btree (privacy);
 
 
 --
