@@ -44,8 +44,6 @@
 //= require jquery-autosize
 //= require marked
 //= require masonry/dist/masonry.pkgd
-//= require nprogress
-//= require nprogress-ajax
 //= require autocomplete-rails
 //= require pnotify
 //= require unobtrusive_flash

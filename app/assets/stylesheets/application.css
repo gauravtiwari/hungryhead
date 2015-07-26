@@ -10,8 +10,6 @@
  *= require sweetalert
  *= require bootstrap-tagsinput
  *= require jquery.scrollbar
- *= require nprogress
- *= require nprogress-bootstrap
  *= require select2-bootstrap-css
  *= require bootstrap-datetimepicker
  *= require font-awesome

@@ -21,17 +21,6 @@
          <%= idea.name %>
        </a>
      </h5>
-
-      <p class="fs-14 p-t-5 inline block people-info text-master no-margin">
-        <% if idea.cached_market_list.present? %>
-        <span class="small-text">
-          <% idea.market_list.each do |tag| %>
-            <%= link_to("@#{tag.parameterize}", tag_people_path(tag.parameterize)) %>
-          <% end %>
-        </span>
-        <% end %>
-      </p>
-
       <% if idea.founder?(current_user) %>
         <span class="badge m-l-10 badge-green">
           founder
@@ -43,6 +32,15 @@
           team
         </span>
       <% end %>
+      <p class="fs-14 p-t-5 block people-info text-master no-margin">
+        <% if idea.cached_market_list.present? %>
+        <span class="small-text">
+          <% idea.market_list.each do |tag| %>
+            <%= link_to("@#{tag.parameterize}", tag_people_path(tag.parameterize)) %>
+          <% end %>
+        </span>
+        <% end %>
+      </p>
       <p class="text-master p-t-5">
         <%= idea.elevator_pitch %>
       </p>

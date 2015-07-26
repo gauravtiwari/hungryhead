@@ -56,11 +56,6 @@ jQuery(document).ready ->
 	$activity_box_el = $('#main_activity_box')
 	window.activityListView = new infinity.ListView($activity_box_el)
 
-	NProgress.configure
-	  showSpinner: true
-	  ease: 'ease'
-	  speed: 500
-
 	$('#form-login').validate()
 	$('.site-feedback-form').validate()
 	$('#information-form').validate()
