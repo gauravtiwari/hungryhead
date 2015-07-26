@@ -193,13 +193,13 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="checkbox check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
-              <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a>.</label>
+              <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a></label>
             </div>
           </div>
          <div className="pull-right sm-pull-reset col-sm-6">
            <div className="checkbox check-complete">
             <input type="checkbox" name="user[role]" value="faculty" id="checkbox2" />
-            <label htmlFor="checkbox2">Are you a Faculty member?</label>
+            <label htmlFor="checkbox2" className="bold">Are you a Faculty member?</label>
            </div>
          </div>
         </div>

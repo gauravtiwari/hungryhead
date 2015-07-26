@@ -10,7 +10,10 @@
           <% end %>
         </li>
         <li>
-          <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}") %>
+          <%= link_to('Collaborate', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}") %>
+        </li>
+        <li>
+          <%= link_to('Terms', main_app.terms_path, class: "#{current_class?(main_app.terms_path)}") %>
         </li>
         <li>
           <%= link_to('Community guidelines', main_app.rules_path, class: "#{current_class?(main_app.rules_path)}") %>

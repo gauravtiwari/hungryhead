@@ -9,10 +9,13 @@
             <% end %>
           </li>
           <li>
-            <%= link_to('Collaborate with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
+            <%= link_to('Collaborate', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
           </li>
           <li>
-            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold") %>
+            <%= link_to('Community guidelines', rules_path, class: "#{current_class?(rules_path)} bold") %>
+          </li>
+          <li>
+            <%= link_to('Terms', terms_path, class: "#{current_class?(terms_path)} bold", remote: false) %>
           </li>
           <li>
             <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold") %>
