@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, except: [:index, :new, :create]
 
   layout "home"
   # GET /events
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def edit
     @owner = @event.owner
     respond_to do |format|
-      format.js {render :new}
+      format.js {render :edit}
     end
   end
 
@@ -84,8 +84,10 @@ class EventsController < ApplicationController
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
+        format.js {render :show}
       else
         format.html { render :edit }
+        format.js {render :edit}
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -110,7 +112,7 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:status, :title, :description, :owner_id, :owner_type, :address, :private,
-    :start_time, :end_time, :eventable_id, :space, :cover, :excerpt, :category_list)
+    params.require(:event).permit(:status, :title, :description, :owner_id, :owner_type, :address,
+    :start_time, :end_time, :eventable_id, :space, :featured, :cover, :excerpt, :category_list)
   end
 end

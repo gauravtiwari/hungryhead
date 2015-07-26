@@ -35,28 +35,7 @@
               <p class="small-text">
                 <%= @event.excerpt %>
               </p>
-              <div class="text-center m-t-20 p-t-10 p-b-10 full-border-light-bottom full-border-light clearfix">
-                  <div class="user-stats-list no-border">
-                   <div class="col-sm-4 all-caps text-center">
-                     Spots
-                     <span class="text-brand displayblock text-center">
-                       0
-                     </span>
-                   </div>
-                   <div class="col-sm-4 all-caps text-center">
-                     Invited
-                     <span class="text-brand displayblock text-center">
-                       5K
-                     </span>
-                   </div>
-                   <div class="col-sm-4 all-caps text-center">
-                     Attending
-                     <span class="text-brand displayblock text-center">
-                       0K
-                     </span>
-                   </div>
-                  </div>
-              </div>
+              <%= render partial: 'event_stats' %>
       </div>
       </div>
       </div>
@@ -143,10 +122,7 @@
         <div class="tab-pane active" id="tab_people">
           <div class="view">
             <div class="list-view boreded no-top-border p-l-40 p-r-40">
-                <h2>Workshop</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore facere quae quod explicabo hic illo facilis impedit aspernatur natus nam culpa excepturi cumque sunt beatae quam, maxime iusto incidunt tempore.</p>
-                <h2>Schedule</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore facere quae quod explicabo hic illo facilis impedit aspernatur natus nam culpa excepturi cumque sunt beatae quam, maxime iusto incidunt tempore.</p>
+              <%= @event.description %>
             </div>
           </div>
         </div>

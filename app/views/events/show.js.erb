@@ -1,2 +1,4 @@
-$('#newEventPopupModal').modal('hide');
-window.location.href = "<%= event_url(@event) %>"
+$('#eventPopupModal').modal('hide');
+<% if @event.id_changed? %>
+  window.location.href = "<%= event_url(@event) %>"
+<% end %>
