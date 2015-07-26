@@ -19,8 +19,8 @@ Rails.application.configure do
   }
 
   config.middleware.use(Rack::Tracker) do
-    handler :google_analytics, { tracker: 'UA-65632243-1' }
-    handler :go_squared, { tracker: 'GSN-565777-F' }
+    handler :google_analytics, { tracker: ENV['GOOGLE_ANALYTICS_TRACKER'] }
+    handler :go_squared, { tracker: ENV['GO_SQUARED_TRACKER'] }
   end
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
