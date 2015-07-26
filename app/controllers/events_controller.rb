@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     @owner = @event.owner
     respond_to do |format|
       if @event.save
-        flash[:notice] = "Event was successfully created, redirecting..."
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
