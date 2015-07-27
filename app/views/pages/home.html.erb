@@ -1,9 +1,33 @@
 <%
-meta title: "Entrepreneurship Reimagined", title: [:title, :site], separator: " — "
+meta title: "Entrepreneurship Reimagined",
      description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
      keywords: %w(home students collaboration entrepreneurship universities schools colleges)
 %>
 
+<%
+  meta robots: "nofollow"
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Entrepreneurship Reimagined",
+    image: "#{image_url('home_banner.jpg')}",
+    description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+  }
+%>
+<%
+  meta og: {
+    image: "https://hungryhead.co/assets/hungryhead.png",
+    title: "Entrepreneurship Reimagined",
+    url: "#{request.original_url}",
+    description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "Landing Page"
+  }
+%>
 
 <div class="splash-wrapper">
   <% cache(['beta', 'home_page', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
