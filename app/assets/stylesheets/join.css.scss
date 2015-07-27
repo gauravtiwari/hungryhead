@@ -11,7 +11,7 @@
   height: 40vh;
 }
 .join-photo {
- background-image: image-url('patterns/syudJMa.png');
+ background-image: image-url('patterns/connecting-dots.png');
  background-position: 100% 55%;
 }
 .or-seperator span {
@@ -98,13 +98,13 @@
 }
 
 .rules-photo {
-  background: #5b98e0;
+  background: #4285f4;
 }
 .brand-photo {
-  background: #5b98e0;
+  background: #4285f4;
 }
 .cookies-photo {
-  background: #5b98e0;
+  background: #4285f4;
 }
 .learn-photo {
   background: image-url('home_banner.jpg');
@@ -219,10 +219,6 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
-}
-.cta {
-  background: image-url('bg_pattern_3.jpg');
-  background-position: 60% 100%;
 }
 
 .mission {

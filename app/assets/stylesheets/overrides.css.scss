@@ -517,6 +517,15 @@ input.error:-webkit-autofill {
   background-color: #4285f4!important;
   overflow: hidden;
 }
+.btn-brand {
+  background-color: #4285f4;
+  border-color: #4285f4;
+}
+.btn-brand:hover {
+  background-color: #4285f4;
+  border-color: #4285f4;
+  opacity: 0.8;
+}
 .text-brand {
   color: #4285f4!important;
 }
