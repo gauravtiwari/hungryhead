@@ -1785,7 +1785,7 @@ h6.block {
 */
 a {
   text-shadow: none !important;
-  color: #4285f4;
+  color: #5b98e0;
   transition: color 0.1s linear 0s, background-color 0.1s linear 0s, opacity 0.2s linear 0s !important;
 }
 a:focus,
