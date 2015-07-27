@@ -14,8 +14,9 @@
                     <div class="form-group">
                       <%= label_tag 'category[name]', 'Name' %>
                       <%= f.input_field :name, name: 'category[name]', class: "form-control", :required => true, :placeholder => "Enter Category name..." %>
+                      <%= f.input_field :description, name: 'category[description]', class: "form-control", :required => true, :placeholder => "Enter description..." %>
                     </div>
-                    <%= button_tag 'Send', class: 'btn btn-primary' %>
+                    <%= button_tag 'Save', class: 'btn btn-primary' %>
                   <% end %>
                 </div>
             </div>
