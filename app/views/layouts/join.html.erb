@@ -44,7 +44,7 @@
       <% if user_signed_in? && !browser.mobile? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
-        <% if user_signed_in? && browser.mobile? %>
+        <% if user_signed_in? && browser.mobile? || browser.mobile? %>
           <%= render partial: 'globals/page_nav_mobile' %>
         <% else %>
           <%= render partial: 'globals/join_nav' %>
