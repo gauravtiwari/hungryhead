@@ -1,3 +1,10 @@
+<%
+meta title: "Entrepreneurship Reimagined", title: [:title, :site], separator: " — "
+     description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+     keywords: %w(home students collaboration entrepreneurship universities schools colleges)
+%>
+
+
 <div class="splash-wrapper">
   <% cache(['beta', 'home_page', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
     <%= render partial: 'pages/content/home' %>

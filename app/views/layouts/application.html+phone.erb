@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hungryhead - An idea simulation platform</title>
+    <%= <%= metamagic title: "Hungryhead", description: "Hungrhead is a platform for students to share, collaborate and validated startup ideas with peers. ", keywords: %w(entrepreneurship startup idea students schools colleges universities) %> %>
+    <meta content="hungryhead team" name="author" />
+
     <%= favicon_link_tag 'favicon.ico' %>
 
-    <meta content="An idea simulation platform" name="HungryHead is a practical simulation platform that simulates real world of entrepreneurship with real people" />
-    <meta content="hungryhead" name="hungryhead team" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
-
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lte IE 9]>

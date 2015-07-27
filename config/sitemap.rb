@@ -25,21 +25,23 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
 
-  add '/learn-more-about-hungryhead'
+  add '/learn-about-hungryhead'
   add '/why-hungryhead'
-  add '/request-invite'
+  add '/our-story'
+  add '/product-tour'
+  add '/how-it-works'
   add '/community-guidelines'
-  add '/get-support'
+  add '/get-started'
+  add '/product-tour/gamification'
+  add '/product-tour/collaboration'
+  add '/product-tour/community'
+  add '/join'
+  add '/login'
+  #get '/our-pricing', to: 'pages#pricing', as: :pricing
 
   add '/privacy-policy'
   add '/cookies-policy'
-  add '/get-started'
-  add '/product-tour'
-  add '/terms-of-use'
-  add '/our-story'
-  add '/how-it-works'
-  add '/join'
-  add '/login'
+  add '/terms-of-service'
   add '/help'
 
   Help::Category.find_each do |category|

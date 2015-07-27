@@ -1,3 +1,9 @@
+<%
+meta title: "Our Product", title: [:title, :site], separator: " — "
+     description: "Read about the core building blocks that makes hungryhead a reality",
+     keywords: %w(our product students collaboration entrepreneurship universities schools colleges)
+%>
+
 <% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="product-wrapper bg-white">
     <div class="product">
