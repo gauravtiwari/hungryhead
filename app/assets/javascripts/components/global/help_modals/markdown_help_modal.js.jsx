@@ -1,7 +1,7 @@
 var MarkDownHelpModal = React.createClass({
 
     componentDidMount: function() {
-        $.Pages.init();
+        $.HH.init();
     },
     render: function() {
         return (

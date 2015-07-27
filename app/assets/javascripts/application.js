@@ -54,6 +54,6 @@
 
 
 // Custom Javascripts
-//= require core/js/pages
+//= require core/js/hungryhead
 //= require pusher_init
 //= require_tree .

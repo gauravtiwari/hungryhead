@@ -60,37 +60,23 @@ html[dir="rtl"] .select2-search input {
 /* core/css/pages-icons */
 @font-face {
   font-family: 'pages-icon';
-  src:asset-url('core/fonts/pages-icon/Pages-icon.eot?-u69vo5');
-  src:asset-url('core/fonts/pages-icon/Pages-icon.eot?#iefix-u69vo5') format('embedded-opentype'),
-  asset-url('core/fonts/pages-icon/Pages-icon.woff?-u69vo5') format('woff'),
-  asset-url('core/fonts/pages-icon/Pages-icon.ttf?-u69vo5') format('truetype'),
-  asset-url('core/fonts/pages-icon/Pages-icon.svg?-u69vo5#Pages-icon') format('svg');
+  src:asset-url('core/fonts/hh-icon/Pages-icon.eot?-u69vo5');
+  src:asset-url('core/fonts/hh-icon/Pages-icon.eot?#iefix-u69vo5') format('embedded-opentype'),
+  asset-url('core/fonts/hh-icon/Pages-icon.woff?-u69vo5') format('woff'),
+  asset-url('core/fonts/hh-icon/Pages-icon.ttf?-u69vo5') format('truetype'),
+  asset-url('core/fonts/hh-icon/Pages-icon.svg?-u69vo5#Pages-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 
-/* core/css/pages */
-.pace .pace-activity {
-  background: asset-url('core/img/progress/progress-circle-success.svg') no-repeat top left;
-}
+/* core/css/hh */
+
 .quickview-wrapper .nav-tabs ~ .tab-content .quickview-notes .note {
   background-image: asset-url('core/img/notes_lines.png');
 }
 .icon-set {
   background: asset-url('core/img/icons/top_tray.png') no-repeat;
-}
-.portlet-icon-refresh-lg-master {
-  background-image: asset-url('core/img/progress/progress-circle-lg-master-static.svg');
-}
-.portlet-icon-refresh-lg-white {
-  background-image: asset-url('core/img/progress/progress-circle-lg-white-static.svg');
-}
-.portlet-icon-refresh-lg-master-animated {
-  background-image: asset-url('core/img/progress/progress-circle-lg-master.svg');
-}
-.portlet-icon-refresh-lg-white-animated {
-  background-image: asset-url('core/img/progress/progress-circle-lg-white.svg');
 }
 @font-face {
   font-family: 'Montserrat';
@@ -199,45 +185,6 @@ html[dir="rtl"] .select2-search input {
 .alert .close {
   background: asset-url('core/img/icons/noti-cross.png') no-repeat scroll 0 0 transparent;
   background-position: -9px -10px;
-}
-.progress-bar-indeterminate {
-  background: asset-url('core/img/progress/progress-bar-master.svg') no-repeat top left;
-}
-.progress-bar-indeterminate.progress-bar-primary {
-  background-image: asset-url('core/img/progress/progress-bar-primary.svg');
-}
-.progress-bar-indeterminate.progress-bar-complete {
-  background-image: asset-url('core/img/progress/progress-bar-complete.svg');
-}
-.progress-bar-indeterminate.progress-bar-success {
-  background-image: asset-url('core/img/progress/progress-bar-success.svg');
-}
-.progress-bar-indeterminate.progress-bar-warning {
-  background-image: asset-url('core/img/progress/progress-bar-warning.svg');
-}
-.progress-bar-indeterminate.progress-bar-danger {
-  background-image: asset-url('core/img/progress/progress-bar-danger.svg');
-}
-.progress-bar-indeterminate.progress-bar-master {
-  background-image: asset-url('core/img/progress/progress-bar-master.svg');
-}
-.progress-circle-indeterminate {
-  background: asset-url('core/img/progress/progress-circle-master.svg') no-repeat top left;
-}
-.progress-circle-indeterminate.progress-circle-warning {
-  background-image: asset-url('core/img/progress/progress-circle-warning.svg');
-}
-.progress-circle-indeterminate.progress-circle-danger {
-  background-image: asset-url('core/img/progress/progress-circle-danger.svg');
-}
-.progress-circle-indeterminate.progress-circle-primary {
-  background-image: asset-url('core/img/progress/progress-circle-primary.svg');
-}
-.progress-circle-indeterminate.progress-circle-success {
-  background-image: asset-url('core/img/progress/progress-circle-success.svg');
-}
-.progress-circle-indeterminate.progress-circle-complete {
-  background-image: asset-url('core/img/progress/progress-circle-complete.svg');
 }
 .editor-icon {
   background-image: asset-url('core/img/editor_tray.png');

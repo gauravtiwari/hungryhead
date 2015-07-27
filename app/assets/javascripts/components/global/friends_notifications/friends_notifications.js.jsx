@@ -23,7 +23,7 @@ var FriendsNotifications = React.createClass({
   componentDidMount: function() {
     if(this.isMounted()){
       this.fetchNotifications();
-      $.Pages.init();
+      $.HH.init();
       if(channel) {
         channel.bind(this.props.channel_event, function(data){
           var new_item = this.buildElements([data.data])

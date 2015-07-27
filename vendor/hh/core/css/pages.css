@@ -972,7 +972,7 @@ body.dashboard .page-container {
   z-index: 0;
   opacity: .4;
 }
-/* Pages Image Icon Sent - Pixel Perfect
+/* Hungryhead Image Icon Sent - Pixel Perfect
 ------------------------------------
 */
 .icon-set {
@@ -1016,7 +1016,7 @@ body.dashboard .page-container {
   position: relative;
   overflow: auto;
 }
-/* Pages Scroll bar
+/* Hungryhead Scroll bar
 ------------------------------------
 */
 .scroll-wrapper > .scroll-element,
@@ -1567,7 +1567,7 @@ body.dashboard .page-container {
   z-index: 600;
   margin: 0;
 }
-/* Pages notification holder */
+/* Hungryhead notification holder */
 .panel .pgn-wrapper {
   position: absolute;
   z-index: 602;
@@ -2876,7 +2876,7 @@ Rounded buttons
 .open.dropdown-default .dropdown-toggle {
   box-shadow: none;
 }
-/* Pages default dropdown */
+/* Hungryhead default dropdown */
 .dropdown-default {
   display: inline-block;
 }
@@ -3691,7 +3691,7 @@ Misc buttons
   right: 9px;
   top: 15px;
 }
-/* Pages Notifications plugin
+/* Hungryhead Notifications plugin
 --------------------------------------------------
 */
 body.menu-pin > .pgn-wrapper[data-position$='-left'],
@@ -4002,7 +4002,7 @@ body.menu-pin > .pgn-wrapper[data-position="bottom"] {
     opacity: 1;
   }
 }
-/* Pages Notification customizations */
+/* Hungryhead Notification customizations */
 body > .pgn-wrapper[data-position="top"] {
   top: 60px;
   left: 70px;
@@ -6871,7 +6871,7 @@ input.error:-webkit-autofill:focus,
 .has-error input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px #F9E9E9 inset !important;
 }
-/* Pages SelectFx */
+/* Hungryhead SelectFx */
 /* Default custom select styles */
 div.cs-select {
   display: inline-block;
@@ -7073,7 +7073,7 @@ div.cs-skin-slide::before {
 .cs-skin-slide .cs-selected span::after {
   content: '';
 }
-/* Pages Select  overriding */
+/* Hungryhead Select  overriding */
 .form-group-default .cs-skin-slide > span {
   padding: 0 30px 0 0;
   height: 22px;

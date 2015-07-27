@@ -97,7 +97,7 @@ jQuery(document).ready ->
 	catch e
 
 	#Initialize Pages modules
-	$.Pages.init()
+	$.HH.init()
 
 	$('.single-tag').tagsinput maxTags: 1
 	$('.three-tags').tagsinput maxTags: 3
