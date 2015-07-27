@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
   before_create :add_username, if: :username_absent?
   after_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
   before_create :seed_fund, :seed_settings, unless: :is_admin
+  after_commit :backup_user, on: :create
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
@@ -230,6 +231,10 @@ class User < ActiveRecord::Base
   #returns if a user is admin
   def is_admin
     admin?
+  end
+
+  def backup_user
+    User.copy_to "#{Rails.root}/tmp/backup/models/users.csv"
   end
 
   def should_generate_new_friendly_id?
