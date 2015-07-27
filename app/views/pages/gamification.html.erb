@@ -82,7 +82,7 @@
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md m-t-40 text-center">
                 <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/investment_badges.png', class: "image-responsive-height auto-width #{browser.mobile? ? '' : ''} lazy") %>
+                <%= image_tag('product/investment_badges.png', class: "image-responsive-height #{browser.tablet? ? 'auto-width displayblock auto-margin' : ''} lazy") %>
               </div>
             </div>
         </div>
@@ -92,13 +92,13 @@
     <section class="bg-master-lightest wrapper-small no-overflow">
       <div class="container col-md-offset-1">
         <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="col-md-5 col-sm-4">
+            <div class="col-md-5 col-sm-5">
               <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
                 <%= image_tag('product/idea_gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/idea_badges_detail.png', class: "image-responsive-height lazy auto-width") %>
+                <%= image_tag('product/idea_badges_detail.png', class: "image-responsive-height lazy #{browser.tablet? ? 'displayblock auto-margin' : ''}") %>
               </div>
             </div>
-            <div class="col-md-5 col-sm-8 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+            <div class="col-md-5 col-sm-7 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <h1 class="m-t-5 m-b-20">Collaborating on ideas</h1>
               <h5>Collaboration takes place when there is a relationship.</h5>
               <p class="m-b-20 fs-16 text-master">
@@ -127,7 +127,7 @@
             <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
               <div class="content-mask-md text-center m-t-40">
                 <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : ''} lazy") %>
+                <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.tablet? ? 'auto-width displayblock auto-margin' : ''} lazy") %>
               </div>
             </div>
         </div>
