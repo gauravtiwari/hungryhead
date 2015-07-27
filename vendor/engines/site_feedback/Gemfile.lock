@@ -8,6 +8,7 @@ PATH
       devise
       fog-google
       mail_form
+      metamagic
       pundit
       rails
       simple_form
@@ -71,7 +72,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
-    excon (0.45.3)
+    excon (0.45.4)
     fog-core (1.32.0)
       builder
       excon (~> 0.45)
@@ -101,6 +102,8 @@ GEM
     mail_form (1.5.1)
       actionmailer (>= 3.2, < 5)
       activemodel (>= 3.2, < 5)
+    metamagic (3.1.7)
+      rails (>= 3.0.0)
     mime-types (2.6.1)
     mimetype-fu (0.1.2)
     mini_portile (0.6.2)

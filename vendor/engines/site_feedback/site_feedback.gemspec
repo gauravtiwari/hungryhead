@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency "browser"
   s.add_dependency "devise"
   s.add_dependency "pundit"
+  s.add_dependency "metamagic"
   s.add_dependency "unobtrusive_flash"
   s.add_dependency "mail_form"
   s.add_dependency "fog-google"

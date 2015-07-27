@@ -1,3 +1,17 @@
+<%
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  metamagic title: "Questions? #{@category.name}",
+     description: "#{@category.description}",
+     keywords: %w(help collaboration entrepreneurship universities schools colleges)
+%>
+
 <% cache(["beta", @category, @category.articles.published.count, current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
 <div class="page-container p-b-60 bg-white overflow-hidden">
 <div class="help-header bg-solid p-t-20 p-b-20 box-shadow">

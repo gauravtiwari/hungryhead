@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hungryhead - An idea simulation platform</title>
+    <%= metamagic site: "HungryHead", title: [:title, :site], separator: " — ",  description: "Hungrhead is a platform for students to share, collaborate and validated startup ideas with peers. ", keywords: %w(entrepreneurship startup idea students schools colleges universities) %>
+
+    <% if ActionController::Base.asset_host %>
+      <link rel="dns-prefetch" href="//<%= ActionController::Base.asset_host %>" />
+    <% end %>
+
     <%= favicon_link_tag 'favicon.ico' %>
 
-    <meta content="An idea simulation platform" name="description" />
-    <meta content="hungryhead" name="author" />
+    <meta content="hungryhead team" name="author" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= stylesheet_link_tag    "help/application", media: "all" %>
 
     <!--[if lte IE 9]>
-      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
     <![endif]-->
 
-    <script type="text/javascript" data-turbolinks-eval=false>
+    <script type="text/javascript">
       window.onload = function() {
         // fix for windows 8
         if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
