@@ -10,8 +10,6 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
 
-  MetaEvents::Tracker.default_event_receivers << Mixpanel::Tracker.new(ENV['MIXPANEL_API_KEY'])
-
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
@@ -20,10 +18,7 @@ Rails.application.configure do
     namespace: 'cache'
   }
 
-  config.middleware.use(Rack::Tracker) do
-    handler :google_analytics, { tracker: ENV['GOOGLE_ANALYTICS_TRACKER'] }
-    handler :go_squared, { tracker: ENV['GO_SQUARED_TRACKER'] }
-  end
+  MetaEvents::Tracker.default_event_receivers << Mixpanel::Tracker.new(ENV['MIXPANEL_API_KEY'])
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
