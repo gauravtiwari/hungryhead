@@ -234,7 +234,7 @@ class User < ActiveRecord::Base
   end
 
   def backup_user
-    User.copy_to "#{Rails.root}/tmp/backup/models/users.csv"
+    User.copy_to "#{Rails.root}/db/seeds/backups/models/users.csv"
   end
 
   def should_generate_new_friendly_id?
