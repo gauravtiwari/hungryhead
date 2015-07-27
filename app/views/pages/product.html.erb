@@ -1,7 +1,36 @@
 <%
-metamagic title: "Our Product",
-     description: "Read about the core building blocks that makes hungryhead a reality",
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  meta title: "Learn about our Product",
+     description: "Read about the core building blocks that makes hungryhead - a collaborative platform for students to start entrepreneurship",
      keywords: %w(our product students collaboration entrepreneurship universities schools colleges)
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Learn about our Product",
+    image: "#{image_url('product.jpg')}",
+    description: "Read about the core building blocks that makes hungryhead - a collaborative platform for students to start entrepreneurship",
+  }
+%>
+<%
+  meta og: {
+    image: "#{image_url('product.jpg')}",
+    title: "Learn about our Product",
+    url: "#{request.original_url}",
+    description: "Read about the core building blocks that makes hungryhead - a collaborative platform for students to start entrepreneurship",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
 %>
 
 <% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>

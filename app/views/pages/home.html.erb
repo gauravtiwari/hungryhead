@@ -1,11 +1,15 @@
 <%
-meta title: "Entrepreneurship Reimagined",
-     description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
-     keywords: %w(home students collaboration entrepreneurship universities schools colleges)
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
 %>
 
 <%
-  meta robots: "nofollow"
+meta title: "Entrepreneurship Reimagined",
+     description: "Welcome! Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+     keywords: %w(home students collaboration entrepreneurship universities schools colleges)
 %>
 
 <%
@@ -14,15 +18,16 @@ meta title: "Entrepreneurship Reimagined",
     site: "@hungryhead_co",
     title: "Entrepreneurship Reimagined",
     image: "#{image_url('home_banner.jpg')}",
-    description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+    description: "Welcome! Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
   }
 %>
+
 <%
   meta og: {
-    image: "https://hungryhead.co/assets/hungryhead.png",
+    image: "#{image_url('home_banner.jpg')}",
     title: "Entrepreneurship Reimagined",
     url: "#{request.original_url}",
-    description: "Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
+    description: "Welcome! Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities",
     site_name: "Hungryhead",
     locale: "en_GB",
     type: "Landing Page"

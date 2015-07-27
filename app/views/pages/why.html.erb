@@ -1,8 +1,38 @@
 <%
-metamagic title: "Why hungryhead",
-     description: "Find our why we started hungryhead -  an online platform for students to start entrepreneurship",
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  metamagic title: "Why we are doing, what we are doing",
+     description: "Learn more about why we started hungryhead -  an collaborative online platform for students to start entrepreneurship",
      keywords: %w(students collaboration entrepreneurship universities schools colleges)
 %>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Why we are doing, what we are doing",
+    image: "#{image_url('why-photo.jpg')}",
+    description: "Learn more about why we started hungryhead -  an collaborative online platform for students to start entrepreneurship",
+  }
+%>
+<%
+  meta og: {
+    image: "#{image_url('why-photo.jpg')}",
+    title: "Why we are doing, what we are doing",
+    url: "#{request.original_url}",
+    description: "Learn more about why we started hungryhead -  an collaborative online platform for students to start entrepreneurship",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
+%>
+
 
 <% cache(['beta', 'why', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="learn-wrapper bg-white">

@@ -1,7 +1,37 @@
 <%
-metamagic title: "How it works",
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  meta title: "How hungryhead works",
      description: "Understand the technical bits about hungryhead - a platform for students to start entrepreneurship",
      keywords: %w(how students collaboration entrepreneurship universities schools colleges)
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "How hungryhead works",
+    image: "#{image_url('how_it_works.jpeg')}",
+    description: "Understand the technical bits about hungryhead - a platform for students to start entrepreneurship",
+  }
+%>
+
+<%
+  meta og: {
+    image: "#{image_url('how_it_works.jpeg')}",
+    title: "How hungryhead works",
+    url: "#{request.original_url}",
+    description: "Understand the technical bits about hungryhead - a platform for students to start entrepreneurship",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
 %>
 
 <% cache(['beta', 'how_it_works', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>

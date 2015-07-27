@@ -1,7 +1,36 @@
 <%
-metamagic title: "Our Story",
-     description: "Hungryhead is a culmination of our own startup journey. Learn how we got started",
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  meta title: "Our Story! Stumble and Fall",
+     description: "Hungryhead is a culmination of our quest to start a company. Learn why and how we got started to build an exclusive platform for students",
      keywords: %w(our story students collaboration entrepreneurship universities schools colleges)
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Our Story",
+    image: "#{image_url('find-your_way.jpg')}",
+    description: "Hungryhead is a culmination of our quest to start a company. Learn why and how we got started to build an exclusive platform for students",
+  }
+%>
+<%
+  meta og: {
+    image: "#{image_url('find-your_way.jpg')}",
+    title: "Learn about our Product",
+    url: "#{request.original_url}",
+    description: "Hungryhead is a culmination of our quest to start a company. Learn why and how we got started to build an exclusive platform for students",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
 %>
 
 <% cache(['beta', 'our_story', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
