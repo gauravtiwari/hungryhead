@@ -13,6 +13,7 @@
 %>
 
 <% cache(["beta", @category, @category.articles.published.count, current_user && current_user.admin? ? "admin-#{current_user.uid}" : "guest"]) do %>
+
 <div class="page-container p-b-60 bg-white overflow-hidden">
 <div class="help-header bg-solid p-t-20 p-b-20 box-shadow">
   <div class="container">
@@ -26,6 +27,17 @@
     <% end %>
   </div>
 </div>
+
+<section class="wrapper-small">
+  <div class="row">
+    <div class="col-md-5 auto-margin">
+      <em class="clearfix semi-bold">
+        This page is currently a work in progress and we will be adding and udpating the questions on daily basis. If you have any questions or want to report a problem, please <%= link_to('Collaborate with us', site_feedback.root_path) %>
+      </em>
+    </div>
+  </div>
+</section>
+
 <div class="container">
 <div class="container-inner p-l-15 p-r-15">
   <div class="help-main-content m-t-50">

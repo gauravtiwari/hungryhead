@@ -1,4 +1,16 @@
 
 var $el = $('body');
-$el.append("<%= j render partial: 'form' %>");
-$('#categoryPopupModal').modal('show');
+$el.append($('<div>', {class: 'new_category_modal', id: 'new_category_modal'}));
+
+var $container = $('#new_category_modal');
+
+//Add form to popup
+$container.html("<%= j render partial: 'form' %>");
+$popup = $('#categoryPopupModal');
+$popup.modal('show');
+
+//remove element from dom
+$popup.on('hidden.bs.modal', function(event) {
+  event.preventDefault();
+  $container.remove();
+});

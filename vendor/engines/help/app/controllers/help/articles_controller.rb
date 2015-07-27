@@ -17,6 +17,16 @@ module Help
       render :edit
     end
 
+    def destroy
+      @article = Article.friendly.find(params[:id])
+      authorize @article
+      if @article.destroy
+        respond_to do |format|
+          format.js {render :destroy}
+        end
+      end
+    end
+
     def update
       @article = Article.friendly.find(params[:id])
       authorize @article

@@ -1,5 +1,8 @@
-<h4 class="bold"><%= article.title %></h4>
-<%= markdownify article.body %>
-<% if current_user && current_user.admin? %>
-  <%= link_to('Edit', edit_article_path(article), remote: true) %>
-<% end %>
+<div id="article_<%= article.id %>">
+  <h4 class="bold"><%= article.title %></h4>
+  <%= markdownify article.body %>
+  <% if current_user && current_user.admin? %>
+    <%= link_to('Edit', edit_article_path(article), remote: true) %>
+    <%= link_to('Delete', article_path(article), method: :delete, confirm: "Are you sure?", remote: true, class: 'm-l-10 text-danger') %>
+  <% end %>
+</div>

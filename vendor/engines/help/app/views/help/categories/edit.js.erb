@@ -1,8 +1,15 @@
 
 var $el = $('body');
-
 $el.append($('<div>', {class: 'edit_category_modal', id: 'edit_category_modal'}));
 
-$('#edit_category_modal').append("<%= j render partial: 'form', locals: {category: @category} %>");
+//Add form to container
+var $container = $('#edit_category_modal');
+$container.html("<%= j render partial: 'form', locals: {category: @category} %>");
+var $popup = $('#categoryPopupModal');
+$popup.modal('show');
 
-$('#categoryPopupModal').modal('show');
+//remove element from dom
+$popup.on('hidden.bs.modal', function(event) {
+  event.preventDefault();
+  $container.remove();
+});

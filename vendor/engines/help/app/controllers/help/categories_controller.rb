@@ -45,6 +45,17 @@ module Help
       end
     end
 
+    def destroy
+      @category = Category.friendly.find(params[:id])
+      authorize @category
+      if @category.destroy
+        flash[:notice] = "Article destroyed"
+        respond_to do |format|
+          format.js {render :destroy}
+        end
+      end
+    end
+
     # GET /categories/1
     def show
       @categories = Category.order(id: :asc)

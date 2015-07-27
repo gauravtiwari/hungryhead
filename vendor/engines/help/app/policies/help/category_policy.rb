@@ -8,6 +8,10 @@ module Help
       current_user && current_user.admin?
     end
 
+    def destroy?
+      current_user && current_user.admin?
+    end
+
     def create?
       current_user && current_user.admin?
     end
