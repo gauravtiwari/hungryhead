@@ -16,8 +16,8 @@
  *= require pnotify
 
  * BEGIN CORE TEMPLATE CSS FOR PAGES
- *= require core/css/pages-icons
- *= require core/css/pages
+ *= require core/css/hh-icons
+ *= require core/css/hungryhead
  *= require core/css/themes/simple
 
 
