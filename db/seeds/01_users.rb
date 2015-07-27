@@ -13,6 +13,7 @@ ActiveRecord::Base.transaction do
     email: 'gaurav@hungryhead.co',
     admin: true,
     role: 0,
+    school_id: 1,
     confirmed_at: Time.now
   )
 
