@@ -24,12 +24,13 @@
                         <span class="help">eg: 'Ecommerce, Mobile'</span>
                         <%= f.input_field :market_list, value: "#{@user.market_list}", data: { url: autocomplete_market_name_markets_path, placeholder: "Which markets are you interested in? eg: 'Education', 'Art'", init: @user.market_list, tag_limit: 3}, class: 'auto-select form-control' %>
                       </div>
-
-                      <div class="form-group clearfix">
-                        <label for="select2-init">Your university or college</label>
-                        <span class="help">eg: 'only UK universities for now'</span>
-                        <%= f.input_field :school_id, data: { url: autocomplete_school_name_schools_path, placeholder: "Which university you are studying or studied? eg: 'UCL', 'Lancaster'", init: @user.school.name}, class: 'auto-select-id form-control' %>
-                      </div>
+                      <% if @user.school_id.present? %>
+                        <div class="form-group clearfix">
+                          <label for="select2-init">Your university or college</label>
+                          <span class="help">eg: 'only UK universities for now'</span>
+                          <%= f.input_field :school_id, data: { url: autocomplete_school_name_schools_path, placeholder: "Which university you are studying or studied? eg: 'UCL', 'Lancaster'", init: @user.school.name}, class: 'auto-select-id form-control' %>
+                        </div>
+                      <% end %>
 
                       <div class="form-group">
                         <div class="checkbox check-success ">
