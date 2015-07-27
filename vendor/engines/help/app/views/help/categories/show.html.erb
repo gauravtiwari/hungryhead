@@ -20,6 +20,7 @@
       Help <i class="fa fa-chevron-right fs-12"></i>
     </small>
     <h2 class="p-l-15 text-white"><%= @category.name %></h2>
+    <h5 class="p-l-15 text-white"><%= @category.description %></h5>
     <% if current_user && current_user.admin? %>
       <%= link_to('Create new Article', new_article_path, remote: true, class: 'text-white pull-right') %>
     <% end %>

@@ -306,8 +306,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-07-26 20:48:30.452409'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-07-26 20:48:30.452435'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-07-27 09:18:51.158048'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-07-27 09:18:51.158075'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -448,6 +448,7 @@ ALTER SEQUENCE help_articles_id_seq OWNED BY help_articles.id;
 CREATE TABLE help_categories (
     id integer NOT NULL,
     name character varying NOT NULL,
+    description character varying NOT NULL,
     slug character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
