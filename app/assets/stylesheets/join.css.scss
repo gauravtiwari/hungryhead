@@ -36,6 +36,7 @@
 .how-photo:before,
 .gamification-photo:before,
 .learn-photo:before,
+.collaboration-photo:before,
 .product-photo:before,
 .join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.5);
@@ -60,6 +61,9 @@
 .join-alumni-photo:before {
   background: rgba(51, 51, 51, 0.4);
 }
+.collaboration-photo:before {
+  background: rgba(51, 51, 51, 0.2);
+}
 .is-scrolling {
   background: #323a45;
   background: rgba(50,58,69,0.95);
@@ -78,6 +82,7 @@
 .support-us-photo,
 .why-photo,
 .brand-photo,
+.collaboration-photo,
 .cookies-photo,
 .product-photo {
   width: 100%;
@@ -109,6 +114,15 @@
 .learn-photo {
   background: image-url('home_banner.jpg');
   background-position: 100% 55%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -khtml-background-size: cover;
+  background-size: cover;
+}
+.collaboration-photo {
+  background: image-url('collaboration.jpg');
+  background-position: 100% 65%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
