@@ -263,6 +263,8 @@ GEM
     fog-xml (0.1.2)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     foreman (0.78.0)
       thor (~> 0.19.1)
     forgery (0.6.0)
@@ -409,7 +411,6 @@ GEM
     rails-assets-fizzy-ui-utils (1.0.1)
       rails-assets-doc-ready (~> 1.0.4)
       rails-assets-matches-selector (~> 1.0.2)
-    rails-assets-font-awesome (4.4.0)
     rails-assets-get-size (1.2.2)
       rails-assets-get-style-property (~> 1.0)
     rails-assets-get-style-property (1.0.4)
@@ -603,6 +604,7 @@ DEPENDENCIES
   execjs
   figaro
   fog-google
+  font-awesome-rails
   foreman
   forgery
   friendly_id
@@ -651,7 +653,6 @@ DEPENDENCIES
   rails-assets-classie!
   rails-assets-eventEmitter!
   rails-assets-fastclick!
-  rails-assets-font-awesome!
   rails-assets-hammerjs!
   rails-assets-imagesloaded!
   rails-assets-jquery!
