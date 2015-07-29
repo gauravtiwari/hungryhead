@@ -15,7 +15,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery.scrollbar'
   gem 'rails-assets-eventEmitter'
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-select2-bootstrap-css'
   gem 'rails-assets-marked'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
@@ -44,6 +43,7 @@ gem 'pg'
 gem 'postgres-copy'
 gem 'coffee-rails'
 gem 'sass'
+
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
@@ -66,9 +66,10 @@ gem 'crono'
 gem 'jbuilder'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+
 gem 'spring',        group: :development
 gem 'sprockets'
-#API
+
 #Render anywhere
 gem 'render_anywhere', :require => false
 
@@ -77,9 +78,6 @@ gem 'order_as_specified'
 
 #Mail form
 gem 'mail_form'
-
-#Deal with JSON data
-gem  'hashie'
 
 #404 page customize
 gem 'gaffe'
@@ -168,11 +166,9 @@ gem 'react-rails'
 #Parse JSON
 gem 'json'
 
-#Show diffs
-gem 'diffy'
-
 #JS routes
 gem 'js-routes'
+
 #Log versions
 gem 'paper_trail', '~> 4.0.0.rc2'
 
