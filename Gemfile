@@ -173,12 +173,8 @@ gem 'diffy'
 
 #JS routes
 gem 'js-routes'
-
-#Mailboxer
-gem 'mailboxer', :github => 'mailboxer/mailboxer'
-
 #Log versions
-gem 'paper_trail', '~> 4.0.0.rc1'
+gem 'paper_trail', '~> 4.0.0.rc2'
 
 #Simple form
 gem 'simple_form'
