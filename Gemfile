@@ -117,10 +117,6 @@ gem 'wicked'
 #Tagging
 gem 'acts-as-taggable-on'
 
-#Ruby Races
-gem 'less-rails'
-gem 'autoprefixer-rails'
-
 #Autocomplete rails
 gem 'rails4-autocomplete'
 
