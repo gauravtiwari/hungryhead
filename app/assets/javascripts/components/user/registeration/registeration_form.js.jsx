@@ -54,8 +54,8 @@ var RegisterationForm = React.createClass({
   onUsernameChange: function(e) {
     data = {
       username: e.target.value,
-      first_name: this.refs.first_name.getDOMNode().value.trim()
-      last_name: this.refs.last_name.getDOMNode().value.trim()
+      first_name: this.refs.first_name.getDOMNode().value.trim(),
+      last_name: this.refs.last_name.getDOMNode().value.trim(),
       name: this.refs.first_name.getDOMNode().value.trim() + ' ' + this.refs.last_name.getDOMNode().value.trim()
     }
     var target = e.target;
