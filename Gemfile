@@ -172,7 +172,7 @@ gem 'json'
 gem 'js-routes'
 
 #Log versions
-gem 'paper_trail', '~> 4.0.0.rc2'
+gem 'paper_trail'
 
 #Simple form
 gem 'simple_form'
@@ -250,6 +250,7 @@ gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'meta_request'
   gem 'activerecord-colored_log_subscriber'
   gem 'bullet'
   gem 'binding_of_caller'
