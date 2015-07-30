@@ -18,13 +18,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_current_user, if: :user_signed_in?
 
-  before_filter :check_rack_mini_profiler
-
-  def check_rack_mini_profiler
-    # for example - if current_user.admin?
-    Rack::MiniProfiler.authorize_request
-  end
-
   protected
 
   def set_current_user
