@@ -117,6 +117,9 @@ gem 'wicked'
 #Tagging
 gem 'acts-as-taggable-on'
 
+#Autoprefixer
+gem 'autoprefixer-rails'
+
 #Autocomplete rails
 gem 'rails4-autocomplete'
 
