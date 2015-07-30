@@ -26,7 +26,6 @@ class Suggester
   # Generates suggestions and making sure they are not in unavailable_suggestions
   def suggest(options)
     candidates_to_exclude = options[:exclude]
-    validation_block      = options[:validate]
     number_of_suggestions = options[:num_suggestions]
 
     results    = []
