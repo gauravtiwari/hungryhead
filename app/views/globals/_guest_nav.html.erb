@@ -1,4 +1,4 @@
-<% cache(["guest_menu", "home", "v1"]) do %>
+<% cache(["guest_menu", "#{request.params[:action]}", "v1"]) do %>
   <!-- START HEADER -->
   <div class="header">
   <div class="container">
