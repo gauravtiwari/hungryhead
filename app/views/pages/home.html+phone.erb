@@ -33,7 +33,7 @@
     type: "Landing Page"
   }
 %>
-<% cache(['beta', 'home_page', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'home_page', 'v1']) do %>
 <div class="splash-wrapper">
     <%= render partial: 'pages/content/home' %>
     <div class="container relative">

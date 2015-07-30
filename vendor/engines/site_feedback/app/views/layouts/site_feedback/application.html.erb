@@ -36,7 +36,7 @@
 
   </head>
 
-  <body class="<%= 'absolute-header no-header' if !user_signed_in? %>  menu-behind  <%= controller_name %> <%= action_name %>">
+  <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : 'absolute-header no-header' %> menu-behind  <%= controller_name %> <%= action_name %>">
 
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
 

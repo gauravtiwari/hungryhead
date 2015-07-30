@@ -36,7 +36,7 @@
 <% cache(['beta', 'learn_more', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="learn-wrapper bg-white">
     <div class="learn">
-      <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+      <div class="jumbotron no-margin" data-pages="parallax">
         <div class="learn-photo">
           <div class="container vmiddle">
           <div class="row <%= browser.mobile? ? 'p-b-40 p-t-40' : ''  %>">
@@ -57,7 +57,7 @@
     </div>
 
     <div class="what-section bg-white">
-      <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+      <div class="wrapper-small">
         <div class="col-md-6 col-sm-10 auto-margin">
           <div>
             <h3 class="semi-bold">Hungryhead is a new way to start entrepreneurship</h3>

@@ -12,10 +12,10 @@
      keywords: %w(community guidelines students collaboration entrepreneurship)
 %>
 
-<% cache(['beta', 'community_guidelines', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'community_guidelines', 'v1']) do %>
 <div class="learn-wrapper bg-white">
   <div class="learn">
-    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+    <div class="jumbotron no-margin" data-pages="parallax">
         <div class="rules-photo inner">
         <div class="container vmiddle">
         <div class="row">
@@ -36,7 +36,7 @@
   </div>
 
   <section class="story">
-    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+    <div class="wrapper-small">
       <div class="col-md-6 col-sm-10 auto-margin">
         <p class="fs-16 semi-bold">
           <strong>Hungryhead is a community</strong> to bring new student ideas to life. We founded hungryhead on a few core values –– <strong>trust, respect and integrity</strong>. It’s all up to us  to ensure hungryhead is safe and open platform to share and build new ideas.

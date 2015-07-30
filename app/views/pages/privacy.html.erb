@@ -12,10 +12,10 @@
      keywords: %w(privacy policy students universities colleges)
 %>
 
-<% cache(['beta', 'privacy_policy', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'privacy_policy', 'v1']) do %>
   <div class="learn-wrapper bg-white">
     <div class="learn">
-      <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+      <div class="jumbotron no-margin" data-pages="parallax">
           <div class="brand-photo inner">
           <div class="container vmiddle">
           <div class="row">
@@ -36,7 +36,7 @@
     </div>
 
     <section class="story p-b-100">
-      <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+      <div class="wrapper-small">
         <div class="col-md-6 col-sm-10 auto-margin">
           <%= render partial: 'pages/content/privacy' %>
         </div>

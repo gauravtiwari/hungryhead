@@ -11,10 +11,10 @@
      keywords: %w(cookies students collaboration entrepreneurship)
 %>
 
-<% cache(['beta', 'cookies', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'cookies', 'v1']) do %>
 <div class="learn-wrapper bg-white">
   <div class="learn">
-    <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
+    <div class="jumbotron no-margin" data-pages="parallax">
         <div class="brand-photo inner">
         <div class="container vmiddle">
         <div class="row">
@@ -35,7 +35,7 @@
   </div>
 
   <section class="cookies">
-    <div class="<%= browser.mobile? ? 'wrapper-small' : 'wrapper-lg'  %>">
+    <div class="wrapper-small">
       <div class="col-md-6 col-sm-10 auto-margin">
         <div>
           <h3 class="semi-bold">Cookies</h3>
