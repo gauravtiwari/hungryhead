@@ -38,7 +38,6 @@ end
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
 gem 'pg'
-#gem 'rack-mini-profiler', require: false
 gem 'postgres-copy'
 gem 'coffee-rails'
 gem 'sass'
