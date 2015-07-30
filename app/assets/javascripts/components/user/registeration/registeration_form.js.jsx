@@ -86,16 +86,6 @@ var RegisterationForm = React.createClass({
     }
   },
 
-  loadTerms: function(e) {
-    e.preventDefault();
-    $.getScript(Routes.terms_path());
-  },
-
-  loadPrivacy: function(e){
-    e.preventDefault();
-    $.getScript(Routes.privacy_path());
-  },
-
   onEmailChange: function(e) {
    data = {
       email: e.target.value
@@ -195,7 +185,7 @@ var RegisterationForm = React.createClass({
           <div className="col-sm-6">
             <div className="checkbox check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
-              <label htmlFor="checkbox1">I agree to the <a onClick={this.loadTerms} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" onClick={this.loadPrivacy} className="text-info small">Privacy</a></label>
+              <label htmlFor="checkbox1">I agree to the <a href={Routes.terms_path()} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" href={Routes.privacy_path()} className="text-info small">Privacy</a></label>
             </div>
           </div>
          <div className="pull-right sm-pull-reset col-sm-6">

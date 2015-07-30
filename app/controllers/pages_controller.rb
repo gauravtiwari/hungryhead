@@ -15,7 +15,6 @@ class PagesController < ApplicationController
   def community_guidelines
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -23,7 +22,6 @@ class PagesController < ApplicationController
   def terms
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
@@ -51,7 +49,6 @@ class PagesController < ApplicationController
   def privacy
     respond_to do |format|
       format.html
-      format.js
     end
   end
 
