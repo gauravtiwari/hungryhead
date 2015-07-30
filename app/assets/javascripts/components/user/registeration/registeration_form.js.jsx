@@ -120,6 +120,8 @@ var RegisterationForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
+    var request_invite_text = "Don't have an school email? ";
+
     return (
       <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
         <div className="row">
@@ -197,6 +199,7 @@ var RegisterationForm = React.createClass({
         </div>
         <div className="sm-m-t-30 m-t-10">
           <button className="btn btn-brand text-white btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
+          <small className="small-text m-l-10">{request_invite_text}Please <a href="/get-started" className="bold">request an invite</a></small>
         </div>
       </form>
     )
