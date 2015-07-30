@@ -237,6 +237,11 @@ gem 'metamagic'
 #UUID generation
 gem 'uuidtools'
 
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof' # ruby 2.1+ only
+gem 'memory_profiler'
+
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
