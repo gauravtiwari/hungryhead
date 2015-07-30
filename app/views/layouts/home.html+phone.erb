@@ -43,12 +43,9 @@
   </head>
 
   <body class="<%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
-
     <%= render partial: 'globals/app_sidebar' %>
-
     <div class="page-container">
       <%= render partial: 'globals/page_nav_mobile' %>
-
       <div class="page-content-wrapper">
         <div class="content">
           <%= yield %>

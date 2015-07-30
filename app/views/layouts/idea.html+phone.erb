@@ -56,11 +56,7 @@
   <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
     <%= render partial: 'globals/app_sidebar' %>
    <div class="page-container">
-     <% if params[:action] == "index" %>
-      <%= render partial: 'globals/guest_nav_mobile' %>
-     <% else %>
-       <%= render partial: 'globals/page_nav_mobile' %>
-     <% end %>
+      <%= render partial: 'globals/page_nav_mobile' %>
 
       <div class="page-content-wrapper">
         <div class="content">

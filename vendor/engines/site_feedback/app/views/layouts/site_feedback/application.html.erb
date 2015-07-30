@@ -40,7 +40,11 @@
 
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
 
-      <%= render partial: 'globals/guest_nav' %>
+      <% if user_signed_in? %>
+        <%= render partial: 'globals/page_nav', locals: {bg: 'bg-white'}  %>
+      <% else %>
+        <%= render partial: 'globals/guest_nav' %>
+      <% end %>
 
       <div class="page-content-wrapper">
         <div class="content" data-no-turbolink>
