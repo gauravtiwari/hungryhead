@@ -63,27 +63,9 @@
 	        </div>
 	        <div class="modal-body m-t-20">
 	            <div class="row">
-	                <div class="col-md-6">
-		                <div class="form-group">
-		                    <input type="text" placeholder="Your email address" class="form-control input-lg" id="icon-filter" name="user_request[email]" autofocus />
-		                </div>
-	                </div>
-	                <div class="col-md-6">
-	                	<div class="form-group">
-	                    	<input type="text" placeholder="Your name" class="form-control input-lg" id="icon-filter" name="user_request[name]" />
-	                   	</div>
-	                </div>
-	                <div class="col-md-6">
-	                	<div class="form-group">
-	                		<input type="text" placeholder="Your school name" class="form-control input-lg" id="icon-filter" name="user_request[school_name]" />
-	                		<input type="hidden" name="user_request[user_type]" value="Student" />
-	                	</div>
-	                </div>
-
-	                <div class="col-md-6 m-t-20 text-center pull-right">
-	                    <button type="button" class="btn btn-green text-white pull-right fs-15">Submit</button>
-	                    <small class="pull-right hinted-text p-t-20">We will get back to you in 24 hours.</small>
-	                </div>
+	            	<div id="invite_form_2">
+	            		<%= render partial: 'invite_requests/new_school' %>
+	            	</div>
 	            </div>
 	        </div>
 	    </div>

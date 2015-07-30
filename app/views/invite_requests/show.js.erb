@@ -2,3 +2,9 @@
 var $el = $('#invite_form_<%= @invite_request.user_type %>');
 //Append message
 $el.html("<div class='no-content'>Thank you! Your request was successfully submitted. We will be in touch shortly.</div>");
+
+<% if @invite_request.user_type == 2 %>
+  setTimeout(function(){
+    $('#addSchoolPopup').modal('hide');
+  }, 2000);
+<% end %>
