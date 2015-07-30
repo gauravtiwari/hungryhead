@@ -196,8 +196,7 @@ var RegisterationForm = React.createClass({
          </div>
         </div>
         <div className="sm-m-t-30 m-t-10">
-          <button className="btn btn-complete btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
-          <a className="btn btn-primary btn-sm fs-13 m-l-10" href="/">Back</a>
+          <button className="btn btn-brand text-white btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
         </div>
       </form>
     )

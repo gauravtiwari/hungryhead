@@ -38,8 +38,8 @@ render: function() {
           </div>
         </div>
       </div>
-      <button className="btn btn-complete btn-cons m-t-10" type="submit"><i className={loading_class}></i> Sign in</button>
-      <a className="btn btn-primary btn-cons m-t-10" href="/account/reset-password">Forgot your password? </a>
+      <button className="btn btn-brand text-white m-r-10 btn-cons m-t-10" type="submit"><i className={loading_class}></i> Sign in</button>
+      <a className="btn btn-danger btn-cons m-t-10" href="/account/reset-password">Forgot your password? </a>
       <div className="col-sm-12 no-padding m-t-20">
         <a className="clearfix" href="/account/confirm/resend">{confirmation_text}</a>
         <a className="clearfix" href="/join">{account_text}</a>
