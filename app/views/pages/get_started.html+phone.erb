@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <div class="container horz-section  wrapper-small">
+  <div class="container horz-section wrapper-small p-b-100">
     <div class="row">
     <div class="col-md-12">
     <div class="panel p-l-15 p-r-15 panel-group panel-transparent" data-toggle="collapse" id=
@@ -51,15 +51,19 @@
         </div>
         <div class="panel-collapse collapse in" id="forStudent">
           <div class="panel-body">
-            <h4>With ideas: </h4>
-            <p>
-             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-            </p>
-
-            <h4>Without ideas: </h4>
-            <p>
-             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-            </p>
+             <div class="content-mask-md m-b-20 text-center p-t-20">
+               <%= image_tag('badges/entrepreneur.png', class: "image-responsive-height auto-width lazy") %>
+             </div>
+             <h1 class="m-t-5 text-center m-b-20">For students</h1>
+             <p class="fs-16 text-master">
+                Whether you are student with your next big idea or want to collaborate with your peers, we have got you covered. The platform is not just about the people with ideas but also those who are interested in startup investment and business in general. We took almost all concepts that are related to idea building and baked it into our gamification engine to make the platform practical, fun and rewarding.
+             </p>
+             <p class="fs-16 text-master">
+                You can pitch and validate your idea with peers, virtually invest in ideas using our app coins, meet and connect with like-minded people, make return on investment and earn friendly badges.
+             </p>
+             <h5 class="fs-16 bold">
+                Hungryhead is currently in beta. <%= link_to('Click here', new_user_registration_path) %> to create an account. If you are an alumni please click on alumni tab on the left.
+             </h5>
           </div>
         </div>
       </div>
@@ -72,10 +76,16 @@
         </div>
         <div class="panel-collapse collapse" id="forMentors">
           <div class="panel-body">
-            <h4>Try Something neat</h4>
-            <p>
-             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-             </p>
+           <div class="content-mask-md m-b-20 text-center p-t-20">
+             <%= image_tag('badges/scholar.png', class: "image-responsive-height auto-width lazy") %>
+           </div>
+           <h1 class="m-t-5 text-center">For alumni and mentors</h1>
+           <h5 class="bold">
+             If you are an alumni and want to validate your idea or contribute your technical business expertise, please submit the form to request an early access.
+           </h5>
+           <div id="invite_form_1">
+            <%= render partial: 'invite_requests/new_alumni' %>
+           </div>
           </div>
         </div>
       </div>
@@ -83,14 +93,24 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a class="collapsed" data-parent="#accordion" data-toggle=
-            "collapse" href="#forSchools">For Colleges and Universities</a>
+            "collapse" href="#forSchools">For Schools, Colleges and Universities</a>
           </h4>
         </div>
         <div class="panel-collapse collapse" id="forSchools">
           <div class="panel-body">
-            <p>
-             We’re a home for everything from films, games, and music to art, design, and technology. Kickstarter is full of projects, big and small, that are brought to life through the direct support of people like you. Since our launch in 2009, <b>8.4 million people </b> have pledged more than <b>$1.7 billion</b>, funding <b>82,000</b> creative projects. Thousands of creative projects are raising funds on Kickstarter right now.
-             </p>
+           <div class="content-mask-md m-b-20 text-center p-t-20">
+             <span class="fa fa-university fs-50"></span>
+           </div>
+           <h1 class="m-t-5 text-center">For institutions</h1>
+           <p class="fs-16 text-master m-t-20">
+             We built hungryhead for institutions to make the student startup support process practical and streamlined. We have integrated tools for institutions to visualize and collaborate with entrepreneurial students easily and provide support effciently.
+           </p>
+           <p class="fs-16 text-master bold">
+             To learn more and request access to manage your institution profile, please submit the form below.
+           </p>
+           <div id="invite_form_0">
+             <%= render partial: 'invite_requests/new_institution' %>
+           </div>
           </div>
         </div>
       </div>
@@ -98,6 +118,15 @@
     </div>
     </div>
   </div>
+
+  <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+    <div class="col-sm-10 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        Are you a student?
+      </h1>
+      <%= link_to('Create an account', new_user_registration_path, class: 'main-button fs-13 bold') %>
+    </div>
+  </section>
 
   </div>
 <% end %>

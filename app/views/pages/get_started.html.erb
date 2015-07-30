@@ -72,7 +72,7 @@
                You can pitch and validate your idea with peers, virtually invest in ideas using our app coins, meet and connect with like-minded people, make return on investment and earn friendly badges.
             </p>
             <h5 class="fs-16 bold">
-               Hungryhead is currently in beta. <%= link_to('Click here', new_user_registration_path) %> to create an account.
+               Hungryhead is currently in beta. <%= link_to('Click here', new_user_registration_path) %> to create an account. If you are an alumni please click on alumni tab on the left.
             </h5>
           </div>
         </div>
@@ -111,7 +111,14 @@
       </div>
     </div>
   </div>
-  <div class="p-t-100 clearfix"></div>
+  <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+    <div class="col-sm-10 col-md-8 auto-margin">
+      <h1 class="m-t-5 m-b-20">
+        Are you a student?
+      </h1>
+      <%= link_to('Create an account', new_user_registration_path, class: 'main-button fs-13 bold') %>
+    </div>
+  </section>
 
 </div>
 <% end %>
