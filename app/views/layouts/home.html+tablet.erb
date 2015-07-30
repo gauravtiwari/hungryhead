@@ -42,22 +42,19 @@
 
   </head>
 
-  <body class="fixed-header menu-behind <%= 'no-header' if params[:action] == 'home' %> <%= controller_name %> <%= action_name %>">
-    <div class="page-container">
-      <% if user_signed_in? %>
-        <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
-      <% elsif params[:action] == "home" %>
-       <%= render partial: 'globals/guest_nav' %>
-      <% else %>
-        <%= render partial: 'globals/page_nav' %>
-      <% end %>
-
-      <div class="page-content-wrapper">
-        <div class="content">
-          <%= yield %>
-        </div>
+  <body class="<%= 'absolute-header no-header' if params[:controller] == 'pages' %>  menu-behind  <%= controller_name %> <%= action_name %>">
+  <div class="page-container">
+    <% if user_signed_in? %>
+      <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
+    <% else %>
+      <%= render partial: 'globals/guest_nav' %>
+    <% end %>
+    <div class="page-content-wrapper">
+      <div class="content">
+        <%= yield %>
       </div>
     </div>
+  </div>
 
   </body>
 

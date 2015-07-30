@@ -106,22 +106,20 @@
     <!-- BEGIN CONTENT SECTION -->
     <section class="wrapper-small no-overflow">
       <div class="container col-md-offset-1">
-        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="col-md-5 col-sm-12">
-              <h1 class="m-t-5 m-b-20">Culture of Cross Pollination</h1>
-              <p class="m-b-20 fs-16 text-master">
-                We have built our platform to bring students from schools, colleges and universities together. Our fundamental idea is to create a culture of cross-pollination among serious entrepreneurial students from around the world where they can share, collaborate and work on startup ideas and achieve shared goals.
-              </p>
-              <p class="m-b-20 fs-16">
-                <%= link_to('Beta Register today', new_user_registration_path, class: 'bold') %> to connect with an exclusive community of students who are serious about entrepreneurship.
-              </p>
-              <%= link_to('Learn more', community_path, class: 'main-button fs-13 bold') %>
-            </div>
-            <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
-              <div class="content-mask-md m-t-40 text-center">
-                <%= image_tag('product/cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
-              </div>
-            </div>
+        <div class="col-md-5 col-sm-12">
+          <h1 class="m-t-5 m-b-20">Culture of Cross Pollination</h1>
+          <p class="m-b-20 fs-16 text-master">
+            We have built our platform to bring students from schools, colleges and universities together. Our fundamental idea is to create a culture of cross-pollination among serious entrepreneurial students from around the world where they can share, collaborate and work on startup ideas and achieve shared goals.
+          </p>
+          <p class="m-b-20 fs-16">
+            <%= link_to('Beta Register today', new_user_registration_path, class: 'bold') %> to connect with an exclusive community of students who are serious about entrepreneurship.
+          </p>
+          <%= link_to('Learn more', community_path, class: 'main-button fs-13 bold') %>
+        </div>
+        <div class="col-md-5 col-sm-12 col-md-offset-1 hidden-xs">
+          <div class="content-mask-md m-t-40 text-center">
+            <%= image_tag('product/cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
+          </div>
         </div>
       </div>
     </section>
@@ -130,23 +128,21 @@
     <!-- BEGIN CONTENT SECTION -->
     <section class="bg-master-lightest wrapper-small no-overflow">
       <div class="container col-md-offset-1">
-        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="col-md-5 col-sm-4">
-              <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
-                <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy auto-width") %>
-              </div>
-            </div>
-            <div class="col-md-5 col-sm-8 col-md-offset-1 xs-p-l-15 xs-p-r-15">
-              <h1 class="m-t-5 m-b-20">Greater collaboration = Better ideas</h1>
-              <h5>Collaboration takes place when there is a relationship.</h5>
-              <p class="m-b-20 fs-16 text-master">
-                We have built our platform around a startup idea because, that's where relationships can be formed. People relate and connect with the problem someone else is experiencing. If you feel like being part of an idea or want to contribute your skills - just hop into a conversation and introduce yourself.
-              </p>
-              <p class="m-b-20 fs-16">
-                You can also subscribe to events and meet new people.
-              </p>
-              <%= link_to('Learn more', collaboration_path, class: 'main-button fs-13 bold') %>
-            </div>
+        <div class="col-md-5 col-sm-4 col-xs-12 hidden-xs">
+          <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
+            <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy auto-width") %>
+          </div>
+        </div>
+        <div class="col-md-5 col-sm-8 col-md-offset-1">
+          <h1 class="m-t-5 m-b-20">Greater collaboration = Better ideas</h1>
+          <h5>Collaboration takes place when there is a relationship.</h5>
+          <p class="m-b-20 fs-16 text-master">
+            We have built our platform around a startup idea because, that's where relationships can be formed. People relate and connect with the problem someone else is experiencing. If you feel like being part of an idea or want to contribute your skills - just hop into a conversation and introduce yourself.
+          </p>
+          <p class="m-b-20 fs-16">
+            You can also subscribe to events and meet new people.
+          </p>
+          <%= link_to('Learn more', collaboration_path, class: 'main-button fs-13 bold') %>
         </div>
       </div>
     </section>
@@ -155,23 +151,21 @@
     <!-- BEGIN CONTENT SECTION -->
     <section class="wrapper-small no-overflow">
       <div class="container col-md-offset-1">
-        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
-            <div class="col-md-5 col-sm-12">
-              <h1 class="m-t-5 m-b-20">Seriousness and fun goes together</h1>
-              <p class="m-b-20 fs-16 text-master">
-                Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
-              </p>
-              <p class="m-b-20 fs-16">
-                Collaborate, invest in useful ideas using app coins, make return on investments, validate ideas, and earn badges.
-              </p>
-              <%= link_to('Learn more', gamification_path, class: 'main-button fs-13 bold') %>
-            </div>
-            <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
-              <div class="content-mask-md text-center m-t-40">
-                <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-                <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock auto-margin'} lazy") %>
-              </div>
-            </div>
+        <div class="col-md-5 col-sm-12">
+          <h1 class="m-t-5 m-b-20">Seriousness and fun goes together</h1>
+          <p class="m-b-20 fs-16 text-master">
+            Building a startup requires a great deal of perseverance. To make the journey fun and rewarding, we have integrated some of the real world startup concepts into our gamification system.
+          </p>
+          <p class="m-b-20 fs-16">
+            Collaborate, invest in useful ideas using app coins, make return on investments, validate ideas, and earn badges.
+          </p>
+          <%= link_to('Learn more', gamification_path, class: 'main-button fs-13 bold') %>
+        </div>
+        <div class="col-md-5 col-sm-12 col-md-offset-1 hidden-xs">
+          <div class="content-mask-md text-center m-t-40">
+            <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+            <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock auto-margin'} lazy") %>
+          </div>
         </div>
       </div>
     </section>

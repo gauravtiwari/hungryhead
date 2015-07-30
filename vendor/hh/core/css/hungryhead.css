@@ -12286,7 +12286,6 @@ section.last:before {
     padding: 0 10px;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-    background: #fff !important;
   }
   .header .header-inner {
     text-align: center;

@@ -36,11 +36,11 @@
 
   </head>
 
-  <body class="fixed-header menu-behind">
+  <body class="<%= 'absolute-header no-header' if !user_signed_in? %>  menu-behind  <%= controller_name %> <%= action_name %>">
 
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
 
-      <%= render partial: 'globals/page_nav' %>
+      <%= render partial: 'globals/guest_nav' %>
 
       <div class="page-content-wrapper">
         <div class="content" data-no-turbolink>

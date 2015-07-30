@@ -40,8 +40,8 @@
 
   </head>
 
-  <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header  no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
-    <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
+  <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
+    <div class="page-container">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
@@ -49,7 +49,7 @@
       <% end %>
 
       <div class="page-content-wrapper">
-        <div class="content" data-no-turbolink>
+        <div class="content">
           <%= yield %>
         </div>
       </div>
