@@ -3,15 +3,6 @@ production:
   after_rails:
     -
       apply_during: all
-      destination: /tmp/rake_task.sh
-      execute: true
-      run_on: all_servers
-      source: /.cloud66/scripts/rake_task.sh
-      sudo: true
-      target: rails
-  after_rails:
-    -
-      apply_during: all
       destination: /tmp/dbseed.sh
       execute: true
       run_on: single_server
