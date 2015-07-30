@@ -13,13 +13,17 @@ class ApplicationController < ActionController::Base
   #Flash messages from rails
   after_filter :prepare_unobtrusive_flash
 
-  #Temporary basic auth
-  before_filter :authenticate_basic
-
   #Device specific templates
   before_action :set_device_type
 
   before_filter :set_current_user, if: :user_signed_in?
+
+  before_filter :check_rack_mini_profiler
+
+  def check_rack_mini_profiler
+    # for example - if current_user.admin?
+    Rack::MiniProfiler.authorize_request
+  end
 
   protected
 
@@ -29,14 +33,6 @@ class ApplicationController < ActionController::Base
 
   def meta_events_tracker
     @meta_events_tracker ||= MetaEvents::Tracker.new(current_user.try(:id), request.remote_ip)
-  end
-
-  def authenticate_basic
-    if Rails.env.production?
-      authenticate_or_request_with_http_basic do |username, password|
-        username == "hungryhead_testing" && password == "production_testing"
-      end
-    end
   end
 
   def configure_permitted_parameters

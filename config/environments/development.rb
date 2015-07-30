@@ -15,7 +15,7 @@ Rails.application.configure do
 
   config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
     expires_in: 2.weeks.to_i,
-    namespace: 'cache'
+    namespace: "cache_#{Rails.env.downcase}"
   }
 
   # Don't care if the mailer can't send.

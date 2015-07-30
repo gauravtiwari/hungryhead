@@ -15,7 +15,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
     expires_in: 2.weeks.to_i,
-    namespace: 'cache'
+    namespace: "cache_#{Rails.env.downcase}"
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Set to :debug to see everything in the log.
   config.log_level = :info

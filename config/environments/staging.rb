@@ -17,7 +17,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
     expires_in: 2.weeks.to_i,
-    namespace: 'cache'
+    namespace: "cache_#{Rails.env.downcase}"
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
