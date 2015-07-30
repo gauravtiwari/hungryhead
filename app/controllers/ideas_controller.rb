@@ -133,9 +133,9 @@ class IdeasController < ApplicationController
     end
   end
 
-  # GET /ideas/1/changelog
+  # GET /ideas/1/changes
   def changes
-    @versions = @idea.versions.paginate(:page => params[:page], :per_page => 10)
+    @versions = @idea.versions.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
     respond_to do |format|
       format.html
       format.js

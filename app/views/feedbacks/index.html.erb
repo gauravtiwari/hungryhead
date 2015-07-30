@@ -9,13 +9,7 @@
       <%= render partial: 'ideas/menu' %>
     <% end %>
 
-    <% cache(@idea) do %>
-      <div class="auto-height box-shadow ">
-        <%= render partial: 'ideas/header', locals: {data: data}  %>
-      </div>
-    <% end %>
-
-    <div class="m-t-20">
+    <div class="feedbacks m-t-10">
       <div class="idea-content">
         <% cache([@idea, @feedbacks]) do %>
          <%= render partial: "feedbacks" %>

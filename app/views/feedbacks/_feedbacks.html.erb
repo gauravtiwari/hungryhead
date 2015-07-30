@@ -4,9 +4,9 @@
      <%= render partial: 'feedback', locals: {feedback: feedback} %>
    <% end %>
   <% end %>
-
   <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
 <% else %>
+  <% if @idea.user != current_user %>
   <div class="panel panel-default p-t-40 p-b-40 box-shadow">
     <div class="text-center light font-opensans fs-22">
       <span class="fa fa-bullhorn fs-22"></span>
@@ -23,4 +23,14 @@
       </div>
     </div>
   </div>
+  <% else %>
+    <div class="panel panel-default p-t-40 p-b-40 box-shadow">
+      <div class="text-center light font-opensans fs-22">
+        <span class="fa fa-bullhorn fs-22"></span>
+        <span class="clearfix">
+          No Feedbacks
+        </span>
+      </div>
+    </div>
+  <% end %>
 <% end %>

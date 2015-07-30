@@ -214,7 +214,7 @@
 }
 .vmiddle {
   position: relative;
-  top: 40%;
+  top: 50%;
   z-index: 10;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -222,19 +222,6 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-@media (max-width: 768px){
-  .vmiddle {
-    position: relative;
-    top: 50%;
-    z-index: 10;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-}
-
 .mission {
   background: image-url("building-ecosystem.png") no-repeat center center;
   -webkit-background-size: cover;

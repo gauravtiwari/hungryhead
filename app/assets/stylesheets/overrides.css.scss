@@ -9,6 +9,11 @@ body.no-header .header {
 body {
   background-color: #eef0f0;
 }
+body.absolute-header .header {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 body, p {
   line-height: 1.6;
   font-size: 14px;
@@ -852,6 +857,23 @@ ul.reactions > div {
     font-size: 11px;
     line-height: 18px;
     margin: auto;
+}
+.select2-results {
+  margin: 3px 10px 10px 3px;
+  margin: 0;
+  padding: 0;
+}
+.select2-drop.select2-drop-above.select2-drop-active {
+  box-shadow: none;
+}
+.select2-result-selectable .select2-match,
+.select2-result-unselectable .select2-match {
+  font-weight: bold;
+}
+.select2-results .select2-highlighted {
+  background: #e5e8e9;
+  border-radius: 3px;
+  border-radius: 0;
 }
 
 .border-back {

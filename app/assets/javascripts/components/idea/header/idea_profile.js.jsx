@@ -17,7 +17,7 @@ var IdeaProfile = React.createClass({
             {this.props.text}
           </a>
         </h4>
-        <p className="no-margin text-white p-b-10 fs-16">
+        <p className="no-margin text-white p-t-10 fs-16">
          {this.props.idea.high_concept_pitch}
         </p>
         <span className="text-white">
