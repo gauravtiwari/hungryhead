@@ -13,7 +13,7 @@ module SiteFeedback
 
     def headers
       {
-        :to => "gaurav@gauravtiwari.co.uk",
+        :to => "support@hungryhead.co",
         :subject => "#{name} left a feedback for hungryhead"
       }
     end
