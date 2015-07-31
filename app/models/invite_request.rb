@@ -13,14 +13,14 @@ class InviteRequest < ActiveRecord::Base
     message: "You have alread submitted your invite request"
   }
 
-  enum invite_form: {institution: 0, mentor: 1, student: 2}
+  enum user_type: {institution: 0, mentor: 1, student: 2}
 
   validates :name, :presence => true
 
   def headers
     {
       :to => "support@hungryhead.co",
-      :subject => "#{name} left a feedback for hungryhead"
+      :subject => "Pending invite request from #{name}"
     }
   end
 
