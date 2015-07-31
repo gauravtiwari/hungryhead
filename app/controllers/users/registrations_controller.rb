@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:user][:email].split('@').last == @school_domain.domain
       build_resource(sign_up_params)
       @user = resource
+      @user.request = request
 
       #Skip confirmation for beta, // this needs to changed once we go live
       @user.skip_confirmation_notification!

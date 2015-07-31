@@ -20,6 +20,7 @@ class InviteRequest < ActiveRecord::Base
   def headers
     {
       :to => "support@hungryhead.co",
+      :from => %("#{name}" <#{email}>),
       :subject => "Pending invite request from #{name} type: #{user_type}"
     }
   end

@@ -14,6 +14,7 @@ module SiteFeedback
     def headers
       {
         :to => "support@hungryhead.co",
+        :from => %("#{name}" <#{email}>),
         :subject => "#{name} left a feedback for hungryhead"
       }
     end
