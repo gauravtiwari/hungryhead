@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/gauravtiwari/browser.git
+  revision: 6437455a6e257bbd1869551b3c9f33ae38427c6a
+  specs:
+    browser (0.9.0)
+
+GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: a709a10b06b7d9fc4a9846bc613c60c86af9dd7c
   specs:
@@ -105,7 +111,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap3-datetimepicker-rails (4.14.30)
       momentjs-rails (>= 2.8.1)
-    browser (0.9.0)
     bugsnag (2.8.10)
       json (~> 1.7, >= 1.7.7)
     builder (3.2.2)
@@ -582,7 +587,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap3-datetimepicker-rails (~> 4.14.30)
-  browser
+  browser!
   bugsnag
   bullet
   carrierwave

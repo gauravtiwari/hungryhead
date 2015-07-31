@@ -127,7 +127,7 @@ gem 'oj'
 gem 'passenger'
 
 #Browser gem
-gem 'browser'
+gem 'browser', github: 'gauravtiwari/browser'
 
 #Autocomplete  + Redis
 gem 'rack-contrib'
