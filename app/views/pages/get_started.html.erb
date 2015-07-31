@@ -85,7 +85,7 @@
            <p class="fs-16 text-master">
             If you are an alumni or mentor and want to contribute your technical business expertise, please submit the form to request an early access. Alumni can also validate their startup ideas.
            </p>
-           <div id="invite_form_1">
+           <div id="invite_form_mentor">
             <%= render partial: 'invite_requests/new_alumni' %>
            </div>
          </div>
@@ -103,7 +103,7 @@
           <p class="fs-16 text-master">
             To learn more and request access to manage your institution profile, please submit the form below.
           </p>
-          <div id="invite_form_0">
+          <div id="invite_form_institution">
             <%= render partial: 'invite_requests/new_institution' %>
           </div>
         </div>
@@ -111,6 +111,7 @@
       </div>
     </div>
   </div>
+
   <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
     <div class="col-sm-10 col-md-8 auto-margin">
       <h1 class="m-t-5 m-b-20">
@@ -120,6 +121,28 @@
     </div>
   </section>
 
+  <div class="modal fade stick-up" id="addSchoolPopup" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  <i class="pg-close"></i>
+              </button>
+              <h5 class="text-left p-b-5 no-margin"><span class="semi-bold">Submit your</span> request</h5>
+              <p class="text-left small">
+                We are sorry :( that we have not added your school into our database. Please enter your details using form below and we will get it added into our list as soon as possible.
+              </p>
+            </div>
+            <div class="modal-body m-t-20">
+                <div class="row">
+                  <div id="invite_form_student">
+                    <%= render partial: 'invite_requests/new_school' %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>
 <% end %>
 <%= render partial: 'globals/footer' %>

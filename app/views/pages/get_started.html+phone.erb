@@ -56,14 +56,14 @@
              </div>
              <h1 class="m-t-5 text-center m-b-20">For students</h1>
              <p class="fs-16 text-master">
-                Whether you are a student with your next big idea or want to collaborate with your peers, we have got you covered. The platform is not just about the people with ideas but also those who are interested in startup investment and business in general. We took almost all concepts that are related to idea building and baked it into our gamification engine to make the platform practical, fun and rewarding.
+                Whether you are a student with your next big idea or want to collaborate with your peers, we have got you covered. The platform is not just about the people with ideas but also those who are interested in startup investment and business in general.
              </p>
-             <p class="fs-16 text-master">
-                You can pitch and validate your idea with peers, virtually invest in ideas using our app coins, meet and connect with like-minded people, make a return on investment and earn friendly badges.
-             </p>
-             <h5 class="fs-16 bold">
-                Hungryhead is currently in beta. <%= link_to('Click here', new_user_registration_path) %> to create an account. If you are an alumni please click on alumni tab on the left.
+             <h5 class="fs-16 text-master">
+               Hungryhead is currently in beta. Fill in the form to create an account. If you are an alumni please click on alumni tab on the left.
              </h5>
+             <div class="student-registeration-form m-t-20">
+               <%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
+             </div>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
         <div class="panel-heading">
           <h4 class="panel-title">
             <a class="" data-parent="#accordion" data-toggle="collapse" href=
-            "#forMentors">For mentors</a>
+            "#forMentors">For alumni and mentors</a>
           </h4>
         </div>
         <div class="panel-collapse collapse" id="forMentors">
@@ -81,9 +81,9 @@
            </div>
            <h1 class="m-t-5 text-center">For alumni and mentors</h1>
            <h5 class="bold">
-             If you are an alumni and want to validate your idea or contribute your technical business expertise, please submit the form to request an early access.
+             If you are an alumni or mentor and want to contribute your technical business expertise, please submit the form to request an early access. Alumni can also validate their startup ideas.
            </h5>
-           <div id="invite_form_1">
+           <div id="invite_form_mentor">
             <%= render partial: 'invite_requests/new_alumni' %>
            </div>
           </div>
@@ -103,12 +103,12 @@
            </div>
            <h1 class="m-t-5 text-center">For institutions</h1>
            <p class="fs-16 text-master m-t-20">
-             We built hungryhead for institutions to make the student startup support process practical and streamlined. We have integrated tools for institutions to visualize and collaborate with entrepreneurial students easily and provide support efficiently.
+             Hungryhead for institutions is to make the student startup support process practical and streamlined. We have integrated tools for institutions to visualize and collaborate with entrepreneurial students easily and provide support efficiently.
            </p>
-           <p class="fs-16 text-master bold">
+           <p class="fs-16 text-master">
              To learn more and request access to manage your institution profile, please submit the form below.
            </p>
-           <div id="invite_form_0">
+           <div id="invite_form_institution">
              <%= render partial: 'invite_requests/new_institution' %>
            </div>
           </div>
