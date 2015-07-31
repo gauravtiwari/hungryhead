@@ -1,5 +1,5 @@
 <%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request m-t-40", id: "new_invite_request"}, remote: true) do |f| %>
- <%= f.hidden_field :user_type, value: 0 %>
+ <%= f.hidden_field :user_type, value: "institution" %>
  <div class="join-alumni-form clearfix">
   <div class="col-sm-8 col-md-8 auto-margin">
     <div class="form-group form-group-default">

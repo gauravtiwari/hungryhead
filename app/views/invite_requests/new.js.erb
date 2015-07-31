@@ -2,3 +2,8 @@
 var $el = $('#invite_form_<%= @invite_request.user_type %>');
 //Append message
 $('form#new_invite_request')[0].reset();
+
+<% if @invite_request.errors.any? %>
+  var $el = $('#new_invite_request');
+  $el.html("<%= j render partial: 'error_message' %>")
+<% end %>
