@@ -10,9 +10,6 @@ class ApplicationController < ActionController::Base
   #Devise Permitted paramaters
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  #Flash messages from rails
-  after_filter :prepare_unobtrusive_flash
-
   #Device specific templates
   before_action :set_device_type
 

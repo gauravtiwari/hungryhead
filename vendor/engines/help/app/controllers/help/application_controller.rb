@@ -1,7 +1,5 @@
 module Help
   class ApplicationController < ActionController::Base
-    #Flash messages from rails
-    after_filter :prepare_unobtrusive_flash
 
     before_action :set_device_type
     include Pundit

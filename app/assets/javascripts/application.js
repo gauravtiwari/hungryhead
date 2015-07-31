@@ -46,7 +46,6 @@
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
 //= require pnotify
-//= require unobtrusive_flash
 //= require flashes
 //= require react
 //= require react-infinite

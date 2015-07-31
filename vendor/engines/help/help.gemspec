@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency "metamagic"
   s.add_dependency "pundit"
   s.add_dependency "postgres-copy"
-  s.add_dependency "unobtrusive_flash"
 
   s.add_development_dependency "sqlite3"
 end

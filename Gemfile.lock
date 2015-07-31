@@ -17,7 +17,6 @@ PATH
       pundit
       rails
       simple_form
-      unobtrusive_flash
 
 PATH
   remote: vendor/engines/site_feedback
@@ -33,7 +32,6 @@ PATH
       pundit
       rails
       simple_form
-      unobtrusive_flash
 
 GEM
   remote: https://rubygems.org/
@@ -562,8 +560,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.1)
     uniform_notifier (1.9.0)
-    unobtrusive_flash (3.1.0)
-      railties
     uuidtools (2.1.5)
     vegas (0.1.11)
       rack (>= 1.0.0)
@@ -699,7 +695,6 @@ DEPENDENCIES
   therubyracer
   uglifier
   unf
-  unobtrusive_flash (>= 3)
   uuidtools
   wicked
   will_paginate
