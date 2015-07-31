@@ -22,6 +22,9 @@ var Register = React.createClass({
           $('#form-register').hide().fadeOut('fast');
           $('.student-registeration-form').html("<div class='no-content animated fadeIn text-green'> Registeration Successful. You will receive an email shortly on " + data.email + "</div>");
         }
+        if(data.error){
+          $('body').pgNotification({style: "simple", message: data.error.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
+        }
         this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
