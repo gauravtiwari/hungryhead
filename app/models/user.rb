@@ -2,19 +2,6 @@ class User < ActiveRecord::Base
 
   acts_as_copy_target
 
-  #Email user registeration
-  include MailForm::Delivery
-  append :remote_ip, :user_agent
-  attributes :name, :email, :created_at
-
-  def headers
-    {
-      :to => "gaurav@hungryhead.co",
-      :from => %("#{name}" <#{email}>),
-      :subject => "New user registeration from #{name}"
-    }
-  end
-
   #Order objects as specified in array
   extend OrderAsSpecified
 
