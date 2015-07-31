@@ -1,0 +1,6 @@
+<div class="no-content m-t-20">
+  Something went wrong.
+  <ul class="no-style">
+    <%= @feedback.errors.full_messages.first if @feedback.errors.any? %>
+  </ul>
+</div>
