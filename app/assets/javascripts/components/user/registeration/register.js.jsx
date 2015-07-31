@@ -19,14 +19,9 @@ var Register = React.createClass({
       dataType: "json",
       success: function ( data ) {
         if(data.name) {
-          $('#form-register').remove();
-
-          $('body').pgNotification({style: "simple", message: "Registeration Successful. You will receive an email shortly on " + data.email + ". Redirecting...", position: "top-right", type: "success",timeout: 5000}).show();
-          setTimeout(function(){
-            window.location.href = Routes.root_path;
-          }, 3000);
+          $('#form-register').hide().fadeOut('fast');
+          $('.student-registeration-form').html("<div class='no-content animated fadeIn text-green'> Registeration Successful. You will receive an email shortly on " + data.email + "</div>");
         }
-
         this.setState({loading: false});
       }.bind(this),
       error: function(xhr, status, err) {
