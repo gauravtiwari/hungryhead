@@ -12981,6 +12981,12 @@ section.last:before {
   .xs-p-t-40 {
     padding-top: 40px;
   }
+  .xs-p-t-80 {
+    padding-top: 80px;
+  }
+  .xs-p-t-60 {
+    padding-top: 60px;
+  }
   .xs-p-t-30 {
     padding-top: 30px;
   }
