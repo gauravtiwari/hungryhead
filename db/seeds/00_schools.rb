@@ -144,6 +144,5 @@ ActiveRecord::Base.transaction do
     user_id: 1,
     website_url: 'ed.ac.uk'
   )
-
 end
 
