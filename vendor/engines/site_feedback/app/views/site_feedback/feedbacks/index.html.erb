@@ -12,6 +12,27 @@
      keywords: %w(feedback collaboration entrepreneurship universities schools colleges)
 %>
 
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Leave us a feedback!",
+    image: "https:#{image_url('building-ecosystem.png')}",
+    description: "Please collaborate with us to build a global platform for students who have potential to change the world.",
+  }
+%>
+<%
+  meta og: {
+    image: "https:#{image_url('building-ecosystem.png')}",
+    title: "Leave us a feedback!",
+    url: "#{request.original_url}",
+    description: "Please collaborate with us to build a global platform for students who have potential to change the world.",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
+%>
+
 <% cache(['beta', 'collaborate_with_us', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
 
   <div class="learn-wrapper bg-white">
