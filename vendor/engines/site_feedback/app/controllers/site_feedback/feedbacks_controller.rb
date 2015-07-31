@@ -28,8 +28,7 @@ module SiteFeedback
           format.html { redirect_to @feedback, notice: 'Thank you so much for your time. We have recieved your feedback.'}
           format.js {render :show, notice: 'Thank you so much for your time. We have recieved your feedback.'}
         else
-          flash[:notice] = "Something went wrong #{@feedback.errors}"
-          format.js {render :show}
+          format.js
           format.json {render json: @feedback.errors}
         end
       end
