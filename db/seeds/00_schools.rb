@@ -105,4 +105,45 @@ ActiveRecord::Base.transaction do
     website_url: 'bristol.ac.uk'
   )
 
+  School.create!(
+    name: 'Liverpool University',
+    location_list: 'Liverpool',
+    description: "The University of Liverpool is one of the great centres of research, knowledge and innovation. Our pioneering reputation attracts students, experts and partners from around the world. Through our research, teaching and collaborations we seek to be life changing and world shaping.",
+    email: 'admin@liv.ac.uk',
+    domain: 'liv.ac.uk',
+    user_id: 1,
+    website_url: 'liv.ac.uk'
+  )
+
+  School.create!(
+    name: 'Birmingham University',
+    location_list: 'Birmingham',
+    description: "Birmingham has been challenging and developing great minds for more than a century. Characterised by a tradition of innovation, research at the University has broken new ground, pushed forward the boundaries of knowledge and made an impact on people’s lives.",
+    email: 'admin@birmingham.ac.uk',
+    domain: 'birmingham.ac.uk',
+    user_id: 1,
+    website_url: 'birmingham.ac.uk'
+  )
+
+  School.create!(
+    name: 'City University',
+    location_list: 'London',
+    description: "City University London is a leading international University and the only university in London to be both committed to academic excellence and focused on business and the professions.",
+    email: 'admin@city.ac.uk',
+    domain: 'city.ac.uk',
+    user_id: 1,
+    website_url: 'city.ac.uk'
+  )
+
+  School.create!(
+    name: 'The University of Edinburgh',
+    location_list: 'Edinburgh',
+    description: "The University of Edinburgh's Academic structure is based on 3 Colleges containing a total of 22 Schools.",
+    email: 'admin@ed.ac.uk',
+    domain: 'ed.ac.uk',
+    user_id: 1,
+    website_url: 'ed.ac.uk'
+  )
+
 end
+
