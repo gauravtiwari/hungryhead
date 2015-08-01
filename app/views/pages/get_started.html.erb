@@ -7,9 +7,31 @@
 %>
 
 <%
-  meta title: "Get Started",
-     description: "Learn how to start using hungryhead today - a platform for students to start entrepreneurship",
-     keywords: %w(join students collaboration entrepreneurship universities schools colleges)
+  meta title: "Join now!",
+    description: "Learn how to start using hungryhead today - a new way to start entrepreneurship for students worldwide",
+    keywords: %w(join students collaboration entrepreneurship universities schools colleges)
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "Join now!",
+    image: "https:#{image_url('patterns/connecting-dots.png')}",
+    description: "Learn how to start using hungryhead today - a new way to start entrepreneurship for students worldwide",
+  }
+%>
+
+<%
+  meta og: {
+    image: "https:#{image_url('patterns/connecting-dots.png')}",
+    title: "Join now!",
+    url: "#{request.original_url}",
+    description: "Learn how to start using hungryhead today - a new way to start entrepreneurship for students worldwide",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
 %>
 
 <% cache(['beta', 'get_started', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>

@@ -17,14 +17,14 @@
     card: "summary_large_image",
     site: "@hungryhead_co",
     title: "Entrepreneurship Reimagined",
-    image: "https:#{image_url('home_banner.jpg')}",
+    image: "https:#{image_url('home_cover.png')}",
     description: "Welcome! Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities.",
   }
 %>
 
 <%
   meta og: {
-    image: "https:#{image_url('home_banner.jpg')}",
+    image: "https:#{image_url('home_cover.png')}",
     title: "Entrepreneurship Reimagined",
     url: "#{request.original_url}",
     description: "Welcome! Hungryhead is a new way to start entreprenuership for students studying in schools, colleges and universities.",
@@ -33,6 +33,7 @@
     type: "article"
   }
 %>
+
 <% cache(['beta', 'home_page', 'v1']) do %>
 <div class="splash-wrapper">
     <%= render partial: 'pages/content/home' %>
