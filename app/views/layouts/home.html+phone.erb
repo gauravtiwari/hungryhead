@@ -20,12 +20,12 @@
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <!--[if lte IE 9]>
-      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
     <![endif]-->
 
     <script type="text/javascript" data-turbolinks-eval=false>

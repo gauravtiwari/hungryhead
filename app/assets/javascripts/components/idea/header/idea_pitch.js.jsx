@@ -9,7 +9,7 @@ var IdeaPitch= React.createClass({
 
     return (
       <div className="col-md-6">
-        <blockquote className="text-white p-t-40 p-b-20 fs-16" dangerouslySetInnerHTML={{__html: html}}></blockquote>
+        <blockquote className="text-white p-t-20 fs-16" dangerouslySetInnerHTML={{__html: html}}></blockquote>
       </div>
     );
   }

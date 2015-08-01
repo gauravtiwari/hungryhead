@@ -1,6 +1,6 @@
 <div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
   <% if activity.owner.avatar_present? %>
-    <%= activity.owner.get_avatar %>
+    <%= image_tag(activity.owner.get_avatar, data: {src: activity.owner.get_avatar, src_retina: activity.owner.get_avatar}) %>
   <% else %>
   <span class="placeholder no-padding bold text-white">
     <%= activity.owner.name_badge %>

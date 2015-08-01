@@ -14,7 +14,7 @@
         <% end %>
       </span>
       <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
-       <h5 class="text-master no-margin bold inline fs-14">
+       <h5 class="no-margin bold inline fs-14">
          <a href="<%= profile_path(user) %>" class="inline">
            <%= user.name %>
          </a>
@@ -31,32 +31,32 @@
         <p class="people-info no-margin">
           <span class="fa fa-map-marker text-green"></span>
           <% user.location_list.each do |tag| %>
-            <%= link_to("#{tag}", tag_people_path(tag.parameterize), class: "text-master") %>
+            <%= link_to("#{tag}", tag_people_path(tag.parameterize)) %>
           <% end %>
         </p>
         <% end %>
         <p class="text-master no-margin p-t-5">
           <%= user.mini_bio %>
         </p>
-        <p class="fs-14 p-t-5 block people-info text-master">
+        <p class="fs-14 p-t-5 block people-info small-text">
           <% if user.cached_subject_list.present? %>
-          <span class="hidden-xs text-master">
+          <span class="hidden-xs small-text">
             <% user.subject_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-master light") %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
             <% end %>
           </span>
           <% end %>
           <% if user.cached_market_list.present? %>
-          <span class="hidden-xs text-master">
+          <span class="hidden-xs small-text">
             <% user.market_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-master light") %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
             <% end %>
           </span>
           <% end %>
           <% if user.cached_skill_list.present? %>
-          <span class="hidden-xs text-master">
+          <span class="hidden-xs small-text">
             <% user.skill_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-master light") %>
+              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
             <% end %>
           </span>
           <% end %>
