@@ -86,7 +86,7 @@ class PagesController < ApplicationController
   end
 
   def last_modified_date
-    return 2.days.ago unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
+    return 1.days.ago unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
   end
 
 end
