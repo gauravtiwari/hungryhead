@@ -1,13 +1,13 @@
 # Be sure to restart your server when you modify this file.
-
+uri = URI.parse(ENV["SESSION_REDIS_URL"])
 Rails.application.config.session_store :redis_session_store, {
   key: 'hungryhead',
   serializer: :hybrid,
   redis: {
-    db: 3,
+    db: 4,
     expire_after: 120.minutes,
     key_prefix: 'hungryhead:session:',
-    host: ENV['SESSION_REDIS_URL'], # Redis host name, default is localhost
-    port: 6379   # Redis port, default is 6379
+    host: uri.host, # Redis host name, default is localhost
+    port: uri.port   # Redis port, default is 6379
   }
 }
