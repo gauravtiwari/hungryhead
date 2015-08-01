@@ -8,3 +8,11 @@ production:
       run_on: single_server
       source: /.cloud66/dbseed.sh
       target: rails
+  last_thing:
+    -
+      apply_during: all
+      destination: /tmp/refresh_sitemap.sh
+      execute: true
+      run_on: single_server
+      source: /.cloud66/refresh_sitemap.sh
+      target: rails
