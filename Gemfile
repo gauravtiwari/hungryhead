@@ -219,9 +219,6 @@ gem 'figaro'
 #caching system
 gem 'readthis'
 
-#Intercom
-gem 'intercom-rails'
-
 #Realtime
 gem 'pusher'
 gem 'em-http-request' # Required by trigger_async
