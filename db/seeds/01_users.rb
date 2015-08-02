@@ -2,7 +2,7 @@
 #into db
 ActiveRecord::Base.transaction do
 
-  User.find_by_slug('adminuser').destroy! if User.find_by_slug('adminuser').present?
+  User.find_by_slug('gaurav').destroy! if User.find_by_slug('gaurav').present?
 
   User.create!(
     name: 'Gaurav Tiwari',

@@ -292,6 +292,8 @@ GEM
     httpclient (2.6.0.1)
     i18n (0.7.0)
     inflecto (0.0.2)
+    intercom-rails (0.2.28)
+      activesupport (> 3.0)
     ipaddress (0.8.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -328,7 +330,7 @@ GEM
       rails (>= 3.0.0)
     mime-types (2.6.1)
     mimetype-fu (0.1.2)
-    mini_magick (4.2.7)
+    mini_magick (4.2.8)
     mini_portile (0.6.2)
     minitest (5.7.0)
     mixpanel-ruby (2.2.0)
@@ -611,6 +613,7 @@ DEPENDENCIES
   honeypot-captcha
   html-pipeline
   htmlcompressor
+  intercom-rails
   jbuilder
   jquery-atwho-rails
   jquery-ui-rails
