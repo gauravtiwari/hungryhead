@@ -12,7 +12,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :cover, null: false, default: ""
       t.string :slug, null: false, default: ""
       t.text :address, index: true
-      t.text :full_address, index: true
       t.integer :status, default: 0
       t.integer :privacy, default: 0
       t.integer :space, default: 0

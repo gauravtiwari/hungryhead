@@ -59,18 +59,18 @@
       <div class="event-date">
         <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
           <p class="inline text-master semi-bold overflow-hidden no-margin">
-            <%= local_time(@event.start_time) %>
+            <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
             <span class="small-text clearfix hint-text">
-              <%= local_time(@event.start_time) %> to <%= local_time(@event.end_time) %>
+              <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %> to <%= @event.end_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
             </span>
           </p>
       </div>
       <div class="event-address full-border-light p-t-10">
         <span class="fa fa-map-marker fs-16 text-master bold pull-left p-r-10"></span>
         <p class="text-master semi-bold overflow-hidden no-margin">
-          <%= @event.address %>
+            <%= @event.address %>
           <span class="small-text clearfix hint-text">
-            <%= @event.reverse_geocode %>
+            <%= @event.full_address %>
           </span>
         </p>
       </div>

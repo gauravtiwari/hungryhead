@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   #Geocode
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode, :save_full_address, if: ->(event){ event.address.present? and event.address_changed? }
+  after_validation :geocode, if: ->(event){ event.address.present? and event.address_changed? }
 
   #Validation
   validates :title, :presence => true, length: {within: 10..50}
@@ -79,10 +79,6 @@ class Event < ActiveRecord::Base
   end
 
   private
-
-  def save_full_address
-    self.full_address = reverse_geocode
-  end
 
   def should_generate_new_friendly_id?
     slug.blank? || title_changed?

@@ -19,7 +19,7 @@ var EventCover = React.createClass({
 
   triggerOpen: function(e) {
     e.preventDefault();
-    $('input[id=idea_cover]').click();
+    $('input[id=event_cover]').click();
   },
 
   _onUpdate: function(event) {
@@ -130,7 +130,7 @@ var EventCover = React.createClass({
           top: '' + top + '',
           left: '' + left + '',
         };
-        var image = <img className="cover-photo" id="ideacover_preview" src={this.state.cover.url} />;
+        var image = <img className="cover-photo" id="eventcover_preview" src={this.state.cover.url} />;
       } else {
         if(this.state.is_owner) {
           var handle = <h2 className="text-master m-t-90 fs-50"><i className="fa fa-upload fs-50"></i> Click to upload event cover</h2>;
@@ -145,9 +145,9 @@ var EventCover = React.createClass({
           <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />
-                <input type="file" ref="cover" style={{"display" : "none"}} name="idea[cover]" id="idea_cover" />
-                <input type="hidden" ref="position" name="idea[cover_position]" value={top} />
-                <input type="hidden" ref="position" name="idea[cover_left]" value={left} />
+                <input type="file" ref="cover" style={{"display" : "none"}} name="event[cover]" id="event_cover" />
+                <input type="hidden" ref="position" name="event[cover_position]" value={top} />
+                <input type="hidden" ref="position" name="event[cover_left]" value={left} />
               </form>
               <div id="coverpic" style={imageStyle}>
                 {image}
@@ -173,9 +173,9 @@ var EventCover = React.createClass({
       var reader = new FileReader();
       var file = e.target.files[0];
       reader.onload = function(upload) {
-        $('#ideacover_preview').attr('width', "100%");
-        $('#ideacover_preview').attr('style', "");
-        $('#ideacover_preview').attr('src', upload.target.result);
+        $('#eventcover_preview').attr('width', "100%");
+        $('#eventcover_preview').attr('style', "");
+        $('#eventcover_preview').attr('src', upload.target.result);
       }.bind(this);
       reader.readAsDataURL(file);
        $('#cover-upload').ajaxSubmit({

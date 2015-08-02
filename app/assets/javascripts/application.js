@@ -35,6 +35,7 @@
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require moment
+//= require moment/en-gb
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
