@@ -301,13 +301,12 @@ CREATE TABLE events (
     cover character varying DEFAULT ''::character varying NOT NULL,
     slug character varying DEFAULT ''::character varying NOT NULL,
     address text,
-    full_address text,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-01 21:57:45.328017'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-01 21:57:45.328049'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-02 16:19:18.969251'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-02 16:19:18.969294'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2308,13 +2307,6 @@ CREATE INDEX index_events_on_end_time ON events USING btree (end_time);
 --
 
 CREATE INDEX index_events_on_featured ON events USING btree (featured);
-
-
---
--- Name: index_events_on_full_address; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_on_full_address ON events USING btree (full_address);
 
 
 --
