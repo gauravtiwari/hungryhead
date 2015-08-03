@@ -12193,7 +12193,6 @@ Main components
   }
   .page-container {
     padding-left: 0;
-    z-index: 100;
     position: relative;
     transition: transform .25s ease;
     -webkit-transition: -webkit-transform 0.25s ease;
