@@ -187,7 +187,7 @@ var RegisterationForm = React.createClass({
 
         <div className="row">
           <div className="col-sm-6">
-            <div className="checkbox check-success">
+            <div className="checkbox overflow-ellipsis check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
               <label htmlFor="checkbox1" className="text-white">I agree to the <a href={Routes.terms_path()} data-toggle="tooltip" title="Click to load terms" className="text-white small bold">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" href={Routes.privacy_path()} className="text-white bold small">Privacy</a></label>
             </div>
