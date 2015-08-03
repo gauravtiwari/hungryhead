@@ -2,13 +2,13 @@
  <%= f.hidden_field :user_type, value: "mentor" %>
  <div class="join-alumni-form m-t-10 clearfix">
   <div class="row">
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-6">
       <div class="form-group">
         <%= f.input_field :name, class: "string required form-control", placeholder: "Your name" %>
       </div>
     </div>
 
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-6">
       <div class="form-group">
         <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "Website, about me url" %>
       </div>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-6 col-md-6">
+    <div class="col-sm-6">
       <div class="form-group">
       <%= f.input_field :email, class: "string required form-control", placeholder: "Your email" %>
       </div>
