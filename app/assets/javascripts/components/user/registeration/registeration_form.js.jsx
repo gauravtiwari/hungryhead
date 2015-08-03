@@ -110,11 +110,18 @@ var RegisterationForm = React.createClass({
 
   showRequestInviteTab: function(e) {
     e.preventDefault();
-    $('#betaregister').removeClass('active');
-    $("a[href='#betaregister']").parent().removeClass('active');
-    $("a[href='#request_invite']").parent().addClass('active');
-    $('#request_invite').addClass('active');
-    $('#request_invite').tab('show');
+    try {
+      $('#betaregister').removeClass('active');
+      $('#forStudents').removeClass('active');
+      $("a[href='#betaregister']").parent().removeClass('active');
+      $("a[href='#forStudents']").parent().removeClass('active');
+      $("a[href='#request_invite']").parent().addClass('active');
+      $("a[href='#forMentors']").parent().addClass('active');
+      $('#request_invite').addClass('active');
+      $("#forMentors").addClass('active');
+      $("#forMentors").tab('show');
+      $('#request_invite').tab('show');
+    } catch(e) {}
   },
 
   render: function() {
@@ -133,7 +140,7 @@ var RegisterationForm = React.createClass({
 
     return (
       <form id="form-register" ref="form" autoComplete="off" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <small className="small-text text-white">{request_invite_text}Please <a onClick={this.showRequestInviteTab} className="bold text-white">request an invite</a></small>
+        <small className="small-text text-white">{request_invite_text}Please <a onClick={this.showRequestInviteTab} className="bold text-white pointer">request an invite</a></small>
         <div className="row m-t-10">
           <div className="col-sm-6">
             <div className="form-group">
