@@ -34,7 +34,6 @@ SitemapGenerator::Sitemap.create do
   add '/get-started'
   add '/product-tour/gamification'
   add '/product-tour/collaboration'
-  add '/product-tour/community'
   add '/join'
   #get '/our-pricing', to: 'pages#pricing', as: :pricing
 

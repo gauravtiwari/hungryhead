@@ -46,4 +46,27 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade stick-up" id="addSchoolPopup" tabindex="-1" role="dialog" aria-labelledby="modalFillInLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  <i class="pg-close"></i>
+              </button>
+              <h5 class="text-left p-b-5 no-margin"><span class="semi-bold">Submit your</span> request</h5>
+              <p class="text-left small">
+                We are sorry :( that your school is not present in our database. Hungryhead is currently in beta, and we are inviting people in small groups. If too many people join at once, the Hungryhead servers will melt down. Please enter your details using the form below and we will get it added into our list as soon as we can.
+              </p>
+            </div>
+            <div class="modal-body m-t-20">
+                <div class="row">
+                  <div id="invite_form_student">
+                    <%= render partial: 'invite_requests/new_school' %>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 <% end %>

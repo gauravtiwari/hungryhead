@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
   get '/product-tour/gamification', to: 'pages#gamification', as: :gamification
   get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
-  get '/product-tour/community', to: 'pages#community', as: :community
   #get '/our-pricing', to: 'pages#pricing', as: :pricing
 
   get '/privacy-policy', to: 'pages#privacy', as: :privacy
