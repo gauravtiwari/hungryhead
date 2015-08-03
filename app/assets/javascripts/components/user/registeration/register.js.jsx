@@ -20,7 +20,12 @@ var Register = React.createClass({
       success: function ( data ) {
         if(data.name) {
           $('#form-register').hide().fadeOut('fast');
-          $('.student-registeration-form').html("<div class='no-content animated fadeIn text-green'> Registeration Successful. You will receive an email shortly on " + data.email + "</div>");
+          $('.student-registeration-form').append("<div class='no-content animated fadeIn text-white'> Registeration Successful. You will receive an email shortly on " + data.email + "</div>");
+          setTimeout(function(){
+            $('#form-register')[0].reset();
+            $('#form-register').show().fadeIn('fast');
+            $('.student-registeration-form .no-content').remove();
+          }, 5000);
         }
         if(data.error){
           $('body').pgNotification({style: "simple", message: data.error.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
