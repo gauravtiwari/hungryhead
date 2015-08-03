@@ -86,7 +86,7 @@ class PagesController < ApplicationController
   end
 
   def last_modified_date
-    return "Sun, 03 Aug 2015".to_date unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
+    return "Sun, 03 Aug 2015 07:00 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
   end
 
 end
