@@ -108,6 +108,15 @@ var RegisterationForm = React.createClass({
     });
   },
 
+  showRequestInviteTab: function(e) {
+    e.preventDefault();
+    $('#betaregister').removeClass('active');
+    $("a[href='#betaregister']").parent().removeClass('active');
+    $("a[href='#request_invite']").parent().addClass('active');
+    $('#request_invite').addClass('active');
+    $('#request_invite').tab('show');
+  },
+
   render: function() {
     var cx = React.addons.classSet;
 
@@ -120,86 +129,71 @@ var RegisterationForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    var request_invite_text = "Don't have an school email? ";
+    var request_invite_text = "Don't have an school/uni email? ";
 
     return (
-      <form id="form-register" ref="form" autoComplete="off" className="p-t-15" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <div className="row">
+      <form id="form-register" ref="form" autoComplete="off" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
+        <small className="small-text text-white">{request_invite_text}Please <a onClick={this.showRequestInviteTab} className="bold text-white">request an invite</a></small>
+        <div className="row m-t-10">
           <div className="col-sm-6">
-            <div className="form-group form-group-default">
-              <label>First Name</label>
-              <input type="text" ref="first_name" id="first_name" autoComplete="off" name="user[first_name]" placeholder="John" className="form-control" required aria-required="true" />
+            <div className="form-group">
+              <input type="text" ref="first_name" id="first_name" autoComplete="off" name="user[first_name]" placeholder="First Name" className="form-control" required aria-required="true" />
             </div>
           </div>
 
           <div className="col-sm-6">
-            <div className="form-group form-group-default">
-              <label>Last Name</label>
-              <input type="text" ref="last_name" id="last_name" autoComplete="off" name="user[last_name]" placeholder="Smith" className="form-control" required aria-required="true" />
+            <div className="form-group">
+              <input type="text" ref="last_name" id="last_name" autoComplete="off" name="user[last_name]" placeholder="Last Name" className="form-control" required aria-required="true" />
               <input type="hidden" ref="name" id="name" autoComplete="off" name="user[name]" />
             </div>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-sm-12 col-md-12">
+          <div className="col-sm-6">
             <div className="form-group">
-              <label>Select your uni/col/school</label>
-              <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Type and choose your school from the list" className="form-control full-width" required aria-required="true" />
-              <small className="fs-8 text-master pull-right p-t-10 p-b-10">Your school is not in the list. <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer">Click here</a></small>
+              <input type="text" name="user[school_id]" autoComplete="off" id="school_select" data-url={this.state.form.url} data-placeholder="Choose your school/uni" className="form-control full-width" required aria-required="true" />
+              <small className="small-text text-white m-t-20 p-b-10">Your school/uni is not in the list? <a data-toggle="modal" data-target="#addSchoolPopup" className="pointer bold text-white">Click here</a></small>
             </div>
           </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm-12 col-md-12">
-            <div className="form-group form-group-default input-group">
-              <label>Uni/College Email</label>
-              <input type="email" name="user[email]" autoCorrect="off" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school email" className="form-control" required="true" aria-required="true" />
-              <span className="input-group-addon bg-solid-dark text-white" id="school_domain">
-                {this.state.school_domain}
-              </span>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <input type="email" name="user[email]" autoCorrect="off" autoComplete="off" onBlur={this.onEmailChange} placeholder="Your school/uni email" className="form-control" required="true" aria-required="true" />
               <span id="invalid-email"></span>
             </div>
           </div>
         </div>
 
         <div className="row">
-
           <div className="col-sm-6">
-            <div className="form-group form-group-default">
-              <label>Username</label>
-              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="no empty spaces or symbols" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+            <div className="form-group">
+              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="Username - no empty space or symbol" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
-
           <div className="col-sm-6">
-            <div className="form-group form-group-default">
-              <label>Password</label>
-              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Minimum of 8 Characters" className="form-control" minlength="8" required aria-required="true" />
+            <div className="form-group">
+              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Password - min 8 characters" className="form-control" minlength="8" required aria-required="true" />
             </div>
           </div>
-
         </div>
 
-        <div className="row m-t-10">
+        <div className="row">
           <div className="col-sm-6">
             <div className="checkbox check-success">
               <input type="checkbox" name="user[terms_accepted]" value="1" id="checkbox1" defaultChecked />
-              <label htmlFor="checkbox1">I agree to the <a href={Routes.terms_path()} data-toggle="tooltip" title="Click to load terms" className="text-info small">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" href={Routes.privacy_path()} className="text-info small">Privacy</a></label>
+              <label htmlFor="checkbox1" className="text-white">I agree to the <a href={Routes.terms_path()} data-toggle="tooltip" title="Click to load terms" className="text-white small bold">Terms or use</a> and <a data-toggle="tooltip" title="Click to load privacy" href={Routes.privacy_path()} className="text-white bold small">Privacy</a></label>
             </div>
           </div>
          <div className="pull-right sm-pull-reset col-sm-6">
            <div className="checkbox check-complete">
             <input type="checkbox" name="user[role]" value="faculty" id="checkbox2" />
-            <label htmlFor="checkbox2" className="bold">Are you a Faculty member?</label>
+            <label htmlFor="checkbox2" className="bold text-white">Are you a Faculty member?</label>
            </div>
          </div>
         </div>
         <div className="sm-m-t-30 m-t-10">
           <button className="btn btn-brand text-white btn-sm fs-13" type="submit"><i className={loading_class}></i> Submit</button>
-          <small className="small-text m-l-10">{request_invite_text}Please <a href="/get-started" className="bold">request an invite</a></small>
         </div>
       </form>
     )

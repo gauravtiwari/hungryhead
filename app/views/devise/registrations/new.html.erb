@@ -33,21 +33,22 @@
     type: "page"
   }
 %>
-
-<div class="register-container full-height sm-p-t-100 sm-p-b-100">
-	<div class="container-sm-height full-height">
-	<div class="row row-sm-height">
-	  <div class="col-sm-8 col-xs-12 col-md-12 col-sm-height col-middle">
-	   	<h1 class="bold b-b b-grey p-b-5 pull-left">Join</h1>
-	    <h5 class="clearfix">Hungryhead is a new way to start
-	    	<span class="bold inline" data-toggle="tooltip" title="Process of starting a company or business">entrepreneurship
-       </span> for students
-      </h5>
-      <div class="student-registeration-form">
-				<%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
+<div class="registeration-wrapper">
+	<div class="register-container full-height sm-p-t-100 sm-p-b-100 z-index-10 relative">
+		<div class="container-sm-height full-height">
+			<div class="row row-sm-height">
+			  <div class="col-sm-8 col-xs-12 col-md-12 col-sm-height col-middle">
+			   	<h1 class="bold b-b b-grey p-b-5 pull-left text-white">Join</h1>
+			    <h5 class="clearfix text-white">Hungryhead is a new way to start
+			    	<span class="bold inline" data-toggle="tooltip" title="Process of starting a company or business">entrepreneurship
+		       </span> for students
+		      </h5>
+		      <div class="student-registeration-form">
+						<%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
+					</div>
+			  </div>
 			</div>
-	  </div>
-	</div>
+		</div>
 	</div>
 </div>
 

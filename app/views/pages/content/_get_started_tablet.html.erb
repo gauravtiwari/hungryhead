@@ -1,0 +1,56 @@
+<div class="panel panel-transparent">
+  <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple p-t-20">
+    <li class="active">
+      <a data-toggle="tab" href="#forStudents" class="text-white">For Students</a>
+    </li>
+    <li>
+      <a data-toggle="tab" href="#forMentors" class="text-white">For Alumni and Mentors</a>
+    </li>
+    <li>
+      <a data-toggle="tab" href="#forSchools" class="text-white">For Institutions</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="forStudents">
+      <div class="col-md-8 col-sm-12 col-xs-12 auto-margin">
+        <h1 class="m-t-5 text-center text-white m-b-20">For students</h1>
+        <p class="fs-14 text-white">
+           Whether you are a student with your next big idea or want to collaborate with your peers, we have got you covered. Hungryhead is currently in beta. Fill in the form to create an account.
+        </p>
+        <div class="b-b b-white"></div>
+        <div class="student-registeration-form m-t-20">
+          <%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="forMentors">
+     <div class="col-md-8 col-sm-12 col-xs-12 auto-margin">
+       <h1 class="m-t-5 text-center text-white">For alumni and mentors</h1>
+       <p class="fs-14 text-white">
+        If you are an alumni or mentor and want to contribute your technical business expertise, please submit the form to request an early access. Alumni can also validate their startup ideas.
+       </p>
+       <div class="b-b b-white"></div>
+       <div id="invite_form_mentor" class="mentor-invite-form m-t-20">
+        <%= render partial: 'invite_requests/new_alumni' %>
+       </div>
+     </div>
+    </div>
+
+    <div class="tab-pane" id="forSchools">
+    <div class="col-md-8 col-sm-10 col-xs-12 auto-margin">
+      <h1 class="m-t-5 text-center text-white">For institutions</h1>
+      <p class="fs-14 text-white m-t-20">
+        Hungryhead for institutions is to make the student startup support process practical and streamlined. We have integrated tools for institutions to visualize and collaborate with entrepreneurial students easily and provide support efficiently.
+      </p>
+      <p class="fs-14 text-white">
+        To learn more and request access to manage your institution profile, please submit the form below.
+      </p>
+      <div class="b-b b-white"></div>
+      <div id="invite_form_institution" class="institution-invite-form m-t-20">
+        <%= render partial: 'invite_requests/new_institution' %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

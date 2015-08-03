@@ -1,6 +1,29 @@
 .join-wrapper .join .jumbotron {
   height: 50vh;
 }
+.get-started-wrapper,
+.registeration-wrapper {
+  background: linear-gradient(to bottom, transparent 0%, transparent 80%, #fff 100%), image-url('header_texture.jpg');
+  position: absolute;
+  background-size: cover;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  background-position: 50% 0px;
+}
+
+.get-started-wrapper:after,
+.registeration-wrapper:after {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  content: '';
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(51,51,51,0.3);
+}
 .product-wrapper .product .jumbotron {
   height: 50vh;
 }

@@ -1,31 +1,34 @@
-<%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request m-t-40", id: "new_invite_request", honeypot: true }, remote: true) do |f| %>
+<%= simple_form_for(InviteRequest.new, url: invite_requests_path, html: {role: 'form', class: "new_invite_request", id: "new_invite_request", honeypot: true }, remote: true) do |f| %>
  <%= f.hidden_field :user_type, value: "mentor" %>
- <div class="join-alumni-form clearfix">
-  <div class="col-sm-8 col-md-8 auto-margin">
-    <div class="form-group form-group-default">
-      <label>Your Name</label>
-      <%= f.input_field :name, class: "string required form-control", placeholder: "John Smith" %>
+ <div class="join-alumni-form m-t-10 clearfix">
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input_field :name, class: "string required form-control", placeholder: "Your name" %>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+      <div class="form-group">
+        <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "Website, about me url" %>
+      </div>
     </div>
   </div>
 
-  <div class="col-sm-8 col-md-8 auto-margin">
-    <div class="form-group form-group-default">
-      <label>Reference website</label>
-      <%= f.input_field :url, as: :url, class: "string required form-control", placeholder: "http://website.com, you linkedin, about me url..." %>
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+      <div class="form-group">
+      <%= f.input_field :email, class: "string required form-control", placeholder: "Your email" %>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <p class="small-text text-white bold m-t-10">
+        We will be touch in next 24 hours
+      </p>
     </div>
   </div>
-
-  <div class="col-sm-8 col-md-8 auto-margin">
-    <div class="form-group form-group-default input-group input-group-attached col-xs-12">
-    <label>Email Address</label>
-    <%= f.input_field :email, class: "string required form-control", placeholder: "johndoe@example.com" %>
-    </div>
-    <span class="input-group-btn">
-       <%= f.button :submit, value: 'Request invite', data: { disable_with: "Please wait..." }, class: 'bold main-button pull-right m-t-20 clearfix' %>
-    </span>
-    <p class="fs-12 pull-right text-right m-t-20 text-master">
-      We will be in touch within next 24 hours.
-    </p>
+  <div class="form-buttons clearfix">
+    <%= f.button :submit, value: 'Request invite', data: { disable_with: "Please wait..." }, class: 'btn text-white btn-brand m-t-10' %>
   </div>
 </div>
 <% end %>

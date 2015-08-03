@@ -40,9 +40,11 @@
         <div class="pull-left p-t-10  p-r-20 font-heading">
           <%= link_to('Questions?', main_app.help_path, title: "Get help", class: 'text-white bold') %>
         </div>
-        <div class="pull-left p-t-5 font-heading">
-          <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-ghost bold') %>
-        </div>
+        <% unless params[:action] == "home" %>
+          <div class="pull-left p-t-5 font-heading">
+            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-ghost bold') %>
+          </div>
+        <% end %>
       </div>
     </div>
     </div>

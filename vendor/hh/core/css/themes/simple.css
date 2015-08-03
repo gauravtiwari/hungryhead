@@ -4490,6 +4490,9 @@ body > .pgn-wrapper {
 .nav-tabs-danger.nav-tabs-simple > li:after {
   background-color: #eb7374;
 }
+.nav-tabs-brand.nav-tabs-simple > li:after {
+  background-color: #5b98e0;
+}
 .nav-tabs-warning.nav-tabs-simple > li:after {
   background-color: #f9dc6b;
 }
