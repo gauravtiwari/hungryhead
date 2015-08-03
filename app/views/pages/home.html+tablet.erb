@@ -35,7 +35,7 @@
 %>
 
 <div class="splash-wrapper">
-  <% cache(['beta', 'home_page_tablet']) do %>
+  <% cache(['beta', 'home_page_tablet', "tablet"]) do %>
     <%= render partial: 'pages/content/home_tablet' %>
   <% end %>
   <%= render partial: 'globals/small_footer' %>

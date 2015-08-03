@@ -35,7 +35,7 @@ meta title: "Entrepreneurship Reimagined",
 %>
 
 <div class="splash-wrapper">
-  <% cache(['beta', 'home_page', 'v1']) do %>
+  <% cache(['beta', 'home_page', 'v1', "desktop"]) do %>
     <%= render partial: 'pages/content/home' %>
   <% end %>
   <%= render partial: 'globals/small_footer' %>
