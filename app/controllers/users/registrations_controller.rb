@@ -28,9 +28,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         respond_with @user
       end
     else
-      flash[:error] = "Your email doesn't match with your school email. Please verify and try again! If you don't have a school email, please request an invite."
+      flash[:error] = "Your email doesn't match with your school/uni email. Please verify and try again! If you don't have a school/uni email, please request an invite."
       render :json =>  {
-              error: "Your email doesn't match with your school email. Please verify and try again! If you don't have a school email, please request an invite."
+              error: "Your email doesn't match with your school/uni email. Please verify and try again! If you don't have a school/uni email, please request an invite."
             }
     end
   end
