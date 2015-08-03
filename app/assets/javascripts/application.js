@@ -1,5 +1,4 @@
 //All application JS assets - checkout vendor assets directory
-
 // BEGIN VENDOR JS FOR PAGES
 //
 //= require jquery
