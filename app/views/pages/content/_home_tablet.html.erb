@@ -25,19 +25,19 @@
         <div class="tab-content">
         <div class="tab-pane active" id="betaregister">
           <div class="row column-seperation">
-          <div class="col-md-12 col-sm-12 no-padding">
+          <div class="student-registeration-form col-md-12 col-sm-12 no-padding">
             <%= react_component('Register', {form: {url: autocomplete_school_name_schools_path}}.to_json) %>
           </div>
           </div>
         </div>
         <div class="tab-pane" id="request_invite">
           <div class="row">
-             <div id="invite_form_mentor">
+            <div id="invite_form_mentor">
               <small class="small-text text-white">
                 Don't have an school email? Please submit the form to request an invite.
               </small>
               <%= render partial: 'invite_requests/new_alumni' %>
-             </div>
+            </div>
           </div>
         </div>
         </div>

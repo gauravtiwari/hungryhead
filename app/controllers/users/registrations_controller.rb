@@ -14,8 +14,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:user][:email].split('@').last == @school_domain.domain
       build_resource(sign_up_params)
       @user = resource
-      @user.request = request
-
       #Skip confirmation for beta, // this needs to changed once we go live
       @user.skip_confirmation_notification!
       @user.save
@@ -58,7 +56,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :school_id, :terms_accepted, :remember_me, :name) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :school_id, :first_name, :last_name, :terms_accepted, :remember_me, :name) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me, :password_confirmation) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :terms_accepted, :username, :email, :password, :password_confirmation, :current_password) }
   end
