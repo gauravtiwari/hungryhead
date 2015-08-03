@@ -12,6 +12,7 @@ PATH
       browser
       devise
       friendly_id
+      meta_events
       metamagic
       postgres-copy
       pundit
@@ -28,6 +29,7 @@ PATH
       devise
       fog-google
       mail_form
+      meta_events
       metamagic
       pundit
       rails
