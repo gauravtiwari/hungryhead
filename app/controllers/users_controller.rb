@@ -137,7 +137,7 @@ class UsersController < ApplicationController
       render :json =>  {
         error: "This Username is already taken. Please try followings \n",
         suggestions: @user.username_suggestions.to_sentence,
-        suggested: @user.username_suggestions.first,
+        suggested: @user.username_suggestions.second,
         available: false
       }
     else
