@@ -18,5 +18,9 @@ module SiteFeedback
       request.variant = :tablet if browser.tablet?
     end
 
+    def meta_events_tracker
+      @meta_events_tracker ||= MetaEvents::Tracker.new(current_user.try(:id), request.remote_ip)
+    end
+
   end
 end

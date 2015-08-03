@@ -16,6 +16,10 @@ module Help
       current_user && current_user.admin?
     end
 
+    def meta_events_tracker
+      @meta_events_tracker ||= MetaEvents::Tracker.new(current_user.try(:id), request.remote_ip)
+    end
+
     helper_method :help_user_admin?
 
   end
