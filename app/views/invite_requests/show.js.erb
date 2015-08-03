@@ -1,10 +1,19 @@
 //find form
 var $el = $('#invite_form_<%= @invite_request.user_type %>');
 //Append message
-$el.html("<div class='no-content'>Thank you! Your request was successfully submitted. We will be in touch shortly.</div>");
+var $form = $el.find('#new_invite_request');
+$form.hide().fadeOut('fast');
+$el.append("<div class='no-content'>Thank you! Your request was successfully submitted. We will be in touch shortly.</div>");
+$form[0].reset();
 
 <% if @invite_request.student? %>
   setTimeout(function(){
     $('#addSchoolPopup').modal('hide');
-  }, 2000);
+    $el.find('.no-content').remove();
+  }, 3000);
+<% else %>
+  setTimeout(function(){
+    $el.find('.no-content').remove();
+    $form.show().fadeIn('fast');
+  }, 3000);
 <% end %>

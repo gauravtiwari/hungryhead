@@ -1,9 +1,14 @@
 //find form
 var $el = $('#invite_form_<%= @invite_request.user_type %>');
 //Append message
-$('form#new_invite_request')[0].reset();
+var $form = $el.find('#new_invite_request');
+$form[0].reset();
 
 <% if @invite_request.errors.any? %>
-  var $el = $('#new_invite_request');
-  $el.html("<%= j render partial: 'error_message' %>")
+  $form.hide().fadeOut('fast');
+  $el.append("<%= j render partial: 'error_message' %>")
+  setTimeout(function(){
+    $el.find('.no-content').remove();
+    $form.show().fadeIn('fast');
+  }, 3000);
 <% end %>
