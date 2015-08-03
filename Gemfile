@@ -231,11 +231,13 @@ gem 'metamagic'
 #UUID generation
 gem 'uuidtools'
 
+#Meta events tracker
+gem 'meta_events'
+
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
   gem 'mixpanel-ruby'
-  gem 'meta_events'
   gem 'rack-tracker'
   gem "skylight"
 end

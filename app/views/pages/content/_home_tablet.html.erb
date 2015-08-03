@@ -15,12 +15,12 @@
       <div class="col-md-6 col-sm-10 sm-auto-margin hero-text">
         <div class="panel panel-transparent">
         <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple" role="tablist">
-          <li class="active">
-            <a href="#betaregister" class="text-white bold no-padding p-r-15 p-b-15 p-t-15" data-toggle="tab" role="tab">Beta register</a>
-          </li>
-          <li>
-            <a href="#request_invite" class="text-white bold" data-toggle="tab" role="tab">Request invite</a>
-          </li>
+         <li class="active">
+           <%= meta_events_tracked_link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Beta Register Tab' } }) %>
+         </li>
+         <li>
+           <%= meta_events_tracked_link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Request Invite Tab' } }) %>
+         </li>
         </ul>
         <div class="tab-content">
         <div class="tab-pane active" id="betaregister">
