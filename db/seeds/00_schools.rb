@@ -144,5 +144,76 @@ ActiveRecord::Base.transaction do
     user_id: 1,
     website_url: 'ed.ac.uk'
   )
+
+  School.create!(
+    name: 'University of Bath',
+    location_list: 'Bath',
+    description: "A leading UK university with an international reputation for teaching and research excellence.",
+    email: 'admin@bath.ac.uk',
+    domain: 'bath.ac.uk',
+    user_id: 1,
+    website_url: 'bath.ac.uk'
+  )
+
+  School.create!(
+    name: 'University of Exeter',
+    location_list: 'Exeter',
+    description: "A leading UK university with an international reputation for teaching and research excellence.",
+    email: 'admin@exeter.ac.uk',
+    domain: 'exeter.ac.uk',
+    user_id: 1,
+    website_url: 'exeter.ac.uk'
+  )
+
+  School.create!(
+    name: 'Cardiff University',
+    location_list: 'Cardiff',
+    description: "We are an ambitious and innovative university with a bold and strategic vision located in a beautiful and thriving capital city.",
+    email: 'admin@cardiff.ac.uk',
+    domain: 'cardiff.ac.uk',
+    user_id: 1,
+    website_url: 'cardiff.ac.uk'
+  )
+
+  School.create!(
+    name: 'London School of Economics',
+    location_list: 'London',
+    description: "The London School of Economics and Political Science (LSE) is one of the foremost social science universities in the world.",
+    email: 'admin@lse.ac.uk',
+    domain: 'lse.ac.uk',
+    user_id: 1,
+    website_url: 'lse.ac.uk'
+  )
+
+  School.create!(
+    name: 'The University of Warwick',
+    location_list: 'Warwick',
+    description: "We’re a world-leading university with the highest academic and research standards. But we’re not letting the story end there.",
+    email: 'admin@warwick.ac.uk',
+    domain: 'warwick.ac.uk',
+    user_id: 1,
+    website_url: 'warwick.ac.uk'
+  )
+
+  School.create!(
+    name: 'University of Southampton',
+    location_list: 'Southampton',
+    description: "Study at a world-class research university based in Southampton. We are ranked among the top 1% of universities worldwide.",
+    email: 'admin@southampton.ac.uk',
+    domain: 'southampton.ac.uk',
+    user_id: 1,
+    website_url: 'southampton.ac.uk'
+  )
+
+  School.create!(
+    name: 'University of York',
+    location_list: 'York',
+    description: "Founded on principles of excellence, equality and opportunity for all, the University of York opened in 1963 with just 230 students.",
+    email: 'admin@york.ac.uk',
+    domain: 'york.ac.uk',
+    user_id: 1,
+    website_url: 'york.ac.uk'
+  )
+
 end
 
