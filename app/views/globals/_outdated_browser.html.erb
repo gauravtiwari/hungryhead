@@ -1,0 +1,19 @@
+<div class="alert alert-notice alert-dismissable full-border-light outdated-browser">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-8">
+       <p>
+        Sorry you are using an outdated browser. We Support all modern browsers and Internet explorer version above 9.
+      </p>
+      <p class="no-margin">
+        You are currently using <%= browser.name + ' ' + browser.version %>. For best experience, please download and install or use latest version of IE, Chrome, Firefox or Safari. For more info Visit, <%= link_to('Browser happy', 'http://browsehappy.com/', class: 'b-b b-grey p-b-5', target: '_blank') %>
+      </p>
+    </div>
+    <div class="col-md-4">
+      <div class="pull-right p-t-30">
+        <%= link_to('Learn more', help.help_category_path('the-basics'), class: 'btn btn-brand inline m-r-10 text-white') %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

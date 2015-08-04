@@ -14,6 +14,17 @@ body.absolute-header .header {
     left: 0;
     top: 0;
 }
+.outdated-browser {
+    position: fixed;
+    bottom: 0;
+    z-index: 11;
+    width: 100%;
+    margin: 0 auto;
+
+  .container {
+    width: 980px;
+  }
+}
 body, p {
   line-height: 1.6;
   font-size: 14px;
