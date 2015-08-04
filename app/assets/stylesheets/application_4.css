@@ -1,0 +1,25 @@
+
+/*
+  All application CSS assets - checkout vendor assets/css directory
+
+ * BEGIN PAGES ASSET PIPELINE OVERRIDE
+ *= require ./asset-pipeline
+
+ * BEGIN SITE STYLES
+ *= require splash
+ *= require home
+ *= require profile
+ *= require login
+ *= require school
+ *= require search
+ *= require users
+ *= require comments
+ *= require coin
+ *= require events
+ *= require help
+ *= require footer
+ *= require idea_profile
+ *= require join
+ *= require overrides
+ *
+ */
