@@ -2,8 +2,13 @@
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="imagetoolbar" content="no" />
+    <![endif]-->
 
     <%= metamagic site: "HungryHead", title: [:title, :site], separator: " | ",  description: "Hungrhead is a platform for students to share, collaborate and validated startup ideas with peers. ", keywords: %w(entrepreneurship startup idea students schools colleges universities) %>
+
     <% if ActionController::Base.asset_host %>
       <link rel="dns-prefetch" href="//<%= ActionController::Base.asset_host %>" />
     <% end %>
@@ -51,6 +56,9 @@
   </head>
 
   <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
+    <% if browser.ie? && browser.version <= "9"%>
+      <%= render partial: 'globals/outdated_browser' %>
+    <% end %>
     <div class="page-container">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
