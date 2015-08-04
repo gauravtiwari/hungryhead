@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def detect_modern_ie
-    redirect_to upgrade_path if browser.ie9? || browser.ie8? || browser.ie7? || browser.ie6?
+    redirect_to upgrade_path if browser.ie? && browser.version <= "9"
   end
 
   def set_current_user
