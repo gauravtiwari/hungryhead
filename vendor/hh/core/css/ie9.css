@@ -38,8 +38,3 @@ h1, p, li, a, h2, strong, ul
     text-shadow: none;
     filter: none;
 }
-
-body
-{
-    overflow: visible;
-}
