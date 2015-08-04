@@ -12,10 +12,18 @@ class ApplicationController < ActionController::Base
 
   #Device specific templates
   before_action :set_device_type
-
   before_filter :set_current_user, if: :user_signed_in?
+  before_filter :outdated_browser, if: :browser_outdated?
 
   protected
+
+  def browser_outdated?
+    browser.ie? && !browser.modern?
+  end
+
+  def outdated_browser
+    redirect_to upgrade_path, notice: 'Your browser is outdated'
+  end
 
   def set_current_user
     User.current = current_user

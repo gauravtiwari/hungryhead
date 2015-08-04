@@ -1,7 +1,7 @@
 
 jQuery(document).ready ->
 
-	#Initialize AutoGrow plugin
+	#Initialize AutoGrow lugin
 
 	$(document).on 'focus', 'textarea', (event) ->
 	  event.preventDefault()
@@ -128,6 +128,5 @@ jQuery(document).ready ->
 	$('.panel-collapse label').on 'click', (e) ->
 	  e.stopPropagation()
 	  return
-
 
 	return
