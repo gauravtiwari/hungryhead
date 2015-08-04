@@ -13,7 +13,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'
   gem 'rails-assets-jquery.scrollbar'
-  gem 'rails-assets-better-placeholder-polyfill'
+  gem 'rails-assets-placeholders'
   gem 'rails-assets-eventEmitter'
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-marked'
