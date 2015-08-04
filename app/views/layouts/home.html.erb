@@ -66,9 +66,10 @@
   </head>
 
   <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
-    <% if browser.ie? && browser.version <= "9"%>
+    <% if browser.ie? && browser.version <= "9" %>
       <%= render partial: 'globals/outdated_browser' %>
     <% end %>
+
     <div class="page-container">
       <% if user_signed_in? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
