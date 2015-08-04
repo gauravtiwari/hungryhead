@@ -123,7 +123,7 @@
         <h1 class="m-t-5 m-b-20">
           Learn how gamification works on hungryhead
         </h1>
-        <%= link_to('Click here', gamification_path, class: 'main-button fs-13 bold') %>
+        <%= meta_events_tracked_link_to('Click here', gamification_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Gamification Page' } }) %>
       </div>
     </section>
 
