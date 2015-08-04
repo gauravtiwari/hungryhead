@@ -3,11 +3,14 @@
     <div class="row-xs-height">
       <div class="col-xs-height col-middle">
         <div class="error-container text-center">
-          <i class="fa fa-frown-o fs-40"></i>
+          <%= image_tag('badges/fish') %>
           <h2 class="semi-bold">
-            Sorry you are using an outdated browser. We Support all modern browsers and IE9+
+            Sorry you are using an outdated browser.
           </h2>
-          <p>For best experience, please download and install latest version of IE, Chrome, Firefox or Safari </p>
+          <p> We Support all modern browsers and Internet explorer version above 9.</p>
+          <p>
+            You are currently using <%= browser.name + ' ' + browser.version %>. For best experience, please download and install or use latest version of IE, Chrome, Firefox or Safari
+          </p>
           <div class="error-container-innner text-center">
             <ul class="no-style no-padding">
               <li class="inline p-r-10 bold">For more info Visit, <%= link_to('Browser happy', 'http://browsehappy.com/', class: 'b-b b-grey p-b-5', target: '_blank') %></li>
