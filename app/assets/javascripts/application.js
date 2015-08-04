@@ -13,6 +13,7 @@
 //= require jquery-ui/effect.all
 //= require jquery-unveil
 //= require jquery-bez
+//= require better-placeholder-polyfill
 //= require eventEmitter
 //= require imagesloaded
 //= require jquery.actual
