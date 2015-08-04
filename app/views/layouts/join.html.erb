@@ -33,7 +33,17 @@
     <% end %>
 
     <%= javascript_include_tag 'application' %>
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+
+    <!--[if !IE]><!-->
+      <%= stylesheet_link_tag 'application', media: 'all' %>
+    <!--<![endif]-->
+
+    <!--[if IE 9]>
+      <%= stylesheet_link_tag 'application_1', media: 'all' %>
+      <%= stylesheet_link_tag 'application_2', media: 'all' %>
+      <%= stylesheet_link_tag 'application_3', media: 'all' %>
+      <%= stylesheet_link_tag 'application_4', media: 'all' %>
+    <![endif]-->
 
     <!--[if lte IE 9]>
       <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
