@@ -8,15 +8,18 @@
     <% end %>
 
     <meta content="hungryhead team" name="author" />
-
     <%= favicon_link_tag 'favicon.ico' %>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="HandheldFriendly" content="true">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="imagetoolbar" content="no" />
+    <![endif]-->
 
     <% cache_if(user_signed_in?, current_user) do %>
       <%= render partial: 'shared/current_user' if user_signed_in? %>
@@ -32,7 +35,7 @@
       <!-- end Mixpanel -->
     <% end %>
 
-    <!--[if IE ]>
+    <!--[if lte IE 10 ]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
