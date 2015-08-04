@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
   #get '/our-pricing', to: 'pages#pricing', as: :pricing
 
+  # Upgrade path for old browsers
+  get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
+
+
   get '/privacy-policy', to: 'pages#privacy', as: :privacy
   get '/cookies-policy', to: 'pages#cookies', as: :cookies
   get '/get-started', to: 'pages#get_started', as: :get_started
@@ -35,10 +39,6 @@ Rails.application.routes.draw do
 
   mount Help::Engine => "/help"
   mount SiteFeedback::Engine => "/collaborate-with-us"
-
-  # Upgrade path for old browsers
-
-  get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
 
   # Authentication
   devise_for :users, skip: [:sessions, :passwords, :confirmations, :registrations],  controllers: {sessions: 'users/sessions',  invitations: "users/invitations", registrations: 'users/registrations', :confirmations => "users/confirmations"}

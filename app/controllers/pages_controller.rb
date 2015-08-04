@@ -68,6 +68,7 @@ class PagesController < ApplicationController
   end
 
   def upgrade_browser
+    render layout: "error"
   end
 
   #Getting started page for ideas
