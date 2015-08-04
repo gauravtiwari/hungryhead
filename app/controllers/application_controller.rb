@@ -11,11 +11,15 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   #Device specific templates
-  before_action :set_device_type
+  before_action :set_device_type, :detect_modern_ie
 
   before_filter :set_current_user, if: :user_signed_in?
 
   protected
+
+  def detect_modern_ie
+    redirect_to upgrade_path if browser.ie9? || browser.ie8? || browser.ie7? || browser.ie6?
+  end
 
   def set_current_user
     User.current = current_user
