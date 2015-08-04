@@ -33,12 +33,13 @@
     background-color: #10CFBD;
 }
 
-.calendar .calendar-container .week-view .tble {
-    width: 100%;
+h1, p, li, a, h2, strong, ul
+{
+    text-shadow: none;
+    filter: none;
 }
 
-.calendar-container {
-    .grid{
-        overflow-x:hidden;
-    }
+body
+{
+    overflow: visible;
 }
