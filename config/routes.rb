@@ -48,9 +48,9 @@ Rails.application.routes.draw do
     post  '/join' => 'users/registrations#create', as: 'user_registration'
 
     # joining
-    #get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
+    # get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
 
-    # # session handling
+    # # # session handling
     # get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
     # post    '/login'  => 'users/sessions#create',  as: 'user_session'
     # get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'

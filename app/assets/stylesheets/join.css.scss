@@ -2,7 +2,8 @@
   height: 50vh;
 }
 .get-started-wrapper,
-.registeration-wrapper {
+.registeration-wrapper,
+.login-bg {
   background: image-url('header_texture.jpg');
   position: absolute;
   background-size: cover;
@@ -13,7 +14,8 @@
 }
 
 .get-started-wrapper:after,
-.registeration-wrapper:after {
+.registeration-wrapper:after,
+.login-wrapper:after {
   position: absolute;
   top:0;
   bottom: 0;

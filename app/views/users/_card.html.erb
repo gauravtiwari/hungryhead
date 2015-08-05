@@ -13,7 +13,7 @@
                      <% if @user == current_user %>
                       <div id="profile_image">
                         <%= simple_form_for(@user, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
-                          <%= f.file_field :avatar, style: "display: none", id: 'profile_photo' %>
+                          <%= f.file_field :avatar, style: "display: none", id: 'profile_photo', accept: "image/*" %>
                         <% end %>
                         <div id="profilepic">
                         <div class="avatar">

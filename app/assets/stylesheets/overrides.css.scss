@@ -69,6 +69,7 @@ body.show-collaboration {
 .login-wrapper .login-container {
   display: block;
   height: 100%;
+  z-index: 10;
   position: relative;
   margin: 0 auto;
   float: none;
