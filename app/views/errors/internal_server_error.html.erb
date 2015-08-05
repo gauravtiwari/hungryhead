@@ -1,0 +1,22 @@
+<% cache(["beta", "errors", "internal_server_error"]) do %>
+  <div class="container-xs-height full-height">
+    <div class="row-xs-height">
+      <div class="col-xs-height col-middle">
+        <div class="error-container text-center">
+          <h1 class="error-number">500</h1>
+          <h2 class="semi-bold"><i class="fa fa-frown-o"></i> Sorry seems like something went wrong</h2>
+          <p>
+            <strong>
+              Our engineers has been notified. This could be a temporary issues, please try reloading after a few minutes.
+            </strong>
+          </p>
+          <div class="error-container-innner text-center">
+            <ul class="no-style no-padding">
+              <li class="inline p-r-10 bold">Go back to <%= link_to('Homepage', root_path, class: 'b-b b-grey p-b-5') %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
