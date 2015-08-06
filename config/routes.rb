@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get '/community-guidelines', to: 'pages#community_guidelines', as: :rules
   get '/product-tour/gamification', to: 'pages#gamification', as: :gamification
   get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
-  get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
+  get '/product-tour/for-academic-institutions', to: 'pages#for_institutions', as: :for_institutions
+
   #get '/our-pricing', to: 'pages#pricing', as: :pricing
 
   # Upgrade path for old browsers
