@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 
   # Upgrade path for old browsers
   get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
-
-
   get '/privacy-policy', to: 'pages#privacy', as: :privacy
   get '/cookies-policy', to: 'pages#cookies', as: :cookies
   get '/get-started', to: 'pages#get_started', as: :get_started
@@ -31,6 +29,12 @@ Rails.application.routes.draw do
   #Soulmate search engine
   authenticated do
     mount Soulmate::Server, :at => "/search"
+  end
+
+  #Sidekiq
+  authenticate :user, lambda { |u| u.admin? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/background_jobs'
   end
 
   #Pusher authentication route
