@@ -252,6 +252,7 @@ gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'rails_best_practices'
   gem 'dawnscanner', :require=>false
   gem 'meta_request'
   gem 'activerecord-colored_log_subscriber'
