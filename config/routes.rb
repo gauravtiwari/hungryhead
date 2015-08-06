@@ -29,12 +29,9 @@ Rails.application.routes.draw do
   get '/how-it-works', to: 'pages#how_it_works', as: :how_it_works
 
   #Soulmate search engine
-  mount Soulmate::Server, :at => "/search"
-
-  #Sidekiq
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
-
+  authenticated do
+    mount Soulmate::Server, :at => "/search"
+  end
 
   #Pusher authentication route
   post "pusher/auth"

@@ -235,11 +235,15 @@ gem 'uuidtools'
 #Meta events tracker
 gem 'meta_events'
 
+#Security for app
+gem 'rack-attack'
+
+#Secure headers
+gem "secure_headers", :require => 'secure_headers'
+
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
-  gem "secure_headers", :require => 'secure_headers'
-  gem 'rack-attack'
   gem 'mixpanel-ruby'
   gem 'rack-tracker'
   gem "skylight"
@@ -249,6 +253,7 @@ gem 'forgery'
 
 group :development, :test do
   gem 'better_errors'
+  gem 'dawnscanner', :require=>false
   gem 'meta_request'
   gem 'activerecord-colored_log_subscriber'
   gem 'bullet'

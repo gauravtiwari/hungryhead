@@ -1,15 +1,6 @@
 class Rack::Attack
 
-  ### Configure Cache ###
-
-  # If you don't want to use Rails.cache (Rack::Attack's default), then
-  # configure it here.
-  #
-  # Note: The store is only used for throttling (not blacklisting and
-  # whitelisting). It must implement .increment and .write like
-  # ActiveSupport::Cache::Store
-
-  # Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
+  banned = %w[182.89.62.3 59.57.171.132 61.178.78.96].to_set
 
   ### Throttle Spammy Clients ###
 
@@ -25,7 +16,7 @@ class Rack::Attack
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:req/ip:#{req.ip}"
   throttle('req/ip', :limit => 300, :period => 5.minutes) do |req|
-    req.ip # unless req.path.starts_with?('/assets')
+    req.ip unless req.path.starts_with?('/assets')
   end
 
   ### Prevent Brute-Force Login Attacks ###
@@ -61,7 +52,18 @@ class Rack::Attack
     end
   end
 
+  throttle("search/query", :limit => 5, :period => 20.seconds) do |req|
+    if req.path == '/search?q=g'
+      req.ip
+    end
+  end
+
   ### Custom Throttle Response ###
+
+  Rack::Attack.blacklist('block spammers') do |req|
+    # Requests are blocked if the return value is truthy
+    banned.include?(req.ip)
+  end
 
   # By default, Rack::Attack returns an HTTP 429 for throttled responses,
   # which is just fine.
@@ -74,4 +76,5 @@ class Rack::Attack
   #    {},   # headers
   #    ['']] # body
   # end
+
 end
