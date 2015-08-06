@@ -50,6 +50,8 @@ module HungryheadSchoolApp
       g.helper_specs    false
     end
 
+    config.middleware.use Rack::Attack
+
     config.active_record.schema_format = :sql
 
   end

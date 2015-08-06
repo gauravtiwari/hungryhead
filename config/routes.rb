@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get '/our-story', to: 'pages#story', as: :story
   get '/how-it-works', to: 'pages#how_it_works', as: :how_it_works
 
+  resources :csp_reports, only: [:create]
+
   #Soulmate search engine
   authenticated do
     mount Soulmate::Server, :at => "/search"

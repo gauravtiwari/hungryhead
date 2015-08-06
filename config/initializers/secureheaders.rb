@@ -5,14 +5,4 @@
   config.x_xss_protection = {:value => 1, :mode => 'block'}
   config.x_download_options = 'noopen'
   config.x_permitted_cross_domain_policies = 'none'
-  config.csp = {
-    :default_src => "self https://apis.google.com",
-    :script_src => "self nonce https://apis.google.com",
-    :img_src => "self https://apis.google.com",
-    :frame_src => "https: https://platform.twitter.com",
-    :tag_report_uri => true,
-    :enforce => true,
-    :app_name => Rails.application.class.to_s.split("::").first,
-    :report_uri => '/csp_reports'
-  }
 end

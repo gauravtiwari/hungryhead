@@ -242,7 +242,6 @@ gem 'rack-attack'
 gem "secure_headers", :require => 'secure_headers'
 
 group :production, :staging do
-  gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
   gem 'mixpanel-ruby'
   gem 'rack-tracker'
