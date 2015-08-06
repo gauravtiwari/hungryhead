@@ -219,6 +219,45 @@ ALTER SEQUENCE crono_jobs_id_seq OWNED BY crono_jobs.id;
 
 
 --
+-- Name: csp_reports; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE csp_reports (
+    id integer NOT NULL,
+    document_uri character varying,
+    referrer character varying,
+    violated_directive character varying,
+    effective_directive character varying,
+    original_policy text,
+    blocked_uri text,
+    enforce boolean DEFAULT false,
+    app_name character varying,
+    status_code integer DEFAULT 0,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: csp_reports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE csp_reports_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: csp_reports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE csp_reports_id_seq OWNED BY csp_reports.id;
+
+
+--
 -- Name: event_attendees; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1587,6 +1626,13 @@ ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY csp_reports ALTER COLUMN id SET DEFAULT nextval('csp_reports_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY event_attendees ALTER COLUMN id SET DEFAULT nextval('event_attendees_id_seq'::regclass);
 
 
@@ -1865,6 +1911,14 @@ ALTER TABLE ONLY comments
 
 ALTER TABLE ONLY crono_jobs
     ADD CONSTRAINT crono_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: csp_reports_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY csp_reports
+    ADD CONSTRAINT csp_reports_pkey PRIMARY KEY (id);
 
 
 --
@@ -3343,4 +3397,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 INSERT INTO schema_migrations (version) VALUES ('20150715172544');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
+
+INSERT INTO schema_migrations (version) VALUES ('20150806191137');
 
