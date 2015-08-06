@@ -367,6 +367,8 @@ GEM
       multi_json (~> 1.0)
       signature (~> 0.1.8)
     rack (1.6.4)
+    rack-attack (4.3.0)
+      rack
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
       rack (~> 1.4)
@@ -509,6 +511,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    secure_headers (2.2.2)
+      user_agent_parser
     select2-rails (3.5.9.3)
       thor (~> 0.14)
     sidekiq (3.4.2)
@@ -562,6 +566,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.1)
     uniform_notifier (1.9.0)
+    user_agent_parser (2.2.0)
     uuidtools (2.1.5)
     vegas (0.1.11)
       rack (>= 1.0.0)
@@ -636,6 +641,7 @@ DEPENDENCIES
   postgres-copy
   pundit
   pusher
+  rack-attack
   rack-contrib
   rack-cors
   rack-tracker
@@ -683,6 +689,7 @@ DEPENDENCIES
   sanitize
   sass
   sass-rails
+  secure_headers
   select2-rails
   sidekiq
   simple_form

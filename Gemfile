@@ -238,6 +238,8 @@ gem 'meta_events'
 group :production, :staging do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'bugsnag'
+  gem "secure_headers", :require => 'secure_headers'
+  gem 'rack-attack'
   gem 'mixpanel-ruby'
   gem 'rack-tracker'
   gem "skylight"
