@@ -11,6 +11,10 @@ class PagesController < ApplicationController
   def story
   end
 
+  #For institutions
+  def for_institutions
+  end
+
   #Community rules
   def community_guidelines
     respond_to do |format|
