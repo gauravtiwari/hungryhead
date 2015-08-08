@@ -5,7 +5,7 @@ json.school do
 		end
 
 		json.cover do
-			json.url @school.cover.url(:large)  if @school.cover
+			json.url @school.cover.url(:cover)  if @school.cover
 			json.top @school.cover_position if @school.cover
 	    json.left @school.cover_left if @school.cover
 	    json.has_cover @school.cover.present?

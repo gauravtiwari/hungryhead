@@ -1,5 +1,88 @@
 <div class="container">
   <div class="social-wrapper container">
+    <div class="col-md-4 no-padding p-r-15">
+      <% cache(["school_card", @school]) do %>
+        <div class="school-card" id="school_card">
+          <%= render partial: 'school_card' %>
+        </div>
+      <% end %>
+      <div class="panel box-shadow m-t-10">
+        <div class="panel-heading">
+          <div class="panel-title b-b b-great p-b-5">
+            People
+          </div>
+        </div>
+        <div class="panel-body">
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height" />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
+        </div>
+        <div class="col-md-2 no-padding">
+          <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height col-middle" />
+        </div>
+        <div class="col-md-2 no-padding p-t-10">
+          <a href="#more" class="bold text-brand fs-22 p-l-10">+22</a>
+        </div>
+      </div>
+      </div>
+
+    <div class="panel box-shadow m-t-10">
+      <div class="panel-heading">
+        <div class="panel-title b-b b-great p-b-5">
+          Ideas
+        </div>
+      </div>
+      <div class="panel-body">
+        <ul class="no-padding no-margin no-style" style="max-height: 250px;">
+
+          <li id="idea">
+            <p class="no-margin">
+              <a class="bold fs-13 no-margin text-black" href={this.props.item.url}>
+                Clowdy
+              </a>
+            </p>
+            <span class="small no-margin overflow-hidden">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </span>
+            <div class="clearfix"></div>
+
+          </li>
+
+        </ul>
+
+        <a href="#more" class="bold pull-right text-brand fs-22 p-l-10">+22</a>
+
+    </div>
+    </div>
+    </div>
+
+    <div class="col-md-8 no-padding">
     <div class="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
           <% cache(["cover", @school]) do %>
@@ -7,23 +90,10 @@
           <% end %>
         </div>
     </div>
-
-    <div class="box-shadow bg-light-blue relative">
-      <div class="school-data full-width" id="school_data">
-        <%=  render partial: 'school_data' %>
-      </div>
+    <div class="box-shadow bg-light-blue">
       <%= render partial: 'menu' %>
     </div>
-
-    <div class="content p-t-20 overflow-hidden">
-
-      <div class="col-md-4 no-padding p-r-15">
-        <% cache(["school_card", @school]) do %>
-          <%= render partial: 'school_card' %>
-        <% end %>
-      </div>
-
-      <div class="col-md-8 no-padding">
+    <div class="school-activities m-t-10">
       <%= cache(["beta", current_user, @activities]) do %>
         <%= render partial: 'activities/activities' %>
       <% end %>
@@ -32,7 +102,7 @@
           <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
         </div>
       <% end %>
-      </div>
     </div>
-  </div>
+    </div>
+</div>
   </div>
