@@ -1,0 +1,144 @@
+<%
+  meta property: {
+    robots: "nofollow",
+    charset: "utf-8",
+    google: "notranslate"
+  }
+%>
+
+<%
+  meta title: "For Academic Institutions - Streamline the idea support process",
+     description: "We have integrated management and visualization tools for academic insitutions to make the student idea support process transparent",
+     keywords: %w(gamification students collaboration entrepreneurship universities schools colleges)
+%>
+
+<%
+  meta twitter: {
+    card: "summary_large_image",
+    site: "@hungryhead_co",
+    title: "For Academic Institutions - Streamline the idea support process",
+    image: "https:#{image_url('for_institutions.jpg')}",
+    description: "We have integrated management and visualization tools for academic insitutions to make the student idea support process transparent",
+  }
+%>
+
+<%
+  meta og: {
+    image: "https:#{image_url('for_institutions.jpg')}",
+    title: "For Academic Institutions - Streamline the idea support process",
+    url: "#{request.original_url}",
+    description: "We have integrated management and visualization tools for academic insitutions to make the student idea support process transparent",
+    site_name: "Hungryhead",
+    locale: "en_GB",
+    type: "article"
+  }
+%>
+
+
+<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+  <div class="product-wrapper bg-white">
+    <div class="product">
+      <div class="jumbotron no-margin" data-pages="parallax">
+          <div class="for-institutions-photo">
+          <div class="container vmiddle">
+          <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
+            <div class="hero-section inner text-center">
+              <h1 class="text-white bold">
+                For academic institutions
+              </h1>
+              <p class="text-white fs-16">
+                Bridging gap between you and your enpreneurial students
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="bg-master-lightest text-center wrapper-small full-border-light-bottom no-overflow" id="intro">
+      <div class="col-sm-10 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          We built hungryhead for everyone who is serious about entrepreneurship and business in general.
+        </h1>
+        <p class="col-sm-10 col-md-10 auto-margin m-b-20 fs-16 text-master">
+          Learn how and where we use gamification concepts.
+        </p>
+      </div>
+    </section>
+
+    <section class="wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-5 hidden-xs">
+              <div class="content-mask-md xs-p-b-40 text-center">
+                <%= image_tag('product/visualize_support.png', class: "image-responsive-height lazy #{browser.mobile? ? '' : 'auto-width displayblock auto-margin'}") %>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-7 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+              <h1 class="m-t-5 m-b-20">Connect and communicate</h1>
+              <h5>Find, connect and directly communicate with entrepreneurial students.</h5>
+              <p class="m-b-20 fs-16 text-master">
+                Each academic institution gets its very own profile where we have integrated communication tools that helps them connect and communicate with relevant students just from a click. Send bulk emails, share resources and stay upto date.
+              </p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-master-lightest wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-12">
+              <h1 class="m-t-5 m-b-20">Engage and collaborate</h1>
+              <h5>Engage with students by creating discussions, events or workshops.</h5>
+              <p class="m-b-20 fs-16 text-master">
+                On hungryhead we have integrated tools to engage just the way it suits your institution needs. You can create offline events, invite students and engage them beyond events by collaborating online in realtime.
+              </p>
+            </div>
+            <div class="col-md-5 col-sm-12 col-md-offset-1 hidden-xs">
+              <div class="content-mask-md m-t-40 text-center">
+                <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/investment_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock auto-margin'} lazy") %>
+              </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrapper-small no-overflow">
+      <div class="container col-md-offset-1">
+        <div class="md-p-l-20 md-p-r-20 xs-no-padding">
+            <div class="col-md-5 col-sm-12 hidden-xs">
+              <div class="content-mask-md m-t-40 text-center">
+                <%= image_tag('product/idea_validation_icon.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
+                <%= image_tag('product/idea_validation_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+              </div>
+            </div>
+            <div class="col-md-5 col-sm-12 col-md-offset-1 xs-p-l-15 xs-p-r-15">
+              <h1 class="m-t-5 m-b-20">Measure and iterate</h1>
+              <h5>Measure your contributions and reflect through all-in-one dashboard.</h5>
+              <p class="m-b-20 fs-16 text-master">
+                Student idea support process has never been this transparent and easier. Your institution profile lets you discover the best ideas in the community
+              </p>
+              <p class="m-b-20 fs-16">
+                Once an idea gets validated, our gamification engine rewards contributors and investors depending on their contributions.
+              </p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-master-lightest full-border-light text-center wrapper-small full-border-light-bottom no-overflow p-b-100" id="intro">
+      <div class="col-sm-10 col-md-8 auto-margin">
+        <h1 class="m-t-5 m-b-20">
+          Learn about collaboration on hungryhead
+        </h1>
+        <%= meta_events_tracked_link_to('Click here', collaboration_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Collaboration Page' } }) %>
+      </div>
+    </section>
+
+  </div>
+<% end %>
+<%= render partial: 'globals/footer' %>
+
