@@ -2,46 +2,19 @@
   <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
     <% data = render(template: 'schools/show.json.jbuilder') %>
     <div class="school-profile auto-margin">
-              <div class="school-logo">
-                   <% if current_user == @school.user %>
-                    <div id="profile_image">
-                      <%= simple_form_for(@school, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
-                        <%= f.file_field :logo, style: "display: none", id: 'profile_photo' %>
-                      <% end %>
-                      <div id="profilepic">
-                      <div class="avatar">
-                        <div class="upload_icon">
-                          <a id ="trigger-file-upload" class="trigger-file-upload">
-                            <span class="upload_icon">
-                              <i class="fa fa-camera text-white"></i>
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                      <% if @school.avatar_present? %>
-                        <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, id: "profile_photo_preview", width: "auto", class: "user-image")%>
-                        <% else %>
-                            <span class="placeholder bold text-white fs-22">
-                                <%= @school.name_badge %>
-                            </span>
-                        <% end %>
-                      </div>
-                    </div>
-                  <% else %>
-                    <div id="profile_image">
-                      <div id="profilepic">
-                      <% if @school.avatar_present? %>
-                       <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
-                       <% else %>
-                           <span class="placeholder bold text-white fs-22">
-                               <%= @school.name_badge %>
-                           </span>
-                       <% end %>
-                      </div>
-                    </div>
-                  <% end %>
-
-              </div>
+      <div class="school-logo">
+        <div id="profile_image">
+          <div id="profilepic">
+          <% if @school.avatar_present? %>
+           <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
+           <% else %>
+               <span class="placeholder bold text-white fs-22">
+                   <%= @school.name_badge %>
+               </span>
+           <% end %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="hero-text inner clearfix">
       <h2 class="text-white">Browse People</h2>

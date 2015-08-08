@@ -4,7 +4,17 @@
       <div class="user-profile auto-margin">
           <div class="thumbnail-wrapper d100">
               <div class="profile-logo">
-                <%= react_component('SchoolLogo', {data: data}) %>
+                <div id="profile_image">
+                  <div id="profilepic">
+                  <% if @school.avatar_present? %>
+                   <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
+                   <% else %>
+                       <span class="placeholder bold text-white fs-22">
+                           <%= @school.name_badge %>
+                       </span>
+                   <% end %>
+                  </div>
+                </div>
               </div>
           </div>
       </div>

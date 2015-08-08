@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-b-60">
   <div class="social-wrapper container">
     <div class="col-md-4 no-padding p-r-15">
         <% cache(["school_card", @school]) do %>
@@ -15,7 +15,9 @@
           <div class="panel-body">
           <% @school.get_published_users.take(11).each do |user| %>
             <div class="col-md-2 no-padding">
-              <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar}, class: "image-responsive-height") %>
+              <%= link_to(profile_path(user), class: 'inline') do %>
+                <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
+              <% end %>
             </div>
           <% end %>
           <% if @school.get_published_users.length >  11 %>
