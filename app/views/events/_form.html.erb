@@ -1,5 +1,5 @@
 <div class="event-form m-t-20">
-  <%= simple_form_for(@event, html: {id: 'new_event_form'}) do |f| %>
+  <%= simple_form_for(@event, html: {id: 'new_event_form', method: :patch}, remote: true) do |f| %>
     <% @event.errors.full_messages.each do |message| %>
       <li class="alert alert-error"><%= message %></li>
     <% end %>
@@ -51,7 +51,7 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control"  placeholder="Start date time" />
+            <input type="text" style="width: 100%" name="event[start_time]" id="startdatepicker" class="form-control"  placeholder="Event Start date time" data-date-options-defaultDate='2012/12/25' />
           </div>
         </div>
       </div>
@@ -63,14 +63,16 @@
             <span class="add-on input-group-addon">
               <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             </span>
-            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" placeholder="Start date time" />
+            <input type="text" style="width: 100%" name="event[end_time]" id="enddatepicker" class="form-control" placeholder="Event End date time" data-date-options-defaultDate='2012/12/25' />
           </div>
         </div>
       </div>
     </div>
 
-    <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
-    <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
+    <% unless @event.present? %>
+      <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
+      <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
+    <% end %>
 
     <div class="button-tags m-t-20">
       <%= button_tag 'Submit', class: 'main-button fs-13 bold' %>

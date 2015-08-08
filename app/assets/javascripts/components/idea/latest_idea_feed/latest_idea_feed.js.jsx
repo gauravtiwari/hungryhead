@@ -45,19 +45,7 @@ var LatestIdeaFeed = React.createClass({
   buildElements: function(feed) {
       var elements = [];
       _.map(feed, function(item){
-        if(item.verb === "invested") {
-          elements.push(<LatestFeedInvestmentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "followed") {
-          elements.push(<LatestFeedFollowItem key={Math.random()} item={item} />)
-        } else if(item.verb === "feedbacked") {
-          elements.push(<LatestFeedFeedbackItem key={Math.random()} item={item} />)
-        } else if(item.verb === "pitched"){
-          elements.push(<LatestFeedIdeaItem key={Math.random()} item={item} />)
-        } else if(item.verb === "commented"){
-          elements.push(<LatestFeedCommentItem key={Math.random()} item={item} />)
-        } else if(item.verb === "voted"){
-          elements.push(<LatestFeedVoteItem key={Math.random()} item={item} />)
-        }
+        elements.push(<LatestFeedItem key={Math.random()} item={item} />)
       });
       return elements;
   },
@@ -93,12 +81,12 @@ var LatestIdeaFeed = React.createClass({
 
   fetchNotifications: function(){
     $.getJSON(this.props.path, function(json, textStatus) {
-      this.setState({
-        feed: this.buildElements(json.items),
-        next_page: json.next_page,
-        loading: false
-    });
-    }.bind(this));
+       this.setState({
+         feed: this.buildElements(json.items),
+         next_page: json.next_page,
+         loading: false
+       });
+     }.bind(this));
   },
 
   render: function(){

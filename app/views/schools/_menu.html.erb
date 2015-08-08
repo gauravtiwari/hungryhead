@@ -1,15 +1,15 @@
 <div class="profile-nav overflow-hidden p-l-15">
-	<ul class="profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
-		<li class="inline b-r b-grey b-dashed p-r-15">
+	<ul class="school-profile-name inline no-style p-t-15 p-b-15 no-margin col-md-7">
+		<li class="inline p-r-25">
 			<%= link_to('Profile', profile_path(@school), class: "bold #{current_class?(profile_path(@school))} p-b-5 fs-13") %>
 		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+		<li class="inline p-r-25">
 			<%= link_to('People', profile_people_path(@school), class: "bold fs-13 #{current_class?(profile_people_path(@school))} ") %>
 		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+		<li class="inline p-r-25">
 			<%= link_to('Ideas', profile_ideas_path(@school), class: "bold fs-13 #{current_class?(profile_ideas_path(@school))} ") %>
 		</li>
-		<li class="inline b-r b-grey b-dashed p-l-15 p-r-15">
+		<li class="inline">
 			<%= link_to('Events', profile_events_path(@school), class: "bold fs-13 #{current_class?(profile_events_path(@school))} ") %>
 		</li>
 	</ul>

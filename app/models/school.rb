@@ -54,7 +54,7 @@ class School < ActiveRecord::Base
 	end
 
 	def get_avatar
-	  logo.url
+	  logo.url(:avatar)
 	end
 
 	def avatar_present?

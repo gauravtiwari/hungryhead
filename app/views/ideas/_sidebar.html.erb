@@ -1,5 +1,5 @@
 <div class="idea-sidebar auto-height bg-white box-shadow">
-  <%= react_component('LatestFeed', {idea_id: @idea.uuid, path: ideas_notification_path(@idea), channel_name: "idea-feed-#{@idea.uuid}", channel_event: "new_ticker_item", name: @idea.name}.to_json) %>
+  <%= react_component('LatestIdeaFeed', {idea_id: @idea.uuid, path: ideas_notification_path(@idea), channel_name: "idea-feed-#{@idea.uuid}", channel_event: "new_ticker_item", name: @idea.name}.to_json) %>
 
   <%= render partial: 'ideas/card_stats' %>
 

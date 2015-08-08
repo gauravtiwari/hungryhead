@@ -2,7 +2,7 @@
   <li class="user-list p-t-15 p-b-15">
       <span class="col-xs-height">
         <% if user.avatar_present? %>
-          <span class="thumbnail-wrapper d48 circular bg-success">
+          <span class="thumbnail-wrapper d48 circular">
               <%= image_tag(user.get_avatar, data: {src:  user.get_avatar, :"src-retina" => user.get_avatar},  class: "col-top", width: "34", height: "34") %>
           </span>
         <% else %>
@@ -15,52 +15,50 @@
       </span>
       <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
        <h5 class="no-margin bold inline fs-14">
-         <a href="<%= profile_path(user) %>" class="inline">
+         <a href="<%= profile_path(user) %>" class="inline text-master">
            <%= user.name %>
          </a>
        </h5>
-        <% if user.school.avatar_present? %>
-         <%= link_to(profile_path(user.school)) do %>
-          <%= image_tag(user.school.get_avatar, data: {src: user.school.get_avatar, :"src-retina" => user.school.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
-         <% end %>
+       <%= link_to(profile_path(user.school), data: {toggle: "tooltip"}, title: user.school.name, class: 'inline') do %>
+        <span class="fa fa-university m-l-10 inline"></span>
+       <% end %>
+
+      <%= link_to(users_path(type: user.role), data: {toggle: "tooltip"}, title: user.role.titlecase, class: 'inline') do %>
+        <span class="fa fa-graduation-cap m-l-10 inline"></span>
+      <% end %>
+      <% if user.cached_location_list.present? %>
+        <% user.location_list.each do |tag| %>
+          <%= link_to(tag_people_path(tag.parameterize), class: 'text-master light', data: {toggle: "tooltip"}, title: tag, class: 'm-l-10 inline') do %>
+            <span class="fa fa-map-marker text-brand"></span>
+          <% end %>
         <% end %>
-        <span class="people-info label small-text m-l-10">
-          <%= link_to(user.role.titlecase, users_path(type: user.role), class: 'text-master normal fs-12') %>
+      <% end %>
+      <p class="text-master no-margin p-t-5">
+        <%= user.mini_bio %>
+      </p>
+      <p class="fs-14 p-t-5 block people-info small-text">
+        <% if user.cached_subject_list.present? %>
+        <span class="hidden-xs small-text">
+          <% user.subject_list.each do |tag| %>
+            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: 'text-master light') %>
+          <% end %>
         </span>
-        <% if user.cached_location_list.present? %>
-        <p class="people-info no-margin">
-          <span class="fa fa-map-marker text-green"></span>
-          <% user.location_list.each do |tag| %>
-            <%= link_to("#{tag}", tag_people_path(tag.parameterize)) %>
-          <% end %>
-        </p>
         <% end %>
-        <p class="text-master no-margin p-t-5">
-          <%= user.mini_bio %>
-        </p>
-        <p class="fs-14 p-t-5 block people-info small-text">
-          <% if user.cached_subject_list.present? %>
-          <span class="hidden-xs small-text">
-            <% user.subject_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
-            <% end %>
-          </span>
+        <% if user.cached_market_list.present? %>
+        <span class="hidden-xs small-text">
+          <% user.market_list.each do |tag| %>
+            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: 'text-master light') %>
           <% end %>
-          <% if user.cached_market_list.present? %>
-          <span class="hidden-xs small-text">
-            <% user.market_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
-            <% end %>
-          </span>
+        </span>
+        <% end %>
+        <% if user.cached_skill_list.present? %>
+        <span class="hidden-xs small-text">
+          <% user.skill_list.each do |tag| %>
+            <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: 'text-master light') %>
           <% end %>
-          <% if user.cached_skill_list.present? %>
-          <span class="hidden-xs small-text">
-            <% user.skill_list.each do |tag| %>
-              <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize)) %>
-            <% end %>
-          </span>
-          <% end %>
-        </p>
+        </span>
+        <% end %>
+      </p>
       </div>
      <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
        <div class="user-stats-list no-border">
@@ -71,9 +69,9 @@
            </span>
          </div>
          <div class="col-sm-6 text-center">
-           Score
+           Ideas
            <span class="text-master displayblock text-center">
-             <%= number_to_human(User.leaderboard.score(user.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+             <%= number_to_human(user.ideas_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
            </span>
          </div>
        </div>

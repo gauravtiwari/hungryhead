@@ -7,7 +7,9 @@
   background:         linear-gradient(90deg, #FFA17F 10%, #00223E 90%); /* W3C */
 
 }
-
+.event-wrapper .jumbotron {
+  height: 60vh!important;
+}
 .event-details {
   min-height: 423px;
   max-height: 423px;

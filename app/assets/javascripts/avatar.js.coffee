@@ -1,5 +1,5 @@
 jQuery(document).ready ->
-  $('#trigger-file-upload').on 'click', (e) ->
+  $(document).on 'click', '#trigger-file-upload', (e) ->
     e.preventDefault()
     $('input[id=profile_photo]')[0].click()
     $('input[id=profile_photo]').on 'change', (e) ->

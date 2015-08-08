@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def edit
     @owner = @event.owner
     respond_to do |format|
-      format.js {render :new}
+      format.js {render :edit}
     end
   end
 

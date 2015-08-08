@@ -8,8 +8,8 @@ var FriendsNotificationItem = React.createClass({
   render: function() {
    var html_id = "feed_"+this.props.item.id;
 
-    return (<li className="alert-list padding-10" id={html_id} onClick={this.loadActivity}>
-               <div className="p-l-10 col-xs-height col-middle col-xs-9 overflow-ellipsis fs-13">
+    return (<li className="alert-list padding-10 overflow-hidden" id={html_id} onClick={this.loadActivity}>
+               <div className="p-l-10 col-xs-height col-middle col-xs-9 fs-13">
                  <span className="text" dangerouslySetInnerHTML={{__html: this.props.item.html}}>
                  </span>
                  <span className="meta clearfix">

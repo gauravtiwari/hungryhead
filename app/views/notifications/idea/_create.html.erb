@@ -1,4 +1,4 @@
-<div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
+<div class="thumbnail-wrapper d32 user-pic circular inline m-r-10">
   <% if activity.owner.avatar_present? %>
     <%= image_tag(activity.owner.get_avatar, data: {src: activity.owner.get_avatar, src_retina: activity.owner.get_avatar}) %>
   <% else %>

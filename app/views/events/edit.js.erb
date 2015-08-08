@@ -9,6 +9,8 @@ $popup.modal('show');
 
 //Add client side validation
 $('#event_form').validate();
+$('#startdatepicker').datetimepicker({sideBySide: true});
+$('#enddatepicker').datetimepicker({sideBySide: true});
 
 //Add client side rules
 $('#event_excerpt').rules('add', {

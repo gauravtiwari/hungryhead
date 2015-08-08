@@ -1,4 +1,5 @@
-<div class="thumbnail-wrapper d32 fs-11 user-pic circular inline m-r-10">
+<span>
+<div class="thumbnail-wrapper d32 user-pic circular inline m-r-10">
   <% if activity.owner.avatar_present? %>
     <%= image_tag(activity.owner.get_avatar, data: {src: activity.owner.get_avatar, src_retina: activity.owner.get_avatar}) %>
   <% else %>
@@ -7,9 +8,10 @@
   </span>
   <% end %>
 </div>
-<div class="overflow-hidden">
+<p class="overflow-hidden fs-13 no-margin">
   <strong class="inline text-black">
     <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
   </strong>
   published an event - <%= activity.trackable.title %>
-</div>
+</p>
+</span>

@@ -1,9 +1,9 @@
 <div class="container p-b-60">
 <div class="row">
-  <div class="social-wrapper container">
+  <div class="event-wrapper container">
       <div class="col-md-8 col-sm-8 no-padding p-l-15">
         <div class="social">
-          <div class="jumbotron full-border-light-left" data-pages="parallax" data-social="cover">
+          <div class="jumbotron full-border-light-left" data-pages="parallax">
             <div class="event-start inline hint-text m-r-10">
               <span class="fa fa-calendar m-l-15"></span>
               <%= local_time(@event.start_time, '%b %e') %>
@@ -70,7 +70,7 @@
         <p class="text-master semi-bold overflow-hidden no-margin">
             <%= @event.address %>
           <span class="small-text clearfix hint-text">
-            <%= @event.full_address %>
+            <%= @event.address %>
           </span>
         </p>
       </div>

@@ -6,9 +6,11 @@
   <% end %>
 
   <div class="col-md-6 col-sm-8 sm-no-padding">
-    <%= cache(["beta", current_user, @activities]) do %>
-      <%= render partial: 'activities/activities' %>
-    <% end %>
+    <div class="activity-feed auto-height m-t-20">
+      <%= cache(["beta", current_user, @activities]) do %>
+        <%= render partial: 'activities/activities' %>
+      <% end %>
+    </div>
     <% if @activities.next_page %>
       <div class="pagination-box text-center padding-10 bg-complete-lighter m-t-20 clearfix box-shadow">
         <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>

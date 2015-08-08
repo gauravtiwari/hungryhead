@@ -2,63 +2,36 @@
   <div class="social-wrapper container">
     <div class="social">
         <div class="jumbotron box-shadow" data-pages="parallax" data-social="cover">
-          <%=  render partial: 'school_data' %>
           <% cache(["cover", @school]) do %>
             <%= render partial: 'cover' %>
           <% end %>
         </div>
     </div>
 
-    <div class="box-shadow bg-white">
+    <div class="box-shadow bg-light-blue relative">
+      <div class="school-data full-width" id="school_data">
+        <%=  render partial: 'school_data' %>
+      </div>
       <%= render partial: 'menu' %>
     </div>
 
     <div class="content p-t-20 overflow-hidden">
 
-      <div class="col-md-3 no-padding p-r-15">
+      <div class="col-md-4 no-padding p-r-15">
         <% cache(["school_card", @school]) do %>
           <%= render partial: 'school_card' %>
         <% end %>
       </div>
 
-      <div class="col-md-9 no-padding">
-      <div class="panel box-shadow no-border">
-        <ul class="nav nav-tabs nav-tabs-simple bg-light-blue-lightest">
-            <li class="active">
-              <a data-toggle="tab" href="#tab_people">
-                <i class="fa fa-graduation-cap"></i> Latest People
-              </a>
-            </li>
-            <li>
-              <%= link_to("#tab_ideas", data: {toggle: 'tab', url: profile_latest_ideas_path(@school)}, id: 'load_school_ideas') do %>
-                <i class="fa fa-lightbulb-o"></i> Latest Ideas
-              <% end %>
-            </li>
-            <li>
-              <%= link_to("#tab_events", data: {toggle: 'tab', url: profile_events_path(@school)}, id: 'load_school_events') do %>
-                <i class="fa fa-calendar"></i> Latest Events
-              <% end %>
-            </li>
-        </ul>
-
-        <div class="tab-content schools-tabs">
-
-          <div class="tab-pane active" id="tab_people">
-            <div class="view">
-              <div class="list-view boreded no-top-border">
-                <%= render partial: 'students' %>
-              </div>
-            </div>
-          </div>
-
-          <div class="tab-pane" id="tab_ideas">
-          </div>
-
-          <div class="tab-pane" id="tab_events">
-          </div>
-
+      <div class="col-md-8 no-padding">
+      <%= cache(["beta", current_user, @activities]) do %>
+        <%= render partial: 'activities/activities' %>
+      <% end %>
+      <% if @activities.next_page %>
+        <div class="pagination-box text-center padding-10 bg-complete-lighter m-t-20 clearfix box-shadow">
+          <%=  link_to 'Load More Activities', root_path(:page => @activities.next_page), :class => 'load-more-posts', remote: true,  data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} %>
         </div>
-      </div>
+      <% end %>
       </div>
     </div>
   </div>

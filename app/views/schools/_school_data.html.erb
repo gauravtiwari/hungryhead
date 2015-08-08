@@ -1,67 +1,69 @@
-<div class="school-data text-center text-white col-md-5">
-    <% data = render(template: 'schools/show.json.jbuilder') %>
-
-    <div class="user-profile auto-margin">
-        <div class="thumbnail-wrapper d100">
-            <div class="profile-logo">
-                 <% if current_user == @school.user %>
-                  <div id="profile_image">
-                    <%= simple_form_for(@school, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
-                      <%= f.file_field :logo, style: "display: none", id: 'profile_photo' %>
-                    <% end %>
-                    <div id="profilepic">
-                    <div class="avatar">
-                      <div class="upload_icon">
-                        <a id ="trigger-file-upload" class="trigger-file-upload">
-                          <span class="upload_icon">
-                            <i class="fa fa-camera text-white"></i>
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                    <% if @school.avatar_present? %>
-                      <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, id: "profile_photo_preview", width: "110", height: "110", class: "user-image")%>
-                      <% else %>
-                          <span class="placeholder bold text-white fs-22">
-                              <%= @school.name_badge %>
-                          </span>
-                      <% end %>
-                    </div>
-                  </div>
-                <% else %>
-                  <div id="profile_image">
-                    <div id="profilepic">
-                    <% if @school.avatar_present? %>
-                     <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "110", height: "110", class: "user-image")%>
-                     <% else %>
-                         <span class="placeholder bold text-white fs-22">
-                             <%= @school.name_badge %>
-                         </span>
-                     <% end %>
-                    </div>
-                  </div>
+<div class="user-profile">
+    <div class="thumbnail-wrapper d100 m-r-20 m-l-20">
+        <div class="profile-logo bg-white padding-10 box-shadow">
+             <% if current_user == @school.user %>
+              <div id="profile_image">
+                <%= simple_form_for(@school, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
+                  <%= f.file_field :logo, style: "display: none", id: 'profile_photo', accept: "image/*" %>
                 <% end %>
+                <div id="profilepic">
+                <div class="avatar">
+                  <div class="upload_icon">
+                    <a id ="trigger-file-upload" class="trigger-file-upload">
+                      <span class="upload_icon">
+                        <i class="fa fa-camera text-master"></i>
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <% if @school.avatar_present? %>
+                  <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, id: "profile_photo_preview", width: "110", height: "110", class: "user-image")%>
+                  <% else %>
+                      <span class="placeholder bold text-white fs-22">
+                          <%= @school.name_badge %>
+                      </span>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <div id="profile_image">
+                <div id="profilepic">
+                <% if @school.avatar_present? %>
+                 <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "110", height: "110", class: "user-image")%>
+                 <% else %>
+                     <span class="placeholder bold text-white fs-22">
+                         <%= @school.name_badge %>
+                     </span>
+                 <% end %>
+                </div>
+              </div>
+            <% end %>
 
-            </div>
-        </div>
-    </div>
-
-    <h3 class="bold clearfix p-t-20 displayblock text-white">
-        <%= @school.name.titlecase %>
-    </h3>
-
-    <div class="row m-t-20 font-opensans">
-        <div class="col-md-4 text-center b-r b-white b-dashed">
-            <h1 class="all-caps bold small fs-16">People</h1>
-            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.people_counter.value %></p>
-        </div>
-        <div class="col-md-4 text-center b-r b-white b-dashed">
-            <h1 class="all-caps bold small fs-16">Ideas</h1>
-            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.ideas_counter.value %></p>
-        </div>
-        <div class="col-md-4 text-center">
-            <h1 class="all-caps bold small fs-16">Followers</h1>
-            <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.followers_counter.value %></p>
         </div>
     </div>
 </div>
+
+<div class="school-content inline">
+  <h3 class="bold no-margin text-white displayblock">
+      <%= @school.name.titlecase %>
+  </h3>
+  <h5 class="no-margin text-white displayblock">
+    <span class="fa fa-map-marker"></span> <%= @school.location_list %>
+  </h5>
+</div>
+
+<div class="font-opensans pull-right">
+    <div class="inline text-center p-r-30">
+        <h1 class="all-caps bold text-white small fs-16">People</h1>
+        <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.people_counter.value %></p>
+    </div>
+    <div class="inline text-center p-r-30">
+        <h1 class="all-caps bold text-white small fs-16">Ideas</h1>
+        <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.ideas_counter.value %></p>
+    </div>
+    <div class="inline text-center p-r-15">
+        <h1 class="all-caps bold text-white small fs-16">Followers</h1>
+        <p class="all-caps bold  no-margin fs-16 text-white"><%= @school.followers_counter.value %></p>
+    </div>
+</div>
+

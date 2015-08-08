@@ -8,7 +8,7 @@ var LatestFeedItem = React.createClass({
   render: function() {
     var html_id = "feed_"+this.props.item.id;
     return (
-        <li id={html_id} className="pointer p-b-10 p-t-10 fs-13 clearfix" onClick={this.loadActivity}>
+        <li id={html_id} className="pointer p-b-10 p-t-10 fs-12 clearfix" onClick={this.loadActivity}>
           <div className="inline" dangerouslySetInnerHTML={{__html: this.props.item.html}}>
           </div>
         </li>

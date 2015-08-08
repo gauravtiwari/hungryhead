@@ -14,18 +14,17 @@
       <% end %>
     </span>
     <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
-     <h5 class="text-master no-margin bold inline fs-14">
-       <a href="<%= profile_path(school) %>" class="inline">
+     <h5 class="no-margin bold inline fs-14">
+       <a href="<%= profile_path(school) %>" class="inline text-master ">
          <%= school.name %>
        </a>
      </h5>
      <% if school.cached_location_list.present? %>
-     <p class="clearfix fs-14">
-       Located in:
-         <% school.location_list.each do |tag| %>
-           <%= link_to("@#{tag.downcase}", tag_people_path(tag.parameterize), class: "text-black light") %>
-         <% end %>
-     </p>
+     <% school.location_list.each do |tag| %>
+      <%= link_to(tag_people_path(tag.parameterize), class: 'text-master light', data: {toggle: "tooltip"}, title: tag, class: 'm-l-10 inline') do %>
+        <span class="fa fa-map-marker text-brand"></span>
+      <% end %>
+      <% end %>
      <% end %>
      <p class="fs-14 p-t-5 block people-info text-master">
        <span class="text-master">

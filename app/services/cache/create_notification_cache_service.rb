@@ -12,8 +12,8 @@ class CreateNotificationCacheService
     add_notification_for_recipient unless @activity.owner == @activity.recipient_user
 
     #Add activity to idea ticker if recipient or trackable is idea
-    add_activity_to_idea(@object) if @activity.trackable_type == "Idea" && @activity.key == "idea.create"
-    add_activity_to_idea(@target) if @activity.recipient_type == "Idea" && @activity.trackable_type != "idea.create"
+    add_activity_to_idea(@object) if @activity.trackable_type == "Idea"
+    add_activity_to_idea(@target) if @activity.recipient_type == "Idea"
 
     #Add activity to followers ticker
     add_activity_to_followers if followers.any?
@@ -33,7 +33,7 @@ class CreateNotificationCacheService
     if @activity.recipient_type == "Idea"
       ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s]).uniq
     elsif @activity.recipient_type == "School"
-      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id) - [@activity.recipient_user.id.to_s]).uniq
+      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) - [@activity.recipient_user.id.to_s]).uniq
     else
       ids = (@actor.followers_ids.members - [@activity.recipient_user.id.to_s]).uniq
     end

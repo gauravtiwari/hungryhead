@@ -1,25 +1,23 @@
-<div class="activity-feed auto-height m-t-20">
-  <div class="activity-feed-box live" id="main_activity_box">
-    <% if @activities.size > 0 %>
-      <% @activities.each do |activity| %>
-        <% cache(["beta", current_user, activity]) do %>
-          <%= render_activity(activity) %>
-        <% end %>
+<div class="activity-feed-box" id="main_activity_box">
+  <% if @activities.size > 0 %>
+    <% @activities.each do |activity| %>
+      <% cache(["beta", current_user, activity]) do %>
+        <%= render_activity(activity) %>
       <% end %>
-    <% else %>
-      <div class="card share" data-social="item">
-       <div class="card-description text-center">
-         <div class="no-content">
-         <span class="fa fa-smile-o fs-50"></span>
-         <h1>
-           Thank you for signing up to our beta. Once we have a few ideas you will be able to see them here.
-         </h1>
-         </div>
-         <p class="text-center">In meantime, if you have a startup idea,
-           <%= link_to("Click", new_idea_path(:intro), class: 'p-b-5 b-b b-grey text-green') %> to pitch
-         </p>
-       </div>
-      </div>
     <% end %>
-  </div>
+  <% else %>
+    <div class="card share" data-social="item">
+     <div class="card-description text-center">
+       <div class="no-content">
+       <span class="fa fa-smile-o fs-50"></span>
+       <h1>
+         Thank you for signing up to our beta. Once we have a few ideas you will be able to see them here.
+       </h1>
+       </div>
+       <p class="text-center">In meantime, if you have a startup idea,
+         <%= link_to("Click", new_idea_path(:intro), class: 'p-b-5 b-b b-grey text-green') %> to pitch
+       </p>
+     </div>
+    </div>
+  <% end %>
 </div>
