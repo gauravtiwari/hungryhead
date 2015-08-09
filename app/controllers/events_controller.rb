@@ -16,7 +16,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @user = params[:user].constantize.find(params[:user_id])
+    @user = params[:owner].constantize.find(params[:owner_id])
   end
 
   # GET /events/1/edit

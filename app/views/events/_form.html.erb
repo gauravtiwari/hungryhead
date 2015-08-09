@@ -1,5 +1,5 @@
 <div class="event-form m-t-20">
-  <%= simple_form_for(@event, html: {id: 'new_event_form', method: :patch}, remote: true) do |f| %>
+  <%= simple_form_for(@event, html: {id: 'new_event_form', method: :post}, remote: true) do |f| %>
     <% @event.errors.full_messages.each do |message| %>
       <li class="alert alert-error"><%= message %></li>
     <% end %>
@@ -69,10 +69,8 @@
       </div>
     </div>
 
-    <% unless @event.present? %>
-      <%= f.hidden_field :user_id, value: "#{@user.id}" %>
-      <%= f.hidden_field :user_type, value: "#{@user.class.to_s}" %>
-    <% end %>
+    <%= f.hidden_field :user_id, value: "#{@user.id}" %>
+    <%= f.hidden_field :user_type, value: "#{@user.class.to_s}" %>
 
     <div class="button-tags m-t-20">
       <%= button_tag 'Submit', class: 'main-button fs-13 bold' %>

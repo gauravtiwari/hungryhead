@@ -3,13 +3,13 @@
      <div class="col-sm-4 all-caps text-center">
        Spots
        <span class="text-brand displayblock text-center">
-         <%= number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+        <%= number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }) %>
        </span>
      </div>
      <div class="col-sm-4 all-caps text-center">
-       Invited
+       Comments
        <span class="text-brand displayblock text-center">
-         <%= number_to_human(@event.event_invites.size, :format => '%n%u', :units => { :thousand => 'K' }) %>
+        <%= number_to_human(@event.comments_counter.value, :format => '%n%u', :units => { :thousand => 'K' }) %>
        </span>
      </div>
      <div class="col-sm-4 all-caps text-center">

@@ -12,7 +12,7 @@
                           <%= f.file_field :logo, style: "display: none", id: 'profile_photo', accept: "image/*" %>
                         <% end %>
                         <div id="profilepic">
-                        <div class="avatar">
+                        <div class="avatar placeholder-logo">
                           <div class="upload_icon">
                             <a id ="trigger-file-upload" class="trigger-file-upload">
                               <span class="upload_icon">
@@ -36,9 +36,9 @@
                         <% if @school.avatar_present? %>
                          <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "110", height: "110", class: "user-image")%>
                          <% else %>
-                             <span class="placeholder bold text-white fs-22">
-                                 <%= @school.name_badge %>
-                             </span>
+                           <span class="placeholder bold text-white fs-22">
+                               <%= @school.name_badge %>
+                           </span>
                          <% end %>
                         </div>
                       </div>
