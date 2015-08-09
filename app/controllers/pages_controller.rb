@@ -50,7 +50,7 @@ class PagesController < ApplicationController
   end
 
   #Privacy policy page
-  def privacy
+  def privacy_policy
     respond_to do |format|
       format.html
     end
@@ -59,7 +59,7 @@ class PagesController < ApplicationController
   def support
   end
 
-  def cookies
+  def cookies_policy
   end
 
   def how_it_works

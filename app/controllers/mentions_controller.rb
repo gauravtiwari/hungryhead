@@ -4,7 +4,7 @@ class MentionsController < ApplicationController
   def mentionables
     @mentionable = params[:mentionable_type].constantize.find_by_uuid(params[:id])
 
-    mentionable_user = @mentionable.user
+    mentionable_user = @mentionable.class.to_s == "Event" ? @mentionable.owner : @mentionable.user
 
     commenters = @mentionable.commenters_ids.values
 

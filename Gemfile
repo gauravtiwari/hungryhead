@@ -241,6 +241,12 @@ gem 'rack-attack'
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
 
+#Turbolinks
+gem 'turbolinks', github: 'rails/turbolinks'
+gem 'jquery-turbolinks', github: 'kossnocorp/jquery.turbolinks'
+
+gem 'actioncable', github: 'rails/actioncable'
+
 group :production, :staging do
   gem 'bugsnag'
   gem 'mixpanel-ruby'

@@ -2,6 +2,7 @@
 // BEGIN VENDOR JS FOR PAGES
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery-form
 //= require bootstrap
 //= require jquery.easing
@@ -58,3 +59,4 @@
 //= require core/js/hungryhead
 //= require pusher_init
 //= require_tree .
+//= require turbolinks

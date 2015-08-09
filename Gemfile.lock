@@ -1,4 +1,19 @@
 GIT
+  remote: git://github.com/kossnocorp/jquery.turbolinks.git
+  revision: 6f336f1d3acceef95f9289129b64b00edc5709e7
+  specs:
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
+
+GIT
+  remote: git://github.com/rails/turbolinks.git
+  revision: 4f99d6c6c80a1e0ce2815a6a912ed9fdb9ec795e
+  specs:
+    turbolinks (3.0.0)
+      coffee-rails
+
+GIT
   remote: git://github.com/thedarkone/rails-dev-boost.git
   revision: a709a10b06b7d9fc4a9846bc613c60c86af9dd7c
   specs:
@@ -691,6 +706,7 @@ DEPENDENCIES
   htmlcompressor
   jbuilder
   jquery-atwho-rails
+  jquery-turbolinks!
   jquery-ui-rails
   js-routes
   json
@@ -774,6 +790,7 @@ DEPENDENCIES
   spring
   sprockets
   therubyracer
+  turbolinks!
   uglifier
   unf
   uuidtools
