@@ -36,11 +36,7 @@ source 'https://rails-assets.org' do
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', github: "rails/rails"
-gem 'sprockets'
-gem 'sprockets-rails', github: "rails/sprockets-rails"
-gem 'arel', github: "rails/arel"
-
+gem 'rails', '4.2.3'
 #Turbolinks
 gem 'turbolinks', github: 'rails/turbolinks'
 gem 'jquery-turbolinks', github: 'kossnocorp/jquery.turbolinks'
@@ -53,7 +49,7 @@ gem 'pg'
 gem 'postgres-copy'
 
 #Coffescript
-gem 'coffee-rails', github: "rails/coffee-rails"
+gem 'coffee-rails'
 gem 'sass'
 
 #Font awesome
@@ -75,7 +71,7 @@ gem 'help', path: "vendor/engines/help"
 gem 'site_feedback', path: "vendor/engines/site_feedback"
 
 #Cron jobs
-gem 'crono', github: 'gauravtiwari/crono'
+gem 'crono'
 
 #Cache for jbuilder
 gem 'jbuilder'
@@ -83,12 +79,13 @@ gem 'jbuilder'
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 
 gem 'spring',        group: :development
+gem 'sprockets'
 
 #Render anywhere
 gem 'render_anywhere', :require => false
 
 #Fetch records in order
-gem 'order_as_specified', github: 'gauravtiwari/order_as_specified'
+gem 'order_as_specified'
 
 #Mail form
 gem 'mail_form'
@@ -159,7 +156,7 @@ gem 'redis-objects'
 gem 'mandrill-rails'
 
 #Eager load associations
-gem 'goldiloader', github: 'gauravtiwari/goldiloader'
+gem 'goldiloader'
 
 #Event maps - Google maps
 gem 'geocoder'
@@ -182,7 +179,7 @@ gem 'js-routes'
 gem 'paper_trail'
 
 #Simple form
-gem 'simple_form', github: 'gauravtiwari/simple_form'
+gem 'simple_form'
 gem 'honeypot-captcha'
 
 # SEO
@@ -245,7 +242,7 @@ gem 'metamagic'
 gem 'uuidtools'
 
 #Meta events tracker
-gem 'meta_events', github: 'gauravtiwari/meta_events'
+gem 'meta_events'
 
 #Security for app
 gem 'rack-attack'
@@ -270,6 +267,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'dawnscanner', :require=>false
   gem 'meta_request'
+  gem 'activerecord-colored_log_subscriber'
   gem 'bullet'
   gem 'binding_of_caller'
   gem 'rb-fsevent', '>= 0.9.1'
