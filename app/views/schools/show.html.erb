@@ -15,8 +15,16 @@
           <div class="panel-body">
           <% @school.get_published_users.take(11).each do |user| %>
             <div class="col-md-2 no-padding">
-              <%= link_to(profile_path(user), class: 'inline') do %>
-                <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
+              <%= link_to(profile_path(user), class: 'inline', data: {toggle: "tooltip", container: "body"}, title: user.name) do %>
+                <% if user.avatar_present? %>
+                 <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar},class: "image-responsive-height") %>
+                <% else %>
+                  <span class="thumbnail-wrapper d52">
+                    <span class="placeholder text-white">
+                      <%= user.name_badge %>
+                    </span>
+                  </span>
+                <% end %>
               <% end %>
             </div>
           <% end %>

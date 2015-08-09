@@ -27,7 +27,7 @@ class DeleteActivityJob < ActiveJob::Base
   end
 
   def is_school?(activity)
-    activity.user_type == "School"
+    activity.trackable.user_type == "School"
   end
 
   #Get recipient id //user

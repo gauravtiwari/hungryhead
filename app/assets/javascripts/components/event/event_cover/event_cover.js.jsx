@@ -184,6 +184,7 @@ var EventCover = React.createClass({
          o.dataType = 'json';
        },
        complete: function(XMLHttpRequest, textStatus) {
+        console.log(XMLHttpRequest.responseText);
          var response = JSON.parse(XMLHttpRequest.responseText);
          self.setState({
            cover: response.event.cover,

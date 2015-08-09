@@ -9,7 +9,7 @@ class CreateNotificationCacheService
 
   def create
     #Send notification to recipient
-    unless  @activity.recipient_user.class.to_s == "School"
+    unless @activity.recipient_user.class.to_s == "School"
       add_notification_for_recipient unless @activity.user == @activity.recipient_user
     end
 
@@ -32,8 +32,8 @@ class CreateNotificationCacheService
   def followers
     if @activity.recipient_type == "Idea"
       ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s]).uniq
-    elsif @activity.recipient_type == "School"
-      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) - [@activity.recipient_user.id.to_s]).uniq
+    elsif @activity.recipient_user.class.to_s == "School"
+      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id) - [@activity.recipient_user.id.to_s]).uniq
     else
       ids = (@actor.followers_ids.members - [@activity.recipient_user.id.to_s]).uniq
     end

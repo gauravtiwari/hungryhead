@@ -99,6 +99,8 @@ var EventDescription = React.createClass({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
+    var html = this.state.is_owner && this.state.description.length === 0 ? "<div class='no-content'>Enter event details<span>Details about location</span></div>" : marked(this.state.description)
+
     var text = this.state.editing ? <span><i className="fa fa-times-circle"></i> Cancel </span> : <span>Click to edit <i className="fa fa-pencil"></i> </span>;
     if(this.state.is_owner) {
       return (
@@ -122,7 +124,7 @@ var EventDescription = React.createClass({
               </div>
             </div>
             <div className="panel-body m-t-10 fs-16 p-l-60 p-r-60">
-              <div className={classes} dangerouslySetInnerHTML={{__html: marked(this.state.description)}}></div>
+              <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
               <div className={form_classes}>
                 <form id="event_form" ref="event_form" className="event_description_form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={this._onSubmit}>
                   <div className="form-group">

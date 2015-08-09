@@ -35,9 +35,7 @@ class Activity < ActiveRecord::Base
   def recipient_user
     if recipient_type == "User"
       recipient
-    elsif recipient_type == "Event" || recipient_type == "Share" && user_type != "School"
-      recipient.user
-    elsif recipient_type == "Event" || recipient_type == "Share" && user_type == "School"
+    elsif trackable.user_type == "School"
       recipient.user.user
     else
       recipient.user

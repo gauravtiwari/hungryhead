@@ -9,7 +9,7 @@ json.event do
     end
 
     json.id @event.uuid
-    json.is_user @event.user_type == "School" ? @event.user.user == current_user : @event.user == current_user
+    json.is_owner @event.user_type == "School" ? @event.user.user == current_user : @event.user == current_user
 
     json.form delete_action: profile_delete_cover_path(@event), action: event_path(@event), method: "PUT"
     json.name @event.title
