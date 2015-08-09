@@ -16,7 +16,7 @@
               <span class="fa fa-calendar m-l-15"></span>
               <%= local_time(@event.start_time, '%b %e') %>
               <p class="pull-right text-white fs-16 m-t-10 m-r-15"><span class="fa fa-university"></span>
-                Hosted by <%= link_to(@event.owner.name, profile_path(@event.owner), class: 'text-white b-b b-white p-b-5') %>
+                Hosted by <%= link_to(@event.user.name, profile_path(@event.user), class: 'text-white b-b b-white p-b-5') %>
               </p>
             </div>
             <%= render partial: 'cover' %>

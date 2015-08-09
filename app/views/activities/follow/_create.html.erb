@@ -1,20 +1,20 @@
 <div class="card share post_<%= activity.id %>" data-social="item">
     <div class="card-header clearfix bg-danger-lighter">
       <div class="user-pic">
-        <% if activity.owner.avatar_present? %>
-          <%= image_tag(activity.owner.get_avatar, :"data-src" => "#{activity.owner.get_avatar}", :"data-src-retina" => "#{activity.owner.get_avatar}", width: "33", height: "33") %>
+        <% if activity.user.avatar_present? %>
+          <%= image_tag(activity.user.get_avatar, :"data-src" => "#{activity.user.get_avatar}", :"data-src-retina" => "#{activity.user.get_avatar}", width: "33", height: "33") %>
           <% else %>
-              <span class="placeholder bold text-white"><%= activity.owner.name_badge %>
+              <span class="placeholder bold text-white"><%= activity.user.name_badge %>
               </span>
         <% end %>
       </div>
 
       <div class="text-master-dark overflow-hidden">
-        <%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> <i class="fa fa-users"></i> followed <%= link_to(activity.recipient == current_user ? 'You' : activity.recipient.name, profile_path(activity.recipient), class: 'bold') %>
+        <%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> <i class="fa fa-users"></i> followed <%= link_to(activity.recipient == current_user ? 'You' : activity.recipient.name, profile_path(activity.recipient), class: 'bold') %>
 
         <h6 class="no-margin">
             <span class="date semi-bold">
-              <%= link_to(profile_path(activity.owner), class: "text-master") do %>
+              <%= link_to(profile_path(activity.user), class: "text-master") do %>
               <i class="fa fa-clock-o"></i>
               <%= local_time_ago(activity.created_at) %>
               <% end %>

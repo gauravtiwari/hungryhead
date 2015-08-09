@@ -5,9 +5,9 @@ class CreateShares < ActiveRecord::Migration
       t.text :body, null: false, default: ""
       t.text :link, null: false, default: ""
       t.uuid :uuid, null: false, default: 'uuid_generate_v4()'
-      t.references :owner, polymorphic: true, null: false
+      t.references :user, polymorphic: true, null: false
       t.timestamps null: false
     end
-    add_index :shares, :owner_id, algorithm: :concurrently
+    add_index :shares, [:user_id, :user_type], algorithm: :concurrently
   end
 end

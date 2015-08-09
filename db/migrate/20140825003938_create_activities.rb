@@ -9,7 +9,7 @@ class CreateActivities < ActiveRecord::Migration
 
       t.belongs_to :trackable, :polymorphic => true , null: false
 
-      t.belongs_to :owner, polymorphic: true, null: false
+      t.belongs_to :user, polymorphic: true, null: false
 
       t.string  :key , null: false, default: ""
 
@@ -29,8 +29,8 @@ class CreateActivities < ActiveRecord::Migration
     end
 
     add_index :activities, [:trackable_id, :trackable_type], algorithm: :concurrently
-    add_index :activities, [:owner_id, :owner_type, :published, :is_notification], name: 'owner_published_activities', algorithm: :concurrently
-    add_index :activities, [:owner_id, :owner_type, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_owner'
+    add_index :activities, [:user_id, :user_type, :published, :is_notification], name: 'user_published_activities', algorithm: :concurrently
+    add_index :activities, [:user_id, :user_type, :trackable_id, :trackable_type, :key], unique: true, name: 'unique_activity_per_user'
     add_index :activities, :uuid, algorithm: :concurrently
     add_index :activities, :parent_id, algorithm: :concurrently
     add_index :activities, [:published, :is_notification], algorithm: :concurrently

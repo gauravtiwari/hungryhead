@@ -18,9 +18,9 @@
          <%= event.title %>
        </a>
      </h5>
-      <% if event.owner.avatar_present? %>
-       <%= link_to(profile_path(event.owner)) do %>
-        <%= image_tag(event.owner.get_avatar, data: {src: event.owner.get_avatar, :"src-retina" => event.owner.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
+      <% if event.user.avatar_present? %>
+       <%= link_to(profile_path(event.user)) do %>
+        <%= image_tag(event.user.get_avatar, data: {src: event.user.get_avatar, :"src-retina" => event.user.get_avatar}, width: "20px", class: 'm-l-10 inline') %>
        <% end %>
       <% end %>
       <p class="people-info no-margin">

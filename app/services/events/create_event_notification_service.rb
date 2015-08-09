@@ -2,14 +2,14 @@ class CreateEventNotificationService
 
   def initialize(event)
     @event = event
-    @owner = event.owner
+    @user = event.user
   end
 
   def create
-    @activity = @owner.activities.create!(
+    @activity = @user.activities.create!(
       trackable: @event,
       verb: 'shared',
-      recipient: @owner,
+      recipient: @user,
       key: 'event.create',
       unread: true
     )

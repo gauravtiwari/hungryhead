@@ -70,8 +70,8 @@
     </div>
 
     <% unless @event.present? %>
-      <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
-      <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
+      <%= f.hidden_field :user_id, value: "#{@user.id}" %>
+      <%= f.hidden_field :user_type, value: "#{@user.class.to_s}" %>
     <% end %>
 
     <div class="button-tags m-t-20">

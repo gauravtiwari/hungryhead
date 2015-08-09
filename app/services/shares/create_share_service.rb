@@ -1,13 +1,13 @@
 class CreateShareService
 
-  def initialize(params, owner)
+  def initialize(params, user)
     @params = params
-    @owner = owner
+    @user = user
   end
 
   def create
     @share = Share.new @params
-    @share.owner = @owner
+    @share.user = @user
     @share
   end
 

@@ -16,12 +16,12 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    @owner = params[:owner].constantize.find(params[:owner_id])
+    @user = params[:user].constantize.find(params[:user_id])
   end
 
   # GET /events/1/edit
   def edit
-    @owner = @event.owner
+    @user = @event.user
     respond_to do |format|
       format.js {render :edit}
     end
@@ -40,7 +40,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = CreateEventService.new(event_params).create
-    @owner = @event.owner
+    @user = @event.user
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -121,7 +121,7 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:status, :title, :description, :owner_id, :owner_type, :address,
+    params.require(:event).permit(:status, :title, :description, :user_id, :user_type, :address,
     :start_time, :end_time, :eventable_id, :space, :cover_position, :cover_left, :featured, :cover, :excerpt, :category_list)
   end
 end

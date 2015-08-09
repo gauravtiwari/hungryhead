@@ -21,13 +21,13 @@ class DeleteActivityJob < ActiveJob::Base
 
   #Get all followers followed by actor
   def find_followers(activity)
-    followers_ids = activity.owner.followers_ids.members
+    followers_ids = activity.user.followers_ids.members
     @followers = User.find(followers_ids) unless followers_ids.empty?
     @followers || []
   end
 
   def is_school?(activity)
-    activity.owner_type == "School"
+    activity.user_type == "School"
   end
 
   #Get recipient id //user
@@ -36,14 +36,8 @@ class DeleteActivityJob < ActiveJob::Base
       activity.recipient
     elsif activity.recipient_type == "Idea"
       activity.recipient.user
-    elsif activity.recipient_type == "Share" && is_school?(activity)
-      activity.recipient.owner.user
-    elsif activity.recipient_type == "Event" && is_school?(activity)
-      activity.recipient.owner.user
-    elsif activity.recipient_type == "Share" && !is_school?(activity)
-      activity.recipient.owner
-    elsif activity.recipient_type == "Event" && !is_school?(activity)
-      activity.recipient.owner
+    elsif is_school?(activity)
+      activity.recipient.user.user
     else
       activity.recipient.user
     end

@@ -1,14 +1,14 @@
 <div class="thumbnail-wrapper d32 user-pic circular inline m-r-10">
-  <% if activity.owner.avatar_present? %>
-    <%= image_tag(activity.owner.get_avatar, data: {src: activity.owner.get_avatar, src_retina: activity.owner.get_avatar}) %>
+  <% if activity.user.avatar_present? %>
+    <%= image_tag(activity.user.get_avatar, data: {src: activity.user.get_avatar, src_retina: activity.user.get_avatar}) %>
   <% else %>
   <span class="placeholder no-padding bold text-white">
-    <%= activity.owner.name_badge %>
+    <%= activity.user.name_badge %>
   </span>
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.owner ==current_user ? 'You' : activity.owner.name %>
+  <%= activity.user ==current_user ? 'You' : activity.user.name %>
 </strong>
 invested <%= activity.trackable.amount %> into
 <%= activity.recipient.founder?(current_user) ? "your idea #{activity.recipient.name}" : activity.recipient.name %>

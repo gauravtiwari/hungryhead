@@ -2,7 +2,7 @@ module Sharings
   extend ActiveSupport::Concern
 
   included do
-    has_many :shares, as: :owner, dependent: :destroy
+    has_many :shares, as: :user, dependent: :destroy
   end
 
 end

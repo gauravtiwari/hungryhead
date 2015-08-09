@@ -11,7 +11,7 @@ class Share < ActiveRecord::Base
   list :commenters_ids
 
   #Associations
-  belongs_to :owner, polymorphic: true
+  belongs_to :user, polymorphic: true
 
   #Includes concerns
   include Commentable

@@ -1,7 +1,7 @@
 <% data = {
     description: "#{@event.description}",
     event_url: "#{event_path(@event)}",
-    is_owner: @event.owner.user == current_user
+    is_user: @event.user.user == current_user
   }
 %>
 <%= react_component('EventDescription', {data: data.to_json} ) %>

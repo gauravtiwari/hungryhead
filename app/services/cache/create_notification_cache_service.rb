@@ -2,7 +2,7 @@ class CreateNotificationCacheService
 
   def initialize(activity)
     @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
-    @actor = activity.owner
+    @actor = activity.user
     @object = activity.trackable
     @target = activity.recipient
   end
@@ -10,7 +10,7 @@ class CreateNotificationCacheService
   def create
     #Send notification to recipient
     unless  @activity.recipient_user.class.to_s == "School"
-      add_notification_for_recipient unless @activity.owner == @activity.recipient_user
+      add_notification_for_recipient unless @activity.user == @activity.recipient_user
     end
 
     #Add activity to idea ticker if recipient or trackable is idea
@@ -25,7 +25,7 @@ class CreateNotificationCacheService
   protected
 
   def is_school?
-    @activity.owner_type == "School"
+    @activity.user_type == "School"
   end
 
   #Get followers for users and ideas
@@ -48,8 +48,8 @@ class CreateNotificationCacheService
     @activity.recipient_user.ticker.add(@activity.id, score_key)
     #Increment counter
     @activity.recipient_user.notifications_counter.increment
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.owner
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification if @activity.recipient_user != @activity.owner
+    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.user
+    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification if @activity.recipient_user != @activity.user
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
@@ -59,7 +59,7 @@ class CreateNotificationCacheService
   end
 
   def add_activity_to_commenters
-    @ids = @activity.recipient.commenters_ids.values - [@activity.owner_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
+    @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
       add_activity_to_friends_ticker(commenter)
       SendNotificationService.new(commenter, @activity.json_blob).user_notification

@@ -2,7 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   disable_ddl_transaction!
   def change
     create_table :events do |t|
-      t.belongs_to :owner, null: false, default: "", polymorphic: true
+      t.belongs_to :user, null: false, default: "", polymorphic: true
       t.string :title, null: false, default: ""
       t.text :excerpt, null: false, default: ""
       t.text :description, null: false, default: ""

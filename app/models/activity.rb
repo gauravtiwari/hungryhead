@@ -12,33 +12,33 @@ class Activity < ActiveRecord::Base
   sorted_set :popular, global: true
 
   def cache_key
-    "activities/activity-#{id}/owner-#{owner.id}-#{owner_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
+    "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
 
   def self.latest_stories
-    where(published: true, is_notification: false).includes([:trackable, :owner]).order(id: :desc)
+    where(published: true, is_notification: false).includes([:trackable, :user]).order(id: :desc)
   end
 
   def self.popular_stories
-    where(published: true, is_notification: false).includes([:trackable, :owner]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
+    where(published: true, is_notification: false).includes([:trackable, :user]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
   end
 
   def trackable_timestamp
     trackable.updated_at.try(:utc).try(:to_s, :number)
   end
 
-  def owner_timestamp
-    owner.updated_at.try(:utc).try(:to_s, :number)
+  def user_timestamp
+    user.updated_at.try(:utc).try(:to_s, :number)
   end
 
   #Find recipient user
   def recipient_user
     if recipient_type == "User"
       recipient
-    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type != "School"
-      recipient.owner
-    elsif recipient_type == "Event" || recipient_type == "Share" && owner_type == "School"
-      recipient.owner.user
+    elsif recipient_type == "Event" || recipient_type == "Share" && user_type != "School"
+      recipient.user
+    elsif recipient_type == "Event" || recipient_type == "Share" && user_type == "School"
+      recipient.user.user
     else
       recipient.user
     end
@@ -51,18 +51,18 @@ class Activity < ActiveRecord::Base
   end
 
   def delete_older_notifications
-    unless owner_type == "School"
+    unless user_type == "School"
       refresh_friends_notifications
       refresh_ticker
     end
   end
 
   def refresh_ticker
-    owner.ticker.remrangebyrank(0, -100)
+    user.ticker.remrangebyrank(0, -100)
   end
 
   def refresh_friends_notifications
-    owner.friends_notifications.remrangebyrank(0, -50)
+    user.friends_notifications.remrangebyrank(0, -50)
   end
 
 end

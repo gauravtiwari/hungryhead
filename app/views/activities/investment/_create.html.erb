@@ -1,16 +1,16 @@
 <div class="card share full-width post_<%= activity.id %>">
 	<div class="card-header clearfix">
     <div class="user-pic">
-      <% if activity.owner.avatar_present? %>
-        <%= image_tag(activity.owner.get_avatar, :"data-src" => "#{activity.owner.get_avatar}", :"data-src-retina" => "#{activity.owner.get_avatar}", width: "33", height: "33") %>
+      <% if activity.user.avatar_present? %>
+        <%= image_tag(activity.user.get_avatar, :"data-src" => "#{activity.user.get_avatar}", :"data-src-retina" => "#{activity.user.get_avatar}", width: "33", height: "33") %>
         <% else %>
-            <span class="placeholder bold text-white"><%= activity.owner.name_badge %>
+            <span class="placeholder bold text-white"><%= activity.user.name_badge %>
             </span>
       <% end %>
     </div>
 
     <div class="text-master overflow-hidden">
-    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> invested <span class="hh-coin fs-14"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></span><%= activity.trackable.amount %> in
+    	<%= link_to(your_name(activity.user, false), profile_path(activity.user), :"data-popover-href" => "#{profile_card_path(activity.user)}", class: 'load-card bold') %> invested <span class="hh-coin fs-14"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span></span><%= activity.trackable.amount %> in
 		<% if activity.recipient.in_team?(current_user) %>
 			your idea
 		<% end %>
