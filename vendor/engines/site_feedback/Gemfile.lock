@@ -11,7 +11,7 @@ PATH
       meta_events
       metamagic
       pundit
-      rails
+      rails (>= 4.2.3)
       simple_form
 
 GEM
@@ -52,7 +52,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    arel (6.0.2)
+    arel (6.0.3)
     bcrypt (3.1.10)
     browser (0.9.1)
     builder (3.2.2)
@@ -91,7 +91,7 @@ GEM
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     formatador (0.2.5)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     json (1.8.3)
@@ -110,7 +110,7 @@ GEM
     mime-types (2.6.1)
     mimetype-fu (0.1.2)
     mini_portile (0.6.2)
-    minitest (5.7.0)
+    minitest (5.8.0)
     multi_json (1.11.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
