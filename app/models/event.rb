@@ -37,6 +37,7 @@ class Event < ActiveRecord::Base
   #Redis Lists
   list :attendees_ids
   list :invites_ids
+  list :commenters_ids
   counter :attendees_counter
   counter :invites_counter
   counter :comments_counter

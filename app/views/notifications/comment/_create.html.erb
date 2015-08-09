@@ -14,6 +14,5 @@
     </strong>
   <% end %>
   posted a comment on
-  <%= activity.recipient.user == current_user ? "your" : "" %>
   <%= activity.recipient_type == 'Idea' ? activity.recipient_type.downcase + ' ' + activity.recipient.name : 'a' + activity.recipient_type.downcase %>
 </span>

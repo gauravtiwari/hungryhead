@@ -1,0 +1,21 @@
+<div class="panel box-shadow m-t-10">
+  <div class="panel-heading">
+    <div class="panel-title b-b b-great p-b-5">
+      Attending
+    </div>
+  </div>
+  <div class="panel-body">
+    <% @event.get_attendees.take(11).each do |user| %>
+      <div class="col-md-2 no-padding">
+        <%= link_to(profile_path(user), class: 'inline') do %>
+          <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @event.get_attendees.length >  11 %>
+      <div class="col-md-2 no-padding p-t-10">
+        <a href="#more" class="bold text-brand fs-22 p-l-10">+22</a>
+      </div>
+    <% end %>
+  </div>
+</div>
