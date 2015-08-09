@@ -33,7 +33,7 @@ class CreateNotificationCacheService
     if @activity.recipient_type == "Idea"
       ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s]).uniq
     elsif @activity.recipient_user.class.to_s == "School"
-      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id) - [@activity.recipient_user.id.to_s]).uniq
+      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id)).uniq
     else
       ids = (@actor.followers_ids.members - [@activity.recipient_user.id.to_s]).uniq
     end
