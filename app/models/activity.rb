@@ -36,7 +36,7 @@ class Activity < ActiveRecord::Base
     if recipient_type == "User"
       recipient
     elsif trackable.user_type == "School"
-      recipient.user.user
+      trackable.user.user
     else
       recipient.user
     end
