@@ -37,13 +37,6 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
-#Turbolinks
-gem 'turbolinks', github: 'rails/turbolinks'
-gem 'jquery-turbolinks', github: 'kossnocorp/jquery.turbolinks'
-
-#Actioncable for realtime
-gem 'actioncable', github: 'rails/actioncable'
-
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'postgres-copy'

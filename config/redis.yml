@@ -1,7 +1,0 @@
-local: &local
-  :url: ENV['REALTIME_REDIS_URL']
-  :timeout: 1
-  :inline: true
-development: *local
-production: *local
-test: *local
