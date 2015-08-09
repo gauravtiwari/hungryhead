@@ -1,7 +1,62 @@
 <div class="container p-b-60">
 <div class="row">
   <div class="event-wrapper container">
-      <div class="col-md-8 col-sm-8 no-padding p-l-15">
+    <div class="col-md-4">
+      <div class="event-sidebar bg-white box-shadow">
+      <div class="event-details padding-15">
+        <h3 class="clearfix bold text-master">
+          <%= @event.title %>
+        </h3>
+        <p class="small-text">
+          <%= @event.excerpt %>
+        </p>
+      </div>
+      <div class="panel">
+        <%= render partial: 'event_stats' %>
+        <div class="event-date padding-10 p-l-15">
+          <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
+            <p class="inline text-master semi-bold overflow-hidden no-margin">
+              <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
+              <span class="small-text clearfix hint-text">
+                <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %> to <%= @event.end_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
+              </span>
+            </p>
+        </div>
+        <div class="event-address full-border-light padding-10 p-l-15">
+          <span class="fa fa-map-marker fs-16 text-master bold pull-left p-r-10"></span>
+          <address class="text-master semi-bold overflow-hidden no-margin">
+              <%= @event.address %>
+            <span class="small-text clearfix hint-text">
+              <%= @event.address %>
+            </span>
+          </address>
+        </div>
+      </div>
+    </div>
+
+      <div class="panel box-shadow m-t-10">
+        <div class="panel-heading">
+          <div class="panel-title b-b b-great p-b-5">
+            Attending
+          </div>
+        </div>
+        <div class="panel-body">
+          <% @event.get_attendees.take(11).each do |user| %>
+            <div class="col-md-2 no-padding">
+              <%= link_to(profile_path(user), class: 'inline') do %>
+                <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @event.get_attendees.length >  11 %>
+            <div class="col-md-2 no-padding p-t-10">
+              <a href="#more" class="bold text-brand fs-22 p-l-10">+22</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <div class="col-md-8 col-sm-8 no-padding p-r-15">
         <div class="social">
           <div class="jumbotron full-border-light-left" data-pages="parallax">
             <div class="event-start inline hint-text m-r-10">
@@ -14,146 +69,46 @@
             <%= render partial: 'cover' %>
           </div>
         </div>
-      </div>
-      <div class="col-md-4 no-padding p-r-15">
-        <div class="social">
-          <div class="event-details full-border-light-right bg-white padding-20">
-              <div class="text-center">
-                <% if @event.owner.avatar_present? %>
-                  <span class="thumbnail-wrapper d48 auto-margin">
-                    <%= image_tag(@event.owner.get_avatar, data: {src:  @event.owner.get_avatar, :"src-retina" => @event.owner.get_avatar},  class: "col-top", width: "34", height: "34") %>
-                  </span>
-                <% else %>
-                <span class="thumbnail-wrapper d48 auto-margin">
-                  <span class="placeholder bold text-white fs-22">
-                      <%= @event.owner.name_badge %>
-                  </span>
-                </span>
-                <% end %>
-              </div>
-              <h2 class="clearfix bold"><%= @event.title %></h2>
-              <p class="small-text">
-                <%= @event.excerpt %>
-              </p>
-              <%= render partial: 'event_stats' %>
-      </div>
-      </div>
-      </div>
-  </div>
-</div>
+        <div class=" box-shadow bg-master-lightest">
+          <%= render partial: 'menu' %>
+        </div>
 
-<div class="row">
-  <div class="container">
-    <div class="col-md-12">
-      <div class=" box-shadow bg-master-lightest">
-        <%= render partial: 'menu' %>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="panel box-shadow no-border m-t-10">
+          <ul class="nav nav-tabs nav-tabs-simple bg-white">
+              <li class="active">
+                <a data-toggle="tab" href="#tab_people">
+                  <i class="fa fa-graduation-cap"></i> Event Info
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa fa-lightbulb-o"></i> Questions
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <i class="fa fa-lightbulb-o"></i> Attending
+                </a>
+              </li>
+          </ul>
 
-<div class="container m-t-40">
-    <div class="col-md-4 no-padding p-r-15">
+          <div class="tab-content event-tabs">
 
-    <div class="panel bg-white overflow-hidden padding-15 box-shadow m-b-10 p-b-10">
-      <div class="event-date">
-        <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
-          <p class="inline text-master semi-bold overflow-hidden no-margin">
-            <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
-            <span class="small-text clearfix hint-text">
-              <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %> to <%= @event.end_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
-            </span>
-          </p>
-      </div>
-      <div class="event-address full-border-light p-t-10">
-        <span class="fa fa-map-marker fs-16 text-master bold pull-left p-r-10"></span>
-        <p class="text-master semi-bold overflow-hidden no-margin">
-            <%= @event.address %>
-          <span class="small-text clearfix hint-text">
-            <%= @event.address %>
-          </span>
-        </p>
-      </div>
-    </div>
-    <div class="bg-white overflow-hidden padding-10 box-shadow">
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height" />
-      </div>
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
-      </div>
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
-      </div>
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
-      </div>
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
-      </div>
-      <div class="col-md-2 no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg" class="image-responsive-height"  />
-      </div>
-      <div class="col-md-2  no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
-      </div>
-      <div class="col-md-2  no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
-      </div>
-      <div class="col-md-2  no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
-      </div>
-      <div class="col-md-2  no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
-      </div>
-      <div class="col-md-2  no-padding">
-        <img src="/assets/profiles/avatar_small2x.jpg"  class="image-responsive-height" />
-      </div>
-      <div class="col-md-2  no-padding">
-        <div class="more-placeholder">
-          <div class="thumbnail-wrapper d58">
-            <span class="placeholder bold text-white fs-22">+22</span>
+            <div class="tab-pane active" id="tab_event_info">
+              <%= render partial: 'description' %>
+            </div>
+
+            <div class="tab-pane" id="tab_ideas">
+            </div>
+
+            <div class="tab-pane" id="tab_events">
+            </div>
+
           </div>
         </div>
       </div>
-    </div>
-    </div>
-    <div class="col-md-8 p-r-30">
-    <div class="panel box-shadow no-border">
-      <ul class="nav nav-tabs nav-tabs-simple bg-white">
-          <li class="active">
-            <a data-toggle="tab" href="#tab_people">
-              <i class="fa fa-graduation-cap"></i> Event Info
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fa fa-lightbulb-o"></i> Questions
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <i class="fa fa-lightbulb-o"></i> Attending
-            </a>
-          </li>
-      </ul>
-
-      <div class="tab-content event-tabs">
-
-        <div class="tab-pane active" id="tab_event_info">
-          <%= render partial: 'description' %>
-        </div>
-
-        <div class="tab-pane" id="tab_ideas">
-        </div>
-
-        <div class="tab-pane" id="tab_events">
-        </div>
-
-      </div>
-    </div>
-    </div>
-    </div>
+  </div>
+</div>
 
 </div>
 

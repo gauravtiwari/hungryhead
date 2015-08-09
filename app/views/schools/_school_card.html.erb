@@ -58,37 +58,30 @@
 
         <div class="p-l-15 p-r-15 text-center">
          <ul class="social-list text-white p-t-5 small no-style">
-          <% if @school.phone.present? %>
-           <li class="inline">
-             <%= mail_to(@school.phone, class: "text-brand p-r-10", target: "_blank") do %>
-             <i class="fa fa-email fs-14"></i>
-             <% end %>
-           </li>
-           <% end %>
           <% if @school.email.present? %>
            <li class="inline">
-             <%= mail_to(@school.email, class: "text-brand p-r-10", target: "_blank") do %>
-             <i class="fa fa-email fs-14"></i>
+             <%= mail_to(@school.email, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Click to email") do %>
+             <i class="fa fa-at fs-14"></i>
              <% end %>
            </li>
            <% end %>
           <% if @school.website_url.present? %>
            <li class="inline">
-             <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank") do %>
+             <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Open website") do %>
              <i class="fa fa-rss fs-14"></i>
              <% end %>
            </li>
            <% end %>
            <% if @school.facebook_url.present? %>
             <li class="inline">
-              <%= link_to(@school.facebook_url, class: "text-brand p-r-10", target: "_blank") do %>
+              <%= link_to(@school.facebook_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Facebook url") do %>
               <i class="fa fa-facebook fs-14"></i>
               <% end %>
             </li>
             <% end %>
             <% if @school.twitter_url.present? %>
              <li class="inline">
-               <%= link_to(@school.twitter_url, class: "text-brand p-r-10", target: "_blank") do %>
+               <%= link_to(@school.twitter_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Twitter url") do %>
                <i class="fa fa-twitter fs-14"></i>
                <% end %>
              </li>

@@ -1,9 +1,9 @@
 
   <li class="event-list p-t-15 p-b-15">
-      <span class="col-xs-height">
+      <span class="col-xs-height col-middle col-md-3">
         <% if event.cover.present? %>
           <span class="thumbnail-wrapper d100">
-              <%= image_tag(event.cover.url(:cover), data: {src:  event.cover.url(:cover), :"src-retina" => event.cover.url(:cover)},  class: "col-top", width: "100", height: "100") %>
+              <%= image_tag(event.cover.url(:cover), data: {src:  event.cover.url(:cover), :"src-retina" => event.cover.url(:cover)}, width: "100", height: "100") %>
           </span>
         <% else %>
           <div class="thumbnail-wrapper d48 inline circular">
