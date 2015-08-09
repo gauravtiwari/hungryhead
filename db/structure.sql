@@ -79,8 +79,8 @@ CREATE TABLE activities (
     id integer NOT NULL,
     trackable_id integer NOT NULL,
     trackable_type character varying NOT NULL,
-    owner_id integer NOT NULL,
-    owner_type character varying NOT NULL,
+    user_id integer NOT NULL,
+    user_type character varying NOT NULL,
     key character varying DEFAULT ''::character varying NOT NULL,
     parameters jsonb DEFAULT '{}'::jsonb,
     uuid uuid DEFAULT uuid_generate_v4(),
@@ -256,8 +256,8 @@ ALTER SEQUENCE event_attendees_id_seq OWNED BY event_attendees.id;
 
 CREATE TABLE events (
     id integer NOT NULL,
-    owner_id integer NOT NULL,
-    owner_type character varying DEFAULT ''::character varying NOT NULL,
+    user_id integer NOT NULL,
+    user_type character varying DEFAULT ''::character varying NOT NULL,
     title character varying DEFAULT ''::character varying NOT NULL,
     excerpt text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text NOT NULL,
@@ -271,8 +271,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-09 15:46:56.318301'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-09 15:46:56.31833'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-09 16:02:43.742432'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-09 16:02:43.742541'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1065,8 +1065,8 @@ CREATE TABLE shares (
     body text DEFAULT ''::text NOT NULL,
     link text DEFAULT ''::text NOT NULL,
     uuid uuid DEFAULT uuid_generate_v4(),
-    owner_id integer NOT NULL,
-    owner_type character varying NOT NULL,
+    user_id integer NOT NULL,
+    user_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -2247,13 +2247,6 @@ CREATE INDEX index_events_on_latitude_and_longitude ON events USING btree (latit
 
 
 --
--- Name: index_events_on_owner_id_and_owner_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_on_owner_id_and_owner_type ON events USING btree (owner_id, owner_type);
-
-
---
 -- Name: index_events_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2272,6 +2265,13 @@ CREATE INDEX index_events_on_slug ON events USING btree (slug);
 --
 
 CREATE INDEX index_events_on_start_time ON events USING btree (start_time);
+
+
+--
+-- Name: index_events_on_user_id_and_user_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_user_id_and_user_type ON events USING btree (user_id, user_type);
 
 
 --
@@ -2709,10 +2709,10 @@ CREATE INDEX index_schools_on_uuid ON schools USING btree (uuid);
 
 
 --
--- Name: index_shares_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_shares_on_user_id_and_user_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_shares_on_owner_id ON shares USING btree (owner_id);
+CREATE INDEX index_shares_on_user_id_and_user_type ON shares USING btree (user_id, user_type);
 
 
 --
@@ -3052,13 +3052,6 @@ CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
 
 
 --
--- Name: owner_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX owner_published_activities ON activities USING btree (owner_id, owner_type, published, is_notification);
-
-
---
 -- Name: recipient_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3073,10 +3066,10 @@ CREATE UNIQUE INDEX taggings_idx ON taggings USING btree (tag_id, taggable_id, t
 
 
 --
--- Name: unique_activity_per_owner; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_activity_per_user; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX unique_activity_per_owner ON activities USING btree (owner_id, owner_type, trackable_id, trackable_type, key);
+CREATE UNIQUE INDEX unique_activity_per_user ON activities USING btree (user_id, user_type, trackable_id, trackable_type, key);
 
 
 --
@@ -3105,6 +3098,13 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 --
 
 CREATE INDEX user_commentable_comments ON comments USING btree (user_id, commentable_id, commentable_type);
+
+
+--
+-- Name: user_published_activities; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX user_published_activities ON activities USING btree (user_id, user_type, published, is_notification);
 
 
 --

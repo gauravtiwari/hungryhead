@@ -23,7 +23,7 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :events, [:owner_id, :owner_type], algorithm: :concurrently
+    add_index :events, [:user_id, :user_type], algorithm: :concurrently
     add_index :events, :start_time, algorithm: :concurrently
     add_index :events, :slug, algorithm: :concurrently
     add_index :events, [:latitude, :longitude], algorithm: :concurrently
