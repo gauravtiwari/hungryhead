@@ -104,9 +104,9 @@ var EventDescription = React.createClass({
       return (
         <div className="EventDescription">
           <div className="panel">
-            <div className="panel-heading p-b-10">
-              <div className="panel-title fs-22 b-b b-grey p-b-5 text-master">
-                <i className="fa fa-calendar"></i>  Event Description
+            <div className="panel-heading p-b-10 p-l-60 p-r-60">
+              <div className="panel-title fs-22 text-master">
+                <i className="fa fa-calendar"></i> Description
               </div>
               <div className="panel-controls pull-right">
                 <ul>
@@ -121,7 +121,7 @@ var EventDescription = React.createClass({
                 </ul>
               </div>
             </div>
-            <div className="panel-body m-t-10 fs-16">
+            <div className="panel-body m-t-10 fs-16 p-l-60 p-r-60">
               <div className={classes} dangerouslySetInnerHTML={{__html: marked(this.state.description)}}></div>
               <div className={form_classes}>
                 <form id="event_form" ref="event_form" className="event_description_form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={this._onSubmit}>

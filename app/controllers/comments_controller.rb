@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     commentable_type = params[:comment][:commentable_type]
     commentable_id = params[:comment][:commentable_id]
 
-    if ["Idea", "Feedback", "Investment"].include? commentable_type
+    if ["Idea", "Feedback", "Investment", "Event"].include? commentable_type
       @commentable = commentable_type.safe_constantize.find_by_uuid(commentable_id)
     else
       respond_to do |format|

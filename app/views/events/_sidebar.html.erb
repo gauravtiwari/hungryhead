@@ -1,1 +1,31 @@
-sidebar
+<div class="event-sidebar bg-white box-shadow">
+  <div class="event-details padding-15">
+    <h3 class="clearfix bold text-master">
+      <%= @event.title %>
+    </h3>
+    <p class="small-text">
+      <%= @event.excerpt %>
+    </p>
+  </div>
+  <div class="panel">
+    <%= render partial: 'event_stats' %>
+    <div class="event-date padding-10 p-l-15">
+      <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
+        <p class="inline text-master semi-bold overflow-hidden no-margin">
+          <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
+          <span class="small-text clearfix hint-text">
+            <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %> to <%= @event.end_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
+          </span>
+        </p>
+    </div>
+    <div class="event-address full-border-light padding-10 p-l-15">
+      <span class="fa fa-map-marker fs-16 text-master bold pull-left p-r-10"></span>
+      <address class="text-master semi-bold overflow-hidden no-margin">
+          <%= @event.address %>
+        <span class="small-text clearfix hint-text">
+          <%= @event.address %>
+        </span>
+      </address>
+    </div>
+  </div>
+</div>

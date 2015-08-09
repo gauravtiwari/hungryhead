@@ -27,6 +27,15 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/1/comments
+  def comments
+    @comments = @event.root_comments.paginate(:page => params[:page], :per_page => 10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # POST /events
   # POST /events.json
   def create
