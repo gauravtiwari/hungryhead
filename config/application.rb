@@ -26,6 +26,7 @@ module HungryheadSchoolApp
     config.autoload_paths += Dir["#{config.root}/app/listeners/*"]
     config.autoload_paths += Dir["#{config.root}/app/controllers/*"]
     config.autoload_paths += Dir["#{config.root}/app/services/*"]
+    config.autoload_paths += Dir["#{config.root}/app/channels/*"]
     config.autoload_paths += Dir["#{config.root}/app/lib/*"]
 
     config.app_generators.scaffold_controller = :scaffold_controller

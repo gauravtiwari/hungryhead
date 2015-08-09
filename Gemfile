@@ -37,9 +37,18 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
+#Turbolinks
+gem 'turbolinks', github: 'rails/turbolinks'
+gem 'jquery-turbolinks', github: 'kossnocorp/jquery.turbolinks'
+
+#Actioncable for realtime
+gem 'actioncable', github: 'rails/actioncable'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'postgres-copy'
+
+#Coffescript
 gem 'coffee-rails'
 gem 'sass'
 
@@ -238,14 +247,11 @@ gem 'meta_events'
 #Security for app
 gem 'rack-attack'
 
+#Puma for actioncable
+gem 'puma'
+
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
-
-#Turbolinks
-gem 'turbolinks', github: 'rails/turbolinks'
-gem 'jquery-turbolinks', github: 'kossnocorp/jquery.turbolinks'
-
-gem 'actioncable', github: 'rails/actioncable'
 
 group :production, :staging do
   gem 'bugsnag'
