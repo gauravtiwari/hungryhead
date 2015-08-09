@@ -25,6 +25,7 @@
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require pusher
+//= require cable
 //= require jquery.soulmate
 //= require underscore
 //= require js-routes
@@ -58,5 +59,6 @@
 // Custom Javascripts
 //= require core/js/hungryhead
 //= require pusher_init
+//= require channels
 //= require_tree .
 //= require turbolinks
