@@ -72,42 +72,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE active_admin_comments (
-    id integer NOT NULL,
-    namespace character varying,
-    body text,
-    resource_id character varying NOT NULL,
-    resource_type character varying NOT NULL,
-    author_id integer,
-    author_type character varying,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE active_admin_comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
-
-
---
 -- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -147,46 +111,6 @@ CREATE SEQUENCE activities_id_seq
 --
 
 ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
-
-
---
--- Name: admin_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE admin_users (
-    id integer NOT NULL,
-    email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip inet,
-    last_sign_in_ip inet,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE admin_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
 
 
 --
@@ -327,40 +251,6 @@ ALTER SEQUENCE event_attendees_id_seq OWNED BY event_attendees.id;
 
 
 --
--- Name: event_invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE event_invites (
-    id integer NOT NULL,
-    invited_id integer,
-    inviter_id integer,
-    inviter_type character varying,
-    event_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: event_invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE event_invites_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: event_invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE event_invites_id_seq OWNED BY event_invites.id;
-
-
---
 -- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -381,8 +271,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-02 16:19:18.969251'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-02 16:19:18.969294'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-09 15:46:56.318301'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-09 15:46:56.31833'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1635,21 +1525,7 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
 
 
 --
@@ -1678,13 +1554,6 @@ ALTER TABLE ONLY crono_jobs ALTER COLUMN id SET DEFAULT nextval('crono_jobs_id_s
 --
 
 ALTER TABLE ONLY event_attendees ALTER COLUMN id SET DEFAULT nextval('event_attendees_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY event_invites ALTER COLUMN id SET DEFAULT nextval('event_invites_id_seq'::regclass);
 
 
 --
@@ -1926,27 +1795,11 @@ ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regcl
 
 
 --
--- Name: active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY active_admin_comments
-    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
-
-
---
 -- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
-
-
---
--- Name: admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY admin_users
-    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -1979,14 +1832,6 @@ ALTER TABLE ONLY crono_jobs
 
 ALTER TABLE ONLY event_attendees
     ADD CONSTRAINT event_attendees_pkey PRIMARY KEY (id);
-
-
---
--- Name: event_invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY event_invites
-    ADD CONSTRAINT event_invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -2262,27 +2107,6 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON active_admin_comments USING btree (author_type, author_id);
-
-
---
--- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments USING btree (namespace);
-
-
---
--- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
-
-
---
 -- Name: index_activities_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2308,20 +2132,6 @@ CREATE INDEX index_activities_on_trackable_id_and_trackable_type ON activities U
 --
 
 CREATE INDEX index_activities_on_uuid ON activities USING btree (uuid);
-
-
---
--- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_admin_users_on_email ON admin_users USING btree (email);
-
-
---
--- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON admin_users USING btree (reset_password_token);
 
 
 --
@@ -2406,27 +2216,6 @@ CREATE UNIQUE INDEX index_event_attendees_on_attendee_id_and_event_id ON event_a
 --
 
 CREATE INDEX index_event_attendees_on_event_id ON event_attendees USING btree (event_id);
-
-
---
--- Name: index_event_invites_on_event_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_event_invites_on_event_id ON event_invites USING btree (event_id);
-
-
---
--- Name: index_event_invites_on_invited_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_event_invites_on_invited_id ON event_invites USING btree (invited_id);
-
-
---
--- Name: index_event_invites_on_inviter_type_and_inviter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_event_invites_on_inviter_type_and_inviter_id ON event_invites USING btree (inviter_type, inviter_id);
 
 
 --
@@ -3291,13 +3080,6 @@ CREATE UNIQUE INDEX unique_activity_per_owner ON activities USING btree (owner_i
 
 
 --
--- Name: unique_event_invites; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX unique_event_invites ON event_invites USING btree (inviter_id, inviter_type, invited_id, event_id);
-
-
---
 -- Name: unique_follows_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3363,14 +3145,6 @@ ALTER TABLE ONLY school_admins
 
 ALTER TABLE ONLY event_attendees
     ADD CONSTRAINT fk_rails_c93dfeb29b FOREIGN KEY (event_id) REFERENCES events(id);
-
-
---
--- Name: fk_rails_dd5ebcb656; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY event_invites
-    ADD CONSTRAINT fk_rails_dd5ebcb656 FOREIGN KEY (event_id) REFERENCES events(id);
 
 
 --
@@ -3481,15 +3255,5 @@ INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 
-INSERT INTO schema_migrations (version) VALUES ('20150715172544');
-
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150806191137');
-
-INSERT INTO schema_migrations (version) VALUES ('20150806233354');
-
-INSERT INTO schema_migrations (version) VALUES ('20150806233358');
-
-INSERT INTO schema_migrations (version) VALUES ('20150807011017');
 
