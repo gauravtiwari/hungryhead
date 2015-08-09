@@ -73,7 +73,7 @@
     <%= f.hidden_field :user_type, value: "#{@user.class.to_s}" %>
 
     <div class="button-tags m-t-20">
-      <%= button_tag 'Submit', class: 'main-button fs-13 bold' %>
+      <%= button_tag 'Submit', class: 'main-button fs-13 bold', data: { disable_with: "Please wait..." } %>
       <small class="m-l-20 hint-text">Event won't be published until you do so using publish button.</small>
     </div>
   <% end %>

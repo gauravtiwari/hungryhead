@@ -173,6 +173,12 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
 
+  #Save user without confirmation
+  def save_without_confirmation
+    self.skip_confirmation_notification!
+    self.save
+  end
+
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later!(wait: 5.seconds)
   end

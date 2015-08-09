@@ -11,7 +11,7 @@
           <% if user.avatar_present? %>
             <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
           <% else %>
-            <span class="placeholder text-white">
+            <span class="placeholder text-white bold fs-22">
               <%= user.user_name_badge %>
             </span>
           <% end %>

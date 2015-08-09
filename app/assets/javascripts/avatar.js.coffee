@@ -4,7 +4,8 @@ jQuery(document).ready ->
     $('input[id=profile_photo]')[0].click()
     $('input[id=profile_photo]').on 'change', (e) ->
       e.preventDefault()
-      $('.upload_icon').html("<i class='fa fa-spinner fa-spin text-white'></i>")
+      $('.school-logo.placeholder-logo').addClass('absolute')
+      $('.upload_icon').html("<i class='fa fa-spinner fa-spin text-master'></i>")
       reader = new FileReader
       file = e.target.files[0]
       reader.onload = ((upload) ->
