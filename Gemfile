@@ -240,9 +240,6 @@ gem 'meta_events'
 #Security for app
 gem 'rack-attack'
 
-#Puma for actioncable
-gem 'puma'
-
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
 

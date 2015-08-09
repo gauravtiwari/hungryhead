@@ -50,7 +50,6 @@ class User < ActiveRecord::Base
   #has_many relationships
   has_many :attendences, class_name: 'EventAttendee', foreign_key: 'attendee_id', :dependent => :destroy
   has_many :team_invites, class_name: 'TeamInvite', foreign_key: 'invited_id', :dependent => :destroy
-  has_many :event_invites, class_name: 'EventInvite', foreign_key: 'invited_id', :dependent => :destroy
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true

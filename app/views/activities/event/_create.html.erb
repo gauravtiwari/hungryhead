@@ -10,9 +10,11 @@
 	    </div>
 
 	    <div class="text-master overflow-hidden">
-	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> published an <i class="fa fa-calendar"></i> event
+	    	<%= link_to(your_name(activity.owner, false), profile_path(activity.owner), :"data-popover-href" => "#{profile_card_path(activity.owner)}", class: 'load-card bold') %> published an
+				<%= link_to(event_path(activity.trackable)) do %>
+	    		<i class="fa fa-calendar"></i> event
+	    	<% end %>
 
-			<%= link_to(activity.trackable.title, event_path(activity.trackable)) %>
 		   	<h6 class="no-margin p-t-5">
 	        <span class="time semi-bold">
 	          <i class="fa fa-clock-o"></i>

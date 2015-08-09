@@ -36,10 +36,8 @@ class Event < ActiveRecord::Base
 
   #Redis Lists
   list :attendees_ids
-  list :invites_ids
   list :commenters_ids
   counter :attendees_counter
-  counter :invites_counter
   counter :comments_counter
 
   #Mount carrierwave
@@ -51,7 +49,6 @@ class Event < ActiveRecord::Base
   #Associations
   belongs_to :owner, polymorphic: true, touch: true
   has_many :event_attendees
-  has_many :event_invites
 
   #Callbacks
   after_destroy  :delete_activity
@@ -68,10 +65,6 @@ class Event < ActiveRecord::Base
 
   def name_badge
     (title.split('').first + title.split('').second).upcase
-  end
-
-  def invited?(user)
-    invites_ids.include?(user.id.to_s)
   end
 
   def profile_complete?
