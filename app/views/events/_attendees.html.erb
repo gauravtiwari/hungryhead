@@ -8,13 +8,15 @@
     <% @event.get_attendees.take(11).each do |user| %>
       <div class="col-md-2 no-padding">
         <%= link_to(profile_path(user), class: 'inline') do %>
+          <div class="thumbnail-wrapper d48 circular">
           <% if user.avatar_present? %>
             <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
           <% else %>
-            <span class="placeholder text-white bold fs-22">
+            <span class="placeholder text-white bold fs-16">
               <%= user.user_name_badge %>
             </span>
           <% end %>
+          </div>
         <% end %>
       </div>
     <% end %>
