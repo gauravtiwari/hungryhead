@@ -8,7 +8,7 @@ class CreateEventNotificationService
   def create
     @activity = @user.activities.create!(
       trackable: @event,
-      verb: 'shared',
+      verb: 'created',
       recipient: @user,
       key: 'event.create',
       unread: true
