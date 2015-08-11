@@ -7,7 +7,7 @@
 
     <div class="form-group">
       <%= label_tag 'share[body]', 'Share your thoughts' %>
-      <%= f.input_field :body, class: "form-control", :required => true, :placeholder => "eg: Great resource for entreprenuers..." %>
+      <%= f.input_field :body, class: "form-control", :required => true, :placeholder => "eg: Great resource for entrepreneurs..." %>
     </div>
     <%= f.hidden_field :owner_id, value: "#{@owner.id}" %>
     <%= f.hidden_field :owner_type, value: "#{@owner.class.to_s}" %>
