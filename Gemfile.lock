@@ -304,7 +304,7 @@ GEM
     gemoji (2.1.0)
     geocoder (1.2.9)
     git-version-bump (0.15.1)
-    github-markdown (0.6.8)
+    github-markdown (0.6.9)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     goldiloader (0.0.9)
