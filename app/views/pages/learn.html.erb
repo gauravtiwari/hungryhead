@@ -79,7 +79,7 @@
           <div>
             <h3 class="m-t-30 semi-bold">Exclusive global community</h3>
             <p class="fs-16 text-master">
-              Hungryhead is currently available for students studying in schools, colleges and universities. If you are a student you can get started by <%= meta_events_tracked_link_to('Creating an account', new_user_registration_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Join Page' } }) %>.
+              Available for students studying in schools, colleges and universities. If you are a student you can get started by <%= meta_events_tracked_link_to('Creating an account', new_user_registration_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Join Page' } }) %>.
             </p>
             <p class="fs-16 text-master">
               If you are an alumni or interested in mentoring, you can join hungryhead by requesting an <%= meta_events_tracked_link_to("Invite", get_started_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Page' } }) %>.
@@ -88,37 +88,25 @@
           <div>
             <h3 class="m-t-30 semi-bold">Collaborate beyond your institution</h3>
             <p class="fs-16 text-master">
-              Discover new startup ideas and connect with like-minded people across institutions from around the world.
+              Discover new startup ideas and connect with peers across institutions from around the world.
             </p>
           </div>
           <div>
-            <h3 class="m-t-30 semi-bold">Practical Gamification</h3>
+            <h3 class="m-t-30 semi-bold">Gamification</h3>
             <p class="fs-16 text-master">
-              We took the real-world startup concepts and integrated it into our Gamification engine.
+              We took the real-world startup concepts and integrated it into our Gamification engine. Collaborate, invest in useful ideas using our virtual app coins, make a return on your investments, validate ideas, and earn badges.
             </p>
             <p class="fs-16 text-master">
-              Collaborate, invest in useful ideas using our virtual app coins, make a return on your investments, validate ideas, and earn badges. <%= link_to('Click', gamification_path) %> to learn how gamification works on hungryhead.
-            </p>
-          </div>
-          <div>
-            <h3 class="m-t-30 semi-bold">You own 100% of your idea</h3>
-            <p class="fs-16 text-master">
-              We don't take any ownership in your idea.
+              <%= link_to('Click', gamification_path) %> to learn how gamification works on hungryhead.
             </p>
           </div>
           <div>
-            <h3 class="m-t-30 semi-bold">Access to support and funding</h3>
+            <h3 class="m-t-30 semi-bold">For Academic Institutions</h3>
             <p class="fs-16 text-master">
-              We also provide academic institutions and support organisations dashboard to discover vetted startup ideas and provide support efficiently.
+              Our integrated dashboard lets academic institutions from around the world connect, manage and support entrepreneurial students seamlessly and efficiently.
             </p>
             <p class="fs-16 text-master">
-              Browse support available for your idea based on your idea validation score.
-            </p>
-          </div>
-          <div>
-            <h3 class="m-t-30 semi-bold">Idea privacy and sharing</h3>
-            <p class="fs-16 text-master">
-              Although, this is not our most favorite feature, but for now, you can keep your idea private or share with the community. It's totally up to you, but we strongly recommend sharing your idea as much as possible if you really care to make it useful.
+              <%= link_to('Click', for_institutions_path) %> to learn more.
             </p>
           </div>
           <div class="divider b-b b-green b-small m-t-20"></div>

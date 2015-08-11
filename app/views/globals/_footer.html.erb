@@ -10,7 +10,7 @@
           <% end %>
         </li>
         <li>
-          <%= meta_events_tracked_link_to('Collaborate', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Collaborate' } }) %>
+          <%= meta_events_tracked_link_to('Connect with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Connect with us' } }) %>
         </li>
         <li>
           <%= meta_events_tracked_link_to('Terms', main_app.terms_path, class: "#{current_class?(main_app.terms_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Terms' } }) %>
@@ -26,7 +26,7 @@
         </li>
       </ul>
     </article>
-    <p class="copyright-text text-master">© <%= Time.now.year %> hungryhead.co ®</p>
+    <p class="copyright-text text-master">© <%= Time.now.year %> hungryhead.co</p>
 </div>
 </div>
 <!-- END FOOTER -->
