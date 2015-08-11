@@ -36,7 +36,7 @@
 %>
 
 
-<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}", "#{browser.tablet? ? 'tablet' : ''}"]) do %>
   <div class="product-wrapper bg-white">
     <div class="product">
       <div class="jumbotron no-margin" data-pages="parallax">
