@@ -307,9 +307,6 @@ class User < ActiveRecord::Base
     #Decrement counters
     school.people_counter.reset
     school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
-
-    #delete cached sorted_set for school
-    school.published_people.delete(id) if school_id.present?
     #delete cached sorted set for global leaderboard
     User.latest.delete(id)
     #delete leaderboard for this user
