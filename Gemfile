@@ -219,7 +219,7 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 
 #caching system
-gem 'readthis', '~> 0.6.2'
+gem 'readthis'
 gem 'hiredis'
 
 #Realtime
