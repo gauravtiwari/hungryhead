@@ -107,10 +107,10 @@
         <div class="col-md-5 col-sm-12">
           <h1 class="m-t-5 m-b-20">Culture of Cross Pollination</h1>
           <p class="m-b-20 fs-16 text-master">
-            Our fundamental idea is to create a culture of cross-pollination among academic institutions from around the world so that serious entrepreneurial students can connect, share, collaborate and work on startup ideas.
+            Our fundamental idea is to create a culture of cross-pollination among academic institutions from around the world so that serious entrepreneurial students can connect, share and collaborate on startup ideas.
           </p>
           <p class="m-b-20 fs-16 text-master">
-            The platform provides tools for academic institutions to visualize, engage and support student ideas seamlessly and transparently.
+            The platform provides tools for academic institutions to connect, engage and support student entrepreneurs seamlessly.
           </p>
 
           <%= meta_events_tracked_link_to('Learn more', for_institutions_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'For institutions Page' } }) %>
@@ -130,6 +130,8 @@
       <div class="container col-md-offset-1">
         <div class="col-md-5 col-sm-4 col-xs-12 hidden-xs">
           <div class="content-mask-md m-t-40 xs-p-b-40 text-center">
+            <%= image_tag('product/engage_event.png', class: "image-responsive-height lazy auto-width hidden-sm") %>
+            <span class="fa fa-plus fs-40 m-l-15 m-r-15 text-brand hidden-sm"></span>
             <%= image_tag('product/collaboration.png', class: "image-responsive-height lazy auto-width") %>
           </div>
         </div>
