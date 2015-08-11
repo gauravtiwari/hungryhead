@@ -219,7 +219,8 @@ gem 'jquery-ui-rails'
 gem 'figaro'
 
 #caching system
-gem 'readthis'
+gem 'readthis', '~> 0.6.2'
+gem 'hiredis'
 
 #Realtime
 gem 'pusher'
