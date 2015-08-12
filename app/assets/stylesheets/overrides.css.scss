@@ -147,7 +147,7 @@ table tr:last-child {
   margin-right: 10px;
 }
 .comment-box .user-pic .placeholder {
-  width:32px;
+  width:38px;
   text-align:center;
 }
 
@@ -427,8 +427,8 @@ input.error:-webkit-autofill {
 .main-button.invested {
   background: #ff9933;
   border: 1px solid #ff9933;
-  background: -webkit-linear-gradient(#ff9933, #ff9933);
-  background: linear-gradient(#ff9933, #ff9933);
+  background: -webkit-linear-gradient(#5b98e0, #ff9933);
+  background: linear-gradient(#5b98e0, #ff9933);
   color: #fff;
 }
 .main-button.feedbacked {
@@ -440,11 +440,13 @@ input.error:-webkit-autofill {
 .main-button.published,
 .main-button.voted,
 .main-button.privacy-public {
-  background: #33cc66;
-  border: 1px solid #33cc66;
   color: #fff;
   padding: 5px 8px;
   text-align: center;
+  background-color: #60b044;
+  background-image: -webkit-linear-gradient(#8add6d, #60b044);
+  background-image: linear-gradient(#8add6d, #60b044);
+  border-color: #5ca941;
 }
 .bg-green {
   background-color: #00b27f!important;
@@ -666,7 +668,7 @@ ul.reactions > div {
   border-radius: 5px;
 }
 .user-pic .placeholder {
-	padding:5px;
+	padding:8px;
 }
 .card.share .card-header .user-pic,
 .card .comment-box .user-pic {

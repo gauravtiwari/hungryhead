@@ -575,7 +575,12 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    market text DEFAULT ''::text,
+    problems text DEFAULT ''::text,
+    solutions text DEFAULT ''::text,
+    value_propositions text DEFAULT ''::text,
+    business_model text DEFAULT ''::text
 );
 
 
@@ -3256,4 +3261,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
+
+INSERT INTO schema_migrations (version) VALUES ('20150811231415');
 

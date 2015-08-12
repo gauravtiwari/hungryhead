@@ -3,7 +3,9 @@
     <tbody>
       <% if @events.size > 0 %>
         <% @events.each do |event| %>
-          <%= render partial: 'events/event', locals: {event: event} %>
+          <ul class="no-style no-padding no-margin">
+            <%= render partial: 'events/event', locals: {event: event} %>
+          </ul>
         <% end %>
       <% else %>
         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">

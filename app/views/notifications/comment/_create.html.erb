@@ -13,6 +13,6 @@
       <%= activity.user ==current_user ? 'You' : activity.user.name %>
     </strong>
   <% end %>
-  posted a comment on
-  <%= activity.recipient_type == 'Idea' ? activity.recipient_type.downcase + ' ' + activity.recipient.name : 'a' + activity.recipient_type.downcase %>
+  commented on
+  <%= activity.recipient_type == 'Idea' ?  activity.recipient.name : activity.recipient_type.downcase %>
 </span>

@@ -47,7 +47,7 @@
         <%= react_component('Upvote', {record: feedback.id, voted: voted, vote_url: vote_path(votable_type: feedback.class.to_s, votable_id: feedback.uuid), votes_count: feedback.votes_counter.value, voters_path: voters_path(votable_type: feedback.class.to_s, votable_id: feedback.id), css_class: 'vote-button add_vote pull-left', button_style: false}.to_json) %>
       </ul>
       <% rated = feedback.badged? %>
-      <%= react_component('Rate', {rate: {record: feedback.id, user_name: @idea.user.name, badge_name: feedback.badge, rated: rated, rate_url: rate_idea_feedback_path(@idea.slug, feedback.id)}}) %>
+      <%= react_component('Rate', {rate: {record: feedback.id, user_name: @idea.user.name, badge_name: feedback.badge, rated: rated, rate_url: rate_idea_feedback_path(@idea.slug, feedback.uuid)}}) %>
 
         <% if feedback.badged? %>
           <div class="review-badge pull-right">

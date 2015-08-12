@@ -1,16 +1,23 @@
 <div class="wrapper-small events-bg-gradient">
-  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-    <% data = render(template: 'schools/show.json.jbuilder') %>
-    <div class="user-profile auto-margin">
-        <div class="thumbnail-wrapper d100">
-            <div class="profile-logo">
-              <%= react_component('SchoolLogo', {data: data}) %>
-            </div>
+  <div class="col-md-4 jumbrotron auto-margin overflow-hidden" data-pages="parallax">
+    <div class="school-profile">
+      <div class="school-logo pull-left m-r-10">
+        <div id="profile_image">
+          <div id="profilepic">
+          <% if @school.avatar_present? %>
+           <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
+           <% else %>
+               <span class="placeholder bold text-white fs-22">
+                   <%= @school.name_badge %>
+               </span>
+           <% end %>
+          </div>
         </div>
-    </div>
-    <div class="hero-text inner clearfix">
-      <h2 class="text-white">Browse events</h2>
-      <h5 class="text-white">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
+      </div>
+      <div class="hero-text inner inline">
+        <h2 class="text-white">Browse events</h2>
+        <h5 class="text-white no-margin">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
+      </div>
     </div>
   </div>
 </div>
@@ -21,26 +28,4 @@
   </div>
 </div>
 
-<div class="container p-t-40 p-b-80">
-  <div class="events-list">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2" class="no-padding"><%= pluralize(@events.count, 'Result',) %> </th>
-            <th>Register</th>
-            <th class="text-center">Event Stats</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @events.each do |event| %>
-            <%= render partial: 'events/event', locals: {event: event} %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="paging-container p-r-15">
-        <%= will_paginate(@events, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix') %>
-    </div>
-  </div>
-</div>
+<%= render partial: 'events/events', locals: {events: @events} %>

@@ -24,7 +24,7 @@ class SchoolsController < ApplicationController
 
   def show
     @students = @school.get_published_users
-    @activities = Activity.where(published: true, is_notification: false).paginate(:page => params[:page], :per_page => 20)
+    @activities = Activity.where(published: true, is_notification: false).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /schools/1/dashboard

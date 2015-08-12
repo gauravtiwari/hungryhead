@@ -10,7 +10,7 @@ class InviteMailer < ActionMailer::Base
     subject = "#{@resource.name} has invited you to join #{@idea.name}"
     @view_link = idea_url(@idea)
     @invitation_link = idea_team_invite_url(@idea.slug, team_invite.id, token: team_invite.token)
-    mail(:from => @resource.email, :to => @user.email, :subject => subject)
+    mail(:from => 'no-reply@hungryhead.co', :to => @user.email, :subject => subject)
   end
 
   def joined_team(team_invite)
@@ -20,7 +20,7 @@ class InviteMailer < ActionMailer::Base
     @team_invite = team_invite
     subject = "#{@resource.name} have successfully joined #{@idea.name}"
     @view_link = idea_url(@idea)
-    mail(:from => @resource.email, :to => @user.email, :subject => subject)
+    mail(:from => 'no-reply@hungryhead.co', :to => @user.email, :subject => subject)
   end
 
   def invite_friends(user, from)
@@ -29,6 +29,6 @@ class InviteMailer < ActionMailer::Base
     @token = @invited.raw_invitation_token
     subject = "#{@sender.name} has invited you to join hungryhead"
     @invitation_link = accept_user_invitation_url(:invitation_token => @token)
-    mail(:from => @sender.email, :to => @invited.email, :subject => subject)
+    mail(:from => 'no-reply@hungryhead.co', :to => @invited.email, :subject => subject)
   end
 end

@@ -9,7 +9,7 @@
             <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
             <% end %>
           </div>
-          <%= form_tag('/search/search', class: 'inline b-l b-grey b-dashed m-l-15')  do %>
+          <%= form_tag('/search/search', class: 'inline m-l-15')  do %>
             <%= text_field_tag "search", params[:query], :id =>"search" , placeholder: "Type here to search...", autocomplete: :off, class: "search-link no-border overlay-search bg-transparent" %>
           <% end %>
           <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
@@ -18,17 +18,17 @@
                 <i class="fa fa-home"></i>
               <% end %>
             </li>
-            <li class="inline p-r-15 p-l-15 fs-14 b-l b-grey b-dashed bold">
+            <li class="inline p-r-15 p-l-15 fs-14 bold">
               <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? current_class?(main_app.users_path) : 'text-brand'}") do %>
                  <i class="fa fa-users"></i>
                <% end %>
             </li>
-            <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold ">
+            <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold ">
               <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? current_class?(main_app.ideas_path) : 'text-brand'}") do %>
                  <i class="fa fa-lightbulb-o"></i>
                <% end %>
             </li>
-            <li class="inline p-r-15 p-l-15 p-l-10 b-l b-grey b-dashed fs-14 bold">
+            <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold">
              <%= link_to(main_app.schools_path, class: "fs-22 #{request.path == main_app.schools_path ? current_class?(main_app.schools_path) : 'text-brand'}") do %>
                 <i class="fa fa-university"></i>
               <% end %>

@@ -1,29 +1,26 @@
-  <div class="wrapper-small idea-bg-gradient">
-    <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-      <% data = render(template: 'schools/show.json.jbuilder') %>
-      <div class="user-profile auto-margin">
-          <div class="thumbnail-wrapper d100">
-              <div class="profile-logo">
-                <div id="profile_image">
-                  <div id="profilepic">
-                  <% if @school.avatar_present? %>
-                   <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
-                   <% else %>
-                       <span class="placeholder bold text-white fs-22">
-                           <%= @school.name_badge %>
-                       </span>
-                   <% end %>
-                  </div>
-                </div>
-              </div>
-          </div>
-      </div>
-      <div class="hero-text inner clearfix">
+<div class="wrapper-small idea-bg-gradient">
+  <div class="col-md-4 jumbrotron auto-margin overflow-hidden" data-pages="parallax">
+   <div class="school-profile">
+     <div class="school-logo pull-left m-r-10">
+       <div id="profile_image">
+         <div id="profilepic">
+         <% if @school.avatar_present? %>
+          <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
+          <% else %>
+              <span class="placeholder bold text-white fs-22">
+                  <%= @school.name_badge %>
+              </span>
+          <% end %>
+         </div>
+       </div>
+     </div>
+      <div class="hero-text inner inline">
         <h2 class="text-white">Browse ideas</h2>
-        <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:intro), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+        <h5 class="text-white no-margin">from <%= link_to(@school.name, profile_path(@school), class: 'text-white p-b-5 b-b b-white') %></h5>
       </div>
     </div>
   </div>
+</div>
 
   <div class="box-shadow bg-white">
     <div class="container">

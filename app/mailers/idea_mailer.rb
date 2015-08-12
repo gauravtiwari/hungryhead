@@ -7,7 +7,7 @@ class IdeaMailer < ActionMailer::Base
     @idea = idea
     @recipient = recipient
     @subject = "Your friend #{@user.name} has pitched #{@idea.name}"
-    mail(:from => @user.email, :to => @recipient.email, :subject => @subject)
+    mail(:from => 'no-reply@hungryhead.co', :to => @recipient.email, :subject => @subject)
   end
 
 end
