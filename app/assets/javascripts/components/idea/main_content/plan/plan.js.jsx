@@ -70,7 +70,7 @@ var Plan = React.createClass({
         <div className="panel p-t-20 box-shadow no-border no-margin">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Your idea</div>
+            <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Summary</div>
             <div className="panel-controls p-r-60 pull-right">
             <ul>
               <li>
@@ -92,7 +92,7 @@ var Plan = React.createClass({
        return (
       <div className="panel p-t-20 box-shadow no-border no-margin">
           <div className="panel-heading p-l-60 p-b-10">
-            <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Idea</div>
+            <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Summary</div>
           </div>
           <div className="panel-body p-l-60 p-r-60 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>

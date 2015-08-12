@@ -14,7 +14,7 @@ var IdeaProfile = React.createClass({
           {this.props.text}
         </a>
         <div>
-          <span className="fa fa-lightbulb-o fs-50 text-white"></span>
+          <span className="fa full-width fa-lightbulb-o fs-50 text-white"></span>
         </div>
         <h3 className="no-margin bold text-white">
           {this.props.idea.name}
