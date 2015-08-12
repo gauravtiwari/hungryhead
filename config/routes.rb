@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   # Upgrade path for old browsers
   get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade
-  get '/privacy-policy', to: 'pages#privacy', as: :privacy
+  get '/privacy-policy', to: 'pages#privacy_policy', as: :privacy
   get '/cookies-policy', to: 'pages#cookies', as: :cookies
   get '/get-started', to: 'pages#get_started', as: :get_started
   get '/product-tour', to: 'pages#product', as: :product

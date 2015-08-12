@@ -241,6 +241,10 @@ gem 'meta_events'
 #Security for app
 gem 'rack-attack'
 
+#Turbolinks
+gem 'jquery-turbolinks'
+gem 'turbolinks', github: 'rails/turbolinks'
+
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
 
