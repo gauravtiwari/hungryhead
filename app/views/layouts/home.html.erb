@@ -65,7 +65,7 @@
 
   </head>
 
-  <body class="menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
+  <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
 
     <% if browser.ie9? %>
       <%= render partial: 'globals/outdated_browser' %>

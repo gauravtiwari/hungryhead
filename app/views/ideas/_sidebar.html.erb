@@ -1,5 +1,6 @@
 <div class="idea-sidebar auto-height">
   <%= react_component('IdeaHeader', {data: data}) %>
+
   <%= render partial: 'ideas/card_stats' %>
 
   <% cache(["idea_badges", @idea, @idea.badges.length]) do %>
