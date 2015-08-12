@@ -215,5 +215,15 @@ ActiveRecord::Base.transaction do
     website_url: 'york.ac.uk'
   )
 
+  School.create!(
+    name: 'Anglia Ruskin University',
+    location_list: 'Cambridge',
+    description: " Anglia Ruskin's story starts in 1858, when the art critic, patron and philanthropist John Ruskin opened Cambridge School of Art. The art school grew to become Anglia Ruskin University, and it's still at the heart of our modern-day campus in Cambridge.",
+    email: 'admin@anglia.ac.uk',
+    domain: 'anglia.ac.uk',
+    user_id: 1,
+    website_url: 'anglia.ac.uk'
+  )
+
 end
 
