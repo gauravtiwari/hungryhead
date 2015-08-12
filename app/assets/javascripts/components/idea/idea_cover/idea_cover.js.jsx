@@ -1,6 +1,6 @@
 var IdeaCover = React.createClass({
   getInitialState: function() {
-    var data = this.props.data;
+    var data = JSON.parse(this.props.data);
 
     if(data.idea.cover) {
       var top = data.idea.cover.top;

@@ -41,23 +41,17 @@ var IdeaHeader = React.createClass({
   },
 
   render: function() {
-    if(this.state.idea.cover.has_cover || this.state.data.meta.is_owner) {
-      var cover = <IdeaCover data= {this.state.data} />
-    } else {
-      var cover = ""
-    }
-
     if(this.state.data.meta.is_owner) {
-
-        var text = <span className="fa fa-pencil"> Edit</span>;
+      var text = <span className="fa fa-pencil"> Edit</span>;
     } else {
       var text = "";
     }
     return (
-      <div className="idea-header bg-solid">
-        {cover}
-        <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
-        <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
+      <div className="panel bg-solid box-shadow m-b-10">
+        <div className="panel-body">
+          <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
+          <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
+        </div>
       </div>
     );
   }

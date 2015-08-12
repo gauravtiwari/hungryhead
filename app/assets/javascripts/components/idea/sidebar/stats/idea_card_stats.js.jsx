@@ -58,7 +58,7 @@ var IdeaCardStats = React.createClass({
 
     return(
       <div className={classes}>
-        <div className="panel-heading bg-light-blue-lightest m-b-20">
+        <div className="panel-heading m-b-20">
           <div className="panel-title b-b b-grey p-b-5">
             <i className="fa fa-star text-danger"></i> Stats
           </div>

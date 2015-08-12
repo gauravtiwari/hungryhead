@@ -9,21 +9,22 @@ var IdeaProfile = React.createClass({
     });
 
     return (
-      <div className="col-md-6">
-        <div className="idea-meta m-l-15 inline p-t-20 p-b-20">
-        <h4 className="no-margin bold text-white">
+      <div className="idea-meta text-center">
+        <a onClick={this.props.openForm} data-toggle="tooltip" title="Click to edit" className="pull-right fs-12 b-b b-white pointer text-white">
+          {this.props.text}
+        </a>
+        <div>
+          <span className="fa fa-lightbulb-o fs-50 text-white"></span>
+        </div>
+        <h3 className="no-margin bold text-white">
           {this.props.idea.name}
-          <a onClick={this.props.openForm} data-toggle="tooltip" title="Click to edit" className="m-l-20 inline fs-12 b-b b-white pointer text-white">
-            {this.props.text}
-          </a>
-        </h4>
-        <p className="no-margin text-white p-t-10 fs-16">
+        </h3>
+        <div className="no-margin text-white fs-16">
          {this.props.idea.high_concept_pitch}
-        </p>
-        <span className="text-white">
+        </div>
+        <span className="text-white m-t-10">
           {market_list}
         </span>
-      </div>
       </div>
     );
   }

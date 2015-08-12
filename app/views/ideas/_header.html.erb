@@ -1,1 +1,3 @@
-<%= react_component('IdeaHeader', {data: data}) %>
+<% if @idea.cover.present? || @idea.user == current_user %>
+  <%= react_component('IdeaCover', {data: data}) %>
+<% end %>

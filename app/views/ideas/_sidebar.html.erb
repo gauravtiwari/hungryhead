@@ -1,7 +1,8 @@
-<div class="idea-sidebar auto-height bg-white box-shadow">
-  <%= react_component('LatestIdeaFeed', {idea_id: @idea.uuid, path: ideas_notification_path(@idea), channel_name: "idea-feed-#{@idea.uuid}", channel_event: "new_ticker_item", name: @idea.name}.to_json) %>
-
+<div class="idea-sidebar auto-height">
+  <%= react_component('IdeaHeader', {data: data}) %>
   <%= render partial: 'ideas/card_stats' %>
+
+  <%= react_component('LatestIdeaFeed', {idea_id: @idea.uuid, path: ideas_notification_path(@idea), channel_name: "idea-feed-#{@idea.uuid}", channel_event: "new_ticker_item", name: @idea.name}.to_json) %>
 
   <% cache(["idea_badges", @idea, @idea.badges.length]) do %>
     <%= render partial: 'ideas/badges' %>
