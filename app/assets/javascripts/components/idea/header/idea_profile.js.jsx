@@ -8,6 +8,10 @@ var IdeaProfile = React.createClass({
           </a>;
     });
 
+    if(this.props.idea.looking_for_team) {
+      var looking_for_team = <div className="clearfix text-white small"><span className='fa fa-search'></span> Looking for team</div>;
+    }
+
     return (
       <div className="idea-meta text-center">
         <a onClick={this.props.openForm} data-toggle="tooltip" title="Click to edit" className="pull-right fs-12 b-b b-white pointer text-white">
@@ -25,6 +29,7 @@ var IdeaProfile = React.createClass({
         <span className="text-white m-t-10">
           {market_list}
         </span>
+        {looking_for_team}
       </div>
     );
   }
