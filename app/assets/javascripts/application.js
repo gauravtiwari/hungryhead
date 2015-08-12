@@ -56,7 +56,7 @@
 
 
 // Custom Javascripts
-//= require pusher_init
 //= require core/js/hungryhead
+//= require pusher_init
 //= require_tree .
 //= require turbolinks
