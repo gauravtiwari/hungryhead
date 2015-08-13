@@ -56,7 +56,7 @@ var Upvote = React.createClass({
     });
 
     var button_classes = cx({
-      'main-button fs-13 bold m-r-10': true,
+      'main-button fs-13 bold pointer m-r-10': true,
       'disabled': this.state.disabled,
       'voted text-white': this.state.voted
     });

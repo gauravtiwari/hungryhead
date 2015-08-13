@@ -1,19 +1,8 @@
 <div class="box-shadow bg-light-blue-lightest">
   <div class="profile-nav p-l-10 row p-t-10 p-b-10">
     <div class="col-md-6 no-padding p-l-15">
-        <ul class="profile-name inline no-style no-margin">
+        <ul class="profile-name inline no-style no-margin p-t-5">
           <li class="inline p-r-15">
-            <div class="thumbnail-wrapper m-r-5 d32 circular">
-            <%= link_to(profile_path(@idea.user), :"data-popover-href" => "#{profile_card_path(@idea.user)}", class: 'load-card inline') do %>
-            <% if @idea.user.avatar_present? %>
-              <%= image_tag(@idea.user.get_avatar, :"data-src" => "#{@idea.user.get_avatar}", :"data-src-retina" => "#{@idea.user.get_avatar}", width: "32", height: "32") %>
-              <% else %>
-              <span class="placeholder bold text-white" width="32px" height="32px">
-                <%= @idea.user.name_badge %>
-              </span>
-              <% end %>
-            <% end %>
-            </div>
             <%= link_to("Idea", idea_path(@idea), class: "bold m-l-15 fs-13 #{current_class?(idea_path(@idea))}") %>
           </li>
           <li class="inline p-r-15">
