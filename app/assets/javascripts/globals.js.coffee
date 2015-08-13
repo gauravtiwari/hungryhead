@@ -12,12 +12,6 @@ jQuery(document).ready ->
 
 	$.HHSelect2.init()
 
-	$(document).on 'click', '.pagination a[data-remote=true]', (e) ->
-	  history.pushState {}, '', $(this).attr('href')
-	  return
-	$(window).on 'popstate', ->
-	  $.getScript document.location.href
-	  return
 	if Modernizr.mq('(min-width: 767px)')
 		$('.widgets').masonry
 		  itemSelector: '.widget-item'

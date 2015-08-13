@@ -95,7 +95,7 @@ var LatestFeed = React.createClass({
     } else if(this.state.feed.length > 0) {
       var content =  <Infinite elementHeight={60}
                 containerHeight={250}
-                infiniteLoadBeginBottomOffset={400}
+                infiniteLoadBeginBottomOffset={200}
                 onInfiniteLoad={this.handleInfiniteLoad}
                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
                 isInfiniteLoading={this.state.isInfiniteLoading}

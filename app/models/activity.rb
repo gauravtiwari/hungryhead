@@ -16,11 +16,11 @@ class Activity < ActiveRecord::Base
   end
 
   def self.latest_stories
-    where(published: true, is_notification: false).includes([:trackable, :user]).order(id: :desc)
+    where(published: true, is_notification: false).find_each.sort {|a,b| b.created_at <=> a.created_at}
   end
 
   def self.popular_stories
-    where(published: true, is_notification: false).includes([:trackable, :user]).find(Activity.popular.revrange(0, -1)).select{|activity| activity.published? }
+    where(published: true, is_notification: false).find(Activity.popular.revrange(0, -1)).sort {|a,b| b.created_at <=> a.created_at}
   end
 
   def trackable_timestamp
