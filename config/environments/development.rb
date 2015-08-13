@@ -18,6 +18,9 @@ Rails.application.configure do
     namespace: "cache_#{Rails.env.downcase}"
   }
 
+  config.sass.inline_source_maps = true
+  config.sass.line_comments = false
+
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 

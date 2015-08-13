@@ -2,6 +2,7 @@
 // BEGIN VENDOR JS FOR PAGES
 //
 //= require jquery
+//= require jquery-ujs
 //= require jquery.turbolinks
 //= require jquery-form
 //= require bootstrap
@@ -23,7 +24,6 @@
 //= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
-//= require pusher
 //= require jquery.soulmate
 //= require underscore
 //= require js-routes
@@ -51,11 +51,29 @@
 //= require flashes
 //= require react
 //= require react-infinite
+//= require pusher
+//= require pusher_turbolinks
+//= require pusher_init
+//= require collaboration_init
 
 
 // Custom Javascripts
 //= require core/js/hungryhead
-//= require_tree .
+//= require avatar
+//= require event
+//= require flashes
+//= require meta_events
+//= require pagination
+//= require typer
+//= require profiles
+//= require school
+//= require script
+//= require utilities
+//= require welcome
+//= require globals
+//= require components
+//= require_tree ./components
 //= require turbolinks
 //= require react_ujs
-//= require jquery-ujs
+
+window.adapter_ready = true

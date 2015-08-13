@@ -43,13 +43,12 @@ gem 'postgres-copy'
 
 #Coffescript
 gem 'coffee-rails'
-gem 'sass'
 
 #Font awesome
 gem "font-awesome-rails"
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sassc-rails'
 # Use Uglifier as ressor for JavaScript assets
 gem 'uglifier'
 

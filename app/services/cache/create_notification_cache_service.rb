@@ -40,9 +40,9 @@ class CreateNotificationCacheService
   #add activity to recipient notifications
   def add_notification_for_recipient
     #add to notifications
-    @activity.recipient_user.friends_notifications.add(@activity.id, score_key)
+    @activity.recipient_user.friends_notifications.add(@activity.json_blob, score_key)
     #add to ticker
-    @activity.recipient_user.ticker.add(@activity.id, score_key)
+    @activity.recipient_user.ticker.add(@activity.json_blob, score_key)
     #Increment counter
     @activity.recipient_user.notifications_counter.increment
     SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.user
@@ -51,7 +51,7 @@ class CreateNotificationCacheService
 
   #Add activity to idea ticker if recipient or trackable is idea
   def add_activity_to_idea(idea)
-    idea.ticker.add(@activity.id, score_key)
+    idea.ticker.add(@activity.json_blob, score_key)
     SendNotificationService.new(idea, @activity.json_blob).idea_notification
   end
 
@@ -65,7 +65,7 @@ class CreateNotificationCacheService
 
   #add activity to friends ticker
   def add_activity_to_friends_ticker(user)
-    user.ticker.add(@activity.id, score_key)
+    user.ticker.add(@activity.json_blob, score_key)
   end
 
   #Add activity to followers ticker
