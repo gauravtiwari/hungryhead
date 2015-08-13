@@ -20,7 +20,6 @@
 //= require jquery.actual
 //= require jquery.scrollbar
 //= require hammerjs
-//= require jquery-ujs
 //= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
@@ -52,11 +51,11 @@
 //= require flashes
 //= require react
 //= require react-infinite
-//= require react_ujs
 
 
 // Custom Javascripts
 //= require core/js/hungryhead
-//= require pusher_init
 //= require_tree .
 //= require turbolinks
+//= require react_ujs
+//= require jquery-ujs

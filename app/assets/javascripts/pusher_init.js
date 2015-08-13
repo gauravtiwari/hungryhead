@@ -1,4 +1,3 @@
-
 if(window.currentUser && window.currentUser.authenticated) {
   var pusher = new Pusher(window.PUSHER_APP_KEY)
   var channel = pusher.subscribe('private-user-' + window.currentUser.id)
