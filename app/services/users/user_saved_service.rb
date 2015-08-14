@@ -8,9 +8,21 @@ class UserSavedService
 
   def call
     soulmate_loader
+    expire_cache
   end
 
   private
+
+  def expire_cache
+    keys = [
+      "popular_20_#{@user.class.to_s.pluralize.downcase}",
+      "latest_20_#{@user.class.to_s.pluralize.downcase}",
+      "trending_20_#{@user.class.to_s.pluralize.downcase}"
+    ]
+    keys.each do |key|
+      Rails.cache.delete(key)
+    end
+  end
 
   def soulmate_loader
     #instantiate soulmate loader to re-generate search index

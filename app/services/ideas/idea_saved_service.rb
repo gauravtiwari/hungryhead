@@ -8,6 +8,20 @@ class IdeaSavedService
 
   def call
     load_into_soulmate
+    expire_cache
+  end
+
+  private
+
+  def expire_cache
+    keys = [
+      "popular_20_#{@idea.class.to_s.pluralize.downcase}",
+      "latest_20_#{@idea.class.to_s.pluralize.downcase}",
+      "trending_20_#{@idea.class.to_s.pluralize.downcase}"
+    ]
+    keys.each do |key|
+      Rails.cache.delete(key)
+    end
   end
 
   def load_into_soulmate

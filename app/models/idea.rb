@@ -25,7 +25,7 @@ class Idea < ActiveRecord::Base
   #CallBack hooks
   after_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_save :load_into_soulmate, if: :visible?
+  after_save :soulmate_loader, if: :visible? && :rebuild_cache?
 
   acts_as_taggable_on :markets, :technologies
 
@@ -204,15 +204,8 @@ class Idea < ActiveRecord::Base
     slug.blank? || name_changed?
   end
 
-  def load_into_soulmate
-    if visible?
-      loader = Soulmate::Loader.new("ideas")
-      loader.add("term" => name, "description" => high_concept_pitch, "id" => id, "data" => {
-        "link" => idea_path(slug)
-        })
-    else
-      remove_from_soulmate
-    end
+  def soulmate_loader
+    RecordSavedJob.set(wait: 1.minute).perform_later(id, self.class.to_s)
   end
 
   def remove_from_soulmate
