@@ -63,7 +63,6 @@
 //= require event
 //= require flashes
 //= require meta_events
-//= require pagination
 //= require typer
 //= require profiles
 //= require school
@@ -75,5 +74,3 @@
 //= require_tree ./components
 //= require turbolinks
 //= require react_ujs
-
-window.adapter_ready = true

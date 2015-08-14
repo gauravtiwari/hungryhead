@@ -23,6 +23,10 @@ class Activity < ActiveRecord::Base
     where(published: true, is_notification: false).find(Activity.popular.revrange(0, -1)).sort {|a,b| b.created_at <=> a.created_at}
   end
 
+  def self.get_activities
+    where(published: true, is_notification: false)
+  end
+
   def trackable_timestamp
     trackable.updated_at.try(:utc).try(:to_s, :number)
   end

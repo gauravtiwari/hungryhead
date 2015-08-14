@@ -118,6 +118,7 @@ class Idea < ActiveRecord::Base
       id: uuid,
       name: name,
       name_badge: name_badge,
+      updated_at: updated_at,
       url: idea_path(self),
       description: high_concept_pitch
     }

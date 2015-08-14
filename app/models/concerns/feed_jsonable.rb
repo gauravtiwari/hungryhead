@@ -9,6 +9,7 @@ module FeedJsonable
     {
       id: uuid,
       type: get_type,
+      updated_at: updated_at,
       activity_id: find_activity_id,
       html: build_html
     }
