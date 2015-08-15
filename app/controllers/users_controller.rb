@@ -189,7 +189,6 @@ class UsersController < ApplicationController
   def activities
     authorize @user
     @activities = @user.activities
-    .where(published: true, is_notification: false)
     .order(created_at: :desc)
     .paginate(:page => params[:page], :per_page => 10)
     @next_page_url = profile_activities_path(page: @activities.next_page)

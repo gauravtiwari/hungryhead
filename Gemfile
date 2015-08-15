@@ -228,9 +228,6 @@ gem 'em-http-request' # Required by trigger_async
 #Pagination
 gem 'will_paginate'
 
-#Activerecord views
-gem 'activerecord_views'
-
 #Meta tags
 gem 'metamagic'
 
