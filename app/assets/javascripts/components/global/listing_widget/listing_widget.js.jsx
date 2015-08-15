@@ -8,6 +8,29 @@ var ListingWidget = React.createClass({
     }
   },
 
+  componentDidMount: function(){
+    $.pubsub('subscribe', 'update_followers_listing', function(msg, data){
+      if(this.props.type != "followings") {
+        if(data.follow) {
+          var new_list = this.state.listing.concat(data.follower);
+        } else {
+          var new_list = _.without(this.state.listing, _.findWhere(this.state.listing, {id: data.follower.id}));
+        }
+        this.setState({listing: new_list});
+      }
+    }.bind(this));
+    $.pubsub('subscribe', 'update_voters_listing', function(msg, data){
+      if(this.props.type != "followings") {
+        if(data.vote) {
+          var new_list = this.state.listing.concat(data.voter);
+        } else {
+          var new_list = _.without(this.state.listing, _.findWhere(this.state.listing, {id: data.voter.id}));
+        }
+        this.setState({listing: new_list});
+      }
+    }.bind(this));
+  },
+
   loadAll: function() {
     this.setState({loading: true});
     var path = this.props.path;
@@ -49,7 +72,7 @@ var ListingWidget = React.createClass({
     }
 
     return (
-      <ul className="list-unstyled">
+      <ul className="list-unstyled overflow-hidden">
         {content}
         {count}
       </ul>

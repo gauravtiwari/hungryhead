@@ -27,10 +27,6 @@
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
 
-    <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
-      <%= render partial: 'shared/idea_json' if idea_collaboration? %>
-    <% end %>
-
     <% if Rails.env.production? %>
       <!-- start Mixpanel -->
       <script type="text/javascript">
@@ -72,6 +68,9 @@
   </head>
 
   <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
+    <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
+      <%= render partial: 'shared/idea_json' if idea_collaboration? %>
+    <% end %>
 
     <div class="<%= user_signed_in? ? 'page-container' : 'page-container' %>">
       <% if user_signed_in? %>

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:latest, :popular, :people_you_may_know, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
   #Verify user access
-  after_action :verify_authorized, :except => [:autocomplete_user_name, :people_you_may_know, :check_username, :check_email, :followings, :followers, :index, :popular, :trending, :latest]
+  after_action :verify_authorized, :except => [:autocomplete_user_name, :people_you_may_know, :check_username, :check_email, :index, :popular, :trending, :latest]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "home"
@@ -158,12 +158,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def followers
-    @followable = @user
-    @followers = @user.get_followers.paginate(:page => params[:page], :per_page => 9)
-    render 'follows/followers'
-  end
-
   def delete_cover
     @user.remove_cover!
     @user.save
@@ -178,12 +172,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json {render :index}
     end
-  end
-
-  def followings
-    @followable = @user
-    @followings = @user.get_followings.paginate(:page => params[:page], :per_page => 9)
-    render 'follows/followings'
   end
 
   def activities

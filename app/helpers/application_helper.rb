@@ -23,13 +23,33 @@ module ApplicationHelper
       followed =  {
         follow: true,
         followable_type: object.class.name,
-        followable_id: object.id
+        followable_id: object.slug
       }
     else
       followed = {
         follow: false,
         followable_type: object.class.name,
-        followable_id: object.id
+        followable_id: object.slug
+      }
+    end
+  end
+
+  def voted?(object)
+    if current_user && object.voted?(current_user)
+      voted =  {
+        vote: true,
+        votes_count: object.votes_counter.value,
+        voters_path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
+        votable_type: object.class.name,
+        votable_id: object.uuid
+      }
+    else
+      voted = {
+        vote: false,
+        votes_count: object.votes_counter.value,
+        voters_path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
+        votable_type: object.class.name,
+        votable_id: object.uuid
       }
     end
   end

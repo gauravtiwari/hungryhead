@@ -1,31 +1,44 @@
 class VotesController < ApplicationController
 
   before_filter :authenticate_user!
-  before_filter :load_votable, only: [:vote, :voters]
+  before_action :load_votable
 
   def vote
-    authorize @votable
-    if @votable.voted?(current_user)
-      CreateVoteService.new(current_user, @votable).unvote
+    return render_data if @votable.voted?(current_user)
+    @vote = CreateVoteService.new(current_user, @votable).vote
+    authorize @vote
+    if @vote.save
+      render_data
     else
-      @vote = CreateVoteService.new(current_user, @votable).vote
-      if @vote.save
-        render json: {
-          voted: @votable.voted?(current_user),
-          votes_count: @votable.votes_counter.value
-        }
-      else
-        render json: @vote.errors, status: :unprocessable_entity
-      end
+      render json: @vote.errors, status: :unprocessable_entity
+    end
+  end
+
+  def unvote
+    return render_data if !@votable.voted?(current_user)
+    @vote = CreateVoteService.new(current_user, @votable).unvote
+    authorize @vote
+    if @vote.destroy
+      render_data
+    else
+      render json: @vote.errors, status: :unprocessable_entity
     end
   end
 
   def voters
-    @voters = User.find(@votable.voters_ids.values).paginate(:page => params[:page], :per_page => 10)
+    @voters = User.find(@votable.voters_ids.values).paginate(:page => params[:page], :per_page => 20)
     render 'voters/index'
   end
 
   private
+
+  def render_data
+    render json: {
+      vote: @votable.voted?(current_user),
+      votes_count: @votable.votes_counter.value,
+      voter: current_user.card_json
+    }
+  end
 
   def load_votable
     @votables = ["Idea", "Feedback", "Investment", "Comment"]

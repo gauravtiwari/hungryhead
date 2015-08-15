@@ -6,7 +6,7 @@
   </div>
   <div class="panel-body">
     <ul class="list-unstyled">
-      <%= react_component('ListingWidget', {listing: @idea.get_voters.take(16).map{|u| {name: u.name, name_badge: u.name_badge,  avatar: u.get_avatar,  url: profile_path(u)}}, count: @idea.votes_counter.value, path: voters_idea_path(@idea), type: "followers" }.to_json) %>
+      <%= react_component('ListingWidget', {listing: @idea.get_voters.take(16).map{|u| {name: u.name, name_badge: u.name_badge, id: u.uid, avatar: u.get_avatar,  url: profile_path(u)}}, count: @idea.votes_counter.value, path: voters_idea_path(@idea), type: "Voters" }.to_json) %>
     </ul>
   </div>
 </div>

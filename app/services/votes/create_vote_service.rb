@@ -10,9 +10,7 @@ class CreateVoteService
   end
 
   def unvote
-    @votable.votes.where(voter: @user).each do |vote|
-      vote.destroy!
-    end
+    @votable.votes.where(voter: @user).first
   end
 
 end

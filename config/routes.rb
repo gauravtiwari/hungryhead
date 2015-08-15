@@ -86,10 +86,8 @@ Rails.application.routes.draw do
   post 'check_username', to: 'users#check_username', as: 'check_username'
   post 'check_email', to: 'users#check_email', as: 'check_email'
 
-  match '/vote',  to: 'votes#vote', via: :put, as: 'vote'
   get '/people_tagged_with/:tag',  to: 'tags#people', as: 'tag_people'
   get '/ideas_tagged_with/:tag',  to: 'tags#show', as: 'tag'
-  match '/voters', to: 'votes#voters', via: :get, as: 'voters'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome
@@ -107,10 +105,20 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :follows, only: [:create, :destroy] do
-    member do
+  resources :follows, only: :create do
+    collection do
+      post :follow
+      delete :unfollow
       get :followers
       get :followings
+    end
+  end
+
+  resources :votes, only: :create do
+    collection do
+      post :vote
+      delete :unvote
+      get :voters
     end
   end
 
@@ -245,12 +253,10 @@ Rails.application.routes.draw do
   get '/:slug/ideas', to: SlugRouter.to(:ideas), as: :profile_ideas
   get '/:slug/latest_ideas', to: SlugRouter.to(:latest_ideas), as: :profile_latest_ideas
   get '/:slug/dashboard', to: SlugRouter.to(:dashboard), as: :profile_dashboard
-  get '/:slug/followers', to: SlugRouter.to(:followers), as: :profile_followers
   get '/:slug/feedbacks', to: SlugRouter.to(:feedbacks), as: :profile_feedbacks
   get '/:slug/investments', to: SlugRouter.to(:investments), as: :profile_investments
   get '/:slug/badges', to: SlugRouter.to(:badges), as: :profile_badges
   post '/:slug/user_invite', to: SlugRouter.to(:user_invite), as: :profile_user_invite
-  get '/:slug/followings', to: SlugRouter.to(:followings), as: :profile_followings
   get '/:slug/comments', to: SlugRouter.to(:comments), as: :profile_comments
   delete '/:slug/delete_cover', to: SlugRouter.to(:delete_cover), as: :profile_delete_cover
 

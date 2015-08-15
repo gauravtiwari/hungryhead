@@ -69,8 +69,6 @@
 //= require globals
 //= require pusher_turbolinks
 //= require pusher_init
-//= require collaboration_init
-//= require components
 //= require_tree ./components
 //= require turbolinks
 //= require react_ujs

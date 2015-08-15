@@ -39,6 +39,8 @@ var CommentBox = React.createClass({
       if(this.state.standalone) {
         this.loadComments();
       }
+      console.log(_.findWhere(pusher.channels, {Channel: this.props.comment_channel}));
+
       var comment_channel = pusher.subscribe(this.props.comment_channel);
       if(comment_channel) {
         comment_channel.bind('new_comment', function(data){

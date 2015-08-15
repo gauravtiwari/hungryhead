@@ -42,8 +42,7 @@
     <div class="card-footer clearfix bold">
 
 	    <ul class="reactions pull-left">
-				<% voted = activity.trackable.voted?(current_user) %>
-				<%= react_component('Upvote', {record: activity.trackable.uuid, voted: voted, vote_url: vote_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), votes_count: activity.trackable.votes_counter.value, voters_path: voters_path(votable_type: activity.trackable_type, votable_id: activity.trackable.uuid), css_class: 'vote-button add_vote pull-left', button_style: false}.to_json) %>
+				<%= react_component('Upvote', {voted: voted?(activity.trackable), css_class: 'vote-button add_vote pull-left', button_style: false}.to_json) %>
 			</ul>
 
 	   	<div class="clearfix"></div>

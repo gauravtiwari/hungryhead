@@ -15,7 +15,7 @@ var Follow = React.createClass({
     this.setState({disabled: true})
     $.ajaxSetup({ cache: false });
     $.ajax({
-      url: Routes.follows_path({
+      url: Routes.follow_follows_path({
         followable_type: this.state.followed.followable_type,
         followable_id: this.state.followed.followable_id
       }),
@@ -26,6 +26,31 @@ var Follow = React.createClass({
         this.setState({ url: data.url });
         this.setState({disabled: false});
         $.pubsub('publish', 'update_followers_stats', data.followers_count);
+        $.pubsub('publish', 'update_followers_listing', data);
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.state.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  handleDelete: function ( event ) {
+    this.setState({ follow: !this.state.follow });
+    this.setState({disabled: true})
+    $.ajaxSetup({ cache: false });
+    $.ajax({
+      url: Routes.unfollow_follows_path({
+        followable_type: this.state.followed.followable_type,
+        followable_id: this.state.followed.followable_id
+      }),
+      type: "DELETE",
+      dataType: "json",
+      success: function ( data ) {
+        this.setState({ follow: data.follow });
+        this.setState({ url: data.url });
+        this.setState({disabled: false});
+        $.pubsub('publish', 'update_followers_stats', data.followers_count);
+        $.pubsub('publish', 'update_followers_listing', data);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.state.url, status, err.toString());
@@ -58,7 +83,7 @@ var Follow = React.createClass({
     }
 
     return (
-        <button data-toggle="tooltip" data-container="body" title={title_text} onClick={this.handleClick} className={classes}>
+        <button data-toggle="tooltip" data-container="body" title={title_text} onClick={this.state.follow? this.handleDelete : this.handleClick} className={classes}>
           {icon} <span className="hidden-xs">{text}</span>
         </button>
     );

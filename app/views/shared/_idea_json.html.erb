@@ -1,8 +1,3 @@
-<%= javascript_tag data: {turbolinks_eval: "always"} do %>
-  var i = {
-    name: "<%= @idea.name %>",
-    slug: "<%= @idea.slug %>",
-    id: "<%= @idea.uuid %>"
-  };
-  window.ideaMeta = i;
+<%= javascript_tag do %>
+  var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.slug %>");
 <% end %>

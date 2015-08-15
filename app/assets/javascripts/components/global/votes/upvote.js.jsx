@@ -6,17 +6,15 @@ var Upvote = React.createClass({
      return {
       loading: false,
       css_class: this.props.css_class,
-      voted: this.props.voted,
-      vote_url: this.props.vote_url,
-      style: this.props.style,
-      votes_count: this.props.votes_count,
-      voters_path: this.props.voters_path
+      voted: this.props.voted.vote,
+      votes_count: this.props.voted.votes_count,
+      voters_path: this.props.voted.voters_path
     };
   },
 
   loadVoters: function() {
     this.setState({loading: true});
-    var path = this.props.voters_path;
+    var path = this.props.vote.voters_path;
     $('body').append($('<div>', {class: 'voters_list', id: 'listing_modal'}));
     React.render(
       <ModalListing path={path} key={Math.random()}  />,
@@ -31,18 +29,50 @@ var Upvote = React.createClass({
       this.setState({voted: !this.state.voted});
       $.ajaxSetup({ cache: false });
       $.ajax({
-        url: this.state.vote_url,
-        type: "PUT",
+        url: Routes.vote_votes_path({
+          votable_type: this.props.voted.votable_type,
+          votable_id: this.props.voted.votable_id
+        }),
+        type: "POST",
         dataType: "json",
         success: function ( data ) {
-          this.setState({ voted: data.voted });
-          this.setState({ vote_url: data.url });
+          this.setState({ voted: data.vote });
           this.setState({ votes_count: data.votes_count });
           $.pubsub('publish', 'update_vote_stats', data.votes_count);
+          $.pubsub('publish', 'update_voters_listing', data);
           this.forceUpdate();
         }.bind(this),
         error: function(xhr, status, err) {
-          console.error(this.props.vote_url, status, err.toString());
+          console.error(Routes.unvote_votes_path({
+            votable_type: this.props.voted.votable_type,
+            votable_id: this.props.voted.votable_id
+          }), status, err.toString());
+        }.bind(this)
+      });
+  },
+
+  handleDelete: function (badge) {
+      this.setState({voted: !this.state.voted});
+      $.ajaxSetup({ cache: false });
+      $.ajax({
+        url: Routes.unvote_votes_path({
+          votable_type: this.props.voted.votable_type,
+          votable_id: this.props.voted.votable_id
+        }),
+        type: "DELETE",
+        dataType: "json",
+        success: function ( data ) {
+          this.setState({ voted: data.vote });
+          this.setState({ votes_count: data.votes_count });
+          $.pubsub('publish', 'update_vote_stats', data.votes_count);
+          $.pubsub('publish', 'update_voters_listing', data);
+          this.forceUpdate();
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(Routes.unvote_votes_path({
+            votable_type: this.props.voted.votable_type,
+            votable_id: this.props.voted.votable_id
+          }), status, err.toString());
         }.bind(this)
       });
   },
@@ -73,13 +103,13 @@ var Upvote = React.createClass({
 
     if(this.props.button_style) {
       return (
-        <a onClick={this.handleClick} className={button_classes}>
+        <a onClick={this.state.voted? this.handleDelete : this.handleClick} className={button_classes}>
           <i className="fa fa-thumbs-up"></i> {button_text}
         </a>
         )
     } else {
       return (<li className="inline text-black m-r-10 fs-14 bold pointer">
-                <a data-toggle="tooltip" data-container="body" title={text} onClick={this.handleClick}>
+                <a data-toggle="tooltip" data-container="body" title={text} onClick={this.state.voted? this.handleDelete : this.handleClick}>
                   {heart}
                 </a>
                 {voters}
