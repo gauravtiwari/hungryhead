@@ -37,7 +37,6 @@ class Activity < ActiveRecord::Base
 
   #Find recipient user
   def recipient_user
-    byebug
     if recipient_type == "User"
       recipient
     elsif user_type == "School"
