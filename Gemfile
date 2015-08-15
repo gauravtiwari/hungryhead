@@ -36,7 +36,7 @@ source 'https://rails-assets.org' do
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4rc1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'postgres-copy'
@@ -227,6 +227,9 @@ gem 'em-http-request' # Required by trigger_async
 
 #Pagination
 gem 'will_paginate'
+
+#Activerecord views
+gem 'activerecord_views'
 
 #Meta tags
 gem 'metamagic'
