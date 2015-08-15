@@ -28,13 +28,13 @@ class CreateNotificationCacheService
   #Get followers for users and ideas
   def followers
     if @activity.user_type == "User" && @activity.key == "vote.create"
-      ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s]).uniq
+      ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s])
     elsif @activity.user_type == "School"
-      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id)).uniq
+      ids = (@actor.followers_ids.union(@activity.recipient.followers_ids) + @actor.users.pluck(:id).map(&:to_s) - [@activity.recipient_user.id.to_s])
     else
-      ids = (@actor.followers_ids.members - [@activity.recipient_user.id.to_s]).uniq
+      ids = (@actor.followers_ids.members - [@activity.recipient_user.id.to_s])
     end
-    User.find(ids)
+    User.find(ids.uniq)
   end
 
   #add activity to recipient notifications

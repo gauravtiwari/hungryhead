@@ -261,6 +261,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'dawnscanner', :require=>false
   gem 'meta_request'
+  gem 'byebug'
   gem 'activerecord-colored_log_subscriber'
   gem 'bullet'
   gem 'binding_of_caller'

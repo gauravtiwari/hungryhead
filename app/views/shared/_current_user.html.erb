@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<%= javascript_tag data: {turbolinks_eval: "always"} do %>
 	var u = {
 		id: "<%= current_user.uid %>",
 		name: "<%= current_user.name %>",
@@ -15,4 +15,4 @@
 	}
 	window.currentUser = u;
 	window.PUSHER_APP_KEY = "<%= ENV['PUSHER_APP_KEY'] %>";
-</script>
+<% end %>

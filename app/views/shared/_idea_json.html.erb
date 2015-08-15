@@ -1,0 +1,8 @@
+<%= javascript_tag data: {turbolinks_eval: "always"} do %>
+  var i = {
+    name: "<%= @idea.name %>",
+    slug: "<%= @idea.slug %>",
+    id: "<%= @idea.uuid %>"
+  };
+  window.ideaMeta = i;
+<% end %>

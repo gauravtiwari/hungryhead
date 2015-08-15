@@ -4,6 +4,7 @@
 //= require jquery
 //= require jquery-ujs
 //= require jquery.turbolinks
+//= require pusher
 //= require jquery-form
 //= require bootstrap
 //= require jquery.easing
@@ -51,10 +52,6 @@
 //= require flashes
 //= require react
 //= require react-infinite
-//= require pusher
-//= require pusher_turbolinks
-//= require pusher_init
-//= require collaboration_init
 
 
 // Custom Javascripts
@@ -70,6 +67,9 @@
 //= require utilities
 //= require welcome
 //= require globals
+//= require pusher_turbolinks
+//= require pusher_init
+//= require collaboration_init
 //= require components
 //= require_tree ./components
 //= require turbolinks

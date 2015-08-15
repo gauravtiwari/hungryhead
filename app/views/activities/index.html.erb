@@ -1,4 +1,4 @@
-<%= cache(["beta", "activities_home", current_user, @activities]) do %>
+<%= cache(["beta", "activities_home", current_user, @activities, User.latest_20.first[:updated_at], @user.ticker.revrange(0, 100).first[:updated_at], Idea.latest_20.first[:updated_at]]) do %>
   <div class="container p-b-60">
     <% unless browser.mobile? %>
       <div class="col-md-3 col-sm-3 visible-md visible-lg no-padding p-l-15 col-lg-3 col-xlg-3">
