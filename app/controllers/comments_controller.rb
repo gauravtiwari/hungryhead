@@ -3,10 +3,6 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable, only: [:create]
 
-  #Add pundit authorization to delete comment
-  after_action :verify_authorized, :only => [:destroy]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   def index
     @commentable = params[:commentable_type].constantize.find_by_uuid(params[:id])
     @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)

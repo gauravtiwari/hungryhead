@@ -14,14 +14,20 @@ module Merit
 
     def initialize
 
+      negative_score = -5
+
       #Users related scoring
       score 5, :on => 'users#update', category: 'autobiographer' do |user|
         user.about_me.present? && user.points(category: 'autobiographer') == 0
       end
 
       #Comments related
-      score 5, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
-        comment.commentable_user != comment.user
+      score 5, :on => 'comments#create', category: "#{commentable_type.downcase}_comment", to: :commentable do |comment|
+        idea.user.points(category: "#{commentable_type.downcase}_#{commentable_id}_comment") == 0 && comment.commentable_user != comment.user
+      end
+
+      score negative_score, :on => 'comments#destroy', category: "#{commentable_type.downcase}_comment", to: :commentable do |comment|
+        idea.user.points(category: "#{commentable_type.downcase}_#{commentable_id}_comment") >= 5 && comment.commentable_user != comment.user
       end
 
       #Feedbacks related
@@ -32,8 +38,7 @@ module Merit
         feedback.badged? && feedback.helpful?
       end
 
-      amount = -5
-      score amount, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      score negative_score, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.irrelevant?
       end
 
@@ -50,8 +55,16 @@ module Merit
         idea.user.points(category: 'idea_publish') == 0 && idea.published?
       end
 
+      score negative_score, :on => 'ideas#unpublish', to: :user, category: 'idea_publish' do |idea|
+        idea.draft?
+      end
+
       #Votes
       score 5, :on => 'votes#vote', to: [:votable, :votable_user], category: 'vote' do |vote|
+        vote.votable_type != "Investment" && vote.voter != vote.votable_user
+      end
+
+      score negative_score, :on => 'votes#unvote', to: [:votable, :votable_user], category: 'vote' do |vote|
         vote.votable_type != "Investment" && vote.voter != vote.votable_user
       end
 

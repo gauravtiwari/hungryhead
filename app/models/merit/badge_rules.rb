@@ -46,7 +46,7 @@ module Merit
         user.sign_in_count >= 100
       end
 
-      grant_on 'follows#create', badge: 'social', to: :follower do |follow|
+      grant_on 'follows#follow', badge: 'social', to: :follower, temporary: true do |follow|
         follow.follower.friends_count >= 200
       end
 
@@ -95,7 +95,7 @@ module Merit
         Idea.leaderboard.score(comment.commentable_id) >= 1000
       end
 
-      grant_on 'votes#create', badge: 'investable', to: :votable do |vote|
+      grant_on 'votes#vote', badge: 'investable', to: :votable, temporary: true  do |vote|
         vote.votable_type == "Idea" &&
         vote.votable.published? &&
         Idea.leaderboard.score(vote.votable_id) >= 1000
@@ -177,7 +177,7 @@ module Merit
       end
 
       #Check everytime vote is casted //hack
-      grant_on 'votes#vote', badge: 'market-fit', to: :votable do |vote|
+      grant_on 'votes#vote', badge: 'market-fit', to: :votable, temporary: true do |vote|
         vote.votable_type == "Idea" &&
         vote.votable.published? &&
         Idea.leaderboard.score(vote.votable_id) >= 2500
@@ -235,7 +235,7 @@ module Merit
         Feedback.leaderboard.score(comment.commentable_id) >= 25
       end
 
-      grant_on 'votes#create', badge: 'feedbacker', to: :votable_user do |vote|
+      grant_on 'votes#vote', badge: 'feedbacker', to: :votable_user, temporary: true do |vote|
         vote.votable_type == "Feedback" &&
         Feedback.leaderboard.score(vote.votable_id) >= 25
       end
@@ -258,7 +258,7 @@ module Merit
 
       # 5. Popular Feedback - Pundit
       #Based on comment //hack
-      grant_on 'votes#vote', badge: 'pundit', to: :votable_user do |vote|
+      grant_on 'votes#vote', badge: 'pundit', to: :votable_user, temporary: true do |vote|
         vote.votable_type == "Feedback" &&
         Feedback.leaderboard.score(vote.votable_id) >= 500
       end
@@ -294,7 +294,7 @@ module Merit
         comment.user.comments_counter.value >= 10
       end
 
-      grant_on 'votes#vote', badge: 'collaborative', to: :votable_user do |vote|
+      grant_on 'votes#vote', badge: 'collaborative', to: :votable_user, temporary: true do |vote|
         vote.votable_type == "Comment" &&
         vote.votable_user.comments_counter.value >= 50 &&
         vote.votable_user.comments_score >= 500

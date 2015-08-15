@@ -62,8 +62,7 @@
      </div>
    </div>
   <div class="card-vote-button text-center pull-reset p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
-    <% voted = idea.voted?(current_user) %>
-    <%= react_component('Upvote', {record: idea.uuid, voted: voted, vote_url: vote_path(votable_type: idea.class.to_s, votable_id: idea.uuid), votes_count: idea.votes_counter.value, voters_path: voters_path(votable_type: idea.class.to_s, votable_id: idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
+    <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
     <script type="text/javascript">
        ReactRailsUJS.mountComponents();
     </script>
