@@ -76,7 +76,7 @@
         <h1 class="m-t-5 m-b-20">
           To know more about our product
         </h1>
-        <%= meta_events_tracked_link_to('Click here', product_path, class: 'main-button m-t-10 fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Product Page' } }) %>
+        <%= link_to('Click here', product_path, class: 'main-button m-t-10 fs-13 bold') %>
       </div>
     </section>
   </div>

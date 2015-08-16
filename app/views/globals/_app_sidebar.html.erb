@@ -8,47 +8,47 @@
   <div class="sidebar-menu">
     <ul class="menu-items">
       <li class="m-b-10 m-t-30">
-        <%= meta_events_tracked_link_to(main_app.story_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Our Story Page' } }) do %>
+        <%= link_to(main_app.story_path, class: "detailed") do %>
           <span class="title">Story</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.why_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Why Page' } }) do %>
+        <%= link_to(main_app.why_path, class: "detailed") do %>
           <span class="title">Why</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.learn_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Learn Page' } }) do %>
+        <%= link_to(main_app.learn_path, class: "detailed") do %>
           <span class="title">What</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.product_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Product Page' } }) do %>
+        <%= link_to(main_app.product_path, class: "detailed") do %>
           <span class="title">The product</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.gamification_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Gamification Page' } }) do %>
+        <%= link_to(main_app.gamification_path, class: "detailed") do %>
           <span class="title">Gamification</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.collaboration_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Collaboration Page' } }) do %>
+        <%= link_to(main_app.collaboration_path, class: "detailed") do %>
           <span class="title">Collaboration</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.how_it_works_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'How it works Page' } }) do %>
+        <%= link_to(main_app.how_it_works_path, class: "detailed") do %>
           <span class="title">How it works</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(main_app.get_started_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Page' } }) do %>
+        <%= link_to(main_app.get_started_path, class: "detailed") do %>
            <span class="title">Get Started</span>
         <% end %>
       </li>
       <li class="m-b-10">
-        <%= meta_events_tracked_link_to(help.root_path, class: "detailed", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Help Page' } }) do %>
+        <%= link_to(help.root_path, class: "detailed") do %>
            <span class="title">Questions?</span>
         <% end %>
       </li>
