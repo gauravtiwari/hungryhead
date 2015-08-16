@@ -10,9 +10,9 @@
       <% end %>
     </div>
     <strong class="inline text-black">
-      <%= activity.user ==current_user ? 'You' : activity.user.name %>
+      <%= activity.user.name %>
     </strong>
   <% end %>
   commented on
-  <%= activity.recipient_type == 'Idea' ?  activity.recipient.name : activity.recipient_type.downcase %>
+  <%= activity.recipient_type == 'Idea' ?  activity.recipient.name : 'a' + activity.recipient_type.downcase %>
 </span>

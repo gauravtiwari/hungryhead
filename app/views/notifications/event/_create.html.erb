@@ -10,7 +10,7 @@
 </div>
 <p class="overflow-hidden fs-13 no-margin">
   <strong class="inline text-black">
-    <%= activity.user ==current_user ? 'You' : activity.user.name %>
+    <%= activity.user.name %>
   </strong>
   published an event - <%= activity.trackable.title %>
 </p>

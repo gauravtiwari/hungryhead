@@ -8,7 +8,7 @@
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.user ==current_user ? 'you' : activity.user.name %>
+  <%= activity.user.name %>
 </strong>
 left a feedback for
 <%= activity.recipient.founder?(current_user) ? "your idea #{activity.recipient.name}" : activity.recipient.name %>

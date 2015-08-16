@@ -8,7 +8,7 @@
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.user ==current_user ? 'You' : activity.user.name %>
+  <%= activity.user.name %>
 </strong>
 invested <%= activity.trackable.amount %> into
 <%= activity.recipient.founder?(current_user) ? "your idea #{activity.recipient.name}" : activity.recipient.name %>
