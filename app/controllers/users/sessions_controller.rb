@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
 
+	after_action :track_visitor_events, only: :new
 	respond_to :json
 
 	layout 'join'

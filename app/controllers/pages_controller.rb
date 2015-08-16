@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   layout "home"
   before_action :set_cache, except: [:home, :get_started]
-  after_action :track_events
+  after_action :track_visitor_events
 
   #Index page to handle home and after login route
   def home
@@ -81,12 +81,6 @@ class PagesController < ApplicationController
   end
 
   private
-
-  def track_events
-    if Rails.env.production?
-      meta_events_tracker.event!(:visitor, :page_viewed, { :ip => request.ip, :title => params[:action].tr!('_', ' ').capitalize })
-    end
-  end
 
   def set_cache
     fresh_when(:etag => cache_key, :last_modified => last_modified_date, :public => true)

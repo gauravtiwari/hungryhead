@@ -1,12 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
-  respond_to :json
+  after_action :track_visitor_events, only: :new
 
+  respond_to :json
   layout 'join'
 
   def new
-      build_resource({})
-      respond_with self.resource
+    build_resource({})
+    respond_with self.resource
   end
 
   def create
