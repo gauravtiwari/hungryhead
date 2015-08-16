@@ -59,7 +59,6 @@
 //= require avatar
 //= require event
 //= require flashes
-//= require meta_events
 //= require typer
 //= require profiles
 //= require school
