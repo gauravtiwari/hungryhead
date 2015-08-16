@@ -51,16 +51,18 @@ class FeedbacksController < ApplicationController
   def rate
     @feedback.badged! if !@feedback.badged?
     @feedback.badge = params[:badge]
-    @feedback.save
-    render json: {
-      rate: {
-        record: @feedback.id,
-        rated: @feedback.badged?,
-        user_name: @idea.user.name,
-        badge_name: @feedback.badge,
-        rate_url: rate_idea_feedback_path(@feedback.idea.slug, @feedback.id)
+    if @feedback.save
+      render json: {
+        rate: {
+          record: @feedback.id,
+          rated: @feedback.badged?,
+          user_name: @idea.user.name,
+          badge_name: @feedback.badge,
+          rate_url: rate_idea_feedback_path(@feedback.idea.slug, @feedback.id)
+        }
       }
-    }
+      RateFeedbackNotificationService.new(current_user, @feedback).create
+    end
   end
 
   # DELETE /feedbacks/1
