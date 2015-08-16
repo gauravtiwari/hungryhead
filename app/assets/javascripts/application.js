@@ -33,7 +33,6 @@
 //= require slimScroll
 //= require jquery.atwho
 //= require typer
-//= require meta_events
 //= require sweetalert
 //= require bootstrap-tagsinput
 //= require moment

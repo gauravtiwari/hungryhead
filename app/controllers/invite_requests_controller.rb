@@ -10,9 +10,8 @@ class InviteRequestsController < ApplicationController
     @invite_request.request = request
     respond_to do |format|
       if @invite_request.save
-        if Rails.env.production?
-          meta_events_tracker.event!(:user, :new_invite_request, { :name => @invite_request.name, user_type: @invite_request.user_type, :email => @invite_request.email, :id => @invite_request.id })
-        end
+        #Track event into MixPanel
+        meta_events_tracker.event!(:user, :new_invite_request, { :name => @invite_request.name, user_type: @invite_request.user_type, :email => @invite_request.email, :id => @invite_request.id })
         format.js {render :show}
       else
        format.js {render :new}
