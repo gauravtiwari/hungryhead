@@ -8,6 +8,6 @@
   <% end %>
 </div>
 <strong class="inline text-black">
-  <%= activity.user ==current_user ? 'You' : activity.user.name %>
+  <%= activity.user == current_user ? 'You' : activity.user.name %>
 </strong>
-found <%= activity.trackable.user == current_user ? 'your' : activity.trackable.user.name %> feedback <%= activity.trackable.badge %>
+found <%= activity.trackable.user == current_user ? 'your' : activity.trackable.user.first_name %> feedback <%= activity.trackable.badge %>

@@ -14,7 +14,7 @@
   			<span><%= truncate(@user.mini_bio, length: 100) %></span>
   			<% if @user != current_user %>
   				<div class="card-follow-button" id="follow-button">
-  					<%= react_component('Follow',{:followed => followed?(@user)}) %>
+  				<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
   				<script type="text/javascript">
   				   ReactRailsUJS.mountComponents();
   				</script>

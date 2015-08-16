@@ -13,7 +13,7 @@
 
 	<div class="pull-right profile-action-buttons p-t-10 p-b-10">
 		<% if @user != current_user %>
-		<%= react_component('Follow',{:followed => followed?(@user), path: followers_follows_path(followable_type: object.class.name, followable_id: object.slug)}, {:id => "follow-component"}) %>
+		<%= react_component('Follow',{:followed => followed?(@user)}, {:id => "follow-component"}) %>
 		<% if current_user.is_friend?(@user) %>
 			<%= content_tag(:div) do %>
 				<%= mail_to(@user.email, subject: "hungryhead: #{current_user.name}", class: 'main-button bold m-r-10 pull-right', id: 'send-message-button') do %>

@@ -271,8 +271,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-09 17:51:20.565559'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-09 17:51:20.565587'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-16 00:56:17.873463'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-16 00:56:17.873495'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -473,42 +473,6 @@ ALTER SEQUENCE hobbies_id_seq OWNED BY hobbies.id;
 
 
 --
--- Name: idea_components; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE idea_components (
-    id integer NOT NULL,
-    title character varying,
-    help_text character varying,
-    body text,
-    idea_id integer,
-    privacy integer,
-    "position" integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: idea_components_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE idea_components_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: idea_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE idea_components_id_seq OWNED BY idea_components.id;
-
-
---
 -- Name: idea_messages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -555,6 +519,11 @@ CREATE TABLE ideas (
     high_concept_pitch character varying DEFAULT ''::character varying NOT NULL,
     elevator_pitch text DEFAULT ''::text NOT NULL,
     description text DEFAULT ''::text,
+    market text DEFAULT ''::text,
+    problems text DEFAULT ''::text,
+    solutions text DEFAULT ''::text,
+    value_propositions text DEFAULT ''::text,
+    business_model text DEFAULT ''::text,
     logo character varying,
     cover character varying,
     team_ids character varying[] DEFAULT '{}'::character varying[],
@@ -575,12 +544,7 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0,
-    market text DEFAULT ''::text,
-    problems text DEFAULT ''::text,
-    solutions text DEFAULT ''::text,
-    value_propositions text DEFAULT ''::text,
-    business_model text DEFAULT ''::text
+    level integer DEFAULT 0
 );
 
 
@@ -1607,13 +1571,6 @@ ALTER TABLE ONLY hobbies ALTER COLUMN id SET DEFAULT nextval('hobbies_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY idea_components ALTER COLUMN id SET DEFAULT nextval('idea_components_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY idea_messages ALTER COLUMN id SET DEFAULT nextval('idea_messages_id_seq'::regclass);
 
 
@@ -1885,14 +1842,6 @@ ALTER TABLE ONLY help_categories
 
 ALTER TABLE ONLY hobbies
     ADD CONSTRAINT hobbies_pkey PRIMARY KEY (id);
-
-
---
--- Name: idea_components_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY idea_components
-    ADD CONSTRAINT idea_components_pkey PRIMARY KEY (id);
 
 
 --
@@ -2396,34 +2345,6 @@ CREATE UNIQUE INDEX index_help_categories_on_slug ON help_categories USING btree
 --
 
 CREATE UNIQUE INDEX index_hobbies_on_slug ON hobbies USING btree (slug);
-
-
---
--- Name: index_idea_components_on_idea_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_components_on_idea_id ON idea_components USING btree (idea_id);
-
-
---
--- Name: index_idea_components_on_idea_id_and_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_components_on_idea_id_and_privacy ON idea_components USING btree (idea_id, privacy);
-
-
---
--- Name: index_idea_components_on_position; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_components_on_position ON idea_components USING btree ("position");
-
-
---
--- Name: index_idea_components_on_privacy; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_idea_components_on_privacy ON idea_components USING btree (privacy);
 
 
 --
@@ -3166,8 +3087,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140805184420');
 
 INSERT INTO schema_migrations (version) VALUES ('20140812190804');
 
-INSERT INTO schema_migrations (version) VALUES ('20140812190810');
-
 INSERT INTO schema_migrations (version) VALUES ('20140814084456');
 
 INSERT INTO schema_migrations (version) VALUES ('20140817173659');
@@ -3261,6 +3180,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
-
-INSERT INTO schema_migrations (version) VALUES ('20150811231415');
 

@@ -12,6 +12,7 @@ class RateFeedbackNotificationService
         verb: 'rated',
         recipient: @feedback,
         key: 'feedback.rate',
+        is_notification: true,
         unread: true
       )
 

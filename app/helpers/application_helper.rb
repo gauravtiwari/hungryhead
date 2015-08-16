@@ -39,7 +39,7 @@ module ApplicationHelper
       voted =  {
         vote: true,
         votes_count: object.votes_counter.value,
-        voters_path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
+        path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
         votable_type: object.class.name,
         votable_id: object.uuid
       }
@@ -47,7 +47,7 @@ module ApplicationHelper
       voted = {
         vote: false,
         votes_count: object.votes_counter.value,
-        voters_path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
+        path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
         votable_type: object.class.name,
         votable_id: object.uuid
       }

@@ -15,8 +15,7 @@
   			<span><%= truncate(@idea.high_concept_pitch, length: 100) %></span>
         <% if !@idea.in_team?(current_user) %>
           <div class="card-follow-button">
-            <% voted = @idea.voted?(current_user) %>
-            <%= react_component('Upvote', {record: @idea.uuid, voted: voted, vote_url: vote_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), votes_count: @idea.votes_counter.value, voters_path: voters_path(votable_type: @idea.class.to_s, votable_id: @idea.uuid), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
+            <%= react_component('Upvote', {voted: voted?(@idea), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
           </div>
           <script type="text/javascript">
              ReactRailsUJS.mountComponents();
