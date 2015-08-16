@@ -22,7 +22,7 @@
 //= require jquery.actual
 //= require jquery.scrollbar
 //= require hammerjs
-//= require infinity
+//= require infinity_scroll
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require jquery.soulmate
