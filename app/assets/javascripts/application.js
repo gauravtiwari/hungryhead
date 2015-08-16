@@ -22,6 +22,7 @@
 //= require jquery.actual
 //= require jquery.scrollbar
 //= require hammerjs
+//= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require jquery.soulmate
@@ -40,6 +41,7 @@
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
+//= require meta_events
 //= require sly
 //= require jquery.validate
 //= require jquery.validate/additional-methods
@@ -47,8 +49,6 @@
 //= require marked
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
-//= require infinity_scroll
-//= require meta_events
 //= require pnotify
 //= require flashes
 //= require react
