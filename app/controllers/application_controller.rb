@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def track_visitor_events
-    meta_events_tracker.event!(:visitor, :page_viewed, { :ip => request.ip, :title => params[:action].humanize.capitalize, request_url: request.original_url, referrer_url: request.referer })
+    meta_events_tracker.event!(:visitor, :page_viewed, { :ip => request.ip, browser: browser.name, :title => params[:action].humanize.capitalize, url: request.original_url, referrer_url: request.referer })
   end
 
   def meta_events_tracker
