@@ -25,11 +25,11 @@ Rails.application.configure do
     remove_input_attributes: true,
     remove_intertag_spaces: false,
     remove_javascript_protocol: true,
-    remove_link_attributes: true,
+    remove_link_attributes: false,
     remove_multi_spaces: true,
     remove_quotes: true,
-    remove_script_attributes: true,
-    remove_style_attributes: true,
+    remove_script_attributes: false,
+    remove_style_attributes: false,
     simple_boolean_attributes: true,
     simple_doctype: false
 end
