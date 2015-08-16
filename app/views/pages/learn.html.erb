@@ -80,10 +80,10 @@
           <div>
             <h3 class="m-t-30 semi-bold">Exclusive global community</h3>
             <p class="fs-16 text-master">
-              Available for students studying in schools, colleges and universities. If you are a student you can get started by <%= meta_events_tracked_link_to('Creating an account', new_user_registration_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Join Page' } }) %>.
+              Available for students studying in schools, colleges and universities. If you are a student you can get started by <%= link_to('Creating an account', new_user_registration_path) %>.
             </p>
             <p class="fs-16 text-master">
-              If you are an alumni or interested in mentoring, you can join hungryhead by requesting an <%= meta_events_tracked_link_to("Invite", get_started_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Page' } }) %>.
+              If you are an alumni or interested in mentoring, you can join hungryhead by requesting an <%= link_to("Invite", get_started_path) %>.
             </p>
           </div>
           <div>
@@ -98,7 +98,7 @@
               We took the real-world startup concepts and integrated it into our Gamification engine. Earn points, invest in useful ideas using virtual app coins, make a return on your investments and receive badges.
             </p>
             <p class="fs-16 text-master">
-              <%= meta_events_tracked_link_to('Click', gamification_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Gamification Page' } }) %> to learn how gamification works on hungryhead.
+              <%= link_to('Click', gamification_path) %> to learn how gamification works on hungryhead.
             </p>
           </div>
           <div>
@@ -107,7 +107,7 @@
               Our integrated dashboard lets academic institutions connect, manage and support entrepreneurial students seamlessly and efficiently.
             </p>
             <p class="fs-16 text-master">
-              <%= meta_events_tracked_link_to('Click', for_institutions_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'For Institutions Page' } }) %> to learn more.
+              <%= link_to('Click', for_institutions_path) %> to learn more.
             </p>
           </div>
           <div class="divider b-b b-green b-small m-t-20"></div>
@@ -119,7 +119,7 @@
         <h1 class="m-t-5 m-b-20">
           Take a product tour
         </h1>
-        <%= meta_events_tracked_link_to('Click here', product_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Product Page' } }) %>
+        <%= link_to('Click here', product_path, class: 'main-button fs-13 bold') %>
       </div>
     </section>
   </div>
