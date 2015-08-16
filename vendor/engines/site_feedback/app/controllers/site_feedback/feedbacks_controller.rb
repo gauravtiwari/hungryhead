@@ -21,7 +21,6 @@ module SiteFeedback
     # POST /feedbacks
     def create
       @feedback = SiteFeedback::Feedback.new(feedback_params)
-      @feedback.request = request
       @feedback.user = current_user if current_user
       respond_to do |format|
         if @feedback.save
