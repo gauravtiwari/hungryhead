@@ -22,7 +22,6 @@
 //= require jquery.actual
 //= require jquery.scrollbar
 //= require hammerjs
-//= require infinity_scroll
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require jquery.soulmate
@@ -48,6 +47,7 @@
 //= require marked
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
+//= require infinity_scroll
 //= require pnotify
 //= require flashes
 //= require react
@@ -71,3 +71,5 @@
 //= require_tree ./components
 //= require turbolinks
 //= require react_ujs
+
+Turbolinks.pagesCached(30);
