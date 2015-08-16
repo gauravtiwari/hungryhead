@@ -41,7 +41,6 @@
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
-//= require meta_events
 //= require sly
 //= require jquery.validate
 //= require jquery.validate/additional-methods
