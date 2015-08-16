@@ -220,9 +220,9 @@ class Idea < ActiveRecord::Base
   def decrement_counters
     #Decrement counters for user and school
     school.ideas_counter.reset
-    school.ideas_counter.(Idea.from_school(school_id).size)
+    school.ideas_counter.incr(Idea.from_school(school_id).size)
     user.ideas_counter.reset
-    user.ideas_counter.(user.ideas.size)
+    user.ideas_counter.incr(user.ideas.size)
 
     #Remove self from sorted set
     Idea.latest.delete(id)
