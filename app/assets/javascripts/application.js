@@ -7,6 +7,7 @@
 //= require pusher
 //= require jquery-form
 //= require bootstrap
+//= require infinity
 //= require jquery.easing
 //= require modernizr
 //= require jquery-ui/core
@@ -22,7 +23,6 @@
 //= require jquery.actual
 //= require jquery.scrollbar
 //= require hammerjs
-//= require infinity
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require jquery.soulmate
