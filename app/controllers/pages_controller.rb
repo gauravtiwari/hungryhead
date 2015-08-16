@@ -87,11 +87,11 @@ class PagesController < ApplicationController
 
   def cache_key
     logged_in = user_signed_in? ? 'logged_in' + current_user.updated_at.try(:to_s, :number) : 'guest_user'
-    browser.to_s + logged_in
+    browser.to_s + logged_in + last_modified_date.try(:to_s, :number)
   end
 
   def last_modified_date
-    return "Sun, 15 Aug 2015 10:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
+    return "Sun, 16 Aug 2015 10:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
   end
 
 end
