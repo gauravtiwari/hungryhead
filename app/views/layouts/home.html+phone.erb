@@ -63,15 +63,16 @@
       </div>
     </div>
 
-    <%= javascript_tag type: 'text/javascript' do %>
-     $(document).ready(function() {
-       <% if Rails.env.production? %>
-         MetaEvents.forAllTrackableElements(document, function(id, element, eventName, properties) {
-           mixpanel.track_links("#" + id, eventName, properties);
-         });
-       <% end %>
-     });
-   <% end %>
+    <script type='text/javascript'>
+      <% if Rails.env.production? %>
+        $(document).ready(function() {
+          MetaEvents.forAllTrackableElements(document, function(id, element, eventName, properties) {
+            mixpanel.track_links("#" + id, eventName, properties);
+          });
+        });
+      <% end %>
+    </script>
+
   </body>
 
 </html>
