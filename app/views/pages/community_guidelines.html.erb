@@ -79,7 +79,7 @@
       <h1 class="m-t-5 m-b-20">
         To get started
       </h1>
-      <%= link_to('Click here', get_started_path, class: 'main-button m-t-10 fs-13 bold') %>
+      <%= meta_events_tracked_link_to('Click here', get_started_path, class: 'main-button m-t-10 fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Page' } }) %>
     </div>
   </section>
 </div>

@@ -38,28 +38,28 @@
       <% else %>
         <div class="header-inner">
           <div class="brand inline">
-          <%= link_to(main_app.root_path) do %>
+          <%= meta_events_tracked_link_to(main_app.root_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Home Page' } }) do %>
             <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
           <% end %>
           </div>
          <ul class="pages-links fs-14 inline no-margin no-style m-l-20 p-l-30 p-r-20">
           <li class="p-r-15 fs-14 inline font-heading">
-            <%= link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}") do %>
+            <%= meta_events_tracked_link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Why page' } }) do %>
               <span >Why</span>
             <% end %>
           </li>
            <li class="p-r-15 fs-14 inline font-heading">
-             <%= link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}") do %>
+             <%= meta_events_tracked_link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Learn page' } }) do %>
                <span>What</span>
              <% end %>
           </li>
           <li class="p-r-15 fs-14 inline font-heading">
-            <%= link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}") do %>
+            <%= meta_events_tracked_link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Product page' } }) do %>
               <span >The Product</span>
             <% end %>
           </li>
           <li class="p-r-15 fs-14 inline font-heading">
-            <%= link_to(main_app.how_it_works_path, class: "#{current_class?(main_app.how_it_works_path)}") do %>
+            <%= meta_events_tracked_link_to(main_app.how_it_works_path, class: "#{current_class?(main_app.how_it_works_path)}", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'How it works page' } }) do %>
               <span >How it works </span>
             <% end %>
           </li>
@@ -144,10 +144,10 @@
       <div class="pull-right">
         <div class="visible-lg visible-md visible-sm m-t-10">
           <div class="pull-left p-t-10  p-r-20 font-heading">
-            <%= link_to('Questions?', main_app.help_path, title: "Get Help", class: 'text-master #{current_class?(help_path)}') %>
+            <%= meta_events_tracked_link_to('Questions?', main_app.help_path, title: "Get Help", class: 'text-master #{current_class?(main_app.help_path)}', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Help page' } }) %>
           </div>
           <div class="pull-left p-t-5 font-heading">
-            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-brand text-white inline', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Beta register page' } }) %>
+            <%= meta_events_tracked_link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-brand text-white inline', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Beta register page' } }) %>
           </div>
         </div>
       </div>

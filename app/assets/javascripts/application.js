@@ -48,6 +48,7 @@
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
 //= require infinity_scroll
+//= require meta_events
 //= require pnotify
 //= require flashes
 //= require react

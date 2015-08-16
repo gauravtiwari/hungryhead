@@ -5,24 +5,24 @@
       <article class="section-list inline">
         <ul>
           <li>
-            <%= link_to(story_path, class: "#{current_class?(story_path)} bold") do %>
+            <%= meta_events_tracked_link_to(story_path, class: "#{current_class?(story_path)} bold", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Our Story' } }) do %>
               <span>Our story</span>
             <% end %>
           </li>
           <li>
-            <%= link_to('Connect with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold") %>
+            <%= meta_events_tracked_link_to('Connect with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)} bold", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Connect with us' } }) %>
           </li>
           <li>
-            <%= link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold") %>
+            <%= meta_events_tracked_link_to('Our rules', rules_path, class: "#{current_class?(rules_path)} bold", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Our Rules' } }) %>
           </li>
           <li>
-            <%= link_to('Terms', terms_path, class: "#{current_class?(terms_path)} bold", remote: false) %>
+            <%= meta_events_tracked_link_to('Terms', terms_path, class: "#{current_class?(terms_path)} bold", remote: false, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Terms' } }) %>
           </li>
           <li>
-            <%= link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold") %>
+            <%= meta_events_tracked_link_to('Cookies Policy', cookies_path, class: "#{current_class?(cookies_path)} bold", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Cookies' } }) %>
           </li>
           <li>
-            <%= link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)} bold") %>
+            <%= meta_events_tracked_link_to('Privacy Policy', privacy_path, class: "#{current_class?(privacy_path)} bold", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Privacy' } }) %>
           </li>
         </ul>
       </article>

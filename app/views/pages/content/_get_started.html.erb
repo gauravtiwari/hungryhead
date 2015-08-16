@@ -1,13 +1,13 @@
 <div class="panel panel-transparent">
   <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple nav-tabs-left p-t-20">
     <li class="active">
-      <a data-toggle="tab" href="#forStudents" class="text-white">For Students</a>
+      <%= meta_events_tracked_link_to('For Students', '#forStudents', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For students' } }, data: {toggle: "tab"}) %>
     </li>
     <li>
-      <a data-toggle="tab" href="#forMentors" class="text-white">For Alumni and Mentors</a>
+      <%= meta_events_tracked_link_to('For Alumni and Mentors', '#forMentors', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Alumni' } }, data: {toggle: "tab"}) %>
     </li>
     <li>
-      <a data-toggle="tab" href="#forSchools" class="text-white">For Institutions</a>
+      <%= meta_events_tracked_link_to('For Institutions', '#forSchools', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For Institutions' } }, data: {toggle: "tab"}) %>
     </li>
   </ul>
 

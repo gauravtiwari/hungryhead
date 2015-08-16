@@ -1,14 +1,14 @@
 <div class="panel panel-transparent">
   <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple p-t-20">
-    <li class="active">
-      <a data-toggle="tab" href="#forStudents" class="text-white no-padding p-r-15 p-t-15 p-b-15">Students</a>
-    </li>
-    <li>
-      <a data-toggle="tab" href="#forMentors" class="text-white no-padding p-r-15 p-t-15 p-b-15">Alumni</a>
-    </li>
-    <li>
-      <a data-toggle="tab" href="#forSchools" class="text-white no-padding p-r-15 p-t-15 p-b-15">Institutions</a>
-    </li>
+     <li class="active">
+       <%= meta_events_tracked_link_to('Students', '#forStudents', class: 'btn btn-brand text-white fs-13 m-t-10 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For students' } }, data: {toggle: "tab"}) %>
+     </li>
+     <li>
+       <%= meta_events_tracked_link_to('Mentors', '#forMentors', class: 'btn btn-brand text-white fs-13 m-t-10 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Alumni' } }, data: {toggle: "tab"}) %>
+     </li>
+     <li>
+       <%= meta_events_tracked_link_to('Institutions', '#forSchools', class: 'btn btn-brand text-white fs-13 m-t-10 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For Institutions' } }, data: {toggle: "tab"}) %>
+     </li>
   </ul>
 
   <div class="tab-content sm-no-padding sm-p-t-20">

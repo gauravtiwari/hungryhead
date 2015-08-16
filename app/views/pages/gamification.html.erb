@@ -145,7 +145,7 @@
         <h1 class="m-t-5 m-b-20">
           Learn about collaboration on hungryhead
         </h1>
-        <%= link_to('Click here', collaboration_path, class: 'main-button fs-13 bold') %>
+        <%= meta_events_tracked_link_to('Click here', collaboration_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Collaboration Page' } }) %>
       </div>
     </section>
 
