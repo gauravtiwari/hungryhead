@@ -85,15 +85,15 @@
       </div>
     </div>
 
-    <script type='text/javascript'>
-      <% if Rails.env.production? %>
-        $(document).ready(function() {
-          MetaEvents.forAllTrackableElements(document, function(id, element, eventName, properties) {
-            mixpanel.track_links("#" + id, eventName, properties);
-          });
-        });
-      <% end %>
-    </script>
+    <% if Rails.env.production? %>
+     <script type='text/javascript'>
+       $(document).ready(function() {
+         MetaEvents.forAllTrackableElements(document, function(id, element, eventName, properties) {
+           mixpanel.track_links("#" + id, eventName, properties);
+         });
+       });
+     </script>
+    <% end %>
 
   </body>
 </html>
