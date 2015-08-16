@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   layout "home"
-  before_action :set_cache, except: [:home, :get_started]
+  before_action :set_cache
   after_action :track_visitor_events
 
   #Index page to handle home and after login route
@@ -92,7 +92,7 @@ class PagesController < ApplicationController
   end
 
   def last_modified_date
-    return "Sun, 16 Aug 2015 16:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
+    return "Sun, 16 Aug 2015 17:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
   end
 
 end
