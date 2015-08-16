@@ -22,12 +22,12 @@ module Merit
       end
 
       #Comments related
-      score 5, :on => 'comments#create', category: "#{commentable_type.downcase}_comment", to: :commentable do |comment|
-        idea.user.points(category: "#{commentable_type.downcase}_#{commentable_id}_comment") == 0 && comment.commentable_user != comment.user
+      score 5, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
+        comment.commentable_user != comment.user
       end
 
-      score negative_score, :on => 'comments#destroy', category: "#{commentable_type.downcase}_comment", to: :commentable do |comment|
-        idea.user.points(category: "#{commentable_type.downcase}_#{commentable_id}_comment") >= 5 && comment.commentable_user != comment.user
+      score negative_score, :on => 'comments#destroy', category: 'comment', to: :commentable do |comment|
+        comment.commentable_user != comment.user
       end
 
       #Feedbacks related
