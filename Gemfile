@@ -79,9 +79,6 @@ gem 'render_anywhere', :require => false
 #Fetch records in order
 gem 'order_as_specified'
 
-#Mail form
-gem 'mail_form'
-
 #404 page customize
 gem 'gaffe'
 
