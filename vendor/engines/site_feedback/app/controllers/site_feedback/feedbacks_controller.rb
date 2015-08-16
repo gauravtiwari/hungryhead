@@ -25,6 +25,8 @@ module SiteFeedback
       @feedback.user = current_user if current_user
       respond_to do |format|
         if @feedback.save
+          #Track event in mixpanel
+          meta_events_tracker.event!(:user, :new_contact_request, { :name => @feedback.name, :email => @feedback.email, :id => @feedback.id })
           format.html { redirect_to @feedback, notice: 'Thank you so much for your time. We have recieved your feedback.'}
           format.js {render :show, notice: 'Thank you so much for your time. We have recieved your feedback.'}
         else
