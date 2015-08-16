@@ -98,7 +98,7 @@
               We took the real-world startup concepts and integrated it into our Gamification engine. Earn points, invest in useful ideas using virtual app coins, make a return on your investments and receive badges.
             </p>
             <p class="fs-16 text-master">
-              <%= link_to('Click', gamification_path) %> to learn how gamification works on hungryhead.
+              <%= meta_events_tracked_link_to('Click', gamification_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Gamification Page' } }) %> to learn how gamification works on hungryhead.
             </p>
           </div>
           <div>
@@ -107,7 +107,7 @@
               Our integrated dashboard lets academic institutions connect, manage and support entrepreneurial students seamlessly and efficiently.
             </p>
             <p class="fs-16 text-master">
-              <%= link_to('Click', for_institutions_path) %> to learn more.
+              <%= meta_events_tracked_link_to('Click', for_institutions_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'For Institutions Page' } }) %> to learn more.
             </p>
           </div>
           <div class="divider b-b b-green b-small m-t-20"></div>
