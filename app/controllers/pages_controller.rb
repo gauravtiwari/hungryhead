@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 
   layout "home"
   before_action :set_cache, except: [:home, :get_started]
+  after_action :track_events
 
   #Index page to handle home and after login route
   def home
@@ -81,6 +82,12 @@ class PagesController < ApplicationController
 
   private
 
+  def track_events
+    if Rails.env.production?
+      meta_events_tracker.event!(:visitor, :page_viewed, { :ip => request.ip, :title => params[:action].tr!('_', ' ').capitalize })
+    end
+  end
+
   def set_cache
     fresh_when(:etag => cache_key, :last_modified => last_modified_date, :public => true)
   end
@@ -91,7 +98,7 @@ class PagesController < ApplicationController
   end
 
   def last_modified_date
-    return "Sun, 16 Aug 2015 10:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
+    return "Sun, 16 Aug 2015 16:30 GMT".to_datetime unless user_signed_in? && current_user.updated_at.try(:to_s, :number)
   end
 
 end
