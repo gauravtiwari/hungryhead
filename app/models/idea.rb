@@ -219,8 +219,8 @@ class Idea < ActiveRecord::Base
 
   def decrement_counters
     #Decrement counters for user and school
-    school.ideas_counter.reset
-    school.ideas_counter.incr(Idea.from_school(school_id).size)
+    school.ideas_counter.reset if self.school_id.present?
+    school.ideas_counter.incr(Idea.from_school(school_id).size) if self.school_id.present?
     user.ideas_counter.reset
     user.ideas_counter.incr(user.ideas.size)
 
