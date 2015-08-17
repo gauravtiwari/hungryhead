@@ -53,33 +53,33 @@ Rails.application.routes.draw do
     post  '/join' => 'users/registrations#create', as: 'user_registration'
 
     # joining
-    # get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
+    get   '/invite_friends' => 'users/invitations#new',    as: 'friends_invite'
 
-    # # # session handling
-    # get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
-    # post    '/login'  => 'users/sessions#create',  as: 'user_session'
-    # get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
+    # # session handling
+    get     '/login'  => 'users/sessions#new',     as: 'new_user_session'
+    post    '/login'  => 'users/sessions#create',  as: 'user_session'
+    get  '/logout' => 'users/sessions#destroy', as: 'destroy_user_session'
 
-    # # settings & cancellation
-    # get '/cancel/:id'   => 'users/registrations#cancel', as: 'cancel_user_registration'
-    # get '/settings/:id' => 'users/registrations#edit',   as: 'edit_user_registration'
-    # patch '/settings/:id' => 'users/registrations#update', as: 'update_user_registeration'
+    # settings & cancellation
+    get '/cancel/:id'   => 'users/registrations#cancel', as: 'cancel_user_registration'
+    get '/settings/:id' => 'users/registrations#edit',   as: 'edit_user_registration'
+    patch '/settings/:id' => 'users/registrations#update', as: 'update_user_registeration'
 
-    # scope '/account' do
-    #   # password reset
-    #   get   '/reset-password'        => 'users/passwords#new',    as: 'new_user_password'
-    #   put   '/reset-password'        => 'users/passwords#update', as: 'user_password'
-    #   post  '/reset-password'        => 'users/passwords#create'
-    #   get   '/reset-password/change' => 'users/passwords#edit',   as: 'edit_user_password'
+    scope '/account' do
+      # password reset
+      get   '/reset-password'        => 'users/passwords#new',    as: 'new_user_password'
+      put   '/reset-password'        => 'users/passwords#update', as: 'user_password'
+      post  '/reset-password'        => 'users/passwords#create'
+      get   '/reset-password/change' => 'users/passwords#edit',   as: 'edit_user_password'
 
-    #   # confirmation
-    #   get   '/confirm'        => 'users/confirmations#show',   as: 'user_confirmation'
-    #   post  '/confirm'        => 'users/confirmations#create'
-    #   get   '/confirm/resend' => 'users/confirmations#new',    as: 'new_user_confirmation'
+      # confirmation
+      get   '/confirm'        => 'users/confirmations#show',   as: 'user_confirmation'
+      post  '/confirm'        => 'users/confirmations#create'
+      get   '/confirm/resend' => 'users/confirmations#new',    as: 'new_user_confirmation'
 
-    #   # account deletion
-    #   delete '' => 'users/registrations#destroy', as: :user_destroy
-    # end
+      # account deletion
+      delete '' => 'users/registrations#destroy', as: :user_destroy
+    end
   end
 
   #Check if email and username exists

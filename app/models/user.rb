@@ -130,7 +130,14 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
   validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /\A[a-zA-Z0-9](\w|\.)*[a-zA-Z0-9]$\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
-
+  validates :avatar,
+  :file_size => {
+    :maximum => 1.megabytes.to_i
+  }
+  validates :cover,
+  :file_size => {
+    :maximum => 1.megabytes.to_i
+  }
   #Get username suggestions
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname

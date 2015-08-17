@@ -124,7 +124,7 @@ class UsersController < ApplicationController
           format.json { render :show, status: :ok }
         end
       else
-        format.html { render :edit }
+        format.html { render :update }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

@@ -134,6 +134,9 @@ GEM
       mimetype-fu
     celluloid (0.16.1)
       timers (~> 4.0.0)
+    centrifuge (0.1.0)
+      httpclient
+      multi_json
     code_analyzer (0.4.5)
       sexp_processor
     coderay (1.1.0)
@@ -348,6 +351,10 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-atwho-rails (1.3.2)
+    jquery-fileupload-rails (0.4.5)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      sass (>= 3.2)
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
@@ -683,6 +690,7 @@ DEPENDENCIES
   byebug
   carrierwave
   carrierwave-mimetype-fu
+  centrifuge
   coffee-rails
   connection_pool
   crono
@@ -710,6 +718,7 @@ DEPENDENCIES
   htmlcompressor
   jbuilder
   jquery-atwho-rails
+  jquery-fileupload-rails
   jquery-turbolinks
   jquery-ui-rails
   js-routes

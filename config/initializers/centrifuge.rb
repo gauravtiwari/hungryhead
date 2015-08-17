@@ -1,0 +1,1 @@
+$client = Centrifuge::Client.new(scheme: :http, host: :localhost, port: 8000, project_key: 'hungryhead', secret: 'b90f9cd7-c3b6-4404-7703-4c933183fb92')

@@ -222,6 +222,9 @@ gem 'hiredis'
 gem 'pusher'
 gem 'em-http-request' # Required by trigger_async
 
+#Centrifuge server
+gem 'centrifuge'
+
 #Pagination
 gem 'will_paginate'
 
@@ -236,6 +239,9 @@ gem 'meta_events'
 
 #Security for app
 gem 'rack-attack'
+
+#JQUERY file upload
+gem "jquery-fileupload-rails"
 
 #Turbolinks
 gem 'jquery-turbolinks'

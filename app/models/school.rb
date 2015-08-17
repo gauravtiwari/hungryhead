@@ -36,8 +36,15 @@ class School < ActiveRecord::Base
 	mount_uploader :logo, LogoUploader
 	mount_uploader :cover, CoverUploader
 
-	validates :name, :presence => true,
-	:on => :create
+	validates :name, :presence => true, :on => :create
+	validates :logo,
+	:file_size => {
+	  :maximum => 1.megabytes.to_i
+	}
+	validates :cover,
+	:file_size => {
+	  :maximum => 1.megabytes.to_i
+	}
 
 	public
 	#Slug candidates for school

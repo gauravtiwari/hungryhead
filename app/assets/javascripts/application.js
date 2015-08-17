@@ -45,6 +45,7 @@
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
 //= require marked
+//= require jquery-fileupload/basic
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
 //= require pnotify

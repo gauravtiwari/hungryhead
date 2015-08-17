@@ -1,6 +1,7 @@
 jQuery(document).ready ->
-  $(document).on 'click', '#trigger-file-upload', (e) ->
+  $('#trigger-file-upload').click (e) ->
     e.preventDefault()
+    $(this).attr 'disabled', 'true'
     $('input[id=profile_photo]')[0].click()
     $('input[id=profile_photo]').on 'change', (e) ->
       e.preventDefault()

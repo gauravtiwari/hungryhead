@@ -1,4 +1,4 @@
-<%= cache(["beta", "activities_home", current_user, @activities, User.latest_20.first[:updated_at], @user.ticker.revrange(0, 100).first[:updated_at], Idea.latest_20.first[:updated_at]]) do %>
+<%= cache(["beta", "activities_home", current_user, @activities, User.latest_20.present? && User.latest_20.first[:updated_at], @user.ticker.revrange(0, 100).present? && @user.ticker.revrange(0, 100).first[:updated_at], Idea.latest_20.present? && Idea.latest_20.first[:updated_at]]) do %>
   <div class="container p-b-60">
     <% unless browser.mobile? %>
       <div class="col-md-3 col-sm-3 visible-md visible-lg no-padding p-l-15 col-lg-3 col-xlg-3">
@@ -22,10 +22,10 @@
     <% unless browser.mobile? %>
       <div class="col-md-3 col-sm-4 no-padding p-r-15">
         <div class="sidebar auto-height sticky white-bg box-shadow">
-        <%= cache(["beta", "home_ticker", @user.ticker.revrange(0, 100).first[:updated_at]]) do %>
+        <%= cache(["beta", "home_ticker", @user.ticker.revrange(0, 100).present? && @user.ticker.revrange(0, 100).first[:updated_at]]) do %>
           <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
         <% end %>
-        <%= cache(["beta", "home_latest_users", User.latest_20.first[:updated_at]]) do %>
+        <%= cache(["beta", "home_latest_users", User.latest_20.present? && User.latest_20.first[:updated_at]]) do %>
           <%= react_component('LatestUsers', {users: Oj.dump({
               list: User.latest_20,
               type: 'Latest People'

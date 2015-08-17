@@ -96,6 +96,14 @@ class Idea < ActiveRecord::Base
 
   #Validations
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false }
+  validates :logo,
+  :file_size => {
+    :maximum => 1.megabytes.to_i
+  }
+  validates :cover,
+  :file_size => {
+    :maximum => 1.megabytes.to_i
+  }
   validates :high_concept_pitch, :presence => true, length: {within: 20..50}
   validates :elevator_pitch, :presence => true, length: {within: 100..140}
 

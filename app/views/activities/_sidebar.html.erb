@@ -3,7 +3,7 @@
         <%= render partial: 'sidebar_card' %>
     <% end %>
 
-    <%= cache(["beta", "home_latest_ideas", Idea.latest_20.first[:updated_at]]) do %>
+    <%= cache(["beta", "home_latest_ideas", Idea.latest_20.present? && Idea.latest_20.first[:updated_at]]) do %>
       <%= react_component('LatestIdeas', {ideas: Oj.dump({
           list: Idea.latest_20,
           type: 'Latest Ideas'
