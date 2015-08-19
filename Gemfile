@@ -222,9 +222,6 @@ gem 'hiredis'
 gem 'pusher'
 gem 'em-http-request' # Required by trigger_async
 
-#Centrifuge server
-gem 'centrifuge'
-
 #Pagination
 gem 'will_paginate'
 
