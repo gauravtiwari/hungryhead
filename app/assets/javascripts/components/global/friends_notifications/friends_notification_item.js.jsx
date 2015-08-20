@@ -13,7 +13,7 @@ var FriendsNotificationItem = React.createClass({
                  <span className="text" dangerouslySetInnerHTML={{__html: this.props.item.html}}>
                  </span>
                  <span className="meta clearfix">
-                  <span className="text-master hint-text inline fs-12">{moment(this.props.item.created_at).fromNow()}</span>
+                  <span className="text-master hint-text inline fs-12">{moment(this.props.item.updated_at).fromNow()}</span>
                  </span>
                </div>
              </li>

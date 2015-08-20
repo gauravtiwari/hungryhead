@@ -66,8 +66,8 @@
 //= require utilities
 //= require welcome
 //= require globals
-//= require pusher_turbolinks
 //= require pusher_init
+//= require pusher_turbolinks
 //= require_tree ./components
 //= require turbolinks
 //= require react_ujs

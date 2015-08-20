@@ -3,12 +3,11 @@ json.comments @comments.each do |comment|
     json.(comment, :id, :commentable_id, :commentable_type, :created_at)
     json.comment markdownify(comment.body)
     json.user_id comment.user.uid
-    json.vote_url vote_path(votable_type: comment.class.to_s, votable_id: comment.id)
-    json.uuid SecureRandom.hex(10)
+    json.uuid SecureRandom.hex(10) + comment.user.uid
     json.is_owner current_user == comment.user
     json.voted comment.voted?(current_user)
     json.votes_count comment.votes_counter.value
-    json.user_url  profile_card_path(comment.user)
+    json.vote_url voters_votes_path(votable_type: @commentable.class.name, votable_id: @commentable.uuid)
     json.name comment.user.name
     json.avatar comment.user.get_avatar
     json.user_name_badge comment.user.name_badge

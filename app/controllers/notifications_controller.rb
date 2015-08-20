@@ -10,20 +10,12 @@ class NotificationsController < ApplicationController
 
   def ideas
     @idea = Idea.find(params[:id])
-    @notifications = Activity
-    .where(id: @idea.ticker.revrange(0, 100))
-    .order_as_specified(id: @idea.ticker.revrange(0, 100))
-    .map{|notification| notification.json_blob }
-    .paginate(:page => params[:page], :per_page => 20)
+    @notifications = @idea.ticker.revrange(0, 100).paginate(:page => params[:page], :per_page => 20)
     render json: @notifications
   end
 
   def friends
-    @notifications = Activity
-    .where(id: @user.friends_notifications.revrange(0, 100))
-    .order_as_specified(id: @user.friends_notifications.revrange(0, 100))
-    .map{|notification| notification.json_blob.merge(created_at: notification.created_at) }
-    .paginate(:page => params[:page], :per_page => 20)
+    @notifications = @user.friends_notifications.revrange(0, 100).paginate(:page => params[:page], :per_page => 20)
     render json: @notifications, status: :ok
   end
 
