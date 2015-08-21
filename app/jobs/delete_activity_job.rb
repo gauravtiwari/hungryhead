@@ -36,7 +36,9 @@ class DeleteActivityJob < ActiveJob::Base
       activity.recipient
     elsif activity.recipient_type == "Idea"
       activity.recipient.user
-    elsif is_school?(activity)
+    elsif activity.recipient_type == "Comment"
+      activity.recipient.user
+    elsif activity.recipient_type != "Comment" && is_school?(activity)
       activity.recipient.user.user
     else
       activity.recipient.user

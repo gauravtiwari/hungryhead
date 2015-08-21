@@ -10,6 +10,8 @@ class CreateComments < ActiveRecord::Migration
 
       t.references :user, :null => false
       t.integer :parent_id, :null => true, :index => true
+      t.uuid :uuid, null: false, default: 'uuid_generate_v4()', index: true
+
       t.integer :lft, :null => false, :index => true
       t.integer :rgt, :null => false, :index => true
       t.integer :depth, :null => false, :default => 0

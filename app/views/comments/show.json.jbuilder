@@ -7,7 +7,7 @@ json.comment do
     json.user_id comment.user.uid
     json.uuid SecureRandom.hex(10) + comment.user.uid
     json.avatar comment.user.get_avatar
-    json.voted comment.voted?(current_user)
+    json.voted voted?(comment)
     json.vote_url voters_votes_path(votable_type: @commentable.class.name, votable_id: @commentable.uuid)
     json.user_name_badge comment.user.name_badge
     json.votes_count comment.votes_counter.value

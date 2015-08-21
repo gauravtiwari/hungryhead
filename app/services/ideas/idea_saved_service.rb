@@ -42,7 +42,7 @@ class IdeaSavedService
 
   def remove_from_soulmate
     loader = Soulmate::Loader.new("ideas")
-    loader.remove("id" => id)
+    loader.remove("id" => @idea.id)
   end
 
 end

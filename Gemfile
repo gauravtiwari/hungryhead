@@ -15,7 +15,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery.scrollbar'
   gem 'rails-assets-placeholders'
   gem 'rails-assets-eventEmitter'
-  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-bootstrap', '3.3.5'
   gem 'rails-assets-marked'
   gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'

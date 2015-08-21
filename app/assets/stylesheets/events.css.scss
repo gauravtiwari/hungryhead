@@ -7,6 +7,12 @@
   background:         linear-gradient(90deg, #FFA17F 10%, #00223E 90%); /* W3C */
 
 }
+.event-meta img {
+  vertical-align: top;
+}
+.related-events > .row:last-child {
+  border: none;
+}
 .event-wrapper .jumbotron {
   height: 300px;
 }

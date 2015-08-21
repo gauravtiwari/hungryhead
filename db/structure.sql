@@ -156,6 +156,7 @@ CREATE TABLE comments (
     body text DEFAULT ''::text NOT NULL,
     user_id integer NOT NULL,
     parent_id integer,
+    uuid uuid DEFAULT uuid_generate_v4(),
     lft integer NOT NULL,
     rgt integer NOT NULL,
     depth integer DEFAULT 0 NOT NULL,
@@ -271,8 +272,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-16 01:17:03.703901'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-16 01:17:03.703934'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-20 12:59:55.174638'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-20 12:59:55.174678'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -2142,6 +2143,13 @@ CREATE INDEX index_comments_on_rgt ON comments USING btree (rgt);
 --
 
 CREATE INDEX index_comments_on_user_id ON comments USING btree (user_id);
+
+
+--
+-- Name: index_comments_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_uuid ON comments USING btree (uuid);
 
 
 --

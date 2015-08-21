@@ -4,25 +4,22 @@
       <%= link_to('Profile', event_path(@event), class: "bold #{current_class?(event_path(@event))} p-b-5 fs-13") %>
     </li>
     <li class="inline p-r-25">
-      <%= link_to('Comments', comments_event_path(@event), class: "bold fs-13", remote: true) %>
+      <%= link_to('Discuss', comments_event_path(@event), class: "bold fs-13", remote: true) %>
     </li>
  </ul>
   <div class="pull-right profile-action-buttons p-t-10 p-b-10">
-      <% if @event.user.user == current_user %>
-       <div>
-        <%= link_to(edit_event_path(@event), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
-          <span class="fa fa-pencil"></span> Edit profile
+      <div class="join inline m-r-10" id="publish_event_button">
+        <% if @event.user.user == current_user %>
+         <div>
+          <%= link_to(edit_event_path(@event), class: "main-button bold fs-13 padding-5 m-r-10 p-l-10 p-r-10", remote: true) do %>
+            <span class="fa fa-pencil"></span> Edit profile
+          <% end %>
+        </div>
+        <%= render partial: 'publish_button' %>
+        <% else %>
+          <a href="" class="main-button bold m-r-10"> <span class="fa fa-bookmark"></span> Save</a>
+          <a href="" class="main-button bold"> <span class="fa fa-user-plus"></span> Join</a>
         <% end %>
       </div>
-      <div class="join inline m-r-10" id="publish_event_button">
-        <%= render partial: 'publish_button' %>
-      </div>
-      <% else %>
-        <div class="text-center m-t-20">
-          <div class="join inline m-r-10">
-              <a href="" class="main-button bold"> <span class="fa fa-users"></span> Click to join</a>
-          </div>
-        </div>
-      <% end %>
   </div>
 </div>

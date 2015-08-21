@@ -43,11 +43,7 @@ class VotesController < ApplicationController
   def load_votable
     @votables = ["Idea", "Feedback", "Investment", "Comment"]
     if @votables.include? params[:votable_type]
-      if params[:votable_type] == "Comment"
-        @votable = params[:votable_type].constantize.find(params[:votable_id])
-      else
-        @votable = params[:votable_type].constantize.find_by_uuid(params[:votable_id])
-      end
+      @votable = params[:votable_type].constantize.find_by_uuid(params[:votable_id])
     else
       respond_to do |format|
        format.html { render json: {error: 'Sorry, unable to vote on this entity'}, status: :unprocessable_entity }

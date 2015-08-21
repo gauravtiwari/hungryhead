@@ -121,7 +121,7 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    byebug (6.0.1)
+    byebug (6.0.2)
     callsite (0.0.11)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -451,13 +451,11 @@ GEM
       railties (= 4.2.4.rc1)
       sprockets-rails
     rails-assets-animate.css (3.4.0)
-    rails-assets-bootstrap (3.1.1)
-      rails-assets-jquery (>= 1.9.0)
-    rails-assets-bootstrap-tagsinput (0.5.0)
-      rails-assets-jquery (~> 2.1.1)
-    rails-assets-bootstrap-tokenfield (0.12.1)
-      rails-assets-bootstrap (~> 3.1.1)
-      rails-assets-jquery (~> 2.1.0)
+    rails-assets-bootstrap (3.3.5)
+      rails-assets-jquery (>= 1.9.1)
+    rails-assets-bootstrap-tagsinput (0.3.14)
+    rails-assets-bootstrap-tokenfield (0.10.0)
+      rails-assets-jquery (~> 1.9.0)
     rails-assets-classie (1.0.1)
     rails-assets-doc-ready (1.0.4)
       rails-assets-eventie (>= 1, < 2)
@@ -474,7 +472,7 @@ GEM
     rails-assets-imagesloaded (3.1.8)
       rails-assets-eventEmitter (~> 4.0)
       rails-assets-eventie (>= 1.0.4, < 2)
-    rails-assets-jquery (2.1.4)
+    rails-assets-jquery (1.9.1)
     rails-assets-jquery-bez (1.0.11)
     rails-assets-jquery-form (3.46.0)
       rails-assets-jquery (>= 1.5)
@@ -740,7 +738,7 @@ DEPENDENCIES
   rack-tracker
   rails (= 4.2.4rc1)
   rails-assets-animate.css!
-  rails-assets-bootstrap!
+  rails-assets-bootstrap (= 3.3.5)!
   rails-assets-bootstrap-tagsinput!
   rails-assets-bootstrap-tokenfield!
   rails-assets-classie!
