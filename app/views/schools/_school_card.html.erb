@@ -1,8 +1,8 @@
 <div class="sidebar auto-height bg-white box-shadow no-margin">
   <div class="school-sidebar">
     <div class="container-xs-height">
-      <div class="widget-11-2 panel panel-transparent no-border">
-        <div class="panel-body">
+    <div class="widget-11-2 panel panel-transparent no-border">
+      <div class="panel-body">
         <div class="user-profile auto-margin">
             <div class="thumbnail-wrapper d100">
                 <div class="profile-logo">
@@ -48,9 +48,12 @@
             </div>
         </div>
         <div class="p-l-15 p-r-15 p-t-15 text-center school-content clearfix">
-          <h3 class="bold no-margin text-master displayblock">
+          <h3 class="bold text-master displayblock">
               <%= @school.name.titlecase %>
           </h3>
+          <p class="small-text">
+            <%= @school.description %>
+          </p>
           <h5 class="text-center no-margin text-master displayblock">
             <span class="fa fa-map-marker"></span> <%= @school.location_list %>
           </h5>
@@ -88,23 +91,22 @@
              <% end %>
           </ul>
         </div>
-
-
-        <div class="p-t-10 p-b-10 text-center font-opensans clearfix">
-            <div class="inline text-center p-r-30">
-                <h1 class="text-master small fs-16">People</h1>
-                <p class="no-margin fs-16 text-master"><%= @school.people_counter.value %></p>
+        <div class="text-center p-t-10 p-b-10 font-opensans clearfix full-border-light-bottom full-border-light">
+          <div class="school-stats-list">
+            <div class="col-sm-4 all-caps text-center">
+                <span>People</span>
+                <span class="text-brand displayblock text-center"><%= @school.people_counter.value %></span>
             </div>
-            <div class="inline text-center p-r-30">
-                <h1 class="text-master small fs-16">Ideas</h1>
-                <p class="no-margin fs-16 text-master"><%= @school.ideas_counter.value %></p>
+            <div class="col-sm-4 all-caps text-center">
+                <span>Ideas</span>
+                <span class="text-brand displayblock text-center"><%= @school.ideas_counter.value %></span>
             </div>
-            <div class="inline text-center p-r-15">
-                <h1 class="text-master small fs-16">Followers</h1>
-                <p class="no-margin fs-16 text-master"><%= @school.followers_counter.value %></p>
+            <div class="col-sm-4 all-caps text-center">
+                <span>Followers</span>
+                <span class="text-brand displayblock text-center"><%= @school.followers_counter.value %></span>
             </div>
-      </div>
-
+          </div>
+        </div>
     </div>
     </div>
     </div>

@@ -73,7 +73,7 @@ class IdeasController < ApplicationController
       @idea.published!
       @idea.everyone!
       if @idea.published?
-        CreateActivityJob.perform_later(@idea.id, @idea.class.to_s)
+        CreateActivityJob.set(wait: 10.seconds).perform_later(@idea.id, @idea.class.to_s)
         @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
       else
         @msg = "Something went wrong, please try again."
@@ -90,9 +90,10 @@ class IdeasController < ApplicationController
     @idea.draft!
     @idea.team!
     if @idea.draft?
-      UnpublishIdeaJob.perform_later(@idea.id)
+      UnpublishIdeaJob.set(wait: 10.seconds).perform_later(@idea.id)
     end
-    @msg = "We are unpublishing your idea profile. Once unpublished it will only visible to your team."
+    @msg = "We are unpublishing your idea profile. This will take a few minutes.
+     Once unpublished it will only be visible to your team."
     render :publish
   end
 

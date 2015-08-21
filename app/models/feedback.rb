@@ -74,12 +74,12 @@ class Feedback < ActiveRecord::Base
 
   def create_activity
     # Enque activity creation
-    CreateActivityJob.perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+    CreateActivityJob.set(wait: 10.seconds).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
 
   def delete_activity
     #Delete activity item from feed
-    DeleteActivityJob.perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

@@ -9,5 +9,7 @@
 //= require_tree ./components/idea/publish_idea_button/
 //= require_tree ./components/global/follow/
 //= require_tree ./components/global/notifications/
+//= require_tree ./components/event/join
+////= require_tree ./components/event/stats
 //= require_tree ./components/idea/invite_team/
 //= require_tree ./components/global/listing_widget/

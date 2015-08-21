@@ -61,7 +61,7 @@ class EventsController < ApplicationController
       @event.published!
       @event.everyone!
       if @event.published?
-        CreateActivityJob.perform_later(@event.id, @event.class.to_s)
+        CreateActivityJob.set(wait: 10.seconds).perform_later(@event.id, @event.class.to_s)
         flash[:notice] = "Your event profile was successfully published to: #{@event.privacy.capitalize}"
       else
         flash[:notice] = "Something went wrong, please try again."

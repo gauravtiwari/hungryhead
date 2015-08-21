@@ -38,7 +38,7 @@ class WelcomeController < ApplicationController
     case step
     when :complete_profile
       @user.update_attributes(user_params)
-      CreateActivityJob.perform_later(@user.id, "User") unless @user.published?
+      CreateActivityJob.set(wait: 10.seconds).perform_later(@user.id, "User") unless @user.published?
     end
     sign_in(@user, bypass: true)
     render_wizard @user

@@ -1,22 +1,8 @@
 <div class="text-center p-t-10 p-b-10 full-border-light-bottom full-border-light clearfix">
-    <div class="user-stats-list no-border">
-     <div class="col-sm-4 all-caps text-center">
-       Spots
-       <span class="text-brand displayblock text-center">
-        <%= number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-       </span>
-     </div>
-     <div class="col-sm-4 all-caps text-center">
-       Comments
-       <span class="text-brand displayblock text-center">
-        <%= number_to_human(@event.comments_counter.value, :format => '%n%u', :units => { :thousand => 'K' }) %>
-       </span>
-     </div>
-     <div class="col-sm-4 all-caps text-center">
-       Attending
-       <span class="text-brand displayblock text-center">
-        <%= number_to_human(@event.event_attendees.size, :format => '%n%u', :units => { :thousand => 'K' }) %>
-       </span>
-     </div>
-    </div>
+<%= react_component('EventStats', {
+  spots: number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }),
+  comments: number_to_human(@event.comments_counter.value, :format => '%n%u', :units => { :thousand => 'K'}),
+  attendees: number_to_human(@event.event_attendees.size, :format => '%n%u', :units => { :thousand => 'K' })
+  }, {prerender: true})
+%>
 </div>

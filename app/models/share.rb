@@ -29,13 +29,12 @@ class Share < ActiveRecord::Base
   private
 
   def create_activity
-    CreateActivityJob.set(wait: 2.seconds).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+    CreateActivityJob.set(wait: 10.seconds).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
   end
-
 
   def delete_activity
     #Delete user feed
-    DeleteActivityJob.set(wait: 5.seconds).perform_later(self.id, self.class.to_s)
+    DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
   end
 
 end

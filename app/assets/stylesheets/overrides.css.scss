@@ -795,13 +795,17 @@ ul.reactions > div {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #999;
 }
-.user-stats-list div {
+.user-stats-list div,
+.event-stats-list div,
+.school-stats-list div {
   font-size: 14px;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #999;
 }
 .stastics-list li span,
-.user-stats-list div span {
+.user-stats-list div span,
+.event-stats-list div span,
+.school-stats-list div span {
   color: #4e5052;
   font-size: 12px;
   display: block;

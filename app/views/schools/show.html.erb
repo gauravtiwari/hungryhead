@@ -11,35 +11,40 @@
             <div class="panel-title b-b b-great p-b-5">
               People
             </div>
-          </div>
-          <div class="panel-body">
-          <% @school.get_published_users.take(11).each do |user| %>
-            <div class="col-md-2 no-padding">
-              <%= link_to(profile_path(user), class: 'inline', data: {toggle: "tooltip", container: "body"}, title: user.name) do %>
-                <div class="thumbnail-wrapper d48 circular">
-                <% if user.avatar_present? %>
-                 <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar},class: "image-responsive-height") %>
-                <% else %>
-                    <span class="placeholder text-white bold fs-16">
-                      <%= user.name_badge %>
-                    </span>
-                <% end %>
-                </div>
+            <div class="panel-controls">
+              <% if @school.get_published_users.length >  5 %>
+                <%= link_to("See all", profile_people_path(@school), class: "bold text-brand p-l-10") %>
               <% end %>
             </div>
-          <% end %>
-          <% if @school.get_published_users.length >  11 %>
-            <div class="col-md-2 no-padding p-t-10">
-              <a href="#more" class="bold text-brand fs-22 p-l-10">+22</a>
-            </div>
-          <% end %>
-        </div>
+          </div>
+          <div class="panel-body">
+            <% @school.get_published_users.take(5).each do |user| %>
+              <div class="col-md-2 no-padding">
+                <%= link_to(profile_path(user), class: 'inline', data: {toggle: "tooltip", container: "body"}, title: user.name) do %>
+                  <div class="thumbnail-wrapper d48 circular">
+                  <% if user.avatar_present? %>
+                   <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar},class: "image-responsive-height") %>
+                  <% else %>
+                      <span class="placeholder text-white bold fs-16">
+                        <%= user.name_badge %>
+                      </span>
+                  <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
 
       <div class="panel box-shadow m-t-10">
         <div class="panel-heading">
           <div class="panel-title b-b b-great p-b-5">
             Ideas
+          </div>
+          <div class="panel-controls">
+            <% if @school.get_published_ideas.length > 5 %>
+              <%= link_to("See all", profile_ideas_path(@school), class: "bold text-brand p-l-10") %>
+            <% end %>
           </div>
         </div>
         <div class="panel-body">
@@ -56,9 +61,6 @@
               </li>
             <% end %>
           </ul>
-          <% if @school.get_published_ideas.length > 5 %>
-            <a href="#more" class="bold pull-right text-brand fs-22 p-l-10">+22</a>
-          <% end %>
         </div>
       </div>
     </div>

@@ -225,6 +225,11 @@ Rails.application.routes.draw do
 
   #Events routes
   resources :events do
+    #Attending event
+
+    post :join, to: 'event_attendees#join'
+    delete :leave, to: 'event_attendees#leave'
+
     member do
       put :publish
       put :unpublish
