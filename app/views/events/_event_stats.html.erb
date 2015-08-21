@@ -2,7 +2,7 @@
 <%= react_component('EventStats', {
   spots: number_to_human(@event.space,  :format => '%n%u', :units => { :thousand => 'K' }),
   comments: number_to_human(@event.comments_counter.value, :format => '%n%u', :units => { :thousand => 'K'}),
-  attendees: number_to_human(@event.event_attendees.size, :format => '%n%u', :units => { :thousand => 'K' })
+  attendees: number_to_human(@event.attendees_counter.value, :format => '%n%u', :units => { :thousand => 'K' })
   }, {prerender: true})
 %>
 </div>

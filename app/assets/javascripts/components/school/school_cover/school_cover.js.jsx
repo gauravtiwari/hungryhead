@@ -144,7 +144,6 @@ var SchoolCover = React.createClass({
 
       if(this.state.is_owner) {
         return (
-
           <div className={drag_class} data-pages="parallax" data-social="cover"  id="cover-wrap-school">
               <form ref="coverForm" method="PUT" action={this.state.form.action} id="cover-upload" className="cover-form" onChange={this._onChange} encType="multipart/form-data">
                 <input type="hidden" name="_method" value={this.state.form.method} />
@@ -173,14 +172,6 @@ var SchoolCover = React.createClass({
       this.setState({loading: true});
       e.preventDefault();
       var self = this;
-      var reader = new FileReader();
-      var file = e.target.files[0];
-      reader.onload = function(upload) {
-        $('#schoolcover_preview').attr('width', "100%");
-        $('#schoolcover_preview').attr('style', "");
-        $('#schoolcover_preview').attr('src', upload.target.result);
-      }.bind(this);
-      reader.readAsDataURL(file);
        $('#cover-upload').ajaxSubmit({
       'type' : 'PUT',
        beforeSubmit: function(a,f,o) {
@@ -193,9 +184,8 @@ var SchoolCover = React.createClass({
            form: response.school.form,
            loading: false,
            draggable: !self.state.draggable,
-          visible: !self.state.visible
+           visible: !self.state.visible
          });
-
          self.handleCoverDrag();
        }
 

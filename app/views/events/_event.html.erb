@@ -1,5 +1,5 @@
 <li class="event-list p-t-15 p-b-15">
-    <span class="col-xs-height col-middle col-md-3">
+    <span class="col-xs-height col-middle col-md-2 no-padding p-r-15">
       <% if event.cover.present? %>
         <span class="thumbnail-wrapper d100">
             <%= image_tag(event.cover.url(:cover), data: {src:  event.cover.url(:cover), :"src-retina" => event.cover.url(:cover)}, width: "100", height: "100") %>
@@ -12,7 +12,7 @@
         </div>
       <% end %>
     </span>
-    <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
+    <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-4 col-sm-4">
      <h5 class="text-master no-margin bold inline fs-14">
        <a href="<%= event_path(event) %>" class="inline">
          <%= event.title %>
@@ -31,24 +31,18 @@
         <%= truncate(event.description, length: 100) %>
       </p>
     </div>
-   <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
-     <div class="user-stats-list no-border">
-       <div class="col-sm-6 text-center">
-         Attending
-         <span class="text-master displayblock text-center">
-           5K
-         </span>
-       </div>
-       <div class="col-sm-6 text-center">
-         Invited
-         <span class="text-master displayblock text-center">
-            10K
-         </span>
-       </div>
-     </div>
-   </div>
-  <div class="card-follow-button text-center p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
-    <a href="" class="main-button padding-5 p-l-10 p-r-10 fs-13 bold"><span class="fa fa-users"></span> Click to Join</a>
-  </div>
+     <div class="p-l-10 col-xs-height col-middle col-md-4 col-sm-4 hidden-xs">
+       <%= react_component('EventStats', {
+         spots: number_to_human(event.space,  :format => '%n%u', :units => { :thousand => 'K' }),
+         comments: number_to_human(event.comments_counter.value, :format => '%n%u', :units => { :thousand => 'K'}),
+         attendees: number_to_human(event.attendees_counter.value, :format => '%n%u', :units => { :thousand => 'K' })
+         }, {prerender: true})
+       %>
+    </div>
+    <div class="card-follow-button text-center p-l-10 col-xs-height col-middle hidden-xs col-sm-2 col-md-2">
+      <% if policy(event).join? %>
+        <%= react_component('EventJoinButton', {data: attending?(event)}.to_json) %>
+      <% end %>
+    </div>
 </li>
 

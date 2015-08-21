@@ -29,6 +29,16 @@ var ListingWidget = React.createClass({
         this.setState({listing: new_list});
       }
     }.bind(this));
+    $.pubsub('subscribe', 'update_attendees_listing', function(msg, data){
+      if(this.props.type != "followings") {
+        if(data.attending) {
+          var new_list = this.state.listing.concat(data.attendee);
+        } else {
+          var new_list = _.without(this.state.listing, _.findWhere(this.state.listing, {id: data.attendee.id}));
+        }
+        this.setState({listing: new_list, count: data.attendees});
+      }
+    }.bind(this));
   },
 
   loadAll: function() {

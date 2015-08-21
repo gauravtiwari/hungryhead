@@ -13,7 +13,8 @@ var EventJoinButton = React.createClass({
       this.setState({
         attending: data.attending
       });
-      $.pubsub('publish', 'update_event_attendees', data.attendees)
+      $.pubsub('publish', 'update_event_attendees', data.attendees);
+      $.pubsub('publish', 'update_attendees_listing', data);
     }.bind(this));
   },
 
@@ -28,6 +29,7 @@ var EventJoinButton = React.createClass({
     .done(function(data) {
       this.setState({attending: data.attending});
       $.pubsub('publish', 'update_event_attendees', data.attendees);
+      $.pubsub('publish', 'update_attendees_listing', data);
     }.bind(this))
     .fail(function(xhr, status, err) {
       this.setState({attending: !this.state.attending});

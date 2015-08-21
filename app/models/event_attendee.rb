@@ -3,7 +3,7 @@ class EventAttendee < ActiveRecord::Base
   belongs_to :event, touch: true
   belongs_to :attendee, class_name: 'User', foreign_key: 'attendee_id'
 
-  after_commit :update_counters, :delete_cached_attendees_ids, on: :destroy
+  after_destroy :update_counters, :delete_cached_attendees_ids
   after_commit :update_counters, :cache_attendees_ids, on: :create
 
   private

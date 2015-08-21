@@ -226,7 +226,7 @@ Rails.application.routes.draw do
   #Events routes
   resources :events do
     #Attending event
-
+    resources :event_attendees, only: :index
     post :join, to: 'event_attendees#join'
     delete :leave, to: 'event_attendees#leave'
 

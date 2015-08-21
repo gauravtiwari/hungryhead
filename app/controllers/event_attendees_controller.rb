@@ -5,14 +5,14 @@ class EventAttendeesController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = EventAttendee.all.paginate(:page => params[:page], :per_page => 20)
+    @events = User.all.paginate(:page => params[:page], :per_page => 20)
   end
 
   # POST /events
   # POST /events.json
   def join
     @event_attendee = EventAttendee.new(attendee: @user, event: @event)
-    authorize @event_attendee
+    authorize @event
     if @event_attendee.save
       render json: {
         attending: true,

@@ -5,25 +5,6 @@
     </div>
   </div>
   <div class="panel-body">
-    <% @event.get_attendees.take(11).each do |user| %>
-      <div class="col-md-2 no-padding">
-        <%= link_to(profile_path(user), class: 'inline') do %>
-          <div class="thumbnail-wrapper d48 circular">
-          <% if user.avatar_present? %>
-            <%= image_tag(user.get_avatar, data: {src: user.get_avatar, src_retina: user.get_avatar, toggle: "tooltip", container: "body"}, title: user.name, class: "image-responsive-height") %>
-          <% else %>
-            <span class="placeholder text-white bold fs-16">
-              <%= user.name_badge %>
-            </span>
-          <% end %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <% if @event.get_attendees.length >  11 %>
-      <div class="col-md-2 no-padding p-t-10">
-        <a href="#more" class="bold text-brand fs-22 p-l-10">+22</a>
-      </div>
-    <% end %>
+    <%= react_component('ListingWidget', {listing: @event.get_attendees.take(7).map{|u| {name: u.name, name_badge: u.name_badge,  id: u.uid, avatar: u.get_avatar,  url: profile_path(u)}}, count: @event.attendees_counter.value, path: event_event_attendees_path(@event), type: "Attending" }.to_json, {prerender: :static}) %>
   </div>
 </div>
