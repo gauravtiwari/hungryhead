@@ -1,0 +1,2097 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o?o:n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({QJf3ax:[function(e,n){function t(e){function n(n,t,a){e&&e(n,t,a),a||(a={});for(var u=c(n),f=u.length,s=i(a,o,r),p=0;f>p;p++)u[p].apply(s,t);return s}function a(e,n){f[e]=c(e).concat(n)}function c(e){return f[e]||[]}function u(){return t(n)}var f={};return{on:a,emit:n,create:u,listeners:c,_events:f}}function r(){return{}}var o="nr@context",i=e("gos");n.exports=t()},{gos:"7eSDFh"}],ee:[function(e,n){n.exports=e("QJf3ax")},{}],3:[function(e,n){function t(e){return function(){r(e,[(new Date).getTime()].concat(i(arguments)))}}var r=e("handle"),o=e(1),i=e(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(e,n){window.NREUM[n]=t("api-"+n)}),n.exports=window.NREUM},{1:12,2:13,handle:"D5DuLP"}],"7eSDFh":[function(e,n){function t(e,n,t){if(r.call(e,n))return e[n];var o=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return e[n]=o,o}var r=Object.prototype.hasOwnProperty;n.exports=t},{}],gos:[function(e,n){n.exports=e("7eSDFh")},{}],handle:[function(e,n){n.exports=e("D5DuLP")},{}],D5DuLP:[function(e,n){function t(e,n,t){return r.listeners(e).length?r.emit(e,n,t):(o[e]||(o[e]=[]),void o[e].push(n))}var r=e("ee").create(),o={};n.exports=t,t.ee=r,r.q=o},{ee:"QJf3ax"}],id:[function(e,n){n.exports=e("XL7HBI")},{}],XL7HBI:[function(e,n){function t(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:i(e,o,function(){return r++})}var r=1,o="nr@id",i=e("gos");n.exports=t},{gos:"7eSDFh"}],G9z0Bl:[function(e,n){function t(){var e=d.info=NREUM.info,n=f.getElementsByTagName("script")[0];if(e&&e.licenseKey&&e.applicationID&&n){c(p,function(n,t){n in e||(e[n]=t)});var t="https"===s.split(":")[0]||e.sslForHttp;d.proto=t?"https://":"http://",a("mark",["onload",i()]);var r=f.createElement("script");r.src=d.proto+e.agent,n.parentNode.insertBefore(r,n)}}function r(){"complete"===f.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=e("handle"),c=e(1),u=(e(2),window),f=u.document,s=(""+location).split("?")[0],p={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-632.min.js"},d=n.exports={offset:i(),origin:s,features:{}};f.addEventListener?(f.addEventListener("DOMContentLoaded",o,!1),u.addEventListener("load",t,!1)):(f.attachEvent("onreadystatechange",r),u.attachEvent("onload",t)),a("mark",["firstbyte",i()])},{1:12,2:3,handle:"D5DuLP"}],loader:[function(e,n){n.exports=e("G9z0Bl")},{}],12:[function(e,n){function t(e,n){var t=[],o="",i=0;for(o in e)r.call(e,o)&&(t[i]=n(o,e[o]),i+=1);return t}var r=Object.prototype.hasOwnProperty;n.exports=t},{}],13:[function(e,n){function t(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(0>o?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=t},{}]},{},["G9z0Bl"]);</script>
+                <meta name="fragment" content="!"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+                
+            <script type="text/javascript">
+        function csAppHttpsChecker() {
+            var redirect = false;
+            
+            var hash = location.hash.substring(1).replace('-', '_');
+            if( '/' == hash.substring(0, 1) ) hash = hash.substring(1);
+            
+            // Force reload if no hash
+            if( arguments.length ) {
+                var params = arguments[0];
+                if( 'undefined' != params.force && params.force ) {
+                    if( '' == hash ) {
+                        redirect = true;
+                    }
+                }
+            }
+            
+            var check = ['apply', 'programs/ajax_application'];
+            
+            // Hash check
+            if( ! redirect ) {
+                if( '' != hash ) {
+                    for( i in  check ) {
+                        var lookfor = check[i];
+                        if( hash.substring( 0, lookfor.length ) == lookfor ) {
+                            redirect = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // URL check
+            if( ! redirect ) {
+                var url = location.href.replace('-', '_');
+                if( '' != location.hash ) url = url.substr( 0, url.length - location.hash.length );
+                if( '' != location.search ) url = url.substr( 0, url.length - location.search.length );
+                
+                for( i in  check ) {
+                    var lookfor = check[i];
+                    if( url.length > lookfor.length + 1 ) {
+                        if( url.substring( url.length - lookfor.length - 1 ) == '/' + lookfor ) {
+                            redirect = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Actual redirect
+            if( redirect ) {
+                if(window.ActiveXObject) {
+                    document.execCommand('Stop');
+                }
+                else if (typeof window.stop == 'function') {
+                    window.stop();
+                }
+                window.location = 'https://www.f6s.com/gauravtiwari/apply';
+            }
+        }
+            </script>
+        
+        <script type="text/javascript">
+            document.write('<link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/css3.css?u=724b8636c4913a7849485ab11a07e077">');
+        </script>
+        
+        <meta name="google-site-verification" content="j5KgwvYdnpRqkypVsjMCqYcSn11bI40y_ncPeiWXTa0" />
+        <meta name="msvalidate.01" content="C1E70A09AADF4E14F0F905BF6FFC17A4" />
+
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/reset.css?u=724b8636c4913a7849485ab11a07e077">    
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600|Open+Sans+Condensed:700&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/components.css?u=724b8636c4913a7849485ab11a07e077">    
+        <!--[if gte IE 6]>
+            <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/components.ie.css?u=724b8636c4913a7849485ab11a07e077">    
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/default.css?u=724b8636c4913a7849485ab11a07e077">                
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/960.css?u=724b8636c4913a7849485ab11a07e077">                    
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/ajax.css?u=724b8636c4913a7849485ab11a07e077">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/objects.css?u=724b8636c4913a7849485ab11a07e077">
+        
+                    <link rel="icon" href="https://www.f6s.com/images/favicon.png" type="image/png">
+            <link rel="shortcut icon" href="https://www.f6s.com/favicon.ico" type="image/vnd.microsoft.icon">
+               
+    
+        <!--[if !IE 7]><style type="text/css">div.content-wrap { display:table; height:100%; width:100%; }</style><![endif]-->
+        <!--[if IE]>
+            <style type="text/css">
+                #profile-content ul.thumbnail-list-medium > li  a span.title,
+                #profile-content ul.thumbnail-list-small > li  a span.title,
+                #profile-main-module-profile-videos-overview div.video-block p.title,
+                #profile-main-module-profile-members-overview.team  div.one-image a.name,
+                #profile-main-module-profile-mentors-overview.team  div.one-image a.name {
+                    background: url('../images/name_gradient.png') repeat-x left top !important;
+                }
+            </style>
+        <![endif]-->
+        <!--[if lte IE 9]>
+            <style type="text/css">
+                #top-logo {
+                    float: left;
+                }
+                #top-user {
+                    float: right;
+                }
+                #top-search {
+                    float: left;
+                }
+                #top-search .area .cs-input-field {
+                    width: 110px !important;
+                }
+                #top-nav {
+                    float: left;
+                }
+                #top-nav ul.menu {
+                    display: block;
+                }
+                #top-nav ul.menu > li {
+                    display: inline-block;
+                }
+                #top-nav ul.menu > li > a {
+                    padding-left: 15px !important;
+                    padding-right: 15px !important;
+                }
+                #topbar:after {
+                    content: "";
+                    clear: both;
+                    display: block;
+                    height: 0px;
+                }
+                .flexbox-table {
+                    display: block;
+                }
+                .flexbox-table: after {
+                    content: "";
+                    clear: both;
+                    display: block;
+                    height: 0px;
+                }
+                .flex-ie {
+                    float: left !important;
+                    display: block !important;
+                }
+            </style>
+        <![endif]-->
+                        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/profile.css?u=724b8636c4913a7849485ab11a07e077">
+                        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/redesign.css?u=724b8636c4913a7849485ab11a07e077">
+
+                    <link type="text/css" href="https://www.f6s.com/plugins/components/jqueryui/themes/base/datepicker.css?u=724b8636c4913a7849485ab11a07e077" rel="stylesheet" />
+            <link type="text/css" href="https://www.f6s.com/plugins/components/jqueryui/themes/base/theme.css?u=724b8636c4913a7849485ab11a07e077" rel="stylesheet" />
+            <link type="text/css" href="https://www.f6s.com/plugins/components/jqueryui/themes/base/core.css?u=724b8636c4913a7849485ab11a07e077" rel="stylesheet" />
+            <link type="text/css" href="https://www.f6s.com/plugins/timepicker/timepicker.css?u=724b8636c4913a7849485ab11a07e077" rel="stylesheet" />
+                
+                    <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/profile_2.css?u=724b8636c4913a7849485ab11a07e077">
+                    
+        <!-- Font Awesome -->
+        <link href="https://www.f6s.com/plugins/fortawesome/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- /Font Awesome -->
+        
+        <!-- jquery.qtip -->
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/qtip/jquery.qtip.min.css?u=724b8636c4913a7849485ab11a07e077">
+        <!-- /jquery.qtip -->
+        
+        <!-- slick -->
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/slick/slick.css">
+        <!-- /slick -->
+        
+        <!-- pickadate -->
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/classic.css" media="all and (min-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/classic.date.css" media="all and (min-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/classic.time.css" media="all and (min-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/default.css" media="all and (max-width: 1023px)">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/default.date.css" media="all and (max-width: 1023px)">
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/plugins/pickadate/themes/default.time.css" media="all and (max-width: 1023px)">
+        <!-- /pickadate -->
+        
+        <!-- Less -->
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/less/compiled/compiled-styles.css?u=724b8636c4913a7849485ab11a07e077">
+                
+                        <!-- END of Less -->
+        
+        <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/print.css?u=724b8636c4913a7849485ab11a07e077" media="print" />
+        
+        <!--[if IE]>
+            <link rel="stylesheet" type="text/css" href="https://www.f6s.com/css/ie.css?u=724b8636c4913a7849485ab11a07e077" />
+        <![endif]-->
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://www.f6s.com/plugins/components/jquery/jquery.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/plugins/components/jquery/jquery-migrate.js?u=724b8636c4913a7849485ab11a07e077"></script>        
+        <!-- /jQuery -->
+        
+        <!-- jquery.qtip -->
+        <script type="text/javascript" src="https://www.f6s.com/plugins/qtip/jquery.qtip.js"></script>
+        <!-- /jquery.qtip -->
+        
+        <!-- slick js -->
+        <script type="text/javascript" src="https://www.f6s.com/plugins/slick/slick.min.js"></script>
+        <!-- /slick js -->
+        
+        <!-- pickadate js -->
+        <script type="text/javascript" src="https://www.f6s.com/plugins/pickadate/picker.js"></script>
+        <script type="text/javascript" src="https://www.f6s.com/plugins/pickadate/picker.date.js"></script>
+        <script type="text/javascript" src="https://www.f6s.com/plugins/pickadate/picker.time.js"></script>
+        <script type="text/javascript" src="https://www.f6s.com/plugins/pickadate/legacy.js"></script>
+        <!-- /pickadate js -->
+        
+        <!-- jquery-watch -->
+        <script type="text/javascript" src="https://www.f6s.com/plugins/jquery-watch/jquery-watch.min.js"></script>
+        <!-- /jquery-watch -->
+        
+        <script type="text/javascript" src="https://www.f6s.com/js/scrollbar/jquery.mousewheel.min.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/scrollbar/jquery.mCustomScrollbar.min.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/cs.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/window/window.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/components/components.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/algorithms/algorithms.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/modules/modules.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/messages/messages.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/builder/blocks.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/builder/builder.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript" src="https://www.f6s.com/js/cs/invites/invites.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        <script type="text/javascript">
+            // Image preloader
+            var preload_arr = new Array('images/icons.png', 'images/title-qtip-bg.png', 'images/title-qtip-pointer.png');
+            for(i in preload_arr) {
+                var preload_img = new Image();
+                preload_img.src = 'https://www.f6s.com/'+preload_arr[i]+'?u=724b8636c4913a7849485ab11a07e077';
+            }
+        </script>
+        <script type="text/javascript">
+            String.prototype.reverse = function(){ return this.split('').reverse().join(''); }
+
+            var cs = new Cs({
+                site_url : "/moc.s6f.www//:sptth".reverse(),
+                site_url_ssl : "/moc.s6f.www//:sptth".reverse(),
+                site_url_main: "https://www.f6s.com/",
+                login_page_path: 'main/authorization/login',
+                fbAppId : '196388037101827',
+                fbUserData : 'public_profile, email, user_friends',
+                youtubeKey : 'AIzaSyDVX5KW2tLWng9Qcze1xzz_Z_8ApL8XTs8'
+            });
+            var userIsAuthenticated = true;
+            
+            // on document load cs function prototype
+            Cs.prototype.onDocumentLoad = function(){
+                // Popup init with version
+                csPopup = cs.components().popup({version: 2});
+
+                
+                
+                                
+                //trigger check for hash changed or exists
+                $(window).trigger( 'hashchange' );
+            }
+        </script>
+        
+        <script type="text/javascript" src="https://www.f6s.com/system/languages/js-language/en?u=724b8636c4913a7849485ab11a07e077"></script>
+        
+                    <script type="text/javascript" src="https://www.f6s.com/plugins/components/jqueryui/ui/datepicker.js?u=724b8636c4913a7849485ab11a07e077"></script>
+            <script type="text/javascript" src="https://www.f6s.com/plugins/components/jqueryui/ui/position.js?u=724b8636c4913a7849485ab11a07e077"></script>
+            <script type="text/javascript" src="https://www.f6s.com/plugins/timepicker/timepicker.js?u=724b8636c4913a7849485ab11a07e077"></script>
+                    
+        <script type="text/javascript" src="https://www.f6s.com/js/default.js?u=724b8636c4913a7849485ab11a07e077"></script>
+        
+        <title>Gaurav Tiwari | F6S</title>
+        
+                    <meta name="Description" CONTENT="Product and idea person, passionate about startups and creating things that.  Gaurav Tiwari&#39;s Startup Experience, Connections and Recommendations">
+                
+                
+                    <link rel="canonical" href="https://www.f6s.com/gauravtiwari">
+        
+                    <meta property="fb:app_id" content="196388037101827" />
+            <meta property="og:type" content="profile" />
+            <meta property="og:url" content="https://www.f6s.com/gauravtiwari" />
+            <meta property="og:image" content="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/26/2592_th1.jpg" />
+            <meta property="og:title" content="Gaurav Tiwari" />
+            <meta property="og:description" content="Product and idea person, passionate about startups and creating things that.  Gaurav Tiwari&#39;s Startup Experience, Connections and Recommendations" />
+            <meta property="profile:username" content="gauravtiwari" />
+                            <meta property="profile:first_name" content="Gaurav" />
+                <meta property="profile:last_name" content="Tiwari" />
+                
+        <!-- embedded code -->
+        
+    <script type="text/javascript">
+
+        // Google Analytics Script
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26460905-1']);
+        _gaq.push(['_setDomainName', 'f6s.com']);
+                    
+        // Track IP address as event
+        _gaq.push(['_trackEvent', 'IP address', '78.148.239.222']);
+
+        // Google Analytics - set custom variables
+                // 'Section' variable set at page level ==> slot 1
+            _gaq.push(['_setCustomVar', 1, 'Section', 'Personal Profile', 3]);
+                        
+        // 'Logged' variable set at session level ==> slot 2
+        _gaq.push(['_setCustomVar', 2, 'Logged', 'true', 2]);
+
+        _gaq.push(['_trackPageview']);
+
+    
+    
+        
+    
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+            <script type="text/javascript">
+    function csAddDealButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?popup_type=deal&hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=create_deal&invite_type=leader&temp=1');
+                }
+    
+    function csAddOrganizationButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=profile');
+                }
+    
+    function csAddEventButtonClick() {
+                    window.location = 'https://www.f6s.com/account/accelerators/add-event';
+                }
+    
+    function csAddProgramButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?popup_type=program&hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=add_application&invite_type=leader&temp=1');
+                }
+    
+    function csAddAngelGroupButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?popup_type=angelgroup&hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=angel_application&invite_type=leader&temp=1');
+                }
+    
+    function csAddInvestFundButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?popup_type=fund&hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=add_fund&invite_type=leader&temp=1');
+                }
+    
+    function csAddJobButtonClick() {
+                    csPopup.display('/account/organizations/popup-create-organization?popup_type=job&hide_parent=1&hide_description=1&hide_type=1&redirect_after_close=create_job&invite_type=leader&temp=1');
+                }
+</script>        <!-- embedded code -->
+        
+            </head>
+    <body class="
+        prefix-profile        ux-0-9
+                        custom-page-profile-main-main        has-bar                chrome        chrome-44    ">
+        
+                                    
+                <div class="content-wrap">
+            <div id="fb-root"></div>
+            <div id="otnPopup" class="popup"><div class="popup_holder popup_centered"><div class="popup_area"><div class="popup_area_content"></div></div></div></div>
+
+<div id="topbar" class="resp">
+        <!-- Logo -->
+    <div id="top-logo" class="logo">
+        <a class="site-logo" href="https://www.f6s.com/"  data-ga='{"section":"Top Bar","feature":"Top Bar Logo"}'><span>F6S</span></a>
+    </div>
+    <!-- End Logo -->
+    
+    <!-- Nav -->
+    <div id="top-nav">
+        <div id="mobile-menu-wrapper" class="menu-hidden">
+            <a href="javascript:;" id="mobile-menu-toggle" class="no-menu"><span>more</span></a>
+            <div id="mobile-menu-container">
+                <ul id="mobile-menu"><!-- --><!--
+ --><li ><a href="https://www.f6s.com/programs"  data-ga='{"section":"Top Bar","feature":"Top Bar Programs"}'>Apply</a></li><!--
+ --><li ><a href="https://www.f6s.com/startups"  data-ga='{"section":"Top Bar","feature":"Top Bar Startups"}'>Startups</a></li><!--
+ --><li ><a href="https://www.f6s.com/jobs"  data-ga='{"section":"Top Bar","feature":"Top Bar Jobs"}'>Jobs</a></li><!--
+         --><li ><a href="https://www.f6s.com/deals"  data-ga='{"section":"Top Bar","feature":"Top Bar Deals"}'>Deals</a></li><!--
+     --><li class="pulldown">
+        <a href="javascript:;" class="topbar-toggle"  >More<div class="drop-arrow"></div></a>
+        <ul class="topbar-submenu">
+                        <li><a href="https://www.f6s.com/f6s"  data-ga='{"section":"Top Bar More","feature":"Top Bar About"}'>About</a></li>
+                                    <li><a href="https://www.f6s.com/mobile"  data-ga='{"section":"Top Bar More","feature":"Top Bar Mobile"}'>Mobile</a></li>
+        </ul>
+    </li><!--
+ --><li class="pulldown has-separator" >
+        <a href="javascript:;" class="topbar-toggle"  >Add your<div class="drop-arrow"></div></a>
+        <ul class="topbar-submenu" >
+            <li><a href="javascript:;" onclick="csAddEventButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Event"}'>Event</a></li>
+            <li><a href="javascript:;" onclick="csAddOrganizationButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Team"}'>Startup</a></li>
+            <li><a href="javascript:;" onclick="csAddJobButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Job"}'>Job Listing</a></li>
+            <li><a href="javascript:;" onclick="csAddDealButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Deal"}'>Deal</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Accelerator"}'>Accelerator</a></li>
+            <li><a href="javascript:;" onclick="csAddInvestFundButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Investment Fund"}'>Inv. Fund</a></li>
+            <li><a href="javascript:;" onclick="csAddAngelGroupButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Angel Group"}'>Angel Group</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Contest"}'>Contest</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Coworking"}'>Coworking</a></li>
+        </ul>
+    </li><!--
+ --><!-- --></ul>
+                <script type="text/javascript">
+                    $(function() {
+                        $(window).load(function(){
+                            // Make the mobile menu scrollable
+                            $("#mobile-menu-container").mCustomScrollbar({
+                                autoHideScrollbar:true,
+                                updateOnContentResize: true,
+                                advanced:{
+                                    updateOnBrowserResize: true
+                                },
+                                autoDraggerLength: true,
+                                scrollInertia: 100
+                            });
+                        });
+                    });
+                </script>
+            </div>
+            <script type="text/javascript">
+                // Show and hide the mobile menu on click
+                $(document).bind('click', function(e) {
+                    csMobileMenuWindowObjectClick(e);
+                });
+                var csMobileMenuWindowObjectClick = function(e){
+                    if (!$('#mobile-menu-wrapper').hasClass('menu-hidden')) {
+                        var close_drop = true;
+                        if (e.target.id == 'mobile-menu-wrapper') {
+                            close_drop = false;
+                            return;
+                        }
+                        var el_id2 = $(e.target).parents('#mobile-menu-wrapper').attr('id');
+                        if (el_id2) {
+                            close_drop = false;
+                            return;
+                        }
+                        if (close_drop) {
+                            $('#mobile-menu-wrapper').addClass('menu-hidden');
+                            $('a#mobile-menu-toggle').addClass('no-menu').width('auto');
+                        }
+                    }
+                    return;
+                }
+                $('a#mobile-menu-toggle').bind('click', function() {
+                    if (!$('#mobile-menu-wrapper').hasClass('menu-hidden')) {
+                        $('#mobile-menu-wrapper').addClass('menu-hidden');
+                        $('a#mobile-menu-toggle').addClass('no-menu').width('auto');
+                        $('body').removeClass('popup-open');
+                    } else {
+                        $('body').addClass('popup-open');
+                        $('#mobile-menu-wrapper').removeClass('menu-hidden');
+                        var customScrollbar = $('#mobile-menu-container').find('.mCSB_scrollTools');
+                        customScrollbar.css({'opacity':0});
+                        $('#mobile-menu-container').mCustomScrollbar('update');
+                        customScrollbar.animate({opacity:1}, 'slow');
+                        // Expand the toggle link to the width of the entire menu
+                        $('a#mobile-menu-toggle').removeClass('no-menu').css('width', $('#mobile-menu-container').width() + 'px');
+                        
+                        // Hide the profile drop-down menu
+                        if (!$('#csTopBarNotifications').hasClass('notifications-hidden')) {
+                            $('#csTopBarNotifications').addClass('notifications-hidden');
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div id="main-menu-wrapper">
+            <ul id="main-menu" class="menu"><!-- --><!--
+ --><li ><a href="https://www.f6s.com/programs"  data-ga='{"section":"Top Bar","feature":"Top Bar Programs"}'>Apply</a></li><!--
+ --><li ><a href="https://www.f6s.com/startups"  data-ga='{"section":"Top Bar","feature":"Top Bar Startups"}'>Startups</a></li><!--
+ --><li ><a href="https://www.f6s.com/jobs"  data-ga='{"section":"Top Bar","feature":"Top Bar Jobs"}'>Jobs</a></li><!--
+         --><li ><a href="https://www.f6s.com/deals"  data-ga='{"section":"Top Bar","feature":"Top Bar Deals"}'>Deals</a></li><!--
+     --><li class="pulldown">
+        <a href="javascript:;" class="topbar-toggle" id="topbar_more" data-dropdown="more">More<div class="drop-arrow"></div></a>
+        <ul class="topbar-submenu"id="more">
+                        <li><a href="https://www.f6s.com/f6s"  data-ga='{"section":"Top Bar More","feature":"Top Bar About"}'>About</a></li>
+                                    <li><a href="https://www.f6s.com/mobile"  data-ga='{"section":"Top Bar More","feature":"Top Bar Mobile"}'>Mobile</a></li>
+        </ul>
+    </li><!--
+ --><li class="pulldown has-separator" data-dropdown="quickadd">
+        <a href="javascript:;" class="topbar-toggle" id="topbar_quickadd" data-dropdown="quickadd">Add your<div class="drop-arrow"></div></a>
+        <ul class="topbar-submenu" id="quickadd">
+            <li><a href="javascript:;" onclick="csAddEventButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Event"}'>Event</a></li>
+            <li><a href="javascript:;" onclick="csAddOrganizationButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Team"}'>Startup</a></li>
+            <li><a href="javascript:;" onclick="csAddJobButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Job"}'>Job Listing</a></li>
+            <li><a href="javascript:;" onclick="csAddDealButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Deal"}'>Deal</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Accelerator"}'>Accelerator</a></li>
+            <li><a href="javascript:;" onclick="csAddInvestFundButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Investment Fund"}'>Inv. Fund</a></li>
+            <li><a href="javascript:;" onclick="csAddAngelGroupButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Angel Group"}'>Angel Group</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Contest"}'>Contest</a></li>
+            <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Top Bar Dropdown","feature":"Top Bar Add Coworking"}'>Coworking</a></li>
+        </ul>
+    </li><!--
+ --><!-- --></ul>
+        </div>
+        <script type="text/javascript">
+            function csTopBarDropdown(particle) {
+                this.particle = particle;
+                this.link = $('#topbar_' + this.particle);
+                this.menu = $('#' + this.particle);
+                
+                this.init();
+                
+                return this;
+            }
+            
+            csTopBarDropdown.prototype.init = function() {
+                var self = this;
+                
+                if (self.menu.outerWidth() < self.link.outerWidth())  self.menu.outerWidth(self.link.outerWidth());
+                
+                // Add hover events to link
+                self.link.hover(function() {
+                    if (!self.link.hasClass('active')) {
+                        clearTimeout(self.menu.data('hoverTimer'));
+                        self.link.addClass('active');
+                        self.link.parent().addClass('expanded');
+                        self.menu.stop(true, true).slideDown(150);
+                    } else {
+                        if ('undefined' != typeof self.menu.data('hoverTimer')) clearTimeout(self.menu.data('hoverTimer'));
+                    }
+                }, function() {
+                    var timer = setTimeout(function() {
+                        self.menu.stop(true, true).slideUp(50, function() {
+                            self.link.removeClass('active');
+                            self.link.parent().removeClass('expanded');
+                        });
+                    }, 400);
+                    self.menu.data('hoverTimer', timer);
+                });
+                
+                // Add hover events to menu
+                self.menu.hover(function(){
+                    if ('undefined' != typeof self.menu.data('hoverTimer')) clearTimeout(self.menu.data('hoverTimer'));
+                }, function() {
+                    var timer = setTimeout(function() {
+                        self.menu.stop(true, true).slideUp(50, function() {
+                            self.link.removeClass('active');
+                            self.link.parent().removeClass('expanded');
+                        });
+                    }, 400);
+                    self.menu.data('hoverTimer', timer);
+                });
+                
+                // Add click event to window
+                $(document).bind('click', function(e) {
+                    if (self.link.hasClass('active')) {
+                        var close_drop = true;
+                        
+                        if (e.target.id = self.particle) {
+                            close_drop = false;
+                            return;
+                        }
+                        
+                        var el_id1 = $(e.target).parents('#' + self.particle).attr('id');
+                        if (el_id1) {
+                            close_drop = false;
+                            return;
+                        }
+                        
+                        if (e.target.id == 'topbar_' + self.particle) {
+                            close_drop = false;
+                            return;
+                        }
+                        
+                        var el_id2 = $(e.target).parents('#topbar_' + self.particle).attr('id');
+                        if (el_id2) {
+                            close_drop = false;
+                            return;
+                        }
+                        
+                        if (close_drop) {
+                            self.menu.stop(true, true).slideUp(50, function() {
+                                self.link.removeClass('active');
+                                self.link.parent().removeClass('expanded');
+                            });
+                        }
+                    }
+                });
+            }
+            
+            $(function() {
+                var csAddYourDropdownObj = new csTopBarDropdown('quickadd');
+                var csMoreDropdownObj = new csTopBarDropdown('more');
+            });
+        </script>
+    </div>
+    <!-- End Nav -->
+    
+    <!-- Search -->
+    <div id="top-search" class="search ">
+        <div class="area" id="csTopBarSearchArea">
+            <span class="icon"></span>
+            <form method="get" action="https://www.f6s.com/search">
+                <input type="text" value="" class="no" style="padding-left: 32px; box-sizing:border-box; -moz-box-sizing:border-box" name="q" id="csTopBarSearchInput"  data-ga='{"section":"Top Bar","feature":"Top Bar Search Box"}'>
+                <script type="text/javascript">
+                    var csTopBarSearchInputObj = cs.components().input('csTopBarSearchInput', {
+                        defaultText: 'Search F6S',
+                        color: 'light-salad'
+                    });
+                    $('#csTopBarSearchArea').find('span.icon').click(function(e){
+                        csTopBarSearchInputObj.focus();
+                    });
+                </script>
+            </form>
+        </div>
+    </div>
+    <!-- End Search -->
+    
+    <div id="top-user" class="">
+                    <div class="notifications notifications-hidden" id="csTopBarNotifications">
+                <div class="user nh" id="csTopBarUser">
+                    <span class="user-icon r3" style="background: none"><span class="border t15 r-full"></span><img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/26/2592_th3.jpg" class="r-full" /></span>
+                    <div class="user-name"><div class="drop-arrow"></div></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="drop" id="csTopBarDrop">
+                                        <div class="drop-inside">
+                        <ul class="simple">
+                            <li><a href="https://www.f6s.com/"  data-ga='{"section":"Top Bar","feature":"User Menu Dashboard"}'><span class="dashbar-icon link-icon"><i class="fa fa-fw fa-home"></i></span>Home</a></li>
+                            <li><a href="https://www.f6s.com/#actions"  data-ga='{"section":"Top Bar","feature":"User Menu Inbox"}'><span class="dashbar-icon link-icon"><i class="fa fa-fw fa-envelope"></i></span>Inbox <span class="notifications-count">2</span></a></li>
+                            <li><a href="https://www.f6s.com/gauravtiwari"  data-ga='{"section":"Top Bar","feature":"User Menu Profile"}'><span class="dashbar-icon link-icon"><i class="fa fa-fw fa-user"></i></span>My profile</a></li>
+                            <li><a href="https://www.f6s.com/account/settings"  data-ga='{"section":"Top Bar","feature":"User Menu Settings"}'><span class="dashbar-icon link-icon"><i class="fa fa-fw fa-cog"></i></span>Settings</a></li>
+                            <li><a href="https://www.f6s.com/account/control/logout?csrf=36fcc7f759aa6cbb23db4cdb6fc794b5"  data-ga='{"section":"Top Bar","feature":"User Menu Logout"}'><span class="dashbar-icon link-icon"><i class="fa fa-fw fa-sign-out"></i></span>Logout</a></li>
+                        </ul>
+                        
+                        <div class="drop-end"></div>
+                    </div>
+                    <script type="text/javascript">
+                            (function($){
+                                $(window).load(function(){
+                                    $("#csTopBarDrop").mCustomScrollbar({
+                                        autoHideScrollbar:true,
+                                        updateOnContentResize: true,
+                                        advanced:{
+                                            updateOnBrowserResize: true
+                                        },
+                                        autoDraggerLength: true,
+                                        scrollInertia: 100
+                                    });
+                                });
+                            })(jQuery);
+                    </script>
+                </div>
+            </div>
+            <script type="text/javascript">
+                // Show and hide the profile menu on click
+                $(document).bind('click', function(e) {
+                    csTopBarDropWindowObjectClick(e);
+                });
+                var csTopBarDropWindowObjectClick = function(e){
+                    if(!$('#csTopBarNotifications').hasClass('notifications-hidden')){
+                        var close_drop = true;
+                        if(e.target.id == 'csTopBarNotifications'){
+                            close_drop = false;
+                            return;
+                        }
+                        var el_id2 = $(e.target).parents('#csTopBarNotifications').attr("id");
+                        if(el_id2){
+                            close_drop = false;
+                            return;
+                        }
+                        if(close_drop){
+                            $('#csTopBarNotifications').addClass('notifications-hidden');
+                        }
+                    }
+                    return;
+                }
+                $('#csTopBarUser').bind('click', function(){
+                    if(!$('#csTopBarNotifications').hasClass('notifications-hidden')){
+                        $('#csTopBarNotifications').addClass('notifications-hidden');
+                    }
+                    else{
+                        $('#csTopBarNotifications').removeClass('notifications-hidden');
+                        var customScrollbar = $("#csTopBarDrop").find(".mCSB_scrollTools");
+                        customScrollbar.css({"opacity":0});
+                        $("#csTopBarDrop").mCustomScrollbar("update");
+                        customScrollbar.animate({opacity:1},"slow");
+                        
+                        // Hide the mobile drop-down menu
+                        if (!$('#mobile-menu-wrapper').hasClass('menu-hidden')) {
+                            $('#mobile-menu-wrapper').addClass('menu-hidden');
+                            $('a#mobile-menu-toggle').addClass('no-menu').width('auto');
+                        }
+                    }
+                });
+            </script>
+            </div>
+</div>
+
+<script type="text/javascript">
+    function csMobileTopBar() {
+        return this;
+    }
+    /**
+     * Calculate the width of the elements in the main menu
+     */
+    csMobileTopBar.prototype.getMenuWidth = function (menuId, options) {
+        var onlyVisible = (options.onlyVisible) ? options.onlyVisible : false;
+        var hiddenClass = (options.hiddenClass) ? options.hiddenClass : false;
+        var menuw = 0;
+        $('#' + menuId + ' > li').each(function() {
+            if (onlyVisible && hiddenClass && '' != hiddenClass) {
+                if (!$(this).hasClass(hiddenClass))
+                    menuw += $(this).outerWidth(true);
+            } else {
+                if ('none' == $(this).css('display')) {
+                    // If the element is taken out of DOM flow, include it temporarily
+                    // to be able to calculate its width
+                    if (hiddenClass && '' != hiddenClass) {
+                        $(this).css('visibility', 'hidden');
+                        $(this).removeClass(hiddenClass);
+                        menuw += $(this).outerWidth(true);
+                        $(this).addClass(hiddenClass);
+                        $(this).css('visibility', 'visible');
+                    }
+                } else {
+                    menuw += $(this).outerWidth(true);
+                }
+            }
+        });
+
+        return menuw;
+    }
+    
+    /**
+     * Show or hide items in a menu by adding a specific class
+     * to the items when they don't fit in available width
+     */
+    csMobileTopBar.prototype.toggleMenuItems = function(menuContainerId, menuId, hideClass) {
+        var containerW = $('#' + menuContainerId).width();
+        var menuw = this.getMenuWidth(menuId, {hiddenClass: hideClass});
+
+        if (menuw > containerW) {
+            var menuItems = $('#' + menuId + ' > li');
+            $('#top-nav').addClass('mobile');
+            containerW = $('#' + menuContainerId).width();
+            while (menuw > containerW) {
+                menuItems.removeClass('hide');
+                var lastItem = menuItems.last();
+                lastItem.addClass(hideClass);
+                menuItems.splice(-1, 1);
+
+                menuw = this.getMenuWidth(menuId, {onlyVisible: true, hiddenClass: hideClass});
+            }
+            menuItems.removeClass(hideClass);
+        }
+
+        menuw = this.getMenuWidth(menuId, {hiddenClass: hideClass});
+        if (menuw <= containerW) {
+            $('#top-nav').removeClass('mobile');
+            $('#' + menuId + ' > li').removeClass(hideClass);
+        }
+    }
+
+    /**
+     * Hide the menu on scroll down, show it on scroll up
+     */
+    csMobileTopBar.prototype.scrollAutoHide = function() {
+        if ($(window).width() < 800) {
+            var highestPos = 0;
+            var lowestPos = 0;
+            var previousPos = 0;
+            var isScrollingUp = true;
+            var scrollThreshold = 5;
+            var scrollTracking = true;
+            var navbarHeight = $('#topbar').height();
+            $(window).on('scroll.topbarHide', function() {
+                var currentPos = $(window).scrollTop();
+                if (currentPos < 0) return false;
+                
+                if(Math.abs(previousPos - currentPos) <= scrollThreshold)
+                    return;
+                
+                if (currentPos > previousPos && currentPos > navbarHeight){
+                    // Scroll Down
+                    $('#topbar').removeClass('nav-down').addClass('nav-up');
+                    $('body').removeClass('nav-down').addClass('nav-up');
+                } else {
+                    // Scroll Up
+                    if(currentPos + $(window).height() < $(document).height()) {
+                        $('#topbar').removeClass('nav-up').addClass('nav-down');
+                        $('body').removeClass('nav-up').addClass('nav-down');
+                    }
+                }
+                
+                previousPos = currentPos;
+                
+            });
+        }
+    }
+
+    /**
+     * Hide elements that don't fit in the width of the browser window
+     */
+    csMobileTopBar.prototype.renderMenuItems = function() {
+        var self = this;
+        this.toggleMenuItems('main-menu-wrapper', 'main-menu', 'hide');
+        $( window ).resize(function() {
+            if ($(window).width() < 800) {
+                self.toggleMenuItems('main-menu-wrapper', 'main-menu', 'hide');
+            } else {
+                $('#main-menu > li').removeClass('hide');
+                $('#top-nav').removeClass('mobile');
+            }
+        });
+    }
+
+    // Mobile menu handling
+    var csMobileTopBarObj = new csMobileTopBar();
+
+    $(function() {
+        csMobileTopBarObj.renderMenuItems();
+        csMobileTopBarObj.scrollAutoHide();
+    });
+
+</script>
+<div id="top" class="custom-page-top-profile-main-main">
+	<div id="profile-top" class="personal">
+	<script type="text/javascript" src="https://www.f6s.com/js/cs/pictures/pictures.js?u=724b8636c4913a7849485ab11a07e077"></script>
+<script type="text/javascript" src="https://www.f6s.com/plugins/uploadify/swfobject.js?u=724b8636c4913a7849485ab11a07e077"></script>
+<script type="text/javascript" src="https://www.f6s.com/plugins/uploadify/jquery.uploadify.v2.1.4.min.js?u=724b8636c4913a7849485ab11a07e077"></script>
+<script type="text/javascript" src="https://www.f6s.com/js/cs/tags/tags.js"></script>
+<style type="text/css">
+	html, body{
+		background-color: #f6f6f6 !important;
+	}
+	#profile-main-content{
+		 width: 632px; 
+		 float: left; 
+		 position: relative; 
+		 z-index: 2; 
+		 margin-top: -15px;
+	}
+	#profile-main-content.personal-full{
+		 width: 960px;
+	}
+</style>
+<div id="profile-main-top">
+	<div class="middle">
+		<div class="main-top">
+			<h1 class="h2 profile-name" itemprop="name" >
+				<a href="" onclick="cs.window().reloadHash( '' );">Gaurav Tiwari</a>
+			</h1>
+						<div class="module team" id="profile-main-module-profile-brief-desription">
+	<h4 class="gray">Product and idea person, passionate about startups and creating things that matter, Cross platform full-stack developer</h4>
+</div>
+<script type="text/javascript">
+	cs.modules().addModule("profile_brief_description",{container_id: 'profile-main-module-profile-brief-desription'});
+</script>		</div>
+		<div class="mini-profile-area">
+			<div class="shadow-box r3 mini-profile" id="csPersonalProfileRightBox">
+				<div id="profile-main-module-profile-actions">
+				<span id="profileActionsModuleButton0"></span>&nbsp;<script type="text/javascript">
+				var profileActionsModuleButton0Obj = cs.components().button("profileActionsModuleButton0", {
+					title: 'I\'m not interested in Jobs',
+					customClassName: '',
+											onClick: function(){ 
+							//this.disable();
+							
+									if(this.options.state == 'interested'){
+										this.setTitle('I\'m not interested in Jobs');
+										this.options.state = 'not_interested';
+									}
+									else{
+										this.setTitle('I\'m interested in Jobs');
+										this.options.state = 'interested';
+									}
+									$.get('https://www.f6s.com/profile/3083/jobs/interested-in-jobs/' + this.options.state, {}, function(response){
+										// do not wait for response
+									});
+															},
+												state: 'not_interested',
+												captionTitleAttr: 'Click for startups to contact you about Jobs',
+												color: 'green',
+											size: '29'
+				});
+			</script>	<script type="text/javascript">
+		// Changing second button if edit profile or edit application
+		/*if('undefined' != typeof(profileActionsModuleButton1Obj)) {
+			var profileActionsModuleButtonForEditObj = profileActionsModuleButton1Obj;
+		}
+		else if('undefined' != typeof(profileActionsModuleButton0Obj)) {
+			var profileActionsModuleButtonForEditObj = profileActionsModuleButton0Obj;
+		}
+		if('undefined' != typeof(profileActionsModuleButtonForEditObj)) {
+			profileActionsModuleButtonForEditObj._modDefaultTitle = profileActionsModuleButtonForEditObj.getTitle();
+			profileActionsModuleButtonForEditObj._modDefaultClick = profileActionsModuleButtonForEditObj.options.onClick;
+			$(window).bind('hashchange', function(e) {
+				if('undefined' != typeof(profileActionsModuleButtonForEditObj)) {
+					if(location.hash.search(/ajax\-summary\?mode\=edit/) != -1 || location.hash.search(/accelerators\/ajax\-application/) != -1 || location.hash.search(/accelerators\/ajax\-participants/) != -1 || location.hash.search(/jobs\/edit-list/) != -1){
+						// Set edit profile text to view profile
+						profileActionsModuleButtonForEditObj.setTitle('View Profile');
+						profileActionsModuleButtonForEditObj.onElementClickTemp = function() {
+							location.href = "#main/ajax-summary";
+							cs.window().reloadHash('main/ajax-summary');
+						}
+					}
+					else{
+						if(profileActionsModuleButtonForEditObj.getTitle() != profileActionsModuleButtonForEditObj._modDefaultTitle){
+							profileActionsModuleButtonForEditObj.setTitle(profileActionsModuleButtonForEditObj._modDefaultTitle);
+							profileActionsModuleButtonForEditObj.onElementClickTemp = profileActionsModuleButtonForEditObj._modDefaultClick;
+						}
+					}
+				}
+			});
+		}*/
+	</script>
+
+</div>				<div class="profile-picture">
+					<span class="arrow"></span>
+					<span class="border t20"></span>
+					<div id="profile-main-module-profile-top-links" class="links">
+	<ul class="links" >
+					<li>
+				<a href="http://gauravtiwari.co.uk" itemprop="url" target="_blank" title="Website" class="link-website"></a>
+			</li>
+						<li>
+				<a href="http://facebook.com/gauravtiwari23"  target="_blank" title="Facebook" class="link-facebook"></a>
+			</li>
+						<li>
+				<a href="https://twitter.com/GauravTiwari90"  target="_blank" title="Twitter" class="link-twitter"></a>
+			</li>
+						<li>
+				<a href="http://uk.linkedin.com/pub/gaurav-tiwari/16/b02/b88"  target="_blank" title="Linkedin" class="link-linkedin"></a>
+			</li>
+			            <script type="application/ld+json">
+                { 
+                    "@context": "http://schema.org",
+                    "@id" : "https://www.f6s.com/gauravtiwari",
+                    "@type": "Person",
+                    "name": "Gaurav Tiwari",
+                    "url": "https://www.f6s.com/gauravtiwari",
+                    "sameAs": [ 
+                                                    "http://gauravtiwari.co.uk",
+                                                        "http://facebook.com/gauravtiwari23",
+                                                        "https://twitter.com/GauravTiwari90",
+                                                        "http://uk.linkedin.com/pub/gaurav-tiwari/16/b02/b88",
+                                                    "https://www.f6s.com/gauravtiwari"
+                    ] 
+                }
+            </script>
+            		<li class="cl"></li>
+	</ul>
+</div>												<img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/26/2592_half.jpg"  itemprop="photo" id="csProfileTopPictureContainer" alt="Gaurav Tiwari"  >
+													<div class="change-pic-area change-pic-area-hover" onclick="csPopup.display('https://www.f6s.com/account/pictures/popup-profile-picture?actor_id=3083');">
+							<div class="change-pic-area-icon"></div>
+							<div class="change-pic-area-text">photo</div>
+						</div>
+						                    <script type="application/ld+json">
+                        {
+                            "@context": "http://schema.org",
+                            "@id" : "https://www.f6s.com/gauravtiwari",
+                            "@type" : "Person",
+                            "name" : "Gaurav Tiwari",
+                            "image" : "https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/26/2592_original.jpg",
+                            "url": "https://www.f6s.com/gauravtiwari"
+                        }
+                    </script>
+                    <script type="application/ld+json">
+                        { 
+                            "@context": "http://schema.org",
+                            "@type": "ProfilePage",
+                            "about": {
+                                "@type": "Person",
+                                "name" : "Gaurav Tiwari",
+                                "url": "https://www.f6s.com/gauravtiwari"
+                            }
+                        }
+                    </script>
+				</div>
+								<div class="layout">
+					  
+								<h4>Invests in Startups</h4>
+																				</div>
+				
+				<div class="divider"></div>
+									<div class="layout">
+						<h4>Gaurav's Startup Activities</h4>
+						<ul class="startup-activity">
+															<li>
+									<a href="/funddedltd" class="image"><img src="/images/profile-placeholder-startup.jpg"></a>
+									<a href="/funddedltd" class="name" title="Leader, Fundded LTD">Leader<b>Fundded LTD</b></a>
+								</li>
+																<li>
+									<a href="/hungryhead" class="image"><img src="https://e03c80700359b94dc076-5d7bb0b1b83e6b4f66ae8968d10998c0.ssl.cf1.rackcdn.com/8243/824272_th3.jpg"></a>
+									<a href="/hungryhead" class="name" title="Leader, hungryhead">Leader<b>hungryhead</b></a>
+								</li>
+																<li>
+									<a href="/nytoutltd" class="image"><img src="/images/profile-placeholder-startup.jpg"></a>
+									<a href="/nytoutltd" class="name" title="Leader, NYTOUT LTD">Leader<b>NYTOUT LTD</b></a>
+								</li>
+															<li class="cl"></li>
+						</ul>
+					</div>
+					<div class="divider"></div>
+                                            <script type="application/ld+json">
+                            {
+                                "@context": "http://schema.org",
+                                "@id" : "https://www.f6s.com/gauravtiwari",
+                                "memberOf" : [
+                                                                            {
+                                            "@id" : "https://www.f6s.com/funddedltd",
+                                            "@type" : "Organization",
+                                                                                            "founder": {
+                                                    "@id" : "https://www.f6s.com/gauravtiwari",
+                                                    "@type" : "Person"
+                                                },
+                                                                                            "name" : "Fundded LTD",
+                                            "url" : "https://www.f6s.com/funddedltd"
+                                        },                                                                                {
+                                            "@id" : "https://www.f6s.com/hungryhead",
+                                            "@type" : "Organization",
+                                                                                            "founder": {
+                                                    "@id" : "https://www.f6s.com/gauravtiwari",
+                                                    "@type" : "Person"
+                                                },
+                                                                                            "name" : "hungryhead",
+                                            "url" : "https://www.f6s.com/hungryhead"
+                                        },                                                                                {
+                                            "@id" : "https://www.f6s.com/nytoutltd",
+                                            "@type" : "Organization",
+                                                                                            "founder": {
+                                                    "@id" : "https://www.f6s.com/gauravtiwari",
+                                                    "@type" : "Person"
+                                                },
+                                                                                            "name" : "NYTOUT LTD",
+                                            "url" : "https://www.f6s.com/nytoutltd"
+                                        }                                                                        ],
+                                "@type" : "Person"
+                            }
+                        </script>
+                        								<div id="profile-main-module-profile-skills-overview">
+			<ul class="skills">
+			                <li>Back End Dev</li>
+                                <li>General Engineer</li>
+                                <li>Front End Dev</li>
+                				<li class="r3 normal-tag">Mobile</li>
+								<li class="r3 normal-tag">Content Management</li>
+								<li class="r3 normal-tag">MySQL</li>
+								<li class="r3 normal-tag">PostgreSQL</li>
+								<li class="r3 normal-tag">Redis</li>
+								<li class="r3 normal-tag">Ruby</li>
+								<li class="r3 normal-tag">Ruby on Rails</li>
+								<li class="r3 normal-tag">Web Development</li>
+							<div class="cb"></div>
+		</ul>
+	</div>				<script type="text/javascript">var checkInterval;
+
+function csPlayMedia(galleryItem, url) {
+    if ('boolean' == typeof window.preventClick && true === window.preventClick) return false;
+    
+    if ('undefined' == typeof csPopup.version || 1 == csPopup.version) {
+        csPlayMediaV1(galleryItem, url);
+    } else if (2 == csPopup.version) {
+        csPlayMediaV2(galleryItem, url);
+    }
+}
+
+function csPlayMediaV1(galleryItem, url) {
+    if(url){
+        var content = $('<div/>', {
+            'class' : 'video'
+        });
+        if(isVideoURL(url)) {
+            // Video
+            var obj = $('<iframe/>',{
+                width: 640,
+                height: 390,
+                src: url,
+                frameborder: '0',
+                allowfullscreen: true
+            }).appendTo(content);
+        }
+        else {
+            // Image
+            var obj = $('<img/>',{
+                src: url
+            }).appendTo(content);
+        }
+        
+        if( 'undefined' == typeof(csPopup.container) || 'none' == csPopup.container.css('display') ) {
+            csPopup.display(content, {
+                html: true,
+                width: 0,
+                height: 0
+            });
+        }
+        else {
+            csPopup.loadHtml(content);
+        }
+        csPopup.windowContainer.css('visibility', 'hidden');
+        
+        checkInterval = setInterval( function() {
+            if(0 != obj.width() && 0 != obj.height()) {
+                
+                var w = obj.width();
+                var h = obj.height();
+                
+                w_limit = $(window).width() - $(window).width() / 20;
+                h_limit = $(window).height() - $(window).height() / 20;
+                
+                var ratio = w / h;
+                var win_ratio = $(window).width() / $(window).height();
+                
+                if(ratio > win_ratio && w > w_limit) {
+                    w = w_limit;
+                    h = w * h / obj.width();
+                }
+                if(ratio < win_ratio && h > h_limit) {
+                    h = h_limit;
+                    w = w * h / obj.height();
+                }
+                
+                obj.css('width', w);
+                obj.css('height', h);
+                
+                csPopup.resize(w, h);
+                csPopup.windowContainer.css('visibility', 'visible');
+                
+                var cross = $('<span/>',{
+                    'class': 'cross r3tr r3br t60'
+                }).appendTo(content);
+                $('<span/>',{}).appendTo(cross);
+                cross.bind('click', function(){
+                    $(document).unbind('keydown');
+                    csPopup.close();
+                });
+                
+                clearInterval(checkInterval);
+            }
+        }, 5 );
+        
+        csMediaSwitchers(galleryItem, content);	
+    }
+}
+
+function csPlayMediaV2(galleryItem, url) {
+    if (!(galleryItem instanceof jQuery)) {
+        galleryItem = $(galleryItem);
+    }
+    
+    var mediaUrl = galleryItem.data('media-url');
+    if (!mediaUrl) {
+        if ('undefined' != typeof url) mediaUrl = url;
+    }
+    
+    if (mediaUrl) {
+        var mediaType = (isVideoURL(mediaUrl)) ? 'video' : 'image';
+        
+        var enableGallery = false;
+        var gallery = getGallery(galleryItem);
+        if (gallery.length > 1) {
+            enableGallery = true;
+            
+            var currentPos = gallery.index($(galleryItem));
+            
+            var nextItem = currentPos + 1;
+            if (nextItem == gallery.length) nextItem = 0;
+            
+            var prevItem = currentPos - 1;
+            if (prevItem < 0) prevItem = gallery.length - 1;
+        }
+        
+        if (!csPopup.visible) {
+            csPopup.display(mediaUrl, {
+                media: mediaType,
+                overlayCloseButton: true,
+                //closeOnBlur: false,
+                fitContent: true
+            });
+        } else {
+            if ('image' == mediaType) csPopup.loadImage(mediaUrl);
+            else if ('video' == mediaType) csPopup.loadVideo(mediaUrl);
+        }
+        
+        if (enableGallery) {
+            csPopup.enableNavButtons(
+                function() {
+                    csPlayMedia(gallery[prevItem]);
+                },
+                function() {
+                    csPlayMedia(gallery[nextItem]);
+                }
+            );
+        }
+    }
+}
+
+function csMediaSwitchers(galleryItem, container){
+    var gallery_items = getGallery(galleryItem);
+    if (gallery_items.length > 1) {
+        
+        arrow = {left: 37, right: 39};
+        $(document).unbind('keydown');
+        
+        var pos = gallery_items.index($(galleryItem));
+        
+        var prev = $('<a/>',{
+            'class': 'mediaSwitch prev'
+        }).appendTo(container);
+        
+        var prev_i = pos - 1;
+        if(prev_i < 0) prev_i = gallery_items.length - 1;
+        
+        prev.click(function() {
+            gallery_items.eq(prev_i).trigger('click');
+        });
+        
+        $(document).keydown(function(e) {
+            var keyCode = e.keyCode || e.which;
+            if(keyCode == arrow.left) {
+                gallery_items.eq(prev_i).trigger('click');
+            }
+        });
+        
+        var next_i = pos + 1;
+        if(next_i == gallery_items.length) next_i = 0;
+        
+        var next = $('<a/>',{
+            'class': 'mediaSwitch next'
+        }).appendTo(container);
+        
+        next.click(function() {
+            gallery_items.eq(next_i).trigger('click');
+        });
+        
+        $(document).keydown(function(e) {
+            var keyCode = e.keyCode || e.which;
+            if(keyCode == arrow.right) {
+                gallery_items.eq(next_i).trigger('click');
+            }
+        });
+    }
+}
+
+function isVideoURL(video_url) {
+    // YouTube
+    video_id = false;
+    var reg = /(\?v=|\&v=|\/\d\/|\/embed\/|\/v\/|\.be\/)([a-zA-Z0-9\-\_]+)/;
+    var regexyoutubeurl = video_url.match(reg);
+    if (regexyoutubeurl) video_id = regexyoutubeurl[2];
+    if(video_id) { 
+        return ['youtube',video_id];
+    }
+    // Vimeo
+    var reg = /(https?:\/\/)?(www\.|player\.)?vimeo.com\/(video\/)?(\d+)(\?|$|\/)/;
+    var regexvimeourl = video_url.match(reg);
+    if (regexvimeourl) {
+        for(i in regexvimeourl) {
+            if(cs.algorithms().isNumber(regexvimeourl[i]) && parseInt(regexvimeourl[i]) > 0) {
+                video_id = regexvimeourl[i];
+                break;
+            }
+        }
+    }
+    if(video_id) { 
+        return ['vimeo',video_id];
+    }
+    return false;
+}
+
+function getGallery(galleryItem) {
+    var gallery = $(galleryItem).data('gallery');
+    if (gallery) {
+        return $('*[data-gallery="' + gallery + '"]');
+    } else {
+        return false;
+    }
+}</script>		<div class="empty"></div>
+											<div class="layout">
+						<ul class="vertical-stats"><li><span class="icon icpn-location"></span>Manchester, United Kingdom</li></ul>
+					</div>
+					<div class="divider"></div>
+                    <script type="application/ld+json">
+                        {
+                            "@context": "http://schema.org",
+                            "@id" : "https://www.f6s.com/gauravtiwari",
+                            "@type" : "Person",
+                            "address" : {
+                                "@type" : "PostalAddress",
+                                "addressLocality" : "Manchester, United Kingdom"
+                            }
+                        }
+                    </script>
+										<div class="work-history layout">
+						<ul class="work-history">
+															<li>
+																		<a href="https://www.facebook.com/profile.php?id=112927428741971" target="_blank">
+										CRO 2010 @ Lancaster university									</a>
+								</li>
+																<li>
+																		<a href="https://www.f6s.com/nytoutltd" target="_blank">
+										Leader  @ NYTOUT LTD									</a>
+								</li>
+														</ul>
+                        <script type="application/ld+json">
+                            {
+                                "@context": "http://schema.org",
+                                "@id" : "https://www.f6s.com/gauravtiwari",
+                                "@type" : "Person",
+                                "jobTitle": "Product and idea person, passionate about startups and creating things that matter, Cross platform full-stack developer"
+                            }
+                        </script>
+					</div>
+					<div class="divider"></div>
+										<div class="work-history layout">
+                        <ul class="education-history">
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">Lancaster University, UK</span>
+                                     |                                                                                                                                                                     <span class="date-end date-span">
+                                                2009                                            </span>
+                                                                                                            </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">Manipal University</span>
+                                     |                                                                                                                                                                     <span class="date-end date-span">
+                                                2007                                            </span>
+                                                                                                            </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">children college</span>
+                                     |                                                                                                                                                                     <span class="date-end date-span">
+                                                2006                                            </span>
+                                                                                                            </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">children college</span>
+                                     |                                                                                                                                                                     <span class="date-end date-span">
+                                                2004                                            </span>
+                                                                                                            </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">children senior secondary school azamgarh</span>
+                                                                    </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">Manipal University</span>
+                                                                    </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">ICAS</span>
+                                                                    </li>
+                                                            <li>
+                                                                        <span class="at_word"  style="display:none">at</span>
+                                    <span class="company_name">Lancaster University</span>
+                                                                    </li>
+                                                    </ul>
+                    </div>
+					<div class="divider"></div>
+								</div>
+		</div>
+		<div class="profile-menu" id="csProfileMenu">
+			<ul class="profile-menu csProfileMenuList">
+								<li class="selected" rel="connections" data-item='{"type":"connections","num":"0"}'><a href="/gauravtiwari/connections" data-hash='{"leave":"gauravtiwari","exclamation":false}' onclick="csProfileMenu.selectItemType('connections');" class="r3tr r3tl">20 Connections</a></li>
+									<li  rel="recommendations" data-item='{"type":"recommendations","num":"1"}'><a href="/gauravtiwari/recommendations" data-hash='{"leave":"gauravtiwari","exclamation":false}' onclick="csProfileMenu.selectItemType('recommendations');" class="r3tr r3tl">Recommendations</a></li>
+									<li  rel="edit" data-item='{"type":"edit","num":"2"}'><a href="/gauravtiwari#main/ajax-summary?mode=edit"  onclick="csProfileMenu.selectItemType('edit');" class="r3tr r3tl">Edit</a></li>
+								</ul>
+		</div>
+		<script type="text/javascript">
+			$('#csPersonalProfileRightBox').find('.divider:last').addClass('divider-last');
+			var csProfileMenu = cs.components().profileMenu("csProfileMenu", {
+			
+			});
+			if(location.hash.indexOf("main/ajax-summary") != -1){
+				$('#csProfileCollapsableHeader').hide();
+			}
+            		</script>
+	</div>
+</div>
+
+
+
+
+
+
+</div></div>
+<div id="content" class="content_holder  custom-page-holder-main-main">
+	<div class="middle">
+		<div id="profile-content" class="personal">
+	<div id="profile-main-content">
+	<script type="text/javascript">var is_profile = true;</script>
+<div id="profile-main-main-content">
+	<div class="shadow-box r3" style="min-height: 200px">
+		<div id="csBlockLoader">
+			<div id="profile-main-connections-personal">
+        
+                <ul class="connections-display-groups">
+                                <li onclick="csDisplayConnectionGroup('startups')">Startups: <span class="group-number">3</span></li>
+                                        <li onclick="csDisplayConnectionGroup('organizations')">Organizations: <span class="group-number">16</span></li>
+                                        <li onclick="csDisplayConnectionGroup('following')">Following: <span class="group-number">9</span></li>
+                                <li class="cl"></li>
+        </ul>
+        	<ul class="connections">
+					<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/dotforge">
+					<img src="https://9e727f32f41cdf779491-ea4dac8c547d02eaeea082ee8be1d361.ssl.cf1.rackcdn.com/8108/810790_th3.jpg" alt="dotforge accelerator">
+					<span class="border t20"></span>
+				</a>
+				<a href="/dotforge" class="name">dotforge accelerator</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend32608"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend32608Obj = cs.components().button('csPersonalConnectionsRecommend32608', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=32608&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/dfimpact">
+					<img src="https://1c4710d1e52ede02dc7c-a93d89698db7668834e3f2b80db8504e.ssl.cf1.rackcdn.com/6504/650348_th3.jpg" alt="Dotforge Impact Accelerator">
+					<span class="border t20"></span>
+				</a>
+				<a href="/dfimpact" class="name">Dotforge Impact Accelerator</a>
+								<ul class="relationship">
+					<li>Architecture & Construction</li><li>, </li><li>Education</li><li>, </li><li>Finance</li><li>, </li><li>Health/Medical</li><li>, </li><li>Social Enterprise</li><li>, </li><li>Accessibility</li><li>, </li><li>Charitable Giving Strategies</li><li>, </li><li>Community Building</li><li>, </li><li>Community Development</li><li>, </li><li>Community Outreach</li><li>, </li><li>Community Relations</li><li>, </li><li>Disability</li><li>, </li><li>Education Management</li><li>, </li><li>Education Reform</li><li>, </li><li>Educational Technology</li><li>, </li><li>Health Economics</li><li>, </li><li>Healthcare</li><li>, </li><li>Healthcare Management</li><li>, </li><li>Housing</li><li>, </li><li>International Education</li><li>, </li><li>NGOs</li><li>, </li><li>Poverty Reduction</li><li>, </li><li>Social Entrepreneurship</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend387065"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend387065Obj = cs.components().button('csPersonalConnectionsRecommend387065', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=387065&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/entrepreneurfirst">
+					<img src="https://dd4440bb04460146213a-ae6f3760d094ae2624e4cfde9d4be366.ssl.cf1.rackcdn.com/826/82564_th3.jpg" alt="Entrepreneur First">
+					<span class="border t20"></span>
+				</a>
+				<a href="/entrepreneurfirst" class="name">Entrepreneur First</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend8605"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend8605Obj = cs.components().button('csPersonalConnectionsRecommend8605', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=8605&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/entrepreneurfirst20131">
+					<img src="https://8033560c263fe9c061a1-90f3c3f6e21498cf4812ff85169d6f2c.ssl.cf1.rackcdn.com/451/45002_th3.jpg" alt="Entrepreneur First 2013">
+					<span class="border t20"></span>
+				</a>
+				<a href="/entrepreneurfirst20131" class="name">Entrepreneur First 2013</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend8606"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend8606Obj = cs.components().button('csPersonalConnectionsRecommend8606', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=8606&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/fundded">
+					<img src="https://82062fa0e6bc02b477f4-01aa321adc0cc85a1cd8c90f67fe3348.ssl.cf1.rackcdn.com/1125/112420_th3.jpg" alt="Fundded">
+					<span class="border t20"></span>
+				</a>
+				<a href="/fundded" class="name">Fundded</a>
+								<ul class="relationship">
+					<li>Mentoring</li><li>, </li><li>Start-ups</li><li>, </li><li>Business Modeling</li><li>, </li><li>Entrepreneur</li><li>, </li><li>Funding</li><li>, </li><li>Students</li><li>, </li><li>Training & Coaching</li><li>, </li><li>Education</li><li>, </li><li>Consulting</li><li>, </li><li>Training & Coaching</li><li>, </li><li>Education</li><li>, </li><li>Consulting</li><li>, </li><li>Finance</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend94362"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend94362Obj = cs.components().button('csPersonalConnectionsRecommend94362', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=94362&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_startups ">
+				<a class="image" href="/funddedltd">
+					<img src="/images/profile-placeholder-startup.jpg" alt="Fundded LTD">
+					<span class="border t20"></span>
+				</a>
+				<a href="/funddedltd" class="name">Fundded LTD</a>
+								<ul class="relationship">
+									</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend129640"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend129640Obj = cs.components().button('csPersonalConnectionsRecommend129640', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=129640&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_following ">
+				<a class="image" href="/gauravtiwari2">
+					<img src="https://8611812d89413dc43d07-29fc318d7fb6b51c14fe741ab4209bd2.ssl.cf1.rackcdn.com/984/98310_th3.jpg" alt="gaurav tiwari">
+					<span class="border t20"></span>
+				</a>
+				<a href="/gauravtiwari2" class="name">gaurav tiwari</a>
+									<p class="blurb">A computer engineer, web developer & a lean entrepreneur. </p>
+									<ul class="relationship">
+					<li><a href="/fundded">Fundded</a></li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend81086"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend81086Obj = cs.components().button('csPersonalConnectionsRecommend81086', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=81086&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_startups ">
+				<a class="image" href="/hungryhead">
+					<img src="https://e03c80700359b94dc076-5d7bb0b1b83e6b4f66ae8968d10998c0.ssl.cf1.rackcdn.com/8243/824272_th3.jpg" alt="hungryhead">
+					<span class="border t20"></span>
+				</a>
+				<a href="/hungryhead" class="name">hungryhead</a>
+								<ul class="relationship">
+					<li>Ideation</li><li>, </li><li>Students</li><li>, </li><li>Education</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend12661"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend12661Obj = cs.components().button('csPersonalConnectionsRecommend12661', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=12661&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/lecamping">
+					<img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/74/7392_th3.jpg" alt="Le Camping">
+					<span class="border t20"></span>
+				</a>
+				<a href="/lecamping" class="name">Le Camping</a>
+								<ul class="relationship">
+					<li>Mobile</li><li>, </li><li>Web</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend7718"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend7718Obj = cs.components().button('csPersonalConnectionsRecommend7718', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=7718&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/lecampingseason3">
+					<img src="https://d92ed57c1997e1387844-57473afe2f9538a60acae373bc9f9b40.ssl.cf1.rackcdn.com/200/19969_th3.jpg" alt="Le Camping Season 3">
+					<span class="border t20"></span>
+				</a>
+				<a href="/lecampingseason3" class="name">Le Camping Season 3</a>
+								<ul class="relationship">
+									</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend2113"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend2113Obj = cs.components().button('csPersonalConnectionsRecommend2113', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=2113&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_startups ">
+				<a class="image" href="/nytoutltd">
+					<img src="/images/profile-placeholder-startup.jpg" alt="NYTOUT LTD">
+					<span class="border t20"></span>
+				</a>
+				<a href="/nytoutltd" class="name">NYTOUT LTD</a>
+								<ul class="relationship">
+									</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend4917"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend4917Obj = cs.components().button('csPersonalConnectionsRecommend4917', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=4917&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/oxygenaccelerator">
+					<img src="https://c2c5d8cc880cd3727bae-22d18257f42d2e0412c7702e5beed5d2.ssl.cf1.rackcdn.com/109/10810_th3.jpg" alt="Oxygen Accelerator">
+					<span class="border t20"></span>
+				</a>
+				<a href="/oxygenaccelerator" class="name">Oxygen Accelerator</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend8082"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend8082Obj = cs.components().button('csPersonalConnectionsRecommend8082', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=8082&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/oxygenaccelerator20122">
+					<img src="https://c2c5d8cc880cd3727bae-22d18257f42d2e0412c7702e5beed5d2.ssl.cf1.rackcdn.com/109/10809_th3.jpg" alt="Oxygen Accelerator 2012">
+					<span class="border t20"></span>
+				</a>
+				<a href="/oxygenaccelerator20122" class="name">Oxygen Accelerator 2012</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend8083"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend8083Obj = cs.components().button('csPersonalConnectionsRecommend8083', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=8083&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/springboard">
+					<img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/74/7386_th3.jpg" alt="Springboard">
+					<span class="border t20"></span>
+				</a>
+				<a href="/springboard" class="name">Springboard</a>
+								<ul class="relationship">
+									</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend7713"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend7713Obj = cs.components().button('csPersonalConnectionsRecommend7713', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=7713&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/springboardlondon2012">
+					<img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/14/1365_th3.jpg" alt="Springboard London 2012">
+					<span class="border t20"></span>
+				</a>
+				<a href="/springboardlondon2012" class="name">Springboard London 2012</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend1961"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend1961Obj = cs.components().button('csPersonalConnectionsRecommend1961', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=1961&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/springboardmobile2012">
+					<img src="https://c2c5d8cc880cd3727bae-22d18257f42d2e0412c7702e5beed5d2.ssl.cf1.rackcdn.com/159/15839_th3.jpg" alt="Springboard Mobile 2012">
+					<span class="border t20"></span>
+				</a>
+				<a href="/springboardmobile2012" class="name">Springboard Mobile 2012</a>
+								<ul class="relationship">
+					<li>Mobile</li><li>, </li><li>Start-ups</li><li>, </li><li>Mobile Marketing</li><li>, </li><li>Mobile Applications</li><li>, </li><li>Mobile Technology</li><li>, </li><li>Mobile Devices</li><li>, </li><li>Mobile Internet</li><li>, </li><li>Mobile Advertising</li><li>, </li><li>Mobile Software</li><li>, </li><li>Mobile Communications</li><li>, </li><li>Mobile Solutions</li><li>, </li><li>Marketing</li><li>, </li><li>Advertising</li><li>, </li><li>Hardware</li><li>, </li><li>Software Development</li><li>, </li><li>Software</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend12775"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend12775Obj = cs.components().button('csPersonalConnectionsRecommend12775', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=12775&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/startupwiseguys2012">
+					<img src="https://e331f1ffddad0c8364ae-8afc0f4c6c7fa1d52c35a89cfaa21c7d.ssl.cf1.rackcdn.com/53/5227_th3.jpg" alt="Startup Wise Guys 2012">
+					<span class="border t20"></span>
+				</a>
+				<a href="/startupwiseguys2012" class="name">Startup Wise Guys 2012</a>
+								<ul class="relationship">
+					<li>Web</li><li>, </li><li>Mobile</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend4969"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend4969Obj = cs.components().button('csPersonalConnectionsRecommend4969', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=4969&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/startupwiseguys">
+					<img src="https://c2c5d8cc880cd3727bae-22d18257f42d2e0412c7702e5beed5d2.ssl.cf1.rackcdn.com/122/12156_th3.jpg" alt="Startup Wise Guys accelerator">
+					<span class="border t20"></span>
+				</a>
+				<a href="/startupwiseguys" class="name">Startup Wise Guys accelerator</a>
+								<ul class="relationship">
+					<li>Finance</li><li>, </li><li>Mobile</li><li>, </li><li>Web</li><li>, </li><li>Payments</li><li>, </li><li>Enterprise Software</li><li>, </li><li>B2B/Enterprise</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend9396"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend9396Obj = cs.components().button('csPersonalConnectionsRecommend9396', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=9396&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations csDisplayConnectionGroup_following ">
+				<a class="image" href="/startupbootcamp">
+					<img src="https://66e31098f4a7d1b271ec-3d63637c9f6c01845eb329e3ddda117c.ssl.cf1.rackcdn.com/5204/520396_th3.jpg" alt="Startupbootcamp">
+					<span class="border t20"></span>
+				</a>
+				<a href="/startupbootcamp" class="name">Startupbootcamp</a>
+								<ul class="relationship">
+					<li>Energy</li><li>, </li><li>Energy & Cleantech</li><li>, </li><li>Health/Medical</li><li>, </li><li>Mobile</li><li>, </li><li>Transportation</li><li>, </li><li>Web</li><li>, </li><li>Healthcare IT</li><li>, </li><li>NFC</li><li>, </li><li>Start-ups</li><li>, </li><li>Technology Development</li><li>, </li><li>Insurance</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend7961"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend7961Obj = cs.components().button('csPersonalConnectionsRecommend7961', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=7961&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+						<li class="csDisplayConnectionGroup_all csDisplayConnectionGroup_organizations ">
+				<a class="image" href="/startupbootcampamsterdam2012">
+					<img src="https://8033560c263fe9c061a1-90f3c3f6e21498cf4812ff85169d6f2c.ssl.cf1.rackcdn.com/455/45485_th3.jpg" alt="Startupbootcamp Amsterdam 2012">
+					<span class="border t20"></span>
+				</a>
+				<a href="/startupbootcampamsterdam2012" class="name">Startupbootcamp Amsterdam 2012</a>
+								<ul class="relationship">
+					<li>Mobile</li><li>, </li><li>Web</li>				</ul>
+				<div class="actions">
+										<span id="csPersonalConnectionsRecommend2742"></span>
+					<script type="text/javascript">
+						var csPersonalConnectionsRecommend2742Obj = cs.components().button('csPersonalConnectionsRecommend2742', {
+							title: 'Recommend',
+							color: 'light-salad',
+							size: 'table-small',
+							onClick: function(){
+								csPopup.display('https://www.f6s.com/account/main/mentors_referral_popup?p_type=reference&respond=1&accelerator_id=&receivers=2742&sub_type=profile&redirect=none',{
+									onTop:true,
+									hideCross: true,
+									scrollTimeout:1,
+									autoPosition:true
+								});
+							}
+						});
+					</script>
+				</div>
+				<div class="cl"></div>
+			</li>
+				</ul>
+	<script type="text/javascript">
+        function csDisplayConnectionGroup(group_name){
+            $('.csDisplayConnectionGroup_all').hide();
+            $('.csDisplayConnectionGroup_' + group_name).show();
+        }
+	</script>
+</div><script type="text/javascript">if ('undefined' != typeof csProfileMenu) {csProfileMenu.selectItemType('connections');}</script>		</div>
+		<div class="cl"></div>
+	</div>
+	<script type="text/javascript">	
+		cs.getPager('csBlockLoader',{
+			anchors: [
+				"profile/3083/main", 
+				"profile/3083/connections", 
+				"profile/3083/recommendations", 
+				"profile/3083/mutual-connections",
+				"profile/3083/edit"
+			], 
+			anchorPrefix: ['profile/3083', 'gauravtiwari'], 
+			scrollTop: true, 
+			scrollTarget: "window",
+			minHeight: ($('#csPersonalProfileRightBox').height() - 50),
+            onLoaderStop: function(response) {
+                 if(location.hash){
+					if(location.hash.indexOf("main/ajax-summary") != -1 || location.hash.indexOf("main/widgets") != -1 || location.hash.indexOf("main/ajax-deals") != -1){
+						$('#profile-main-top').addClass("personal-full");
+						$('#profile-main-content').addClass("personal-full");
+					}
+					else{
+						$('#profile-main-top').removeClass("personal-full");
+						$('#profile-main-content').removeClass("personal-full");
+					}
+				}
+                else{
+                    $('#profile-main-top').removeClass("personal-full");
+                    $('#profile-main-content').removeClass("personal-full");
+                }
+            }
+		});	
+		$('#csBlockLoader').css('min-height', parseInt(parseInt($('#csPersonalProfileRightBox').height()) - 50) + 'px');
+	</script>
+</div>
+</div>
+<script type="text/javascript">
+        csMods.setParam('actor_id', 3083 );
+    
+    cs.options.fbUserData = 'public_profile, email, user_friends';
+    if( 'undefined' != typeof csFacebook ) csFacebook.userData = csFacebook.options.userData = cs.options.fbUserData;
+</script>
+
+</div>	</div>
+</div></div>
+<div id="bottom" class="footer-wrapper">
+    <div class="footer-content">
+        <div class="fw footer-col-1">
+                        <p><strong>Add Your</strong></p>
+            <ul class="footer-list mobile-2-col">
+                <li><a href="javascript:;" onclick="csAddEventButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Event"}'>Event</a></li>
+                <li><a href="javascript:;" onclick="csAddOrganizationButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Team"}'>Startup</a></li>
+                <li><a href="javascript:;" onclick="csAddJobButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Job"}'>Job Listing</a></li>
+                <li><a href="javascript:;" onclick="csAddDealButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Deal"}'>Deal</a></li>
+                <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Accelerator"}'>Accelerator</a></li>
+                <li><a href="javascript:;" onclick="csAddInvestFundButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Investment Fund"}'>Inv. Fund</a></li>
+                <li><a href="javascript:;" onclick="csAddAngelGroupButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Angel Group"}'>Angel Group</a></li>
+                <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Contest"}'>Contest</a></li>
+                <li><a href="javascript:;" onclick="csAddProgramButtonClick();"  data-ga='{"section":"Personal Profile","feature":"Footer Add Your Add Coworking"}'>Coworking</a></li>
+            </ul>
+        </div>
+        <div class="fw footer-col-2">
+                        <ul class="footer-list">
+                <li><a href="https://www.f6s.com/deals"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Get Deals"}'>Get Free Deals</a></li>
+                <li><a href="https://www.f6s.com/deals" onclick="csAddDealButtonClick(); return false;"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Promote Deal"}'>Promote your own Deal</a></li>
+                <li><a href="https://www.f6s.com/jobs"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Startup Jobs"}'>Startup Jobs</a></li>
+                <li><a href="https://www.f6s.com/contests"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Contests"}'>Contests</a></li>
+                <li><a href="https://www.f6s.com/startup-events"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Startup Events"}'>Startup Events</a></li>
+                <li><a href="https://www.f6s.com/investment-funds"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Investment Funds"}'>Investment Funds</a></li>
+                <li><a href="https://www.f6s.com/accelerators"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Accelerators"}'>Accelerators</a></li>
+                <li><a href="https://www.f6s.com/rd-tax-credit"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals R&amp;D"}'>R&amp;D Tax Relief</a></li>
+                <li><a href="https://www.f6s.com/talent"  data-ga='{"section":"Personal Profile","feature":"Footer Verticals Search Talent"}'>Search for Talent</a></li>
+            </ul>
+        </div>
+        <div class="fw footer-col-3">
+                        <ul class="footer-list">
+                <li><a href="https://www.f6s.com/f6s"  data-ga='{"section":"Personal Profile","feature":"Footer About About F6S"}'>About</a></li>
+                <li><a href="https://www.f6s.com/docs"  data-ga='{"section":"Personal Profile","feature":"Footer About API Documentation"}'>F6S API</a></li>
+                <li><a href="https://www.f6s.com/privacy-policy"  data-ga='{"section":"Personal Profile","feature":"Footer About Privacy"}'>Privacy policy</a></li>
+                <li><a href="https://www.f6s.com/terms-and-conditions"  data-ga='{"section":"Personal Profile","feature":"Footer About Terms"}'>Terms and Conditions</a></li>
+                <li><a href="https://www.f6s.com/cookie-policy"  data-ga='{"section":"Personal Profile","feature":"Footer About Cookies"}'>Cookie Policy</a></li>
+                <li><a href="javascript:;" onClick="csPopup.display('/main/frontpage/show-feedback'); "  data-ga='{"section":"Personal Profile","feature":"Footer About Send Feedback"}'>Feedback</a></li>
+            </ul>
+        </div>
+        <div class="footer-col-4">
+            <div class="footer-search">
+                <form method="get" action="https://www.f6s.com/search">
+                    <input type="text" name="q" id="csFooterSearch" />
+                    <script type="text/javascript">
+                        var csFooterSearchObj = cs.components().input('csFooterSearch', {
+                            version: 2,
+                            fullWidth: true,
+                            defaultText: 'Search F6S',
+                            icon: {
+                                fa: 'fa-search'
+                            },
+                            onEnter: function() {
+                                // Track the click of the button on Google Analytics
+                                if ('undefined' != typeof _gaq)
+                                    _gaq.push(['_trackEvent', 'Search Submit', 'Footer']);
+                            }
+                        })
+                    </script>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footer-content">
+        <div class="t t-secondary" style="text-align: right;">
+            &copy; 2015 F6S Network Limited. All rights reserved.        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    
+        
+    function is_application_page() {
+        var hash = location.hash;
+        hash = hash.substring( 2 ).replace('-', '_');
+        var static_check = false;
+        var ajax_check = ( -1 != $.inArray(hash, ['programs/ajax_application', 'apply']) );
+        return static_check || ajax_check;
+    }
+    
+            if ( ! is_application_page() ) {
+            // Non-application form popups
+                    }
+            
+        
+            
+    </script>
+
+
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"510ff838d0","applicationID":"4279088","transactionName":"bgNbYUBRDBIHAhINVldJbEdbHwsPAgQeSklRFg==","queueTime":0,"applicationTime":180,"atts":"QkRYFwhLHxw=","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-632.min.js"}</script></body>
+</html>

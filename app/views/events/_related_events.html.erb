@@ -1,0 +1,14 @@
+<div class="panel box-shadow m-t-10">
+  <div class="panel-heading">
+    <div class="panel-title b-b b-great p-b-5">
+      Related events
+    </div>
+  </div>
+  <div class="panel-body">
+    <% @related_events.take(5).each do |event| %>
+     <div class="related-events">
+       <%= render partial: 'events/event_small', locals: {event: event} %>
+     </div>
+    <% end %>
+  </div>
+</div>
