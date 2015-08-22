@@ -812,6 +812,19 @@ ul.reactions > div {
   font-weight: bold;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+.tag {
+  box-align: center;
+  padding: 2px 6px 1px;
+  color: #ccc;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 2px solid #ddd;
+  border-radius: 2px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
 .search-follow-idea {
   float: right;
   display: block;

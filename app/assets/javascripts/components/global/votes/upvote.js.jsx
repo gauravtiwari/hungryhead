@@ -78,7 +78,6 @@ var Upvote = React.createClass({
   },
 
   render: function() {
-    var css_classes = this.state.css_class;
 
     var cx = React.addons.classSet;
     var classes = cx({
@@ -93,12 +92,12 @@ var Upvote = React.createClass({
 
     var text = this.state.voted ? 'You voted this' : 'Click to vote';
     var button_text = this.state.voted ? 'Voted' : 'Vote';
-    var heart = this.state.voted ? <i className="fa fa-thumbs-up text-danger"></i> : <i className="fa fa-thumbs-o-up"></i>;
+    var heart = this.state.voted ? <i className="fa fa-thumbs-up inline text-danger"></i> : <i className="fa fa-thumbs-o-up"></i>;
 
     var voter_text = this.state.votes_count > 1 ? 'people' : 'person';
 
     if(this.state.votes_count > 0) {
-      var voters =<a onClick={this.loadVoters} className="m-l-5"><i className={classes}></i>{this.state.votes_count}</a>;
+      var voters =<a onClick={this.loadVoters} className="bold"><i className={classes}></i>{this.state.votes_count}</a>;
     }
 
     if(this.props.button_style) {
@@ -108,8 +107,8 @@ var Upvote = React.createClass({
         </a>
         )
     } else {
-      return (<li className="inline text-black m-r-10 fs-14 bold pointer">
-                <a data-toggle="tooltip" data-container="body" title={text} onClick={this.state.voted? this.handleDelete : this.handleClick}>
+      return (<li className="text-black fs-14 pointer no-padding text-center">
+                <a className="m-r-5" data-toggle="tooltip" data-container="body" title={text} onClick={this.state.voted? this.handleDelete : this.handleClick}>
                   {heart}
                 </a>
                 {voters}

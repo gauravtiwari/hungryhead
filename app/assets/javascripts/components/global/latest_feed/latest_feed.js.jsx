@@ -111,7 +111,7 @@ var LatestFeed = React.createClass({
 
     return(
       <div className="widget-11-2 panel b-b b-light-grey no-margin">
-          <div className="panel-heading bg-light-blue-lightest">
+          <div className="panel-heading bg-light-blue">
             <div className="panel-title">
               <span className="fa fa-list text-danger"></span> Latest Activities
             </div>

@@ -3,47 +3,60 @@
     <span class="col-xs-height">
       <%= link_to(profile_path(idea.user)) do %>
         <% if idea.user.avatar_present? %>
-          <span class="thumbnail-wrapper d48 circular bg-success">
+          <div class="thumbnail-wrapper d48 circular bg-success m-b-10">
             <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "34", height: "34") %>
-          </span>
+          </div>
         <% else %>
-          <div class="thumbnail-wrapper d48 inline circular">
+          <div class="thumbnail-wrapper d48 inline circular m-b-10">
             <span class="placeholder bold text-white">
               <%= idea.user.name_badge.upcase %>
             </span>
           </div>
         <% end %>
       <% end %>
+      <div class="clearfix">
+        <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote displayblock', button_style: false}.to_json) %>
+        <script type="text/javascript">
+          ReactRailsUJS.mountComponents();
+        </script>
+      </div>
     </span>
     <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
-     <h5 class="text-master no-margin bold inline fs-14">
+     <h5 class="text-master no-margin bold inline">
        <a href="<%= idea_path(idea) %>" class="inline">
          <%= idea.name %>
        </a>
      </h5>
       <% if idea.founder?(current_user) %>
-        <span class="badge m-l-10 badge-green">
+        <span class="badge m-l-10 badge-green inline">
           founder
         </span>
       <% end %>
 
       <% if idea.team_member?(current_user) %>
-        <span class="badge badge-inverse">
+        <span class="badge m-l-10 badge-inverse inline">
           team
         </span>
       <% end %>
-      <p class="fs-14 p-t-5 block people-info text-master no-margin">
-        <% if idea.cached_market_list.present? %>
-        <span class="small-text">
-          <% idea.market_list.each do |tag| %>
-            <%= link_to("@#{tag.parameterize}", tag_people_path(tag.parameterize)) %>
+      <% if idea.school.present? %>
+        <span class="small-text m-l-10">
+          <%= link_to(profile_path(idea.school.name), data: {toggle: "tooltip", container: "body"}, title: idea.school.name) do %>
+            <span class="fa fa-university"></span>
           <% end %>
         </span>
-        <% end %>
-      </p>
-      <p class="text-master p-t-5">
-        <%= idea.elevator_pitch %>
-      </p>
+      <% end %>
+     <p class="fs-14 p-t-5 block people-info text-master no-margin">
+       <p class="text-master p-t-5">
+         <%= idea.elevator_pitch %>
+       </p>
+     </p>
+      <% if idea.cached_market_list.present? %>
+        <span class="small-text m-t-10 displayblock">
+          <% idea.market_list.each do |tag| %>
+            <%= link_to("#{tag.parameterize}", tag_people_path(tag.parameterize), class: 'tag m-r-5') %>
+          <% end %>
+        </span>
+      <% end %>
     </div>
    <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
      <div class="user-stats-list no-border">
@@ -61,11 +74,14 @@
        </div>
      </div>
    </div>
-  <div class="card-vote-button text-center pull-reset p-l-10 col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
-    <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote pull-left', button_style: true}.to_json) %>
-    <script type="text/javascript">
-       ReactRailsUJS.mountComponents();
-    </script>
+  <div class="card-vote-button text-center col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
+    <div class="inline small-text" data-toggle="tooltip" title="Click to save">
+      <span class="fa fa-bookmark text-master light m-r-15"></span><a href="" class="text-master light"></a>
+    </div>
+    <div class="inline small-text" data-toggle="tooltip" title="Load comments">
+      <span class="fa fa-comment text-master light"></span>
+      <a class="text-master light" href="">100</a>
+    </div>
   </div>
 </li>
 <% end %>

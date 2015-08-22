@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   authenticated do
-    root :to => 'activities#index', as: :authenticated
+    root :to => 'ideas#index', as: :authenticated
   end
 
   root 'pages#home'

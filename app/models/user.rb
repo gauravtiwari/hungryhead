@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
+  after_commit :rebuild_notifications, on: :update, if: :cacheable_changed?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
@@ -220,6 +221,10 @@ class User < ActiveRecord::Base
 
   def rebuild_cache?
      published? || id_changed? || name_changed? || avatar_changed? || mini_bio_changed?
+  end
+
+  def rebuild_notifications
+    UpdateActivityJob.set(wait: 1.minute).perform_later(self.id)
   end
 
   def has_notifications?

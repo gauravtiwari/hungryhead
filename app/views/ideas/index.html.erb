@@ -1,13 +1,53 @@
-<div class="wrapper-small idea-bg-gradient">
-  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
-    <div class="hero-text inner">
-      <i class="fa fa-lightbulb-o text-white fs-22"></i>
-      <h2 class="text-white no-margin">Startup ideas</h2>
-      <h5 class="text-white">or, <%= link_to("Pitch", new_idea_path(:intro), class: 'text-white b-b b-white p-b-5') %> your own idea and share with others</h5>
+<%= cache(["beta", "loggedin_home", current_user, @ideas, User.latest_20.present? && User.latest_20.first[:updated_at], current_user.ticker.revrange(0, 100).present? && current_user.ticker.revrange(0, 100).first[:updated_at]]) do %>
+  <div class="container p-b-60">
+    <div class="col-md-9 col-sm-9">
+     <div class="menu bg-light-blue">
+       <ul class="no-margin no-style padding-15 p-l-30 bold">
+         <li class="m-r-20 inline b-b b-green">
+           <a href="">Live</a>
+         </li>
+         <li class="m-r-20 inline">
+           <a href="">Trending</a>
+         </li>
+         <li class="inline">
+           <a href="">Popular</a>
+         </li>
+       </ul>
+     </div>
+     <div class="view bg-white box-shadow" id="<%= controller_name %>-list-view">
+       <% if Idea.published.empty? %>
+         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+           <i class="fa fa-list"></i>
+           <span class="clearfix">No ideas</span>
+         </div>
+       <% else %>
+         <div class="list-view boreded no-top-border">
+          <% Idea.published.each do |idea| %>
+            <ul class="no-style no-padding no-margin">
+              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+            </ul>
+           <% end %>
+         </div>
+       <% end %>
+     </div>
     </div>
-  </div>
-</div>
 
-<%= render partial: 'ideas/ideas', resource: @ideas %>
+    <% unless browser.mobile? %>
+      <div class="col-md-3 col-sm-4 no-padding p-r-15">
+        <div class="sidebar auto-height sticky bg-white box-shadow">
+          <%= cache(["beta", "home_ticker", current_user.ticker.revrange(0, 100).present? && current_user.ticker.revrange(0, 100).first[:updated_at]]) do %>
+            <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
+          <% end %>
+          <%= cache(["beta", "home_latest_users", User.latest_20.present? && User.latest_20.first[:updated_at]]) do %>
+            <%= react_component('LatestUsers', {users: Oj.dump({
+                list: User.latest_20,
+                type: 'Latest People'
+              }, mode: :compat)} ) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 
