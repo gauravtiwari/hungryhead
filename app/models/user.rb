@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
-  after_commit :rebuild_notifications, on: :update, if: :cacheable_changed?
+  after_update :rebuild_notifications, if: :cacheable_changed?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects

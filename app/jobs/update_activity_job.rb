@@ -4,8 +4,8 @@ class UpdateActivityJob < ActiveJob::Base
     ActiveRecord::Base.connection_pool.with_connection do
       if User.find(user_id).present?
         @user = User.find(user_id)
-        Activity.where(uuid: @user.ticker.members.map{|a| a[:id]}).find_each do |activity|
-          "Update#{trackable_type}NotificationService".constantize.new(activity).update
+        Activity.where(user: @user).find_each do |activity|
+          UpdateNotificationCacheService.new(activity).update
         end
       else
         return false

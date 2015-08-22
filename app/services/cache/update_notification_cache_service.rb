@@ -40,16 +40,16 @@ class UpdateNotificationCacheService
   #add activity to recipient notifications
   def add_notification_for_recipient
     #add to notifications
-    @activity.recipient_user.friends_notifications.delete(score_key)
+    @activity.recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
     @activity.recipient_user.friends_notifications.add(@activity.json_blob, score_key)
     #add to ticker
-    @activity.recipient_user.ticker.delete(score_key)
+    @activity.recipient_user.ticker.remrangebyscore(score_key, score_key)
     @activity.recipient_user.ticker.add(@activity.json_blob, score_key)
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
   def add_activity_to_idea(idea)
-    idea.ticker.delet(score_key)
+    idea.ticker.remrangebyscore(score_key, score_key)
     idea.ticker.add(@activity.json_blob, score_key)
   end
 
@@ -62,7 +62,7 @@ class UpdateNotificationCacheService
 
   #add activity to friends ticker
   def add_activity_to_friends_ticker(user)
-    user.ticker.delete(score_key)
+    user.ticker.remrangebyscore(score_key, score_key)
     user.ticker.add(@activity.json_blob, score_key)
   end
 
