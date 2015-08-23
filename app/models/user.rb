@@ -162,6 +162,10 @@ class User < ActiveRecord::Base
     Idea.find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
   end
 
+  def send_welcome_email!
+    RegistrationMailer.welcome_email(self.id).deliver_later(wait: 5.seconds)
+  end
+
   def after_password_reset; end
 
   def joined_within_a_year?

@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.save
 
       if @user.persisted?
-        RegistrationMailer.welcome_email(@user.id).deliver_later(wait: 5.seconds)
+        @user.send_welcome_email!
         #Track event into MixPanel
         meta_events_tracker.event!(:user, :signed_up, { :name => @user.name, :email => @user.email })
         respond_with @user, location: after_sign_up_path_for(@user)
