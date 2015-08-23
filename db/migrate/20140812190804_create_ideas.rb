@@ -35,6 +35,8 @@ class CreateIdeas < ActiveRecord::Migration
       t.integer :status, default: 0
       t.integer :privacy, default: 0
 
+      t.datetime :published_date, index: true
+
       t.boolean :investable, default: false
 
       t.boolean :validated, null: false, default: false

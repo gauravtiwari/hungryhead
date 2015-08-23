@@ -4,7 +4,7 @@ class Impression < ActiveRecord::Base
   belongs_to :impressionable, polymorphic: true, touch: true
 
   after_commit :cache_impression, on: :create
-  after_destroy :delete_cached_impression
+  before_destroy :delete_cached_impression
 
   private
 

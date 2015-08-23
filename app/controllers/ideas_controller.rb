@@ -79,18 +79,6 @@ class IdeasController < ApplicationController
     end
   end
 
-  # PUT /ideas/1/unpublish
-  def unpublish
-    @idea.draft!
-    @idea.team!
-    if @idea.draft?
-      UnpublishIdeaJob.set(wait: 10.seconds).perform_later(@idea.id)
-    end
-    @msg = "We are unpublishing your idea profile. This will take a few minutes.
-     Once unpublished it will only be visible to your team."
-    render :publish
-  end
-
   # GET /ideas/1/comments
   def comments
     @comments = @idea.root_comments.paginate(:page => params[:page], :per_page => 10)

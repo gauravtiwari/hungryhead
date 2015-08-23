@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   #Callbacks
   before_create :add_fullname, if: :name_not_present?
   before_create :add_username, if: :username_absent?
-  after_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
+  before_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
   before_create :seed_fund, :seed_settings, unless: :is_admin
 
   #Call Service to update cache

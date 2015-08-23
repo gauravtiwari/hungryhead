@@ -8,7 +8,7 @@ class Vote < ActiveRecord::Base
   validates_presence_of :voter_id
 
   #Callbacks for storing cache in redis
-  after_destroy :update_counters, :delete_cached_voters_ids, :delete_notification
+  before_destroy :update_counters, :delete_cached_voters_ids, :delete_activity
   after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create
 
   #Scopes for fetching records
@@ -50,7 +50,7 @@ class Vote < ActiveRecord::Base
   end
 
   #Delete notification before destroying vote
-  def delete_notification
+  def delete_activity
     #delete notification if record is destroyed
     DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
   end

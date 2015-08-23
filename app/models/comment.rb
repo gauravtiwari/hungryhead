@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
 
   #Callback hooks
   after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
-  after_destroy :update_counters, :deleted_cached_commenters_ids, :delete_notification
+  before_destroy :update_counters, :deleted_cached_commenters_ids, :delete_activity
 
   #Model Associations
   belongs_to :user
@@ -95,7 +95,7 @@ class Comment < ActiveRecord::Base
     commentable.commenters_ids.delete(user_id) if commentable.commented?(user)
   end
 
-  def delete_notification
+  def delete_activity
     #Delete activity item from feed
     DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
   end

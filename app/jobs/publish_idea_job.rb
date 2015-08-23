@@ -24,6 +24,10 @@ class PublishIdeaJob < ActiveJob::Base
       Idea.trending.add(@idea.id, @idea.impressions.size)
       Idea.leaderboard.add(@idea.id, @idea.points)
 
+      #Update publish date time
+      @idea.published_date = Time.now
+      @idea.save
+
       #Pusher notification for new idea
       Pusher.trigger_async("ideas-channel",
         "new_idea",

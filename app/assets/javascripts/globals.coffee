@@ -123,4 +123,33 @@ jQuery(document).ready ->
 	  e.stopPropagation()
 	  return
 
+	# Delete a record
+	jQuery ->
+	  $("[data-behavior='delete_idea']").on "click", (e) ->
+	    e.preventDefault()
+	    swal {
+	      title: 'Are you sure?'
+	      text: 'You will not be able to recover this!'
+	      type: 'warning'
+	      showCancelButton: true
+	      confirmButtonColor: '#DD6B55'
+	      confirmButtonText: 'Yes, delete it!'
+	      cancelButtonText: 'No, cancel pls!'
+	      closeOnConfirm: false
+	      closeOnCancel: false
+	    }, (confirmed) =>
+	      if confirmed
+	        $.ajax(
+	          url: $(this).attr("href")
+	          dataType: "JSON"
+	          method: "DELETE"
+	          success: =>
+	            swal 'Deleted!', 'Your idea has been deleted.', 'success'
+	            window.location.href = Routes.root_path
+	        )
+
+	      else
+	        swal 'Cancelled', 'Your idea has not been deleted :)', 'error'
+	      return
+
 	return

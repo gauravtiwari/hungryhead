@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
   has_many :event_attendees
 
   #Callbacks
-  after_destroy  :delete_activity
+  before_destroy  :delete_activity
 
   public
 

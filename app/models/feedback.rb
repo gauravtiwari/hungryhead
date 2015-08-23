@@ -35,7 +35,7 @@ class Feedback < ActiveRecord::Base
   enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
 
   #Hooks
-  after_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
+  before_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
   after_commit :update_counters, :cache_feedbacker_ids, :create_activity, on: :create
 
   public

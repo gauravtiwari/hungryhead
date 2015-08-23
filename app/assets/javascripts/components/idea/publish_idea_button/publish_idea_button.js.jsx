@@ -17,26 +17,40 @@ var PublishIdeaButton = React.createClass({
   },
 
   handleClick: function ( event ) {
-    this.setState({disabled: true})
-    $.ajaxSetup({ cache: false });
-    $.ajax({
-      url: this.state.url,
-      type: "PUT",
-      dataType: "json",
-      success: function ( data ) {
-        this.setState({
-         privacy: data.current_privacy,
-         is_public: data.is_public,
-         is_team: data.is_team,
-         published: data.published,
-         url: data.url
-       });
-        this.setState({disabled: false});
-        $('body').pgNotification({style: "simple", message: data.msg, position: "bottom-left", type: "danger",timeout: 5000}).show();
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.state.url, status, err.toString());
-      }.bind(this)
+    if(this.state.published) {
+      this.alreadyPublished();
+    } else {
+      this.setState({disabled: true})
+      $.ajaxSetup({ cache: false });
+      $.ajax({
+        url: this.state.url,
+        type: "PUT",
+        dataType: "json",
+        success: function ( data ) {
+          this.setState({
+           privacy: data.current_privacy,
+           is_public: data.is_public,
+           is_team: data.is_team,
+           published: data.published,
+           url: data.url
+         });
+          this.setState({disabled: false});
+          $('body').pgNotification({style: "simple", message: data.msg, position: "bottom-left", type: "danger",timeout: 5000}).show();
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.state.url, status, err.toString());
+        }.bind(this)
+      });
+    }
+  },
+
+  alreadyPublished: function(){
+    swal({
+      title: "Error!",
+      text: "Hey! Your idea is already published",
+      type: "error",
+      confirmButtonText: "",
+      timer: 2000
     });
   },
 

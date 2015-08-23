@@ -23,10 +23,9 @@ class Idea < ActiveRecord::Base
   include Impressionable
 
   #CallBack hooks
-  after_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_save :soulmate_loader, if: :visible? && :rebuild_cache?
-
   acts_as_taggable_on :markets, :technologies
 
   #Cache ids of voters, feedbackers, investors and activities

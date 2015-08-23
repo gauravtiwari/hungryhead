@@ -8,7 +8,7 @@ class Follow < ActiveRecord::Base
   validates :follower, presence: true
 
   after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
-  after_destroy :update_counters, :delete_cache_follow_ids, :delete_notification
+  before_destroy :update_counters, :delete_cache_follow_ids, :delete_activity
 
   #Scopes for fetching records
   scope :followings_for, ->(follower, followable) {
@@ -49,7 +49,7 @@ class Follow < ActiveRecord::Base
     followable.followers_ids.delete(follower_id)
   end
 
-  def delete_notification
+  def delete_activity
     DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s) unless followable_type == "School"
   end
 

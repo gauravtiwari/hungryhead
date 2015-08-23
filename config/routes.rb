@@ -86,8 +86,8 @@ Rails.application.routes.draw do
   post 'check_username', to: 'users#check_username', as: 'check_username'
   post 'check_email', to: 'users#check_email', as: 'check_email'
 
-  get '/people/:tag',  to: 'tags#people', as: 'tag_people'
-  get '/ideas/:tag',  to: 'tags#show', as: 'tag'
+  get '/:tag/people',  to: 'tags#people', as: 'tag_people'
+  get '/:tag/ideas',  to: 'tags#show', as: 'tag'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome
@@ -195,7 +195,6 @@ Rails.application.routes.draw do
     #Member routes
     member do
       put :publish
-      put :unpublish
       get :likers
       get :card
       get :join_team

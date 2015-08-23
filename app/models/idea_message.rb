@@ -4,7 +4,6 @@ class IdeaMessage < ActiveRecord::Base
   belongs_to :idea, touch: true
 
   after_commit :update_counters, on: [:create, :destroy]
-  before_destroy :decrement_counter
 
   private
 
