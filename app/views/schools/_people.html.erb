@@ -1,0 +1,10 @@
+<div class="panel no-border box-shadow">
+    <div class="panel-heading m-b-10">
+        <div class="panel-title text-master fs-11">
+          <i class="fa fa-users text-danger"></i> People
+        </div>
+    </div>
+    <div class="panel-body">
+      <%= react_component('ListingWidget', {listing: @school.get_published_users.take(7).map{|u| {name: u.name, name_badge: u.name_badge,  id: u.uid, avatar: u.get_avatar,  url: profile_path(u)}}, count: @user.followers_counter.value, path: followers_follows_path(@user), type: "People" }.to_json, {prerender: :static}) %>
+    </div>
+</div>

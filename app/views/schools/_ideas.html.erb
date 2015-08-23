@@ -1,41 +1,27 @@
-<div class="row ideas-list">
-  <table class="table no-margin">
-    <tbody>
-      <% if is_beta %>
-        <tr>
-          <td colspan="4"class="no-border">
-            <div class="no-content">
-                <span class="fa fa-smile-o fs-50"></span>
-                <h1>
-                  Thank you for signing up to our beta. Once we have a few ideas published you will be able to browse them here.
-                </h1>
-            </div>
-            <p class="text-center">In meantime, if you have a startup idea,
-              <%= link_to("Click", new_idea_path(:intro), class: 'p-b-5 b-b b-grey text-green') %> to pitch
-            </p>
-          </td>
-        </tr>
-      <% else %>
-        <% if @ideas.empty? %>
-          <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
-            <i class="fa fa-list"></i>
-            <span class="clearfix">No Ideas</span>
-          </div>
-        <% else %>
-          <% @ideas.first(5).each do |idea| %>
-            <ul class="no-style no-padding no-margin">
-              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
-            </ul>
-          <% end %>
-        <% end %>
+<div class="panel box-shadow m-t-10">
+  <div class="panel-heading">
+    <div class="panel-title text-master fs-11">
+      Ideas
+    </div>
+    <div class="panel-controls">
+      <% if @school.get_published_ideas.length > 5 %>
+        <%= link_to("See all", profile_ideas_path(@school), class: "bold text-brand p-l-10") %>
       <% end %>
-    </tbody>
-  </table>
-</div>
-<% if @ideas.size > 10 %>
-  <div class="text-center m-t-20">
-    <%= link_to(profile_ideas_path(@school), class: "main-button bold fs-13 pull-right") do %>
-      Browse all <span class="fa fa-chevron-circle-right"></span>
-    <% end %>
+    </div>
   </div>
-<% end %>
+  <div class="panel-body">
+    <ul class="no-padding no-margin no-style" style="max-height: 250px;">
+      <% @school.get_published_ideas.take(5).each do |idea| %>
+        <li id="idea">
+          <p class="no-margin">
+            <%= link_to(idea.name, idea_path(idea), class: "bold fs-13 no-margin text-black" ) %>
+          </p>
+          <span class="small no-margin overflow-hidden">
+            <%= idea.high_concept_pitch %>
+          </span>
+          <div class="clearfix"></div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

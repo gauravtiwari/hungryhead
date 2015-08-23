@@ -272,8 +272,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-20 12:59:55.174638'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-20 12:59:55.174678'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-23 17:43:27.382686'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-23 17:43:27.382717'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -533,6 +533,7 @@ CREATE TABLE ideas (
     school_id integer,
     status integer DEFAULT 0,
     privacy integer DEFAULT 0,
+    published_date timestamp without time zone,
     investable boolean DEFAULT false,
     validated boolean DEFAULT false NOT NULL,
     rules_accepted boolean DEFAULT false,
@@ -2395,6 +2396,13 @@ CREATE INDEX index_idea_validated ON ideas USING btree (validated) WHERE (valida
 --
 
 CREATE INDEX index_ideas_on_level ON ideas USING btree (level);
+
+
+--
+-- Name: index_ideas_on_published_date; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ideas_on_published_date ON ideas USING btree (published_date);
 
 
 --
