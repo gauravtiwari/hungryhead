@@ -4,8 +4,8 @@ module ApplicationHelper
     current_user.mailbox.notifications(read: false).length if current_user
   end
 
-  def is_beta
-    false
+  def is_beta?
+    true
   end
 
   def current_class?(test_path)

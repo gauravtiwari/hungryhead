@@ -7,9 +7,11 @@
         <% if @school.avatar_present? %>
          <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "auto", class: "school-image")%>
          <% else %>
+          <div class="thumbnail-wrapper d100 w110">
              <span class="placeholder bold text-white fs-22">
                  <%= @school.name_badge %>
              </span>
+          </div>
          <% end %>
         </div>
       </div>
@@ -22,7 +24,7 @@
 </div>
 </div>
 
-<div class="box-shadow bg-white">
+<div class="box-shadow bg-light-blue">
   <div class="container">
     <%= render partial: 'menu' %>
   </div>

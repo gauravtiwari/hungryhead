@@ -30,22 +30,7 @@
          </li>
        </ul>
      </div>
-     <div class="view <%= 'bg-white box-shadow' if !browser.mobile? %>" id="<%= controller_name %>-list-view">
-       <% if @ideas.empty? %>
-         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
-           <i class="fa fa-list"></i>
-           <span class="clearfix">No ideas</span>
-         </div>
-       <% else %>
-         <div class="list-view boreded no-top-border">
-         <ul class="no-style no-padding no-margin">
-          <% @ideas.each do |idea| %>
-            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
-           <% end %>
-           </ul>
-         </div>
-       <% end %>
-     </div>
+      <%= render partial: 'ideas' %>
     </div>
   </div>
 <% end %>

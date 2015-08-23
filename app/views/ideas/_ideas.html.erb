@@ -1,38 +1,28 @@
 <% cache([cache_key_for_ideas, params[:page]])  do %>
-<div class="container p-t-40 p-b-80 xs-no-padding" id="<%= controller_name %>_listing">
-  <div class="people-list">
-    <div class="col-md-12 col-sm-12 sm-no-padding">
-     <div class="view" id="<%= controller_name %>-list-view">
-       <% if @ideas.empty? %>
-         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
-           <i class="fa fa-list"></i>
-           <span class="clearfix">No ideas</span>
-         </div>
-       <% else %>
-         <div class="list-view boreded no-top-border">
-          <li class="list-header clearfix font-opensans p-t-15 p-b-15 b-b b-grey p-b-5">
-            <div class="text-left">
-              <h5><%= pluralize(@ideas.count, 'Result') %></h5>
-            </div>
-            <div class="p-l-10 col-xs-height text-center col-middle col-xs-3 col-md-3 col-sm-3">
-              <h5>Stats</h5>
-            </div>
-            <div class="p-l-10 col-xs-height text-center col-middle col-xs-3 col-md-3 col-sm-3">
-              <h5>Vote</h5>
-            </div>
-          </li>
-          <% @ideas.each do |idea| %>
-            <ul class="no-style no-padding no-margin">
-              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
-            </ul>
-           <% end %>
-         </div>
-       <% end %>
-     </div>
+  <div class="view bg-white box-shadow" id="<%= controller_name %>-list-view">
+    <div class="list-view boreded no-top-border">
+      <% if is_beta? %>
+        <div class="no-content p-b-50">
+          <div class="col-md-8 col-sm-10 auto-margin">
+            <span class="fa fa-smile-o fs-50"></span>
+            <h3>
+              Thank you for signing up to our beta. Once we have a few ideas published you will be able to browse them here.
+            </h3>
+            <p class="text-center">In meantime, if you have a startup idea,
+              <%= link_to("Click", new_idea_path(:intro), class: 'p-b-5 b-b b-grey text-green') %> to pitch
+            </p>
+          </div>
+        </div>
+      <% else %>
+        <% @ideas.each do |idea| %>
+          <ul class="no-style no-padding no-margin">
+            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+          </ul>
+        <% end %>
+      <% end %>
     </div>
     <div class="paging-container p-r-15">
-      <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
+    <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
     </div>
   </div>
-</div>
 <% end %>

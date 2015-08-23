@@ -1,13 +1,13 @@
 <div class="wrapper-small people-bg-gradient">
-  <div class="col-md-4 jumbrotron text-center auto-margin" data-pages="parallax" data-social="cover">
+  <div class="col-md-4 jumbrotron auto-margin" data-pages="parallax">
     <div class="hero-text inner">
-      <i class="fa fa-users text-white fs-22"></i>
+      <i class="fa fa-users text-white fs-50 pull-left"></i>
       <% if params[:type] %>
-        <h2 class="text-white no-margin">All <%= params[:type].pluralize %></h2>
+        <h2 class="text-white no-margin inline"><%= params[:type].pluralize %></h2>
       <% else %>
-        <h2 class="text-white no-margin">All people</h2>
+        <h2 class="text-white no-margin inline">People</h2>
       <% end %>
-      <h5 class="text-white">Browse and connect with like-minded people</h5>
+      <h5 class="text-white inline no-margin">Browse and connect with like-minded people</h5>
     </div>
   </div>
 </div>

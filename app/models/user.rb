@@ -4,11 +4,9 @@ class User < ActiveRecord::Base
 
   #Order objects as specified in array
   extend OrderAsSpecified
-
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
-
   #redis objects
   include Redis::Objects
 
