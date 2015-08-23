@@ -46,24 +46,18 @@ class IdeasController < ApplicationController
   #GET popular ideas
   #GET /ideas/popular
   def popular
+    @ideas = Idea.find(Idea.trending.revrange(0, 20))
     respond_to do |format|
-      format.html
-      format.json { render json: Oj.dump({
-      list: Idea.popular_20,
-      type: 'Popular Ideas',
-    }, mode: :compat) }
+      format.html {render :index}
     end
   end
 
   #GET trending ideas
   #GET /ideas/trending
   def trending
+    @ideas = Idea.find(Idea.leaderboard.revrange(0, 20))
     respond_to do |format|
-      format.html
-      format.json { render json: Oj.dump({
-      list: Idea.trending_20,
-      type: 'Trending Ideas'
-    }, mode: :compat) }
+      format.html {render :index}
     end
   end
 

@@ -16,9 +16,6 @@
       <% end %>
       <div class="clearfix">
         <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote displayblock', button_style: false}.to_json) %>
-        <script type="text/javascript">
-          ReactRailsUJS.mountComponents();
-        </script>
       </div>
     </span>
     <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
@@ -45,16 +42,17 @@
           <% end %>
         </span>
       <% end %>
-     <p class="fs-14 p-t-5 block people-info text-master no-margin">
+    <p class="date small-text hint-text">
+      Pitched <%= local_relative_time(idea.created_at, type: 'time-or-date') %>
+    </p>
+     <p class="fs-14 block people-info text-master no-margin">
        <p class="text-master p-t-5">
-         <%= idea.elevator_pitch %>
+         <%= idea.high_concept_pitch %>
        </p>
      </p>
       <% if idea.cached_market_list.present? %>
         <span class="small-text m-t-10 displayblock">
-          <% idea.market_list.each do |tag| %>
-            <%= link_to("#{tag.parameterize}", tag_people_path(tag.parameterize), class: 'tag m-r-5') %>
-          <% end %>
+          <%= link_to(idea.market_list.first, tag_path(idea.market_list.first.parameterize), class: 'tag m-r-5') %>
         </span>
       <% end %>
     </div>

@@ -15,17 +15,12 @@
           <ul class="main-nav-links inline no-style m-l-20 b-l b-grey b-dashed">
             <li class="inline p-r-15 p-l-15 fs-14 bold">
               <%= link_to(main_app.root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : 'text-brand'}") do %>
-                <i class="fa fa-home"></i>
+                <i class="fa fa-lightbulb-o"></i>
               <% end %>
             </li>
             <li class="inline p-r-15 p-l-15 fs-14 bold">
               <%= link_to(main_app.users_path, class: "fs-22 #{request.path == main_app.users_path ? current_class?(main_app.users_path) : 'text-brand'}") do %>
                  <i class="fa fa-users"></i>
-               <% end %>
-            </li>
-            <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold ">
-              <%= link_to(main_app.ideas_path, class: "fs-22 #{request.path == main_app.ideas_path ? current_class?(main_app.ideas_path) : 'text-brand'}") do %>
-                 <i class="fa fa-lightbulb-o"></i>
                <% end %>
             </li>
             <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold">

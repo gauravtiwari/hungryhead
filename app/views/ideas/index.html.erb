@@ -1,40 +1,8 @@
-<%= cache(["beta", "loggedin_home", current_user, @ideas, User.latest_20.present? && User.latest_20.first[:updated_at], current_user.ticker.revrange(0, 100).present? && current_user.ticker.revrange(0, 100).first[:updated_at]]) do %>
-  <div class="container p-b-60">
-    <div class="col-md-9 col-sm-9">
-     <div class="menu bg-light-blue">
-       <ul class="no-margin no-style padding-15 p-l-30 bold">
-         <li class="m-r-20 inline b-b b-green">
-           <a href="">Live</a>
-         </li>
-         <li class="m-r-20 inline">
-           <a href="">Trending</a>
-         </li>
-         <li class="inline">
-           <a href="">Popular</a>
-         </li>
-       </ul>
-     </div>
-     <div class="view bg-white box-shadow" id="<%= controller_name %>-list-view">
-       <% if Idea.published.empty? %>
-         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
-           <i class="fa fa-list"></i>
-           <span class="clearfix">No ideas</span>
-         </div>
-       <% else %>
-         <div class="list-view boreded no-top-border">
-          <% Idea.published.each do |idea| %>
-            <ul class="no-style no-padding no-margin">
-              <%= render partial: 'ideas/idea', locals: {idea: idea} %>
-            </ul>
-           <% end %>
-         </div>
-       <% end %>
-     </div>
-    </div>
-
+<%= cache(["beta", "ideas", params[:action], current_user, @ideas, User.latest_20.present? && User.latest_20.first[:updated_at], current_user.ticker.revrange(0, 100).present? && current_user.ticker.revrange(0, 100).first[:updated_at]]) do %>
+  <div class="container xs-no-padding  p-b-60 <%= 'bg-white box-shadow' if browser.mobile? %>">
     <% unless browser.mobile? %>
-      <div class="col-md-3 col-sm-4 no-padding p-r-15">
-        <div class="sidebar auto-height sticky bg-white box-shadow">
+      <div class="col-md-3 col-sm-4 no-padding p-l-15" id="home_sidebar" data-turbolinks-permanent>
+        <div class="sidebar auto-height sticky box-shadow">
           <%= cache(["beta", "home_ticker", current_user.ticker.revrange(0, 100).present? && current_user.ticker.revrange(0, 100).first[:updated_at]]) do %>
             <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
           <% end %>
@@ -47,6 +15,38 @@
         </div>
       </div>
     <% end %>
+
+    <div class="col-md-9 col-sm-9">
+     <div class="menu bg-light-blue">
+       <ul class="no-margin no-style padding-15 p-l-30 bold">
+         <li class="m-r-20 inline <%= 'b-b b-green' if request.fullpath == root_path %>">
+           <%= link_to('Live', root_path) %>
+         </li>
+         <li class="m-r-20 inline <%= 'b-b b-green' if request.fullpath == trending_ideas_path %>">
+          <%= link_to('Trending', trending_ideas_path) %>
+         </li>
+         <li class="inline <%= 'b-b b-green' if request.fullpath == popular_ideas_path %>">
+          <%= link_to('Popular', popular_ideas_path) %>
+         </li>
+       </ul>
+     </div>
+     <div class="view <%= 'bg-white box-shadow' if !browser.mobile? %>" id="<%= controller_name %>-list-view">
+       <% if @ideas.empty? %>
+         <div class="text-center fs-22 font-opensans text-master light p-t-40 p-b-40">
+           <i class="fa fa-list"></i>
+           <span class="clearfix">No ideas</span>
+         </div>
+       <% else %>
+         <div class="list-view boreded no-top-border">
+         <ul class="no-style no-padding no-margin">
+          <% @ideas.each do |idea| %>
+            <%= render partial: 'ideas/idea', locals: {idea: idea} %>
+           <% end %>
+           </ul>
+         </div>
+       <% end %>
+     </div>
+    </div>
   </div>
 <% end %>
 

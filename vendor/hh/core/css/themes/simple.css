@@ -7771,7 +7771,6 @@ input.list-view-search {
 .list-view li {
   padding-left: 15px;
   white-space: nowrap;
-  cursor: pointer;
   width: 100%;
   display: table;
 }

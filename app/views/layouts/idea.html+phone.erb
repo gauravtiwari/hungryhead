@@ -53,11 +53,13 @@
 
   </head>
 
-  <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
+  <body class="<%= controller_name %> <%= action_name %>">
+    <% cache_if(idea_collaboration?, [current_user, @idea]) do %>
+      <%= render partial: 'shared/idea_json' if idea_collaboration? %>
+    <% end %>
     <%= render partial: 'globals/app_sidebar' %>
    <div class="page-container">
       <%= render partial: 'globals/page_nav_mobile' %>
-
       <div class="page-content-wrapper">
         <div class="content">
           <%= yield %>

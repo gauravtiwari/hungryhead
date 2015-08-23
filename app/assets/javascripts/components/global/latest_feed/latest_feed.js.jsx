@@ -94,7 +94,7 @@ var LatestFeed = React.createClass({
       var content = <div className="no-content hint-text"><i className="fa fa-spinner fa-spin"></i></div>;
     } else if(this.state.feed.length > 0) {
       var content =  <Infinite elementHeight={60}
-                containerHeight={250}
+                containerHeight={300}
                 infiniteLoadBeginBottomOffset={200}
                 onInfiniteLoad={this.handleInfiniteLoad}
                 loadingSpinnerDelegate={this.elementInfiniteLoad()}
@@ -110,13 +110,8 @@ var LatestFeed = React.createClass({
     }
 
     return(
-      <div className="widget-11-2 panel b-b b-light-grey no-margin">
-          <div className="panel-heading bg-light-blue">
-            <div className="panel-title">
-              <span className="fa fa-list text-danger"></span> Latest Activities
-            </div>
-          </div>
-          <div className="panel-body full-border-light no-margin auto-overflow no-padding">
+      <div className="widget-11-2 panel b-b b-light-grey bg-light-blue p-t-10 no-margin">
+          <div className="panel-body bg-white full-border-light auto-overflow no-padding">
            <div>
              <ul className="latest-activities scrollable no-style no-padding no-margin">
               {content}

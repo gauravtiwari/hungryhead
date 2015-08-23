@@ -82,6 +82,9 @@ gem 'order_as_specified'
 #404 page customize
 gem 'gaffe'
 
+#Group record by day
+gem 'groupdate'
+
 #datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'

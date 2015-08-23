@@ -86,8 +86,8 @@ Rails.application.routes.draw do
   post 'check_username', to: 'users#check_username', as: 'check_username'
   post 'check_email', to: 'users#check_email', as: 'check_email'
 
-  get '/people_tagged_with/:tag',  to: 'tags#people', as: 'tag_people'
-  get '/ideas_tagged_with/:tag',  to: 'tags#show', as: 'tag'
+  get '/people/:tag',  to: 'tags#people', as: 'tag_people'
+  get '/ideas/:tag',  to: 'tags#show', as: 'tag'
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome

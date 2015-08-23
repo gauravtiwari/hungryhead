@@ -23,7 +23,7 @@ module IdeasHelper
   end
 
   def idea_collaboration?
-    params[:controller] == "ideas" && params[:action] != "index"  || params[:controller] == "feedbacks" && user_signed_in?
+    params[:controller] == "ideas" && params[:action] == "show"  || params[:controller] == "feedbacks" && user_signed_in?
   end
 
   def cache_key_for_idea(idea)

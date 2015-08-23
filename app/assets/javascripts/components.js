@@ -3,6 +3,10 @@
 
 //= require_self
 //= require underscore
+//= require js-routes
+//= require marked
+//= require moment
+//= require react-infinite
 //= require_tree ./components/user/profile/publish_profile_button/
 //= require_tree ./components/user/profile/header/
 //= require_tree ./components/user/profile/sidebar/card/
