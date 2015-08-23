@@ -6,8 +6,12 @@
           <%= render partial: 'school_card' %>
         </div>
       <% end %>
-      <%= render partial: 'people' %>
-      <%= render partial: 'ideas' %>
+      <% cache(@school.people_cache_key) do %>
+        <%= render partial: 'people' %>
+      <% end %>
+      <% cache(@school.ideas_cache_key) do %>
+        <%= render partial: 'ideas' %>
+      <% end %>
     </div>
 
     <div class="col-md-8 no-padding">

@@ -93,6 +93,18 @@ class School < ActiveRecord::Base
   	words.first(3).map{|w| w.first }.join.upcase
   end
 
+  def ideas_cache_key
+  	count = ideas.published.count
+  	max_updated_at = ideas.maximum(:updated_at).try(:utc).try(:to_s, :number)
+  	"school_ideas/all-#{count}-#{max_updated_at}"
+  end
+
+  def people_cache_key
+  	count = users.count
+  	max_updated_at = users.maximum(:updated_at).try(:utc).try(:to_s, :number)
+  	"school_people/all-#{count}-#{max_updated_at}"
+  end
+
 	private
 
 	def should_generate_new_friendly_id?

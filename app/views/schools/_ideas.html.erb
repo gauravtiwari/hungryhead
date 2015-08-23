@@ -12,15 +12,17 @@
   <div class="panel-body">
     <ul class="no-padding no-margin no-style" style="max-height: 250px;">
       <% @school.get_published_ideas.take(5).each do |idea| %>
-        <li id="idea">
-          <p class="no-margin">
-            <%= link_to(idea.name, idea_path(idea), class: "bold fs-13 no-margin text-black" ) %>
-          </p>
-          <span class="small no-margin overflow-hidden">
-            <%= idea.high_concept_pitch %>
-          </span>
-          <div class="clearfix"></div>
-        </li>
+        <% cache([cache_key_for_idea(idea), "idea_small"]) do %>
+          <li id="idea">
+            <p class="no-margin">
+              <%= link_to(idea.name, idea_path(idea), class: "bold fs-13 no-margin text-black" ) %>
+            </p>
+            <span class="small no-margin overflow-hidden">
+              <%= idea.high_concept_pitch %>
+            </span>
+            <div class="clearfix"></div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
