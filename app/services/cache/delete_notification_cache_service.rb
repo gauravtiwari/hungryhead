@@ -1,4 +1,4 @@
-class CreateNotificationCacheService
+class DeleteNotificationCacheService
 
   def initialize(activity)
     @activity = activity.class.to_s.constantize.find(activity.id) #already persist in Postgres
@@ -7,16 +7,16 @@ class CreateNotificationCacheService
     @target = activity.recipient
   end
 
-  def create
+  def delete
     #Send notification to recipient
-    add_notification_for_recipient unless @activity.user == @activity.recipient_user
+    delete_notification_for_recipient unless @activity.user == @activity.recipient_user
     #Add activity to idea ticker if recipient or trackable is idea
-    add_activity_to_idea(@object) if @activity.trackable_type == "Idea"
-    add_activity_to_idea(@target) if @activity.recipient_type == "Idea"
+    delete_activity_from_idea(@object) if @activity.trackable_type == "Idea"
+    delete_activity_from_idea(@target) if @activity.recipient_type == "Idea"
     #Add activity to followers ticker
-    add_activity_to_followers if followers.any?
+    delete_activity_from_followers if followers.any?
     #Add notification to commenters
-    add_activity_to_commenters if @activity.trackable_type == "Comment"
+    delete_activity_from_commenters if @activity.trackable_type == "Comment"
   end
 
   protected
@@ -34,40 +34,34 @@ class CreateNotificationCacheService
   end
 
   #add activity to recipient notifications
-  def add_notification_for_recipient
+  def delete_notification_for_recipient
     #add to notifications
-    @activity.recipient_user.friends_notifications.add(@activity.json_blob, score_key)
+    @activity.recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
     #add to ticker
-    @activity.recipient_user.ticker.add(@activity.json_blob, score_key)
-    #Increment counter
-    @activity.recipient_user.notifications_counter.increment
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.user
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification if @activity.recipient_user != @activity.user
+    @activity.recipient_user.ticker.remrangebyscore(score_key, score_key)
   end
 
   #Add activity to idea ticker if recipient or trackable is idea
-  def add_activity_to_idea(idea)
-    idea.ticker.add(@activity.json_blob, score_key)
-    SendNotificationService.new(idea, @activity.json_blob).idea_notification
+  def delete_activity_from_idea(idea)
+    idea.ticker.remrangebyscore(score_key, score_key)
   end
 
-  def add_activity_to_commenters
+  def delete_activity_from_commenters
     @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
-      add_activity_to_friends_ticker(commenter)
-      SendNotificationService.new(commenter, @activity.json_blob).user_notification
+      delete_activity_from_friends_ticker(commenter)
     end
   end
 
   #add activity to friends ticker
-  def add_activity_to_friends_ticker(user)
-    user.ticker.add(@activity.json_blob, score_key)
+  def delete_activity_from_friends_ticker(user)
+    user.ticker.remrangebyscore(score_key, score_key)
   end
 
   #Add activity to followers ticker
-  def add_activity_to_followers
+  def delete_activity_from_followers
     followers.each do |follower|
-      add_activity_to_friends_ticker(follower)
+      delete_activity_from_friends_ticker(follower)
       SendNotificationService.new(follower, @activity.json_blob).user_notification
     end
   end

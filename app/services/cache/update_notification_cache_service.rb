@@ -21,10 +21,6 @@ class UpdateNotificationCacheService
 
   protected
 
-  def is_school?
-    @activity.user_type == "School"
-  end
-
   #Get followers for users and ideas
   def followers
     if @activity.user_type == "User" && @activity.key == "vote.create"
