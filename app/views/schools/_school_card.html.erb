@@ -1,114 +1,109 @@
-<div class="sidebar auto-height bg-white box-shadow no-margin">
-  <div class="school-sidebar">
-    <div class="container-xs-height">
-    <div class="widget-11-2 panel panel-transparent no-border">
-      <div class="panel-body">
-        <div class="user-profile auto-margin">
-            <div class="thumbnail-wrapper d100">
-                <div class="profile-logo">
-                     <% if current_user == @school.user %>
-                      <div id="profile_image">
-                        <%= simple_form_for(@school, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
-                          <%= f.file_field :logo, style: "display: none", id: 'profile_photo', accept: "image/*" %>
-                        <% end %>
-                        <div id="profilepic">
-                        <div class="school-logo placeholder-logo">
-                          <div class="upload_icon">
-                            <a id ="trigger-file-upload" class="trigger-file-upload">
-                              <span class="icon">
-                                <i class="fa fa-camera text-master"></i>
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                        <% if @school.avatar_present? %>
-                          <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, id: "profile_photo_preview", width: "110", height: "110", class: "user-image")%>
-                          <% else %>
-                              <span class="placeholder bold text-white fs-22">
-                                  <%= @school.name_badge %>
-                              </span>
-                          <% end %>
-                        </div>
-                      </div>
+<div class="widget-11-2 panel box-shadow no-border">
+<div class="panel-body">
+  <div class="user-profile auto-margin">
+      <div class="thumbnail-wrapper d100">
+          <div class="profile-logo">
+               <% if current_user == @school.user %>
+                <div id="profile_image">
+                  <%= simple_form_for(@school, method: :patch, html: {role: 'form', id: "profile_photo_form", class: "avatar-form", multipart: true}, remote: true ) do |f| %>
+                    <%= f.file_field :logo, style: "display: none", id: 'profile_photo', accept: "image/*" %>
+                  <% end %>
+                  <div id="profilepic">
+                  <div class="school-logo placeholder-logo">
+                    <div class="upload_icon">
+                      <a id ="trigger-file-upload" class="trigger-file-upload">
+                        <span class="icon">
+                          <i class="fa fa-camera text-master"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <% if @school.avatar_present? %>
+                    <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, id: "profile_photo_preview", width: "110", height: "110", class: "user-image")%>
                     <% else %>
-                      <div id="profile_image">
-                        <div id="profilepic">
-                        <% if @school.avatar_present? %>
-                         <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "110", height: "110", class: "user-image")%>
-                         <% else %>
-                           <span class="placeholder bold text-white fs-22">
-                               <%= @school.name_badge %>
-                           </span>
-                         <% end %>
-                        </div>
-                      </div>
+                        <span class="placeholder bold text-white fs-22">
+                            <%= @school.name_badge %>
+                        </span>
                     <% end %>
-
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="p-l-15 p-r-15 p-t-15 text-center school-content clearfix">
-          <h3 class="bold text-master displayblock">
-              <%= @school.name.titlecase %>
-          </h3>
-          <p class="small-text">
-            <%= @school.description %>
-          </p>
-          <h5 class="text-center no-margin text-master displayblock">
-            <span class="fa fa-map-marker"></span> <%= @school.location_list %>
-          </h5>
-        </div>
-
-        <div class="p-l-15 p-r-15 text-center">
-         <ul class="social-list text-white p-t-5 small no-style">
-          <% if @school.email.present? %>
-           <li class="inline">
-             <%= mail_to(@school.email, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Click to email") do %>
-             <i class="fa fa-at fs-14"></i>
-             <% end %>
-           </li>
-           <% end %>
-          <% if @school.website_url.present? %>
-           <li class="inline">
-             <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Open website") do %>
-             <i class="fa fa-rss fs-14"></i>
-             <% end %>
-           </li>
-           <% end %>
-           <% if @school.facebook_url.present? %>
-            <li class="inline">
-              <%= link_to(@school.facebook_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Facebook url") do %>
-              <i class="fa fa-facebook fs-14"></i>
+              <% else %>
+                <div id="profile_image">
+                  <div id="profilepic">
+                  <% if @school.avatar_present? %>
+                   <%= image_tag(@school.get_avatar, data: {src: @school.get_avatar, :"src-retina" => @school.get_avatar}, width: "110", height: "110", class: "user-image")%>
+                   <% else %>
+                     <span class="placeholder bold text-white fs-22">
+                         <%= @school.name_badge %>
+                     </span>
+                   <% end %>
+                  </div>
+                </div>
               <% end %>
-            </li>
-            <% end %>
-            <% if @school.twitter_url.present? %>
-             <li class="inline">
-               <%= link_to(@school.twitter_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Twitter url") do %>
-               <i class="fa fa-twitter fs-14"></i>
-               <% end %>
-             </li>
-             <% end %>
-          </ul>
-        </div>
-        <div class="text-center p-t-10 p-b-10 font-opensans clearfix full-border-light-bottom full-border-light">
-          <div class="school-stats-list">
-            <div class="col-sm-4 all-caps text-center">
-                <span>People</span>
-                <span class="text-brand displayblock text-center"><%= @school.people_counter.value %></span>
-            </div>
-            <div class="col-sm-4 all-caps text-center">
-                <span>Ideas</span>
-                <span class="text-brand displayblock text-center"><%= @school.ideas_counter.value %></span>
-            </div>
-            <div class="col-sm-4 all-caps text-center">
-                <span>Followers</span>
-                <span class="text-brand displayblock text-center"><%= @school.followers_counter.value %></span>
-            </div>
+
           </div>
-        </div>
-    </div>
-    </div>
+      </div>
+  </div>
+  <div class="p-l-15 p-r-15 p-t-15 text-center school-content clearfix">
+    <h3 class="bold text-master displayblock">
+        <%= @school.name.titlecase %>
+    </h3>
+    <p class="small-text">
+      <%= @school.description %>
+    </p>
+    <h5 class="text-center no-margin text-master displayblock">
+      <span class="fa fa-map-marker"></span> <%= @school.location_list %>
+    </h5>
+  </div>
+
+  <div class="p-l-15 p-r-15 text-center">
+   <ul class="social-list text-white p-t-5 small no-style">
+    <% if @school.email.present? %>
+     <li class="inline">
+       <%= mail_to(@school.email, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Click to email") do %>
+       <i class="fa fa-at fs-14"></i>
+       <% end %>
+     </li>
+     <% end %>
+    <% if @school.website_url.present? %>
+     <li class="inline">
+       <%= link_to(url_with_protocol(@school.website_url), class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Open website") do %>
+       <i class="fa fa-rss fs-14"></i>
+       <% end %>
+     </li>
+     <% end %>
+     <% if @school.facebook_url.present? %>
+      <li class="inline">
+        <%= link_to(@school.facebook_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Facebook url") do %>
+        <i class="fa fa-facebook fs-14"></i>
+        <% end %>
+      </li>
+      <% end %>
+      <% if @school.twitter_url.present? %>
+       <li class="inline">
+         <%= link_to(@school.twitter_url, class: "text-brand p-r-10", target: "_blank", data: {toggle: "tooltip", container: "body"}, title: "Twitter url") do %>
+         <i class="fa fa-twitter fs-14"></i>
+         <% end %>
+       </li>
+       <% end %>
+    </ul>
+  </div>
+  <div class="text-center p-t-10 p-b-10 font-opensans clearfix full-border-light-bottom full-border-light">
+    <div class="school-stats-list">
+      <div class="col-sm-4 all-caps text-center">
+          <span>People</span>
+          <span class="text-brand displayblock text-center"><%= @school.people_counter.value %></span>
+      </div>
+      <div class="col-sm-4 all-caps text-center">
+          <span>Ideas</span>
+          <span class="text-brand displayblock text-center"><%= @school.ideas_counter.value %></span>
+      </div>
+      <div class="col-sm-4 all-caps text-center">
+          <span>Followers</span>
+          <span class="text-brand displayblock text-center"><%= @school.followers_counter.value %></span>
+      </div>
     </div>
   </div>
 </div>
+</div>
+

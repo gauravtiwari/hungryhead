@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def is_beta?
-    true
+    false
   end
 
   def current_class?(test_path)

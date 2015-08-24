@@ -8,6 +8,12 @@ module FeedJsonable
   def json_blob
     {
       id: uuid,
+      actor: {
+        name: user.name
+      },
+      recipient: {
+        name: recipient_user.name
+      },
       type: get_type,
       updated_at: updated_at,
       activity_id: find_activity_id,
