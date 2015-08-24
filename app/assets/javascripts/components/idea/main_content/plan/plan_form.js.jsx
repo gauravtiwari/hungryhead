@@ -19,7 +19,7 @@ var PlanForm = React.createClass({
              <textarea ref="description" className="form-control empty" defaultValue= {this.props.idea.description} name="idea[description]" placeholder='Your Story content' autofocus/>
              <div className="form-buttons send-button m-t-10 pull-right">
               <div>
-                <button type="submit" id="post_feedback_message" className="main-button"><i className={loading_class}></i> Save </button>
+                <button type="submit" id="post_feedback_message" className="main-button fs-13 bold"><i className={loading_class}></i> Save </button>
               </div>
             </div>
           </form>

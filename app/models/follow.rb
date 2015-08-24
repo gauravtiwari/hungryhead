@@ -1,5 +1,8 @@
 class Follow < ActiveRecord::Base
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #Hooks
   after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
   before_destroy :update_counters, :delete_cache_follow_ids, :delete_activity

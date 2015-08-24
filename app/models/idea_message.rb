@@ -1,4 +1,5 @@
 class IdeaMessage < ActiveRecord::Base
+
   #Associations
   belongs_to :user
   belongs_to :idea, touch: true

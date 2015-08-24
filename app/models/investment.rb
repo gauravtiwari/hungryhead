@@ -1,5 +1,9 @@
 class Investment < ActiveRecord::Base
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
+  #redis
   include Redis::Objects
 
   #Model Callbacks

@@ -1,6 +1,7 @@
 class Activity < ActiveRecord::Base
 
   extend OrderAsSpecified
+
   #redis objects
   include Redis::Objects
   include Feedable

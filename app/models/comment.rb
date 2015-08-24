@@ -2,6 +2,9 @@ class Comment < ActiveRecord::Base
 
   include Redis::Objects
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #Callback hooks
   after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
   before_destroy :update_counters, :deleted_cached_commenters_ids, :delete_activity

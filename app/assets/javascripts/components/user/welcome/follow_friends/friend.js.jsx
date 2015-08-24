@@ -16,9 +16,8 @@ var Friend = React.createClass({
          <div className={classes}>
           {avatar}
          </div>
-
          <h4 className="no-margin"><a href="">{this.props.friend.name}</a> <small>{this.props.friend.type}</small></h4>
-         <p className="overflow-hidden">{this.props.friend.mini_bio}</p>
+         <p className="overflow-hidden fs-12">{this.props.friend.mini_bio}</p>
        </div>
        <Follow followed={this.props.friend.followed} />
       </li>

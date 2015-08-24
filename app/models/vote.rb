@@ -1,5 +1,8 @@
 class Vote < ActiveRecord::Base
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #Callbacks for storing cache in redis
   before_destroy :update_counters, :delete_cached_voters_ids, :delete_activity
   after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create

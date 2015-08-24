@@ -1,5 +1,8 @@
 class Share < ActiveRecord::Base
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #redis objects
   include Redis::Objects
   #redis caching
