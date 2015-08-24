@@ -15,7 +15,7 @@ class Idea < ActiveRecord::Base
   friendly_id :slug_candidates
 
   #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity, unless: :already_deleted?
   before_create :add_fund
   after_save :soulmate_loader, if: :visible? && :rebuild_cache?
 
@@ -213,6 +213,10 @@ class Idea < ActiveRecord::Base
   end
 
   private
+
+  def already_deleted?
+    deleted_at.present?
+  end
 
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
