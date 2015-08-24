@@ -31,8 +31,8 @@ class Feedback < ActiveRecord::Base
   include Votable
 
   #Associations
-  belongs_to :idea, touch: true
-  belongs_to :user, touch: true
+  belongs_to :idea, -> {with_deleted}, touch: true
+  belongs_to :user, -> {with_deleted}, touch: true
 
   #Tags for feedback
   acts_as_taggable_on :categories

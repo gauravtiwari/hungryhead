@@ -69,8 +69,8 @@ class Idea < ActiveRecord::Base
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
-  belongs_to :user, touch: true
-  belongs_to :school, touch: true
+  belongs_to :user, -> {with_deleted}, touch: true
+  belongs_to :school, -> {with_deleted}, touch: true
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 

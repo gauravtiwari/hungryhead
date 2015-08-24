@@ -8,8 +8,8 @@ class Vote < ActiveRecord::Base
   after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create
 
   #Model Associations
-  belongs_to :voter, class_name: 'User', foreign_key: 'voter_id'
-  belongs_to :votable, :polymorphic => true, touch: true
+  belongs_to :voter, -> {with_deleted}, class_name: 'User', foreign_key: 'voter_id'
+  belongs_to :votable, -> {with_deleted}, :polymorphic => true, touch: true
 
   validates_presence_of :votable_id
   validates_presence_of :voter_id

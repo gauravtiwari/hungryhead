@@ -23,6 +23,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    authorize @event
     @user = @event.user
     respond_to do |format|
       format.js {render :edit}
@@ -58,6 +59,7 @@ class EventsController < ApplicationController
 
   # PUT /events/1/publish
   def publish
+    authorize @event
     if @event.profile_complete?
       @event.published!
       @event.everyone!
@@ -77,6 +79,7 @@ class EventsController < ApplicationController
 
   # PUT /events/1/unpublish
   def unpublish
+    authorize @event
     @event.draft!
     @event.me!
     if @event.draft?
@@ -93,6 +96,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    authorize @event
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -110,6 +114,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event.destroy
+    authorize @event
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }

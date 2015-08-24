@@ -1,7 +1,7 @@
 class Impression < ActiveRecord::Base
 
-  belongs_to :user
-  belongs_to :impressionable, polymorphic: true, touch: true
+  belongs_to :user, -> {with_deleted}
+  belongs_to :impressionable, -> {with_deleted}, polymorphic: true, touch: true
 
   after_commit :cache_impression, on: :create
   before_destroy :delete_cached_impression

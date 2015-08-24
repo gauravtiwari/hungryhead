@@ -129,7 +129,7 @@ jQuery(document).ready ->
 	    e.preventDefault()
 	    swal {
 	      title: 'Are you sure?'
-	      text: 'You will not be able to recover this!'
+	      text: 'Your idea will be unpublished, all scores/comments will reset and scheduled for deletion!'
 	      type: 'warning'
 	      showCancelButton: true
 	      confirmButtonColor: '#DD6B55'
@@ -144,12 +144,12 @@ jQuery(document).ready ->
 	          dataType: "JSON"
 	          method: "DELETE"
 	          success: =>
-	            swal 'Deleted!', 'Your idea has been deleted.', 'success'
+	            swal 'Deleted!', 'Your idea has been unpublished and will be deleted within 1 day from now.', 'success'
 	            window.location.href = Routes.root_path
 	        )
 
 	      else
-	        swal 'Cancelled', 'Your idea has not been deleted :)', 'error'
+	        swal 'Cancelled', 'Your idea has not been unpublished :)', 'error'
 	      return
 
 	return

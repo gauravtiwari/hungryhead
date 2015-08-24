@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    if !@idea.impressioners_ids.member?(current_user.id)
+    unless @idea.viewed?(current_user) and @idea.deleted_at.present?
       PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
     end
   end
@@ -153,7 +153,8 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    @idea.destroy
+    authorize @idea
+    SoftDeleteIdeaJob.perform_later(@idea)
     respond_to do |format|
       format.html { redirect_to ideas_url, notice: 'Idea was successfully destroyed.' }
       format.json { head :no_content }
@@ -172,7 +173,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.find(params[:id])
+    @idea = Idea.with_deleted.find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end
