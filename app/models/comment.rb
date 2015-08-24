@@ -2,6 +2,10 @@ class Comment < ActiveRecord::Base
 
   include Redis::Objects
 
+  #Callback hooks
+  after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
+  before_destroy :update_counters, :deleted_cached_commenters_ids, :delete_activity
+
   #Redis counters and ids cache
   counter :votes_counter
   list :voters_ids
@@ -14,10 +18,6 @@ class Comment < ActiveRecord::Base
 
   include Votable
   include Mentioner
-
-  #Callback hooks
-  after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
-  before_destroy :update_counters, :deleted_cached_commenters_ids, :delete_activity
 
   #Model Associations
   belongs_to :user

@@ -1,15 +1,23 @@
 class Idea < ActiveRecord::Base
 
+  #Order records
   extend OrderAsSpecified
-
   include Rails.application.routes.url_helpers
+
   #included modules
   include Redis::Objects
-  #Gamification
-  has_merit
 
+  #Friendly id
   extend FriendlyId
   friendly_id :slug_candidates
+
+  #CallBack hooks
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
+  before_create :add_fund
+  after_save :soulmate_loader, if: :visible? && :rebuild_cache?
+
+  #Gamification
+  has_merit
 
   #Includes concerns
   include Sluggable
@@ -22,10 +30,6 @@ class Idea < ActiveRecord::Base
   include Feedbackable
   include Impressionable
 
-  #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
-  before_create :add_fund
-  after_save :soulmate_loader, if: :visible? && :rebuild_cache?
   acts_as_taggable_on :markets, :technologies
 
   #Cache ids of voters, feedbackers, investors and activities

@@ -17,6 +17,7 @@ class IdeaSavedService
       loader = Soulmate::Loader.new("ideas")
       loader.add(
         "term" => @idea.name,
+        "name_badge" => @idea.name_badge,
         "description" => @idea.high_concept_pitch,
         "id" => @idea.id,
         "data" => {

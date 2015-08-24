@@ -2,6 +2,10 @@ class Feedback < ActiveRecord::Base
 
   include Redis::Objects
 
+  #Hooks
+  before_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
+  after_commit :update_counters, :cache_feedbacker_ids, :create_activity, on: :create
+
   #Gamification for feedback
   has_merit
 
@@ -33,10 +37,6 @@ class Feedback < ActiveRecord::Base
   #Enums and states
   enum status: { posted: 0, badged: 1, flagged: 2 }
   enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
-
-  #Hooks
-  before_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
-  after_commit :update_counters, :cache_feedbacker_ids, :create_activity, on: :create
 
   public
 

@@ -1,15 +1,15 @@
 class Vote < ActiveRecord::Base
 
+  #Callbacks for storing cache in redis
+  before_destroy :update_counters, :delete_cached_voters_ids, :delete_activity
+  after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create
+
   #Model Associations
   belongs_to :voter, class_name: 'User', foreign_key: 'voter_id'
   belongs_to :votable, :polymorphic => true, touch: true
 
   validates_presence_of :votable_id
   validates_presence_of :voter_id
-
-  #Callbacks for storing cache in redis
-  before_destroy :update_counters, :delete_cached_voters_ids, :delete_activity
-  after_commit :update_counters, :create_activity, :cache_voters_ids, on: :create
 
   #Scopes for fetching records
   scope :votes_for, ->(voter, votable) {

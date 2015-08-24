@@ -4,6 +4,9 @@ class Event < ActiveRecord::Base
   include Redis::Objects
   include ActiveModel::Validations
 
+  #Callbacks
+  before_destroy  :delete_activity
+
   #Slug
   extend FriendlyId
   friendly_id :slug_candidates
@@ -48,9 +51,6 @@ class Event < ActiveRecord::Base
   #Associations
   belongs_to :user, polymorphic: true, touch: true
   has_many :event_attendees
-
-  #Callbacks
-  before_destroy  :delete_activity
 
   public
 

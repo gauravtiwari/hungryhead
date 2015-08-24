@@ -1,8 +1,9 @@
 //All application JS assets - checkout vendor assets directory
 // BEGIN VENDOR JS FOR PAGES
 //
-//= require jquery
-//= require jquery-ujs
+//= require jquery2
+//= require jquery_ujs
+//= require jquery.soulmate
 //= require jquery.turbolinks
 //= require pusher
 //= require jquery-form
@@ -25,7 +26,6 @@
 //= require hammerjs
 //= require jquery.cookie
 //= require jquery.pubsub
-//= require jquery.soulmate
 //= require underscore
 //= require js-routes
 //= require select2

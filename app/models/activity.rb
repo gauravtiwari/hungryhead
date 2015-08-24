@@ -37,12 +37,12 @@ class Activity < ActiveRecord::Base
 
   #Find recipient user
   def recipient_user
-    if recipient_type == "User"
-      recipient
-    elsif user_type == "School"
-      trackable.user.user
-    else
-      recipient.user
+    if recipient.present?
+      if recipient_type == "User"
+        recipient
+      else
+        recipient.user
+      end
     end
   end
 

@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  acts_as_copy_target
-
   #Order objects as specified in array
   extend OrderAsSpecified
   #External modules
@@ -9,6 +7,19 @@ class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   #redis objects
   include Redis::Objects
+
+  #Callbacks
+  before_create :add_fullname, if: :name_not_present?
+  before_create :add_username, if: :username_absent?
+  before_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
+  before_create :seed_fund, :seed_settings, unless: :is_admin
+
+  #Call Service to update cache
+  after_save :soulmate_loader, if: :rebuild_cache?
+  after_update :rebuild_notifications, if: :cacheable_changed?
+
+  #copy records
+  acts_as_copy_target
 
   #Scopes for searching
   scope :students, -> { where(state: 1, role: 1) }
@@ -51,16 +62,6 @@ class User < ActiveRecord::Base
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
-
-  #Callbacks
-  before_create :add_fullname, if: :name_not_present?
-  before_create :add_username, if: :username_absent?
-  before_destroy :remove_from_soulmate, :decrement_counters, unless: :is_admin
-  before_create :seed_fund, :seed_settings, unless: :is_admin
-
-  #Call Service to update cache
-  after_save :soulmate_loader, if: :rebuild_cache?
-  after_update :rebuild_notifications, if: :cacheable_changed?
 
   #Tagging System
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects

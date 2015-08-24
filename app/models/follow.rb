@@ -1,14 +1,16 @@
 class Follow < ActiveRecord::Base
 
+  #Hooks
+  after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
+  before_destroy :update_counters, :delete_cache_follow_ids, :delete_activity
+
+  #relations
   belongs_to :follower, class_name: 'User', foreign_key: 'follower_id'
   belongs_to :followable, polymorphic: true, touch: true
 
   # Validations
   validates :followable, presence: true
   validates :follower, presence: true
-
-  after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
-  before_destroy :update_counters, :delete_cache_follow_ids, :delete_activity
 
   #Scopes for fetching records
   scope :followings_for, ->(follower, followable) {

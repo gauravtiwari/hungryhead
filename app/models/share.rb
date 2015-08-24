@@ -6,6 +6,11 @@ class Share < ActiveRecord::Base
   counter :votes_counter
   counter :comments_counter
 
+  #Callbacks
+  before_destroy :delete_activity
+  after_create :create_activity
+
+
   #cached ids to redis
   list :voters_ids
   list :commenters_ids
@@ -16,9 +21,6 @@ class Share < ActiveRecord::Base
   #Includes concerns
   include Commentable
   include Votable
-
-  before_destroy :delete_activity
-  after_create :create_activity
 
   public
 

@@ -115,6 +115,7 @@ class School < ActiveRecord::Base
 		loader = Soulmate::Loader.new("schools")
 		loader.add(
 			"term" => name,
+			"name_badge" => name_badge,
 			"image" => logo.url(:avatar),
 			"description" => location_list,
 			"id" => id,

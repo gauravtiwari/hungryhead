@@ -4,7 +4,6 @@ ruby '2.2.2'
 source 'https://rubygems.org'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery'
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
@@ -17,7 +16,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-eventEmitter'
   gem 'rails-assets-bootstrap', '3.3.5'
   gem 'rails-assets-marked'
-  gem 'rails-assets-jquery-ujs'
   gem 'rails-assets-jquery-form'
   gem 'rails-assets-pusher'
   gem 'rails-assets-sweetalert'
@@ -110,11 +108,17 @@ gem 'pundit'
 
 gem 'responders'
 
+#Jquery
+gem 'jquery-rails'
+
 #Local time
 gem 'local_time'
 
 #Step by step wizard
 gem 'wicked'
+
+#HTTP requests
+gem 'httparty'
 
 #Tagging
 gem 'acts-as-taggable-on'

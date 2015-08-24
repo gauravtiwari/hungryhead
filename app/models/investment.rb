@@ -2,6 +2,10 @@ class Investment < ActiveRecord::Base
 
   include Redis::Objects
 
+  #Model Callbacks
+  before_destroy :cancel_investment, :update_counters, :delete_cached_investor_ids, :delete_activity
+  after_commit  :update_balance, :update_counters, :cache_investor_ids, :create_activity, on: :create
+
   #Counters for redis
   counter :votes_counter
   list :voters_ids
@@ -15,10 +19,6 @@ class Investment < ActiveRecord::Base
   #Includes concerns
   include Commentable
   include Votable
-
-  #Model Callbacks
-  before_destroy :cancel_investment, :update_counters, :delete_cached_investor_ids, :delete_activity
-  after_commit  :update_balance, :update_counters, :cache_investor_ids, :create_activity, on: :create
 
   public
 
