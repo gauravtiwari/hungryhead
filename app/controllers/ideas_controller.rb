@@ -131,7 +131,6 @@ class IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
     @idea.update_attributes(user_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
-
     if @idea.save
       render json: {status: :created, location_url: idea_path(@idea)}
     else

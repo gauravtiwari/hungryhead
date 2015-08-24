@@ -10,6 +10,6 @@ module Feedable
     belongs_to :recipient, -> { with_deleted }, :polymorphic => true, touch: true
     #Serialize JSON
     store_accessor :parameters, :verb, :meta, :unread, :badge_description
-  endmk
+  end
 
 end

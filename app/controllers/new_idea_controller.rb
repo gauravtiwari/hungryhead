@@ -1,4 +1,6 @@
 class NewIdeaController < ApplicationController
+  before_filter :authenticate_or_token!
+  before_action :set_user
 
   layout "new_idea"
 
@@ -20,7 +22,31 @@ class NewIdeaController < ApplicationController
     render_wizard
   end
 
+  def create
+    @idea = Idea.new(idea_params)
+    @idea.update_attributes(user_id: @user.id, school_id: @user.school_id)
+    if @idea.save
+      render json: {status: :created, location_url: root_path, notice: "You have successfully pitched your idea."}
+    else
+      render json: @idea.errors, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def authenticate_or_token!
+    return if user_signed_in? or params[:token].present?
+    redirect_to root_path, notice: "You need to sign in or need unique link to pitch new idea."
+  end
+
+  def set_user
+    if params[:token].present? and User.find_by_uid(params[:token]).present?
+      @user = User.find_by_uid(params[:token])
+      redirect_to root_path, notice: "Sorry! You have already posted 5 ideas." if @user.ideas_counter.value > 5
+    else
+      redirect_to root_path, notice: "Ohh no.. invalid link! Please check your email and retry again."
+    end
+  end
 
   def finish_wizard_path
     idea_path(@idea)

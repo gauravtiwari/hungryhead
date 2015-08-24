@@ -62,7 +62,7 @@ var NewIdeaForm = React.createClass({
   },
 
   _handleSubmit: function(formData){
-    $.post(Routes.ideas_path(), formData, function(data, textStatus, xhr) {
+    $.post(Routes.new_idea_index_path(), formData, function(data, textStatus, xhr) {
       window.location.href = data.location_url;
     }).fail(function(error){
       $('body').pgNotification({style: "simple", message: error.responseText.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
@@ -79,16 +79,19 @@ var NewIdeaForm = React.createClass({
   },
 
   render: function() {
+    if(this.props.meta.token){
+      var token = <input name="token" type="hidden" value={this.props.meta.token} />
+    }
     return (
       <form className="pitch_idea_form" ref="form" id="pitch_idea_form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={this._onSubmit}>
-        <input name="utf8" type="hidden" value="✓" />
+        {token}
         <h5>If you need help, click on question mark to open help popups. <a className="fa fa-question-circle" onClick={this.newIdeaModalHelp}></a></h5>
         <div className="idea-basics m-t-20">
           <div className="col-md-6 no-padding p-r-15">
             <div className="form-group">
-            <label>Name</label>
-            <span className="help"> "eg: facebook, twitter"</span>
-            <input label="false" className="string required form-control empty" placeholder="Idea name" type="text" name="idea[name]" id="idea_name" />
+              <label>Name</label>
+              <span className="help"> "eg: facebook, twitter"</span>
+              <input label="false" className="string required form-control empty" placeholder="Idea name" type="text" name="idea[name]" id="idea_name" />
             </div>
             <div className="form-group">
             <label>Select market</label>
@@ -116,10 +119,10 @@ var NewIdeaForm = React.createClass({
             </div>
 
           <div className="form-buttons pull-right clearfix m-t-20">
-            <button name="button" type="submit" className=" btn btn-sm btn-green pull-right fs-13 text-white continue">
-              Continue
+            <button name="button" type="submit" className=" btn btn-sm btn-brand pull-right m-l-20 fs-13 text-white continue">
+              Submit
             </button>
-            <small className="clearfix"><strong>Note:</strong> Your idea will not be published until you publish it from profile page.</small>
+            <small className="clearfix">Your idea will not be published until you publish it from idea page.</small>
           </div>
           </div>
         </div>

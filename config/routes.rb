@@ -91,7 +91,7 @@ Rails.application.routes.draw do
   match '/mentionables/:mentionable_type/:id', to: 'mentions#mentionables', via: :get, as: 'mentionables'
 
   resources :welcome
-  resources :new_idea
+  resources :new_idea, only: [:create, :show, :update]
 
   resources :notifications, only: [:index, :update] do
     member do

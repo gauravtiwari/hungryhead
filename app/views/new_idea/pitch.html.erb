@@ -1,11 +1,11 @@
-<% cache(["new_idea_form", current_user]) do %>
+<% cache(["new_idea_form", @user]) do %>
 	<div class="container-fluid col-md-8 auto-margin p-b-60">
 		<div class="m-t-50" id="rootwizard">
 			<%= cache do %>
 				<%= render 'tab_nav' %>
 			<% end %>
-			<div class="tab-content">
-				<div class="tab-pane padding-20 active slide-left" id="tab2">
+			<div class="tab-content bg-transparent">
+				<div class="tab-pane active" id="tab2">
 					<div class="row row-same-height">
 						<div class="col-md-12 auto-margin">
 							<%= render 'form' %>

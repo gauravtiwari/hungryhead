@@ -58,7 +58,7 @@
 
   <body class="fixed-header menu-behind <%= controller_name %> <%= action_name %>">
     <div class="page-container">
-      <%= render partial: 'globals/nav', locals: {bg: 'bg-white'} %>
+      <%= render partial: 'globals/nav', locals: {bg: 'bg-white'} if user_signed_in? %>
       <div class="page-content-wrapper">
         <div class="content">
           <%= yield %>
