@@ -26,10 +26,6 @@ class Investment < ActiveRecord::Base
 
   public
 
-  def can_score?
-    false
-  end
-
 	private
 
   def cancel_investment

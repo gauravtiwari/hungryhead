@@ -147,10 +147,6 @@ class User < ActiveRecord::Base
   #Public methods
   public
 
-  def can_score?
-    true
-  end
-
   def self.current
     Thread.current[:user]
   end
@@ -259,14 +255,6 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     slug.blank? || username_changed?
-  end
-
-  def name_not_present?
-    !first_name.present? && !last_name.present?
-  end
-
-  def username_absent?
-    !username.present?
   end
 
   def add_username

@@ -3,6 +3,10 @@ class School < ActiveRecord::Base
 	#redis objects
 	include Redis::Objects
 
+	#Callbacks hooks
+	after_save :load_into_soulmate
+	before_destroy :remove_from_soulmate
+
 	#Don't delete straightaway
 	acts_as_paranoid
 
@@ -82,14 +86,6 @@ class School < ActiveRecord::Base
 	def get_published_students
 		students.order(created_at: :desc)
 	end
-
-	#Callbacks hooks
-	after_save :load_into_soulmate
-  before_destroy :remove_from_soulmate
-
-  def can_score?
-  	true
-  end
 
   def name_badge
   	words = name.split(' ')

@@ -65,10 +65,6 @@ class Comment < ActiveRecord::Base
     commentable_str.constantize.find(commentable_id)
   end
 
-  def can_score?
-    true
-  end
-
   #Get commentable user
   def commentable_user
     commentable.user

@@ -43,10 +43,6 @@ class Feedback < ActiveRecord::Base
 
   public
 
-  def can_score?
-    true
-  end
-
   def idea_owner
     idea.user
   end

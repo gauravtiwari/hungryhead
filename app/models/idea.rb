@@ -115,10 +115,6 @@ class Idea < ActiveRecord::Base
 
   public
 
-  def can_score?
-    true
-  end
-
   def get_published_feedbacks
     feedbacks.order(created_at: :desc)
   end

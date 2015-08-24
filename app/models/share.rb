@@ -25,12 +25,6 @@ class Share < ActiveRecord::Base
   include Commentable
   include Votable
 
-  public
-
-  def can_score?
-    false
-  end
-
   private
 
   def create_activity
