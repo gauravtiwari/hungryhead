@@ -162,7 +162,8 @@ CREATE TABLE comments (
     depth integer DEFAULT 0 NOT NULL,
     children_count integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone
 );
 
 
@@ -272,8 +273,8 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-24 18:48:06.961624'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-24 18:48:06.961662'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-24 19:12:23.032611'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-24 19:12:23.032673'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -1043,7 +1044,8 @@ CREATE TABLE shares (
     user_id integer NOT NULL,
     user_type character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
