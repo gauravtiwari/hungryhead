@@ -41,6 +41,9 @@ gem 'rails', '4.2.4rc1'
 gem 'pg'
 gem 'postgres-copy'
 
+#Arel for advances queries
+gem 'arel'
+
 #Coffescript
 gem 'coffee-rails'
 

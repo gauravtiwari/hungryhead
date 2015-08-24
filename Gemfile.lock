@@ -672,6 +672,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-colored_log_subscriber
   acts-as-taggable-on
+  arel
   asset_sync
   auto_html
   autoprefixer-rails
