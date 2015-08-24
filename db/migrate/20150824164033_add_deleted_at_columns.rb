@@ -6,5 +6,7 @@ class AddDeletedAtColumns < ActiveRecord::Migration
     add_column :schools, :deleted_at, :datetime, index: true, algorithm: :concurrently
     add_column :feedbacks, :deleted_at, :datetime, index: true, algorithm: :concurrently
     add_column :events, :deleted_at, :datetime, index: true, algorithm: :concurrently
+    add_column :comments, :deleted_at, :datetime, index: true, algorithm: :concurrently
+    add_column :shares, :deleted_at, :datetime, index: true, algorithm: :concurrently
   end
 end

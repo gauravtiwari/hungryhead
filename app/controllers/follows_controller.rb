@@ -20,7 +20,7 @@ class FollowsController < ApplicationController
     return render_data if !@followable.followed_by?(current_user)
     @follow = current_user.followings.where(followable: @followable).first
     authorize @follow.follower
-    if @follow.really_destroy!
+    if @follow.destroy
       render_data
     else
       respond_to do |format|

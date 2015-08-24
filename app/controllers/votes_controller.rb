@@ -18,7 +18,7 @@ class VotesController < ApplicationController
     return render_data if !@votable.voted?(current_user)
     @vote = CreateVoteService.new(current_user, @votable).unvote
     authorize @vote
-    if @vote.really_destroy!
+    if @vote.destroy
       render_data
     else
       render json: @vote.errors, status: :unprocessable_entity

@@ -1,8 +1,5 @@
 class Mention < ActiveRecord::Base
 
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #Model relationships
   belongs_to :mentionable, -> {with_deleted}, polymorphic: true
   belongs_to :mentioner, -> {with_deleted}, polymorphic: true, touch: true

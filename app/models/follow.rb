@@ -1,15 +1,12 @@
 class Follow < ActiveRecord::Base
 
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #Hooks
   after_commit :update_counters, :create_activity, :cache_follow_ids, on: :create
   before_destroy :update_counters, :delete_cache_follow_ids, :delete_activity
 
   #relations
-  belongs_to :follower, class_name: 'User', foreign_key: 'follower_id'
-  belongs_to :followable, polymorphic: true, touch: true
+  belongs_to :follower, -> {with_deleted}, class_name: 'User', foreign_key: 'follower_id'
+  belongs_to :followable, -> {with_deleted}, polymorphic: true, touch: true
 
   # Validations
   validates :followable, presence: true
