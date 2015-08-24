@@ -272,12 +272,13 @@ CREATE TABLE events (
     privacy integer DEFAULT 0,
     space integer DEFAULT 0,
     media jsonb DEFAULT '{}'::jsonb,
-    start_time timestamp without time zone DEFAULT '2015-08-24 13:47:37.506111'::timestamp without time zone NOT NULL,
-    end_time timestamp without time zone DEFAULT '2015-08-24 13:47:37.506143'::timestamp without time zone NOT NULL,
+    start_time timestamp without time zone DEFAULT '2015-08-24 17:38:55.900186'::timestamp without time zone NOT NULL,
+    end_time timestamp without time zone DEFAULT '2015-08-24 17:38:55.900218'::timestamp without time zone NOT NULL,
     latitude double precision DEFAULT 0.0 NOT NULL,
     longitude double precision DEFAULT 0.0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -316,7 +317,8 @@ CREATE TABLE feedbacks (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    deleted_at timestamp without time zone
 );
 
 
@@ -546,7 +548,8 @@ CREATE TABLE ideas (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     sash_id integer,
-    level integer DEFAULT 0
+    level integer DEFAULT 0,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1004,7 +1007,8 @@ CREATE TABLE schools (
     cached_location_list character varying,
     customizations jsonb DEFAULT '{}'::jsonb,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1362,7 +1366,8 @@ CREATE TABLE users (
     invitations_count integer DEFAULT 0,
     sash_id integer,
     level integer DEFAULT 0,
-    uid character varying
+    uid character varying,
+    deleted_at timestamp without time zone
 );
 
 
@@ -3196,4 +3201,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150627164750');
 INSERT INTO schema_migrations (version) VALUES ('20150711185427');
 
 INSERT INTO schema_migrations (version) VALUES ('20150715185616');
+
+INSERT INTO schema_migrations (version) VALUES ('20150824164033');
 

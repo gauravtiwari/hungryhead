@@ -4,6 +4,9 @@ class Event < ActiveRecord::Base
   include Redis::Objects
   include ActiveModel::Validations
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #Callbacks
   before_destroy  :delete_activity
 

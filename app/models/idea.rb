@@ -4,6 +4,9 @@ class Idea < ActiveRecord::Base
   extend OrderAsSpecified
   include Rails.application.routes.url_helpers
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #included modules
   include Redis::Objects
 

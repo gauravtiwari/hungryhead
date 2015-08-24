@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
 
   #Order objects as specified in array
   extend OrderAsSpecified
+
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers

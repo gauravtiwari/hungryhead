@@ -3,6 +3,9 @@ class School < ActiveRecord::Base
 	#redis objects
 	include Redis::Objects
 
+	#Don't delete straightaway
+	acts_as_paranoid
+
 	#Included concerns
 	include Followable
 	include Sharings

@@ -111,6 +111,9 @@ gem 'responders'
 #Jquery
 gem 'jquery-rails'
 
+#Add acts as paranoia for soft deletes
+gem 'paranoia'
+
 #Local time
 gem 'local_time'
 

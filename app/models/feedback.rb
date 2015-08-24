@@ -2,6 +2,9 @@ class Feedback < ActiveRecord::Base
 
   include Redis::Objects
 
+  #Don't delete straightaway
+  acts_as_paranoid
+
   #Hooks
   before_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
   after_commit :update_counters, :cache_feedbacker_ids, :create_activity, on: :create
