@@ -9,11 +9,11 @@ class SoftDeleteIdeaJob < ActiveJob::Base
 
       #Rebuild counters for school
       @idea.school.ideas_counter.reset
-      @idea.school.ideas_counter.incr(@school.get_published_ideas.length)
+      @idea.school.ideas_counter.incr(@idea.school.get_published_ideas.length)
 
       #Rebuild counters for user
       @idea.user.ideas_counter.reset
-      @idea.user.ideas_counter.incr(@user.ideas.size)
+      @idea.user.ideas_counter.incr(@idea.user.ideas.size)
 
       #Insert into cache list
       Idea.latest.delete(@idea.id)
@@ -24,6 +24,8 @@ class SoftDeleteIdeaJob < ActiveJob::Base
       @idea.published_date = nil
       @idea.save
 
+      #Finally set the idea for destruction in a day
+      DestroyRecordJob.set(wait: 1.day).perform_later(@idea)
     end
   end
 end
