@@ -75,6 +75,8 @@
       </div>
     </div>
     <%= render partial: 'shared/flash_notification' %>
-    <%= render partial: 'shared/track_links' %>
+    <% if Rails.env.production? %>
+      <%= render partial: 'shared/track_links' %>
+    <% end %>
   </body>
 </html>
