@@ -3,6 +3,7 @@ var NewIdeaForm = React.createClass({
 
   componentDidMount: function() {
     this.selectMarkets();
+    mixpanel.track_forms("#pitch_idea_form", "Pitched new idea");
   },
 
   selectMarkets: function(e){
