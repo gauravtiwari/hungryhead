@@ -3366,8 +3366,6 @@ Misc buttons
   top: 8px;
 }
 .alert .close {
-  background: url("core/img/icons/noti-cross.png") no-repeat scroll 0 0 transparent;
-  background-position: -9px -10px;
   width: 10px;
   height: 9px;
   position: relative;
@@ -3390,11 +3388,6 @@ Misc buttons
   color: #8d4546;
   border-color: #8d4546;
 }
-.alert-danger .close,
-.alert-error .close,
-.alert-alert .close {
-  background-position: -95px -10px !important;
-}
 .alert-warning {
   background-color: #fef8e1;
   color: #958440;
@@ -3405,33 +3398,20 @@ Misc buttons
   color: #3f6d92;
   border-color: #3f6d92;
 }
-.alert-info .close {
-  background-position: -67px -10px !important;
-}
-
 .alert-notice {
   background-color: #e1f0fd;
   color: #3f6d92;
   border-color: #3f6d92;
-}
-.alert-notice .close {
-  background-position: -67px -10px !important;
 }
 .alert-success {
   background-color: #daf0ee;
   color: #2b6d67;
   border-color: #2b6d67;
 }
-.alert-success .close {
-  background-position: -38px -10px !important;
-}
 .alert-default {
   background-color: #fff;
   color: #51646b;
   border-color: #d5dadb;
-}
-.alert-default .close {
-  background-position: -67px -10px !important;
 }
 /*------------------------------------------------------------------
 [8. Notifications]

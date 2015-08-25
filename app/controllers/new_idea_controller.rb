@@ -36,15 +36,17 @@ class NewIdeaController < ApplicationController
 
   def authenticate_or_token!
     return if user_signed_in? or params[:token].present?
-    redirect_to root_path, notice: "You need to sign in or need unique link to pitch new idea."
+    redirect_to root_path, alert: "You need to sign in or need unique link to pitch new idea."
   end
 
   def set_user
-    if params[:token].present? and User.find_by_uid(params[:token]).present?
+    if user_signed_in? && current_user
+      @user = current_user
+    elsif params[:token].present? and User.find_by_uid(params[:token]).present?
       @user = User.find_by_uid(params[:token])
-      redirect_to root_path, notice: "Sorry! You have already posted 5 ideas." if @user.ideas_counter.value > 5
+      redirect_to root_path, alert: "Sorry! You have already posted 5 ideas." if @user.ideas_counter.value > 5
     else
-      redirect_to root_path, notice: "Ohh no.. invalid link! Please check your email and retry again."
+      redirect_to root_path, alert: "Ohh no.. invalid link! Please check your email and retry again."
     end
   end
 

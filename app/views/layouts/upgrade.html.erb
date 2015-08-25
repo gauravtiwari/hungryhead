@@ -14,6 +14,10 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
+    <%= javascript_tag do %>
+      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
+    <% end %>
+
     <%= stylesheet_link_tag 'core/css/hungryhead', media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lte IE 9]>

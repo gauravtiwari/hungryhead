@@ -10,6 +10,11 @@ jQuery(document).ready ->
 
 	$.ajaxSetup cache: false
 
+	$.each flashMessages, (key, value) ->
+	  $('body').pgNotification {style: "simple", message: value.toString(), position: "bottom-left", type: 'default', timeout: 5000}
+	  	.show();
+
+
 	$.HHSelect2.init()
 
 	if Modernizr.mq('(min-width: 767px)')

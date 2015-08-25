@@ -1016,7 +1016,7 @@
 
             self.alert.append(self.options.message);
             if (self.options.showClose) {
-                var close = $('<button type="button" class="close" data-dismiss="alert"></button>')
+                var close = $('<button type="button" class="close fa fa-times" data-dismiss="alert"></button>')
                     .append('<span aria-hidden="true">&times;</span>')
                     .append('<span class="sr-only">Close</span>');
 
