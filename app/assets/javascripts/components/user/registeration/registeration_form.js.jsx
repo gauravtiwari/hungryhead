@@ -136,11 +136,11 @@ var RegisterationForm = React.createClass({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
-    var request_invite_text = "Don't have an school/uni email? ";
+    var request_invite_text = "Alumni or Mentor? ";
 
     return (
       <form id="form-register" ref="form" autoComplete="off" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <small className="small-text text-white">{request_invite_text}Please <a onClick={this.showRequestInviteTab} className="bold text-white pointer">request an invite</a></small>
+        <small className="small-text text-white">{request_invite_text}Please click tab to <a onClick={this.showRequestInviteTab} className="bold text-white pointer">request an invite</a></small>
         <div className="row m-t-10">
           <div className="col-sm-6">
             <div className="form-group">
