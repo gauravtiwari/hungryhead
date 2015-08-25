@@ -10,4 +10,7 @@ version 1, "2015-07-26" do
   category :visitor do
     event :page_viewed, "2015-07-26", "visitor visits a page"
   end
+  category :idea do
+    event :new_idea, "2015-07-26", "Pitched new idea"
+  end
 end

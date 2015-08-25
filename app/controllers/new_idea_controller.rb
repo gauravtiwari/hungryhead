@@ -27,6 +27,8 @@ class NewIdeaController < ApplicationController
     @idea.update_attributes(user_id: @user.id, school_id: @user.school_id)
     if @idea.save
       render json: {status: :created, location_url: root_path, notice: "You have successfully pitched your idea."}
+      #Track event into MixPanel
+      meta_events_tracker.event!(:idea, :new_idea, { :name => @idea.name, user_name: @idea.user.name, :email => @idea.user.email })
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
