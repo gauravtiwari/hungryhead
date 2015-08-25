@@ -2,7 +2,6 @@ class PagesController < ApplicationController
 
   layout "home"
   before_action :set_cache
-  after_action :track_visitor_events
 
   #Index page to handle home and after login route
   def home

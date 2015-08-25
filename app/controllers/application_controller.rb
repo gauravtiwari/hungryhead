@@ -38,10 +38,6 @@ class ApplicationController < ActionController::Base
     User.current = current_user
   end
 
-  def track_visitor_events
-    meta_events_tracker.event!(:visitor, :page_viewed, { :ip => request.ip, :Browser => browser.name, :Title => params[:action].humanize.capitalize, :Url => request.original_url, referrer_url: request.referer })
-  end
-
   def meta_events_tracker
     @meta_events_tracker ||= MetaEvents::Tracker.new(current_user.try(:id), request.remote_ip)
   end
