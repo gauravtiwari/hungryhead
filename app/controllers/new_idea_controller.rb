@@ -46,7 +46,7 @@ class NewIdeaController < ApplicationController
       @user = User.find_by_uid(params[:token])
       redirect_to root_path, alert: "Sorry! You have already posted 5 ideas." if @user.ideas_counter.value > 5
     else
-      redirect_to root_path, alert: "Ohh no.. invalid link! Please check your email and retry again."
+      redirect_to root_path, alert: "Ohh no.. you don't exist on our system! Please register again with your email and try again."
     end
   end
 

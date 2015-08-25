@@ -24,10 +24,6 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
-    <% end %>
-
     <!--[if !IE]><!-->
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--<![endif]-->
@@ -81,7 +77,7 @@
         <%= yield %>
       <% end %>
     </div>
-
+    <%= render partial: 'shared/flash_notification' %>
   </body>
 
 </html>

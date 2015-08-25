@@ -1,7 +1,6 @@
 class PagesController < ApplicationController
 
   layout "home"
-  before_action :set_cache
   after_action :track_visitor_events
 
   #Index page to handle home and after login route
@@ -78,25 +77,6 @@ class PagesController < ApplicationController
 
   #Getting started page for ideas
   def learn
-  end
-
-  private
-
-  def set_cache
-    fresh_when(:etag => cache_key, :last_modified => last_modified_date, :public => true)
-  end
-
-  def cache_key
-    logged_in = user_signed_in? ? 'logged_in' + current_user.updated_at.try(:to_s, :number) : 'guest_user'
-    browser.to_s + logged_in + last_modified_date.try(:to_s, :number)
-  end
-
-  def last_modified_date
-    if user_signed_in?
-      current_user.updated_at.try(:to_s, :number)
-    else
-      "Sun, 16 Aug 2015 17:30 GMT".to_datetime
-    end
   end
 
 end

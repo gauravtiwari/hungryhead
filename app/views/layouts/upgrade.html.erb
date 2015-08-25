@@ -13,11 +13,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
-    <%= javascript_tag do %>
-      window.flashMessages = $.parseJSON('<%=j flash.to_hash.to_json.html_safe %>');
-    <% end %>
-
     <%= stylesheet_link_tag 'core/css/hungryhead', media: 'all', 'data-turbolinks-track' => true %>
 
     <!--[if lte IE 9]>
@@ -41,6 +36,6 @@
     <div class="page-container">
       <%= yield %>
     </div>
+    <%= render partial: 'shared/flash_notification' %>
   </body>
-
 </html>
