@@ -16,12 +16,12 @@
       <div class="col-md-6 col-sm-10 sm-auto-margin hero-text">
         <div class="panel panel-transparent">
         <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple" role="tablist">
-         <li class="active">
-           <%= link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab", data: {content_link_click: 'Beta register home'}) %>
-         </li>
-         <li>
-           <%= link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab", data: {content_link_click: 'Request invite home'}) %>
-         </li>
+          <li class="active">
+             <%= link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab", content_link_click: 'Beta register home'}, role: "tab") %>
+           </li>
+           <li>
+             <%= link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab", content_link_click: 'Request invite home'}, role: "tab") %>
+           </li>
         </ul>
         <div class="tab-content">
         <div class="tab-pane active" id="betaregister">
