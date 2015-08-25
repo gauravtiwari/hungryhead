@@ -1,9 +1,7 @@
-
 var NewIdeaForm = React.createClass({
 
   componentDidMount: function() {
     this.selectMarkets();
-    mixpanel.track_forms("#pitch_idea_form", "Pitched new idea");
   },
 
   selectMarkets: function(e){
@@ -58,16 +56,20 @@ var NewIdeaForm = React.createClass({
     event.preventDefault();
     if($(this.refs.form.getDOMNode()).valid()) {
       var formData = $(this.refs.form.getDOMNode()).serialize();
-      this._handleSubmit(formData);
+      this._handleSubmit(event, formData);
     }
   },
 
-  _handleSubmit: function(formData){
+  _handleSubmit: function(event, formData){
+    event.preventDefault();
     $.post(Routes.new_idea_index_path(), formData, function(data, textStatus, xhr) {
-      window.location.href = data.location_url;
-    }).fail(function(error){
+      window.flashMessages = {alert: "Submitted. You will be redirected to homepage shortly."}
+      setTimeout(function(){
+        window.location.href = data.location_url;
+      }, 2000);
+    }.bind(this)).fail(function(error){
       $('body').pgNotification({style: "simple", message: error.responseText.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
-    });
+    }.bind(this));
   },
 
   newIdeaModalHelp: function() {

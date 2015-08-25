@@ -18,10 +18,10 @@
         <div class="panel panel-transparent">
         <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple" role="tablist">
           <li class="active">
-            <%= meta_events_tracked_link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Beta Register Tab' } }) %>
+            <%= link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab") %>
           </li>
           <li>
-            <%= meta_events_tracked_link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab", :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Request Invite Tab' } }) %>
+            <%= link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab") %>
           </li>
         </ul>
         <div class="tab-content">
@@ -46,7 +46,6 @@
         </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>

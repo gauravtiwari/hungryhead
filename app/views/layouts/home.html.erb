@@ -21,10 +21,6 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <% if Rails.env.production? %>
-      <%= render partial: 'shared/mixpanel' %>
-    <% end %>
-
     <% cache_if(user_signed_in?, current_user) do %>
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
