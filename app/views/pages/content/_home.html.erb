@@ -10,7 +10,7 @@
           <p class="fs-16 text-white">
             Hungryhead is a collaborative network for students to share, validate and develop startup ideas with peers and mentors, supported by gamification.
           </p>
-          <%= link_to('Learn more', learn_path, class: 'btn btn-brand text-white fs-13 m-t-10 bold') %>
+          <%= link_to('Learn more', learn_path, class: 'btn btn-brand text-white fs-13 m-t-10 bold', data: {content_link_click: 'Learn more home'}) %>
         </div>
       </div>
 
@@ -18,10 +18,10 @@
         <div class="panel panel-transparent">
         <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple" role="tablist">
           <li class="active">
-            <%= link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab") %>
+            <%= link_to('Beta register', '#betaregister', class: "text-white bold no-padding p-r-15 p-b-15 p-t-15", data: {toggle:"tab"}, role: "tab", data: {content_link_click: 'Beta register home'}) %>
           </li>
           <li>
-            <%= link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab") %>
+            <%= link_to('Request invite', '#request_invite', class: "text-white bold", data: {toggle:"tab"}, role: "tab", data: {content_link_click: 'Request invite home'}) %>
           </li>
         </ul>
         <div class="tab-content">

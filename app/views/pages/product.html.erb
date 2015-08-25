@@ -87,7 +87,7 @@
           <div class="col-sm-4 no-padding">
             <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/cup.png', data: {src: "#{image_url('badges/cup.png')}", src_retina: "#{image_url('badges/cup.png')}"}, class: "m-b-20 w100") %>
-              <%= link_to(gamification_path, :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Gamification Page' } }) do %>
+              <%= link_to(gamification_path, data: {content_link_click: 'Product tour gamification'}) do %>
                 <h6 class="block-title p-b-5">
                   Gamification <i class="pg-arrow_right m-l-10"></i>
                 </h6>
@@ -114,7 +114,7 @@
             The platform also provides tools to academic institutions to connect, engage and support student ideas.
           </p>
 
-          <%= link_to('Learn more', for_institutions_path, class: 'main-button fs-13 bold', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'For institutions Page' } }) %>
+          <%= link_to('Learn more', for_institutions_path, class: 'main-button fs-13 bold', data: {content_link_click: 'For Institutions Product'}) %>
 
         </div>
         <div class="col-md-5 col-sm-12 col-md-offset-1 hidden-xs">
@@ -145,7 +145,7 @@
           <p class="fs-16 text-master">
             Discuss and share your ideas with your team members and community anytime, anywhere.
           </p>
-          <%= link_to('Learn more', collaboration_path, class: 'main-button fs-13 bold') %>
+          <%= link_to('Learn more', collaboration_path, class: 'main-button fs-13 bold', data: {content_link_click: 'Product tour collaboration'}) %>
         </div>
       </div>
     </section>
@@ -162,7 +162,7 @@
           <p class="m-b-20 fs-16">
             Earn points, invest in useful ideas using app coins, make a return on investments, and receive badges.
           </p>
-          <%= link_to('Learn more', gamification_path, class: 'main-button fs-13 bold') %>
+          <%= link_to('Learn more', gamification_path, class: 'main-button fs-13 bold', data: {content_link_click: 'Product tour gamification'}) %>
         </div>
 
         <div class="col-md-5 col-sm-12 col-md-offset-1 hidden-xs">

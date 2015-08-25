@@ -5,29 +5,29 @@
     <div class=" pull-left">
       <div class="header-inner">
         <div class="brand inline">
-        <%= link_to(main_app.root_path, class: 'inline m-t-15 text-white') do %>
+        <%= link_to(main_app.root_path, class: 'inline m-t-15 text-white', data: {main_nav_click: 'Logo'}) do %>
         <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
           <span>beta</span>
         <% end %>
         </div>
         <ul class="pages-links fs-16 inline no-margin no-style m-l-20 p-l-30 p-r-20">
           <li class="p-r-15 fs-15 inline font-heading">
-            <%= link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}") do %>
+            <%= link_to(main_app.why_path, class: "#{current_class?(main_app.why_path)}", data: {main_nav_click: 'Why Page'}) do %>
               <span class="text-white bold">Why</span>
             <% end %>
          </li>
           <li class="p-r-15 fs-15 inline font-heading">
-            <%= link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}") do %>
+            <%= link_to(main_app.learn_path, class: "#{current_class?(main_app.learn_path)}", data: {main_nav_click: 'Learn Page'}) do %>
               <span class="text-white bold">What</span>
             <% end %>
          </li>
          <li class="p-r-15 fs-15 inline font-heading">
-           <%= link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}") do %>
+           <%= link_to(main_app.product_path, class: "#{current_class?(main_app.product_path)}", data: {main_nav_click: 'Product Tour'}) do %>
              <span class="text-white bold">The Product</span>
            <% end %>
          </li>
          <li class="p-r-15 fs-15 inline font-heading">
-           <%= link_to(main_app.how_it_works_path, class: "#{current_class?(main_app.how_it_works_path)}") do %>
+           <%= link_to(main_app.how_it_works_path, class: "#{current_class?(main_app.how_it_works_path)}", data: {main_nav_click: 'How it works'}) do %>
              <span class="text-white bold">How it works </span>
            <% end %>
          </li>
@@ -38,11 +38,11 @@
     <div class="inline pull-right">
       <div class="visible-lg visible-md visible-sm m-t-10">
         <div class="pull-left p-t-10 <%= 'p-r-20' unless params[:action] == "home" %>  font-heading">
-          <%= link_to('Questions?', main_app.help_path, title: "Get help", class: 'text-white bold') %>
+          <%= link_to('Questions?', main_app.help_path, title: "Get help", class: 'text-white bold', data: {main_nav_click: 'Help'}) %>
         </div>
         <% unless params[:action] == "home" %>
           <div class="pull-left p-t-5 font-heading">
-            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-ghost bold') %>
+            <%= link_to('Beta Registeration', main_app.get_started_path, title: "Beta Registeration", class: 'btn btn-ghost bold', data: {main_nav_click: 'Get Started'}) %>
           </div>
         <% end %>
       </div>

@@ -5,24 +5,24 @@
     <article class="page-list inline">
       <ul class="no-margin no-padding">
         <li>
-          <%= link_to(main_app.story_path, class: "#{current_class?(main_app.story_path)}") do %>
+          <%= link_to(main_app.story_path, class: "#{current_class?(main_app.story_path)}", data: {footer_nav_click: 'Our Story'}) do %>
             <span>Our story</span>
           <% end %>
         </li>
         <li>
-          <%= link_to('Connect with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}") %>
+          <%= link_to('Connect with us', site_feedback.root_path, class: "#{current_class?(site_feedback.root_path)}", data: {footer_nav_click: 'Feedback'}) %>
         </li>
         <li>
-          <%= link_to('Terms', main_app.terms_path, class: "#{current_class?(main_app.terms_path)}") %>
+          <%= link_to('Terms', main_app.terms_path, class: "#{current_class?(main_app.terms_path)}", data: {footer_nav_click: 'Terms'}) %>
         </li>
         <li>
-          <%= link_to('Our rules', main_app.rules_path, class: "#{current_class?(main_app.rules_path)}") %>
+          <%= link_to('Our rules', main_app.rules_path, class: "#{current_class?(main_app.rules_path)}", data: {footer_nav_click: 'Rules'}) %>
         </li>
         <li>
-          <%= link_to('Cookies Policy', main_app.cookies_path, class: "#{current_class?(main_app.cookies_path)}") %>
+          <%= link_to('Cookies Policy', main_app.cookies_path, class: "#{current_class?(main_app.cookies_path)}", data: {footer_nav_click: 'Cookies'}) %>
         </li>
         <li>
-          <%= link_to('Privacy Policy', main_app.privacy_path, class: "#{current_class?(main_app.privacy_path)}") %>
+          <%= link_to('Privacy Policy', main_app.privacy_path, class: "#{current_class?(main_app.privacy_path)}", data: {footer_nav_click: 'Privacy'}) %>
         </li>
       </ul>
     </article>

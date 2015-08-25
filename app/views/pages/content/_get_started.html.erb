@@ -1,13 +1,13 @@
 <div class="panel panel-transparent">
   <ul class="nav nav-tabs nav-tabs-brand nav-tabs-simple nav-tabs-left p-t-20">
     <li class="active">
-      <%= meta_events_tracked_link_to('For Students', '#forStudents', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For students' } }, data: {toggle: "tab"}) %>
+      <%= link_to('For Students', '#forStudents', class: 'text-white', data: {toggle: "tab"}, data: {content_link_click: 'For Students'}) %>
     </li>
     <li>
-      <%= meta_events_tracked_link_to('For Alumni and Mentors', '#forMentors', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started Alumni' } }, data: {toggle: "tab"}) %>
+      <%= link_to('For Alumni and Mentors', '#forMentors', class: 'text-white', data: {toggle: "tab"}, data: {content_link_click: 'For Mentors'}) %>
     </li>
     <li>
-      <%= meta_events_tracked_link_to('For Institutions', '#forSchools', class: 'text-white', :meta_event => { :category => :visitor, :event => :page_viewed, :properties => { title: 'Get Started For Institutions' } }, data: {toggle: "tab"}) %>
+      <%= link_to('For Institutions', '#forSchools', class: 'text-white', data: {toggle: "tab"}, data: {content_link_click: 'For Schools'}) %>
     </li>
   </ul>
 
