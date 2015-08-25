@@ -140,7 +140,7 @@ var RegisterationForm = React.createClass({
 
     return (
       <form id="form-register" ref="form" autoComplete="off" role="form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={ this._onKeyDown }>
-        <small className="small-text text-white">{request_invite_text}Please click tab to <a onClick={this.showRequestInviteTab} className="bold text-white pointer">request an invite</a></small>
+        <small className="small-text text-white">{request_invite_text}Please click <a onClick={this.showRequestInviteTab} className="bold text-white pointer">request an invite</a> tab</small>
         <div className="row m-t-10">
           <div className="col-sm-6">
             <div className="form-group">
