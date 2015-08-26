@@ -13,8 +13,10 @@ class User < ActiveRecord::Base
   include Redis::Objects
 
   #Callbacks
-  before_create :add_fullname, :add_username, :seed_fund, :seed_settings
-  before_destroy :remove_from_soulmate, :decrement_counters
+  before_create :seed_fund, :seed_settings, unless: :admin?
+  before_create :add_fullname, unless: :name_present?
+  before_create :add_username, unless: :username_present?
+  before_destroy :remove_from_soulmate, :decrement_counters, unless: :admin?
 
   #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
@@ -155,6 +157,14 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
 
+  def name_present?
+    name.present?
+  end
+
+  def username_present?
+    username.present?
+  end
+
   def get_contributions
     Idea.find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
   end
@@ -258,7 +268,6 @@ class User < ActiveRecord::Base
   end
 
   def add_username
-    return if username.present?
     email_username = self.name.parameterize
     if User.find_by_username(email_username).blank?
       email_username = email_username
@@ -274,20 +283,17 @@ class User < ActiveRecord::Base
 
   # returns and adds first_name and last_name to database
   def add_fullname
-    return if first_name.present?
     self.first_name = firstname
     self.last_name =  lastname
   end
 
   #Seeds amount into database on: :create
   def seed_fund
-    return if admin?
     self.fund = {balance: 1000}
   end
 
   #Seeds settings into database on: :create
   def seed_settings
-    return if admin?
     self.settings = {
       theme: "#{role.downcase}",
       idea_notifications: true,
@@ -308,14 +314,12 @@ class User < ActiveRecord::Base
   end
 
   def remove_from_soulmate
-    return if admin?
     #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
   end
 
   def decrement_counters
-    return if admin?
     #Decrement counters
     school.people_counter.reset
     school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
