@@ -74,9 +74,9 @@ var NewIdeaForm = React.createClass({
     $.post(Routes.new_idea_index_path(), formData, function(data, textStatus, xhr) {
       window.flashMessages = {alert: "Submitted. You will be redirected to homepage shortly."}
       setTimeout(function(){
+        this.setState({loading: false});
         window.location.href = data.location_url;
       }, 2000);
-      this.setState({loading: false});
     }.bind(this)).fail(function(error){
       $('body').pgNotification({style: "simple", message: error.responseText.toString(), position: "top-right", type: "danger",timeout: 5000}).show();
     }.bind(this));
