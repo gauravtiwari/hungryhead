@@ -320,14 +320,14 @@ class User < ActiveRecord::Base
   end
 
   def decrement_counters
-    #Decrement counters
-    school.people_counter.reset
-    school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
     #delete cached sorted set for global leaderboard
     User.latest.delete(id)
     #delete leaderboard for this user
     User.leaderboard.delete(id)
     User.trending.delete(id)
+    #Decrement counters
+    school.people_counter.reset
+    school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
   end
 
   protected
