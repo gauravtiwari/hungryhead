@@ -1,7 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
-  after_action :track_visitor_events, only: :new
-
   respond_to :json
   layout 'join'
 
