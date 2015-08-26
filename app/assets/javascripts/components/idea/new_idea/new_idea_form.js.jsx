@@ -73,8 +73,9 @@ var NewIdeaForm = React.createClass({
     event.preventDefault();
     $.post(Routes.new_idea_index_path(), formData, function(data, textStatus, xhr) {
       window.flashMessages = {alert: "Submitted. You will be redirected to homepage shortly."}
+      var self = this;
       setTimeout(function(){
-        this.setState({loading: false});
+        self.setState({loading: false});
         window.location.href = data.location_url;
       }, 2000);
     }.bind(this)).fail(function(error){
