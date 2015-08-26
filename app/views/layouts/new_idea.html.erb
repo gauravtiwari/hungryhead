@@ -22,9 +22,6 @@
     <meta name="HandheldFriendly" content="true">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-
-    <%= render partial: 'shared/mixpanel' %>
-
     <% cache_if(user_signed_in?, current_user) do %>
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>

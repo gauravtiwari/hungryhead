@@ -22,12 +22,7 @@
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-    <% if Rails.env.production? %>
-      <%= render partial: 'shared/mixpanel' %>
-    <% end %>
-
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
     <!--[if !IE]><!-->
       <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <!--<![endif]-->
