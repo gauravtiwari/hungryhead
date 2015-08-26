@@ -195,7 +195,7 @@ class User < ActiveRecord::Base
   #Save user without confirmation
   def save_without_confirmation
     self.skip_confirmation_notification!
-    self.save
+    self.save!
   end
 
   def send_devise_notification(notification, *args)
