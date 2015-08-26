@@ -1,5 +1,11 @@
 var NewIdeaForm = React.createClass({
 
+  getInitialState: function() {
+    return {
+      loading: false
+    }
+  },
+
   componentDidMount: function() {
     this.selectMarkets();
   },
@@ -54,9 +60,12 @@ var NewIdeaForm = React.createClass({
   },
   _onSubmit: function(event) {
     event.preventDefault();
+    this.setState({loading: true});
     if($(this.refs.form.getDOMNode()).valid()) {
       var formData = $(this.refs.form.getDOMNode()).serialize();
       this._handleSubmit(event, formData);
+    } else {
+      this.setState({loading: false});
     }
   },
 
@@ -64,6 +73,7 @@ var NewIdeaForm = React.createClass({
     event.preventDefault();
     $.post(Routes.new_idea_index_path(), formData, function(data, textStatus, xhr) {
       window.flashMessages = {alert: "Submitted. You will be redirected to homepage shortly."}
+      this.setState({loading: false});
       setTimeout(function(){
         window.location.href = data.location_url;
       }, 2000);
@@ -84,6 +94,9 @@ var NewIdeaForm = React.createClass({
   render: function() {
     if(this.props.meta.token){
       var token = <input name="token" type="hidden" value={this.props.meta.token} />
+    }
+    if(this.state.loading) {
+      var loading_class = "fa fa-spinner fa-spin";
     }
     return (
       <form className="pitch_idea_form" ref="form" id="pitch_idea_form" noValidate="novalidate" acceptCharset="UTF-8" onSubmit={this._onSubmit}>
@@ -123,7 +136,7 @@ var NewIdeaForm = React.createClass({
 
           <div className="form-buttons pull-right clearfix m-t-20">
             <button name="button" type="submit" className=" btn btn-sm btn-brand pull-right m-l-20 fs-13 text-white continue">
-              Submit
+              <span className={loading_class}></span> Submit
             </button>
             <small className="clearfix">Your idea will not be published until you publish it from idea page.</small>
           </div>
