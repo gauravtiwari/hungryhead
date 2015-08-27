@@ -94,7 +94,7 @@ class PagesController < ApplicationController
     if user_signed_in?
       current_user.updated_at.try(:to_s, :number)
     else
-      "Sun, 25 Aug 2015 17:30 GMT".to_datetime
+      "Sun, 27 Aug 2015 17:30 GMT".to_datetime
     end
   end
 
