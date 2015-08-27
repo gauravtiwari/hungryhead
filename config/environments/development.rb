@@ -13,9 +13,10 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  config.cache_store = :readthis_store, ENV.fetch('CACHE_REDIS_URL'), {
+  config.cache_store = :readthis_store, {
     expires_in: 2.weeks.to_i,
-    namespace: "cache_#{Rails.env.downcase}"
+    namespace: "cache_#{Rails.env.downcase}",
+    redis: { url: ENV.fetch('CACHE_REDIS_URL'), driver: :hiredis }
   }
 
   config.sass.inline_source_maps = true
