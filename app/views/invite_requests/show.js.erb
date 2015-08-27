@@ -3,7 +3,7 @@ var $el = $('#invite_form_<%= @invite_request.user_type %>');
 //Append message
 var $form = $el.find('#new_invite_request');
 $form.hide().fadeOut('fast');
-$el.append("<div class='no-content'>Thank you! Your request was successfully submitted. We will be in touch shortly.</div>");
+$el.append("<div class='no-content text-white'>Thank you! Your request was successfully submitted. We will be in touch shortly.</div>");
 $form[0].reset();
 
 <% if @invite_request.student? %>
