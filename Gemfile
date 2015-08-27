@@ -114,6 +114,9 @@ gem 'jquery-rails'
 #Add acts as paranoia for soft deletes
 gem 'paranoia'
 
+#Fastly service
+gem 'fastly-rails'
+
 #Local time
 gem 'local_time'
 
