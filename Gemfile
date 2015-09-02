@@ -24,11 +24,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-pnotify'
   gem 'rails-assets-modernizr'
   gem 'rails-assets-fastclick'
-  gem 'rails-assets-hammerjs'
   gem 'rails-assets-underscore'
   gem 'rails-assets-jquery.easing'
   gem 'rails-assets-jquery.validate'
-  gem 'rails-assets-sly'
   gem 'rails-assets-animate.css'
   gem 'rails-assets-jquery.cookie'
 end
@@ -136,7 +134,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'passenger'
+gem 'unicorn'
 
 #Browser gem
 gem 'browser'
@@ -253,10 +251,6 @@ gem 'rack-attack'
 #JQUERY file upload
 gem "jquery-fileupload-rails"
 
-#Turbolinks
-gem 'jquery-turbolinks'
-gem 'turbolinks', github: 'rails/turbolinks'
-
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
 
@@ -267,10 +261,11 @@ group :production, :staging do
   gem "skylight"
 end
 
-gem 'forgery'
-
 group :development, :test do
   gem 'better_errors'
+  gem 'flamegraph'
+  gem 'stackprof'
+  gem 'rack-mini-profiler', :require=>false
   gem 'rails_best_practices'
   gem 'dawnscanner', :require=>false
   gem 'meta_request'

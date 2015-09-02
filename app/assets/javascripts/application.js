@@ -65,5 +65,3 @@
 //= require pusher_init
 //= require_tree ./components
 //= require react_ujs
-
-Turbolinks.pagesCached(30);

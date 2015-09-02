@@ -25,7 +25,7 @@ var LatestUsersItem = React.createClass({
     var html_id = "people_" + this.props.item.id;
 
     return (
-      <li id={html_id}>
+      <li id={html_id} className="p-t-10 p-b-10">
         <div className="widget-16-header">
           <span>
             {image}

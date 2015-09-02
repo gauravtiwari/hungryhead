@@ -13,7 +13,6 @@ class WelcomeController < ApplicationController
     @user = current_user
     case step
     when :hello
-      flash[:notice] = "Please accept guidelines to complete registeration."
     when :follow_friends
       if @user.school_id.present?
         ids = User.published.where(school_id: @user.school_id).where.not(id: current_user.id).pluck(:id)
