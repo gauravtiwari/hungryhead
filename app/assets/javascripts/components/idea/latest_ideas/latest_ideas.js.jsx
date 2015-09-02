@@ -23,7 +23,6 @@ var LatestIdeas = React.createClass({
               }
           });
           this.setState(newState);
-          $("#idea_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
           $("#idea_"+data.data.id).addClass('animated fadeInDown');
         }.bind(this));
       }

@@ -145,7 +145,7 @@ var CollaborationBox = React.createClass({
         var messages = self.state.messages.reverse();
         var newMessages = [response].concat(messages);
         self.setState({messages: newMessages.reverse()});
-        $("#message-"+response.uuid).effect('highlight', {color: '#f2f2f2'} , 3000);
+        $("#message-"+response.uuid).addClass('animated slideInDown');
       }
     });
   },

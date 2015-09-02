@@ -34,7 +34,6 @@ var LatestIdeaFeed = React.createClass({
               }
           });
           this.setState(newState);
-          $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
           $("#feed_"+data.data.id).addClass('animated fadeInDown');
         }.bind(this));
       }

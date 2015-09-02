@@ -4,7 +4,6 @@
 //= require jquery2
 //= require jquery_ujs
 //= require jquery.soulmate
-//= require jquery.turbolinks
 //= require pusher
 //= require jquery-form
 //= require bootstrap
@@ -15,7 +14,6 @@
 //= require jquery-ui/autocomplete
 //= require jquery-ui/position
 //= require jquery-ui/draggable
-//= require jquery-ui/effect.all
 //= require jquery-unveil
 //= require jquery-bez
 //= require placeholders
@@ -23,7 +21,6 @@
 //= require imagesloaded
 //= require jquery.actual
 //= require jquery.scrollbar
-//= require hammerjs
 //= require jquery.cookie
 //= require jquery.pubsub
 //= require underscore
@@ -40,7 +37,6 @@
 //= require bootstrap-datetimepicker
 //= require classie
 //= require fastclick
-//= require sly
 //= require jquery.validate
 //= require jquery.validate/additional-methods
 //= require jquery.autosize
@@ -67,9 +63,7 @@
 //= require welcome
 //= require globals
 //= require pusher_init
-//= require pusher_turbolinks
 //= require_tree ./components
-//= require turbolinks
 //= require react_ujs
 
 Turbolinks.pagesCached(30);

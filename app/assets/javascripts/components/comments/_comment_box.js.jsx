@@ -52,7 +52,7 @@ var CommentBox = React.createClass({
                 }
             });
             this.setState(newState);
-            $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+            $("#comment_"+comment.id).addClass('animated slideInDown');
           }
           this.setState({count: this.state.count+1 });
         }.bind(this));
@@ -76,7 +76,7 @@ var CommentBox = React.createClass({
             }
         });
         this.setState(newState);
-        $("#comment_"+comment.id).effect('highlight', {color: '#f7f7f7'} , 5000);
+        $("#comment_"+comment.id).addClass('animated slideInDown');
         $('body textarea').trigger('autosize.destroy');
         this.setState({visible: false});
         this.setState({button_loading: false});

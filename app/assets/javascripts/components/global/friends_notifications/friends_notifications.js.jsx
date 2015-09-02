@@ -33,8 +33,7 @@ var FriendsNotifications = React.createClass({
               }
           });
           this.setState(newState);
-          $("#feed_"+data.data.id).effect('highlight', {color: '#f7f7f7'} , 5000);
-          $("#feed_"+data.data.id).addClass('animated fadeInDown');
+          $("#feed_"+data.data.id).addClass('animated slideInDown');
         }.bind(this));
       }
     }
