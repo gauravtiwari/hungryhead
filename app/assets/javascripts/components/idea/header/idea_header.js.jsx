@@ -51,6 +51,7 @@ var IdeaHeader = React.createClass({
         <div className="panel-body">
           <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
           <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
+          <IdeaCardStats data={this.props.stats} />
         </div>
       </div>
     );

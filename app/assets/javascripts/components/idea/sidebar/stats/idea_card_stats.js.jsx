@@ -57,58 +57,36 @@ var IdeaCardStats = React.createClass({
     });
 
     return(
-      <div className={classes}>
-        <div className="panel-heading m-b-10">
-          <div className="panel-title text-master fs-11">
-            <i className="fa fa-star text-danger"></i> Stats
-          </div>
-          <a className="know-more" onClick={this.openLeaderboardHelpModal}>
-            <i className="fa fa-question-circle pull-right fs-16 text-black"></i>
-          </a>
-        </div>
-        <div className="p-l-25 p-r-45">
-            <div className="row">
 
+        <div className="p-l-25 p-r-45 p-t-25">
+            <div className="row">
             <div style={{width: '50%'}} className="text-center auto-margin">
-                <div className="progress-text text-center text-complete fs-16 p-b-10 bold">Score: {this.state.score}/10K</div>
+                <div className="progress-text text-center text-white fs-16 p-b-10 bold">Score: {this.state.score} / 10K</div>
                 <div className="progress">
-                    <div className="progress-bar progress-bar-complete" style={{width: this.state.width + '%'}}></div>
+                    <div className="progress-bar progress-bar-white" style={{width: this.state.width + '%'}}></div>
                 </div>
             </div>
-
-            <div className="col-md-4 text-center">
-              <p className="hint-text all-caps font-montserrat small no-margin">Views</p>
-              <p className="all-caps font-montserrat no-margin text-success">{this.state.views_count}</p>
-            </div>
-
-            <div className="col-md-4 text-center">
-              <p className="hint-text all-caps font-montserrat small no-margin">Feedbacks</p>
-              <p className="all-caps font-montserrat no-margin text-success">{this.state.feedbacks_count}</p>
-            </div>
-            <div className="col-md-4 text-center">
-            <p className="hint-text all-caps font-montserrat small no-margin ">Raised</p>
-            <p className="all-caps font-montserrat  no-margin text-success ">{this.state.raised}</p>
-            </div>
           </div>
-          <div className="row p-t-15 p-b-15">
-            <div className="col-md-4 text-center m-t-10">
-              <p className="hint-text all-caps font-montserrat small no-margin ">Investments</p>
-              <p className="all-caps font-montserrat no-margin text-success ">{this.state.investments_count}</p>
+            <div className="row p-b-25 text-center">
+              <div className="inline m-r-15">
+                <span className="font-montserrat m-r-5 text-white"><span className="fa fa-eye"></span></span>
+                <span className="font-montserrat no-margin text-white">{this.state.views_count}</span>
               </div>
 
-
-            <div className="col-md-4 text-center m-t-10">
-              <p className="hint-text all-caps font-montserrat small no-margin">Votes</p>
-              <p className="all-caps font-montserrat no-margin text-success">{this.state.votes_count}</p>
-            </div>
-
-            <div className="col-md-4 text-center m-t-10">
-              <p className="hint-text all-caps font-montserrat small no-margin">Comments</p>
-              <p className="all-caps font-montserrat no-margin text-success">{this.state.comments_count}</p>
+              <div className="inline m-r-15">
+                <span className="font-montserrat m-r-5 text-white"><span className="fa fa-comments"></span></span>
+                <span className="font-montserrat no-margin text-white">{this.state.feedbacks_count}</span>
+              </div>
+              <div className="inline m-r-15">
+                <span className="font-montserrat m-r-5 text-white"><span className="fa fa-dollar"></span></span>
+                <span className="font-montserrat  no-margin text-white ">{this.state.raised}</span>
+              </div>
+              <div className="inline">
+                <span className="font-montserrat m-r-5 text-white"><span className="fa fa-thumbs-up"></span></span>
+                <span className="font-montserrat no-margin text-white">{this.state.votes_count}</span>
+              </div>
             </div>
           </div>
-      </div>
-      </div>
     )
   }
 });

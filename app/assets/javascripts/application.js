@@ -10,6 +10,7 @@
 //= require infinity
 //= require jquery.easing
 //= require modernizr
+//= require jquery.countdown
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
 //= require jquery-ui/position

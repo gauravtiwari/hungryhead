@@ -24,7 +24,6 @@ class Idea < ActiveRecord::Base
 
   #Includes concerns
   include Sluggable
-  include Commentable
   include Votable
   include Followable
   include Activist
@@ -39,7 +38,6 @@ class Idea < ActiveRecord::Base
   list :voters_ids
   list :feedbackers_ids
   list :investors_ids
-  list :commenters_ids
   set :impressioners_ids
 
   #Store latest idea notifications
@@ -55,7 +53,6 @@ class Idea < ActiveRecord::Base
   counter :feedbackers_counter
   counter :views_counter
   counter :votes_counter
-  counter :comments_counter
   counter :idea_messages_counter
 
   #Enumerators for handling states
@@ -120,7 +117,7 @@ class Idea < ActiveRecord::Base
   end
 
   def contributers
-    (feedbackers_ids.values + commenters_ids.values + voters_ids.values).uniq
+    (investors_ids.values + feedbackers_ids.values + voters_ids.values).uniq
   end
 
   def card_json

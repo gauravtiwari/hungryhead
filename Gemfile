@@ -8,6 +8,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
   gem 'rails-assets-jquery-bez'
+  gem 'rails-assets-jquery.countdown'
   gem 'rails-assets-masonry'
   gem 'rails-assets-imagesloaded'
   gem 'rails-assets-jquery.actual'
@@ -47,7 +48,7 @@ gem 'coffee-rails'
 gem "font-awesome-rails"
 
 # Use SCSS for stylesheets
-gem 'sassc-rails'
+gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
 gem 'uglifier'
 
@@ -134,7 +135,7 @@ gem 'rails4-autocomplete'
 gem 'oj'
 
 # Server
-gem 'unicorn'
+gem 'passenger'
 
 #Browser gem
 gem 'browser'
