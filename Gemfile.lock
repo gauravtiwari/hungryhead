@@ -301,9 +301,6 @@ GEM
     github-markdown (0.6.9)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    goldiloader (0.0.9)
-      activerecord (>= 3.2, < 4.3)
-      activesupport (>= 3.2, < 4.3)
     hiredis (0.6.0)
     hitimes (1.2.2)
     honeypot-captcha (0.0.3)
@@ -570,11 +567,7 @@ GEM
       ref
     thor (0.19.1)
     thread_safe (0.3.5)
-    thread_variables (0.2.0)
     tilt (1.4.1)
-    time_bandits (0.7.3)
-      activesupport (>= 2.3.2)
-      thread_variables
     timers (4.1.1)
       hitimes
     tzinfo (1.2.2)
@@ -624,7 +617,6 @@ DEPENDENCIES
   gaffe
   geocoder
   github-markdown
-  goldiloader
   help!
   hiredis
   honeypot-captcha
@@ -706,7 +698,6 @@ DEPENDENCIES
   spring
   sprockets
   therubyracer
-  time_bandits
   uglifier
   unf
   wicked

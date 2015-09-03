@@ -63,7 +63,6 @@ module ApplicationHelper
     pipeline = HTML::Pipeline.new [
     HTML::Pipeline::MarkdownFilter,
     HTML::Pipeline::SanitizationFilter,
-    HTML::Pipeline::EmojiFilter,
     HTML::Pipeline::MentionFilter
     ], context
     pipeline.call(content)[:output].to_s.html_safe
@@ -78,7 +77,6 @@ module ApplicationHelper
     pipeline = HTML::Pipeline.new [
     HTML::Pipeline::MarkdownFilter,
     HTML::Pipeline::SanitizationFilter,
-    HTML::Pipeline::EmojiFilter,
     HTML::Pipeline::MentionFilter
     ], context
 

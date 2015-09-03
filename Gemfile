@@ -144,9 +144,6 @@ gem 'redis-objects'
 #Mailer gems
 gem 'mandrill-rails'
 
-#Eager load associations
-gem 'goldiloader'
-
 #Event maps - Google maps
 gem 'geocoder'
 
@@ -170,9 +167,6 @@ gem 'honeypot-captcha'
 
 # SEO
 gem 'friendly_id'
-
-#Compress HTML output in production
-gem 'htmlcompressor'
 
 #Select 2
 gem "select2-rails"
@@ -231,6 +225,7 @@ gem "secure_headers", :require => 'secure_headers'
 
 group :production, :staging do
   gem 'bugsnag'
+  gem 'htmlcompressor'
   gem 'sitemap_generator'
   gem 'mixpanel-ruby'
   gem 'rack-tracker'

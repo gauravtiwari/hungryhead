@@ -10,7 +10,7 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.includes(:user, :school).published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /ideas/1
@@ -82,15 +82,6 @@ class IdeasController < ApplicationController
     @idea.save
     respond_to do |format|
       format.json { render :show, status: :ok }
-    end
-  end
-
-  # GET /ideas/1/comments
-  def comments
-    @comments = @idea.root_comments.paginate(:page => params[:page], :per_page => 10)
-    respond_to do |format|
-      format.html
-      format.js
     end
   end
 
@@ -178,7 +169,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.with_deleted.find(params[:id])
+    @idea = Idea.includes(:user, :school).with_deleted.find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end
