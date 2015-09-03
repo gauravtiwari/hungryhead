@@ -42,7 +42,7 @@ class IdeasController < ApplicationController
   #GET popular ideas
   #GET /ideas/popular
   def popular
-    @ideas = Idea.find(Idea.trending.revrange(0, 20))
+    @ideas = Idea.find(Idea.leaderboard.revrange(0, 20))
     respond_to do |format|
       format.html {render :index}
     end
@@ -51,7 +51,7 @@ class IdeasController < ApplicationController
   #GET trending ideas
   #GET /ideas/trending
   def trending
-    @ideas = Idea.find(Idea.leaderboard.revrange(0, 20))
+    @ideas = Idea.find(Idea.trending.revrange(0, 20))
     respond_to do |format|
       format.html {render :index}
     end

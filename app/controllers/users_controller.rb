@@ -4,10 +4,6 @@ class UsersController < ApplicationController
   before_filter :check_terms, except: [:update, :edit, :check_username, :check_email, :join]
   before_action :set_user, except: [:latest, :popular, :people_you_may_know, :trending, :tags, :autocomplete_user_name, :join, :index, :check_username, :check_email]
 
-  #Verify user access
-  after_action :verify_authorized, :except => [:autocomplete_user_name, :people_you_may_know, :check_username, :check_email, :index, :popular, :trending, :latest]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   layout "home"
 
   autocomplete :user, :name, :full => true, extra_data: [:username]
@@ -209,7 +205,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.find(id)
+    @user = User.with_deleted.find(id)
     @badges = @user.badges.group_by(&:level)
   end
 
