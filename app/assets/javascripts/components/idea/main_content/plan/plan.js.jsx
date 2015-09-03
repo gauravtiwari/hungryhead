@@ -67,7 +67,7 @@ var Plan = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel p-t-20 box-shadow no-border no-margin">
+        <div className="panel p-t-20 no-border no-margin">
           {error}
           <div className="panel-heading p-l-60 p-b-10">
             <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Summary</div>

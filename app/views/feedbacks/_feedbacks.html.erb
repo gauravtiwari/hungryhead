@@ -1,10 +1,10 @@
-<% if @feedbacks.size > 0 %>
-  <% @feedbacks.each do |feedback| %>
+<% if feedbacks.size > 0 %>
+  <% feedbacks.each do |feedback| %>
    <% cache(feedback) do %>
-     <%= render partial: 'feedback', locals: {feedback: feedback} %>
+     <%= render partial: 'feedbacks/feedback', locals: {feedback: feedback} %>
    <% end %>
   <% end %>
-  <%= will_paginate(@feedbacks, :class => 'pagination-box') %>
+  <%= will_paginate(feedbacks, :class => 'pagination-box') %>
 <% else %>
   <% if @idea.user != current_user %>
   <div class="panel panel-default p-t-40 p-b-40 box-shadow">

@@ -23,6 +23,8 @@ json.idea do
   end
 end
 
+json.form delete_action: profile_delete_cover_path(@idea), action: user_path(@idea), method: "PUT"
+
 json.stats do
   json.views_counter @idea.views_counter.value
   json.feedbacks_counter @idea.feedbackers_counter.value

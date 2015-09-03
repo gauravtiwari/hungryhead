@@ -5,7 +5,7 @@ class SoftDeleteIdeaJob < ActiveJob::Base
     ActiveRecord::Base.connection_pool.with_connection do
       #Set idea state to default
       @idea.draft!
-      @idea.me!
+      @idea.team!
 
       #Rebuild counters for school
       @idea.school.ideas_counter.reset

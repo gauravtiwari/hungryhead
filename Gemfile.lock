@@ -426,7 +426,7 @@ GEM
       rails (>= 3.0.0)
     mime-types (1.25.1)
     mimetype-fu (0.1.2)
-    mini_magick (4.3.0)
+    mini_magick (4.2.10)
     mini_portile (0.6.2)
     minitest (5.8.0)
     mixpanel-ruby (2.2.0)
@@ -730,7 +730,6 @@ DEPENDENCIES
   bullet
   byebug
   carrierwave
-  carrierwave-mimetype-fu
   coffee-rails
   connection_pool
   crono
@@ -742,7 +741,7 @@ DEPENDENCIES
   execjs
   figaro
   flamegraph
-  fog-google
+  fog
   font-awesome-rails
   foreman
   friendly_id
@@ -771,7 +770,7 @@ DEPENDENCIES
   meta_events
   meta_request
   metamagic
-  mini_magick
+  mini_magick (~> 4.2.10)
   mixpanel-ruby
   momentjs-rails (>= 2.9.0)
   nokogiri

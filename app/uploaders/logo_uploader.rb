@@ -4,12 +4,7 @@ class LogoUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
   #include ::CarrierWave::Backgrounder::Delay
-  include CarrierWave::MimeTypes
-  include CarrierWave::MimetypeFu
-  process :set_content_type
-
   storage :fog
-
 
   def process_uri(uri)
     return URI.parse(uri)

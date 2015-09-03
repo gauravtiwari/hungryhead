@@ -39,9 +39,9 @@ var InvestButton = React.createClass({
     });
 
     var invested_classes = cx({
-      'fs-13 padding-5 bold p-l-10 p-r-10 pull-right m-r-10': true,
-      'main-button pointer': !this.state.invested && this.state.investable,
-      'main-button light': !this.state.investable,
+      'fs-13 pointer padding-5 bold p-l-10 p-r-10 pull-right m-r-10': true,
+      'main-button': !this.state.invested && this.state.investable,
+      'main-button': !this.state.investable,
       'invested': this.state.invested
     });
 

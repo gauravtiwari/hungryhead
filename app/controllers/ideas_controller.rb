@@ -2,11 +2,7 @@ class IdeasController < ApplicationController
 
   before_action :authenticate_user!
   before_action :check_terms
-  before_action :set_idea, except: [:index, :latest, :popular, :trending, :create]
-
-  #Pundit authorization
-  after_action :verify_authorized, except: [:index, :popular, :trending, :latest]
-  rescue_from Pundit::NotAuthorizedError, with: :idea_not_authorized
+  before_action :set_idea, except: [:index, :latest, :popular, :trending, :create, :delete_cover]
 
   #Set layout
   layout "idea"
@@ -20,8 +16,8 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
-    unless @idea.viewed?(current_user) and @idea.deleted_at.present?
-      PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip)
+    unless @idea.viewed?(current_user)
+      PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.deleted_at.present?
     end
   end
 
@@ -76,6 +72,16 @@ class IdeasController < ApplicationController
     else
       @msg = "Your idea profile isn't complete. Please complete profile and try again."
       render :publish
+    end
+  end
+
+  #Delete cover
+  def delete_cover
+    @idea = Idea.with_deleted.find(params[:slug])
+    @idea.remove_cover!
+    @idea.save
+    respond_to do |format|
+      format.json { render :show, status: :ok }
     end
   end
 
@@ -180,7 +186,7 @@ class IdeasController < ApplicationController
   # WhiteListed Params
   def idea_params
     params.require(:idea).permit(:looking_for_team, :rules_accepted, :video, :logo, :name, :high_concept_pitch,
-      :elevator_pitch, :website, :location_list, :description, :cover, :cover_position, :cover_left, :market_list,
+      :elevator_pitch, :website, :location_list, :problems, :solutions, :market, :business_model, :value_propositions, :description, :cover, :cover_position, :cover_left, :market_list,
       :technology_list)
   end
 

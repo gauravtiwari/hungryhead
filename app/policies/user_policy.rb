@@ -35,6 +35,10 @@ class UserPolicy < ApplicationPolicy
     show?
   end
 
+  def delete_cover?
+    current_user == record
+  end
+
   def activities?
     show?
   end

@@ -194,10 +194,9 @@ gem "select2-rails"
 
 #Image upload and manipulations
 gem 'carrierwave'
-gem 'carrierwave-mimetype-fu'
 
 #Sync assets with cloudfront
-gem "fog-google"
+gem "fog"
 gem 'asset_sync'
 
 #Sitemap
@@ -207,7 +206,7 @@ gem 'sitemap_generator'
 gem 'sidekiq'
 
 # Image Processing
-gem "mini_magick"
+gem "mini_magick", '~> 4.2.10'
 gem 'unf'
 
 # Sideqiq Interface

@@ -8,7 +8,7 @@ var IdeaCover = React.createClass({
     }
     return {
       cover: data.idea.cover,
-      form: data.idea.form,
+      form: data.form,
       top: top,
       left: left,
       draggable: false,

@@ -61,7 +61,7 @@ var IdeaCardStats = React.createClass({
         <div className="p-l-25 p-r-45 p-t-25">
             <div className="row">
             <div style={{width: '50%'}} className="text-center auto-margin">
-                <div className="progress-text text-center text-white fs-16 p-b-10 bold">Score: {this.state.score} / 10K</div>
+                <div className="progress-text text-center text-white fs-16 p-b-10 bold">Score: {this.state.score} / 10K <span className="fa fa-question-circle" data-toggle="tooltip" title="Total Validation score"></span></div>
                 <div className="progress">
                     <div className="progress-bar progress-bar-white" style={{width: this.state.width + '%'}}></div>
                 </div>
