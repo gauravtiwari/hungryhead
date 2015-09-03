@@ -34,10 +34,10 @@ Rails.application.routes.draw do
   end
 
   #Sidekiq
-  authenticate :user, lambda { |u| u.admin? } do
-    require 'sidekiq/web'
-    mount Sidekiq::Web => '/background_jobs'
-  end
+  # authenticate :user, lambda { |u| u.admin? } do
+  #   require 'sidekiq/web'
+  #   mount Sidekiq::Web => '/background_jobs'
+  # end
 
   #Pusher authentication route
   post "pusher/auth"

@@ -38,9 +38,6 @@ gem 'rails', '4.2.4'
 gem 'pg'
 gem 'postgres-copy'
 
-#Arel for advances queries
-gem 'arel'
-
 #Coffescript
 gem 'coffee-rails'
 
@@ -69,8 +66,6 @@ gem 'crono'
 gem 'jbuilder'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-
-gem 'spring',        group: :development
 gem 'sprockets'
 
 #Render anywhere
@@ -82,9 +77,6 @@ gem 'order_as_specified'
 #404 page customize
 gem 'gaffe'
 
-#Group record by day
-gem 'groupdate'
-
 #datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
@@ -93,7 +85,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'html-pipeline'
 gem 'github-markdown'
 gem 'sanitize'
-gem 'gemoji'
 gem 'auto_html'
 
 #Deployment
@@ -118,9 +109,6 @@ gem 'local_time'
 
 #Step by step wizard
 gem 'wicked'
-
-#HTTP requests
-gem 'httparty'
 
 #Tagging
 gem 'acts-as-taggable-on'
@@ -162,9 +150,6 @@ gem 'goldiloader'
 #Event maps - Google maps
 gem 'geocoder'
 
-#Parser
-gem 'nokogiri'
-
 #React JS
 gem 'execjs'
 gem 'therubyracer', platforms: :ruby
@@ -196,11 +181,8 @@ gem "select2-rails"
 gem 'carrierwave'
 
 #Sync assets with cloudfront
-gem "fog"
+gem 'fog-google'
 gem 'asset_sync'
-
-#Sitemap
-gem 'sitemap_generator'
 
 #Background Job processing
 gem 'sidekiq'
@@ -208,10 +190,6 @@ gem 'sidekiq'
 # Image Processing
 gem "mini_magick", '~> 4.2.10'
 gem 'unf'
-
-# Sideqiq Interface
-gem 'slim', '>= 1.1.0'
-gem 'sinatra', '>= 1.3.0', :require => nil
 
 #Voting and commenting
 gem 'awesome_nested_set'
@@ -239,9 +217,6 @@ gem 'will_paginate'
 #Meta tags
 gem 'metamagic'
 
-#UUID generation
-gem 'uuidtools'
-
 #Meta events tracker
 gem 'meta_events'
 
@@ -256,24 +231,14 @@ gem "secure_headers", :require => 'secure_headers'
 
 group :production, :staging do
   gem 'bugsnag'
+  gem 'sitemap_generator'
   gem 'mixpanel-ruby'
   gem 'rack-tracker'
   gem "skylight"
 end
 
 group :development, :test do
-  gem 'better_errors'
-  gem 'flamegraph'
-  gem 'stackprof'
-  gem 'rack-mini-profiler', :require=>false
-  gem 'rails_best_practices'
-  gem 'dawnscanner', :require=>false
-  gem 'meta_request'
   gem 'byebug'
-  gem 'activerecord-colored_log_subscriber'
-  gem 'bullet'
-  gem 'binding_of_caller'
-  gem 'rb-fsevent', '>= 0.9.1'
-  gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git'
+  gem 'spring'
 end
 
