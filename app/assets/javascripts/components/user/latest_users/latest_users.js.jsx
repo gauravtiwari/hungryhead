@@ -14,18 +14,21 @@ var LatestUsers = React.createClass({
 
   componentDidMount: function() {
     if(this.isMounted()) {
-      var users_channel = pusher.subscribe("users-channel");
-      if(users_channel) {
-        users_channel.bind('new_user', function(data){
-          var new_item = [data.data]
-          var newState = React.addons.update(this.state, {
-              list : {
-                $unshift : new_item
-              }
-          });
-          this.setState(newState);
-          $("#user_"+data.data.id).addClass('animated fadeInDown');
-        }.bind(this));
+      var users_channel_subscribed = _.findWhere(pusher.allChannels(), {name: "users-channel"});
+      if(users_channel_subscribed === undefined) {
+        var users_channel = pusher.subscribe("users-channel");
+        if(users_channel) {
+          users_channel.bind('new_user', function(data){
+            var new_item = [data.data]
+            var newState = React.addons.update(this.state, {
+                list : {
+                  $unshift : new_item
+                }
+            });
+            this.setState(newState);
+            $("#user_"+data.data.id).addClass('animated fadeInDown');
+          }.bind(this));
+        }
       }
     }
   },

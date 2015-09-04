@@ -28,20 +28,18 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-    <!--[if !IE]><!-->
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-    <!--<![endif]-->
+    <% if !browser.ie? or browser.ie? and browser.version >= "10"  %>
+      <%= stylesheet_link_tag 'application', media: 'all' %>
+    <% end %>
 
-    <!--[if IE 9]>
-      <%= stylesheet_link_tag 'application_1', media: 'all', 'data-turbolinks-track' => true %>
-      <%= stylesheet_link_tag 'application_2', media: 'all', 'data-turbolinks-track' => true %>
-      <%= stylesheet_link_tag 'application_3', media: 'all', 'data-turbolinks-track' => true %>
-      <%= stylesheet_link_tag 'application_4', media: 'all', 'data-turbolinks-track' => true %>
-    <![endif]-->
+    <% if browser.ie? and browser.version <= "9"  %>
+      <%= stylesheet_link_tag 'application_1', media: 'all' %>
+      <%= stylesheet_link_tag 'application_2', media: 'all' %>
+      <%= stylesheet_link_tag 'application_3', media: 'all' %>
+      <%= stylesheet_link_tag 'application_4', media: 'all' %>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
+    <% end %>
 
-    <!--[if lte IE 9]>
-      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all', 'data-turbolinks-track' => true %>
-    <![endif]-->
 
     <script type="text/javascript" data-turbolinks-eval=false>
       window.onload = function() {

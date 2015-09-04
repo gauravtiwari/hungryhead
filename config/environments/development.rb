@@ -54,4 +54,10 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = { host: 'localhost:3000', port: '3000' }
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.after_initialize do
+    Bullet.enable = false
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+  end
 end

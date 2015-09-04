@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
   end
 
   def get_contributions
-    Idea.find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
+    Idea.includes(:user).find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
   end
 
   def send_welcome_email!

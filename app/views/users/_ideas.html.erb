@@ -5,7 +5,7 @@
         </div>
     </div>
     <% if @user.ideas.any? %>
-        <% @user.ideas.take(3).each do |idea| %>
+        <% @user.ideas.includes(:user).take(3).each do |idea| %>
             <% if idea.visible? || idea.user == current_user %>
                 <div class="widget-16-header p-l-20 p-r-20 p-b-20">
                     <div class="pull-left">

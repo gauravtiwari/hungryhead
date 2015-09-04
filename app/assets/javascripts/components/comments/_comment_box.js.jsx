@@ -39,23 +39,24 @@ var CommentBox = React.createClass({
       if(this.state.standalone) {
         this.loadComments();
       }
-
-      var comment_channel = pusher.subscribe(this.props.comment_channel);
-      if(comment_channel) {
-        comment_channel.bind('new_comment', function(data){
-          var response = JSON.parse(data.data);
-          var comment = response.comment;
-          if(presence_channel.members.me.id != comment.user_id) {
-            var newState = React.addons.update(this.state, {
-                comments : {
-                  $unshift : [comment]
-                }
-            });
-            this.setState(newState);
-            $("#comment_"+comment.id).addClass('animated slideInDown');
-          }
-          this.setState({count: this.state.count+1 });
-        }.bind(this));
+      if(_.findWhere(pusher.allChannels(), {name: this.props.comment_channel}) === undefined) {
+        var comment_channel = pusher.subscribe(this.props.comment_channel);
+        if(comment_channel) {
+          comment_channel.bind('new_comment', function(data){
+            var response = JSON.parse(data.data);
+            var comment = response.comment;
+            if(presence_channel.members.me.id != comment.user_id) {
+              var newState = React.addons.update(this.state, {
+                  comments : {
+                    $unshift : [comment]
+                  }
+              });
+              this.setState(newState);
+              $("#comment_"+comment.id).addClass('animated slideInDown');
+            }
+            this.setState({count: this.state.count+1 });
+          }.bind(this));
+        }
       }
     }
   },

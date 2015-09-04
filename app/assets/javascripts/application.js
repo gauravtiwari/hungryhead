@@ -3,6 +3,7 @@
 //
 //= require jquery2
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require jquery.soulmate
 //= require pusher
 //= require jquery-form
@@ -64,5 +65,7 @@
 //= require welcome
 //= require globals
 //= require pusher_init
+//= require turbolinks
 //= require_tree ./components
+//= require pusher_turbolinks
 //= require react_ujs

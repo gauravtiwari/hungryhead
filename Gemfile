@@ -1,8 +1,5 @@
-
 ruby '2.2.2'
-
 source 'https://rubygems.org'
-
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'
@@ -37,194 +34,144 @@ gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'postgres-copy'
-
 #Coffescript
 gem 'coffee-rails'
-
 #Font awesome
 gem "font-awesome-rails"
-
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as ressor for JavaScript assets
 gem 'uglifier'
+#Turbolinks
+gem 'turbolinks', github: 'rails/turbolinks'
+gem 'jquery-turbolinks'
 
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
-
 #Gamification system
 gem 'merit'
-
 #Mountanable engines
 gem 'help', path: "vendor/engines/help"
 gem 'site_feedback', path: "vendor/engines/site_feedback"
-
 #Cron jobs
 gem 'crono'
-
 #Cache for jbuilder
 gem 'jbuilder'
-
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'sprockets'
-
 #Render anywhere
 gem 'render_anywhere', :require => false
-
 #Fetch records in order
 gem 'order_as_specified'
-
+#Eager load
+gem 'goldiloader'
 #404 page customize
 gem 'gaffe'
-
 #datetime picker
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-
 #For formatting texts
 gem 'html-pipeline'
 gem 'github-markdown'
 gem 'sanitize'
 gem 'auto_html'
-
 #Deployment
 gem 'foreman'
-
 #Authentication Authorization and Social Signup
 gem 'devise'
 gem 'devise_invitable'
 gem 'devise_uid'
 gem 'pundit'
-
+#responding formats
 gem 'responders'
-
 #Jquery
 gem 'jquery-rails'
-
 #Add acts as paranoia for soft deletes
 gem 'paranoia'
-
 #Local time
 gem 'local_time'
-
 #Step by step wizard
 gem 'wicked'
-
 #Tagging
 gem 'acts-as-taggable-on'
-
 #Autoprefixer
 gem 'autoprefixer-rails'
-
 #Autocomplete rails
 gem 'rails4-autocomplete'
-
 #JSON generator
 gem 'oj'
-
 # Server
 gem 'passenger'
-
 #Browser gem
 gem 'browser'
-
 #Autocomplete  + Redis
 gem 'rack-contrib'
 gem 'soulmate', :require => 'soulmate/server'
 gem 'redis'
 gem 'redis-session-store'
 gem 'redis-namespace'
-
 #Connection pool
 gem 'connection_pool'
-
 #Redis objects
 gem 'redis-objects'
-
-#Mailer gems
-gem 'mandrill-rails'
-
 #Event maps - Google maps
 gem 'geocoder'
-
 #React JS
 gem 'execjs'
 gem 'therubyracer', platforms: :ruby
 gem 'react-rails'
-
 #Parse JSON
 gem 'json'
-
 #JS routes
 gem 'js-routes'
-
 #Log versions
 gem 'paper_trail'
-
 #Simple form
 gem 'simple_form'
 gem 'honeypot-captcha'
-
 # SEO
 gem 'friendly_id'
-
 #Select 2
 gem "select2-rails"
-
 #Image upload and manipulations
 gem 'carrierwave'
-
 #Sync assets with cloudfront
 gem 'fog-google'
 gem 'asset_sync'
-
 #Background Job processing
 gem 'sidekiq'
-
 # Image Processing
 gem "mini_magick", '~> 4.2.10'
 gem 'unf'
-
 #Voting and commenting
 gem 'awesome_nested_set'
-
 #At.js
 gem 'jquery-atwho-rails'
-
 #Jquery UI
 gem 'jquery-ui-rails'
-
 #Application configuration
 gem 'figaro'
-
 #caching system
 gem 'readthis'
 gem 'hiredis'
-
 #Realtime
 gem 'pusher'
 gem 'em-http-request' # Required by trigger_async
-
 #Pagination
 gem 'will_paginate'
-
 #Meta tags
 gem 'metamagic'
-
 #Meta events tracker
 gem 'meta_events'
-
 #Security for app
 gem 'rack-attack'
-
 #JQUERY file upload
 gem "jquery-fileupload-rails"
-
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
-
 group :production, :staging do
   gem 'bugsnag'
+  gem 'mandrill-rails'
   gem 'htmlcompressor'
   gem 'sitemap_generator'
   gem 'mixpanel-ruby'
@@ -234,6 +181,7 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem "bullet"
   gem 'spring'
 end
 

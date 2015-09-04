@@ -1,3 +1,5 @@
-<%= javascript_tag do %>
-  var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.slug %>");
-<% end %>
+<script type="text/javascript">
+  if(_.findWhere(pusher.allChannels(), {name: "presence-idea-collaboration-<%= @idea.slug %>"}) === undefined) {
+    var idea_collaboration_channel = pusher.subscribe("presence-idea-collaboration-<%= @idea.slug %>");
+  }
+</script>

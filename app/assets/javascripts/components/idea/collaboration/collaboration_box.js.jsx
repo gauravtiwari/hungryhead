@@ -11,7 +11,6 @@ var CollaborationBox = React.createClass({
 
   componentDidMount: function() {
     var self = this;
-
     if(this.isMounted()){
       $.getJSON(this.props.form.action, function(data) {
         this.setState({
