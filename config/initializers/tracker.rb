@@ -1,4 +1,4 @@
-# config/initializers/compression.rb
+# config/initializers/tracker.rb
 
 Rails.application.configure do
   # Use environment names or environment variables:

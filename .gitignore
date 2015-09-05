@@ -9,7 +9,6 @@
 /.idea
 /.metadata
 .DS_Store
-hungryhead_environment.txt
 node_modules/
 
 Guardfile
