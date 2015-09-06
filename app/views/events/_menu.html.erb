@@ -1,7 +1,7 @@
 <div class="profile-nav overflow-hidden p-l-15">
  <ul class="school-profile-name inline no-style p-t-15 p-b-15 no-margin col-md-6">
     <li class="inline p-r-25">
-      <%= link_to('Profile', event_path(@event), class: "bold #{current_class?(event_path(@event))} p-b-5 fs-13") %>
+      <%= link_to('Profile', event_path(@event), class: "bold #{sub_menu_active?(event_path(@event))} p-b-5 fs-13") %>
     </li>
     <li class="inline p-r-25">
       <%= link_to('Discuss', comments_event_path(@event), class: "bold fs-13", remote: true) %>

@@ -86,8 +86,6 @@ gem 'pundit'
 gem 'responders'
 #Jquery
 gem 'jquery-rails'
-#Add acts as paranoia for soft deletes
-gem 'paranoia'
 #Local time
 gem 'local_time'
 #Step by step wizard
@@ -112,6 +110,8 @@ gem 'redis-session-store'
 gem 'redis-namespace'
 #Connection pool
 gem 'connection_pool'
+#Add acts as paranoia for soft deletes
+gem 'paranoia'
 #Redis objects
 gem 'redis-objects'
 #Event maps - Google maps
@@ -136,13 +136,13 @@ gem "select2-rails"
 #Image upload and manipulations
 gem 'carrierwave'
 #Sync assets with cloudfront
+gem 'net-ssh', '2.10.1.rc1'
 gem 'fog-google'
 gem 'asset_sync'
 #Background Job processing
 gem 'sidekiq'
 # Image Processing
-gem "mini_magick", '~> 4.2.10'
-gem 'unf'
+gem "mini_magick"
 #Voting and commenting
 gem 'awesome_nested_set'
 #At.js
@@ -169,6 +169,7 @@ gem 'rack-attack'
 gem "jquery-fileupload-rails"
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
+
 group :production, :staging do
   gem 'bugsnag'
   gem 'mandrill-rails'
@@ -182,6 +183,10 @@ end
 group :development, :test do
   gem 'byebug'
   gem "bullet"
+  gem "awesome_print"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'meta_request'
   gem 'spring'
 end
 

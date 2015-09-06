@@ -3,10 +3,10 @@
     <div class="pull-left no-padding p-l-15 p-r-25">
         <ul class="profile-name inline no-style no-margin p-t-5">
           <li class="inline p-r-15">
-            <%= link_to("Idea", idea_path(@idea), class: "bold m-l-15 fs-13 #{current_class?(idea_path(@idea))}") %>
+            <%= link_to("Idea", idea_path(@idea), class: "bold m-l-15 fs-13 #{sub_menu_active?(idea_path(@idea))}") %>
           </li>
           <li class="inline p-r-15">
-            <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{current_class?(idea_feedbacks_path(@idea))}") %>
+            <%= link_to("Feedbacks", idea_feedbacks_path(@idea), class: "text-brand bold fs-13 #{sub_menu_active?(idea_feedbacks_path(@idea))}") %>
           </li>
         </ul>
     </div>

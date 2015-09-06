@@ -47,7 +47,7 @@ var IdeaHeader = React.createClass({
       var text = "";
     }
     return (
-      <div className="panel bg-solid box-shadow m-b-10">
+      <div className="panel bg-white box-shadow m-b-10">
         <div className="panel-body">
           <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
           <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />

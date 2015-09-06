@@ -149,10 +149,13 @@ body.dashboard .page-container {
 .header .search-link {
   display: inline-block;
   margin-left: 15px;
-  color: #626262;
+  color: #fff;
   opacity: .7;
   font-size: 16px;
   font-family: wf_segoe-ui_light, wf_segoe-ui_normal, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.header .search-link::-webkit-input-placeholder {
+  color: #fff;
 }
 .header .search-link i {
   margin-right: 15px;

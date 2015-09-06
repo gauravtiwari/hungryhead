@@ -49,7 +49,7 @@ var OpenNotificationsThread = React.createClass({
     }
 
     return(
-        <a href="javascript:;" onClick={this.openNotifications} id="notification-center" className="fa fa-globe p-r-10 fs-22 text-brand">
+        <a href="javascript:;" onClick={this.openNotifications} id="notification-center" className="fa fa-globe p-r-10 fs-22 text-white">
           {thread_count}
         </a>
       )
