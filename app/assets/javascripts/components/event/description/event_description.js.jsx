@@ -38,7 +38,8 @@ var EventDescription = React.createClass({
     .done(function(data) {
       this.setState({
         description: data.event.description,
-        editing: !this.state.editing
+        editing: !this.state.editing,
+        loading: false
       });
       $('body').pgNotification({style: "simple", message: "Event updated", position: "top-right", type: "success",timeout: 5000}).show();
     }.bind(this))

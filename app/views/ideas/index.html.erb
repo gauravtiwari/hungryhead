@@ -1,8 +1,10 @@
 <div class="container xs-no-padding  p-b-60 <%= 'bg-white box-shadow' if browser.mobile? %>">
   <% unless browser.mobile? %>
     <div class="col-md-3 col-sm-4 no-padding p-l-15" id="home_sidebar">
-      <div class="sidebar auto-height sticky box-shadow">
+      <div class="sidebar auto-height box-shadow">
         <%= react_component('LatestFeed', {user_id: current_user.uid, path: notifications_path, channel_event: "new_ticker_item"}.to_json) %>
+        <% @related_events = Event.all %>
+        <%= render partial: 'events/related_events', resource: @related_events, locals: {type: "Latest"} %>
         <%= react_component('LatestUsers', {users: Oj.dump({
               list: User.latest_20,
               type: 'Latest People'

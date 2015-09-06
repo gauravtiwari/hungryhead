@@ -94,9 +94,9 @@ var LatestUsers = React.createClass({
     }
 
     return (
-      <div className="widget-11-2 panel no-border no-margin">
+      <div className="widget-11-2 panel full-border-light no-margin">
           <div className="panel-heading">
-            <div className="panel-title fs-11 text-master">
+            <div className="panel-title b-b b-great p-b-5">
               {this.state.type}
             </div>
             <div className="panel-controls">
@@ -124,7 +124,7 @@ var LatestUsers = React.createClass({
                 </ul>
             </div>
           </div>
-          <div className="panel-body full-border-light scrollable no-padding no-margin"  style={styles}>
+          <div className="panel-body scrollable no-padding no-margin"  style={styles}>
             <ul className="trending-list no-padding no-style no-margin" ref="trendingList" style={styles}>
               {content}
             </ul>

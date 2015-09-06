@@ -11,7 +11,7 @@
     <%= render partial: 'event_stats' %>
     <div class="event-date padding-10 p-l-15">
       <span class="fa fa-calendar fs-16 text-master bold pull-left p-r-10"></span>
-        <p class="inline text-master semi-bold overflow-hidden no-margin">
+        <p class="text-master semi-bold overflow-hidden no-margin">
           <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>
           <span class="small-text clearfix hint-text">
             <%= @event.start_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %> to <%= @event.end_time.in_time_zone.utc.strftime('%B %e, %Y %l:%M%P') %>

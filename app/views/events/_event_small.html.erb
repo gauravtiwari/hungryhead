@@ -1,20 +1,6 @@
 <div class="row full-border-light-bottom m-b-10">
   <div class="col-xs-12 col-md-12 col-sm-12">
     <div class="event-meta">
-      <div class="col-md-2 col-middle no-padding">
-        <% if event.cover.present? %>
-          <div class="thumbnail-wrapper d48">
-            <%= image_tag(event.cover.url(:cover), data: {src:  event.cover.url(:cover), :"src-retina" => event.cover.url(:cover)}, width: "48", height: "48") %>
-          </div>
-        <% else %>
-          <div class="thumbnail-wrapper d32">
-            <span class="placeholder bold text-white">
-              <%= event.name_badge %>
-            </span>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-md-10 overflow-hidden">
         <h5 class="text-master no-margin bold fs-14">
          <a href="<%= event_path(event) %>" class="inline">
            <%= event.title %>
@@ -28,7 +14,6 @@
           <a href="" class="m-r-5 fs-13"><span class="fa fa-user-plus"></span> Join</a>
           <a href="" class="fs-13"><span class="fa fa-bookmark"></span> Save</a>
         </div>
-      </div>
     </div>
   </div>
 </div>
