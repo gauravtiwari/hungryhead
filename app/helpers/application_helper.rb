@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def current_class?(test_path)
-    return 'text-white bold p-b-5 b-b b-grey' if request.path == test_path
+    return 'text-brand bold p-b-5 b-b b-grey' if request.path == test_path
     ''
   end
 

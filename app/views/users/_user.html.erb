@@ -39,17 +39,17 @@
       <p class="fs-14 p-t-5 block people-info small-text">
         <% if user.cached_subject_list.present? %>
         <span class="hidden-xs small-text">
-          <%= link_to(user.subject_list.first, tag_people_path(user.subject_list.first.parameterize), class: 'tag m-r-5') %>
+          <%= link_to(user.subject_list.first, tag_people_path(user.subject_list.first.parameterize), class: 'badge m-r-5') %>
         </span>
         <% end %>
         <% if user.cached_market_list.present? %>
         <span class="hidden-xs small-text">
-          <%= link_to(user.market_list.first, tag_people_path(user.market_list.first.parameterize), class: 'tag m-r-5') %>
+          <%= link_to(user.market_list.first, tag_people_path(user.market_list.first.parameterize), class: 'badge m-r-5') %>
         </span>
         <% end %>
         <% if user.cached_skill_list.present? %>
         <span class="hidden-xs small-text">
-          <%= link_to(user.skill_list.first, tag_people_path(user.skill_list.first.parameterize), class: 'tag m-r-5') %>
+          <%= link_to(user.skill_list.first, tag_people_path(user.skill_list.first.parameterize), class: 'badge m-r-5') %>
         </span>
         <% end %>
       </p>

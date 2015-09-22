@@ -47,6 +47,7 @@ class CreateIdeaNotificationService
         PublishIdeaJob.perform_later(@idea.id, @user.id, activity.id) unless Idea.trending.member?(@idea.id)
       end
     end
+    PublishIdeaJob.perform_later(@idea.id, @user.id, @activity.id)
   end
 
 end

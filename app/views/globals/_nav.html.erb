@@ -1,10 +1,10 @@
-<div class="header bg-solid b-b b-solid box-shadow">
+<div class="header">
   <div class="container">
     <div class="pull-left">
       <div class="header-inner p-t-10">
         <div class="brand inline">
           <%= link_to(root_path) do %>
-          <img src="<%= image_path('hungryhead_white.png') %>" alt="logo" data-src="<%= image_path('hungryhead_white.png') %>" data-src-retina="<%= image_path('hungryhead_white.png') %>" width="30">
+          <img src="<%= image_path('hungryhead.png') %>" alt="logo" data-src="<%= image_path('hungryhead.png') %>" data-src-retina="<%= image_path('hungryhead.png') %>" width="30">
           <% end %>
         </div>
         <%= form_tag('/search/search', class: 'inline m-l-15')  do %>
@@ -12,23 +12,23 @@
         <% end %>
         <ul class="main-nav-links inline no-style m-l-20">
           <li class="inline p-r-15 p-l-15 fs-14 bold">
-            <%= link_to(root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : ' text-white'}") do %>
+            <%= link_to(root_path, class: "fs-22 #{request.path == root_path ? current_class?(root_path) : 'text-brand'}") do %>
               <i class="fa fa-lightbulb-o"></i>
             <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 fs-14 bold">
-            <%= link_to(users_path, class: "fs-22 #{request.path == users_path ? current_class?(users_path) : ' text-white'}") do %>
+            <%= link_to(users_path, class: "fs-22 #{request.path == users_path ? current_class?(users_path) : 'text-brand'}") do %>
                <i class="fa fa-users"></i>
              <% end %>
           </li>
           <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold">
-           <%= link_to(schools_path, class: "fs-22 #{request.path == schools_path ? current_class?(schools_path) : ' text-white'}") do %>
+           <%= link_to(schools_path, class: "fs-22 #{request.path == schools_path ? current_class?(schools_path) : 'text-brand'}") do %>
               <i class="fa fa-university"></i>
             <% end %>
           </li>
 
           <li class="inline p-r-15 p-l-15 p-l-10 fs-14 bold">
-           <%= link_to(events_path, class: "fs-22 #{request.path == events_path ? current_class?(events_path) : ' text-white'}") do %>
+           <%= link_to(events_path, class: "fs-22 #{request.path == events_path ? current_class?(events_path) : 'text-brand'}") do %>
               <i class="fa fa-calendar"></i>
             <% end %>
           </li>
@@ -60,7 +60,7 @@
         </ul>
         <div class="pull-left p-r-10 p-t-10 fs-16 font-heading">
           <%= link_to(profile_path(current_user)) do %>
-            <span class="fs-14 bold <%= request.path == profile_path(current_user) ? current_class?(profile_path(current_user)) : ' text-white' %>"><%= current_user.first_name %></span>
+            <span class="fs-14 bold <%= request.path == profile_path(current_user) ? current_class?(profile_path(current_user)) : 'text-brand' %>"><%= current_user.first_name %></span>
           <% end %>
         </div>
         <div class="dropdown pull-right">

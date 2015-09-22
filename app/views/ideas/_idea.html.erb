@@ -1,29 +1,29 @@
 <% cache(cache_key_for_idea(idea)) do %>
-<li class="user-list clearfix p-t-15 p-b-15">
-    <span class="col-xs-height">
-      <%= link_to(profile_path(idea.user)) do %>
+<li class="idea-list clearfix p-t-15 p-b-15">
+    <div class="col-xs-height col-middle col-xs-1 col-md-1 col-sm-1">
+      <%= link_to(profile_path(idea.user), data: {toggle: "tooltip"}, class: 'inline', title: idea.user.name) do %>
         <% if idea.user.avatar_present? %>
-          <div class="thumbnail-wrapper d48 circular bg-success m-b-10">
+          <div class="thumbnail-wrapper d32 circular">
             <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "34", height: "34") %>
           </div>
         <% else %>
-          <div class="thumbnail-wrapper d48 inline circular m-b-10">
+          <div class="thumbnail-wrapper d32 inline circular">
             <span class="placeholder bold text-white">
               <%= idea.user.name_badge.upcase %>
             </span>
           </div>
         <% end %>
       <% end %>
-      <div class="clearfix">
-        <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote displayblock', button_style: false}.to_json) %>
-      </div>
-    </span>
-    <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-6 col-sm-6">
-     <h5 class="text-master no-margin bold inline">
-       <a href="<%= idea_path(idea) %>" class="inline">
-         <%= idea.name %>
-       </a>
-     </h5>
+    </div>
+    <div class="p-l-10 col-xs-height col-middle col-xs-12 col-md-7 col-sm-7">
+      <a href="<%= idea_path(idea) %>" class="inline">
+       <h5 class="no-margin bold inline m-r-10">
+           <%= idea.name %>
+       </h5>
+     </a>
+     <p class="p-l-5 date inline small-text hint-text">
+       Pitched <%= local_relative_time(idea.created_at, type: 'time-or-date') %>
+     </p>
       <% if idea.founder?(current_user) %>
         <span class="badge m-l-10 badge-green inline">
           founder
@@ -35,51 +35,49 @@
           team
         </span>
       <% end %>
-      <% if idea.school.present? %>
-        <span class="small-text m-l-10">
-          <%= link_to(profile_path(idea.school.name), data: {toggle: "tooltip", container: "body"}, title: idea.school.name) do %>
-            <span class="fa fa-university"></span>
-          <% end %>
-        </span>
-      <% end %>
-    <p class="date small-text hint-text">
-      Pitched <%= local_relative_time(idea.created_at, type: 'time-or-date') %>
-    </p>
-     <p class="fs-14 block people-info text-master no-margin">
-       <p class="text-master p-t-5">
+     <p class="fs-14 block people-info  no-margin">
+       <p class="p-t-5">
          <%= idea.high_concept_pitch %>
        </p>
      </p>
-      <% if idea.cached_market_list.present? %>
-        <span class="small-text m-t-10 displayblock">
-          <%= link_to(idea.market_list.first, tag_path(idea.market_list.first.parameterize), class: 'tag m-r-5') %>
-        </span>
+     <% if idea.cached_market_list.present? %>
+       <div class="markets m-t-5">
+          <% idea.market_list.each do |market| %>
+            <%= link_to(market, tag_path(market.parameterize), class: 'badge') %>
+          <% end %>
+        </div>
+    <% end %>
+    </div>
+
+  <div class="col-xs-height col-middle hidden-xs col-sm-4 col-md-4">
+    <div class="m-t-5 pull-left m-r-20">
+      <span class="fa fa-comments light"></span>
+      <a href="" class=" light">100</a>
+    </div>
+
+    <div class="m-t-5 pull-left m-r-20">
+      <span class="fa fa-bookmark light"></span><a href="" class=" light"></a>
+    </div>
+    <div class="m-t-5 pull-left m-r-20">
+      <span class="fa fa-star light"></span>
+      <%= number_to_human(User.leaderboard.score(idea.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
+    </div>
+    <div class="pull-left bold m-t-5 m-r-20 vote_button">
+      <%= react_component('Upvote', {voted: voted?(idea), css_class: 'vote-button add_vote displayblock', button_style: false}.to_json) %>
+    </div>
+    <%= link_to(profile_path(idea.school), data: {toggle: "tooltip"}, class: 'inline', title: idea.school.name) do %>
+      <% if idea.school.avatar_present? %>
+        <div class="thumbnail-wrapper d32 circular">
+          <%= image_tag(idea.school.get_avatar, data: {src:  idea.school.get_avatar, :"src-retina" => idea.school.get_avatar}, width: "34", height: "34") %>
+        </div>
+      <% else %>
+        <div class="thumbnail-wrapper d32 inline circular">
+          <span class="placeholder bold text-white">
+            <%= idea.school.name_badge.upcase %>
+          </span>
+        </div>
       <% end %>
-    </div>
-   <div class="p-l-10 col-xs-height col-middle col-md-3 col-sm-3 hidden-xs">
-     <div class="user-stats-list no-border">
-       <div class="col-sm-6 text-center">
-         Feedbacks
-         <span class="text-master">
-         <%= number_to_human(idea.feedbackers_counter.value,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-         </span>
-       </div>
-       <div class="col-sm-6 text-center">
-         Score
-         <span class="text-master displayblock text-center">
-           <%= number_to_human(User.leaderboard.score(idea.id) || 0,  :format => '%n%u', :units => { :thousand => 'K' }) %>
-         </span>
-       </div>
-     </div>
-   </div>
-  <div class="card-vote-button text-center col-xs-height col-middle hidden-xs col-sm-3 col-md-3">
-    <div class="inline small-text" data-toggle="tooltip" title="Click to save">
-      <span class="fa fa-bookmark text-master light m-r-15"></span><a href="" class="text-master light"></a>
-    </div>
-    <div class="inline small-text" data-toggle="tooltip" title="Load comments">
-      <span class="fa fa-comment text-master light"></span>
-      <a class="text-master light" href="">100</a>
-    </div>
+    <% end %>
   </div>
 </li>
 <% end %>

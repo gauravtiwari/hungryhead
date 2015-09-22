@@ -1,11 +1,11 @@
 <div class="row full-border-light-bottom m-b-10">
   <div class="col-xs-12 col-md-12 col-sm-12">
     <div class="event-meta">
-        <h5 class="text-master no-margin bold fs-14">
-         <a href="<%= event_path(event) %>" class="inline">
-           <%= event.title %>
-         </a>
-       </h5>
+        <a href="<%= event_path(event) %>" class="inline m-b-5">
+          <h5 class="no-margin bold fs-14">
+             <%= event.title %>
+         </h5>
+        </a>
         <p class="people-info no-margin fs-12">
           <span class="fa fa-map-marker text-green"></span>
           <%= event.address %>

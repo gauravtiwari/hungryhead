@@ -107,12 +107,12 @@ var Upvote = React.createClass({
         </a>
         )
     } else {
-      return (<li className="text-black fs-14 pointer no-padding text-center">
+      return (<div className="text-black fs-14 pointer no-padding text-center">
                 <a className="m-r-5" data-toggle="tooltip" data-container="body" title={text} onClick={this.state.voted? this.handleDelete : this.handleClick}>
                   {heart}
                 </a>
                 {voters}
-              </li>
+              </div>
 
       );
     }

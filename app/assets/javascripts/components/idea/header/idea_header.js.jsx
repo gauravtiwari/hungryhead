@@ -42,12 +42,12 @@ var IdeaHeader = React.createClass({
 
   render: function() {
     if(this.state.data.meta.is_owner) {
-      var text = <span className="fa fa-pencil"> Edit</span>;
+      var text = <span><i className="fa fa-pencil"></i> Edit</span>;
     } else {
       var text = "";
     }
     return (
-      <div className="panel bg-white box-shadow m-b-10">
+      <div className="panel bg-solid box-shadow m-b-10">
         <div className="panel-body">
           <IdeaProfile idea={this.state.idea} text={text} openForm={this.openForm} />
           <IdeaPitch idea={this.state.idea} text={text} openForm={this.openForm} />
