@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rails/turbolinks.git
-  revision: dc4f5f36f1c1965e6c5921f49d20fa718277f19e
+  revision: eac0a3e43a69b341abdd55ef1bc45d1d4cfaf8a9
   specs:
     turbolinks (3.0.0)
       coffee-rails
@@ -86,13 +86,13 @@ GEM
     auto_html (1.6.4)
       redcarpet (~> 3.1)
       rinku (~> 1.5.0)
-    autoprefixer-rails (6.0.1)
+    autoprefixer-rails (6.0.3)
       execjs
       json
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
     awesome_print (1.6.1)
-    babel-source (5.8.23)
+    babel-source (5.8.26)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
@@ -198,7 +198,7 @@ GEM
       em-socksify (>= 0.3)
       eventmachine (>= 1.0.3)
       http_parser.rb (>= 0.6.0)
-    em-socksify (0.3.0)
+    em-socksify (0.3.1)
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
     eventmachine (1.0.8)
@@ -283,7 +283,7 @@ GEM
       fog-core
       fog-json
       fog-xml
-    fog-sakuracloud (1.1.0)
+    fog-sakuracloud (1.3.1)
       fog-core
       fog-json
     fog-serverlove (0.1.2)
@@ -316,7 +316,7 @@ GEM
       activerecord (>= 4.0.0)
     gaffe (1.0.2)
       rails (>= 3.2.0)
-    geocoder (1.2.9)
+    geocoder (1.2.11)
     git-version-bump (0.15.1)
     github-markdown (0.6.9)
     globalid (0.3.6)
@@ -325,12 +325,12 @@ GEM
       activerecord (>= 3.2, < 4.3)
       activesupport (>= 3.2, < 4.3)
     hiredis (0.6.0)
-    hitimes (1.2.2)
+    hitimes (1.2.3)
     honeypot-captcha (0.0.3)
     html-pipeline (2.0)
       activesupport (>= 2, < 5)
       nokogiri (>= 1.4, <= 1.6.5)
-    htmlcompressor (0.2.0)
+    htmlcompressor (0.3.0)
     http_parser.rb (0.6.0)
     httpclient (2.6.0.1)
     i18n (0.7.0)
@@ -353,7 +353,7 @@ GEM
       turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
-    js-routes (1.1.0)
+    js-routes (1.1.2)
       railties (>= 3.2)
       sprockets-rails
     json (1.8.3)
@@ -377,12 +377,13 @@ GEM
       railties (>= 3.0.0, < 5.0.0)
     metamagic (3.1.7)
       rails (>= 3.0.0)
-    mime-types (2.6.1)
+    mime-types (2.6.2)
     mimetype-fu (0.1.2)
-    mini_magick (4.3.2)
+    mini_magick (4.3.3)
     mini_portile (0.6.2)
     minitest (5.8.0)
     mixpanel-ruby (2.2.0)
+    modernizr-rails (2.7.1)
     momentjs-rails (2.10.3)
       railties (>= 3.1)
     multi_json (1.11.2)
@@ -394,7 +395,7 @@ GEM
       mini_portile (~> 0.6.0)
     nokogumbo (1.4.1)
       nokogiri
-    oj (2.12.13)
+    oj (2.12.14)
     order_as_specified (0.1.0)
       activerecord (~> 4.0)
     orm_adapter (0.5.0)
@@ -404,7 +405,7 @@ GEM
       request_store (~> 1.1)
     paranoia (2.1.3)
       activerecord (~> 4.0)
-    passenger (5.0.16)
+    passenger (5.0.18)
       rack
       rake (>= 0.8.1)
     pg (0.18.3)
@@ -488,7 +489,6 @@ GEM
       rails-assets-get-size (~> 1.2.2)
       rails-assets-outlayer (~> 1.4.0)
     rails-assets-matches-selector (1.0.3)
-    rails-assets-modernizr (2.8.3)
     rails-assets-outlayer (1.4.2)
       rails-assets-doc-ready (~> 1.0.0)
       rails-assets-eventEmitter (>= 4.2, < 5)
@@ -520,14 +520,14 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    react-rails (1.2.0)
+    react-rails (1.3.1)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
       connection_pool
       execjs
       rails (>= 3.2)
       tilt
-    readthis (0.8.1)
+    readthis (1.0.0.pre.beta)
       connection_pool (~> 2.1)
       redis (~> 3.0)
     redcarpet (3.3.2)
@@ -585,10 +585,10 @@ GEM
       redis (>= 3.0)
       sinatra (>= 1.0)
       vegas (>= 0.1.0)
-    spring (1.3.6)
+    spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
-    sprockets-rails (2.3.2)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -674,6 +674,7 @@ DEPENDENCIES
   metamagic
   mini_magick
   mixpanel-ruby
+  modernizr-rails
   momentjs-rails (>= 2.9.0)
   net-ssh (= 2.10.1.rc1)
   oj
@@ -708,7 +709,6 @@ DEPENDENCIES
   rails-assets-jquery.validate!
   rails-assets-marked!
   rails-assets-masonry!
-  rails-assets-modernizr!
   rails-assets-placeholders!
   rails-assets-pnotify!
   rails-assets-pusher!
@@ -717,7 +717,7 @@ DEPENDENCIES
   rails-assets-underscore!
   rails4-autocomplete
   react-rails
-  readthis
+  readthis (= 1.0.0.pre.beta)
   redis
   redis-namespace
   redis-objects
@@ -727,7 +727,7 @@ DEPENDENCIES
   sanitize
   sass-rails
   secure_headers
-  select2-rails
+  select2-rails (= 3.5.9.3)
   sidekiq
   simple_form
   site_feedback!

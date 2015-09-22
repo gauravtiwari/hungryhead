@@ -1,4 +1,3 @@
-ruby '2.2.3'
 source 'https://rubygems.org'
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
@@ -20,7 +19,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-slimScroll'
   gem 'rails-assets-bootstrap-tagsinput'
   gem 'rails-assets-pnotify'
-  gem 'rails-assets-modernizr'
   gem 'rails-assets-fastclick'
   gem 'rails-assets-underscore'
   gem 'rails-assets-jquery.easing'
@@ -45,7 +43,6 @@ gem 'uglifier'
 #Turbolinks
 gem 'turbolinks', github: 'rails/turbolinks'
 gem 'jquery-turbolinks'
-
 #Distrubuted query
 #gem 'makara', github: 'taskrabbit/makara'
 #Gamification system
@@ -132,7 +129,8 @@ gem 'honeypot-captcha'
 # SEO
 gem 'friendly_id'
 #Select 2
-gem "select2-rails"
+gem "select2-rails", '3.5.9.3'
+gem 'modernizr-rails'
 #Image upload and manipulations
 gem 'carrierwave'
 #Sync assets with cloudfront
@@ -152,7 +150,7 @@ gem 'jquery-ui-rails'
 #Application configuration
 gem 'figaro'
 #caching system
-gem 'readthis'
+gem 'readthis', '1.0.0.pre.beta'
 gem 'hiredis'
 #Realtime
 gem 'pusher'
