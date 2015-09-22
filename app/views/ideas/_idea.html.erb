@@ -3,12 +3,12 @@
     <div class="col-xs-height col-middle col-xs-1 col-md-1 col-sm-1">
       <%= link_to(profile_path(idea.user), data: {toggle: "tooltip"}, class: 'inline', title: idea.user.name) do %>
         <% if idea.user.avatar_present? %>
-          <div class="thumbnail-wrapper d32 circular">
-            <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "34", height: "34") %>
+          <div class="thumbnail-wrapper d48 circular">
+            <%= image_tag(idea.user.get_avatar, data: {src:  idea.user.get_avatar, :"src-retina" => idea.user.get_avatar},  class: "col-top", width: "48", height: "48") %>
           </div>
         <% else %>
-          <div class="thumbnail-wrapper d32 inline circular">
-            <span class="placeholder bold text-white">
+          <div class="thumbnail-wrapper d48 inline circular">
+            <span class="placeholder bold fs-16 text-white">
               <%= idea.user.name_badge.upcase %>
             </span>
           </div>

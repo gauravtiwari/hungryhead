@@ -26,6 +26,8 @@
       <%= render partial: 'shared/current_user' if user_signed_in? %>
     <% end %>
 
+    <%= javascript_include_tag 'application' %>
+
     <% if !browser.ie? or browser.ie? and browser.version >= "10"  %>
       <%= stylesheet_link_tag 'application', media: 'all' %>
     <% end %>
