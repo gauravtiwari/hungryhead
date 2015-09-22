@@ -1,11 +1,13 @@
 <div class="container p-b-60">
+  <div class="col-sm-12 m-b-10">
+    <%= render partial: 'ideas/menu' %>
+  </div>
   <div class="col-md-4 col-lg-4 col-sm-4 no-padding p-l-15">
     <%= render partial: 'ideas/sidebar' %>
   </div>
 
   <div class="col-md-8 col-lg-8 col-sm-8">
-    <%= render partial: 'ideas/menu' %>
-    <div class="feedback m-t-10">
+    <div class="feedback">
       <div class="idea-content">
        <%= render partial: "feedback", locals: {feedback: @feedback} %>
       </div>

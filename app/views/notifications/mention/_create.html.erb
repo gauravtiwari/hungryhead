@@ -11,6 +11,5 @@
   <strong class="inline text-black">
     <%= activity.user.name %>
   </strong>
-  mentioned <%= activity.recipient == current_user ? 'you' : activity.recipient.name %>
-  in a <%= activity.trackable.mentioner_type.downcase %>
+  mentioned you in a <%= activity.trackable.mentioner_type.downcase %>
 </span>

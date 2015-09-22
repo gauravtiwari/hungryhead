@@ -10,5 +10,5 @@
 <strong class="inline text-black">
   <%= activity.user.name %>
 </strong>
-voted on <%= activity.recipient.user == current_user ? "your" : "" %>
+voted on your
 <%= activity.recipient_type == "Idea" ? "#{activity.recipient_type.downcase} #{activity.recipient.name}" : "#{activity.recipient_type.downcase}" %>

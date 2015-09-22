@@ -67,11 +67,11 @@ var Plan = React.createClass({
 
     if(this.props.meta.is_owner) {
       return (
-        <div className="panel p-t-20 no-border no-margin">
+        <div className="panel p-t-20 box-shadow no-border no-margin">
           {error}
-          <div className="panel-heading p-l-60 p-b-10">
+          <div className="panel-heading p-l-30 p-b-10">
             <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Summary</div>
-            <div className="panel-controls p-r-60 pull-right">
+            <div className="panel-controls p-r-30 pull-right">
             <ul>
               <li>
                 <a className="portlet-maximize pointer text-master m-r-10 fs-12" onClick={this.showMarkDownModal}>Markdown help <i className="fa fa-question-circle"></i></a>
@@ -82,7 +82,7 @@ var Plan = React.createClass({
             </ul>
             </div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-master">
+          <div className="panel-body p-l-30 p-r-30 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
             <PlanForm editable={this.state.editable} idea={this.props.idea} loading= {this.state.loading} handlePlanSubmit= {this.handlePlanSubmit} form={this.props.idea} />
           </div>
@@ -91,10 +91,10 @@ var Plan = React.createClass({
     } else {
        return (
       <div className="panel p-t-20 box-shadow no-border no-margin">
-          <div className="panel-heading p-l-60 p-b-10">
+          <div className="panel-heading p-l-30 p-b-10">
             <div className="panel-title fs-22 b-b b-grey p-b-5 text-master"><i className="fa fa-lightbulb-o text-danger"></i>  Summary</div>
           </div>
-          <div className="panel-body p-l-60 p-r-60 text-master">
+          <div className="panel-body p-l-30 p-r-30 text-master">
             <div className={classes} dangerouslySetInnerHTML={{__html: html}}></div>
           </div>
         </div>

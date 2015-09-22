@@ -1,5 +1,10 @@
 <div class="container p-b-60">
     <% data = render(template: 'users/show.json.jbuilder') %>
+    <div class="col-sm-12">
+        <div class="box-shadow bg-light-blue m-b-10">
+            <%= render partial: 'menu' %>
+        </div>
+    </div>
     <% cache(["user_sidebar_desktop_widget", @user, @user == current_user ? "owner" : "guest"]) do %>
         <div class="col-md-4 col-sm-5 no-padding visible-md visible-lg p-l-15" id="profile_sidebar">
             <%= render partial: 'sidebar', locals: {data: data} %>
@@ -11,10 +16,6 @@
                 <%= render partial: 'cover', locals: {data: data} %>
             </div>
         <% end %>
-
-        <div class="box-shadow bg-light-blue">
-            <%= render partial: 'menu' %>
-        </div>
 
         <% cache(["user_profile", @user, @user == current_user ? "owner" : "guest"]) do %>
             <div class="profile">

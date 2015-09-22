@@ -13,6 +13,6 @@
       <%= activity.user.name %>
     </strong>
   <% end %>
-  commented on
+  commented on your
   <%= activity.recipient_type == 'Idea' ?  activity.recipient.name : 'a' + activity.recipient_type.downcase %>
 </span>
