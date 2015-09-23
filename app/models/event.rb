@@ -49,7 +49,7 @@ class Event < ActiveRecord::Base
   acts_as_taggable_on :categories
 
   #Associations
-  belongs_to :user, -> {with_deleted}, polymorphic: true, touch: true
+  belongs_to :user, polymorphic: true, touch: true
   has_many :event_attendees
 
   public

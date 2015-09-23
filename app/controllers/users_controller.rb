@@ -205,7 +205,7 @@ class UsersController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     id = params[:slug] || params[:id]
-    @user = User.with_deleted.find(id)
+    @user = User.find(id)
     @badges = @user.badges.group_by(&:level)
   end
 

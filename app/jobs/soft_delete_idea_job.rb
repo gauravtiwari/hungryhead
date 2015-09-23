@@ -25,7 +25,7 @@ class SoftDeleteIdeaJob < ActiveJob::Base
       @idea.save
 
       #Finally set the idea for destruction in a day
-      DestroyRecordJob.set(wait: 1.day).perform_later(@idea)
+      DestroyRecordJob.set(wait: 10.seconds).perform_later(@idea)
     end
   end
 end

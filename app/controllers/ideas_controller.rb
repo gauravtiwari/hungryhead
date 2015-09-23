@@ -86,7 +86,7 @@ class IdeasController < ApplicationController
 
   #Delete cover
   def delete_cover
-    @idea = Idea.with_deleted.find(params[:slug])
+    @idea = Idea.find(params[:slug])
     @idea.remove_cover!
     @idea.save
     respond_to do |format|
@@ -178,7 +178,7 @@ class IdeasController < ApplicationController
   end
 
   def set_idea
-    @idea = Idea.includes(:user).with_deleted.find(params[:id])
+    @idea = Idea.includes(:user).find(params[:id])
     @badges = @idea.badges.group_by(&:level)
     authorize @idea
   end
