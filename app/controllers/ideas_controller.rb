@@ -2,7 +2,7 @@ class IdeasController < ApplicationController
 
   before_action :authenticate_user!
   before_action :check_terms
-  before_action :set_idea, except: [:index, :latest, :popular, :trending, :create, :delete_cover]
+  before_action :set_idea, except: [:index, :featured, :latest, :popular, :trending, :create, :delete_cover]
 
   #Set layout
   layout "idea"
@@ -10,7 +10,16 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.published.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.includes(:school, :user).published.order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
+  end
+
+  # GET /ideas
+  # GET /ideas.json
+  def featured
+    @ideas = Idea.includes(:school, :user).published.order(published_date: :desc).paginate(:page => params[:page], :per_page => 20)
+    respond_to do |format|
+      format.html {render :index}
+    end
   end
 
   # GET /ideas/1

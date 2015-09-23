@@ -126,6 +126,7 @@ class School < ActiveRecord::Base
 	def remove_from_soulmate
 		loader = Soulmate::Loader.new("universities")
 	  loader.remove("id" => id)
+	  true
 	end
 
 end

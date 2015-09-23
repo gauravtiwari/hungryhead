@@ -165,6 +165,8 @@ gem 'meta_events'
 gem 'rack-attack'
 #JQUERY file upload
 gem "jquery-fileupload-rails"
+#Group collection
+gem 'groupdate'
 #Secure headers
 gem "secure_headers", :require => 'secure_headers'
 
@@ -181,6 +183,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem "bullet"
+  gem 'forgery'
   gem "awesome_print"
   gem "better_errors"
   gem "binding_of_caller"

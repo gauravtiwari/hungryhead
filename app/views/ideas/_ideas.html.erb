@@ -21,10 +21,5 @@
         <% end %>
       <% end %>
     </div>
-    <% if @ideas.length > 20 %>
-      <div class="paging-container p-r-15">
-        <%= will_paginate(@ideas, class: 'displayblock padding-10 paging_bootstrap pull-right pagination clearfix', :"data-id" => "#{controller_name}_listing") %>
-      </div>
-    <% end %>
   </div>
 <% end %>

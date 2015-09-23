@@ -10,6 +10,6 @@ class IdeaMessage < ActiveRecord::Base
 
   def update_counters
     idea.idea_messages_counter.incr(idea.idea_messages.size)
+    true
   end
-
 end

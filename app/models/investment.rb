@@ -41,6 +41,7 @@ class Investment < ActiveRecord::Base
     user.investments_counter.incr(user.investments.size)
     idea.investors_counter.reset
     idea.investors_counter.incr(idea.investments.size)
+    true
   end
 
   def cache_investor_ids
@@ -51,6 +52,7 @@ class Investment < ActiveRecord::Base
   def delete_cached_investor_ids
     #Remove investor_id from idea cache
     idea.investors_ids.delete(user_id) if idea.invested?(user)
+    true
   end
 
   def create_activity
@@ -59,7 +61,12 @@ class Investment < ActiveRecord::Base
 
   def delete_activity
     #remove activity from database and cache
-    DeleteActivityJob.perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

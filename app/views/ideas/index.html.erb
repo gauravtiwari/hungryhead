@@ -1,22 +1,23 @@
 <div class="container xs-no-padding  p-b-60 <%= 'bg-white box-shadow' if browser.mobile? %>">
 <%= cache(["beta", "ideas", params[:action], current_user, @ideas]) do %>
   <div class="col-md-12 col-sm-12">
-   <div class="menu bg-light-blue">
+   <div class="menu bg-light-blue m-b-10 box-shadow">
      <ul class="no-margin no-style padding-15 p-l-30 bold">
-       <li class="m-r-20 inline <%= 'b-b b-green' if request.fullpath == root_path %>">
-         <%= link_to('Live', root_path) %>
+       <li class="m-r-20 inline <%= 'tag' if request.fullpath == root_path %>">
+         <%= link_to('Featured', root_path) %>
        </li>
-       <li class="m-r-20 inline <%= 'b-b b-green' if request.fullpath == trending_ideas_path %>">
+       <li class="m-r-20 inline <%= 'tag' if request.fullpath == trending_ideas_path %>">
         <%= link_to('Trending', trending_ideas_path) %>
        </li>
-       <li class="inline <%= 'b-b b-green' if request.fullpath == popular_ideas_path %>">
+       <li class="inline m-r-20 <%= 'tag' if request.fullpath == popular_ideas_path %>">
         <%= link_to('Popular', popular_ideas_path) %>
+       </li>
+       <li class=" inline <%= 'tag' if request.fullpath == ideas_path %>">
+         <%= link_to('All', ideas_path) %>
        </li>
      </ul>
    </div>
-    <div class="box-shadow">
-      <%= render partial: 'ideas' %>
-    </div>
+    <%= render partial: 'ideas' %>
   </div>
 </div>
 <% end %>

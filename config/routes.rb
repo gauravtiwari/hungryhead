@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   authenticated do
-    root :to => 'ideas#index', as: :authenticated
+    root :to => 'ideas#featured', as: :authenticated
   end
 
   root 'pages#home'
@@ -189,6 +189,7 @@ Rails.application.routes.draw do
 
     collection do
       get :latest
+      get :featured
       get :popular
       get :trending
     end

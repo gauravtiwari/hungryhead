@@ -12,7 +12,12 @@ class Mention < ActiveRecord::Base
 
   def delete_notification
     #Delete notification
-    DeleteActivityJob.perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

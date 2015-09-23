@@ -222,6 +222,7 @@ class Idea < ActiveRecord::Base
   def remove_from_soulmate
     loader = Soulmate::Loader.new("ideas")
     loader.remove("id" => id)
+    true
   end
 
   def slug_candidates
@@ -239,11 +240,17 @@ class Idea < ActiveRecord::Base
     Idea.latest.delete(id)
     Idea.trending.delete(id)
     Idea.leaderboard.delete(id)
+    true
   end
 
   def delete_activity
     #Delete idea time from user feed
-    DeleteActivityJob.perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

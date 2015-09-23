@@ -22,7 +22,7 @@
        </h5>
      </a>
      <p class="p-l-5 date inline small-text hint-text">
-       Pitched <%= local_relative_time(idea.created_at, type: 'time-or-date') %>
+       Pitched <%= local_time(idea.published_date, '%d %B') %>
      </p>
       <% if idea.founder?(current_user) %>
         <span class="badge m-l-10 badge-green inline">

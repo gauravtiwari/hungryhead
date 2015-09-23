@@ -11,6 +11,7 @@ class EventAttendee < ActiveRecord::Base
   def update_counters
     event.attendees_counter.reset
     event.attendees_counter.incr(event.event_attendees.size)
+    true
   end
 
   def cache_attendees_ids
@@ -19,5 +20,6 @@ class EventAttendee < ActiveRecord::Base
 
   def delete_cached_attendees_ids
     event.attendees_ids.delete(attendee_id)
+    true
   end
 end

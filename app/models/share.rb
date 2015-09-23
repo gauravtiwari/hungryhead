@@ -33,7 +33,12 @@ class Share < ActiveRecord::Base
 
   def delete_activity
     #Delete user feed
-    DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

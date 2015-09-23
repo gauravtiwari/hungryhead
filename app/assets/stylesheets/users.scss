@@ -17,11 +17,3 @@ body.users.index .container {
 .people-list .people-info {
   word-wrap: break-word;
 }
-.people-list .people-info a:hover,
-.ideas-list .idea-info a:hover,
-.feed-list li a:hover,
-.latest-activities li a:hover {
-  border-bottom: 1px solid #5b98e0;
-  color: #5b98e0!important;
-  opacity: 1;
-}

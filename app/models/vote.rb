@@ -37,6 +37,7 @@ class Vote < ActiveRecord::Base
     #Increment votes counter
     votable.votes_counter.reset
     votable.votes_counter.incr(votable.votes.size)
+    true
   end
 
   def cache_voters_ids
@@ -47,12 +48,18 @@ class Vote < ActiveRecord::Base
   def delete_cached_voters_ids
     #Delete cached voters ids in redis
     votable.voters_ids.delete(voter_id) if votable.voted?(voter)
+    true
   end
 
   #Delete notification before destroying vote
   def delete_activity
     #delete notification if record is destroyed
-    DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

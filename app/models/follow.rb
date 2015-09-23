@@ -29,7 +29,7 @@ class Follow < ActiveRecord::Base
    follower.followings_counter.incr(follower.followings.size)
    followable.followers_counter.reset
    followable.followers_counter.incr(followable.followers.size)
-
+   true
   end
 
   #Create activity
@@ -49,6 +49,7 @@ class Follow < ActiveRecord::Base
     follower.followings_ids.delete(followable_id) if followable_type == "User"
     follower.school_followings_ids.delete(followable_id) if followable_type == "School"
     followable.followers_ids.delete(follower_id)
+    true
   end
 
   def delete_activity

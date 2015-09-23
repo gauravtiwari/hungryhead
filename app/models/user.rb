@@ -309,6 +309,7 @@ class User < ActiveRecord::Base
     #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
+    true
   end
 
   def decrement_counters
@@ -320,6 +321,7 @@ class User < ActiveRecord::Base
     #Decrement counters
     school.people_counter.reset
     school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
+    true
   end
 
   protected

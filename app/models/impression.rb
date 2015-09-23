@@ -14,6 +14,7 @@ class Impression < ActiveRecord::Base
 
   def delete_cached_impression
     impressionable.impressioners_ids.delete(user_id)
+    true
   end
 
 end

@@ -82,6 +82,7 @@ class Comment < ActiveRecord::Base
     commentable.comments_counter.incr(commentable.comments.size)
     user.comments_counter.reset
     user.comments_counter.incr(user.comments.size)
+    true
   end
 
   def cache_commenters_ids
@@ -92,11 +93,17 @@ class Comment < ActiveRecord::Base
   def deleted_cached_commenters_ids
     #cache commenters ids
     commentable.commenters_ids.delete(user_id) if commentable.commented?(user)
+    true
   end
 
   def delete_activity
     #Delete activity item from feed
-    DeleteActivityJob.set(wait: 10.seconds).perform_later(self.id, self.class.to_s)
+    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end
