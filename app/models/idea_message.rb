@@ -1,8 +1,8 @@
 class IdeaMessage < ActiveRecord::Base
 
   #Associations
-  belongs_to :user, -> {with_deleted}
-  belongs_to :idea, -> {with_deleted}, touch: true
+  belongs_to :user
+  belongs_to :idea, touch: true
 
   after_commit :update_counters, on: [:create, :destroy]
 

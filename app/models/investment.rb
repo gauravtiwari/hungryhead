@@ -14,8 +14,8 @@ class Investment < ActiveRecord::Base
   counter :comments_counter
 
   #Associations
-  belongs_to :user, -> {with_deleted}, touch: true
-  belongs_to :idea, -> {with_deleted}, touch: true
+  belongs_to :user, touch: true
+  belongs_to :idea, touch: true
 
   #Includes concerns
   include Commentable

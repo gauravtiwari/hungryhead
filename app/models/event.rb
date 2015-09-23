@@ -4,9 +4,6 @@ class Event < ActiveRecord::Base
   include Redis::Objects
   include ActiveModel::Validations
 
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #Callbacks
   before_destroy  :delete_activity
 
@@ -91,11 +88,11 @@ class Event < ActiveRecord::Base
   def delete_activity
     #Delete activity item from feed
     Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
-          #Delete cached activities
-          DeleteNotificationCacheService.new(activity).delete
-          #finally destroy the activity
-          activity.destroy if activity.present?
-        end
+      #Delete cached activities
+      DeleteNotificationCacheService.new(activity).delete
+      #finally destroy the activity
+      activity.destroy if activity.present?
+    end
   end
 
 end

@@ -1,10 +1,6 @@
 class Feedback < ActiveRecord::Base
 
   include Redis::Objects
-
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #Hooks
   before_destroy :update_counters, :delete_feedbacker_ids, :delete_activity
   after_commit :update_counters, :cache_feedbacker_ids, :create_activity, on: :create
@@ -31,8 +27,8 @@ class Feedback < ActiveRecord::Base
   include Votable
 
   #Associations
-  belongs_to :idea, -> {with_deleted}, touch: true
-  belongs_to :user, -> {with_deleted}, touch: true
+  belongs_to :idea, touch: true
+  belongs_to :user, touch: true
 
   #Tags for feedback
   acts_as_taggable_on :categories

@@ -3,22 +3,15 @@ class Idea < ActiveRecord::Base
   #Order records
   extend OrderAsSpecified
   include Rails.application.routes.url_helpers
-
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #included modules
   include Redis::Objects
-
   #Friendly id
   extend FriendlyId
   friendly_id :slug_candidates
-
   #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity, unless: :already_deleted?
   before_create :add_fund
   after_save :soulmate_loader, if: :visible? && :rebuild_cache?
-
   #Gamification
   has_merit
 
@@ -39,9 +32,6 @@ class Idea < ActiveRecord::Base
   list :feedbackers_ids
   list :investors_ids
   set :impressioners_ids
-
-  #Store latest idea notifications
-  sorted_set :ticker, marshal: true
 
   #Leaderboard ideas
   sorted_set :latest, global: true
@@ -66,8 +56,8 @@ class Idea < ActiveRecord::Base
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
   #Associations
-  belongs_to :user, -> {with_deleted}, touch: true
-  belongs_to :school, -> {with_deleted}, touch: true
+  belongs_to :user, touch: true
+  belongs_to :school, touch: true
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 

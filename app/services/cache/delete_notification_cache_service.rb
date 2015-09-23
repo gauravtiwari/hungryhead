@@ -10,10 +10,7 @@ class DeleteNotificationCacheService
   def delete
     #Send notification to recipient
     delete_notification_for_recipient unless @activity.user == @activity.recipient_user
-    #Add activity to idea ticker if recipient or trackable is idea
-    delete_activity_from_idea(@object) if @activity.trackable_type == "Idea"
-    delete_activity_from_idea(@target) if @activity.recipient_type == "Idea"
-    #Add activity to followers ticker
+    #Add activity to followers friends_notifications
     delete_activity_from_followers if followers.any?
     #Add notification to commenters
     delete_activity_from_commenters if @activity.trackable_type == "Comment"
@@ -21,7 +18,7 @@ class DeleteNotificationCacheService
 
   protected
 
-  #Get followers for users and ideas
+  #Get followers for users
   def followers
     if @activity.user_type == "User" && @activity.key == "vote.create"
       ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s])
@@ -37,31 +34,24 @@ class DeleteNotificationCacheService
   def delete_notification_for_recipient
     #add to notifications
     @activity.recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
-    #add to ticker
-    @activity.recipient_user.ticker.remrangebyscore(score_key, score_key)
-  end
-
-  #Add activity to idea ticker if recipient or trackable is idea
-  def delete_activity_from_idea(idea)
-    idea.ticker.remrangebyscore(score_key, score_key)
   end
 
   def delete_activity_from_commenters
     @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
-      delete_activity_from_friends_ticker(commenter)
+      delete_activity_from_friends_notification(commenter)
     end
   end
 
-  #add activity to friends ticker
-  def delete_activity_from_friends_ticker(user)
-    user.ticker.remrangebyscore(score_key, score_key)
+  #add activity to friends friends_notifications
+  def delete_activity_from_friends_notification(user)
+    user.friends_notifications.remrangebyscore(score_key, score_key)
   end
 
-  #Add activity to followers ticker
+  #Add activity to followers friends_notifications
   def delete_activity_from_followers
     followers.each do |follower|
-      delete_activity_from_friends_ticker(follower)
+      delete_activity_from_friends_notification(follower)
       SendNotificationService.new(follower, @activity.json_blob).user_notification
     end
   end

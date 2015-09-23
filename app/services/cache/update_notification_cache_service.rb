@@ -10,10 +10,7 @@ class UpdateNotificationCacheService
   def update
     #Send notification to recipient
     add_notification_for_recipient unless @activity.user == @activity.recipient_user
-    #Add activity to idea ticker if recipient or trackable is idea
-    add_activity_to_idea(@object) if @activity.trackable_type == "Idea"
-    add_activity_to_idea(@target) if @activity.recipient_type == "Idea"
-    #Add activity to followers ticker
+    #Add activity to followers friends_notifications
     add_activity_to_followers if followers.any?
     #Add notification to commenters
     add_activity_to_commenters if @activity.trackable_type == "Comment"
@@ -21,7 +18,7 @@ class UpdateNotificationCacheService
 
   protected
 
-  #Get followers for users and ideas
+  #Get followers for users
   def followers
     if @activity.user_type == "User" && @activity.key == "vote.create"
       ids = (@actor.followers_ids.union(@activity.recipient.voters_ids) - [@activity.recipient_user.id.to_s])
@@ -38,34 +35,25 @@ class UpdateNotificationCacheService
     #add to notifications
     @activity.recipient_user.friends_notifications.remrangebyscore(score_key, score_key)
     @activity.recipient_user.friends_notifications.add(@activity.json_blob, score_key)
-    #add to ticker
-    @activity.recipient_user.ticker.remrangebyscore(score_key, score_key)
-    @activity.recipient_user.ticker.add(@activity.json_blob, score_key)
-  end
-
-  #Add activity to idea ticker if recipient or trackable is idea
-  def add_activity_to_idea(idea)
-    idea.ticker.remrangebyscore(score_key, score_key)
-    idea.ticker.add(@activity.json_blob, score_key)
   end
 
   def add_activity_to_commenters
     @ids = @activity.recipient.commenters_ids.values - [@activity.user_id.to_s, @activity.recipient_user.id.to_s] - @actor.followers_ids.members
     User.find(@ids).each do |commenter|
-      add_activity_to_friends_ticker(commenter)
+      add_activity_to_friends_notifications(commenter)
     end
   end
 
-  #add activity to friends ticker
-  def add_activity_to_friends_ticker(user)
-    user.ticker.remrangebyscore(score_key, score_key)
-    user.ticker.add(@activity.json_blob, score_key)
+  #add activity to friends friends_notifications
+  def add_activity_to_friends_notifications(user)
+    user.friends_notifications.remrangebyscore(score_key, score_key)
+    user.friends_notifications.add(@activity.json_blob, score_key)
   end
 
-  #Add activity to followers ticker
+  #Add activity to followers friends_notifications
   def add_activity_to_followers
     followers.each do |follower|
-      add_activity_to_friends_ticker(follower)
+      add_activity_to_friends_notifications(follower)
       SendNotificationService.new(follower, @activity.json_blob).user_notification
     end
   end

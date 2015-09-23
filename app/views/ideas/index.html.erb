@@ -1,8 +1,19 @@
-<div class="container xs-no-padding  p-b-60 <%= 'bg-white box-shadow' if browser.mobile? %>">
+<%-# Problem sectors -%>
+  <%= render partial: 'globals/sectors' %>
+<%-# /Problem sectors -%>
+<div class="bg-white">
+<div class="container xs-no-padding  p-b-60">
 <%= cache(["beta", "ideas", params[:action], current_user, @ideas]) do %>
   <div class="col-md-12 col-sm-12">
-   <div class="menu bg-light-blue m-b-10 box-shadow">
+   <div class="menu">
      <ul class="no-margin no-style padding-15 p-l-30 bold">
+       <li class="m-r-20 inline">
+         <h3>
+          <%= link_to(root_path, class: 'text-master') do %>
+            <%= params[:action] == "index" ? 'All Startup Ideas' : params[:action].capitalize + ' Startup Ideas' %>
+          <% end %>
+         </h3>
+       </li>
        <li class="m-r-20 inline <%= 'tag' if request.fullpath == root_path %>">
          <%= link_to('Featured', root_path) %>
        </li>
@@ -19,6 +30,7 @@
    </div>
     <%= render partial: 'ideas' %>
   </div>
+</div>
 </div>
 <% end %>
 

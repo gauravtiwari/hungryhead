@@ -107,8 +107,6 @@ gem 'redis-session-store'
 gem 'redis-namespace'
 #Connection pool
 gem 'connection_pool'
-#Add acts as paranoia for soft deletes
-gem 'paranoia'
 #Redis objects
 gem 'redis-objects'
 #Event maps - Google maps

@@ -506,6 +506,9 @@ input.error:-webkit-autofill {
 .panel.panel-default {
   border: 1px solid rgba(0, 0, 0, 0.07);
 }
+.jumbotron {
+  background-color: #f0f0f0;
+}
 .container .jumbotron,
 .cover {
   padding-right: 60px;
@@ -913,6 +916,23 @@ ul.reactions > div {
   background: #e5e8e9;
   border-radius: 3px;
   border-radius: 0;
+}
+
+.badge-lg {
+  padding: 10px 18px;
+  margin: 0 8px 8px 0;
+  font-size: 12px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.badge-sm {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 7px;
+  color: #626262;
+  padding: 7px 7px;
 }
 
 .border-back {

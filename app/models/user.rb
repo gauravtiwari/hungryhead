@@ -3,9 +3,6 @@ class User < ActiveRecord::Base
   #Order objects as specified in array
   extend OrderAsSpecified
 
-  #Don't delete straightaway
-  acts_as_paranoid
-
   #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
@@ -81,7 +78,6 @@ class User < ActiveRecord::Base
   list :latest, maxlength: 20, marshal: true, global: true
 
   #Store latest user notifications
-  sorted_set :ticker, marshal: true
   sorted_set :friends_notifications, marshal: true
 
   #Sorted set to store trending ideas
@@ -228,11 +224,6 @@ class User < ActiveRecord::Base
 
   def rebuild_notifications
     UpdateActivityJob.set(wait: 1.minute).perform_later(self.id)
-  end
-
-  def has_notifications?
-    #check if user has notifications
-    ticker.members.length > 0
   end
 
   def card_json
