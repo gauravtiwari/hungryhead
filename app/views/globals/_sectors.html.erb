@@ -1,0 +1,16 @@
+<div class="jumbotron no-margin">
+  <div class="container">
+    <div class="row wrapper-small">
+      <div class="col-md-8 auto-margin no-padding text-center">
+        <h3 class="m-b-20">Choose markets and locations</h3>
+        <% Idea.tag_counts_on(:markets).paginate(:page => params[:page], :per_page => 10).each do |tag| %>
+          <%= link_to(tag_path(tag)) do %>
+            <span class="badge badge-white badge-lg <%= request.fullpath == profile_path(tag) ? 'active' : '' %>">
+              <%= tag %>
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
