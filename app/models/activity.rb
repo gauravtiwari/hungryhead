@@ -56,12 +56,7 @@ class Activity < ActiveRecord::Base
   def delete_older_notifications
     unless user_type == "School"
       refresh_friends_notifications
-      refresh_ticker
     end
-  end
-
-  def refresh_ticker
-    user.ticker.remrangebyrank(0, -100)
   end
 
   def refresh_friends_notifications

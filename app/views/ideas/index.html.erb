@@ -15,16 +15,16 @@
          </h3>
        </li>
        <li class="m-r-20 inline <%= 'tag' if request.fullpath == root_path %>">
-         <%= link_to('Featured', root_path) %>
+         <%= link_to('Ideas', root_path) %>
        </li>
        <li class="m-r-20 inline <%= 'tag' if request.fullpath == trending_ideas_path %>">
-        <%= link_to('Trending', trending_ideas_path) %>
+        <%= link_to('Competitions', trending_ideas_path) %>
        </li>
        <li class="inline m-r-20 <%= 'tag' if request.fullpath == popular_ideas_path %>">
-        <%= link_to('Popular', popular_ideas_path) %>
+        <%= link_to('Events', popular_ideas_path) %>
        </li>
        <li class=" inline <%= 'tag' if request.fullpath == ideas_path %>">
-         <%= link_to('All', ideas_path) %>
+         <%= link_to('Universities', ideas_path) %>
        </li>
      </ul>
    </div>
