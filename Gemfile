@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-tokenfield'
   gem 'rails-assets-classie'

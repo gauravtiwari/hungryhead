@@ -4,10 +4,6 @@ class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:rate, :show, :destroy]
   before_action :set_props, only: [:index, :show, :create, :rate]
 
-  #Pundit authorization
-  after_action :verify_authorized, :only => [:create, :destroy]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   #set layout
   layout "idea"
 

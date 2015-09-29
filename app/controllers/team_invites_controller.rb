@@ -15,8 +15,16 @@ class TeamInvitesController < ApplicationController
       if @idea.in_team?(user) || @idea.invited?(user)
         skip_authorization
       else
-        @team_invite = CreateTeamInviteService.new(user, current_user, @idea, params[:team_invite][:message]).create
+        @team_invite = CreateTeamInviteService.new(
+          user,
+          current_user,
+          @idea, params[:team_invite][:message]
+        ).create
+
+        # Authorize invite
         authorize @team_invite
+
+        # Save invite
         if @team_invite.save
           invited << user.name
           #cache invites ids

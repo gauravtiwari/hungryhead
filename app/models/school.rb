@@ -89,6 +89,7 @@ class School < ActiveRecord::Base
   	words.first(3).map{|w| w.first }.join.upcase
   end
 
+  # TODO delete cache keys
   def ideas_cache_key
   	count = ideas.published.count
   	max_updated_at = ideas.maximum(:updated_at).try(:utc).try(:to_s, :number)

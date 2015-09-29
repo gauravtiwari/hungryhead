@@ -12,6 +12,7 @@ class Activity < ActiveRecord::Base
   #Redis cache ids
   sorted_set :popular, global: true
 
+  # TODO remove cache keys and activity class methods
   def cache_key
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end

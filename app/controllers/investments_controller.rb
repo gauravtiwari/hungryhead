@@ -1,12 +1,11 @@
 class InvestmentsController < ApplicationController
+
+  # Set before filters
   before_action :authenticate_user!
   before_action :set_investment, only: [:show, :destroy]
   before_action :set_props, only: [:index, :show, :create]
-  respond_to :json, :html
 
-  after_action :verify_authorized
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  # Set layout
   layout "idea"
 
   # GET /investments

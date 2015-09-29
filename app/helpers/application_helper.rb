@@ -26,37 +26,35 @@ module ApplicationHelper
   def followed?(object)
     if current_user && object.followers_ids.member?(current_user.id)
       followed =  {
-        follow: true,
-        followable_type: object.class.name,
-        followable_id: object.slug
+        follow: true
       }
     else
       followed = {
-        follow: false,
-        followable_type: object.class.name,
-        followable_id: object.slug
+        follow: false
       }
     end
+    followed.merge!(
+      followable_type: object.class.name,
+      followable_id: object.slug
+    )
   end
 
   def voted?(object)
     if current_user && object.voted?(current_user)
       voted =  {
-        vote: true,
-        votes_count: object.votes_counter.value,
-        path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
-        votable_type: object.class.name,
-        votable_id: object.uuid
+        vote: true
       }
     else
       voted = {
-        vote: false,
-        votes_count: object.votes_counter.value,
-        path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
-        votable_type: object.class.name,
-        votable_id: object.uuid
+        vote: false
       }
     end
+    voted.merge!(
+      votes_count: object.votes_counter.value,
+      path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
+      votable_type: object.class.name,
+      votable_id: object.uuid
+    )
   end
 
   def markdownify(content)
@@ -98,16 +96,6 @@ module ApplicationHelper
     ], context
 
     pipeline.call(content)[:output].to_s.html_safe
-  end
-
-  def your_name(user, type)
-    if user == current_user && type
-      "your"
-    elsif user == current_user && !type
-      "You"
-    else
-      user.name
-    end
   end
 
 end

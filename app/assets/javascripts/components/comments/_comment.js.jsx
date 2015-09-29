@@ -1,13 +1,13 @@
 var SetIntervalMixin = {
-    componentWillMount: function() {
-        this.intervals = [];
-    },
-    setInterval: function(fn, ms) {
-        this.intervals.push(setInterval(fn, ms));
-    },
-    componentWillUnmount: function() {
-        this.intervals.forEach(clearInterval);
-    }
+  componentWillMount: function() {
+      this.intervals = [];
+  },
+  setInterval: function(fn, ms) {
+      this.intervals.push(setInterval(fn, ms));
+  },
+  componentWillUnmount: function() {
+      this.intervals.forEach(clearInterval);
+  }
 };
 
 var Comment = React.createClass({

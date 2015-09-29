@@ -1,8 +1,6 @@
 class ActivitiesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :set_user
-  before_filter :check_terms
+  before_action :authenticate_user!, :set_user, :check_terms
   layout "home"
 
   def index

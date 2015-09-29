@@ -2,10 +2,6 @@ class IdeaMessagesController < ApplicationController
 
   before_filter :authenticate_user!
   before_action :set_idea, except: [:destroy]
-
-  #Verify User Access
-  after_action :verify_authorized, :only => [:create, :update, :delete]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   respond_to :json
 
   # GET /idea_messages
@@ -21,7 +17,8 @@ class IdeaMessagesController < ApplicationController
     @idea_message.update_attributes(user_id: current_user.id, idea: @idea)
     authorize @idea_message
     if @idea_message.save
-      Pusher.trigger("presence-idea-collaboration-#{@idea.slug}", "collaboration_new_message", {id: @idea_message.id, data: render(template: 'idea_messages/show')}.to_json)
+      Pusher.trigger("presence-idea-collaboration-#{@idea.slug}", "collaboration_new_message",
+        {id: @idea_message.id, data: render(template: 'idea_messages/show')}.to_json)
     else
       render json: @idea_message.errors, status: :unprocessable_entity
     end
@@ -34,7 +31,8 @@ class IdeaMessagesController < ApplicationController
     @idea_message.destroy
 
     respond_to do |format|
-      format.html { redirect_to idea_messages_url, notice: 'Idea message was successfully destroyed.' }
+      format.html { redirect_to idea_messages_url,
+        notice: 'Idea message was successfully destroyed.' }
       format.json { head :no_content }
     end
 

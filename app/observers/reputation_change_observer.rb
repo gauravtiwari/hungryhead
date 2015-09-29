@@ -1,4 +1,3 @@
-# reputation_change_observer.rb
 class ReputationChangeObserver
 
   def update(changed_data)
@@ -11,6 +10,7 @@ class ReputationChangeObserver
 
     resource.class.leaderboard[resource.id] = resource.points
 
+    # Update resources if leaderboard changes
     if resource.class.to_s == "User"
       user = resource
     elsif resource.class.to_s == "Idea"

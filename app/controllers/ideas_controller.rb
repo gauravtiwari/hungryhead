@@ -10,13 +10,17 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.includes(:school, :user).published.order(created_at: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.includes(:school, :user)
+    .published.order(created_at: :desc)
+    .paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /ideas
   # GET /ideas.json
   def featured
-    @ideas = Idea.includes(:school, :user).published.order(published_date: :desc).paginate(:page => params[:page], :per_page => 20)
+    @ideas = Idea.includes(:school, :user)
+    .published.order(published_date: :desc)
+    .paginate(:page => params[:page], :per_page => 20)
     respond_to do |format|
       format.html {render :index}
     end
@@ -26,7 +30,13 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     unless @idea.viewed?(current_user)
-      PersistViewsCountJob.perform_later(current_user.id, @idea.id, @idea.class.to_s, request.referrer, request.remote_ip) unless @idea.deleted_at.present?
+      PersistViewsCountJob.perform_later(
+        current_user.id,
+        @idea.id,
+        @idea.class.to_s,
+        request.referrer,
+        request.remote_ip
+      )
     end
   end
 
@@ -149,7 +159,11 @@ class IdeasController < ApplicationController
   def update
     authorize @idea
     if @idea.update(idea_params)
-      Pusher.trigger_async("presence-idea-collaboration-#{@idea.slug}", "idea_update_#{@idea.slug}", {id: @idea.uuid, data: render(template: 'ideas/show')}.to_json)
+      Pusher.trigger_async("presence-idea-collaboration-#{@idea.slug}",
+        "idea_update_#{@idea.slug}",
+        {id: @idea.uuid, data: render(template: 'ideas/show')
+        }.to_json
+      )
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
@@ -185,9 +199,11 @@ class IdeasController < ApplicationController
 
   # WhiteListed Params
   def idea_params
-    params.require(:idea).permit(:looking_for_team, :rules_accepted, :video, :logo, :name, :high_concept_pitch,
-      :elevator_pitch, :website, :location_list, :problems, :solutions, :market, :business_model, :value_propositions, :description, :cover, :cover_position, :cover_left, :market_list,
-      :technology_list)
+    params.require(:idea).permit(:looking_for_team, :rules_accepted, :video,
+      :logo, :name, :high_concept_pitch, :elevator_pitch, :website,
+      :location_list, :problems, :solutions, :market, :business_model,
+      :value_propositions, :description, :cover, :cover_position,
+      :cover_left, :market_list, :technology_list)
   end
 
 end

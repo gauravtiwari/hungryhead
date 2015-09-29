@@ -1,5 +1,5 @@
 json.payload do
-
+  # Duplicate view to be refactored
   json.listings @investors.each do |investor|
     json.cache! [ "investors", investor ], expires_in: 2.hours do
         json.name investor.name

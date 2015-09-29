@@ -64,7 +64,9 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin_user!
     authenticate_user!
-    redirect_to root_path, alert: "This area is restricted to administrators only." unless current_user.admin?
+    unless current_user.admin?
+      redirect_to root_path, alert: "This area is restricted to administrators only."
+    end
   end
 
   def current_admin_user

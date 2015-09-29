@@ -1,6 +1,6 @@
 class InviteRequestsController < ApplicationController
 
-  respond_to :js
+  # Set layout
   layout "home"
 
   # POST /invite_requests
@@ -10,7 +10,14 @@ class InviteRequestsController < ApplicationController
     respond_to do |format|
       if @invite_request.save
         #Track event into MixPanel
-        meta_events_tracker.event!(:user, :new_invite_request, { :name => @invite_request.name, user_type: @invite_request.user_type, :email => @invite_request.email, :id => @invite_request.id })
+        meta_events_tracker.event!(:user, :new_invite_request,
+          {
+            :name => @invite_request.name,
+            user_type: @invite_request.user_type,
+            :email => @invite_request.email,
+            :id => @invite_request.id
+          }
+        )
         format.js {render :show}
       else
        format.js {render :new}

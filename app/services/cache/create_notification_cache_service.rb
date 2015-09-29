@@ -36,8 +36,10 @@ class CreateNotificationCacheService
     @activity.recipient_user.friends_notifications.add(@activity.json_blob, score_key)
     #Increment counter
     @activity.recipient_user.notifications_counter.increment
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification if @activity.recipient_user != @activity.user
-    SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification if @activity.recipient_user != @activity.user
+    if @activity.recipient_user != @activity.user
+      SendNotificationService.new(@activity.recipient_user, @activity.json_blob).user_notification
+      SendNotificationService.new(@activity.recipient_user, @activity.json_blob).friend_notification
+    end
   end
 
   def add_activity_to_commenters

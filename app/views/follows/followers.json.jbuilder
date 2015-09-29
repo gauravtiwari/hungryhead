@@ -1,5 +1,5 @@
 json.payload do
-
+  # Duplicate view to be refactored
   json.listings @followers.each do |follower|
     json.cache! [ follower], expires_in: 2.hours do
         json.name follower.name

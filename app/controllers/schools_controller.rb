@@ -3,12 +3,8 @@ class SchoolsController < ApplicationController
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
   before_action :set_schools, except: [:new, :create, :index, :autocomplete_school_name]
-
   #Autocomplete school
   autocomplete :school, :name, :full => true, :extra_data => [:domain]
-  #Verify user access
-  after_action :verify_authorized, only: [:new, :create, :update, :destroy]
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   #Setup layout
   layout 'home'
@@ -16,7 +12,8 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @schools = School.order(id: :desc)
+    .paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /schools/1
@@ -24,7 +21,8 @@ class SchoolsController < ApplicationController
 
   def show
     @students = @school.get_published_users
-    @activities = Activity.where(published: true, is_notification: false).order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+    @activities = Activity.where(published: true, is_notification: false)
+    .order(id: :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /schools/1/dashboard
@@ -43,7 +41,9 @@ class SchoolsController < ApplicationController
   end
 
   def people
-    @users = @school.get_published_users.paginate(:page => params[:page], :per_page => 20)
+    @users = @school.get_published_users
+    .paginate(:page => params[:page], :per_page => 20)
+
     respond_to do |format|
       format.html
       format.js {render :index}
@@ -51,7 +51,9 @@ class SchoolsController < ApplicationController
   end
 
   def students
-    @users = @school.get_published_students.paginate(:page => params[:page], :per_page => 20)
+    @users = @school.get_published_students
+    .paginate(:page => params[:page], :per_page => 20)
+
     respond_to do |format|
       format.html
       format.js {render :index}
@@ -59,7 +61,9 @@ class SchoolsController < ApplicationController
   end
 
   def events
-    @events = @school.get_published_events.paginate(:page => params[:page], :per_page => 20)
+    @events = @school.get_published_events
+    .paginate(:page => params[:page], :per_page => 20)
+
     respond_to do |format|
       format.html
       format.js
@@ -67,7 +71,9 @@ class SchoolsController < ApplicationController
   end
 
   def ideas
-    @ideas = @school.get_published_ideas.paginate(:page => params[:page], :per_page => 20)
+    @ideas = @school.get_published_ideas
+    .paginate(:page => params[:page], :per_page => 20)
+
     respond_to do |format|
       format.html
       format.js {render :index}
@@ -135,6 +141,8 @@ class SchoolsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schools_params
-       params.require(:school).permit(:id, :email, :name, :phone, :description, :cover_left, :cover_position, :website_url, :twitter_url, :facebook_url, :logo, :cover, :location_list)
+       params.require(:school).permit(:id, :email, :name, :phone,
+        :description, :cover_left, :cover_position, :website_url,
+        :twitter_url, :facebook_url, :logo, :cover, :location_list)
     end
 end

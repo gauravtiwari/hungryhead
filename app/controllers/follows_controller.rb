@@ -60,7 +60,8 @@ class FollowsController < ApplicationController
       end
     else
       respond_to do |format|
-       format.html { render json: {error: 'Sorry, unable to follow this entity'}, status: :unprocessable_entity }
+       format.html { render json: {error: 'Sorry, unable to follow this entity'},
+       status: :unprocessable_entity }
       end
     end
   end

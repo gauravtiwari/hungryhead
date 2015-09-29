@@ -1,3 +1,6 @@
+// Type notification for Pusher
+// TODO : convert to coffeescript
+
 var Typer = function(options) {
   var broadcastRate = options.broadcastRate || 4000;
   var timeout = options.timeout || 5000;

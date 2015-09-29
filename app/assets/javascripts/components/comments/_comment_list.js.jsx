@@ -29,11 +29,9 @@ var CommentList = React.createClass({
     });
 
     return (
-
       <ul id={css_id} className={comment_classes} ref="commentList">
        { commentNodes }
       </ul>
-
     )
   }
 

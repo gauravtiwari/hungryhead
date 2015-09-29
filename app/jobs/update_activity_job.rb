@@ -7,6 +7,7 @@ class UpdateActivityJob < ActiveJob::Base
       else
         @user = User.find(user_id)
         Activity.where(user: @user).find_each do |activity|
+          # Update cached activity if trackable/actor updated
           UpdateNotificationCacheService.new(activity).update
         end
       end

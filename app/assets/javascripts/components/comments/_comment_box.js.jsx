@@ -1,18 +1,18 @@
 var ComponentIsMountedMixin = {
-    componentWillMount: function() {
-        this.componentIsMounted = false;
-    },
-    componentDidMount: function() {
-        this.componentIsMounted = true;
-    },
-    componentWillUnmount: function() {
-        this.componentIsMounted = false;
-    },
-    safeSetState: function(newState) {
-        if (this.componentIsMounted) {
-            this.setState(newState);
-        }
-    }
+  componentWillMount: function() {
+      this.componentIsMounted = false;
+  },
+  componentDidMount: function() {
+      this.componentIsMounted = true;
+  },
+  componentWillUnmount: function() {
+      this.componentIsMounted = false;
+  },
+  safeSetState: function(newState) {
+      if (this.componentIsMounted) {
+          this.setState(newState);
+      }
+  }
 };
 
 var CommentBox = React.createClass({

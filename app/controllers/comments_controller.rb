@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :set_commentable, only: [:create]
 
   def index
+    # Find commentable and association comments
     @commentable = params[:commentable_type].constantize.find_by_uuid(params[:id])
     @comments = @commentable.root_comments.paginate(:page => params[:page], :per_page => 10)
   end

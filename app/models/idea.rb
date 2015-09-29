@@ -3,16 +3,20 @@ class Idea < ActiveRecord::Base
   #Order records
   extend OrderAsSpecified
   include Rails.application.routes.url_helpers
-  #included modules
+
+  #included redis
   include Redis::Objects
+
   #Friendly id
   extend FriendlyId
   friendly_id :slug_candidates
+
   #CallBack hooks
-  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity, unless: :already_deleted?
+  before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_save :soulmate_loader, if: :visible? && :rebuild_cache?
-  #Gamification
+  after_save :soulmate_loader, if: :visible? and :rebuild_cache?
+
+  # Gamification
   has_merit
 
   #Includes concerns
@@ -188,18 +192,14 @@ class Idea < ActiveRecord::Base
   end
 
   def visible?
-    published? && everyone?
+    published? and everyone?
   end
 
   def rebuild_cache?
-    slug_changed? || name_changed? || high_concept_pitch_changed? && !id_changed?
+    slug_changed? || name_changed? || high_concept_pitch_changed? and !id_changed?
   end
 
   private
-
-  def already_deleted?
-    deleted_at.present?
-  end
 
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?

@@ -1,15 +1,21 @@
 class Suggester
 
+  # Suggester class to suggest a list of valid usernames available
+  # Parameters [:first_name, :last_name]
+
   attr_reader :first_name, :last_name
 
   def initialize(first_name, last_name)
+    # Raise exception if not defined in model
     raise Error, "first_name or last_name has not been specified" if first_name.nil? || last_name.nil?
 
+    # Remove whitespaces first_name and last_name
     @first_name = first_name.downcase.gsub(/[^\w]/, '')
     @last_name  = last_name.downcase.gsub(/[^\w]/, '')
   end
 
-  # Generates the combinations without the knowledge of what names are available
+  # Generates the combinations
+  # Without the knowledge of what names are available
   def name_combinations
     @name_combinations ||= [
       "#{first_name}",
@@ -23,7 +29,8 @@ class Suggester
     ].uniq.reject { |s| s.blank? }
   end
 
-  # Generates suggestions and making sure they are not in unavailable_suggestions
+  # Generates suggestions
+  # Make sure they are not in unavailable_suggestions
   def suggest(options)
     candidates_to_exclude = options[:exclude]
     number_of_suggestions = options[:num_suggestions]
@@ -46,10 +53,12 @@ class Suggester
 
   private
 
-  # Generates a candidate with "candidate<number>" which is not included in unavailable_set
+  # Generates a candidate with "candidate<number>"
+  # It should not be included in unavailable_set
   def find_extended_candidate(candidate, candidates_to_exclude)
     i = 1
     i+=rand(10) while candidates_to_exclude.include? "#{candidate}#{i}"
     "#{candidate}#{i}"
   end
+
 end

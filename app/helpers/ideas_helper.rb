@@ -1,6 +1,6 @@
 module IdeasHelper
 
-	def invested?
+  def invested?
     {
       form: {
         action: idea_investments_path(@idea),
@@ -16,6 +16,7 @@ module IdeasHelper
     }
   end
 
+  # Todo cleanup these keys
   def cache_key_for_ideas
     count = Idea.published.count
     max_updated_at = Idea.published.maximum(:updated_at).try(:utc).try(:to_s, :number)
@@ -26,6 +27,7 @@ module IdeasHelper
     params[:controller] == "ideas" && params[:action] == "show"  || params[:controller] == "feedbacks" && user_signed_in?
   end
 
+  # Todo cleanup these keys
   def cache_key_for_idea(idea)
     investors = idea.investors_counter.value
     votes = idea.votes_counter.value

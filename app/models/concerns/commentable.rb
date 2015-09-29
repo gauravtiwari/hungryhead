@@ -6,6 +6,7 @@ module Commentable
     has_many :comments, as: :commentable, :dependent => :destroy
   end
 
+  # Methods to fetch comments: root and top level
   def root_comments
     comments.where(parent_id: nil).order(created_at: :desc)
   end

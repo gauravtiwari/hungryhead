@@ -1,5 +1,6 @@
 var $ = jQuery.noConflict();
 
+// TODO: Old code to be converted
 
 $(document).ready(function () {
 

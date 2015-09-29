@@ -8,9 +8,7 @@ class InviteRequest < ActiveRecord::Base
     :case_sensitive => false,
     message: "You have already submitted your invite request"
   }
-
   enum user_type: {institution: 0, mentor: 1, student: 2}
-
   validates :name, :presence => true
 
 end

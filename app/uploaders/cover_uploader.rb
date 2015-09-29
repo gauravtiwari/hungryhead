@@ -1,8 +1,5 @@
-# encoding: utf-8
-
 class CoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  #include ::CarrierWave::Backgrounder::Delay
   storage :fog
 
   def process_uri(uri)

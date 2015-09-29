@@ -14,7 +14,10 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # PUT /resource/invitation
   def update
-    invitation_token = Devise.token_generator.digest(resource_class, :invitation_token, update_resource_params[:invitation_token])
+    invitation_token = Devise.token_generator.digest(
+      resource_class, :invitation_token,
+      update_resource_params[:invitation_token]
+    )
     self.resource = resource_class.where(invitation_token: invitation_token).first
     respond_to do |format|
       format.js do
@@ -35,7 +38,8 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def update_sanitized_params
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:name, :password, :password_confirmation, :invitation_token, :username, :avatar, :avatar_cache)
+      u.permit(:name, :password, :password_confirmation, :invitation_token,
+        :username, :avatar, :avatar_cache)
     end
   end
 

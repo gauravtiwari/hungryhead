@@ -1,5 +1,6 @@
 module SchoolsHelper
 
+  # Todo cleanup these keys
   def cache_key_for_school(school)
     people = school.people_counter.value
     followers = school.followers_counter.value
