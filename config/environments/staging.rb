@@ -17,7 +17,7 @@ Rails.application.configure do
   config.cache_store = :readthis_store, {
     expires_in: 2.weeks.to_i,
     namespace: "cache_#{Rails.env.downcase}",
-    redis: { url: ENV.fetch('CACHE_REDIS_URL'), driver: :hiredis }
+    redis: { url: ENV.fetch('REDIS_URL'), driver: :hiredis }
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application

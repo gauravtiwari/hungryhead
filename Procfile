@@ -1,3 +1,2 @@
-web: bundle exec passenger start
-worker: env RAILS_ENV=$RAILS_ENV bundle exec sidekiq -C config/sidekiq.yml -i {{UNIQUE_INT}}
-#cron: bundle exec crono RAILS_ENV=$RAILS_ENV
+web: bundle exec passenger start -p $PORT
+worker: bundle exec sidekiq -C config/sidekiq.yml

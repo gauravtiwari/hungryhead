@@ -19,7 +19,7 @@ Rails.application.configure do
     compress: true,
     compression_threshold: 2.kilobytes,
     namespace: "cache_#{Rails.env.downcase}",
-    redis: { url: ENV.fetch('CACHE_REDIS_URL'), driver: :hiredis }
+    redis: { url: ENV.fetch('REDIS_URL'), driver: :hiredis }
   }
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
