@@ -265,6 +265,7 @@ group :production, :staging do
   gem 'mixpanel-ruby'
   gem 'rack-tracker'
   gem "skylight"
+  gem 'rails_12factor'
 end
 
 gem 'forgery'
