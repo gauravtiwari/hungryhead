@@ -1,5 +1,8 @@
 #this is seeds file for loading test users
 #into db
+
+User.destroy_all
+
 User.create!(
    name: "Gaurav Tiwari",
    first_name: "Gaurav",

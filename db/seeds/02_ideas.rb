@@ -1,5 +1,8 @@
 #this is seeds file for loading test schools
 #into db
+
+Idea.destroy_all
+
 ActiveRecord::Base.transaction do
   1.upto(200) { |i|
     Idea.create!(

@@ -39,7 +39,7 @@ module HungryheadSchoolApp
     config.react.server_renderer_timeout    ||= 20
     config.react.server_renderer = React::ServerRendering::SprocketsRenderer
     config.react.server_renderer_options = {
-      files: ["react.js", "components.js"],
+      files: ["react-server.js", "components.js"],
       replay_console: true,
     }
 

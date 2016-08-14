@@ -50,6 +50,7 @@
 //= require autocomplete-rails
 //= require flashes
 //= require react
+//= require react-server
 //= require react-infinite
 
 
