@@ -42,8 +42,6 @@ Rails.application.configure do
   config.assets.enabled = true
   config.react.variant = :production
 
-  config.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
-
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { host: 'hungryhead.co'}
@@ -76,9 +74,6 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = "//#{ENV['PUBLIC_ASSET_BUCKET_NAME']}.storage.googleapis.com"
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
