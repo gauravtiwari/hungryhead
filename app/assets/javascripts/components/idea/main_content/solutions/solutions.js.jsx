@@ -47,14 +47,13 @@ var Solutions = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'idea-solutions': true,
       'hidden': this.state.editable,
       'show': !this.state.editable
     });
 
-    var video_classes = cx({
+    var video_classes = classNames({
       'video-wrapper': true,
       'hidden': this.state.editable,
       'show': !this.state.editable

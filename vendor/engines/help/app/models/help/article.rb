@@ -11,7 +11,7 @@ module Help
     private
 
     def backup_to_file
-      Help::Article.copy_to "#{Rails.root}/tmp/backup/help/articles.csv"
+      Help::Article.copy_to "#{Rails.root}/db/seeds/backups/help/articles.csv"
     end
   end
 end

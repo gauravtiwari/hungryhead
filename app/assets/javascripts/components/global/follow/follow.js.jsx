@@ -59,16 +59,15 @@ var Follow = React.createClass({
   },
   render: function() {
     var text = this.state.follow ? 'Following' : 'Follow';
-    var cx = React.addons.classSet;
     var title_text =  this.state.follow ? 'Following' : 'Follow to receive updates';
 
     if(this.props.no_button){
-       var classes = cx({
+       var classes = classNames({
         'disabled': this.state.disabled,
         'following': this.state.follow
       });
     } else {
-      var classes = cx({
+      var classes = classNames({
         'main-button fs-13 bold pull-right text-white m-r-10': true,
         'disabled': this.state.disabled,
         'text-brand': !this.state.follow,

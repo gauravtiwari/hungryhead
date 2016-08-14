@@ -19,9 +19,7 @@ var MessageListItem = React.createClass({
   },
   render: function() {
     var message = this.props.message;
-
-    var cx = React.addons.classSet;
-    var message_owner_classes = cx({
+    var message_owner_classes = classNames({
       "chat-bubble": true,
       "from-me": this.props.message.user_id == window.currentUser.id,
       "from-them": this.props.message.user_id != window.currentUser.id

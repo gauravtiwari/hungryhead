@@ -27,7 +27,7 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <% if !browser.ie? || browser.ie? and browser.ie?([">10"])   %>
+    <% unless browser.ie? || browser.ie?([">10"])   %>
       <%= stylesheet_link_tag 'application', media: 'all' %>
     <% end %>
 

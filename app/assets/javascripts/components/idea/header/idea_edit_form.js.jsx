@@ -85,13 +85,11 @@ var IdeaEditForm = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-
     var markets = this.props.idea.markets.map(function(market){
       return market.name
     });
 
-    var loadingClass = cx({
+    var loadingClass = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
@@ -157,8 +155,8 @@ var IdeaEditForm = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    if($(this.refs.idea_form.getDOMNode()).valid()) {
-      var formData = $( this.refs.idea_form.getDOMNode() ).serialize();
+    if($(this.refs.idea_form).valid()) {
+      var formData = $( this.refs.idea_form ).serialize();
       this.props.saveIdeaForm(formData, this.props.form.action);
     }
   }

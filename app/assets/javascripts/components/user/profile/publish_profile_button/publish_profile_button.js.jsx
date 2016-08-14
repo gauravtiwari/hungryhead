@@ -34,9 +34,7 @@ var PublishProfileButton = React.createClass({
 
   render: function() {
     var text = this.state.published ? 'Published' : 'Publish Profile';
-    var cx = React.addons.classSet;
-
-     var classes = cx({
+     var classes = classNames({
       'main-button': true,
       'disabled': this.state.disabled,
       'published': this.state.published

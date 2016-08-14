@@ -54,8 +54,8 @@ var PublishIdeaPopup = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    var formData = $( this.refs.privacy_form.getDOMNode() ).serialize();
-    if($(this.refs.invest_form.getDOMNode()).valid()) {
+    var formData = $( this.refs.privacy_form ).serialize();
+    if($(this.refs.invest_form).valid()) {
       this.props.sendInvestment(formData, this.props.form.action, {amount: amount});
     }
   }

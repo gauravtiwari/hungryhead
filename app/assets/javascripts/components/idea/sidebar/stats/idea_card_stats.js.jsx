@@ -51,8 +51,7 @@ var IdeaCardStats = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'widget-16 panel bg-light-blue': true
     });
 

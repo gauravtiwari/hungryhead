@@ -7,24 +7,23 @@ var TextWidgetForm = React.createClass({
   },
 
   render: function(){
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'panel-body widget-form': true,
       'show': this.props.mode,
       'hidden': !this.props.mode,
     });
 
-    var loading_class = cx({
+    var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
 
-    var save_button_class = cx({
+    var save_button_class = classNames({
       "main-button bold m-r-10": true,
       "disabled": this.state.text.length > 1500 || this.state.text.length < 500
     });
 
-    var count_class = cx({
+    var count_class = classNames({
       "chars_count pull-right text-danger fs-12": true,
       'chars-overflow': this.state.text.length > 1500 || this.state.text.length < 500
     });
@@ -54,8 +53,8 @@ var TextWidgetForm = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    var text = this.refs.about_me.getDOMNode().value.trim();
-    var formData = $( this.refs.about_widget.getDOMNode() ).serialize();
+    var text = this.refs.about_me.value.trim();
+    var formData = $( this.refs.about_widget ).serialize();
     this.props.publishWidget(formData, this.props.form.action, {about_me: text});
   }
 

@@ -8,15 +8,14 @@ var InvestForm = React.createClass({
 
   updateBalance: function(event) {
     event.preventDefault();
-    var amount = this.refs.amount.getDOMNode().value.trim();
+    var amount = this.refs.amount.value.trim();
     this.setState({available_balance: this.props.idea.user_fund - amount});
   },
 
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
-      'fa fa-spinner fa-spin': this.props.loading
+  var classes = classNames({
+    'fa fa-spinner fa-spin': this.props.loading
   });
   return (
     <form id="information-form" role="form" noValidate="novalidate" acceptCharset="UTF-8" ref="invest_form" onSubmit={this._onKeyDown}>
@@ -62,9 +61,9 @@ readmoreInvestment: function() {
 },
 _onKeyDown: function(event) {
   event.preventDefault();
-  var amount = this.refs.amount.getDOMNode().value.trim();
-  var formData = $( this.refs.invest_form.getDOMNode() ).serialize();
-  if($(this.refs.invest_form.getDOMNode()).valid()) {
+  var amount = this.refs.amount.value.trim();
+  var formData = $( this.refs.invest_form ).serialize();
+  if($(this.refs.invest_form).valid()) {
     this.props.sendInvestment(formData, this.props.form.action, {amount: amount});
   }
 }

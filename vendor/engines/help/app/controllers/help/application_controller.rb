@@ -8,8 +8,8 @@ module Help
     private
 
     def set_device_type
-      request.variant = :phone if browser.mobile?
-      request.variant = :tablet if browser.tablet?
+      request.variant = :phone if browser.device.mobile?
+      request.variant = :tablet if browser.device.tablet?
     end
 
     def help_user_admin?

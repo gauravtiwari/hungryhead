@@ -26,7 +26,7 @@ var IdeaCover = React.createClass({
 
   _onUpdate: function(event) {
     event.preventDefault();
-    var formData = $( this.refs.coverForm.getDOMNode() ).serialize();
+    var formData = $( this.refs.coverForm ).serialize();
     this.updateCover(formData);
     this.setState({draggable: false});
     this.setState({visible: false});
@@ -100,19 +100,17 @@ var IdeaCover = React.createClass({
   },
 
   render: function() {
-
-      var cx = React.addons.classSet;
-      var upload_class = cx({
+      var upload_class = classNames({
         'uploading': true
       });
 
-      var drag_class = cx({
+      var drag_class = classNames({
         'jumbotron': true,
         'normal': !this.state.draggable,
         'drag': this.state.draggable
       });
 
-      var classes = cx({
+      var classes = classNames({
         'fa fa-camera': !this.state.loading,
         'fa fa-spinner fa-spin': this.state.loading
       });

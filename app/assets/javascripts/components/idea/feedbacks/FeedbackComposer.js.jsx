@@ -46,9 +46,9 @@ var FeedbackComposer = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var text = this.refs.body.getDOMNode().value.trim();
-      if($(this.refs.form.getDOMNode()).valid()) {
-        var formData = $( this.refs.form.getDOMNode() ).serialize();
+      var text = this.refs.body.value.trim();
+      if($(this.refs.form).valid()) {
+        var formData = $( this.refs.form ).serialize();
         this.handleFeedbackSubmit(formData, this.state.form.action, {body: text});
       }
       this.setState({text: ''});
@@ -70,9 +70,7 @@ var FeedbackComposer = React.createClass({
 
   render: function() {
     var form_classes = "add-feedback";
-
-    var cx = React.addons.classSet;
-    var loading_classes = cx({
+    var loading_classes = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 

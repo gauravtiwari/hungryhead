@@ -29,8 +29,7 @@ var CardStats = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'widget-16 panel no-border cup-bg profile-cards box-shadow': true
     });
 

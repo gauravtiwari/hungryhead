@@ -101,8 +101,8 @@ var InviteFriends = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    if($(this.refs.form.getDOMNode()).valid()) {
-      var formData = $(this.refs.form.getDOMNode()).serialize();
+    if($(this.refs.form).valid()) {
+      var formData = $(this.refs.form).serialize();
       this.handleInvite(formData);
     }
   }

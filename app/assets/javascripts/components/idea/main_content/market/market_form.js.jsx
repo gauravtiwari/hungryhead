@@ -1,15 +1,13 @@
 var MarketForm = React.createClass({
 
   render: function() {
-
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'market-edit-form': true,
       'show': this.props.editable,
       'hidden': !this.props.editable
     });
 
-    var loading_class = cx({
+    var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -36,9 +34,8 @@ var MarketForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var formData = $( this.refs.market_form.getDOMNode() ).serialize();
-      this.props.handleMarketSubmit(formData, {text: this.refs.description.getDOMNode().value});
+      var formData = $( this.refs.market_form ).serialize();
+      this.props.handleMarketSubmit(formData, {text: this.refs.description.value});
   }
 
 });
-

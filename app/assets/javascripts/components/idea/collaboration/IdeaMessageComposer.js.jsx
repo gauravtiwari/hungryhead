@@ -11,8 +11,7 @@ var IdeaMessageComposer = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var loading_classes = cx({
+    var loading_classes = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -37,9 +36,9 @@ var IdeaMessageComposer = React.createClass({
   _onKeyDown: function(event) {
     if(event.keyCode === ENTER_KEY_CODE) {
       event.preventDefault();
-      var text = this.refs.body.getDOMNode().value.trim();
+      var text = this.refs.body.value.trim();
       if (text) {
-        var formData = $( this.refs.form.getDOMNode() ).serialize();
+        var formData = $( this.refs.form ).serialize();
         this.props.onMessageSubmit(formData, this.props.form.action, text);
       }
       this.setState({text: ''});

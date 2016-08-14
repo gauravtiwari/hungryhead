@@ -39,8 +39,7 @@ var Trash = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 

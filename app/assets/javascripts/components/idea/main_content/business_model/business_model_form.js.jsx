@@ -1,15 +1,13 @@
 var BusinessModelForm = React.createClass({
 
   render: function() {
-
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'business-model-edit-form': true,
       'show': this.props.editable,
       'hidden': !this.props.editable
     });
 
-    var loading_class = cx({
+    var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -36,9 +34,8 @@ var BusinessModelForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var formData = $( this.refs.business_model_form.getDOMNode() ).serialize();
-      this.props.handleBusinessModelSubmit(formData, {text: this.refs.description.getDOMNode().value});
+      var formData = $( this.refs.business_model_form ).serialize();
+      this.props.handleBusinessModelSubmit(formData, {text: this.refs.description.value});
   }
 
 });
-

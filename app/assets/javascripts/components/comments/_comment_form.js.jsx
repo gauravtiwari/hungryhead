@@ -7,13 +7,13 @@ var CommentForm = React.createClass({
 
   handleSubmit: function ( event ) {
     event.preventDefault();
-    var body = this.refs.body.getDOMNode().value.trim();
+    var body = this.refs.body.value.trim();
     if (!body) {
       return false;
     }
-    var formData = $( this.refs.form.getDOMNode() ).serialize();
+    var formData = $( this.refs.form ).serialize();
     this.props.onCommentSubmit(formData);
-    this.refs.body.getDOMNode().value = "";
+    this.refs.body.value = "";
     event.stopPropagation();
   },
 
@@ -30,8 +30,7 @@ var CommentForm = React.createClass({
   },
 
   render: function () {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'add-comment-form margin-left': true,
       'bg-white p-b-20': this.props.white
     });

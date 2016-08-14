@@ -34,13 +34,13 @@
   }
 %>
 
-<% cache(['beta', 'learn_more', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'learn_more', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="learn-wrapper bg-white">
     <div class="learn">
       <div class="jumbotron no-margin" data-pages="parallax">
         <div class="learn-photo">
           <div class="container vmiddle">
-          <div class="row <%= browser.mobile? ? 'p-b-40 p-t-40' : ''  %>">
+          <div class="row <%= browser.device.mobile? ? 'p-b-40 p-t-40' : ''  %>">
                 <div class="col-md-8 auto-margin">
                     <div class="hero-section inner text-center">
                         <h1 class="text-white bold">

@@ -61,8 +61,8 @@ var NewIdeaForm = React.createClass({
   _onSubmit: function(event) {
     event.preventDefault();
     this.setState({loading: true});
-    if($(this.refs.form.getDOMNode()).valid()) {
-      var formData = $(this.refs.form.getDOMNode()).serialize();
+    if($(this.refs.form).valid()) {
+      var formData = $(this.refs.form).serialize();
       this._handleSubmit(event, formData);
     } else {
       this.setState({loading: false});

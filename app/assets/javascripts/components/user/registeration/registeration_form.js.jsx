@@ -54,12 +54,12 @@ var RegisterationForm = React.createClass({
   onUsernameChange: function(e) {
     data = {
       username: e.target.value,
-      first_name: this.refs.first_name.getDOMNode().value.trim(),
-      last_name: this.refs.last_name.getDOMNode().value.trim(),
-      name: this.refs.first_name.getDOMNode().value.trim() + ' ' + this.refs.last_name.getDOMNode().value.trim()
+      first_name: this.refs.first_name.value.trim(),
+      last_name: this.refs.last_name.value.trim(),
+      name: this.refs.first_name.value.trim() + ' ' + this.refs.last_name.value.trim()
     }
     var target = e.target;
-    if($(this.refs.name.getDOMNode().length) != 0) {
+    if($(this.refs.name.length) != 0) {
       $.ajax({
           data: data,
           url: Routes.check_username_path(),
@@ -125,14 +125,12 @@ var RegisterationForm = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-
-    var button_class = cx ({
+    var button_class = classNames ({
       'main-button': true,
       'disabled': this.props.disabled
     });
 
-    var loading_class = cx ({
+    var loading_class = classNames ({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -174,13 +172,13 @@ var RegisterationForm = React.createClass({
         <div className="row">
           <div className="col-sm-6">
             <div className="form-group">
-              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="Username - no empty space or symbol" id="formUsername" className="form-control" minlength="6" required aria-required="true" />
+              <input type="text" name="user[username]" autoCorrect="off" autoCapitalize="off" autoComplete="off" onBlur={this.onUsernameChange} placeholder="Username - no empty space or symbol" id="formUsername" className="form-control" minLength="6" required aria-required="true" />
               <span id="invalid-username"></span>
             </div>
           </div>
           <div className="col-sm-6">
             <div className="form-group">
-              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Password - min 8 characters" className="form-control" minlength="8" required aria-required="true" />
+              <input type="password" name="user[password]" autoCapitalize="off" id="formPassword" autoComplete="off" placeholder="Password - min 8 characters" className="form-control" minLength="8" required aria-required="true" />
             </div>
           </div>
         </div>
@@ -208,9 +206,9 @@ var RegisterationForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      $(this.refs.name.getDOMNode()).val($(this.refs.first_name.getDOMNode()).val() + ' ' + $(this.refs.last_name.getDOMNode()).val());
-      if($(this.refs.form.getDOMNode()).valid()) {
-        var formData = $(this.refs.form.getDOMNode()).serialize();
+      $(this.refs.name).val($(this.refs.first_name).val() + ' ' + $(this.refs.last_name).val());
+      if($(this.refs.form).valid()) {
+        var formData = $(this.refs.form).serialize();
         this.props.handleRegisterationSubmit(formData);
       }
   }

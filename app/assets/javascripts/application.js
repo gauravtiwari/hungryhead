@@ -8,9 +8,10 @@
 //= require pusher
 //= require jquery-form
 //= require bootstrap
+//= require ev-emitter
 //= require infinity
 //= require jquery.easing
-//= require modernizr/src/Modernizr
+//= require modernizr
 //= require jquery.countdown
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
@@ -27,6 +28,7 @@
 //= require jquery.pubsub
 //= require underscore
 //= require js-routes
+//= require classnames
 //= require select2
 //= require local_time
 //= require slimScroll
@@ -46,7 +48,6 @@
 //= require jquery-fileupload/basic
 //= require masonry/dist/masonry.pkgd
 //= require autocomplete-rails
-//= require pnotify
 //= require flashes
 //= require react
 //= require react-infinite

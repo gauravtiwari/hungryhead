@@ -9,6 +9,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-classie'
   gem 'rails-assets-jquery-unveil'
   gem 'rails-assets-jquery-bez'
+  gem 'rails-assets-ev-emitter'
+  gem 'rails-assets-classnames'
   gem 'rails-assets-jquery.countdown'
   gem 'rails-assets-masonry'
   gem 'rails-assets-imagesloaded'
@@ -25,7 +27,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-slimScroll'
   gem 'rails-assets-bootstrap-tagsinput'
   gem 'rails-assets-pnotify'
-  gem 'rails-assets-modernizr'
   gem 'rails-assets-fastclick'
   gem 'rails-assets-hammerjs'
   gem 'rails-assets-underscore'
@@ -191,7 +192,7 @@ gem 'friendly_id'
 gem 'htmlcompressor'
 
 #Select 2
-gem "select2-rails", '4.0.0'
+gem "select2-rails", '3.5.9.3'
 
 #Image upload and manipulations
 gem 'carrierwave'
@@ -230,6 +231,9 @@ gem 'figaro'
 #caching system
 gem 'readthis'
 gem 'hiredis'
+
+gem 'modernizr-rails'
+
 
 #Realtime
 gem 'pusher'

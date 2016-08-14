@@ -1,5 +1,5 @@
 var Team = React.createClass({
-	
+
 	getInitialState: function() {
 		var data = JSON.parse(this.props.data);
 		return {
@@ -27,9 +27,7 @@ var Team = React.createClass({
 	},
 
 	render: function() {
-
-		var cx = React.addons.classSet;
-	    var classes = cx({
+	    var classes = classNames({
 	      'fa fa-spinner fa-spin': this.state.loading
 	    });
 

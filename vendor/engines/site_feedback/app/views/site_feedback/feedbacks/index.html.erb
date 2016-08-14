@@ -33,7 +33,7 @@
   }
 %>
 
-<% cache(['beta', 'collaborate_with_us', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'collaborate_with_us', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}"]) do %>
 
   <div class="learn-wrapper bg-white">
     <div class="learn">

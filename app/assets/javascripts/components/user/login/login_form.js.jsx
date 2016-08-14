@@ -1,14 +1,12 @@
 
 var LoginForm = React.createClass({
 render: function() {
-  var cx = React.addons.classSet;
-
-  var button_class = cx ({
+  var button_class = classNames ({
     'main-button': true,
     'disabled': this.props.disabled
   });
 
-  var loading_class = cx ({
+  var loading_class = classNames ({
     'fa fa-spinner fa-spin': this.props.loading
   });
 
@@ -43,8 +41,8 @@ render: function() {
 
 _onKeyDown: function(event) {
     event.preventDefault();
-    if($(this.refs.form.getDOMNode()).valid()) {
-      var formData = $( this.refs.form.getDOMNode() ).serialize();
+    if($(this.refs.form).valid()) {
+      var formData = $( this.refs.form ).serialize();
       this.props.handleLoginSubmit(formData);
     }
 

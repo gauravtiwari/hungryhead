@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/product-tour/collaboration', to: 'pages#collaboration', as: :collaboration
   get '/product-tour/for-academic-institutions', to: 'pages#for_institutions', as: :for_institutions
 
-  #get '/our-pricing', to: 'pages#pricing', as: :pricing
+  get '/our-pricing', to: 'pages#pricing', as: :pricing
 
   # Upgrade path for old browsers
   get '/browser-upgrade', to: 'pages#upgrade_browser', as: :upgrade

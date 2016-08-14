@@ -34,13 +34,13 @@
   }
 %>
 
-<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'the_product', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="product-wrapper bg-white">
     <div class="product">
       <div class="jumbotron no-margin" data-pages="parallax">
           <div class="product-photo">
           <div class="container vmiddle">
-          <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
+          <div class="col-md-6 auto-margin <%= browser.device.mobile? ? 'p-b-40 p-t-20' : ''  %>">
             <div class="hero-section inner text-center">
                 <h1 class="text-white bold">
                   Our Product
@@ -58,7 +58,7 @@
       <div class="container">
         <div class="md-p-l-20 xs-no-padding clearfix">
           <div class="col-sm-4 no-padding">
-            <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
+            <div class="<%= browser.device.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/welcome.png', data: {src: "#{image_url('badges/welcome.png')}", src_retina: "#{image_url('badges/welcome.png')}"}, class: "m-b-20 w100") %>
               <h6 class="block-title p-b-5">Global Community
                 <i class="pg-arrow_right m-l-10"></i>
@@ -70,7 +70,7 @@
             <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
           </div>
           <div class="col-sm-4 no-padding">
-            <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
+            <div class="<%= browser.device.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/top_comments.png', data: {src: "#{image_url('badges/top_comments.png')}", src_retina: "#{image_url('badges/top_comments.png')}"}, class: "w100 m-b-20") %>
               <%= link_to(collaboration_path) do %>
               <h6 class="block-title p-b-5">
@@ -85,7 +85,7 @@
             <div class="visible-xs b-b b-grey-light m-t-30 m-b-30"></div>
           </div>
           <div class="col-sm-4 no-padding">
-            <div class="<%= browser.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
+            <div class="<%= browser.device.mobile? ? '' : 'p-r-40 md-pr-30' %> text-center">
               <%= image_tag('badges/cup.png', data: {src: "#{image_url('badges/cup.png')}", src_retina: "#{image_url('badges/cup.png')}"}, class: "m-b-20 w100") %>
               <%= link_to(gamification_path, data: {content_link_click: 'Product tour gamification'}) do %>
                 <h6 class="block-title p-b-5">
@@ -119,7 +119,7 @@
         </div>
         <div class="col-md-6 col-sm-12 hidden-xs">
           <div class="content-mask-md m-t-40 text-center">
-            <%= image_tag('product/cross-pollination-world.png', class: "image-responsive-height #{browser.mobile? ? '' : ''} lazy") %>
+            <%= image_tag('product/cross-pollination-world.png', class: "image-responsive-height #{browser.device.mobile? ? '' : ''} lazy") %>
           </div>
         </div>
       </div>
@@ -167,8 +167,8 @@
 
         <div class="col-md-6 col-sm-12 hidden-xs">
           <div class="content-mask-md text-center m-t-40">
-            <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.mobile? || browser.tablet? ? '' : 'auto-width'} lazy w110") %>
-            <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock auto-margin'} lazy") %>
+            <%= image_tag('product/gamification.png', class: "image-responsive-height #{browser.device.mobile? || browser.device.tablet? ? '' : 'auto-width'} lazy w110") %>
+            <%= image_tag('product/people_badges.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock auto-margin'} lazy") %>
           </div>
         </div>
       </div>
@@ -186,4 +186,3 @@
   </div>
 <% end %>
 <%= render partial: 'globals/footer' %>
-

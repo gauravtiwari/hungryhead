@@ -14,8 +14,8 @@ module SiteFeedback
     private
 
     def set_device_type
-      request.variant = :phone if browser.mobile?
-      request.variant = :tablet if browser.tablet?
+      request.variant = :phone if browser.device.mobile?
+      request.variant = :tablet if browser.device.tablet?
     end
 
     def meta_events_tracker

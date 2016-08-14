@@ -10,7 +10,7 @@ module Help
     private
 
     def backup_to_file
-      Help::Category.copy_to "#{Rails.root}/tmp/backup/help/categories.csv"
+      Help::Category.copy_to "#{Rails.root}/db/seeds/backups/help/categories.csv"
     end
 
   end

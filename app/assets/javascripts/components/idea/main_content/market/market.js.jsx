@@ -52,8 +52,7 @@ var Market = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'idea-market': true,
       'hidden': this.state.editable,
       'show': !this.state.editable

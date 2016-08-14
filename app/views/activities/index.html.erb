@@ -32,7 +32,7 @@
      </div>
     </div>
 
-    <% unless browser.mobile? %>
+    <% unless browser.device.mobile? %>
       <div class="col-md-3 col-sm-4 no-padding p-r-15">
         <div class="sidebar auto-height sticky white-bg box-shadow">
         <%= cache(["beta", "home_ticker", @user.ticker.revrange(0, 100).present? && @user.ticker.revrange(0, 100).first[:updated_at]]) do %>
@@ -49,5 +49,3 @@
     <% end %>
   </div>
 <% end %>
-
-

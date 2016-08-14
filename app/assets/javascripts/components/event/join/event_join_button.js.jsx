@@ -39,8 +39,7 @@ var EventJoinButton = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'main-button pointer bold m-r-10': true,
       'published': this.state.attending
     });

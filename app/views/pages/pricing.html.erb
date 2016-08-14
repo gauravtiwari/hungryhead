@@ -1,4 +1,4 @@
-<% cache(['beta', 'our_story', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'our_story', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="learn-wrapper bg-white">
     <div class="learn">
       <div class="jumbotron no-margin" data-pages="parallax" data-social="cover">
@@ -52,5 +52,3 @@
   </div>
 <% end %>
 <%= render partial: 'globals/footer' %>
-
-

@@ -52,8 +52,7 @@ var BusinessModel = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'idea-business-model': true,
       'hidden': this.state.editable,
       'show': !this.state.editable

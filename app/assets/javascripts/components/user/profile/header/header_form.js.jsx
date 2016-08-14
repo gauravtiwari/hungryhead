@@ -45,8 +45,7 @@ var UserProfileHeaderForm = React.createClass ({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var loadingClass = cx({
+    var loadingClass = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
     return (<form id="edit-profile-form" ref="header_form" onSubmit={this._onKeyDown} noValidate="novalidate" className="simple_form edit_user" acceptCharset="UTF-8" >
@@ -129,7 +128,7 @@ var UserProfileHeaderForm = React.createClass ({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    var formData = $( this.refs.header_form.getDOMNode() ).serialize();
+    var formData = $( this.refs.header_form ).serialize();
     this.saveUserProfile(formData, this.state.form.action);
   }
 

@@ -36,13 +36,13 @@
 %>
 
 
-<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}", "#{browser.tablet? ? 'tablet' : ''}"]) do %>
+<% cache(['beta', 'the_product', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}", "#{browser.device.tablet? ? 'tablet' : ''}"]) do %>
   <div class="product-wrapper bg-white">
     <div class="product">
       <div class="jumbotron no-margin" data-pages="parallax">
           <div class="for-institutions-photo">
           <div class="container vmiddle">
-          <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
+          <div class="col-md-6 auto-margin <%= browser.device.mobile? ? 'p-b-40 p-t-20' : ''  %>">
             <div class="hero-section inner text-center">
               <h1 class="text-white bold">
                 For Academic Institutions
@@ -72,7 +72,7 @@
       <div class="container col-md-offset-1">
         <div class="col-md-5 col-sm-5 hidden-xs">
           <div class="content-mask-md text-center">
-            <%= image_tag('product/visualize_support.png', class: "image-responsive-height lazy #{browser.mobile? || browser.tablet? ? '' : 'auto-width displayblock auto-margin'}") %>
+            <%= image_tag('product/visualize_support.png', class: "image-responsive-height lazy #{browser.device.mobile? || browser.device.tablet? ? '' : 'auto-width displayblock auto-margin'}") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 m-t-40 ">
@@ -89,7 +89,7 @@
       <div class="container col-md-offset-1">
         <div class="col-md-5 col-sm-5 hidden-xs">
           <div class="content-mask-md text-center">
-            <%= image_tag('product/ideas_supported.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+            <%= image_tag('product/ideas_supported.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 m-t-20">
@@ -106,7 +106,7 @@
       <div class="container col-md-offset-1">
         <div class="col-md-5 col-sm-5 hidden-xs">
           <div class="content-mask-md text-center">
-            <%= image_tag('product/engage_event.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+            <%= image_tag('product/engage_event.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7">
@@ -123,7 +123,7 @@
       <div class="container col-md-offset-1">
         <div class="col-md-5 col-sm-5 hidden-xs">
           <div class="content-mask-md text-center">
-            <%= image_tag('product/dashboard.png', class: "image-responsive-height p-t-10 lazy #{browser.mobile? || browser.tablet? ? '' : 'auto-width displayblock auto-margin'}") %>
+            <%= image_tag('product/dashboard.png', class: "image-responsive-height p-t-10 lazy #{browser.device.mobile? || browser.device.tablet? ? '' : 'auto-width displayblock auto-margin'}") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 m-t-20">
@@ -148,4 +148,3 @@
   </div>
 <% end %>
 <%= render partial: 'globals/footer' %>
-

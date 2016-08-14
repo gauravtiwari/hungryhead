@@ -45,8 +45,7 @@ var Plan = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'idea-plan': true,
       'hidden': this.state.editable,
       'show': !this.state.editable

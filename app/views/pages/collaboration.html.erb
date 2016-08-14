@@ -36,13 +36,13 @@
 %>
 
 
-<% cache(['beta', 'the_product', 'v1', "#{browser.mobile? ? 'mobile' : 'desktop'}"]) do %>
+<% cache(['beta', 'the_product', 'v1', "#{browser.device.mobile? ? 'mobile' : 'desktop'}"]) do %>
   <div class="product-wrapper bg-white">
     <div class="product">
       <div class="jumbotron no-margin" data-pages="parallax">
           <div class="collaboration-photo">
           <div class="container vmiddle">
-          <div class="col-md-6 auto-margin <%= browser.mobile? ? 'p-b-40 p-t-20' : ''  %>">
+          <div class="col-md-6 auto-margin <%= browser.device.mobile? ? 'p-b-40 p-t-20' : ''  %>">
             <div class="hero-section inner text-center">
               <h1 class="text-white bold">
                 Collaboration
@@ -72,7 +72,7 @@
       <div class="container col-md-offset-2">
         <div class="col-md-3 col-sm-4 hidden-xs">
           <div class="content-mask-md m-t-20 text-center">
-           <%= image_tag('icons/collaborate-icon.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+           <%= image_tag('icons/collaborate-icon.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 col-xs-12">
@@ -89,7 +89,7 @@
       <div class="container col-md-offset-2">
         <div class="col-md-3 col-sm-4 hidden-xs">
           <div class="content-mask-md m-t-20 text-center">
-            <%= image_tag('icons/global-collaboration.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+            <%= image_tag('icons/global-collaboration.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 col-xs-12">
@@ -106,7 +106,7 @@
       <div class="container col-md-offset-2">
         <div class="col-md-3 col-sm-4 hidden-xs">
           <div class="content-mask-md m-t-20">
-            <%= image_tag('icons/calendar.png', class: "image-responsive-height #{browser.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
+            <%= image_tag('icons/calendar.png', class: "image-responsive-height #{browser.device.mobile? ? '' : 'auto-width displayblock p-t-10 auto-margin'} lazy") %>
           </div>
         </div>
         <div class="col-md-5 col-sm-7 col-xs-12">
@@ -132,4 +132,3 @@
 <% end %>
 
 <%= render partial: 'globals/footer' %>
-

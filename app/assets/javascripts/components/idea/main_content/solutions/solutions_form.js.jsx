@@ -1,14 +1,13 @@
 var SolutionsForm = React.createClass({
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'solutions-edit-form': true,
       'show': this.props.editable,
       'hidden': !this.props.editable
     });
 
-     var loading_class = cx({
+     var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -35,9 +34,8 @@ var SolutionsForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var formData = $( this.refs.solutions_form.getDOMNode() ).serialize();
-      this.props.handleSolutionsSubmit(formData, this.refs.description.getDOMNode().value);
+      var formData = $( this.refs.solutions_form ).serialize();
+      this.props.handleSolutionsSubmit(formData, this.refs.description.value);
   }
 
 });
-

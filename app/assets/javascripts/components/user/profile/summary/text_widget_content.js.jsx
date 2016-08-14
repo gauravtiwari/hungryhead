@@ -1,8 +1,7 @@
 var TextWidgetContent = React.createClass({
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'panel-body p-t-10': true,
       'hidden': this.props.mode,
       'show': !this.props.mode,

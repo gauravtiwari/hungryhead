@@ -57,15 +57,13 @@ var PublishIdeaButton = React.createClass({
   render: function() {
     var text = this.state.is_public && this.state.published ? 'Published' : 'Private';
     var title = this.state.is_public ? 'Visible to everyone on Hungryhead' : 'Private, visible to you and team members. Click to publish.';
-
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'main-button pointer fs-13 m-r-10 bold pull-right': true,
       'privacy-team': !this.state.is_public,
       'privacy-public bg-green text-white': this.state.is_public
     });
 
-    var icon_class = cx({
+    var icon_class = classNames({
       "fa fa-lock": !this.state.is_public,
       "fa fa-unlock-alt": this.state.is_public
     });

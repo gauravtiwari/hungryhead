@@ -78,13 +78,11 @@ var Upvote = React.createClass({
   },
 
   render: function() {
-
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
-    var button_classes = cx({
+    var button_classes = classNames({
       'main-button fs-13 bold pointer m-r-10': true,
       'disabled': this.state.disabled,
       'voted text-white': this.state.voted

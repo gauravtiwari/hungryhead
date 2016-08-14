@@ -56,9 +56,9 @@ var EventDescription = React.createClass({
 
   _onSubmit: function(event) {
     event.preventDefault();
-    var event_description = this.refs.event_description.getDOMNode().value.trim();
-    if($(this.refs.event_form.getDOMNode()).valid()) {
-      var formData = $( this.refs.event_form.getDOMNode() ).serialize();
+    var event_description = this.refs.event_description.value.trim();
+    if($(this.refs.event_form).valid()) {
+      var formData = $( this.refs.event_form ).serialize();
       this.handleSubmit(formData);
     }
     event.stopPropagation();
@@ -72,32 +72,29 @@ var EventDescription = React.createClass({
   },
 
   render: function() {
-
-    var cx = React.addons.classSet;
-
-    var form_classes = cx({
+    var form_classes = classNames({
       'event_description_form clearfix': true,
       'show': this.state.editing,
       'hidden': !this.state.editing,
     });
 
-    var button_classes = cx({
+    var button_classes = classNames({
       'main-button m-r-10 fs-13 bold': true,
       'disabled': this.state.description.length < 300 || this.state.description.length > 2000
     });
 
-    var classes = cx({
+    var classes = classNames({
       'event_description clearfix': true,
       'show': !this.state.editing,
       'hidden': this.state.editing,
     });
 
-    var count_class = cx({
+    var count_class = classNames({
       "chars_count pull-right text-danger fs-12": true,
       'chars-overflow': this.state.description.length > 2000 || this.state.description.length < 300
     });
 
-    var loading_class = cx ({
+    var loading_class = classNames ({
       'fa fa-spinner fa-spin': this.state.loading
     });
 

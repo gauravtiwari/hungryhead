@@ -24,11 +24,11 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <% if !browser.ie? or browser.ie? and browser.version >= "10"  %>
+    <% unless browser.ie? || browser.ie?([">10"])   %>
       <%= stylesheet_link_tag 'application', media: 'all' %>
     <% end %>
 
-    <% if browser.ie? and browser.version <= "9"  %>
+    <% if browser.ie?(["<=9"]) %>
       <%= stylesheet_link_tag 'application_1', media: 'all' %>
       <%= stylesheet_link_tag 'application_2', media: 'all' %>
       <%= stylesheet_link_tag 'application_3', media: 'all' %>
@@ -51,14 +51,14 @@
   </head>
 
   <body class="fixed-header menu-behind <%= user_signed_in? ? '' : 'no-header' %> <%= controller_name %> <%= action_name %>">
-    <% if browser.mobile? %>
+    <% if browser.device.mobile? %>
       <%= render partial: 'globals/app_sidebar' %>
     <% end %>
     <div class="page-container">
-      <% if user_signed_in? && !browser.mobile? %>
+      <% if user_signed_in? && !browser.device.mobile? %>
         <%= render partial: 'globals/nav', locals: {bg: 'bg-white'}  %>
       <% else %>
-        <% if user_signed_in? && browser.mobile? || browser.mobile? %>
+        <% if user_signed_in? && browser.device.mobile? || browser.device.mobile? %>
           <%= render partial: 'globals/page_nav_mobile' %>
         <% else %>
           <%= render partial: 'globals/guest_nav' %>

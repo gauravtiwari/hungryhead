@@ -1,14 +1,13 @@
 var VideoForm = React.createClass({
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'plan-edit-form': true,
       'show': this.props.editable,
       'hidden': !this.props.editable
     });
 
-     var loading_class = cx({
+     var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -29,9 +28,8 @@ var VideoForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var formData = $( this.refs.video_form.getDOMNode() ).serialize();
+      var formData = $( this.refs.video_form ).serialize();
       this.props.handleVideoSubmit(formData);
   }
 
 });
-

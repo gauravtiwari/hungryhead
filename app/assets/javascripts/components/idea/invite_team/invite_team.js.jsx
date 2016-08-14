@@ -87,17 +87,15 @@ var InviteTeam = React.createClass({
 
 	_onKeyDown: function(event) {
       event.preventDefault();
-      var text = this.refs.msg.getDOMNode().value.trim();
+      var text = this.refs.msg.value.trim();
       if (text) {
-        var formData = $( this.refs.form.getDOMNode() ).serialize();
+        var formData = $( this.refs.form ).serialize();
         this.handleTeamInvite(formData);
       }
   	},
 
 	render: function() {
-
-	var cx = React.addons.classSet;
-    var loading_classes = cx({
+    var loading_classes = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 

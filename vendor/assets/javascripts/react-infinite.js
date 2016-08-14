@@ -144,7 +144,7 @@ var Infinite = React.createClass({displayName: "Infinite",
   },
 
   getScrollTop:function() {
-    return this.refs.scrollable.getDOMNode().scrollTop;
+    return this.refs.scrollable.scrollTop;
   },
 
   // Given the scrollTop of the container, computes the state the
@@ -166,11 +166,11 @@ var Infinite = React.createClass({displayName: "Infinite",
   },
 
   infiniteHandleScroll:function(e) {
-    if (e.target !== this.refs.scrollable.getDOMNode()) {
+    if (e.target !== this.refs.scrollable) {
       return;
     }
 
-    this.props.handleScroll(this.refs.scrollable.getDOMNode());
+    this.props.handleScroll(this.refs.scrollable);
     this.handleScroll(e.target.scrollTop);
   },
 
@@ -241,17 +241,17 @@ var Infinite = React.createClass({displayName: "Infinite",
 
     // topSpacer and bottomSpacer take up the amount of space that the
     // rendered elements would have taken up otherwise
-    return React.createElement("div", {className: this.props.className ? this.props.className : '', 
-                ref: "scrollable", 
-                style: this.buildScrollableStyle(), 
-                onScroll: this.infiniteHandleScroll}, 
-      React.createElement("div", {ref: "smoothScrollingWrapper", style: infiniteScrollStyles}, 
-        React.createElement("div", {ref: "topSpacer", 
-             style: this.buildHeightStyle(topSpacerHeight)}), 
-            displayables, 
-        React.createElement("div", {ref: "bottomSpacer", 
-             style: this.buildHeightStyle(bottomSpacerHeight)}), 
-        React.createElement("div", {ref: "loadingSpinner"}, 
+    return React.createElement("div", {className: this.props.className ? this.props.className : '',
+                ref: "scrollable",
+                style: this.buildScrollableStyle(),
+                onScroll: this.infiniteHandleScroll},
+      React.createElement("div", {ref: "smoothScrollingWrapper", style: infiniteScrollStyles},
+        React.createElement("div", {ref: "topSpacer",
+             style: this.buildHeightStyle(topSpacerHeight)}),
+            displayables,
+        React.createElement("div", {ref: "bottomSpacer",
+             style: this.buildHeightStyle(bottomSpacerHeight)}),
+        React.createElement("div", {ref: "loadingSpinner"},
              this.state.isInfiniteLoading ? this.props.loadingSpinnerDelegate : null
         )
       )
@@ -651,7 +651,7 @@ for(var InfiniteComputer____Key in InfiniteComputer){if(InfiniteComputer.hasOwnP
 
   Object.defineProperty(ArrayInfiniteComputer.prototype,"getDisplayIndexEnd",{writable:true,configurable:true,value:function(windowBottom) {"use strict";
     var foundIndex = bs.binaryIndexSearch(this.prefixHeightData, windowBottom, bs.opts.CLOSEST_HIGHER);
-    return typeof foundIndex === 'undefined' ? this.prefixHeightData.length - 1 : foundIndex; 
+    return typeof foundIndex === 'undefined' ? this.prefixHeightData.length - 1 : foundIndex;
   }});
 
   Object.defineProperty(ArrayInfiniteComputer.prototype,"getTopSpacerHeight",{writable:true,configurable:true,value:function(displayIndexStart) {"use strict";

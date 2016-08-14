@@ -34,8 +34,7 @@ var OpenFeedbackButton = React.createClass({
 
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'fa fa-comment': !this.state.feedbacked,
       'fa fa-fw fa-check': this.state.feedbacked
     });

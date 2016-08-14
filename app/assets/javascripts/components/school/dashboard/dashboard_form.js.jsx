@@ -90,8 +90,7 @@ var DashboardForm = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var loadingClass = cx({
+    var loadingClass = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
@@ -172,8 +171,8 @@ var DashboardForm = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    if($(this.refs.school_form.getDOMNode()).valid()) {
-      var formData = $( this.refs.school_form.getDOMNode() ).serialize();
+    if($(this.refs.school_form).valid()) {
+      var formData = $( this.refs.school_form ).serialize();
       this.saveSchoolForm(formData, this.state.school.form.action);
     }
   }

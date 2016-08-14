@@ -33,12 +33,11 @@ var InvestButton = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'fa fa-dollar': true
     });
 
-    var invested_classes = cx({
+    var invested_classes = classNames({
       'fs-13 pointer padding-5 bold p-l-10 p-r-10 pull-right m-r-10': true,
       'main-button': !this.state.invested && this.state.investable,
       'main-button': !this.state.investable,

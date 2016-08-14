@@ -28,16 +28,16 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <% if !browser.ie? or browser.ie? and browser.version >= "10"  %>
+    <% unless browser.ie? || browser.ie?([">10"])   %>
       <%= stylesheet_link_tag 'application', media: 'all' %>
     <% end %>
 
-    <% if browser.ie? and browser.version <= "9"  %>
-     <%= stylesheet_link_tag 'application_1', media: 'all' %>
-     <%= stylesheet_link_tag 'application_2', media: 'all' %>
-     <%= stylesheet_link_tag 'application_3', media: 'all' %>
-     <%= stylesheet_link_tag 'application_4', media: 'all' %>
-     <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
+    <% if browser.ie?(["<=9"]) %>
+      <%= stylesheet_link_tag 'application_1', media: 'all' %>
+      <%= stylesheet_link_tag 'application_2', media: 'all' %>
+      <%= stylesheet_link_tag 'application_3', media: 'all' %>
+      <%= stylesheet_link_tag 'application_4', media: 'all' %>
+      <%= stylesheet_link_tag 'core/css/ie9',  media: 'all' %>
     <% end %>
 
 

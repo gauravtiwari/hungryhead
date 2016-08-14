@@ -1,28 +1,25 @@
 var CoverEditMenu =  React.createClass({
 
 	render: function() {
-
-	  var cx = React.addons.classSet;
-
-      var save_buttons_class = cx({
+      var save_buttons_class = classNames({
       	'change-cover': true,
       	'show': this.props.visible,
         'hidden': !this.props.visible
       });
 
-      var change_icon_class = cx({
+      var change_icon_class = classNames({
       	'save-cover ': true,
       	'hidden': this.props.visible || this.props.loading,
         'show': !this.props.visible
       });
 
-      var spinner_class = cx({
+      var spinner_class = classNames({
       	'spinner ': true,
       	'show': this.props.loading,
         'hidden': !this.props.loading
       });
 
-      var classes = cx({
+      var classes = classNames({
         'fa fa-camera': !this.props.loading,
         'fa fa-spinner fa-spin': this.props.loading
       });

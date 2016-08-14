@@ -120,17 +120,16 @@ var CommentBox = React.createClass({
 
   render: function () {
     var like = this.state.like;
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'fa fa-spinner fa-spin': this.state.button_loading
     });
 
-    var comments_box = cx({
+    var comments_box = classNames({
       'commentapp comment-box': true,
       'standalone': this.state.standalone
     });
 
-    var comment_loading_classes = cx({
+    var comment_loading_classes = classNames({
       'fa fa-spinner fa-spin': this.state.comment_loading
     });
     if(this.state.comments_path && !this.state.show_comment_bar) {

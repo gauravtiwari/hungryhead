@@ -1,14 +1,13 @@
 var ValuePropositionForm = React.createClass({
 
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
+    var classes = classNames({
       'plan-edit-form': true,
       'show': this.props.editable,
       'hidden': !this.props.editable
     });
 
-     var loading_class = cx({
+     var loading_class = classNames({
       'fa fa-spinner fa-spin': this.props.loading
     });
 
@@ -36,9 +35,8 @@ var ValuePropositionForm = React.createClass({
 
   _onKeyDown: function(event) {
       event.preventDefault();
-      var formData = $( this.refs.value_form.getDOMNode() ).serialize();
-      this.props.handleValuePropositionSubmit(formData, this.refs.description.getDOMNode().value);
+      var formData = $( this.refs.value_form ).serialize();
+      this.props.handleValuePropositionSubmit(formData, this.refs.description.value);
   }
 
 });
-

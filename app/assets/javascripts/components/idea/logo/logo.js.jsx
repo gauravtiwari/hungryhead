@@ -41,12 +41,11 @@ var Logo = React.createClass({
   },
 
   render: function() {
-      var cx = React.addons.classSet;
-      var upload_class = cx({
+      var upload_class = classNames({
         'uploading': true
       });
 
-      var classes = cx({
+      var classes = classNames({
         'fa fa-camera': !this.state.loading,
         'fa fa-spinner fa-spin': this.state.loading
       });

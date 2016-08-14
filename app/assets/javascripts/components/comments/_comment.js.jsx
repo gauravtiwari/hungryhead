@@ -92,9 +92,7 @@ var Comment = React.createClass({
     var text = this.state.liked ? 'Unlike' : 'Like';
     var comment = this.state.comment;
 
-    var cx = React.addons.classSet;
-
-    var deleteClass = cx({
+    var deleteClass = classNames({
       'fa fa-spinner fa-spin': this.state.deleting
     });
 
@@ -102,7 +100,7 @@ var Comment = React.createClass({
       var likes_count = '('+this.state.likes_count + ')';
     }
 
-    var classes = cx({
+    var classes = classNames({
       'fa fa-spinner fa-spin': this.state.deleting
     });
 

@@ -314,7 +314,6 @@ var CardForm = React.createClass({
   },
 
   render: function() {
-    var cx = React.addons.classSet;
       if(this.props.profile.markets && this.props.profile.markets.length > 0 ) {
       var markets = this.props.profile.markets.map(function(market){
         return market.tag
@@ -355,7 +354,7 @@ var CardForm = React.createClass({
       var subjects = "";
     }
 
-    var loadingClass = cx({
+    var loadingClass = classNames({
       'fa fa-spinner fa-spin': this.state.loading
     });
 
@@ -471,8 +470,8 @@ var CardForm = React.createClass({
 
   _onKeyDown: function(event) {
     event.preventDefault();
-    if($(this.refs.profile_form.getDOMNode()).valid()) {
-      var formData = $( this.refs.profile_form.getDOMNode() ).serialize();
+    if($(this.refs.profile_form).valid()) {
+      var formData = $( this.refs.profile_form ).serialize();
       this.props.saveSidebarWidget(formData, this.props.form.action);
     }
   }
