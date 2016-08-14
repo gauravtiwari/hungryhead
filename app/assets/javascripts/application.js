@@ -10,7 +10,7 @@
 //= require bootstrap
 //= require infinity
 //= require jquery.easing
-//= require modernizr
+//= require modernizr/src/Modernizr
 //= require jquery.countdown
 //= require jquery-ui/core
 //= require jquery-ui/autocomplete
@@ -56,7 +56,6 @@
 //= require core/js/hungryhead
 //= require avatar
 //= require event
-//= require flashes
 //= require typer
 //= require profiles
 //= require school

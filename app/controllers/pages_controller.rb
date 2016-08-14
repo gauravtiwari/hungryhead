@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   layout "home"
-  before_action :set_cache
+  before_action :set_cache, if: :production?
 
   #Index page to handle home and after login route
   def home
@@ -80,6 +80,10 @@ class PagesController < ApplicationController
   end
 
   private
+
+  def production?
+    Rails.env.production?
+  end
 
   def set_cache
     fresh_when(:etag => cache_key, :last_modified => last_modified_date, :public => true)

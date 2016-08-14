@@ -27,11 +27,11 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <% if !browser.ie? or browser.ie? and browser.version >= "10"  %>
+    <% if !browser.ie? || browser.ie? and browser.ie?([">10"])   %>
       <%= stylesheet_link_tag 'application', media: 'all' %>
     <% end %>
 
-    <% if browser.ie? and browser.version <= "9"  %>
+    <% if browser.ie?(["<=9"]) %>
       <%= stylesheet_link_tag 'application_1', media: 'all' %>
       <%= stylesheet_link_tag 'application_2', media: 'all' %>
       <%= stylesheet_link_tag 'application_3', media: 'all' %>
@@ -54,7 +54,7 @@
 
   <body class="<%= user_signed_in? && params[:controller] != 'pages' ? 'fixed-header' : '' %> menu-behind <%= 'absolute-header no-header' if params[:controller] == 'pages' %> <%= controller_name %> <%= action_name %>">
 
-    <% if browser.ie9? %>
+    <% if browser.ie?(9) %>
       <%= render partial: 'globals/outdated_browser' %>
     <% end %>
 
