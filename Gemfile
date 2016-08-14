@@ -122,9 +122,6 @@ gem 'rails4-autocomplete'
 #JSON generator
 gem 'oj'
 
-# Server
-gem 'unicorn'
-
 #Browser gem
 gem 'browser'
 
@@ -236,6 +233,12 @@ gem 'metamagic'
 
 #UUID generation
 gem 'uuidtools'
+
+# Server
+gem 'passenger'
+
+gem 'readthis'
+gem 'hiredis' # Highly recommended
 
 #Skylight
 #gem "skylight"
