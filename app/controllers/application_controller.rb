@@ -7,17 +7,14 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  #Devise Permitted paramaters
+  # Devise Permitted paramaters
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  #Flash messages from rails
+  # Flash messages from rails
   after_action :prepare_unobtrusive_flash
-
-  #Temporary basic auth
-  before_action :authenticate_basic
   before_action :set_paper_trail_whodunnit
 
-  #Device specific templates
+  # Device specific templates
   before_action :set_device_type
 
   before_action :set_current_user, if: :user_signed_in?
@@ -26,14 +23,6 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current = current_user
-  end
-
-  def authenticate_basic
-    if Rails.env.production?
-      authenticate_or_request_with_http_basic do |username, password|
-        username == "hungryhead_testing" && password == "production_testing"
-      end
-    end
   end
 
   def configure_permitted_parameters
