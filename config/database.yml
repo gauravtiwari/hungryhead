@@ -1,25 +1,18 @@
----
-default:
-  adapter: 'postgresql'
+default: &default
+  adapter: postgresql
   encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 5 %>
+  pool: 5
 
 development:
-  adapter: 'postgresql'
-  username: gaurav
+  <<: *default
   host: localhost
-  database: hungryhead_school_app_development
-  encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 5 %>
+  database: hungryhead_development
+
+test:
+  <<: *default
+  host: localhost
+  database: hungryhead_test
 
 production:
-  adapter: 'postgresql'
-  database: hungryhead_school_app_production
-  encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 50 %>
-
-staging:
-  adapter: 'postgresql'
-  database: hungryhead_school_app_staging
-  encoding: unicode
-  pool: <%= ENV["DB_POOL"] || 50 %>
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

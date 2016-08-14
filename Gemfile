@@ -200,7 +200,6 @@ gem 'carrierwave-mimetype-fu'
 
 #Sync assets with cloudfront
 gem "fog-google"
-gem 'asset_sync'
 
 #Sitemap
 gem 'sitemap_generator'

@@ -5,9 +5,9 @@
 development:
   :concurrency: 5
 staging:
-  :concurrency: 10
+  :concurrency: 5
 production:
-  :concurrency: 20
+  :concurrency: 5
 :queues:
   - default
   - carrierwave

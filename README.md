@@ -1,3 +1,8 @@
-## Hungryhead APP doc
+# Hungryhead (Now Demo only)
+Hungryhead is a collaborative network for students to share, validate and develop startup ideas with peers and mentors, supported by gamification.
 
-Hungryhead is a web and mobile app platform for universities to expose entrepreneurship to students. It's built on rails using React as front end framework. 
+The platform was built on Rails - standard monolith. Currently, the platform is in production only for demo purposes.
+
+The source code is more than 2 years old and contains many things that could be improved or done better.
+
+The repo only serves as a reference to source code. 
