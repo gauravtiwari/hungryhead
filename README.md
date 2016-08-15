@@ -27,3 +27,36 @@ The repo is now open source and serves as a reference for many implementations l
 * Realtime stuff with Pusher,
 * Using jobs to offload heavier stuffs,
 * And, many other cool things like commenting and voting
+
+## Running locally
+
+```bash
+git clone git@github.com:gauravtiwari/hungryhead.git
+cd hungryhead
+bundle install
+
+brew install redis
+brew install postgresql
+
+bundle exec rake db:drop db:create db:migrate
+bundle exec rake db:seed
+./start
+```
+
+## Environment variabels
+```bash
+  ASSET_KEY: ""
+  ASSET_SECRET: ""
+  ASSET_BUCKET_NAME: ""
+  PUSHER_APP_ID: ""
+  PUSHER_APP_KEY: ""
+  PUSHER_APP_SECRET: ""
+  MANDRILL_USERNAME: ''
+  MANDRILL_API_KEY: ''
+  SKYLIGHT_AUTHENTICATION: ''
+  BUGSNAG_API_KEY: ''
+  ENABLE_COMPRESSION: '0'
+  MIXPANEL_API_KEY: ''
+  DB_POOL: '5'
+  REDIS_URL: ""
+```
