@@ -44,6 +44,9 @@ bundle exec rake db:seed
 ```
 
 ## Environment variabels
+The platform uses Google cloud for storing user uploaded assets.
+[http://cloud.google.com/](http://cloud.google.com/)
+
 ```bash
   ASSET_KEY: ""
   ASSET_SECRET: ""
