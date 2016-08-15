@@ -15,6 +15,7 @@ SitemapGenerator::Sitemap.create do
   add '/cookies-policy'
   add '/terms-of-service'
   add '/help'
+
   Help::Category.find_each do |category|
     add Help::Engine.routes.url_helpers.help_category_path(category), :lastmod => category.updated_at
   end
