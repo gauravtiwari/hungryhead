@@ -1,5 +1,4 @@
 module EventsHelper
-
   def attending?(event)
     if current_user && event.attending?(current_user)
       event =  {
@@ -16,5 +15,4 @@ module EventsHelper
       user_slug: current_user.slug
     )
   end
-
 end

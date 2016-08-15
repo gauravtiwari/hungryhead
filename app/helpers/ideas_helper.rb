@@ -1,5 +1,4 @@
 module IdeasHelper
-
   def invested?
     {
       form: {
@@ -35,5 +34,4 @@ module IdeasHelper
     voted = idea.voted?(current_user)
     "idea-#{idea.id}-#{idea.updated_at.try(:to_s, :number)}/investors-#{investors}/votes-#{votes}/feedbackers-#{feedbackers}/voted-#{voted}"
   end
-
 end

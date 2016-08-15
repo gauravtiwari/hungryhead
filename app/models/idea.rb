@@ -1,25 +1,18 @@
 class Idea < ActiveRecord::Base
-
-  #Order records
   extend OrderAsSpecified
   include Rails.application.routes.url_helpers
 
-  #included redis
   include Redis::Objects
 
-  #Friendly id
   extend FriendlyId
   friendly_id :slug_candidates
 
-  #CallBack hooks
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
   after_save :soulmate_loader, if: :visible? and :rebuild_cache?
 
-  # Gamification
   has_merit
 
-  #Includes concerns
   include Sluggable
   include Votable
   include Followable
@@ -31,44 +24,37 @@ class Idea < ActiveRecord::Base
 
   acts_as_taggable_on :markets, :technologies
 
-  #Cache ids of voters, feedbackers, investors and activities
   list :voters_ids
   list :feedbackers_ids
   list :investors_ids
   set :impressioners_ids
 
-  #Leaderboard ideas
   sorted_set :latest, global: true
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
-  #Redis Cache counters
   counter :investors_counter
   counter :feedbackers_counter
   counter :views_counter
   counter :votes_counter
   counter :idea_messages_counter
 
-  #Enumerators for handling states
   enum status: { draft:0, published:1 }
   enum privacy: { team: 0, everyone: 1 }
 
-  #Scopes
   scope :published, -> { where(status: 1) }
   scope :from_school, ->(school_id) { where(status: 1, :school_id => school_id)}
   scope :public_ideas, -> { where(privacy: 1) }
   scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
 
-  #Associations
   belongs_to :user, touch: true
   belongs_to :school, touch: true
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 
-  #Includes modules
-  has_paper_trail :on => [:update, :destroy], :only => [:name, :description, :elevator_pitch, :high_concept_pitch]
+  has_paper_trail :on => [:update, :destroy],
+  :only => [:name, :description, :elevator_pitch, :high_concept_pitch]
 
-  #Store accessor for JSON columns
   store_accessor :fund, :balance
 
   store_accessor :settings, :visible_everyone
@@ -79,11 +65,9 @@ class Idea < ActiveRecord::Base
   store_accessor :media, :logo_position, :cover_position,
   :cover_left, :cover_processing, :logo_processing, :logo_tmp, :cover_tmp
 
-  #Upload logos and covers
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
 
-  #Auto HTML for youtube video
   auto_html_for :video do
     html_escape
     vimeo(:width => 640, :height => 250, :autoplay => false)
@@ -91,7 +75,6 @@ class Idea < ActiveRecord::Base
     simple_format
   end
 
-  #Validations
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false }
   validates :logo,
   :file_size => {
@@ -220,13 +203,13 @@ class Idea < ActiveRecord::Base
   end
 
   def decrement_counters
-    #Decrement counters for user and school
     school.ideas_counter.reset if self.school_id.present?
-    school.ideas_counter.incr(Idea.from_school(school_id).size) if self.school_id.present?
+    school.ideas_counter.incr(
+      Idea.from_school(school_id).size
+    ) if self.school_id.present?
     user.ideas_counter.reset
     user.ideas_counter.incr(user.ideas.size)
 
-    #Remove self from sorted set
     Idea.latest.delete(id)
     Idea.trending.delete(id)
     Idea.leaderboard.delete(id)
@@ -234,11 +217,11 @@ class Idea < ActiveRecord::Base
   end
 
   def delete_activity
-    #Delete idea time from user feed
-    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
-      #Delete cached activities
+    Activity.where(
+      trackable_id: self.id,
+      trackable_type: self.class.to_s
+    ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
-      #finally destroy the activity
       activity.destroy if activity.present?
     end
   end

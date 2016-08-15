@@ -1,28 +1,21 @@
 class User < ActiveRecord::Base
-
-  #Order objects as specified in array
   extend OrderAsSpecified
 
-  #External modules
   include ActiveModel::Validations
   include Rails.application.routes.url_helpers
-  #redis objects
+
   include Redis::Objects
 
-  #Callbacks
   before_create :seed_fund, :seed_settings, unless: :admin?
   before_create :add_fullname, unless: :name_present?
   before_create :add_username, unless: :username_present?
   before_destroy :remove_from_soulmate, :decrement_counters, unless: :admin?
 
-  #Call Service to update cache
   after_save :soulmate_loader, if: :rebuild_cache?
   after_update :rebuild_notifications, if: :cacheable_changed?
 
-  #copy records
   acts_as_copy_target
 
-  #Scopes for searching
   scope :students, -> { where(state: 1, role: 1) }
   scope :from_school, ->(school_id) { where(state: 1, :school_id => school_id)}
   scope :entrepreneurs, -> { where(state: 1, role: 2) }
@@ -30,10 +23,8 @@ class User < ActiveRecord::Base
   scope :users, -> { where(state: 1, role: 0) }
   scope :published, -> { where(state: 1) }
 
-  #Gamification
   has_merit
 
-  #Concerns for User class
   include Sluggable
   include Followable
   include Follower
@@ -54,39 +45,36 @@ class User < ActiveRecord::Base
   attr_accessor :login
   attr_reader :raw_invitation_token
 
-  #Model Relationships
   belongs_to :school, touch: true
 
-  #has_many relationships
-  has_many :attendences, class_name: 'EventAttendee', foreign_key: 'attendee_id', :dependent => :destroy
-  has_many :team_invites, class_name: 'TeamInvite', foreign_key: 'invited_id', :dependent => :destroy
+  has_many :attendences, class_name: 'EventAttendee',
+  foreign_key: 'attendee_id', :dependent => :destroy
+
+  has_many :team_invites, class_name: 'TeamInvite',
+  foreign_key: 'invited_id', :dependent => :destroy
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
 
-  #Tagging System
+
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
   acts_as_tagger
 
-  #Sorted set to store followers, followings ids and latest activities
   set :followers_ids
   set :followings_ids
   set :school_followings_ids
   set :impressioners_ids
 
-  #List to store latest users
+
   list :latest, maxlength: 20, marshal: true, global: true
 
-  #Store latest user notifications
+
   sorted_set :friends_notifications, marshal: true
 
-  #Sorted set to store trending ideas
   sorted_set :latest, global: true
   sorted_set :leaderboard, global: true
   sorted_set :trending, global: true
 
-  #Redis counters to cache total followers, followings,
-  #feedbacks, investments and ideas
   counter :followers_counter
   counter :followings_counter
 
@@ -98,15 +86,14 @@ class User < ActiveRecord::Base
   counter :ideas_counter
   counter :views_counter
 
-  #Count user notifications
+
   counter :notifications_counter
 
-  #Enumerators to handle states
+
   enum state: { inactive: 0, published: 1}
   enum feed_preferences: { latest_stories: 0, popular_stories: 1 }
   enum role: { user: 0, student: 1, entrepreneur: 2, alumni: 3, faculty: 4 }
 
-  #Accessor methods for JSONB datatypes
   store_accessor :profile, :facebook_url,
   :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
@@ -115,27 +102,22 @@ class User < ActiveRecord::Base
   :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
-  #Devise for authentication
   devise :invitable, :uid, :database_authenticatable, :registerable,
     :recoverable, :rememberable, :lockable, :trackable, :validatable, :confirmable,
     :authentication_keys => [:login]
 
 
-  #Media Uploaders - carrierwave
   mount_uploader :avatar, LogoUploader
   mount_uploader :cover, CoverUploader
 
-  #Model Validations
   validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
   validates :name, :presence => true
   validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /\A[a-zA-Z0-9](\w|\.)*[a-zA-Z0-9]$\Z/, message: "should not contain empty spaces or symbols" }
   validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
-  #Get username suggestions
+
   suggestions_for :username, :num_suggestions => 5,
       :first_name_attribute => :firstname, :last_name_attribute => :lastname
 
-  #Public methods
-  public
 
   def self.current
     Thread.current[:user]
@@ -171,7 +153,6 @@ class User < ActiveRecord::Base
     balance > amount.to_i
   end
 
-  #Login using both email and username
   def login=(login)
     @login = login
   end
@@ -180,7 +161,6 @@ class User < ActiveRecord::Base
     @login || self.username || self.email
   end
 
-  #Save user without confirmation
   def save_without_confirmation
     self.skip_confirmation_notification!
     self.save!
@@ -241,7 +221,6 @@ class User < ActiveRecord::Base
 
   private
 
-  #returns if a user is admin
   def is_admin
     admin?
   end
@@ -264,18 +243,15 @@ class User < ActiveRecord::Base
     self.username = email_username
   end
 
-  # returns and adds first_name and last_name to database
   def add_fullname
     self.first_name = firstname
     self.last_name =  lastname
   end
 
-  #Seeds amount into database on: :create
   def seed_fund
     self.fund = {balance: 1000}
   end
 
-  #Seeds settings into database on: :create
   def seed_settings
     self.settings = {
       theme: "#{role.downcase}",
@@ -287,7 +263,6 @@ class User < ActiveRecord::Base
     }
   end
 
-  #Slug attributes for friendly id
   def slug_candidates
     [:username]
   end
@@ -297,19 +272,16 @@ class User < ActiveRecord::Base
   end
 
   def remove_from_soulmate
-    #Remove search index if :record destroyed
     loader = Soulmate::Loader.new("people")
     loader.remove("id" => id)
     true
   end
 
   def decrement_counters
-    #delete cached sorted set for global leaderboard
     User.latest.delete(id)
-    #delete leaderboard for this user
     User.leaderboard.delete(id)
     User.trending.delete(id)
-    #Decrement counters
+
     school.people_counter.reset
     school.people_counter.incr(User.from_school(school_id).size) if school_id.present?
     true
@@ -320,7 +292,11 @@ class User < ActiveRecord::Base
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions).where(
+        ["lower(username) = :value OR lower(email) = :value",
+          { :value => login.downcase }
+        ]
+      ).first
     else
       where(conditions).first
     end

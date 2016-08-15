@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def notifications_count
     current_user.mailbox.notifications(read: false).length if current_user
   end
@@ -97,5 +96,4 @@ module ApplicationHelper
 
     pipeline.call(content)[:output].to_s.html_safe
   end
-
 end

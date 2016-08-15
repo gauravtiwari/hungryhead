@@ -1,5 +1,4 @@
 module UserHelper
-
 	def is_owner?(user)
 		current_user == user
 	end
@@ -24,5 +23,4 @@ module UserHelper
     followed = user.followed_by?(current_user)
     "user-#{user.id}-#{user.updated_at.try(:to_s, :number)}/investments-#{investments}/followers-#{followers}/feedbacks-#{feedbacks}/followed-#{followed}"
   end
-
 end

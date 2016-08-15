@@ -1,5 +1,4 @@
 module SchoolsHelper
-
   # Todo cleanup these keys
   def cache_key_for_school(school)
     people = school.people_counter.value
@@ -14,5 +13,4 @@ module SchoolsHelper
     max_updated_at = School.maximum(:updated_at).try(:utc).try(:to_s, :number)
     "schools/all-#{count}-#{max_updated_at}"
   end
-
 end

@@ -1,5 +1,4 @@
 module ActivitiesHelper
-
   def render_activity activity
    render partial: partial_path(activity), locals: {activity: activity}
   end
@@ -19,5 +18,4 @@ module ActivitiesHelper
       "activities/activity"
     ]
   end
-
 end

@@ -1,18 +1,14 @@
 class Activity < ActiveRecord::Base
-
   extend OrderAsSpecified
 
-  #redis objects
   include Redis::Objects
   include Feedable
   include FeedJsonable
 
   after_commit :cache_activity_to_redis, :delete_older_notifications, on: :create
 
-  #Redis cache ids
   sorted_set :popular, global: true
 
-  # TODO remove cache keys and activity class methods
   def cache_key
     "activities/activity-#{id}/user-#{user.id}-#{user_timestamp}/#{trackable_type}-#{trackable_id}-#{trackable_timestamp}"
   end
@@ -37,7 +33,6 @@ class Activity < ActiveRecord::Base
     user.updated_at.try(:utc).try(:to_s, :number)
   end
 
-  #Find recipient user
   def recipient_user
     if recipient.present?
       if recipient_type == "User"
@@ -63,5 +58,4 @@ class Activity < ActiveRecord::Base
   def refresh_friends_notifications
     user.friends_notifications.remrangebyrank(0, -50)
   end
-
 end
