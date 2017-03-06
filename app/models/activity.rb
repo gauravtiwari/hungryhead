@@ -14,11 +14,11 @@ class Activity < ActiveRecord::Base
   end
 
   def self.latest_stories
-    where(published: true, is_notification: false).find_each.sort {|a,b| b.created_at <=> a.created_at}
+    where(published: true, is_notification: false).find_each.sort { |a, b| b.created_at <=> a.created_at }
   end
 
   def self.popular_stories
-    where(published: true, is_notification: false).find(Activity.popular.revrange(0, -1)).sort {|a,b| b.created_at <=> a.created_at}
+    where(published: true, is_notification: false).find(Activity.popular.revrange(0, -1)).sort { |a, b| b.created_at <=> a.created_at }
   end
 
   def self.get_activities
@@ -35,7 +35,7 @@ class Activity < ActiveRecord::Base
 
   def recipient_user
     if recipient.present?
-      if recipient_type == "User"
+      if recipient_type == 'User'
         recipient
       else
         recipient.user
@@ -50,9 +50,7 @@ class Activity < ActiveRecord::Base
   end
 
   def delete_older_notifications
-    unless user_type == "School"
-      refresh_friends_notifications
-    end
+    refresh_friends_notifications unless user_type == 'School'
   end
 
   def refresh_friends_notifications

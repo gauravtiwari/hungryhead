@@ -1,5 +1,4 @@
 class SlugRouter
-
   # SlugRouter class to route a request to a controller action
   #   Parameters [:slug]
   # Vanity urls
@@ -21,12 +20,11 @@ class SlugRouter
     model = sluggable.try(:sluggable_type)
 
     # Raise exception if not found
-    raise ActionController::RoutingError.new('Not Found') if !model
+    raise ActionController::RoutingError, 'Not Found' unless model
 
     # If Matched pass it to controller
-    controller = [model.pluralize.camelize,'Controller'].join
+    controller = [model.pluralize.camelize, 'Controller'].join
     params[:controller] = model.pluralize.downcase
     controller.constantize.action(params[:action]).call(env)
   end
-
 end

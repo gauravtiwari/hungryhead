@@ -1,5 +1,4 @@
 class CreateIdeaNotificationService
-
   def initialize(idea)
     @idea = idea
     @user = idea.user
@@ -15,12 +14,12 @@ class CreateIdeaNotificationService
 
   private
 
-  #Check if activity exists for idea?
+  # Check if activity exists for idea?
   def activity_empty?
-    Activity.where(trackable_id: @idea.id, trackable_type: "Idea", key: 'idea.create').empty?
+    Activity.where(trackable_id: @idea.id, trackable_type: 'Idea', key: 'idea.create').empty?
   end
 
-  #Create activity if new idea
+  # Create activity if new idea
   def create_activity
     @activity = @user.activities.create!(
       trackable: @idea,
@@ -37,9 +36,9 @@ class CreateIdeaNotificationService
     CreateNotificationCacheService.new(activity).create
   end
 
-  #Publish activity if activity exists?
+  # Publish activity if activity exists?
   def publish_activity
-    Activity.where(trackable_id: @idea.id, trackable_type: "Idea").find_each do |activity|
+    Activity.where(trackable_id: @idea.id, trackable_type: 'Idea').find_each do |activity|
       if activity && !activity.published?
         activity.published = true
         activity.save
@@ -49,5 +48,4 @@ class CreateIdeaNotificationService
     end
     PublishIdeaJob.perform_later(@idea.id, @user.id, @activity.id)
   end
-
 end

@@ -1,19 +1,23 @@
 class InvestmentPolicy < ApplicationPolicy
-
   def update?
-  	current_user == record.user
+    current_user == record.user
   end
 
   def vote?
-  	true
+    true
   end
 
-  def show?   ; false; end
+  def show?
+    false
+  end
+
   def create?
-   current_user != record.idea.user &&
-   record.idea.published? &&
-   !record.idea.invested?(current_user)
+    current_user != record.idea.user &&
+      record.idea.published? &&
+      !record.idea.invested?(current_user)
   end
-  def destroy?; current_user == record.user; end
-end
 
+  def destroy?
+    current_user == record.user
+  end
+end

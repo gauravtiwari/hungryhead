@@ -1,5 +1,4 @@
 class CreateActivityJob < ActiveJob::Base
-
   def perform(trackable_id, trackable_type)
     ActiveRecord::Base.connection_pool.with_connection do
       if trackable_type.constantize.where(id: trackable_id).empty?
@@ -12,5 +11,4 @@ class CreateActivityJob < ActiveJob::Base
       end
     end
   end
-
 end

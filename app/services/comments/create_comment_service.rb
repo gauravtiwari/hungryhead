@@ -1,5 +1,4 @@
 class CreateCommentService
-
   def initialize(params, commentable, user)
     @params = params
     @user = user
@@ -11,5 +10,4 @@ class CreateCommentService
     comment.commentable = @commentable
     comment
   end
-
 end

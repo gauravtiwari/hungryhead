@@ -1,5 +1,4 @@
 class CreateTeamInviteService
-
   def initialize(reciever, current_user, idea, message)
     @reciever = reciever
     @current_user = current_user
@@ -17,5 +16,4 @@ class CreateTeamInviteService
     )
     team_invite
   end
-
 end

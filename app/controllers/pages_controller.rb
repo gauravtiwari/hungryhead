@@ -1,83 +1,68 @@
 class PagesController < ApplicationController
-
-  layout "home"
+  layout 'home'
   before_action :set_cache, if: :production?
 
-  #Index page to handle home and after login route
-  def home
-  end
+  # Index page to handle home and after login route
+  def home; end
 
-  #Our Story and how we got started
-  def story
-  end
+  # Our Story and how we got started
+  def story; end
 
-  #For institutions
-  def for_institutions
-  end
+  # For institutions
+  def for_institutions; end
 
-  #Community rules
+  # Community rules
   def community_guidelines
     respond_to do |format|
       format.html
     end
   end
 
-  #Terms and conditions
+  # Terms and conditions
   def terms
     respond_to do |format|
       format.html
     end
   end
 
-  #Gamification
-  def gamification
-  end
+  # Gamification
+  def gamification; end
 
-  #pricing
-  def pricing
-  end
+  # pricing
+  def pricing; end
 
-  #Collaboration
-  def collaboration
-  end
+  # Collaboration
+  def collaboration; end
 
-  #Community
-  def community
-  end
+  # Community
+  def community; end
 
-  #Why page
-  def why
-  end
+  # Why page
+  def why; end
 
-  #Privacy policy page
+  # Privacy policy page
   def privacy_policy
     respond_to do |format|
       format.html
     end
   end
 
-  def support
-  end
+  def support; end
 
-  def cookies_policy
-  end
+  def cookies_policy; end
 
-  def how_it_works
-  end
+  def how_it_works; end
 
-  def product
-  end
+  def product; end
 
-  def get_started
-  end
+  def get_started; end
 
   def upgrade_browser
-    render layout: "upgrade"
+    render layout: 'upgrade'
   end
 
-  #Getting started page for ideas
-  def learn
-  end
+  # Getting started page for ideas
+  def learn; end
 
   private
 
@@ -86,7 +71,7 @@ class PagesController < ApplicationController
   end
 
   def set_cache
-    fresh_when(:etag => cache_key, :last_modified => last_modified_date, :public => true)
+    fresh_when(etag: cache_key, last_modified: last_modified_date, public: true)
   end
 
   def cache_key
@@ -98,8 +83,7 @@ class PagesController < ApplicationController
     if user_signed_in?
       current_user.updated_at.try(:to_s, :number)
     else
-      "Sun, 27 Aug 2015 17:30 GMT".to_datetime
+      'Sun, 27 Aug 2015 17:30 GMT'.to_datetime
     end
   end
-
 end

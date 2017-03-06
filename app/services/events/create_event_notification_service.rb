@@ -1,5 +1,4 @@
 class CreateEventNotificationService
-
   def initialize(event)
     @event = event
     @user = event.user
@@ -19,5 +18,4 @@ class CreateEventNotificationService
   def cache(activity)
     CreateNotificationCacheService.new(activity).create
   end
-
 end

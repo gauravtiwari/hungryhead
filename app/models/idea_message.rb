@@ -1,5 +1,4 @@
 class IdeaMessage < ActiveRecord::Base
-
   # Associations
   belongs_to :user
   belongs_to :idea, touch: true
@@ -14,5 +13,4 @@ class IdeaMessage < ActiveRecord::Base
     idea.idea_messages_counter.incr(idea.idea_messages.size)
     true
   end
-
 end

@@ -1,13 +1,10 @@
 class ActivitiesController < ApplicationController
-
   before_action :authenticate_user!, :set_user, :check_terms
-  layout "home"
+  layout 'home'
 
   def index
-    if params[:type]
-      @user.update_attributes(feed_preferences: params[:type])
-    end
-    @activities = Activity.send(@user.feed_preferences).paginate(:page => params[:page], :per_page => 10)
+    @user.update_attributes(feed_preferences: params[:type]) if params[:type]
+    @activities = Activity.send(@user.feed_preferences).paginate(page: params[:page], per_page: 10)
   end
 
   def show
@@ -22,5 +19,4 @@ class ActivitiesController < ApplicationController
   def set_user
     @user = current_user
   end
-
 end

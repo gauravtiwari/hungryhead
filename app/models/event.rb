@@ -2,19 +2,19 @@ class Event < ActiveRecord::Base
   include Redis::Objects
   include ActiveModel::Validations
 
-  before_destroy  :delete_activity
+  before_destroy :delete_activity
 
   extend FriendlyId
   friendly_id :slug_candidates
 
   geocoded_by :address
   reverse_geocoded_by :latitude, :longitude
-  after_validation :geocode, if: ->(event){ event.address.present? and event.address_changed? }
+  after_validation :geocode, if: ->(event) { event.address.present? && event.address_changed? }
 
-  validates :title, :presence => true, length: {within: 10..50}
-  validates :start_time, :end_time, :presence => true
-  validates :excerpt, :presence => true, length: {within: 100..300}
-  validates :address, :presence => true
+  validates :title, presence: true, length: { within: 10..50 }
+  validates :start_time, :end_time, presence: true
+  validates :excerpt, presence: true, length: { within: 100..300 }
+  validates :address, presence: true
 
   include Sluggable
   include Commentable
@@ -22,9 +22,9 @@ class Event < ActiveRecord::Base
   include Impressionable
 
   store_accessor :media, :cover_position, :cover_left,
-  :cover_processing, :cover_tmp
+                 :cover_processing, :cover_tmp
 
-  enum status: { draft:0, published:1 }
+  enum status: { draft: 0, published: 1 }
   enum privacy: { me: 0, friends: 1, everyone: 2 }
 
   list :attendees_ids
@@ -54,11 +54,11 @@ class Event < ActiveRecord::Base
   end
 
   def profile_complete?
-    if [self.title, self.description, self.cover,
-      self.excerpt, self.space, self.address].any?{|f| f.blank? }
-      return false
+    if [title, description, cover,
+        excerpt, space, address].any?(&:blank?)
+      false
     else
-      return true
+      true
     end
   end
 
@@ -69,17 +69,16 @@ class Event < ActiveRecord::Base
   end
 
   def slug_candidates
-   [:title]
+    [:title]
   end
 
   def delete_activity
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

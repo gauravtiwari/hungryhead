@@ -30,17 +30,14 @@ class Users::InvitationsController < Devise::InvitationsController
     end
   end
 
-  def edit
-  end
-
+  def edit; end
 
   protected
 
   def update_sanitized_params
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
       u.permit(:name, :password, :password_confirmation, :invitation_token,
-        :username, :avatar, :avatar_cache)
+               :username, :avatar, :avatar_cache)
     end
   end
-
 end

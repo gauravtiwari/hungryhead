@@ -1,5 +1,4 @@
 class CreateShareService
-
   def initialize(params, user)
     @params = params
     @user = user
@@ -10,5 +9,4 @@ class CreateShareService
     @share.user = @user
     @share
   end
-
 end

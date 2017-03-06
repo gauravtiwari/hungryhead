@@ -1,5 +1,4 @@
 class CreateEventService
-
   def initialize(params)
     @params = params
   end
@@ -8,5 +7,4 @@ class CreateEventService
     @event = Event.new @params
     @event
   end
-
 end

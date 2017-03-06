@@ -1,9 +1,8 @@
 module Commentable
-
   extend ActiveSupport::Concern
 
   included do
-    has_many :comments, as: :commentable, :dependent => :destroy
+    has_many :comments, as: :commentable, dependent: :destroy
   end
 
   # Methods to fetch comments: root and top level
@@ -26,5 +25,4 @@ module Commentable
   def commenter
     commentable.user_id
   end
-
 end

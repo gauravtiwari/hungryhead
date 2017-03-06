@@ -9,12 +9,11 @@ class Mention < ActiveRecord::Base
 
   def delete_notification
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

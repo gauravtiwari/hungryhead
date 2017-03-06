@@ -1,5 +1,4 @@
 class Impression < ActiveRecord::Base
-
   # Associations
   belongs_to :user
   belongs_to :impressionable, polymorphic: true, touch: true
@@ -19,5 +18,4 @@ class Impression < ActiveRecord::Base
     impressionable.impressioners_ids.delete(user_id)
     true
   end
-
 end

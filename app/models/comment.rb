@@ -1,44 +1,44 @@
 class Comment < ActiveRecord::Base
   include Redis::Objects
-  after_commit :update_counters, :cache_commenters_ids, :create_activity,  on: :create
+  after_commit :update_counters, :cache_commenters_ids, :create_activity, on: :create
   before_destroy :update_counters, :deleted_cached_commenters_ids, :delete_activity
 
   counter :votes_counter
   list :voters_ids
 
-  acts_as_nested_set :scope => [:commentable_id, :commentable_type]
+  acts_as_nested_set scope: [:commentable_id, :commentable_type]
 
-  validates :body, :presence => true
-  validates :commentable, :presence => true
-  validates :user, :presence => true
+  validates :body, presence: true
+  validates :commentable, presence: true
+  validates :user, presence: true
 
   include Votable
   include Mentioner
 
   belongs_to :user
-  belongs_to :commentable , :polymorphic => true, touch: true
+  belongs_to :commentable, polymorphic: true, touch: true
 
   def self.build_from(obj, user_id, comment)
     new \
-      :commentable => obj,
-      :body        => comment,
-      :user_id     => user_id
+      commentable: obj,
+      body: comment,
+      user_id: user_id
   end
 
   def has_children?
-    self.children.any?
+    children.any?
   end
 
   scope :find_comments_by_user, lambda { |user|
-    where(:user_id => user.id).order('created_at DESC')
+    where(user_id: user.id).order('created_at DESC')
   }
 
   scope :find_comments_for_commentable, lambda { |commentable_str, commentable_id|
-    where(:commentable_type => commentable_str.to_s, :commentable_id => commentable_id).order('created_at DESC')
+    where(commentable_type: commentable_str.to_s, commentable_id: commentable_id).order('created_at DESC')
   }
 
   scope :find_comments_for_commentable_without_current, lambda { |commentable_str, commentable_id|
-    where(:commentable_type => commentable_str.to_s, :commentable_id => commentable_id).order('created_at DESC').not(user_id: current_user.id)
+    where(commentable_type: commentable_str.to_s, commentable_id: commentable_id).order('created_at DESC').not(user_id: current_user.id)
   }
 
   def self.find_commentable(commentable_str, commentable_id)
@@ -74,12 +74,11 @@ class Comment < ActiveRecord::Base
 
   def delete_activity
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

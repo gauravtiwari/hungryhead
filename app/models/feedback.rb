@@ -27,8 +27,6 @@ class Feedback < ActiveRecord::Base
   enum status: { posted: 0, badged: 1, flagged: 2 }
   enum badge: { initial: 0, helpful: 1, unhelpful: 2, irrelevant: 3 }
 
-  public
-
   def idea_owner
     idea.user
   end
@@ -53,16 +51,17 @@ class Feedback < ActiveRecord::Base
   end
 
   def create_activity
-    CreateActivityJob.set(
-      wait: 10.seconds
-    ).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+    if Activity.where(trackable: self).empty?
+      CreateActivityJob.set(
+        wait: 10.seconds
+      ).perform_later(id, self.class.to_s)
+    end
   end
 
   def delete_activity
-    Activity.where(trackable_id: self.id, trackable_type: self.class.to_s).each do |activity|
+    Activity.where(trackable_id: id, trackable_type: self.class.to_s).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

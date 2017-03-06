@@ -1,5 +1,5 @@
 class MentionsController < ApplicationController
-  # Set before filter
+  #  Set before filter
   before_filter :authenticate_user!
 
   def mentionables
@@ -16,14 +16,13 @@ class MentionsController < ApplicationController
     # Delete current_user from mentionable
     mentionable_ids.delete(current_user.id.to_s)
 
-    @mentionables = User.find(mentionable_ids.uniq).map { |user|
+    @mentionables = User.find(mentionable_ids.uniq).map do |user|
       {
         id: user.uid,
         name: user.name,
         username: user.username
       }
-    }
+    end
     render json: @mentionables
   end
-
 end

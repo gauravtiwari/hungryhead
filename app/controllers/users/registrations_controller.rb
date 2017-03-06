@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     build_resource({})
-    respond_with self.resource
+    respond_with resource
   end
 
   def create
@@ -13,15 +13,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:user][:email].split('@').last == @school_domain.domain
       build_resource(sign_up_params)
       @user = resource
-      #Skip confirmation for beta, // this needs to changed once we go live
+      # Skip confirmation for beta, // this needs to changed once we go live
       @user.skip_confirmation_notification!
       @user.save
 
       # If user exists
       if @user.persisted?
         @user.send_welcome_email!
-        #Track event into MixPanel
-        meta_events_tracker.event!(:user, :signed_up, { :name => @user.name, :email => @user.email })
+        # Track event into MixPanel
+        meta_events_tracker.event!(:user, :signed_up, name: @user.name, email: @user.email)
         respond_with @user, location: after_sign_up_path_for(@user)
       else
         respond_with @user
@@ -29,10 +29,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       flash[:error] = "Your email doesn't match with your school/uni email.
       Please verify and try again! If you don't have a school/uni email, please request an invite."
-      render :json =>  {
-              error: "Your email doesn't match with your school/uni email.
-              Please verify and try again! If you don't have a school/uni email, please request an invite."
-            }
+      render json: {
+        error: "Your email doesn't match with your school/uni email.
+        Please verify and try again! If you don't have a school/uni email, please request an invite."
+      }
     end
   end
 
@@ -47,10 +47,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
     if @user.encrypted_password_changed?
       set_flash_message :notice, :updated
-      sign_in @user, :bypass => true
+      sign_in @user, bypass: true
       render :edit
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -61,5 +61,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me, :password_confirmation) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :terms_accepted, :username, :email, :password, :password_confirmation, :current_password) }
   end
-
 end

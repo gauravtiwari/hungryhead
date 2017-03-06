@@ -1,5 +1,4 @@
 module Feedbackable
-
   extend ActiveSupport::Concern
 
   included do
@@ -13,5 +12,4 @@ module Feedbackable
   def find_feedbackers
     User.find(feedbackers_ids.values)
   end
-
 end

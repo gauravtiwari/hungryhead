@@ -1,5 +1,4 @@
 class CreateVoteNotificationService
-
   def initialize(vote)
     @user = vote.voter
     @vote = vote
@@ -17,8 +16,6 @@ class CreateVoteNotificationService
         is_notification: true
       )
       cache(@activity)
-    else
-      return
     end
   end
 
@@ -27,15 +24,14 @@ class CreateVoteNotificationService
   end
 
   def find_parent_activity
-    if @vote.votable_type == "Comment"
+    if @vote.votable_type == 'Comment'
       @activity = Activity.where(trackable: @votable.commentable).first
     else
       @activity = Activity.where(trackable: @votable).first
     end
-    #Increment parent score
+    # Increment parent score
     Activity.popular.incr(@activity.id, 5) unless @activity.blank?
-    #return uuid
+    # return uuid
     @activity.uuid
   end
-
 end

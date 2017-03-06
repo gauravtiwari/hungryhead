@@ -1,5 +1,4 @@
 class RateFeedbackNotificationService
-
   def initialize(user, feedback)
     @feedback = feedback
     @user = user
@@ -16,11 +15,8 @@ class RateFeedbackNotificationService
         unread: true
       )
 
-      #Cache notification to user/followers feed
+      # Cache notification to user/followers feed
       CreateNotificationCacheService.new(@activity).create
-    else
-      return
     end
   end
-
 end

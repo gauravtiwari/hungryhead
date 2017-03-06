@@ -1,5 +1,4 @@
 class CreateFeedbackService
-
   def initialize(params, idea, user)
     @params = params
     @idea = idea
@@ -11,5 +10,4 @@ class CreateFeedbackService
     feedback.idea = @idea
     feedback
   end
-
 end

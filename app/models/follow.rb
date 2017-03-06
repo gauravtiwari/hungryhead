@@ -19,36 +19,39 @@ class Follow < ActiveRecord::Base
   private
 
   def update_counters
-   follower.followings_counter.reset
-   follower.followings_counter.incr(follower.followings.size)
-   followable.followers_counter.reset
-   followable.followers_counter.incr(followable.followers.size)
-   true
+    follower.followings_counter.reset
+    follower.followings_counter.incr(follower.followings.size)
+    followable.followers_counter.reset
+    followable.followers_counter.incr(followable.followers.size)
+    true
   end
 
   def create_activity
-    CreateActivityJob.set(
-      wait: 10.seconds
-    ).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+    if Activity.where(trackable: self).empty?
+      CreateActivityJob.set(
+        wait: 10.seconds
+      ).perform_later(id, self.class.to_s)
+    end
   end
 
   def cache_follow_ids
-    follower.followings_ids << followable_id if followable_type == "User"
-    follower.school_followings_ids << followable_id if followable_type == "School"
+    follower.followings_ids << followable_id if followable_type == 'User'
+    follower.school_followings_ids << followable_id if followable_type == 'School'
     followable.followers_ids << follower_id
   end
 
   def delete_cache_follow_ids
-    follower.followings_ids.delete(followable_id) if followable_type == "User"
-    follower.school_followings_ids.delete(followable_id) if followable_type == "School"
+    follower.followings_ids.delete(followable_id) if followable_type == 'User'
+    follower.school_followings_ids.delete(followable_id) if followable_type == 'School'
     followable.followers_ids.delete(follower_id)
     true
   end
 
   def delete_activity
-    DeleteActivityJob.set(
-      wait: 10.seconds
-    ).perform_later(self.id, self.class.to_s) unless followable_type == "School"
+    unless followable_type == 'School'
+      DeleteActivityJob.set(
+        wait: 10.seconds
+      ).perform_later(id, self.class.to_s)
+    end
   end
-
 end

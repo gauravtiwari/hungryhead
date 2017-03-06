@@ -1,9 +1,9 @@
 module ActivitiesHelper
-  def render_activity activity
-   render partial: partial_path(activity), locals: {activity: activity}
+  def render_activity(activity)
+    render partial: partial_path(activity), locals: { activity: activity }
   end
 
-  alias_method :render_activities, :render_activity
+  alias render_activities render_activity
 
   def partial_path(activity)
     partial_paths(activity).detect do |path|
@@ -13,9 +13,9 @@ module ActivitiesHelper
 
   def partial_paths(activity)
     [
-      "activities/#{activity.key.to_s.gsub('.', '/')}",
+      "activities/#{activity.key.to_s.tr('.', '/')}",
       "activities/#{activity.trackable_type.underscore}",
-      "activities/activity"
+      'activities/activity'
     ]
   end
 end

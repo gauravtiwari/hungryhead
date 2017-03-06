@@ -1,5 +1,4 @@
 module Investable
-
   extend ActiveSupport::Concern
 
   included do
@@ -17,5 +16,4 @@ module Investable
   def find_investors
     User.find(investors_ids.values)
   end
-
 end

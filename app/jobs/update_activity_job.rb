@@ -1,5 +1,4 @@
 class UpdateActivityJob < ActiveJob::Base
-
   def perform(user_id)
     ActiveRecord::Base.connection_pool.with_connection do
       if User.where(id: user_id).empty?
@@ -13,5 +12,4 @@ class UpdateActivityJob < ActiveJob::Base
       end
     end
   end
-
 end

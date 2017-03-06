@@ -1,8 +1,8 @@
 class CreateFollowService
-	def initialize(user, followable)
-		@user = user
+  def initialize(user, followable)
+    @user = user
     @followable = followable
-	end
+  end
 
   def follow
     @user.followings.new(followable: @followable)
@@ -11,5 +11,4 @@ class CreateFollowService
   def unfollow
     @user.followings.where(followable: @followable).first
   end
-
 end

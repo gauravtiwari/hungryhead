@@ -1,5 +1,4 @@
 class SchoolPolicy < ApplicationPolicy
-
   def follow?
     true
   end

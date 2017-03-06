@@ -23,7 +23,7 @@ module IdeasHelper
   end
 
   def idea_collaboration?
-    params[:controller] == "ideas" && params[:action] == "show"  || params[:controller] == "feedbacks" && user_signed_in?
+    params[:controller] == 'ideas' && params[:action] == 'show' || params[:controller] == 'feedbacks' && user_signed_in?
   end
 
   # Todo cleanup these keys

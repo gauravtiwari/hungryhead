@@ -1,5 +1,4 @@
 class FollowPolicy < ApplicationPolicy
-
   def follow?
     current_user != record.followable
   end
@@ -15,6 +14,4 @@ class FollowPolicy < ApplicationPolicy
   def followings?
     true
   end
-
 end
-

@@ -18,19 +18,20 @@ class Share < ActiveRecord::Base
   private
 
   def create_activity
-    CreateActivityJob.set(
-      wait: 10.seconds
-    ).perform_later(id, self.class.to_s) if Activity.where(trackable: self).empty?
+    if Activity.where(trackable: self).empty?
+      CreateActivityJob.set(
+        wait: 10.seconds
+      ).perform_later(id, self.class.to_s)
+    end
   end
 
   def delete_activity
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

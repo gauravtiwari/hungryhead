@@ -1,9 +1,8 @@
 module Votable
-
   extend ActiveSupport::Concern
 
   included do
-    has_many :votes, as: :votable, class_name: 'Vote', :dependent => :destroy
+    has_many :votes, as: :votable, class_name: 'Vote', dependent: :destroy
   end
 
   def voted?(user)
@@ -13,5 +12,4 @@ module Votable
   def get_voters
     User.find(voters_ids.values)
   end
-
 end

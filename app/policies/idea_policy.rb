@@ -1,16 +1,15 @@
 class IdeaPolicy < ApplicationPolicy
-
   def update?
-  	collaborator?
+    collaborator?
   end
 
   def index?
-  	show?
+    show?
   end
 
   def show?
     record.in_team?(current_user) ||
-    record.published? && record.everyone?
+      record.published? && record.everyone?
   end
 
   def card?
@@ -26,7 +25,7 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def publish?
-  	show?
+    show?
   end
 
   def vote?
@@ -34,19 +33,19 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def invite_team?
-  	record.user == current_user
+    record.user == current_user
   end
 
   def updates?
-  	record.in_team?(current_user)
+    record.in_team?(current_user)
   end
 
   def unpublish?
-  	show?
+    show?
   end
 
   def investors?
-  	show?
+    show?
   end
 
   def comments?
@@ -66,11 +65,11 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def followers?
-  	show?
+    show?
   end
 
   def collaborator?
-  	record.in_team?(current_user)
+    record.in_team?(current_user)
   end
 
   def create?
@@ -82,8 +81,6 @@ class IdeaPolicy < ApplicationPolicy
   end
 
   def destroy?
-  	record.founder?(current_user)
+    record.founder?(current_user)
   end
-
 end
-

@@ -1,14 +1,14 @@
 class UserPolicy < ApplicationPolicy
-
   def index?
-  	current_user == record
+    current_user == record
   end
+
   def update?
-  	current_user == record
+    current_user == record
   end
 
   def unpublish?
-  	current_user == record
+    current_user == record
   end
 
   def vote?
@@ -44,11 +44,18 @@ class UserPolicy < ApplicationPolicy
   end
 
   def publish?
-  	current_user == record
+    current_user == record
   end
-  def show?   ; record.published? || record == current_user  end
-  def create? ; current_user == record; end
-  def destroy?; current_user == record; end
 
+  def show?
+    record.published? || record == current_user
+  end
+
+  def create?
+    current_user == record
+  end
+
+  def destroy?
+    current_user == record
+  end
 end
-

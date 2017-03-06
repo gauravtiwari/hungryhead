@@ -1,5 +1,4 @@
 class CreateShareNotificationService
-
   def initialize(share)
     @share = share
     @user = share.user
@@ -19,5 +18,4 @@ class CreateShareNotificationService
   def cache(activity)
     CreateNotificationCacheService.new(activity).create
   end
-
 end

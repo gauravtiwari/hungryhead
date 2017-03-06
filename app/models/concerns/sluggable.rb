@@ -1,5 +1,4 @@
 module Sluggable
-
   extend ActiveSupport::Concern
 
   included do
@@ -17,5 +16,4 @@ module Sluggable
     previous.delete_all
     slugs.create!(slug: slug)
   end
-
 end

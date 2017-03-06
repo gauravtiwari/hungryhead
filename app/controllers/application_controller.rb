@@ -35,11 +35,11 @@ class ApplicationController < ActionController::Base
   end
 
   def render_forbidden
-    flash[:notice] = "You are not authorized to access this page"
+    flash[:notice] = 'You are not authorized to access this page'
     if user_signed_in?
       redirect_to profile_path(current_user)
     else
-      flash[:notice] = "Please login to access this page"
+      flash[:notice] = 'Please login to access this page'
       redirect_to root_path
     end
   end
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   def authenticate_admin_user!
     authenticate_user!
     unless current_user.admin?
-      redirect_to root_path, alert: "This area is restricted to administrators only."
+      redirect_to root_path, alert: 'This area is restricted to administrators only.'
     end
   end
 
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_logged_in
-    redirect_to root_path, alert:  "You are already logged in" unless !user_signed_in?
+    redirect_to root_path, alert: 'You are already logged in' if user_signed_in?
   end
 
   def user_for_paper_trail
@@ -65,29 +65,31 @@ class ApplicationController < ActionController::Base
   end
 
   def info_for_paper_trail
-    {
-      user_name: current_user.name,
-      user_avatar: current_user.get_avatar,
-      name_badge: current_user.name_badge,
-      owner_url: profile_path(current_user)
-    } if current_user
+    if current_user
+      {
+        user_name: current_user.name,
+        user_avatar: current_user.get_avatar,
+        name_badge: current_user.name_badge,
+        owner_url: profile_path(current_user)
+      }
+    end
   end
 
   def check_terms
-    if user_signed_in?  && !current_user.rules_accepted? && !current_user.admin?
+    if user_signed_in? && !current_user.rules_accepted? && !current_user.admin?
       redirect_to(welcome_path(:complete_profile),
-        notice: 'Welcome! Please accept terms to complete your registeration.')
+                  notice: 'Welcome! Please accept terms to complete your registeration.')
     end
   end
 
   private
 
-  #Error message if user not authorised
+  # Error message if user not authorised
   def user_not_authorized
     if request.xhr?
-      render json: {error: "Not found"}, :status => 404
+      render json: { error: 'Not found' }, status: 404
     else
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError, 'Not Found'
     end
   end
 
@@ -95,5 +97,4 @@ class ApplicationController < ActionController::Base
     request.variant = :phone if browser.device.mobile?
     request.variant = :tablet if browser.device.tablet?
   end
-
 end

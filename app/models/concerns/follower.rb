@@ -2,13 +2,13 @@ module Follower
   extend ActiveSupport::Concern
 
   included do
-    has_many :followings, class_name: 'Follow', foreign_key: 'follower_id', :dependent => :destroy
+    has_many :followings, class_name: 'Follow', foreign_key: 'follower_id', dependent: :destroy
   end
 
   def people_you_may_know
     followings_sets = []
-    User.published.find(followings_ids.members).map{|u| followings_sets << u.followings_ids }
-    followings_sets.map{|f| f.difference(followings_ids) }.flatten - ["#{id}"]
+    User.published.find(followings_ids.members).map { |u| followings_sets << u.followings_ids }
+    followings_sets.map { |f| f.difference(followings_ids) }.flatten - [id.to_s]
   end
 
   # users that follow self
@@ -39,9 +39,8 @@ module Follower
     followings_ids.member?(user.id)
   end
 
-  #school following
+  # school following
   def school_following?(school)
     school_followings_ids.member?(school.id)
   end
-
 end

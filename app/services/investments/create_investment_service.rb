@@ -11,5 +11,4 @@ class CreateInvestmentService
     @investment.user = @user
     @investment
   end
-
 end

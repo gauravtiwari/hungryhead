@@ -1,5 +1,5 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
-   # Remove the first skip_before_filter (:require_no_authentication) if you
+  # Remove the first skip_before_filter (:require_no_authentication) if you
   # don't want to enable logged users to access the confirmation page.
   skip_before_filter :require_no_authentication
   skip_before_filter :authenticate_user!
@@ -8,6 +8,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def new
     super
   end
+
   # PUT /resource/confirmation
   def update
     super
@@ -29,5 +30,4 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def destroy
     super
   end
-
 end

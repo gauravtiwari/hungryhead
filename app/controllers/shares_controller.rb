@@ -1,8 +1,7 @@
 class SharesController < ApplicationController
-
   before_filter :authenticate_user!
   before_filter :find_share, only: [:show, :destroy]
-  after_action :verify_authorized, :only => [:destroy]
+  after_action :verify_authorized, only: [:destroy]
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # GET /shares/new
@@ -31,7 +30,7 @@ class SharesController < ApplicationController
   def destroy
     authorize @share
     DestroyRecordJob.perform_later(@share)
-    render json: {message: "Share deleted", deleted: true}
+    render json: { message: 'Share deleted', deleted: true }
   end
 
   private
@@ -43,5 +42,4 @@ class SharesController < ApplicationController
   def find_share
     @share = Share.find(params[:id])
   end
-
 end

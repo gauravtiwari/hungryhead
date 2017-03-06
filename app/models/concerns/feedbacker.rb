@@ -1,5 +1,4 @@
 module Feedbacker
-
   extend ActiveSupport::Concern
 
   included do
@@ -21,5 +20,4 @@ module Feedbacker
   def not_helpful_feedbacks_counter
     feedbacks.where(badge: 'unhelpful').size
   end
-
 end

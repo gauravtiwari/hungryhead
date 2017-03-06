@@ -21,29 +21,26 @@ module Merit
     include Merit::BadgeRulesMethods
 
     def initialize
-
       ###########################
       # => User related badges
       ###########################
 
-      grant_on 'welcome#show', badge: 'community', :model_name => 'User' do |user|
-        user.rules_accepted?
-      end
+      grant_on 'welcome#show', badge: 'community', model_name: 'User', &:rules_accepted?
 
       grant_on 'users#update', badge: 'autobiographer', to: :itself, temporary: true do |user|
         user.about_me.present?
       end
 
-      grant_on 'sessions#create', badge: 'enthusiast', :model_name => 'User' do |user|
+      grant_on 'sessions#create', badge: 'enthusiast', model_name: 'User' do |user|
         days = (DateTime.now.to_date - user.created_at.to_date).to_i
         days == 30 &&
-        user.sign_in_count >=30
+          user.sign_in_count >= 30
       end
 
-      grant_on 'sessions#create', badge: 'focussed', :model_name => 'User' do |user|
+      grant_on 'sessions#create', badge: 'focussed', model_name: 'User' do |user|
         days = (DateTime.now.to_date - user.created_at.to_date).to_i
         days == 100 &&
-        user.sign_in_count >= 100
+          user.sign_in_count >= 100
       end
 
       grant_on 'follows#follow', badge: 'social', to: :follower, temporary: true do |follow|
@@ -51,7 +48,7 @@ module Merit
       end
 
       ##############################
-        # => Idea related badges
+      # => Idea related badges
       ##############################
 
       #########################################################
@@ -60,24 +57,24 @@ module Merit
 
       grant_on 'ideas#show', badge: 'lean', to: :user do |idea|
         idea.published? &&
-        idea.user.ideas_counter.value >= 1 &&
-        Idea.leaderboard.score(idea.id) >= 5
+          idea.user.ideas_counter.value >= 1 &&
+          Idea.leaderboard.score(idea.id) >= 5
       end
 
-      #Check everytime comment is created //hack
+      # Check everytime comment is created //hack
       grant_on 'comments#create', badge: 'lean', to: :commentable_user do |comment|
-        comment.commentable_type == "Idea" &&
-        comment.commentable.published? &&
-        comment.commentable_user.ideas_counter.value >= 1 &&
-        Idea.leaderboard.score(comment.commentable_id) >= 5
+        comment.commentable_type == 'Idea' &&
+          comment.commentable.published? &&
+          comment.commentable_user.ideas_counter.value >= 1 &&
+          Idea.leaderboard.score(comment.commentable_id) >= 5
       end
 
-      #Check everytime vote is casted //hack
+      # Check everytime vote is casted //hack
       grant_on 'votes#vote', badge: 'lean', to: :votable_user do |vote|
-        vote.votable_type == "Idea" &&
-        vote.votable.published? &&
-        vote.votable_user.ideas_counter.value >= 1 &&
-        Idea.leaderboard.score(vote.votable_id) >= 5
+        vote.votable_type == 'Idea' &&
+          vote.votable.published? &&
+          vote.votable_user.ideas_counter.value >= 1 &&
+          Idea.leaderboard.score(vote.votable_id) >= 5
       end
 
       ##################################################################
@@ -86,19 +83,19 @@ module Merit
 
       grant_on 'ideas#show', badge: 'investable', to: :itself do |idea|
         idea.published? &&
-        Idea.leaderboard.score(idea.id) >= 1000
+          Idea.leaderboard.score(idea.id) >= 1000
       end
 
       grant_on 'comments#create', badge: 'investable', to: :commentable do |comment|
-        comment.commentable_type == "Idea" &&
-        comment.commentable.published? &&
-        Idea.leaderboard.score(comment.commentable_id) >= 1000
+        comment.commentable_type == 'Idea' &&
+          comment.commentable.published? &&
+          Idea.leaderboard.score(comment.commentable_id) >= 1000
       end
 
-      grant_on 'votes#vote', badge: 'investable', to: :votable, temporary: true  do |vote|
-        vote.votable_type == "Idea" &&
-        vote.votable.published? &&
-        Idea.leaderboard.score(vote.votable_id) >= 1000
+      grant_on 'votes#vote', badge: 'investable', to: :votable, temporary: true do |vote|
+        vote.votable_type == 'Idea' &&
+          vote.votable.published? &&
+          Idea.leaderboard.score(vote.votable_id) >= 1000
       end
 
       ################################################################
@@ -107,21 +104,21 @@ module Merit
 
       grant_on 'ideas#show', badge: 'entrepreneur', to: :user do |idea|
         idea.published? &&
-        Idea.leaderboard.score(idea.id) >= 10000
+          Idea.leaderboard.score(idea.id) >= 10_000
       end
 
-      #Check everytime comment is created //hack
+      # Check everytime comment is created //hack
       grant_on 'comments#create', badge: 'entrepreneur', to: :commentable_user do |comment|
-        comment.commentable_type == "Idea" &&
-        comment.commentable.published? &&
-        Idea.leaderboard.score(comment.commentable_id) >= 10000
+        comment.commentable_type == 'Idea' &&
+          comment.commentable.published? &&
+          Idea.leaderboard.score(comment.commentable_id) >= 10_000
       end
 
-      #Check everytime vote is casted //hack
+      # Check everytime vote is casted //hack
       grant_on 'votes#vote', badge: 'entrepreneur', to: :votable_user do |vote|
-        vote.votable_type == "Idea" &&
-        vote.votable.published? &&
-        Idea.leaderboard.score(vote.votable_id) >= 10000
+        vote.votable_type == 'Idea' &&
+          vote.votable.published? &&
+          Idea.leaderboard.score(vote.votable_id) >= 10_000
       end
 
       ##################################################################
@@ -130,23 +127,22 @@ module Merit
 
       grant_on 'ideas#show', badge: 'validated', to: :itself do |idea|
         idea.published? &&
-        Idea.leaderboard.score(idea.id) >= 10000
+          Idea.leaderboard.score(idea.id) >= 10_000
       end
 
-      #Check everytime comment is created //hack
+      # Check everytime comment is created //hack
       grant_on 'comments#create', badge: 'validated', to: :commentable do |comment|
-        comment.commentable_type == "Idea" &&
-        comment.commentable.published? &&
-        Idea.leaderboard.score(comment.commentable_id) >= 10000
+        comment.commentable_type == 'Idea' &&
+          comment.commentable.published? &&
+          Idea.leaderboard.score(comment.commentable_id) >= 10_000
       end
 
-      #Check everytime vote is casted //hack
+      # Check everytime vote is casted //hack
       grant_on 'votes#vote', badge: 'validated', to: :votable do |vote|
-        vote.votable_type == "Idea" &&
-        vote.votable.published? &&
-        Idea.leaderboard.score(vote.votable_id) >= 10000
+        vote.votable_type == 'Idea' &&
+          vote.votable.published? &&
+          Idea.leaderboard.score(vote.votable_id) >= 10_000
       end
-
 
       ##################################################################
       # Check everytime idea is viewed to grant popular-idea badge to IDEA
@@ -155,10 +151,9 @@ module Merit
       grant_on 'ideas#show', badge: 'popular-idea', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        days.between?(1, 10) &&
-        Idea.trending.score(idea.id) >= 500
+          days.between?(1, 10) &&
+          Idea.trending.score(idea.id) >= 500
       end
-
 
       ##################################################################
       # => Check everytime idea is viewed to grant market-fit badge to IDEA
@@ -166,23 +161,22 @@ module Merit
 
       grant_on 'ideas#show', badge: 'market-fit', to: :itself do |idea|
         idea.published? &&
-        Idea.leaderboard.score(idea.id) >= 2500
+          Idea.leaderboard.score(idea.id) >= 2500
       end
 
-      #Check everytime comment is created //hack
+      # Check everytime comment is created //hack
       grant_on 'comments#create', badge: 'market-fit', to: :commentable do |comment|
-        comment.commentable_type == "Idea" &&
-        comment.commentable.published? &&
-        Idea.leaderboard.score(comment.commentable_id) >= 2500
+        comment.commentable_type == 'Idea' &&
+          comment.commentable.published? &&
+          Idea.leaderboard.score(comment.commentable_id) >= 2500
       end
 
-      #Check everytime vote is casted //hack
+      # Check everytime vote is casted //hack
       grant_on 'votes#vote', badge: 'market-fit', to: :votable, temporary: true do |vote|
-        vote.votable_type == "Idea" &&
-        vote.votable.published? &&
-        Idea.leaderboard.score(vote.votable_id) >= 2500
+        vote.votable_type == 'Idea' &&
+          vote.votable.published? &&
+          Idea.leaderboard.score(vote.votable_id) >= 2500
       end
-
 
       ##################################################################
       # => Check everytime idea is viewed to grant viral badge to IDEA
@@ -191,8 +185,8 @@ module Merit
       grant_on 'ideas#show', badge: 'viral', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        days.between?(1, 3) &&
-        Idea.trending.score(idea.id) >= 500
+          days.between?(1, 3) &&
+          Idea.trending.score(idea.id) >= 500
       end
 
       ##################################################################
@@ -201,8 +195,8 @@ module Merit
       grant_on 'ideas#show', badge: 'disruptive', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        days.between?(1, 5) &&
-        Idea.trending.score(idea.id) >= 1000
+          days.between?(1, 5) &&
+          Idea.trending.score(idea.id) >= 1000
       end
 
       ##################################################################
@@ -212,8 +206,8 @@ module Merit
       grant_on 'ideas#show', badge: 'traction', to: :itself do |idea|
         days = (DateTime.now.to_date - idea.created_at.to_date).to_i
         idea.published? &&
-        days.between?(5, 10) &&
-        Idea.leaderboard.score(idea.id)/days >= 100
+          days.between?(5, 10) &&
+          Idea.leaderboard.score(idea.id) / days >= 100
       end
 
       ##################################################################
@@ -222,26 +216,25 @@ module Merit
 
       grant_on 'ideas#show', badge: 'exit', multiple: true, to: :user do |idea|
         idea.published? &&
-        idea.validated?
+          idea.validated?
       end
 
       ##############################
-        # => Feedback related badges
+      # => Feedback related badges
       ##############################
 
       # 1. Feedbacker
       grant_on 'comments#create', badge: 'feedbacker', to: :commentable_user do |comment|
-        comment.commentable_type == "Feedback" &&
-        Feedback.leaderboard.score(comment.commentable_id) >= 25
+        comment.commentable_type == 'Feedback' &&
+          Feedback.leaderboard.score(comment.commentable_id) >= 25
       end
 
       grant_on 'votes#vote', badge: 'feedbacker', to: :votable_user, temporary: true do |vote|
-        vote.votable_type == "Feedback" &&
-        Feedback.leaderboard.score(vote.votable_id) >= 25
+        vote.votable_type == 'Feedback' &&
+          Feedback.leaderboard.score(vote.votable_id) >= 25
       end
 
-
-      #2. Early adopter
+      # 2. Early adopter
       grant_on 'feedbacks#create', badge: 'early-adopter', to: :user do |feedback|
         feedback.user.feedbacks_counter.value >= 5
       end
@@ -257,19 +250,19 @@ module Merit
       end
 
       # 5. Popular Feedback - Pundit
-      #Based on comment //hack
+      # Based on comment //hack
       grant_on 'votes#vote', badge: 'pundit', to: :votable_user, temporary: true do |vote|
-        vote.votable_type == "Feedback" &&
-        Feedback.leaderboard.score(vote.votable_id) >= 500
+        vote.votable_type == 'Feedback' &&
+          Feedback.leaderboard.score(vote.votable_id) >= 500
       end
 
       grant_on 'comments#create', badge: 'pundit', to: :commentable_user do |comment|
-        comment.commentable_type == "Feedback" &&
-        Feedback.leaderboard.score(comment.commentable_id) >= 500
+        comment.commentable_type == 'Feedback' &&
+          Feedback.leaderboard.score(comment.commentable_id) >= 500
       end
 
       ##############################
-        # => Investment related bages
+      # => Investment related bages
       # #############################
 
       grant_on 'investments#create', badge: 'investor', to: :user do |investment|
@@ -278,16 +271,16 @@ module Merit
 
       grant_on 'investments#create', badge: 'angel-investor', to: :user do |investment|
         investment.user.joined_within_a_year? &&
-        investment.user.angel_investor?
+          investment.user.angel_investor?
       end
 
       grant_on 'investments#create', badge: 'vc', to: :user do |investment|
         investment.user.joined_within_a_year? &&
-        investment.user.vc?
+          investment.user.vc?
       end
 
       #############################
-        # => Comments related badges
+      # => Comments related badges
       # ############################
 
       grant_on 'comments#create', badge: 'commentator', to: :user do |comment|
@@ -295,12 +288,10 @@ module Merit
       end
 
       grant_on 'votes#vote', badge: 'collaborative', to: :votable_user, temporary: true do |vote|
-        vote.votable_type == "Comment" &&
-        vote.votable_user.comments_counter.value >= 50 &&
-        vote.votable_user.comments_score >= 500
+        vote.votable_type == 'Comment' &&
+          vote.votable_user.comments_counter.value >= 50 &&
+          vote.votable_user.comments_score >= 500
       end
-
     end
-
   end
 end

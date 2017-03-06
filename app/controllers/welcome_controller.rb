@@ -1,15 +1,14 @@
 class WelcomeController < ApplicationController
-
   before_action :check_terms, only: [:quick_links, :follow_friends]
   before_action :authenticate_user!, :set_user
 
   include Wicked::Wizard
   steps :hello, :complete_profile, :follow_friends, :quick_links
 
-  layout "home"
+  layout 'home'
 
   def show
-    @welcome = current_user #for merit to avoid console errors
+    @welcome = current_user # for merit to avoid console errors
     @user = current_user
     case step
     when :hello
@@ -23,7 +22,7 @@ class WelcomeController < ApplicationController
       if ids.empty?
         skip_step
       else
-        @friends = User.published.find(ids).paginate(:page => params[:page], :per_page => 10)
+        @friends = User.published.find(ids).paginate(page: params[:page], per_page: 10)
       end
     when :quick_links
 
@@ -32,12 +31,12 @@ class WelcomeController < ApplicationController
   end
 
   def update
-    @welcome = current_user #for merit to avoid console errors
+    @welcome = current_user # for merit to avoid console errors
     @user = current_user
     case step
     when :complete_profile
       @user.update_attributes(user_params)
-      CreateActivityJob.set(wait: 10.seconds).perform_later(@user.id, "User") unless @user.published?
+      CreateActivityJob.set(wait: 10.seconds).perform_later(@user.id, 'User') unless @user.published?
     end
     sign_in(@user, bypass: true)
     render_wizard @user
@@ -56,5 +55,4 @@ class WelcomeController < ApplicationController
   def set_user
     @user = current_user
   end
-
 end

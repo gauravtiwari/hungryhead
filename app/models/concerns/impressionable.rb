@@ -1,5 +1,4 @@
 module Impressionable
-
   extend ActiveSupport::Concern
 
   included do
@@ -9,5 +8,4 @@ module Impressionable
   def viewed?(user)
     impressioners_ids.member?(user.id)
   end
-
 end

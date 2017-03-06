@@ -1,12 +1,11 @@
 module Followable
-
   extend ActiveSupport::Concern
 
   included do
     has_many :followers, as: :followable, class_name: 'Follow', dependent: :destroy
   end
 
-  #users that self follows
+  # users that self follows
   def get_followers
     User.find(followers_ids.members)
   end
@@ -15,5 +14,4 @@ module Followable
   def followed_by?(user)
     followers_ids.member?(user.id)
   end
-
 end

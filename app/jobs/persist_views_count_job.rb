@@ -1,5 +1,4 @@
 class PersistViewsCountJob < ActiveJob::Base
-
   def perform(user_id, record_id, record_type, referrer, remote_ip)
     ActiveRecord::Base.connection_pool.with_connection do
       @user = User.find(user_id)
@@ -24,5 +23,4 @@ class PersistViewsCountJob < ActiveJob::Base
       end
     end
   end
-
 end

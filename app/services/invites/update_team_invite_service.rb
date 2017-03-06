@@ -1,5 +1,4 @@
 class UpdateTeamInviteService
-
   def initialize(team_invite)
     @team_invite = team_invite
   end
@@ -13,5 +12,4 @@ class UpdateTeamInviteService
     @team_invite.pending = false
     @team_invite
   end
-
 end

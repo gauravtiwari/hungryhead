@@ -1,10 +1,9 @@
 class CreateFollowNotificationService
-
-	def initialize(follow)
-		@follow = follow
+  def initialize(follow)
+    @follow = follow
     @user = follow.follower
     @followable = follow.followable
-	end
+  end
 
   def create
     if @user.activities.where(trackable: @follow).empty?
@@ -16,13 +15,10 @@ class CreateFollowNotificationService
         is_notification: true
       )
       cache(@activity)
-    else
-      return
     end
   end
 
   def cache(activity)
     CreateNotificationCacheService.new(activity).create
   end
-
 end

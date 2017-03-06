@@ -1,5 +1,4 @@
 module Investor
-
   extend ActiveSupport::Concern
 
   included do
@@ -15,11 +14,10 @@ module Investor
   end
 
   def angel_investor?
-    investments.where("amount >= ? AND amount <= ?", 200, 500).length >= 60
+    investments.where('amount >= ? AND amount <= ?', 200, 500).length >= 60
   end
 
   def vc?
-    investments.where("amount >= ? AND amount <= ?", 500, 900).length >= 150
+    investments.where('amount >= ? AND amount <= ?', 500, 900).length >= 150
   end
-
 end

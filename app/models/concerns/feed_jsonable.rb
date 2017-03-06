@@ -1,7 +1,6 @@
 require 'render_anywhere'
 
 module FeedJsonable
-
   include RenderAnywhere
   extend ActiveSupport::Concern
 
@@ -22,10 +21,10 @@ module FeedJsonable
   end
 
   def build_html
-    root ||= "notifications"
-    path ||= key.to_s.gsub('.', '/')
+    root ||= 'notifications'
+    path ||= key.to_s.tr('.', '/')
     partial_path =  select_path path, root
-    render :partial => partial_path, locals: {activity: self}
+    render partial: partial_path, locals: { activity: self }
   end
 
   private
@@ -36,17 +35,16 @@ module FeedJsonable
 
   def find_activity_id
     if is_notification?
-      return parent_id
+      parent_id
     else
-      return uuid
+      uuid
     end
   end
 
-  #Get path for notifications or activities
-  def select_path path, root
+  # Get path for notifications or activities
+  def select_path(path, root)
     [root, path].map(&:to_s).join('/')
   end
-
 
   class RenderingController < RenderAnywhere::RenderingController
     attr_accessor :current_user
@@ -58,7 +56,6 @@ module FeedJsonable
   end
 
   def rendering_controller
-    @rendering_controller ||= self.class.const_get("RenderingController").new
+    @rendering_controller ||= self.class.const_get('RenderingController').new
   end
-
 end

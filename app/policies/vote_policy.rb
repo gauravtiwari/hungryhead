@@ -1,5 +1,4 @@
 class VotePolicy < ApplicationPolicy
-
   def vote?
     true
   end
@@ -11,6 +10,4 @@ class VotePolicy < ApplicationPolicy
   def voters?
     true
   end
-
 end
-

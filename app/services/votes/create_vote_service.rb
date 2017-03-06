@@ -1,5 +1,4 @@
 class CreateVoteService
-
   def initialize(user, votable)
     @user = user
     @votable = votable
@@ -12,5 +11,4 @@ class CreateVoteService
   def unvote
     @votable.votes.where(voter: @user).first
   end
-
 end

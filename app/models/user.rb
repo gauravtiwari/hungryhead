@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   acts_as_copy_target
 
   scope :students, -> { where(state: 1, role: 1) }
-  scope :from_school, ->(school_id) { where(state: 1, :school_id => school_id)}
+  scope :from_school, ->(school_id) { where(state: 1, school_id: school_id) }
   scope :entrepreneurs, -> { where(state: 1, role: 2) }
   scope :faculties, -> { where(state: 1, role: 4) }
   scope :users, -> { where(state: 1, role: 0) }
@@ -48,14 +48,13 @@ class User < ActiveRecord::Base
   belongs_to :school, touch: true
 
   has_many :attendences, class_name: 'EventAttendee',
-  foreign_key: 'attendee_id', :dependent => :destroy
+                         foreign_key: 'attendee_id', dependent: :destroy
 
   has_many :team_invites, class_name: 'TeamInvite',
-  foreign_key: 'invited_id', :dependent => :destroy
+                          foreign_key: 'invited_id', dependent: :destroy
 
   has_many :ideas, dependent: :destroy, autosave: true
   has_many :idea_messages, dependent: :destroy, autosave: true
-
 
   acts_as_taggable_on :hobbies, :locations, :markets, :skills, :subjects
   acts_as_tagger
@@ -65,9 +64,7 @@ class User < ActiveRecord::Base
   set :school_followings_ids
   set :impressioners_ids
 
-
   list :latest, maxlength: 20, marshal: true, global: true
-
 
   sorted_set :friends_notifications, marshal: true
 
@@ -86,38 +83,34 @@ class User < ActiveRecord::Base
   counter :ideas_counter
   counter :views_counter
 
-
   counter :notifications_counter
 
-
-  enum state: { inactive: 0, published: 1}
+  enum state: { inactive: 0, published: 1 }
   enum feed_preferences: { latest_stories: 0, popular_stories: 1 }
   enum role: { user: 0, student: 1, entrepreneur: 2, alumni: 3, faculty: 4 }
 
   store_accessor :profile, :facebook_url,
-  :twitter_url, :linkedin_url, :website_url
+                 :twitter_url, :linkedin_url, :website_url
   store_accessor :media, :avatar_position, :cover_position, :cover_left,
-  :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
+                 :cover_processing, :avatar_processing, :avatar_tmp, :cover_tmp
   store_accessor :settings, :theme, :idea_notifications, :feedback_notifications,
-  :investment_notifications, :follow_notifications, :weekly_mail
+                 :investment_notifications, :follow_notifications, :weekly_mail
   store_accessor :fund, :balance, :invested_amount, :earned_amount
 
   devise :invitable, :uid, :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :lockable, :trackable, :validatable, :confirmable,
-    :authentication_keys => [:login]
-
+         :recoverable, :rememberable, :lockable, :trackable, :validatable, :confirmable,
+         authentication_keys: [:login]
 
   mount_uploader :avatar, LogoUploader
   mount_uploader :cover, CoverUploader
 
-  validates :email, :presence => true, :uniqueness => {:case_sensitive => false}
-  validates :name, :presence => true
-  validates :username, :presence => true, :length => {:within => 3..40}, :uniqueness => true, format: { with: /\A[a-zA-Z0-9](\w|\.)*[a-zA-Z0-9]$\Z/, message: "should not contain empty spaces or symbols" }
-  validates :password, :confirmation => true, :presence => true, :length => {:within => 6..40}, :on => :create
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true
+  validates :username, presence: true, length: { within: 3..40 }, uniqueness: true, format: { with: /\A[a-zA-Z0-9](\w|\.)*[a-zA-Z0-9]$\Z/, message: 'should not contain empty spaces or symbols' }
+  validates :password, confirmation: true, presence: true, length: { within: 6..40 }, on: :create
 
-  suggestions_for :username, :num_suggestions => 5,
-      :first_name_attribute => :firstname, :last_name_attribute => :lastname
-
+  suggestions_for :username, num_suggestions: 5,
+                             first_name_attribute: :firstname, last_name_attribute: :lastname
 
   def self.current
     Thread.current[:user]
@@ -136,34 +129,32 @@ class User < ActiveRecord::Base
   end
 
   def get_contributions
-    Idea.includes(:user).find_each.select{|idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id  }
+    Idea.includes(:user).find_each.select { |idea| idea.contributers.include?(id.to_s) && !idea.team_ids.include?(id.to_s) && idea.user_id != id }
   end
 
   def send_welcome_email!
-    RegistrationMailer.welcome_email(self.id).deliver_later(wait: 5.seconds)
+    RegistrationMailer.welcome_email(id).deliver_later(wait: 5.seconds)
   end
 
   def after_password_reset; end
 
   def joined_within_a_year?
-    (DateTime.now.to_date - self.created_at.to_date).to_i <= 365
+    (DateTime.now.to_date - created_at.to_date).to_i <= 365
   end
 
   def balance_available?(amount)
     balance > amount.to_i
   end
 
-  def login=(login)
-    @login = login
-  end
+  attr_writer :login
 
   def login
-    @login || self.username || self.email
+    @login || username || email
   end
 
   def save_without_confirmation
-    self.skip_confirmation_notification!
-    self.save!
+    skip_confirmation_notification!
+    save!
   end
 
   def send_devise_notification(notification, *args)
@@ -179,7 +170,7 @@ class User < ActiveRecord::Base
   end
 
   def school_name
-    school_id.present? ? school.name : ""
+    school_id.present? ? school.name : ''
   end
 
   def name_badge
@@ -187,11 +178,11 @@ class User < ActiveRecord::Base
   end
 
   def firstname
-    self.name.split(' ').first
+    name.split(' ').first
   end
 
   def lastname
-    self.name.split(' ').second
+    name.split(' ').second
   end
 
   def cacheable_changed?
@@ -199,11 +190,11 @@ class User < ActiveRecord::Base
   end
 
   def rebuild_cache?
-     published? || id_changed? || name_changed? || avatar_changed? || mini_bio_changed?
+    published? || id_changed? || name_changed? || avatar_changed? || mini_bio_changed?
   end
 
   def rebuild_notifications
-    UpdateActivityJob.set(wait: 1.minute).perform_later(self.id)
+    UpdateActivityJob.set(wait: 1.minute).perform_later(id)
   end
 
   def card_json
@@ -218,7 +209,6 @@ class User < ActiveRecord::Base
     }
   end
 
-
   private
 
   def is_admin
@@ -230,12 +220,12 @@ class User < ActiveRecord::Base
   end
 
   def add_username
-    email_username = self.name.parameterize
+    email_username = name.parameterize
     if User.find_by_username(email_username).blank?
       email_username = email_username
     else
       num = 1
-      while(User.find_by_username(email_username).blank?)
+      while User.find_by_username(email_username).blank?
         email_username = "#{name.parameterize}#{num}"
         num += 1
       end
@@ -249,12 +239,12 @@ class User < ActiveRecord::Base
   end
 
   def seed_fund
-    self.fund = {balance: 1000}
+    self.fund = { balance: 1000 }
   end
 
   def seed_settings
     self.settings = {
-      theme: "#{role.downcase}",
+      theme: role.downcase.to_s,
       idea_notifications: true,
       feedback_notifications: true,
       investment_notifications: true,
@@ -272,8 +262,8 @@ class User < ActiveRecord::Base
   end
 
   def remove_from_soulmate
-    loader = Soulmate::Loader.new("people")
-    loader.remove("id" => id)
+    loader = Soulmate::Loader.new('people')
+    loader.remove('id' => id)
     true
   end
 
@@ -287,19 +277,15 @@ class User < ActiveRecord::Base
     true
   end
 
-  protected
-
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
+    if login == conditions.delete(:login)
       where(conditions).where(
-        ["lower(username) = :value OR lower(email) = :value",
-          { :value => login.downcase }
-        ]
+        ['lower(username) = :value OR lower(email) = :value',
+         { value: login.downcase }]
       ).first
     else
       where(conditions).first
     end
   end
-
 end

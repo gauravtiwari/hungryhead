@@ -4,5 +4,4 @@ module Sharings
   included do
     has_many :shares, as: :user, dependent: :destroy
   end
-
 end

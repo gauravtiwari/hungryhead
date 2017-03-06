@@ -1,3 +1,3 @@
 class MarketsController < ApplicationController
-  autocomplete :market, :name, :full => true
+  autocomplete :market, :name, full: true
 end

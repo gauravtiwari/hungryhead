@@ -2,9 +2,9 @@ class Investment < ActiveRecord::Base
   include Redis::Objects
 
   before_destroy :cancel_investment, :update_counters,
-  :delete_cached_investor_ids, :delete_activity
-  after_commit  :update_balance, :update_counters,
-  :cache_investor_ids, :create_activity, on: :create
+                 :delete_cached_investor_ids, :delete_activity
+  after_commit :update_balance, :update_counters,
+               :cache_investor_ids, :create_activity, on: :create
 
   counter :votes_counter
   list :voters_ids
@@ -17,17 +17,17 @@ class Investment < ActiveRecord::Base
   include Commentable
   include Votable
 
-  public
-
-	private
+  private
 
   def cancel_investment
-    idea.update_attributes!(
-      fund: {"balance" => idea.balance - amount }
-    ) if idea.balance > 0
+    if idea.balance > 0
+      idea.update_attributes!(
+        fund: { 'balance' => idea.balance - amount }
+      )
+    end
 
     user.update_attributes!(
-      fund: {"balance" => user.balance + amount }
+      fund: { 'balance' => user.balance + amount }
     )
   end
 
@@ -53,19 +53,20 @@ class Investment < ActiveRecord::Base
   end
 
   def create_activity
-    CreateActivityJob.perform_later(
-      id, self.class.to_s
-    ) if Activity.where(trackable: self).empty?
+    if Activity.where(trackable: self).empty?
+      CreateActivityJob.perform_later(
+        id, self.class.to_s
+      )
+    end
   end
 
   def delete_activity
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

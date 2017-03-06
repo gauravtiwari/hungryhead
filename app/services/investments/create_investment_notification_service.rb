@@ -1,5 +1,4 @@
 class CreateInvestmentNotificationService
-
   def initialize(investment)
     @investment = investment
     @idea = investment.idea
@@ -16,13 +15,10 @@ class CreateInvestmentNotificationService
         unread: true
       )
       cache(@activity)
-    else
-      return
     end
   end
 
   def cache(activity)
     CreateNotificationCacheService.new(activity).create
   end
-
 end

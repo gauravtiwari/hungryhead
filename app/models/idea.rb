@@ -9,7 +9,7 @@ class Idea < ActiveRecord::Base
 
   before_destroy :decrement_counters, :remove_from_soulmate, :delete_activity
   before_create :add_fund
-  after_save :soulmate_loader, if: :visible? and :rebuild_cache?
+  after_save(:soulmate_loader, if: :visible?) && :rebuild_cache?
 
   has_merit
 
@@ -39,53 +39,53 @@ class Idea < ActiveRecord::Base
   counter :votes_counter
   counter :idea_messages_counter
 
-  enum status: { draft:0, published:1 }
+  enum status: { draft: 0, published: 1 }
   enum privacy: { team: 0, everyone: 1 }
 
   scope :published, -> { where(status: 1) }
-  scope :from_school, ->(school_id) { where(status: 1, :school_id => school_id)}
+  scope :from_school, ->(school_id) { where(status: 1, school_id: school_id) }
   scope :public_ideas, -> { where(privacy: 1) }
-  scope :for_user, lambda {|user| where("user_id=? OR team_ids @> ?", "#{user.id}", "{#{user.id}}") }
+  scope :for_user, lambda { |user| where('user_id=? OR team_ids @> ?', user.id.to_s, "{#{user.id}}") }
 
   belongs_to :user, touch: true
   belongs_to :school, touch: true
   has_many :idea_messages, dependent: :destroy
   has_many :team_invites, dependent: :destroy
 
-  has_paper_trail :on => [:update, :destroy],
-  :only => [:name, :description, :elevator_pitch, :high_concept_pitch]
+  has_paper_trail on: [:update, :destroy],
+                  only: [:name, :description, :elevator_pitch, :high_concept_pitch]
 
   store_accessor :fund, :balance
 
   store_accessor :settings, :visible_everyone
 
   store_accessor :profile, :markets, :facebook_url, :twitter_url,
-  :website
+                 :website
 
   store_accessor :media, :logo_position, :cover_position,
-  :cover_left, :cover_processing, :logo_processing, :logo_tmp, :cover_tmp
+                 :cover_left, :cover_processing, :logo_processing, :logo_tmp, :cover_tmp
 
   mount_uploader :logo, LogoUploader
   mount_uploader :cover, CoverUploader
 
   auto_html_for :video do
     html_escape
-    vimeo(:width => 640, :height => 250, :autoplay => false)
-    youtube(:width => 640, :height => 250, :autoplay => false)
+    vimeo(width: 640, height: 250, autoplay: false)
+    youtube(width: 640, height: 250, autoplay: false)
     simple_format
   end
 
-  validates :name, :presence => true, :uniqueness => {:case_sensitive => false }
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :logo,
-  :file_size => {
-    :maximum => 1.megabytes.to_i
-  }
+            file_size: {
+              maximum: 1.megabytes.to_i
+            }
   validates :cover,
-  :file_size => {
-    :maximum => 1.megabytes.to_i
-  }
-  validates :high_concept_pitch, :presence => true, length: {within: 20..50}
-  validates :elevator_pitch, :presence => true, length: {within: 100..140}
+            file_size: {
+              maximum: 1.megabytes.to_i
+            }
+  validates :high_concept_pitch, presence: true, length: { within: 20..50 }
+  validates :elevator_pitch, presence: true, length: { within: 100..140 }
 
   public
 
@@ -162,24 +162,24 @@ class Idea < ActiveRecord::Base
   end
 
   def add_fund
-    self.fund = {"balance" => 0}
+    self.fund = { 'balance' => 0 }
   end
 
   def profile_complete?
-    if [self.name, self.high_concept_pitch, self.elevator_pitch,
-      self.description].any?{|f| f.blank? }
-      return false
+    if [name, high_concept_pitch, elevator_pitch,
+        description].any?(&:blank?)
+      false
     else
-      return true
+      true
     end
   end
 
   def visible?
-    published? and everyone?
+    published? && everyone?
   end
 
   def rebuild_cache?
-    slug_changed? || name_changed? || high_concept_pitch_changed? and !id_changed?
+    slug_changed? || name_changed? || high_concept_pitch_changed? && !id_changed?
   end
 
   private
@@ -193,8 +193,8 @@ class Idea < ActiveRecord::Base
   end
 
   def remove_from_soulmate
-    loader = Soulmate::Loader.new("ideas")
-    loader.remove("id" => id)
+    loader = Soulmate::Loader.new('ideas')
+    loader.remove('id' => id)
     true
   end
 
@@ -203,10 +203,12 @@ class Idea < ActiveRecord::Base
   end
 
   def decrement_counters
-    school.ideas_counter.reset if self.school_id.present?
-    school.ideas_counter.incr(
-      Idea.from_school(school_id).size
-    ) if self.school_id.present?
+    school.ideas_counter.reset if school_id.present?
+    if school_id.present?
+      school.ideas_counter.incr(
+        Idea.from_school(school_id).size
+      )
+    end
     user.ideas_counter.reset
     user.ideas_counter.incr(user.ideas.size)
 
@@ -218,12 +220,11 @@ class Idea < ActiveRecord::Base
 
   def delete_activity
     Activity.where(
-      trackable_id: self.id,
+      trackable_id: id,
       trackable_type: self.class.to_s
     ).each do |activity|
       DeleteNotificationCacheService.new(activity).delete
       activity.destroy if activity.present?
     end
   end
-
 end

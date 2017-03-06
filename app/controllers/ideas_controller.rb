@@ -1,28 +1,27 @@
 class IdeasController < ApplicationController
-
   before_action :authenticate_user!
   before_action :check_terms
   before_action :set_idea, except: [:index, :featured, :latest, :popular, :trending, :create, :delete_cover]
 
-  #Set layout
-  layout "idea"
+  # Set layout
+  layout 'idea'
 
   # GET /ideas
   # GET /ideas.json
   def index
     @ideas = Idea.includes(:school, :user)
-    .published.order(created_at: :desc)
-    .paginate(:page => params[:page], :per_page => 20)
+                 .published.order(created_at: :desc)
+                 .paginate(page: params[:page], per_page: 20)
   end
 
   # GET /ideas
   # GET /ideas.json
   def featured
     @ideas = Idea.includes(:school, :user)
-    .published.order(published_date: :desc)
-    .paginate(:page => params[:page], :per_page => 20)
+                 .published.order(published_date: :desc)
+                 .paginate(page: params[:page], per_page: 20)
     respond_to do |format|
-      format.html {render :index}
+      format.html { render :index }
     end
   end
 
@@ -40,39 +39,41 @@ class IdeasController < ApplicationController
     end
   end
 
-  #Get idea card
-  #GET /idea/1/card
+  # Get idea card
+  # GET /idea/1/card
   def card
     render partial: 'shared/idea_card'
   end
 
-  #Get latest ideas
-  #GET /ideas/latest
+  # Get latest ideas
+  # GET /ideas/latest
   def latest
     respond_to do |format|
       format.html
-      format.json { render json: Oj.dump({
-      list: Idea.latest_20,
-      type: 'Latest Ideas'
-    }, mode: :compat) }
+      format.json do
+        render json: Oj.dump({
+                               list: Idea.latest_20,
+                               type: 'Latest Ideas'
+                             }, mode: :compat)
+      end
     end
   end
 
-  #GET popular ideas
-  #GET /ideas/popular
+  # GET popular ideas
+  # GET /ideas/popular
   def popular
     @ideas = Idea.find(Idea.leaderboard.revrange(0, 20))
     respond_to do |format|
-      format.html {render :index}
+      format.html { render :index }
     end
   end
 
-  #GET trending ideas
-  #GET /ideas/trending
+  # GET trending ideas
+  # GET /ideas/trending
   def trending
     @ideas = Idea.find(Idea.trending.revrange(0, 20))
     respond_to do |format|
-      format.html {render :index}
+      format.html { render :index }
     end
   end
 
@@ -85,7 +86,7 @@ class IdeasController < ApplicationController
         CreateActivityJob.set(wait: 10.seconds).perform_later(@idea.id, @idea.class.to_s)
         @msg = "Your idea profile was successfully published to: #{@idea.privacy.capitalize}"
       else
-        @msg = "Something went wrong, please try again."
+        @msg = 'Something went wrong, please try again.'
       end
       render :publish
     else
@@ -94,7 +95,7 @@ class IdeasController < ApplicationController
     end
   end
 
-  #Delete cover
+  # Delete cover
   def delete_cover
     @idea = Idea.find(params[:slug])
     @idea.remove_cover!
@@ -106,26 +107,26 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/investors
   def investors
-    @investors = @idea.find_investors.paginate(:page => params[:page], :per_page => 10)
+    @investors = @idea.find_investors.paginate(page: params[:page], per_page: 10)
     render 'investors/index'
   end
 
   # GET /ideas/1/feedbackers
   def feedbackers
-    @feedbackers = @idea.find_feedbackers.paginate(:page => params[:page], :per_page => 10)
+    @feedbackers = @idea.find_feedbackers.paginate(page: params[:page], per_page: 10)
     render 'feedbackers/index'
   end
 
   # GET /ideas/1/voters
   def voters
     @votable = @idea
-    @followers = @idea.get_voters.paginate(:page => params[:page], :per_page => 10)
+    @followers = @idea.get_voters.paginate(page: params[:page], per_page: 10)
     render 'voters/voters'
   end
 
   # GET /ideas/1/team
   def team
-    @team = @idea.get_team.paginate(:page => params[:page], :per_page => 10)
+    @team = @idea.get_team.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
       format.json
@@ -134,7 +135,7 @@ class IdeasController < ApplicationController
 
   # GET /ideas/1/changes
   def changes
-    @versions = @idea.versions.reorder(id: :desc).paginate(:page => params[:page], :per_page => 10)
+    @versions = @idea.versions.reorder(id: :desc).paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
       format.js
@@ -148,7 +149,7 @@ class IdeasController < ApplicationController
     @idea.update_attributes(user_id: current_user.id, school_id: current_user.school_id)
     authorize @idea
     if @idea.save
-      render json: {status: :created, location_url: idea_path(@idea)}
+      render json: { status: :created, location_url: idea_path(@idea) }
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
@@ -160,10 +161,8 @@ class IdeasController < ApplicationController
     authorize @idea
     if @idea.update(idea_params)
       Pusher.trigger_async("presence-idea-collaboration-#{@idea.slug}",
-        "idea_update_#{@idea.slug}",
-        {id: @idea.uuid, data: render(template: 'ideas/show')
-        }.to_json
-      )
+                           "idea_update_#{@idea.slug}",
+                           { id: @idea.uuid, data: render(template: 'ideas/show') }.to_json)
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
@@ -182,12 +181,12 @@ class IdeasController < ApplicationController
 
   private
 
-  #Error message if user not authorised
+  # Error message if user not authorised
   def idea_not_authorized
     if request.xhr?
-      render json: {error: "Not found"}, :status => 404
+      render json: { error: 'Not found' }, status: 404
     else
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError, 'Not Found'
     end
   end
 
@@ -200,10 +199,9 @@ class IdeasController < ApplicationController
   # WhiteListed Params
   def idea_params
     params.require(:idea).permit(:looking_for_team, :rules_accepted, :video,
-      :logo, :name, :high_concept_pitch, :elevator_pitch, :website,
-      :location_list, :problems, :solutions, :market, :business_model,
-      :value_propositions, :description, :cover, :cover_position,
-      :cover_left, :market_list, :technology_list)
+                                 :logo, :name, :high_concept_pitch, :elevator_pitch, :website,
+                                 :location_list, :problems, :solutions, :market, :business_model,
+                                 :value_propositions, :description, :cover, :cover_position,
+                                 :cover_left, :market_list, :technology_list)
   end
-
 end

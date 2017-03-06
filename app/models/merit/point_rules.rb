@@ -13,61 +13,55 @@ module Merit
     include Merit::PointRulesMethods
 
     def initialize
-
       negative_score = -5
 
-      #Users related scoring
-      score 5, :on => 'users#update', category: 'autobiographer' do |user|
+      # Users related scoring
+      score 5, on: 'users#update', category: 'autobiographer' do |user|
         user.about_me.present? && user.points(category: 'autobiographer') == 0
       end
 
-      #Comments related
-      score 5, :on => 'comments#create', category: 'comment', to: :commentable do |comment|
+      # Comments related
+      score 5, on: 'comments#create', category: 'comment', to: :commentable do |comment|
         comment.commentable_user != comment.user
       end
 
-      score negative_score, :on => 'comments#destroy', category: 'comment', to: :commentable do |comment|
+      score negative_score, on: 'comments#destroy', category: 'comment', to: :commentable do |comment|
         comment.commentable_user != comment.user
       end
 
-      #Feedbacks related
-      score 25, :on => 'feedbacks#create', category: 'feedback', to: :idea
+      # Feedbacks related
+      score 25, on: 'feedbacks#create', category: 'feedback', to: :idea
 
-      #Rate feedback
-      score 25, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      # Rate feedback
+      score 25, on: 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.helpful?
       end
 
-      score negative_score, :on => 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
+      score negative_score, on: 'feedbacks#rate', to: :user, category: 'feedback' do |feedback|
         feedback.badged? && feedback.irrelevant?
       end
 
-      #Feedback rate
-      score 5, :on => 'feedbacks#rate', to: :idea_owner, category: 'user' do |feedback|
-        feedback.badged?
-      end
+      # Feedback rate
+      score 5, on: 'feedbacks#rate', to: :idea_owner, category: 'user', &:badged?
 
-      #Investment related
-      score 25, :on => 'investments#create', to: [:user, :idea], category: 'investment'
+      # Investment related
+      score 25, on: 'investments#create', to: [:user, :idea], category: 'investment'
 
-      #Ideas
-      score 5, :on => 'ideas#publish', to: :user, category: 'idea_publish' do |idea|
+      # Ideas
+      score 5, on: 'ideas#publish', to: :user, category: 'idea_publish' do |idea|
         idea.user.points(category: 'idea_publish') == 0 && idea.published?
       end
 
-      score negative_score, :on => 'ideas#unpublish', to: :user, category: 'idea_publish' do |idea|
-        idea.draft?
+      score negative_score, on: 'ideas#unpublish', to: :user, category: 'idea_publish', &:draft?
+
+      # Votes
+      score 5, on: 'votes#vote', to: [:votable, :votable_user], category: 'vote' do |vote|
+        vote.votable_type != 'Investment' && vote.voter != vote.votable_user
       end
 
-      #Votes
-      score 5, :on => 'votes#vote', to: [:votable, :votable_user], category: 'vote' do |vote|
-        vote.votable_type != "Investment" && vote.voter != vote.votable_user
+      score negative_score, on: 'votes#unvote', to: [:votable, :votable_user], category: 'vote' do |vote|
+        vote.votable_type != 'Investment' && vote.voter != vote.votable_user
       end
-
-      score negative_score, :on => 'votes#unvote', to: [:votable, :votable_user], category: 'vote' do |vote|
-        vote.votable_type != "Investment" && vote.voter != vote.votable_user
-      end
-
     end
   end
 end

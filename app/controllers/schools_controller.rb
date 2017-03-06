@@ -1,19 +1,18 @@
 class SchoolsController < ApplicationController
-
   before_filter :authenticate_user!, except: :autocomplete_school_name
   before_filter :check_terms, except: :autocomplete_school_name
   before_action :set_schools, except: [:new, :create, :index, :autocomplete_school_name]
-  #Autocomplete school
-  autocomplete :school, :name, :full => true, :extra_data => [:domain]
+  # Autocomplete school
+  autocomplete :school, :name, full: true, extra_data: [:domain]
 
-  #Setup layout
+  # Setup layout
   layout 'home'
 
   # GET /schools
   # GET /schools.json
   def index
     @schools = School.order(id: :desc)
-    .paginate(:page => params[:page], :per_page => 20)
+                     .paginate(page: params[:page], per_page: 20)
   end
 
   # GET /schools/1
@@ -22,12 +21,11 @@ class SchoolsController < ApplicationController
   def show
     @students = @school.get_published_users
     @activities = Activity.where(published: true, is_notification: false)
-    .order(id: :desc).paginate(:page => params[:page], :per_page => 20)
+                          .order(id: :desc).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /schools/1/dashboard
-  def dashboard
-  end
+  def dashboard; end
 
   def latest_ideas
     @ideas = @school.get_published_ideas
@@ -42,27 +40,27 @@ class SchoolsController < ApplicationController
 
   def people
     @users = @school.get_published_users
-    .paginate(:page => params[:page], :per_page => 20)
+                    .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html
-      format.js {render :index}
+      format.js { render :index }
     end
   end
 
   def students
     @users = @school.get_published_students
-    .paginate(:page => params[:page], :per_page => 20)
+                    .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html
-      format.js {render :index}
+      format.js { render :index }
     end
   end
 
   def events
     @events = @school.get_published_events
-    .paginate(:page => params[:page], :per_page => 20)
+                     .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html
@@ -72,11 +70,11 @@ class SchoolsController < ApplicationController
 
   def ideas
     @ideas = @school.get_published_ideas
-    .paginate(:page => params[:page], :per_page => 20)
+                    .paginate(page: params[:page], per_page: 20)
 
     respond_to do |format|
       format.html
-      format.js {render :index}
+      format.js { render :index }
     end
   end
 
@@ -86,8 +84,7 @@ class SchoolsController < ApplicationController
   end
 
   # GET /schools/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /schools
   # POST /schools.json
@@ -112,7 +109,7 @@ class SchoolsController < ApplicationController
     respond_to do |format|
       if @school.update(schools_params)
         format.html { redirect_to @school, notice: 'School was succesfully updated.' }
-        format.js {render :show}
+        format.js { render :show }
         format.json { render :show, status: :ok, location: @school }
       else
         format.html { render :edit }
@@ -132,17 +129,18 @@ class SchoolsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_schools
-      @user = current_user
-      id = params[:id] || params[:slug]
-      @school = School.find(id)
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def schools_params
-       params.require(:school).permit(:id, :email, :name, :phone,
-        :description, :cover_left, :cover_position, :website_url,
-        :twitter_url, :facebook_url, :logo, :cover, :location_list)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_schools
+    @user = current_user
+    id = params[:id] || params[:slug]
+    @school = School.find(id)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def schools_params
+    params.require(:school).permit(:id, :email, :name, :phone,
+                                   :description, :cover_left, :cover_position, :website_url,
+                                   :twitter_url, :facebook_url, :logo, :cover, :location_list)
+  end
 end

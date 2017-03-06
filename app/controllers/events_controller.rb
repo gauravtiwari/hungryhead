@@ -2,11 +2,11 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_event, except: [:index, :new, :create]
 
-  layout "home"
+  layout 'home'
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all.paginate(:page => params[:page], :per_page => 20)
+    @events = Event.all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /events/1
@@ -26,13 +26,13 @@ class EventsController < ApplicationController
     authorize @event
     @user = @event.user
     respond_to do |format|
-      format.js {render :edit}
+      format.js { render :edit }
     end
   end
 
   # GET /events/1/comments
   def comments
-    @comments = @event.root_comments.paginate(:page => params[:page], :per_page => 10)
+    @comments = @event.root_comments.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html
       format.js
@@ -67,7 +67,7 @@ class EventsController < ApplicationController
         CreateActivityJob.set(wait: 10.seconds).perform_later(@event.id, @event.class.to_s)
         flash[:notice] = "Your event profile was successfully published to: #{@event.privacy.capitalize}"
       else
-        flash[:notice] = "Something went wrong, please try again."
+        flash[:notice] = 'Something went wrong, please try again.'
       end
     else
       flash[:notice] = "Your event profile isn't complete. Please complete your profile and try publishing again."
@@ -84,12 +84,12 @@ class EventsController < ApplicationController
     @event.me!
     if @event.draft?
       DeleteActivityJob.perform_later(@event.id, @event.class.to_s)
-      flash[:notice] = "Your event profile was successfully unpublished"
+      flash[:notice] = 'Your event profile was successfully unpublished'
     else
-      flash[:notice] = "Something went wrong, please try again."
+      flash[:notice] = 'Something went wrong, please try again.'
     end
     respond_to do |format|
-      format.js {render :publish}
+      format.js { render :publish }
     end
   end
 
@@ -101,10 +101,10 @@ class EventsController < ApplicationController
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
-        format.js {render :show}
+        format.js { render :show }
       else
         format.html { render :edit }
-        format.js {render :edit}
+        format.js { render :edit }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
@@ -131,6 +131,6 @@ class EventsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
     params.require(:event).permit(:status, :title, :description, :user_id, :user_type, :address,
-    :start_time, :end_time, :eventable_id, :space, :cover_position, :cover_left, :featured, :cover, :excerpt, :category_list)
+                                  :start_time, :end_time, :eventable_id, :space, :cover_position, :cover_left, :featured, :cover, :excerpt, :category_list)
   end
 end

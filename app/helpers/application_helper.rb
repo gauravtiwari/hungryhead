@@ -23,15 +23,15 @@ module ApplicationHelper
   end
 
   def followed?(object)
-    if current_user && object.followers_ids.member?(current_user.id)
-      followed =  {
-        follow: true
-      }
-    else
-      followed = {
-        follow: false
-      }
-    end
+    followed = if current_user && object.followers_ids.member?(current_user.id)
+                 {
+                   follow: true
+                 }
+               else
+                 {
+                   follow: false
+                 }
+               end
     followed.merge!(
       followable_type: object.class.name,
       followable_id: object.slug
@@ -39,15 +39,15 @@ module ApplicationHelper
   end
 
   def voted?(object)
-    if current_user && object.voted?(current_user)
-      voted =  {
-        vote: true
-      }
-    else
-      voted = {
-        vote: false
-      }
-    end
+    voted = if current_user && object.voted?(current_user)
+              {
+                vote: true
+              }
+            else
+              {
+                vote: false
+              }
+            end
     voted.merge!(
       votes_count: object.votes_counter.value,
       path: voters_votes_path(votable_type: object.class.name, votable_id: object.uuid),
@@ -58,28 +58,28 @@ module ApplicationHelper
 
   def markdownify(content)
     context = {
-    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-    :base_url   => root_url,
-    :gfm => false
+      asset_root: 'http://a248.e.akamai.net/assets.github.com/images/icons/',
+      base_url: root_url,
+      gfm: false
     }
     pipeline = HTML::Pipeline.new [
-    HTML::Pipeline::MarkdownFilter,
-    HTML::Pipeline::SanitizationFilter,
-    HTML::Pipeline::MentionFilter
+      HTML::Pipeline::MarkdownFilter,
+      HTML::Pipeline::SanitizationFilter,
+      HTML::Pipeline::MentionFilter
     ], context
     pipeline.call(content)[:output].to_s.html_safe
   end
 
   def linkify(content)
     context = {
-    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-    :base_url   => root_url,
-    :gfm => true
+      asset_root: 'http://a248.e.akamai.net/assets.github.com/images/icons/',
+      base_url: root_url,
+      gfm: true
     }
     pipeline = HTML::Pipeline.new [
-    HTML::Pipeline::MarkdownFilter,
-    HTML::Pipeline::SanitizationFilter,
-    HTML::Pipeline::MentionFilter
+      HTML::Pipeline::MarkdownFilter,
+      HTML::Pipeline::SanitizationFilter,
+      HTML::Pipeline::MentionFilter
     ], context
 
     pipeline.call(content)[:output].to_s.html_safe
@@ -87,11 +87,11 @@ module ApplicationHelper
 
   def sanitizify(content)
     context = {
-    :asset_root => "http://a248.e.akamai.net/assets.github.com/images/icons/",
-    :base_url   => root_url
+      asset_root: 'http://a248.e.akamai.net/assets.github.com/images/icons/',
+      base_url: root_url
     }
     pipeline = HTML::Pipeline.new [
-    HTML::Pipeline::SanitizationFilter
+      HTML::Pipeline::SanitizationFilter
     ], context
 
     pipeline.call(content)[:output].to_s.html_safe
