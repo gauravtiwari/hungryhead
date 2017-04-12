@@ -4,7 +4,8 @@ Hungryhead is a collaborative network for students to share, validate and develo
 
 The platform was built on Rails - standard monolith. Currently, this code is used in production for demo purposes only. The source code is now more than a year old and contains many things that could be improved or done better.
 
-## Stack
+## Stack
+
 * Rails 4.2.7
 * Postgres
 * Redis
@@ -27,6 +28,7 @@ The repo is now open source and serves as a reference for many implementations l
 * Realtime stuff with Pusher,
 * Using jobs to offload heavier stuffs,
 * And, many other cool things like commenting and voting
+
 
 ## Running locally
 
