@@ -27,23 +27,7 @@ The repo is now open source and serves as a reference for many implementations l
 * Faster keyword search with redis,
 * Realtime stuff with Pusher,
 * Using jobs to offload heavier stuffs,
-* And, many other cool things like commenting and voting
-
-
-## Running locally
-
-```bash
-git clone git@github.com:gauravtiwari/hungryhead.git
-cd hungryhead
-bundle install
-
-brew install redis
-brew install postgresql
-
-bundle exec rake db:drop db:create db:migrate
-bundle exec rake db:seed
-./start
-```
+* And, many other cool things like commenting and voting.
 
 ## Environment variabels
 The platform uses Google cloud for storing user uploaded assets.
@@ -64,4 +48,19 @@ The platform uses Google cloud for storing user uploaded assets.
   MIXPANEL_API_KEY: ''
   DB_POOL: '5'
   REDIS_URL: ""
+```
+
+## Development
+
+```bash
+git clone git@github.com:gauravtiwari/hungryhead.git
+cd hungryhead
+bundle install
+
+brew install redis
+brew install postgresql
+
+bundle exec rake db:drop db:create db:migrate
+bundle exec rake db:seed
+./start
 ```
